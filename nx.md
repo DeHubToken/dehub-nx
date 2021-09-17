@@ -5,38 +5,37 @@ This project was generated using [Nx](https://nx.dev).
 # Scaffolding
 
 1. Create new latest nx workspace with empty project and **nx cloud** selected:
-    ```
-    npx create-nx-workspace dehub
-    ```
+   ```
+   npx create-nx-workspace dehub
+   ```
 1. Add Angular support:<br>
-    ```
-    npm install --save-dev @nrwl/angular
-    ```
+   ```
+   npm install --save-dev @nrwl/angular
+   ```
 1. Generate Angular app:
-    ```
-    nx generate @nrwl/angular:application --name=web --style=scss --prefix=dh --routing --standaloneConfig
-    ```
+   ```
+   nx generate @nrwl/angular:application --name=web --style=scss --prefix=dh --routing --standaloneConfig
+   ```
 1. Precommit hook with formatting (git >= v2.9)
-    ```
-    npm i husky pretty-quick --save-dev
-    ```
-    add the following into `package.json`:
-    ```
-    "husky": {
-      "hooks": {
-        "pre-commit": "pretty-quick --staged"
-      }
-    }
-    ```
+   ```
+   npm i husky pretty-quick --save-dev
+   ```
+   add the following into `package.json`:
+   ```
+   "husky": {
+     "hooks": {
+       "pre-commit": "pretty-quick --staged"
+     }
+   }
+   ```
 1. Local website serving with [lite-server](https://github.com/johnpapa/lite-server)
-    ```
-    npm i lite-server compression --save-dev
-    ```
-    Add the following line to `/etc/hosts`:
-    ```
-    127.0.0.1 dev.localhost
-    ```
-
+   ```
+   npm i lite-server compression --save-dev
+   ```
+   Add the following line to `/etc/hosts`:
+   ```
+   127.0.0.1 dev.localhost
+   ```
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
@@ -112,8 +111,6 @@ Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
 
 ## ☁ Nx Cloud
 
