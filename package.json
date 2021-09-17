@@ -5,13 +5,13 @@
   "scripts": {
     "nx": "node ./node_modules/.bin/nx",
     "postinstall": "ngcc --properties es2015 browser module main",
-    "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test",
-    "lint": "nx lint",
+    "start": "npm run nx serve",
+    "build": "npm run nx build",
+    "test": "npm run nx test",
+    "lint": "npm run nx lint",
     "ci": "npm run lint && npm run test && npm run build",
     "demo": "npm run build && lite-server -c bs-config.js",
-    "format": "nx format:write"
+    "format": "npm run nx format:write"
   },
   "husky": {
     "hooks": {
