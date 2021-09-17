@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "nx": "node ./node_modules/.bin/nx",
     "postinstall": "ngcc --properties es2015 browser module main",
     "start": "nx serve",
-    "build": "npx nx build",
-    "test": "npx nx test",
-    "lint": "npx nx lint",
+    "build": "nx build",
+    "test": "nx test",
+    "lint": "nx lint",
     "ci": "npm run lint && npm run test && npm run build",
     "demo": "npm run build && lite-server -c bs-config.js",
     "format": "nx format:write"
