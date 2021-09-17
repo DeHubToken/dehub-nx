@@ -39,7 +39,7 @@ jobs:
           cache: 'npm'
 
       - name: Linting...
-        run: npm run lint
+        run: npx nx lint
 
   test:
     needs: install
