@@ -3,15 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "nx": "./node_modules/.bin/nx",
     "postinstall": "ngcc --properties es2015 browser module main",
-    "start": "npm run nx serve",
-    "build": "npm run nx build",
-    "test": "npm run nx test",
-    "lint": "npm run nx lint",
+    "start": "npx nx serve",
+    "build": "npx nx build",
+    "test": "npx nx test",
+    "lint": "npx nx lint",
     "ci": "npm run lint && npm run test && npm run build",
     "demo": "npm run build && lite-server -c bs-config.js",
-    "format": "npm run nx format:write"
+    "format": "npx nx format:write"
   },
   "husky": {
     "hooks": {
