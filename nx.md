@@ -28,6 +28,15 @@ This project was generated using [Nx](https://nx.dev).
       }
     }
     ```
+1. Local website serving with [lite-server](https://github.com/johnpapa/lite-server)
+    ```
+    npm i lite-server compression --save-dev
+    ```
+    Add the following line to `/etc/hosts`:
+    ```
+    127.0.0.1 dev.localhost
+    ```
+
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 

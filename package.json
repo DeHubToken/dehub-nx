@@ -3,10 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "postinstall": "ngcc --properties es2015 browser module main",
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "postinstall": "ngcc --properties es2015 browser module main",
+    "lint": "nx lint",
+    "ci": "npm run lint && npm run test && npm run build",
+    "demo": "npm run build && lite-server -c bs-config.js",
     "format": "nx format:write"
   },
   "husky": {
@@ -48,6 +51,7 @@
     "@types/node": "14.14.33",
     "@typescript-eslint/eslint-plugin": "4.28.3",
     "@typescript-eslint/parser": "4.28.3",
+    "compression": "1.7.4",
     "cypress": "8.3.0",
     "eslint": "7.22.0",
     "eslint-config-prettier": "8.1.0",
@@ -55,6 +59,7 @@
     "husky": "7.0.2",
     "jest": "27.0.3",
     "jest-preset-angular": "9.0.7",
+    "lite-server": "2.6.1",
     "prettier": "2.3.1",
     "pretty-quick": "3.1.1",
     "ts-jest": "27.0.3",

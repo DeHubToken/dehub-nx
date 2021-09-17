@@ -58,7 +58,9 @@
           "browserTarget": "web:build:production"
         },
         "development": {
-          "browserTarget": "web:build:development"
+          "browserTarget": "web:build:development",
+          "host": "dev.localhost",
+          "port": 8301
         }
       },
       "defaultConfiguration": "development"
