@@ -1,4 +1,4 @@
-# Dehub
+# DeHUB
 
 This project was generated using [Nx](https://nx.dev).
 
@@ -15,6 +15,18 @@ This project was generated using [Nx](https://nx.dev).
 1. Generate Angular app:
     ```
     nx generate @nrwl/angular:application --name=web --style=scss --prefix=dh --routing --standaloneConfig
+    ```
+1. Precommit hook with formatting (git >= v2.9)
+    ```
+    npm i husky pretty-quick --save-dev
+    ```
+    add the following into `package.json`:
+    ```
+    "husky": {
+      "hooks": {
+        "pre-commit": "pretty-quick --staged"
+      }
+    }
     ```
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
