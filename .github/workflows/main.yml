@@ -18,9 +18,9 @@ jobs:
       # https://github.com/marketplace/actions/setup-node-js-environment
       - name: Setup node
         uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-            cache: 'npm'
+        with:
+          node-version: '14'
+          cache: 'npm'
 
       - name: Installing...
         run: npm i
@@ -34,9 +34,9 @@ jobs:
 
       - name: Setup node
         uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-            cache: 'npm'
+        with:
+          node-version: '14'
+          cache: 'npm'
 
       - name: Linting...
         run: npm run lint
@@ -50,9 +50,9 @@ jobs:
 
       - name: Setup node
         uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-            cache: 'npm'
+        with:
+          node-version: '14'
+          cache: 'npm'
 
       - name: Testing...
         run: npm run test
@@ -66,9 +66,9 @@ jobs:
 
       - name: Setup node
         uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-            cache: 'npm'
+        with:
+          node-version: '14'
+          cache: 'npm'
 
       - name: Building...
         run: npm run build
