@@ -2,9 +2,13 @@ name: DeHUB Angular
 
 on:
   push:
-    branches: [main, dev]
+    branches:
+      - main
+      - dev
   pull_request:
-    branches: [main, dev]
+    branches:
+      - main
+      - dev
 
   workflow_dispatch:
 
@@ -32,13 +36,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
-      - uses: actions/setup-node@v2
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
           cache: 'npm'
+
       - name: Linting...
-      - run: npm i
-      - run: npm run lint
+        run: |
+          npm i
+          npm run lint
 
   test:
     needs: install
@@ -47,13 +53,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
-      - uses: actions/setup-node@v2
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
           cache: 'npm'
+
       - name: Testing...
-      - run: npm i
-      - run: npm run test
+        run: |
+          npm i
+          npm run test
 
   build:
     needs: install
@@ -62,10 +70,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
-      - uses: actions/setup-node@v2
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
           cache: 'npm'
+
       - name: Building...
-      - run: npm i
-      - run: npm run build
+        run: |
+          npm i
+          npm run build
