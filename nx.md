@@ -16,7 +16,7 @@ This project was generated using [Nx](https://nx.dev).
    ```
    nx generate @nrwl/angular:application --name=web --style=scss --prefix=dh --routing --standaloneConfig
    ```
-1. Precommit hook with formatting (git >= v2.9)
+1. Precommit hook with formatting (git >= v2.9):
    ```
    npm i husky pretty-quick --save-dev
    ```
