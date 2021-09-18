@@ -3,14 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "postinstall": "ngcc --properties es2015 browser module main",
-    "start": "npx nx serve",
-    "build": "npx nx build",
-    "test": "npx nx test",
-    "lint": "npx nx lint",
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test",
+    "lint": "nx lint",
     "ci": "npm run lint && npm run test && npm run build",
     "demo": "npm run build && lite-server -c bs-config.js",
-    "format": "npx nx format:write"
+    "format": "nx format:write"
   },
   "husky": {
     "hooks": {
@@ -60,6 +59,7 @@
     "jest": "27.0.3",
     "jest-preset-angular": "9.0.7",
     "lite-server": "2.6.1",
+    "nx": "12.9.0",
     "prettier": "2.3.1",
     "pretty-quick": "3.1.1",
     "ts-jest": "27.0.3",
