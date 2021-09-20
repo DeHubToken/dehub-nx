@@ -108,6 +108,7 @@ jobs:
         # Netlify manual deploy: https://docs.netlify.com/cli/get-started/#manual-deploys
         run: |
           npm i
+          npm run build
           npx netlify deploy -d=dist/apps/web -m="${{ github.event.pull_request.title }}"
 
   # deploy-prod:
