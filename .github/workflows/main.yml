@@ -12,7 +12,7 @@ on:
 
 env:
   # General variables
-  DIST: dist/apps/web
+  # DIST: dist/apps/web
 
   # Nx Cloud
   # Requires Github Agents, see more: https://youtu.be/GT7XIwG1i5A?t=222
@@ -108,7 +108,7 @@ jobs:
         # Netlify manual deploy: https://docs.netlify.com/cli/get-started/#manual-deploys
         run: |
           npm i
-          npx netlify deploy -d="$env:DIST" -m="${{ github.event.pull_request.title }}"
+          npx netlify deploy -d=dist/apps/web -m="${{ github.event.pull_request.title }}"
 
   # deploy-prod:
   #   environment: 'prod' # Custom env needed with approval
