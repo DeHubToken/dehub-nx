@@ -11,8 +11,18 @@ on:
   workflow_dispatch:
 
 env:
+  # General variables
+  DIST: dist/apps/web
+
   # Nx Cloud
+  # Requires Github Agents, see more: https://youtu.be/GT7XIwG1i5A?t=222
   NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
+  # Netlify
+  # NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  NETLIFY_AUTH_TOKEN: VBotI2cpCvog6EC87JTwhuq-BTKb96UvIn_Gqg4eoWk
+  # NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+  NETLIFY_SITE_ID: 95c16eee-58bd-4f8c-b36e-b104bf63ab22
 
 jobs:
   install:
@@ -81,3 +91,23 @@ jobs:
         run: |
           npm i
           npm run build
+
+  deploy-draft:
+    needs: [lint, test, build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - name: Deploying Draft...
+        # Netlify manual deploy: https://docs.netlify.com/cli/get-started/#manual-deploys
+        run: |
+          npm i
+          npx netlify link --id "$env:NETLIFY_SITE_ID"
+          npx netlify deploy -d="$env:DIST" -m="${{ github.event.pull_request.title }}"
+          npx netlify unlink

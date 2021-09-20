@@ -51,6 +51,26 @@ This project was generated using [Nx](https://nx.dev).
    };
    ```
 
+# Netlify Settings
+
+1. Configuration details found in `.env` with `NETLIFY_AUTH_TOKEN` created on the Netlify Team page
+
+1. Creating manual site (without ci) with the netlify cli
+
+   ```
+   npx netlify sites:create --account-slug=attilacsanyi --name=dehub-ng-website
+   ```
+
+   Output sample:
+
+   ```
+   Site Created
+
+   Admin URL: https://app.netlify.com/sites/dehub-ng-website
+   URL:       https://dehub-ng-website.netlify.app
+   Site ID:   95c16eee-58bd-4f8c-b36e-b104bf63ab22
+   ```
+
 # Nx Cloud benefits
 
 - [Nx Cloud 8 mins pitch](https://www.youtube.com/watch?v=GT7XIwG1i5A&feature=emb_title)

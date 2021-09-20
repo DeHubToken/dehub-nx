@@ -10,6 +10,10 @@
     "lint": "nx lint",
     "ci": "npm run lint && npm run test && npm run build",
     "demo": "npm run build && lite-server -c bs-config.js",
+    "link": "netlify link --id 95c16eee-58bd-4f8c-b36e-b104bf63ab22",
+    "unlink": "netlify unlink",
+    "deploy:draft": "npm run link && netlify deploy -d dist/apps/web -o && npm run unlink",
+    "deploy:prod": "npm run link && netlify deploy -d dist/apps/web -p -o && npm run unlink",
     "format": "nx format:write"
   },
   "husky": {
@@ -60,6 +64,8 @@
     "jest": "27.0.3",
     "jest-preset-angular": "9.0.7",
     "lite-server": "2.6.1",
+    "netlify-cli": "6.9.9",
+    "nx": "12.9.0",
     "prettier": "2.3.1",
     "pretty-quick": "3.1.1",
     "ts-jest": "27.0.3",
