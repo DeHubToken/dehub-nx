@@ -36,6 +36,25 @@ This project was generated using [Nx](https://nx.dev).
    ```
    127.0.0.1 dev.localhost
    ```
+   Add `bs-config.js` lite server config to the root:
+   ```
+   module.exports = {
+    port: 9301,
+     open: 'external',
+     host: 'dev.localhost',
+     server: {
+       baseDir: './dist/apps/web',
+       middleware: {
+         1: require('compression')(),
+       },
+     },
+   };
+   ```
+
+# Nx Cloud benefits
+
+- [Nx Cloud 8 mins pitch](https://www.youtube.com/watch?v=GT7XIwG1i5A&feature=emb_title)
+- [Run Details monitoring](https://blog.nrwl.io/introducing-run-details-available-now-on-nx-cloud-d2da86361862)
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
