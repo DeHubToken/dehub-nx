@@ -1,0 +1,27 @@
+{
+  // Place your settings in this file to overwrite default and user settings.
+  // Files
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/.history": true
+  },
+
+  // Search
+  "search.exclude": {
+    ".vscode": true,
+    ".history": true,
+    "dist": true,
+    "**/node_modules": true,
+    "*lock.json": true
+  },
+  // Typescript
+  "typescript.tsdk": "node_modules/typescript/lib",
+  // Editor
+  "window.title": "${rootName}${separator}${activeEditorLong} ${dirty}",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.formatOnSave": true,
+  "editor.foldingImportsByDefault": true
+}
