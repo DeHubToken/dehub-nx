@@ -111,21 +111,21 @@ jobs:
           npm run lottery:build
           npx netlify deploy -d=dist/apps/lottery -m="${{ github.event.pull_request.title }}"
 
-  deploy-prod:
-    environment: 'prod' # Custom env needed with approval
-    needs: [deploy-draft]
-    runs-on: ubuntu-latest
+  # deploy-prod:
+  #   environment: 'prod' # Custom env needed with approval
+  #   needs: [deploy-draft]
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          cache: 'npm'
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Setup node
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '14'
+  #         cache: 'npm'
 
-      - name: Deploying Prod...
-        run: |
-          npm i
-          npm run lottery:build
-          npx netlify deploy -d="$env:DIST" -m="${{ github.event.pull_request.title }}" -p
+  #     - name: Deploying Prod...
+  #       run: |
+  #         npm i
+  #         npm run lottery:build
+  #         npx netlify deploy -d=dist/apps/lottery -m="${{ github.event.pull_request.title }}" -p
