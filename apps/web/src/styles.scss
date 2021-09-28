@@ -1,10 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-.bg-gradient-1 {
-  background-image: linear-gradient(
-    45deg,
-    #0b1113,
-    #051118 46%,
-    #060c1d 71%,
-    #321338
-  );
-}
+$gutter: 1rem; //for primeflex grid system
+
+// @import '../../../node_modules/primeng/resources/primeng.min.css';
+@import '../../../node_modules/primeflex/primeflex.scss';
+@import '../../../node_modules/primeicons/primeicons.css';
+
+@import '../../../libs/assets/theme/purple/theme-dark.scss';
+@import '../../../libs/assets/layout/css/layout-dark.scss';
