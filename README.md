@@ -12,9 +12,17 @@ _Apps represent standalone sites, which can be written in pure JS, React, Vue.JS
 
 _Angular DeHUB website_
 
-- Repo: **[Github](https://github.com/DeHubToken/dehub-ng-website)**
-- CI: Github **[Actions](https://github.com/DeHubToken/dehub-ng-website/actions)**
+- Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
+- CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
 - Hosting: **[Netlify](https://dehub-ng-website.netlify.app/)**
+
+## `apps/lottery` -> **DeHUB React Lottery Dapp**.
+
+_React DeHUB Lottery Dapp_
+
+- Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
+- CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
+- Hosting: **[Netlify](https://dehub-react-lottery.netlify.app)**
 
 # Libraries
 

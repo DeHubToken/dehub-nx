@@ -15,6 +15,17 @@
     "web:unlink": "netlify unlink",
     "web:deploy:draft": "npm run web:link && netlify deploy -d dist/apps/web -o && npm run web:unlink",
     "web:deploy:prod": "npm run web:link && netlify deploy -d dist/apps/web -p -o && npm run web:unlink",
+    "lottery:start": "nx run lottery:serve",
+    "lottery:build": "nx run lottery:build",
+    "lottery:test": "nx run lottery:test",
+    "lottery:tdd": "nx run lottery:test --watchAll",
+    "lottery:lint": "nx run lottery:lint",
+    "lottery:ci": "npm run lottery:lint && npm run lottery:test && npm run lottery:build",
+    "lottery:demo": "npm run lottery:build && lite-server -c bs-config-lottery.js",
+    "lottery:link": "netlify link --id 6954dbe6-f72c-49d1-99b9-ce57364a6956",
+    "lottery:unlink": "netlify unlink",
+    "lottery:deploy:draft": "npm run lottery:link && netlify deploy -d dist/apps/lottery -o && npm run lottery:unlink",
+    "lottery:deploy:prod": "npm run lottery:link && netlify deploy -d dist/apps/lottery -p -o && npm run lottery:unlink",
     "format": "nx format:write"
   },
   "husky": {

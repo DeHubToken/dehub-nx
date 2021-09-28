@@ -1,4 +1,4 @@
-name: DeHUB Angular
+name: DeHUB Web
 
 on:
   push:
@@ -21,7 +21,7 @@ env:
   # Netlify
   # NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
   NETLIFY_AUTH_TOKEN: VBotI2cpCvog6EC87JTwhuq-BTKb96UvIn_Gqg4eoWk
-  # NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+  # NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_WEB }}
   NETLIFY_SITE_ID: 95c16eee-58bd-4f8c-b36e-b104bf63ab22
 
 jobs:
@@ -56,7 +56,7 @@ jobs:
       - name: Linting...
         run: |
           npm i
-          npm run lint
+          npm run web:lint
 
   test:
     needs: install
@@ -73,7 +73,7 @@ jobs:
       - name: Testing...
         run: |
           npm i
-          npm run test
+          npm run web:test
 
   build:
     needs: install
@@ -90,7 +90,7 @@ jobs:
       - name: Building...
         run: |
           npm i
-          npm run build
+          npm run web:build
 
   deploy-draft:
     needs: [lint, test, build]
@@ -108,23 +108,24 @@ jobs:
         # Netlify manual deploy: https://docs.netlify.com/cli/get-started/#manual-deploys
         run: |
           npm i
-          npm run build
+          npm run web:build
           npx netlify deploy -d=dist/apps/web -m="${{ github.event.pull_request.title }}"
 
-  # deploy-prod:
-  #   environment: 'prod' # Custom env needed with approval
-  #   needs: [deploy-draft]
-  #   runs-on: ubuntu-latest
+  deploy-prod:
+    environment: 'prod' # Custom env needed with approval
+    needs: [deploy-draft]
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Setup node
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '14'
-  #         cache: 'npm'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
 
-  #     - name: Deploying Prod...
-  #       run: |
-  #         npm i
-  #         npx netlify deploy -d="$env:DIST" -m="${{ github.event.pull_request.title }}" -p
+      - name: Deploying Prod...
+        run: |
+          npm i
+          npm run web:build
+          npx netlify deploy -d="$env:DIST" -m="${{ github.event.pull_request.title }}" -p

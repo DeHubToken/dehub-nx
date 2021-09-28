@@ -46,7 +46,9 @@
       "executor": "@nrwl/web:dev-server",
       "options": {
         "buildTarget": "lottery:build",
-        "hmr": true
+        "hmr": true,
+        "host": "dev.localhost",
+        "port": 8401
       },
       "configurations": {
         "production": {
