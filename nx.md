@@ -50,6 +50,13 @@ This project was generated using [Nx](https://nx.dev).
      },
    };
    ```
+1. Generate React App
+   ```
+   npm i @nrwl/react --save-dev
+   ```
+   ```
+   nx generate @nrwl/react:application --name=lottery --style=scss --standaloneConfig --strict
+   ```
 
 # Netlify Settings
 

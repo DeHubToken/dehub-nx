@@ -26,11 +26,13 @@ _Like UI, models, shared or moralis, etc._<br>
 
 # Dev Setup
 
-1. **Checkout** the project: `https://github.com/DeHubToken/dehub-ng-website`
+`<APP>` can be `web` or `lottery`
+
+1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
 1. Open **VSCode** _(pre-configured editor settings involved)_
 1. **Install** dependencies: `npm i`
-1. Run **Dev mode**: `npm start`
-1. Run **Prod mode**: `npm run demo` _(serve prod version locally)_
-1. Run **CI**: `npm run ci` _(lint, test, build)_
-1. Deploy as **draft**: `npm run deploy:draft`
-1. Deploy to **prod**: `npm run deploy:prod`
+1. Run **Dev mode**: `npm <APP>:start`
+1. Run **Prod mode**: `npm run <APP>:demo` _(serve prod version locally)_
+1. Run **CI**: `npm run <APP>:ci` _(lint, test, build)_
+1. Deploy as **draft**: `npm run <APP>:deploy:draft`
+1. Deploy to **prod**: `npm run <APP>:deploy:prod`
