@@ -14,10 +14,6 @@ export class AppComponent implements OnInit {
 
   menuTheme = 'dark';
 
-  inputStyle = 'outlined';
-
-  ripple = true;
-
   constructor(private primengConfig: PrimeNGConfig) {}
 
   ngOnInit() {
