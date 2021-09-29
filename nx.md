@@ -57,6 +57,10 @@ This project was generated using [Nx](https://nx.dev).
    ```
    nx generate @nrwl/react:application --name=lottery --style=scss --standaloneConfig --strict
    ```
+   upgrade to [webpack 5](https://nx.dev/l/r/guides/webpack-5#webpack-5-for-react-apps)
+   ```
+   npx nx g @nrwl/web:webpack5
+   ```
 
 # Netlify Settings
 
