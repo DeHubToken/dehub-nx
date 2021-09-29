@@ -50,6 +50,17 @@ This project was generated using [Nx](https://nx.dev).
      },
    };
    ```
+1. Generate React App
+   ```
+   npm i @nrwl/react --save-dev
+   ```
+   ```
+   nx generate @nrwl/react:application --name=lottery --style=scss --standaloneConfig --strict
+   ```
+   upgrade to [webpack 5](https://nx.dev/l/r/guides/webpack-5#webpack-5-for-react-apps)
+   ```
+   npx nx g @nrwl/web:webpack5
+   ```
 
 # Netlify Settings
 
@@ -59,16 +70,23 @@ This project was generated using [Nx](https://nx.dev).
 
    ```
    npx netlify sites:create --account-slug=attilacsanyi --name=dehub-ng-website
+   npx netlify sites:create --account-slug=attilacsanyi --name=dehub-react-lottery
    ```
 
    Output sample:
 
    ```
-   Site Created
+   Site Created (Angular)
 
    Admin URL: https://app.netlify.com/sites/dehub-ng-website
    URL:       https://dehub-ng-website.netlify.app
    Site ID:   95c16eee-58bd-4f8c-b36e-b104bf63ab22
+
+   Site Created (React)
+
+   Admin URL: https://app.netlify.com/sites/dehub-react-lottery
+   URL:       https://dehub-react-lottery.netlify.app
+   Site ID:   6954dbe6-f72c-49d1-99b9-ce57364a6956
    ```
 
 # Nx Cloud benefits

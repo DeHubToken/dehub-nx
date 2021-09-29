@@ -1,0 +1,131 @@
+name: DeHUB Lottery
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+env:
+  # General variables
+  # DIST: dist/apps/lottery
+
+  # Nx Cloud
+  # Requires Github Agents, see more: https://youtu.be/GT7XIwG1i5A?t=222
+  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
+  # Netlify
+  # NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  NETLIFY_AUTH_TOKEN: VBotI2cpCvog6EC87JTwhuq-BTKb96UvIn_Gqg4eoWk
+  # NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_LOTTERY }}
+  NETLIFY_SITE_ID: 6954dbe6-f72c-49d1-99b9-ce57364a6956
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # https://github.com/marketplace/actions/setup-node-js-environment
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - name: Installing...
+        run: npm i
+
+  lint:
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - name: Linting...
+        run: |
+          npm i
+          npm run lottery:lint
+
+  test:
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - name: Testing...
+        run: |
+          npm i
+          npm run lottery:test
+
+  build:
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - name: Building...
+        run: |
+          npm i
+          npm run lottery:build
+
+  deploy-draft:
+    needs: [lint, test, build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - name: Deploying Draft...
+        # Netlify manual deploy: https://docs.netlify.com/cli/get-started/#manual-deploys
+        run: |
+          npm i
+          npm run lottery:build
+          npx netlify deploy -d=dist/apps/lottery -m="${{ github.event.pull_request.title }}"
+
+  # deploy-prod:
+  #   environment: 'prod' # Custom env needed with approval
+  #   needs: [deploy-draft]
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Setup node
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '14'
+  #         cache: 'npm'
+
+  #     - name: Deploying Prod...
+  #       run: |
+  #         npm i
+  #         npm run lottery:build
+  #         npx netlify deploy -d=dist/apps/lottery -m="${{ github.event.pull_request.title }}" -p
