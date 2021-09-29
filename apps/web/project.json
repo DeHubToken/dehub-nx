@@ -15,7 +15,6 @@
         "tsConfig": "apps/web/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/web/src/favicon.ico",
           "apps/web/src/assets",
           {
             "input": "libs/assets",

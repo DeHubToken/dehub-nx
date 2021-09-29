@@ -98,7 +98,7 @@ This project was generated using [Nx](https://nx.dev).
 
 Custom purchased [Angular Freya template](https://primefaces.org/freya-ng/#/documentation).
 
-- Grid system is [PrimeFlex](https://www.primefaces.org/primeflex/setup)
+- Grid system is [PrimeFlex 2.0.0!](https://www.primefaces.org/primeflex/setup) ([intro](https://www.youtube.com/watch?v=6DfUHUDt9mw)) ([migration](https://www.primefaces.org/primeflex/migration), [video](https://www.youtube.com/watch?v=2HGkuo1nOns))
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 

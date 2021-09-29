@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppMainComponent } from './app.main.component';
+import { AppMainComponent } from '../app.main.component';
 export interface MenuItem {
   label: string;
   icon: string;

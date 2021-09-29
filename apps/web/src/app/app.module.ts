@@ -9,14 +9,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TabViewModule } from 'primeng/tabview';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppFooterComponent } from './app.footer.component';
 import { AppMainComponent } from './app.main.component';
-import { AppMenuComponent } from './app.menu.component';
-import { MenuService } from './app.menu.service';
-import { AppMenuitemComponent } from './app.menuitem.component';
-import { AppTopBarComponent } from './app.topbar.component';
+import { AppRoutingModule } from './app.routing.module';
+import { AppFooterComponent } from './footer/app.footer.component';
+import { AppMenuComponent } from './menu/app.menu.component';
+import { MenuService } from './menu/app.menu.service';
+import { AppMenuitemComponent } from './menu/app.menuitem.component';
+import { AppTopBarComponent } from './topbar/app.topbar.component';
 @NgModule({
   imports: [
     CommonModule,
