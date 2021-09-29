@@ -82,7 +82,16 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/web/src/**/*.ts", "apps/web/src/**/*.html"]
+        "lintFilePatterns": ["apps/web/src/**/*.ts", "apps/web/src/**/*.html"],
+        "maxWarnings": 0
+      },
+      "configurations": {
+        "development": {
+          "fix": true
+        },
+        "production": {
+          "fix": false
+        }
       }
     },
     "test": {

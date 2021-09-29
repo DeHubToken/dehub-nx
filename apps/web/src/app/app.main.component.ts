@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { PrimeNGConfig } from 'primeng/api';
 import { AppComponent } from './app.component';
 import { MenuService } from './app.menu.service';
 
@@ -8,35 +7,31 @@ import { MenuService } from './app.menu.service';
   templateUrl: './app.main.component.html',
 })
 export class AppMainComponent {
-  sidebarStatic: boolean;
+  sidebarStatic?: boolean;
 
   sidebarActive = false;
 
-  staticMenuMobileActive: boolean;
+  staticMenuMobileActive?: boolean;
 
-  menuClick: boolean;
+  menuClick?: boolean;
 
-  topbarItemClick: boolean;
+  topbarItemClick?: boolean;
 
   activeTopbarItem: unknown;
 
-  topbarMenuActive: boolean;
+  topbarMenuActive?: boolean;
 
   searchClick = false;
 
   search = false;
 
-  configActive: boolean;
+  configActive?: boolean;
 
-  configClick: boolean;
+  configClick?: boolean;
 
   menuHoverActive = false;
 
-  constructor(
-    private menuService: MenuService,
-    private primengConfig: PrimeNGConfig,
-    public app: AppComponent
-  ) {}
+  constructor(private menuService: MenuService, public app: AppComponent) {}
 
   onLayoutClick() {
     if (!this.topbarItemClick) {
@@ -71,7 +66,7 @@ export class AppMainComponent {
     this.menuClick = false;
   }
 
-  onMenuButtonClick(event) {
+  onMenuButtonClick(event: MouseEvent) {
     this.menuClick = true;
     this.topbarMenuActive = false;
 
@@ -87,7 +82,7 @@ export class AppMainComponent {
     event.preventDefault();
   }
 
-  onTopbarItemClick(event, item) {
+  onTopbarItemClick(event: MouseEvent, item: HTMLLIElement) {
     this.topbarItemClick = true;
 
     if (this.activeTopbarItem === item) {
@@ -104,11 +99,6 @@ export class AppMainComponent {
     event.preventDefault();
   }
 
-  onRippleChange(event) {
-    this.app.ripple = event.checked;
-    this.primengConfig.ripple = event.checked;
-  }
-
   onConfigClick() {
     this.configClick = true;
   }
@@ -117,7 +107,7 @@ export class AppMainComponent {
     this.menuClick = true;
   }
 
-  onToggleMenu() {
+  onToggleMenu(event: MouseEvent) {
     this.menuClick = true;
     this.sidebarStatic = !this.sidebarStatic;
 

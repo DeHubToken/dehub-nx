@@ -9,9 +9,9 @@ import { AppMainComponent } from './app.main.component';
   templateUrl: './app.topbar.component.html',
 })
 export class AppTopBarComponent implements OnDestroy {
-  subscription: Subscription;
+  subscription?: Subscription;
 
-  items: MenuItem[];
+  items?: MenuItem[];
 
   constructor(public app: AppComponent, public appMain: AppMainComponent) {}
 
