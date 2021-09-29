@@ -8,7 +8,9 @@ _More libraries or apps are supported and will be added as we go under `apps` or
 
 _Apps represent standalone sites, which can be written in pure JS, React, Vue.JS or Angular and can consume common libraries (`libs`)_
 
-## **DeHUB Angular Website** _(`apps/web`)_.
+## `apps/web` -> **DeHUB Angular Website**.
+
+_Angular DeHUB website_
 
 - Repo: **[Github](https://github.com/DeHubToken/dehub-ng-website)**
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-ng-website/actions)**
@@ -16,8 +18,11 @@ _Apps represent standalone sites, which can be written in pure JS, React, Vue.JS
 
 # Libraries
 
+## `libs/assets` -> **Themes, styles, assets: Freya**.
+
+_Common sass styles from the Freya PrimeNG themes_
+
 _Like UI, models, shared or moralis, etc._<br>
-_Coming soon..._
 
 # Dev Setup
 

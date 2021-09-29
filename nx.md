@@ -76,6 +76,12 @@ This project was generated using [Nx](https://nx.dev).
 - [Nx Cloud 8 mins pitch](https://www.youtube.com/watch?v=GT7XIwG1i5A&feature=emb_title)
 - [Run Details monitoring](https://blog.nrwl.io/introducing-run-details-available-now-on-nx-cloud-d2da86361862)
 
+# PrimeNG & Freya Theme
+
+Custom purchased [Angular Freya template](https://primefaces.org/freya-ng/#/documentation).
+
+- Grid system is [PrimeFlex](https://www.primefaces.org/primeflex/setup)
+
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
 🔎 **Smart, Extensible Build Framework**
