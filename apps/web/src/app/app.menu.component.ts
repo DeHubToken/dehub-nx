@@ -18,7 +18,7 @@ export interface MenuItem {
   templateUrl: './app.menu.component.html',
 })
 export class AppMenuComponent implements OnInit {
-  model: MenuItem[];
+  model?: MenuItem[];
 
   constructor(public appMain: AppMainComponent) {}
 
