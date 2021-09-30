@@ -12,7 +12,15 @@
         "main": "apps/lottery/src/main.tsx",
         "polyfills": "apps/lottery/src/polyfills.ts",
         "tsConfig": "apps/lottery/tsconfig.app.json",
-        "assets": ["apps/lottery/src/favicon.ico", "apps/lottery/src/assets"],
+        "assets": [
+          "apps/lottery/src/favicon.ico",
+          "apps/lottery/src/assets",
+          {
+            "input": "libs/assets",
+            "glob": "**/*",
+            "output": "assets"
+          }
+        ],
         "styles": ["apps/lottery/src/styles.scss"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
@@ -44,18 +52,18 @@
     },
     "serve": {
       "executor": "@nrwl/web:dev-server",
-      "options": {
-        "buildTarget": "lottery:build",
-        "hmr": true,
-        "host": "dev.localhost",
-        "port": 8401
-      },
       "configurations": {
         "production": {
           "buildTarget": "lottery:build:production",
           "hmr": false
+        },
+        "development": {
+          "buildTarget": "lottery:build:development",
+          "host": "dev.localhost",
+          "port": 8401
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
