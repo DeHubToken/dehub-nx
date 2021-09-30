@@ -3,6 +3,7 @@
   "projects": {
     "lottery": "apps/lottery",
     "lottery-e2e": "apps/lottery-e2e",
+    "shared-assets-freya": "libs/shared/assets/freya",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   },
