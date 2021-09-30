@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { AppComponent } from './app.component';
-import { AppMainComponent } from './app.main.component';
+import { AppComponent } from '../app.component';
+import { AppMainComponent } from '../app.main.component';
 
 @Component({
   selector: 'dh-topbar',

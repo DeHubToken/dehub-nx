@@ -3,8 +3,7 @@ import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'dh-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  template: `<router-outlet></router-outlet> `,
 })
 export class AppComponent implements OnInit {
   menuMode = 'horizontal';
@@ -14,10 +13,6 @@ export class AppComponent implements OnInit {
   topbarTheme = 'dark';
 
   menuTheme = 'dark';
-
-  inputStyle = 'outlined';
-
-  ripple = true;
 
   constructor(private primengConfig: PrimeNGConfig) {}
 

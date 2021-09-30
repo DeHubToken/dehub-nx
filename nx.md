@@ -51,15 +51,29 @@ This project was generated using [Nx](https://nx.dev).
    };
    ```
 1. Generate React App
+
    ```
    npm i @nrwl/react --save-dev
    ```
+
    ```
    nx generate @nrwl/react:application --name=lottery --style=scss --standaloneConfig --strict
    ```
+
    upgrade to [webpack 5](https://nx.dev/l/r/guides/webpack-5#webpack-5-for-react-apps)
+
    ```
    npx nx g @nrwl/web:webpack5
+   ```
+
+1. Generate Shared Assets<br>
+   **Freya** _Used to store Primefaces template assets_
+   ```
+   nx generate @nrwl/workspace:library --name=freya --directory=shared/assets --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
+   ```
+   **DeHUB** _Used to store common assets like logo, etc._
+   ```
+   nx generate @nrwl/workspace:library --name=dehub --directory=shared/assets --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
 
 # Netlify Settings
@@ -98,7 +112,7 @@ This project was generated using [Nx](https://nx.dev).
 
 Custom purchased [Angular Freya template](https://primefaces.org/freya-ng/#/documentation).
 
-- Grid system is [PrimeFlex](https://www.primefaces.org/primeflex/setup)
+- Grid system is [PrimeFlex 2.0.0!](https://www.primefaces.org/primeflex/setup) ([intro](https://www.youtube.com/watch?v=6DfUHUDt9mw)) ([migration](https://www.primefaces.org/primeflex/migration), [video](https://www.youtube.com/watch?v=2HGkuo1nOns))
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 

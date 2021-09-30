@@ -9,7 +9,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { AppMainComponent } from './app.main.component';
+import { AppMainComponent } from '../app.main.component';
 import { MenuItem } from './app.menu.component';
 import { MenuService } from './app.menu.service';
 

@@ -28,7 +28,8 @@
     "lottery:unlink": "netlify unlink",
     "lottery:deploy:draft": "npm run lottery:link && netlify deploy -d dist/apps/lottery -o && npm run lottery:unlink",
     "lottery:deploy:prod": "npm run lottery:link && netlify deploy -d dist/apps/lottery -p -o && npm run lottery:unlink",
-    "format": "nx format:write"
+    "format": "nx format:write",
+    "dep-graph": "nx dep-graph --watch=true "
   },
   "husky": {
     "hooks": {

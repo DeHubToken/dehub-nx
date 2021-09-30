@@ -12,8 +12,10 @@
     ".vscode": true,
     ".history": true,
     "dist": true,
+    "build": true,
     "**/node_modules": true,
-    "*lock.json": true
+    "*lock.json": true,
+    "*.svg": true,
   },
   // Typescript
   "typescript.tsdk": "node_modules/typescript/lib",

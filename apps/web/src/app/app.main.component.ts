@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppComponent } from './app.component';
-import { MenuService } from './app.menu.service';
+import { MenuService } from './menu/app.menu.service';
 
 @Component({
   selector: 'dh-main',
@@ -15,36 +15,15 @@ export class AppMainComponent {
 
   menuClick?: boolean;
 
-  topbarItemClick?: boolean;
-
-  activeTopbarItem: unknown;
-
   topbarMenuActive?: boolean;
-
-  searchClick = false;
-
-  search = false;
-
-  configActive?: boolean;
-
-  configClick?: boolean;
 
   menuHoverActive = false;
 
   constructor(private menuService: MenuService, public app: AppComponent) {}
 
   onLayoutClick() {
-    if (!this.topbarItemClick) {
-      this.activeTopbarItem = null;
-      this.topbarMenuActive = false;
-    }
-
     if (!this.menuClick && (this.isHorizontal() || this.isSlim())) {
       this.menuService.reset();
-    }
-
-    if (this.configActive && !this.configClick) {
-      this.configActive = false;
     }
 
     if (!this.menuClick) {
@@ -56,13 +35,6 @@ export class AppMainComponent {
       this.unblockBodyScroll();
     }
 
-    if (!this.searchClick) {
-      this.search = false;
-    }
-
-    this.searchClick = false;
-    this.configClick = false;
-    this.topbarItemClick = false;
     this.menuClick = false;
   }
 
@@ -80,27 +52,6 @@ export class AppMainComponent {
     }
 
     event.preventDefault();
-  }
-
-  onTopbarItemClick(event: MouseEvent, item: HTMLLIElement) {
-    this.topbarItemClick = true;
-
-    if (this.activeTopbarItem === item) {
-      this.activeTopbarItem = null;
-    } else {
-      this.activeTopbarItem = item;
-    }
-
-    if (item.className === 'topbar-item search-item') {
-      this.search = !this.search;
-      this.searchClick = !this.searchClick;
-    }
-
-    event.preventDefault();
-  }
-
-  onConfigClick() {
-    this.configClick = true;
   }
 
   onSidebarClick() {
