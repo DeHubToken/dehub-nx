@@ -66,9 +66,14 @@ This project was generated using [Nx](https://nx.dev).
    npx nx g @nrwl/web:webpack5
    ```
 
-1. Generate Shared Asseets for Freya
+1. Generate Shared Assets<br>
+   **Freya** _Used to store Primefaces template assets_
    ```
    nx generate @nrwl/workspace:library --name=freya --directory=shared/assets --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
+   ```
+   **DeHUB** _Used to store common assets like logo, etc._
+   ```
+   nx generate @nrwl/workspace:library --name=dehub --directory=shared/assets --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
 
 # Netlify Settings

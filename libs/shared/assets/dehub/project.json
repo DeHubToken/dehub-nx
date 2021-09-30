@@ -1,0 +1,15 @@
+{
+  "root": "libs/shared/assets/dehub",
+  "sourceRoot": "libs/shared/assets/dehub/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/assets/dehub/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}
