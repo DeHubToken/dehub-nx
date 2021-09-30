@@ -8,7 +8,7 @@ _More libraries or apps are supported and will be added as we go under `apps` or
 
 _Apps represent standalone sites, which can be written in pure JS, React, Vue.JS or Angular and can consume common libraries (`libs`)_
 
-## `apps/web` -> **DeHUB Angular Website**.
+## `apps/web` [DeHUB Angular Website]
 
 _Angular DeHUB website_
 
@@ -16,7 +16,7 @@ _Angular DeHUB website_
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
 - Hosting: **[Netlify](https://dehub-ng-website.netlify.app/)**
 
-## `apps/lottery` -> **DeHUB React Lottery Dapp**.
+## `apps/lottery` [DeHUB Lottery Dapp]
 
 _React DeHUB Lottery Dapp_
 
@@ -26,11 +26,15 @@ _React DeHUB Lottery Dapp_
 
 # Libraries
 
-## `libs/assets` -> **Themes, styles, assets: Freya**.
+_Like UI, models, shared or moralis, etc._<br>
+
+## `libs/shared/assets/dehub` [Shared DeHUB assets]
 
 _Common sass styles from the Freya PrimeNG themes_
 
-_Like UI, models, shared or moralis, etc._<br>
+## `libs/shared/assets/freya` [Shared Freya template]
+
+_Common sass styles from the Freya PrimeNG themes_
 
 # Dev Setup
 
