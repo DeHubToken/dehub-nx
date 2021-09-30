@@ -17,8 +17,9 @@
         "assets": [
           "apps/web/src/assets",
           {
-            "input": "libs/assets",
+            "input": "libs/shared/assets/freya/src/lib",
             "glob": "**/*",
+            "ignore": ["**/ts"],
             "output": "assets"
           }
         ],
@@ -94,5 +95,6 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["shared-assets-dehub", "shared-assets-freya"]
 }
