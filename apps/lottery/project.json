@@ -12,7 +12,22 @@
         "main": "apps/lottery/src/main.tsx",
         "polyfills": "apps/lottery/src/polyfills.ts",
         "tsConfig": "apps/lottery/tsconfig.app.json",
-        "assets": ["apps/lottery/src/favicon.ico", "apps/lottery/src/assets"],
+        "assets": [
+          "apps/lottery/src/assets",
+          {
+            "input": "libs/shared/assets/dehub/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/ts"],
+            "output": "assets/dehub"
+          },
+
+          {
+            "input": "libs/shared/assets/freya/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/ts"],
+            "output": "assets"
+          }
+        ],
         "styles": ["apps/lottery/src/styles.scss"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
@@ -74,5 +89,6 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["shared-assets-dehub", "shared-assets-freya"]
 }
