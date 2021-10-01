@@ -1,13 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { memo } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Button } from 'primereact/button';
 
 /* eslint-disable-next-line */
 export interface FooterProps {}
 
 export function Footer(props: FooterProps) {
-  const history = useHistory();
 
   return (
     <div className="layout-footer">
@@ -17,16 +14,16 @@ export function Footer(props: FooterProps) {
       </div>
       <div className="flex flex-wrap align-items-center justify-content-center card-container">
         <ul><li>
-          <a href="#" className="p-link mb-2 mx-2" onClick={() => history.push('/privacy-policy')}>Disclaimer</a>
+          <a href="/declaimer" className="p-link mb-2 mx-2">Disclaimer</a>
         </li></ul>&nbsp;|&nbsp;
         <ul><li>
-          <a href="#" className="p-link mb-2 mx-2" onClick={() => history.push('/privacy-policy')}>Privacy Policy</a>
+          <a href="/privacy-policy" className="p-link mb-2 mx-2">Privacy Policy</a>
         </li></ul>&nbsp;|&nbsp;
         <ul><li>
-          <a href="#" className="p-link mb-2 mx-2" onClick={() => history.push('/terms')}>Terms & Conditions</a>
+          <a href="/terms" className="p-link mb-2 mx-2">Terms & Conditions</a>
         </li></ul>&nbsp;|&nbsp;
         <ul><li>
-          <a href="#" className="p-link mb-2 mx-2" onClick={() => history.push('/careers')}>Careers</a>
+          <a href="/careers" className="p-link mb-2 mx-2">Careers</a>
         </li></ul>
       </div>
     </div>
