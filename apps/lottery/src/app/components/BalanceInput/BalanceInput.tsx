@@ -1,5 +1,5 @@
 import React, { ReactNode, ReactText } from 'react';
-import { InputHTMLAttributes } from 'react-router/node_modules/@types/react';
+import { InputHTMLAttributes } from 'react';
 import { Box } from '../Layout';
 import { Text } from '../Text';
 import {
