@@ -20,7 +20,8 @@
     "ci": "npm run lint && npm run test && npm run build",
     "deploy:draft": "nx affected --target=deploy-draft",
     "deploy:prod": "nx affected --target=deploy-prod",
-    "dep-graph": "nx dep-graph --watch=true"
+    "dep-graph": "nx dep-graph --watch=true",
+    "dep-graph:a": "nx affected:dep-graph --watch=true"
   },
   "husky": {
     "hooks": {
