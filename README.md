@@ -45,6 +45,6 @@ _Common sass styles from the Freya PrimeNG themes_
 1. **Install** dependencies: `npm i`
 1. Run **Dev mode**: `npm <APP>:start`
 1. Run **Prod mode**: `npm run <APP>:demo` _(serve prod version locally)_
-1. Run **CI**: `npm run <APP>:ci` _(lint, test, build)_
-1. Deploy as **draft**: `npm run <APP>:deploy:draft`
-1. Deploy to **prod**: `npm run <APP>:deploy:prod`
+1. Run **CI**: `npm run ci` _(lint, test, build fro affected apps)_
+1. Deploy as **draft**: `npm run deploy:draft`
+1. Deploy to **prod**: `npm run deploy:prod`
