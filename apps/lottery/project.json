@@ -20,7 +20,6 @@
             "ignore": ["**/ts"],
             "output": "assets/dehub"
           },
-
           {
             "input": "libs/shared/assets/freya/src/lib",
             "glob": "**/*",
@@ -86,6 +85,20 @@
       "options": {
         "jestConfig": "apps/lottery/jest.config.js",
         "passWithNoTests": true
+      }
+    },
+    "deploy-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run lottery:deploy:draft"
+      }
+    },
+    "deploy-prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run lottery:deploy:prod"
       }
     }
   },

@@ -29,7 +29,12 @@
     "lottery:deploy:draft": "npm run lottery:link && netlify deploy -d dist/apps/lottery -o && npm run lottery:unlink",
     "lottery:deploy:prod": "npm run lottery:link && netlify deploy -d dist/apps/lottery -p -o && npm run lottery:unlink",
     "format": "nx format:write",
-    "dep-graph": "nx dep-graph --watch=true "
+    "dep-graph": "nx dep-graph --watch=true",
+    "affected:lint": "nx affected --target=lint",
+    "affected:test": "nx affected --target=test",
+    "affected:build": "nx affected --target=build",
+    "affected:deploy-draft": "nx affected --target=deploy-draft",
+    "affected:deploy-prod": "nx affected --target=deploy-prod"
   },
   "husky": {
     "hooks": {

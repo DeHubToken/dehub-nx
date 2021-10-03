@@ -99,6 +99,20 @@
         "jestConfig": "apps/web/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "deploy-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run web:deploy:draft"
+      }
+    },
+    "deploy-prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run web:deploy:prod"
+      }
     }
   },
   "tags": [],
