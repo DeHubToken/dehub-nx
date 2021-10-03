@@ -93,6 +93,13 @@
       "options": {
         "command": "npm run lottery:deploy:draft"
       }
+    },
+    "deploy-prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run lottery:deploy:prod"
+      }
     }
   },
   "tags": [],
