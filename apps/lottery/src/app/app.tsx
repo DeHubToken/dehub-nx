@@ -1,5 +1,4 @@
 import styles from './app.module.scss';
-
 import { ReactComponent as Logo } from './logo.svg';
 import star from './star.svg';
 
@@ -8,7 +7,7 @@ export function App() {
     <div className={styles.app}>
       <header className="flex">
         <Logo width="75" height="75" />
-        <h1>Welcome to lottery!</h1>
+        <h1>Welcome to lottery Dapp!</h1>
       </header>
       <main>
         <h2>Resources &amp; Tools</h2>
