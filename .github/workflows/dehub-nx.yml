@@ -1,3 +1,4 @@
+# Documentation
 # https://nx.app/docs/configuring-ci
 name: DeHUB Nx
 on:
@@ -27,9 +28,12 @@ jobs:
           node-version: '14'
       - run: npm install
       - run: npx nx-cloud start-ci-run
-      - run: npx nx affected --target=build --parallel --max-parallel=3
-      - run: npx nx affected --target=test --parallel --max-parallel=2
+      - run: npx nx affected --target=build --parallel --max-parallel=4
+      - run: npx nx affected --target=test --parallel --max-parallel=3
+      - run: npx nx affected --target=lint --parallel --max-parallel=2
+      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx affected --target=deploy-prod
       - run: npx nx-cloud stop-all-agents
+
   pr:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
@@ -45,16 +49,19 @@ jobs:
           node-version: '14'
       - run: npm install
       - run: npx nx-cloud start-ci-run
-      - run: npx nx affected --target=build --parallel --max-parallel=3
-      - run: npx nx affected --target=test --parallel --max-parallel=2
+      - run: npx nx affected --target=build --parallel --max-parallel=4
+      - run: npx nx affected --target=test --parallel --max-parallel=3
+      - run: npx nx affected --target=lint --parallel --max-parallel=2
+      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx affected --target=deploy-draft
       - run: npx nx-cloud stop-all-agents
+
   agents:
     runs-on: ubuntu-latest
-    name: Agent 1
+    name: Nx Agent
     timeout-minutes: 60
     strategy:
       matrix:
-        agent: [1, 2, 3]
+        agent: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1

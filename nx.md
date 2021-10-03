@@ -68,12 +68,33 @@ This project was generated using [Nx](https://nx.dev).
 
 1. Generate Shared Assets<br>
    **Freya** _Used to store Primefaces template assets_
+
    ```
    nx generate @nrwl/workspace:library --name=freya --directory=shared/assets --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
+
    **DeHUB** _Used to store common assets like logo, etc._
+
    ```
    nx generate @nrwl/workspace:library --name=dehub --directory=shared/assets --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
+   ```
+
+1. Run Commands generation
+
+   ```
+   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run web:deploy:draft' --project=web
+   ```
+
+   ```
+   nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run web:deploy:prod' --project=web
+   ```
+
+   ```
+   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run lottery:deploy:draft' --project=lottery
+   ```
+
+   ```
+   nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run lottery:deploy:prod' --project=lottery
    ```
 
 # Netlify Settings
