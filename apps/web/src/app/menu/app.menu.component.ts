@@ -23,6 +23,8 @@ export class AppMenuComponent implements OnInit {
   constructor(public appMain: AppMainComponent) {}
 
   ngOnInit() {
-    this.model = [{ label: 'Home', icon: 'pi pi-home', routerLink: ['/'] }];
+    this.model = [
+      { label: 'Dashboard', icon: 'pi pi-home', routerLink: ['/'] },
+    ];
   }
 }
