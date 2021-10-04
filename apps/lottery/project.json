@@ -58,18 +58,18 @@
     },
     "serve": {
       "executor": "@nrwl/web:dev-server",
-      "options": {
-        "buildTarget": "lottery:build",
-        "hmr": true,
-        "host": "dev.localhost",
-        "port": 8401
-      },
       "configurations": {
         "production": {
           "buildTarget": "lottery:build:production",
           "hmr": false
+        },
+        "development": {
+          "buildTarget": "lottery:build:development",
+          "host": "dev.localhost",
+          "port": 8401
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
