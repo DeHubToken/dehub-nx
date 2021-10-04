@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import uniqueId from 'lodash/uniqueId';
+import { uniqueId } from 'lodash-es';
 import styled from 'styled-components';
 import { Text } from '../Text';
 

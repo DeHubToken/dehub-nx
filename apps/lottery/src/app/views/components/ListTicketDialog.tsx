@@ -1,4 +1,4 @@
-import uniqueId from 'lodash/uniqueId';
+import { uniqueId } from 'lodash-es';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
