@@ -1,4 +1,3 @@
-import { uniqueId } from 'lodash-es';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
@@ -35,10 +34,10 @@ const ListTicketDialog = ({
         </div>
         <div className="mb-4">
           {
-            ticketNumbers.map(number => {
+            ticketNumbers.map((number: number, index: number) => {
               return (
                 <TicketNumberLabel
-                  key={uniqueId()}
+                  key={`${index}`}
                   number={number}
                   state="bought"
                   className="mt-2"

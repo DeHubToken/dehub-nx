@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { uniqueId } from 'lodash-es';
 import { Avatar } from 'primereact/avatar';
 
 import { Text } from '../../components/Text';
@@ -48,9 +47,9 @@ const WinningNumbers = ({
   return (
     <div className="flex">
       {
-        numbers.map((num, index) => {
+        numbers.map((num: number, index: number) => {
           return (
-            <div key={uniqueId()} className="ml-1">
+            <div key={`${index}`} className="ml-1">
               {
                 rounded ?
                 <Avatar

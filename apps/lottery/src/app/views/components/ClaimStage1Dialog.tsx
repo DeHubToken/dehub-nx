@@ -1,4 +1,3 @@
-import { uniqueId } from 'lodash-es';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
@@ -69,17 +68,17 @@ const ClaimStage1Dialog = ({
           <Text fontSize="12px">1d 30m 32s</Text>
         </div>
         {
-          roundTickets.map((roundTicket: RoundTicketProps) => {
+          roundTickets.map((roundTicket: RoundTicketProps, index: number) => {
             return (
-              <div key={uniqueId()} className="mt-2 mb-2">
+              <div key={`${index}`} className="mt-2 mb-2">
                 <div className="mb-2">
                   <Text>{roundTicket.round}</Text>
                 </div>
                 {
-                  roundTicket.tickets.map((ticket: TicketProps) => {
+                  roundTicket.tickets.map((ticket: TicketProps, index: number) => {
                     return (
                       <TicketNumberLabel
-                        key={uniqueId()}
+                        key={`${index}`}
                         number={ticket.number}
                         state={roundTicket.state}
                         className="mb-2"

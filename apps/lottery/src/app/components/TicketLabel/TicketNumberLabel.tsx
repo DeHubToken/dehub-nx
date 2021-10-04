@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { uniqueId } from 'lodash-es';
 import styled from 'styled-components';
 import { Text } from '../Text';
 
@@ -44,7 +43,7 @@ const TicketNumberLabel = ({
       {
         parts.map((num: number, index: number) => {
           return (
-            <Text key={uniqueId()} className="m-2" color="#000">{num}</Text>
+            <Text key={`${index}`} className="m-2" color="#000">{num}</Text>
           )
         })
       }
