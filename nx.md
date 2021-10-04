@@ -79,6 +79,12 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/workspace:library --name=dehub --directory=shared/assets --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
 
+1. Generate Moralis lib:
+
+   ```
+   nx generate @nrwl/workspace:library --name=moralis --directory=shared --standaloneConfig --strict
+   ```
+
 1. Run Commands generation
 
    ```
