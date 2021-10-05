@@ -18,8 +18,8 @@
     "tdd": "nx affected --target=test --watchAll",
     "build": "nx affected --target=build --parallel --max-parallel=4",
     "ci": "npm run lint && npm run test && npm run build",
-    "deploy:draft": "nx affected --target=deploy-draft --parallel --max-parallel=4",
-    "deploy:prod": "nx affected --target=deploy-prod --parallel --max-parallel=4",
+    "deploy:draft": "nx affected --target=deploy-draft",
+    "deploy:prod": "nx affected --target=deploy-prod",
     "dep-graph": "nx dep-graph --watch=true",
     "dep-graph:a": "nx affected:dep-graph --watch=true"
   },
