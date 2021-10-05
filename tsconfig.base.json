@@ -15,7 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@dehub/shared/moralis": ["libs/shared/moralis/src/index.ts"]
+      "@dehub/shared/moralis": ["libs/shared/moralis/src/index.ts"],
+      "@dehub/shared/config": ["libs/shared/config/src/index.ts"],
+      "crypto": ["./node_modules/crypto-browserify"],
+      "stream": ["./node_modules/stream-browserify"],
+      "assert": ["./node_modules/assert"],
+      "http": ["./node_modules/stream-http"],
+      "https": ["./node_modules/https-browserify"],
+      "os": ["./node_modules/os-browserify"]
     }
   },
   "exclude": ["node_modules", "tmp"]

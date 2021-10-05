@@ -6,6 +6,7 @@
     "shared-assets-dehub": "libs/shared/assets/dehub",
     "shared-assets-freya": "libs/shared/assets/freya",
     "shared-moralis": "libs/shared/moralis",
+    "shared-config": "libs/shared/config",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   },
