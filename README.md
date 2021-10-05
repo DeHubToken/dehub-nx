@@ -43,6 +43,11 @@ _Common sass styles from the Freya PrimeNG themes_
 1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
 1. Open **VSCode** _(pre-configured editor settings involved)_
 1. **Install** dependencies: `npm i`
+1. While installing:
+   Add the following line to `/etc/hosts` _(`c:/windows/system32/drivers/hosts`)_:
+   ```
+   127.0.0.1 dev.localhost
+   ```
 1. Run **Dev mode**: `npm <APP>:start`
 1. Run **Prod mode**: `npm run <APP>:demo` _(serve prod version locally)_
 1. Run **CI**: `npm run ci` _(lint, test, build fro affected apps)_
