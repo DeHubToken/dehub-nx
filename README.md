@@ -14,7 +14,7 @@ _Angular DeHUB website_
 
 - Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
-- Hosting: **[Netlify](https://dehub-ng-landing-draft.netlify.app/)**
+- Hosting: **[Netlify](https://dehub-ng-website-draft.netlify.app/)**
 
 ## `apps/lottery` [DeHUB Lottery Dapp]
 

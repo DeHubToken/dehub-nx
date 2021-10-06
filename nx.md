@@ -110,7 +110,7 @@ This project was generated using [Nx](https://nx.dev).
 1. Creating manual site (without ci) with the netlify cli
 
    ```
-   npx netlify sites:create --account-slug=dehub --name=dehub-ng-landing-draft
+   npx netlify sites:create --account-slug=dehub --name=dehub-ng-website-draft
    npx netlify sites:create --account-slug=dehub --name=dehub-react-lottery-draft
    ```
 
@@ -119,8 +119,8 @@ This project was generated using [Nx](https://nx.dev).
    ```
    Site Created (Angular)
 
-   Admin URL: https://app.netlify.com/sites/dehub-ng-landing-draft
-   URL:       https://dehub-ng-landing-draft.netlify.app
+   Admin URL: https://app.netlify.com/sites/dehub-ng-website-draft
+   URL:       https://dehub-ng-website-draft.netlify.app
    Site ID:   355647c5-6e43-4c94-92bc-eac397ab80a8
 
    Site Created (React)
