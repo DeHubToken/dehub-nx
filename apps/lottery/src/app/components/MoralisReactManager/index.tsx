@@ -14,7 +14,7 @@ const MoralisReactManager = ({ children }: MoralisReactManagerProps) => {
     user
   } = useMoralis();
 
-  const moralisContext = useMoralisEthers();
+  const { activateProvider } = useMoralisEthers();
 
   useEffect(() => {
     const loginMoralis = async (provider: string | null) => {
@@ -41,14 +41,14 @@ const MoralisReactManager = ({ children }: MoralisReactManagerProps) => {
         window.localStorage.removeItem('chainChange');
       }
 
-      moralisContext?.activateProvider();
+      activateProvider();
     }
 
     if (user) {
       enableMoralis();
     }
 
-  }, [user, authenticate, enableWeb3]);
+  }, [user, authenticate, enableWeb3, activateProvider]);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment

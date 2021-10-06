@@ -5,12 +5,11 @@ import store from './state'
 import { Constants } from '@dehub/shared/config';
 import MoralisReactManager from './components/MoralisReactManager';
 import MoralisEthersProvider from './context/MoralisEthersProvider';
+import { getChainId } from './constants';
 import Lottery from './views/Lottery';
 
-const chainName = 'mainnet';
-
-const appId = Constants[chainName].MORALIS_ID;
-const serverUrl = Constants[chainName].MORALIS_SERVER;
+const appId = Constants[getChainId()].MORALIS_ID;
+const serverUrl = Constants[getChainId()].MORALIS_SERVER;
 
 export function App() {
   return (

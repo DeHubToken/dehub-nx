@@ -16,14 +16,14 @@ export function Header(props: HeaderProps) {
   const history = useHistory();
 
   const toggleWalletModal = useWalletModalToggle();
-  const moralisContext = useMoralisEthers();
+  const { authProvider } = useMoralisEthers();
 
   const [signerAddress, setSignerAddress] = useState<string>("Connect Wallet");
 
   useEffect(() => {
     const fetchSignerAddress = async () => {
-      if (moralisContext?.authProvider) {
-        const signer = moralisContext?.authProvider.getSigner();
+      if (authProvider) {
+        const signer = authProvider.getSigner();
         setSignerAddress(shortenAddress((await signer.getAddress())));
       } else {
         setSignerAddress("Connect Wallet");
@@ -31,7 +31,7 @@ export function Header(props: HeaderProps) {
     };
 
     fetchSignerAddress();
-  }, [moralisContext?.authProvider])
+  }, [authProvider])
 
   // const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
 

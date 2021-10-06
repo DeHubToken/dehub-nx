@@ -24,7 +24,7 @@ const WalletModal = () => {
     authenticate
   } = useMoralis();
 
-  const moralisContext = useMoralisEthers();
+  const { activateProvider } = useMoralisEthers();
 
   const connectWallet = useCallback((provider) => {
     setWalletConnectingState(WalletConnectingState.WAITING);
@@ -35,7 +35,7 @@ const WalletModal = () => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
         onSuccess: (user: Moralis.User) => {
-          moralisContext?.activateProvider();
+          activateProvider();
           
           setWalletConnectingState(WalletConnectingState.COMPLETE);
           toggleWalletModal();
@@ -47,14 +47,14 @@ const WalletModal = () => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
         onSuccess: async (user: Moralis.User) => {
-          moralisContext?.activateProvider();
+          activateProvider();
 
           setWalletConnectingState(WalletConnectingState.COMPLETE);
           toggleWalletModal();
         }
       })
     }
-  }, [authenticate, setWalletConnectingState, moralisContext, toggleWalletModal]);
+  }, [authenticate, setWalletConnectingState, activateProvider, toggleWalletModal]);
 
   return (
     <Dialog

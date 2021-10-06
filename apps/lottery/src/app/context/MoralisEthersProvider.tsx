@@ -11,12 +11,16 @@ export interface MoralisEthersProviderProps {
 
 const MoralisEthersProvider = ({ children }: MoralisEthersProviderProps) => {
   const [authProvider, setAuthProvider] = useState<Web3Provider | null>(null);
+  const [account, setAccount] = useState<string | null>(null);
 
   const activateProvider = useCallback(
     async () => {
       const web3 = await Moralis.Web3.activeWeb3Provider?.activate();
       const provider = new ethers.providers.Web3Provider(web3?.currentProvider as ExternalProvider);
       setAuthProvider(provider);
+
+      const signer = provider.getSigner();
+      setAccount(await signer.getAddress());
     },
     [],
   );
@@ -30,6 +34,7 @@ const MoralisEthersProvider = ({ children }: MoralisEthersProviderProps) => {
       value={{
         authProvider,
         activateProvider,
+        account,
         isAuthenticated
       }}
     >
