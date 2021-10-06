@@ -110,8 +110,8 @@ This project was generated using [Nx](https://nx.dev).
 1. Creating manual site (without ci) with the netlify cli
 
    ```
-   npx netlify sites:create --account-slug=attilacsanyi --name=dehub-ng-website
-   npx netlify sites:create --account-slug=attilacsanyi --name=dehub-react-lottery
+   npx netlify sites:create --account-slug=dehub --name=dehub-ng-landing-draft
+   npx netlify sites:create --account-slug=dehub --name=dehub-react-lottery-draft
    ```
 
    Output sample:
@@ -119,15 +119,15 @@ This project was generated using [Nx](https://nx.dev).
    ```
    Site Created (Angular)
 
-   Admin URL: https://app.netlify.com/sites/dehub-ng-website
-   URL:       https://dehub-ng-website.netlify.app
-   Site ID:   95c16eee-58bd-4f8c-b36e-b104bf63ab22
+   Admin URL: https://app.netlify.com/sites/dehub-ng-landing-draft
+   URL:       https://dehub-ng-landing-draft.netlify.app
+   Site ID:   355647c5-6e43-4c94-92bc-eac397ab80a8
 
    Site Created (React)
 
-   Admin URL: https://app.netlify.com/sites/dehub-react-lottery
-   URL:       https://dehub-react-lottery.netlify.app
-   Site ID:   6954dbe6-f72c-49d1-99b9-ce57364a6956
+   Admin URL: https://app.netlify.com/sites/dehub-react-lottery-draft
+   URL:       https://dehub-react-lottery-draft.netlify.app
+   Site ID:   bacc9132-2b4b-438d-9b93-a377c12181fb
    ```
 
 # Nx Cloud benefits
