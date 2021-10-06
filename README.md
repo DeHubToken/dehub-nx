@@ -14,7 +14,7 @@ _Angular DeHUB website_
 
 - Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
-- Hosting: **[Netlify](https://dehub-ng-website.netlify.app/)**
+- Hosting: **[Netlify](https://dehub-ng-website-draft.netlify.app/)**
 
 ## `apps/lottery` [DeHUB Lottery Dapp]
 
@@ -22,7 +22,7 @@ _React DeHUB Lottery Dapp_
 
 - Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
-- Hosting: **[Netlify](https://dehub-react-lottery.netlify.app)**
+- Hosting: **[Netlify](https://dehub-react-lottery-draft.netlify.app)**
 
 # Libraries
 
