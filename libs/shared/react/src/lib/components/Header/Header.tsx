@@ -56,7 +56,7 @@ function Header(props: HeaderProps) {
 
           <div className="layout-topbar-right">
             {
-              authError ? <div className="text-center">Wrong Network</div> : <></>
+              authError ? <div className="text-center">Wrong Network</div> : <div></div>
             }
             <ul className="layout-topbar-actions">
               <li>

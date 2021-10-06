@@ -7,6 +7,7 @@ import { getContract } from '@dehub/shared/utils';
 import { getChainId } from '../constants';
 
 // returns null on errors
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function useContract(address?: string, ABI?: any, withSignerIfPossible = true): Contract | null {
   const {
     authProvider,

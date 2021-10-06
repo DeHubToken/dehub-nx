@@ -8,6 +8,7 @@ export function sharedUtils(): string {
 }
 
 // returns the checksummed address if the address is valid, otherwise returns false
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isAddress(value: any): string | false {
   try {
     return getAddress(value)
@@ -36,10 +37,13 @@ export function getProviderOrSigner(library: Web3Provider, account?: string): We
 }
 
 // account is optional
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getContract(address: string, ABI: any, library: Web3Provider, account?: string): Contract {
   if (!isAddress(address) || address === AddressZero) {
     throw Error(`Invalid 'address' parameter '${address}'.`)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return new Contract(address, ABI, getProviderOrSigner(library, account) as any)
 }
