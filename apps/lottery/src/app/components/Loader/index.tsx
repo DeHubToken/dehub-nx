@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { Player } from '@lottiefiles/react-lottie-player';
 
+/**
+ * @todo linear-gradient must be defined as $variable
+ */
 const LoaderWrapper = styled.div`
   background: linear-gradient(45deg, #0b1113, #051118 46%, #060c1d 71%, #321338);
   position: fixed;

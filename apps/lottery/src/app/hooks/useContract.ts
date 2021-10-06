@@ -1,8 +1,11 @@
 import { useMemo } from 'react';
 import { Contract } from '@ethersproject/contracts';
+import {
+  ContractAddresses,
+  getContract
+} from '@dehub/shared/config';
 import { useMoralisEthers } from './index';
 
-import { ContractAddresses, getContract } from '@dehub/shared/config';
 import { getChainId } from '../constants';
 
 // returns null on errors
