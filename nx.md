@@ -91,6 +91,12 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/workspace:library --name=config --directory=shared --standaloneConfig --strict
    ```
 
+1. Generate Utils lib:
+
+   ```
+   nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
+   ```
+
 1. Generate React lib:
 
    ```

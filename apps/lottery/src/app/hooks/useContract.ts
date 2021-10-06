@@ -1,10 +1,8 @@
 import { useMemo } from 'react';
 import { Contract } from '@ethersproject/contracts';
-import {
-  ContractAddresses,
-  getContract
-} from '@dehub/shared/config';
+import { ContractAddresses } from '@dehub/shared/config';
 import { Hooks } from '@dehub/shared/react';
+import { getContract } from '@dehub/shared/utils';
 
 import { getChainId } from '../constants';
 
