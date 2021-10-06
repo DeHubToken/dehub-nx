@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { WalletConnectingState } from '../../constants'
+import { WalletConnectingState } from '@dehub/shared/config';
 
 export const toggleWalletModal = createAction<void>('toggleWalletModal');
 export const setWalletConnectingState =

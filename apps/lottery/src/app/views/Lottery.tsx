@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
 import Card from '../components/Layout/Card';
 import DeGrand from '../views/DeGrand';
 import DeLotto from '../views/DeLotto';
 
-import Loader from '../components/Loader';
-import { WalletConnectingState } from '../constants';
-import { useWalletConnectingState } from '../state/application/hooks';
+import { WalletConnectingState } from '@dehub/shared/config';
+import {
+  Components,
+  States
+} from '@dehub/shared/react';
 
 export default function Lottery() {
   const [showLoader, setShowLoader] = useState(false);
-  const walletConnectingState = useWalletConnectingState(); 
+  const walletConnectingState = States.Application.Hooks.useWalletConnectingState(); 
 
   useEffect(() => {
     if (walletConnectingState === WalletConnectingState.WAITING) {
@@ -23,9 +23,9 @@ export default function Lottery() {
 
   return (
     <div>
-      {showLoader ? <Loader /> :
+      {showLoader ? <Components.Loader /> :
         <div className="layout-wrapper">
-          <Header />
+          <Components.Header />
           <div className="layout-main">
             <div className="layout-content">
               <Card
@@ -42,7 +42,7 @@ export default function Lottery() {
               </div>
             </div>
           </div>
-          <Footer />
+          <Components.Footer />
         </div>
       }
     </div>

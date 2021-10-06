@@ -5,7 +5,7 @@ import application from './application/reducers';
 
 const PERSISTED_KEYS: string[] = ['user']
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     application
   },

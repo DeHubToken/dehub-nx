@@ -6,14 +6,14 @@ import { Moralis } from 'moralis';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
-import { Text } from '../Text';
-import { WalletConnectingState } from '../../constants';
+import { WalletConnectingState } from '@dehub/shared/config';
+
 import { useMoralisEthers } from '../../hooks';
 import {
   useWalletModalOpen,
   useWalletModalToggle,
   useSetWalletConnectingState
-} from '../../state/application/hooks'
+} from '../../states/application/hooks';
 
 const WalletModal = () => {
   const walletModalOpen = useWalletModalOpen();
@@ -76,7 +76,7 @@ const WalletModal = () => {
               >
                 MetaMask
               </Button>
-              <Text textAlign="center">Easy-to-use browser extension</Text>
+              <div className="text-center">Easy-to-use browser extension</div>
             </div>
           // eslint-disable-next-line react/jsx-no-useless-fragment
           ) : <></>
@@ -88,7 +88,7 @@ const WalletModal = () => {
           >
             WalletConnect
           </Button>
-          <Text textAlign="center">Connect to Trust Wallet, Rainbow Wallet and more...</Text>
+          <div className="text-center">Connect to Trust Wallet, Rainbow Wallet and more...</div>
         </div>
       </div>
     </Dialog>

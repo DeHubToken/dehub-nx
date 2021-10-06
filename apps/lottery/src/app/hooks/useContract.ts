@@ -4,7 +4,7 @@ import {
   ContractAddresses,
   getContract
 } from '@dehub/shared/config';
-import { useMoralisEthers } from './index';
+import { Hooks } from '@dehub/shared/react';
 
 import { getChainId } from '../constants';
 
@@ -13,7 +13,7 @@ function useContract(address?: string, ABI?: any, withSignerIfPossible = true): 
   const {
     authProvider,
     account
-  } = useMoralisEthers();
+  } = Hooks.useMoralisEthers();
 
   return useMemo(() => {
     if (!address || !ABI || !authProvider) return null;

@@ -4,10 +4,9 @@ import { useMoralis } from 'react-moralis';
 
 import { shortenAddress } from '@dehub/shared/config';
 
-import { Text } from '../Text';
-import WalletModal from '../WalletModal';
 import { useMoralisEthers } from '../../hooks';
-import { useWalletModalToggle } from '../../state/application/hooks';
+import { useWalletModalToggle } from '../../states/application/hooks';
+import WalletModal from '../WalletModal';
 
 /* eslint-disable-next-line */
 export interface HeaderProps {}
@@ -57,7 +56,7 @@ export function Header(props: HeaderProps) {
 
           <div className="layout-topbar-right">
             {
-              authError ? <Text>Wrong Network</Text> : <></>
+              authError ? <div className="text-center">Wrong Network</div> : <></>
             }
             <ul className="layout-topbar-actions">
               <li>

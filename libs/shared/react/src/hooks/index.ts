@@ -1,6 +1,5 @@
-import { useContext, useMemo } from 'react';
-import { useMoralis } from 'react-moralis';
-import { MoralisEthersContext } from '../context/MoralisEthersContext';
+import { useContext } from 'react';
+import { MoralisEthersContext } from '../contexts/MoralisEthersContext';
 
 export const useMoralisEthers = () => {
   const context = useContext(MoralisEthersContext);

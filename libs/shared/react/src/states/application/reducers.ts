@@ -3,7 +3,7 @@ import {
   toggleWalletModal,
   setWalletConnectingState
 } from './actions';
-import { WalletConnectingState } from '../../constants';
+import { WalletConnectingState } from '@dehub/shared/config';
 
 export interface ApplicationState {
   walletModalOpen: boolean;

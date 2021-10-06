@@ -9,7 +9,7 @@ export interface MoralisEthersProviderProps {
   children: React.ReactNode;
 }
 
-const MoralisEthersProvider = ({ children }: MoralisEthersProviderProps) => {
+export const MoralisEthersProvider = ({ children }: MoralisEthersProviderProps) => {
   const [authProvider, setAuthProvider] = useState<Web3Provider | null>(null);
   const [account, setAccount] = useState<string | null>(null);
 

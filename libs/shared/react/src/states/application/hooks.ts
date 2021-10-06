@@ -4,8 +4,8 @@ import {
   setWalletConnectingState
 } from './actions';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from '../index';
-import { WalletConnectingState } from '../../constants';
+import { AppState } from '../store';
+import { WalletConnectingState } from '@dehub/shared/config';
 
 export function useWalletModalOpen(): boolean {
   return useSelector((state: AppState) => state.application.walletModalOpen);
