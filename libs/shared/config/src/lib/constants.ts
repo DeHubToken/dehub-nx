@@ -1,3 +1,10 @@
+export const BSC_MAINNET = 56;
+export const BSC_TESTNET = 97;
+
+export const SupportedChainId = [
+  BSC_MAINNET
+];
+
 export interface NetworkInfo {
   MORALIS_ID: string;
   MORALIS_SERVER: string;
@@ -21,26 +28,5 @@ export const Constants: { [key: string]: NetworkInfo } = {
     CHAIN_ID_HEX: '0x61',
     CHAIN_ID_DEC: 97,
     RPC_URL: 'https://data-seed-prebsc-2-s3.binance.org:8545/'
-  }
-}
-
-export interface WalletInfo {
-  name: string;
-  provider: string;
-  description?: string;
-  isMobile?: boolean;
-}
-
-export const SupportedWallets: { [key: string]: WalletInfo } = {
-  METAMASK: {
-    name: "MetaMask",
-    provider: "",
-    description: "Easy-to-use browser extension"
-  },
-  WALLETCONNECT: {
-    name: "WalletConnect",
-    provider: "walletconnect",
-    description: "Connect to Trust Wallet, Rainbow Wallet and more...",
-    isMobile: true
   }
 }
