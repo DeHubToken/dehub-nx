@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
 
+import { useMoralisEthers } from '../../hooks';
+
 interface MoralisReactManagerProps {
   children?: React.ReactNode
 }
@@ -11,6 +13,8 @@ const MoralisReactManager = ({ children }: MoralisReactManagerProps) => {
     authenticate,
     user
   } = useMoralis();
+
+  const moralisContext = useMoralisEthers();
 
   useEffect(() => {
     const loginMoralis = async (provider: string | null) => {
@@ -25,7 +29,8 @@ const MoralisReactManager = ({ children }: MoralisReactManagerProps) => {
 
     const enableMoralis = async () => {
       const savedProviderName = window.localStorage.getItem('providerName');
-			if (savedProviderName && savedProviderName === "walletconnect") {
+      
+      if (savedProviderName && savedProviderName === "walletconnect") {
         await enableWeb3({ provider: "walletconnect" })
       } else {
         await enableWeb3();
@@ -35,6 +40,8 @@ const MoralisReactManager = ({ children }: MoralisReactManagerProps) => {
         await loginMoralis(savedProviderName);
         window.localStorage.removeItem('chainChange');
       }
+
+      moralisContext?.activateProvider();
     }
 
     if (user) {
