@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMoralis } from 'react-moralis';
 
-import { shortenAddress } from '@dehub/shared/config';
+import { shortenAddress } from '@dehub/shared/utils';
 
 import { useMoralisEthers } from '../../hooks';
 import { useWalletModalToggle } from '../../states/application/hooks';
@@ -11,7 +11,7 @@ import WalletModal from '../WalletModal';
 /* eslint-disable-next-line */
 export interface HeaderProps {}
 
-export function Header(props: HeaderProps) {
+function Header(props: HeaderProps) {
   const history = useHistory();
 
   const toggleWalletModal = useWalletModalToggle();
@@ -85,4 +85,4 @@ export function Header(props: HeaderProps) {
   )
 }
 
-export default memo(Header)
+export default Header;
