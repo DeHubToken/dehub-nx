@@ -10,7 +10,8 @@
     "web-e2e": "apps/web-e2e"
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "npm"
   },
   "generators": {
     "@nrwl/angular:application": {
