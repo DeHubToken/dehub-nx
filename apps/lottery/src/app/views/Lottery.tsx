@@ -5,13 +5,17 @@ import DeLotto from '../views/DeLotto';
 
 import { WalletConnectingState } from '@dehub/shared/config';
 import {
-  Components,
-  States
-} from '@dehub/shared/react';
+  Header,
+  Footer,
+  Loader
+} from '@dehub/react/ui';
+
+import UserMenu from '../components/UserMenu';
+import { useWalletConnectingState } from '../states/application/hooks';
 
 export default function Lottery() {
   const [showLoader, setShowLoader] = useState(false);
-  const walletConnectingState = States.Application.Hooks.useWalletConnectingState(); 
+  const walletConnectingState = useWalletConnectingState();
 
   useEffect(() => {
     if (walletConnectingState === WalletConnectingState.WAITING) {
@@ -19,13 +23,18 @@ export default function Lottery() {
     } else {
       setShowLoader(false);
     }
-  }, [walletConnectingState])
+  }, [walletConnectingState]);
 
   return (
     <div>
-      {showLoader ? <Components.Loader /> :
+      {showLoader ? (
+        <Loader />
+      ) : (
         <div className="layout-wrapper">
-          <Components.Header />
+          <Header
+            userMenu={<UserMenu />}
+            logo={{ href: "https://dehub.net", icon: "assets/dehub/logo.png" }}
+          />
           <div className="layout-main">
             <div className="layout-content">
               <Card
@@ -42,9 +51,9 @@ export default function Lottery() {
               </div>
             </div>
           </div>
-          <Components.Footer />
+          <Footer />
         </div>
-      }
+      )}
     </div>
-  )
+  );
 }

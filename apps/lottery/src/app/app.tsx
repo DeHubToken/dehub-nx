@@ -1,14 +1,12 @@
 import { MoralisProvider } from 'react-moralis';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
 import { Constants } from '@dehub/shared/config';
-import {
-  Components,
-  Contexts,
-  States
-} from '@dehub/shared/react';
+import { Contexts } from '@dehub/react/core';
 
 import { getChainId } from './constants';
+import MoralisReactManager from './components/MoralisReactManager';
+import { store } from './states';
 import Lottery from './views/Lottery';
 
 const appId = Constants[getChainId()].MORALIS_ID;
@@ -17,11 +15,11 @@ const serverUrl = Constants[getChainId()].MORALIS_SERVER;
 export function App() {
   return (
     <MoralisProvider appId={appId} serverUrl={serverUrl}>
-      <Provider store={States.store}>
+      <Provider store={store}>
         <Contexts.MoralisEthersProvider>
-          <Components.MoralisReactManager>
+          <MoralisReactManager>
             <Lottery />
-          </Components.MoralisReactManager>
+          </MoralisReactManager>
         </Contexts.MoralisEthersProvider>
       </Provider>
     </MoralisProvider>

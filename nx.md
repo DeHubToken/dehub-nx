@@ -100,7 +100,9 @@ This project was generated using [Nx](https://nx.dev).
 1. Generate React lib:
 
    ```
-   nx generate @nrwl/react:lib --name=react --directory=shared --standaloneConfig --strict
+   nx generate @nrwl/react:lib --name=ui --directory=react --standaloneConfig --strict
+
+   nx generate @nrwl/react:lib --name=core --directory=react --standaloneConfig --strict
    ```
 
 1. Run Commands generation

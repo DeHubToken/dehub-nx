@@ -1,18 +1,19 @@
 import { useMemo } from 'react';
 import { Contract } from '@ethersproject/contracts';
 import { ContractAddresses } from '@dehub/shared/config';
-import { Hooks } from '@dehub/shared/react';
+import { Hooks } from '@dehub/react/core';
 import { getContract } from '@dehub/shared/utils';
 
 import { getChainId } from '../constants';
 
 // returns null on errors
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function useContract(address?: string, ABI?: any, withSignerIfPossible = true): Contract | null {
-  const {
-    authProvider,
-    account
-  } = Hooks.useMoralisEthers();
+function useContract(
+  address?: string,
+  ABI?: any,
+  withSignerIfPossible = true
+): Contract | null {
+  const { authProvider, account } = Hooks.useMoralisEthers();
 
   return useMemo(() => {
     if (!address || !ABI || !authProvider) return null;
@@ -21,9 +22,7 @@ function useContract(address?: string, ABI?: any, withSignerIfPossible = true): 
         address,
         ABI,
         authProvider,
-        withSignerIfPossible &&
-          account ?
-          account : undefined
+        withSignerIfPossible && account ? account : undefined
       );
     } catch (error) {
       console.error('Failed to get contract', error);
@@ -33,6 +32,6 @@ function useContract(address?: string, ABI?: any, withSignerIfPossible = true): 
 }
 
 export function useStandardLotteryContract(): Contract | null {
-  const contractAddress = ContractAddresses[getChainId()]["StandardLottery"];
+  const contractAddress = ContractAddresses[getChainId()]['StandardLottery'];
   return useContract(contractAddress);
 }
