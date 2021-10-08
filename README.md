@@ -44,6 +44,10 @@ _Common Moralis logic like authentication, walletconnect, etc_
 
 _Common Models used in react and angular apps_
 
+## `libs/shared/utils` [Shared utils and functions]
+
+_Common Utils used in react and angular apps_
+
 # Dev Setup
 
 `<APP>` can be `web` or `lottery`
