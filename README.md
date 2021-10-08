@@ -30,11 +30,15 @@ _Like UI, models, shared or moralis, etc._<br>
 
 ## `libs/shared/assets/dehub` [Shared DeHUB assets]
 
-_Common sass styles from the Freya PrimeNG themes_
+_Common sass styles of DeHUB_
 
 ## `libs/shared/assets/freya` [Shared Freya template]
 
 _Common sass styles from the Freya PrimeNG themes_
+
+## `libs/shared/moralis` [Shared Moralis functionality]
+
+_Common Moralis logic like authentication, walletconnect, etc_
 
 # Dev Setup
 

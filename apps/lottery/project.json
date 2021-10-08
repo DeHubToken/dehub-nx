@@ -27,7 +27,29 @@
             "output": "assets"
           }
         ],
-        "styles": ["apps/lottery/src/styles.scss"],
+        "styles": [
+          "apps/lottery/src/styles.scss",
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/dehub/theme.scss",
+            "bundleName": "theme",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dehub.scss",
+            "bundleName": "layout",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/purple/theme-dark.scss",
+            "bundleName": "theme-alternative",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dark.scss",
+            "bundleName": "layout-alternative",
+            "inject": false
+          }
+        ],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
