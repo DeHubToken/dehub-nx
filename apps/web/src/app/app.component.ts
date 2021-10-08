@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { ThemeMode } from '@dehub/shared/models';
 import { PrimeNGConfig } from 'primeng/api';
-import { ThemeMode } from './app.model';
 import { ThemeService } from './theme.service';
 
 @Component({

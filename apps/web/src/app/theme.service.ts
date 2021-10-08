@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
-import { ThemeMode, Themes } from './app.model';
+import { ThemeMode, Themes } from '@dehub/shared/models';
 
 @Injectable({
   providedIn: 'root',
