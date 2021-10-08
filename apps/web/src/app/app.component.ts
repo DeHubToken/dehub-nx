@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ThemeMode } from '@dehub/shared/models';
+import { isThemeSwitchKey } from '@dehub/shared/utils';
 import { PrimeNGConfig } from 'primeng/api';
 import { ThemeService } from './theme.service';
-
 @Component({
   selector: 'dh-root',
   template: `<router-outlet></router-outlet> `,
@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent({ ctrlKey, code, shiftKey }: KeyboardEvent) {
-    if (ctrlKey && shiftKey && code === 'KeyT') {
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (isThemeSwitchKey(event)) {
       this.setMode(this.themeService.toggleTheme());
     }
   }
