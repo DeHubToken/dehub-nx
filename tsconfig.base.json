@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dehub/shared/models": ["libs/shared/models/src/index.ts"],
       "@dehub/shared/moralis": ["libs/shared/moralis/src/index.ts"]
     }
   },

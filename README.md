@@ -40,6 +40,10 @@ _Common sass styles from the Freya PrimeNG themes_
 
 _Common Moralis logic like authentication, walletconnect, etc_
 
+## `libs/shared/models` [Shared types, states, models]
+
+_Common Models used in react and angular apps_
+
 # Dev Setup
 
 `<APP>` can be `web` or `lottery`

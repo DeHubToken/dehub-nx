@@ -5,6 +5,7 @@
     "lottery-e2e": "apps/lottery-e2e",
     "shared-assets-dehub": "libs/shared/assets/dehub",
     "shared-assets-freya": "libs/shared/assets/freya",
+    "shared-models": "libs/shared/models",
     "shared-moralis": "libs/shared/moralis",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
