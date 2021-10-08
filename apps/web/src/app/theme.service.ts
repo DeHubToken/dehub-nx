@@ -1,17 +1,18 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
+import { ThemeMode, Themes } from './app.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  private actualTheme: '' | '-alternative' = '';
+  private theme: Themes = '';
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  /** Toggle Theme between Dehub and an alternative custom one */
-  toggleTheme() {
-    this.actualTheme = this.actualTheme === '' ? '-alternative' : '';
+  /** Toggle Theme between Dehub and an alternative */
+  toggleTheme(): ThemeMode {
+    this.theme = this.theme === '' ? '-alternative' : '';
 
     const themeLink = this.document.getElementById(
       'theme'
@@ -20,7 +21,10 @@ export class ThemeService {
       'layout'
     ) as HTMLLinkElement | null;
 
-    if (themeLink) themeLink.href = `theme${this.actualTheme}.css`;
-    if (layoutLink) layoutLink.href = `layout${this.actualTheme}.css`;
+    if (themeLink) themeLink.href = `theme${this.theme}.css`;
+    if (layoutLink) layoutLink.href = `layout${this.theme}.css`;
+
+    // Default theme is dark, alternative is light
+    return this.theme === '' ? 'dark' : 'light';
   }
 }

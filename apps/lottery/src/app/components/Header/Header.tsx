@@ -12,8 +12,11 @@ export function Header(props: HeaderProps) {
       <div className="layout-topbar">
         <div className="layout-topbar-wrapper">
           <div className="layout-topbar-left">
-            <button className="p-link layout-topbar-logo" onClick={() => history.push('/')}>
-              <img src="assets/dehub/logo.png" alt="DeHUB logo" />
+            <button
+              className="p-link layout-topbar-logo"
+              onClick={() => history.push('/')}
+            >
+              <img src="assets/dehub/logo-dehub-white.svg" alt="DeHUB logo" />
             </button>
           </div>
 
@@ -29,7 +32,7 @@ export function Header(props: HeaderProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default memo(Header)
+export default memo(Header);

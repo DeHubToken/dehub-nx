@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import { ThemeMode } from './app.model';
 import { ThemeService } from './theme.service';
 
 @Component({
@@ -9,11 +10,9 @@ import { ThemeService } from './theme.service';
 export class AppComponent implements OnInit {
   menuMode = 'horizontal';
 
-  darkMode = 'dark';
-
-  topbarTheme = 'dark';
-
-  menuTheme = 'dark';
+  darkMode: ThemeMode = 'dark';
+  topbarTheme: ThemeMode = 'dark';
+  menuTheme: ThemeMode = 'dark';
 
   constructor(
     private primengConfig: PrimeNGConfig,
@@ -21,13 +20,19 @@ export class AppComponent implements OnInit {
   ) {}
 
   @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.altKey && event.code === 'KeyT') {
-      this.themeService.toggleTheme();
+  handleKeyboardEvent({ altKey, code }: KeyboardEvent) {
+    if (altKey && code === 'KeyT') {
+      this.setMode(this.themeService.toggleTheme());
     }
   }
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+  }
+
+  private setMode(mode: ThemeMode) {
+    this.darkMode = mode;
+    this.topbarTheme = mode;
+    this.menuTheme = mode;
   }
 }

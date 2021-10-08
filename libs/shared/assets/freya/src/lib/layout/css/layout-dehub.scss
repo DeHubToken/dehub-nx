@@ -1,5 +1,5 @@
-$primaryColor: #2170e7;
+$primaryColor: lighten(#2170e7, 5%);
 $primaryTextColor: #ffffff;
 
-@import '../../sass/variables/layout/_layout_light';
+@import '../../sass/variables/layout/_layout_dark';
 @import '../../sass/layout/_layout';
