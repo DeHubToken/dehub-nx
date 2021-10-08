@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@dehub/shared/models": ["libs/shared/models/src/index.ts"],
-      "@dehub/shared/moralis": ["libs/shared/moralis/src/index.ts"]
+      "@dehub/shared/moralis": ["libs/shared/moralis/src/index.ts"],
+      "@dehub/shared/utils": ["libs/shared/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

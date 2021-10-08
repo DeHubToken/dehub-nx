@@ -83,6 +83,13 @@ This project was generated using [Nx](https://nx.dev).
 
    ```
    nx generate @nrwl/workspace:library --name=models --directory=shared --standaloneConfig --strict
+
+   ```
+
+1. Generate Shared Utils _used for utilities, and common functions_
+
+   ```
+   nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
    ```
 
 1. Generate Moralis lib:
