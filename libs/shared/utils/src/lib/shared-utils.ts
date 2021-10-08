@@ -4,5 +4,5 @@
  * @param param0 keyboard event
  * @returns true if theme switch key combo was pressed
  */
-export const isThemeSwitchKey = ({ ctrlKey, code, shiftKey }: KeyboardEvent) =>
-  ctrlKey && shiftKey && code === 'KeyT';
+export const isThemeSwitchKey = ({ code, shiftKey }: KeyboardEvent) =>
+  shiftKey && code === 'IntlBackslash';

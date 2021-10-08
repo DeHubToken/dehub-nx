@@ -2,11 +2,11 @@ import { isThemeSwitchKey } from './shared-utils';
 
 describe('sharedUtils', () => {
   describe('isThemeSwitchKey ', () => {
-    it('should trigger on Shift + Ctrl + T', () => {
+    it('should trigger on Shift + IntlBackslash', () => {
       expect(
         isThemeSwitchKey({
-          ctrlKey: true,
-          code: 'KeyT',
+          ctrlKey: false,
+          code: 'IntlBackslash',
           shiftKey: true,
         } as KeyboardEvent)
       ).toBe(true);
