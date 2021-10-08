@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent({ altKey, code }: KeyboardEvent) {
-    if (altKey && code === 'KeyT') {
+  handleKeyboardEvent({ ctrlKey, code, shiftKey }: KeyboardEvent) {
+    if (ctrlKey && shiftKey && code === 'KeyT') {
       this.setMode(this.themeService.toggleTheme());
     }
   }
