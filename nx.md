@@ -98,6 +98,26 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/workspace:library --name=moralis --directory=shared --standaloneConfig --strict
    ```
 
+1. Generate Config lib:
+
+   ```
+   nx generate @nrwl/workspace:library --name=config --directory=shared --standaloneConfig --strict
+   ```
+
+1. Generate Utils lib:
+
+   ```
+   nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
+   ```
+
+1. Generate React lib:
+
+   ```
+   nx generate @nrwl/react:lib --name=ui --directory=react --standaloneConfig --strict
+
+   nx generate @nrwl/react:lib --name=core --directory=react --standaloneConfig --strict
+   ```
+
 1. Run Commands generation
 
    ```

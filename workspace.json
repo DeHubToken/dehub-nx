@@ -3,8 +3,11 @@
   "projects": {
     "lottery": "apps/lottery",
     "lottery-e2e": "apps/lottery-e2e",
+    "react-core": "libs/react/core",
+    "react-ui": "libs/react/ui",
     "shared-assets-dehub": "libs/shared/assets/dehub",
     "shared-assets-freya": "libs/shared/assets/freya",
+    "shared-config": "libs/shared/config",
     "shared-models": "libs/shared/models",
     "shared-moralis": "libs/shared/moralis",
     "shared-utils": "libs/shared/utils",

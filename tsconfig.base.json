@@ -15,9 +15,18 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dehub/react/ui": ["libs/react/ui/src/index.ts"],
+      "@dehub/react/core": ["libs/react/core/src/index.ts"],
+      "@dehub/shared/config": ["libs/shared/config/src/index.ts"],
       "@dehub/shared/models": ["libs/shared/models/src/index.ts"],
       "@dehub/shared/moralis": ["libs/shared/moralis/src/index.ts"],
-      "@dehub/shared/utils": ["libs/shared/utils/src/index.ts"]
+      "@dehub/shared/utils": ["libs/shared/utils/src/index.ts"],
+      "assert": ["./node_modules/assert"],
+      "crypto": ["./node_modules/crypto-browserify"],
+      "http": ["./node_modules/stream-http"],
+      "https": ["./node_modules/https-browserify"],
+      "os": ["./node_modules/os-browserify"],
+      "stream": ["./node_modules/stream-browserify"]
     }
   },
   "exclude": ["node_modules", "tmp"]
