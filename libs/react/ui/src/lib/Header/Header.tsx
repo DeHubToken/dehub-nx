@@ -1,17 +1,13 @@
-import { ReactElement, memo } from 'react';
+import { memo, ReactElement } from 'react';
 import Logo from './Logo';
 import { LogoTypes } from './types';
 
-/* eslint-disable-next-line */
 export interface HeaderProps {
   userMenu?: ReactElement;
   logo: LogoTypes;
 }
 
-function Header({
-  userMenu,
-  logo
-}: HeaderProps) {
+function Header({ userMenu, logo }: HeaderProps) {
   return (
     <div className="layout-topbar-dark">
       <div className="layout-topbar">
@@ -19,9 +15,7 @@ function Header({
           <div className="layout-topbar-left">
             <Logo logo={logo} />
           </div>
-          <div className="layout-topbar-right">
-            {userMenu}
-          </div>
+          <div className="layout-topbar-right">{userMenu}</div>
         </div>
       </div>
     </div>

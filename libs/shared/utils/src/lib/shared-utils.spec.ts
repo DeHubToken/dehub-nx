@@ -1,7 +1,25 @@
-import { sharedUtils } from './shared-utils';
+import { isThemeSwitchKey } from './shared-utils';
 
 describe('sharedUtils', () => {
-  it('should work', () => {
-    expect(sharedUtils()).toEqual('shared-utils');
+  describe('isThemeSwitchKey ', () => {
+    it('should trigger on Shift + IntlBackslash', () => {
+      expect(
+        isThemeSwitchKey({
+          ctrlKey: false,
+          code: 'IntlBackslash',
+          shiftKey: true,
+        } as KeyboardEvent)
+      ).toBe(true);
+    });
+
+    it('should not trigger on Shift + T', () => {
+      expect(
+        isThemeSwitchKey({
+          ctrlKey: false,
+          code: 'KeyT',
+          shiftKey: true,
+        } as KeyboardEvent)
+      ).toBe(false);
+    });
   });
 });

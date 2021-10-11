@@ -29,8 +29,31 @@
             "output": "assets"
           }
         ],
-        "styles": ["apps/web/src/styles.scss"],
-        "scripts": []
+        "styles": [
+          "apps/web/src/styles.scss",
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/dehub/theme.scss",
+            "bundleName": "theme",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dehub.scss",
+            "bundleName": "layout",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/alternative/theme-light.scss",
+            "bundleName": "theme-alternative",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-light.scss",
+            "bundleName": "layout-alternative",
+            "inject": false
+          }
+        ],
+        "scripts": [],
+        "allowedCommonJsDependencies": ["hash.js"]
       },
       "configurations": {
         "production": {

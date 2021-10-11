@@ -2,5 +2,6 @@
 
 /dist
 /coverage
+/libs/shared/assets/freya
 .history
 .vscode
