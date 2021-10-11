@@ -52,7 +52,8 @@
             "inject": false
           }
         ],
-        "scripts": []
+        "scripts": [],
+        "allowedCommonJsDependencies": ["hash.js"]
       },
       "configurations": {
         "production": {

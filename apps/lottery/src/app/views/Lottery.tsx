@@ -1,17 +1,11 @@
-import { useState, useEffect } from 'react';
-import Card from '../components/Layout/Card';
-import DeGrand from '../views/DeGrand';
-import DeLotto from '../views/DeLotto';
-
+import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
-import {
-  Header,
-  Footer,
-  Loader
-} from '@dehub/react/ui';
-
+import { useEffect, useState } from 'react';
+import Card from '../components/Layout/Card';
 import UserMenu from '../components/UserMenu';
 import { useWalletConnectingState } from '../states/application/hooks';
+import DeGrand from '../views/DeGrand';
+import DeLotto from '../views/DeLotto';
 
 export default function Lottery() {
   const [showLoader, setShowLoader] = useState(false);
@@ -33,7 +27,10 @@ export default function Lottery() {
         <div className="layout-wrapper">
           <Header
             userMenu={<UserMenu />}
-            logo={{ href: "https://dehub.net", icon: "assets/dehub/logo.png" }}
+            logo={{
+              href: 'https://dehub.net',
+              icon: 'assets/dehub/logo-dehub-white.svg',
+            }}
           />
           <div className="layout-main">
             <div className="layout-content">
