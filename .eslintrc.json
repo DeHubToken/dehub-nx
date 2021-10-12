@@ -24,7 +24,18 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
+      "rules": {
+        "multiline-comment-style": ["error", "starred-block"],
+        "spaced-comment": [
+          "warn",
+          "always",
+          {
+            "exceptions": ["-", "*"],
+            "line": { "exceptions": ["-"] },
+            "block": { "exceptions": ["*"] }
+          }
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
