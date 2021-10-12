@@ -78,7 +78,7 @@ const processViewLotteryAndError = (lotteryId: string): LotteryResponse => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const processRawTicketsReponse = (data: any): LotteryTicket[] => {
-  const [ticketIds, ticketNumbers, claimStatuses, nextCursor] = data;
+  const [ticketIds, ticketNumbers, claimStatuses,] = data;
 
   if (ticketIds.length > 0) {
     return ticketNumbers.map((ticketId: ethers.BigNumber, index: number) => {
