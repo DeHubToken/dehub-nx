@@ -4,7 +4,7 @@ import { ContractAddresses } from '@dehub/shared/config';
 import { Hooks } from '@dehub/react/core';
 import { getContract } from '@dehub/shared/utils';
 
-import { getChainId } from '../constants';
+import { getChainId } from '../config/constants';
 
 // returns null on errors
 function useContract(
@@ -13,7 +13,10 @@ function useContract(
   ABI?: any,
   withSignerIfPossible = true
 ): Contract | null {
-  const { authProvider, account } = Hooks.useMoralisEthers();
+  const {
+    authProvider,
+    account
+  } = Hooks.useMoralisEthers();
 
   return useMemo(() => {
     if (!address || !ABI || !authProvider) return null;
@@ -22,7 +25,9 @@ function useContract(
         address,
         ABI,
         authProvider,
-        withSignerIfPossible && account ? account : undefined
+        withSignerIfPossible &&
+          account ?
+          account : undefined
       );
     } catch (error) {
       console.error('Failed to get contract', error);
@@ -32,6 +37,11 @@ function useContract(
 }
 
 export function useStandardLotteryContract(): Contract | null {
-  const contractAddress = ContractAddresses[getChainId()]['StandardLottery'];
+  const contractAddress = ContractAddresses[getChainId()]["StandardLottery"];
+  return useContract(contractAddress);
+}
+
+export function useSpecialLotteryContract(): Contract | null {
+  const contractAddress = ContractAddresses[getChainId()]["SpecialLottery"];
   return useContract(contractAddress);
 }

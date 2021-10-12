@@ -1,3 +1,5 @@
+export const DEHUB_DECIMALS = 5;
+
 export enum ChainId {
   BSC_MAINNET = 56,
   BSC_TESTNET = 97
@@ -36,11 +38,15 @@ export const Constants: { [key: number]: NetworkInfo } = {
 
 export const ContractAddresses: { [chainId in ChainId]: { [label: string]: string } } = {
   [ChainId.BSC_MAINNET]: {
+    Dehub: "",
     StandardLottery: "",
     SpecialLottery: "",
+    MultiCall: "0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B",
   },
   [ChainId.BSC_TESTNET]: {
-    StandardLottery: "",
-    SpecialLottery: "",
+    Dehub: "0x5A5e32fE118E7c7b6536d143F446269123c0ba74",
+    StandardLottery: "0x73b468a9f889c32C76Ec66163e7a5c4acEFebA0c",
+    SpecialLottery: "0xed62779619E47742D5173E5f0Ed89b635A0bcCA9",
+    MultiCall: "0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576",
   },
 }

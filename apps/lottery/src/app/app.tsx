@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Constants } from '@dehub/shared/config';
 import { Contexts } from '@dehub/react/core';
 
-import { getChainId } from './constants';
+import { getChainId } from './config/constants';
 import MoralisReactManager from './components/MoralisReactManager';
 import { store } from './states';
 import Lottery from './views/Lottery';

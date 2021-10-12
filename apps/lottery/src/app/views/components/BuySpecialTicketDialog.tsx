@@ -13,7 +13,7 @@ interface BuySpecialTicketDialogProps {
 const BuySpecialTicketDialog = ({
   open,
   onHide,
-  onUserInput
+  onUserInput,
 }: BuySpecialTicketDialogProps) => {
   return (
     <Dialog
@@ -33,9 +33,7 @@ const BuySpecialTicketDialog = ({
           placeholder="0"
           value="0"
           onUserInput={onUserInput}
-          currencyValue={
-            `~0.00000 Dehub`
-          }
+          currencyValue={`~0.00000 Dehub`}
         />
         <div className="flex justify-content-end mt-2 mb-5">
           <Text fontSize="12px">DeHub Balance: 3,000,000.12343</Text>
@@ -46,6 +44,6 @@ const BuySpecialTicketDialog = ({
       </div>
     </Dialog>
   );
-}
+};
 
 export default BuySpecialTicketDialog;

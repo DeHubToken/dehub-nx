@@ -2,11 +2,7 @@ import React, { ReactNode, ReactText } from 'react';
 import { InputHTMLAttributes } from 'react';
 import { Box } from '../Layout';
 import { Text } from '../Text';
-import {
-  StyledBalanceInput,
-  StyledInput,
-  UnitContainer
-} from './styles';
+import { StyledBalanceInput, StyledInput, UnitContainer } from './styles';
 
 interface BalanceInputProps {
   value: ReactText;
@@ -14,25 +10,28 @@ interface BalanceInputProps {
   currencyValue?: ReactNode;
   placeholder?: string;
   innerRef?: React.RefObject<HTMLInputElement>;
-  inputProps?: Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "placeholder" | "onChange">;
+  inputProps?: Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    'value' | 'placeholder' | 'onChange'
+  >;
   decimals?: number;
   unit?: string;
 }
 
-const BalanceInput: React.FC<BalanceInputProps> = ({
+const BalanceInput = ({
   value,
   onUserInput,
   currencyValue,
-  placeholder = "0.0",
+  placeholder = '0.0',
   innerRef,
   inputProps,
   decimals = 18,
   unit,
   ...props
-}) => {
+}: BalanceInputProps) => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.validity.valid) {
-      onUserInput(e.currentTarget.value.replace(/,/g, "."));
+      onUserInput(e.currentTarget.value.replace(/,/g, '.'));
     }
   };
 
@@ -62,6 +61,6 @@ const BalanceInput: React.FC<BalanceInputProps> = ({
       </div>
     </StyledBalanceInput>
   );
-}
+};
 
 export default BalanceInput;
