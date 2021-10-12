@@ -15,12 +15,18 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
   const prizeInBusd = pot.times(dehubPriceInBusd);
   const prizeTotal = getBalanceNumber(prizeInBusd, DEHUB_DECIMALS);
 
-  return status === LotteryStatus.OPEN ? (
-    !prizeInBusd.isNaN() ? (
-      <Text>{prizeTotal} $DEHUB</Text>
-    ) : (
-      <Text>...</Text>
-    )
+  // return status === LotteryStatus.OPEN ? (
+  //   !prizeInBusd.isNaN() ? (
+  //     <Text>{prizeTotal} $DEHUB</Text>
+  //   ) : (
+  //     <Text>...</Text>
+  //   )
+  // ) : (
+  //   <Text>...</Text>
+  // );
+
+  return !prizeInBusd.isNaN() ? (
+    <Text>{prizeTotal} $DEHUB</Text>
   ) : (
     <Text>...</Text>
   );

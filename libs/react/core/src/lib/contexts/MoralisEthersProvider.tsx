@@ -2,7 +2,11 @@ import React, { useState, useCallback } from 'react';
 import { useMoralis } from 'react-moralis';
 import { ethers } from 'ethers';
 import { Moralis } from 'moralis';
-import { Web3Provider, ExternalProvider } from '@ethersproject/providers';
+import {
+  JsonRpcSigner,
+  Web3Provider,
+  ExternalProvider,
+} from '@ethersproject/providers';
 
 import { MoralisEthersContext } from './MoralisEthersContext';
 
@@ -14,6 +18,7 @@ export const MoralisEthersProvider = ({
   children,
 }: MoralisEthersProviderProps) => {
   const [authProvider, setAuthProvider] = useState<Web3Provider | null>(null);
+  const [signer, setSigner] = useState<JsonRpcSigner | null>(null);
   const [account, setAccount] = useState<string | null>(null);
 
   const activateProvider = useCallback(async () => {
@@ -23,8 +28,9 @@ export const MoralisEthersProvider = ({
     );
     setAuthProvider(provider);
 
-    const signer = provider.getSigner();
-    setAccount(await signer.getAddress());
+    const signerT = provider.getSigner();
+    setSigner(signerT);
+    setAccount(await signerT.getAddress());
   }, []);
 
   const { isAuthenticated } = useMoralis();
@@ -33,6 +39,7 @@ export const MoralisEthersProvider = ({
     <MoralisEthersContext.Provider
       value={{
         authProvider,
+        signer,
         activateProvider,
         account,
         isAuthenticated,

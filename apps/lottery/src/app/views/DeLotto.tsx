@@ -103,10 +103,6 @@ const DeLotto = () => {
     }
   };
 
-  const handleBuyStandardTicket = (input: number[]) => {
-    console.log('Buy tickets: ', input);
-  };
-
   const handleInputChange = (input: string) => {
     console.log('Balance input=', input);
   };
@@ -288,7 +284,6 @@ const DeLotto = () => {
       <BuyStandardTicketDialog
         open={buyStandardTicketDialog}
         onHide={() => handleHideDialog('BuyStandardTicket')}
-        onBuy={handleBuyStandardTicket}
       />
 
       <BuySpecialTicketDialog
