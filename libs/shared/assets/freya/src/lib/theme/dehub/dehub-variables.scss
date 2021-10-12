@@ -1,6 +1,10 @@
 /* ------------------------------ Custom Start ------------------------------ */
 // Non-Freya variables, which we can use when overriding the theme.
 
+$dhb_gray_1: #101927;
+$dhb_gray_2: #1c293c;
+$dhb_border_translucent_1: rgba(0, 0, 0, 0.125);
+$dhb_border_translucent_2: rgba(255, 255, 255, 0.125);
 $dhb_black: #060d1b;
 
 $dhb_gradient1: linear-gradient(45deg, #0b1113, #051118 46%, #060c1d 71%, #321338);

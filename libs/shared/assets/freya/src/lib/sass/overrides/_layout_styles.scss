@@ -1,28 +1,36 @@
 /* Add your customizations of the layout styles here */
 @import '../../theme/dehub/dehub-variables';
 
+$menuBgColor: transparent;
+
 /* ---------------------------------- Main ---------------------------------- */
 .layout-wrapper {
   background: $dhb_gradient1;
   
-  .layout-topbar-dark {
-    .layout-topbar {
-      position: relative;
-      background: transparent;
-      height: 90px;
-      // padding: 0 20px 0 40px;
-      .layout-topbar-wrapper {
-        .layout-topbar-left {
-          padding-left: 40px;
-          .layout-topbar-logo {
+  .layout-topbar {
+    position: relative;
+    background: transparent;
+    height: 90px;
+    // padding: 0 20px 0 40px;
+    .layout-topbar-wrapper {
+      .layout-topbar-left {
+        padding-left: 40px;
+        .layout-topbar-logo {
+          height: 25px;
+          > img {
             height: 25px;
-            > img {
-              height: 25px;
-            }
           }
         }
-        .layout-topbar-right {
-          padding-right: 20px;
+      }
+      .layout-topbar-right {
+        padding-right: 20px;
+      }
+      .menu-wrapper {
+        background-color: transparent;
+        .layout-menu-container {
+          .layout-menu {
+            padding: 5px 0 0 0;
+          }
         }
       }
     }
@@ -105,17 +113,24 @@
 
 
 /* ------------------------------ Media Queries ----------------------------- */
-@media (max-width: $phoneBreakpoint) {
+@media (max-width: $tabletBreakpoint) {
   .layout-wrapper {
-    .layout-topbar-dark {
-      .layout-topbar {
-        .layout-topbar-wrapper {
-          .layout-topbar-left {
-            padding-left: 16px;
+    .layout-topbar {
+      .layout-topbar-wrapper {
+        .layout-topbar-left {
+          padding-left: 16px;
+          .menu-button {
+            margin-top: 5px;
           }
-          .layout-topbar-right {
-            padding-right: 16px;
-          }
+        }
+        .layout-topbar-right {
+          padding-right: 16px;
+        }
+        .menu-wrapper {
+          background-color: $dhb_gray_1;
+          z-index: 998;
+          padding-top: 95px;
+          top: 0;
         }
       }
     }
