@@ -136,6 +136,11 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run lottery:deploy:prod' --project=lottery
    ```
 
+1. Angular lazy module under web:
+   ```
+   nx generate @schematics/angular:module --name=team --project=web --path=apps/web/src/app/modules --routing
+   ```
+
 # Netlify Settings
 
 1. Configuration details found in `.env` with `NETLIFY_AUTH_TOKEN` created on the Netlify Team page

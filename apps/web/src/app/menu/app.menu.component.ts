@@ -13,12 +13,12 @@ export class AppMenuComponent implements OnInit {
 
   ngOnInit() {
     this.model = [
-      { label: 'Features', routerLink: ['/'] },
-      { label: '$DEHUB', routerLink: ['/'] },
-      { label: 'Partners', routerLink: ['/'] },
-      { label: 'The Team', routerLink: ['/'] },
-      { label: 'Contract', routerLink: ['/'] },
-      { label: 'dApps', routerLink: ['/'] },
+      { label: 'Features', routerLink: ['/features'] },
+      { label: '$DEHUB', routerLink: ['/dehub'] },
+      { label: 'Partners', routerLink: ['/partners'] },
+      { label: 'The Team', routerLink: ['/team'] },
+      { label: 'Contract', routerLink: ['/contract'] },
+      { label: 'dApps', routerLink: ['/dapps'] },
     ];
   }
 }
