@@ -4,7 +4,7 @@ import { isThemeSwitchKey } from '@dehub/shared/utils';
 import { PrimeNGConfig } from 'primeng/api';
 import { ThemeService } from './theme.service';
 @Component({
-  selector: 'dh-root',
+  selector: 'dhb-root',
   template: `<router-outlet></router-outlet> `,
 })
 export class AppComponent implements OnInit {

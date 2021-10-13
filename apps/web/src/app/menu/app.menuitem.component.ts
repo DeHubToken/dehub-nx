@@ -15,7 +15,7 @@ import { MenuService } from './app.menu.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[dh-menuitem]',
+  selector: '[dhb-menuitem]',
   template: `
     <ng-container>
       <a
@@ -76,7 +76,7 @@ import { MenuService } from './app.menu.service';
       >
         <ng-template ngFor let-child let-i="index" [ngForOf]="item?.items">
           <li
-            dh-menuitem
+            dhb-menuitem
             [item]="child"
             [index]="i"
             [parentKey]="key"

@@ -3,7 +3,7 @@ import { MenuItem } from '@dehub/shared/models';
 import { AppMainComponent } from '../app.main.component';
 
 @Component({
-  selector: 'dh-menu',
+  selector: 'dhb-menu',
   templateUrl: './app.menu.component.html',
 })
 export class AppMenuComponent implements OnInit {

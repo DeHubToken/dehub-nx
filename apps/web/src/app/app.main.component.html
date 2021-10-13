@@ -10,14 +10,14 @@
   [class]="'layout-menu-' + app.menuTheme + ' layout-topbar-' + app.topbarTheme"
   (click)="onLayoutClick()"
 >
-  <dh-topbar></dh-topbar>
+  <dhb-topbar></dhb-topbar>
 
   <div class="layout-main">
     <div class="layout-content">
       <router-outlet></router-outlet>
     </div>
 
-    <dh-footer></dh-footer>
+    <dhb-footer></dhb-footer>
   </div>
 
   <div class="layout-mask modal-in"></div>
