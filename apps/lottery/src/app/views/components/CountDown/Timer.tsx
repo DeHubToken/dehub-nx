@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -9,18 +10,36 @@ const StyledWrapper = styled.div`
   }
 `;
 
-interface TimerProps {
+interface TimerProps extends React.HTMLAttributes<HTMLDivElement> {
+  seconds?: number;
   minutes?: number;
   hours?: number;
   days?: number;
 }
 
-const Timer = ({ minutes, hours, days }: TimerProps) => {
+const Timer = ({ seconds, minutes, hours, days, ...props }: TimerProps) => {
   return (
     <StyledWrapper>
-      {Boolean(days) && <h1 className="m-3 mr-1">{days}d</h1>}
-      {Boolean(hours) && <h1 className="m-3 mr-1">{hours}h</h1>}
-      {Boolean(minutes) && <h1 className="m-3 mr-1">{minutes}m</h1>}
+      {Boolean(days) && (
+        <div className="m-3 mr-1" {...props}>
+          {days}d
+        </div>
+      )}
+      {Boolean(hours) && (
+        <div className="m-3 mr-1" {...props}>
+          {hours}h
+        </div>
+      )}
+      {Boolean(minutes) && (
+        <div className="m-3 mr-1" {...props}>
+          {minutes}m
+        </div>
+      )}
+      {Boolean(seconds) && (
+        <div className="m-3 mr-1" {...props}>
+          {seconds}s
+        </div>
+      )}
     </StyledWrapper>
   );
 };

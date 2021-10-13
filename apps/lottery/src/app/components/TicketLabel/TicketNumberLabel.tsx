@@ -2,30 +2,19 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Text } from '../Text';
 
-const Wrapper = styled.div<{
-  state: string
-}>`
-  background-color: ${({ state = "bought" }) =>
-    state === "bought" ?
-    'rgb(234, 235, 236)' :
-    state === "claimable" ?
-    'var(--yellow-500)' : 'var(--text-color-secondary)'};
+const Wrapper = styled.div`
+  background-color: var(--text-color-secondary);
   border-radius: 16px;
   margin: auto;
   display: flex;
   justify-content: center;
-`
+`;
 
 interface TicketNumberLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   number: number;
-  state: "bought" | "claimable" | "claimed";
 }
 
-const TicketNumberLabel = ({
-  number,
-  state,
-  ...props
-} : TicketNumberLabelProps) => {
+const TicketNumberLabel = ({ number, ...props }: TicketNumberLabelProps) => {
   const [parts, setParts] = useState<number[]>([]);
 
   useEffect(() => {
@@ -36,19 +25,19 @@ const TicketNumberLabel = ({
       temp = Math.floor(temp / 100);
     }
     setParts(splits);
-  }, [number])
+  }, [number]);
 
   return (
-    <Wrapper state={state} {...props}>
-      {
-        parts.map((num: number, index: number) => {
-          return (
-            <Text key={`${index}`} className="m-2" color="#000">{num}</Text>
-          )
-        })
-      }
+    <Wrapper {...props}>
+      {parts.map((num: number, index: number) => {
+        return (
+          <Text key={`${index}`} className="m-2" color="#000">
+            {num}
+          </Text>
+        );
+      })}
     </Wrapper>
   );
-}
+};
 
 export default TicketNumberLabel;

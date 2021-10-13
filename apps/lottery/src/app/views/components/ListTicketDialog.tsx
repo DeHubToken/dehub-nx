@@ -1,7 +1,7 @@
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
-import { LotteryTicket } from '../../config/constants/types';
+import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 import { Text } from '../../components/Text';
 import { TicketNumberLabel } from '../../components/TicketLabel';
 
@@ -11,6 +11,7 @@ interface ListTicketDialogProps {
   onBuy: () => void;
   roundId: string;
   tickets: LotteryTicket[] | undefined;
+  status: LotteryStatus;
 }
 
 const ListTicketDialog = ({
@@ -19,6 +20,7 @@ const ListTicketDialog = ({
   onBuy,
   roundId,
   tickets,
+  status,
 }: ListTicketDialogProps) => {
   return (
     <Dialog
@@ -41,17 +43,18 @@ const ListTicketDialog = ({
                 <TicketNumberLabel
                   key={`${index}`}
                   number={ticketAsInt}
-                  state="bought"
                   className="mt-2"
                 />
               );
             })}
         </div>
-        <div className="flex flex-column mt-2">
-          <Button className="justify-content-center" onClick={onBuy}>
-            Buy Now
-          </Button>
-        </div>
+        {status === LotteryStatus.OPEN && (
+          <div className="flex flex-column mt-2">
+            <Button className="justify-content-center" onClick={onBuy}>
+              Buy Now
+            </Button>
+          </div>
+        )}
       </div>
     </Dialog>
   );

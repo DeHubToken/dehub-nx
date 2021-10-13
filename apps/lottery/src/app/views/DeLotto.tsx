@@ -9,7 +9,7 @@ import BuyStandardTicketDialog from './components/BuyStandardTicketDialog';
 import BuySpecialTicketDialog from './components/BuySpecialTicketDialog';
 import ClaimStage1Dialog from './components/ClaimStage1Dialog';
 import ClaimStage2Dialog from './components/ClaimStage2Dialog';
-import CountDown from './components/CountDown';
+import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
 import ListTicketDialog from './components/ListTicketDialog';
 import PrizePot from './components/PrizePot';
@@ -24,8 +24,9 @@ import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
 import {
   useLottery,
   useFetchLottery,
-  usePreviousStandardLottery,
+  usePreviousLottery,
 } from '../states/standard-lottery/hooks';
+import { LotteryStatus } from '../config/constants/types';
 
 const StyledContainer = styled(Container)`
   .p-tabview .p-tabview-nav li {
@@ -61,7 +62,7 @@ const DeLotto = () => {
   );
 
   const previousLotteryIdAsInt = currentLotteryIdAsInt - 1;
-  const { previousLotteryId, previousRound } = usePreviousStandardLottery(
+  const { previousLotteryId, previousRound } = usePreviousLottery(
     previousLotteryIdAsInt.toString()
   );
   const prevEndTimeAsInt = previousRound
@@ -107,10 +108,6 @@ const DeLotto = () => {
     console.log('Balance input=', input);
   };
 
-  const handleClaimStage1 = (ticketIds: number[]) => {
-    console.log('Claim stage1');
-  };
-
   const handleClaimStage2 = () => {
     console.log('Claim stage2');
   };
@@ -123,7 +120,7 @@ const DeLotto = () => {
           <StyledBox>
             <FlexLine className="align-items-center justify-content-center">
               {nextEventTime && countDownText ? (
-                <CountDown
+                <EventCountDown
                   nextEventTime={nextEventTime}
                   countDownText={countDownText}
                 />
@@ -172,12 +169,14 @@ const DeLotto = () => {
                   ) : (
                     <Text>...</Text>
                   )}
-                  <Button
-                    className="button-link mt-3"
-                    onClick={() => handleShowDialog('BuyStandardTicket')}
-                  >
-                    Buy Tickets
-                  </Button>
+                  {account && status === LotteryStatus.OPEN && (
+                    <Button
+                      className="button-link mt-3"
+                      onClick={() => handleShowDialog('BuyStandardTicket')}
+                    >
+                      Buy Tickets
+                    </Button>
+                  )}
                 </div>
               </FlexLine>
             )}
@@ -189,7 +188,7 @@ const DeLotto = () => {
                   <WinningNumbers numbers={winningNumbers} rounded={true} />
                   <Text>Round #{previousLotteryId}</Text>
                   <Text>
-                    Drawn {new Date(prevEndTimeAsInt).toLocaleString()}
+                    Drawn {new Date(prevEndTimeAsInt * 1000).toLocaleString()}
                   </Text>
                 </div>
               </FlexLine>
@@ -279,6 +278,7 @@ const DeLotto = () => {
         tickets={
           userTickets && userTickets.isLoading ? userTickets.tickets : []
         }
+        status={status}
       />
 
       <BuyStandardTicketDialog
@@ -295,7 +295,7 @@ const DeLotto = () => {
       <ClaimStage1Dialog
         open={checkStage1Dialog}
         onHide={() => handleHideDialog('CheckStage1')}
-        onClaim={handleClaimStage1}
+        roundId={currentLotteryId}
       />
 
       <ClaimStage2Dialog

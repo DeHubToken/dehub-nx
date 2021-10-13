@@ -4,9 +4,9 @@ import {
   PayloadAction
 } from '@reduxjs/toolkit';
 import {
-  fetchCurrentStandardLotteryIdAndMaxBuy,
+  fetchCurrentLotteryIdAndMaxBuy,
   fetchLottery,
-  fetchUserTicketsPerStandardLottery
+  fetchUserTicketsPerOneRound
 } from './helpers';
 import {
   LotteryState,
@@ -55,7 +55,7 @@ export const fetchCurrentLottery = createAsyncThunk<LotteryResponse, { currentLo
 export const fetchCurrentLotteryId = createAsyncThunk<PublicLotteryData>(
   'lottery/fetchCurrentLotteryId',
   async () => {
-    const currentIdAndMaxBuy = await fetchCurrentStandardLotteryIdAndMaxBuy();
+    const currentIdAndMaxBuy = await fetchCurrentLotteryIdAndMaxBuy();
     return currentIdAndMaxBuy;
   }
 );
@@ -65,7 +65,7 @@ export const fetchUserTicketsAndLotteries = createAsyncThunk<{
 }, { account: string, currentLotteryId: string }>(
   'lottery/fetchUserTicketsAndLotteries',
   async ({ account, currentLotteryId }) => {
-    const userTickets: LotteryTicket[] = await fetchUserTicketsPerStandardLottery(account, currentLotteryId);
+    const userTickets: LotteryTicket[] = await fetchUserTicketsPerOneRound(account, currentLotteryId);
     // if (!userTickets || userTickets.length === 0) {
     //   return { userTickets: null };
     // }

@@ -1,58 +1,47 @@
+import { useEffect, useState } from 'react';
+import { endOfMonth } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
+import { Hooks } from '@dehub/react/core';
+
+import { SimpleCountDown } from './CountDown';
+
 import { Text } from '../../components/Text';
 import { TicketNumberLabel } from '../../components/TicketLabel';
-
-interface TicketProps {
-  id: number;
-  number: number;
-}
-
-interface RoundTicketProps {
-  round: string;
-  tickets: TicketProps[];
-  state: "bought" | "claimable" | "claimed";
-}
-
-const roundTickets: RoundTicketProps[] = [
-  {
-    round: "#165",
-    tickets: [
-      { id: 1, number: 1142111 },
-      { id: 2, number: 1142112 },
-      { id: 3, number: 1142113 },
-      { id: 4, number: 1142114 }
-    ],
-    state: "claimable"
-  },
-  {
-    round: "#166",
-    tickets: [
-      { id: 5, number: 1142111 },
-      { id: 6, number: 1142112 }
-    ],
-    state: "claimed"
-  }
-];
+import { LotteryTicketClaimData } from '../../config/constants/types';
+import { LotteryTicket } from '../../config/constants/types';
+import useGetUnclaimedRewards, {
+  FetchStatus,
+} from '../../hooks/useGetUnclaimedReward';
 
 interface ClaimStage1DialogProps {
   open: boolean;
   onHide: () => void;
-  onClaim: (ticketIds: number[]) => void;
+  roundId: string;
 }
 
 const ClaimStage1Dialog = ({
   open,
   onHide,
-  onClaim
+  roundId,
 }: ClaimStage1DialogProps) => {
+  const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
+  const { fetchAllRewards, unclaimedRewards, fetchStatus } =
+    useGetUnclaimedRewards();
+  const isFetchingRewards = fetchStatus === FetchStatus.IN_PROGRESS;
+  const { account } = Hooks.useMoralisEthers();
+
+  useEffect(() => {
+    fetchAllRewards(roundId);
+  }, [account, roundId, fetchAllRewards]);
+
   return (
     <Dialog
       visible={open}
       modal
       className="p-fluid"
-      header="Round #166"
+      header={`Round #${roundId}`}
       style={{ width: '250px' }}
       onHide={onHide}
     >
@@ -61,43 +50,48 @@ const ClaimStage1Dialog = ({
           <Text>Unclaimed Total</Text>
         </div>
         <div className="mb-3 flex justify-content-center">
-          <Text className="font-bold">323,333,322.31234 DeHub</Text>
+          <Text className="font-bold">******* DeHub</Text>
         </div>
         <div className="mb-3 flex flex-column align-items-center">
           <Text fontSize="12px">Will be burned in:</Text>
-          <Text fontSize="12px">1d 30m 32s</Text>
+          <SimpleCountDown limitTime={endOfMonthAsInt} />
         </div>
-        {
-          roundTickets.map((roundTicket: RoundTicketProps, index: number) => {
-            return (
-              <div key={`${index}`} className="mt-2 mb-2">
-                <div className="mb-2">
-                  <Text>{roundTicket.round}</Text>
+        {isFetchingRewards ? (
+          <Text>Loading...</Text>
+        ) : (
+          unclaimedRewards.map(
+            (claimData: LotteryTicketClaimData, index: number) => {
+              return (
+                <div key={`${index}`} className="mt-2 mb-2">
+                  <div className="mb-2">
+                    <Text>Round #{claimData.roundId}</Text>
+                  </div>
+                  {claimData.ticketsWithUnclaimedRewards.map(
+                    (ticket: LotteryTicket, index: number) => {
+                      const ticketAsInt = parseInt(ticket.number, 10);
+                      return (
+                        <TicketNumberLabel
+                          key={`${index}`}
+                          number={ticketAsInt}
+                          className="mb-2"
+                        />
+                      );
+                    }
+                  )}
+                  {claimData.ticketsWithUnclaimedRewards.length > 0 && (
+                    <div className="flex flex-column mt-5">
+                      <Button className="justify-content-center">Claim</Button>
+                    </div>
+                  )}
                 </div>
-                {
-                  roundTicket.tickets.map((ticket: TicketProps, index: number) => {
-                    return (
-                      <TicketNumberLabel
-                        key={`${index}`}
-                        number={ticket.number}
-                        state={roundTicket.state}
-                        className="mb-2"
-                      />
-                    );
-                  })
-                }
-                <div className="flex flex-column mt-5">
-                  <Button className="justify-content-center" onClick={() => onClaim([])}>
-                    Claim
-                  </Button>
-                </div>
-              </div>
-            );
-          })
-        }
+              );
+            }
+          )
+        )}
+        {}
       </div>
     </Dialog>
   );
-}
+};
 
 export default ClaimStage1Dialog;

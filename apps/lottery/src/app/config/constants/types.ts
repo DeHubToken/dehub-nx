@@ -11,6 +11,10 @@ export enum LotteryStatus {
 export interface LotteryTicket {
   id: string;
   number: string;
+  claimed?: boolean;
+  rewardBracket?: number;
+  roundId?: string;
+  dehubReward?: string;
 }
 
 export interface LotteryTicketClaimData {

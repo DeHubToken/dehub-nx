@@ -85,7 +85,7 @@ const processRawTicketsReponse = (data: any): LotteryTicket[] => {
       return {
         id: ticketId.toString(),
         number: ticketNumbers[index].toString(),
-        status: claimStatuses[index]
+        claimed: claimStatuses[index]
       };
     })
   }
@@ -102,7 +102,7 @@ export const fetchLottery = async (lotteryId: string): Promise<LotteryResponse> 
   }
 }
 
-export const fetchCurrentStandardLotteryIdAndMaxBuy = async () => {
+export const fetchCurrentLotteryIdAndMaxBuy = async () => {
   try {
     const calls: Call[] = [
       'currentLotteryId', 'maxNumberTicketsPerBuyOrClaim'
@@ -150,7 +150,7 @@ export const viewUserInfoForLotteryId = async (
   }
 }
 
-export const fetchUserTicketsPerStandardLottery = async (
+export const fetchUserTicketsPerOneRound = async (
   account: string, lotteryId: string
 ): Promise<LotteryTicket[]> => {
   let cursor = 0;
@@ -169,7 +169,22 @@ export const fetchUserTicketsPerStandardLottery = async (
   return ticketData;
 }
 
-export const useProcessStandardLotteryResponse = (
+export const fetchUserTicketsPerMultipleRounds = async (
+  account: string, lotteryIds: string[],
+): Promise<{ roundId: string; userTickets: LotteryTicket[] }[]> => {
+  const ticketsForMultipleRounds = [];
+  for (let idx = 0; idx < lotteryIds.length; idx++) {
+    const roundId = lotteryIds[idx];
+    const ticketsForRound = await fetchUserTicketsPerOneRound(account, roundId);
+    ticketsForMultipleRounds.push({
+      roundId,
+      userTickets: ticketsForRound
+    });
+  }
+  return ticketsForMultipleRounds;
+}
+
+export const useProcessLotteryResponse = (
   lotteryData: LotteryResponse & { userTickets?: LotteryRoundUserTickets }
 ): LotteryRound => {
   const {
@@ -202,7 +217,7 @@ export const useProcessStandardLotteryResponse = (
   };
 }
 
-export const processStandardLotteryResponse = (
+export const processLotteryResponse = (
   lotteryData: LotteryResponse & { userTickets?: LotteryRoundUserTickets }
 ): LotteryRound => {
   const {

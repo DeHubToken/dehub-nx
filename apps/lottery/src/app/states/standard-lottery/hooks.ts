@@ -10,13 +10,13 @@ import {
 } from '.';
 import {
   fetchLottery,
-  useProcessStandardLotteryResponse,
-  processStandardLotteryResponse
+  useProcessLotteryResponse,
+  processLotteryResponse
 } from './helpers';
 import { useAppDispatch } from '..';
 import { LotteryRound, State } from '../types';
 
-export const useGetCurrentStandardLotteryId = (): string => {
+export const useGetCurrentLotteryId = (): string => {
   return useSelector((state: State) => state.lottery.currentLotteryId);
 }
 
@@ -24,7 +24,7 @@ export const useFetchLottery = () => {
   const { account } = Hooks.useMoralisEthers();
 
   const dispatch = useAppDispatch();
-  const currentLotteryId: string = useGetCurrentStandardLotteryId();
+  const currentLotteryId: string = useGetCurrentLotteryId();
 
   useEffect(() => {
     dispatch(fetchCurrentLotteryId());
@@ -48,11 +48,11 @@ export const useFetchLottery = () => {
 
 export const useLottery = () => {
   const currentRound = useSelector((state: State) => state.lottery.currentRound);
-  const processedCurrentRound = useProcessStandardLotteryResponse(currentRound);
+  const processedCurrentRound = useProcessLotteryResponse(currentRound);
 
   const isTransitioning = useSelector((state: State) => state.lottery.isTransitioning);
 
-  const currentLotteryId = useGetCurrentStandardLotteryId();
+  const currentLotteryId = useGetCurrentLotteryId();
 
   const maxNumberTicketsPerBuyOrClaimAsString = useSelector(
     (state: State) => state.lottery.maxNumberTicketsPerBuyOrClaim
@@ -69,7 +69,7 @@ export const useLottery = () => {
   };
 }
 
-export const usePreviousStandardLottery = (lotteryId: string) => {
+export const usePreviousLottery = (lotteryId: string) => {
   const [previousRound, setPreviousRound] = useState<LotteryRound | null>(null);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export const usePreviousStandardLottery = (lotteryId: string) => {
 
     const fetchLotteryData = async () => {
       const lotteryData = await fetchLottery(lotteryId);
-      const processedLotteryData = processStandardLotteryResponse(lotteryData);
+      const processedLotteryData = processLotteryResponse(lotteryData);
       setPreviousRound(processedLotteryData);
     }
 
