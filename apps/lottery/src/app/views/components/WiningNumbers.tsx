@@ -1,40 +1,41 @@
-import styled from 'styled-components';
 import { Avatar } from 'primereact/avatar';
-
+import styled from 'styled-components';
 import { Text } from '../../components/Text';
 
 const Grid = styled.div`
   display: flex;
   grid-template-columns: auto;
   grid-column-gap: 5px;
-`
+`;
 
 interface NumberComponentProps {
   size?: string;
   fontSize?: string;
-  number: number
+  number: number;
 }
 
-// const RoundNumber: React.FC<NumberComponentProps> = ({
-//   size,
-//   fontSize,
-//   number
-// }) => {
-//   return (
-//     <div className="flex justify-content-center align-items-center">
-//       <div style={{ borderRadius: '50%', width: `${size}px`, height: `${size}px` }} />
-//       <div style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', position: 'absolute' }}>
-//         <Text fontSize={fontSize}>{number}</Text>
-//       </div>
-//     </div>
-//   );
-// }
+/*
+ * const RoundNumber: React.FC<NumberComponentProps> = ({
+ *   size,
+ *   fontSize,
+ *   number
+ * }) => {
+ *   return (
+ *     <div className="flex justify-content-center align-items-center">
+ *       <div style={{ borderRadius: '50%', width: `${size}px`, height: `${size}px` }} />
+ *       <div style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', position: 'absolute' }}>
+ *         <Text fontSize={fontSize}>{number}</Text>
+ *       </div>
+ *     </div>
+ *   );
+ * }
+ */
 
 interface WinningNumbersProps {
-  numbers: number[],
-  size?: string,
-  fontSize?: string,
-  rounded?: boolean
+  numbers: number[];
+  size?: string;
+  fontSize?: string;
+  rounded?: boolean;
 }
 
 const WinningNumbers = ({
@@ -43,39 +44,31 @@ const WinningNumbers = ({
   fontSize = '14px',
   rounded = true,
   ...containerProps
-} : WinningNumbersProps) => {
+}: WinningNumbersProps) => {
   return (
     <div className="flex">
-      {
-        numbers.map((num: number, index: number) => {
-          return (
-            <div key={`${index}`} className="ml-1">
-              {
-                rounded ?
-                <Avatar
-                  label={`${num}`}
-                  size="large"
-                  shape="circle"
-                  style={{ backgroundColor: '#2196F3', color: '#ffffff', fontSize: `${fontSize}` }}
-                />
-                // <RoundNumber
-                //   size={size}
-                //   fontSize={fontSize}
-                //   number={num}
-                // />
-                :
-                <Text
-                  fontSize={fontSize}
-                >
-                  {num}
-                </Text>
-              }
-            </div>
-          );
-        })
-      }
+      {numbers.map((num: number, index: number) => {
+        return (
+          <div key={`${index}`} className="ml-1">
+            {rounded ? (
+              <Avatar
+                label={`${num}`}
+                size="large"
+                shape="circle"
+                style={{
+                  backgroundColor: '#2196F3',
+                  color: '#ffffff',
+                  fontSize: `${fontSize}`,
+                }}
+              />
+            ) : (
+              <Text fontSize={fontSize}>{num}</Text>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
-}
+};
 
 export default WinningNumbers;
