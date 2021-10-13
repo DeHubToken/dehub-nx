@@ -1,9 +1,12 @@
+import { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceNumber } from '@dehub/shared/utils';
+
+import { BUSD_DECIMALS } from '@dehub/shared/config';
+import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
+
 import { Text } from '../../components/Text';
-import usePriceDehubBusd from '../../hooks/usePriceDehubBusd';
 import { LotteryStatus } from '../../config/constants/types';
+import { getDehubPrice, getBNBPrice } from '../../utils/priceDehub';
 
 interface PrizePotProps {
   pot: BigNumber;
@@ -11,22 +14,21 @@ interface PrizePotProps {
 }
 
 const PrizePot = ({ pot, status }: PrizePotProps) => {
-  const dehubPriceInBusd = usePriceDehubBusd();
-  const prizeInBusd = pot.times(dehubPriceInBusd);
-  const prizeTotal = getBalanceNumber(prizeInBusd, DEHUB_DECIMALS);
+  const [prizeInBusd, setPrizeInBusd] = useState<BigNumber>(BIG_ZERO);
 
-  // return status === LotteryStatus.OPEN ? (
-  //   !prizeInBusd.isNaN() ? (
-  //     <Text>{prizeTotal} $DEHUB</Text>
-  //   ) : (
-  //     <Text>...</Text>
-  //   )
-  // ) : (
-  //   <Text>...</Text>
-  // );
+  useEffect(() => {
+    const calculate = async () => {
+      const dehubPriceInBusd = await getDehubPrice();
+      const prizeInBusdCalc = pot.times(dehubPriceInBusd);
+
+      setPrizeInBusd(prizeInBusdCalc);
+    };
+
+    calculate();
+  }, [pot]);
 
   return !prizeInBusd.isNaN() ? (
-    <Text>{prizeTotal} $DEHUB</Text>
+    <Text>${getBalanceNumber(prizeInBusd, BUSD_DECIMALS)}</Text>
   ) : (
     <Text>...</Text>
   );

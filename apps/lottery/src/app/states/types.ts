@@ -79,5 +79,5 @@ export type UserTicketsResponnse = [ethers.BigNumber[], number[], boolean[]];
 
 export interface State {
   application: ApplicationState;
-  lottery: LotteryState;
+  standardLottery: LotteryState;
 }

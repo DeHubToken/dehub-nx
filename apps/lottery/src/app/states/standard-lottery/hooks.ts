@@ -17,7 +17,7 @@ import { useAppDispatch } from '..';
 import { LotteryRound, State } from '../types';
 
 export const useGetCurrentLotteryId = (): string => {
-  return useSelector((state: State) => state.lottery.currentLotteryId);
+  return useSelector((state: State) => state.standardLottery.currentLotteryId);
 }
 
 export const useFetchLottery = () => {
@@ -47,15 +47,15 @@ export const useFetchLottery = () => {
 }
 
 export const useLottery = () => {
-  const currentRound = useSelector((state: State) => state.lottery.currentRound);
+  const currentRound = useSelector((state: State) => state.standardLottery.currentRound);
   const processedCurrentRound = useProcessLotteryResponse(currentRound);
 
-  const isTransitioning = useSelector((state: State) => state.lottery.isTransitioning);
+  const isTransitioning = useSelector((state: State) => state.standardLottery.isTransitioning);
 
   const currentLotteryId = useGetCurrentLotteryId();
 
   const maxNumberTicketsPerBuyOrClaimAsString = useSelector(
-    (state: State) => state.lottery.maxNumberTicketsPerBuyOrClaim
+    (state: State) => state.standardLottery.maxNumberTicketsPerBuyOrClaim
   );
   const maxNumberTicketsPerBuyOrClaim = useMemo(() => {
     return new BigNumber(maxNumberTicketsPerBuyOrClaimAsString)
