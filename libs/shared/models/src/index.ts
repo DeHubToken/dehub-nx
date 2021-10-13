@@ -1,2 +1,1 @@
-export * from './lib/shared-models';
-export * from './lib/types';
+export * from './lib/freya-models';

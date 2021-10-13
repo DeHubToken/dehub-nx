@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from '@dehub/shared/models';
 import { AppMainComponent } from '../app.main.component';
-export interface MenuItem {
-  label: string;
-  icon: string;
-  routerLink?: string[];
-  class?: string;
-  badgeClass?: string;
-  url?: string | string[];
-  target?: '_blank' | '_parent' | '_top' | '_self';
-  items?: MenuItem[];
-  visible?: boolean;
-  disabled?: boolean;
-  command?: (event: unknown) => void;
-}
+
 @Component({
   selector: 'dh-menu',
   templateUrl: './app.menu.component.html',
@@ -24,7 +13,12 @@ export class AppMenuComponent implements OnInit {
 
   ngOnInit() {
     this.model = [
-      { label: 'Dashboard', icon: 'pi pi-home', routerLink: ['/'] },
+      { label: 'Features', routerLink: ['/'] },
+      { label: '$DEHUB', routerLink: ['/'] },
+      { label: 'Partners', routerLink: ['/'] },
+      { label: 'The Team', routerLink: ['/'] },
+      { label: 'Contract', routerLink: ['/'] },
+      { label: 'dApps', routerLink: ['/'] },
     ];
   }
 }

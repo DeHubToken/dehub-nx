@@ -7,10 +7,10 @@ import {
 } from '@angular/animations';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { MenuItem } from '@dehub/shared/models';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { AppMainComponent } from '../app.main.component';
-import { MenuItem } from './app.menu.component';
 import { MenuService } from './app.menu.service';
 
 @Component({
