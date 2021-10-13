@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ThemeMode } from '@dehub/shared/models';
+import { MenuMode, ThemeMode } from '@dehub/shared/models';
 import { isThemeSwitchKey } from '@dehub/shared/utils';
 import { PrimeNGConfig } from 'primeng/api';
 import { ThemeService } from './theme.service';
@@ -8,7 +8,7 @@ import { ThemeService } from './theme.service';
   template: `<router-outlet></router-outlet> `,
 })
 export class AppComponent implements OnInit {
-  menuMode = 'horizontal';
+  menuMode: MenuMode = 'horizontal';
 
   darkMode: ThemeMode = 'dark';
   topbarTheme: ThemeMode = 'dark';

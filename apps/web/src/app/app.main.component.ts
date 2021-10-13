@@ -65,20 +65,6 @@ export class AppMainComponent {
     event.preventDefault();
   }
 
-  onSidebarMouseOver() {
-    if (this.app.menuMode === 'sidebar' && !this.sidebarStatic) {
-      this.sidebarActive = !this.isMobile();
-    }
-  }
-
-  onSidebarMouseLeave() {
-    if (this.app.menuMode === 'sidebar' && !this.sidebarStatic) {
-      setTimeout(() => {
-        this.sidebarActive = false;
-      }, 250);
-    }
-  }
-
   isSlim() {
     return this.app.menuMode === 'slim';
   }

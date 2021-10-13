@@ -2,8 +2,6 @@
   class="menu-wrapper"
   [ngClass]="{ 'layout-sidebar-active': appMain.sidebarActive }"
   (click)="appMain.onSidebarClick()"
-  (mouseover)="appMain.onSidebarMouseOver()"
-  (mouseleave)="appMain.onSidebarMouseLeave()"
 >
   <div class="sidebar-logo">
     <a [routerLink]="['/']">
