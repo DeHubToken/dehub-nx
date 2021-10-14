@@ -137,8 +137,15 @@ This project was generated using [Nx](https://nx.dev).
    ```
 
 1. Angular lazy module under web:
+
    ```
    nx generate @schematics/angular:module --name=team --project=web --path=apps/web/src/app/modules --routing
+
+   ```
+
+1. Angular Core module:
+   ```
+   nx generate @nrwl/angular:library --name=core --directory=angular --standaloneConfig --strict
    ```
 
 # Netlify Settings
