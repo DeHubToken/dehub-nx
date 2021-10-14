@@ -3,6 +3,15 @@ import { PreloadAllModules, RouterModule } from '@angular/router';
 import { AppMainComponent } from './app.main.component';
 import { LandingComponent } from './view/landing.component';
 
+enum Navigation {
+  Features = 'features',
+  Dehub = 'dehub',
+  Partners = 'partners',
+  Team = 'team',
+  Contract = 'contract',
+  Dapps = 'dapps',
+}
+
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -13,46 +22,64 @@ import { LandingComponent } from './view/landing.component';
           children: [
             { path: '', component: LandingComponent },
             {
-              path: 'features',
+              path: Navigation.Partners,
               loadChildren: () =>
                 import('./modules/features/features.module').then(
                   module => module.FeaturesModule
                 ),
+              data: {
+                animation: Navigation.Partners,
+              },
             },
             {
-              path: 'dehub',
+              path: Navigation.Dehub,
               loadChildren: () =>
                 import('./modules/dehub/dehub.module').then(
                   module => module.DehubModule
                 ),
+              data: {
+                animation: Navigation.Dehub,
+              },
             },
             {
-              path: 'partners',
+              path: Navigation.Partners,
               loadChildren: () =>
                 import('./modules/partners/partners.module').then(
                   module => module.PartnersModule
                 ),
+              data: {
+                animation: Navigation.Partners,
+              },
             },
             {
-              path: 'team',
+              path: Navigation.Team,
               loadChildren: () =>
                 import('./modules/team/team.module').then(
                   module => module.TeamModule
                 ),
+              data: {
+                animation: Navigation.Team,
+              },
             },
             {
-              path: 'contract',
+              path: Navigation.Contract,
               loadChildren: () =>
                 import('./modules/contract/contract.module').then(
                   module => module.ContractModule
                 ),
+              data: {
+                animation: Navigation.Contract,
+              },
             },
             {
-              path: 'dapps',
+              path: Navigation.Dapps,
               loadChildren: () =>
                 import('./modules/dapps/dapps.module').then(
                   module => module.DappsModule
                 ),
+              data: {
+                animation: Navigation.Dapps,
+              },
             },
           ],
         },

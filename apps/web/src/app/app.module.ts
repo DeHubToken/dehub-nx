@@ -17,6 +17,14 @@ import { AppMenuComponent } from './menu/app.menu.component';
 import { MenuService } from './menu/app.menu.service';
 import { AppMenuitemComponent } from './menu/app.menuitem.component';
 import { AppTopBarComponent } from './topbar/app.topbar.component';
+
+const primeNgModules = [
+  ButtonModule,
+  InputTextModule,
+  MenuModule,
+  RadioButtonModule,
+  TabViewModule,
+];
 @NgModule({
   imports: [
     CommonModule,
@@ -25,11 +33,7 @@ import { AppTopBarComponent } from './topbar/app.topbar.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ButtonModule,
-    InputTextModule,
-    MenuModule,
-    RadioButtonModule,
-    TabViewModule,
+    primeNgModules,
   ],
   declarations: [
     AppComponent,
