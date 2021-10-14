@@ -1,6 +1,7 @@
 import { Avatar } from 'primereact/avatar';
 import styled from 'styled-components';
 import { Text } from '../../components/Text';
+import { toLotteryNumbers } from '../../utils/numbers';
 
 const Grid = styled.div`
   display: flex;
@@ -32,19 +33,21 @@ interface NumberComponentProps {
  */
 
 interface WinningNumbersProps {
-  numbers: number[];
+  number: number;
   size?: string;
   fontSize?: string;
   rounded?: boolean;
 }
 
 const WinningNumbers = ({
-  numbers,
+  number,
   size = '32px',
   fontSize = '14px',
   rounded = true,
   ...containerProps
 }: WinningNumbersProps) => {
+  const numbers = toLotteryNumbers(number);
+
   return (
     <div className="flex">
       {numbers.map((num: number, index: number) => {

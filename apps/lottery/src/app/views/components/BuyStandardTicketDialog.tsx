@@ -20,6 +20,7 @@ import { useLottery } from '../../states/standard-lottery/hooks';
 import { getStandardLotteryAddress } from '../../utils/addressHelpers';
 import { fetchUserTicketsAndLotteries } from '../../states/standard-lottery';
 import { useAppDispatch } from '../../states';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
 
 const random = (minNumber: number, maxNumber: number): number => {
   return Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
@@ -179,7 +180,12 @@ const BuyStandardTicketDialog = ({
           <div className="flex justify-content-end">
             {fetchStatus === FetchStatus.SUCCESS ? (
               <Text fontSize="12px">
-                DeHub Balance: {getFullDisplayBalance(dehubBalance, 5, 5)}
+                DeHub Balance:{' '}
+                {getFullDisplayBalance(
+                  dehubBalance,
+                  DEHUB_DECIMALS,
+                  DEHUB_DECIMALS
+                )}
               </Text>
             ) : (
               <Text fontSize="12px">Loading...</Text>
@@ -202,7 +208,13 @@ const BuyStandardTicketDialog = ({
           </div>
           <div className="flex justify-content-end mt-2">
             <Text fontSize="14px">
-              Price: ~{getFullDisplayBalance(priceTicketInDehub, 5, 5)} DeHub
+              Price: ~
+              {getFullDisplayBalance(
+                priceTicketInDehub,
+                DEHUB_DECIMALS,
+                DEHUB_DECIMALS
+              )}{' '}
+              DeHub
             </Text>
           </div>
           <div className="flex justify-content-center mt-4 mb-4">
@@ -229,7 +241,12 @@ const BuyStandardTicketDialog = ({
             </div>
             <div className="col-6 mt-2 flex justify-content-end">
               <Text>
-                ~{getFullDisplayBalance(priceTicketInDehub.times(5), 5, 5)}
+                ~
+                {getFullDisplayBalance(
+                  priceTicketInDehub.times(5),
+                  DEHUB_DECIMALS,
+                  DEHUB_DECIMALS
+                )}
               </Text>
             </div>
             <div className="col-6 mt-2">
@@ -248,7 +265,12 @@ const BuyStandardTicketDialog = ({
             </div>
             <div className="col-6 mt-2 flex justify-content-end">
               <Text>
-                ~{getFullDisplayBalance(priceTicketInDehub.times(10), 5, 5)}
+                ~
+                {getFullDisplayBalance(
+                  priceTicketInDehub.times(10),
+                  DEHUB_DECIMALS,
+                  DEHUB_DECIMALS
+                )}
               </Text>
             </div>
             <div className="col-6 mt-2">
@@ -267,7 +289,12 @@ const BuyStandardTicketDialog = ({
             </div>
             <div className="col-6 mt-2 flex justify-content-end">
               <Text>
-                ~{getFullDisplayBalance(priceTicketInDehub.times(15), 5, 5)}
+                ~
+                {getFullDisplayBalance(
+                  priceTicketInDehub.times(15),
+                  DEHUB_DECIMALS,
+                  DEHUB_DECIMALS
+                )}
               </Text>
             </div>
           </div>

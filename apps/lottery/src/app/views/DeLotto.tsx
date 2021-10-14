@@ -38,8 +38,6 @@ const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
-const winningNumbers: number[] = [5, 16, 9, 12];
-
 const DeLotto = () => {
   useFetchLottery();
   useStatusTransitions();
@@ -61,7 +59,10 @@ const DeLotto = () => {
     status
   );
 
-  const previousLotteryIdAsInt = currentLotteryIdAsInt - 1;
+  const previousLotteryIdAsInt =
+    status === LotteryStatus.CLAIMABLE
+      ? currentLotteryIdAsInt
+      : currentLotteryIdAsInt - 1;
   const { previousLotteryId, previousRound } = usePreviousLottery(
     previousLotteryIdAsInt.toString()
   );
@@ -185,7 +186,10 @@ const DeLotto = () => {
               <FlexLine className="align-items-center md:align-items-start justify-content-between">
                 <Header>Latest Winning Number:</Header>
                 <div className="flex flex-column align-items-center md:align-items-end">
-                  <WinningNumbers numbers={winningNumbers} rounded={true} />
+                  <WinningNumbers
+                    number={previousRound.finalNumber}
+                    rounded={true}
+                  />
                   <Text>Round #{previousLotteryId}</Text>
                   <Text>
                     Drawn {new Date(prevEndTimeAsInt * 1000).toLocaleString()}

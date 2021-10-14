@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import { Text } from '../Text';
+import { toLotteryNumbers } from '../../utils/numbers';
 
 const Wrapper = styled.div`
   background-color: var(--text-color-secondary);
@@ -15,17 +16,7 @@ interface TicketNumberLabelProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const TicketNumberLabel = ({ number, ...props }: TicketNumberLabelProps) => {
-  const [parts, setParts] = useState<number[]>([]);
-
-  useEffect(() => {
-    const splits: number[] = [];
-    let temp = number;
-    while (temp > 0) {
-      splits.push(temp % 100);
-      temp = Math.floor(temp / 100);
-    }
-    setParts(splits);
-  }, [number]);
+  const parts = toLotteryNumbers(number);
 
   return (
     <Wrapper {...props}>

@@ -4,6 +4,7 @@ import BigNumber from 'bignumber.js';
 import { Hooks } from '@dehub/react/core';
 import { BIG_ZERO } from '@dehub/shared/utils';
 
+import useRefresh from './useRefresh';
 import { getBep20Contract } from '../utils/contractHelpers';
 import { getDehubAddress } from '../utils/addressHelpers';
 
@@ -26,6 +27,7 @@ export const useTokenBalance = (tokenAddress: string) => {
   });
 
   const { account } = Hooks.useMoralisEthers();
+  const { fastRefresh } = useRefresh();
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -49,7 +51,7 @@ export const useTokenBalance = (tokenAddress: string) => {
       fetchBalance();
     }
 
-  }, [account, tokenAddress, SUCCESS, FAILED]);
+  }, [account, tokenAddress, fastRefresh, SUCCESS, FAILED]);
 
   return balanceState;
 }

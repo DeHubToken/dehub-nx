@@ -40,6 +40,7 @@ const processViewLotterySuccessResponse = (response: any, lotteryId: string): Lo
     ethersToSerializedBigNumber(tokenPerBracket));
   const serializedRewardPerBracket = rewardBreakdown.map((reward: ethers.BigNumber) =>
     ethersToSerializedBigNumber(reward));
+  const wrappedFinalNumber = finalNumber.mod(ethers.BigNumber.from(100000000));
 
   return {
     isLoading: false,
@@ -49,7 +50,7 @@ const processViewLotterySuccessResponse = (response: any, lotteryId: string): Lo
     endTime: endTime?.toString(),
     firstTicketId: firstTicketId?.toString(),
     lastTicketId: firstTicketIdNextLottery?.toString(),
-    finalNumber: parseInt(finalNumber, 10),
+    finalNumber: wrappedFinalNumber.toNumber(),
     priceTicketInDehub: ethersToSerializedBigNumber(ticketRate),
     amountCollectedInDehub: ethersToSerializedBigNumber(amountCollectedToken),
     dehubPerBracket: serializedTokenPerBracket,
