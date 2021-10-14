@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react'
+import { useEffect, useReducer, useRef } from 'react'
 import { Hooks } from '@dehub/react/core';
 import { ethers } from 'ethers'
 
@@ -90,6 +90,9 @@ const useApproveConfirmTransaction = ({
 
   const { account } = Hooks.useMoralisEthers();
   const [state, dispatch] = useReducer(reducer, initialState);
+  // https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
+  const mountedRef = useRef(true);
+
   // const handlePreApprove = useRef(onRequiresApproval);
 
   // // Check if approval is necessary, re-check if account changes
@@ -106,10 +109,13 @@ const useApproveConfirmTransaction = ({
   useEffect(() => {
     if (account && onRequiresApproval) {
       onRequiresApproval().then((result) => {
-        if (result) {
+        if (result && mountedRef.current) {
           dispatch({ type: 'requires_approval' })
         }
       })
+    }
+    return () => {
+      mountedRef.current = false;
     }
   }, [account, onRequiresApproval]);
 
