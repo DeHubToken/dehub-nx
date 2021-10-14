@@ -5,6 +5,7 @@ import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 
 import { Hooks } from '@dehub/react/core';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getFullDisplayBalance } from '@dehub/shared/utils';
 import { ethersToBigNumber } from '@dehub/shared/utils';
 
@@ -20,18 +21,7 @@ import { useLottery } from '../../states/standard-lottery/hooks';
 import { getStandardLotteryAddress } from '../../utils/addressHelpers';
 import { fetchUserTicketsAndLotteries } from '../../states/standard-lottery';
 import { useAppDispatch } from '../../states';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-
-const random = (minNumber: number, maxNumber: number): number => {
-  return Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
-};
-const randomTicket = () => {
-  let num = 0;
-  for (let idx = 0; idx < 4; idx++) {
-    num = num * 100 + random(1, 18);
-  }
-  return num;
-};
+import { generateLotteryNumber } from '../../utils/numbers';
 
 let newTickets: {
   tickets: number[];
@@ -153,12 +143,12 @@ const BuyStandardTicketDialog = ({
     }
 
     for (let idx = 0; idx < count; idx++) {
-      let num = randomTicket();
+      let num = generateLotteryNumber();
       while (
         generatedTicketsNumbers.includes(num) ||
         newTicketsNumbers.includes(num)
       ) {
-        num = randomTicket();
+        num = generateLotteryNumber();
       }
       newTicketsNumbers.push(num);
     }

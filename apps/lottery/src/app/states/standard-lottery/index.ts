@@ -102,7 +102,7 @@ export const LotterySlice = createSlice({
       fetchUserTicketsAndLotteries.fulfilled,
       (state, action: PayloadAction<{ userTickets: LotteryTicket[] }>) => {
         state.currentRound.userTickets = {};
-        state.currentRound.userTickets.isLoading = true;
+        state.currentRound.userTickets.isLoading = false;
         state.currentRound.userTickets.tickets = action.payload.userTickets;
       })
     builder.addCase(setLotteryIsTransitioning.fulfilled,
