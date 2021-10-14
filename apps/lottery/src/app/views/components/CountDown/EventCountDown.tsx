@@ -5,28 +5,36 @@ import getTimePeriods from '../../../utils/getTimePeriods';
 
 interface EventCountDownProps {
   nextEventTime: number;
-  countDownText: string;
+  preCountDownText?: string;
+  postCountDownText?: string;
 }
 
 const EventCountDown = ({
   nextEventTime,
-  countDownText,
+  preCountDownText,
+  postCountDownText,
 }: EventCountDownProps) => {
   const secondsRemaining = useNextEventCountDown(nextEventTime);
-  const { days, hours, minutes } = getTimePeriods(secondsRemaining);
+  const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {secondsRemaining ? (
         <div className="flex flex-column align-items-center">
+          {preCountDownText && (
+            <Header style={{ fontSize: '30px' }}>{preCountDownText}</Header>
+          )}
           <Timer
+            seconds={seconds}
             minutes={minutes}
             hours={hours}
             days={days}
-            style={{ fontSize: '30px' }}
+            style={{ fontSize: `${postCountDownText ? '30px' : '14px'}` }}
           />
-          {countDownText && <Header>{countDownText}</Header>}
+          {postCountDownText && (
+            <Header style={{ fontSize: '30px' }}>{postCountDownText}</Header>
+          )}
         </div>
       ) : (
         <h1 className="text-center" style={{ fontSize: '30px' }}>

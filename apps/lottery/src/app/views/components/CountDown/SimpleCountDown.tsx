@@ -37,7 +37,7 @@ const SimpleCountDown = ({ limitTime }: SimpleCountDownProps) => {
         <div className="flex flex-column align-items-center">
           <Timer
             seconds={seconds}
-            minutes={minutes + 1}
+            minutes={minutes}
             hours={hours}
             days={days}
             style={{ fontSize: '14px' }}

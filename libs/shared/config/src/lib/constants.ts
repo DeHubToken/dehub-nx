@@ -50,8 +50,8 @@ export const ContractAddresses: { [chainId in ChainId]: { [label: string]: strin
     Dehub: "0x5A5e32fE118E7c7b6536d143F446269123c0ba74",
     BNB: "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
     BUSD: "0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7",
-    StandardLottery: "0x73b468a9f889c32C76Ec66163e7a5c4acEFebA0c",
-    SpecialLottery: "0xed62779619E47742D5173E5f0Ed89b635A0bcCA9",
+    StandardLottery: "0xf73766cdF1F2F55aEA4e1F7B1Af2AA36a52c1f7D",
+    SpecialLottery: "0x5Eb211A9F12b449a0e1625726F8a267846D8AE46",
     MultiCall: "0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576",
   },
 }

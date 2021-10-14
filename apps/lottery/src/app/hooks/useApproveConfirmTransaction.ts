@@ -107,6 +107,7 @@ const useApproveConfirmTransaction = ({
   // }, [account, handlePreApprove, dispatch]);
 
   useEffect(() => {
+    mountedRef.current = true;
     if (account && onRequiresApproval) {
       onRequiresApproval().then((result) => {
         if (result && mountedRef.current) {

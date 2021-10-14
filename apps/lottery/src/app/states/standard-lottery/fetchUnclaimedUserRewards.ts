@@ -67,13 +67,14 @@ const getRewardBracketByNumber = (ticketNumber: string, finalNumber: string): nu
   const winningNumbersAsArray = finalNumber.split('').reverse();
   const matchingNumbers = [];
 
+  // ticketNumber is from 100000000 to 118181818, ignore first 1 number
   for (let idx = 0; idx < winningNumbersAsArray.length - 1; idx++) {
     if (ticketNumberAsArray[idx] !== winningNumbersAsArray[idx]) {
       break;
     }
     matchingNumbers.push(ticketNumberAsArray[idx]);
   }
-  return (matchingNumbers.length - 1) / 2;
+  return Math.floor(matchingNumbers.length / 2) - 1;
 }
 
 const getWinningTickets = async (

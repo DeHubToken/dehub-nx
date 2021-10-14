@@ -82,7 +82,7 @@ const processRawTicketsReponse = (data: any): LotteryTicket[] => {
   const [ticketIds, ticketNumbers, claimStatuses,] = data;
 
   if (ticketIds.length > 0) {
-    return ticketNumbers.map((ticketId: ethers.BigNumber, index: number) => {
+    return ticketIds.map((ticketId: ethers.BigNumber, index: number) => {
       return {
         id: ticketId.toString(),
         number: ticketNumbers[index].toString(),

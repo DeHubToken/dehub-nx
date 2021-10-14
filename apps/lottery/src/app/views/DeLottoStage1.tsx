@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { addHours } from 'date-fns';
+import { addHours, addMinutes } from 'date-fns';
 import { Button } from 'primereact/button';
 
 import { Hooks } from '@dehub/react/core';
 
 import BuyStandardTicketDialog from './components/BuyStandardTicketDialog';
 import ClaimStage1Dialog from './components/ClaimStage1Dialog';
-import { EventCountDown } from './components/CountDown';
+import { EventCountDown, SimpleCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
 import ListTicketDialog from './components/ListTicketDialog';
 import PrizePot from './components/PrizePot';
@@ -36,10 +36,13 @@ const DeLottoStage1 = () => {
   const currentLotteryIdAsInt = parseInt(currentLotteryId, 10);
   const startTimeAsInt = parseInt(startTime, 10);
   const endTimeAsInt = parseInt(endTime, 10);
-  const { nextEventTime, countDownText } = useGetNextLotteryEvent(
-    endTimeAsInt,
-    status
-  );
+  const { nextEventTime, preCountDownText, postCountDownText } =
+    useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, status);
+
+  const nextLotteryIdAsInt =
+    status === LotteryStatus.OPEN
+      ? currentLotteryIdAsInt
+      : currentLotteryIdAsInt + 1;
 
   const previousLotteryIdAsInt =
     status === LotteryStatus.CLAIMABLE
@@ -80,22 +83,25 @@ const DeLottoStage1 = () => {
   return (
     <>
       <FlexLine className="align-items-center justify-content-center">
-        {nextEventTime && countDownText ? (
+        {nextEventTime && (preCountDownText || postCountDownText) ? (
           <EventCountDown
             nextEventTime={nextEventTime}
-            countDownText={countDownText}
+            preCountDownText={preCountDownText}
+            postCountDownText={postCountDownText}
           />
         ) : (
-          <h1 className="text-center">Loading...</h1>
+          <h1 className="text-center" style={{ fontSize: '30px' }}>
+            Loading...
+          </h1>
         )}
       </FlexLine>
 
       <FlexLine className="align-items-center justify-content-between">
         <Header>Next Draw:</Header>
-        {currentLotteryIdAsInt > 0 ? (
+        {nextLotteryIdAsInt > 0 ? (
           <Text>
-            #{currentLotteryId} | Draw:{' '}
-            {addHours(startTimeAsInt * 1000, 6).toLocaleString()}
+            #{nextLotteryIdAsInt} | Draw:{' '}
+            {new Date(endTimeAsInt * 1000).toLocaleString()}
           </Text>
         ) : (
           <Text>...</Text>

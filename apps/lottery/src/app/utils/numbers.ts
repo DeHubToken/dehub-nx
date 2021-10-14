@@ -9,11 +9,11 @@ export const toLotteryNumbers = (wrapped: number): number[] => {
     splits[index--] = (temp % 100 - 1) % 18 + 1;
     temp = Math.floor(temp / 100);
   }
-  return splits;
+  return splits.reverse();
 }
 
 export const toWrappedNumber = (numbers: number[]): number => {
-  return numbers.reduce((
+  return numbers.reverse().reduce((
     previousValue: number, currentValue: number
   ) => previousValue * 100 + currentValue) + LIMIT_NUMBER;
 }

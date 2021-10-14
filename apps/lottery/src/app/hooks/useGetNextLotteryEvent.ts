@@ -3,16 +3,22 @@ import { LotteryStatus } from '../config/constants/types';
 
 interface LotteryEvent {
   nextEventTime: number;
-  countDownText?: string;
+  preCountDownText?: string;
+  postCountDownText?: string;
 }
 
-const useGetNextLotteryEvent = (endTime: number, status: LotteryStatus): LotteryEvent => {
+const useGetNextLotteryEvent = (
+  endTime: number,
+  lotteryId: string,
+  status: LotteryStatus
+): LotteryEvent => {
   const vrfRequestTime = 180; // 3 min
   const secondsBetweenRounds = 300; // 5 min
   const transactionResolvingBuffer = 30; // Delay countdown by 30s to ensure contract transctions have been calculated and broadcast
   const [nextEvent, setNextEvent] = useState<LotteryEvent>({
     nextEventTime: 0,
-    countDownText: ''
+    preCountDownText: undefined,
+    postCountDownText: undefined
   });
 
   useEffect(() => {
@@ -20,7 +26,8 @@ const useGetNextLotteryEvent = (endTime: number, status: LotteryStatus): Lottery
     if (status === LotteryStatus.OPEN) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer,
-        countDownText: 'until the draw'
+        preCountDownText: undefined,
+        postCountDownText: 'until the draw'
       });
     }
 
@@ -28,7 +35,8 @@ const useGetNextLotteryEvent = (endTime: number, status: LotteryStatus): Lottery
     if (status === LotteryStatus.CLOSE) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer + vrfRequestTime,
-        countDownText: 'Winners announced in'
+        preCountDownText: `Closing Round #${lotteryId}`,
+        postCountDownText: undefined
       });
     }
 
@@ -36,11 +44,12 @@ const useGetNextLotteryEvent = (endTime: number, status: LotteryStatus): Lottery
     if (status === LotteryStatus.CLAIMABLE) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer + secondsBetweenRounds,
-        countDownText: 'Tickets on sale in'
+        preCountDownText: `Drawing Numbers for Round #${lotteryId}`,
+        postCountDownText: undefined
       });
     }
 
-  }, [status, endTime]);
+  }, [lotteryId, status, endTime]);
 
   return nextEvent;
 }
