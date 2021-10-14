@@ -8,6 +8,7 @@ import useRefresh from '../../hooks/useRefresh';
 import {
   fetchCurrentLottery,
   fetchCurrentLotteryId,
+  fetchLotteryBundles,
   fetchUserTicketsAndLotteries
 } from '.';
 import {
@@ -16,15 +17,19 @@ import {
   processLotteryResponse
 } from './helpers';
 import { useAppDispatch } from '..';
-import { LotteryRound, State } from '../types';
+import { LotteryBundleRule, LotteryRound, State } from '../types';
 
 export const useGetCurrentLotteryId = (): string => {
   return useSelector((state: State) => state.standardLottery.currentLotteryId);
 }
 
+export const useGetLotteryBundleRules = (): LotteryBundleRule[] => {
+  return useSelector((state: State) => state.standardLottery.bundleRules);
+}
+
 export const useFetchLottery = () => {
   const { account } = Hooks.useMoralisEthers();
-  const { fastRefresh } = useRefresh();
+  const { fastRefresh, slowRefresh } = useRefresh();
 
   const dispatch = useAppDispatch();
   const currentLotteryId: string = useGetCurrentLotteryId();
@@ -33,6 +38,10 @@ export const useFetchLottery = () => {
     dispatch(fetchCurrentLotteryId());
 
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchLotteryBundles());
+  }, [dispatch, slowRefresh]);
 
   useEffect(() => {
     if (currentLotteryId) {

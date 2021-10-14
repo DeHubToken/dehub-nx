@@ -104,12 +104,12 @@ const ClaimStage1Dialog = ({
         onHide={onHide}
       >
         <div className="flex flex-column">
-          <div className="mb-2 flex justify-content-center">
+          {/* <div className="mb-2 flex justify-content-center">
             <Text>Unclaimed Total</Text>
           </div>
           <div className="mb-3 flex justify-content-center">
             <Text className="font-bold">******* DeHub</Text>
-          </div>
+          </div> */}
           <div className="mb-3 flex flex-column align-items-center">
             <Text fontSize="12px">Will be burned in:</Text>
             <SimpleCountDown limitTime={endOfMonthAsInt} />

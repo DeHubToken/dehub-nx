@@ -17,11 +17,15 @@ import {
 } from '../../hooks/useContract';
 import useApproveConfirmTransaction from '../../hooks/useApproveConfirmTransaction';
 import { FetchStatus, useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { useLottery } from '../../states/standard-lottery/hooks';
+import {
+  useGetLotteryBundleRules,
+  useLottery,
+} from '../../states/standard-lottery/hooks';
 import { getStandardLotteryAddress } from '../../utils/addressHelpers';
 import { fetchUserTicketsAndLotteries } from '../../states/standard-lottery';
 import { useAppDispatch } from '../../states';
 import { generateLotteryNumber } from '../../utils/numbers';
+import { LotteryBundleRule } from '../../states/types';
 
 let newTickets: {
   tickets: number[];
@@ -49,10 +53,13 @@ const BuyStandardTicketDialog = ({
     currentLotteryId,
     currentRound: { priceTicketInDehub, userTickets },
   } = useLottery();
+  const bundleRules = useGetLotteryBundleRules();
+
   const dehubContract = useDehubContract();
   const standardLotteryContract = useStandardLotteryContract();
 
   const { account } = Hooks.useMoralisEthers();
+  const [pendingTx, setPendingTx] = useState(-1);
 
   const {
     isApproving,
@@ -71,14 +78,21 @@ const BuyStandardTicketDialog = ({
         const currentAllowance = ethersToBigNumber(response);
         return currentAllowance.gt(0);
       } catch (error) {
+        console.error(error);
         return false;
       }
     },
-    onApprove: () => {
-      return dehubContract?.approve(
-        getStandardLotteryAddress(),
-        ethers.constants.MaxUint256
-      );
+    onApprove: async () => {
+      try {
+        return dehubContract?.approve(
+          getStandardLotteryAddress(),
+          ethers.constants.MaxUint256
+        );
+      } catch (error) {
+        console.error(error);
+        setPendingTx(-1);
+        return false;
+      }
     },
     onApproveSuccess: async () => {
       toast?.current?.show({
@@ -108,6 +122,7 @@ const BuyStandardTicketDialog = ({
           }`,
           life: 3000,
         });
+        setPendingTx(-1);
         return false;
       }
     },
@@ -124,7 +139,8 @@ const BuyStandardTicketDialog = ({
           currentLotteryId,
         })
       );
-      onHide();
+      setPendingTx(-1);
+      // onHide();
     },
   });
 
@@ -183,8 +199,11 @@ const BuyStandardTicketDialog = ({
           </div>
           <div className="flex flex-column mt-2">
             <Button
-              className="justify-content-center"
+              icon={pendingTx === 1 ? 'pi pi-spin pi-spinner' : ''}
               onClick={() => {
+                if (pendingTx > 0) {
+                  return;
+                }
                 newTickets = {
                   tickets: generateTickets(1),
                   purchased: 1,
@@ -192,9 +211,8 @@ const BuyStandardTicketDialog = ({
                 };
                 isApproved ? handleConfirm() : handleApprove();
               }}
-            >
-              Buy a Single Ticket
-            </Button>
+              label="Buy a Single Ticket"
+            />
           </div>
           <div className="flex justify-content-end mt-2">
             <Text fontSize="14px">
@@ -215,78 +233,63 @@ const BuyStandardTicketDialog = ({
             <div className="col-6 flex justify-content-end">
               <Text className="font-bold">Price in Dehub</Text>
             </div>
-            <div className="col-6 mt-2">
-              <Button
-                onClick={() => {
-                  newTickets = {
-                    tickets: generateTickets(6),
-                    purchased: 5,
-                    free: 1,
-                  };
-                  isApproved ? handleConfirm() : handleApprove();
-                }}
-              >
-                Buy 5 + 1 Free
-              </Button>
-            </div>
-            <div className="col-6 mt-2 flex justify-content-end">
-              <Text>
-                ~
-                {getFullDisplayBalance(
-                  priceTicketInDehub.times(5),
-                  DEHUB_DECIMALS,
-                  DEHUB_DECIMALS
-                )}
-              </Text>
-            </div>
-            <div className="col-6 mt-2">
-              <Button
-                onClick={() => {
-                  newTickets = {
-                    tickets: generateTickets(13),
-                    purchased: 10,
-                    free: 3,
-                  };
-                  isApproved ? handleConfirm() : handleApprove();
-                }}
-              >
-                Buy 10 + 3 Free
-              </Button>
-            </div>
-            <div className="col-6 mt-2 flex justify-content-end">
-              <Text>
-                ~
-                {getFullDisplayBalance(
-                  priceTicketInDehub.times(10),
-                  DEHUB_DECIMALS,
-                  DEHUB_DECIMALS
-                )}
-              </Text>
-            </div>
-            <div className="col-6 mt-2">
-              <Button
-                onClick={() => {
-                  newTickets = {
-                    tickets: generateTickets(20),
-                    purchased: 15,
-                    free: 5,
-                  };
-                  isApproved ? handleConfirm() : handleApprove();
-                }}
-              >
-                Buy 15 + 5 Free
-              </Button>
-            </div>
-            <div className="col-6 mt-2 flex justify-content-end">
-              <Text>
-                ~
-                {getFullDisplayBalance(
-                  priceTicketInDehub.times(15),
-                  DEHUB_DECIMALS,
-                  DEHUB_DECIMALS
-                )}
-              </Text>
-            </div>
+            {bundleRules &&
+              bundleRules.length > 0 &&
+              bundleRules.map(
+                (bundleRule: LotteryBundleRule, index: number) => {
+                  return (
+                    bundleRule.purchasedCount + bundleRule.freeCount > 0 && (
+                      <div
+                        className="col-12 mt-2 flex flex-row"
+                        key={`bundle-${index}`}
+                      >
+                        <div className="col-7">
+                          <Button
+                            icon={
+                              pendingTx ===
+                              bundleRule.purchasedCount + bundleRule.freeCount
+                                ? 'pi pi-spin pi-spinner'
+                                : ''
+                            }
+                            onClick={() => {
+                              if (pendingTx > 0) {
+                                return;
+                              }
+                              setPendingTx(
+                                bundleRule.purchasedCount + bundleRule.freeCount
+                              );
+                              newTickets = {
+                                tickets: generateTickets(
+                                  bundleRule.purchasedCount +
+                                    bundleRule.freeCount
+                                ),
+                                purchased: bundleRule.purchasedCount,
+                                free: bundleRule.freeCount,
+                              };
+                              isApproved ? handleConfirm() : handleApprove();
+                            }}
+                            label={`Buy ${bundleRule.purchasedCount} ${
+                              bundleRule.freeCount > 0
+                                ? ' + ' + bundleRule.freeCount + ' Free'
+                                : ''
+                            }`}
+                          />
+                        </div>
+                        <div className="col-5 flex justify-content-end">
+                          <Text>
+                            ~
+                            {getFullDisplayBalance(
+                              priceTicketInDehub.times(5),
+                              DEHUB_DECIMALS,
+                              DEHUB_DECIMALS
+                            )}
+                          </Text>
+                        </div>
+                      </div>
+                    )
+                  );
+                }
+              )}
           </div>
         </div>
       </Dialog>

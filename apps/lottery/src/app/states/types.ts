@@ -55,9 +55,15 @@ export interface LotteryResponse extends LotteryRoundGenerics {
   rewardsBreakdown: SerializedBigNumber[];
 }
 
+export interface LotteryBundleRule {
+  purchasedCount: number;
+  freeCount: number;
+}
+
 export interface LotteryState {
   currentLotteryId: string;
   maxNumberTicketsPerBuyOrClaim: string;
+  bundleRules: LotteryBundleRule[];
   isTransitioning: boolean;
   currentRound: LotteryResponse & { userTickets?: LotteryRoundUserTickets };
 }

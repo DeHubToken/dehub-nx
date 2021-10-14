@@ -5,7 +5,8 @@ import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
 import {
   LotteryRound,
   LotteryResponse,
-  LotteryRoundUserTickets
+  LotteryRoundUserTickets,
+  LotteryBundleRule
 } from '../types';
 
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
@@ -131,6 +132,25 @@ export const fetchCurrentLotteryIdAndMaxBuy = async () => {
       currentLotteryId: '',
       maxNumberTicketsPerBuyOrClaim: ''
     };
+  }
+}
+
+export const fetchLotteryBundleRules = async (): Promise<LotteryBundleRule[]> => {
+  try {
+    const data = await standardLotteryContract.viewBundleRule();
+    const [purchasedCounts, freeCounts] = data;
+
+    return purchasedCounts.map((purchasedCount: ethers.BigNumber, index: number) => {
+      return {
+        index,
+        purchasedCount: purchasedCount.toNumber(),
+        freeCount: freeCounts[index].toNumber()
+      };
+    });
+
+  } catch (error) {
+    console.log('viewUserInfoForLotteryId', error);
+    return [];
   }
 }
 

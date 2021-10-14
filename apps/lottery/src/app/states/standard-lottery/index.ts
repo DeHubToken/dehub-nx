@@ -6,11 +6,13 @@ import {
 import {
   fetchCurrentLotteryIdAndMaxBuy,
   fetchLottery,
+  fetchLotteryBundleRules,
   fetchUserTicketsPerOneRound
 } from './helpers';
 import {
   LotteryState,
-  LotteryResponse
+  LotteryResponse,
+  LotteryBundleRule
 } from '../types';
 import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 
@@ -23,6 +25,7 @@ const initialState: LotteryState = {
   currentLotteryId: '',
   maxNumberTicketsPerBuyOrClaim: '',
   isTransitioning: false,
+  bundleRules: [],
   currentRound: {
     isLoading: true,
     lotteryId: '',
@@ -60,15 +63,25 @@ export const fetchCurrentLotteryId = createAsyncThunk<PublicLotteryData>(
   }
 );
 
+export const fetchLotteryBundles = createAsyncThunk<LotteryBundleRule[]>(
+  'lottery/fetchLotteryBundleRules',
+  async () => {
+    const bundleRules = await fetchLotteryBundleRules();
+    return bundleRules;
+  }
+)
+
 export const fetchUserTicketsAndLotteries = createAsyncThunk<{
   userTickets: LotteryTicket[]
 }, { account: string, currentLotteryId: string }>(
   'lottery/fetchUserTicketsAndLotteries',
   async ({ account, currentLotteryId }) => {
     const userTickets: LotteryTicket[] = await fetchUserTicketsPerOneRound(account, currentLotteryId);
-    // if (!userTickets || userTickets.length === 0) {
-    //   return { userTickets: null };
-    // }
+    /*
+     * if (!userTickets || userTickets.length === 0) {
+     *   return { userTickets: null };
+     * }
+     */
     return { userTickets };
   }
 )
@@ -97,6 +110,9 @@ export const LotterySlice = createSlice({
     builder.addCase(fetchCurrentLotteryId.fulfilled, (state, action: PayloadAction<PublicLotteryData>) => {
       state.currentLotteryId = action.payload.currentLotteryId;
       state.maxNumberTicketsPerBuyOrClaim = action.payload.maxNumberTicketsPerBuyOrClaim;
+    })
+    builder.addCase(fetchLotteryBundles.fulfilled, (state, action: PayloadAction<LotteryBundleRule[]>) => {
+      state.bundleRules = action.payload;
     })
     builder.addCase(
       fetchUserTicketsAndLotteries.fulfilled,

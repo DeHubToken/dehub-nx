@@ -95,6 +95,7 @@ const useApproveConfirmTransaction = ({
 
   // const handlePreApprove = useRef(onRequiresApproval);
 
+  // eslint-disable-next-line multiline-comment-style
   // // Check if approval is necessary, re-check if account changes
   // useEffect(() => {
   //   if (account && handlePreApprove.current) {
