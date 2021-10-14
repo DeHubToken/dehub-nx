@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+import BigNumber from 'bignumber.js';
 import { endOfMonth } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 
 import { Hooks } from '@dehub/react/core';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
+import { getFullDisplayBalance, getBalanceNumber } from '@dehub/shared/utils';
 
 import { SimpleCountDown } from './CountDown';
 
@@ -16,6 +19,7 @@ import useGetUnclaimedRewards, {
   FetchStatus,
 } from '../../hooks/useGetUnclaimedReward';
 import { useStandardLotteryContract } from '../../hooks/useContract';
+import { BIG_ZERO } from '@dehub/shared/utils';
 
 interface ClaimStage1DialogProps {
   open: boolean;
@@ -34,12 +38,22 @@ const ClaimStage1Dialog = ({
   const isFetchingRewards = fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
   const [pendingTx, setPendingTx] = useState(false);
+  const [unclaimedDehubTotal, setUnclaimedDehubTotal] =
+    useState<BigNumber>(BIG_ZERO);
   const lotteryContract = useStandardLotteryContract();
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
     fetchAllRewards(roundId);
   }, [account, roundId, fetchAllRewards]);
+
+  useEffect(() => {
+    let total: BigNumber = BIG_ZERO;
+    unclaimedRewards.forEach((reward: LotteryTicketClaimData) => {
+      total = total.plus(reward.dehubTotal);
+    });
+    setUnclaimedDehubTotal(total);
+  }, [unclaimedRewards]);
 
   const parseUnclaimedTicketDataOrClaimCall = (
     ticketWithUnclaimedRewards: LotteryTicket[],
@@ -104,12 +118,14 @@ const ClaimStage1Dialog = ({
         onHide={onHide}
       >
         <div className="flex flex-column">
-          {/* <div className="mb-2 flex justify-content-center">
+          <div className="mb-2 flex justify-content-center">
             <Text>Unclaimed Total</Text>
           </div>
           <div className="mb-3 flex justify-content-center">
-            <Text className="font-bold">******* DeHub</Text>
-          </div> */}
+            <Text className="font-bold">
+              {getBalanceNumber(unclaimedDehubTotal, DEHUB_DECIMALS)} $DeHub
+            </Text>
+          </div>
           <div className="mb-3 flex flex-column align-items-center">
             <Text fontSize="12px">Will be burned in:</Text>
             <SimpleCountDown limitTime={endOfMonthAsInt} />

@@ -279,7 +279,9 @@ const BuyStandardTicketDialog = ({
                           <Text>
                             ~
                             {getFullDisplayBalance(
-                              priceTicketInDehub.times(5),
+                              priceTicketInDehub.times(
+                                bundleRule.purchasedCount
+                              ),
                               DEHUB_DECIMALS,
                               DEHUB_DECIMALS
                             )}

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 
-import { BUSD_DECIMALS } from '@dehub/shared/config';
+import { BUSD_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
 
 import { Text } from '../../components/Text';
@@ -39,7 +39,10 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
 
   return !prizeInBusd.isNaN() ? (
     <Text>
-      {`${pot} $Dehub / $${getBalanceNumber(prizeInBusd, BUSD_DECIMALS)}`}
+      {`${getBalanceNumber(pot, DEHUB_DECIMALS)} $Dehub / $${getBalanceNumber(
+        prizeInBusd,
+        BUSD_DECIMALS
+      )}`}
     </Text>
   ) : (
     <Text>...</Text>
