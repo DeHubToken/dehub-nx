@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 
 import { BUSD_DECIMALS } from '@dehub/shared/config';
@@ -19,6 +19,12 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
   const mountedRef = useRef(true);
 
   useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
     const calculate = async () => {
       const dehubPriceInBusd = await getDehubPrice();
       const prizeInBusdCalc = pot.times(dehubPriceInBusd);
@@ -29,10 +35,6 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
     };
 
     calculate();
-
-    return () => {
-      mountedRef.current = false;
-    };
   }, [pot]);
 
   return !prizeInBusd.isNaN() ? (
