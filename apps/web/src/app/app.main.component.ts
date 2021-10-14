@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { MenuService } from './menu/app.menu.service';
 
 @Component({
-  selector: 'dh-main',
+  selector: 'dhb-main',
   templateUrl: './app.main.component.html',
 })
 export class AppMainComponent {
@@ -63,20 +63,6 @@ export class AppMainComponent {
     this.sidebarStatic = !this.sidebarStatic;
 
     event.preventDefault();
-  }
-
-  onSidebarMouseOver() {
-    if (this.app.menuMode === 'sidebar' && !this.sidebarStatic) {
-      this.sidebarActive = !this.isMobile();
-    }
-  }
-
-  onSidebarMouseLeave() {
-    if (this.app.menuMode === 'sidebar' && !this.sidebarStatic) {
-      setTimeout(() => {
-        this.sidebarActive = false;
-      }, 250);
-    }
   }
 
   isSlim() {

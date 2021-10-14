@@ -5,7 +5,7 @@ import { AppComponent } from '../app.component';
 import { AppMainComponent } from '../app.main.component';
 
 @Component({
-  selector: 'dh-topbar',
+  selector: 'dhb-topbar',
   templateUrl: './app.topbar.component.html',
 })
 export class AppTopBarComponent implements OnDestroy {

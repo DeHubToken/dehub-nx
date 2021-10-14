@@ -14,7 +14,7 @@ This project was generated using [Nx](https://nx.dev).
    ```
 1. Generate Angular app:
    ```
-   nx generate @nrwl/angular:application --name=web --style=scss --prefix=dh --routing --standaloneConfig
+   nx generate @nrwl/angular:application --name=web --style=scss --prefix=dhb --routing --standaloneConfig
    ```
 1. Precommit hook with formatting (git >= v2.9):
    ```
@@ -134,6 +134,11 @@ This project was generated using [Nx](https://nx.dev).
 
    ```
    nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run lottery:deploy:prod' --project=lottery
+   ```
+
+1. Angular lazy module under web:
+   ```
+   nx generate @schematics/angular:module --name=team --project=web --path=apps/web/src/app/modules --routing
    ```
 
 # Netlify Settings

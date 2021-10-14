@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'dh-footer',
+  selector: 'dhb-footer',
   templateUrl: './app.footer.component.html',
 })
 export class AppFooterComponent {}
