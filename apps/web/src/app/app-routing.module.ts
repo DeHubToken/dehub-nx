@@ -22,13 +22,13 @@ enum Navigation {
           children: [
             { path: '', component: LandingComponent },
             {
-              path: Navigation.Partners,
+              path: Navigation.Features,
               loadChildren: () =>
                 import('./modules/features/features.module').then(
                   module => module.FeaturesModule
                 ),
               data: {
-                animation: Navigation.Partners,
+                animation: Navigation.Features,
               },
             },
             {
