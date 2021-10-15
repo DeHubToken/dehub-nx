@@ -23,4 +23,4 @@ export default createReducer(initialState, builder =>
         state.walletConnectingState = connectingState;
       }
     )
-);
+)

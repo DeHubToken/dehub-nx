@@ -43,12 +43,12 @@ function useContract(
 export const useStandardLotteryContract = (): Contract | null => {
   const contractAddress = ContractAddresses[getChainId()]["StandardLottery"];
   return useContract(contractAddress, StandardLotteryAbi);
-};
+}
 
 export const useSpecialLotteryContract = (): Contract | null => {
   const contractAddress = ContractAddresses[getChainId()]["SpecialLottery"];
   return useContract(contractAddress, SpecialLotteryAbi);
-};
+}
 
 export const useDehubContract = (): Contract | null => {
   const { signer } = Hooks.useMoralisEthers();

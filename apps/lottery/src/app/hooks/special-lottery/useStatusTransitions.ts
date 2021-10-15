@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import usePrevious from '../usePrevious';
 import { LotteryStatus } from '../../config/constants/types';
 import { useAppDispatch } from '../../states';
-import { useLottery } from '../../states/standard-lottery/hooks';
-import { fetchCurrentLottery, fetchCurrentLotteryId } from '../../states/standard-lottery';
+import { useLottery } from '../../states/special-lottery/hooks';
+import { fetchCurrentLottery, fetchCurrentLotteryId } from '../../states/special-lottery';
 
 const useStatusTransitions = () => {
   const {

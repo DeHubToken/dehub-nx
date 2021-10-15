@@ -17,7 +17,7 @@ interface LotteryStatusAndFinalNumber {
   roundId: string;
   status: LotteryStatus;
   finalNumber: string;
-};
+}
 
 interface RoundDataAndUserTickets {
   roundId: string;
@@ -62,6 +62,12 @@ const fetchDehubRewardsForTickets = async (
   }
 }
 
+/**
+ * Get reward bracket matched by ticket number
+ * @param ticketNumber 
+ * @param finalNumber 
+ * @returns 0 = 1 match, 1 = 2 match, 2 = 3 match, 3 = all match
+ */
 const getRewardBracketByNumber = (ticketNumber: string, finalNumber: string): number => {
   const ticketNumberAsArray = ticketNumber.split('').reverse();
   const winningNumbersAsArray = finalNumber.split('').reverse();

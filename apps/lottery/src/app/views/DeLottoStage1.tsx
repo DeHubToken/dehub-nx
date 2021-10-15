@@ -1,25 +1,24 @@
 import { useState } from 'react';
-import { addHours, addMinutes } from 'date-fns';
 import { Button } from 'primereact/button';
 
 import { Hooks } from '@dehub/react/core';
 
 import BuyStandardTicketDialog from './components/BuyStandardTicketDialog';
 import ClaimStage1Dialog from './components/ClaimStage1Dialog';
-import { EventCountDown, SimpleCountDown } from './components/CountDown';
+import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
 import ListTicketDialog from './components/ListTicketDialog';
 import PrizePot from './components/PrizePot';
 import WinningNumbers from './components/WiningNumbers';
+
+import { LotteryStatus } from '../config/constants/types';
 import ConnectWalletButton from '../components/ConnectWalletButton';
 import { Header, Text } from '../components/Text';
-
-import useGetNextLotteryEvent from '../hooks/standard-lottery/useGetNextLotteryEvent';
+import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
 import {
   useLottery,
   usePreviousLottery,
 } from '../states/standard-lottery/hooks';
-import { LotteryStatus } from '../config/constants/types';
 
 const DeLottoStage1 = () => {
   const {
@@ -194,7 +193,6 @@ const DeLottoStage1 = () => {
       <ClaimStage1Dialog
         open={checkStage1Dialog}
         onHide={() => handleHideDialog('CheckStage1')}
-        roundId={currentLotteryId}
       />
     </>
   );

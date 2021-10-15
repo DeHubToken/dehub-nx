@@ -14,8 +14,10 @@ interface BalanceInputProps {
     InputHTMLAttributes<HTMLInputElement>,
     'value' | 'placeholder' | 'onChange'
   >;
+  isWarning: boolean;
   decimals?: number;
   unit?: string;
+  switchEditingUnits?: () => void;
 }
 
 const BalanceInput = ({
@@ -25,6 +27,7 @@ const BalanceInput = ({
   placeholder = '0.0',
   innerRef,
   inputProps,
+  isWarning = false,
   decimals = 18,
   unit,
   ...props
@@ -36,7 +39,7 @@ const BalanceInput = ({
   };
 
   return (
-    <StyledBalanceInput {...props}>
+    <StyledBalanceInput isWarning={isWarning} {...props}>
       <div className="flex justify-content-end">
         <Box>
           <div className="flex align-items-center">

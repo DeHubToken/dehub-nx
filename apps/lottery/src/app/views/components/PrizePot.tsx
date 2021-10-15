@@ -14,7 +14,7 @@ interface PrizePotProps {
 }
 
 const PrizePot = ({ pot, status }: PrizePotProps) => {
-  const [prizeInBusd, setPrizeInBusd] = useState<BigNumber>(BIG_ZERO);
+  const [prizeInBusd, setPrizeInBusd] = useState<BigNumber>(new BigNumber(NaN));
   // https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
   const mountedRef = useRef(true);
 

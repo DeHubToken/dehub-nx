@@ -3,7 +3,7 @@ import { Dialog } from 'primereact/dialog';
 
 import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 import { Text } from '../../components/Text';
-import { TicketNumberLabel } from '../../components/TicketLabel';
+import { TicketIdLabel, TicketNumberLabel } from '../../components/TicketLabel';
 
 interface ListTicketDialogProps {
   open: boolean;
@@ -39,10 +39,16 @@ const ListTicketDialog = ({
           {tickets &&
             tickets.map((ticket: LotteryTicket, index: number) => {
               const ticketAsInt = parseInt(ticket.number, 10);
-              return (
+              return ticketAsInt > 0 ? (
                 <TicketNumberLabel
                   key={`${index}`}
                   number={ticketAsInt}
+                  className="mt-2"
+                />
+              ) : (
+                <TicketIdLabel
+                  key={`${index}`}
+                  id={ticket.id}
                   className="mt-2"
                 />
               );

@@ -7,7 +7,7 @@ import { Toast } from 'primereact/toast';
 
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceNumber } from '@dehub/shared/utils';
+import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
 
 import { SimpleCountDown } from './CountDown';
 
@@ -19,19 +19,16 @@ import useGetUnclaimedRewards, {
   FetchStatus,
 } from '../../hooks/standard-lottery/useGetUnclaimedReward';
 import { useStandardLotteryContract } from '../../hooks/useContract';
-import { BIG_ZERO } from '@dehub/shared/utils';
+import { useLottery } from '../../states/standard-lottery/hooks';
 
 interface ClaimStage1DialogProps {
   open: boolean;
   onHide: () => void;
-  roundId: string;
 }
 
-const ClaimStage1Dialog = ({
-  open,
-  onHide,
-  roundId, // start roundId to claim
-}: ClaimStage1DialogProps) => {
+const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
+  const { currentLotteryId } = useLottery();
+
   const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
   const { fetchAllRewards, unclaimedRewards, fetchStatus } =
     useGetUnclaimedRewards();
@@ -44,8 +41,8 @@ const ClaimStage1Dialog = ({
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
-    fetchAllRewards(roundId);
-  }, [account, roundId, fetchAllRewards]);
+    fetchAllRewards(currentLotteryId);
+  }, [account, currentLotteryId, fetchAllRewards]);
 
   useEffect(() => {
     let total: BigNumber = BIG_ZERO;
@@ -113,7 +110,7 @@ const ClaimStage1Dialog = ({
         visible={open}
         modal
         className="p-fluid"
-        header={`Round #${roundId}`}
+        header={`Round #${currentLotteryId}`}
         style={{ width: '250px' }}
         onHide={onHide}
       >
@@ -147,6 +144,7 @@ const ClaimStage1Dialog = ({
                           <TicketNumberLabel
                             key={`${index}`}
                             number={ticketAsInt}
+                            rewardBracket={ticket.rewardBracket}
                             className="mb-2"
                           />
                         );

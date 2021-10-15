@@ -21,11 +21,11 @@ import {
   useGetLotteryBundleRules,
   useLottery,
 } from '../../states/standard-lottery/hooks';
-import { getStandardLotteryAddress } from '../../utils/addressHelpers';
 import { fetchUserTicketsAndLotteries } from '../../states/standard-lottery';
 import { useAppDispatch } from '../../states';
-import { generateLotteryNumber } from '../../utils/numbers';
 import { LotteryBundleRule } from '../../states/standard-lottery/types';
+import { getStandardLotteryAddress } from '../../utils/addressHelpers';
+import { generateLotteryNumber } from '../../utils/numbers';
 
 let newTickets: {
   tickets: number[];
@@ -209,6 +209,7 @@ const BuyStandardTicketDialog = ({
                   purchased: 1,
                   free: 0,
                 };
+                setPendingTx(1);
                 isApproved ? handleConfirm() : handleApprove();
               }}
               label="Buy a Single Ticket"

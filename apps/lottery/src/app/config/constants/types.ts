@@ -1,5 +1,12 @@
 import BigNumber from 'bignumber.js';
 
+export enum LotteryPrizeLevel {
+  NONE = 0,
+  BRONZE = 1,
+  SILVER = 2,
+  GOLD = 3
+}
+
 export enum LotteryStatus {
   PENDING = 'Pending',
   OPEN = 'Open',

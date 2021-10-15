@@ -155,6 +155,6 @@ const useApproveConfirmTransaction = ({
       }
     },
   }
-};
+}
 
 export default useApproveConfirmTransaction;

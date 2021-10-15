@@ -4,13 +4,15 @@ import { save, load } from 'redux-localstorage-simple';
 
 import application from './application/reducers';
 import standardLotteryReducer from './standard-lottery';
+import specialLotteryReducer from './special-lottery';
 
 const PERSISTED_KEYS: string[] = ['user'];
 
 export const store = configureStore({
   reducer: {
     application,
-    standardLottery: standardLotteryReducer
+    standardLottery: standardLotteryReducer,
+    specialLottery: specialLotteryReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(save({ states: PERSISTED_KEYS })),
   preloadedState: load({

@@ -6,14 +6,9 @@ import {
 import {
   fetchCurrentLotteryIdAndMaxBuy,
   fetchLottery,
-  fetchLotteryBundleRules,
   fetchUserTicketsPerOneRound
 } from './helpers';
-import {
-  LotteryState,
-  LotteryResponse,
-  LotteryBundleRule
-} from './types';
+import { LotteryState, LotteryResponse } from '../special-lottery/types';
 import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 
 interface PublicLotteryData {
@@ -25,7 +20,6 @@ const initialState: LotteryState = {
   currentLotteryId: '',
   maxNumberTicketsPerBuyOrClaim: '',
   isTransitioning: false,
-  bundleRules: [],
   currentRound: {
     isLoading: true,
     lotteryId: '',
@@ -34,12 +28,9 @@ const initialState: LotteryState = {
     endTime: '',
     firstTicketId: '',
     lastTicketId: '',
-    finalNumber: 0,
+    deGrandMaximumWinners: 0,
     priceTicketInDehub: '',
     amountCollectedInDehub: '',
-    dehubPerBracket: [],
-    countWinnersPerBracket: [],
-    rewardsBreakdown: [],
     userTickets: {
       isLoading: true,
       tickets: []
@@ -48,7 +39,7 @@ const initialState: LotteryState = {
 };
 
 export const fetchCurrentLottery = createAsyncThunk<LotteryResponse, { currentLotteryId: string }>(
-  'standardLottery/fetchCurrentLottery',
+  'specialLottery/fetchCurrentLottery',
   async ({ currentLotteryId }) => {
     const lotteryInfo = await fetchLottery(currentLotteryId)
     return lotteryInfo
@@ -56,25 +47,17 @@ export const fetchCurrentLottery = createAsyncThunk<LotteryResponse, { currentLo
 )
 
 export const fetchCurrentLotteryId = createAsyncThunk<PublicLotteryData>(
-  'standardLottery/fetchCurrentLotteryId',
+  'specialLottery/fetchCurrentLotteryId',
   async () => {
     const currentIdAndMaxBuy = await fetchCurrentLotteryIdAndMaxBuy();
     return currentIdAndMaxBuy;
   }
 )
 
-export const fetchLotteryBundles = createAsyncThunk<LotteryBundleRule[]>(
-  'standardLottery/fetchLotteryBundleRules',
-  async () => {
-    const bundleRules = await fetchLotteryBundleRules();
-    return bundleRules;
-  }
-)
-
 export const fetchUserTicketsAndLotteries = createAsyncThunk<{
   userTickets: LotteryTicket[]
 }, { account: string, currentLotteryId: string }>(
-  'standardLottery/fetchUserTicketsAndLotteries',
+  'specialLottery/fetchUserTicketsAndLotteries',
   async ({ account, currentLotteryId }) => {
     const userTickets: LotteryTicket[] = await fetchUserTicketsPerOneRound(account, currentLotteryId);
     /*
@@ -89,14 +72,14 @@ export const fetchUserTicketsAndLotteries = createAsyncThunk<{
 export const setLotteryIsTransitioning = createAsyncThunk<{
   isTransitioning: boolean
 }, { isTransitioning: boolean }>(
-  'standardLottery/setLotteryIsTransitioning',
+  'specialLottery/setLotteryIsTransitioning',
   async ({ isTransitioning }) => {
     return { isTransitioning };
   }
 )
 
 export const LotterySlice = createSlice({
-  name: 'StandardLottery',
+  name: 'SpecialLottery',
   initialState,
   reducers: {
     setLotteryPublicData: (state, action) => {
@@ -111,9 +94,6 @@ export const LotterySlice = createSlice({
       state.currentLotteryId = action.payload.currentLotteryId;
       state.maxNumberTicketsPerBuyOrClaim = action.payload.maxNumberTicketsPerBuyOrClaim;
     })
-    builder.addCase(fetchLotteryBundles.fulfilled, (state, action: PayloadAction<LotteryBundleRule[]>) => {
-      state.bundleRules = action.payload;
-    })
     builder.addCase(
       fetchUserTicketsAndLotteries.fulfilled,
       (state, action: PayloadAction<{ userTickets: LotteryTicket[] }>) => {
@@ -126,7 +106,7 @@ export const LotterySlice = createSlice({
         state.isTransitioning = action.payload.isTransitioning;
       })
   }
-})
+});
 
 export const { setLotteryPublicData } = LotterySlice.actions;
 
