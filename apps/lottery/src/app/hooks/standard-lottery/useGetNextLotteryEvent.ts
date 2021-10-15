@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LotteryStatus } from '../config/constants/types';
+import { LotteryStatus } from '../../config/constants/types';
 
 interface LotteryEvent {
   nextEventTime: number;

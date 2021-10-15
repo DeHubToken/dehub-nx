@@ -17,7 +17,8 @@ import {
   processLotteryResponse
 } from './helpers';
 import { useAppDispatch } from '..';
-import { LotteryBundleRule, LotteryRound, State } from '../types';
+import { LotteryBundleRule, LotteryRound } from './types';
+import { State } from '../types';
 
 export const useGetCurrentLotteryId = (): string => {
   return useSelector((state: State) => state.standardLottery.currentLotteryId);

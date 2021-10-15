@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import usePrevious from './usePrevious';
-import { LotteryStatus } from '../config/constants/types';
-import { useAppDispatch } from '../states';
-import { useLottery } from '../states/standard-lottery/hooks';
-import { fetchCurrentLottery, fetchCurrentLotteryId } from '../states/standard-lottery';
+import usePrevious from '../usePrevious';
+import { LotteryStatus } from '../../config/constants/types';
+import { useAppDispatch } from '../../states';
+import { useLottery } from '../../states/standard-lottery/hooks';
+import { fetchCurrentLottery, fetchCurrentLotteryId } from '../../states/standard-lottery';
 
 const useStatusTransitions = () => {
   const {
@@ -18,9 +18,11 @@ const useStatusTransitions = () => {
   // @todo
 
   useEffect(() => {
-    // Current lottery is CLAIMABLE and the lottery is transitioninig to a NEW round,
-    // fetch current lottery Id every 10 seconds.
-    // The isTransitioning condition will no longer be true when fetchCurrentLotteryId returns the next lottery Id
+    /*
+     * Current lottery is CLAIMABLE and the lottery is transitioninig to a NEW round,
+     * fetch current lottery Id every 10 seconds.
+     * The isTransitioning condition will no longer be true when fetchCurrentLotteryId returns the next lottery Id
+     */
     if (previousStatus === LotteryStatus.CLAIMABLE && status === LotteryStatus.CLAIMABLE && isTransitioning) {
       dispatch(fetchCurrentLotteryId());
       dispatch(fetchCurrentLottery({ currentLotteryId }));

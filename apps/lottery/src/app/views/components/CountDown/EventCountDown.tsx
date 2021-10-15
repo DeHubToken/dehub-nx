@@ -1,6 +1,6 @@
 import Timer from './Timer';
 import { Header } from '../../../components/Text';
-import useNextEventCountDown from '../../../hooks/useNextEventCountDown';
+import useNextEventCountDown from '../../../hooks/standard-lottery/useNextEventCountDown';
 import getTimePeriods from '../../../utils/getTimePeriods';
 
 interface EventCountDownProps {

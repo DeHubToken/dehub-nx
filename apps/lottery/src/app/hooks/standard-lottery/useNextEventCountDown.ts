@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
-import { useAppDispatch } from '../states';
-import { useLottery } from '../states/standard-lottery/hooks';
-import { fetchCurrentLottery, setLotteryIsTransitioning } from '../states/standard-lottery';
+import { useAppDispatch } from '../../states';
+import { useLottery } from '../../states/standard-lottery/hooks';
+import { fetchCurrentLottery, setLotteryIsTransitioning } from '../../states/standard-lottery';
 
 const useNextEventCountDown = (nextEventTime: number): number => {
   const dispatch = useAppDispatch();

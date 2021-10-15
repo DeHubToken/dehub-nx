@@ -25,7 +25,7 @@ import { getStandardLotteryAddress } from '../../utils/addressHelpers';
 import { fetchUserTicketsAndLotteries } from '../../states/standard-lottery';
 import { useAppDispatch } from '../../states';
 import { generateLotteryNumber } from '../../utils/numbers';
-import { LotteryBundleRule } from '../../states/types';
+import { LotteryBundleRule } from '../../states/standard-lottery/types';
 
 let newTickets: {
   tickets: number[];

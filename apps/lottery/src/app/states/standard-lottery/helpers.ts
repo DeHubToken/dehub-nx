@@ -7,7 +7,7 @@ import {
   LotteryResponse,
   LotteryRoundUserTickets,
   LotteryBundleRule
-} from '../types';
+} from './types';
 
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
 import { LotteryStatus, LotteryTicket } from '../../config/constants/types';

@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { BIG_ZERO } from '@dehub/shared/utils';
 import { fetchLottery, fetchUserTicketsPerMultipleRounds } from './helpers';
 
-import { LotteryResponse } from '../types';
+import { LotteryResponse } from './types';
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
 import {
   LotteryStatus,

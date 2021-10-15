@@ -13,7 +13,7 @@ import {
   LotteryState,
   LotteryResponse,
   LotteryBundleRule
-} from '../types';
+} from './types';
 import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 
 interface PublicLotteryData {

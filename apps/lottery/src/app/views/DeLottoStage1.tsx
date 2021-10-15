@@ -14,7 +14,7 @@ import WinningNumbers from './components/WiningNumbers';
 import ConnectWalletButton from '../components/ConnectWalletButton';
 import { Header, Text } from '../components/Text';
 
-import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
+import useGetNextLotteryEvent from '../hooks/standard-lottery/useGetNextLotteryEvent';
 import {
   useLottery,
   usePreviousLottery,

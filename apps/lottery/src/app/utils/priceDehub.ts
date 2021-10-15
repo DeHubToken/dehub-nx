@@ -81,12 +81,14 @@ export const getDehubPrice = async (): Promise<BigNumber> => {
 
   // const tokenBusdLp = await getPancakeLiquidityInfo(dehubAddress, busdAddress);
 
-  // if (tokenBnbLp.quoteToken.reserve.gt(tokenBusdLp.quoteToken.reserve)) {
-  //   const bnbPriceAsEth = ethers.BigNumber.from(bnbPrice.toString());
-  //   return ethersToBigNumber(tokenBnbLp.baseToken.reserve.mul(bnbPriceAsEth).div(tokenBnbLp.quoteToken.reserve));
-  // } else {
-  //   return ethersToBigNumber(tokenBusdLp.baseToken.reserve.div(tokenBusdLp.quoteToken.reserve));
-  // }
+  /*
+   * if (tokenBnbLp.quoteToken.reserve.gt(tokenBusdLp.quoteToken.reserve)) {
+   *   const bnbPriceAsEth = ethers.BigNumber.from(bnbPrice.toString());
+   *   return ethersToBigNumber(tokenBnbLp.baseToken.reserve.mul(bnbPriceAsEth).div(tokenBnbLp.quoteToken.reserve));
+   * } else {
+   *   return ethersToBigNumber(tokenBusdLp.baseToken.reserve.div(tokenBusdLp.quoteToken.reserve));
+   * }
+   */
 }
 
 export default getDehubPrice;

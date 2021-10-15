@@ -6,8 +6,8 @@ import DeLottoStage2 from './DeLottoStage2';
 import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
 
-import useStatusTransitions from '../hooks/useStatusTransitions';
-import { useFetchLottery } from '../states/standard-lottery/hooks';
+import useStandardLotteryStatusTransitions from '../hooks/standard-lottery/useStatusTransitions';
+import { useFetchLottery as useFetchStandardLottery } from '../states/standard-lottery/hooks';
 
 const StyledContainer = styled(Container)`
   .p-tabview .p-tabview-nav li {
@@ -20,8 +20,9 @@ const StyledBox = styled(Box)`
 `;
 
 const DeLotto = () => {
-  useFetchLottery();
-  useStatusTransitions();
+  // standard lottery
+  useFetchStandardLottery();
+  useStandardLotteryStatusTransitions();
 
   return (
     <StyledContainer>

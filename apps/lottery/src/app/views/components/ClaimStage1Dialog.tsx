@@ -7,7 +7,7 @@ import { Toast } from 'primereact/toast';
 
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getFullDisplayBalance, getBalanceNumber } from '@dehub/shared/utils';
+import { getBalanceNumber } from '@dehub/shared/utils';
 
 import { SimpleCountDown } from './CountDown';
 
@@ -17,7 +17,7 @@ import { LotteryTicketClaimData } from '../../config/constants/types';
 import { LotteryTicket } from '../../config/constants/types';
 import useGetUnclaimedRewards, {
   FetchStatus,
-} from '../../hooks/useGetUnclaimedReward';
+} from '../../hooks/standard-lottery/useGetUnclaimedReward';
 import { useStandardLotteryContract } from '../../hooks/useContract';
 import { BIG_ZERO } from '@dehub/shared/utils';
 

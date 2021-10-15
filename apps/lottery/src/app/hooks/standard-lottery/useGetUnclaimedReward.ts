@@ -1,10 +1,10 @@
 import { useCallback, useState, useEffect } from 'react';
 
 import { Hooks } from '@dehub/react/core';
-import { useLottery } from '../states/standard-lottery/hooks';
-import { fetchUnclaimedUserRewards } from '../states/standard-lottery/fetchUnclaimedUserRewards';
-import { MAX_LOTTERIES_REQUEST_SIZE } from '../config/constants';
-import { LotteryTicketClaimData } from '../config/constants/types';
+import { useLottery } from '../../states/standard-lottery/hooks';
+import { fetchUnclaimedUserRewards } from '../../states/standard-lottery/fetchUnclaimedUserRewards';
+import { MAX_LOTTERIES_REQUEST_SIZE } from '../../config/constants';
+import { LotteryTicketClaimData } from '../../config/constants/types';
 
 export enum FetchStatus {
   NOT_FETCHED = 'not-fetched',
