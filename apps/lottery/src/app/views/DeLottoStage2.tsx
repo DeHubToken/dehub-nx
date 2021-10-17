@@ -82,7 +82,7 @@ const DeLottoStage2 = () => {
 
       <FlexLine className="align-items-center justify-content-between">
         <Header>Next Draw:</Header>
-        {nextLotteryIdAsInt > 0 ? (
+        {status !== LotteryStatus.PENDING && nextLotteryIdAsInt > 0 ? (
           <Text>
             #{nextLotteryIdAsInt} | Draw:{' '}
             {new Date(endTimeAsInt * 1000).toLocaleString()}
@@ -97,7 +97,7 @@ const DeLottoStage2 = () => {
         <PrizePot pot={amountCollectedInDehub} status={status} />
       </FlexLine>
 
-      {account && (
+      {status !== LotteryStatus.PENDING && account && (
         <FlexLine className="align-items-center md:align-items-start justify-content-between">
           <Header>Your Tickets:</Header>
           <div className="flex flex-column align-items-center md:align-items-end">
@@ -132,34 +132,38 @@ const DeLottoStage2 = () => {
         </FlexLine>
       )}
 
-      <div className="flex flex-row justify-content-center">
-        <div className="flex flex-column">
-          <Text>Are you a winner stage1?</Text>
-          {account ? (
-            <Button
-              className="mt-2 justify-content-center"
-              onClick={() => handleShowDialog('CheckStage1')}
-            >
-              Check Now
-            </Button>
-          ) : (
-            <ConnectWalletButton />
+      {status !== LotteryStatus.PENDING && (
+        <div className="flex flex-row justify-content-center">
+          <div className="flex flex-column">
+            <Text>Are you a winner stage1?</Text>
+            {account ? (
+              <Button
+                className="mt-2 justify-content-center"
+                onClick={() => handleShowDialog('CheckStage1')}
+              >
+                Check Now
+              </Button>
+            ) : (
+              <ConnectWalletButton />
+            )}
+          </div>
+          {status === LotteryStatus.CLAIMABLE && (
+            <div className="flex flex-column ml-3">
+              <Text>Are you a winner stage2?</Text>
+              {account ? (
+                <Button
+                  className="mt-2 justify-content-center"
+                  onClick={() => handleShowDialog('CheckStage2')}
+                >
+                  Check Now
+                </Button>
+              ) : (
+                <ConnectWalletButton />
+              )}
+            </div>
           )}
         </div>
-        <div className="flex flex-column ml-3">
-          <Text>Are you a winner stage2?</Text>
-          {account ? (
-            <Button
-              className="mt-2 justify-content-center"
-              onClick={() => handleShowDialog('CheckStage2')}
-            >
-              Check Now
-            </Button>
-          ) : (
-            <ConnectWalletButton />
-          )}
-        </div>
-      </div>
+      )}
 
       <ListTicketDialog
         open={listTicketDialog}

@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
-import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
+import { ethersToBigNumber, ethersToSerializedBigNumber } from '@dehub/shared/utils';
 import { LotteryRound, LotteryResponse, LotteryRoundUserTickets } from './types';
 
 import SpecialLotteryAbi from '../../config/abis/SpecialLottery.json';
-import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
+import { LotteryStatus, LotteryTicket, LotteryTicketClaimData } from '../../config/constants/types';
 import { TICKET_LIMIT_PER_REQUEST } from '../../config/constants';
 import { getSpecialLotteryAddress } from '../../utils/addressHelpers';
 import { getSpecialLotteryContract } from '../../utils/contractHelpers';
@@ -163,6 +163,110 @@ export const fetchUserTicketsPerMultipleRounds = async (
     });
   }
   return ticketsForMultipleRounds;
+}
+
+export const viewDeLottoWinningForTicketIds = async (
+  lotteryId: string,
+  ticketIds: string[]
+): Promise<boolean[] | null> => {
+
+  try {
+    const data = await specialLotteryContract.viewDeLottoWinningForTicketIds(lotteryId, ticketIds);
+    return data;
+
+  } catch (error) {
+    console.log('viewDeLottoWinningForTicketIds', error);
+    return null;
+  }
+}
+
+export const fetchDeLottoWinningForTicketIds = async (
+  lotteryId: string, ticketIds: string[]
+): Promise<boolean[]> => {
+  let cursor = 0;
+  let numReturned = 100; // TICKET_LIMIT_PER_REQUEST; // @todo
+  const winningTicketIds: boolean[] = [];
+
+  while (cursor < ticketIds.length) {
+    const checkTicketIds: string[] = ticketIds.slice(cursor, cursor + numReturned);
+    const response = await viewDeLottoWinningForTicketIds(lotteryId, checkTicketIds);
+    if (response) {
+      cursor += response?.length;
+      winningTicketIds.push(...response);
+    } else {
+      break;
+    }
+  }
+
+  return winningTicketIds;
+}
+
+export const fetchDeLottoRewardsForTicketIds = async (
+  lotteryId: string, ticketIds: string[]
+): Promise<BigNumber> => {
+  let cursor = 0;
+  let numReturned = 100; // TICKET_LIMIT_PER_REQUEST; // @todo
+  let rewards: ethers.BigNumber = ethers.BigNumber.from('0');
+
+  while (cursor < ticketIds.length) {
+    const checkTicketIds: string[] = ticketIds.slice(cursor, cursor + numReturned);
+    const response = await specialLotteryContract.viewDeLottoRewardsForTicketIds(
+      lotteryId, checkTicketIds
+    );
+    if (response) {
+      cursor += 100;
+      rewards = rewards.add(response);
+    } else {
+      break;
+    }
+  }
+
+  return ethersToBigNumber(rewards);
+}
+
+export const fetchUserDeLottoWinningRewards = async (
+  account: string, lotteryId: string
+): Promise<LotteryTicketClaimData | null> => {
+  try {
+    const ticketsForRound = await fetchUserTicketsPerOneRound(account, lotteryId);
+    const ticketIds = ticketsForRound.map((ticket: LotteryTicket, index: number) => ticket.id);
+
+    const ticketsWinning = await fetchDeLottoWinningForTicketIds(lotteryId, ticketIds);
+    const rewardTotal = await fetchDeLottoRewardsForTicketIds(lotteryId, ticketIds);
+    console.log('rewardTotal', rewardTotal.toString());
+
+    const ticketsWithUnclaimedRewards: LotteryTicket[] = [];
+    const allWinningTickets: LotteryTicket[] = [];
+
+    ticketsWinning.forEach((winning: boolean, index: number) => {
+      if (winning) {
+        if (!ticketsForRound[index].claimed) {
+          ticketsWithUnclaimedRewards.push({
+            id: ticketIds[index],
+            number: '',
+            claimed: ticketsForRound[index].claimed
+          });
+        }
+        allWinningTickets.push({
+          id: ticketIds[index],
+          number: '',
+          claimed: ticketsForRound[index].claimed
+        });
+      }
+    });
+
+    return {
+      ticketsWithUnclaimedRewards,
+      allWinningTickets,
+      dehubTotal: rewardTotal,
+      roundId: lotteryId
+    };
+
+  } catch (error) {
+    console.error('fetchUserDeLottoWinningRewards', error);
+  }
+
+  return null;
 }
 
 export const useProcessLotteryResponse = (

@@ -37,7 +37,7 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
     calculate();
   }, [pot]);
 
-  return !prizeInBusd.isNaN() ? (
+  return status !== LotteryStatus.PENDING && !prizeInBusd.isNaN() ? (
     <Text>
       {`${getBalanceNumber(pot, DEHUB_DECIMALS)} $Dehub / $${getBalanceNumber(
         prizeInBusd,

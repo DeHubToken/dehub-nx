@@ -166,7 +166,7 @@ export const viewUserInfoForLotteryId = async (
     return processRawTicketsReponse(data);
 
   } catch (error) {
-    console.log('viewUserInfoForLotteryId', error);
+    console.error('viewUserInfoForLotteryId', error);
     return null;
   }
 }

@@ -97,7 +97,7 @@ const DeLottoStage1 = () => {
 
       <FlexLine className="align-items-center justify-content-between">
         <Header>Next Draw:</Header>
-        {nextLotteryIdAsInt > 0 ? (
+        {status !== LotteryStatus.PENDING && nextLotteryIdAsInt > 0 ? (
           <Text>
             #{nextLotteryIdAsInt} | Draw:{' '}
             {new Date(endTimeAsInt * 1000).toLocaleString()}
@@ -112,7 +112,7 @@ const DeLottoStage1 = () => {
         <PrizePot pot={amountCollectedInDehub} status={status} />
       </FlexLine>
 
-      {account && (
+      {status !== LotteryStatus.PENDING && account && (
         <FlexLine className="align-items-center md:align-items-start justify-content-between">
           <Header>Your Tickets:</Header>
           <div className="flex flex-column align-items-center md:align-items-end">
@@ -147,7 +147,7 @@ const DeLottoStage1 = () => {
         </FlexLine>
       )}
 
-      {previousRound && (
+      {status !== LotteryStatus.PENDING && previousRound && (
         <FlexLine className="align-items-center md:align-items-start justify-content-between">
           <Header>Latest Winning Number:</Header>
           <div className="flex flex-column align-items-center md:align-items-end">
@@ -160,19 +160,21 @@ const DeLottoStage1 = () => {
         </FlexLine>
       )}
 
-      <FlexLine className="md:flex-column align-items-center justify-content-between">
-        <Text>Are you a winner?</Text>
-        {account ? (
-          <Button
-            className="mt-2 justify-content-center"
-            onClick={() => handleShowDialog('CheckStage1')}
-          >
-            Check Now
-          </Button>
-        ) : (
-          <ConnectWalletButton />
-        )}
-      </FlexLine>
+      {status !== LotteryStatus.PENDING && (
+        <FlexLine className="md:flex-column align-items-center justify-content-between">
+          <Text>Are you a winner?</Text>
+          {account ? (
+            <Button
+              className="mt-2 justify-content-center"
+              onClick={() => handleShowDialog('CheckStage1')}
+            >
+              Check Now
+            </Button>
+          ) : (
+            <ConnectWalletButton />
+          )}
+        </FlexLine>
+      )}
 
       <ListTicketDialog
         open={listTicketDialog}

@@ -1,24 +1,8 @@
-import React, { ReactNode, ReactText } from 'react';
-import { InputHTMLAttributes } from 'react';
+import React from 'react';
 import { Box } from '../Layout';
 import { Text } from '../Text';
 import { StyledBalanceInput, StyledInput, UnitContainer } from './styles';
-
-interface BalanceInputProps {
-  value: ReactText;
-  onUserInput: (input: string) => void;
-  currencyValue?: ReactNode;
-  placeholder?: string;
-  innerRef?: React.RefObject<HTMLInputElement>;
-  inputProps?: Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    'value' | 'placeholder' | 'onChange'
-  >;
-  isWarning: boolean;
-  decimals?: number;
-  unit?: string;
-  switchEditingUnits?: () => void;
-}
+import { BalanceInputProps } from './types';
 
 const BalanceInput = ({
   value,
@@ -39,7 +23,7 @@ const BalanceInput = ({
   };
 
   return (
-    <StyledBalanceInput isWarning={isWarning} {...props}>
+    <StyledBalanceInput data-is-warning={isWarning} {...props}>
       <div className="flex justify-content-end">
         <Box>
           <div className="flex align-items-center">

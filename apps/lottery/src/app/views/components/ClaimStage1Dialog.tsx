@@ -153,11 +153,16 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
                     {claimData.ticketsWithUnclaimedRewards.length > 0 && (
                       <div className="flex flex-column mt-5">
                         <Button
+                          icon={pendingTx ? 'pi pi-spin pi-spinner' : ''}
                           className="justify-content-center"
-                          onClick={() => handleClaim(index)}
-                        >
-                          Claim
-                        </Button>
+                          onClick={() => {
+                            if (pendingTx) {
+                              return;
+                            }
+                            handleClaim(index);
+                          }}
+                          label="Claim Now"
+                        />
                       </div>
                     )}
                   </div>
@@ -165,7 +170,6 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
               }
             )
           )}
-          {}
         </div>
       </Dialog>
     </>

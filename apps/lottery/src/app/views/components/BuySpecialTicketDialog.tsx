@@ -35,9 +35,9 @@ const BuySpecialTicketDialog = ({
   const {
     currentLotteryId,
     maxNumberTicketsPerBuyOrClaim,
-    currentRound: { priceTicketInDehub },
+    currentRound: { priceTicketInDehub, userTickets },
   } = useLottery();
-  const [ticketsToBuy, setTicketsToBuy] = useState('');
+  const [ticketsToBuy, setTicketsToBuy] = useState('0');
   const [userNotEnoughDehub, setUserNotEnoughDehub] = useState(false);
   const [maxTicketPurchaseExceeded, setMaxTicketPurchaseExceeded] =
     useState(false);
@@ -59,17 +59,25 @@ const BuySpecialTicketDialog = ({
   );
 
   const validateInput = useCallback(
-    (inputNumber: BigNumber) => {
+    (inputNumber: BigNumber): boolean => {
+      const totalNumber = inputNumber.plus(
+        new BigNumber(
+          userTickets && userTickets?.tickets ? userTickets?.tickets?.length : 0
+        )
+      );
       const limitedNumberTickets = limitNumberByMaxTicketsPerBuy(inputNumber);
       const dehubCost = priceTicketInDehub.times(limitedNumberTickets);
 
       if (dehubCost.gt(dehubBalance)) {
         setUserNotEnoughDehub(true);
+        return false;
       } else if (limitedNumberTickets.eq(maxNumberTicketsPerBuyOrClaim)) {
         setMaxTicketPurchaseExceeded(true);
+        return true;
       } else {
         setUserNotEnoughDehub(false);
         setMaxTicketPurchaseExceeded(false);
+        return true;
       }
     },
     [
@@ -86,7 +94,7 @@ const BuySpecialTicketDialog = ({
     const inputAsBN = new BigNumber(inputAsInt);
     const limitedNumberTickets = limitNumberByMaxTicketsPerBuy(inputAsBN);
     validateInput(inputAsBN);
-    setTicketsToBuy(inputAsInt ? limitedNumberTickets.toString() : '');
+    setTicketsToBuy(inputAsInt ? limitedNumberTickets.toString() : '0');
   };
   const {
     isApproving,
@@ -229,6 +237,21 @@ const BuySpecialTicketDialog = ({
                 if (pendingTx) {
                   return;
                 }
+                if (!validateInput(new BigNumber(parseInt(ticketsToBuy, 10)))) {
+                  return;
+                }
+                // const totalNumber = new BigNumber(ticketsToBuy, 10).plus(
+                //   new BigNumber(
+                //     userTickets && userTickets?.tickets
+                //       ? userTickets?.tickets?.length
+                //       : 0
+                //   )
+                // );
+                // if (
+                //   totalNumber.eq(limitNumberByMaxTicketsPerBuy(totalNumber))
+                // ) {
+                //   return;
+                // }
                 setPendingTx(true);
                 isApproved ? handleConfirm() : handleApprove();
               }}
