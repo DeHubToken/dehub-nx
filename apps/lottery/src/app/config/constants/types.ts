@@ -30,3 +30,8 @@ export interface LotteryTicketClaimData {
   dehubTotal: BigNumber;
   roundId: string;
 }
+
+export interface LotteryTicketOwner {
+  owner: string;
+  ticketId: string;
+}

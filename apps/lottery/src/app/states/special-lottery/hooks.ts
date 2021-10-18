@@ -8,13 +8,13 @@ import useRefresh from '../../hooks/useRefresh';
 import {
   fetchCurrentLottery,
   fetchCurrentLotteryId,
-  fetchUserTicketsAndLotteries
+  fetchUserTicketsAndLotteries,
+  fetchDeGrandPrize
 } from '.';
 import {
   fetchLottery,
   useProcessLotteryResponse,
-  processLotteryResponse,
-  fetchDeGrandPrize
+  processLotteryResponse
 } from './helpers';
 import { useAppDispatch } from '..';
 import { DeGrandPrize, LotteryRound } from './types';
@@ -26,7 +26,7 @@ export const useGetCurrentLotteryId = (): string => {
 
 export const useFetchLottery = () => {
   const { account } = Hooks.useMoralisEthers();
-  const { fastRefresh } = useRefresh();
+  const { fastRefresh, slowRefresh } = useRefresh();
 
   const dispatch = useAppDispatch();
   const currentLotteryId: string = useGetCurrentLotteryId();
@@ -42,6 +42,10 @@ export const useFetchLottery = () => {
     }
 
   }, [dispatch, currentLotteryId, fastRefresh]);
+
+  useEffect(() => {
+    dispatch(fetchDeGrandPrize());
+  }, [dispatch, slowRefresh])
 
   useEffect(() => {
     if (account && currentLotteryId) {
@@ -66,11 +70,14 @@ export const useLottery = () => {
     return new BigNumber(maxNumberTicketsPerBuyOrClaimAsString)
   }, [maxNumberTicketsPerBuyOrClaimAsString]);
 
+  const deGrandPrize = useThisMonthDeGrandPrize();
+
   return {
     isTransitioning,
     currentLotteryId,
     maxNumberTicketsPerBuyOrClaim,
-    currentRound: processedCurrentRound
+    currentRound: processedCurrentRound,
+    deGrandPrize
   };
 }
 
@@ -98,22 +105,6 @@ export const usePreviousLottery = (lotteryId: string) => {
   }
 }
 
-export const useDeGrandPrize = (lotteryId: string) => {
-  const [deGrandPrize, setDeGrandPrize] = useState<DeGrandPrize | null>(null);
-
-  useEffect(() => {
-    setDeGrandPrize(null);
-
-    const fetch = async () => {
-      const deGrandPrizeResponse = await fetchDeGrandPrize(lotteryId);
-      setDeGrandPrize(deGrandPrizeResponse);
-    }
-
-    const lotteryIdAsInt = parseInt(lotteryId, 10);
-    if (lotteryIdAsInt > 0) {
-      fetch();
-    }
-  }, [lotteryId]);
-
-  return deGrandPrize;
+export const useThisMonthDeGrandPrize = (): DeGrandPrize => {
+  return useSelector((state: State) => state.specialLottery.deGrandPrize);
 }

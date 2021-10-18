@@ -30,7 +30,9 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
   const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
   const { fetchAllRewards, winningRewards, fetchStatus } =
     useGetDeLottoWinningRewards();
-  const isFetchingRewards = fetchStatus === FetchStatus.IN_PROGRESS;
+  const isFetchingRewards =
+    fetchStatus === FetchStatus.NOT_FETCHED ||
+    fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
   const [pendingTx, setPendingTx] = useState(false);
   const lotteryContract = useSpecialLotteryContract();
@@ -112,7 +114,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
                     return (
                       <TicketIdLabel
                         key={`${index}`}
-                        id={ticket.id}
+                        id={`#${ticket.id}`}
                         className="mb-2"
                       />
                     );

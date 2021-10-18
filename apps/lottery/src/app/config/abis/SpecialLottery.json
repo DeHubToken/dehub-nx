@@ -543,7 +543,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_lotteryId",
+        "name": "_timestamp",
         "type": "uint256"
       },
       {
@@ -814,7 +814,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_lotteryId",
+        "name": "_timestamp",
         "type": "uint256"
       }
     ],
@@ -824,7 +824,7 @@
         "components": [
           {
             "internalType": "uint256",
-            "name": "lotteryId",
+            "name": "deGrandMonth",
             "type": "uint256"
           },
           {

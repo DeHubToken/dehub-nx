@@ -48,7 +48,7 @@ const ListTicketDialog = ({
               ) : (
                 <TicketIdLabel
                   key={`${index}`}
-                  id={ticket.id}
+                  id={`#${ticket.id}`}
                   className="mt-2"
                 />
               );

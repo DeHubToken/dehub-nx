@@ -6,6 +6,7 @@ import { Card } from 'primereact/card';
 
 import { Hooks } from '@dehub/react/core';
 
+import ClaimDeGrandDialog from './components/ClaimDeGrandDialog';
 import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
 import Box from '../components/Layout/Box';
@@ -13,7 +14,10 @@ import ConnectWalletButton from '../components/ConnectWalletButton';
 import Container from '../components/Layout/Container';
 import { Title, Header, Text } from '../components/Text';
 import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
-import { useLottery, useDeGrandPrize } from '../states/special-lottery/hooks';
+import {
+  useLottery,
+  useThisMonthDeGrandPrize,
+} from '../states/special-lottery/hooks';
 import { LotteryStatus } from '../config/constants/types';
 
 const StyledBox = styled(Box)`
@@ -29,12 +33,7 @@ const DeGrand = () => {
   const { nextEventTime, preCountDownText, postCountDownText } =
     useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, status);
 
-  const currentLotteryIdAsInt = parseInt(currentLotteryId, 10);
-  let newLotteryId = currentLotteryId;
-  if (status !== LotteryStatus.OPEN) {
-    newLotteryId = (currentLotteryIdAsInt + 1).toString(); // get next round
-  }
-  const deGrandPrize = useDeGrandPrize(newLotteryId);
+  const deGrandPrize = useThisMonthDeGrandPrize();
 
   const { account } = Hooks.useMoralisEthers();
   const [checkDeGrandDialog, setCheckDeGrandDialog] = useState(false);
@@ -57,7 +56,7 @@ const DeGrand = () => {
       <h1>DeGrand</h1>
       <Card>
         <StyledBox>
-          {deGrandPrize ? (
+          {deGrandPrize && deGrandPrize.deGrandMonth > 0 ? (
             <FlexLine
               className="md:flex-column align-items-center justify-content-center"
               style={{ borderBottom: '1px solid' }}
@@ -67,11 +66,12 @@ const DeGrand = () => {
                 <img
                   src={deGrandPrize.imageUrl}
                   style={{ width: '100%', height: '100%' }}
+                  alt="DeGrand prize this month"
                 />
               )}
               <FlexLine className="justify-content-between w-full">
                 <FlexLine className="md:flex-column">
-                  <Header>{deGrandPrize.title}</Header>
+                  <Header>{`${deGrandPrize.title} | ${deGrandPrize.maxWinnerCount} lucky winners will be announced`}</Header>
                   {status === LotteryStatus.CLAIMABLE ? (
                     <Text className="text-pink-700">Draw Completed!</Text>
                   ) : nextEventTime &&
@@ -95,7 +95,7 @@ const DeGrand = () => {
                         <Text>Are you a winner?</Text>
                         <Button
                           className="mt-2 justify-content-center"
-                          onClick={() => handleShowDialog('Check Now')}
+                          onClick={() => handleShowDialog('CheckDeGrand')}
                           label="Check Now"
                         />
                       </>
@@ -120,7 +120,7 @@ const DeGrand = () => {
             {account ? (
               <Button
                 className="mt-2 justify-content-center"
-                onClick={() => handleShowDialog('CheckDeGrand')}
+                onClick={() => handleShowDialog('CheckDeGrandHistory')}
                 label="Check Now"
               />
             ) : (
@@ -129,6 +129,11 @@ const DeGrand = () => {
           </FlexLine>
         </StyledBox>
       </Card>
+
+      <ClaimDeGrandDialog
+        open={checkDeGrandDialog}
+        onHide={() => handleHideDialog('CheckDeGrand')}
+      />
     </Container>
   );
 };

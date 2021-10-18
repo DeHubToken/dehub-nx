@@ -6,7 +6,8 @@ import {
 import {
   fetchCurrentLotteryIdAndMaxBuy,
   fetchLottery,
-  fetchUserTicketsPerOneRound
+  fetchUserTicketsPerOneRound,
+  fetchThisMonthDeGrandPrize
 } from './helpers';
 import { LotteryState, LotteryResponse, DeGrandPrize } from '../special-lottery/types';
 import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
@@ -28,7 +29,6 @@ const initialState: LotteryState = {
     endTime: '',
     firstTicketId: '',
     lastTicketId: '',
-    deGrandMaximumWinners: 0,
     priceTicketInDehub: '',
     amountCollectedInDehub: '',
     userTickets: {
@@ -37,7 +37,7 @@ const initialState: LotteryState = {
     }
   },
   deGrandPrize: {
-    lotteryId: '',
+    deGrandMonth: 0,
     title: '',
     subtitle: '',
     description: '',
@@ -87,6 +87,14 @@ export const setLotteryIsTransitioning = createAsyncThunk<{
   }
 )
 
+export const fetchDeGrandPrize = createAsyncThunk<DeGrandPrize>(
+  'specialLottery/fetchThisMonthDeGrandPrize',
+  async () => {
+    const deGrandPrize: DeGrandPrize = await fetchThisMonthDeGrandPrize();
+    return deGrandPrize;
+  }
+)
+
 export const LotterySlice = createSlice({
   name: 'SpecialLottery',
   initialState,
@@ -102,6 +110,9 @@ export const LotterySlice = createSlice({
     builder.addCase(fetchCurrentLotteryId.fulfilled, (state, action: PayloadAction<PublicLotteryData>) => {
       state.currentLotteryId = action.payload.currentLotteryId;
       state.maxNumberTicketsPerBuyOrClaim = action.payload.maxNumberTicketsPerBuyOrClaim;
+    })
+    builder.addCase(fetchDeGrandPrize.fulfilled, (state, action: PayloadAction<DeGrandPrize>) => {
+      state.deGrandPrize = { ...state.deGrandPrize, ...action.payload };
     })
     builder.addCase(
       fetchUserTicketsAndLotteries.fulfilled,

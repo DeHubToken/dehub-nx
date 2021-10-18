@@ -32,7 +32,9 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
   const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
   const { fetchAllRewards, unclaimedRewards, fetchStatus } =
     useGetUnclaimedRewards();
-  const isFetchingRewards = fetchStatus === FetchStatus.IN_PROGRESS;
+  const isFetchingRewards =
+    fetchStatus === FetchStatus.NOT_FETCHED ||
+    fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
   const [pendingTx, setPendingTx] = useState(false);
   const [unclaimedDehubTotal, setUnclaimedDehubTotal] =

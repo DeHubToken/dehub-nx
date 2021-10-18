@@ -5,9 +5,7 @@ import { Text } from '../Text';
 /**
  * @todo set color with freya variables
  */
-const Wrapper = styled.div<{
-  rewardBracket?: number;
-}>`
+const Wrapper = styled.div`
   background-color: var(--text-color-secondary);
   border-radius: 16px;
   margin: auto;
@@ -23,7 +21,7 @@ const TicketIdLabel = ({ id, ...props }: TicketIdLabelProps) => {
   return (
     <Wrapper {...props}>
       <Text className="m-2" color="#000">
-        #{id}
+        {id}
       </Text>
     </Wrapper>
   );

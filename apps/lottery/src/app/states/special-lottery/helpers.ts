@@ -10,7 +10,7 @@ import {
 } from './types';
 
 import SpecialLotteryAbi from '../../config/abis/SpecialLottery.json';
-import { LotteryStatus, LotteryTicket, LotteryTicketClaimData } from '../../config/constants/types';
+import { LotteryStatus, LotteryTicket, LotteryTicketClaimData, LotteryTicketOwner } from '../../config/constants/types';
 import { TICKET_LIMIT_PER_REQUEST } from '../../config/constants';
 import { getSpecialLotteryAddress } from '../../utils/addressHelpers';
 import { getSpecialLotteryContract } from '../../utils/contractHelpers';
@@ -27,8 +27,7 @@ const processViewLotterySuccessResponse = (response: any, lotteryId: string): Lo
     ticketRate,
     amountCollectedToken,
     firstTicketId,
-    firstTicketIdNextLottery,
-    deGrandMaximumWinners,
+    firstTicketIdNextLottery
   } = response;
 
   const statusKey = Object.keys(LotteryStatus)[status];
@@ -42,8 +41,7 @@ const processViewLotterySuccessResponse = (response: any, lotteryId: string): Lo
     firstTicketId: firstTicketId?.toString(),
     lastTicketId: firstTicketIdNextLottery?.toString(),
     priceTicketInDehub: ethersToSerializedBigNumber(ticketRate),
-    amountCollectedInDehub: ethersToSerializedBigNumber(amountCollectedToken),
-    deGrandMaximumWinners: parseInt(deGrandMaximumWinners, 10)
+    amountCollectedInDehub: ethersToSerializedBigNumber(amountCollectedToken)
   };
 }
 
@@ -57,8 +55,7 @@ const processViewLotteryAndError = (lotteryId: string): LotteryResponse => {
     firstTicketId: '',
     lastTicketId: '',
     priceTicketInDehub: '',
-    amountCollectedInDehub: '',
-    deGrandMaximumWinners: 0
+    amountCollectedInDehub: ''
   }
 }
 
@@ -273,21 +270,22 @@ export const fetchUserDeLottoWinningRewards = async (
   return null;
 }
 
-export const fetchDeGrandPrize = async (lotteryId: string): Promise<DeGrandPrize | null> => {
+export const fetchThisMonthDeGrandPrize = async (): Promise<DeGrandPrize> => {
   try {
-    const data = await specialLotteryContract.viewDeGrandPrize(lotteryId);
+    const currentSeconds = Math.floor(Date.now() / 1000);
 
     const {
+      deGrandMonth,
       title,
       subtitle,
       description,
       ctaUrl,
       imageUrl,
       maxWinnerCount
-    } = data;
+    } = await specialLotteryContract.viewDeGrandPrize(currentSeconds);
 
     return {
-      lotteryId,
+      deGrandMonth: parseInt(deGrandMonth, 10),
       title,
       subtitle,
       description,
@@ -298,7 +296,34 @@ export const fetchDeGrandPrize = async (lotteryId: string): Promise<DeGrandPrize
 
   } catch (error) {
     // console.error('fetchDeGrandPrize', error);
-    return null;
+    return {
+      deGrandMonth: 0,
+      title: '',
+      subtitle: '',
+      description: '',
+      ctaUrl: '',
+      imageUrl: '',
+      maxWinnerCount: 0
+    };
+  }
+}
+
+export const fetchUserDeGrandWinners = async (lotteryId: string): Promise<LotteryTicketOwner[]> => {
+  try {
+    const [ticketOwners, ticketIds] = await specialLotteryContract.viewDeGrandStatusForTicketIds(lotteryId);
+    if (ticketOwners.length > 0) {
+      return ticketOwners.map((ticketOwner: string, index: number) => {
+        return {
+          owner: ticketOwner,
+          ticketId: ticketIds[index]
+        };
+      });
+    }
+    return [];
+
+  } catch (error) {
+    console.log('fetchUserDeGrandWinners', error);
+    return [];
   }
 }
 
@@ -327,8 +352,7 @@ export const useProcessLotteryResponse = (
     firstTicketId: lotteryData.firstTicketId,
     lastTicketId: lotteryData.lastTicketId,
     priceTicketInDehub,
-    amountCollectedInDehub,
-    deGrandMaximumWinners: lotteryData.deGrandMaximumWinners
+    amountCollectedInDehub
   };
 }
 
@@ -353,7 +377,6 @@ export const processLotteryResponse = (
     firstTicketId: lotteryData.firstTicketId,
     lastTicketId: lotteryData.lastTicketId,
     priceTicketInDehub,
-    amountCollectedInDehub,
-    deGrandMaximumWinners: lotteryData.deGrandMaximumWinners
+    amountCollectedInDehub
   };
 }

@@ -18,7 +18,6 @@ interface LotteryRoundGenerics {
   endTime: string;
   firstTicketId: string;
   lastTicketId: string;
-  deGrandMaximumWinners?: number;
 }
 
 export interface LotteryRound extends LotteryRoundGenerics {
@@ -33,7 +32,7 @@ export interface LotteryResponse extends LotteryRoundGenerics {
 }
 
 export interface DeGrandPrize {
-  lotteryId: string;
+  deGrandMonth: number;
   title: string;
   subtitle: string;
   description?: string;
