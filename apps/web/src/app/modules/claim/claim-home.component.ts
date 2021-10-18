@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  template: `<h1>Dapps</h1>`,
+  template: `<h1>Claim</h1>`,
 })
-export class DappsHomeComponent implements OnInit {
+export class ClaimHomeComponent implements OnInit {
   ngOnInit() {}
 }
