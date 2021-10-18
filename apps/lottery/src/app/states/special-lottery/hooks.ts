@@ -13,10 +13,11 @@ import {
 import {
   fetchLottery,
   useProcessLotteryResponse,
-  processLotteryResponse
+  processLotteryResponse,
+  fetchDeGrandPrize
 } from './helpers';
 import { useAppDispatch } from '..';
-import { LotteryRound } from './types';
+import { DeGrandPrize, LotteryRound } from './types';
 import { State } from '../types';
 
 export const useGetCurrentLotteryId = (): string => {
@@ -95,4 +96,24 @@ export const usePreviousLottery = (lotteryId: string) => {
     previousLotteryId: lotteryId,
     previousRound
   }
+}
+
+export const useDeGrandPrize = (lotteryId: string) => {
+  const [deGrandPrize, setDeGrandPrize] = useState<DeGrandPrize | null>(null);
+
+  useEffect(() => {
+    setDeGrandPrize(null);
+
+    const fetch = async () => {
+      const deGrandPrizeResponse = await fetchDeGrandPrize(lotteryId);
+      setDeGrandPrize(deGrandPrizeResponse);
+    }
+
+    const lotteryIdAsInt = parseInt(lotteryId, 10);
+    if (lotteryIdAsInt > 0) {
+      fetch();
+    }
+  }, [lotteryId]);
+
+  return deGrandPrize;
 }

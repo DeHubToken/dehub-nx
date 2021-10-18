@@ -60,11 +60,11 @@ const BuySpecialTicketDialog = ({
 
   const validateInput = useCallback(
     (inputNumber: BigNumber): boolean => {
-      const totalNumber = inputNumber.plus(
-        new BigNumber(
-          userTickets && userTickets?.tickets ? userTickets?.tickets?.length : 0
-        )
-      );
+      // const totalNumber = inputNumber.plus(
+      //   new BigNumber(
+      //     userTickets && userTickets?.tickets ? userTickets?.tickets?.length : 0
+      //   )
+      // );
       const limitedNumberTickets = limitNumberByMaxTicketsPerBuy(inputNumber);
       const dehubCost = priceTicketInDehub.times(limitedNumberTickets);
 
@@ -240,18 +240,20 @@ const BuySpecialTicketDialog = ({
                 if (!validateInput(new BigNumber(parseInt(ticketsToBuy, 10)))) {
                   return;
                 }
-                // const totalNumber = new BigNumber(ticketsToBuy, 10).plus(
-                //   new BigNumber(
-                //     userTickets && userTickets?.tickets
-                //       ? userTickets?.tickets?.length
-                //       : 0
-                //   )
-                // );
-                // if (
-                //   totalNumber.eq(limitNumberByMaxTicketsPerBuy(totalNumber))
-                // ) {
-                //   return;
-                // }
+                /*
+                 * const totalNumber = new BigNumber(ticketsToBuy, 10).plus(
+                 *   new BigNumber(
+                 *     userTickets && userTickets?.tickets
+                 *       ? userTickets?.tickets?.length
+                 *       : 0
+                 *   )
+                 * );
+                 * if (
+                 *   totalNumber.eq(limitNumberByMaxTicketsPerBuy(totalNumber))
+                 * ) {
+                 *   return;
+                 * }
+                 */
                 setPendingTx(true);
                 isApproved ? handleConfirm() : handleApprove();
               }}

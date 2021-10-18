@@ -1,5 +1,5 @@
 import Timer from './Timer';
-import { Header } from '../../../components/Text';
+import { Title } from '../../../components/Text';
 import useNextEventCountDown from '../../../hooks/standard-lottery/useNextEventCountDown';
 import getTimePeriods from '../../../utils/getTimePeriods';
 
@@ -7,12 +7,14 @@ interface EventCountDownProps {
   nextEventTime: number;
   preCountDownText?: string;
   postCountDownText?: string;
+  isVertical?: boolean;
 }
 
 const EventCountDown = ({
   nextEventTime,
   preCountDownText,
   postCountDownText,
+  isVertical = true,
 }: EventCountDownProps) => {
   const secondsRemaining = useNextEventCountDown(nextEventTime);
   const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining);
@@ -21,25 +23,27 @@ const EventCountDown = ({
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {secondsRemaining ? (
-        <div className="flex flex-column align-items-center">
-          {preCountDownText && (
-            <Header style={{ fontSize: '30px' }}>{preCountDownText}</Header>
-          )}
+        <div
+          className={`flex ${
+            isVertical ? 'flex-column' : 'flex-row'
+          } align-items-center`}
+        >
+          {preCountDownText && <Title>{preCountDownText}</Title>}
           <Timer
             seconds={seconds}
             minutes={minutes}
             hours={hours}
             days={days}
-            style={{ fontSize: `${postCountDownText ? '30px' : '14px'}` }}
+            style={{
+              fontSize: `${
+                preCountDownText || postCountDownText ? '30px' : '14px'
+              }`,
+            }}
           />
-          {postCountDownText && (
-            <Header style={{ fontSize: '30px' }}>{postCountDownText}</Header>
-          )}
+          {postCountDownText && <Title>{postCountDownText}</Title>}
         </div>
       ) : (
-        <h1 className="text-center" style={{ fontSize: '30px' }}>
-          Loading...
-        </h1>
+        <Title>Loading...</Title>
       )}
     </>
   );

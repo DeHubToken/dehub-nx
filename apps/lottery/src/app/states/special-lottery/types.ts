@@ -32,9 +32,20 @@ export interface LotteryResponse extends LotteryRoundGenerics {
   amountCollectedInDehub: SerializedBigNumber;
 }
 
+export interface DeGrandPrize {
+  lotteryId: string;
+  title: string;
+  subtitle: string;
+  description?: string;
+  ctaUrl?: string;
+  imageUrl?: string;
+  maxWinnerCount: number;
+}
+
 export interface LotteryState {
   currentLotteryId: string;
   maxNumberTicketsPerBuyOrClaim: string;
   isTransitioning: boolean;
   currentRound: LotteryResponse & { userTickets?: LotteryRoundUserTickets };
+  deGrandPrize: DeGrandPrize;
 }

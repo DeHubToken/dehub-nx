@@ -2,7 +2,12 @@ import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
 import { ethersToBigNumber, ethersToSerializedBigNumber } from '@dehub/shared/utils';
-import { LotteryRound, LotteryResponse, LotteryRoundUserTickets } from './types';
+import {
+  LotteryRound,
+  LotteryResponse,
+  LotteryRoundUserTickets,
+  DeGrandPrize
+} from './types';
 
 import SpecialLotteryAbi from '../../config/abis/SpecialLottery.json';
 import { LotteryStatus, LotteryTicket, LotteryTicketClaimData } from '../../config/constants/types';
@@ -184,7 +189,7 @@ export const fetchDeLottoWinningForTicketIds = async (
   lotteryId: string, ticketIds: string[]
 ): Promise<boolean[]> => {
   let cursor = 0;
-  let numReturned = 100; // TICKET_LIMIT_PER_REQUEST; // @todo
+  const numReturned = 100; // TICKET_LIMIT_PER_REQUEST; // @todo
   const winningTicketIds: boolean[] = [];
 
   while (cursor < ticketIds.length) {
@@ -205,7 +210,7 @@ export const fetchDeLottoRewardsForTicketIds = async (
   lotteryId: string, ticketIds: string[]
 ): Promise<BigNumber> => {
   let cursor = 0;
-  let numReturned = 100; // TICKET_LIMIT_PER_REQUEST; // @todo
+  const numReturned = 100; // TICKET_LIMIT_PER_REQUEST; // @todo
   let rewards: ethers.BigNumber = ethers.BigNumber.from('0');
 
   while (cursor < ticketIds.length) {
@@ -229,11 +234,10 @@ export const fetchUserDeLottoWinningRewards = async (
 ): Promise<LotteryTicketClaimData | null> => {
   try {
     const ticketsForRound = await fetchUserTicketsPerOneRound(account, lotteryId);
-    const ticketIds = ticketsForRound.map((ticket: LotteryTicket, index: number) => ticket.id);
+    const ticketIds = ticketsForRound.map((ticket: LotteryTicket) => ticket.id);
 
     const ticketsWinning = await fetchDeLottoWinningForTicketIds(lotteryId, ticketIds);
     const rewardTotal = await fetchDeLottoRewardsForTicketIds(lotteryId, ticketIds);
-    console.log('rewardTotal', rewardTotal.toString());
 
     const ticketsWithUnclaimedRewards: LotteryTicket[] = [];
     const allWinningTickets: LotteryTicket[] = [];
@@ -267,6 +271,33 @@ export const fetchUserDeLottoWinningRewards = async (
   }
 
   return null;
+}
+
+export const fetchDeGrandPrize = async (lotteryId: string): Promise<DeGrandPrize | null> => {
+  try {
+    const {
+      title,
+      subtitle,
+      description,
+      ctaUrl,
+      imageUrl,
+      maxWinnerCount
+    } = await specialLotteryContract.viewDeLottoRewardsForTicketIds(lotteryId);
+
+    return {
+      lotteryId,
+      title,
+      subtitle,
+      description,
+      ctaUrl,
+      imageUrl,
+      maxWinnerCount: parseInt(maxWinnerCount, 10)
+    };
+
+  } catch (error) {
+    console.error('fetchDeGrandPrize', error);
+    return null;
+  }
 }
 
 export const useProcessLotteryResponse = (

@@ -14,7 +14,7 @@ import PrizePot from './components/PrizePot';
 
 import { LotteryStatus } from '../config/constants/types';
 import ConnectWalletButton from '../components/ConnectWalletButton';
-import { Header, Text } from '../components/Text';
+import { Title, Header, Text } from '../components/Text';
 import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
 import { useLottery } from '../states/special-lottery/hooks';
 
@@ -74,9 +74,7 @@ const DeLottoStage2 = () => {
             postCountDownText={postCountDownText}
           />
         ) : (
-          <h1 className="text-center" style={{ fontSize: '30px' }}>
-            Loading...
-          </h1>
+          <Title>Loading...</Title>
         )}
       </FlexLine>
 
@@ -113,9 +111,8 @@ const DeLottoStage2 = () => {
                 <Button
                   className="p-button-link p-0"
                   onClick={() => handleShowDialog('ListTicket')}
-                >
-                  View your tickets
-                </Button>
+                  label="View your tickets"
+                />
               </>
             ) : (
               <Text>...</Text>
@@ -124,9 +121,8 @@ const DeLottoStage2 = () => {
               <Button
                 className="button-link mt-3"
                 onClick={() => handleShowDialog('BuySpecialTicket')}
-              >
-                Buy Tickets
-              </Button>
+                label="Buy Tickets"
+              />
             )}
           </div>
         </FlexLine>
@@ -140,9 +136,8 @@ const DeLottoStage2 = () => {
               <Button
                 className="mt-2 justify-content-center"
                 onClick={() => handleShowDialog('CheckStage1')}
-              >
-                Check Now
-              </Button>
+                label="Check Now"
+              />
             ) : (
               <ConnectWalletButton />
             )}
@@ -154,9 +149,8 @@ const DeLottoStage2 = () => {
                 <Button
                   className="mt-2 justify-content-center"
                   onClick={() => handleShowDialog('CheckStage2')}
-                >
-                  Check Now
-                </Button>
+                  label="Check Now"
+                />
               ) : (
                 <ConnectWalletButton />
               )}

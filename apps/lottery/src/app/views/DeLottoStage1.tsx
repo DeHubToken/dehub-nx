@@ -13,7 +13,7 @@ import WinningNumbers from './components/WiningNumbers';
 
 import { LotteryStatus } from '../config/constants/types';
 import ConnectWalletButton from '../components/ConnectWalletButton';
-import { Header, Text } from '../components/Text';
+import { Title, Header, Text } from '../components/Text';
 import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
 import {
   useLottery,
@@ -33,7 +33,6 @@ const DeLottoStage1 = () => {
     },
   } = useLottery();
   const currentLotteryIdAsInt = parseInt(currentLotteryId, 10);
-  const startTimeAsInt = parseInt(startTime, 10);
   const endTimeAsInt = parseInt(endTime, 10);
   const { nextEventTime, preCountDownText, postCountDownText } =
     useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, status);
@@ -89,9 +88,7 @@ const DeLottoStage1 = () => {
             postCountDownText={postCountDownText}
           />
         ) : (
-          <h1 className="text-center" style={{ fontSize: '30px' }}>
-            Loading...
-          </h1>
+          <Title>Loading...</Title>
         )}
       </FlexLine>
 
@@ -128,9 +125,8 @@ const DeLottoStage1 = () => {
                 <Button
                   className="p-button-link p-0"
                   onClick={() => handleShowDialog('ListTicket')}
-                >
-                  View your tickets
-                </Button>
+                  label="View your tickets"
+                />
               </>
             ) : (
               <Text>...</Text>
@@ -139,9 +135,8 @@ const DeLottoStage1 = () => {
               <Button
                 className="button-link mt-3"
                 onClick={() => handleShowDialog('BuyStandardTicket')}
-              >
-                Buy Tickets
-              </Button>
+                label="Buy Tickets"
+              />
             )}
           </div>
         </FlexLine>
@@ -167,9 +162,8 @@ const DeLottoStage1 = () => {
             <Button
               className="mt-2 justify-content-center"
               onClick={() => handleShowDialog('CheckStage1')}
-            >
-              Check Now
-            </Button>
+              label="Check Now"
+            />
           ) : (
             <ConnectWalletButton />
           )}

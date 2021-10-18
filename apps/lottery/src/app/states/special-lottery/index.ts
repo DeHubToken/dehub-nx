@@ -8,7 +8,7 @@ import {
   fetchLottery,
   fetchUserTicketsPerOneRound
 } from './helpers';
-import { LotteryState, LotteryResponse } from '../special-lottery/types';
+import { LotteryState, LotteryResponse, DeGrandPrize } from '../special-lottery/types';
 import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 
 interface PublicLotteryData {
@@ -35,6 +35,15 @@ const initialState: LotteryState = {
       isLoading: true,
       tickets: []
     }
+  },
+  deGrandPrize: {
+    lotteryId: '',
+    title: '',
+    subtitle: '',
+    description: '',
+    ctaUrl: '',
+    imageUrl: '',
+    maxWinnerCount: 0
   }
 };
 
