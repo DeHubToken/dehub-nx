@@ -7,6 +7,7 @@ import { Card } from 'primereact/card';
 import { Hooks } from '@dehub/react/core';
 
 import ClaimDeGrandDialog from './components/ClaimDeGrandDialog';
+import DeGrandHistoryDialog from './components/DeGrandHistoryDialog';
 import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
 import Box from '../components/Layout/Box';
@@ -39,15 +40,21 @@ const DeGrand = () => {
 
   const { account } = Hooks.useMoralisEthers();
   const [checkDeGrandDialog, setCheckDeGrandDialog] = useState(false);
+  const [checkDeGrandHistoryDialog, setCheckDeGrandHistoryDialog] =
+    useState(false);
 
   const handleShowDialog = (dialogKind: string) => {
     if (dialogKind === 'CheckDeGrand') {
       setCheckDeGrandDialog(true);
+    } else if (dialogKind === 'CheckDeGrandHistory') {
+      setCheckDeGrandHistoryDialog(true);
     }
   };
   const handleHideDialog = (dialogKind: string) => {
     if (dialogKind === 'CheckDeGrand') {
       setCheckDeGrandDialog(false);
+    } else if (dialogKind === 'CheckDeGrandHistory') {
+      setCheckDeGrandHistoryDialog(false);
     }
   };
 
@@ -119,11 +126,14 @@ const DeGrand = () => {
             <Header className="mt-2">Grand history</Header>
             <Text className="my-2">See previous DeGrand Draws</Text>
             {account ? (
-              <Button
-                className="mt-2 justify-content-center"
-                onClick={() => handleShowDialog('CheckDeGrandHistory')}
-                label="Check Now"
-              />
+              deGrandPrize &&
+              deGrandPrize.deGrandMonth > 0 && (
+                <Button
+                  className="mt-2 justify-content-center"
+                  onClick={() => handleShowDialog('CheckDeGrandHistory')}
+                  label="Check Now"
+                />
+              )
             ) : (
               <ConnectWalletButton />
             )}
@@ -134,6 +144,11 @@ const DeGrand = () => {
       <ClaimDeGrandDialog
         open={checkDeGrandDialog}
         onHide={() => handleHideDialog('CheckDeGrand')}
+      />
+
+      <DeGrandHistoryDialog
+        open={checkDeGrandHistoryDialog}
+        onHide={() => handleHideDialog('CheckDeGrandHistory')}
       />
     </Container>
   );

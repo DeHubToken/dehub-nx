@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { SerializedBigNumber } from '@dehub/shared/config';
-import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
+import { LotteryStatus, LotteryTicket, LotteryTicketOwner } from '../../config/constants/types';
 
 /**
  * SpecialLotteryState
@@ -39,6 +39,14 @@ export interface DeGrandPrize {
   ctaUrl?: string;
   imageUrl?: string;
   maxWinnerCount: number;
+}
+
+export interface DeGrandHistory {
+  roundId: string;
+  winners: LotteryTicketOwner[];
+  myWinningTickets?: string[];
+  winningAddresses?: string[];
+  prize: DeGrandPrize;
 }
 
 export interface LotteryState {

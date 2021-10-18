@@ -123,9 +123,13 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
             <Text>Unclaimed Total</Text>
           </div>
           <div className="mb-3 flex justify-content-center">
-            <Text className="font-bold">
-              {getBalanceNumber(unclaimedDehubTotal, DEHUB_DECIMALS)} $DeHub
-            </Text>
+            {!isFetchingRewards ? (
+              <Text className="font-bold">
+                {getBalanceNumber(unclaimedDehubTotal, DEHUB_DECIMALS)} $DeHub
+              </Text>
+            ) : (
+              <Skeleton width="100%" height="2rem" />
+            )}
           </div>
           <div className="mb-3 flex flex-column align-items-center">
             <Text fontSize="12px">Will be burned in:</Text>

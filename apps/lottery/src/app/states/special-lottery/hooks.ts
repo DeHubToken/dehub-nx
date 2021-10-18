@@ -9,7 +9,7 @@ import {
   fetchCurrentLottery,
   fetchCurrentLotteryId,
   fetchUserTicketsAndLotteries,
-  fetchDeGrandPrize
+  fetchThisMonthDeGrandPrize
 } from '.';
 import {
   fetchLottery,
@@ -44,7 +44,7 @@ export const useFetchLottery = () => {
   }, [dispatch, currentLotteryId, fastRefresh]);
 
   useEffect(() => {
-    dispatch(fetchDeGrandPrize());
+    dispatch(fetchThisMonthDeGrandPrize());
   }, [dispatch, slowRefresh])
 
   useEffect(() => {

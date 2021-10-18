@@ -6,17 +6,11 @@ import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 
 import { Hooks } from '@dehub/react/core';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
-
-import { SimpleCountDown } from './CountDown';
+import { shortenAddress } from '@dehub/shared/utils';
 
 import { Header, Text } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
-import {
-  LotteryTicket,
-  LotteryTicketOwner,
-} from '../../config/constants/types';
+import { LotteryTicketOwner } from '../../config/constants/types';
 import useGetDeGrandWinners, {
   FetchStatus,
 } from '../../hooks/special-lottery/useGetDeGrandWinners';
@@ -34,31 +28,39 @@ interface ClaimDeGrandDialogProps {
 const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
   const { currentLotteryId } = useLottery();
 
-  const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
   const { fetchAllWinners, winners, fetchStatus } = useGetDeGrandWinners();
   const isFetchingWinners =
     fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
-  const lotteryContract = useSpecialLotteryContract();
   const deGrandPrize = useThisMonthDeGrandPrize();
-  const [myWinningTickets, setMyWinningTickets] = useState<
-    LotteryTicketOwner[]
-  >([]);
+  const [myWinningTicketIds, setMyWinningTicketIds] = useState<string[]>([]);
+  const [filteredWinners, setFilteredWiners] = useState<string[]>([]);
 
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
-    if (account && currentLotteryId) {
-      fetchAllWinners();
+    if (currentLotteryId) {
+      fetchAllWinners(currentLotteryId);
     }
-  }, [account, currentLotteryId, fetchAllWinners]);
+  }, [currentLotteryId, fetchAllWinners]);
 
   useEffect(() => {
-    const filteredWinners = winners.filter(
-      (item: LotteryTicketOwner) => item.owner === account
+    const winningTicketIds = winners.map((item: LotteryTicketOwner) =>
+      item.owner === account ? item.ticketId : ''
     );
-    setMyWinningTickets(filteredWinners);
+    const ticketIds = winningTicketIds.filter(
+      (item: string) => item.length > 0
+    );
+    setMyWinningTicketIds(ticketIds);
+
+    const winnerAddresses: string[] = [];
+    winners.forEach((item: LotteryTicketOwner) => {
+      if (!winnerAddresses.includes(item.owner)) {
+        winnerAddresses.push(item.owner);
+      }
+    });
+    setFilteredWiners(winnerAddresses);
   }, [winners, account]);
 
   return (
@@ -77,18 +79,18 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
             <Header>{`${deGrandPrize.title} Winners`}</Header>
           </div>
           <div className="mb-3 flex flex-column">
-            {!isFetchingWinners && myWinningTickets.length > 0 && (
+            {!isFetchingWinners && myWinningTicketIds.length > 0 && (
               <>
                 <Text className="font-bold text-center text-green-600 mb-3">
-                  {`You won ${myWinningTickets.length}!`}
+                  {`You won ${myWinningTicketIds.length}!`}
                 </Text>
                 <div className="mb-4">
-                  {myWinningTickets.map(
-                    (winningTicket: LotteryTicketOwner, index: number) => {
+                  {myWinningTicketIds.map(
+                    (winningTicket: string, index: number) => {
                       return (
                         <TicketIdLabel
                           key={`${index}`}
-                          id={`#${winningTicket.ticketId}`}
+                          id={`#${winningTicket}`}
                           className="mb-2 bg-green-600"
                         />
                       );
@@ -104,7 +106,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
                 />
               </>
             )}
-            {!isFetchingWinners && myWinningTickets.length < 1 && (
+            {!isFetchingWinners && myWinningTicketIds.length < 1 && (
               <Text className="font-bold">
                 You didn't win this time...Better luck next time!
               </Text>
@@ -117,17 +119,15 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
             <Text className="font-bold text-center mb-3">All winners</Text>
             <div className="mb-4">
               {!isFetchingWinners ? (
-                winners.map(
-                  (winningTicket: LotteryTicketOwner, index: number) => {
-                    return (
-                      <TicketIdLabel
-                        key={`${index}`}
-                        id={`#${winningTicket.ticketId}`}
-                        className="mb-2"
-                      />
-                    );
-                  }
-                )
+                filteredWinners.map((winner: string, index: number) => {
+                  return (
+                    <TicketIdLabel
+                      key={`${index}`}
+                      id={`#${shortenAddress(winner)}`}
+                      className="mb-2"
+                    />
+                  );
+                })
               ) : (
                 <Skeleton width="100%" height="2rem" className="mb-3" />
               )}

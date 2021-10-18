@@ -270,10 +270,8 @@ export const fetchUserDeLottoWinningRewards = async (
   return null;
 }
 
-export const fetchThisMonthDeGrandPrize = async (): Promise<DeGrandPrize> => {
+export const fetchDeGrandPrize = async (timestamp: number): Promise<DeGrandPrize | null> => {
   try {
-    const currentSeconds = Math.floor(Date.now() / 1000);
-
     const {
       deGrandMonth,
       title,
@@ -282,7 +280,7 @@ export const fetchThisMonthDeGrandPrize = async (): Promise<DeGrandPrize> => {
       ctaUrl,
       imageUrl,
       maxWinnerCount
-    } = await specialLotteryContract.viewDeGrandPrize(currentSeconds);
+    } = await specialLotteryContract.viewDeGrandPrize(timestamp);
 
     return {
       deGrandMonth: parseInt(deGrandMonth, 10),
@@ -296,15 +294,7 @@ export const fetchThisMonthDeGrandPrize = async (): Promise<DeGrandPrize> => {
 
   } catch (error) {
     // console.error('fetchDeGrandPrize', error);
-    return {
-      deGrandMonth: 0,
-      title: '',
-      subtitle: '',
-      description: '',
-      ctaUrl: '',
-      imageUrl: '',
-      maxWinnerCount: 0
-    };
+    return null;
   }
 }
 
@@ -315,7 +305,7 @@ export const fetchUserDeGrandWinners = async (lotteryId: string): Promise<Lotter
       return ticketOwners.map((ticketOwner: string, index: number) => {
         return {
           owner: ticketOwner,
-          ticketId: ticketIds[index]
+          ticketId: ethersToSerializedBigNumber(ticketIds[index])
         };
       });
     }
@@ -325,6 +315,18 @@ export const fetchUserDeGrandWinners = async (lotteryId: string): Promise<Lotter
     console.log('fetchUserDeGrandWinners', error);
     return [];
   }
+}
+
+export const fetchUserDeGrandWinnersPerMultipleRounds = async (lotteryIds: string[]): Promise<{ roundId: string; winners: LotteryTicketOwner[] }[]> => {
+  const winnersForMultipleRounds = [];
+  for (let idx = 0; idx < lotteryIds.length; idx++) {
+    const winnersForRound = await fetchUserDeGrandWinners(lotteryIds[idx]);
+    winnersForMultipleRounds.push({
+      roundId: lotteryIds[idx],
+      winners: winnersForRound
+    });
+  }
+  return winnersForMultipleRounds;
 }
 
 export const useProcessLotteryResponse = (
