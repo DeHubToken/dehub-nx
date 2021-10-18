@@ -275,6 +275,8 @@ export const fetchUserDeLottoWinningRewards = async (
 
 export const fetchDeGrandPrize = async (lotteryId: string): Promise<DeGrandPrize | null> => {
   try {
+    const data = await specialLotteryContract.viewDeGrandPrize(lotteryId);
+
     const {
       title,
       subtitle,
@@ -282,7 +284,7 @@ export const fetchDeGrandPrize = async (lotteryId: string): Promise<DeGrandPrize
       ctaUrl,
       imageUrl,
       maxWinnerCount
-    } = await specialLotteryContract.viewDeLottoRewardsForTicketIds(lotteryId);
+    } = data;
 
     return {
       lotteryId,
@@ -295,7 +297,7 @@ export const fetchDeGrandPrize = async (lotteryId: string): Promise<DeGrandPrize
     };
 
   } catch (error) {
-    console.error('fetchDeGrandPrize', error);
+    // console.error('fetchDeGrandPrize', error);
     return null;
   }
 }

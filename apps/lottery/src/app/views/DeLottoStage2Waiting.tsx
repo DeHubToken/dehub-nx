@@ -1,4 +1,3 @@
-import { endOfMonth } from 'date-fns';
 import { Button } from 'primereact/button';
 
 import { EventCountDown } from './components/CountDown';
@@ -21,11 +20,13 @@ const DeLottoStage2Waiting = () => {
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center">
       <EventCountDown
-        nextEventTime={startOfNextMonthAsInt}
+        nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 501}
         preCountDownText="Starts in "
         isVertical={false}
       />
-      <Text>Come back later to buy tickets for the DeLotto first stage.</Text>
+      <Text>
+        Come back later to buy tickets for the DeLotto second stage and DeGrand!
+      </Text>
       <Button className="p-button-link p-0 mt-7" label="Read more" />
     </FlexLine>
   );

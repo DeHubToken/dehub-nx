@@ -7,6 +7,8 @@ interface EventCountDownProps {
   nextEventTime: number;
   preCountDownText?: string;
   postCountDownText?: string;
+  titleFontSize?: string;
+  timerFontSize?: string;
   isVertical?: boolean;
 }
 
@@ -14,6 +16,8 @@ const EventCountDown = ({
   nextEventTime,
   preCountDownText,
   postCountDownText,
+  titleFontSize = '30px',
+  timerFontSize = '30px',
   isVertical = true,
 }: EventCountDownProps) => {
   const secondsRemaining = useNextEventCountDown(nextEventTime);
@@ -28,22 +32,26 @@ const EventCountDown = ({
             isVertical ? 'flex-column' : 'flex-row'
           } align-items-center`}
         >
-          {preCountDownText && <Title>{preCountDownText}</Title>}
+          {preCountDownText && (
+            <Title style={{ fontSize: titleFontSize }}>
+              {preCountDownText}
+            </Title>
+          )}
           <Timer
             seconds={seconds}
             minutes={minutes}
             hours={hours}
             days={days}
-            style={{
-              fontSize: `${
-                preCountDownText || postCountDownText ? '30px' : '14px'
-              }`,
-            }}
+            style={{ fontSize: timerFontSize }}
           />
-          {postCountDownText && <Title>{postCountDownText}</Title>}
+          {postCountDownText && (
+            <Title style={{ fontSize: titleFontSize }}>
+              {postCountDownText}
+            </Title>
+          )}
         </div>
       ) : (
-        <Title>Loading...</Title>
+        <Title style={{ fontSize: titleFontSize }}>Loading...</Title>
       )}
     </>
   );

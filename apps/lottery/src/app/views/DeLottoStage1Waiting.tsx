@@ -6,12 +6,12 @@ import FlexLine from './components/FlexLine';
 import { Title, Text } from '../components/Text';
 
 const DeLottoStage1Waiting = () => {
-  const startOfNextMonthAsInt = endOfMonth(new Date()).getTime() + 501; // after 5 min
+  const startOfNextMonthAsInt = endOfMonth(new Date()).getTime(); // after 5 min
 
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center">
       <EventCountDown
-        nextEventTime={startOfNextMonthAsInt}
+        nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 501}
         preCountDownText="Starts in "
         isVertical={false}
       />

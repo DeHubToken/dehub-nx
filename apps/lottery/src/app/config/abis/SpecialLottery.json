@@ -489,11 +489,6 @@
         "internalType": "uint256",
         "name": "_lotteryId",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_maxNumberDeGrandWinners",
-        "type": "uint256"
       }
     ],
     "name": "pickDeGrandWinners",
@@ -540,6 +535,49 @@
       }
     ],
     "name": "setBreakdownPercent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_title",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_subtitle",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_ctaUrl",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageUrl",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_maxNumberDeGrandWinners",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDeGrandPrize",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -767,6 +805,62 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewDeGrandPrize",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "lotteryId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "subtitle",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "ctaUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "imageUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxWinnerCount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SpecialLottery.DeGrandPrize",
+        "name": "",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",

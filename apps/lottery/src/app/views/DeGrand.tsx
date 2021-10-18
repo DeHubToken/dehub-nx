@@ -6,20 +6,35 @@ import { Card } from 'primereact/card';
 
 import { Hooks } from '@dehub/react/core';
 
+import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
 import Box from '../components/Layout/Box';
 import ConnectWalletButton from '../components/ConnectWalletButton';
 import Container from '../components/Layout/Container';
 import { Title, Header, Text } from '../components/Text';
+import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
 import { useLottery, useDeGrandPrize } from '../states/special-lottery/hooks';
+import { LotteryStatus } from '../config/constants/types';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
 const DeGrand = () => {
-  const { currentLotteryId } = useLottery();
-  const deGrandPrize = useDeGrandPrize(currentLotteryId);
+  const {
+    currentLotteryId,
+    currentRound: { status, endTime },
+  } = useLottery();
+  const endTimeAsInt = parseInt(endTime, 10);
+  const { nextEventTime, preCountDownText, postCountDownText } =
+    useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, status);
+
+  const currentLotteryIdAsInt = parseInt(currentLotteryId, 10);
+  let newLotteryId = currentLotteryId;
+  if (status !== LotteryStatus.OPEN) {
+    newLotteryId = (currentLotteryIdAsInt + 1).toString(); // get next round
+  }
+  const deGrandPrize = useDeGrandPrize(newLotteryId);
 
   const { account } = Hooks.useMoralisEthers();
   const [checkDeGrandDialog, setCheckDeGrandDialog] = useState(false);
@@ -44,7 +59,7 @@ const DeGrand = () => {
         <StyledBox>
           {deGrandPrize ? (
             <FlexLine
-              className="align-items-center justify-content-center"
+              className="md:flex-column align-items-center justify-content-center"
               style={{ borderBottom: '1px solid' }}
             >
               <Header>DeGrand prize this month:</Header>
@@ -54,18 +69,40 @@ const DeGrand = () => {
                   style={{ width: '100%', height: '100%' }}
                 />
               )}
-              <FlexLine className="justify-content-between">
+              <FlexLine className="justify-content-between w-full">
                 <FlexLine className="md:flex-column">
                   <Header>{deGrandPrize.title}</Header>
-                  <Text>23h 26m until the draw</Text>
+                  {status === LotteryStatus.CLAIMABLE ? (
+                    <Text className="text-pink-700">Draw Completed!</Text>
+                  ) : nextEventTime &&
+                    (preCountDownText || postCountDownText) ? (
+                    <EventCountDown
+                      nextEventTime={nextEventTime}
+                      preCountDownText={preCountDownText}
+                      postCountDownText={postCountDownText}
+                      isVertical={false}
+                      titleFontSize="14px"
+                      timerFontSize="14px"
+                    />
+                  ) : (
+                    <Title fontSize="14px">Waiting...</Title>
+                  )}
                 </FlexLine>
                 <FlexLine className="md:flex-column">
-                  <Text>Are you a winner?</Text>
-                  <Button
-                    className="p-button-link p-0"
-                    onClick={() => handleShowDialog('Check Now')}
-                    label="Check Now"
-                  />
+                  {account ? (
+                    status === LotteryStatus.CLAIMABLE && (
+                      <>
+                        <Text>Are you a winner?</Text>
+                        <Button
+                          className="mt-2 justify-content-center"
+                          onClick={() => handleShowDialog('Check Now')}
+                          label="Check Now"
+                        />
+                      </>
+                    )
+                  ) : (
+                    <ConnectWalletButton />
+                  )}
                 </FlexLine>
               </FlexLine>
             </FlexLine>
