@@ -18,7 +18,13 @@ import { AppMenuComponent } from './menu/app.menu.component';
 import { MenuService } from './menu/app.menu.service';
 import { AppMenuitemComponent } from './menu/app.menuitem.component';
 import { AppTopBarComponent } from './topbar/app.topbar.component';
+import { LandingAboutComponent } from './view/landing/landing-about/landing-about.component';
+import { LandingAuditsComponent } from './view/landing/landing-audits/landing-audits.component';
+import { LandingLinksComponent } from './view/landing/landing-links/landing-links.component';
+import { LandingSlogenComponent } from './view/landing/landing-slogen/landing-slogen.component';
 import { LandingViewComponent } from './view/landing/landing-view.component';
+import { LandingYoutubeComponent } from './view/landing/landing-youtube/landing-youtube.component';
+import { LandingListedComponent } from './view/landing/landing-listed/landing-listed.component';
 
 const primeNgModules = [
   ButtonModule,
@@ -45,7 +51,15 @@ const primeNgModules = [
     AppMenuitemComponent,
     AppTopBarComponent,
     AppFooterComponent,
+
+    // Landing
     LandingViewComponent,
+    LandingSlogenComponent,
+    LandingAboutComponent,
+    LandingLinksComponent,
+    LandingAuditsComponent,
+    LandingYoutubeComponent,
+    LandingListedComponent,
   ],
   providers: [MenuService, AppMainComponent],
   bootstrap: [AppComponent],

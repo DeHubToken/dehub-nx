@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  template: `<h1>Claim</h1>`,
+  template: ``,
 })
 export class ClaimHomeComponent implements OnInit {
   ngOnInit() {}

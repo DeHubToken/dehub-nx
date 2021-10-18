@@ -143,6 +143,12 @@ This project was generated using [Nx](https://nx.dev).
 
    ```
 
+1. Angular component for landing page:
+
+   ```
+   nx generate @schematics/angular:component --name=landing-slogen --project=web --style=scss --changeDetection=OnPush --inlineStyle --inlineTemplate --path=apps/web/src/app/view/landing --skipTests
+   ```
+
 1. Angular Core module:
    ```
    nx generate @nrwl/angular:library --name=core --directory=angular --standaloneConfig --strict
