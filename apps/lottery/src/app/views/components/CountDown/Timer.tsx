@@ -21,22 +21,22 @@ const Timer = ({ seconds, minutes, hours, days, ...props }: TimerProps) => {
   return (
     <StyledWrapper {...props}>
       {Boolean(days) && (
-        <div className="m-3 mr-1" {...props}>
+        <div className="m-2" {...props}>
           {days}d
         </div>
       )}
       {Boolean(hours) && (
-        <div className="m-3 mr-1" {...props}>
+        <div className="m-2" {...props}>
           {hours}h
         </div>
       )}
       {Boolean(minutes) && (
-        <div className="m-3 mr-1" {...props}>
+        <div className="m-2" {...props}>
           {minutes}m
         </div>
       )}
       {Boolean(seconds) && (
-        <div className="m-3 mr-1" {...props}>
+        <div className="m-2" {...props}>
           {seconds}s
         </div>
       )}

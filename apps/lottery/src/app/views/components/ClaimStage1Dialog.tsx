@@ -3,6 +3,7 @@ import BigNumber from 'bignumber.js';
 import { endOfMonth } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 
 import { Hooks } from '@dehub/react/core';
@@ -103,6 +104,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
       });
     }
     setPendingTx(false);
+    onHide();
   };
 
   return (
@@ -130,7 +132,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
             <SimpleCountDown limitTime={endOfMonthAsInt} />
           </div>
           {isFetchingRewards ? (
-            <Text>Loading...</Text>
+            <Skeleton width="100%" height="2rem" className="mb-3" />
           ) : (
             unclaimedRewards.map(
               (claimData: LotteryTicketClaimData, index: number) => {

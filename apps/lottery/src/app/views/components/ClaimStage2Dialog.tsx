@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { endOfMonth } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 
 import { Hooks } from '@dehub/react/core';
@@ -73,6 +74,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
       });
     }
     setPendingTx(false);
+    onHide();
   };
 
   return (
@@ -97,7 +99,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
                 $DeHub
               </Text>
             ) : (
-              <Text>Loading...</Text>
+              <Skeleton width="100%" height="2rem" />
             )}
           </div>
           <div className="mb-3 flex flex-column align-items-center">
@@ -105,7 +107,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
             <SimpleCountDown limitTime={endOfMonthAsInt} />
           </div>
           {isFetchingRewards ? (
-            <Text>Loading...</Text>
+            <Skeleton width="100%" height="2rem" className="mb-4" />
           ) : (
             <div className="mb-4">
               {winningRewards &&

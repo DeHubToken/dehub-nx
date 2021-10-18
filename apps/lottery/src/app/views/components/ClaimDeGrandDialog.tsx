@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { endOfMonth } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 
 import { Hooks } from '@dehub/react/core';
@@ -48,7 +49,9 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
-    fetchAllWinners();
+    if (account && currentLotteryId) {
+      fetchAllWinners();
+    }
   }, [account, currentLotteryId, fetchAllWinners]);
 
   useEffect(() => {
@@ -76,7 +79,9 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
           <div className="mb-3 flex flex-column">
             {!isFetchingWinners && myWinningTickets.length > 0 && (
               <>
-                <Text className="font-bold text-center mb-3">{`You won ${myWinningTickets.length}!`}</Text>
+                <Text className="font-bold text-center text-green-600 mb-3">
+                  {`You won ${myWinningTickets.length}!`}
+                </Text>
                 <div className="mb-4">
                   {myWinningTickets.map(
                     (winningTicket: LotteryTicketOwner, index: number) => {
@@ -84,7 +89,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
                         <TicketIdLabel
                           key={`${index}`}
                           id={`#${winningTicket.ticketId}`}
-                          className="mb-2"
+                          className="mb-2 bg-green-600"
                         />
                       );
                     }
@@ -104,7 +109,9 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
                 You didn't win this time...Better luck next time!
               </Text>
             )}
-            {isFetchingWinners && <Text>Loading...</Text>}
+            {isFetchingWinners && (
+              <Skeleton width="100%" height="2rem" className="mb-3" />
+            )}
           </div>
           <div className="mb-3 flex flex-column">
             <Text className="font-bold text-center mb-3">All winners</Text>
@@ -122,7 +129,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
                   }
                 )
               ) : (
-                <Text>Loading...</Text>
+                <Skeleton width="100%" height="2rem" className="mb-3" />
               )}
             </div>
           </div>

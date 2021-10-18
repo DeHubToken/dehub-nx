@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
+import { Skeleton } from 'primereact/skeleton';
 
 import { BUSD_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
@@ -45,7 +46,7 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
       )}`}
     </Text>
   ) : (
-    <Text>...</Text>
+    <Skeleton width="8rem" height="2rem" />
   );
 };
 

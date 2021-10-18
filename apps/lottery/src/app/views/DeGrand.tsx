@@ -32,13 +32,13 @@ const DeGrand = () => {
   const endTimeAsInt = parseInt(endTime, 10);
   const { nextEventTime, preCountDownText, postCountDownText } =
     useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, status);
+  const lotteryMonthAsInt = new Date(endTimeAsInt * 1000).getUTCMonth();
+  const currentMonthAsInt = new Date().getUTCMonth();
 
   const deGrandPrize = useThisMonthDeGrandPrize();
 
   const { account } = Hooks.useMoralisEthers();
   const [checkDeGrandDialog, setCheckDeGrandDialog] = useState(false);
-
-  const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
 
   const handleShowDialog = (dialogKind: string) => {
     if (dialogKind === 'CheckDeGrand') {
@@ -72,8 +72,9 @@ const DeGrand = () => {
               <FlexLine className="justify-content-between w-full">
                 <FlexLine className="md:flex-column">
                   <Header>{`${deGrandPrize.title} | ${deGrandPrize.maxWinnerCount} lucky winners will be announced`}</Header>
-                  {status === LotteryStatus.CLAIMABLE ? (
-                    <Text className="text-pink-700">Draw Completed!</Text>
+                  {lotteryMonthAsInt === currentMonthAsInt &&
+                  status === LotteryStatus.CLAIMABLE ? (
+                    <Text className="text-pink-400">Draw Completed!</Text>
                   ) : nextEventTime &&
                     (preCountDownText || postCountDownText) ? (
                     <EventCountDown

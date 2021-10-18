@@ -1,6 +1,6 @@
 import { useState } from 'react';
-
 import { Button } from 'primereact/button';
+import { Skeleton } from 'primereact/skeleton';
 
 import { Hooks } from '@dehub/react/core';
 
@@ -79,25 +79,39 @@ const DeLottoStage2 = () => {
       </FlexLine>
 
       <FlexLine className="align-items-center justify-content-between">
-        <Header>Next Draw:</Header>
         {status !== LotteryStatus.PENDING && nextLotteryIdAsInt > 0 ? (
-          <Text>
-            #{nextLotteryIdAsInt} | Draw:{' '}
-            {new Date(endTimeAsInt * 1000).toLocaleString()}
-          </Text>
+          <>
+            <Header>Next Draw:</Header>
+            <Text>
+              #{nextLotteryIdAsInt} | Draw:{' '}
+              {new Date(endTimeAsInt * 1000).toLocaleString()}
+            </Text>
+          </>
         ) : (
-          <Text>...</Text>
+          <>
+            <Skeleton width="7rem" height="2rem" />
+            <Skeleton width="20rem" height="1.5rem" />
+          </>
         )}
       </FlexLine>
 
       <FlexLine className="align-items-center justify-content-between">
-        <Header>Prize Pot:</Header>
+        {status !== LotteryStatus.PENDING ? (
+          <Header>Prize Pot:</Header>
+        ) : (
+          <Skeleton width="6rem" height="2rem" />
+        )}
         <PrizePot pot={amountCollectedInDehub} status={status} />
       </FlexLine>
 
-      {status !== LotteryStatus.PENDING && account && (
+      {account && (
         <FlexLine className="align-items-center md:align-items-start justify-content-between">
-          <Header>Your Tickets:</Header>
+          {status !== LotteryStatus.PENDING ? (
+            <Header>Your Tickets:</Header>
+          ) : (
+            <Skeleton width="8rem" height="2rem" />
+          )}
+
           <div className="flex flex-column align-items-center md:align-items-end">
             {userTickets && !userTickets.isLoading ? (
               <>
@@ -115,7 +129,10 @@ const DeLottoStage2 = () => {
                 />
               </>
             ) : (
-              <Text>...</Text>
+              <>
+                <Skeleton width="16rem" height="1.5rem" />
+                <Skeleton width="8rem" height="1.5rem" />
+              </>
             )}
             {account && status === LotteryStatus.OPEN && !isTransitioning && (
               <Button
