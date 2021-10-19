@@ -69,22 +69,22 @@ const BuyStandardTicketDialog = ({
     handleApprove,
     handleConfirm,
   } = useApproveConfirmTransaction({
-    onRequiresApproval: async () => {
+    onRequiresApproval: async (approvalAccount: string) => {
       try {
         const response = await dehubContract?.allowance(
-          account,
+          approvalAccount,
           getStandardLotteryAddress()
         );
         const currentAllowance = ethersToBigNumber(response);
         return currentAllowance.gt(0);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         return false;
       }
     },
     onApprove: async () => {
       try {
-        return dehubContract?.approve(
+        return await dehubContract?.approve(
           getStandardLotteryAddress(),
           ethers.constants.MaxUint256
         );
@@ -216,15 +216,15 @@ const BuyStandardTicketDialog = ({
             />
           </div>
           <div className="flex justify-content-end mt-2">
-            <Text fontSize="14px">
-              Price: ~
+            <Text fontSize="14px">Price: ~</Text>
+            <Text fontSize="14px" className="font-bold">
               {getFullDisplayBalance(
                 priceTicketInDehub,
                 DEHUB_DECIMALS,
                 DEHUB_DECIMALS
-              )}{' '}
-              DeHub
+              )}
             </Text>
+            <Text fontSize="14px">&nbsp; DeHub</Text>
           </div>
           <div className="flex justify-content-center mt-4 mb-4">
             <Header>Or buy bundles instantly!</Header>
@@ -276,8 +276,8 @@ const BuyStandardTicketDialog = ({
                             }`}
                           />
                         </div>
-                        <div className="col-5 flex justify-content-end">
-                          <Text>
+                        <div className="col-5 flex justify-content-end align-items-center">
+                          <Text className="font-bold">
                             ~
                             {getFullDisplayBalance(
                               priceTicketInDehub.times(

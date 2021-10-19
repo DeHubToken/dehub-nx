@@ -32,7 +32,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
   const { fetchAllRewards, winningRewards, fetchStatus } =
     useGetDeLottoWinningRewards();
   const isFetchingRewards =
-    fetchStatus === FetchStatus.NOT_FETCHED ||
+    // fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
   const [pendingTx, setPendingTx] = useState(false);

@@ -29,7 +29,7 @@ const DeGrandHistoryDialog = ({ open, onHide }: DeGrandHistoryDialogProps) => {
   const { fetchHistoricalAllWinners, historicalDeGrands, fetchStatus } =
     useGetHistoricalDeGrands();
   const isFetchingWinners =
-    fetchStatus === FetchStatus.NOT_FETCHED ||
+    // fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
   const [deGrand, setDeGrand] = useState<DeGrandHistory>();

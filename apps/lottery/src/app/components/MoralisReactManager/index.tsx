@@ -1,49 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { useMoralis } from 'react-moralis';
 
 import { Hooks } from '@dehub/react/core';
+
+import { getChainIdHex, getNetworkInfo } from '../../config/constants';
 
 interface MoralisReactManagerProps {
   children?: React.ReactNode;
 }
 
 const MoralisReactManager = ({ children }: MoralisReactManagerProps) => {
-  const { enableWeb3, authenticate, user } = useMoralis();
-
-  const { activateProvider } = Hooks.useMoralisEthers();
+  const { chainId, authProvider } = Hooks.useMoralisEthers();
 
   useEffect(() => {
-    const loginMoralis = async (provider: string | null) => {
-      window.localStorage.setItem('providerName', provider ?? '');
+    const switchNetwork = async () => {
+      try {
+        // If wrong chain id, ask to switch network
+        console.log('Current Chain Id', chainId);
+        if (chainId !== getChainIdHex()) {
+          console.log('Ask to switch network');
 
-      if (provider) {
-        await authenticate({ provider: 'walletconnect' });
-      } else {
-        await authenticate();
+          if (authProvider?.provider && authProvider?.provider?.request) {
+            await authProvider?.provider?.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: getChainIdHex() }],
+            });
+          }
+        }
+      } catch (switchError) {
+        // This error code indicates that the chain has not been added to MetaMask.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((switchError as any).code === 4902) {
+          console.log('Add network');
+          try {
+            if (authProvider?.provider && authProvider?.provider?.request) {
+              const networkInfo = getNetworkInfo();
+              await authProvider?.provider.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: networkInfo.CHAIN_ID_HEX,
+                    rpcUrl: networkInfo.RPC_URL,
+                  },
+                ],
+              });
+            }
+          } catch (addError) {
+            // TODO: handle "add" error by showing error alert
+            console.error('addEthereumChain', addError);
+          }
+        }
       }
     };
 
-    const enableMoralis = async () => {
-      const savedProviderName = window.localStorage.getItem('providerName');
-
-      if (savedProviderName && savedProviderName === 'walletconnect') {
-        await enableWeb3({ provider: 'walletconnect' });
-      } else {
-        await enableWeb3();
-      }
-
-      if (window.localStorage.getItem('chainChange')) {
-        await loginMoralis(savedProviderName);
-        window.localStorage.removeItem('chainChange');
-      }
-
-      activateProvider();
-    };
-
-    if (user) {
-      enableMoralis();
+    if (chainId && authProvider) {
+      switchNetwork();
     }
-  }, [user, authenticate, enableWeb3, activateProvider]);
+  }, [chainId, authProvider]);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment

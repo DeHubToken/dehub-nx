@@ -1,6 +1,4 @@
 import { useCallback } from 'react';
-import { Moralis } from 'moralis';
-import { useMoralis } from 'react-moralis';
 
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
@@ -17,9 +15,7 @@ const ConnectWalletButton = () => {
   const toggleWalletModal = useWalletModalToggle();
   const setWalletConnectingState = useSetWalletConnectingState();
 
-  const { activateProvider } = Hooks.useMoralisEthers();
-
-  const { authenticate } = useMoralis();
+  const { activateProvider, authenticate } = Hooks.useMoralisEthers();
 
   const connectWallet = useCallback(
     provider => {
@@ -30,7 +26,7 @@ const ConnectWalletButton = () => {
           onError: (error: Error) => {
             setWalletConnectingState(WalletConnectingState.INIT);
           },
-          onSuccess: (user: Moralis.User) => {
+          onSuccess: () => {
             activateProvider();
 
             setWalletConnectingState(WalletConnectingState.COMPLETE);
@@ -42,7 +38,7 @@ const ConnectWalletButton = () => {
           onError: (error: Error) => {
             setWalletConnectingState(WalletConnectingState.INIT);
           },
-          onSuccess: async (user: Moralis.User) => {
+          onSuccess: async () => {
             activateProvider();
 
             setWalletConnectingState(WalletConnectingState.COMPLETE);

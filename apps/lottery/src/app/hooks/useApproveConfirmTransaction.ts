@@ -5,6 +5,7 @@ import { ethers } from 'ethers'
 type LoadingState = 'idle' | 'loading' | 'success' | 'fail';
 
 type Action =
+  | { type: 'idle' }
   | { type: 'requires_approval' }
   | { type: 'approve_sending' }
   | { type: 'approve_receipt' }
@@ -25,6 +26,11 @@ const initialState: State = {
 
 const reducer = (state: State, actions: Action): State => {
   switch (actions.type) {
+    case 'idle':
+      return {
+        ...state,
+        approvalState: 'idle'
+      }
     case 'requires_approval':
       return {
         ...state,
@@ -73,7 +79,7 @@ interface OnSuccessProps {
 interface ApproveConfirmTransaction {
   onApprove: () => Promise<ethers.providers.TransactionResponse>;
   onConfirm: () => Promise<ethers.providers.TransactionResponse>;
-  onRequiresApproval?: () => Promise<boolean>;
+  onRequiresApproval?: (account: string) => Promise<boolean>;
   onSuccess: ({ state, receipt }: OnSuccessProps) => void;
   onApproveSuccess?: ({ state, receipt }: OnSuccessProps) => void;
   onToast?: (severity: string, detail: string) => void;
@@ -93,7 +99,7 @@ const useApproveConfirmTransaction = ({
   // https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
   const mountedRef = useRef(true);
 
-  // const handlePreApprove = useRef(onRequiresApproval);
+  const handlePreApprove = useRef(onRequiresApproval);
 
   // eslint-disable-next-line multiline-comment-style
   // // Check if approval is necessary, re-check if account changes
@@ -107,19 +113,39 @@ const useApproveConfirmTransaction = ({
   //   }
   // }, [account, handlePreApprove, dispatch]);
 
+  // eslint-disable-next-line multiline-comment-style
+  // useEffect(() => {
+  //   mountedRef.current = true;
+  //   if (account && onRequiresApproval) {
+  //     onRequiresApproval().then((result) => {
+  //       if (result && mountedRef.current) {
+  //         dispatch({ type: 'requires_approval' })
+  //       }
+  //     })
+  //   }
+  //   return () => {
+  //     mountedRef.current = false;
+  //   }
+  // }, [account, onRequiresApproval]);
+
   useEffect(() => {
     mountedRef.current = true;
-    if (account && onRequiresApproval) {
-      onRequiresApproval().then((result) => {
-        if (result && mountedRef.current) {
+    if (account && handlePreApprove.current) {
+      handlePreApprove.current(account).then((result) => {
+        if (!mountedRef.current) {
+          return;
+        }
+        if (result) {
           dispatch({ type: 'requires_approval' })
+        } else {
+          dispatch({ type: 'idle' })
         }
       })
     }
     return () => {
       mountedRef.current = false;
     }
-  }, [account, onRequiresApproval]);
+  }, [account, handlePreApprove]);
 
   return {
     isApproving: state.approvalState === 'loading',

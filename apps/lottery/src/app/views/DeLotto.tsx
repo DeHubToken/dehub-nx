@@ -53,7 +53,7 @@ const DeLotto = () => {
       <TabView>
         <TabPanel header="STAGE #1">
           <StyledBox>
-            {endTimeAsInt > specialEndTimeAsInt ? (
+            {endTimeAsInt >= specialEndTimeAsInt ? (
               <DeLottoStage1 />
             ) : (
               <DeLottoStage1Waiting />

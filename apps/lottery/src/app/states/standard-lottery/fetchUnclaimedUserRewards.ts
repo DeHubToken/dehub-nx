@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
-import { BIG_ZERO } from '@dehub/shared/utils';
+import { BIG_ZERO, ethersToSerializedBigNumber } from '@dehub/shared/utils';
 import { fetchUserTicketsPerMultipleRounds } from './helpers';
 
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
@@ -104,8 +104,13 @@ const getWinningTickets = async (
     return ticket.rewardBracket >= 0;
   });
 
+  let maximumMatched = 0;
+  allWinningTickets.forEach((value, index) => {
+    maximumMatched = maximumMatched > value.rewardBracket ? maximumMatched : value.rewardBracket;
+  });
+
   const unclaimedWinningTickets = allWinningTickets.filter((ticket) => {
-    return !ticket.claimed;
+    return !ticket.claimed && ticket.rewardBracket === maximumMatched;
   });
 
   if (unclaimedWinningTickets.length > 0) {
@@ -124,29 +129,6 @@ const getWinningTickets = async (
   };
 }
 
-/**
- * fetch lottery final numbers. If unclaimable status, returns blank.
- * @param roundIds 
- * @returns array of final numbers
- */
-/*
- * const fetchLotteryFinalNumbers = async (roundIds: string[]): Promise<LotteryStatusAndFinalNumber[]> => {
- *   const finalNumbers = [];
- *   for (let idx = 0; idx < roundIds.length; idx++) {
- *     const lottery: LotteryResponse = await fetchLottery(roundIds[idx]);
- *     finalNumbers.push({
- *       roundId: roundIds[idx],
- *       status: lottery.status,
- *       finalNumber: lottery.finalNumber.toString()
- *     });
- *   }
- *   return finalNumbers;
- * }
- */
-
-/**
- * @todo, re-deploy viewLotteryDrawable
- */
 const fetchLotteryFinalNumbers = async (roundIds: string[]): Promise<LotteryStatusAndFinalNumber[]> => {
   const calls: Call[] = roundIds.map((roundId) => {
     return {
@@ -166,7 +148,7 @@ const fetchLotteryFinalNumbers = async (roundIds: string[]): Promise<LotteryStat
       return {
         roundId: roundIds[index],
         status: LotteryStatus[statusKey as keyof typeof LotteryStatus],
-        finalNumber: statusAndFinalNumber[1] as string
+        finalNumber: ethersToSerializedBigNumber(statusAndFinalNumber[1])
       };
     });
 

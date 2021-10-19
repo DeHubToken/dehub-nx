@@ -30,7 +30,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
 
   const { fetchAllWinners, winners, fetchStatus } = useGetDeGrandWinners();
   const isFetchingWinners =
-    fetchStatus === FetchStatus.NOT_FETCHED ||
+    // fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
   const deGrandPrize = useThisMonthDeGrandPrize();
@@ -119,15 +119,21 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
             <Text className="font-bold text-center mb-3">All winners</Text>
             <div className="mb-4">
               {!isFetchingWinners ? (
-                filteredWinners.map((winner: string, index: number) => {
-                  return (
-                    <TicketIdLabel
-                      key={`${index}`}
-                      id={`#${shortenAddress(winner)}`}
-                      className="mb-2"
-                    />
-                  );
-                })
+                filteredWinners.length > 0 ? (
+                  filteredWinners.map((winner: string, index: number) => {
+                    return (
+                      <TicketIdLabel
+                        key={`${index}`}
+                        id={`#${shortenAddress(winner)}`}
+                        className="mb-2"
+                      />
+                    );
+                  })
+                ) : (
+                  <Text className="font-bold text-center">
+                    Unfortunately, there is no winner.
+                  </Text>
+                )
               ) : (
                 <Skeleton width="100%" height="2rem" className="mb-3" />
               )}

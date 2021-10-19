@@ -34,7 +34,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
   const { fetchAllRewards, unclaimedRewards, fetchStatus } =
     useGetUnclaimedRewards();
   const isFetchingRewards =
-    fetchStatus === FetchStatus.NOT_FETCHED ||
+    // fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
   const [pendingTx, setPendingTx] = useState(false);
@@ -158,21 +158,22 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
                         );
                       }
                     )}
-                    {claimData.ticketsWithUnclaimedRewards.length > 0 && (
-                      <div className="flex flex-column mt-5">
-                        <Button
-                          icon={pendingTx ? 'pi pi-spin pi-spinner' : ''}
-                          className="justify-content-center"
-                          onClick={() => {
-                            if (pendingTx) {
-                              return;
-                            }
-                            handleClaim(index);
-                          }}
-                          label="Claim Now"
-                        />
-                      </div>
-                    )}
+                    {claimData.ticketsWithUnclaimedRewards.length > 0 &&
+                      unclaimedDehubTotal.gt(BIG_ZERO) && (
+                        <div className="flex flex-column mt-5">
+                          <Button
+                            icon={pendingTx ? 'pi pi-spin pi-spinner' : ''}
+                            className="justify-content-center"
+                            onClick={() => {
+                              if (pendingTx) {
+                                return;
+                              }
+                              handleClaim(index);
+                            }}
+                            label="Claim Now"
+                          />
+                        </div>
+                      )}
                   </div>
                 );
               }

@@ -60,6 +60,7 @@ const BuySpecialTicketDialog = ({
 
   const validateInput = useCallback(
     (inputNumber: BigNumber): boolean => {
+      // eslint-disable-next-line multiline-comment-style
       // const totalNumber = inputNumber.plus(
       //   new BigNumber(
       //     userTickets && userTickets?.tickets ? userTickets?.tickets?.length : 0
@@ -104,12 +105,14 @@ const BuySpecialTicketDialog = ({
     handleApprove,
     handleConfirm,
   } = useApproveConfirmTransaction({
-    onRequiresApproval: async () => {
+    onRequiresApproval: async (account: string) => {
+      console.log('allowance >> ', account);
       try {
         const response = await dehubContract?.allowance(
           account,
           getSpecialLotteryAddress()
         );
+        console.log('allowance', response);
         const currentAllowance = ethersToBigNumber(response);
         return currentAllowance.gt(0);
       } catch (error) {
@@ -119,7 +122,7 @@ const BuySpecialTicketDialog = ({
     },
     onApprove: async () => {
       try {
-        return dehubContract?.approve(
+        return await dehubContract?.approve(
           getSpecialLotteryAddress(),
           ethers.constants.MaxUint256
         );

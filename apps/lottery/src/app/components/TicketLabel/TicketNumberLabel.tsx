@@ -13,11 +13,11 @@ const Wrapper = styled.div<{
 }>`
   background-color: ${({ rewardBracket = LotteryPrizeLevel.NONE }) =>
     rewardBracket === LotteryPrizeLevel.GOLD
-      ? 'rgb(234, 235, 236)'
+      ? 'var(--pink-800)'
       : rewardBracket === LotteryPrizeLevel.SILVER
-      ? 'var(--yellow-500)'
+      ? 'var(--teal-800)'
       : rewardBracket === LotteryPrizeLevel.BRONZE
-      ? 'var(--text-color-secondary)'
+      ? 'var(--yellow-800)'
       : 'var(--text-color-secondary)'};
   border-radius: 16px;
   margin: auto;
@@ -32,7 +32,7 @@ interface TicketNumberLabelProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const TicketNumberLabel = ({
   number,
-  rewardBracket,
+  rewardBracket = -1,
   ...props
 }: TicketNumberLabelProps) => {
   const parts = toLotteryNumbers(number);
@@ -41,7 +41,18 @@ const TicketNumberLabel = ({
     <Wrapper rewardBracket={rewardBracket} {...props}>
       {parts.map((num: number, index: number) => {
         return (
-          <Text key={`${index}`} className="m-2" color="#000">
+          <Text
+            key={`${index}`}
+            className={`m-2 text-center ${
+              index <= rewardBracket ? 'font-bold' : ''
+            }`}
+            color={
+              rewardBracket < 0 || rewardBracket === LotteryPrizeLevel.NONE
+                ? 'var(--surface-a)'
+                : 'var(--text-color)'
+            }
+            style={{ width: '16px' }}
+          >
             {num}
           </Text>
         );
