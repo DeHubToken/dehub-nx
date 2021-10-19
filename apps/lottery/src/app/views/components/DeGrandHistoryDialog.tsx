@@ -89,7 +89,7 @@ const DeGrandHistoryDialog = ({ open, onHide }: DeGrandHistoryDialogProps) => {
         <div className="flex flex-column">
           {isFetchingWinners ? (
             <Skeleton width="100%" height="4rem" className="mb-3" />
-          ) : (
+          ) : historicalDeGrands.length > 0 ? (
             historicalDeGrands.map((deGrand: DeGrandHistory, index: number) => {
               return (
                 <div className="flex flex-column" key={`${index}`}>
@@ -141,6 +141,10 @@ const DeGrandHistoryDialog = ({ open, onHide }: DeGrandHistoryDialogProps) => {
                 </div>
               );
             })
+          ) : (
+            <Text className="font-bold text-center">
+              You didn't participate DeGrand stage... Better luck next time!
+            </Text>
           )}
 
           {deGrand && (
