@@ -1032,7 +1032,12 @@
         "components": [
           {
             "internalType": "enum SpecialLottery.Status",
-            "name": "status",
+            "name": "deLottoStatus",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum SpecialLottery.Status",
+            "name": "deGrandStatus",
             "type": "uint8"
           },
           {
@@ -1099,6 +1104,11 @@
     ],
     "name": "viewLotteryDrawable",
     "outputs": [
+      {
+        "internalType": "enum SpecialLottery.Status",
+        "name": "",
+        "type": "uint8"
+      },
       {
         "internalType": "enum SpecialLottery.Status",
         "name": "",

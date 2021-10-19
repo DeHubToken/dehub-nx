@@ -105,7 +105,7 @@ const getWinningTickets = async (
   });
 
   let maximumMatched = 0;
-  allWinningTickets.forEach((value, index) => {
+  allWinningTickets.forEach((value) => {
     maximumMatched = maximumMatched > value.rewardBracket ? maximumMatched : value.rewardBracket;
   });
 
