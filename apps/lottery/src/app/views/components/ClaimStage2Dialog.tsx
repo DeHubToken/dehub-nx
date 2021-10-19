@@ -26,7 +26,10 @@ interface ClaimStage2DialogProps {
 }
 
 const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
-  const { currentLotteryId } = useLottery();
+  const {
+    currentLotteryId,
+    currentRound: { status },
+  } = useLottery();
 
   const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
   const { fetchAllRewards, winningRewards, fetchStatus } =
@@ -42,7 +45,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
 
   useEffect(() => {
     fetchAllRewards();
-  }, [account, currentLotteryId, fetchAllRewards]);
+  }, [account, currentLotteryId, status, fetchAllRewards]);
 
   const handleClaim = async () => {
     const ticketIds = winningRewards?.ticketsWithUnclaimedRewards.map(

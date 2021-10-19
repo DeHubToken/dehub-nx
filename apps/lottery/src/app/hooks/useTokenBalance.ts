@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 
 import { Hooks } from '@dehub/react/core';
@@ -28,12 +28,17 @@ export const useTokenBalance = (tokenAddress: string) => {
 
   const { account } = Hooks.useMoralisEthers();
   const { fastRefresh } = useRefresh();
+  const mountedRef = useRef(true);
 
   useEffect(() => {
+    mountedRef.current = true;
     const fetchBalance = async () => {
       const contract = getBep20Contract(tokenAddress);
       try {
         const res = await contract.balanceOf(account);
+        if (!mountedRef.current) {
+          return;
+        }
         setBalanceState({
           balance: new BigNumber(res.toString()),
           fetchStatus: SUCCESS
@@ -46,9 +51,11 @@ export const useTokenBalance = (tokenAddress: string) => {
         }));
       }
     }
-
     if (account) {
       fetchBalance();
+    }
+    return () => {
+      mountedRef.current = false;
     }
 
   }, [account, tokenAddress, fastRefresh, SUCCESS, FAILED]);

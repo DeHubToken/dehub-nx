@@ -26,7 +26,10 @@ interface ClaimDeGrandDialogProps {
 }
 
 const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
-  const { currentLotteryId } = useLottery();
+  const {
+    currentLotteryId,
+    currentRound: { status },
+  } = useLottery();
 
   const { fetchAllWinners, winners, fetchStatus } = useGetDeGrandWinners();
   const isFetchingWinners =
@@ -43,7 +46,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
     if (currentLotteryId) {
       fetchAllWinners(currentLotteryId);
     }
-  }, [currentLotteryId, fetchAllWinners]);
+  }, [currentLotteryId, status, fetchAllWinners]);
 
   useEffect(() => {
     const winningTicketIds = winners.map((item: LotteryTicketOwner) =>

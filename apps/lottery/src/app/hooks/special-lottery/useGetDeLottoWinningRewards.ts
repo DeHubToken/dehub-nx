@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 
 import { Hooks } from '@dehub/react/core';
 import { useLottery } from '../../states/special-lottery/hooks';
@@ -16,18 +16,28 @@ const useGetDeLottoWinningRewards = () => {
   const { currentLotteryId, isTransitioning } = useLottery();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [winningRewards, setWinningRewards] = useState<LotteryTicketClaimData | null>(null);
+  const mountedRef = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    }
+  }, []);
 
   useEffect(() => {
     setFetchStatus(FetchStatus.NOT_FETCHED);
   }, [account, isTransitioning]);
 
   const fetchAllRewards = useCallback(async () => {
-    if (account) {
+    if (account && mountedRef.current) {
       setFetchStatus(FetchStatus.IN_PROGRESS);
       const winningRewardsResponse = await fetchUserDeLottoWinningRewards(
         account,
         currentLotteryId
       );
+      if (!mountedRef.current) {
+        return;
+      }
       setWinningRewards(winningRewardsResponse);
       setFetchStatus(FetchStatus.SUCCESS);
     }

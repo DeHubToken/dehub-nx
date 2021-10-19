@@ -28,7 +28,10 @@ interface ClaimStage1DialogProps {
 }
 
 const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
-  const { currentLotteryId } = useLottery();
+  const {
+    currentLotteryId,
+    currentRound: { status },
+  } = useLottery();
 
   const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
   const { fetchAllRewards, unclaimedRewards, fetchStatus } =
@@ -45,7 +48,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
 
   useEffect(() => {
     fetchAllRewards(currentLotteryId);
-  }, [account, currentLotteryId, fetchAllRewards]);
+  }, [account, currentLotteryId, status, fetchAllRewards]);
 
   useEffect(() => {
     let total: BigNumber = BIG_ZERO;

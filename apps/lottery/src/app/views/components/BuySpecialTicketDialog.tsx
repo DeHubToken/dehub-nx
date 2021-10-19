@@ -106,13 +106,11 @@ const BuySpecialTicketDialog = ({
     handleConfirm,
   } = useApproveConfirmTransaction({
     onRequiresApproval: async (account: string) => {
-      console.log('allowance >> ', account);
       try {
         const response = await dehubContract?.allowance(
           account,
           getSpecialLotteryAddress()
         );
-        console.log('allowance', response);
         const currentAllowance = ethersToBigNumber(response);
         return currentAllowance.gt(0);
       } catch (error) {
