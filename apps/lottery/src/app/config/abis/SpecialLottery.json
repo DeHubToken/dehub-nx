@@ -1092,6 +1092,25 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewLotteryDrawable",
+    "outputs": [
+      {
+        "internalType": "enum SpecialLottery.Status",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "_user",
         "type": "address"

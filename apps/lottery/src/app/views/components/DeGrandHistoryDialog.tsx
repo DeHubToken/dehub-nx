@@ -16,10 +16,7 @@ import {
   FetchStatus,
 } from '../../hooks/special-lottery/useGetDeGrandWinners';
 import { useLottery } from '../../states/special-lottery/hooks';
-import {
-  DeGrandPrize,
-  DeGrandHistory,
-} from '../../states/special-lottery/types';
+import { DeGrandHistory } from '../../states/special-lottery/types';
 import DeGrandWinnersDialog from './DeGrandWinnersDialog';
 
 interface DeGrandHistoryDialogProps {
@@ -131,8 +128,8 @@ const DeGrandHistoryDialog = ({ open, onHide }: DeGrandHistoryDialogProps) => {
                         />
                       </>
                     ) : (
-                      <Text className="font-bold">
-                        You didn't win this time...Better luck next time!
+                      <Text className="font-bold text-center">
+                        You didn't win this time... Better luck next time!
                       </Text>
                     )}
                   </div>

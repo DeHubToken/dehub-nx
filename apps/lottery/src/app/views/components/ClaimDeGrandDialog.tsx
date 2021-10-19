@@ -107,8 +107,8 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
               </>
             )}
             {!isFetchingWinners && myWinningTicketIds.length < 1 && (
-              <Text className="font-bold">
-                You didn't win this time...Better luck next time!
+              <Text className="font-bold text-center">
+                You didn't win this time... Better luck next time!
               </Text>
             )}
             {isFetchingWinners && (

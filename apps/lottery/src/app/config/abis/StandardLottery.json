@@ -196,6 +196,19 @@
   },
   {
     "inputs": [],
+    "name": "DEAD_ADDRESS",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "MAX_BUNDLE_RULES",
     "outputs": [
       {
@@ -441,19 +454,6 @@
   {
     "inputs": [],
     "name": "deGrandAddress",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "deadAddress",
     "outputs": [
       {
         "internalType": "address",
@@ -950,6 +950,30 @@
         "internalType": "struct StandardLottery.Lottery",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewLotteryDrawable",
+    "outputs": [
+      {
+        "internalType": "enum StandardLottery.Status",
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",

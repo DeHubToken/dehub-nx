@@ -1,9 +1,8 @@
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
 import { BIG_ZERO } from '@dehub/shared/utils';
-import { fetchLottery, fetchUserTicketsPerMultipleRounds } from './helpers';
+import { fetchUserTicketsPerMultipleRounds } from './helpers';
 
-import { LotteryResponse } from './types';
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
 import {
   LotteryStatus,
@@ -130,62 +129,54 @@ const getWinningTickets = async (
  * @param roundIds 
  * @returns array of final numbers
  */
-const fetchLotteryFinalNumbers = async (roundIds: string[]): Promise<LotteryStatusAndFinalNumber[]> => {
-  const finalNumbers = [];
-  for (let idx = 0; idx < roundIds.length; idx++) {
-    const lottery: LotteryResponse = await fetchLottery(roundIds[idx]);
-    finalNumbers.push({
-      roundId: roundIds[idx],
-      status: lottery.status,
-      finalNumber: lottery.finalNumber.toString()
-    });
-  }
-  return finalNumbers;
-}
+/*
+ * const fetchLotteryFinalNumbers = async (roundIds: string[]): Promise<LotteryStatusAndFinalNumber[]> => {
+ *   const finalNumbers = [];
+ *   for (let idx = 0; idx < roundIds.length; idx++) {
+ *     const lottery: LotteryResponse = await fetchLottery(roundIds[idx]);
+ *     finalNumbers.push({
+ *       roundId: roundIds[idx],
+ *       status: lottery.status,
+ *       finalNumber: lottery.finalNumber.toString()
+ *     });
+ *   }
+ *   return finalNumbers;
+ * }
+ */
 
 /**
  * @todo, re-deploy viewLotteryDrawable
  */
-/*
- * const fetchLotteryFinalNumbers = async (roundIds: string[]): Promise<LotteryStatusAndFinalNumber[]> => {
- *   const calls: Call[] = roundIds.map((roundId) => {
- *     return {
- *       name: 'viewLotteryDrawable',
- *       address: getStandardLotteryAddress(),
- *       params: [roundId]
- *     };
- *   });
- */
+const fetchLotteryFinalNumbers = async (roundIds: string[]): Promise<LotteryStatusAndFinalNumber[]> => {
+  const calls: Call[] = roundIds.map((roundId) => {
+    return {
+      name: 'viewLotteryDrawable',
+      address: getStandardLotteryAddress(),
+      params: [roundId]
+    };
+  });
 
-/*
- *   try {
- *     const statusAndFinalNumbers = await multicallv2(StandardLotteryAbi, calls);
- */
+  try {
+    const statusAndFinalNumbers = await multicallv2(StandardLotteryAbi, calls);
 
-/*
- *     // eslint-disable-next-line @typescript-eslint/no-explicit-any
- *     const finalNumbers = statusAndFinalNumbers.map((statusAndFinalNumber: any, index: number) => {
- *       const statusKey = Object.keys(LotteryStatus)[statusAndFinalNumber[0]];
- */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const finalNumbers = statusAndFinalNumbers.map((statusAndFinalNumber: any, index: number) => {
+      const statusKey = Object.keys(LotteryStatus)[statusAndFinalNumber[0]];
 
-/*
- *       return {
- *         roundId: roundIds[index],
- *         status: LotteryStatus[statusKey as keyof typeof LotteryStatus],
- *         finalNumber: statusAndFinalNumber[1] as string
- *       };
- *     });
- */
+      return {
+        roundId: roundIds[index],
+        status: LotteryStatus[statusKey as keyof typeof LotteryStatus],
+        finalNumber: statusAndFinalNumber[1] as string
+      };
+    });
 
-//     return finalNumbers;
+    return finalNumbers;
 
-/*
- *   } catch (error) {
- *     console.error(error);
- *     return [];
- *   }
- * }
- */
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
 
 const findFinalNumberForRound = (targetRoundId: string, roundsData: LotteryStatusAndFinalNumber[]) => {
   const targetRound = roundsData.find((roundData) => roundData.roundId === targetRoundId);
