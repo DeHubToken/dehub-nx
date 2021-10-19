@@ -9,7 +9,8 @@ import { Call, multicallv2 } from '../../utils/multicall';
 
 interface LotteryDrawable {
   roundId: string;
-  status: LotteryStatus;
+  deLottoStatus: LotteryStatus;
+  deGrandStatus: LotteryStatus;
 }
 
 const fetchLotteryDrawable = async (roundIds: string[]): Promise<LotteryDrawable[]> => {
@@ -26,11 +27,13 @@ const fetchLotteryDrawable = async (roundIds: string[]): Promise<LotteryDrawable
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const drawables = response.map((drawable: any, index: number) => {
-      const statusKey = Object.keys(LotteryStatus)[drawable[0]];
+      const deLottoStatusKey = Object.keys(LotteryStatus)[drawable[0]];
+      const deGrandStatusKey = Object.keys(LotteryStatus)[drawable[1]];
 
       return {
         roundId: roundIds[index],
-        status: LotteryStatus[statusKey as keyof typeof LotteryStatus],
+        deLottoStatus: LotteryStatus[deLottoStatusKey as keyof typeof LotteryStatus],
+        deGrandStatus: LotteryStatus[deGrandStatusKey as keyof typeof LotteryStatus],
       };
     });
 
@@ -55,7 +58,7 @@ export const fetchHistoricalDeGrands = async (
 
     const drawables = await fetchLotteryDrawable(roundsToCheck);
     const claimableRounds = drawables.filter((drawable) => {
-      return drawable.status === LotteryStatus.CLAIMABLE;
+      return drawable.deGrandStatus === LotteryStatus.CLAIMABLE;
     });
 
     if (claimableRounds.length < 1) {

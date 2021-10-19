@@ -28,11 +28,11 @@ const StyledBox = styled(Box)`
 const DeGrand = () => {
   const {
     currentLotteryId,
-    currentRound: { status, endTime },
+    currentRound: { deGrandStatus, endTime },
   } = useLottery();
   const endTimeAsInt = parseInt(endTime, 10);
   const { nextEventTime, preCountDownText, postCountDownText } =
-    useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, status);
+    useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, deGrandStatus);
   const lotteryMonthAsInt = new Date(endTimeAsInt * 1000).getUTCMonth();
   const currentMonthAsInt = new Date().getUTCMonth();
 
@@ -80,7 +80,7 @@ const DeGrand = () => {
                 <FlexLine className="md:flex-column">
                   <Header>{`${deGrandPrize.title} | ${deGrandPrize.maxWinnerCount} lucky winners will be announced`}</Header>
                   {lotteryMonthAsInt === currentMonthAsInt &&
-                  status === LotteryStatus.CLAIMABLE ? (
+                  deGrandStatus === LotteryStatus.CLAIMABLE ? (
                     <Text className="text-pink-400">Draw Completed!</Text>
                   ) : nextEventTime &&
                     (preCountDownText || postCountDownText) ? (
@@ -98,7 +98,7 @@ const DeGrand = () => {
                 </FlexLine>
                 <FlexLine className="md:flex-column">
                   {account ? (
-                    status === LotteryStatus.CLAIMABLE && (
+                    deGrandStatus === LotteryStatus.CLAIMABLE && (
                       <>
                         <Text>Are you a winner?</Text>
                         <Button

@@ -21,7 +21,8 @@ const specialLotteryContract = getSpecialLotteryContract();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const processViewLotterySuccessResponse = (response: any, lotteryId: string): LotteryResponse => {
   const {
-    status,
+    deLottoStatus,
+    deGrandStatus,
     startTime,
     endTime,
     ticketRate,
@@ -30,12 +31,14 @@ const processViewLotterySuccessResponse = (response: any, lotteryId: string): Lo
     firstTicketIdNextLottery
   } = response;
 
-  const statusKey = Object.keys(LotteryStatus)[status];
+  const deLottoStatusKey = Object.keys(LotteryStatus)[deLottoStatus];
+  const deGrandStatusKey = Object.keys(LotteryStatus)[deGrandStatus];
 
   return {
     isLoading: false,
     lotteryId,
-    status: LotteryStatus[statusKey as keyof typeof LotteryStatus],
+    deLottoStatus: LotteryStatus[deLottoStatusKey as keyof typeof LotteryStatus],
+    deGrandStatus: LotteryStatus[deGrandStatusKey as keyof typeof LotteryStatus],
     startTime: startTime?.toString(),
     endTime: endTime?.toString(),
     firstTicketId: firstTicketId?.toString(),
@@ -49,7 +52,8 @@ const processViewLotteryAndError = (lotteryId: string): LotteryResponse => {
   return {
     isLoading: true,
     lotteryId,
-    status: LotteryStatus.PENDING,
+    deLottoStatus: LotteryStatus.PENDING,
+    deGrandStatus: LotteryStatus.PENDING,
     startTime: '',
     endTime: '',
     firstTicketId: '',
@@ -348,7 +352,8 @@ export const useProcessLotteryResponse = (
     isLoading: lotteryData.isLoading,
     lotteryId: lotteryData.lotteryId,
     userTickets: lotteryData.userTickets,
-    status: lotteryData.status,
+    deLottoStatus: lotteryData.deLottoStatus,
+    deGrandStatus: lotteryData.deGrandStatus,
     startTime: lotteryData.startTime,
     endTime: lotteryData.endTime,
     firstTicketId: lotteryData.firstTicketId,
@@ -373,7 +378,8 @@ export const processLotteryResponse = (
     isLoading: lotteryData.isLoading,
     lotteryId: lotteryData.lotteryId,
     userTickets: lotteryData.userTickets,
-    status: lotteryData.status,
+    deLottoStatus: lotteryData.deLottoStatus,
+    deGrandStatus: lotteryData.deGrandStatus,
     startTime: lotteryData.startTime,
     endTime: lotteryData.endTime,
     firstTicketId: lotteryData.firstTicketId,

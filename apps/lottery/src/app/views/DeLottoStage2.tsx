@@ -22,15 +22,20 @@ const DeLottoStage2 = () => {
   const {
     currentLotteryId,
     isTransitioning,
-    currentRound: { status, endTime, amountCollectedInDehub, userTickets },
+    currentRound: {
+      deLottoStatus,
+      endTime,
+      amountCollectedInDehub,
+      userTickets,
+    },
   } = useLottery();
   const currentLotteryIdAsInt = parseInt(currentLotteryId, 10);
   const endTimeAsInt = parseInt(endTime, 10);
   const { nextEventTime, preCountDownText, postCountDownText } =
-    useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, status);
+    useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, deLottoStatus);
 
   const nextLotteryIdAsInt =
-    status === LotteryStatus.OPEN
+    deLottoStatus === LotteryStatus.OPEN
       ? currentLotteryIdAsInt
       : currentLotteryIdAsInt + 1;
 
@@ -79,7 +84,7 @@ const DeLottoStage2 = () => {
       </FlexLine>
 
       <FlexLine className="align-items-center justify-content-between">
-        {status !== LotteryStatus.PENDING && nextLotteryIdAsInt > 0 ? (
+        {deLottoStatus !== LotteryStatus.PENDING && nextLotteryIdAsInt > 0 ? (
           <>
             <Header>Next Draw:</Header>
             <Text>
@@ -96,17 +101,17 @@ const DeLottoStage2 = () => {
       </FlexLine>
 
       <FlexLine className="align-items-center justify-content-between">
-        {status !== LotteryStatus.PENDING ? (
+        {deLottoStatus !== LotteryStatus.PENDING ? (
           <Header>Prize Pot:</Header>
         ) : (
           <Skeleton width="6rem" height="2rem" />
         )}
-        <PrizePot pot={amountCollectedInDehub} status={status} />
+        <PrizePot pot={amountCollectedInDehub} status={deLottoStatus} />
       </FlexLine>
 
       {account && (
         <FlexLine className="align-items-center md:align-items-start justify-content-between">
-          {status !== LotteryStatus.PENDING ? (
+          {deLottoStatus !== LotteryStatus.PENDING ? (
             <Header>Your Tickets:</Header>
           ) : (
             <Skeleton width="8rem" height="2rem" />
@@ -134,18 +139,20 @@ const DeLottoStage2 = () => {
                 <Skeleton width="8rem" height="1.5rem" />
               </>
             )}
-            {account && status === LotteryStatus.OPEN && !isTransitioning && (
-              <Button
-                className="button-link mt-3"
-                onClick={() => handleShowDialog('BuySpecialTicket')}
-                label="Buy Tickets"
-              />
-            )}
+            {account &&
+              deLottoStatus === LotteryStatus.OPEN &&
+              !isTransitioning && (
+                <Button
+                  className="button-link mt-3"
+                  onClick={() => handleShowDialog('BuySpecialTicket')}
+                  label="Buy Tickets"
+                />
+              )}
           </div>
         </FlexLine>
       )}
 
-      {status !== LotteryStatus.PENDING && (
+      {deLottoStatus !== LotteryStatus.PENDING && (
         <div className="flex flex-row justify-content-center">
           <div className="flex flex-column">
             <Text>Are you a winner stage1?</Text>
@@ -159,7 +166,7 @@ const DeLottoStage2 = () => {
               <ConnectWalletButton />
             )}
           </div>
-          {status === LotteryStatus.CLAIMABLE && (
+          {deLottoStatus === LotteryStatus.CLAIMABLE && (
             <div className="flex flex-column ml-3">
               <Text>Are you a winner stage2?</Text>
               {account ? (
@@ -184,7 +191,7 @@ const DeLottoStage2 = () => {
         tickets={
           userTickets && !userTickets.isLoading ? userTickets.tickets : []
         }
-        status={status}
+        status={deLottoStatus}
       />
 
       <BuySpecialTicketDialog

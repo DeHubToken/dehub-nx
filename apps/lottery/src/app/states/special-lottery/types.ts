@@ -13,7 +13,8 @@ export interface LotteryRoundUserTickets {
 interface LotteryRoundGenerics {
   isLoading?: boolean;
   lotteryId: string;
-  status: LotteryStatus;
+  deLottoStatus: LotteryStatus;
+  deGrandStatus: LotteryStatus;
   startTime: string;
   endTime: string;
   firstTicketId: string;

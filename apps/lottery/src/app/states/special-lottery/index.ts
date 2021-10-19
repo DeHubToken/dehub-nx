@@ -24,7 +24,8 @@ const initialState: LotteryState = {
   currentRound: {
     isLoading: true,
     lotteryId: '',
-    status: LotteryStatus.PENDING,
+    deLottoStatus: LotteryStatus.PENDING,
+    deGrandStatus: LotteryStatus.PENDING,
     startTime: '',
     endTime: '',
     firstTicketId: '',

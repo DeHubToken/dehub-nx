@@ -9,11 +9,11 @@ const useStatusTransitions = () => {
   const {
     currentLotteryId,
     isTransitioning,
-    currentRound: { status }
+    currentRound: { deLottoStatus }
   } = useLottery();
 
   const dispatch = useAppDispatch();
-  const previousStatus = usePrevious(status);
+  const previousStatus = usePrevious(deLottoStatus);
 
   useEffect(() => {
     /*
@@ -21,7 +21,7 @@ const useStatusTransitions = () => {
      * fetch current lottery Id every 10 seconds.
      * The isTransitioning condition will no longer be true when fetchCurrentLotteryId returns the next lottery Id
      */
-    if (previousStatus === LotteryStatus.CLAIMABLE && status === LotteryStatus.CLAIMABLE && isTransitioning) {
+    if (previousStatus === LotteryStatus.CLAIMABLE && deLottoStatus === LotteryStatus.CLAIMABLE && isTransitioning) {
       dispatch(fetchCurrentLotteryId());
       dispatch(fetchCurrentLottery({ currentLotteryId }));
       const interval = setInterval(async () => {
@@ -31,7 +31,7 @@ const useStatusTransitions = () => {
       return () => clearInterval(interval);
     }
     return () => null;
-  }, [status, previousStatus, isTransitioning, currentLotteryId, dispatch]);
+  }, [deLottoStatus, previousStatus, isTransitioning, currentLotteryId, dispatch]);
 }
 
 export default useStatusTransitions;
