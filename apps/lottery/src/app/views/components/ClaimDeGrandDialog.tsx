@@ -46,7 +46,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
     if (currentLotteryId) {
       fetchAllWinners(currentLotteryId);
     }
-  }, [currentLotteryId, deGrandStatus, fetchAllWinners]);
+  }, [currentLotteryId, deGrandStatus, account, fetchAllWinners]);
 
   useEffect(() => {
     const winningTicketIds = winners.map((item: LotteryTicketOwner) =>
@@ -127,7 +127,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
                     return (
                       <TicketIdLabel
                         key={`${index}`}
-                        id={`#${shortenAddress(winner)}`}
+                        id={`${shortenAddress(winner)}`}
                         className="mb-2"
                       />
                     );
