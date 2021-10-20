@@ -5,11 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
+import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
-import { RadioButtonModule } from 'primeng/radiobutton';
 import { RippleModule } from 'primeng/ripple';
-import { TabViewModule } from 'primeng/tabview';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
@@ -20,29 +18,22 @@ import { AppMenuitemComponent } from './menu/app.menuitem.component';
 import { AppTopBarComponent } from './topbar/app.topbar.component';
 import { LandingAboutComponent } from './view/landing/landing-about/landing-about.component';
 import { LandingAuditsComponent } from './view/landing/landing-audits/landing-audits.component';
+import { LandingDistributionComponent } from './view/landing/landing-distribution/landing-distribution.component';
 import { LandingLinksComponent } from './view/landing/landing-links/landing-links.component';
-import { LandingSlogenComponent } from './view/landing/landing-slogen/landing-slogen.component';
-import { LandingViewComponent } from './view/landing/landing-view.component';
-import { LandingYoutubeComponent } from './view/landing/landing-youtube/landing-youtube.component';
 import { LandingListedComponent } from './view/landing/landing-listed/landing-listed.component';
+import { LandingPartnerComponent } from './view/landing/landing-partner/landing-partner.component';
+import { LandingPartnersComponent } from './view/landing/landing-partners/landing-partners.component';
+import { LandingSlogenComponent } from './view/landing/landing-slogen/landing-slogen.component';
 import { LandingTeamMemberComponent } from './view/landing/landing-team-member/landing-team-member.component';
 import { LandingTeamComponent } from './view/landing/landing-team/landing-team.component';
-import { LandingPartnersComponent } from './view/landing/landing-partners/landing-partners.component';
-import { LandingPartnerComponent } from './view/landing/landing-partner/landing-partner.component';
-import { LandingZonesComponent } from './view/landing/landing-zones/landing-zones.component';
-import { LandingZoneComponent } from './view/landing/landing-zone/landing-zone.component';
-import { LandingDistributionComponent } from './view/landing/landing-distribution/landing-distribution.component';
-import { LandingTrikenomicsComponent } from './view/landing/landing-trikenomics/landing-trikenomics.component';
 import { LandingTrikenomicComponent } from './view/landing/landing-trikenomic/landing-trikenomic.component';
+import { LandingTrikenomicsComponent } from './view/landing/landing-trikenomics/landing-trikenomics.component';
+import { LandingViewComponent } from './view/landing/landing-view.component';
+import { LandingYoutubeComponent } from './view/landing/landing-youtube/landing-youtube.component';
+import { LandingZoneComponent } from './view/landing/landing-zone/landing-zone.component';
+import { LandingZonesComponent } from './view/landing/landing-zones/landing-zones.component';
 
-const primeNgModules = [
-  ButtonModule,
-  RippleModule,
-  InputTextModule,
-  MenuModule,
-  RadioButtonModule,
-  TabViewModule,
-];
+const primeNgModules = [ButtonModule, RippleModule, MenuModule, ChartModule];
 @NgModule({
   imports: [
     CommonModule,
@@ -51,7 +42,7 @@ const primeNgModules = [
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    primeNgModules,
+    ...primeNgModules,
   ],
   declarations: [
     AppComponent,
