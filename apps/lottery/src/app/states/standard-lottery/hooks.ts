@@ -88,6 +88,7 @@ export const usePreviousLottery = (lotteryId: string) => {
 
   useEffect(() => {
     setPreviousRound(null);
+    mountedRef.current = true;
 
     const fetchLotteryData = async () => {
       const lotteryData = await fetchLottery(lotteryId);
