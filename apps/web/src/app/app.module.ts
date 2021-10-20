@@ -27,6 +27,8 @@ import { LandingYoutubeComponent } from './view/landing/landing-youtube/landing-
 import { LandingListedComponent } from './view/landing/landing-listed/landing-listed.component';
 import { LandingTeamMemberComponent } from './view/landing/landing-team-member/landing-team-member.component';
 import { LandingTeamComponent } from './view/landing/landing-team/landing-team.component';
+import { LandingPartnersComponent } from './view/landing/landing-partners/landing-partners.component';
+import { LandingPartnerComponent } from './view/landing/landing-partner/landing-partner.component';
 
 const primeNgModules = [
   ButtonModule,
@@ -64,6 +66,8 @@ const primeNgModules = [
     LandingListedComponent,
     LandingTeamMemberComponent,
     LandingTeamComponent,
+    LandingPartnersComponent,
+    LandingPartnerComponent,
   ],
   providers: [MenuService, AppMainComponent],
   bootstrap: [AppComponent],
