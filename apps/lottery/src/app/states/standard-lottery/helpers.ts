@@ -28,6 +28,7 @@ const processViewLotterySuccessResponse = (response: any, lotteryId: string): Lo
     rewardBreakdown,
     countWinnersPerBracket,
     tokenPerBracket,
+    unwonPreviousPot,
     amountCollectedToken,
     firstTicketId,
     firstTicketIdNextLottery,
@@ -53,6 +54,7 @@ const processViewLotterySuccessResponse = (response: any, lotteryId: string): Lo
     lastTicketId: firstTicketIdNextLottery?.toString(),
     finalNumber: wrappedFinalNumber.toNumber(),
     priceTicketInDehub: ethersToSerializedBigNumber(ticketRate),
+    unwonPreviousPotInDehub: ethersToSerializedBigNumber(unwonPreviousPot),
     amountCollectedInDehub: ethersToSerializedBigNumber(amountCollectedToken),
     dehubPerBracket: serializedTokenPerBracket,
     countWinnersPerBracket: serializedCountWinnersPerBracket,
@@ -71,6 +73,7 @@ const processViewLotteryAndError = (lotteryId: string): LotteryResponse => {
     lastTicketId: '',
     finalNumber: 0,
     priceTicketInDehub: '',
+    unwonPreviousPotInDehub: '',
     amountCollectedInDehub: '',
     dehubPerBracket: [],
     countWinnersPerBracket: [],
@@ -210,12 +213,16 @@ export const useProcessLotteryResponse = (
 ): LotteryRound => {
   const {
     priceTicketInDehub: priceTicketInDehubAsString,
+    unwonPreviousPotInDehub: unwonPreviousPotAsString,
     amountCollectedInDehub: amountCollectedInDehubAsString
   } = lotteryData;
 
   const priceTicketInDehub = useMemo(() => {
     return new BigNumber(priceTicketInDehubAsString);
   }, [priceTicketInDehubAsString]);
+  const unwonPreviousPotInDehub = useMemo(() => {
+    return new BigNumber(unwonPreviousPotAsString);
+  }, [unwonPreviousPotAsString]);
   const amountCollectedInDehub = useMemo(() => {
     return new BigNumber(amountCollectedInDehubAsString);
   }, [amountCollectedInDehubAsString]);
@@ -231,6 +238,7 @@ export const useProcessLotteryResponse = (
     lastTicketId: lotteryData.lastTicketId,
     finalNumber: lotteryData.finalNumber,
     priceTicketInDehub,
+    unwonPreviousPotInDehub,
     amountCollectedInDehub,
     dehubPerBracket: lotteryData.dehubPerBracket,
     countWinnersPerBracket: lotteryData.countWinnersPerBracket,
@@ -243,10 +251,12 @@ export const processLotteryResponse = (
 ): LotteryRound => {
   const {
     priceTicketInDehub: priceTicketInDehubAsString,
+    unwonPreviousPotInDehub: unwonPreviousPotInDehubAsString,
     amountCollectedInDehub: amountCollectedInDehubAsString
   } = lotteryData;
 
   const priceTicketInDehub = new BigNumber(priceTicketInDehubAsString);
+  const unwonPreviousPotInDehub = new BigNumber(unwonPreviousPotInDehubAsString);
   const amountCollectedInDehub = new BigNumber(amountCollectedInDehubAsString);
 
   return {
@@ -260,6 +270,7 @@ export const processLotteryResponse = (
     lastTicketId: lotteryData.lastTicketId,
     finalNumber: lotteryData.finalNumber,
     priceTicketInDehub,
+    unwonPreviousPotInDehub,
     amountCollectedInDehub,
     dehubPerBracket: lotteryData.dehubPerBracket,
     countWinnersPerBracket: lotteryData.countWinnersPerBracket,

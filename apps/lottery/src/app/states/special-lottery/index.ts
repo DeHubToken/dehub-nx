@@ -31,6 +31,7 @@ const initialState: LotteryState = {
     firstTicketId: '',
     lastTicketId: '',
     priceTicketInDehub: '',
+    unwonPreviousPotInDehub: '',
     amountCollectedInDehub: '',
     userTickets: {
       isLoading: true,

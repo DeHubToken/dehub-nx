@@ -24,11 +24,13 @@ interface LotteryRoundGenerics {
 export interface LotteryRound extends LotteryRoundGenerics {
   userTickets?: LotteryRoundUserTickets;
   priceTicketInDehub: BigNumber;
+  unwonPreviousPotInDehub: BigNumber;
   amountCollectedInDehub: BigNumber;
 }
 
 export interface LotteryResponse extends LotteryRoundGenerics {
   priceTicketInDehub: SerializedBigNumber;
+  unwonPreviousPotInDehub: SerializedBigNumber;
   amountCollectedInDehub: SerializedBigNumber;
 }
 

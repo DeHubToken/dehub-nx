@@ -36,6 +36,7 @@ const initialState: LotteryState = {
     lastTicketId: '',
     finalNumber: 0,
     priceTicketInDehub: '',
+    unwonPreviousPotInDehub: '',
     amountCollectedInDehub: '',
     dehubPerBracket: [],
     countWinnersPerBracket: [],

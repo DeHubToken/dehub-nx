@@ -28,6 +28,7 @@ interface LotteryRoundGenerics {
 export interface LotteryRound extends LotteryRoundGenerics {
   userTickets?: LotteryRoundUserTickets;
   priceTicketInDehub: BigNumber;
+  unwonPreviousPotInDehub: BigNumber;
   amountCollectedInDehub: BigNumber;
   dehubPerBracket: string[];
   countWinnersPerBracket: string[];
@@ -36,6 +37,7 @@ export interface LotteryRound extends LotteryRoundGenerics {
 
 export interface LotteryResponse extends LotteryRoundGenerics {
   priceTicketInDehub: SerializedBigNumber;
+  unwonPreviousPotInDehub: SerializedBigNumber;
   amountCollectedInDehub: SerializedBigNumber;
   dehubPerBracket: SerializedBigNumber[];
   countWinnersPerBracket: SerializedBigNumber[];

@@ -51,7 +51,7 @@ const EventCountDown = ({
           )}
         </div>
       ) : (
-        <Title style={{ fontSize: titleFontSize }}>Loading...</Title>
+        <Title style={{ fontSize: titleFontSize }}>Waiting...</Title>
       )}
     </>
   );
