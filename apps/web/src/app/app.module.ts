@@ -29,6 +29,11 @@ import { LandingTeamMemberComponent } from './view/landing/landing-team-member/l
 import { LandingTeamComponent } from './view/landing/landing-team/landing-team.component';
 import { LandingPartnersComponent } from './view/landing/landing-partners/landing-partners.component';
 import { LandingPartnerComponent } from './view/landing/landing-partner/landing-partner.component';
+import { LandingZonesComponent } from './view/landing/landing-zones/landing-zones.component';
+import { LandingZoneComponent } from './view/landing/landing-zone/landing-zone.component';
+import { LandingDistributionComponent } from './view/landing/landing-distribution/landing-distribution.component';
+import { LandingTrikenomicsComponent } from './view/landing/landing-trikenomics/landing-trikenomics.component';
+import { LandingTrikenomicComponent } from './view/landing/landing-trikenomic/landing-trikenomic.component';
 
 const primeNgModules = [
   ButtonModule,
@@ -68,6 +73,11 @@ const primeNgModules = [
     LandingTeamComponent,
     LandingPartnersComponent,
     LandingPartnerComponent,
+    LandingZonesComponent,
+    LandingZoneComponent,
+    LandingDistributionComponent,
+    LandingTrikenomicsComponent,
+    LandingTrikenomicComponent,
   ],
   providers: [MenuService, AppMainComponent],
   bootstrap: [AppComponent],
