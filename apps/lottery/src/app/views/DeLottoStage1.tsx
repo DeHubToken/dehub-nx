@@ -165,34 +165,36 @@ const DeLottoStage1 = () => {
         </FlexLine>
       )}
 
-      <FlexLine className="align-items-center md:align-items-start justify-content-between">
-        {status !== LotteryStatus.PENDING ? (
-          <Header>Latest Winning Number:</Header>
-        ) : (
-          <Skeleton width="16rem" height="2rem" />
-        )}
-
-        <div className="flex flex-column align-items-center md:align-items-end">
-          {status !== LotteryStatus.PENDING && previousRound ? (
-            <>
-              <WinningNumbers
-                number={previousRound.finalNumber}
-                rounded={true}
-              />
-              <Text className="mt-2">Round #{previousLotteryId}</Text>
-              <Text className="mt-2">
-                Drawn {new Date(prevEndTimeAsInt * 1000).toLocaleString()}
-              </Text>
-            </>
+      {previousLotteryIdAsInt > 0 && (
+        <FlexLine className="align-items-center md:align-items-start justify-content-between">
+          {status !== LotteryStatus.PENDING ? (
+            <Header>Latest Winning Number:</Header>
           ) : (
-            <>
-              <Skeleton width="16rem" height="2.5rem" />
-              <Skeleton width="6rem" height="1.5rem" className="mt-2" />
-              <Skeleton width="14rem" height="2rem" className="mt-2" />
-            </>
+            <Skeleton width="16rem" height="2rem" />
           )}
-        </div>
-      </FlexLine>
+
+          <div className="flex flex-column align-items-center md:align-items-end">
+            {status !== LotteryStatus.PENDING && previousRound ? (
+              <>
+                <WinningNumbers
+                  number={previousRound.finalNumber}
+                  rounded={true}
+                />
+                <Text className="mt-2">Round #{previousLotteryId}</Text>
+                <Text className="mt-2">
+                  Drawn {new Date(prevEndTimeAsInt * 1000).toLocaleString()}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Skeleton width="16rem" height="2.5rem" />
+                <Skeleton width="6rem" height="1.5rem" className="mt-2" />
+                <Skeleton width="14rem" height="2rem" className="mt-2" />
+              </>
+            )}
+          </div>
+        </FlexLine>
+      )}
 
       {status !== LotteryStatus.PENDING && (
         <FlexLine className="md:flex-column align-items-center justify-content-between">

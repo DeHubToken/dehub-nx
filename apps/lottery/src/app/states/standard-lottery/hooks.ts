@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { useSelector } from 'react-redux';
 import { Hooks } from '@dehub/react/core';
@@ -84,6 +84,7 @@ export const useLottery = () => {
 
 export const usePreviousLottery = (lotteryId: string) => {
   const [previousRound, setPreviousRound] = useState<LotteryRound | null>(null);
+  const mountedRef = useRef(true);
 
   useEffect(() => {
     setPreviousRound(null);
@@ -91,12 +92,18 @@ export const usePreviousLottery = (lotteryId: string) => {
     const fetchLotteryData = async () => {
       const lotteryData = await fetchLottery(lotteryId);
       const processedLotteryData = processLotteryResponse(lotteryData);
+      if (!mountedRef.current) {
+        return;
+      }
       setPreviousRound(processedLotteryData);
     }
 
     const lotteryIdAsInt = parseInt(lotteryId, 10);
     if (lotteryIdAsInt > 0) {
       fetchLotteryData();
+    }
+    return () => {
+      mountedRef.current = false;
     }
   }, [lotteryId]);
 

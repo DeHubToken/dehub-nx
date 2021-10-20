@@ -64,6 +64,12 @@
         "internalType": "uint256",
         "name": "finalNumber",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "unwonPot",
+        "type": "uint256"
       }
     ],
     "name": "LotteryNumberDrawn",
@@ -100,6 +106,12 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "firstTicketId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "unwonPreviousPot",
         "type": "uint256"
       }
     ],
@@ -223,19 +235,6 @@
   {
     "inputs": [],
     "name": "MAX_LENGTH_LOTTERY",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "MAX_TICKETS_PER_BUYCLAIM",
     "outputs": [
       {
         "internalType": "uint256",
@@ -805,6 +804,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "unwonPreviousPot",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -880,6 +892,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "viewLastUnwonPot",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -892,7 +917,7 @@
       {
         "components": [
           {
-            "internalType": "enum StandardLottery.Status",
+            "internalType": "enum DeHubLotterysAbstract.Status",
             "name": "status",
             "type": "uint8"
           },
@@ -925,6 +950,11 @@
             "internalType": "uint256[4]",
             "name": "tokenPerBracket",
             "type": "uint256[4]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "unwonPreviousPot",
+            "type": "uint256"
           },
           {
             "internalType": "uint256",
@@ -966,7 +996,7 @@
     "name": "viewLotteryDrawable",
     "outputs": [
       {
-        "internalType": "enum StandardLottery.Status",
+        "internalType": "enum DeHubLotterysAbstract.Status",
         "name": "",
         "type": "uint8"
       },
