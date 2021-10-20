@@ -25,6 +25,7 @@ const DeLottoStage2 = () => {
     currentRound: {
       deLottoStatus,
       endTime,
+      unwonPreviousPotInDehub,
       amountCollectedInDehub,
       userTickets,
     },
@@ -106,7 +107,10 @@ const DeLottoStage2 = () => {
         ) : (
           <Skeleton width="6rem" height="2rem" />
         )}
-        <PrizePot pot={amountCollectedInDehub} status={deLottoStatus} />
+        <PrizePot
+          pot={unwonPreviousPotInDehub.plus(amountCollectedInDehub)}
+          status={deLottoStatus}
+        />
       </FlexLine>
 
       {account && (
