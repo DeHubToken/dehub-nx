@@ -5,6 +5,10 @@ import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 
+import {
+  TransactionReceipt,
+  TransactionResponse,
+} from '@ethersproject/abstract-provider';
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
@@ -40,12 +44,13 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
   const { account } = Hooks.useMoralisEthers();
   const [pendingTx, setPendingTx] = useState(false);
   const lotteryContract = useSpecialLotteryContract();
+  const [claimed, setClaimed] = useState(false);
 
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
     fetchAllRewards();
-  }, [account, currentLotteryId, deLottoStatus, fetchAllRewards]);
+  }, [account, currentLotteryId, deLottoStatus, claimed, fetchAllRewards]);
 
   const handleClaim = async () => {
     const ticketIds = winningRewards?.ticketsWithUnclaimedRewards.map(
@@ -55,14 +60,20 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
     setPendingTx(true);
     try {
       if (lotteryContract) {
-        await lotteryContract.claimTickets(currentLotteryId, ticketIds);
-
-        toast?.current?.show({
-          severity: 'info',
-          summary: 'Claim tickets',
-          detail: 'Claim tickets successfully. Please check your wallet.',
-          life: 3000,
-        });
+        const tx: TransactionResponse = await lotteryContract.claimTickets(
+          currentLotteryId,
+          ticketIds
+        );
+        const receipt: TransactionReceipt = await tx.wait();
+        if (receipt.status) {
+          toast?.current?.show({
+            severity: 'info',
+            summary: 'Claim tickets',
+            detail: 'Claim tickets successfully. Please check your wallet.',
+            life: 3000,
+          });
+          setClaimed(true);
+        }
       }
     } catch (error) {
       console.error(error);

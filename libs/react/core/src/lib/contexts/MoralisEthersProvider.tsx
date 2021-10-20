@@ -27,14 +27,15 @@ export const MoralisEthersProvider = ({
 
   const activateProvider = useCallback(async () => {
     const web3 = await Moralis.Web3.activeWeb3Provider?.activate();
-    const provider = new ethers.providers.Web3Provider(
+    const provider = new Web3Provider(
       web3?.currentProvider as ExternalProvider
     );
     setAuthProvider(provider);
 
     const signerT = provider.getSigner();
     setSigner(signerT);
-    setAccount(await signerT.getAddress());
+    const address = await signerT.getAddress();
+    setAccount(address);
   }, []);
 
   const { isWeb3Enabled, isAuthenticated, authenticate, user, logout } =

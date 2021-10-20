@@ -4,11 +4,13 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 
+import { Web3Provider } from '@ethersproject/providers';
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getFullDisplayBalance } from '@dehub/shared/utils';
+import { getContract, getFullDisplayBalance } from '@dehub/shared/utils';
 import { ethersToBigNumber } from '@dehub/shared/utils';
 
+import Bep20Abi from '../../config/abis/erc20.json';
 import { LotteryTicket } from '../../config/constants/types';
 import { Header, Text } from '../../components/Text';
 import {
@@ -24,7 +26,10 @@ import {
 import { fetchUserTicketsAndLotteries } from '../../states/standard-lottery';
 import { useAppDispatch } from '../../states';
 import { LotteryBundleRule } from '../../states/standard-lottery/types';
-import { getStandardLotteryAddress } from '../../utils/addressHelpers';
+import {
+  getDehubAddress,
+  getStandardLotteryAddress,
+} from '../../utils/addressHelpers';
 import { generateLotteryNumber } from '../../utils/numbers';
 
 let newTickets: {
@@ -69,9 +74,18 @@ const BuyStandardTicketDialog = ({
     handleApprove,
     handleConfirm,
   } = useApproveConfirmTransaction({
-    onRequiresApproval: async (approvalAccount: string) => {
+    onRequiresApproval: async (
+      provider: Web3Provider,
+      approvalAccount: string
+    ) => {
       try {
-        const response = await dehubContract?.allowance(
+        const tokenContract = getContract(
+          getDehubAddress(),
+          Bep20Abi,
+          provider,
+          approvalAccount
+        );
+        const response = await tokenContract.allowance(
           approvalAccount,
           getStandardLotteryAddress()
         );

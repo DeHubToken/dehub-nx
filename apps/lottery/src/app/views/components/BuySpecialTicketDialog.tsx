@@ -7,8 +7,13 @@ import { Toast } from 'primereact/toast';
 
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { ethersToBigNumber, getFullDisplayBalance } from '@dehub/shared/utils';
+import {
+  ethersToBigNumber,
+  getContract,
+  getFullDisplayBalance,
+} from '@dehub/shared/utils';
 
+import Bep20Abi from '../../config/abis/erc20.json';
 import BalanceInput from '../../components/BalanceInput/BalanceInput';
 import { Text } from '../../components/Text';
 import {
@@ -20,7 +25,11 @@ import { FetchStatus, useGetDehubBalance } from '../../hooks/useTokenBalance';
 import { useAppDispatch } from '../../states';
 import { useLottery } from '../../states/special-lottery/hooks';
 import { fetchUserTicketsAndLotteries } from '../../states/special-lottery';
-import { getSpecialLotteryAddress } from '../../utils/addressHelpers';
+import {
+  getDehubAddress,
+  getSpecialLotteryAddress,
+} from '../../utils/addressHelpers';
+import { Web3Provider } from '@ethersproject/providers';
 
 interface BuySpecialTicketDialogProps {
   open: boolean;
@@ -105,9 +114,18 @@ const BuySpecialTicketDialog = ({
     handleApprove,
     handleConfirm,
   } = useApproveConfirmTransaction({
-    onRequiresApproval: async (account: string) => {
+    onRequiresApproval: async (
+      provider: Web3Provider,
+      approvalAccount: string
+    ) => {
       try {
-        const response = await dehubContract?.allowance(
+        const tokenContract = getContract(
+          getDehubAddress(),
+          Bep20Abi,
+          provider,
+          approvalAccount
+        );
+        const response = await tokenContract.allowance(
           account,
           getSpecialLotteryAddress()
         );

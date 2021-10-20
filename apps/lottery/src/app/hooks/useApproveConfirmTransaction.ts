@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useRef } from 'react'
 import { Hooks } from '@dehub/react/core';
 import { ethers } from 'ethers'
+import { Web3Provider } from '@ethersproject/providers';
 
 type LoadingState = 'idle' | 'loading' | 'success' | 'fail';
 
@@ -79,7 +80,7 @@ interface OnSuccessProps {
 interface ApproveConfirmTransaction {
   onApprove: () => Promise<ethers.providers.TransactionResponse>;
   onConfirm: () => Promise<ethers.providers.TransactionResponse>;
-  onRequiresApproval?: (account: string) => Promise<boolean>;
+  onRequiresApproval?: (web3Provider: Web3Provider, account: string) => Promise<boolean>;
   onSuccess: ({ state, receipt }: OnSuccessProps) => void;
   onApproveSuccess?: ({ state, receipt }: OnSuccessProps) => void;
   onToast?: (severity: string, detail: string) => void;
@@ -94,44 +95,18 @@ const useApproveConfirmTransaction = ({
   onToast
 }: ApproveConfirmTransaction) => {
 
-  const { account } = Hooks.useMoralisEthers();
+  const { account, authProvider } = Hooks.useMoralisEthers();
   const [state, dispatch] = useReducer(reducer, initialState);
   // https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
   const mountedRef = useRef(true);
 
   const handlePreApprove = useRef(onRequiresApproval);
 
-  // eslint-disable-next-line multiline-comment-style
-  // // Check if approval is necessary, re-check if account changes
-  // useEffect(() => {
-  //   if (account && handlePreApprove.current) {
-  //     handlePreApprove.current().then((result) => {
-  //       if (result) {
-  //         dispatch({ type: 'requires_approval' })
-  //       }
-  //     })
-  //   }
-  // }, [account, handlePreApprove, dispatch]);
-
-  // eslint-disable-next-line multiline-comment-style
-  // useEffect(() => {
-  //   mountedRef.current = true;
-  //   if (account && onRequiresApproval) {
-  //     onRequiresApproval().then((result) => {
-  //       if (result && mountedRef.current) {
-  //         dispatch({ type: 'requires_approval' })
-  //       }
-  //     })
-  //   }
-  //   return () => {
-  //     mountedRef.current = false;
-  //   }
-  // }, [account, onRequiresApproval]);
-
   useEffect(() => {
     mountedRef.current = true;
-    if (account && handlePreApprove.current) {
-      handlePreApprove.current(account).then((result) => {
+    if (account && handlePreApprove.current && authProvider) {
+      handlePreApprove.current(authProvider, account).then((result) => {
+        console.log('handlePreApprove,', result, mountedRef.current);
         if (!mountedRef.current) {
           return;
         }
@@ -145,7 +120,7 @@ const useApproveConfirmTransaction = ({
     return () => {
       mountedRef.current = false;
     }
-  }, [account, handlePreApprove]);
+  }, [account, authProvider, handlePreApprove]);
 
   return {
     isApproving: state.approvalState === 'loading',

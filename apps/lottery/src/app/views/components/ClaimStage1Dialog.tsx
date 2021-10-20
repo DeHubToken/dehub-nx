@@ -6,6 +6,10 @@ import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 
+import {
+  TransactionReceipt,
+  TransactionResponse,
+} from '@ethersproject/abstract-provider';
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
@@ -40,15 +44,16 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
     // fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
-  const [pendingTx, setPendingTx] = useState(false);
+  const [pendingTx, setPendingTx] = useState(-1);
   const [unclaimedDehubTotal, setUnclaimedDehubTotal] =
     useState<BigNumber>(BIG_ZERO);
   const lotteryContract = useStandardLotteryContract();
+  const [claimed, setClaimed] = useState(false);
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
     fetchAllRewards(currentLotteryId);
-  }, [account, currentLotteryId, status, fetchAllRewards]);
+  }, [account, currentLotteryId, status, claimed, fetchAllRewards]);
 
   useEffect(() => {
     let total: BigNumber = BIG_ZERO;
@@ -82,17 +87,24 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
         activeClaimData.ticketsWithUnclaimedRewards,
         activeClaimData.roundId
       );
-    setPendingTx(true);
+    setPendingTx(index);
     try {
       if (lotteryContract) {
-        await lotteryContract.claimTickets(lotteryId, ticketIds, brackets);
-
-        toast?.current?.show({
-          severity: 'info',
-          summary: 'Claim tickets',
-          detail: 'Claim tickets successfully. Please check your wallet.',
-          life: 3000,
-        });
+        const tx: TransactionResponse = await lotteryContract.claimTickets(
+          lotteryId,
+          ticketIds,
+          brackets
+        );
+        const receipt: TransactionReceipt = await tx.wait();
+        if (receipt.status) {
+          toast?.current?.show({
+            severity: 'info',
+            summary: 'Claim tickets',
+            detail: 'Claim tickets successfully. Please check your wallet.',
+            life: 3000,
+          });
+          setClaimed(true);
+        }
       }
     } catch (error) {
       console.error(error);
@@ -106,7 +118,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
         life: 3000,
       });
     }
-    setPendingTx(false);
+    setPendingTx(-1);
     onHide();
   };
 
@@ -165,10 +177,12 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
                       unclaimedDehubTotal.gt(BIG_ZERO) && (
                         <div className="flex flex-column mt-5">
                           <Button
-                            icon={pendingTx ? 'pi pi-spin pi-spinner' : ''}
+                            icon={
+                              pendingTx === index ? 'pi pi-spin pi-spinner' : ''
+                            }
                             className="justify-content-center"
                             onClick={() => {
-                              if (pendingTx) {
+                              if (pendingTx >= 0) {
                                 return;
                               }
                               handleClaim(index);
