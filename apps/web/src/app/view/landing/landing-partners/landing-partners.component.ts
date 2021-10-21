@@ -9,6 +9,17 @@ import { Partner } from '../landing-partner/landing-partner.component';
         <dhb-landing-partner [partner]="partner"></dhb-landing-partner>
       </div>
     </div>
+
+    <!-- Become a Partner -->
+    <div class="col-12 flex justify-content-center">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Become a Partner"
+        class="button-rounded uppercase"
+      ></button>
+    </div>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
