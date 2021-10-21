@@ -8,6 +8,7 @@ import DeLottoStage2Waiting from './DeLottoStage2Waiting';
 import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
 
+import { LotteryStatus } from '../config/constants/types';
 import useStandardLotteryStatusTransitions from '../hooks/standard-lottery/useStatusTransitions';
 import useSpecialLotteryStatusTransitions from '../hooks/special-lottery/useStatusTransitions';
 import {
@@ -39,10 +40,10 @@ const DeLotto = () => {
   useSpecialLotteryStatusTransitions();
 
   const {
-    currentRound: { endTime: standardEndTime },
+    currentRound: { status: standardStatus, endTime: standardEndTime },
   } = useStandardLottery();
   const {
-    currentRound: { endTime: specialEndTime },
+    currentRound: { deLottoStatus: specialStatus, endTime: specialEndTime },
   } = useSpecialLottery();
   const endTimeAsInt = parseInt(standardEndTime, 10);
   const specialEndTimeAsInt = parseInt(specialEndTime, 10);
@@ -53,8 +54,9 @@ const DeLotto = () => {
       <TabView>
         <TabPanel header="STAGE #1">
           <StyledBox>
-            {isNaN(specialEndTimeAsInt) ||
-            endTimeAsInt >= specialEndTimeAsInt ? (
+            {standardStatus !== LotteryStatus.PENDING &&
+            (isNaN(specialEndTimeAsInt) ||
+              endTimeAsInt >= specialEndTimeAsInt) ? (
               <DeLottoStage1 />
             ) : (
               <DeLottoStage1Waiting />
@@ -64,7 +66,8 @@ const DeLotto = () => {
 
         <TabPanel header="STAGE #2">
           <StyledBox>
-            {isNaN(endTimeAsInt) || endTimeAsInt < specialEndTimeAsInt ? (
+            {specialStatus !== LotteryStatus.PENDING &&
+            (isNaN(endTimeAsInt) || endTimeAsInt < specialEndTimeAsInt) ? (
               <DeLottoStage2 />
             ) : (
               <DeLottoStage2Waiting />

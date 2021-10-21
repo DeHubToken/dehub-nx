@@ -118,6 +118,15 @@ const getWinningTickets = async (
       ticketsWithUnclaimedRewards,
       dehubTotal
     } = await fetchDehubRewardsForTickets(unclaimedWinningTickets);
+    if (dehubTotal.eq(BIG_ZERO)) { // it does not have claimable tickets
+      /*
+       * Even though numbers are matched, it could be a maximum match in the current round.
+       * If not a maximum matching, claimable amount can be zero.
+       */
+      return {
+        ticketsWithUnclaimedRewards: [], allWinningTickets: [], dehubTotal, roundId
+      };
+    }
     return { ticketsWithUnclaimedRewards, allWinningTickets, dehubTotal, roundId };
   }
 

@@ -131,7 +131,9 @@ const DeLottoStage1 = () => {
             <Skeleton width="8rem" height="2rem" />
           )}
           <div className="flex flex-column align-items-center md:align-items-end">
-            {userTickets && !userTickets.isLoading ? (
+            {status !== LotteryStatus.PENDING &&
+            userTickets &&
+            !userTickets.isLoading ? (
               <>
                 <Text>
                   You have{' '}
@@ -151,7 +153,7 @@ const DeLottoStage1 = () => {
             ) : (
               <>
                 <Skeleton width="16rem" height="1.5rem" />
-                <Skeleton width="8rem" height="1.5rem" />
+                <Skeleton width="8rem" height="1.5rem" className="mt-2" />
               </>
             )}
             {account && status === LotteryStatus.OPEN && !isTransitioning && (

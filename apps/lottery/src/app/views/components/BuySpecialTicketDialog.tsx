@@ -126,7 +126,7 @@ const BuySpecialTicketDialog = ({
           approvalAccount
         );
         const response = await tokenContract.allowance(
-          account,
+          approvalAccount,
           getSpecialLotteryAddress()
         );
         const currentAllowance = ethersToBigNumber(response);
