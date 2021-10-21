@@ -26,7 +26,7 @@ import { ChartData, ChartOptions } from 'chart.js';
       </div>
 
       <!-- Pie Chart -->
-      <div class="col-12 flex justify-content-around">
+      <div class="col-12 flex justify-content-center">
         <p-chart
           type="doughnut"
           [data]="chartData"

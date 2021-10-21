@@ -15,7 +15,7 @@ export interface TeamMember {
 @Component({
   selector: 'dhb-landing-team-member',
   template: `
-    <div *ngIf="teamMember" class="card image-card">
+    <div *ngIf="teamMember" class="card image-card shadow-8">
       <img
         [src]="
           'assets/landing/team/avatars/' + teamMember.avatar + '-avatar.jpg'

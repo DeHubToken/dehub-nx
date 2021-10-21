@@ -15,7 +15,7 @@ export interface Partner {
 @Component({
   selector: 'dhb-landing-partner',
   template: `
-    <div *ngIf="partner" class="card image-card">
+    <div *ngIf="partner" class="card image-card shadow-8">
       <img
         [src]="'assets/landing/partners/' + partner.logo + '-logo.svg'"
         [alt]="partner.title"
