@@ -149,7 +149,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "deGrandMonth",
+        "name": "drawTime",
         "type": "uint256"
       },
       {
@@ -878,7 +878,7 @@
         "components": [
           {
             "internalType": "uint256",
-            "name": "deGrandMonth",
+            "name": "drawTime",
             "type": "uint256"
           },
           {
@@ -934,7 +934,7 @@
         "components": [
           {
             "internalType": "uint256",
-            "name": "deGrandMonth",
+            "name": "drawTime",
             "type": "uint256"
           },
           {

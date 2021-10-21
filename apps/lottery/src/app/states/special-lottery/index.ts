@@ -39,7 +39,7 @@ const initialState: LotteryState = {
     }
   },
   deGrandPrize: {
-    deGrandMonth: 0,
+    drawTime: 0,
     title: '',
     subtitle: '',
     description: '',
@@ -97,7 +97,7 @@ export const fetchThisMonthDeGrandPrize = createAsyncThunk<DeGrandPrize>(
       return deGrandPrize;
     }
     return {
-      deGrandMonth: 0,
+      drawTime: 0,
       title: '',
       subtitle: '',
       description: '',

@@ -131,11 +131,13 @@ const DeLottoStage2 = () => {
                   </span>{' '}
                   tickets this round.
                 </Text>
-                <Button
-                  className="p-button-link p-0"
-                  onClick={() => handleShowDialog('ListTicket')}
-                  label="View your tickets"
-                />
+                {userTickets.tickets && userTickets.tickets?.length > 0 && (
+                  <Button
+                    className="p-button-link p-0"
+                    onClick={() => handleShowDialog('ListTicket')}
+                    label="View your tickets"
+                  />
+                )}
               </>
             ) : (
               <>

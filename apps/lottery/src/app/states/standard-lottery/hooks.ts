@@ -38,7 +38,7 @@ export const useFetchLottery = () => {
   useEffect(() => {
     dispatch(fetchCurrentLotteryId());
 
-  }, [dispatch]);
+  }, [dispatch, slowRefresh]);
 
   useEffect(() => {
     dispatch(fetchLotteryBundles());

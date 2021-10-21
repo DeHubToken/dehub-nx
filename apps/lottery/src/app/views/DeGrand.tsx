@@ -27,12 +27,9 @@ const StyledBox = styled(Box)`
 
 const DeGrand = () => {
   const {
-    currentLotteryId,
     currentRound: { deGrandStatus, endTime },
   } = useLottery();
   const endTimeAsInt = parseInt(endTime, 10);
-  const { nextEventTime, preCountDownText, postCountDownText } =
-    useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, deGrandStatus);
   const lotteryMonthAsInt = new Date(endTimeAsInt * 1000).getUTCMonth();
   const currentMonthAsInt = new Date().getUTCMonth();
 
@@ -42,6 +39,7 @@ const DeGrand = () => {
   const [checkDeGrandDialog, setCheckDeGrandDialog] = useState(false);
   const [checkDeGrandHistoryDialog, setCheckDeGrandHistoryDialog] =
     useState(false);
+  const currentSeconds = Math.floor(Date.now() / 1000);
 
   const handleShowDialog = (dialogKind: string) => {
     if (dialogKind === 'CheckDeGrand') {
@@ -63,7 +61,7 @@ const DeGrand = () => {
       <h1>DeGrand</h1>
       <Card>
         <StyledBox>
-          {deGrandPrize && deGrandPrize.deGrandMonth > 0 ? (
+          {deGrandPrize && deGrandPrize.drawTime > 0 ? (
             <FlexLine
               className="md:flex-column align-items-center justify-content-center"
               style={{ borderBottom: '1px solid' }}
@@ -82,12 +80,10 @@ const DeGrand = () => {
                   {lotteryMonthAsInt === currentMonthAsInt &&
                   deGrandStatus === LotteryStatus.CLAIMABLE ? (
                     <Text className="text-pink-400">Draw Completed!</Text>
-                  ) : nextEventTime &&
-                    (preCountDownText || postCountDownText) ? (
+                  ) : deGrandPrize && deGrandPrize.drawTime > currentSeconds ? (
                     <EventCountDown
-                      nextEventTime={nextEventTime}
-                      preCountDownText={preCountDownText}
-                      postCountDownText={postCountDownText}
+                      nextEventTime={deGrandPrize.drawTime}
+                      postCountDownText="until the draw"
                       isVertical={false}
                       titleFontSize="14px"
                       timerFontSize="14px"
@@ -127,7 +123,7 @@ const DeGrand = () => {
             <Text className="my-2">See previous DeGrand Draws</Text>
             {account ? (
               deGrandPrize &&
-              deGrandPrize.deGrandMonth > 0 && (
+              deGrandPrize.drawTime > 0 && (
                 <Button
                   className="mt-2 justify-content-center"
                   onClick={() => handleShowDialog('CheckDeGrandHistory')}

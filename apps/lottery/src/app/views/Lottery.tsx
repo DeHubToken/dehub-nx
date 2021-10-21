@@ -38,7 +38,7 @@ export default function Lottery() {
                 className="mx-auto text-center"
                 style={{ width: '300px', height: '100px' }}
               >
-                <h1>Lottery LOGO</h1>
+                <h1>Raffle LOGO</h1>
               </Card>
               <div className="my-8">
                 <DeLotto />

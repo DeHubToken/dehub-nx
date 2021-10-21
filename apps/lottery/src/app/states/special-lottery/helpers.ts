@@ -280,7 +280,7 @@ export const fetchUserDeLottoWinningRewards = async (
 export const fetchDeGrandPrize = async (timestamp: number): Promise<DeGrandPrize | null> => {
   try {
     const {
-      deGrandMonth,
+      drawTime,
       title,
       subtitle,
       description,
@@ -290,7 +290,7 @@ export const fetchDeGrandPrize = async (timestamp: number): Promise<DeGrandPrize
     } = await specialLotteryContract.viewDeGrandPrize(timestamp);
 
     return {
-      deGrandMonth: parseInt(deGrandMonth, 10),
+      drawTime: parseInt(drawTime, 10),
       title,
       subtitle,
       description,

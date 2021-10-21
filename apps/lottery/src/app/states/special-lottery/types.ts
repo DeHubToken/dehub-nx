@@ -35,7 +35,7 @@ export interface LotteryResponse extends LotteryRoundGenerics {
 }
 
 export interface DeGrandPrize {
-  deGrandMonth: number;
+  drawTime: number;
   title: string;
   subtitle: string;
   description?: string;
