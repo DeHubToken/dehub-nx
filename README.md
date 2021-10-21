@@ -1,6 +1,6 @@
-# DeHUB Monorepo
+# DeHub Monorepo
 
-This is the **monorepo of DeHUB**. Created based on the awesome [Nx.dev](https://nx.dev) workspace by [Nrwl](https://nrwl.io/) Team.
+This is the **monorepo of DeHub**. Created based on the awesome [Nx.dev](https://nx.dev) workspace by [Nrwl](https://nrwl.io/) Team.
 
 _More libraries or apps are supported and will be added as we go under `apps` or `libs` folders_
 
@@ -8,17 +8,21 @@ _More libraries or apps are supported and will be added as we go under `apps` or
 
 _Apps represent standalone sites, which can be written in pure JS, React, Vue.JS or Angular and can consume common libraries (`libs`)_
 
-## `apps/web` [DeHUB Angular Website]
+## `apps/web` - [DeHub Angular Website]
 
-_Angular DeHUB website_
+[![Netlify Status](https://api.netlify.com/api/v1/badges/355647c5-6e43-4c94-92bc-eac397ab80a8/deploy-status)](https://app.netlify.com/sites/dehub-ng-website-draft/deploys)
+
+_Angular DeHub website_
 
 - Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
 - Hosting: **[Netlify](https://dehub-ng-website-draft.netlify.app/)**
 
-## `apps/lottery` [DeHUB Lottery Dapp]
+## `apps/lottery` - [DeHub Lottery Dapp]
 
-_React DeHUB Lottery Dapp_
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bacc9132-2b4b-438d-9b93-a377c12181fb/deploy-status)](https://app.netlify.com/sites/dehub-react-lottery-draft/deploys)
+
+_React DeHub Lottery Dapp_
 
 - Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
@@ -28,23 +32,23 @@ _React DeHUB Lottery Dapp_
 
 _Like UI, models, shared or moralis, etc._<br>
 
-## `libs/shared/assets/dehub` [Shared DeHUB assets]
+## `libs/shared/assets/dehub` - [Shared DeHub assets]
 
 _Common sass styles of DeHUB_
 
-## `libs/shared/assets/freya` [Shared Freya template]
+## `libs/shared/assets/freya` - [Shared Freya template]
 
 _Common sass styles from the Freya PrimeNG themes_
 
-## `libs/shared/moralis` [Shared Moralis functionality]
+## `libs/shared/moralis` - [Shared Moralis functionality]
 
 _Common Moralis logic like authentication, walletconnect, etc_
 
-## `libs/shared/models` [Shared types, states, models]
+## `libs/shared/models` - [Shared types, states, models]
 
 _Common Models used in react and angular apps_
 
-## `libs/shared/utils` [Shared utils and functions]
+## `libs/shared/utils` - [Shared utils and functions]
 
 _Common Utils used in react and angular apps_
 
