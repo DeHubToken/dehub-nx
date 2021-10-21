@@ -253,7 +253,7 @@ const BuyStandardTicketDialog = ({
               bundleRules.map(
                 (bundleRule: LotteryBundleRule, index: number) => {
                   return (
-                    bundleRule.purchasedCount > 0 && (
+                    bundleRule.freeCount > 0 && (
                       <div
                         className="col-12 mt-2 flex flex-row"
                         key={`bundle-${index}`}
