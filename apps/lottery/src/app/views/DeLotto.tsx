@@ -9,6 +9,11 @@ import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
 
 import { LotteryStatus } from '../config/constants/types';
+import {
+  useFetchPaused,
+  useGetSpecialPaused,
+  useGetStandardPaused,
+} from '../states/pause/hooks';
 import useStandardLotteryStatusTransitions from '../hooks/standard-lottery/useStatusTransitions';
 import useSpecialLotteryStatusTransitions from '../hooks/special-lottery/useStatusTransitions';
 import {
@@ -31,6 +36,9 @@ const StyledBox = styled(Box)`
 `;
 
 const DeLotto = () => {
+  // pause status
+  useFetchPaused();
+
   // standard lottery
   useFetchStandardLottery();
   useStandardLotteryStatusTransitions();
@@ -47,6 +55,8 @@ const DeLotto = () => {
   } = useSpecialLottery();
   const endTimeAsInt = parseInt(standardEndTime, 10);
   const specialEndTimeAsInt = parseInt(specialEndTime, 10);
+  const standardPaused = useGetStandardPaused();
+  const specialPaused = useGetSpecialPaused();
 
   return (
     <StyledContainer>
@@ -59,7 +69,7 @@ const DeLotto = () => {
               endTimeAsInt >= specialEndTimeAsInt) ? (
               <DeLottoStage1 />
             ) : (
-              <DeLottoStage1Waiting />
+              <DeLottoStage1Waiting paused={standardPaused} />
             )}
           </StyledBox>
         </TabPanel>
@@ -70,7 +80,7 @@ const DeLotto = () => {
             (isNaN(endTimeAsInt) || endTimeAsInt < specialEndTimeAsInt) ? (
               <DeLottoStage2 />
             ) : (
-              <DeLottoStage2Waiting />
+              <DeLottoStage2Waiting paused={specialPaused} />
             )}
           </StyledBox>
         </TabPanel>

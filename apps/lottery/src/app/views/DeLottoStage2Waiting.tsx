@@ -5,7 +5,13 @@ import FlexLine from './components/FlexLine';
 import { Text } from '../components/Text';
 import { environment } from '../../environments/environment';
 
-const DeLottoStage2Waiting = () => {
+interface DeLottoStage1WaitingProps {
+  paused?: boolean;
+}
+
+const DeLottoStage2Waiting = ({
+  paused = false,
+}: DeLottoStage1WaitingProps) => {
   const now = new Date();
   const startDate = new Date(0);
   startDate.setUTCFullYear(
@@ -19,15 +25,22 @@ const DeLottoStage2Waiting = () => {
 
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center">
-      <EventCountDown
-        nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 501}
-        preCountDownText="Starts in "
-        isVertical={false}
-      />
-      <Text>
-        Come back later to buy tickets for the DeLotto second stage and DeGrand!
-      </Text>
-      <Button className="p-button-link p-0 mt-7" label="Read more" />
+      {paused ? (
+        <Text>DeLotto is paused for a while. Please wait...</Text>
+      ) : (
+        <>
+          <EventCountDown
+            nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 501}
+            preCountDownText="Starts in "
+            isVertical={false}
+          />
+          <Text>
+            Come back later to buy tickets for the DeLotto second stage and
+            DeGrand!
+          </Text>
+          <Button className="p-button-link p-0 mt-7" label="Read more" />
+        </>
+      )}
     </FlexLine>
   );
 };
