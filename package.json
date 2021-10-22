@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "nx",
     "migrate": "nx migrate latest",
     "migrate:run": "nx migrate --run-migrations=migrations.json",
     "postinstall": "ngcc --properties es2015 browser module main",
