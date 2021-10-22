@@ -64,11 +64,11 @@ export const MoralisEthersProvider = ({
 
   useEffect(() => {
     Moralis.Web3.onAccountsChanged(([newAccount]) => {
-      console.log('onAccountsChanged', newAccount, user);
-      if (!user || newAccount !== user.attributes.accounts[0]) {
-        logout();
-        return;
-      }
+      console.log('onAccountsChanged', newAccount);
+      // if (!user || newAccount !== user.attributes.accounts[0]) {
+      //   logout();
+      //   return;
+      // }
       setAccount(newAccount);
     });
 
