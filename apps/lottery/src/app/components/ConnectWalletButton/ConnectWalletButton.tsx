@@ -9,13 +9,15 @@ import {
   useWalletModalToggle,
   useSetWalletConnectingState,
 } from '../../states/application/hooks';
+import { getChainId } from '../../config/constants';
 
 const ConnectWalletButton = () => {
   const walletModalOpen = useWalletModalOpen();
   const toggleWalletModal = useWalletModalToggle();
   const setWalletConnectingState = useSetWalletConnectingState();
 
-  const { activateProvider, authenticate } = Hooks.useMoralisEthers();
+  const { authenticate } = Hooks.useMoralisEthers();
+  const chainId = getChainId();
 
   const connectWallet = useCallback(
     provider => {
@@ -23,36 +25,29 @@ const ConnectWalletButton = () => {
       if (provider) {
         authenticate({
           provider: 'walletconnect',
+          chainId: chainId,
           onError: (error: Error) => {
             setWalletConnectingState(WalletConnectingState.INIT);
           },
           onSuccess: () => {
-            activateProvider();
-
             setWalletConnectingState(WalletConnectingState.COMPLETE);
             toggleWalletModal();
           },
         });
       } else {
         authenticate({
+          chainId: chainId,
           onError: (error: Error) => {
             setWalletConnectingState(WalletConnectingState.INIT);
           },
-          onSuccess: async () => {
-            activateProvider();
-
+          onSuccess: () => {
             setWalletConnectingState(WalletConnectingState.COMPLETE);
             toggleWalletModal();
           },
         });
       }
     },
-    [
-      authenticate,
-      setWalletConnectingState,
-      activateProvider,
-      toggleWalletModal,
-    ]
+    [authenticate, chainId, setWalletConnectingState, toggleWalletModal]
   );
 
   return (

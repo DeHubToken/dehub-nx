@@ -11,12 +11,21 @@ export const SupportedChainId = [
   ChainId.BSC_TESTNET
 ];
 
+interface NativeCurrencyInfo {
+  name: string;
+  symbol: string;
+  decimals: number;
+}
+
 export interface NetworkInfo {
   MORALIS_ID: string;
   MORALIS_SERVER: string;
   CHAIN_ID_HEX: string;
   CHAIN_ID_DEC: number;
+  CHAIN_NAME: string;
+  NATIVE_CURRENCY: NativeCurrencyInfo;
   RPC_URL: string;
+  BLOCK_EXPLORER_URLS: string;
 }
 
 export const Constants: { [key: number]: NetworkInfo } = {
@@ -25,15 +34,29 @@ export const Constants: { [key: number]: NetworkInfo } = {
     MORALIS_SERVER: 'https://vamoxwojj7ht.moralisweb3.com:2053/server',
     CHAIN_ID_HEX: '0x38',
     CHAIN_ID_DEC: 56,
+    CHAIN_NAME: 'Binance Smart Chain Mainnet',
+    NATIVE_CURRENCY: {
+      name: 'BNB',
+      symbol: 'bnb',
+      decimals: 18,
+    },
     RPC_URL:
       'https://speedy-nodes-nyc.moralis.io/a63582bee45a03699c0ca8fa/bsc/mainnet',
+    BLOCK_EXPLORER_URLS: 'https://bscscan.com'
   },
   97: {
     MORALIS_ID: 'LQazohFSg15yR5ZtaRVqZQysUbzDI9olJjNKUrlE',
     MORALIS_SERVER: 'https://3jucoi8srnps.moralisweb3.com:2053/server',
     CHAIN_ID_HEX: '0x61',
     CHAIN_ID_DEC: 97,
-    RPC_URL: 'https://data-seed-prebsc-2-s3.binance.org:8545/'
+    CHAIN_NAME: 'Binance Smart Chain Testnet',
+    NATIVE_CURRENCY: {
+      name: 'BNB',
+      symbol: 'bnb',
+      decimals: 18,
+    },
+    RPC_URL: 'https://data-seed-prebsc-2-s3.binance.org:8545/',
+    BLOCK_EXPLORER_URLS: 'https://testnet.bscscan.com'
   }
 }
 

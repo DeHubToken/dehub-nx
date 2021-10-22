@@ -1,7 +1,6 @@
 /* eslint-disable multiline-comment-style */
 import React, { useEffect, useState, useCallback } from 'react';
 import { useMoralis } from 'react-moralis';
-import { ethers } from 'ethers';
 import { Moralis } from 'moralis';
 import {
   JsonRpcSigner,
@@ -25,6 +24,15 @@ export const MoralisEthersProvider = ({
   const [account, setAccount] = useState<string | undefined>(undefined);
   const [chainId, setChainId] = useState<string | undefined>(undefined);
 
+  const {
+    isWeb3Enabled,
+    enableWeb3,
+    isAuthenticated,
+    authenticate,
+    user,
+    logout,
+  } = useMoralis();
+
   const activateProvider = useCallback(async () => {
     const web3 = await Moralis.Web3.activeWeb3Provider?.activate();
     const provider = new Web3Provider(
@@ -32,32 +40,35 @@ export const MoralisEthersProvider = ({
     );
     setAuthProvider(provider);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const ethereum = (window as any).ethereum;
+    const newChainId = await ethereum?.request({ method: 'eth_chainId' });
+    setChainId(newChainId);
+
     const signerT = provider.getSigner();
     setSigner(signerT);
+
     const address = await signerT.getAddress();
     setAccount(address);
   }, []);
 
-  const { isWeb3Enabled, isAuthenticated, authenticate, user, logout } =
-    useMoralis();
-
   useEffect(() => {
-    const enable = async () => {
-      if (!isWeb3Enabled) {
-        await Moralis.Web3.enable();
-        await activateProvider();
+    if (isWeb3Enabled) {
+      if (user) {
+        activateProvider();
       }
-    };
-    enable();
-  }, [isWeb3Enabled, activateProvider]);
+    } else {
+      enableWeb3();
+    }
+  }, [isWeb3Enabled, enableWeb3, user, activateProvider]);
 
   useEffect(() => {
     Moralis.Web3.onAccountsChanged(([newAccount]) => {
       console.log('onAccountsChanged', newAccount, user);
-      // if (!user || newAccount !== user.attributes.accounts[0]) {
-      //   logout();
-      //   return;
-      // }
+      if (!user || newAccount !== user.attributes.accounts[0]) {
+        logout();
+        return;
+      }
       setAccount(newAccount);
     });
 
@@ -65,7 +76,7 @@ export const MoralisEthersProvider = ({
       console.log('onChainChanged', newChainId);
       setChainId(newChainId);
     });
-  }, [logout, user, activateProvider]);
+  }, [logout, user]);
 
   return (
     <MoralisEthersContext.Provider
@@ -75,7 +86,6 @@ export const MoralisEthersProvider = ({
         signer,
         account,
         chainId,
-        activateProvider,
         authenticate,
         logout,
       }}
