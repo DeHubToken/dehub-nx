@@ -21,5 +21,5 @@ export const useGetStandardPaused = (): boolean => {
 }
 
 export const useGetSpecialPaused = (): boolean => {
-  return useSelector((state: State) => state.paused.standardPaused);
+  return useSelector((state: State) => state.paused.specialPaused);
 }

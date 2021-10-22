@@ -12,7 +12,7 @@ const initialState: LotteryState = {
 }
 
 export const fetchCurrentStandardPaused = createAsyncThunk<boolean>(
-  'PauseSlice/paused',
+  'PauseSlice/standardPaused',
   async () => {
     const paused = await fetchStandardPaused();
     return paused;
@@ -20,7 +20,7 @@ export const fetchCurrentStandardPaused = createAsyncThunk<boolean>(
 )
 
 export const fetchCurrentSpecialPaused = createAsyncThunk<boolean>(
-  'PauseSlice/paused',
+  'PauseSlice/specialPaused',
   async () => {
     const paused = await fetchSpecialPaused();
     return paused;
@@ -39,6 +39,6 @@ export const PauseSlice = createSlice({
       state.specialPaused = action.payload;
     })
   }
-})
+});
 
 export default PauseSlice.reducer;

@@ -3,7 +3,7 @@ import { Button } from 'primereact/button';
 
 import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
-import { Text } from '../components/Text';
+import { Title, Text } from '../components/Text';
 
 interface DeLottoStage1WaitingProps {
   paused?: boolean;
@@ -17,7 +17,7 @@ const DeLottoStage1Waiting = ({
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center">
       {paused ? (
-        <Text>DeLotto is paused for a while. Please wait...</Text>
+        <Title>DeLotto is paused for a while. Please wait...</Title>
       ) : (
         <>
           <EventCountDown

@@ -63,7 +63,7 @@ const DeGrand = () => {
       <Card>
         <StyledBox>
           {specialPaused ? (
-            <Text>DeGrand is paused for a while. Please wait...</Text>
+            <Title>DeGrand is paused for a while. Please wait...</Title>
           ) : (
             <>
               {deGrandPrize && deGrandPrize.drawTime > 0 ? (
