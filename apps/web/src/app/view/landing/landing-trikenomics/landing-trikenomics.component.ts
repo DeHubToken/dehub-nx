@@ -15,24 +15,11 @@ import { Trikenomic } from '../landing-trikenomic/landing-trikenomic.component';
       <div class="landing-wrapper">
         <div id="pricing" class="landing-pricing">
           <div class="grid">
-            <!-- <div class="col-12 lg:col-4"> -->
-            <!-- <div class="pricing-card enterprise">
-              <h2>Enterprise</h2>
-              <span class="price">99$</span>
-              <span class="time">per month</span>
-              <ul>
-                <li>everything on standard, plus:</li>
-                <li>7/24 phone support</li>
-                <li>Solution service</li>
-                <li>Communication bundle</li>
-              </ul>
-            </div> -->
             <div *ngFor="let trikenomic of trikenomics" class="col-12 md:col-4">
               <dhb-landing-trikenomic
                 [trikenomic]="trikenomic"
               ></dhb-landing-trikenomic>
             </div>
-            <!-- </div> -->
           </div>
         </div>
       </div>
