@@ -86,11 +86,19 @@ const DeLottoStage1 = () => {
         {nextEventTime && (preCountDownText || postCountDownText) ? (
           <EventCountDown
             nextEventTime={nextEventTime}
+            headerText={'Round #' + currentLotteryId}
+            headerFontSize="14px"
             preCountDownText={preCountDownText}
             postCountDownText={postCountDownText}
           />
         ) : (
-          <Title>Loading...</Title>
+          <div className={`flex flex-row`}>
+            <div className="card overview-box gray">
+              <div className="overview-info px-4 text-left">
+                <Title>Loading...</Title>
+              </div>
+            </div>
+          </div>
         )}
       </FlexLine>
 

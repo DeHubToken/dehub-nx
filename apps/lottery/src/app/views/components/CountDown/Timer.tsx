@@ -20,26 +20,10 @@ interface TimerProps extends React.HTMLAttributes<HTMLDivElement> {
 const Timer = ({ seconds, minutes, hours, days, ...props }: TimerProps) => {
   return (
     <StyledWrapper {...props}>
-      {Boolean(days) && (
-        <div className="m-2" {...props}>
-          {days}d
-        </div>
-      )}
-      {Boolean(hours) && (
-        <div className="m-2" {...props}>
-          {hours}h
-        </div>
-      )}
-      {Boolean(minutes) && (
-        <div className="m-2" {...props}>
-          {minutes}m
-        </div>
-      )}
-      {Boolean(seconds) && (
-        <div className="m-2" {...props}>
-          {seconds}s
-        </div>
-      )}
+      {Boolean(days) && <div {...props}>{days}d&nbsp;</div>}
+      {Boolean(hours) && <div {...props}>{hours}h&nbsp;</div>}
+      {Boolean(minutes) && <div {...props}>{minutes}m&nbsp;</div>}
+      {Boolean(seconds) && <div {...props}>{seconds}s&nbsp;</div>}
     </StyledWrapper>
   );
 };
