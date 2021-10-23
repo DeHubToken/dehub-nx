@@ -1,0 +1,22 @@
+@import '../../../variables/dhb_variables';
+.p-dialog {
+  background: $dhb_gradient2;
+
+  .p-dialog-header {
+  }
+
+  .p-dialog-content {
+    background: transparent;
+  }
+
+  .p-dialog-footer {
+    background: transparent;
+  }
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .p-dialog-mask.p-component-overlay {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
