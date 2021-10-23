@@ -3,7 +3,7 @@ import { isMobile } from 'react-device-detect';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
-export type ProviderTypes = "walletconnect" | null;
+export type ProviderTypes = 'walletconnect' | null;
 
 interface WalletModalProps {
   visible: boolean;
@@ -11,11 +11,7 @@ interface WalletModalProps {
   doConnect: (provider: ProviderTypes) => void;
 }
 
-const WalletModal = ({
-  visible,
-  onDismiss,
-  doConnect
-}: WalletModalProps) => {
+const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
   return (
     <Dialog
       visible={visible}
@@ -34,7 +30,6 @@ const WalletModal = ({
             >
               MetaMask
             </Button>
-            <div className="text-center">Easy-to-use browser extension</div>
           </div>
         ) : (
           // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -47,9 +42,6 @@ const WalletModal = ({
           >
             WalletConnect
           </Button>
-          <div className="text-center">
-            Connect to Trust Wallet, Rainbow Wallet and more...
-          </div>
         </div>
       </div>
     </Dialog>
