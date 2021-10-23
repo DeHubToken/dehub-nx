@@ -10,6 +10,7 @@ import {
   useSetWalletConnectingState,
 } from '../../states/application/hooks';
 import { getChainId } from '../../config/constants';
+import { Button } from 'primereact/button';
 
 const ConnectWalletButton = () => {
   const walletModalOpen = useWalletModalOpen();
@@ -52,11 +53,11 @@ const ConnectWalletButton = () => {
 
   return (
     <>
-      <button className="landing-button p-button">
-        <span className="p-button-text" onClick={toggleWalletModal}>
-          Connect Wallet
-        </span>
-      </button>
+      <Button
+        label="Connect Wallet"
+        icon="fas fa-wallet"
+        onClick={toggleWalletModal}
+      ></Button>
 
       <WalletModal
         visible={walletModalOpen}
