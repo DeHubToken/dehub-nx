@@ -18,6 +18,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
       modal
       className="p-fluid"
       header="Connect Wallet"
+      footer=" "
       style={{ width: '350px' }}
       onHide={onDismiss}
     >
