@@ -1,0 +1,11 @@
+.p-button {
+  .p-button-icon-left,
+  .p-button-icon-right {
+    &.fas,
+    &.far,
+    &.fal,
+    &.fad {
+      padding-top: 1px;
+    }
+  }
+}
