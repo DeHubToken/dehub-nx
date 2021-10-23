@@ -9,5 +9,5 @@ $highlightBg: $primaryColor;
 $highlightTextColor: $primaryTextColor;
 
 @import '../../sass/theme/_theme_dark';
-@import 'icons/fontawesome.scss';
+@import './icons/fontawesome.scss';
 @import './overrides/components/dhb_components';
