@@ -623,7 +623,7 @@ $errorMessageTextColor: scale-color($errorMessageBg, $lightness: -75%);
 $errorMessageIconColor: scale-color($errorMessageBg, $lightness: -75%);
 
 //overlays
-$overlayContentBorder: 1px solid $shade600;
+$overlayContentBorder: 0px solid $shade600;
 $overlayContentBg: $panelContentBg;
 $overlayContainerShadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
   0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
