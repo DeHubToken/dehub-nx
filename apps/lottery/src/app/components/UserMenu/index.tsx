@@ -1,20 +1,36 @@
+import { MenuItem } from 'primereact/menuitem';
+import { SplitButton } from 'primereact/splitbutton';
 import { Hooks } from '@dehub/react/core';
 import { shortenAddress } from '@dehub/shared/utils';
-
 import ConnectWalletButton from '../ConnectWalletButton';
-
 const UserMenu = () => {
   const { account, isAuthenticated, logout } = Hooks.useMoralisEthers();
-
+  const handleLogout = ({
+    originalEvent,
+    item,
+  }: {
+    originalEvent: React.SyntheticEvent;
+    item: MenuItem;
+  }) => {
+    logout();
+  };
+  const items: MenuItem[] = [
+    {
+      label: 'Logout',
+      icon: 'pi pi-sign-out',
+      command: handleLogout,
+    },
+  ];
   return (
     <ul className="layout-topbar-actions">
       <li>
         {isAuthenticated ? (
-          <button className="landing-button p-button" onClick={() => logout()}>
-            <span className="p-button-text">
-              {account ? shortenAddress(account) : 'Connect Wallet'}
-            </span>
-          </button>
+          <SplitButton
+            label={account ? shortenAddress(account) : 'Connect Wallet'}
+            icon="fas fa-wallet"
+            model={items}
+            className="p-button-primary"
+          ></SplitButton>
         ) : (
           <ConnectWalletButton />
         )}
@@ -22,5 +38,4 @@ const UserMenu = () => {
     </ul>
   );
 };
-
 export default UserMenu;
