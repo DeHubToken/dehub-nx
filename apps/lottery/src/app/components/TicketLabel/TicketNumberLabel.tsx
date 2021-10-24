@@ -11,13 +11,13 @@ import { LotteryPrizeLevel } from '../../config/constants/types';
 const Wrapper = styled.div<{
   rewardBracket?: number;
 }>`
-  background-color: ${({ rewardBracket = LotteryPrizeLevel.NONE }) =>
+  background: ${({ rewardBracket = LotteryPrizeLevel.NONE }) =>
     rewardBracket === LotteryPrizeLevel.GOLD
-      ? 'var(--pink-800)'
+      ? 'linear-gradient(50deg, rgba(89,70,0,1) 0%, rgba(234,201,89,1) 48%, rgba(89,70,0,1) 100%)'
       : rewardBracket === LotteryPrizeLevel.SILVER
-      ? 'var(--teal-800)'
+      ? 'linear-gradient(50deg, rgba(46,59,78,1) 0%, rgba(158,198,223,1) 48%, rgba(46,59,78,1) 100%)'
       : rewardBracket === LotteryPrizeLevel.BRONZE
-      ? 'var(--yellow-800)'
+      ? 'linear-gradient(50deg, rgba(89,63,46,1) 0%, rgba(179,109,45,1) 48%, rgba(89,63,46,1) 100%)'
       : 'var(--text-color-secondary)'};
   border-radius: 16px;
   margin: auto;
