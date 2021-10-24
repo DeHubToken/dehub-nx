@@ -1,6 +1,6 @@
-import { useEffect, useReducer, useRef } from 'react'
+import { useEffect, useReducer, useRef } from 'react';
 import { Hooks } from '@dehub/react/core';
-import { ethers } from 'ethers'
+import { ethers } from 'ethers';
 import { Web3Provider } from '@ethersproject/providers';
 
 type LoadingState = 'idle' | 'loading' | 'success' | 'fail';
@@ -23,54 +23,54 @@ interface State {
 const initialState: State = {
   approvalState: 'idle',
   confirmState: 'idle',
-}
+};
 
 const reducer = (state: State, actions: Action): State => {
   switch (actions.type) {
     case 'idle':
       return {
         ...state,
-        approvalState: 'idle'
-      }
+        approvalState: 'idle',
+      };
     case 'requires_approval':
       return {
         ...state,
         approvalState: 'success',
-      }
+      };
     case 'approve_sending':
       return {
         ...state,
         approvalState: 'loading',
-      }
+      };
     case 'approve_receipt':
       return {
         ...state,
         approvalState: 'success',
-      }
+      };
     case 'approve_error':
       return {
         ...state,
         approvalState: 'fail',
-      }
+      };
     case 'confirm_sending':
       return {
         ...state,
         confirmState: 'loading',
-      }
+      };
     case 'confirm_receipt':
       return {
         ...state,
         confirmState: 'success',
-      }
+      };
     case 'confirm_error':
       return {
         ...state,
         confirmState: 'fail',
-      }
+      };
     default:
       return state;
   }
-}
+};
 
 interface OnSuccessProps {
   state: State;
@@ -80,7 +80,10 @@ interface OnSuccessProps {
 interface ApproveConfirmTransaction {
   onApprove: () => Promise<ethers.providers.TransactionResponse>;
   onConfirm: () => Promise<ethers.providers.TransactionResponse>;
-  onRequiresApproval?: (web3Provider: Web3Provider, account: string) => Promise<boolean>;
+  onRequiresApproval?: (
+    web3Provider: Web3Provider,
+    account: string
+  ) => Promise<boolean>;
   onSuccess: ({ state, receipt }: OnSuccessProps) => void;
   onApproveSuccess?: ({ state, receipt }: OnSuccessProps) => void;
   onToast?: (severity: string, detail: string) => void;
@@ -92,9 +95,8 @@ const useApproveConfirmTransaction = ({
   onRequiresApproval,
   onSuccess, // = noop,
   onApproveSuccess, // = noop,
-  onToast
+  onToast,
 }: ApproveConfirmTransaction) => {
-
   const { account, authProvider } = Hooks.useMoralisEthers();
   const [state, dispatch] = useReducer(reducer, initialState);
   // https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
@@ -105,21 +107,21 @@ const useApproveConfirmTransaction = ({
   useEffect(() => {
     mountedRef.current = true;
     if (account && handlePreApprove.current && authProvider) {
-      handlePreApprove.current(authProvider, account).then((result) => {
+      handlePreApprove.current(authProvider, account).then(result => {
         console.log('handlePreApprove,', result, mountedRef.current);
         if (!mountedRef.current) {
           return;
         }
         if (result) {
-          dispatch({ type: 'requires_approval' })
+          dispatch({ type: 'requires_approval' });
         } else {
-          dispatch({ type: 'idle' })
+          dispatch({ type: 'idle' });
         }
-      })
+      });
     }
     return () => {
       mountedRef.current = false;
-    }
+    };
   }, [account, authProvider, handlePreApprove]);
 
   return {
@@ -138,7 +140,11 @@ const useApproveConfirmTransaction = ({
         }
       } catch (error) {
         dispatch({ type: 'approve_error' });
-        onToast && onToast('error', 'Please try again. Confirm the transaction and make sure you are paying enough gas!');
+        onToast &&
+          onToast(
+            'error',
+            'Please try again. Confirm the transaction and make sure you are paying enough gas!'
+          );
       }
     },
     handleConfirm: async () => {
@@ -152,10 +158,14 @@ const useApproveConfirmTransaction = ({
         }
       } catch (error) {
         dispatch({ type: 'confirm_error' });
-        onToast && onToast('error', 'Please try again. Confirm the transaction and make sure you are paying enough gas!')
+        onToast &&
+          onToast(
+            'error',
+            'Please try again. Confirm the transaction and make sure you are paying enough gas!'
+          );
       }
     },
-  }
-}
+  };
+};
 
 export default useApproveConfirmTransaction;

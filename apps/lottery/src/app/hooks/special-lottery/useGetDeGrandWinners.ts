@@ -11,7 +11,7 @@ import { DeGrandHistory } from '../../states/special-lottery/types';
 export enum FetchStatus {
   NOT_FETCHED = 'not-fetched',
   IN_PROGRESS = 'in-progress',
-  SUCCESS = 'success'
+  SUCCESS = 'success',
 }
 
 const useGetDeGrandWinners = () => {
@@ -24,7 +24,7 @@ const useGetDeGrandWinners = () => {
   useEffect(() => {
     return () => {
       mountedRef.current = false;
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -44,13 +44,15 @@ const useGetDeGrandWinners = () => {
   }, []);
 
   return { fetchAllWinners, winners, fetchStatus };
-}
+};
 
 export const useGetHistoricalDeGrands = () => {
   const { account } = Hooks.useMoralisEthers();
   const { isTransitioning } = useLottery();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
-  const [historicalDeGrands, setHistoricalDeGrands] = useState<DeGrandHistory[]>([]);
+  const [historicalDeGrands, setHistoricalDeGrands] = useState<
+    DeGrandHistory[]
+  >([]);
   const mountedRef = useRef(true);
 
   useEffect(() => {
@@ -62,7 +64,10 @@ export const useGetHistoricalDeGrands = () => {
       return;
     }
     setFetchStatus(FetchStatus.IN_PROGRESS);
-    const winnersResponse = await fetchHistoricalDeGrands(lotteryId, MAX_DEGRAND_REQUEST_SIZE);
+    const winnersResponse = await fetchHistoricalDeGrands(
+      lotteryId,
+      MAX_DEGRAND_REQUEST_SIZE
+    );
     if (!mountedRef.current) {
       return;
     }
@@ -71,6 +76,6 @@ export const useGetHistoricalDeGrands = () => {
   }, []);
 
   return { fetchHistoricalAllWinners, historicalDeGrands, fetchStatus };
-}
+};
 
 export default useGetDeGrandWinners;

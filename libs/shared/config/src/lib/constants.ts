@@ -3,13 +3,10 @@ export const BUSD_DECIMALS = 18;
 
 export enum ChainId {
   BSC_MAINNET = 56,
-  BSC_TESTNET = 97
+  BSC_TESTNET = 97,
 }
 
-export const SupportedChainId = [
-  ChainId.BSC_MAINNET,
-  ChainId.BSC_TESTNET
-];
+export const SupportedChainId = [ChainId.BSC_MAINNET, ChainId.BSC_TESTNET];
 
 interface NativeCurrencyInfo {
   name: string;
@@ -42,7 +39,7 @@ export const Constants: { [key: number]: NetworkInfo } = {
     },
     RPC_URL:
       'https://speedy-nodes-nyc.moralis.io/a63582bee45a03699c0ca8fa/bsc/mainnet',
-    BLOCK_EXPLORER_URLS: 'https://bscscan.com'
+    BLOCK_EXPLORER_URLS: 'https://bscscan.com',
   },
   97: {
     MORALIS_ID: 'LQazohFSg15yR5ZtaRVqZQysUbzDI9olJjNKUrlE',
@@ -56,25 +53,27 @@ export const Constants: { [key: number]: NetworkInfo } = {
       decimals: 18,
     },
     RPC_URL: 'https://data-seed-prebsc-2-s3.binance.org:8545/',
-    BLOCK_EXPLORER_URLS: 'https://testnet.bscscan.com'
-  }
-}
+    BLOCK_EXPLORER_URLS: 'https://testnet.bscscan.com',
+  },
+};
 
-export const ContractAddresses: { [chainId in ChainId]: { [label: string]: string } } = {
+export const ContractAddresses: {
+  [chainId in ChainId]: { [label: string]: string };
+} = {
   [ChainId.BSC_MAINNET]: {
-    Dehub: "",
-    BNB: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-    BUSD: "",
-    StandardLottery: "",
-    SpecialLottery: "",
-    MultiCall: "0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B",
+    Dehub: '',
+    BNB: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    BUSD: '',
+    StandardLottery: '',
+    SpecialLottery: '',
+    MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
   },
   [ChainId.BSC_TESTNET]: {
-    Dehub: "0x5A5e32fE118E7c7b6536d143F446269123c0ba74",
-    BNB: "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
-    BUSD: "0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7",
-    StandardLottery: "0x34fa1042e8d507742EbC5fD7b9a81943Df206612",
-    SpecialLottery: "0x1968666CF30825bB49dA5E257687492Db8D7aE3b",
-    MultiCall: "0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576",
+    Dehub: '0x5A5e32fE118E7c7b6536d143F446269123c0ba74',
+    BNB: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
+    BUSD: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
+    StandardLottery: '0x34fa1042e8d507742EbC5fD7b9a81943Df206612',
+    SpecialLottery: '0x1968666CF30825bB49dA5E257687492Db8D7aE3b',
+    MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
   },
-}
+};

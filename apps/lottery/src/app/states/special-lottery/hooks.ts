@@ -9,12 +9,12 @@ import {
   fetchCurrentLottery,
   fetchCurrentLotteryId,
   fetchUserTicketsAndLotteries,
-  fetchThisMonthDeGrandPrize
+  fetchThisMonthDeGrandPrize,
 } from '.';
 import {
   fetchLottery,
   useProcessLotteryResponse,
-  processLotteryResponse
+  processLotteryResponse,
 } from './helpers';
 import { useAppDispatch } from '..';
 import { DeGrandPrize, LotteryRound } from './types';
@@ -22,7 +22,7 @@ import { State } from '../types';
 
 export const useGetCurrentLotteryId = (): string => {
   return useSelector((state: State) => state.specialLottery.currentLotteryId);
-}
+};
 
 export const useFetchLottery = () => {
   const { account } = Hooks.useMoralisEthers();
@@ -33,33 +33,34 @@ export const useFetchLottery = () => {
 
   useEffect(() => {
     dispatch(fetchCurrentLotteryId());
-
   }, [dispatch, slowRefresh]);
 
   useEffect(() => {
     if (currentLotteryId) {
       dispatch(fetchCurrentLottery({ currentLotteryId }));
     }
-
   }, [dispatch, currentLotteryId, fastRefresh]);
 
   useEffect(() => {
     dispatch(fetchThisMonthDeGrandPrize());
-  }, [dispatch, slowRefresh])
+  }, [dispatch, slowRefresh]);
 
   useEffect(() => {
     if (account && currentLotteryId) {
       dispatch(fetchUserTicketsAndLotteries({ account, currentLotteryId }));
     }
-
   }, [dispatch, currentLotteryId, account]);
-}
+};
 
 export const useLottery = () => {
-  const currentRound = useSelector((state: State) => state.specialLottery.currentRound);
+  const currentRound = useSelector(
+    (state: State) => state.specialLottery.currentRound
+  );
   const processedCurrentRound = useProcessLotteryResponse(currentRound);
 
-  const isTransitioning = useSelector((state: State) => state.specialLottery.isTransitioning);
+  const isTransitioning = useSelector(
+    (state: State) => state.specialLottery.isTransitioning
+  );
 
   const currentLotteryId = useGetCurrentLotteryId();
 
@@ -67,7 +68,7 @@ export const useLottery = () => {
     (state: State) => state.specialLottery.maxNumberTicketsPerBuyOrClaim
   );
   const maxNumberTicketsPerBuyOrClaim = useMemo(() => {
-    return new BigNumber(maxNumberTicketsPerBuyOrClaimAsString)
+    return new BigNumber(maxNumberTicketsPerBuyOrClaimAsString);
   }, [maxNumberTicketsPerBuyOrClaimAsString]);
 
   const deGrandPrize = useThisMonthDeGrandPrize();
@@ -77,9 +78,9 @@ export const useLottery = () => {
     currentLotteryId,
     maxNumberTicketsPerBuyOrClaim,
     currentRound: processedCurrentRound,
-    deGrandPrize
+    deGrandPrize,
   };
-}
+};
 
 export const usePreviousLottery = (lotteryId: string) => {
   const [previousRound, setPreviousRound] = useState<LotteryRound | null>(null);
@@ -91,7 +92,7 @@ export const usePreviousLottery = (lotteryId: string) => {
       const lotteryData = await fetchLottery(lotteryId);
       const processedLotteryData = processLotteryResponse(lotteryData);
       setPreviousRound(processedLotteryData);
-    }
+    };
 
     const lotteryIdAsInt = parseInt(lotteryId, 10);
     if (lotteryIdAsInt > 0) {
@@ -101,10 +102,10 @@ export const usePreviousLottery = (lotteryId: string) => {
 
   return {
     previousLotteryId: lotteryId,
-    previousRound
-  }
-}
+    previousRound,
+  };
+};
 
 export const useThisMonthDeGrandPrize = (): DeGrandPrize => {
   return useSelector((state: State) => state.specialLottery.deGrandPrize);
-}
+};

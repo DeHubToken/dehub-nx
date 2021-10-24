@@ -1,7 +1,7 @@
 import {
   getStandardLotteryContract,
-  getSpecialLotteryContract
-} from "../../utils/contractHelpers";
+  getSpecialLotteryContract,
+} from '../../utils/contractHelpers';
 
 const standardLotteryContract = getStandardLotteryContract();
 const specialLotteryContract = getSpecialLotteryContract();
@@ -12,7 +12,7 @@ export const fetchStandardPaused = async (): Promise<boolean> => {
   } catch (error) {
     return true;
   }
-}
+};
 
 export const fetchSpecialPaused = async (): Promise<boolean> => {
   try {
@@ -20,4 +20,4 @@ export const fetchSpecialPaused = async (): Promise<boolean> => {
   } catch (error) {
     return true;
   }
-}
+};

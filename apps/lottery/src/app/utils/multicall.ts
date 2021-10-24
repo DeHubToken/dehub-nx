@@ -1,41 +1,46 @@
-import { ethers } from 'ethers'
-import { getMultiCallContract } from './contractHelpers'
+import { ethers } from 'ethers';
+import { getMultiCallContract } from './contractHelpers';
 
-export type MultiCallResponse<T> = T | null
+export type MultiCallResponse<T> = T | null;
 
 export interface Call {
-  address: string // Address of the contract
-  name: string // Function name on the contract (example: balanceOf)
+  address: string; // Address of the contract
+  name: string; // Function name on the contract (example: balanceOf)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params?: any[] // Function params
+  params?: any[]; // Function params
 }
 
 interface MulticallOptions {
-  requireSuccess?: boolean
+  requireSuccess?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const multicall = async <T = any>(abi: any[], calls: Call[]): Promise<T> => {
   try {
-    const multi = getMultiCallContract()
-    const itf = new ethers.utils.Interface(abi)
+    const multi = getMultiCallContract();
+    const itf = new ethers.utils.Interface(abi);
 
-    const calldata = calls.map((call) => [call.address.toLowerCase(), itf.encodeFunctionData(call.name, call.params)])
-    const { returnData } = await multi.aggregate(calldata)
+    const calldata = calls.map(call => [
+      call.address.toLowerCase(),
+      itf.encodeFunctionData(call.name, call.params),
+    ]);
+    const { returnData } = await multi.aggregate(calldata);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res = returnData.map((call: any, i: number) => itf.decodeFunctionResult(calls[i].name, call))
+    const res = returnData.map((call: any, i: number) =>
+      itf.decodeFunctionResult(calls[i].name, call)
+    );
 
-    return res
+    return res;
   } catch (error) {
     if (error instanceof Error) {
       throw error;
     } else {
       console.log(error);
-      throw new Error('unknown error in multicall')
+      throw new Error('unknown error in multicall');
     }
   }
-}
+};
 
 /**
  * Multicall V2 uses the new "tryAggregate" function. It is different in 2 ways
@@ -48,22 +53,25 @@ export const multicallv2 = async <T = any>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   abi: any[],
   calls: Call[],
-  options: MulticallOptions = { requireSuccess: true },
+  options: MulticallOptions = { requireSuccess: true }
 ): Promise<MultiCallResponse<T>> => {
-  const { requireSuccess } = options
-  const multi = getMultiCallContract()
+  const { requireSuccess } = options;
+  const multi = getMultiCallContract();
 
-  const itf = new ethers.utils.Interface(abi)
+  const itf = new ethers.utils.Interface(abi);
 
-  const calldata = calls.map((call) => [call.address.toLowerCase(), itf.encodeFunctionData(call.name, call.params)])
-  const returnData = await multi.tryAggregate(requireSuccess, calldata)
+  const calldata = calls.map(call => [
+    call.address.toLowerCase(),
+    itf.encodeFunctionData(call.name, call.params),
+  ]);
+  const returnData = await multi.tryAggregate(requireSuccess, calldata);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const res = returnData.map((call: any, i: number) => {
-    const [result, data] = call
-    return result ? itf.decodeFunctionResult(calls[i].name, data) : null
-  })
+    const [result, data] = call;
+    return result ? itf.decodeFunctionResult(calls[i].name, data) : null;
+  });
 
-  return res
-}
+  return res;
+};
 
-export default multicall
+export default multicall;

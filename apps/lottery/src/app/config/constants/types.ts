@@ -4,7 +4,7 @@ export enum LotteryPrizeLevel {
   NONE = 0,
   BRONZE = 1,
   SILVER = 2,
-  GOLD = 3
+  GOLD = 3,
 }
 
 export enum LotteryStatus {
@@ -12,7 +12,7 @@ export enum LotteryStatus {
   OPEN = 'Open',
   CLOSE = 'Close',
   CLAIMABLE = 'Claimable',
-  BURNED = 'Burned'
+  BURNED = 'Burned',
 }
 
 export interface LotteryTicket {

@@ -4,5 +4,5 @@ export const environment = {
   production: true,
   chainId: ChainId.BSC_MAINNET,
   deGrandStartDay: 25,
-  deGrandStartDayOnFebruary: 24
+  deGrandStartDayOnFebruary: 24,
 };

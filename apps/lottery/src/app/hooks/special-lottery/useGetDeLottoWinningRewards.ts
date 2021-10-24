@@ -8,20 +8,21 @@ import { fetchUserDeLottoWinningRewards } from '../../states/special-lottery/hel
 export enum FetchStatus {
   NOT_FETCHED = 'not-fetched',
   IN_PROGRESS = 'in-progress',
-  SUCCESS = 'success'
+  SUCCESS = 'success',
 }
 
 const useGetDeLottoWinningRewards = () => {
   const { account } = Hooks.useMoralisEthers();
   const { currentLotteryId, isTransitioning } = useLottery();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
-  const [winningRewards, setWinningRewards] = useState<LotteryTicketClaimData | null>(null);
+  const [winningRewards, setWinningRewards] =
+    useState<LotteryTicketClaimData | null>(null);
   const mountedRef = useRef(true);
 
   useEffect(() => {
     return () => {
       mountedRef.current = false;
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -44,6 +45,6 @@ const useGetDeLottoWinningRewards = () => {
   }, [account, currentLotteryId]);
 
   return { fetchAllRewards, winningRewards, fetchStatus };
-}
+};
 
 export default useGetDeLottoWinningRewards;

@@ -3,7 +3,10 @@ import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
 import { DeGrandHistory } from './types';
 
 import SpecialLotteryAbi from '../../config/abis/SpecialLottery.json';
-import { LotteryStatus, LotteryTicketOwner } from '../../config/constants/types';
+import {
+  LotteryStatus,
+  LotteryTicketOwner,
+} from '../../config/constants/types';
 import { getSpecialLotteryAddress } from '../../utils/addressHelpers';
 import { Call, multicallv2 } from '../../utils/multicall';
 
@@ -13,12 +16,14 @@ interface LotteryDrawable {
   deGrandStatus: LotteryStatus;
 }
 
-const fetchLotteryDrawable = async (roundIds: string[]): Promise<LotteryDrawable[]> => {
-  const calls: Call[] = roundIds.map((roundId) => {
+const fetchLotteryDrawable = async (
+  roundIds: string[]
+): Promise<LotteryDrawable[]> => {
+  const calls: Call[] = roundIds.map(roundId => {
     return {
       name: 'viewLotteryDrawable',
       address: getSpecialLotteryAddress(),
-      params: [roundId]
+      params: [roundId],
     };
   });
 
@@ -32,23 +37,24 @@ const fetchLotteryDrawable = async (roundIds: string[]): Promise<LotteryDrawable
 
       return {
         roundId: roundIds[index],
-        deLottoStatus: LotteryStatus[deLottoStatusKey as keyof typeof LotteryStatus],
-        deGrandStatus: LotteryStatus[deGrandStatusKey as keyof typeof LotteryStatus],
+        deLottoStatus:
+          LotteryStatus[deLottoStatusKey as keyof typeof LotteryStatus],
+        deGrandStatus:
+          LotteryStatus[deGrandStatusKey as keyof typeof LotteryStatus],
       };
     });
 
     return drawables;
-
   } catch (error) {
     console.error(error);
     return [];
   }
-}
+};
 
 export const fetchHistoricalDeGrands = async (
-  lotteryId: string, requestSize: number
+  lotteryId: string,
+  requestSize: number
 ): Promise<DeGrandHistory[]> => {
-
   try {
     const roundId: number = parseInt(lotteryId, 10);
     const roundsToCheck = [];
@@ -57,7 +63,7 @@ export const fetchHistoricalDeGrands = async (
     }
 
     const drawables = await fetchLotteryDrawable(roundsToCheck);
-    const claimableRounds = drawables.filter((drawable) => {
+    const claimableRounds = drawables.filter(drawable => {
       return drawable.deGrandStatus === LotteryStatus.CLAIMABLE;
     });
 
@@ -65,20 +71,20 @@ export const fetchHistoricalDeGrands = async (
       return [];
     }
 
-    const idsToCheck = claimableRounds.map((item) => item.roundId);
+    const idsToCheck = claimableRounds.map(item => item.roundId);
 
     const calls: Call[] = idsToCheck.map((roundId: string) => ({
       address: getSpecialLotteryAddress(),
-      name: "viewDeGrandStatusForTicketIds",
-      params: [roundId]
+      name: 'viewDeGrandStatusForTicketIds',
+      params: [roundId],
     }));
 
     const winnersResponse = await multicallv2(SpecialLotteryAbi, calls);
 
     const calls2: Call[] = idsToCheck.map((roundId: string) => ({
       address: getSpecialLotteryAddress(),
-      name: "viewDeGrandPrizeByLotteryId",
-      params: [roundId]
+      name: 'viewDeGrandPrizeByLotteryId',
+      params: [roundId],
     }));
 
     const prizesResponse = await multicallv2(SpecialLotteryAbi, calls2);
@@ -86,23 +92,24 @@ export const fetchHistoricalDeGrands = async (
     const history: DeGrandHistory[] = [];
     idsToCheck.forEach((roundId: string, index: number) => {
       const [ticketOwners, ticketIds] = winnersResponse[index];
-      const winners: LotteryTicketOwner[] = ticketOwners.map((ticketOwner: string, index: number) => {
-        return {
-          owner: ticketOwner,
-          ticketId: ethersToSerializedBigNumber(ticketIds[index])
-        };
-      });
+      const winners: LotteryTicketOwner[] = ticketOwners.map(
+        (ticketOwner: string, index: number) => {
+          return {
+            owner: ticketOwner,
+            ticketId: ethersToSerializedBigNumber(ticketIds[index]),
+          };
+        }
+      );
 
       history.push({
         roundId,
         winners,
-        prize: prizesResponse[index][0]
+        prize: prizesResponse[index][0],
       });
     });
     return history;
-
   } catch (error) {
     console.error('fetchHistoricalDeGrands', error);
     return [];
   }
-}
+};

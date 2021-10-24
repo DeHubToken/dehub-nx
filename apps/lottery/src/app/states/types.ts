@@ -3,7 +3,6 @@ import { LotteryState as PauseState } from './pause';
 import { LotteryState as StandardLotteryState } from './standard-lottery/types';
 import { LotteryState as SpecialLotteryState } from './special-lottery/types';
 
-
 /**
  * ApplicationState
  */

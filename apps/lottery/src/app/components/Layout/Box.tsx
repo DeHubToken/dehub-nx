@@ -11,7 +11,7 @@ const Box = ({ className, children, ...props }: BoxProps) => {
     <div className={classNames(`box ${className ?? ''}`)} {...props}>
       {children}
     </div>
-  )
+  );
 };
 
 export default Box;

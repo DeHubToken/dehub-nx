@@ -1,13 +1,17 @@
 import BigNumber from 'bignumber.js';
 import { SerializedBigNumber } from '@dehub/shared/config';
-import { LotteryStatus, LotteryTicket, LotteryTicketOwner } from '../../config/constants/types';
+import {
+  LotteryStatus,
+  LotteryTicket,
+  LotteryTicketOwner,
+} from '../../config/constants/types';
 
 /**
  * SpecialLotteryState
  */
 export interface LotteryRoundUserTickets {
   isLoading?: boolean;
-  tickets?: LotteryTicket[]
+  tickets?: LotteryTicket[];
 }
 
 interface LotteryRoundGenerics {

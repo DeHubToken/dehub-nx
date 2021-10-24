@@ -6,7 +6,7 @@ import {
   LotteryRound,
   LotteryResponse,
   LotteryRoundUserTickets,
-  LotteryBundleRule
+  LotteryBundleRule,
 } from './types';
 
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
@@ -19,7 +19,10 @@ import { Call, multicallv2 } from '../../utils/multicall';
 const standardLotteryContract = getStandardLotteryContract();
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const processViewLotterySuccessResponse = (response: any, lotteryId: string): LotteryResponse => {
+const processViewLotterySuccessResponse = (
+  response: any,
+  lotteryId: string
+): LotteryResponse => {
   const {
     status,
     startTime,
@@ -32,16 +35,21 @@ const processViewLotterySuccessResponse = (response: any, lotteryId: string): Lo
     amountCollectedToken,
     firstTicketId,
     firstTicketIdNextLottery,
-    finalNumber
+    finalNumber,
   } = response;
 
   const statusKey = Object.keys(LotteryStatus)[status];
-  const serializedCountWinnersPerBracket = countWinnersPerBracket.map((winnersPerBracket: ethers.BigNumber) =>
-    ethersToSerializedBigNumber(winnersPerBracket));
-  const serializedTokenPerBracket = tokenPerBracket.map((tokenPerBracket: ethers.BigNumber) =>
-    ethersToSerializedBigNumber(tokenPerBracket));
-  const serializedRewardPerBracket = rewardBreakdown.map((reward: ethers.BigNumber) =>
-    ethersToSerializedBigNumber(reward));
+  const serializedCountWinnersPerBracket = countWinnersPerBracket.map(
+    (winnersPerBracket: ethers.BigNumber) =>
+      ethersToSerializedBigNumber(winnersPerBracket)
+  );
+  const serializedTokenPerBracket = tokenPerBracket.map(
+    (tokenPerBracket: ethers.BigNumber) =>
+      ethersToSerializedBigNumber(tokenPerBracket)
+  );
+  const serializedRewardPerBracket = rewardBreakdown.map(
+    (reward: ethers.BigNumber) => ethersToSerializedBigNumber(reward)
+  );
   const wrappedFinalNumber = finalNumber.mod(ethers.BigNumber.from(100000000));
 
   return {
@@ -58,9 +66,9 @@ const processViewLotterySuccessResponse = (response: any, lotteryId: string): Lo
     amountCollectedInDehub: ethersToSerializedBigNumber(amountCollectedToken),
     dehubPerBracket: serializedTokenPerBracket,
     countWinnersPerBracket: serializedCountWinnersPerBracket,
-    rewardsBreakdown: serializedRewardPerBracket
+    rewardsBreakdown: serializedRewardPerBracket,
   };
-}
+};
 
 const processViewLotteryAndError = (lotteryId: string): LotteryResponse => {
   return {
@@ -77,85 +85,85 @@ const processViewLotteryAndError = (lotteryId: string): LotteryResponse => {
     amountCollectedInDehub: '',
     dehubPerBracket: [],
     countWinnersPerBracket: [],
-    rewardsBreakdown: []
-  }
-}
+    rewardsBreakdown: [],
+  };
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const processRawTicketsReponse = (data: any): LotteryTicket[] => {
-  const [ticketIds, ticketNumbers, claimStatuses,] = data;
+  const [ticketIds, ticketNumbers, claimStatuses] = data;
 
   if (ticketIds.length > 0) {
     return ticketIds.map((ticketId: ethers.BigNumber, index: number) => {
       return {
         id: ticketId.toString(),
         number: ticketNumbers[index].toString(),
-        claimed: claimStatuses[index]
+        claimed: claimStatuses[index],
       };
-    })
+    });
   }
   return [];
-}
+};
 
-export const fetchLottery = async (lotteryId: string): Promise<LotteryResponse> => {
+export const fetchLottery = async (
+  lotteryId: string
+): Promise<LotteryResponse> => {
   try {
     const lotteryData = await standardLotteryContract.viewLottery(lotteryId);
     return processViewLotterySuccessResponse(lotteryData, lotteryId);
-
   } catch (error) {
     return processViewLotteryAndError(lotteryId);
   }
-}
+};
 
 export const fetchCurrentLotteryIdAndMaxBuy = async () => {
   try {
     const calls: Call[] = [
-      'currentLotteryId', 'maxNumberTicketsPerBuyOrClaim'
-    ].map((method) => ({
+      'currentLotteryId',
+      'maxNumberTicketsPerBuyOrClaim',
+    ].map(method => ({
       address: getStandardLotteryAddress(),
       name: method,
     }));
 
     const [[currentLotteryId], [maxNumberTicketsPerBuyOrClaim]] =
-      (await multicallv2(
-        StandardLotteryAbi,
-        calls
-      )) as ethers.BigNumber[][];
+      (await multicallv2(StandardLotteryAbi, calls)) as ethers.BigNumber[][];
 
     return {
-      currentLotteryId:
-        currentLotteryId ? currentLotteryId.toString() : '',
-      maxNumberTicketsPerBuyOrClaim:
-        maxNumberTicketsPerBuyOrClaim ?
-          maxNumberTicketsPerBuyOrClaim.toString() : ''
+      currentLotteryId: currentLotteryId ? currentLotteryId.toString() : '',
+      maxNumberTicketsPerBuyOrClaim: maxNumberTicketsPerBuyOrClaim
+        ? maxNumberTicketsPerBuyOrClaim.toString()
+        : '',
     };
-
   } catch (error) {
     return {
       currentLotteryId: '',
-      maxNumberTicketsPerBuyOrClaim: ''
+      maxNumberTicketsPerBuyOrClaim: '',
     };
   }
-}
+};
 
-export const fetchLotteryBundleRules = async (): Promise<LotteryBundleRule[]> => {
+export const fetchLotteryBundleRules = async (): Promise<
+  LotteryBundleRule[]
+> => {
   try {
     const data = await standardLotteryContract.viewBundleRule();
     const [purchasedCounts, freeCounts] = data;
 
-    return purchasedCounts.map((purchasedCount: ethers.BigNumber, index: number) => {
-      return {
-        index,
-        purchasedCount: purchasedCount.toNumber(),
-        freeCount: freeCounts[index].toNumber()
-      };
-    });
-
+    return purchasedCounts.map(
+      (purchasedCount: ethers.BigNumber, index: number) => {
+        return {
+          index,
+          purchasedCount: purchasedCount.toNumber(),
+          freeCount: freeCounts[index].toNumber(),
+        };
+      }
+    );
   } catch (error) {
     console.log('viewUserInfoForLotteryId', error);
     return [];
   }
-}
+};
 
 export const viewUserInfoForLotteryId = async (
   account: string,
@@ -163,26 +171,35 @@ export const viewUserInfoForLotteryId = async (
   cursor: number,
   perRequestLimit: number
 ): Promise<LotteryTicket[] | null> => {
-
   try {
-    const data = await standardLotteryContract.viewUserInfoForLotteryId(account, lotteryId, cursor, perRequestLimit);
+    const data = await standardLotteryContract.viewUserInfoForLotteryId(
+      account,
+      lotteryId,
+      cursor,
+      perRequestLimit
+    );
     return processRawTicketsReponse(data);
-
   } catch (error) {
     console.error('viewUserInfoForLotteryId', error);
     return null;
   }
-}
+};
 
 export const fetchUserTicketsPerOneRound = async (
-  account: string, lotteryId: string
+  account: string,
+  lotteryId: string
 ): Promise<LotteryTicket[]> => {
   let cursor = 0;
   let numReturned = TICKET_LIMIT_PER_REQUEST;
   const ticketData: LotteryTicket[] = [];
 
   while (numReturned === TICKET_LIMIT_PER_REQUEST) {
-    const response = await viewUserInfoForLotteryId(account, lotteryId, cursor, numReturned);
+    const response = await viewUserInfoForLotteryId(
+      account,
+      lotteryId,
+      cursor,
+      numReturned
+    );
     if (response) {
       cursor += response?.length;
       ticketData.push(...response);
@@ -191,10 +208,11 @@ export const fetchUserTicketsPerOneRound = async (
   }
 
   return ticketData;
-}
+};
 
 export const fetchUserTicketsPerMultipleRounds = async (
-  account: string, lotteryIds: string[],
+  account: string,
+  lotteryIds: string[]
 ): Promise<{ roundId: string; userTickets: LotteryTicket[] }[]> => {
   const ticketsForMultipleRounds = [];
   for (let idx = 0; idx < lotteryIds.length; idx++) {
@@ -202,11 +220,11 @@ export const fetchUserTicketsPerMultipleRounds = async (
     const ticketsForRound = await fetchUserTicketsPerOneRound(account, roundId);
     ticketsForMultipleRounds.push({
       roundId,
-      userTickets: ticketsForRound
+      userTickets: ticketsForRound,
     });
   }
   return ticketsForMultipleRounds;
-}
+};
 
 export const useProcessLotteryResponse = (
   lotteryData: LotteryResponse & { userTickets?: LotteryRoundUserTickets }
@@ -214,7 +232,7 @@ export const useProcessLotteryResponse = (
   const {
     priceTicketInDehub: priceTicketInDehubAsString,
     unwonPreviousPotInDehub: unwonPreviousPotAsString,
-    amountCollectedInDehub: amountCollectedInDehubAsString
+    amountCollectedInDehub: amountCollectedInDehubAsString,
   } = lotteryData;
 
   const priceTicketInDehub = useMemo(() => {
@@ -242,9 +260,9 @@ export const useProcessLotteryResponse = (
     amountCollectedInDehub,
     dehubPerBracket: lotteryData.dehubPerBracket,
     countWinnersPerBracket: lotteryData.countWinnersPerBracket,
-    rewardsBreakdown: lotteryData.rewardsBreakdown
+    rewardsBreakdown: lotteryData.rewardsBreakdown,
   };
-}
+};
 
 export const processLotteryResponse = (
   lotteryData: LotteryResponse & { userTickets?: LotteryRoundUserTickets }
@@ -252,11 +270,13 @@ export const processLotteryResponse = (
   const {
     priceTicketInDehub: priceTicketInDehubAsString,
     unwonPreviousPotInDehub: unwonPreviousPotInDehubAsString,
-    amountCollectedInDehub: amountCollectedInDehubAsString
+    amountCollectedInDehub: amountCollectedInDehubAsString,
   } = lotteryData;
 
   const priceTicketInDehub = new BigNumber(priceTicketInDehubAsString);
-  const unwonPreviousPotInDehub = new BigNumber(unwonPreviousPotInDehubAsString);
+  const unwonPreviousPotInDehub = new BigNumber(
+    unwonPreviousPotInDehubAsString
+  );
   const amountCollectedInDehub = new BigNumber(amountCollectedInDehubAsString);
 
   return {
@@ -274,6 +294,6 @@ export const processLotteryResponse = (
     amountCollectedInDehub,
     dehubPerBracket: lotteryData.dehubPerBracket,
     countWinnersPerBracket: lotteryData.countWinnersPerBracket,
-    rewardsBreakdown: lotteryData.rewardsBreakdown
+    rewardsBreakdown: lotteryData.rewardsBreakdown,
   };
-}
+};

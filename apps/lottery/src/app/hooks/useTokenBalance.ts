@@ -11,19 +11,19 @@ import { getDehubAddress } from '../utils/addressHelpers';
 type UseTokenBalanceState = {
   balance: BigNumber;
   fetchStatus: FetchStatus;
-}
+};
 
 export enum FetchStatus {
   NOT_FETCHED = 'not-fetched',
   SUCCESS = 'success',
-  FAILED = 'failed'
+  FAILED = 'failed',
 }
 
 export const useTokenBalance = (tokenAddress: string) => {
   const { NOT_FETCHED, SUCCESS, FAILED } = FetchStatus;
   const [balanceState, setBalanceState] = useState<UseTokenBalanceState>({
     balance: BIG_ZERO,
-    fetchStatus: NOT_FETCHED
+    fetchStatus: NOT_FETCHED,
   });
 
   const { account } = Hooks.useMoralisEthers();
@@ -41,32 +41,31 @@ export const useTokenBalance = (tokenAddress: string) => {
         }
         setBalanceState({
           balance: new BigNumber(res.toString()),
-          fetchStatus: SUCCESS
+          fetchStatus: SUCCESS,
         });
       } catch (error) {
         console.error(error);
-        setBalanceState((prev) => ({
+        setBalanceState(prev => ({
           ...prev,
-          fetchStatus: FAILED
+          fetchStatus: FAILED,
         }));
       }
-    }
+    };
     if (account) {
       fetchBalance();
     }
     return () => {
       mountedRef.current = false;
-    }
-
+    };
   }, [account, tokenAddress, fastRefresh, SUCCESS, FAILED]);
 
   return balanceState;
-}
+};
 
 export const useGetDehubBalance = () => {
   const { balance, fetchStatus } = useTokenBalance(getDehubAddress());
 
   return { balance, fetchStatus };
-}
+};
 
 export default useTokenBalance;

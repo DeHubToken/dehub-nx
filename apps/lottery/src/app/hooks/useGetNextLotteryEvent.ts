@@ -16,7 +16,7 @@ const useGetNextLotteryEvent = (
   const transactionResolvingBuffer = 30; // Delay countdown by 30s to ensure contract transctions have been calculated and broadcast
   const [nextEvent, setNextEvent] = useState<LotteryEvent>({
     nextEventTime: 0,
-    postCountDownText: undefined
+    postCountDownText: undefined,
   });
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const useGetNextLotteryEvent = (
     if (status === LotteryStatus.OPEN) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer,
-        postCountDownText: 'until the draw'
+        postCountDownText: 'until the draw',
       });
     }
 
@@ -32,21 +32,21 @@ const useGetNextLotteryEvent = (
     if (status === LotteryStatus.CLOSE) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer + vrfRequestTime,
-        postCountDownText: 'Closing the round'
+        postCountDownText: 'Closing the round',
       });
     }
 
     // Current lottery claimable, Next lottery has not yet started
     if (status === LotteryStatus.CLAIMABLE) {
       setNextEvent({
-        nextEventTime: endTime + transactionResolvingBuffer + secondsBetweenRounds,
-        postCountDownText: 'Drawing numbers...'
+        nextEventTime:
+          endTime + transactionResolvingBuffer + secondsBetweenRounds,
+        postCountDownText: 'Drawing numbers...',
       });
     }
-
   }, [lotteryId, status, endTime]);
 
   return nextEvent;
-}
+};
 
 export default useGetNextLotteryEvent;

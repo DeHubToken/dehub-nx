@@ -14,13 +14,14 @@ export const store = configureStore({
     application,
     paused: pauseReducer,
     standardLottery: standardLotteryReducer,
-    specialLottery: specialLotteryReducer
+    specialLottery: specialLotteryReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(save({ states: PERSISTED_KEYS })),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(save({ states: PERSISTED_KEYS })),
   preloadedState: load({
     states: PERSISTED_KEYS,
-    disableWarnings: true
-  })
+    disableWarnings: true,
+  }),
 });
 
 export default store;

@@ -3,4 +3,4 @@ export type LogoTypes = {
   href: string;
   icon?: string;
   alt?: string;
-}
+};

@@ -11,11 +11,10 @@ const initialState: ApplicationState = {
 };
 
 export default createReducer(initialState, builder =>
-  builder
-    .addCase(
-      setWalletConnectingState,
-      (state, { payload: { connectingState } }) => {
-        state.walletConnectingState = connectingState;
-      }
-    )
-)
+  builder.addCase(
+    setWalletConnectingState,
+    (state, { payload: { connectingState } }) => {
+      state.walletConnectingState = connectingState;
+    }
+  )
+);

@@ -17,10 +17,7 @@ function useContract(
   ABI?: any,
   withSignerIfPossible = true
 ): Contract | null {
-  const {
-    authProvider,
-    account
-  } = Hooks.useMoralisEthers();
+  const { authProvider, account } = Hooks.useMoralisEthers();
 
   return useMemo(() => {
     if (!address || !ABI || !authProvider) return null;
@@ -29,9 +26,7 @@ function useContract(
         address,
         ABI,
         authProvider,
-        withSignerIfPossible &&
-          account ?
-          account : undefined
+        withSignerIfPossible && account ? account : undefined
       );
     } catch (error) {
       console.error('Failed to get contract', error);
@@ -41,16 +36,19 @@ function useContract(
 }
 
 export const useStandardLotteryContract = (): Contract | null => {
-  const contractAddress = ContractAddresses[getChainId()]["StandardLottery"];
+  const contractAddress = ContractAddresses[getChainId()]['StandardLottery'];
   return useContract(contractAddress, StandardLotteryAbi);
-}
+};
 
 export const useSpecialLotteryContract = (): Contract | null => {
-  const contractAddress = ContractAddresses[getChainId()]["SpecialLottery"];
+  const contractAddress = ContractAddresses[getChainId()]['SpecialLottery'];
   return useContract(contractAddress, SpecialLotteryAbi);
-}
+};
 
 export const useDehubContract = (): Contract | null => {
   const { signer } = Hooks.useMoralisEthers();
-  return useMemo(() => signer ? getBep20Contract(getDehubAddress(), signer) : null, [signer]);
-}
+  return useMemo(
+    () => (signer ? getBep20Contract(getDehubAddress(), signer) : null),
+    [signer]
+  );
+};

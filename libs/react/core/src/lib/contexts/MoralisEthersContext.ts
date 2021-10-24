@@ -8,7 +8,7 @@ export interface MoralisEthersContextValue {
   signer: JsonRpcSigner | undefined;
   account: string | undefined;
   chainId: string | undefined;
-  authenticate: (options?: AuthenticateOptions) => Promise<void>
+  authenticate: (options?: AuthenticateOptions) => Promise<void>;
   logout: () => Promise<void>;
 }
 

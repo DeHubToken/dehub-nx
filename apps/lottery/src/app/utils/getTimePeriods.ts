@@ -48,6 +48,6 @@ const getTimePeriods = (seconds: number) => {
   timeLeft.seconds = delta;
 
   return timeLeft;
-}
+};
 
 export default getTimePeriods;

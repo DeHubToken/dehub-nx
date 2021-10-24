@@ -19,7 +19,7 @@ export const switchNetwork = async (chainId: number): Promise<boolean> => {
     return true;
   }
   return false;
-}
+};
 
 export const addNetwork = async (chainId: number): Promise<boolean> => {
   try {

@@ -4,20 +4,20 @@ import { getChainId } from '../config/constants';
 export const getAddress = (label: string): string => {
   const chainId = getChainId();
   return ContractAddresses[chainId][label];
-}
+};
 
 export const getStandardLotteryAddress = (): string => {
-  return getAddress("StandardLottery");
-}
+  return getAddress('StandardLottery');
+};
 
 export const getSpecialLotteryAddress = (): string => {
-  return getAddress("SpecialLottery");
-}
+  return getAddress('SpecialLottery');
+};
 
 export const getMultiCallAddress = (): string => {
-  return getAddress("MultiCall");
-}
+  return getAddress('MultiCall');
+};
 
 export const getDehubAddress = (): string => {
-  return getAddress("Dehub");
-}
+  return getAddress('Dehub');
+};
