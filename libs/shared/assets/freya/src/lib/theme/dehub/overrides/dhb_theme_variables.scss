@@ -226,10 +226,10 @@ $dangerButtonActiveBorderColor: scale-color($dangerButtonBg, $lightness: -20%);
 $dangerButtonFocusShadow: 0 0 0 1px
   scale-color($dangerButtonBg, $lightness: 30%);
 
-$linkButtonColor: $primaryColor;
-$linkButtonHoverColor: $primaryColor;
+$linkButtonColor: $dhb_link_color;
+$linkButtonHoverColor: $dhb_link_color;
 $linkButtonTextHoverDecoration: underline;
-$linkButtonFocusShadow: 0 0 0 0.1rem $focusOutlineColor;
+$linkButtonFocusShadow: 0 0 0 0 $focusOutlineColor;
 
 //checkbox
 $checkboxWidth: 20px;
