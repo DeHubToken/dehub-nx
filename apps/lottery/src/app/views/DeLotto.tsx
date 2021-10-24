@@ -58,14 +58,19 @@ const DeLotto = () => {
   const standardPaused = useGetStandardPaused();
   const specialPaused = useGetSpecialPaused();
 
+  const isActiveStage1 =
+    isNaN(specialEndTimeAsInt) || endTimeAsInt >= specialEndTimeAsInt;
+  const isActiveStage2 =
+    isNaN(endTimeAsInt) || endTimeAsInt < specialEndTimeAsInt;
+  const activeIndex = isActiveStage2 ? 1 : 0;
+
   return (
     <StyledContainer>
       <h1>DeLotto</h1>
-      <TabView>
+      <TabView activeIndex={activeIndex}>
         <TabPanel header="STAGE ONE">
           <StyledBox>
-            {isNaN(specialEndTimeAsInt) ||
-            endTimeAsInt >= specialEndTimeAsInt ? (
+            {isActiveStage1 ? (
               <DeLottoStage1 />
             ) : (
               <DeLottoStage1Waiting paused={standardPaused} />
@@ -75,7 +80,7 @@ const DeLotto = () => {
 
         <TabPanel header="STAGE TWO">
           <StyledBox>
-            {isNaN(endTimeAsInt) || endTimeAsInt < specialEndTimeAsInt ? (
+            {isActiveStage2 ? (
               <DeLottoStage2 />
             ) : (
               <DeLottoStage2Waiting paused={specialPaused} />
