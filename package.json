@@ -12,7 +12,7 @@
     "lottery:demo": "nx run lottery:build && lite-server -c bs-config-lottery.js",
     "lottery:deploy:draft": "NETLIFY_SITE_ID=bacc9132-2b4b-438d-9b93-a377c12181fb netlify deploy -d dist/apps/lottery -o",
     "lottery:deploy:prod": "NETLIFY_SITE_ID=bacc9132-2b4b-438d-9b93-a377c12181fb netlify deploy -d dist/apps/lottery -p -o",
-    "format": "nx format:write",
+    "format": "nx format:write --all",
     "lint": "nx affected --target=lint --fix --parallel --max-parallel=4",
     "test": "nx affected --target=test --parallel --max-parallel=4",
     "tdd": "nx affected --target=test --watchAll",

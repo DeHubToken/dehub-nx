@@ -6,3 +6,7 @@
 !/libs/shared/assets/freya/**/dhb_*.scss
 .history
 .vscode
+.github
+!**/*.json
+!**/*.js
+
