@@ -62,7 +62,7 @@ const DeLotto = () => {
     <StyledContainer>
       <h1>DeLotto</h1>
       <TabView>
-        <TabPanel header="STAGE #1">
+        <TabPanel header="STAGE ONE">
           <StyledBox>
             {standardStatus !== LotteryStatus.PENDING &&
             (isNaN(specialEndTimeAsInt) ||
@@ -74,7 +74,7 @@ const DeLotto = () => {
           </StyledBox>
         </TabPanel>
 
-        <TabPanel header="STAGE #2">
+        <TabPanel header="STAGE TWO">
           <StyledBox>
             {specialStatus !== LotteryStatus.PENDING &&
             (isNaN(endTimeAsInt) || endTimeAsInt < specialEndTimeAsInt) ? (
