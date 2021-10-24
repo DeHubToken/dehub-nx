@@ -52,7 +52,8 @@ export const Constants: { [key: number]: NetworkInfo } = {
       symbol: 'bnb',
       decimals: 18,
     },
-    RPC_URL: 'https://data-seed-prebsc-2-s3.binance.org:8545/',
+    RPC_URL:
+      'https://speedy-nodes-nyc.moralis.io/74ef8961baa2e25faa50a65f/bsc/testnet',
     BLOCK_EXPLORER_URLS: 'https://testnet.bscscan.com',
   },
 };
@@ -73,7 +74,7 @@ export const ContractAddresses: {
     BNB: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
     BUSD: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
     StandardLottery: '0x34fa1042e8d507742EbC5fD7b9a81943Df206612',
-    SpecialLottery: '0x1968666CF30825bB49dA5E257687492Db8D7aE3b',
+    SpecialLottery: '0x030C4e201D9D6a3575d0319c5d0b7e9fdEa628d6',
     MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
   },
 };

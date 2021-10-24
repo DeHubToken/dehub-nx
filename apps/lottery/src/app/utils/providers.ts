@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 
 import { Constants, NetworkInfo } from '@dehub/shared/config';
 
-import getRpcUrl from './rpc';
+import { getRpcUrl } from '../config/constants';
 
 const RPC_URL = getRpcUrl();
 
