@@ -75,95 +75,99 @@ const DeLottoStage2 = () => {
 
   return (
     <>
-      <FlexLine className="align-items-center justify-content-center">
-        {nextEventTime && postCountDownText ? (
-          <EventCountDown
-            nextEventTime={nextEventTime}
-            postCountDownText={postCountDownText}
-          />
-        ) : (
-          <Title>Loading...</Title>
-        )}
-      </FlexLine>
-
-      <FlexLine className="align-items-center justify-content-between">
-        {deLottoStatus !== LotteryStatus.PENDING && nextLotteryIdAsInt > 0 ? (
-          <>
-            <Header>Next Draw:</Header>
-            <Text>
-              #{nextLotteryIdAsInt} | Draw:{' '}
-              {new Date(endTimeAsInt * 1000).toLocaleString()}
-            </Text>
-          </>
-        ) : (
-          <>
-            <Skeleton width="7rem" height="2rem" />
-            <Skeleton width="20rem" height="1.5rem" />
-          </>
-        )}
-      </FlexLine>
-
-      <FlexLine className="align-items-center justify-content-between">
-        {deLottoStatus !== LotteryStatus.PENDING ? (
-          <Header>Prize Pot:</Header>
-        ) : (
-          <Skeleton width="6rem" height="2rem" />
-        )}
-        <PrizePot
-          pot={unwonPreviousPotInDehub.plus(amountCollectedInDehub)}
-          status={deLottoStatus}
-        />
-      </FlexLine>
-
-      {account && (
-        <FlexLine className="align-items-center md:align-items-start justify-content-between">
-          {deLottoStatus !== LotteryStatus.PENDING ? (
-            <Header>Your Tickets:</Header>
-          ) : (
-            <Skeleton width="8rem" height="2rem" />
-          )}
-
-          <div className="flex flex-column align-items-center md:align-items-end">
-            {userTickets && !userTickets.isLoading ? (
-              <>
-                <Text>
-                  You have{' '}
-                  <span className="font-bold">
-                    {userTickets.tickets?.length}
-                  </span>{' '}
-                  tickets this round.
-                </Text>
-                {userTickets.tickets && userTickets.tickets?.length > 0 && (
-                  <Button
-                    className="p-button-link p-0"
-                    onClick={() => handleShowDialog('ListTicket')}
-                    label="View your tickets"
-                  />
-                )}
-              </>
-            ) : (
-              <>
-                <Skeleton width="16rem" height="1.5rem" />
-                <Skeleton width="8rem" height="1.5rem" />
-              </>
-            )}
-            {account &&
-              deLottoStatus === LotteryStatus.OPEN &&
-              !isTransitioning && (
-                <Button
-                  className="button-link mt-3"
-                  onClick={() => handleShowDialog('BuySpecialTicket')}
-                  label="Buy Tickets"
+      <div className="grid">
+        <div className="col-12 md:col-6 lg:col-6">
+          <div className="card overview-box gray">
+            <div className="overview-info pr-4 text-left w-full">
+              <Header className="pb-2">{'Round #' + currentLotteryId}</Header>
+              {nextEventTime && postCountDownText ? (
+                <EventCountDown
+                  nextEventTime={nextEventTime}
+                  postCountDownText={postCountDownText}
                 />
+              ) : (
+                <Skeleton width="100%" height="1.5rem" />
               )}
+            </div>
+            <i className="fad fa-clock"></i>
           </div>
-        </FlexLine>
-      )}
+        </div>
+
+        <div className="col-12 md:col-6 lg:col-6">
+          <div className="card overview-box gray">
+            <div className="overview-info pr-4 text-left w-full">
+              {deLottoStatus !== LotteryStatus.PENDING &&
+              nextLotteryIdAsInt > 0 ? (
+                <>
+                  <Header>Next Draw:</Header>
+                  <Text>{new Date(endTimeAsInt * 1000).toLocaleString()}</Text>
+                </>
+              ) : (
+                <Skeleton width="100%" height="1.5rem" />
+              )}
+            </div>
+            <i className="fad fa-calendar-star"></i>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid mt-1 mb-4">
+        <div className="col-12 md:col-6 lg:col-6">
+          <div className="card overview-box gray">
+            <div className="overview-info pr-4 text-left w-full">
+              <Header className="pb-2">Prize Pot</Header>
+              <PrizePot
+                pot={unwonPreviousPotInDehub.plus(amountCollectedInDehub)}
+                status={deLottoStatus}
+              />
+            </div>
+            <i className="fad fa-coins"></i>
+          </div>
+        </div>
+
+        <div className="col-12 md:col-6 lg:col-6">
+          <div className="card overview-box gray">
+            <div className="overview-info pr-4 text-left w-full">
+              <Header className="pb-2">Your Tickets</Header>
+              {deLottoStatus !== LotteryStatus.PENDING ? (
+                <>
+                  <Text>
+                    You have{' '}
+                    <span className="font-bold">
+                      {account && userTickets && !userTickets.isLoading
+                        ? userTickets.tickets?.length
+                        : 0}
+                    </span>{' '}
+                    tickets this round.
+                  </Text>
+                  {account &&
+                    userTickets &&
+                    !userTickets.isLoading &&
+                    userTickets.tickets &&
+                    userTickets.tickets?.length > 0 && (
+                      <Button
+                        className="p-button-link p-0"
+                        onClick={() => handleShowDialog('ListTicket')}
+                        label="View your tickets"
+                      />
+                    )}
+                </>
+              ) : (
+                <>
+                  <Skeleton width="100%" height="1.5rem" />
+                  <Skeleton width="8rem" height="1.5rem" className="mt-2" />
+                </>
+              )}
+            </div>
+            <i className="fad fa-ticket"></i>
+          </div>
+        </div>
+      </div>
 
       {deLottoStatus !== LotteryStatus.PENDING && (
         <div className="flex flex-row justify-content-center">
           <div className="flex flex-column">
-            <Text>Are you a winner stage1?</Text>
+            <Text className="mb-3">Are you a winner stage1?</Text>
             {account ? (
               <Button
                 className="mt-2 justify-content-center"

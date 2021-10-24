@@ -118,15 +118,15 @@ const DeGrand = () => {
                 </FlexLine>
               ) : (
                 <FlexLine
-                  className="align-items-center justify-content-center py-2"
+                  className="align-items-center justify-content-center py-3"
                   style={{ borderBottom: '1px solid' }}
                 >
                   <Title>Prizes will be anounced soon!</Title>
                 </FlexLine>
               )}
               <FlexLine className="md:flex-column align-items-center justify-content-between">
-                <Header className="mt-2">Grand history</Header>
-                <Text className="my-2">See previous DeGrand Draws</Text>
+                <Header className="my-3">Grand history</Header>
+                <Text className="mb-3">See previous DeGrand Draws</Text>
                 {account ? (
                   deGrandPrize &&
                   deGrandPrize.drawTime > 0 && (
