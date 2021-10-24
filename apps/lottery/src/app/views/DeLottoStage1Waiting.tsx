@@ -22,7 +22,7 @@ const DeLottoStage1Waiting = ({
         <>
           <EventCountDown
             nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 501}
-            preCountDownText="Starts in "
+            postCountDownText="left until start"
             isVertical={false}
           />
           <Text>

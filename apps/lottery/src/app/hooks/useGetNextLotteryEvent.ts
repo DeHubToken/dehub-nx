@@ -3,7 +3,6 @@ import { LotteryStatus } from '../config/constants/types';
 
 interface LotteryEvent {
   nextEventTime: number;
-  preCountDownText?: string;
   postCountDownText?: string;
 }
 
@@ -17,7 +16,6 @@ const useGetNextLotteryEvent = (
   const transactionResolvingBuffer = 30; // Delay countdown by 30s to ensure contract transctions have been calculated and broadcast
   const [nextEvent, setNextEvent] = useState<LotteryEvent>({
     nextEventTime: 0,
-    preCountDownText: undefined,
     postCountDownText: undefined
   });
 
@@ -26,7 +24,6 @@ const useGetNextLotteryEvent = (
     if (status === LotteryStatus.OPEN) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer,
-        preCountDownText: undefined,
         postCountDownText: 'until the draw'
       });
     }
@@ -35,8 +32,7 @@ const useGetNextLotteryEvent = (
     if (status === LotteryStatus.CLOSE) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer + vrfRequestTime,
-        preCountDownText: `Closing Round #${lotteryId}`,
-        postCountDownText: undefined
+        postCountDownText: 'Closing the round'
       });
     }
 
@@ -44,8 +40,7 @@ const useGetNextLotteryEvent = (
     if (status === LotteryStatus.CLAIMABLE) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer + secondsBetweenRounds,
-        preCountDownText: `Drawing Numbers for Round #${lotteryId}`,
-        postCountDownText: undefined
+        postCountDownText: 'Drawing numbers...'
       });
     }
 

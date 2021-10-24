@@ -32,8 +32,11 @@ const DeLottoStage2 = () => {
   } = useLottery();
   const currentLotteryIdAsInt = parseInt(currentLotteryId, 10);
   const endTimeAsInt = parseInt(endTime, 10);
-  const { nextEventTime, preCountDownText, postCountDownText } =
-    useGetNextLotteryEvent(endTimeAsInt, currentLotteryId, deLottoStatus);
+  const { nextEventTime, postCountDownText } = useGetNextLotteryEvent(
+    endTimeAsInt,
+    currentLotteryId,
+    deLottoStatus
+  );
 
   const nextLotteryIdAsInt =
     deLottoStatus === LotteryStatus.OPEN
@@ -73,10 +76,9 @@ const DeLottoStage2 = () => {
   return (
     <>
       <FlexLine className="align-items-center justify-content-center">
-        {nextEventTime && (preCountDownText || postCountDownText) ? (
+        {nextEventTime && postCountDownText ? (
           <EventCountDown
             nextEventTime={nextEventTime}
-            preCountDownText={preCountDownText}
             postCountDownText={postCountDownText}
           />
         ) : (
