@@ -57,7 +57,7 @@ const ListTicketDialog = ({
         {status === LotteryStatus.OPEN && (
           <div className="flex flex-column mt-2">
             <Button className="justify-content-center" onClick={onBuy}>
-              Buy Now
+              Buy More
             </Button>
           </div>
         )}
