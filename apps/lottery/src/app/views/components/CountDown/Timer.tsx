@@ -20,9 +20,9 @@ const Timer = ({ seconds, minutes, hours, days, ...props }: TimerProps) => {
   return (
     <StyledWrapper {...props}>
       {Boolean(days) && <div {...props}>{days}d&nbsp;</div>}
-      {Boolean(hours) && <div {...props}>{hours}h&nbsp;</div>}
-      {Boolean(minutes) && <div {...props}>{minutes}m&nbsp;</div>}
-      {Boolean(seconds) && <div {...props}>{seconds}s&nbsp;</div>}
+      {<div {...props}>{`${hours}`.padStart(2, '0')}h&nbsp;</div>}
+      {<div {...props}>{`${minutes}`.padStart(2, '0')}m&nbsp;</div>}
+      {<div {...props}>{`${seconds}`.padStart(2, '0')}s&nbsp;</div>}
     </StyledWrapper>
   );
 };
