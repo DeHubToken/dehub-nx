@@ -1,21 +1,17 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
 
-import {
-  useWalletModalOpen,
-  useWalletModalToggle,
-  useSetWalletConnectingState,
-} from '../../states/application/hooks';
+import { useSetWalletConnectingState } from '../../states/application/hooks';
 import { getChainId } from '../../config/constants';
 import { Button } from 'primereact/button';
 
 const ConnectWalletButton = () => {
-  const walletModalOpen = useWalletModalOpen();
-  const toggleWalletModal = useWalletModalToggle();
   const setWalletConnectingState = useSetWalletConnectingState();
+
+  const [walletModalOpen, setWalletModalOpen] = useState(false);
 
   const { authenticate } = Hooks.useMoralisEthers();
   const chainId = getChainId();
@@ -32,7 +28,7 @@ const ConnectWalletButton = () => {
           },
           onSuccess: () => {
             setWalletConnectingState(WalletConnectingState.COMPLETE);
-            toggleWalletModal();
+            setWalletModalOpen(false);
           },
         });
       } else {
@@ -43,12 +39,12 @@ const ConnectWalletButton = () => {
           },
           onSuccess: () => {
             setWalletConnectingState(WalletConnectingState.COMPLETE);
-            toggleWalletModal();
+            setWalletModalOpen(false);
           },
         });
       }
     },
-    [authenticate, chainId, setWalletConnectingState, toggleWalletModal]
+    [authenticate, chainId, setWalletConnectingState, setWalletModalOpen]
   );
 
   return (
@@ -56,12 +52,16 @@ const ConnectWalletButton = () => {
       <Button
         label="Connect Wallet"
         icon="fas fa-wallet"
-        onClick={toggleWalletModal}
+        onClick={() => {
+          setWalletModalOpen(true);
+        }}
       ></Button>
 
       <WalletModal
         visible={walletModalOpen}
-        onDismiss={toggleWalletModal}
+        onDismiss={() => {
+          setWalletModalOpen(false);
+        }}
         doConnect={connectWallet}
       />
     </>

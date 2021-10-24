@@ -27,11 +27,15 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
 
   useEffect(() => {
     const calculate = async () => {
-      const dehubPriceInBusd = await getDehubPrice();
-      const prizeInBusdCalc = pot.times(dehubPriceInBusd);
+      try {
+        const dehubPriceInBusd = await getDehubPrice();
+        const prizeInBusdCalc = pot.times(dehubPriceInBusd);
 
-      if (mountedRef.current) {
-        setPrizeInBusd(prizeInBusdCalc);
+        if (mountedRef.current) {
+          setPrizeInBusd(prizeInBusdCalc);
+        }
+      } catch (error) {
+        console.log('calculate $DeHub in BUSD', error);
       }
     };
 
