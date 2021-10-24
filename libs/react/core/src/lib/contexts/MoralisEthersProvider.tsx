@@ -52,15 +52,23 @@ export const MoralisEthersProvider = ({
     setAccount(address);
   }, []);
 
+  const clearProvider = useCallback(() => {
+    setAuthProvider(undefined);
+    setSigner(undefined);
+    setAccount(undefined);
+  }, []);
+
   useEffect(() => {
     if (isWeb3Enabled) {
       if (user) {
         activateProvider();
+      } else {
+        clearProvider();
       }
     } else {
       enableWeb3();
     }
-  }, [isWeb3Enabled, enableWeb3, user, activateProvider]);
+  }, [isWeb3Enabled, enableWeb3, user, activateProvider, clearProvider]);
 
   useEffect(() => {
     Moralis.Web3.onAccountsChanged(([newAccount]) => {
