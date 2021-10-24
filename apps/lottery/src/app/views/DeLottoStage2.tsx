@@ -180,7 +180,7 @@ const DeLottoStage2 = () => {
           </div>
           {deLottoStatus === LotteryStatus.CLAIMABLE && (
             <div className="flex flex-column ml-3">
-              <Text>Are you a winner stage2?</Text>
+              <Text className="mb-3">Are you a winner stage2?</Text>
               {account ? (
                 <Button
                   className="mt-2 justify-content-center"

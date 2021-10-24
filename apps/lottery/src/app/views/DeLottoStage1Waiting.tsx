@@ -17,7 +17,9 @@ const DeLottoStage1Waiting = ({
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center">
       {paused ? (
-        <Title>DeLotto is paused for a while. Please wait...</Title>
+        <Title className="mt-3">
+          DeLotto is paused for a while. Please wait...
+        </Title>
       ) : (
         <>
           <EventCountDown
@@ -25,7 +27,7 @@ const DeLottoStage1Waiting = ({
             postCountDownText="left until start"
             isVertical={false}
           />
-          <Text>
+          <Text className="mt-3">
             Come back later to buy tickets for the DeLotto first stage.
           </Text>
           <Button className="p-button-link p-0 mt-7" label="Read more" />
