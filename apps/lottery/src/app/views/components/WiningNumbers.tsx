@@ -58,10 +58,14 @@ const WinningNumbers = ({
                 label={`${num}`}
                 size="large"
                 shape="circle"
+                className="shadow-3"
                 style={{
-                  backgroundColor: '#2196F3',
+                  background:
+                    'linear-gradient(128deg, rgba(31, 122, 153, 0.5) 0%, rgba(25, 120, 173, 0.5) 45%, rgba(162, 75, 180, 0.5) 100%)',
                   color: '#ffffff',
                   fontSize: `${fontSize}`,
+                  fontWeight: 900,
+                  marginRight: '5px',
                 }}
               />
             ) : (
