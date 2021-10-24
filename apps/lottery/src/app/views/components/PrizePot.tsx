@@ -46,7 +46,7 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
       )}`}
     </Text>
   ) : (
-    <Skeleton width="8rem" height="2rem" />
+    <Skeleton width="100%" height="2rem" />
   );
 };
 

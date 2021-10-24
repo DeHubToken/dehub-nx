@@ -34,7 +34,7 @@ const DeLottoStage2Waiting = ({
             postCountDownText="left until start"
             isVertical={false}
           />
-          <Text>
+          <Text textAlign="center">
             Come back later to buy tickets for the DeLotto second stage and
             DeGrand!
           </Text>
