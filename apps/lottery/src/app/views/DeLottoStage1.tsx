@@ -134,9 +134,9 @@ const DeLottoStage1 = () => {
       <div className="grid mt-1 mb-4">
         <div className="col-12 md:col-5 lg:col-5">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full">
+            <div className="overview-info pr-4 text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
-              {status !== LotteryStatus.PENDING && (
+              {status !== LotteryStatus.PENDING ? (
                 <>
                   <Text>
                     You have{' '}
@@ -169,8 +169,7 @@ const DeLottoStage1 = () => {
                       />
                     )}
                 </>
-              )}
-              {status === LotteryStatus.PENDING && (
+              ) : (
                 <>
                   <Skeleton width="100%" height="1.5rem" />
                   <Skeleton width="8rem" height="1.5rem" className="mt-2" />

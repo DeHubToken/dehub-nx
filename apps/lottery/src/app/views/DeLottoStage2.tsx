@@ -127,7 +127,7 @@ const DeLottoStage2 = () => {
 
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full">
+            <div className="overview-info pr-4 text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
               {deLottoStatus !== LotteryStatus.PENDING ? (
                 <>
@@ -149,6 +149,15 @@ const DeLottoStage2 = () => {
                         className="p-button-link p-0"
                         onClick={() => handleShowDialog('ListTicket')}
                         label="View your tickets"
+                      />
+                    )}
+                  {account &&
+                    deLottoStatus === LotteryStatus.OPEN &&
+                    !isTransitioning && (
+                      <Button
+                        className="button-link mt-3"
+                        onClick={() => handleShowDialog('BuySpecialTicket')}
+                        label="Buy Tickets"
                       />
                     )}
                 </>
