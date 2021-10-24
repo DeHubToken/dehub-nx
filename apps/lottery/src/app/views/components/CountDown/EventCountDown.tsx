@@ -1,7 +1,7 @@
-import Timer from './Timer';
 import { Title } from '../../../components/Text';
 import useNextEventCountDown from '../../../hooks/standard-lottery/useNextEventCountDown';
 import getTimePeriods from '../../../utils/getTimePeriods';
+import Timer from './Timer';
 
 interface EventCountDownProps {
   nextEventTime: number;
@@ -36,7 +36,13 @@ const EventCountDown = ({
             days={days}
             style={{ fontSize: timerFontSize }}
           />
-          <Title style={{ fontSize: titleFontSize }}>
+          <Title
+            style={{
+              fontSize: titleFontSize,
+              fontWeight: 900,
+              color: 'orange',
+            }}
+          >
             {postCountDownText || '\u00A0'}
           </Title>
         </>
