@@ -1,20 +1,19 @@
-import { useMemo } from 'react';
-import BigNumber from 'bignumber.js';
-import { ContractInterface, ethers } from 'ethers';
 import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
-import {
-  LotteryRound,
-  LotteryResponse,
-  LotteryRoundUserTickets,
-  LotteryBundleRule,
-} from './types';
-
+import BigNumber from 'bignumber.js';
+import { ethers } from 'ethers';
+import { useMemo } from 'react';
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
-import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 import { TICKET_LIMIT_PER_REQUEST } from '../../config/constants';
+import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 import { getStandardLotteryAddress } from '../../utils/addressHelpers';
 import { getStandardLotteryContract } from '../../utils/contractHelpers';
 import { Call, multicallv2 } from '../../utils/multicall';
+import {
+  LotteryBundleRule,
+  LotteryResponse,
+  LotteryRound,
+  LotteryRoundUserTickets,
+} from './types';
 
 const standardLotteryContract = getStandardLotteryContract();
 
