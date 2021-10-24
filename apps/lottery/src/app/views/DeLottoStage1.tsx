@@ -189,6 +189,7 @@ const DeLottoStage1 = () => {
                           className="button-link mt-3"
                           onClick={() => handleShowDialog('BuyStandardTicket')}
                           label="Buy Tickets"
+                          icon="fal fa-coin"
                         />
                       )}
                   </div>
