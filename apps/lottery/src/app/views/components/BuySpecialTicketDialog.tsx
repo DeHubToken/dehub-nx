@@ -232,7 +232,7 @@ const BuySpecialTicketDialog = ({
                     DEHUB_DECIMALS
                   )
                 : '0.00'
-            } $Dehub`}
+            } $DeHub`}
           />
           <div className="flex justify-content-end mt-2 mb-5">
             {fetchStatus === FetchStatus.SUCCESS ? (
