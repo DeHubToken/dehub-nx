@@ -141,7 +141,7 @@ const DeLottoStage1 = () => {
       </div>
 
       <div className="grid mt-1 mb-4">
-        <div className="col-12 md:col-4 lg:col-4">
+        <div className="col-12 md:col-5 lg:col-5">
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left">
               {account && (
@@ -199,7 +199,7 @@ const DeLottoStage1 = () => {
           </div>
         </div>
 
-        <div className="col-12 md:col-8 lg:col-8">
+        <div className="col-12 md:col-7 lg:col-7">
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left">
               {previousLotteryIdAsInt > 0 && (
