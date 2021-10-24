@@ -169,8 +169,8 @@ const fetchLotteryFinalNumbers = async (
   try {
     const statusAndFinalNumbers = await multicallv2(StandardLotteryAbi, calls);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const finalNumbers = statusAndFinalNumbers.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (statusAndFinalNumber: any, index: number) => {
         const statusKey = Object.keys(LotteryStatus)[statusAndFinalNumber[0]];
 

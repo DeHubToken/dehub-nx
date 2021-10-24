@@ -1,7 +1,6 @@
-import { isMobile } from 'react-device-detect';
-
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+import { isMobile } from 'react-device-detect';
 
 export type ProviderTypes = 'walletconnect' | null;
 
@@ -29,6 +28,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
               <img
                 style={{ height: '16px', paddingRight: '10px' }}
                 src="assets/dehub/icons/metamask.svg"
+                alt=""
               />
               Metamask
             </Button>
@@ -45,6 +45,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
             <img
               style={{ height: '11px', paddingRight: '10px' }}
               src="assets/dehub/icons/walletconnect.svg"
+              alt=""
             />
             WalletConnect
           </Button>

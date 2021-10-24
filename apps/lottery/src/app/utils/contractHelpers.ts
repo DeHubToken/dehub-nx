@@ -1,5 +1,5 @@
 import { simpleRpcProvider } from './providers';
-import { ethers } from 'ethers';
+import { ethers, ContractInterface } from 'ethers';
 import {
   getStandardLotteryAddress,
   getSpecialLotteryAddress,
@@ -10,10 +10,9 @@ import StandardLotteryAbi from '../config/abis/StandardLottery.json';
 import SpecialLotteryAbi from '../config/abis/SpecialLottery.json';
 import MulticallAbi from '../config/abis/Multicall.json';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getContract = (
   address: string,
-  abi: any,
+  abi: ContractInterface,
   signer?: ethers.Signer | ethers.providers.Provider
 ) => {
   const signerOrProvider = signer ?? simpleRpcProvider;

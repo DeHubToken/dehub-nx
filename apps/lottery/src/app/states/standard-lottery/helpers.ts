@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
-import { ethers } from 'ethers';
+import { ContractInterface, ethers } from 'ethers';
 import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
 import {
   LotteryRound,
@@ -18,8 +18,8 @@ import { Call, multicallv2 } from '../../utils/multicall';
 
 const standardLotteryContract = getStandardLotteryContract();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const processViewLotterySuccessResponse = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   response: any,
   lotteryId: string
 ): LotteryResponse => {

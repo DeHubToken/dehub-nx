@@ -26,8 +26,8 @@ import { Call, multicallv2 } from '../../utils/multicall';
 
 const specialLotteryContract = getSpecialLotteryContract();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const processViewLotterySuccessResponse = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   response: any,
   lotteryId: string
 ): LotteryResponse => {

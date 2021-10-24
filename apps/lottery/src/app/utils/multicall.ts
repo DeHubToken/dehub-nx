@@ -1,4 +1,6 @@
+import { JsonFragment } from '@ethersproject/abi';
 import { ethers } from 'ethers';
+import { Fragment } from 'ethers/lib/utils';
 import { getMultiCallContract } from './contractHelpers';
 
 export type MultiCallResponse<T> = T | null;
@@ -14,8 +16,7 @@ interface MulticallOptions {
   requireSuccess?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const multicall = async <T = any>(abi: any[], calls: Call[]): Promise<T> => {
+const multicall = async <T>(abi: string[], calls: Call[]): Promise<T> => {
   try {
     const multi = getMultiCallContract();
     const itf = new ethers.utils.Interface(abi);
@@ -50,8 +51,7 @@ const multicall = async <T = any>(abi: any[], calls: Call[]): Promise<T> => {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const multicallv2 = async <T = any>(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  abi: any[],
+  abi: string | ReadonlyArray<Fragment | JsonFragment | string>,
   calls: Call[],
   options: MulticallOptions = { requireSuccess: true }
 ): Promise<MultiCallResponse<T>> => {
