@@ -10,3 +10,5 @@ $highlightTextColor: $primaryTextColor;
 
 @import '../../sass/theme/_theme_dark';
 @import './icons/fontawesome.scss';
+@import './mixins/dhb_mixins.scss';
+@import './extensions/dhb_extensions.scss'
