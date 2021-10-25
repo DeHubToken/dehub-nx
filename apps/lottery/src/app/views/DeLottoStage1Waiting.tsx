@@ -18,7 +18,7 @@ const DeLottoStage1Waiting = () => {
         postCountDownText="until the start"
       />
       <Text className="mt-3 text-center">
-        Come back later to buy tickets for the DeLotto first stage.
+        Come back later to buy tickets for the DeRaffles first stage.
       </Text>
       <Button
         className="p-button-link p-0 mt-7"
