@@ -1,14 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import BigNumber from 'bignumber.js';
-import { Skeleton } from 'primereact/skeleton';
-
 import {
   BUSD_DECIMALS,
-  DEHUB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
+  DEHUB_DECIMALS,
 } from '@dehub/shared/config';
 import { getBalanceNumber, getFullDisplayBalance } from '@dehub/shared/utils';
-
+import BigNumber from 'bignumber.js';
+import { Skeleton } from 'primereact/skeleton';
+import { useEffect, useRef, useState } from 'react';
 import { Text } from '../../components/Text';
 import { LotteryStatus } from '../../config/constants/types';
 import { getDehubPrice } from '../../utils/priceDehub';
@@ -39,7 +37,7 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
           setPrizeInBusd(prizeInBusdCalc);
         }
       } catch (error) {
-        console.log('calculate $DeHub in BUSD', error);
+        console.error('calculate $DeHub in BUSD', error);
       }
     };
 

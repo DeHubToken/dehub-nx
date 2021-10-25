@@ -1,28 +1,27 @@
-import { useMemo } from 'react';
-import BigNumber from 'bignumber.js';
-import { ethers } from 'ethers';
 import {
   ethersToBigNumber,
   ethersToSerializedBigNumber,
 } from '@dehub/shared/utils';
-import {
-  LotteryRound,
-  LotteryResponse,
-  LotteryRoundUserTickets,
-  DeGrandPrize,
-} from './types';
-
+import BigNumber from 'bignumber.js';
+import { ethers } from 'ethers';
+import { useMemo } from 'react';
 import SpecialLotteryAbi from '../../config/abis/SpecialLottery.json';
+import { TICKET_LIMIT_PER_REQUEST } from '../../config/constants';
 import {
   LotteryStatus,
   LotteryTicket,
   LotteryTicketClaimData,
   LotteryTicketOwner,
 } from '../../config/constants/types';
-import { TICKET_LIMIT_PER_REQUEST } from '../../config/constants';
 import { getSpecialLotteryAddress } from '../../utils/addressHelpers';
 import { getSpecialLotteryContract } from '../../utils/contractHelpers';
 import { Call, multicallv2 } from '../../utils/multicall';
+import {
+  DeGrandPrize,
+  LotteryResponse,
+  LotteryRound,
+  LotteryRoundUserTickets,
+} from './types';
 
 const specialLotteryContract = getSpecialLotteryContract();
 
@@ -148,7 +147,7 @@ export const viewUserInfoForLotteryId = async (
     );
     return processRawTicketsReponse(data);
   } catch (error) {
-    console.log('viewUserInfoForLotteryId', error);
+    console.error('viewUserInfoForLotteryId', error);
     return null;
   }
 };
@@ -205,7 +204,7 @@ export const viewDeLottoWinningForTicketIds = async (
     );
     return data;
   } catch (error) {
-    console.log('viewDeLottoWinningForTicketIds', error);
+    console.error('viewDeLottoWinningForTicketIds', error);
     return null;
   }
 };
@@ -365,7 +364,7 @@ export const fetchUserDeGrandWinners = async (
     }
     return [];
   } catch (error) {
-    console.log('fetchUserDeGrandWinners', error);
+    console.error('fetchUserDeGrandWinners', error);
     return [];
   }
 };

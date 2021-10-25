@@ -37,7 +37,7 @@ const multicall = async <T>(abi: string[], calls: Call[]): Promise<T> => {
     if (error instanceof Error) {
       throw error;
     } else {
-      console.log(error);
+      console.error(error);
       throw new Error('unknown error in multicall');
     }
   }

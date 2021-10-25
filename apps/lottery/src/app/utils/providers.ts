@@ -1,7 +1,5 @@
-import { ethers } from 'ethers';
-
 import { Constants, NetworkInfo } from '@dehub/shared/config';
-
+import { ethers } from 'ethers';
 import { getRpcUrl } from '../config/constants';
 
 const RPC_URL = getRpcUrl();
@@ -27,7 +25,6 @@ export const addNetwork = async (chainId: number): Promise<boolean> => {
     const ethereum = (window as any).ethereum;
     if (ethereum) {
       const networkInfo: NetworkInfo = Constants[chainId];
-      console.log('networkInfo', networkInfo);
       await ethereum.request({
         method: 'wallet_addEthereumChain',
         params: [

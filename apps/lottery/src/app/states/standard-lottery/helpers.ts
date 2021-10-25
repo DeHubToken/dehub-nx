@@ -159,7 +159,7 @@ export const fetchLotteryBundleRules = async (): Promise<
       }
     );
   } catch (error) {
-    console.log('viewUserInfoForLotteryId', error);
+    console.error('viewUserInfoForLotteryId', error);
     return [];
   }
 };

@@ -1,30 +1,31 @@
-import { useRef, useState } from 'react';
+import { Hooks } from '@dehub/react/core';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
+import {
+  ethersToBigNumber,
+  getContract,
+  getFullDisplayBalance,
+} from '@dehub/shared/utils';
+import { Web3Provider } from '@ethersproject/providers';
 import { ethers } from 'ethers';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
-
-import { Web3Provider } from '@ethersproject/providers';
-import { Hooks } from '@dehub/react/core';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getContract, getFullDisplayBalance } from '@dehub/shared/utils';
-import { ethersToBigNumber } from '@dehub/shared/utils';
-
+import { useRef, useState } from 'react';
+import { Header, Text } from '../../components/Text';
 import Bep20Abi from '../../config/abis/erc20.json';
 import { LotteryTicket } from '../../config/constants/types';
-import { Header, Text } from '../../components/Text';
+import useApproveConfirmTransaction from '../../hooks/useApproveConfirmTransaction';
 import {
   useDehubContract,
   useStandardLotteryContract,
 } from '../../hooks/useContract';
-import useApproveConfirmTransaction from '../../hooks/useApproveConfirmTransaction';
 import { FetchStatus, useGetDehubBalance } from '../../hooks/useTokenBalance';
+import { useAppDispatch } from '../../states';
+import { fetchUserTicketsAndLotteries } from '../../states/standard-lottery';
 import {
   useGetLotteryBundleRules,
   useLottery,
 } from '../../states/standard-lottery/hooks';
-import { fetchUserTicketsAndLotteries } from '../../states/standard-lottery';
-import { useAppDispatch } from '../../states';
 import { LotteryBundleRule } from '../../states/standard-lottery/types';
 import {
   getDehubAddress,
@@ -126,7 +127,7 @@ const BuyStandardTicketDialog = ({
         );
       } catch (error) {
         // eslint-disable-next-line
-        console.log(error.message);
+        console.error(error.message);
         toast?.current?.show({
           severity: 'error',
           summary: 'Purchase tickets',

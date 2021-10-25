@@ -1,7 +1,7 @@
-import { useEffect, useReducer, useRef } from 'react';
 import { Hooks } from '@dehub/react/core';
-import { ethers } from 'ethers';
 import { Web3Provider } from '@ethersproject/providers';
+import { ethers } from 'ethers';
+import { useEffect, useReducer, useRef } from 'react';
 
 type LoadingState = 'idle' | 'loading' | 'success' | 'fail';
 
@@ -108,7 +108,6 @@ const useApproveConfirmTransaction = ({
     mountedRef.current = true;
     if (account && handlePreApprove.current && authProvider) {
       handlePreApprove.current(authProvider, account).then(result => {
-        console.log('handlePreApprove,', result, mountedRef.current);
         if (!mountedRef.current) {
           return;
         }

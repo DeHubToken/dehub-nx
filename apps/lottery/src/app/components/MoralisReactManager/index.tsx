@@ -13,9 +13,8 @@ const MoralisReactManager = ({ children }: MoralisReactManagerProps) => {
   useEffect(() => {
     const setupNetwork = async () => {
       // If wrong chain id, ask to switch network
-      console.log('Current Chain Id', chainId);
       if (chainId !== getChainIdHex()) {
-        console.log('Ask to switch network');
+        console.warn('Ask to switch network');
 
         try {
           await switchNetwork(getChainId());

@@ -70,7 +70,6 @@ export const MoralisEthersProvider = ({
 
   useEffect(() => {
     Moralis.Web3.onAccountsChanged(([newAccount]) => {
-      console.log('onAccountsChanged', newAccount);
       /*
        * if (!user || newAccount !== user.attributes.accounts[0]) {
        *   logout();
@@ -81,7 +80,6 @@ export const MoralisEthersProvider = ({
     });
 
     Moralis.Web3.onChainChanged(newChainId => {
-      console.log('onChainChanged', newChainId);
       setChainId(newChainId);
     });
   }, [logout, user]);
