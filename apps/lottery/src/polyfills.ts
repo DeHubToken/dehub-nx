@@ -13,7 +13,7 @@ global.Buffer = Buffer;
 global.process = {
   env: { DEBUG: undefined },
   version: '',
-  nextTick: require('next-tick')
+  nextTick: require('next-tick'),
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any;

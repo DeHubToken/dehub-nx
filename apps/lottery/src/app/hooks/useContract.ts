@@ -4,7 +4,11 @@ import { ContractAddresses } from '@dehub/shared/config';
 import { Hooks } from '@dehub/react/core';
 import { getContract } from '@dehub/shared/utils';
 
-import { getChainId } from '../constants';
+import { getChainId } from '../config/constants';
+import StandardLotteryAbi from '../config/abis/StandardLottery.json';
+import SpecialLotteryAbi from '../config/abis/SpecialLottery.json';
+import { getBep20Contract } from '../utils/contractHelpers';
+import { getDehubAddress } from '../utils/addressHelpers';
 
 // returns null on errors
 function useContract(
@@ -31,7 +35,20 @@ function useContract(
   }, [address, ABI, withSignerIfPossible, authProvider, account]);
 }
 
-export function useStandardLotteryContract(): Contract | null {
+export const useStandardLotteryContract = (): Contract | null => {
   const contractAddress = ContractAddresses[getChainId()]['StandardLottery'];
-  return useContract(contractAddress);
-}
+  return useContract(contractAddress, StandardLotteryAbi);
+};
+
+export const useSpecialLotteryContract = (): Contract | null => {
+  const contractAddress = ContractAddresses[getChainId()]['SpecialLottery'];
+  return useContract(contractAddress, SpecialLotteryAbi);
+};
+
+export const useDehubContract = (): Contract | null => {
+  const { signer } = Hooks.useMoralisEthers();
+  return useMemo(
+    () => (signer ? getBep20Contract(getDehubAddress(), signer) : null),
+    [signer]
+  );
+};

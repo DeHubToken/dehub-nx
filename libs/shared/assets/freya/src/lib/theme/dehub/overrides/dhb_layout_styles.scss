@@ -134,5 +134,7 @@ $menuBgColor: transparent;
   }
 }
 
+@import 'widgets/dhb_card_layout_styles';
 @import 'widgets/dhb_tabview_layout_styles';
 @import 'layout/dhb_landing';
+@import 'components/overlay/dhb_dialog';

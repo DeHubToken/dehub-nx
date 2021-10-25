@@ -26,7 +26,23 @@ const LoaderWrapper = styled.div`
   }
 `;
 
-const Loader = () => {
+const HeaderWrapper = styled.h4`
+  text-transfer: uppercase !important;
+  font-size: 20px;
+  margin-top: -20px;
+`;
+
+const TextWrapper = styled.div`
+  font-size: 16px;
+`;
+
+const Loader = ({
+  header = 'LOADING',
+  text,
+}: {
+  header?: string;
+  text?: string;
+}) => {
   return (
     <LoaderWrapper>
       <table>
@@ -43,13 +59,12 @@ const Loader = () => {
                   autoplay
                 />
               </div>
-              <h4
-                className="full-screen-loader-title text-uppercase f-20 text-monospace"
-                style={{ marginTop: '-20px' }}
-              >
-                Loading
-              </h4>
-              <span className="full-screen-loader-subtitle"></span>
+              <HeaderWrapper className="full-screen-loader-title">
+                {header}
+              </HeaderWrapper>
+              <TextWrapper className="full-screen-loader-subtitle">
+                {text ?? ''}
+              </TextWrapper>
             </td>
           </tr>
         </tbody>

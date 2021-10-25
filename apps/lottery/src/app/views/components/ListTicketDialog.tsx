@@ -1,30 +1,33 @@
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
+import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 import { Text } from '../../components/Text';
-import { TicketNumberLabel } from '../../components/TicketLabel';
-
-const ticketNumbers = [
-  1141208, 1140208, 1101208,
-];
+import { TicketIdLabel, TicketNumberLabel } from '../../components/TicketLabel';
 
 interface ListTicketDialogProps {
   open: boolean;
   onHide: () => void;
   onBuy: () => void;
+  roundId: string;
+  tickets: LotteryTicket[] | undefined;
+  status: LotteryStatus;
 }
 
 const ListTicketDialog = ({
   open,
   onHide,
-  onBuy
+  onBuy,
+  roundId,
+  tickets,
+  status,
 }: ListTicketDialogProps) => {
   return (
     <Dialog
       visible={open}
       modal
       className="p-fluid"
-      header="Round #166"
+      header={`Round #${roundId}`}
       style={{ width: '250px' }}
       onHide={onHide}
     >
@@ -33,27 +36,34 @@ const ListTicketDialog = ({
           <Text>Your Tickets</Text>
         </div>
         <div className="mb-4">
-          {
-            ticketNumbers.map((number: number, index: number) => {
-              return (
+          {tickets &&
+            tickets.map((ticket: LotteryTicket, index: number) => {
+              const ticketAsInt = parseInt(ticket.number, 10);
+              return ticketAsInt > 0 ? (
                 <TicketNumberLabel
                   key={`${index}`}
-                  number={number}
-                  state="bought"
+                  number={ticketAsInt}
+                  className="mt-2"
+                />
+              ) : (
+                <TicketIdLabel
+                  key={`${index}`}
+                  id={`#${ticket.id}`}
                   className="mt-2"
                 />
               );
-            })
-          }
+            })}
         </div>
-        <div className="flex flex-column mt-2">
-          <Button className="justify-content-center" onClick={onBuy}>
-            Buy Now
-          </Button>
-        </div>
+        {status === LotteryStatus.OPEN && (
+          <div className="flex flex-column mt-2">
+            <Button className="justify-content-center" onClick={onBuy}>
+              Buy More
+            </Button>
+          </div>
+        )}
       </div>
     </Dialog>
   );
-}
+};
 
 export default ListTicketDialog;

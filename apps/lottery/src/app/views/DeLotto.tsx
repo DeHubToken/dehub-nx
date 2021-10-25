@@ -1,234 +1,129 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import { Button } from 'primereact/button';
-import {
-  TabView,
-  TabPanel
-} from 'primereact/tabview';
+import { TabView, TabPanel } from 'primereact/tabview';
 
+import DeLottoStage1 from './DeLottoStage1';
+import DeLottoStage1Waiting from './DeLottoStage1Waiting';
+import DeLottoStage2 from './DeLottoStage2';
+import DeLottoStage2Waiting from './DeLottoStage2Waiting';
+import SyncWaiting from './SyncWaiting';
 import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
+
+import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import {
-  Header,
-  Text
-} from '../components/Text';
-import BuyStandardTicketDialog from './components/BuyStandardTicketDialog';
-import BuySpecialTicketDialog from './components/BuySpecialTicketDialog';
-import ClaimStage1Dialog from './components/ClaimStage1Dialog';
-import ClaimStage2Dialog from './components/ClaimStage2Dialog';
-import ListTicketDialog from './components/ListTicketDialog';
-import FlexLine from './components/FlexLine';
-import WinningNumbers from './components/WiningNumbers';
+  useFetchPaused,
+  useGetSpecialPaused,
+  useGetStandardPaused,
+} from '../states/pause/hooks';
+import useStandardLotteryStatusTransitions from '../hooks/standard-lottery/useStatusTransitions';
+import useSpecialLotteryStatusTransitions from '../hooks/special-lottery/useStatusTransitions';
+import {
+  useFetchLottery as useFetchStandardLottery,
+  useLottery as useStandardLottery,
+} from '../states/standard-lottery/hooks';
+import {
+  useFetchLottery as useFetchSpecialLottery,
+  useLottery as useSpecialLottery,
+} from '../states/special-lottery/hooks';
+import { environment } from '../../environments/environment';
 
 const StyledContainer = styled(Container)`
   .p-tabview .p-tabview-nav li {
     width: 50%;
   }
-`
+`;
 
 const StyledBox = styled(Box)`
   padding: 1rem;
-`
-
-const winningNumbers: number[] = [
-  5, 16, 9, 12
-];
+`;
 
 const DeLotto = () => {
-  const [listTicketDialog, setListTicketDialog] = useState(false);
-  const [buyStandardTicketDialog, setBuyStandardTicketDialog] = useState(false);
-  const [buySpecialTicketDialog, setBuySpecialTicketDialog] = useState(false);
-  const [checkStage1Dialog, setCheckStage1Dialog] = useState(false);
-  const [checkStage2Dialog, setCheckStage2Dialog] = useState(false);
+  // pause status
+  useFetchPaused();
 
-  const handleShowListTicketDialog = () => {
-    setListTicketDialog(true);
-  }
+  // standard lottery
+  useFetchStandardLottery();
+  useStandardLotteryStatusTransitions();
 
-  const handleHideListTicketDialog = () => {
-    setListTicketDialog(false);
-  }
+  // special lottery
+  useFetchSpecialLottery();
+  useSpecialLotteryStatusTransitions();
 
-  const handleShowBuyStandardTicketDialog = () => {
-    setBuyStandardTicketDialog(true);
-  }
+  const {
+    currentRound: {
+      lotteryId: standardLotteryId,
+      status: standardStatus,
+      endTime: standardEndTime,
+    },
+  } = useStandardLottery();
+  const {
+    currentRound: {
+      lotteryId: specialLotteryId,
+      deLottoStatus: specialStatus,
+      endTime: specialEndTime,
+    },
+  } = useSpecialLottery();
+  const standardEndTimeAsInt = parseInt(standardEndTime, 10);
+  const specialEndTimeAsInt = parseInt(specialEndTime, 10);
+  const standardPaused = useGetStandardPaused();
+  const specialPaused = useGetSpecialPaused();
+  const now = new Date();
 
-  const handleHideBuyStandardTicketDialog = () => {
-    setBuyStandardTicketDialog(false);
-  }
+  const isActiveStage1 = standardEndTimeAsInt > specialEndTimeAsInt;
+  const isActiveStage2 = standardEndTimeAsInt < specialEndTimeAsInt;
+  const activeIndex =
+    !isActiveStage1 && isActiveStage2
+      ? 1
+      : isActiveStage1 && !isActiveStage2
+      ? 0
+      : now.getUTCDay() >= // If waiting to start our first round
+        (now.getUTCMonth() === 1
+          ? environment.deGrandStartDayOnFebruary
+          : environment.deGrandStartDay)
+      ? 0
+      : 1;
 
-  const handleShowBuySpecialTicketDialog = () => {
-    setBuySpecialTicketDialog(true);
-  }
+  const isSyncStage1 = standardLotteryId && !isNaN(standardEndTimeAsInt);
+  const isSyncStage2 = specialLotteryId && !isNaN(specialEndTimeAsInt);
 
-  const handleHideBuySpecialTicketDialog = () => {
-    setBuySpecialTicketDialog(false);
-  }
-
-  const handleShowCheckStage1Dialog = () => {
-    setCheckStage1Dialog(true);
-  }
-
-  const handleHideCheckStage1Dialog = () => {
-    setCheckStage1Dialog(false);
-  }
-
-  const handleShowCheckStage2Dialog = () => {
-    setCheckStage2Dialog(true);
-  }
-
-  const handleHideCheckStage2Dialog = () => {
-    setCheckStage2Dialog(false);
-  }
-
-  const handleBuyStandardTicket = (input: number) => {
-    console.log('Buy tickets: ', input);
-  }
-
-  const handleInputChange = (input: string) => {
-    console.log('Balance input=', input);
-  }
-
-  const handleClaimStage1 = (ticketIds: number[]) => {
-    console.log('Claim stage1');
-  }
-
-  const handleClaimStage2 = () => {
-    console.log('Claim stage2');
-  }
+  const loadingStatus =
+    standardStatus === LotteryStatus.PENDING &&
+    specialStatus === LotteryStatus.PENDING &&
+    !isSyncStage1 &&
+    !isSyncStage2
+      ? LoadingStatus.LOADING
+      : standardPaused || specialPaused
+      ? LoadingStatus.PAUSED
+      : isSyncStage1 && isSyncStage2
+      ? LoadingStatus.COMPLETE
+      : LoadingStatus.SYNCHRONIZING;
 
   return (
     <StyledContainer>
       <h1>DeLotto</h1>
-      <TabView>
-        <TabPanel header="STAGE #1">
-          <StyledBox>
-            <h1 className="text-center">
-            2h 26m until the draw
-            </h1>
+      {loadingStatus !== LoadingStatus.COMPLETE ? (
+        <SyncWaiting loadingStatus={loadingStatus} />
+      ) : (
+        <TabView activeIndex={activeIndex}>
+          <TabPanel header="STAGE ONE" contentStyle={{ minHeight: '30rem' }}>
+            <StyledBox>
+              {isActiveStage1 ? <DeLottoStage1 /> : <DeLottoStage1Waiting />}
+            </StyledBox>
+          </TabPanel>
 
-            <FlexLine className="align-items-center">
-              <Header>Next Draw:</Header>
-              <Text>#166 | Draw: Sep 23, 2021, 3:00 PM</Text>
-            </FlexLine>
-
-            <FlexLine className="align-items-center">
-              <Header>Prize Pot:</Header>
-              <Text>300,000,000 $DeHub</Text>
-            </FlexLine>
-
-            <FlexLine className="align-items-center md:align-items-start">
-              <Header>Your Tickets:</Header>
-              <div className="flex flex-column align-items-center md:align-items-end">
-                <Text>You have <span className="font-bold">10</span> tickets this round.</Text>
-                <Button className="p-button-link p-0" onClick={handleShowListTicketDialog}>
-                  View your tickets
-                </Button>
-                <Button className="button-link mt-3" onClick={handleShowBuyStandardTicketDialog}>
-                  Buy Tickets
-                </Button>
-              </div>
-            </FlexLine>
-
-            <FlexLine className="align-items-center md:align-items-start">
-              <Header>Latest Winning Number:</Header>
-              <div className="flex flex-column align-items-center md:align-items-end">
-                <WinningNumbers
-                  numbers={winningNumbers}
-                  rounded={true}
-                />
-                <Text>Round #165</Text>
-                <Text>Drawn Sep 23, 2021, 3:00 AM</Text>
-              </div>
-            </FlexLine>
-
-            <FlexLine className="md:flex-column align-items-center">
-              <div className="flex flex-column">
-                <Text>Are you a winner?</Text>
-                <Button className="mt-2 justify-content-center" onClick={handleShowCheckStage1Dialog}>Check Now</Button>
-              </div>
-            </FlexLine>
-          </StyledBox>
-        </TabPanel>
-
-        <TabPanel header="STAGE #2">
-          <StyledBox>
-            <h1 className="text-center">
-            1d 2h 26m until the draw
-            </h1>
-
-            <FlexLine className="align-items-center">
-              <Header>Next Draw:</Header>
-              <Text>#166 | Draw: Sep 23, 2021, 3:00 PM</Text>
-            </FlexLine>
-
-            <FlexLine className="align-items-center">
-              <Header>Prize Pot:</Header>
-              <Text>300,000,000 $DeHub</Text>
-            </FlexLine>
-
-            <FlexLine className="align-items-center md:align-items-start">
-              <Header>Your Tickets:</Header>
-              <div className="flex flex-column align-items-center md:align-items-end">
-                <Text>You have <span className="font-bold">10</span> tickets this round.</Text>
-                <Button className="p-button-link p-0" onClick={handleShowListTicketDialog}>
-                  View your tickets
-                </Button>
-                <Button className="button-link mt-3" onClick={handleShowBuySpecialTicketDialog}>
-                  Buy Special Tickets
-                </Button>
-              </div>
-            </FlexLine>
-
-            <div className="flex flex-row justify-content-center">
-              <div className="flex flex-column">
-                <Text>Are you a winner?</Text>
-                <Button className="mt-2 justify-content-center" onClick={handleShowCheckStage1Dialog}>
-                  Check Now
-                </Button>
-              </div>
-              <div className="flex flex-column ml-3">
-                <Text>Are you a winner stage2?</Text>
-                <Button className="mt-2 justify-content-center" onClick={handleShowCheckStage2Dialog}>
-                  Check Now
-                </Button>
-              </div>
-            </div>
-          </StyledBox>
-        </TabPanel>
-      </TabView>
-
-      <ListTicketDialog
-        open={listTicketDialog}
-        onHide={handleHideListTicketDialog}
-        onBuy={handleShowBuyStandardTicketDialog}
-      />
-
-      <BuyStandardTicketDialog
-        open={buyStandardTicketDialog}
-        onHide={handleHideBuyStandardTicketDialog}
-        onBuy={handleBuyStandardTicket}
-      />
-
-      <BuySpecialTicketDialog
-        open={buySpecialTicketDialog}
-        onHide={handleHideBuySpecialTicketDialog}
-        onUserInput={handleInputChange}
-      />
-
-      <ClaimStage1Dialog
-        open={checkStage1Dialog}
-        onHide={handleHideCheckStage1Dialog}
-        onClaim={handleClaimStage1}
-      />
-
-      <ClaimStage2Dialog
-        open={checkStage2Dialog}
-        onHide={handleHideCheckStage2Dialog}
-        onClaim={handleClaimStage2}
-      />
+          <TabPanel header="STAGE TWO" contentStyle={{ minHeight: '30rem' }}>
+            {isActiveStage2 ? (
+              <StyledBox>
+                <DeLottoStage2 />
+              </StyledBox>
+            ) : (
+              <DeLottoStage2Waiting />
+            )}
+          </TabPanel>
+        </TabView>
+      )}
     </StyledContainer>
   );
-}
+};
 
 export default DeLotto;

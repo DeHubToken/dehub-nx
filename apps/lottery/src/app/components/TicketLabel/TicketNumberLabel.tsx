@@ -1,54 +1,64 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Text } from '../Text';
 
+import { Text } from '../Text';
+import { toLotteryNumbers } from '../../utils/numbers';
+
+import { LotteryPrizeLevel } from '../../config/constants/types';
+
+/**
+ * @todo set color with freya variables
+ */
 const Wrapper = styled.div<{
-  state: string
+  rewardBracket?: number;
 }>`
-  background-color: ${({ state = "bought" }) =>
-    state === "bought" ?
-    'rgb(234, 235, 236)' :
-    state === "claimable" ?
-    'var(--yellow-500)' : 'var(--text-color-secondary)'};
+  background: ${({ rewardBracket = LotteryPrizeLevel.NONE }) =>
+    rewardBracket === LotteryPrizeLevel.GOLD
+      ? 'linear-gradient(50deg, rgba(89,70,0,1) 0%, rgba(234,201,89,1) 48%, rgba(89,70,0,1) 100%)'
+      : rewardBracket === LotteryPrizeLevel.SILVER
+      ? 'linear-gradient(50deg, rgba(46,59,78,1) 0%, rgba(158,198,223,1) 48%, rgba(46,59,78,1) 100%)'
+      : rewardBracket === LotteryPrizeLevel.BRONZE
+      ? 'linear-gradient(50deg, rgba(89,63,46,1) 0%, rgba(179,109,45,1) 48%, rgba(89,63,46,1) 100%)'
+      : 'var(--text-color-secondary)'};
   border-radius: 16px;
   margin: auto;
   display: flex;
   justify-content: center;
-`
+`;
 
 interface TicketNumberLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   number: number;
-  state: "bought" | "claimable" | "claimed";
+  rewardBracket?: number;
 }
 
 const TicketNumberLabel = ({
   number,
-  state,
+  rewardBracket = -1,
   ...props
-} : TicketNumberLabelProps) => {
-  const [parts, setParts] = useState<number[]>([]);
-
-  useEffect(() => {
-    const splits: number[] = [];
-    let temp = number;
-    while (temp > 0) {
-      splits.push(temp % 100);
-      temp = Math.floor(temp / 100);
-    }
-    setParts(splits);
-  }, [number])
+}: TicketNumberLabelProps) => {
+  const parts = toLotteryNumbers(number);
 
   return (
-    <Wrapper state={state} {...props}>
-      {
-        parts.map((num: number, index: number) => {
-          return (
-            <Text key={`${index}`} className="m-2" color="#000">{num}</Text>
-          )
-        })
-      }
+    <Wrapper rewardBracket={rewardBracket} {...props}>
+      {parts.map((num: number, index: number) => {
+        return (
+          <Text
+            key={`${index}`}
+            className={`m-2 text-center ${
+              index <= rewardBracket ? 'font-bold' : ''
+            }`}
+            color={
+              rewardBracket < 0 || rewardBracket === LotteryPrizeLevel.NONE
+                ? 'var(--surface-a)'
+                : 'var(--text-color)'
+            }
+            style={{ width: '16px' }}
+          >
+            {num}
+          </Text>
+        );
+      })}
     </Wrapper>
   );
-}
+};
 
 export default TicketNumberLabel;
