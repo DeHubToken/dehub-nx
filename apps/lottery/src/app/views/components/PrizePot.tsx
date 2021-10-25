@@ -47,14 +47,14 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
       <Text fontSize="22px" className="inline-block">
         ${getBalanceNumber(prizeInBusd, BUSD_DECIMALS)}
       </Text>
-      <>
+      <div className="w-full">
         <Text fontSize="14px" className="inline-block">
           {`${getBalanceNumber(pot, DEHUB_DECIMALS)}`}
         </Text>
         <Text fontSize="12px" className="inline-block font-bold">
           &nbsp;$DeHub
         </Text>
-      </>
+      </div>
     </>
   ) : (
     <>
