@@ -24,7 +24,7 @@ const useGetNextLotteryEvent = (
     if (status === LotteryStatus.OPEN) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer,
-        postCountDownText: 'until the draw',
+        postCountDownText: 'until the draw.',
       });
     }
 
@@ -32,7 +32,7 @@ const useGetNextLotteryEvent = (
     if (status === LotteryStatus.CLOSE) {
       setNextEvent({
         nextEventTime: endTime + transactionResolvingBuffer + vrfRequestTime,
-        postCountDownText: 'Closing the round',
+        postCountDownText: 'closing the round...',
       });
     }
 
@@ -41,7 +41,7 @@ const useGetNextLotteryEvent = (
       setNextEvent({
         nextEventTime:
           endTime + transactionResolvingBuffer + secondsBetweenRounds,
-        postCountDownText: 'Drawing numbers...',
+        postCountDownText: 'drawing numbers...',
       });
     }
   }, [lotteryId, status, endTime]);
