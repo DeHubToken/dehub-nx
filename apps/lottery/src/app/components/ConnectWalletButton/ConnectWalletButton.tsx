@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
@@ -12,9 +12,16 @@ const ConnectWalletButton = () => {
   const setWalletConnectingState = useSetWalletConnectingState();
 
   const [walletModalOpen, setWalletModalOpen] = useState(false);
+  const mountedRef = useRef(true);
 
   const { authenticate } = Hooks.useMoralisEthers();
   const chainId = getChainId();
+
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   const connectWallet = useCallback(
     provider => {
@@ -28,7 +35,9 @@ const ConnectWalletButton = () => {
           },
           onSuccess: () => {
             setWalletConnectingState(WalletConnectingState.COMPLETE);
-            setWalletModalOpen(false);
+            if (mountedRef.current) {
+              setWalletModalOpen(false);
+            }
           },
         });
       } else {
@@ -39,7 +48,9 @@ const ConnectWalletButton = () => {
           },
           onSuccess: () => {
             setWalletConnectingState(WalletConnectingState.COMPLETE);
-            setWalletModalOpen(false);
+            if (mountedRef.current) {
+              setWalletModalOpen(false);
+            }
           },
         });
       }

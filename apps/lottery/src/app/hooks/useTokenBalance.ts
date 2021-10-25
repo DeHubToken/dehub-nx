@@ -31,6 +31,12 @@ export const useTokenBalance = (tokenAddress: string) => {
   const mountedRef = useRef(true);
 
   useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
     mountedRef.current = true;
     const fetchBalance = async () => {
       const contract = getBep20Contract(tokenAddress);
@@ -54,9 +60,6 @@ export const useTokenBalance = (tokenAddress: string) => {
     if (account) {
       fetchBalance();
     }
-    return () => {
-      mountedRef.current = false;
-    };
   }, [account, tokenAddress, fastRefresh, SUCCESS, FAILED]);
 
   return balanceState;
