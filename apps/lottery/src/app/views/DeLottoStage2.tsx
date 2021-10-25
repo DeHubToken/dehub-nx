@@ -81,7 +81,7 @@ const DeLottoStage2 = () => {
   return (
     <>
       <div className="grid">
-        <div className="col-12 md:col-6 lg:col-6">
+        <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full">
               <Header className="pb-2">{'Round #' + currentLotteryId}</Header>
@@ -98,7 +98,7 @@ const DeLottoStage2 = () => {
           </div>
         </div>
 
-        <div className="col-12 md:col-6 lg:col-6">
+        <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full">
               <Header>Next Draw:</Header>
@@ -122,10 +122,8 @@ const DeLottoStage2 = () => {
             <i className="fad fa-calendar-star"></i>
           </div>
         </div>
-      </div>
 
-      <div className="grid mt-1 mb-4">
-        <div className="col-12 md:col-6 lg:col-6">
+        <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full">
               <Header className="pb-2">Prize Pot</Header>
@@ -134,7 +132,9 @@ const DeLottoStage2 = () => {
             <i className="fad fa-coins"></i>
           </div>
         </div>
+      </div>
 
+      <div className="grid mt-1 mb-4">
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full flex flex-column align-items-start">
@@ -168,6 +168,7 @@ const DeLottoStage2 = () => {
                         className="button-link mt-3"
                         onClick={() => handleShowDialog('BuySpecialTicket')}
                         label="Buy Tickets"
+                        icon="fal fa-coin"
                       />
                     )}
                 </>
