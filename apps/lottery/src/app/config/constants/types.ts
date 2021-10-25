@@ -1,5 +1,12 @@
 import BigNumber from 'bignumber.js';
 
+export enum LoadingStatus {
+  LOADING = 0,
+  SYNCHRONIZING = 1,
+  PAUSED = 2,
+  COMPLETE = 3,
+}
+
 export enum LotteryPrizeLevel {
   NONE = 0,
   BRONZE = 1,

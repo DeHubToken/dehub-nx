@@ -5,10 +5,11 @@ import DeLottoStage1 from './DeLottoStage1';
 import DeLottoStage1Waiting from './DeLottoStage1Waiting';
 import DeLottoStage2 from './DeLottoStage2';
 import DeLottoStage2Waiting from './DeLottoStage2Waiting';
+import SyncWaiting from './SyncWaiting';
 import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
 
-import { LotteryStatus } from '../config/constants/types';
+import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import {
   useFetchPaused,
   useGetSpecialPaused,
@@ -53,41 +54,50 @@ const DeLotto = () => {
   const {
     currentRound: { deLottoStatus: specialStatus, endTime: specialEndTime },
   } = useSpecialLottery();
-  const endTimeAsInt = parseInt(standardEndTime, 10);
+  const standardEndTimeAsInt = parseInt(standardEndTime, 10);
   const specialEndTimeAsInt = parseInt(specialEndTime, 10);
   const standardPaused = useGetStandardPaused();
   const specialPaused = useGetSpecialPaused();
 
-  const isActiveStage1 =
-    isNaN(specialEndTimeAsInt) || endTimeAsInt >= specialEndTimeAsInt;
-  const isActiveStage2 =
-    isNaN(endTimeAsInt) || endTimeAsInt < specialEndTimeAsInt;
+  const isActiveStage1 = standardEndTimeAsInt >= specialEndTimeAsInt;
+  const isActiveStage2 = standardEndTimeAsInt < specialEndTimeAsInt;
   const activeIndex = isActiveStage2 ? 1 : 0;
+
+  const isSyncStage1 =
+    standardStatus !== LotteryStatus.PENDING && !isNaN(standardEndTimeAsInt);
+  const isSyncStage2 =
+    specialStatus !== LotteryStatus.PENDING && !isNaN(specialEndTimeAsInt);
+
+  const loadingStatus =
+    standardStatus === LotteryStatus.PENDING &&
+    specialStatus === LotteryStatus.PENDING
+      ? LoadingStatus.LOADING
+      : standardPaused || specialPaused
+      ? LoadingStatus.PAUSED
+      : isSyncStage1 && isSyncStage2
+      ? LoadingStatus.COMPLETE
+      : LoadingStatus.SYNCHRONIZING;
 
   return (
     <StyledContainer>
       <h1>DeLotto</h1>
-      <TabView activeIndex={activeIndex}>
-        <TabPanel header="STAGE ONE">
-          <StyledBox>
-            {isActiveStage1 ? (
-              <DeLottoStage1 />
-            ) : (
-              <DeLottoStage1Waiting paused={standardPaused} />
-            )}
-          </StyledBox>
-        </TabPanel>
+      {loadingStatus !== LoadingStatus.COMPLETE ? (
+        <SyncWaiting loadingStatus={loadingStatus} />
+      ) : (
+        <TabView activeIndex={activeIndex}>
+          <TabPanel header="STAGE ONE" contentStyle={{ minHeight: '30rem' }}>
+            <StyledBox>
+              {isActiveStage1 ? <DeLottoStage1 /> : <DeLottoStage1Waiting />}
+            </StyledBox>
+          </TabPanel>
 
-        <TabPanel header="STAGE TWO">
-          <StyledBox>
-            {isActiveStage2 ? (
-              <DeLottoStage2 />
-            ) : (
-              <DeLottoStage2Waiting paused={specialPaused} />
-            )}
-          </StyledBox>
-        </TabPanel>
-      </TabView>
+          <TabPanel header="STAGE TWO" contentStyle={{ minHeight: '30rem' }}>
+            <StyledBox>
+              {isActiveStage2 ? <DeLottoStage2 /> : <DeLottoStage2Waiting />}
+            </StyledBox>
+          </TabPanel>
+        </TabView>
+      )}
     </StyledContainer>
   );
 };

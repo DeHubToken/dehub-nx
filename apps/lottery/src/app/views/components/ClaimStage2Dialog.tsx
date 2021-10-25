@@ -104,7 +104,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
       >
         <div className="flex flex-column">
           <div className="mb-2 flex justify-content-center">
-            <Text>Your winnings</Text>
+            <Text>Unclaimed Total</Text>
           </div>
           <div className="mb-3 flex justify-content-center">
             {winningRewards ? (

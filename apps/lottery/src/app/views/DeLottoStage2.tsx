@@ -175,31 +175,29 @@ const DeLottoStage2 = () => {
 
       {deLottoStatus !== LotteryStatus.PENDING && (
         <div className="flex flex-row justify-content-center">
-          <div className="flex flex-column">
-            <Text className="mb-3">Are you a winner stage1?</Text>
-            {account ? (
-              <Button
-                className="mt-2 justify-content-center"
-                onClick={() => handleShowDialog('CheckStage1')}
-                label="Check Now"
-              />
-            ) : (
-              <ConnectWalletButton />
-            )}
-          </div>
-          {deLottoStatus === LotteryStatus.CLAIMABLE && (
-            <div className="flex flex-column ml-3">
-              <Text className="mb-3">Are you a winner stage2?</Text>
-              {account ? (
+          {account ? (
+            <>
+              <div className="flex flex-column">
+                <Text className="mb-3">Are you a winner stage1?</Text>
                 <Button
                   className="mt-2 justify-content-center"
-                  onClick={() => handleShowDialog('CheckStage2')}
+                  onClick={() => handleShowDialog('CheckStage1')}
                   label="Check Now"
                 />
-              ) : (
-                <ConnectWalletButton />
+              </div>
+              {deLottoStatus === LotteryStatus.CLAIMABLE && (
+                <div className="flex flex-column ml-3">
+                  <Text className="mb-3">Are you a winner stage2?</Text>
+                  <Button
+                    className="mt-2 justify-content-center"
+                    onClick={() => handleShowDialog('CheckStage2')}
+                    label="Check Now"
+                  />
+                </div>
               )}
-            </div>
+            </>
+          ) : (
+            <ConnectWalletButton />
           )}
         </div>
       )}

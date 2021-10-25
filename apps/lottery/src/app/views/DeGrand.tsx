@@ -19,7 +19,8 @@ import {
   useLottery,
   useThisMonthDeGrandPrize,
 } from '../states/special-lottery/hooks';
-import { LotteryStatus } from '../config/constants/types';
+import { LoadingStatus, LotteryStatus } from '../config/constants/types';
+import SyncWaiting from './SyncWaiting';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
@@ -57,93 +58,100 @@ const DeGrand = () => {
     }
   };
 
+  const loadingStatus =
+    deGrandStatus === LotteryStatus.PENDING
+      ? LoadingStatus.LOADING
+      : specialPaused
+      ? LoadingStatus.PAUSED
+      : !isNaN(endTimeAsInt) && deGrandPrize
+      ? LoadingStatus.COMPLETE
+      : LoadingStatus.SYNCHRONIZING;
+
   return (
     <Container>
       <h1>DeGrand</h1>
-      <Card>
-        <StyledBox>
-          {specialPaused ? (
-            <Title>DeGrand is paused for a while. Please wait...</Title>
-          ) : (
-            <>
-              {deGrandPrize && deGrandPrize.drawTime > 0 ? (
-                <FlexLine
-                  className="md:flex-column align-items-center justify-content-center"
-                  style={{ borderBottom: '1px solid' }}
-                >
-                  <Header>DeGrand prize this month:</Header>
-                  {deGrandPrize.imageUrl && (
-                    <img
-                      src={deGrandPrize.imageUrl}
-                      style={{ width: '100%', height: '100%' }}
-                      alt="DeGrand prize this month"
-                    />
-                  )}
-                  <FlexLine className="justify-content-between w-full">
-                    <FlexLine className="md:flex-column">
-                      <Header>{`${deGrandPrize.title} | ${deGrandPrize.maxWinnerCount} lucky winners will be announced`}</Header>
-                      {lotteryMonthAsInt === currentMonthAsInt &&
-                      deGrandStatus === LotteryStatus.CLAIMABLE ? (
-                        <Text className="text-pink-400">Draw Completed!</Text>
-                      ) : deGrandPrize &&
-                        deGrandPrize.drawTime > currentSeconds ? (
-                        <EventCountDown
-                          nextEventTime={deGrandPrize.drawTime}
-                          postCountDownText="until the draw"
-                          isVertical={false}
-                          titleFontSize="14px"
-                          timerFontSize="14px"
-                        />
-                      ) : (
-                        <Title fontSize="14px">Waiting...</Title>
-                      )}
-                    </FlexLine>
-                    <FlexLine className="md:flex-column">
-                      {account ? (
-                        deGrandStatus === LotteryStatus.CLAIMABLE && (
-                          <>
-                            <Text>Are you a winner?</Text>
-                            <Button
-                              className="mt-2 justify-content-center"
-                              onClick={() => handleShowDialog('CheckDeGrand')}
-                              label="Check Now"
-                            />
-                          </>
-                        )
-                      ) : (
-                        <ConnectWalletButton />
-                      )}
-                    </FlexLine>
+      {loadingStatus !== LoadingStatus.COMPLETE ? (
+        <SyncWaiting loadingStatus={loadingStatus} />
+      ) : (
+        <Card>
+          <StyledBox>
+            {deGrandPrize && deGrandPrize.drawTime > 0 ? (
+              <FlexLine
+                className="md:flex-column align-items-center justify-content-center"
+                style={{ borderBottom: '1px solid' }}
+              >
+                <Header>DeGrand prize this month:</Header>
+                {deGrandPrize.imageUrl && (
+                  <img
+                    src={deGrandPrize.imageUrl}
+                    style={{ width: '100%', height: '100%' }}
+                    alt="DeGrand prize this month"
+                  />
+                )}
+                <FlexLine className="justify-content-between w-full">
+                  <FlexLine className="md:flex-column">
+                    <Header>{`${deGrandPrize.title} | ${deGrandPrize.maxWinnerCount} lucky winners will be announced`}</Header>
+                    {lotteryMonthAsInt === currentMonthAsInt &&
+                    deGrandStatus === LotteryStatus.CLAIMABLE ? (
+                      <Text className="text-pink-400">Draw Completed!</Text>
+                    ) : deGrandPrize &&
+                      deGrandPrize.drawTime > currentSeconds ? (
+                      <EventCountDown
+                        nextEventTime={deGrandPrize.drawTime}
+                        postCountDownText="until the draw"
+                        isVertical={false}
+                        titleFontSize="14px"
+                        timerFontSize="14px"
+                      />
+                    ) : (
+                      <Title fontSize="14px">Waiting...</Title>
+                    )}
+                  </FlexLine>
+                  <FlexLine className="md:flex-column">
+                    {account ? (
+                      deGrandStatus === LotteryStatus.CLAIMABLE && (
+                        <>
+                          <Text>Are you a winner?</Text>
+                          <Button
+                            className="mt-2 justify-content-center"
+                            onClick={() => handleShowDialog('CheckDeGrand')}
+                            label="Check Now"
+                          />
+                        </>
+                      )
+                    ) : (
+                      <ConnectWalletButton />
+                    )}
                   </FlexLine>
                 </FlexLine>
-              ) : (
-                <FlexLine
-                  className="align-items-center justify-content-center py-3"
-                  style={{ borderBottom: '1px solid' }}
-                >
-                  <Title>Prizes will be anounced soon!</Title>
-                </FlexLine>
-              )}
-              <FlexLine className="md:flex-column align-items-center justify-content-between">
-                <Header className="my-3">Grand history</Header>
-                <Text className="mb-3">See previous DeGrand Draws</Text>
-                {account ? (
-                  deGrandPrize &&
-                  deGrandPrize.drawTime > 0 && (
-                    <Button
-                      className="mt-2 justify-content-center"
-                      onClick={() => handleShowDialog('CheckDeGrandHistory')}
-                      label="Check Now"
-                    />
-                  )
-                ) : (
-                  <ConnectWalletButton />
-                )}
               </FlexLine>
-            </>
-          )}
-        </StyledBox>
-      </Card>
+            ) : (
+              <FlexLine
+                className="align-items-center justify-content-center py-3"
+                style={{ borderBottom: '1px solid' }}
+              >
+                <Title>Prizes will be anounced soon!</Title>
+              </FlexLine>
+            )}
+            <FlexLine className="md:flex-column align-items-center justify-content-between">
+              <Header className="my-3">Grand history</Header>
+              <Text className="mb-3">See previous DeGrand Draws</Text>
+              {account ? (
+                deGrandPrize &&
+                deGrandPrize.drawTime > 0 && (
+                  <Button
+                    className="mt-2 justify-content-center"
+                    onClick={() => handleShowDialog('CheckDeGrandHistory')}
+                    label="Check Now"
+                  />
+                )
+              ) : (
+                <ConnectWalletButton />
+              )}
+            </FlexLine>
+          </StyledBox>
+        </Card>
+      )}
 
       <ClaimDeGrandDialog
         open={checkDeGrandDialog}
