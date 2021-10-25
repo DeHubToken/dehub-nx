@@ -85,7 +85,9 @@ const DeLottoStage2 = () => {
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full">
               <Header className="pb-2">{'Round #' + currentLotteryId}</Header>
-              {nextEventTime && postCountDownText ? (
+              {deLottoStatus !== LotteryStatus.PENDING &&
+              nextEventTime &&
+              postCountDownText ? (
                 <EventCountDown
                   nextEventTime={nextEventTime}
                   postCountDownText={postCountDownText}
@@ -175,7 +177,7 @@ const DeLottoStage2 = () => {
               ) : (
                 <>
                   <Skeleton width="100%" height="1.5rem" />
-                  <Skeleton width="8rem" height="1.5rem" className="mt-2" />
+                  <Skeleton width="8rem" height="1rem" className="mt-2" />
                 </>
               )}
             </div>

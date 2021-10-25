@@ -39,7 +39,9 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
     }
   }, [pot, dehubPriceInBusd]);
 
-  return status !== LotteryStatus.PENDING && !prizeInBusd.isNaN() ? (
+  return status !== LotteryStatus.PENDING &&
+    status !== LotteryStatus.BURNED &&
+    !prizeInBusd.isNaN() ? (
     <>
       <Text fontSize="22px" className="inline-block">
         $

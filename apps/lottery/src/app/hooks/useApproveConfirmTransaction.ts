@@ -102,6 +102,12 @@ const useApproveConfirmTransaction = ({
   // https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
   const mountedRef = useRef(true);
 
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
   const handlePreApprove = useRef(onRequiresApproval);
 
   useEffect(() => {
@@ -118,9 +124,6 @@ const useApproveConfirmTransaction = ({
         }
       });
     }
-    return () => {
-      mountedRef.current = false;
-    };
   }, [account, authProvider, handlePreApprove]);
 
   return {

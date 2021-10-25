@@ -56,6 +56,12 @@ export const useGetHistoricalDeGrands = () => {
   const mountedRef = useRef(true);
 
   useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
     setFetchStatus(FetchStatus.NOT_FETCHED);
   }, [account, isTransitioning]);
 

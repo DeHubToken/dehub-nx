@@ -95,7 +95,10 @@ const DeLottoStage1 = () => {
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full">
               <Header className="pb-2">{'Round #' + currentLotteryId}</Header>
-              {nextEventTime && postCountDownText ? (
+              {status !== LotteryStatus.PENDING &&
+              status !== LotteryStatus.BURNED &&
+              nextEventTime &&
+              postCountDownText ? (
                 <EventCountDown
                   nextEventTime={nextEventTime}
                   postCountDownText={postCountDownText}
@@ -112,7 +115,9 @@ const DeLottoStage1 = () => {
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full">
               <Header className="pb-2">Next Draw</Header>
-              {status !== LotteryStatus.PENDING && nextLotteryIdAsInt > 0 ? (
+              {status !== LotteryStatus.PENDING &&
+              status !== LotteryStatus.BURNED &&
+              nextLotteryIdAsInt > 0 ? (
                 <>
                   <Text fontSize="22px">
                     {format(new Date(endTimeAsInt * 1000), 'HH:mm:ss')}
@@ -148,7 +153,8 @@ const DeLottoStage1 = () => {
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
-              {status !== LotteryStatus.PENDING ? (
+              {status !== LotteryStatus.PENDING &&
+              status !== LotteryStatus.BURNED ? (
                 <>
                   <Text>
                     You have{' '}
@@ -189,7 +195,7 @@ const DeLottoStage1 = () => {
               ) : (
                 <>
                   <Skeleton width="100%" height="1.5rem" />
-                  <Skeleton width="8rem" height="1.5rem" className="mt-2" />
+                  <Skeleton width="8rem" height="1rem" className="mt-2" />
                 </>
               )}
             </div>
@@ -201,7 +207,8 @@ const DeLottoStage1 = () => {
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full">
               <Header className="pb-2">Last Winning Numbers</Header>
-              {status !== LotteryStatus.PENDING ? (
+              {status !== LotteryStatus.PENDING &&
+              status !== LotteryStatus.BURNED ? (
                 previousRound && (
                   <>
                     <Text className="mb-2">Round #{previousLotteryId}</Text>

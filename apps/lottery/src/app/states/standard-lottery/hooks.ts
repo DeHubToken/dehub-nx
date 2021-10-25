@@ -88,6 +88,12 @@ export const usePreviousLottery = (lotteryId: string) => {
   const mountedRef = useRef(true);
 
   useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
     setPreviousRound(null);
     mountedRef.current = true;
 
@@ -104,9 +110,6 @@ export const usePreviousLottery = (lotteryId: string) => {
     if (lotteryIdAsInt > 0) {
       fetchLotteryData();
     }
-    return () => {
-      mountedRef.current = false;
-    };
   }, [lotteryId]);
 
   return {

@@ -103,7 +103,7 @@ const DeLotto = () => {
 
   return (
     <StyledContainer>
-      <h1>DeLotto</h1>
+      <h1>DeRaffles</h1>
       {loadingStatus !== LoadingStatus.COMPLETE ? (
         <SyncWaiting loadingStatus={loadingStatus} />
       ) : (
