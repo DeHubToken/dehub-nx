@@ -246,7 +246,7 @@ const BuyStandardTicketDialog = ({
           <div className="grid grid-nogutter align-items-center">
             <div className="col-6" />
             <div className="col-6 flex justify-content-end">
-              <Text className="font-bold">Price in Dehub</Text>
+              <Text className="font-bold">Price in DeHub</Text>
             </div>
             {bundleRules &&
               bundleRules.length > 0 &&
