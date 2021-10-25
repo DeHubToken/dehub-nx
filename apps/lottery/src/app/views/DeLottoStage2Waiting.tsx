@@ -2,7 +2,7 @@ import { Button } from 'primereact/button';
 
 import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
-import { Title, Text } from '../components/Text';
+import { Text } from '../components/Text';
 import { environment } from '../../environments/environment';
 
 const DeLottoStage2Waiting = () => {

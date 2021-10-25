@@ -25,6 +25,7 @@ import {
   useFetchLottery as useFetchSpecialLottery,
   useLottery as useSpecialLottery,
 } from '../states/special-lottery/hooks';
+import { environment } from '../../environments/environment';
 
 const StyledContainer = styled(Container)`
   .p-tabview .p-tabview-nav li {
@@ -49,28 +50,47 @@ const DeLotto = () => {
   useSpecialLotteryStatusTransitions();
 
   const {
-    currentRound: { status: standardStatus, endTime: standardEndTime },
+    currentRound: {
+      lotteryId: standardLotteryId,
+      status: standardStatus,
+      endTime: standardEndTime,
+    },
   } = useStandardLottery();
   const {
-    currentRound: { deLottoStatus: specialStatus, endTime: specialEndTime },
+    currentRound: {
+      lotteryId: specialLotteryId,
+      deLottoStatus: specialStatus,
+      endTime: specialEndTime,
+    },
   } = useSpecialLottery();
   const standardEndTimeAsInt = parseInt(standardEndTime, 10);
   const specialEndTimeAsInt = parseInt(specialEndTime, 10);
   const standardPaused = useGetStandardPaused();
   const specialPaused = useGetSpecialPaused();
+  const now = new Date();
 
-  const isActiveStage1 = standardEndTimeAsInt >= specialEndTimeAsInt;
+  const isActiveStage1 = standardEndTimeAsInt > specialEndTimeAsInt;
   const isActiveStage2 = standardEndTimeAsInt < specialEndTimeAsInt;
-  const activeIndex = isActiveStage2 ? 1 : 0;
+  const activeIndex =
+    !isActiveStage1 && isActiveStage2
+      ? 1
+      : isActiveStage1 && !isActiveStage2
+      ? 0
+      : now.getUTCDay() >= // If waiting to start our first round
+        (now.getUTCMonth() === 1
+          ? environment.deGrandStartDayOnFebruary
+          : environment.deGrandStartDay)
+      ? 0
+      : 1;
 
-  const isSyncStage1 =
-    standardStatus !== LotteryStatus.PENDING && !isNaN(standardEndTimeAsInt);
-  const isSyncStage2 =
-    specialStatus !== LotteryStatus.PENDING && !isNaN(specialEndTimeAsInt);
+  const isSyncStage1 = standardLotteryId && !isNaN(standardEndTimeAsInt);
+  const isSyncStage2 = specialLotteryId && !isNaN(specialEndTimeAsInt);
 
   const loadingStatus =
     standardStatus === LotteryStatus.PENDING &&
-    specialStatus === LotteryStatus.PENDING
+    specialStatus === LotteryStatus.PENDING &&
+    !isSyncStage1 &&
+    !isSyncStage2
       ? LoadingStatus.LOADING
       : standardPaused || specialPaused
       ? LoadingStatus.PAUSED

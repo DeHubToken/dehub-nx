@@ -59,7 +59,7 @@ const DeGrand = () => {
   };
 
   const loadingStatus =
-    deGrandStatus === LotteryStatus.PENDING
+    deGrandStatus === LotteryStatus.PENDING && isNaN(endTimeAsInt)
       ? LoadingStatus.LOADING
       : specialPaused
       ? LoadingStatus.PAUSED
