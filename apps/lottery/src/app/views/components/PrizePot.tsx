@@ -43,14 +43,24 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
   }, [pot]);
 
   return status !== LotteryStatus.PENDING && !prizeInBusd.isNaN() ? (
-    <Text>
-      {`${getBalanceNumber(pot, DEHUB_DECIMALS)} $DeHub / $${getBalanceNumber(
-        prizeInBusd,
-        BUSD_DECIMALS
-      )}`}
-    </Text>
+    <>
+      <Text fontSize="22px" className="inline-block">
+        ${getBalanceNumber(prizeInBusd, BUSD_DECIMALS)}
+      </Text>
+      <>
+        <Text fontSize="14px" className="inline-block">
+          {`${getBalanceNumber(pot, DEHUB_DECIMALS)}`}
+        </Text>
+        <Text fontSize="12px" className="inline-block font-bold">
+          &nbsp;$DeHub
+        </Text>
+      </>
+    </>
   ) : (
-    <Skeleton width="100%" height="2rem" />
+    <>
+      <Skeleton width="100%" height="2.4rem" />
+      <Skeleton width="100%" height="1rem" className="mt-2" />
+    </>
   );
 };
 
