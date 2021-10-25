@@ -129,7 +129,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
         visible={open}
         modal
         className="p-fluid"
-        header={`Round #${currentLotteryId}`}
+        header={`Unclaimed Winnings`}
         style={{ width: '250px' }}
         onHide={onHide}
       >
