@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
@@ -64,6 +64,10 @@ const DeLottoStage1 = () => {
   const [listTicketDialog, setListTicketDialog] = useState(false);
   const [buyStandardTicketDialog, setBuyStandardTicketDialog] = useState(false);
   const [checkStage1Dialog, setCheckStage1Dialog] = useState(false);
+  const prize = useMemo(
+    () => unwonPreviousPotInDehub.plus(amountCollectedInDehub),
+    [unwonPreviousPotInDehub, amountCollectedInDehub]
+  );
 
   const handleShowDialog = (dialogKind: string) => {
     if (dialogKind === 'ListTicket') {
@@ -132,10 +136,7 @@ const DeLottoStage1 = () => {
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full">
               <Header className="pb-2">Prize Pot</Header>
-              <PrizePot
-                pot={unwonPreviousPotInDehub.plus(amountCollectedInDehub)}
-                status={status}
-              />
+              <PrizePot pot={prize} status={status} />
             </div>
             <i className="fad fa-coins"></i>
           </div>
