@@ -1,13 +1,11 @@
-/* eslint-disable multiline-comment-style */
-import React, { useEffect, useState, useCallback } from 'react';
-import { useMoralis } from 'react-moralis';
-import { Moralis } from 'moralis';
 import {
+  ExternalProvider,
   JsonRpcSigner,
   Web3Provider,
-  ExternalProvider,
 } from '@ethersproject/providers';
-
+import { Moralis } from 'moralis';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { MoralisEthersContext } from './MoralisEthersContext';
 
 export interface MoralisEthersProviderProps {
@@ -73,10 +71,12 @@ export const MoralisEthersProvider = ({
   useEffect(() => {
     Moralis.Web3.onAccountsChanged(([newAccount]) => {
       console.log('onAccountsChanged', newAccount);
-      // if (!user || newAccount !== user.attributes.accounts[0]) {
-      //   logout();
-      //   return;
-      // }
+      /*
+       * if (!user || newAccount !== user.attributes.accounts[0]) {
+       *   logout();
+       *   return;
+       * }
+       */
       setAccount(newAccount);
     });
 

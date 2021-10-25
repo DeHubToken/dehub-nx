@@ -1,9 +1,6 @@
 import './react-core.module.scss';
 
-/* eslint-disable-next-line */
-export interface ReactCoreProps {}
-
-export function ReactCore(props: ReactCoreProps) {
+export function ReactCore() {
   return (
     <div>
       <h1>Welcome to ReactCore!</h1>

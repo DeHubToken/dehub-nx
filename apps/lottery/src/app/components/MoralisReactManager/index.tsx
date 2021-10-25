@@ -1,14 +1,7 @@
-/* eslint-disable multiline-comment-style */
-import React, { useState, useEffect } from 'react';
-
 import { Hooks } from '@dehub/react/core';
-
-import {
-  getChainId,
-  getChainIdHex,
-  getNetworkInfo,
-} from '../../config/constants';
-import { switchNetwork, addNetwork } from '../../utils/providers';
+import React, { useEffect } from 'react';
+import { getChainId, getChainIdHex } from '../../config/constants';
+import { addNetwork, switchNetwork } from '../../utils/providers';
 
 interface MoralisReactManagerProps {
   children?: React.ReactNode;
