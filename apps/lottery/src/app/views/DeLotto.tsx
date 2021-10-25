@@ -112,9 +112,13 @@ const DeLotto = () => {
           </TabPanel>
 
           <TabPanel header="STAGE TWO" contentStyle={{ minHeight: '30rem' }}>
-            <StyledBox>
-              {isActiveStage2 ? <DeLottoStage2 /> : <DeLottoStage2Waiting />}
-            </StyledBox>
+            {isActiveStage2 ? (
+              <StyledBox>
+                <DeLottoStage2 />
+              </StyledBox>
+            ) : (
+              <DeLottoStage2Waiting />
+            )}
           </TabPanel>
         </TabView>
       )}
