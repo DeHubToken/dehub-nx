@@ -17,7 +17,7 @@ const EventCountDown = ({
   nextEventTime,
   postCountDownText,
   titleFontSize = '14px',
-  timerFontSize = '24px',
+  timerFontSize = '22px',
   isVertical = true,
 }: EventCountDownProps) => {
   const secondsRemaining = useNextEventCountDown(nextEventTime);
