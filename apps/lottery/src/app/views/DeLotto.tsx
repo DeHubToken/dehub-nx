@@ -26,6 +26,7 @@ import {
   useLottery as useSpecialLottery,
 } from '../states/special-lottery/hooks';
 import { environment } from '../../environments/environment';
+import { usePullBusdPrice } from '../states/application/hooks';
 
 const StyledContainer = styled(Container)`
   .p-tabview .p-tabview-nav li {
@@ -40,6 +41,8 @@ const StyledBox = styled(Box)`
 const DeLotto = () => {
   // pause status
   useFetchPaused();
+
+  usePullBusdPrice();
 
   // standard lottery
   useFetchStandardLottery();

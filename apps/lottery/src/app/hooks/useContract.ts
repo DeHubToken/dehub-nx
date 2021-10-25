@@ -52,3 +52,10 @@ export const useDehubContract = (): Contract | null => {
     [signer]
   );
 };
+
+export const useBnbContract = (): Contract | null => {
+  return useMemo(
+    () => getBep20Contract(ContractAddresses[getChainId()]['BNB']),
+    []
+  );
+};

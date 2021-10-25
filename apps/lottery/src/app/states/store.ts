@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { save, load } from 'redux-localstorage-simple';
 
-import application from './application/reducers';
+import applicationReducer from './application';
 import pauseReducer from './pause';
 import standardLotteryReducer from './standard-lottery';
 import specialLotteryReducer from './special-lottery';
@@ -11,7 +11,7 @@ const PERSISTED_KEYS: string[] = ['user'];
 
 export const store = configureStore({
   reducer: {
-    application,
+    application: applicationReducer,
     paused: pauseReducer,
     standardLottery: standardLotteryReducer,
     specialLottery: specialLotteryReducer,
