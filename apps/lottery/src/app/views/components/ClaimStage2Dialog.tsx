@@ -11,7 +11,7 @@ import {
 } from '@ethersproject/abstract-provider';
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
+import { getBalanceNumber } from '@dehub/shared/utils';
 
 import { SimpleCountDown } from './CountDown';
 

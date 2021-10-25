@@ -2,12 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { Skeleton } from 'primereact/skeleton';
 
-import { BUSD_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
-import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
+import {
+  BUSD_DECIMALS,
+  DEHUB_DECIMALS,
+  BUSD_DISPLAY_DECIMALS,
+} from '@dehub/shared/config';
+import { getBalanceNumber, getFullDisplayBalance } from '@dehub/shared/utils';
 
 import { Text } from '../../components/Text';
 import { LotteryStatus } from '../../config/constants/types';
-import { getDehubPrice, getBNBPrice } from '../../utils/priceDehub';
+import { getDehubPrice } from '../../utils/priceDehub';
 
 interface PrizePotProps {
   pot: BigNumber;
@@ -45,7 +49,12 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
   return status !== LotteryStatus.PENDING && !prizeInBusd.isNaN() ? (
     <>
       <Text fontSize="22px" className="inline-block">
-        ${getBalanceNumber(prizeInBusd, BUSD_DECIMALS)}
+        $
+        {getFullDisplayBalance(
+          prizeInBusd,
+          BUSD_DECIMALS,
+          BUSD_DISPLAY_DECIMALS
+        )}
       </Text>
       <div className="w-full">
         <Text fontSize="14px" className="inline-block">

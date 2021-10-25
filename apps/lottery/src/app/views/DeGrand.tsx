@@ -107,7 +107,7 @@ const DeGrand = () => {
                       <Title fontSize="14px">Waiting...</Title>
                     )}
                   </FlexLine>
-                  <FlexLine className="md:flex-column">
+                  <FlexLine className="md:flex-column align-items-center">
                     {account ? (
                       deGrandStatus === LotteryStatus.CLAIMABLE && (
                         <>
