@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 
@@ -101,10 +102,10 @@ const DeLottoStage2 = () => {
               nextLotteryIdAsInt > 0 ? (
                 <>
                   <Text fontSize="22px">
-                    {new Date(endTimeAsInt * 1000).toLocaleDateString()}
+                    {format(new Date(endTimeAsInt * 1000), 'HH:mm:ss')}
                   </Text>
                   <Text fontSize="14px">
-                    {new Date(endTimeAsInt * 1000).toLocaleTimeString()}
+                    {format(new Date(endTimeAsInt * 1000), 'dd/MM/yyyy')}
                   </Text>
                 </>
               ) : (
