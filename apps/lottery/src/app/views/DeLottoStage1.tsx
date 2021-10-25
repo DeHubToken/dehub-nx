@@ -108,9 +108,19 @@ const DeLottoStage1 = () => {
             <div className="overview-info pr-4 text-left w-full">
               <Header className="pb-2">Next Draw</Header>
               {status !== LotteryStatus.PENDING && nextLotteryIdAsInt > 0 ? (
-                <Text>{new Date(endTimeAsInt * 1000).toLocaleString()}</Text>
+                <>
+                  <Text fontSize="22px">
+                    {new Date(endTimeAsInt * 1000).toLocaleDateString()}
+                  </Text>
+                  <Text fontSize="14px">
+                    {new Date(endTimeAsInt * 1000).toLocaleTimeString()}
+                  </Text>
+                </>
               ) : (
-                <Skeleton width="100%" height="1.5rem" />
+                <>
+                  <Skeleton width="100%" height="2.4rem" />
+                  <Skeleton width="100%" height="1rem" className="mt-2" />
+                </>
               )}
             </div>
             <i className="fad fa-calendar-star"></i>

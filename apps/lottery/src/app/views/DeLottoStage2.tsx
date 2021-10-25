@@ -96,14 +96,22 @@ const DeLottoStage2 = () => {
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray">
             <div className="overview-info pr-4 text-left w-full">
+              <Header>Next Draw:</Header>
               {deLottoStatus !== LotteryStatus.PENDING &&
               nextLotteryIdAsInt > 0 ? (
                 <>
-                  <Header>Next Draw:</Header>
-                  <Text>{new Date(endTimeAsInt * 1000).toLocaleString()}</Text>
+                  <Text fontSize="22px">
+                    {new Date(endTimeAsInt * 1000).toLocaleDateString()}
+                  </Text>
+                  <Text fontSize="14px">
+                    {new Date(endTimeAsInt * 1000).toLocaleTimeString()}
+                  </Text>
                 </>
               ) : (
-                <Skeleton width="100%" height="1.5rem" />
+                <>
+                  <Skeleton width="100%" height="2.4rem" />
+                  <Skeleton width="100%" height="1rem" className="mt-2" />
+                </>
               )}
             </div>
             <i className="fad fa-calendar-star"></i>
