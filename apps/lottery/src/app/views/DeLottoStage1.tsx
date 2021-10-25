@@ -140,12 +140,17 @@ const DeLottoStage1 = () => {
                 <>
                   <Text>
                     You have{' '}
-                    <span className="font-bold">
+                    <Text fontSize="22px" className="inline">
                       {account && userTickets && !userTickets.isLoading
                         ? userTickets.tickets?.length
                         : 0}
-                    </span>{' '}
-                    tickets this round.
+                    </Text>{' '}
+                    {userTickets &&
+                    userTickets.tickets &&
+                    userTickets.tickets?.length > 1
+                      ? 'tickets'
+                      : 'ticket'}{' '}
+                    this round.
                   </Text>
                   {account &&
                     userTickets &&
