@@ -25,16 +25,18 @@ export const MoralisEthersProvider = ({
   const {
     isWeb3Enabled,
     enableWeb3,
+    web3,
     isAuthenticated,
     authenticate,
     user,
     logout,
   } = useMoralis();
 
-  const activateProvider = useCallback(async () => {
-    const web3 = await Moralis.Web3.activeWeb3Provider?.activate();
+  const activateProvider = useCallback(async (newWeb3: Moralis.Web3 | null) => {
+    if (!newWeb3 || !newWeb3?.currentProvider) return;
+    // const web3 = await Moralis.Web3.activeWeb3Provider?.activate();
     const provider = new Web3Provider(
-      web3?.currentProvider as ExternalProvider
+      newWeb3?.currentProvider as ExternalProvider
     );
     setAuthProvider(provider);
 
@@ -57,16 +59,24 @@ export const MoralisEthersProvider = ({
   }, []);
 
   useEffect(() => {
-    if (isWeb3Enabled) {
-      if (user) {
-        activateProvider();
-      } else {
-        clearProvider();
-      }
+    const onSuccess = (web3: Moralis.Web3 | null) => {
+      activateProvider(web3);
+    };
+    const onError = (error: Error) => {
+      clearProvider();
+    };
+
+    if (user) {
+      const savedProviderName = window.localStorage.getItem('providerName');
+      enableWeb3({
+        provider: savedProviderName,
+        onSuccess,
+        onError,
+      });
     } else {
-      enableWeb3();
+      clearProvider();
     }
-  }, [isWeb3Enabled, enableWeb3, user, activateProvider, clearProvider]);
+  }, [user, enableWeb3, activateProvider, clearProvider]);
 
   useEffect(() => {
     Moralis.Web3.onAccountsChanged(([newAccount]) => {

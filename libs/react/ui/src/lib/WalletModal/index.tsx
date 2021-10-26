@@ -2,7 +2,7 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { isMobile } from 'react-device-detect';
 
-export type ProviderTypes = 'walletconnect' | null;
+export type ProviderTypes = 'walletconnect' | 'metamask';
 
 interface WalletModalProps {
   visible: boolean;
@@ -24,7 +24,10 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
       <div className="flex flex-column">
         {!isMobile ? (
           <div className="flex flex-column mt-2 mb-3">
-            <Button className="p-shadow-4" onClick={() => doConnect(null)}>
+            <Button
+              className="p-shadow-4"
+              onClick={() => doConnect('metamask')}
+            >
               <img
                 style={{ height: '16px', paddingRight: '10px' }}
                 src="assets/dehub/icons/metamask.svg"

@@ -26,36 +26,22 @@ const ConnectWalletButton = () => {
   const connectWallet = useCallback(
     provider => {
       setWalletConnectingState(WalletConnectingState.WAITING);
-      if (provider) {
-        authenticate({
-          provider: 'walletconnect',
-          chainId: chainId,
-          onError: (error: Error) => {
-            setWalletConnectingState(WalletConnectingState.INIT);
-          },
-          onSuccess: () => {
-            setWalletConnectingState(WalletConnectingState.COMPLETE);
-            if (mountedRef.current) {
-              setWalletModalOpen(false);
-            }
-          },
-        });
-      } else {
-        authenticate({
-          chainId: chainId,
-          onError: (error: Error) => {
-            setWalletConnectingState(WalletConnectingState.INIT);
-          },
-          onSuccess: () => {
-            setWalletConnectingState(WalletConnectingState.COMPLETE);
-            if (mountedRef.current) {
-              setWalletModalOpen(false);
-            }
-          },
-        });
-      }
+      window.localStorage.setItem('providerName', provider);
+      authenticate({
+        chainId: chainId,
+        provider,
+        onError: (error: Error) => {
+          setWalletConnectingState(WalletConnectingState.INIT);
+        },
+        onSuccess: () => {
+          setWalletConnectingState(WalletConnectingState.COMPLETE);
+          if (mountedRef.current) {
+            setWalletModalOpen(false);
+          }
+        },
+      });
     },
-    [authenticate, chainId, setWalletConnectingState, setWalletModalOpen]
+    [authenticate, chainId, setWalletConnectingState]
   );
 
   return (
