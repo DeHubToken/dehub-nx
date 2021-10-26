@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
@@ -43,6 +45,14 @@ const primeNgModules = [ButtonModule, RippleModule, MenuModule, ChartModule];
     HttpClientModule,
     BrowserAnimationsModule,
     ...primeNgModules,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      /**
+       * Register the ServiceWorker as soon as the app is stable
+       * or after 30 seconds (whichever comes first)
+       */
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   declarations: [
     AppComponent,

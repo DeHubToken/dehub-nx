@@ -71,3 +71,15 @@ _Common Utils used in react and angular apps_
 1. Run **CI**: `npm run ci` _(lint, test, build from affected apps)_
 1. Deploy as **draft**: `npm run deploy:draft`
 1. Deploy to **prod**: `npm run deploy:prod`
+
+# PWA Manifest
+
+Generated with [PWA Manifest Generator](https://www.simicart.com/manifest-generator.html/)
+
+1. App name: `DeHub`
+1. Short name: `DeHub`
+1. Display Mode: `fullscreen`
+1. Description: `DeHub - Decentralized Entertainment Hub`
+1. Theme color: `#060d1b`
+1. Background color: `#622f88`
+1. Icon: `shared/assets/dehub/ulogo.png`
