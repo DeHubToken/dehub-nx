@@ -19,5 +19,5 @@ export const getMultiCallAddress = (): string => {
 };
 
 export const getDehubAddress = (): string => {
-  return getAddress('Dehub');
+  return getAddress('DeHub');
 };

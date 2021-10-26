@@ -62,19 +62,23 @@ export const ContractAddresses: {
   [chainId in ChainId]: { [label: string]: string };
 } = {
   [ChainId.BSC_MAINNET]: {
-    Dehub: '',
+    DeHub: '',
     BNB: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     BUSD: '',
+    'DeHub-BNB': '',
+    'BNB-BUSD': '',
     StandardLottery: '',
     SpecialLottery: '',
     MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
   },
   [ChainId.BSC_TESTNET]: {
-    Dehub: '0x5A5e32fE118E7c7b6536d143F446269123c0ba74',
+    DeHub: '0x5A5e32fE118E7c7b6536d143F446269123c0ba74',
     BNB: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
     BUSD: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
-    StandardLottery: '0x34fa1042e8d507742EbC5fD7b9a81943Df206612',
-    SpecialLottery: '0x030C4e201D9D6a3575d0319c5d0b7e9fdEa628d6',
+    'DeHub-BNB': '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
+    'BNB-BUSD': '0xe0e92035077c39594793e61802a350347c320cf2',
+    StandardLottery: '0x47770273D5847dCc70b16fa7F314FFD31AA5e694',
+    SpecialLottery: '0x7A18dB568d76F23e53b582f6F253Ae04713fE151',
     MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
   },
 };
