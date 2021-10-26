@@ -6,7 +6,7 @@ This project was generated using [Nx](https://nx.dev).
 
 1. Create new latest nx workspace with empty project and **nx cloud** selected:
    ```
-   npx create-nx-workspace dehub
+   npx create-nx-workspace dehub-nx
    ```
 1. Add Angular support:<br>
    ```

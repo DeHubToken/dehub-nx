@@ -2,6 +2,8 @@
 
 This is the **monorepo of DeHub**. Created based on the awesome [Nx.dev](https://nx.dev) workspace by [Nrwl](https://nrwl.io/) Team.
 
+[![DeHUB Nx](https://github.com/DeHubToken/dehub-nx/actions/workflows/dehub-nx.yml/badge.svg)](https://github.com/DeHubToken/dehub-nx/actions/workflows/dehub-nx.yml)
+
 _More libraries or apps are supported and will be added as we go under `apps` or `libs` folders_
 
 # Applications
