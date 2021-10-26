@@ -16,6 +16,7 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/web/src/assets",
+          "apps/web/src/manifest.webmanifest",
           {
             "input": "libs/shared/assets/dehub/src/lib",
             "glob": "**/*",
@@ -56,7 +57,9 @@
           }
         ],
         "scripts": [],
-        "allowedCommonJsDependencies": ["hash.js"]
+        "allowedCommonJsDependencies": ["hash.js"],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/web/ngsw-config.json"
       },
       "configurations": {
         "production": {
