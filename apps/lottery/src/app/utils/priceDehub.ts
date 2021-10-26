@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
-import { ChainId, ContractAddresses } from '@dehub/shared/config';
+import { ContractAddresses } from '@dehub/shared/config';
 import { ethersToBigNumber } from '@dehub/shared/utils';
 
 import PancakePairAbi from '../config/abis/PancakePair.json';
@@ -9,7 +9,6 @@ import { getContract } from './contractHelpers';
 
 const getPancakeLiquidityInfo = async (quote: string, base: string) => {
   const quoteToken = ContractAddresses[getChainId()][quote];
-  const baseToken = ContractAddresses[getChainId()][base];
 
   const pairAddress = ContractAddresses[getChainId()][`${quote}-${base}`];
   const pairContract = getContract(pairAddress, PancakePairAbi);
