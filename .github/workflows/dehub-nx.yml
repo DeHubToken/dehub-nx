@@ -58,7 +58,7 @@ jobs:
   agents:
     runs-on: ubuntu-latest
     name: Nx Agent
-    timeout-minutes: 60
+    timeout-minutes: 15
     strategy:
       matrix:
         agent: [1, 2, 3, 4]
