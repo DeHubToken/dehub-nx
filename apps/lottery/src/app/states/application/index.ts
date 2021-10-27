@@ -1,8 +1,9 @@
+import BigNumber from 'bignumber.js';
+
 import {
   SerializedBigNumber,
   WalletConnectingState,
 } from '@dehub/shared/config';
-import { BIG_ZERO } from '@dehub/shared/utils';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import getDehubPrice from '../../utils/priceDehub';
@@ -14,7 +15,7 @@ export interface ApplicationState {
 
 const initialState: ApplicationState = {
   walletConnectingState: WalletConnectingState.INIT,
-  dehubPrice: BIG_ZERO.toJSON(),
+  dehubPrice: new BigNumber(NaN).toJSON(),
 };
 
 export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
