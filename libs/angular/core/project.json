@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/core",
+  "sourceRoot": "libs/angular/core/src",
+  "prefix": "dehub",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/core"],
+      "options": {
+        "jestConfig": "libs/angular/core/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/core/src/**/*.ts",
+          "libs/angular/core/src/**/*.html"
+        ],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": []
+}

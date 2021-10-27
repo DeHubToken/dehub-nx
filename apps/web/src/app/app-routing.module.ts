@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { AppMainComponent } from './app.main.component';
-import { LandingComponent } from './view/landing.component';
+import { LandingViewComponent } from './view/landing/landing-view.component';
+
+enum Navigation {
+  Claim = 'claim',
+}
 
 @NgModule({
   imports: [
@@ -11,48 +15,16 @@ import { LandingComponent } from './view/landing.component';
           path: '',
           component: AppMainComponent,
           children: [
-            { path: '', component: LandingComponent },
+            { path: '', component: LandingViewComponent },
             {
-              path: 'features',
+              path: Navigation.Claim,
               loadChildren: () =>
-                import('./modules/features/features.module').then(
-                  module => module.FeaturesModule
+                import('./modules/claim/claim.module').then(
+                  module => module.ClaimModule
                 ),
-            },
-            {
-              path: 'dehub',
-              loadChildren: () =>
-                import('./modules/dehub/dehub.module').then(
-                  module => module.DehubModule
-                ),
-            },
-            {
-              path: 'partners',
-              loadChildren: () =>
-                import('./modules/partners/partners.module').then(
-                  module => module.PartnersModule
-                ),
-            },
-            {
-              path: 'team',
-              loadChildren: () =>
-                import('./modules/team/team.module').then(
-                  module => module.TeamModule
-                ),
-            },
-            {
-              path: 'contract',
-              loadChildren: () =>
-                import('./modules/contract/contract.module').then(
-                  module => module.ContractModule
-                ),
-            },
-            {
-              path: 'dapps',
-              loadChildren: () =>
-                import('./modules/dapps/dapps.module').then(
-                  module => module.DappsModule
-                ),
+              data: {
+                animation: Navigation.Claim,
+              },
             },
           ],
         },
