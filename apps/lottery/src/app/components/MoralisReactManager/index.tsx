@@ -1,49 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { useMoralis } from 'react-moralis';
-
 import { Hooks } from '@dehub/react/core';
+import React, { useEffect } from 'react';
+import { getChainId, getChainIdHex } from '../../config/constants';
+import { addNetwork, switchNetwork } from '../../utils/providers';
 
 interface MoralisReactManagerProps {
   children?: React.ReactNode;
 }
 
 const MoralisReactManager = ({ children }: MoralisReactManagerProps) => {
-  const { enableWeb3, authenticate, user } = useMoralis();
-
-  const { activateProvider } = Hooks.useMoralisEthers();
+  const { chainId, authProvider } = Hooks.useMoralisEthers();
 
   useEffect(() => {
-    const loginMoralis = async (provider: string | null) => {
-      window.localStorage.setItem('providerName', provider ?? '');
+    const setupNetwork = async () => {
+      // If wrong chain id, ask to switch network
+      if (chainId !== getChainIdHex()) {
+        console.warn('Ask to switch network');
 
-      if (provider) {
-        await authenticate({ provider: 'walletconnect' });
-      } else {
-        await authenticate();
+        try {
+          await switchNetwork(getChainId());
+        } catch (switchError) {
+          // This error code indicates that the chain has not been added to MetaMask.
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          if ((switchError as any).code === 4902) {
+            await addNetwork(getChainId());
+          }
+        }
       }
     };
 
-    const enableMoralis = async () => {
-      const savedProviderName = window.localStorage.getItem('providerName');
-
-      if (savedProviderName && savedProviderName === 'walletconnect') {
-        await enableWeb3({ provider: 'walletconnect' });
-      } else {
-        await enableWeb3();
-      }
-
-      if (window.localStorage.getItem('chainChange')) {
-        await loginMoralis(savedProviderName);
-        window.localStorage.removeItem('chainChange');
-      }
-
-      activateProvider();
-    };
-
-    if (user) {
-      enableMoralis();
+    if (chainId && authProvider) {
+      setupNetwork();
     }
-  }, [user, authenticate, enableWeb3, activateProvider]);
+  }, [chainId, authProvider]);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment

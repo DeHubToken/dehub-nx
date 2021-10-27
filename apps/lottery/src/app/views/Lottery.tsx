@@ -1,11 +1,11 @@
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
 import { useEffect, useState } from 'react';
-import Card from '../components/Layout/Card';
 import UserMenu from '../components/UserMenu';
 import { useWalletConnectingState } from '../states/application/hooks';
 import DeGrand from '../views/DeGrand';
 import DeLotto from '../views/DeLotto';
+import FlexLine from './components/FlexLine';
 
 export default function Lottery() {
   const [showLoader, setShowLoader] = useState(false);
@@ -24,7 +24,13 @@ export default function Lottery() {
       {showLoader ? (
         <Loader />
       ) : (
-        <div className="layout-wrapper">
+        <div
+          className="layout-wrapper"
+          style={{
+            background:
+              'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover',
+          }}
+        >
           <Header
             userMenu={<UserMenu />}
             logo={{
@@ -34,12 +40,14 @@ export default function Lottery() {
           />
           <div className="layout-main">
             <div className="layout-content">
-              <Card
-                className="mx-auto text-center"
-                style={{ width: '300px', height: '100px' }}
-              >
-                <h1>Lottery LOGO</h1>
-              </Card>
+              <FlexLine className="md:flex-column align-items-center justify-content-between">
+                <img
+                  src="../../assets/img/prize-draw-logo.png"
+                  className="anim-float-1"
+                  alt="Prize Draw Logo"
+                  style={{ maxWidth: '300px' }}
+                />
+              </FlexLine>
               <div className="my-8">
                 <DeLotto />
               </div>

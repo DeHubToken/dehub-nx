@@ -1,19 +1,30 @@
+export const DEHUB_DECIMALS = 5;
+export const BUSD_DECIMALS = 18;
+
+export const BUSD_DISPLAY_DECIMALS = 2;
+
 export enum ChainId {
   BSC_MAINNET = 56,
-  BSC_TESTNET = 97
+  BSC_TESTNET = 97,
 }
 
-export const SupportedChainId = [
-  ChainId.BSC_MAINNET,
-  ChainId.BSC_TESTNET
-];
+export const SupportedChainId = [ChainId.BSC_MAINNET, ChainId.BSC_TESTNET];
+
+interface NativeCurrencyInfo {
+  name: string;
+  symbol: string;
+  decimals: number;
+}
 
 export interface NetworkInfo {
   MORALIS_ID: string;
   MORALIS_SERVER: string;
   CHAIN_ID_HEX: string;
   CHAIN_ID_DEC: number;
+  CHAIN_NAME: string;
+  NATIVE_CURRENCY: NativeCurrencyInfo;
   RPC_URL: string;
+  BLOCK_EXPLORER_URLS: string;
 }
 
 export const Constants: { [key: number]: NetworkInfo } = {
@@ -22,25 +33,52 @@ export const Constants: { [key: number]: NetworkInfo } = {
     MORALIS_SERVER: 'https://vamoxwojj7ht.moralisweb3.com:2053/server',
     CHAIN_ID_HEX: '0x38',
     CHAIN_ID_DEC: 56,
-    RPC_URL:
-      'https://speedy-nodes-nyc.moralis.io/a63582bee45a03699c0ca8fa/bsc/mainnet',
+    CHAIN_NAME: 'Binance Smart Chain Mainnet',
+    NATIVE_CURRENCY: {
+      name: 'BNB',
+      symbol: 'bnb',
+      decimals: 18,
+    },
+    RPC_URL: 'https://bsc-dataseed.binance.org/',
+    BLOCK_EXPLORER_URLS: 'https://bscscan.com',
   },
   97: {
     MORALIS_ID: 'LQazohFSg15yR5ZtaRVqZQysUbzDI9olJjNKUrlE',
     MORALIS_SERVER: 'https://3jucoi8srnps.moralisweb3.com:2053/server',
     CHAIN_ID_HEX: '0x61',
     CHAIN_ID_DEC: 97,
-    RPC_URL: 'https://data-seed-prebsc-2-s3.binance.org:8545/'
-  }
-}
+    CHAIN_NAME: 'Binance Smart Chain Testnet',
+    NATIVE_CURRENCY: {
+      name: 'BNB',
+      symbol: 'bnb',
+      decimals: 18,
+    },
+    RPC_URL: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+    BLOCK_EXPLORER_URLS: 'https://testnet.bscscan.com',
+  },
+};
 
-export const ContractAddresses: { [chainId in ChainId]: { [label: string]: string } } = {
+export const ContractAddresses: {
+  [chainId in ChainId]: { [label: string]: string };
+} = {
   [ChainId.BSC_MAINNET]: {
-    StandardLottery: "",
-    SpecialLottery: "",
+    DeHub: '',
+    BNB: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    BUSD: '',
+    'DeHub-BNB': '',
+    'BNB-BUSD': '',
+    StandardLottery: '',
+    SpecialLottery: '',
+    MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
   },
   [ChainId.BSC_TESTNET]: {
-    StandardLottery: "",
-    SpecialLottery: "",
+    DeHub: '0x5A5e32fE118E7c7b6536d143F446269123c0ba74',
+    BNB: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
+    BUSD: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
+    'DeHub-BNB': '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
+    'BNB-BUSD': '0xe0e92035077c39594793e61802a350347c320cf2',
+    StandardLottery: '0x47770273D5847dCc70b16fa7F314FFD31AA5e694',
+    SpecialLottery: '0x7A18dB568d76F23e53b582f6F253Ae04713fE151',
+    MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
   },
-}
+};

@@ -1,9 +1,6 @@
 import './shared-react.module.scss';
 
-/* eslint-disable-next-line */
-export interface SharedReactProps {}
-
-export function SharedReact(props: SharedReactProps) {
+export function SharedReact() {
   return (
     <div>
       <h1>Welcome to SharedReact!</h1>

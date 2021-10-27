@@ -25,9 +25,7 @@ $shade900: #3e4754; //grxwound surface
 $hoverBg: rgba($primaryColor, 0.2);
 
 //global
-$fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-  'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-  'Segoe UI Symbol';
+$fontFamily: 'Roboto', sans-serif;
 $fontSize: 1rem;
 $fontWeight: normal;
 $textColor: $shade000;
@@ -42,7 +40,7 @@ $actionIconTransition: background-color $transitionDuration,
 $listItemTransition: box-shadow $transitionDuration;
 $primeIconFontSize: 1rem;
 $divider: 1px solid $shade600;
-$inlineSpacing: 0.5rem; //spacing between inline elements
+$inlineSpacing: 0.6rem; //spacing between inline elements
 $disabledOpacity: 0.4; //opacity of a disabled item
 $maskBg: rgba(0, 0, 0, 0.4); //modal mask bg color
 $loadingIconFontSize: 2rem;
@@ -228,10 +226,10 @@ $dangerButtonActiveBorderColor: scale-color($dangerButtonBg, $lightness: -20%);
 $dangerButtonFocusShadow: 0 0 0 1px
   scale-color($dangerButtonBg, $lightness: 30%);
 
-$linkButtonColor: $primaryColor;
-$linkButtonHoverColor: $primaryColor;
+$linkButtonColor: $dhb_link_color;
+$linkButtonHoverColor: $dhb_link_color;
 $linkButtonTextHoverDecoration: underline;
-$linkButtonFocusShadow: 0 0 0 0.1rem $focusOutlineColor;
+$linkButtonFocusShadow: 0 0 0 0 $focusOutlineColor;
 
 //checkbox
 $checkboxWidth: 20px;
@@ -409,14 +407,16 @@ $accordionContentTextColor: $panelContentTextColor;
 $accordionContentPadding: $panelContentPadding;
 
 //tabview
-$tabviewNavBorder: 1px solid transparentize($shade600, 0.5);
-$tabviewNavBorderWidth: 0 0 1px 0;
+$tabviewNavBorder: 1px solid transparentize($dhb_neon_1, 0.48);
+$tabviewNavBorderWidth: 0 1px 0 1px;
 $tabviewNavBg: $dhb_gradient2;
 
 $tabviewHeaderSpacing: 0;
 $tabviewHeaderBorder: solid $shade600;
-$tabviewHeaderBorderWidth: 0 0 1px 0;
-$tabviewHeaderBorderColor: transparent transparent $shade800 transparent;
+$tabviewHeaderBorderWidth: 1px 0 0px 0;
+$tabviewHeaderBorderColor: transparentize($dhb_neon_1, 0.48)
+  transparentize($dhb_neon_1, 0.48) transparent
+  transparentize($dhb_neon_1, 0.48);
 $tabviewHeaderBg: linear-gradient(
   270deg,
   #2932419e 0%,
@@ -429,14 +429,16 @@ $tabviewHeaderPadding: $panelHeaderPadding;
 $tabviewHeaderMargin: 0 0 -2px 0;
 
 $tabviewHeaderHoverBg: transparentize($shade800, 0.7);
-$tabviewHeaderHoverBorderColor: $shade800;
+$tabviewHeaderHoverBorderColor: transparentize($dhb_neon_1, 0.48);
 $tabviewHeaderTextHoverColor: $shade000;
 
-$tabviewHeaderActiveBg: $shade800;
-$tabviewHeaderActiveBorderColor: transparent;
+$tabviewHeaderActiveBg: transparentize($dhb_neon_1, 0.48);
+$tabviewHeaderActiveBorderColor: transparentize($dhb_neon_1, 0.48)
+  transparentize($dhb_neon_1, 0.48) transparent
+  transparentize($dhb_neon_1, 0.48);
 $tabviewHeaderTextActiveColor: $primaryTextColor;
 
-$tabviewContentBorder: 0 none;
+$tabviewContentBorder: 1px solid transparentize($dhb_neon_1, 0.48);
 $tabviewContentBg: $dhb_gradient2;
 $tabviewContentTextColor: $shade000;
 $tabviewContentPadding: $panelContentPadding;
@@ -625,20 +627,20 @@ $errorMessageTextColor: scale-color($errorMessageBg, $lightness: -75%);
 $errorMessageIconColor: scale-color($errorMessageBg, $lightness: -75%);
 
 //overlays
-$overlayContentBorder: 1px solid $shade600;
+$overlayContentBorder: 0px solid $shade600;
 $overlayContentBg: $panelContentBg;
 $overlayContainerShadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
   0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 
 //dialog
-$dialogHeaderBg: $shade800;
-$dialogHeaderBorder: 0 none;
+$dialogHeaderBg: transparent;
+$dialogHeaderBorder: 1px solid $dhb_border_translucent_1;
 $dialogHeaderTextColor: $shade000;
 $dialogHeaderFontWeight: 600;
 $dialogHeaderFontSize: 1.25rem;
 $dialogHeaderPadding: 1.5rem;
-$dialogContentPadding: 0 1.5rem 2rem 1.5rem;
-$dialogFooterBorder: 0 none;
+$dialogContentPadding: 2rem 1.5rem 2rem 1.5rem;
+$dialogFooterBorder: 1px solid $dhb_border_translucent_1;
 $dialogFooterPadding: 0 1.5rem 1.5rem 1.5rem;
 
 //tooltip

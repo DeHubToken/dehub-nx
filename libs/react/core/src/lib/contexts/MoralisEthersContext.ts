@@ -1,11 +1,15 @@
 import { createContext } from 'react';
-import { Web3Provider } from '@ethersproject/providers';
+import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
+import { AuthenticateOptions } from 'react-moralis/lib/hooks/useMoralis/_useMoralisAuth';
 
 export interface MoralisEthersContextValue {
-  authProvider: Web3Provider | null;
-  activateProvider: () => void;
-  account: string | null;
   isAuthenticated: boolean;
+  authProvider: Web3Provider | undefined;
+  signer: JsonRpcSigner | undefined;
+  account: string | undefined;
+  chainId: string | undefined;
+  authenticate: (options?: AuthenticateOptions) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 export const MoralisEthersContext =
