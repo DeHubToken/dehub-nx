@@ -48,6 +48,7 @@
     "assert": "2.0.0",
     "bignumber.js": "9.0.1",
     "canvas": "2.8.0",
+    "chart.js": "3.5.1",
     "classnames": "2.3.1",
     "core-js": "3.6.5",
     "crypto-browserify": "3.12.0",

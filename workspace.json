@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "angular-core": "libs/angular/core",
     "lottery": "apps/lottery",
     "lottery-e2e": "apps/lottery-e2e",
     "react-core": "libs/react/core",
