@@ -3,9 +3,10 @@
 
 $dhb_gray_1: #101927;
 $dhb_gray_2: #1c293c;
+$dhb_neon_1: #2fadbe;
 $dhb_border_translucent_1: rgba(0, 0, 0, 0.125);
 $dhb_border_translucent_2: rgba(255, 255, 255, 0.125);
-$dhb_shadow_neon_1: 0 0 6px #1e7068 !important;
+$dhb_shadow_neon_1: 0 0 6px $dhb_neon_1 !important;
 $dhb_black: #060d1b;
 
 $dhb_link_color: #1791a7;

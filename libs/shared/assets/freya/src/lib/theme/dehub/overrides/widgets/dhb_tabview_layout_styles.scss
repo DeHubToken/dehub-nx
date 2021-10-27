@@ -1,5 +1,15 @@
 .p-tabview {
+  @include border-radius(6px);
+  overflow: hidden;
+  box-shadow: 0 0 9px rgba(47, 173, 190, 0.48);
   .p-tabview-nav {
-    border-radius: 6px 6px 0 0;
+    @include border-radius-top(6px);
+    li {
+      box-shadow: 0 0 9px rgba(47, 173, 190, 0.48);
+    }
+  }
+
+  .p-tabview-panels {
+    // box-shadow: 0 0 9px rgba(47, 173, 190, 0.48);
   }
 }

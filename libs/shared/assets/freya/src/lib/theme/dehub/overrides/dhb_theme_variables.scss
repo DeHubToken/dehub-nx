@@ -407,14 +407,16 @@ $accordionContentTextColor: $panelContentTextColor;
 $accordionContentPadding: $panelContentPadding;
 
 //tabview
-$tabviewNavBorder: 1px solid transparentize($shade600, 0.5);
-$tabviewNavBorderWidth: 0 0 1px 0;
+$tabviewNavBorder: 1px solid transparentize($dhb_neon_1, 0.48);
+$tabviewNavBorderWidth: 0 1px 0 1px;
 $tabviewNavBg: $dhb_gradient2;
 
 $tabviewHeaderSpacing: 0;
 $tabviewHeaderBorder: solid $shade600;
-$tabviewHeaderBorderWidth: 0 0 1px 0;
-$tabviewHeaderBorderColor: transparent transparent $shade800 transparent;
+$tabviewHeaderBorderWidth: 1px 0 0px 0;
+$tabviewHeaderBorderColor: transparentize($dhb_neon_1, 0.48)
+  transparentize($dhb_neon_1, 0.48) transparent
+  transparentize($dhb_neon_1, 0.48);
 $tabviewHeaderBg: linear-gradient(
   270deg,
   #2932419e 0%,
@@ -427,14 +429,16 @@ $tabviewHeaderPadding: $panelHeaderPadding;
 $tabviewHeaderMargin: 0 0 -2px 0;
 
 $tabviewHeaderHoverBg: transparentize($shade800, 0.7);
-$tabviewHeaderHoverBorderColor: $shade800;
+$tabviewHeaderHoverBorderColor: transparentize($dhb_neon_1, 0.48);
 $tabviewHeaderTextHoverColor: $shade000;
 
-$tabviewHeaderActiveBg: $shade800;
-$tabviewHeaderActiveBorderColor: transparent;
+$tabviewHeaderActiveBg: transparentize($dhb_neon_1, 0.48);
+$tabviewHeaderActiveBorderColor: transparentize($dhb_neon_1, 0.48)
+  transparentize($dhb_neon_1, 0.48) transparent
+  transparentize($dhb_neon_1, 0.48);
 $tabviewHeaderTextActiveColor: $primaryTextColor;
 
-$tabviewContentBorder: 0 none;
+$tabviewContentBorder: 1px solid transparentize($dhb_neon_1, 0.48);
 $tabviewContentBg: $dhb_gradient2;
 $tabviewContentTextColor: $shade000;
 $tabviewContentPadding: $panelContentPadding;

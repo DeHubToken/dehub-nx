@@ -2,6 +2,7 @@
   @include gradient-border();
 }
 
-.shadow-neon-1 {
-  box-shadow: $dhb_shadow_neon_1;
+.border-neon-1 {
+  border: 1px solid #2fadbe7a;
+  box-shadow: 0 0 9px #2fadbe7a;
 }
