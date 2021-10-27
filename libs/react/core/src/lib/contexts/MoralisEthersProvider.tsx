@@ -22,15 +22,8 @@ export const MoralisEthersProvider = ({
   const [account, setAccount] = useState<string | undefined>(undefined);
   const [chainId, setChainId] = useState<string | undefined>(undefined);
 
-  const {
-    isWeb3Enabled,
-    enableWeb3,
-    web3,
-    isAuthenticated,
-    authenticate,
-    user,
-    logout,
-  } = useMoralis();
+  const { enableWeb3, isAuthenticated, authenticate, user, logout } =
+    useMoralis();
 
   const activateProvider = useCallback(async (newWeb3: Moralis.Web3 | null) => {
     if (!newWeb3 || !newWeb3?.currentProvider) return;
