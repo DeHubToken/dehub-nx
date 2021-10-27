@@ -1,5 +1,7 @@
 export enum WalletConnectingState {
   INIT,
   WAITING,
-  COMPLETE
+  SWITCH_NETWORK,
+  ADD_NETWORK,
+  COMPLETE,
 }

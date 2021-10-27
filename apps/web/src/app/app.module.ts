@@ -36,6 +36,7 @@ import { LandingZoneComponent } from './view/landing/landing-zone/landing-zone.c
 import { LandingZonesComponent } from './view/landing/landing-zones/landing-zones.component';
 
 const primeNgModules = [ButtonModule, RippleModule, MenuModule, ChartModule];
+
 @NgModule({
   imports: [
     CommonModule,

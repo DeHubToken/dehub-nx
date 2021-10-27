@@ -3,28 +3,38 @@
 
 $dhb_gray_1: #101927;
 $dhb_gray_2: #1c293c;
+$dhb_neon_1: #2fadbe;
 $dhb_border_translucent_1: rgba(0, 0, 0, 0.125);
 $dhb_border_translucent_2: rgba(255, 255, 255, 0.125);
-	$dhb_black: #060d1b;
+$dhb_shadow_neon_1: 0 0 6px $dhb_neon_1 !important;
+$dhb_black: #060d1b;
 
-$dhb_gradient1: linear-gradient(45deg, #0b1113, #051118 46%, #060c1d 71%, #321338);
+$dhb_link_color: #1791a7;
+
+$dhb_gradient1: linear-gradient(
+  45deg,
+  #0b1113,
+  #051118 46%,
+  #060c1d 71%,
+  #321338
+);
 $dhb_gradient2: linear-gradient(
-	128deg,
-	rgba(11, 17, 19, 1) 0%,
-	rgba(26, 50, 63, 0.8) 25%,
-	rgba(50, 19, 56, 0.8) 100%
+  128deg,
+  rgba(11, 17, 19, 1) 0%,
+  rgba(26, 50, 63, 0.8) 25%,
+  rgba(50, 19, 56, 0.8) 100%
 );
 $dhb_gradient3: linear-gradient(
-	45deg,
-	rgba(11, 17, 19, 0.7),
-	rgba(5, 17, 24, 0.7) 46%,
-	rgba(6, 12, 29, 0.7) 71%,
-	rgba(50, 19, 56, 0.7)
+  45deg,
+  rgba(11, 17, 19, 0.7),
+  rgba(5, 17, 24, 0.7) 46%,
+  rgba(6, 12, 29, 0.7) 71%,
+  rgba(50, 19, 56, 0.7)
 );
 $dhb_gradient4: linear-gradient(
-	128deg,
-	rgba(31, 122, 153, 0.5) 0%,
-	rgba(25, 120, 173, 0.5) 45%,
-	rgba(162, 75, 180, 0.5) 100%
+  128deg,
+  rgba(31, 122, 153, 0.5) 0%,
+  rgba(25, 120, 173, 0.5) 45%,
+  rgba(162, 75, 180, 0.5) 100%
 );
 /* ------------------------------- Custom End ------------------------------- */

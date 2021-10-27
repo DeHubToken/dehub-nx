@@ -1,43 +1,29 @@
-import React, { ReactNode, ReactText } from 'react';
-import { InputHTMLAttributes } from 'react';
+import React from 'react';
 import { Box } from '../Layout';
 import { Text } from '../Text';
-import {
-  StyledBalanceInput,
-  StyledInput,
-  UnitContainer
-} from './styles';
+import { StyledBalanceInput, StyledInput, UnitContainer } from './styles';
+import { BalanceInputProps } from './types';
 
-interface BalanceInputProps {
-  value: ReactText;
-  onUserInput: (input: string) => void;
-  currencyValue?: ReactNode;
-  placeholder?: string;
-  innerRef?: React.RefObject<HTMLInputElement>;
-  inputProps?: Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "placeholder" | "onChange">;
-  decimals?: number;
-  unit?: string;
-}
-
-const BalanceInput: React.FC<BalanceInputProps> = ({
+const BalanceInput = ({
   value,
   onUserInput,
   currencyValue,
-  placeholder = "0.0",
+  placeholder = '0.0',
   innerRef,
   inputProps,
+  isWarning = false,
   decimals = 18,
   unit,
   ...props
-}) => {
+}: BalanceInputProps) => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.validity.valid) {
-      onUserInput(e.currentTarget.value.replace(/,/g, "."));
+      onUserInput(e.currentTarget.value.replace(/,/g, '.'));
     }
   };
 
   return (
-    <StyledBalanceInput {...props}>
+    <StyledBalanceInput data-is-warning={isWarning} {...props}>
       <div className="flex justify-content-end">
         <Box>
           <div className="flex align-items-center">
@@ -62,6 +48,6 @@ const BalanceInput: React.FC<BalanceInputProps> = ({
       </div>
     </StyledBalanceInput>
   );
-}
+};
 
 export default BalanceInput;

@@ -1,10 +1,6 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { memo } from 'react';
 
-/* eslint-disable-next-line */
-export interface FooterProps {}
-
-function Footer(props: FooterProps) {
+function Footer() {
   return (
     <div className="layout-footer">
       <div className="flex flex-wrap align-items-center justify-content-center card-container">

@@ -11,7 +11,7 @@ const Card = ({ className, children, ...props }: CardProps) => {
     <div className={classNames(`card ${className ?? ''}`)} {...props}>
       {children}
     </div>
-  )
+  );
 };
 
 export default Card;
