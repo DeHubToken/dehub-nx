@@ -4,6 +4,7 @@ import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
 import { Text } from '../components/Text';
 import { environment } from '../../environments/environment';
+import Icon from '../components/Icon/Icon';
 
 const DeLottoStage2Waiting = () => {
   const now = new Date();
@@ -19,7 +20,7 @@ const DeLottoStage2Waiting = () => {
 
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center h-30rem">
-      <i className="fad fa-alarm-clock mb-4" style={{ fontSize: '30px' }}></i>
+      <Icon className="fad fa-alarm-clock mb-5" size="40px"></Icon>
       <EventCountDown
         nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 501}
         timerFontSize="28px"
