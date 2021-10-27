@@ -1,7 +1,7 @@
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
+import FlexLine from 'apps/lottery/src/app/views/components/FlexLine';
 import { useEffect, useState } from 'react';
-import Card from '../components/Layout/Card';
 import UserMenu from '../components/UserMenu';
 import { useWalletConnectingState } from '../states/application/hooks';
 import DeGrand from '../views/DeGrand';
@@ -40,12 +40,13 @@ export default function Lottery() {
           />
           <div className="layout-main">
             <div className="layout-content">
-              <Card
-                className="mx-auto text-center"
-                style={{ width: '300px', height: '100px' }}
-              >
-                <h1>Raffles LOGO</h1>
-              </Card>
+              <FlexLine className="md:flex-column align-items-center justify-content-between">
+                <img
+                  src="../../assets/img/prize-draw-logo.png"
+                  className="anim-float-1"
+                  style={{ maxWidth: '300px' }}
+                />
+              </FlexLine>
               <div className="my-8">
                 <DeLotto />
               </div>
