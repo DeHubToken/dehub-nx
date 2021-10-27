@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { useSelector } from 'react-redux';
+
 import { Hooks } from '@dehub/react/core';
 
 import useRefresh from '../../hooks/useRefresh';
@@ -10,14 +11,15 @@ import {
   fetchCurrentLotteryId,
   fetchLotteryBundles,
   fetchUserTicketsAndLotteries,
+  fetchUserData,
 } from '.';
 import {
   fetchLottery,
   useProcessLotteryResponse,
   processLotteryResponse,
 } from './helpers';
+import { LotteryBundleRule, LotteryRound, LotteryUserData } from './types';
 import { useAppDispatch } from '..';
-import { LotteryBundleRule, LotteryRound } from './types';
 import { State } from '../types';
 
 export const useGetCurrentLotteryId = (): string => {
@@ -28,12 +30,22 @@ export const useGetLotteryBundleRules = (): LotteryBundleRule[] => {
   return useSelector((state: State) => state.standardLottery.bundleRules);
 };
 
+export const useGetUserLotteryData = (): LotteryUserData => {
+  return useSelector((state: State) => state.standardLottery.userLotteryData);
+};
+
+export const useGetUserLotteryDataLoading = (): boolean => {
+  return useSelector(
+    (state: State) => state.standardLottery.userLotteryData.isLoading
+  );
+};
+
 export const useFetchLottery = () => {
   const { account } = Hooks.useMoralisEthers();
   const { fastRefresh, slowRefresh } = useRefresh();
 
   const dispatch = useAppDispatch();
-  const currentLotteryId: string = useGetCurrentLotteryId();
+  const { currentLotteryId, isTransitioning } = useLottery();
 
   useEffect(() => {
     dispatch(fetchCurrentLotteryId());
@@ -52,8 +64,9 @@ export const useFetchLottery = () => {
   useEffect(() => {
     if (account && currentLotteryId) {
       dispatch(fetchUserTicketsAndLotteries({ account, currentLotteryId }));
+      dispatch(fetchUserData({ account, currentLotteryId }));
     }
-  }, [dispatch, currentLotteryId, account]);
+  }, [dispatch, currentLotteryId, account, isTransitioning]);
 };
 
 export const useLottery = () => {

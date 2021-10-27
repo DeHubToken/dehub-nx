@@ -1,12 +1,23 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import BigNumber from 'bignumber.js';
+
 import {
   fetchCurrentLotteryIdAndMaxBuy,
   fetchLottery,
   fetchLotteryBundleRules,
   fetchUserTicketsPerOneRound,
 } from './helpers';
-import { LotteryState, LotteryResponse, LotteryBundleRule } from './types';
+import { fetchUnclaimedUserRewards } from './fetchUnclaimedUserRewards';
+import {
+  LotteryState,
+  LotteryResponse,
+  LotteryBundleRule,
+  LotteryUserData,
+  LotteryUserRound,
+} from './types';
+import { MAX_DELOTTO_REQUEST_SIZE } from '../../config/constants';
 import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
+import { processLotteryUserClaimData } from '../../states/standard-lottery/helpers';
 
 interface PublicLotteryData {
   currentLotteryId: string;
@@ -37,6 +48,12 @@ const initialState: LotteryState = {
       isLoading: true,
       tickets: [],
     },
+  },
+  userLotteryData: {
+    isLoading: true,
+    account: '',
+    dehubTotal: '',
+    rounds: [],
   },
 };
 
@@ -85,6 +102,73 @@ export const fetchUserTicketsAndLotteries = createAsyncThunk<
   }
 );
 
+export const fetchUserData = createAsyncThunk<
+  {
+    userData: LotteryUserData;
+  },
+  { account: string; currentLotteryId: string }
+>(
+  'standardLottery/fetchUserData',
+  async (
+    { account, currentLotteryId },
+    { getState }
+  ): Promise<{ userData: LotteryUserData }> => {
+    const { standardLottery: state } = getState() as {
+      standardLottery: LotteryState;
+    };
+    const unclaimedRewardsResponse = await fetchUnclaimedUserRewards(
+      account,
+      state.userLotteryData,
+      currentLotteryId,
+      MAX_DELOTTO_REQUEST_SIZE
+    );
+
+    // Save newly pulled user data into redux
+    const additionalUserData: LotteryUserData = processLotteryUserClaimData(
+      account,
+      unclaimedRewardsResponse
+    );
+
+    const { dehubTotal, rounds } = state.userLotteryData;
+    if (
+      state.userLotteryData.account.length > 0 &&
+      state.userLotteryData.account.toLocaleLowerCase() !==
+        additionalUserData.account.toLocaleLowerCase()
+    ) {
+      return { userData: additionalUserData };
+    }
+
+    /*
+     * Accumulate unclaimed rewards
+     * If additionalUserData has claimed user data, its dehubTotal must have negative value
+     */
+    const newDeHubTotal = new BigNumber(dehubTotal)
+      .plus(new BigNumber(additionalUserData.dehubTotal))
+      .toJSON();
+
+    const newRounds = [...rounds];
+    // Replace round information
+    additionalUserData.rounds.forEach((additionalRound: LotteryUserRound) => {
+      const index = newRounds.findIndex(
+        (round: LotteryUserRound) => round.roundId === additionalRound.roundId
+      );
+      if (index >= 0) {
+        newRounds.splice(index, 1, additionalRound);
+      } else {
+        newRounds.push(additionalRound);
+      }
+    });
+
+    return {
+      userData: {
+        account,
+        dehubTotal: newDeHubTotal,
+        rounds: newRounds,
+      },
+    };
+  }
+);
+
 export const setLotteryIsTransitioning = createAsyncThunk<
   {
     isTransitioning: boolean;
@@ -129,6 +213,18 @@ export const LotterySlice = createSlice({
         state.currentRound.userTickets = {};
         state.currentRound.userTickets.isLoading = false;
         state.currentRound.userTickets.tickets = action.payload.userTickets;
+      }
+    );
+    builder.addCase(fetchUserData.pending, state => {
+      state.userLotteryData.isLoading = true;
+    });
+    builder.addCase(
+      fetchUserData.fulfilled,
+      (state, action: PayloadAction<{ userData: LotteryUserData }>) => {
+        state.userLotteryData.isLoading = false;
+        state.userLotteryData.account = action.payload.userData.account;
+        state.userLotteryData.dehubTotal = action.payload.userData.dehubTotal;
+        state.userLotteryData.rounds = action.payload.userData.rounds;
       }
     );
     builder.addCase(

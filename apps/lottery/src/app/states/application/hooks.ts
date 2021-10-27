@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import BigNumber from 'bignumber.js';
 
 import { WalletConnectingState } from '@dehub/shared/config';
@@ -19,7 +19,7 @@ export const useWalletConnectingState = (): WalletConnectingState => {
 export const useSetWalletConnectingState = (): ((
   connectingState: WalletConnectingState
 ) => void) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   return useCallback(
     (connectingState: WalletConnectingState) => {
       dispatch(setWalletConnectingState({ connectingState }));

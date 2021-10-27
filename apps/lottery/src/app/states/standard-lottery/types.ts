@@ -46,10 +46,26 @@ export interface LotteryBundleRule {
   freeCount: number;
 }
 
+export interface LotteryUserData {
+  account: string;
+  dehubTotal: SerializedBigNumber; // total unclaimed amount
+  rounds: LotteryUserRound[]; // array of user information per round
+}
+
+export interface LotteryUserRound {
+  // Similar with LotteryTicketClaimData
+  status: LotteryStatus;
+  roundId: string;
+  dehubTotal: SerializedBigNumber; // unclaimed amount in a round
+  ticketsWithUnclaimedRewards: LotteryTicket[];
+  allWinningTickets: LotteryTicket[];
+}
+
 export interface LotteryState {
   currentLotteryId: string;
   maxNumberTicketsPerBuyOrClaim: string;
   bundleRules: LotteryBundleRule[];
   isTransitioning: boolean;
   currentRound: LotteryResponse & { userTickets?: LotteryRoundUserTickets };
+  userLotteryData: LotteryUserData & { isLoading: boolean };
 }

@@ -72,7 +72,7 @@ const DeLotto = () => {
   const specialPaused = useGetSpecialPaused();
   const now = new Date();
 
-  const isActiveStage1 = standardEndTimeAsInt > specialEndTimeAsInt;
+  const isActiveStage1 = standardEndTimeAsInt >= specialEndTimeAsInt;
   const isActiveStage2 = standardEndTimeAsInt < specialEndTimeAsInt;
   const activeIndex =
     !isActiveStage1 && isActiveStage2
