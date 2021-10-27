@@ -1,11 +1,11 @@
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
-import FlexLine from 'apps/lottery/src/app/views/components/FlexLine';
 import { useEffect, useState } from 'react';
 import UserMenu from '../components/UserMenu';
 import { useWalletConnectingState } from '../states/application/hooks';
 import DeGrand from '../views/DeGrand';
 import DeLotto from '../views/DeLotto';
+import FlexLine from './components/FlexLine';
 
 export default function Lottery() {
   const [showLoader, setShowLoader] = useState(false);
