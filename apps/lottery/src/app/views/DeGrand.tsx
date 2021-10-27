@@ -73,7 +73,7 @@ const DeGrand = () => {
       {loadingStatus !== LoadingStatus.COMPLETE ? (
         <SyncWaiting loadingStatus={loadingStatus} />
       ) : (
-        <Card>
+        <Card className="border-neon-1">
           <StyledBox>
             {deGrandPrize && deGrandPrize.drawTime > 0 ? (
               <FlexLine

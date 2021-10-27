@@ -7,7 +7,7 @@ import { LoadingStatus } from '../config/constants/types';
 const SyncWaiting = ({ loadingStatus }: { loadingStatus: LoadingStatus }) => {
   return (
     <Container>
-      <Card className="h-30rem pt-8">
+      <Card className="h-30rem pt-8 border-neon-1">
         {loadingStatus === LoadingStatus.LOADING ? (
           <>
             <div className="fa-3x pb-5 text-center">
