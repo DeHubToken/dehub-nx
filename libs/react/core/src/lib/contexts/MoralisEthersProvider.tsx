@@ -86,7 +86,9 @@ export const MoralisEthersProvider = ({
        *   return;
        * }
        */
-      setAccount(newAccount);
+      if (user) {
+        setAccount(newAccount);
+      }
     });
 
     Moralis.Web3.onChainChanged(newChainId => {
