@@ -1,10 +1,16 @@
-import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
+import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
-import { useMemo } from 'react';
+
+import { BIG_ZERO, ethersToSerializedBigNumber } from '@dehub/shared/utils';
+
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
 import { TICKET_LIMIT_PER_REQUEST } from '../../config/constants';
-import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
+import {
+  LotteryStatus,
+  LotteryTicket,
+  LotteryTicketClaimData,
+} from '../../config/constants/types';
 import { getStandardLotteryAddress } from '../../utils/addressHelpers';
 import { getStandardLotteryContract } from '../../utils/contractHelpers';
 import { Call, multicallv2 } from '../../utils/multicall';
@@ -13,6 +19,8 @@ import {
   LotteryResponse,
   LotteryRound,
   LotteryRoundUserTickets,
+  LotteryUserData,
+  LotteryUserRound,
 } from './types';
 
 const standardLotteryContract = getStandardLotteryContract();
@@ -294,5 +302,34 @@ export const processLotteryResponse = (
     dehubPerBracket: lotteryData.dehubPerBracket,
     countWinnersPerBracket: lotteryData.countWinnersPerBracket,
     rewardsBreakdown: lotteryData.rewardsBreakdown,
+  };
+};
+
+export const processLotteryUserClaimData = (
+  account: string,
+  claimData: LotteryTicketClaimData[]
+): LotteryUserData => {
+  // Accumulate unclaimed amount
+  let total: BigNumber = BIG_ZERO;
+  claimData.forEach((reward: LotteryTicketClaimData) => {
+    total = total.plus(reward.dehubTotal);
+  });
+
+  const rounds: LotteryUserRound[] = claimData.map(
+    (claimItem: LotteryTicketClaimData) => {
+      return {
+        status: LotteryStatus.CLAIMABLE,
+        roundId: claimItem.roundId,
+        dehubTotal: total.toJSON(),
+        ticketsWithUnclaimedRewards: claimItem.ticketsWithUnclaimedRewards,
+        allWinningTickets: claimItem.allWinningTickets,
+      };
+    }
+  );
+
+  return {
+    account,
+    dehubTotal: total.toJSON(),
+    rounds,
   };
 };

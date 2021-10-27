@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { endOfMonth } from 'date-fns';
 import { Button } from 'primereact/button';
@@ -18,13 +18,16 @@ import { SimpleCountDown } from './CountDown';
 
 import { Text } from '../../components/Text';
 import { TicketNumberLabel } from '../../components/TicketLabel';
-import { LotteryTicketClaimData } from '../../config/constants/types';
 import { LotteryTicket } from '../../config/constants/types';
-import useGetUnclaimedRewards, {
-  FetchStatus,
-} from '../../hooks/standard-lottery/useGetUnclaimedReward';
 import { useStandardLotteryContract } from '../../hooks/useContract';
-import { useLottery } from '../../states/standard-lottery/hooks';
+import { useAppDispatch } from '../../states';
+import { fetchUserData } from '../../states/standard-lottery';
+import {
+  useLottery,
+  useGetUserLotteryData,
+  useGetUserLotteryDataLoading,
+} from '../../states/standard-lottery/hooks';
+import { LotteryUserRound } from '../../states/standard-lottery/types';
 
 interface ClaimStage1DialogProps {
   open: boolean;
@@ -32,36 +35,19 @@ interface ClaimStage1DialogProps {
 }
 
 const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
-  const {
-    currentLotteryId,
-    currentRound: { status },
-  } = useLottery();
+  const dispatch = useAppDispatch();
+  const { currentLotteryId } = useLottery();
+
+  const { dehubTotal, rounds: unclaimedRewards } = useGetUserLotteryData();
+  const isFetchingRewards = useGetUserLotteryDataLoading();
 
   const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
-  const { fetchAllRewards, unclaimedRewards, fetchStatus } =
-    useGetUnclaimedRewards();
-  const isFetchingRewards =
-    // fetchStatus === FetchStatus.NOT_FETCHED ||
-    fetchStatus === FetchStatus.IN_PROGRESS;
   const { account } = Hooks.useMoralisEthers();
   const [pendingTx, setPendingTx] = useState(-1);
-  const [unclaimedDehubTotal, setUnclaimedDehubTotal] =
-    useState<BigNumber>(BIG_ZERO);
   const lotteryContract = useStandardLotteryContract();
-  const [claimed, setClaimed] = useState(false);
   const toast = useRef<Toast>(null);
 
-  useEffect(() => {
-    fetchAllRewards(currentLotteryId);
-  }, [account, currentLotteryId, status, claimed, fetchAllRewards]);
-
-  useEffect(() => {
-    let total: BigNumber = BIG_ZERO;
-    unclaimedRewards.forEach((reward: LotteryTicketClaimData) => {
-      total = total.plus(reward.dehubTotal);
-    });
-    setUnclaimedDehubTotal(total);
-  }, [unclaimedRewards]);
+  const unclaimedDehubTotal = new BigNumber(dehubTotal);
 
   const parseUnclaimedTicketDataOrClaimCall = (
     ticketWithUnclaimedRewards: LotteryTicket[],
@@ -97,13 +83,18 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
         );
         const receipt: TransactionReceipt = await tx.wait();
         if (receipt.status) {
+          dispatch(
+            fetchUserData({
+              account: account ?? '',
+              currentLotteryId: currentLotteryId ?? '',
+            })
+          );
           toast?.current?.show({
             severity: 'info',
             summary: 'Claim tickets',
             detail: 'Claim tickets successfully. Please check your wallet.',
             life: 3000,
           });
-          setClaimed(true);
         }
       }
     } catch (error) {
@@ -154,7 +145,9 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
             <Skeleton width="100%" height="2rem" className="mb-3" />
           ) : (
             unclaimedRewards.map(
-              (claimData: LotteryTicketClaimData, index: number) => {
+              (claimData: LotteryUserRound, index: number) => {
+                if (claimData.ticketsWithUnclaimedRewards.length < 1)
+                  return null;
                 return (
                   <div key={`${index}`} className="mt-2 mb-2">
                     <div className="mb-2">

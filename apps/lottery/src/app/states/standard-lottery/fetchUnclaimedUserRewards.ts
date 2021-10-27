@@ -11,6 +11,7 @@ import {
 } from '../../config/constants/types';
 import { getStandardLotteryAddress } from '../../utils/addressHelpers';
 import { Call, multicallv2 } from '../../utils/multicall';
+import { LotteryUserData, LotteryUserRound } from './types';
 
 interface LotteryStatusAndFinalNumber {
   roundId: string;
@@ -94,6 +95,7 @@ const getWinningTickets = async (
 ): Promise<LotteryTicketClaimData> => {
   const { roundId, userTickets, finalNumber } = roundDataAndUserTickets;
 
+  // Match ticket numbers with final number and get reward bracket index
   const ticketsWithRewardBrackets = userTickets.map(ticket => {
     return {
       id: ticket.id,
@@ -111,6 +113,7 @@ const getWinningTickets = async (
     return ticket.rewardBracket >= 0;
   });
 
+  // Any ticket wining a higher tier reward cancels all rewards for lower reward tiers winning tickets
   let maximumMatched = 0;
   allWinningTickets.forEach(value => {
     maximumMatched =
@@ -124,6 +127,7 @@ const getWinningTickets = async (
   });
 
   if (unclaimedWinningTickets.length > 0) {
+    // Fetch reward amount by passing winning ticket ids and its bracket index.
     const { ticketsWithUnclaimedRewards, dehubTotal } =
       await fetchDehubRewardsForTickets(unclaimedWinningTickets);
     if (dehubTotal.eq(BIG_ZERO)) {
@@ -201,6 +205,7 @@ const findFinalNumberForRound = (
 
 export const fetchUnclaimedUserRewards = async (
   account: string,
+  userData: LotteryUserData,
   lotteryId: string,
   requestSize: number
 ): Promise<LotteryTicketClaimData[]> => {
@@ -208,24 +213,59 @@ export const fetchUnclaimedUserRewards = async (
     return [];
   }
 
+  const { rounds } = userData;
+
+  const previousRounds =
+    userData.account.length > 0 &&
+    account.toLocaleLowerCase() !== userData.account.toLocaleLowerCase()
+      ? []
+      : rounds;
+
+  // Collect all the round ids to fetch unclaimed rewards
   const roundId: number = parseInt(lotteryId);
-  const roundsToCheck = [];
-  for (let idx = 0; roundId - idx > 0 && idx < requestSize; idx++) {
+  const roundsToCheck = [lotteryId];
+  for (let idx = 1; roundId - idx > 0 && idx < requestSize; idx++) {
+    // If already fetched winning tickets and rewards, ignore
+    const found = previousRounds.find((round: LotteryUserRound) => {
+      const prevRoundId = parseInt(round.roundId, 10);
+      return (
+        prevRoundId === roundId - idx &&
+        round.status === LotteryStatus.CLAIMABLE
+      );
+    });
+    if (found) {
+      continue;
+    }
     roundsToCheck.push((roundId - idx).toString());
   }
 
+  // Fetch all the final numbers and round status per rounds
   const statusAndFinalNumbers = await fetchLotteryFinalNumbers(roundsToCheck);
+  // Only claim claimable rounds
   const claimableRounds = statusAndFinalNumbers.filter(statusAndFinalNumber => {
     return (
-      statusAndFinalNumber.status === LotteryStatus.CLAIMABLE &&
+      (statusAndFinalNumber.status === LotteryStatus.CLAIMABLE ||
+        statusAndFinalNumber.status === LotteryStatus.BURNED) &&
       statusAndFinalNumber.finalNumber.length > 0
     );
   });
 
+  const roundsWaitingToClaim = claimableRounds.map(
+    (item: LotteryStatusAndFinalNumber): LotteryTicketClaimData => {
+      return {
+        ticketsWithUnclaimedRewards: [],
+        allWinningTickets: [],
+        dehubTotal: BIG_ZERO,
+        roundId: item.roundId,
+      };
+    }
+  );
+
   if (claimableRounds.length < 1) {
-    return [];
+    return roundsWaitingToClaim;
   }
 
+  // Fetch all the user tickets per claimable rounds
   const idsToCheck = claimableRounds.map(item => item.roundId);
   const userTicketData = await fetchUserTicketsPerMultipleRounds(
     account,
@@ -247,6 +287,7 @@ export const fetchUnclaimedUserRewards = async (
     }
   );
 
+  // Get all winning tickets/unclaimed tickets and reward amount by matching final numbers
   const winningTickets = await Promise.all(
     roundDataAndWinningTickets.map(roundData => getWinningTickets(roundData))
   );
@@ -256,5 +297,17 @@ export const fetchUnclaimedUserRewards = async (
     winninTicketData => winninTicketData.ticketsWithUnclaimedRewards.length > 0
   );
 
-  return roundsWithUnclaimedWinningTickets;
+  // Replace duplicated entry items
+  const roundsClaimData = roundsWaitingToClaim.map(
+    (roundClaimData: LotteryTicketClaimData) => {
+      const index = roundsWithUnclaimedWinningTickets.findIndex(
+        item => item.roundId === roundClaimData.roundId
+      );
+      return index >= 0
+        ? roundsWithUnclaimedWinningTickets[index]
+        : roundClaimData;
+    }
+  );
+
+  return roundsClaimData;
 };
