@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { Skeleton } from 'primereact/skeleton';
 
@@ -7,12 +6,15 @@ import {
   DEHUB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
 } from '@dehub/shared/config';
-import { getBalanceNumber, getFullDisplayBalance } from '@dehub/shared/utils';
+import {
+  BIG_ZERO,
+  getBalanceNumber,
+  getFullDisplayBalance,
+} from '@dehub/shared/utils';
 
 import { Text } from '../../components/Text';
 import { LotteryStatus } from '../../config/constants/types';
 import { useDehubBusdPrice } from '../../states/application/hooks';
-import { getDehubPrice } from '../../utils/priceDehub';
 
 interface PrizePotProps {
   pot: BigNumber;
@@ -20,28 +22,13 @@ interface PrizePotProps {
 }
 
 const PrizePot = ({ pot, status }: PrizePotProps) => {
-  const [prizeInBusd, setPrizeInBusd] = useState<BigNumber>(new BigNumber(NaN));
-  // https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
-  const mountedRef = useRef(true);
-
   const dehubPriceInBusd = useDehubBusdPrice();
-
-  useEffect(() => {
-    return () => {
-      mountedRef.current = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (mountedRef.current) {
-      const prizeInBusdCalc = pot.times(dehubPriceInBusd);
-      setPrizeInBusd(prizeInBusdCalc);
-    }
-  }, [pot, dehubPriceInBusd]);
+  const prizeInBusd = pot.times(dehubPriceInBusd);
 
   return status !== LotteryStatus.PENDING &&
     status !== LotteryStatus.BURNED &&
-    !prizeInBusd.isNaN() ? (
+    !dehubPriceInBusd.isNaN() &&
+    !pot.isNaN() ? (
     <>
       <Text fontSize="22px" className="inline-block">
         $
