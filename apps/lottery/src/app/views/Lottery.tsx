@@ -44,6 +44,7 @@ export default function Lottery() {
                 <img
                   src="../../assets/img/prize-draw-logo.png"
                   className="anim-float-1"
+                  alt="Prize Draw Logo"
                   style={{ maxWidth: '300px' }}
                 />
               </FlexLine>
