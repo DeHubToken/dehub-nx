@@ -22,19 +22,12 @@ export const MoralisEthersProvider = ({
   const [account, setAccount] = useState<string | undefined>(undefined);
   const [chainId, setChainId] = useState<string | undefined>(undefined);
 
-  const {
-    isWeb3Enabled,
-    enableWeb3,
-    web3,
-    isAuthenticated,
-    authenticate,
-    user,
-    logout,
-  } = useMoralis();
+  const { enableWeb3, isAuthenticated, authenticate, user, logout } =
+    useMoralis();
 
-  const activateProvider = useCallback(async (newWeb3: Moralis.Web3 | null) => {
-    if (!newWeb3 || !newWeb3?.currentProvider) return;
-    // const web3 = await Moralis.Web3.activeWeb3Provider?.activate();
+  const activateProvider = useCallback(async () => {
+    // if (!newWeb3 || !newWeb3?.currentProvider) return;
+    const newWeb3 = await Moralis.Web3.activeWeb3Provider?.activate();
     const provider = new Web3Provider(
       newWeb3?.currentProvider as ExternalProvider
     );
@@ -60,7 +53,7 @@ export const MoralisEthersProvider = ({
 
   useEffect(() => {
     const onSuccess = (web3: Moralis.Web3 | null) => {
-      activateProvider(web3);
+      activateProvider();
     };
     const onError = (error: Error) => {
       clearProvider();
@@ -86,13 +79,19 @@ export const MoralisEthersProvider = ({
        *   return;
        * }
        */
-      setAccount(newAccount);
+      if (user) {
+        if (newAccount) {
+          activateProvider();
+        } else {
+          logout();
+        }
+      }
     });
 
     Moralis.Web3.onChainChanged(newChainId => {
       setChainId(newChainId);
     });
-  }, [logout, user]);
+  }, [logout, user, activateProvider]);
 
   return (
     <MoralisEthersContext.Provider
