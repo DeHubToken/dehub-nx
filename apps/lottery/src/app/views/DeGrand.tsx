@@ -21,6 +21,7 @@ import {
 } from '../states/special-lottery/hooks';
 import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import SyncWaiting from './SyncWaiting';
+import Icon from '../components/Icon/Icon';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
@@ -126,24 +127,30 @@ const DeGrand = () => {
                 </FlexLine>
               </FlexLine>
             ) : (
-              <FlexLine
-                className="align-items-center justify-content-center py-3"
-                style={{ borderBottom: '1px solid' }}
-              >
-                <Title>Prizes will be anounced soon!</Title>
-              </FlexLine>
+              <div className="text-center">
+                <Icon className="fad fa-gift pb-4" size="30px"></Icon>
+                <Text className="text-center" fontSize="20px">
+                  Prizes will be announced soon!
+                </Text>
+                <Button
+                  className="p-button-link p-0 mt-3"
+                  label="Read more about the 'DeGrand'"
+                />
+              </div>
             )}
             <FlexLine className="md:flex-column align-items-center justify-content-between">
-              <Header className="my-3">Grand history</Header>
-              <Text className="mb-3">See previous DeGrand Draws</Text>
               {account ? (
                 deGrandPrize &&
                 deGrandPrize.drawTime > 0 && (
-                  <Button
-                    className="mt-2 justify-content-center"
-                    onClick={() => handleShowDialog('CheckDeGrandHistory')}
-                    label="Check Now"
-                  />
+                  <>
+                    <Header className="my-3">DeGrand history</Header>
+                    <Text className="mb-3">See previous DeGrand Draws</Text>
+                    <Button
+                      className="mt-2 justify-content-center"
+                      onClick={() => handleShowDialog('CheckDeGrandHistory')}
+                      label="Check Now"
+                    />
+                  </>
                 )
               ) : (
                 <ConnectWalletButton />
