@@ -104,7 +104,7 @@ const DeLottoStage1 = () => {
                   postCountDownText={postCountDownText}
                 />
               ) : (
-                <Skeleton width="100%" height="1.5rem" />
+                <Skeleton width="100%" height="2.4rem" />
               )}
             </div>
             <i className="fad fa-clock"></i>
@@ -129,7 +129,7 @@ const DeLottoStage1 = () => {
               ) : (
                 <>
                   <Skeleton width="100%" height="2.4rem" />
-                  <Skeleton width="100%" height="1rem" className="mt-2" />
+                  <Skeleton width="100%" height="1.5rem" className="mt-2" />
                 </>
               )}
             </div>
@@ -155,35 +155,33 @@ const DeLottoStage1 = () => {
               <Header className="pb-2">Your Tickets</Header>
               {status !== LotteryStatus.PENDING &&
               status !== LotteryStatus.BURNED ? (
-                <>
-                  <Text>
-                    You have{' '}
-                    <Text fontSize="22px" className="inline">
-                      {account && userTickets && !userTickets.isLoading
-                        ? userTickets.tickets?.length
-                        : 0}
-                    </Text>{' '}
+                account && userTickets && !userTickets.isLoading ? (
+                  <>
+                    <Text>
+                      You have{' '}
+                      <Text fontSize="22px" className="inline">
+                        {userTickets && !userTickets.isLoading
+                          ? userTickets.tickets?.length
+                          : 0}
+                      </Text>{' '}
+                      {userTickets &&
+                      userTickets.tickets &&
+                      userTickets.tickets?.length > 1
+                        ? 'tickets'
+                        : 'ticket'}{' '}
+                      this round.
+                    </Text>
                     {userTickets &&
-                    userTickets.tickets &&
-                    userTickets.tickets?.length > 1
-                      ? 'tickets'
-                      : 'ticket'}{' '}
-                    this round.
-                  </Text>
-                  {account &&
-                    userTickets &&
-                    !userTickets.isLoading &&
-                    userTickets.tickets &&
-                    userTickets.tickets?.length > 0 && (
-                      <Button
-                        className="p-button-link p-0"
-                        onClick={() => handleShowDialog('ListTicket')}
-                        label="View your tickets"
-                      />
-                    )}
-                  {account &&
-                    status === LotteryStatus.OPEN &&
-                    !isTransitioning && (
+                      !userTickets.isLoading &&
+                      userTickets.tickets &&
+                      userTickets.tickets?.length > 0 && (
+                        <Button
+                          className="p-button-link p-0"
+                          onClick={() => handleShowDialog('ListTicket')}
+                          label="View your tickets"
+                        />
+                      )}
+                    {status === LotteryStatus.OPEN && !isTransitioning && (
                       <Button
                         className="button-link mt-3"
                         onClick={() => handleShowDialog('BuyStandardTicket')}
@@ -191,11 +189,19 @@ const DeLottoStage1 = () => {
                         icon="fal fa-coin"
                       />
                     )}
-                </>
+                  </>
+                ) : (
+                  account && (
+                    <>
+                      <Skeleton width="100%" height="2.4rem" />
+                      <Skeleton width="8rem" height="1.5rem" className="mt-2" />
+                    </>
+                  )
+                )
               ) : (
                 <>
-                  <Skeleton width="100%" height="1.5rem" />
-                  <Skeleton width="8rem" height="1rem" className="mt-2" />
+                  <Skeleton width="100%" height="2.4rem" />
+                  <Skeleton width="8rem" height="1.5rem" className="mt-2" />
                 </>
               )}
             </div>
@@ -208,21 +214,24 @@ const DeLottoStage1 = () => {
             <div className="overview-info pr-4 text-left w-full">
               <Header className="pb-2">Last Winning Numbers</Header>
               {status !== LotteryStatus.PENDING &&
-              status !== LotteryStatus.BURNED ? (
-                previousRound && (
-                  <>
-                    <Text className="mb-2">Round #{previousLotteryId}</Text>
-                    <Text className="mb-4">
-                      Drawn {new Date(prevEndTimeAsInt * 1000).toLocaleString()}
-                    </Text>
-                    <WinningNumbers
-                      number={previousRound.finalNumber}
-                      rounded={true}
-                    />
-                  </>
-                )
+              status !== LotteryStatus.BURNED &&
+              previousRound ? (
+                <>
+                  <Text className="mb-2">Round #{previousLotteryId}</Text>
+                  <Text className="mb-4">
+                    Drawn {new Date(prevEndTimeAsInt * 1000).toLocaleString()}
+                  </Text>
+                  <WinningNumbers
+                    number={previousRound.finalNumber}
+                    rounded={true}
+                  />
+                </>
               ) : (
-                <Skeleton width="100%" height="1.5rem" className="mb-2" />
+                <>
+                  <Skeleton width="100%" height="1.5rem" className="mb-2" />
+                  <Skeleton width="100%" height="1.5rem" className="mb-4" />
+                  <Skeleton width="100%" height="3rem" />
+                </>
               )}
             </div>
             <i className="fad fa-star"></i>

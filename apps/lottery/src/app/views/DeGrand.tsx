@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { endOfMonth } from 'date-fns';
-import styled from 'styled-components';
+import { Hooks } from '@dehub/react/core';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
-
-import { Hooks } from '@dehub/react/core';
-
-import ClaimDeGrandDialog from './components/ClaimDeGrandDialog';
-import DeGrandHistoryDialog from './components/DeGrandHistoryDialog';
-import { EventCountDown } from './components/CountDown';
-import FlexLine from './components/FlexLine';
-import Box from '../components/Layout/Box';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import ConnectWalletButton from '../components/ConnectWalletButton';
+import Icon from '../components/Icon/Icon';
+import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
-import { Title, Header, Text } from '../components/Text';
+import { Header, Text, Title } from '../components/Text';
+import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import { useGetSpecialPaused } from '../states/pause/hooks';
 import {
   useLottery,
   useThisMonthDeGrandPrize,
 } from '../states/special-lottery/hooks';
-import { LoadingStatus, LotteryStatus } from '../config/constants/types';
+import ClaimDeGrandDialog from './components/ClaimDeGrandDialog';
+import { EventCountDown } from './components/CountDown';
+import DeGrandHistoryDialog from './components/DeGrandHistoryDialog';
+import FlexLine from './components/FlexLine';
 import SyncWaiting from './SyncWaiting';
-import Icon from '../components/Icon/Icon';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
@@ -70,62 +67,107 @@ const DeGrand = () => {
 
   return (
     <Container>
-      <h1>DeGrand</h1>
+      <FlexLine className="md:flex-column align-items-start justify-content-between">
+        <img
+          src="../../assets/img/degrand-logo.png"
+          className="anim-float-1"
+          alt="DeGrand Logo"
+          style={{ maxWidth: '300px' }}
+        />
+      </FlexLine>
       {loadingStatus !== LoadingStatus.COMPLETE ? (
         <SyncWaiting loadingStatus={loadingStatus} />
       ) : (
-        <Card className="border-neon-1">
+        <Card
+          className="border-neon-2 overflow-hidden"
+          style={{ marginTop: '-80px' }}
+          header={
+            deGrandPrize.imageUrl && (
+              <img src={deGrandPrize.imageUrl} alt="DeGrand prize this month" />
+            )
+          }
+        >
           <StyledBox>
             {deGrandPrize && deGrandPrize.drawTime > 0 ? (
-              <FlexLine
-                className="md:flex-column align-items-center justify-content-center"
-                style={{ borderBottom: '1px solid' }}
-              >
-                <Header>DeGrand prize this month:</Header>
-                {deGrandPrize.imageUrl && (
-                  <img
-                    src={deGrandPrize.imageUrl}
-                    style={{ width: '100%', height: '100%' }}
-                    alt="DeGrand prize this month"
-                  />
-                )}
-                <FlexLine className="justify-content-between w-full">
-                  <FlexLine className="md:flex-column">
-                    <Header>{`${deGrandPrize.title} | ${deGrandPrize.maxWinnerCount} lucky winners will be announced`}</Header>
-                    {lotteryMonthAsInt === currentMonthAsInt &&
-                    deGrandStatus === LotteryStatus.CLAIMABLE ? (
-                      <Text className="text-pink-400">Draw Completed!</Text>
-                    ) : deGrandPrize &&
-                      deGrandPrize.drawTime > currentSeconds ? (
-                      <EventCountDown
-                        nextEventTime={deGrandPrize.drawTime}
-                        postCountDownText="until the draw"
-                        isVertical={false}
-                        titleFontSize="14px"
-                        timerFontSize="14px"
-                      />
-                    ) : (
-                      <Title fontSize="14px">Waiting...</Title>
-                    )}
-                  </FlexLine>
+              <>
+                <FlexLine
+                  className="md:flex-column align-items-start"
+                  style={{
+                    marginTop: '-65px',
+                  }}
+                >
+                  <Header
+                    className="py-2 px-3 inline-flex border-neon-2"
+                    style={{
+                      borderRadius: '8px',
+                      background:
+                        'linear-gradient(50deg, rgba(89,70,0,1) 0%, rgba(193,160,49,1) 48%, rgba(89,70,0,1) 100%)',
+                    }}
+                  >
+                    <Icon
+                      className="fad fa-gift pr-2"
+                      size="20px"
+                      style={{ paddingTop: '2px' }}
+                    ></Icon>
+                    <span style={{ fontWeight: 900 }}>
+                      {deGrandPrize.maxWinnerCount}
+                    </span>
+                    &nbsp;Lucky Winner
+                    {deGrandPrize.maxWinnerCount > 1 ? `s` : ``}
+                  </Header>
+                </FlexLine>
+
+                <div className="grid mt-4">
+                  <div className="col-12 md:col-8 lg:col-8">
+                    <Header className="mb-2" fontSize="24px">
+                      {deGrandPrize.title}
+                    </Header>
+                    <Header fontSize="14px" className="opacity-60 pb-4">
+                      {deGrandPrize.subtitle}
+                    </Header>
+                    <Text className="pb-2">{deGrandPrize.description}</Text>
+                  </div>
+                  <div className="col-12 md:col-4 lg:col-4 align-self-start">
+                    <div className="card overview-box gray">
+                      <div className="overview-info pr-4 text-left w-full">
+                        {lotteryMonthAsInt === currentMonthAsInt &&
+                        deGrandStatus === LotteryStatus.CLAIMABLE ? (
+                          <Text className="text-pink-400">Draw Completed!</Text>
+                        ) : deGrandPrize &&
+                          deGrandPrize.drawTime > currentSeconds ? (
+                          <>
+                            <Header className="pb-2">Final Draw</Header>
+                            <EventCountDown
+                              nextEventTime={deGrandPrize.drawTime}
+                              postCountDownText="left until the draw"
+                            />
+                          </>
+                        ) : (
+                          <Title fontSize="14px">Waiting...</Title>
+                        )}
+                      </div>
+                      <Icon className="fad fa-clock"></Icon>
+                    </div>
+                  </div>
+                </div>
+
+                {deGrandStatus === LotteryStatus.CLAIMABLE && (
                   <FlexLine className="md:flex-column align-items-center">
                     {account ? (
-                      deGrandStatus === LotteryStatus.CLAIMABLE && (
-                        <>
-                          <Text>Are you a winner?</Text>
-                          <Button
-                            className="mt-2 justify-content-center"
-                            onClick={() => handleShowDialog('CheckDeGrand')}
-                            label="Check Now"
-                          />
-                        </>
-                      )
+                      <>
+                        <Text>Are you a winner?</Text>
+                        <Button
+                          className="mt-2 justify-content-center"
+                          onClick={() => handleShowDialog('CheckDeGrand')}
+                          label="Check Now"
+                        />
+                      </>
                     ) : (
                       <ConnectWalletButton />
                     )}
                   </FlexLine>
-                </FlexLine>
-              </FlexLine>
+                )}
+              </>
             ) : (
               <div className="text-center">
                 <Icon className="fad fa-gift pb-4" size="30px"></Icon>
@@ -138,24 +180,32 @@ const DeGrand = () => {
                 />
               </div>
             )}
-            <FlexLine className="md:flex-column align-items-center justify-content-between">
-              {account ? (
-                deGrandPrize &&
-                deGrandPrize.drawTime > 0 && (
-                  <>
-                    <Header className="my-3">DeGrand history</Header>
-                    <Text className="mb-3">See previous DeGrand Draws</Text>
-                    <Button
-                      className="mt-2 justify-content-center"
-                      onClick={() => handleShowDialog('CheckDeGrandHistory')}
-                      label="Check Now"
-                    />
-                  </>
-                )
-              ) : (
-                <ConnectWalletButton />
-              )}
-            </FlexLine>
+
+            <div className="grid mt-4">
+              <div className="col-12 md:col-6 lg:colo-6">
+                <div className="card overview-box gray">
+                  <div className="overview-info pr-4 text-left w-full">
+                    <Header className="pb-2">History</Header>
+                    <Text className="mb-3">Check previous DeGrand Draws.</Text>
+                    {account ? (
+                      deGrandPrize &&
+                      deGrandPrize.drawTime > 0 && (
+                        <Button
+                          className="mt-2 justify-content-center"
+                          onClick={() =>
+                            handleShowDialog('CheckDeGrandHistory')
+                          }
+                          label="Check Now"
+                        />
+                      )
+                    ) : (
+                      <ConnectWalletButton />
+                    )}
+                  </div>
+                  <Icon className="fad fa-history"></Icon>
+                </div>
+              </div>
+            </div>
           </StyledBox>
         </Card>
       )}

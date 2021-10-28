@@ -50,7 +50,7 @@ const PrizePot = ({ pot, status }: PrizePotProps) => {
   ) : (
     <>
       <Skeleton width="100%" height="2.4rem" />
-      <Skeleton width="100%" height="1rem" className="mt-2" />
+      <Skeleton width="100%" height="1.5rem" className="mt-2" />
     </>
   );
 };

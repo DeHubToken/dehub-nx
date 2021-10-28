@@ -27,6 +27,7 @@ import {
 } from '../states/special-lottery/hooks';
 import { environment } from '../../environments/environment';
 import { usePullBusdPrice } from '../states/application/hooks';
+import FlexLine from './components/FlexLine';
 
 const StyledContainer = styled(Container)`
   .p-tabview .p-tabview-nav li {
@@ -72,19 +73,28 @@ const DeLotto = () => {
   const specialPaused = useGetSpecialPaused();
   const now = new Date();
 
-  const isActiveStage1 = standardEndTimeAsInt >= specialEndTimeAsInt;
+  /**
+   * If standardEndTimeAsInt is equal to specialEndTimeAsInt,
+   * means that waiting to start first round
+   */
+  const isActiveStage1 = standardEndTimeAsInt > specialEndTimeAsInt;
   const isActiveStage2 = standardEndTimeAsInt < specialEndTimeAsInt;
+  /**
+   * If both first stage and second stage are not active,
+   * it will compare if current date is at the time of second stage and
+   * show active tab.
+   */
   const activeIndex =
     !isActiveStage1 && isActiveStage2
       ? 1
       : isActiveStage1 && !isActiveStage2
       ? 0
-      : now.getUTCDay() >= // If waiting to start our first round
+      : now.getUTCDate() >= // If waiting to start our first round
         (now.getUTCMonth() === 1
           ? environment.deGrandStartDayOnFebruary
           : environment.deGrandStartDay)
-      ? 0
-      : 1;
+      ? 1
+      : 0;
 
   const isSyncStage1 = standardLotteryId && !isNaN(standardEndTimeAsInt);
   const isSyncStage2 = specialLotteryId && !isNaN(specialEndTimeAsInt);
@@ -103,7 +113,14 @@ const DeLotto = () => {
 
   return (
     <StyledContainer>
-      <h1>DeRaffles</h1>
+      <FlexLine className="md:flex-column align-items-start justify-content-between">
+        <img
+          src="../../assets/img/deraffles-logo.png"
+          className="anim-float-4"
+          alt="DeRaffles Logo"
+          style={{ maxWidth: '200px' }}
+        />
+      </FlexLine>
       {loadingStatus !== LoadingStatus.COMPLETE ? (
         <SyncWaiting loadingStatus={loadingStatus} />
       ) : (
