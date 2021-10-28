@@ -1,26 +1,23 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import BigNumber from 'bignumber.js';
-import { useSelector } from 'react-redux';
-
 import { Hooks } from '@dehub/react/core';
-
-import useRefresh from '../../hooks/useRefresh';
-
+import BigNumber from 'bignumber.js';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   fetchCurrentLottery,
   fetchCurrentLotteryId,
   fetchLotteryBundles,
-  fetchUserTicketsAndLotteries,
   fetchUserData,
+  fetchUserTicketsAndLotteries,
 } from '.';
+import { useAppDispatch } from '..';
+import useRefresh from '../../hooks/useRefresh';
+import { State } from '../types';
 import {
   fetchLottery,
-  useProcessLotteryResponse,
   processLotteryResponse,
+  useProcessLotteryResponse,
 } from './helpers';
 import { LotteryBundleRule, LotteryRound, LotteryUserData } from './types';
-import { useAppDispatch } from '..';
-import { State } from '../types';
 
 export const useGetCurrentLotteryId = (): string => {
   return useSelector((state: State) => state.standardLottery.currentLotteryId);

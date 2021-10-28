@@ -151,7 +151,7 @@ const DeGrand = () => {
                   </div>
                 </div>
 
-                {deGrandStatus === LotteryStatus.CLAIMABLE ? (
+                {deGrandStatus === LotteryStatus.CLAIMABLE && (
                   <FlexLine className="md:flex-column align-items-center">
                     {account ? (
                       <>
@@ -166,8 +166,6 @@ const DeGrand = () => {
                       <ConnectWalletButton />
                     )}
                   </FlexLine>
-                ) : (
-                  <></>
                 )}
               </>
             ) : (
