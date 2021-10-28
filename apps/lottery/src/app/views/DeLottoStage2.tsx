@@ -93,7 +93,7 @@ const DeLottoStage2 = () => {
                   postCountDownText={postCountDownText}
                 />
               ) : (
-                <Skeleton width="100%" height="1.5rem" />
+                <Skeleton width="100%" height="2.4rem" />
               )}
             </div>
             <i className="fad fa-clock"></i>
@@ -117,7 +117,7 @@ const DeLottoStage2 = () => {
               ) : (
                 <>
                   <Skeleton width="100%" height="2.4rem" />
-                  <Skeleton width="100%" height="1rem" className="mt-2" />
+                  <Skeleton width="100%" height="1.5rem" className="mt-2" />
                 </>
               )}
             </div>
@@ -142,42 +142,47 @@ const DeLottoStage2 = () => {
             <div className="overview-info pr-4 text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
               {deLottoStatus !== LotteryStatus.PENDING ? (
-                <>
-                  <Text>
-                    You have{' '}
-                    <span className="font-bold">
-                      {account && userTickets && !userTickets.isLoading
-                        ? userTickets.tickets?.length
-                        : 0}
-                    </span>{' '}
-                    tickets this round.
-                  </Text>
-                  {account &&
-                    userTickets &&
-                    !userTickets.isLoading &&
-                    userTickets.tickets &&
-                    userTickets.tickets?.length > 0 && (
-                      <Button
-                        className="p-button-link p-0"
-                        onClick={() => handleShowDialog('ListTicket')}
-                        label="View your tickets"
-                      />
-                    )}
-                  {account &&
-                    deLottoStatus === LotteryStatus.OPEN &&
-                    !isTransitioning && (
-                      <Button
-                        className="button-link mt-3"
-                        onClick={() => handleShowDialog('BuySpecialTicket')}
-                        label="Buy Tickets"
-                        icon="fal fa-coin"
-                      />
-                    )}
-                </>
+                account ? (
+                  <>
+                    <Text>
+                      You have{' '}
+                      <span className="font-bold">
+                        {userTickets && !userTickets.isLoading
+                          ? userTickets.tickets?.length
+                          : 0}
+                      </span>{' '}
+                      tickets this round.
+                    </Text>
+                    {userTickets &&
+                      !userTickets.isLoading &&
+                      userTickets.tickets &&
+                      userTickets.tickets?.length > 0 && (
+                        <Button
+                          className="p-button-link p-0"
+                          onClick={() => handleShowDialog('ListTicket')}
+                          label="View your tickets"
+                        />
+                      )}
+                    {deLottoStatus === LotteryStatus.OPEN &&
+                      !isTransitioning && (
+                        <Button
+                          className="button-link mt-3"
+                          onClick={() => handleShowDialog('BuySpecialTicket')}
+                          label="Buy Tickets"
+                          icon="fal fa-coin"
+                        />
+                      )}
+                  </>
+                ) : (
+                  <>
+                    <Skeleton width="100%" height="2.4rem" />
+                    <Skeleton width="8rem" height="1.5rem" className="mt-2" />
+                  </>
+                )
               ) : (
                 <>
-                  <Skeleton width="100%" height="1.5rem" />
-                  <Skeleton width="8rem" height="1rem" className="mt-2" />
+                  <Skeleton width="100%" height="2.4rem" />
+                  <Skeleton width="8rem" height="1.5rem" className="mt-2" />
                 </>
               )}
             </div>
