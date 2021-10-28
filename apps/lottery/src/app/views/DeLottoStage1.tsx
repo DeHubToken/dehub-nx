@@ -93,7 +93,7 @@ const DeLottoStage1 = () => {
       <div className="grid">
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full">
+            <div className="overview-info text-left w-full">
               <Header className="pb-2">{'Round #' + currentLotteryId}</Header>
               {status !== LotteryStatus.PENDING &&
               status !== LotteryStatus.BURNED &&
@@ -113,7 +113,7 @@ const DeLottoStage1 = () => {
 
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full">
+            <div className="overview-info text-left w-full">
               <Header className="pb-2">Next Draw</Header>
               {status !== LotteryStatus.PENDING &&
               status !== LotteryStatus.BURNED &&
@@ -139,7 +139,7 @@ const DeLottoStage1 = () => {
 
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full">
+            <div className="overview-info text-left w-full">
               <Header className="pb-2">Prize Pot</Header>
               <PrizePot pot={prize} status={status} />
             </div>
@@ -151,7 +151,7 @@ const DeLottoStage1 = () => {
       <div className="grid mt-1 mb-4">
         <div className="col-12 md:col-5 lg:col-5">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full flex flex-column align-items-start">
+            <div className="overview-info text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
               {status !== LotteryStatus.PENDING &&
               status !== LotteryStatus.BURNED ? (
@@ -211,7 +211,7 @@ const DeLottoStage1 = () => {
 
         <div className="col-12 md:col-7 lg:col-7">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full">
+            <div className="overview-info text-left w-full">
               <Header className="pb-2">Last Winning Numbers</Header>
               {status !== LotteryStatus.PENDING &&
               status !== LotteryStatus.BURNED &&
