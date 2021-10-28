@@ -155,7 +155,7 @@ const DeLottoStage1 = () => {
               <Header className="pb-2">Your Tickets</Header>
               {status !== LotteryStatus.PENDING &&
               status !== LotteryStatus.BURNED ? (
-                account ? (
+                account && userTickets && !userTickets.isLoading ? (
                   <>
                     <Text>
                       You have{' '}
@@ -191,10 +191,12 @@ const DeLottoStage1 = () => {
                     )}
                   </>
                 ) : (
-                  <>
-                    <Skeleton width="100%" height="2.4rem" />
-                    <Skeleton width="8rem" height="1.5rem" className="mt-2" />
-                  </>
+                  account && (
+                    <>
+                      <Skeleton width="100%" height="2.4rem" />
+                      <Skeleton width="8rem" height="1.5rem" className="mt-2" />
+                    </>
+                  )
                 )
               ) : (
                 <>
