@@ -86,7 +86,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
           dispatch(
             fetchUserData({
               account: account ?? '',
-              currentLotteryId: currentLotteryId ?? '',
+              currentLotteryId: lotteryId ?? '',
             })
           );
           toast?.current?.show({

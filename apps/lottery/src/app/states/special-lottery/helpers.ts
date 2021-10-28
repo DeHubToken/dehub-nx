@@ -311,6 +311,7 @@ export const fetchUserDeLottoWinningRewards = async (
       allWinningTickets,
       dehubTotal: rewardTotal,
       roundId: lotteryId,
+      status: LotteryStatus.CLAIMABLE,
     };
   } catch (error) {
     console.error('fetchUserDeLottoWinningRewards', error);

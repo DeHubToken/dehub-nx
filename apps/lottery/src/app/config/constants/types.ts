@@ -28,10 +28,11 @@ export interface LotteryTicket {
   claimed?: boolean;
   rewardBracket?: number;
   roundId?: string;
-  dehubReward?: string;
+  dehubReward?: string; // as type of SerializedBigNumber
 }
 
 export interface LotteryTicketClaimData {
+  status: LotteryStatus;
   ticketsWithUnclaimedRewards: LotteryTicket[];
   allWinningTickets: LotteryTicket[];
   dehubTotal: BigNumber;

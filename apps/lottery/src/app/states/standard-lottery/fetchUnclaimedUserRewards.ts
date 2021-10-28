@@ -50,9 +50,12 @@ const fetchDehubRewardsForTickets = async (
       BIG_ZERO
     );
 
-    const ticketsWithUnclaimedRewards = winningTickets.map(
+    const ticketsWithUnclaimedRewards: LotteryTicket[] = winningTickets.map(
       (winningTicket, index) => {
-        return { ...winningTicket, dehubReward: dehubRewards[index] };
+        return {
+          ...winningTicket,
+          dehubReward: ethersToSerializedBigNumber(dehubRewards[index]), // Serialize BigNumber so as to save in redux
+        };
       }
     );
 
@@ -141,6 +144,7 @@ const getWinningTickets = async (
         allWinningTickets: [],
         dehubTotal,
         roundId,
+        status: LotteryStatus.CLAIMABLE,
       };
     }
     return {
@@ -148,6 +152,7 @@ const getWinningTickets = async (
       allWinningTickets,
       dehubTotal,
       roundId,
+      status: LotteryStatus.CLAIMABLE,
     };
   }
 
@@ -156,6 +161,7 @@ const getWinningTickets = async (
     allWinningTickets,
     dehubTotal: BIG_ZERO,
     roundId,
+    status: LotteryStatus.CLAIMABLE,
   };
 };
 
@@ -230,7 +236,8 @@ export const fetchUnclaimedUserRewards = async (
       const prevRoundId = parseInt(round.roundId, 10);
       return (
         prevRoundId === roundId - idx &&
-        round.status === LotteryStatus.CLAIMABLE
+        (round.status === LotteryStatus.CLAIMABLE ||
+          round.status === LotteryStatus.BURNED)
       );
     });
     if (found) {
@@ -250,6 +257,11 @@ export const fetchUnclaimedUserRewards = async (
     );
   });
 
+  /**
+   * statusAndFinalNumbers and claimableRounds should have the same length
+   * if it didn't have maintenance period.
+   */
+
   const roundsWaitingToClaim = claimableRounds.map(
     (item: LotteryStatusAndFinalNumber): LotteryTicketClaimData => {
       return {
@@ -257,6 +269,7 @@ export const fetchUnclaimedUserRewards = async (
         allWinningTickets: [],
         dehubTotal: BIG_ZERO,
         roundId: item.roundId,
+        status: item.status,
       };
     }
   );
@@ -265,8 +278,21 @@ export const fetchUnclaimedUserRewards = async (
     return roundsWaitingToClaim;
   }
 
-  // Fetch all the user tickets per claimable rounds
-  const idsToCheck = claimableRounds.map(item => item.roundId);
+  /**
+   * The whole DeLotto stage per month starts from the next of burned round
+   * in the previous month to the last round this month to be burned.
+   * Maximum times of round is 100, however all the rounds to be checked are
+   * from the next of burned round in the previous month
+   */
+  // Round id is sorted in decending order in claimableRounds
+  const burnedIndex = claimableRounds.findIndex(
+    (item: LotteryStatusAndFinalNumber) => item.status === LotteryStatus.BURNED
+  );
+
+  // Fetch all the user tickets per claimable rounds(played after burned round)
+  const idsToCheck = claimableRounds
+    .filter((item, index) => burnedIndex < 0 || index < burnedIndex)
+    .map(item => item.roundId);
   const userTicketData = await fetchUserTicketsPerMultipleRounds(
     account,
     idsToCheck

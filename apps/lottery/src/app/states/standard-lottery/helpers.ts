@@ -320,7 +320,7 @@ export const processLotteryUserClaimData = (
       return {
         status: LotteryStatus.CLAIMABLE,
         roundId: claimItem.roundId,
-        dehubTotal: total.toJSON(),
+        dehubTotal: claimItem.dehubTotal.toJSON(),
         ticketsWithUnclaimedRewards: claimItem.ticketsWithUnclaimedRewards,
         allWinningTickets: claimItem.allWinningTickets,
       };
