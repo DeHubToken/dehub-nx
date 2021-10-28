@@ -74,58 +74,94 @@ const DeGrand = () => {
       {loadingStatus !== LoadingStatus.COMPLETE ? (
         <SyncWaiting loadingStatus={loadingStatus} />
       ) : (
-        <Card className="border-neon-1">
+        <Card
+          className="border-neon-2 overflow-hidden"
+          header={
+            deGrandPrize.imageUrl && (
+              <img src={deGrandPrize.imageUrl} alt="DeGrand prize this month" />
+            )
+          }
+        >
           <StyledBox>
             {deGrandPrize && deGrandPrize.drawTime > 0 ? (
-              <FlexLine
-                className="md:flex-column align-items-center justify-content-center"
-                style={{ borderBottom: '1px solid' }}
-              >
-                <Header>DeGrand prize this month:</Header>
-                {deGrandPrize.imageUrl && (
-                  <img
-                    src={deGrandPrize.imageUrl}
-                    style={{ width: '100%', height: '100%' }}
-                    alt="DeGrand prize this month"
-                  />
-                )}
-                <FlexLine className="justify-content-between w-full">
-                  <FlexLine className="md:flex-column">
-                    <Header>{`${deGrandPrize.title} | ${deGrandPrize.maxWinnerCount} lucky winners will be announced`}</Header>
-                    {lotteryMonthAsInt === currentMonthAsInt &&
-                    deGrandStatus === LotteryStatus.CLAIMABLE ? (
-                      <Text className="text-pink-400">Draw Completed!</Text>
-                    ) : deGrandPrize &&
-                      deGrandPrize.drawTime > currentSeconds ? (
-                      <EventCountDown
-                        nextEventTime={deGrandPrize.drawTime}
-                        postCountDownText="until the draw"
-                        isVertical={false}
-                        titleFontSize="14px"
-                        timerFontSize="14px"
-                      />
-                    ) : (
-                      <Title fontSize="14px">Waiting...</Title>
-                    )}
-                  </FlexLine>
-                  <FlexLine className="md:flex-column align-items-center">
-                    {account ? (
-                      deGrandStatus === LotteryStatus.CLAIMABLE && (
-                        <>
-                          <Text>Are you a winner?</Text>
-                          <Button
-                            className="mt-2 justify-content-center"
-                            onClick={() => handleShowDialog('CheckDeGrand')}
-                            label="Check Now"
-                          />
-                        </>
-                      )
-                    ) : (
-                      <ConnectWalletButton />
-                    )}
-                  </FlexLine>
+              <>
+                <FlexLine
+                  className="md:flex-column align-items-start"
+                  style={{
+                    marginTop: '-65px',
+                  }}
+                >
+                  <Header
+                    className="py-2 px-3 inline-flex border-neon-2"
+                    style={{
+                      borderRadius: '8px',
+                      background:
+                        'linear-gradient(50deg, rgba(89,70,0,1) 0%, rgba(193,160,49,1) 48%, rgba(89,70,0,1) 100%)',
+                    }}
+                  >
+                    <Icon
+                      className="fad fa-gift pr-2"
+                      size="20px"
+                      style={{ paddingTop: '2px' }}
+                    ></Icon>
+                    <span
+                      style={{ fontWeight: 900 }}
+                    >{`${deGrandPrize.maxWinnerCount} `}</span>
+                    &nbsp;Prizes This Month
+                  </Header>
                 </FlexLine>
-              </FlexLine>
+
+                <div className="grid mt-4">
+                  <div className="col-12 md:col-8 lg:col-8">
+                    <Header className="mb-2" fontSize="24px">
+                      {deGrandPrize.title}
+                    </Header>
+                    <Header fontSize="14px" className="opacity-60 pb-4">
+                      {deGrandPrize.subtitle}
+                    </Header>
+                    <Text className="pb-2">{deGrandPrize.description}</Text>
+                  </div>
+                  <div className="col-12 md:col-4 lg:col-4">
+                    <div className="card overview-box gray">
+                      <div className="overview-info pr-4 text-left w-full">
+                        {lotteryMonthAsInt === currentMonthAsInt &&
+                        deGrandStatus === LotteryStatus.CLAIMABLE ? (
+                          <Text className="text-pink-400">Draw Completed!</Text>
+                        ) : deGrandPrize &&
+                          deGrandPrize.drawTime > currentSeconds ? (
+                          <>
+                            <Header className="pb-2">Countdown</Header>
+                            <EventCountDown
+                              nextEventTime={deGrandPrize.drawTime}
+                              postCountDownText="left until the draw"
+                            />
+                          </>
+                        ) : (
+                          <Title fontSize="14px">Waiting...</Title>
+                        )}
+                      </div>
+                      <i className="fad fa-clock"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <FlexLine className="md:flex-column align-items-center">
+                  {account ? (
+                    deGrandStatus === LotteryStatus.CLAIMABLE && (
+                      <>
+                        <Text>Are you a winner?</Text>
+                        <Button
+                          className="mt-2 justify-content-center"
+                          onClick={() => handleShowDialog('CheckDeGrand')}
+                          label="Check Now"
+                        />
+                      </>
+                    )
+                  ) : (
+                    <ConnectWalletButton />
+                  )}
+                </FlexLine>
+              </>
             ) : (
               <div className="text-center">
                 <Icon className="fad fa-gift pb-4" size="30px"></Icon>
