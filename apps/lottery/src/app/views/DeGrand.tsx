@@ -104,10 +104,11 @@ const DeGrand = () => {
                       size="20px"
                       style={{ paddingTop: '2px' }}
                     ></Icon>
-                    <span
-                      style={{ fontWeight: 900 }}
-                    >{`${deGrandPrize.maxWinnerCount} `}</span>
-                    &nbsp;Prizes This Month
+                    <span style={{ fontWeight: 900 }}>
+                      {deGrandPrize.maxWinnerCount}
+                    </span>
+                    &nbsp;Lucky Winner
+                    {deGrandPrize.maxWinnerCount > 1 ? `s` : ``}
                   </Header>
                 </FlexLine>
 
@@ -121,7 +122,7 @@ const DeGrand = () => {
                     </Header>
                     <Text className="pb-2">{deGrandPrize.description}</Text>
                   </div>
-                  <div className="col-12 md:col-4 lg:col-4">
+                  <div className="col-12 md:col-4 lg:col-4 align-self-start">
                     <div className="card overview-box gray">
                       <div className="overview-info pr-4 text-left w-full">
                         {lotteryMonthAsInt === currentMonthAsInt &&
@@ -130,7 +131,7 @@ const DeGrand = () => {
                         ) : deGrandPrize &&
                           deGrandPrize.drawTime > currentSeconds ? (
                           <>
-                            <Header className="pb-2">Countdown</Header>
+                            <Header className="pb-2">Draw</Header>
                             <EventCountDown
                               nextEventTime={deGrandPrize.drawTime}
                               postCountDownText="left until the draw"
@@ -140,14 +141,14 @@ const DeGrand = () => {
                           <Title fontSize="14px">Waiting...</Title>
                         )}
                       </div>
-                      <i className="fad fa-clock"></i>
+                      <Icon className="fad fa-clock"></Icon>
                     </div>
                   </div>
                 </div>
 
-                <FlexLine className="md:flex-column align-items-center">
-                  {account ? (
-                    deGrandStatus === LotteryStatus.CLAIMABLE && (
+                {deGrandStatus === LotteryStatus.CLAIMABLE ? (
+                  <FlexLine className="md:flex-column align-items-center">
+                    {account ? (
                       <>
                         <Text>Are you a winner?</Text>
                         <Button
@@ -156,11 +157,13 @@ const DeGrand = () => {
                           label="Check Now"
                         />
                       </>
-                    )
-                  ) : (
-                    <ConnectWalletButton />
-                  )}
-                </FlexLine>
+                    ) : (
+                      <ConnectWalletButton />
+                    )}
+                  </FlexLine>
+                ) : (
+                  <></>
+                )}
               </>
             ) : (
               <div className="text-center">
@@ -174,24 +177,32 @@ const DeGrand = () => {
                 />
               </div>
             )}
-            <FlexLine className="md:flex-column align-items-center justify-content-between">
-              {account ? (
-                deGrandPrize &&
-                deGrandPrize.drawTime > 0 && (
-                  <>
-                    <Header className="my-3">DeGrand history</Header>
-                    <Text className="mb-3">See previous DeGrand Draws</Text>
-                    <Button
-                      className="mt-2 justify-content-center"
-                      onClick={() => handleShowDialog('CheckDeGrandHistory')}
-                      label="Check Now"
-                    />
-                  </>
-                )
-              ) : (
-                <ConnectWalletButton />
-              )}
-            </FlexLine>
+
+            <div className="grid mt-4">
+              <div className="col-12 md:col-6 lg:colo-6">
+                <div className="card overview-box gray">
+                  <div className="overview-info pr-4 text-left w-full">
+                    <Header className="pb-2">History</Header>
+                    <Text className="mb-3">Check previous DeGrand Draws.</Text>
+                    {account ? (
+                      deGrandPrize &&
+                      deGrandPrize.drawTime > 0 && (
+                        <Button
+                          className="mt-2 justify-content-center"
+                          onClick={() =>
+                            handleShowDialog('CheckDeGrandHistory')
+                          }
+                          label="Check Now"
+                        />
+                      )
+                    ) : (
+                      <ConnectWalletButton />
+                    )}
+                  </div>
+                  <Icon className="fad fa-history"></Icon>
+                </div>
+              </div>
+            </div>
           </StyledBox>
         </Card>
       )}
