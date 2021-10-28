@@ -58,7 +58,7 @@ const WinningNumbers = ({
                 label={`${num}`}
                 size="large"
                 shape="circle"
-                className="shadow-3"
+                className="border-neon-1"
                 style={{
                   background:
                     'linear-gradient(128deg, rgba(31, 122, 153, 0.5) 0%, rgba(25, 120, 173, 0.5) 45%, rgba(162, 75, 180, 0.5) 100%)',
