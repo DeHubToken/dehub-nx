@@ -73,19 +73,28 @@ const DeLotto = () => {
   const specialPaused = useGetSpecialPaused();
   const now = new Date();
 
-  const isActiveStage1 = standardEndTimeAsInt >= specialEndTimeAsInt;
+  /**
+   * If standardEndTimeAsInt is equal to specialEndTimeAsInt,
+   * means that waiting to start first round
+   */
+  const isActiveStage1 = standardEndTimeAsInt > specialEndTimeAsInt;
   const isActiveStage2 = standardEndTimeAsInt < specialEndTimeAsInt;
+  /**
+   * If both first stage and second stage are not active,
+   * it will compare if current date is at the time of second stage and
+   * show active tab.
+   */
   const activeIndex =
     !isActiveStage1 && isActiveStage2
       ? 1
       : isActiveStage1 && !isActiveStage2
       ? 0
-      : now.getUTCDay() >= // If waiting to start our first round
+      : now.getUTCDate() >= // If waiting to start our first round
         (now.getUTCMonth() === 1
           ? environment.deGrandStartDayOnFebruary
           : environment.deGrandStartDay)
-      ? 0
-      : 1;
+      ? 1
+      : 0;
 
   const isSyncStage1 = standardLotteryId && !isNaN(standardEndTimeAsInt);
   const isSyncStage2 = specialLotteryId && !isNaN(specialEndTimeAsInt);
