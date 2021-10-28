@@ -190,6 +190,15 @@ export const LotterySlice = createSlice({
     setLotteryPublicData: (state, action) => {
       state = action.payload;
     },
+    clearUserData: state => {
+      state.currentRound.userTickets = {};
+      state.userLotteryData = {
+        isLoading: true,
+        account: '',
+        dehubTotal: '',
+        rounds: [],
+      };
+    },
   },
   extraReducers: builder => {
     builder.addCase(
@@ -241,6 +250,6 @@ export const LotterySlice = createSlice({
   },
 });
 
-export const { setLotteryPublicData } = LotterySlice.actions;
+export const { setLotteryPublicData, clearUserData } = LotterySlice.actions;
 
 export default LotterySlice.reducer;
