@@ -92,7 +92,7 @@ const DeGrand = () => {
                   }}
                 >
                   <Header
-                    className="py-2 px-3 inline-flex border-neon-2"
+                    className="py-2 px-3 inline-flex border-neon-2 anim-float-4"
                     style={{
                       borderRadius: '8px',
                       background:
