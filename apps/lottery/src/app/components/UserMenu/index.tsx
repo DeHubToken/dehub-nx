@@ -1,10 +1,19 @@
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
+
 import { Hooks } from '@dehub/react/core';
 import { shortenAddress } from '@dehub/shared/utils';
+
 import ConnectWalletButton from '../ConnectWalletButton';
+import { useAppDispatch } from '../../states';
+
+import { clearUserData as clearUserSpecialData } from '../../states/special-lottery';
+import { clearUserData as clearUserStandardData } from '../../states/standard-lottery';
+
 const UserMenu = () => {
+  const dispatch = useAppDispatch();
   const { account, isAuthenticated, logout } = Hooks.useMoralisEthers();
+
   const handleLogout = ({
     originalEvent,
     item,
@@ -13,6 +22,8 @@ const UserMenu = () => {
     item: MenuItem;
   }) => {
     logout();
+    dispatch(clearUserSpecialData());
+    dispatch(clearUserStandardData());
   };
   const items: MenuItem[] = [
     {
