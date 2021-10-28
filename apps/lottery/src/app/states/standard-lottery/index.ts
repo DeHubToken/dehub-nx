@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
 
+import { BIG_ZERO } from '@dehub/shared/utils';
+
 import {
   fetchCurrentLotteryIdAndMaxBuy,
   fetchLottery,
@@ -52,7 +54,7 @@ const initialState: LotteryState = {
   userLotteryData: {
     isLoading: true,
     account: '',
-    dehubTotal: '',
+    dehubTotal: BIG_ZERO.toJSON(),
     rounds: [],
   },
 };
@@ -142,10 +144,7 @@ export const fetchUserData = createAsyncThunk<
      * Accumulate unclaimed rewards
      * If additionalUserData has claimed user data, its dehubTotal must have negative value
      */
-    const newDeHubTotal = new BigNumber(dehubTotal)
-      .plus(new BigNumber(additionalUserData.dehubTotal))
-      .toJSON();
-
+    let newDeHubTotal = new BigNumber(dehubTotal);
     const newRounds = [...rounds];
     // Replace round information
     additionalUserData.rounds.forEach((additionalRound: LotteryUserRound) => {
@@ -153,8 +152,14 @@ export const fetchUserData = createAsyncThunk<
         (round: LotteryUserRound) => round.roundId === additionalRound.roundId
       );
       if (index >= 0) {
+        newDeHubTotal = newDeHubTotal
+          .minus(new BigNumber(newRounds[index].dehubTotal))
+          .plus(new BigNumber(additionalRound.dehubTotal));
         newRounds.splice(index, 1, additionalRound);
       } else {
+        newDeHubTotal = newDeHubTotal.plus(
+          new BigNumber(additionalRound.dehubTotal)
+        );
         newRounds.push(additionalRound);
       }
     });
@@ -162,7 +167,7 @@ export const fetchUserData = createAsyncThunk<
     return {
       userData: {
         account,
-        dehubTotal: newDeHubTotal,
+        dehubTotal: newDeHubTotal.toJSON(),
         rounds: newRounds,
       },
     };
