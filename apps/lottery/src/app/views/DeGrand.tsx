@@ -70,12 +70,20 @@ const DeGrand = () => {
 
   return (
     <Container>
-      <h1>DeGrand</h1>
+      <FlexLine className="md:flex-column align-items-start justify-content-between">
+        <img
+          src="../../assets/img/degrand-logo.png"
+          className="anim-float-1"
+          alt="DeGrand Logo"
+          style={{ maxWidth: '300px' }}
+        />
+      </FlexLine>
       {loadingStatus !== LoadingStatus.COMPLETE ? (
         <SyncWaiting loadingStatus={loadingStatus} />
       ) : (
         <Card
           className="border-neon-2 overflow-hidden"
+          style={{ marginTop: '-80px' }}
           header={
             deGrandPrize.imageUrl && (
               <img src={deGrandPrize.imageUrl} alt="DeGrand prize this month" />
@@ -92,7 +100,7 @@ const DeGrand = () => {
                   }}
                 >
                   <Header
-                    className="py-2 px-3 inline-flex border-neon-2 anim-float-4"
+                    className="py-2 px-3 inline-flex border-neon-2"
                     style={{
                       borderRadius: '8px',
                       background:

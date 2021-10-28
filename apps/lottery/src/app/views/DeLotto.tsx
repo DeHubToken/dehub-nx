@@ -27,6 +27,7 @@ import {
 } from '../states/special-lottery/hooks';
 import { environment } from '../../environments/environment';
 import { usePullBusdPrice } from '../states/application/hooks';
+import FlexLine from './components/FlexLine';
 
 const StyledContainer = styled(Container)`
   .p-tabview .p-tabview-nav li {
@@ -103,7 +104,14 @@ const DeLotto = () => {
 
   return (
     <StyledContainer>
-      <h1>DeRaffles</h1>
+      <FlexLine className="md:flex-column align-items-start justify-content-between">
+        <img
+          src="../../assets/img/deraffles-logo.png"
+          className="anim-float-4"
+          alt="DeRaffles Logo"
+          style={{ maxWidth: '200px' }}
+        />
+      </FlexLine>
       {loadingStatus !== LoadingStatus.COMPLETE ? (
         <SyncWaiting loadingStatus={loadingStatus} />
       ) : (
