@@ -22,24 +22,16 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
       onHide={onDismiss}
     >
       <div className="flex flex-column">
-        {!isMobile ? (
-          <div className="flex flex-column mt-2 mb-3">
-            <Button
-              className="p-shadow-4"
-              onClick={() => doConnect('metamask')}
-            >
-              <img
-                style={{ height: '16px', paddingRight: '10px' }}
-                src="assets/dehub/icons/metamask.svg"
-                alt=""
-              />
-              Metamask
-            </Button>
-          </div>
-        ) : (
-          // eslint-disable-next-line react/jsx-no-useless-fragment
-          <>&nbsp;</>
-        )}
+        <div className="flex flex-column mt-2 mb-3">
+          <Button className="p-shadow-4" onClick={() => doConnect('metamask')}>
+            <img
+              style={{ height: '16px', paddingRight: '10px' }}
+              src="assets/dehub/icons/metamask.svg"
+              alt=""
+            />
+            Metamask
+          </Button>
+        </div>
         <div className="flex flex-column mt-2 mb-3">
           <Button
             className="p-shadow-4"
