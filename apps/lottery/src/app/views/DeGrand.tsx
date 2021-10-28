@@ -139,7 +139,7 @@ const DeGrand = () => {
                         ) : deGrandPrize &&
                           deGrandPrize.drawTime > currentSeconds ? (
                           <>
-                            <Header className="pb-2">Draw</Header>
+                            <Header className="pb-2">Final Draw</Header>
                             <EventCountDown
                               nextEventTime={deGrandPrize.drawTime}
                               postCountDownText="left until the draw"
