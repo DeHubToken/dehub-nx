@@ -143,7 +143,9 @@ const DeGrandHistoryDialog = ({ open, onHide }: DeGrandHistoryDialogProps) => {
             })
           ) : (
             <Text className="font-bold text-center">
-              You didn't participate DeGrand stage... Better luck next time!
+              You haven't participated in any previous DeGrand draws.
+              <br /> <br />
+              Make sure to get a ticket for the next one!
             </Text>
           )}
 
