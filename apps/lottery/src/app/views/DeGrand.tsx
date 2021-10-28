@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { endOfMonth } from 'date-fns';
-import styled from 'styled-components';
+import { Hooks } from '@dehub/react/core';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
-
-import { Hooks } from '@dehub/react/core';
-
-import ClaimDeGrandDialog from './components/ClaimDeGrandDialog';
-import DeGrandHistoryDialog from './components/DeGrandHistoryDialog';
-import { EventCountDown } from './components/CountDown';
-import FlexLine from './components/FlexLine';
-import Box from '../components/Layout/Box';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import ConnectWalletButton from '../components/ConnectWalletButton';
+import Icon from '../components/Icon/Icon';
+import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
-import { Title, Header, Text } from '../components/Text';
+import { Header, Text, Title } from '../components/Text';
+import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import { useGetSpecialPaused } from '../states/pause/hooks';
 import {
   useLottery,
   useThisMonthDeGrandPrize,
 } from '../states/special-lottery/hooks';
-import { LoadingStatus, LotteryStatus } from '../config/constants/types';
+import ClaimDeGrandDialog from './components/ClaimDeGrandDialog';
+import { EventCountDown } from './components/CountDown';
+import DeGrandHistoryDialog from './components/DeGrandHistoryDialog';
+import FlexLine from './components/FlexLine';
 import SyncWaiting from './SyncWaiting';
-import Icon from '../components/Icon/Icon';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
