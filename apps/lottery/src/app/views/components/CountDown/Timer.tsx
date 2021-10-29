@@ -19,7 +19,12 @@ interface TimerProps extends React.HTMLAttributes<HTMLDivElement> {
 const Timer = ({ seconds, minutes, hours, days, ...props }: TimerProps) => {
   return (
     <StyledWrapper {...props}>
-      {Boolean(days) && <div {...props}>{days}d&nbsp;</div>}
+      {Boolean(days) && (
+        <div {...props} className="pr-1">
+          {`${days}`.padStart(2, '0')}
+          <small>d</small>
+        </div>
+      )}
       {
         <div {...props} className="pr-1">
           {`${hours}`.padStart(2, '0')}
