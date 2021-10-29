@@ -128,7 +128,7 @@ const DeGrand = () => {
                     <Text className="pb-2">{deGrandPrize.description}</Text>
                   </div>
                   <div className="col-12 md:col-4 lg:col-4 align-self-start">
-                    <div className="card overview-box gray">
+                    <div className="card overview-box gray shadow-2">
                       <div className="overview-info text-left w-full">
                         {lotteryMonthAsInt === currentMonthAsInt &&
                         deGrandStatus === LotteryStatus.CLAIMABLE ? (
@@ -183,7 +183,7 @@ const DeGrand = () => {
 
             <div className="grid mt-4">
               <div className="col-12 md:col-6 lg:colo-6">
-                <div className="card overview-box gray">
+                <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">History</Header>
                     <Text className="mb-3">Check previous DeGrand Draws.</Text>

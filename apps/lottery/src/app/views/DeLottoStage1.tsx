@@ -92,7 +92,7 @@ const DeLottoStage1 = () => {
     <>
       <div className="grid">
         <div className="col-12 md:col-4 lg:col-4">
-          <div className="card overview-box gray">
+          <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header className="pb-2">{'Round #' + currentLotteryId}</Header>
               {status !== LotteryStatus.PENDING &&
@@ -112,7 +112,7 @@ const DeLottoStage1 = () => {
         </div>
 
         <div className="col-12 md:col-4 lg:col-4">
-          <div className="card overview-box gray">
+          <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header className="pb-2">Next Draw</Header>
               {status !== LotteryStatus.PENDING &&
@@ -138,7 +138,7 @@ const DeLottoStage1 = () => {
         </div>
 
         <div className="col-12 md:col-4 lg:col-4">
-          <div className="card overview-box gray">
+          <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header className="pb-2">Prize Pot</Header>
               <PrizePot pot={prize} status={status} />
@@ -150,7 +150,7 @@ const DeLottoStage1 = () => {
 
       <div className="grid mt-1 mb-4">
         <div className="col-12 md:col-5 lg:col-5">
-          <div className="card overview-box gray">
+          <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
               {status !== LotteryStatus.PENDING &&
@@ -215,7 +215,7 @@ const DeLottoStage1 = () => {
         </div>
 
         <div className="col-12 md:col-7 lg:col-7">
-          <div className="card overview-box gray">
+          <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header className="pb-2">Last Winning Numbers</Header>
               {status !== LotteryStatus.PENDING &&
