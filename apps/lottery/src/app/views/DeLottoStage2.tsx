@@ -83,8 +83,8 @@ const DeLottoStage2 = () => {
       <div className="grid">
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full">
-              <Header className="pb-2">{'Round #' + currentLotteryId}</Header>
+            <div className="overview-info text-left w-full">
+              <Header className="pb-2">Current Draw</Header>
               {deLottoStatus !== LotteryStatus.PENDING &&
               nextEventTime &&
               postCountDownText ? (
@@ -102,7 +102,7 @@ const DeLottoStage2 = () => {
 
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full">
+            <div className="overview-info text-left w-full">
               <Header>Next Draw:</Header>
               {deLottoStatus !== LotteryStatus.PENDING &&
               nextLotteryIdAsInt > 0 ? (
@@ -127,7 +127,7 @@ const DeLottoStage2 = () => {
 
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full">
+            <div className="overview-info text-left w-full">
               <Header className="pb-2">Prize Pot</Header>
               <PrizePot pot={prize} status={deLottoStatus} />
             </div>
@@ -139,19 +139,24 @@ const DeLottoStage2 = () => {
       <div className="grid mt-1 mb-4">
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray">
-            <div className="overview-info pr-4 text-left w-full flex flex-column align-items-start">
+            <div className="overview-info text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
               {deLottoStatus !== LotteryStatus.PENDING ? (
-                account ? (
+                account && userTickets && !userTickets.isLoading ? (
                   <>
                     <Text>
                       You have{' '}
-                      <span className="font-bold">
+                      <Text fontSize="22px" className="inline">
                         {userTickets && !userTickets.isLoading
                           ? userTickets.tickets?.length
                           : 0}
-                      </span>{' '}
-                      tickets this round.
+                      </Text>{' '}
+                      {userTickets &&
+                      userTickets.tickets &&
+                      userTickets.tickets?.length > 1
+                        ? 'tickets'
+                        : 'ticket'}{' '}
+                      this round.
                     </Text>
                     {userTickets &&
                       !userTickets.isLoading &&
@@ -173,10 +178,17 @@ const DeLottoStage2 = () => {
                         />
                       )}
                   </>
-                ) : (
+                ) : account ? (
                   <>
                     <Skeleton width="100%" height="2.4rem" />
                     <Skeleton width="8rem" height="1.5rem" className="mt-2" />
+                  </>
+                ) : (
+                  <>
+                    <Text className="mb-3">
+                      Please connect your wallet fist.
+                    </Text>
+                    <ConnectWalletButton />
                   </>
                 )
               ) : (
@@ -193,10 +205,10 @@ const DeLottoStage2 = () => {
 
       {deLottoStatus !== LotteryStatus.PENDING && (
         <div className="flex flex-row justify-content-center">
-          {account ? (
+          {account && (
             <>
               <div className="flex flex-column">
-                <Text className="mb-3">Are you a winner stage1?</Text>
+                <Text className="mb-3">Are you a winner in 'Stage One'?</Text>
                 <Button
                   className="mt-2 justify-content-center"
                   onClick={() => handleShowDialog('CheckStage1')}
@@ -205,7 +217,7 @@ const DeLottoStage2 = () => {
               </div>
               {deLottoStatus === LotteryStatus.CLAIMABLE && (
                 <div className="flex flex-column ml-3">
-                  <Text className="mb-3">Are you a winner stage2?</Text>
+                  <Text className="mb-3">Are you a winner in 'Stage Two'?</Text>
                   <Button
                     className="mt-2 justify-content-center"
                     onClick={() => handleShowDialog('CheckStage2')}
@@ -214,8 +226,6 @@ const DeLottoStage2 = () => {
                 </div>
               )}
             </>
-          ) : (
-            <ConnectWalletButton />
           )}
         </div>
       )}
