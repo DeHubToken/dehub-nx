@@ -190,13 +190,18 @@ const DeLottoStage1 = () => {
                       />
                     )}
                   </>
+                ) : account ? (
+                  <>
+                    <Skeleton width="100%" height="2.4rem" />
+                    <Skeleton width="8rem" height="1.5rem" className="mt-2" />
+                  </>
                 ) : (
-                  account && (
-                    <>
-                      <Skeleton width="100%" height="2.4rem" />
-                      <Skeleton width="8rem" height="1.5rem" className="mt-2" />
-                    </>
-                  )
+                  <>
+                    <Text className="mb-2">
+                      Please connect your wallet fist.
+                    </Text>
+                    <ConnectWalletButton />
+                  </>
                 )
               ) : (
                 <>
@@ -242,14 +247,12 @@ const DeLottoStage1 = () => {
       {status !== LotteryStatus.PENDING && (
         <FlexLine className="md:flex-column align-items-center justify-content-between">
           <Text className="mb-3">Are you a winner?</Text>
-          {account ? (
+          {account && (
             <Button
               className="justify-content-center"
               onClick={() => handleShowDialog('CheckStage1')}
               label="Check Now"
             />
-          ) : (
-            <ConnectWalletButton />
           )}
         </FlexLine>
       )}

@@ -142,16 +142,21 @@ const DeLottoStage2 = () => {
             <div className="overview-info text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
               {deLottoStatus !== LotteryStatus.PENDING ? (
-                account ? (
+                account && userTickets && !userTickets.isLoading ? (
                   <>
                     <Text>
                       You have{' '}
-                      <span className="font-bold">
+                      <Text fontSize="22px" className="inline">
                         {userTickets && !userTickets.isLoading
                           ? userTickets.tickets?.length
                           : 0}
-                      </span>{' '}
-                      tickets this round.
+                      </Text>{' '}
+                      {userTickets &&
+                      userTickets.tickets &&
+                      userTickets.tickets?.length > 1
+                        ? 'tickets'
+                        : 'ticket'}{' '}
+                      this round.
                     </Text>
                     {userTickets &&
                       !userTickets.isLoading &&
@@ -173,10 +178,17 @@ const DeLottoStage2 = () => {
                         />
                       )}
                   </>
-                ) : (
+                ) : account ? (
                   <>
                     <Skeleton width="100%" height="2.4rem" />
                     <Skeleton width="8rem" height="1.5rem" className="mt-2" />
+                  </>
+                ) : (
+                  <>
+                    <Text className="mb-3">
+                      Please connect your wallet fist.
+                    </Text>
+                    <ConnectWalletButton />
                   </>
                 )
               ) : (
@@ -193,7 +205,7 @@ const DeLottoStage2 = () => {
 
       {deLottoStatus !== LotteryStatus.PENDING && (
         <div className="flex flex-row justify-content-center">
-          {account ? (
+          {account && (
             <>
               <div className="flex flex-column">
                 <Text className="mb-3">Are you a winner in 'Stage One'?</Text>
@@ -214,8 +226,6 @@ const DeLottoStage2 = () => {
                 </div>
               )}
             </>
-          ) : (
-            <ConnectWalletButton />
           )}
         </div>
       )}
