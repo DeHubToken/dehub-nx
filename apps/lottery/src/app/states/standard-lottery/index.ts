@@ -195,7 +195,7 @@ export const LotterySlice = createSlice({
       state.userLotteryData = {
         isLoading: true,
         account: '',
-        dehubTotal: '',
+        dehubTotal: BIG_ZERO.toJSON(),
         rounds: [],
       };
     },
