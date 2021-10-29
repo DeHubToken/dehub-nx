@@ -167,9 +167,8 @@ const DeLottoStage1 = () => {
                       {userTickets &&
                       userTickets.tickets &&
                       userTickets.tickets?.length > 1
-                        ? 'tickets'
-                        : 'ticket'}{' '}
-                      this round.
+                        ? 'tickets.'
+                        : 'ticket.'}{' '}
                     </Text>
                     {userTickets &&
                       !userTickets.isLoading &&
