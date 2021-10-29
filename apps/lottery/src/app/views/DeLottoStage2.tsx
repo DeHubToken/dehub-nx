@@ -82,7 +82,7 @@ const DeLottoStage2 = () => {
     <>
       <div className="grid">
         <div className="col-12 md:col-4 lg:col-4">
-          <div className="card overview-box gray">
+          <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header className="pb-2">Current Draw</Header>
               {deLottoStatus !== LotteryStatus.PENDING &&
@@ -101,7 +101,7 @@ const DeLottoStage2 = () => {
         </div>
 
         <div className="col-12 md:col-4 lg:col-4">
-          <div className="card overview-box gray">
+          <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header>Next Draw:</Header>
               {deLottoStatus !== LotteryStatus.PENDING &&
@@ -126,7 +126,7 @@ const DeLottoStage2 = () => {
         </div>
 
         <div className="col-12 md:col-4 lg:col-4">
-          <div className="card overview-box gray">
+          <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header className="pb-2">Prize Pot</Header>
               <PrizePot pot={prize} status={deLottoStatus} />
@@ -138,7 +138,7 @@ const DeLottoStage2 = () => {
 
       <div className="grid mt-1 mb-4">
         <div className="col-12 md:col-6 lg:col-6">
-          <div className="card overview-box gray">
+          <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
               {deLottoStatus !== LotteryStatus.PENDING ? (
