@@ -84,7 +84,7 @@ const DeLottoStage2 = () => {
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray">
             <div className="overview-info text-left w-full">
-              <Header className="pb-2">{'Round #' + currentLotteryId}</Header>
+              <Header className="pb-2">Current Draw</Header>
               {deLottoStatus !== LotteryStatus.PENDING &&
               nextEventTime &&
               postCountDownText ? (
@@ -196,7 +196,7 @@ const DeLottoStage2 = () => {
           {account ? (
             <>
               <div className="flex flex-column">
-                <Text className="mb-3">Are you a winner stage1?</Text>
+                <Text className="mb-3">Are you a winner in 'Stage One'?</Text>
                 <Button
                   className="mt-2 justify-content-center"
                   onClick={() => handleShowDialog('CheckStage1')}
@@ -205,7 +205,7 @@ const DeLottoStage2 = () => {
               </div>
               {deLottoStatus === LotteryStatus.CLAIMABLE && (
                 <div className="flex flex-column ml-3">
-                  <Text className="mb-3">Are you a winner stage2?</Text>
+                  <Text className="mb-3">Are you a winner in 'Stage Two'?</Text>
                   <Button
                     className="mt-2 justify-content-center"
                     onClick={() => handleShowDialog('CheckStage2')}
