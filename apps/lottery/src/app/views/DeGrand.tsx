@@ -186,7 +186,7 @@ const DeGrand = () => {
             )}
 
             <div className="grid mt-4 justify-content-end">
-              <div className="col-12 md:col-6 lg:colo-6">
+              <div className="col-12 md:col-5 lg:colo-5">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">History</Header>
