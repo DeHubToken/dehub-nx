@@ -18,6 +18,7 @@ import { Header, Text } from '../components/Text';
 import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
 import { useLottery } from '../states/special-lottery/hooks';
 import { localToUTC } from '../utils/dateHelpers';
+import { Icon } from '../components/Icon';
 
 const DeLottoStage2 = () => {
   const {
@@ -98,7 +99,7 @@ const DeLottoStage2 = () => {
                 <Skeleton width="100%" height="2.4rem" />
               )}
             </div>
-            <i className="fad fa-clock"></i>
+            <Icon className="fad fa-clock"></Icon>
           </div>
         </div>
 
@@ -123,7 +124,7 @@ const DeLottoStage2 = () => {
                 </>
               )}
             </div>
-            <i className="fad fa-calendar-star"></i>
+            <Icon className="fad fa-calendar-star"></Icon>
           </div>
         </div>
 
@@ -133,7 +134,7 @@ const DeLottoStage2 = () => {
               <Header className="pb-2">Prize Pot</Header>
               <PrizePot pot={prize} status={deLottoStatus} />
             </div>
-            <i className="fad fa-coins"></i>
+            <Icon className="fad fa-coins"></Icon>
           </div>
         </div>
       </div>
@@ -199,37 +200,39 @@ const DeLottoStage2 = () => {
                 </>
               )}
             </div>
-            <i className="fad fa-ticket"></i>
+            <Icon className="fad fa-ticket"></Icon>
           </div>
         </div>
-      </div>
 
-      {deLottoStatus !== LotteryStatus.PENDING && (
-        <div className="flex flex-row justify-content-center">
-          {account && (
-            <>
-              <div className="flex flex-column">
-                <Text className="mb-3">Are you a winner in 'Stage One'?</Text>
-                <Button
-                  className="mt-2 justify-content-center"
-                  onClick={() => handleShowDialog('CheckStage1')}
-                  label="Check Now"
-                />
+        {deLottoStatus !== LotteryStatus.PENDING && account && (
+          <div className="col-12 md:col-6 lg:col-6">
+            <div className="card overview-box gray shadow-2">
+              <div className="overview-info text-left w-full">
+                <Header className="pb-2">History</Header>
+                <Text className="mb-3">Check and claim previous draws.</Text>
+                {account ? (
+                  <>
+                    <Button
+                      className="mt-2 justify-content-center mr-3"
+                      onClick={() => handleShowDialog('CheckStage1')}
+                      label="Stage One"
+                    />
+                    <Button
+                      className="mt-2 justify-content-center"
+                      onClick={() => handleShowDialog('CheckStage2')}
+                      label="Stage Two"
+                      disabled={!(deLottoStatus === LotteryStatus.CLAIMABLE)}
+                    />
+                  </>
+                ) : (
+                  <ConnectWalletButton />
+                )}
               </div>
-              {deLottoStatus === LotteryStatus.CLAIMABLE && (
-                <div className="flex flex-column ml-3">
-                  <Text className="mb-3">Are you a winner in 'Stage Two'?</Text>
-                  <Button
-                    className="mt-2 justify-content-center"
-                    onClick={() => handleShowDialog('CheckStage2')}
-                    label="Check Now"
-                  />
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      )}
+              <Icon className="fad fa-history"></Icon>
+            </div>
+          </div>
+        )}
+      </div>
 
       <ListTicketDialog
         open={listTicketDialog}
