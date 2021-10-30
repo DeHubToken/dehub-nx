@@ -169,7 +169,7 @@ const DeGrand = () => {
                 )}
               </>
             ) : (
-              <div className="text-center">
+              <div className="text-center my-6">
                 <Icon className="fad fa-gift pb-4" size="30px"></Icon>
                 <Text className="text-center" fontSize="20px">
                   Prizes will be announced soon!
@@ -188,16 +188,11 @@ const DeGrand = () => {
                     <Header className="pb-2">History</Header>
                     <Text className="mb-3">Check previous DeGrand Draws.</Text>
                     {account ? (
-                      deGrandPrize &&
-                      deGrandPrize.drawTime > 0 && (
-                        <Button
-                          className="mt-2 justify-content-center"
-                          onClick={() =>
-                            handleShowDialog('CheckDeGrandHistory')
-                          }
-                          label="Check Now"
-                        />
-                      )
+                      <Button
+                        className="mt-2 justify-content-center"
+                        onClick={() => handleShowDialog('CheckDeGrandHistory')}
+                        label="Check Now"
+                      />
                     ) : (
                       <ConnectWalletButton />
                     )}
