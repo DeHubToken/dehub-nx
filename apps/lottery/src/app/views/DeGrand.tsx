@@ -133,9 +133,30 @@ const DeGrand = () => {
                         <Header className="pb-2">DeGrand Draw</Header>
                         {lotteryMonthAsInt === currentMonthAsInt &&
                         deGrandStatus === LotteryStatus.CLAIMABLE ? (
-                          <Text fontSize="22px" color="orange">
-                            Completed!
-                          </Text>
+                          <>
+                            <Text
+                              fontSize="14px"
+                              color="orange"
+                              fontWeight={900}
+                              className="pb-2"
+                            >
+                              Completed!
+                            </Text>
+                            {account ? (
+                              <>
+                                <Text>Are you a winner?</Text>
+                                <Button
+                                  className="mt-2 justify-content-center md:w-full"
+                                  onClick={() =>
+                                    handleShowDialog('CheckDeGrand')
+                                  }
+                                  label="Check Now"
+                                />
+                              </>
+                            ) : (
+                              <ConnectWalletButton />
+                            )}
+                          </>
                         ) : deGrandPrize &&
                           deGrandPrize.drawTime > currentSeconds ? (
                           <EventCountDown
@@ -150,23 +171,6 @@ const DeGrand = () => {
                     </div>
                   </div>
                 </div>
-
-                {deGrandStatus === LotteryStatus.CLAIMABLE && (
-                  <FlexLine className="md:flex-column align-items-center">
-                    {account ? (
-                      <>
-                        <Text>Are you a winner?</Text>
-                        <Button
-                          className="mt-2 justify-content-center"
-                          onClick={() => handleShowDialog('CheckDeGrand')}
-                          label="Check Now"
-                        />
-                      </>
-                    ) : (
-                      <ConnectWalletButton />
-                    )}
-                  </FlexLine>
-                )}
               </>
             ) : (
               <div className="text-center my-6">
@@ -181,7 +185,7 @@ const DeGrand = () => {
               </div>
             )}
 
-            <div className="grid mt-4">
+            <div className="grid mt-4 justify-content-end">
               <div className="col-12 md:col-6 lg:colo-6">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
