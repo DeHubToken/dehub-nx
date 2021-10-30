@@ -27,8 +27,8 @@ const ListTicketDialog = ({
       visible={open}
       modal
       className="p-fluid"
-      style={{ width: '250px' }}
       header={`Your tickets`}
+      style={{ width: '300px' }}
       onHide={onHide}
     >
       <div className="flex flex-column">

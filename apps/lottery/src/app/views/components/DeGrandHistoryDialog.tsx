@@ -83,7 +83,7 @@ const DeGrandHistoryDialog = ({ open, onHide }: DeGrandHistoryDialogProps) => {
         modal
         className="p-fluid"
         header="DeGrand History"
-        style={{ width: '250px' }}
+        style={{ width: '300px' }}
         onHide={onHide}
       >
         <div className="flex flex-column">

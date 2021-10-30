@@ -104,7 +104,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
         modal
         className="p-fluid"
         header={`Round #${currentLotteryId}`}
-        style={{ width: '250px' }}
+        style={{ width: '300px' }}
         onHide={onHide}
       >
         <div className="flex flex-column">

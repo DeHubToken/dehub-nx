@@ -124,7 +124,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
         modal
         className="p-fluid"
         header={`Unclaimed Winnings`}
-        style={{ width: '250px' }}
+        style={{ width: '300px' }}
         onHide={onHide}
       >
         <div className="flex flex-column">
