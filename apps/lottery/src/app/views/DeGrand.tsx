@@ -130,18 +130,18 @@ const DeGrand = () => {
                   <div className="col-12 md:col-4 lg:col-4 align-self-start">
                     <div className="card overview-box gray shadow-2">
                       <div className="overview-info text-left w-full">
+                        <Header className="pb-2">DeGrand Draw</Header>
                         {lotteryMonthAsInt === currentMonthAsInt &&
                         deGrandStatus === LotteryStatus.CLAIMABLE ? (
-                          <Text className="text-pink-400">Draw Completed!</Text>
+                          <Text fontSize="22px" color="orange">
+                            Completed!
+                          </Text>
                         ) : deGrandPrize &&
                           deGrandPrize.drawTime > currentSeconds ? (
-                          <>
-                            <Header className="pb-2">Final Draw</Header>
-                            <EventCountDown
-                              nextEventTime={deGrandPrize.drawTime}
-                              postCountDownText="left until the draw"
-                            />
-                          </>
+                          <EventCountDown
+                            nextEventTime={deGrandPrize.drawTime}
+                            postCountDownText="left until the draw"
+                          />
                         ) : (
                           <Title fontSize="14px">Waiting...</Title>
                         )}
