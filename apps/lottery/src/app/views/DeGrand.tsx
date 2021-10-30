@@ -190,7 +190,7 @@ const DeGrand = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">History</Header>
-                    <Text className="mb-3">Check previous DeGrand Draws.</Text>
+                    <Text className="mb-3">Check previous DeGrand draws.</Text>
                     {account ? (
                       <Button
                         className="mt-2 justify-content-center"
