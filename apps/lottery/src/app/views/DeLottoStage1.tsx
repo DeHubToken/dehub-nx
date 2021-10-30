@@ -120,10 +120,10 @@ const DeLottoStage1 = () => {
               status !== LotteryStatus.BURNED ? (
                 <>
                   <Text fontSize="22px">
-                    {format(localToUTC(endTimeAsInt * 1000), 'HH:mm:ss')}
+                    {format(endTimeAsInt * 1000, 'HH:mm:ss')}
                   </Text>
                   <Text fontSize="14px">
-                    {format(localToUTC(endTimeAsInt * 1000), 'dd/MM/yyyy')}
+                    {format(endTimeAsInt * 1000, 'dd/MM/yyyy')}
                   </Text>
                 </>
               ) : (

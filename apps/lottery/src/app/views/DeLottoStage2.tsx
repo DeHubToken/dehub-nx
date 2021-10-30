@@ -110,10 +110,10 @@ const DeLottoStage2 = () => {
               nextLotteryIdAsInt > 0 ? (
                 <>
                   <Text fontSize="22px">
-                    {format(localToUTC(nextDrawAsInt), 'HH:mm:ss')}
+                    {format(nextDrawAsInt, 'HH:mm:ss')}
                   </Text>
                   <Text fontSize="14px">
-                    {format(localToUTC(nextDrawAsInt), 'dd/MM/yyyy')}
+                    {format(nextDrawAsInt, 'dd/MM/yyyy')}
                   </Text>
                 </>
               ) : (
