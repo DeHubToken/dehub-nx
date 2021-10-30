@@ -21,6 +21,7 @@ import {
   useLottery,
   usePreviousLottery,
 } from '../states/standard-lottery/hooks';
+import { localToUTC } from '../utils/dateHelpers';
 
 const DeLottoStage1 = () => {
   const {
@@ -116,14 +117,13 @@ const DeLottoStage1 = () => {
             <div className="overview-info text-left w-full">
               <Header className="pb-2">Next Draw</Header>
               {status !== LotteryStatus.PENDING &&
-              status !== LotteryStatus.BURNED &&
-              nextLotteryIdAsInt > 0 ? (
+              status !== LotteryStatus.BURNED ? (
                 <>
                   <Text fontSize="22px">
-                    {format(new Date(endTimeAsInt * 1000), 'HH:mm:ss')}
+                    {format(localToUTC(endTimeAsInt * 1000), 'HH:mm:ss')}
                   </Text>
                   <Text fontSize="14px">
-                    {format(new Date(endTimeAsInt * 1000), 'dd/MM/yyyy')}
+                    {format(localToUTC(endTimeAsInt * 1000), 'dd/MM/yyyy')}
                   </Text>
                 </>
               ) : (

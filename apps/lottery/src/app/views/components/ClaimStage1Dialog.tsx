@@ -28,6 +28,7 @@ import {
   useGetUserLotteryDataLoading,
 } from '../../states/standard-lottery/hooks';
 import { LotteryUserRound } from '../../states/standard-lottery/types';
+import { utcToLocal } from '../../utils/dateHelpers';
 
 interface ClaimStage1DialogProps {
   open: boolean;
@@ -41,7 +42,9 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
   const { dehubTotal, rounds: unclaimedRewards } = useGetUserLotteryData();
   const isFetchingRewards = useGetUserLotteryDataLoading();
 
-  const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
+  const endOfMonthAsInt = utcToLocal(
+    endOfMonth(new Date()).getTime()
+  ).getTime(); // end of month with 23:59:59
   const { account } = Hooks.useMoralisEthers();
   const [pendingTx, setPendingTx] = useState(-1);
   const lotteryContract = useStandardLotteryContract();
@@ -139,7 +142,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
           </div>
           <div className="mb-3 flex flex-column align-items-center">
             <Text fontSize="12px">Will be burned in:</Text>
-            <SimpleCountDown limitTime={endOfMonthAsInt} />
+            <SimpleCountDown limitTime={Math.floor(endOfMonthAsInt / 1000)} />
           </div>
           {isFetchingRewards ? (
             <Skeleton width="100%" height="2rem" className="mb-3" />
