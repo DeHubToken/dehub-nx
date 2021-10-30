@@ -3,10 +3,13 @@ import { Button } from 'primereact/button';
 
 import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
-import { Header, Text } from '../components/Text';
+import { Text } from '../components/Text';
+import { utcToLocal } from '../utils/dateHelpers';
 
 const DeLottoStage1Waiting = () => {
-  const startOfNextMonthAsInt = endOfMonth(new Date()).getTime(); // after 5 min
+  const startOfNextMonthAsInt = utcToLocal(
+    endOfMonth(new Date()).getTime()
+  ).getTime(); // after 5 min
 
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center h-30rem">

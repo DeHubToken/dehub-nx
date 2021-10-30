@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { format } from 'date-fns';
+import { format, addMonths } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 
@@ -9,15 +9,15 @@ import BuySpecialTicketDialog from './components/BuySpecialTicketDialog';
 import ClaimStage1Dialog from './components/ClaimStage1Dialog';
 import ClaimStage2Dialog from './components/ClaimStage2Dialog';
 import { EventCountDown } from './components/CountDown';
-import FlexLine from './components/FlexLine';
 import ListTicketDialog from './components/ListTicketDialog';
 import PrizePot from './components/PrizePot';
 
 import { LotteryStatus } from '../config/constants/types';
 import ConnectWalletButton from '../components/ConnectWalletButton';
-import { Title, Header, Text } from '../components/Text';
+import { Header, Text } from '../components/Text';
 import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
 import { useLottery } from '../states/special-lottery/hooks';
+import { localToUTC } from '../utils/dateHelpers';
 
 const DeLottoStage2 = () => {
   const {
@@ -25,6 +25,7 @@ const DeLottoStage2 = () => {
     isTransitioning,
     currentRound: {
       deLottoStatus,
+      startTime,
       endTime,
       unwonPreviousPotInDehub,
       amountCollectedInDehub,
@@ -33,6 +34,7 @@ const DeLottoStage2 = () => {
   } = useLottery();
   const currentLotteryIdAsInt = parseInt(currentLotteryId, 10);
   const endTimeAsInt = parseInt(endTime, 10);
+  const nextDrawAsInt = addMonths(parseInt(startTime, 10) * 1000, 1).getTime();
   const { nextEventTime, postCountDownText } = useGetNextLotteryEvent(
     endTimeAsInt,
     currentLotteryId,
@@ -108,10 +110,10 @@ const DeLottoStage2 = () => {
               nextLotteryIdAsInt > 0 ? (
                 <>
                   <Text fontSize="22px">
-                    {format(new Date(endTimeAsInt * 1000), 'HH:mm:ss')}
+                    {format(localToUTC(nextDrawAsInt), 'HH:mm:ss')}
                   </Text>
                   <Text fontSize="14px">
-                    {format(new Date(endTimeAsInt * 1000), 'dd/MM/yyyy')}
+                    {format(localToUTC(nextDrawAsInt), 'dd/MM/yyyy')}
                   </Text>
                 </>
               ) : (

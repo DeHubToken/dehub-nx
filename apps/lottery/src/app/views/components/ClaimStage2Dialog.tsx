@@ -23,6 +23,7 @@ import useGetDeLottoWinningRewards, {
 } from '../../hooks/special-lottery/useGetDeLottoWinningRewards';
 import { useSpecialLotteryContract } from '../../hooks/useContract';
 import { useLottery } from '../../states/special-lottery/hooks';
+import { utcToLocal } from '../../utils/dateHelpers';
 
 interface ClaimStage2DialogProps {
   open: boolean;
@@ -35,7 +36,11 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
     currentRound: { deLottoStatus },
   } = useLottery();
 
-  const endOfMonthAsInt = endOfMonth(new Date()).getTime(); // end of month with 23:59:59
+  // end of month with 23:59:59
+  const endOfMonthAsInt = utcToLocal(
+    endOfMonth(Date.now()).getTime()
+  ).getTime();
+
   const { fetchAllRewards, winningRewards, fetchStatus } =
     useGetDeLottoWinningRewards();
   const isFetchingRewards =
@@ -118,7 +123,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
           </div>
           <div className="mb-3 flex flex-column align-items-center">
             <Text fontSize="12px">Will be burned in:</Text>
-            <SimpleCountDown limitTime={endOfMonthAsInt} />
+            <SimpleCountDown limitTime={Math.floor(endOfMonthAsInt / 1000)} />
           </div>
           {isFetchingRewards ? (
             <Skeleton width="100%" height="2rem" className="mb-4" />
