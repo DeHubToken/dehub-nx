@@ -133,18 +133,22 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
               <div className="mb-2 flex justify-content-center">
                 <Text fontWeight={900}>Unclaimed Total in 'Stage One'</Text>
               </div>
-              <div className="mb-3 flex justify-content-center">
+              <div className="mt-2 mb-3 flex justify-content-center">
                 {!isFetchingRewards ? (
-                  <Text className="font-bold">
+                  <Text fontSize="22px" fontWeight={900} textAlign="center">
                     {getBalanceNumber(unclaimedDehubTotal, DEHUB_DECIMALS)}{' '}
-                    $DeHub
+                    <Text fontSize="13px" className="inline-block">
+                      $DeHub
+                    </Text>
                   </Text>
                 ) : (
                   <Skeleton width="100%" height="2rem" />
                 )}
               </div>
               <div className="mb-3 flex flex-column align-items-center">
-                <Text fontSize="12px">Will be burned in:</Text>
+                <Text fontSize="14px" fontWeight={900}>
+                  Will be burned in:
+                </Text>
                 <SimpleCountDown
                   limitTime={Math.floor(endOfMonthAsInt / 1000)}
                 />
