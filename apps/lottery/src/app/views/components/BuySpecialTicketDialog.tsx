@@ -246,6 +246,14 @@ const BuySpecialTicketDialog = ({
               <Text fontSize="12px">Loading...</Text>
             )}
           </div>
+
+          <div className="flex justify-content-end mt-2 mb-5">
+            <Text>
+              These tickets will be eligible for the DeRaffles Stage Two final
+              pot draw and the DeGrand prize draw.
+            </Text>
+          </div>
+
           <div className="flex flex-column mt-2">
             <Button
               icon={pendingTx ? 'pi pi-spin pi-spinner' : ''}

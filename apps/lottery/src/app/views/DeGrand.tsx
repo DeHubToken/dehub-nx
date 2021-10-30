@@ -130,18 +130,39 @@ const DeGrand = () => {
                   <div className="col-12 md:col-4 lg:col-4 align-self-start">
                     <div className="card overview-box gray shadow-2">
                       <div className="overview-info text-left w-full">
+                        <Header className="pb-2">DeGrand Draw</Header>
                         {lotteryMonthAsInt === currentMonthAsInt &&
                         deGrandStatus === LotteryStatus.CLAIMABLE ? (
-                          <Text className="text-pink-400">Draw Completed!</Text>
+                          <>
+                            <Text
+                              fontSize="14px"
+                              color="orange"
+                              fontWeight={900}
+                              className="pb-2"
+                            >
+                              Completed!
+                            </Text>
+                            {account ? (
+                              <>
+                                <Text>Are you a winner?</Text>
+                                <Button
+                                  className="mt-2 justify-content-center md:w-full"
+                                  onClick={() =>
+                                    handleShowDialog('CheckDeGrand')
+                                  }
+                                  label="Check Now"
+                                />
+                              </>
+                            ) : (
+                              <ConnectWalletButton />
+                            )}
+                          </>
                         ) : deGrandPrize &&
                           deGrandPrize.drawTime > currentSeconds ? (
-                          <>
-                            <Header className="pb-2">Final Draw</Header>
-                            <EventCountDown
-                              nextEventTime={deGrandPrize.drawTime}
-                              postCountDownText="left until the draw"
-                            />
-                          </>
+                          <EventCountDown
+                            nextEventTime={deGrandPrize.drawTime}
+                            postCountDownText="left until the draw"
+                          />
                         ) : (
                           <Title fontSize="14px">Waiting...</Title>
                         )}
@@ -150,23 +171,6 @@ const DeGrand = () => {
                     </div>
                   </div>
                 </div>
-
-                {deGrandStatus === LotteryStatus.CLAIMABLE && (
-                  <FlexLine className="md:flex-column align-items-center">
-                    {account ? (
-                      <>
-                        <Text>Are you a winner?</Text>
-                        <Button
-                          className="mt-2 justify-content-center"
-                          onClick={() => handleShowDialog('CheckDeGrand')}
-                          label="Check Now"
-                        />
-                      </>
-                    ) : (
-                      <ConnectWalletButton />
-                    )}
-                  </FlexLine>
-                )}
               </>
             ) : (
               <div className="text-center my-6">
@@ -181,12 +185,12 @@ const DeGrand = () => {
               </div>
             )}
 
-            <div className="grid mt-4">
-              <div className="col-12 md:col-6 lg:colo-6">
+            <div className="grid mt-4 justify-content-end">
+              <div className="col-12 md:col-5 lg:colo-5">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">History</Header>
-                    <Text className="mb-3">Check previous DeGrand Draws.</Text>
+                    <Text className="mb-3">Check previous DeGrand draws.</Text>
                     {account ? (
                       <Button
                         className="mt-2 justify-content-center"

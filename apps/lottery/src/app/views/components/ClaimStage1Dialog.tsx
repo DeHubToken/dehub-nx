@@ -124,73 +124,91 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
         modal
         className="p-fluid"
         header={`Unclaimed Winnings`}
-        style={{ width: '250px' }}
+        style={{ width: '300px' }}
         onHide={onHide}
       >
         <div className="flex flex-column">
-          <div className="mb-2 flex justify-content-center">
-            <Text>Unclaimed Total</Text>
-          </div>
-          <div className="mb-3 flex justify-content-center">
-            {!isFetchingRewards ? (
-              <Text className="font-bold">
-                {getBalanceNumber(unclaimedDehubTotal, DEHUB_DECIMALS)} $DeHub
-              </Text>
-            ) : (
-              <Skeleton width="100%" height="2rem" />
-            )}
-          </div>
-          <div className="mb-3 flex flex-column align-items-center">
-            <Text fontSize="12px">Will be burned in:</Text>
-            <SimpleCountDown limitTime={Math.floor(endOfMonthAsInt / 1000)} />
-          </div>
           {isFetchingRewards ? (
-            <Skeleton width="100%" height="2rem" className="mb-3" />
-          ) : (
-            unclaimedRewards.map(
-              (claimData: LotteryUserRound, index: number) => {
-                if (claimData.ticketsWithUnclaimedRewards.length < 1)
-                  return null;
-                return (
-                  <div key={`${index}`} className="mt-2 mb-2">
-                    <div className="mb-2">
-                      <Text>Round #{claimData.roundId}</Text>
-                    </div>
-                    {claimData.ticketsWithUnclaimedRewards.map(
-                      (ticket: LotteryTicket, index: number) => {
-                        const ticketAsInt = parseInt(ticket.number, 10);
-                        return (
-                          <TicketNumberLabel
-                            key={`${index}`}
-                            number={ticketAsInt}
-                            rewardBracket={ticket.rewardBracket}
-                            className="mb-2"
-                          />
-                        );
-                      }
-                    )}
-                    {claimData.ticketsWithUnclaimedRewards.length > 0 &&
-                      unclaimedDehubTotal.gt(BIG_ZERO) && (
-                        <div className="flex flex-column mt-5">
-                          <Button
-                            icon={
-                              pendingTx === index ? 'pi pi-spin pi-spinner' : ''
-                            }
-                            className="justify-content-center"
-                            onClick={() => {
-                              if (pendingTx >= 0) {
-                                return;
-                              }
-                              handleClaim(index);
-                            }}
-                            label="Claim Now"
-                          />
-                        </div>
+            <>
+              <div className="mb-2 flex justify-content-center">
+                <Text fontWeight={900}>Give it a few seconds please...</Text>
+              </div>
+              <Skeleton width="100%" height="2rem" className="mb-3" />
+            </>
+          ) : unclaimedDehubTotal.gt(BIG_ZERO) ? (
+            <>
+              <div className="mb-2 flex justify-content-center">
+                <Text fontWeight={900}>Unclaimed Total in 'Stage One'</Text>
+              </div>
+              <div className="mt-2 mb-3 flex justify-content-center">
+                <Text fontSize="22px" fontWeight={900} textAlign="center">
+                  {getBalanceNumber(unclaimedDehubTotal, DEHUB_DECIMALS)}{' '}
+                  <Text fontSize="13px" className="inline-block">
+                    $DeHub
+                  </Text>
+                </Text>
+              </div>
+              <div className="mb-3 flex flex-column align-items-center">
+                <Text fontSize="14px" fontWeight={900}>
+                  Will be burned in:
+                </Text>
+                <SimpleCountDown
+                  limitTime={Math.floor(endOfMonthAsInt / 1000)}
+                />
+              </div>
+              {unclaimedRewards.map(
+                (claimData: LotteryUserRound, index: number) => {
+                  if (claimData.ticketsWithUnclaimedRewards.length < 1)
+                    return null;
+                  return (
+                    <div key={`${index}`} className="mt-2 mb-2">
+                      <div className="mb-2">
+                        <Text>Round #{claimData.roundId}</Text>
+                      </div>
+                      {claimData.ticketsWithUnclaimedRewards.map(
+                        (ticket: LotteryTicket, index: number) => {
+                          const ticketAsInt = parseInt(ticket.number, 10);
+                          return (
+                            <TicketNumberLabel
+                              key={`${index}`}
+                              number={ticketAsInt}
+                              rewardBracket={ticket.rewardBracket}
+                              className="mb-2"
+                            />
+                          );
+                        }
                       )}
-                  </div>
-                );
-              }
-            )
+                      {claimData.ticketsWithUnclaimedRewards.length > 0 &&
+                        unclaimedDehubTotal.gt(BIG_ZERO) && (
+                          <div className="flex flex-column mt-5">
+                            <Button
+                              icon={
+                                pendingTx === index
+                                  ? 'pi pi-spin pi-spinner'
+                                  : ''
+                              }
+                              className="justify-content-center"
+                              onClick={() => {
+                                if (pendingTx >= 0) {
+                                  return;
+                                }
+                                handleClaim(index);
+                              }}
+                              label="Claim Now"
+                            />
+                          </div>
+                        )}
+                    </div>
+                  );
+                }
+              )}
+            </>
+          ) : (
+            <div className="mt-3 mb-4 flex justify-content-center">
+              <Text textAlign="center">
+                You have no unclaimed winning tickets in the 'Stage One'.
+              </Text>
+            </div>
           )}
         </div>
       </Dialog>

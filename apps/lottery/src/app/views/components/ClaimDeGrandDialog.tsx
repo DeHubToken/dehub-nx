@@ -74,7 +74,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
         modal
         className="p-fluid"
         header={`Round #${currentLotteryId}`}
-        style={{ width: '250px' }}
+        style={{ width: '300px' }}
         onHide={onHide}
       >
         <div className="flex flex-column">

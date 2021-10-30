@@ -103,19 +103,21 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
         visible={open}
         modal
         className="p-fluid"
-        header={`Round #${currentLotteryId}`}
-        style={{ width: '250px' }}
+        header={`Unclaimed Winnings`}
+        style={{ width: '300px' }}
         onHide={onHide}
       >
         <div className="flex flex-column">
           <div className="mb-2 flex justify-content-center">
-            <Text>Unclaimed Total</Text>
+            <Text fontWeight={900}>Unclaimed Total in 'Stage Two'</Text>
           </div>
-          <div className="mb-3 flex justify-content-center">
+          <div className="mt-2 mb-3 flex justify-content-center">
             {winningRewards ? (
-              <Text className="font-bold">
+              <Text fontSize="22px" fontWeight={900} textAlign="center">
                 {getBalanceNumber(winningRewards.dehubTotal, DEHUB_DECIMALS)}{' '}
-                $DeHub
+                <Text fontSize="13px" className="inline-block">
+                  $DeHub
+                </Text>
               </Text>
             ) : (
               <Skeleton width="100%" height="2rem" />

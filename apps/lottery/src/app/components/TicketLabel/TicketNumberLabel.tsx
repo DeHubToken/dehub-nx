@@ -43,9 +43,9 @@ const TicketNumberLabel = ({
         return (
           <Text
             key={`${index}`}
-            className={`m-2 text-center ${
-              index <= rewardBracket ? 'font-bold' : ''
-            }`}
+            className="m-2"
+            textAlign="center"
+            fontWeight={index <= rewardBracket ? 900 : 100}
             color={
               rewardBracket < 0 || rewardBracket === LotteryPrizeLevel.NONE
                 ? 'var(--surface-a)'
@@ -53,7 +53,15 @@ const TicketNumberLabel = ({
             }
             style={{ width: '16px' }}
           >
-            {num}
+            {index <= rewardBracket
+              ? index === 0
+                ? rewardBracket === 0
+                  ? `[${num}]`
+                  : `[${num}`
+                : index === rewardBracket
+                ? `${num}]`
+                : `${num}`
+              : `${num}`}
           </Text>
         );
       })}

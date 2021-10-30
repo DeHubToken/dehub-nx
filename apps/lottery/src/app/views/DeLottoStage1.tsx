@@ -95,7 +95,7 @@ const DeLottoStage1 = () => {
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header className="pb-2">{'Round #' + currentLotteryId}</Header>
+              <Header className="pb-2">Current Draw</Header>
               {status !== LotteryStatus.PENDING &&
               status !== LotteryStatus.BURNED &&
               nextEventTime &&
@@ -120,10 +120,10 @@ const DeLottoStage1 = () => {
               status !== LotteryStatus.BURNED ? (
                 <>
                   <Text fontSize="22px">
-                    {format(localToUTC(endTimeAsInt * 1000), 'HH:mm:ss')}
+                    {format(endTimeAsInt * 1000, 'HH:mm:ss')}
                   </Text>
                   <Text fontSize="14px">
-                    {format(localToUTC(endTimeAsInt * 1000), 'dd/MM/yyyy')}
+                    {format(endTimeAsInt * 1000, 'dd/MM/yyyy')}
                   </Text>
                 </>
               ) : (

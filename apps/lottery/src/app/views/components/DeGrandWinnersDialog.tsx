@@ -31,7 +31,7 @@ const DeGrandWinnersDialog = ({
         modal
         className="p-fluid"
         header="DeGrand Winners"
-        style={{ width: '250px' }}
+        style={{ width: '300px' }}
         onHide={onHide}
       >
         <div className="flex flex-column">
