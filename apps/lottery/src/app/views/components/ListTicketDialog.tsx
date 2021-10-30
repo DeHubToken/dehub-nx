@@ -27,14 +27,11 @@ const ListTicketDialog = ({
       visible={open}
       modal
       className="p-fluid"
-      header={`Round #${roundId}`}
       style={{ width: '250px' }}
+      header={`Your tickets`}
       onHide={onHide}
     >
       <div className="flex flex-column">
-        <div className="flex justify-content-center mb-2">
-          <Text>Your Tickets</Text>
-        </div>
         <div className="mb-4">
           {tickets &&
             tickets.map((ticket: LotteryTicket, index: number) => {
