@@ -30,8 +30,11 @@ export const ApplicationSlice = createSlice({
   name: 'Application',
   initialState,
   reducers: {
-    setWalletConnectingState: (state, action) => {
-      state.walletConnectingState = action.payload;
+    setWalletConnectingState: (
+      state,
+      action: PayloadAction<{ connectingState: WalletConnectingState }>
+    ) => {
+      state.walletConnectingState = action.payload.connectingState;
     },
   },
   extraReducers: builder => {

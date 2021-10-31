@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
+import { setupNetwork } from '@dehub/shared/utils';
 
 import { useSetWalletConnectingState } from '../../states/application/hooks';
 import { getChainId } from '../../config/constants';
@@ -14,7 +15,7 @@ const ConnectWalletButton = () => {
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const mountedRef = useRef(true);
 
-  const { authenticate } = Hooks.useMoralisEthers();
+  const { authenticate, logout, activateProvider } = Hooks.useMoralisEthers();
   const chainId = getChainId();
 
   useEffect(() => {
@@ -33,15 +34,28 @@ const ConnectWalletButton = () => {
         onError: (error: Error) => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
-        onSuccess: () => {
-          setWalletConnectingState(WalletConnectingState.COMPLETE);
+        onSuccess: async () => {
+          const onSwitchNetwork = () => {
+            setWalletConnectingState(WalletConnectingState.SWITCH_NETWORK);
+          };
+          const onAddNetwork = () => {
+            setWalletConnectingState(WalletConnectingState.ADD_NETWORK);
+          };
+          if (await setupNetwork(getChainId(), onSwitchNetwork, onAddNetwork)) {
+            activateProvider();
+            setWalletConnectingState(WalletConnectingState.COMPLETE);
+          } else {
+            logout();
+            setWalletConnectingState(WalletConnectingState.INIT);
+          }
+
           if (mountedRef.current) {
             setWalletModalOpen(false);
           }
         },
       });
     },
-    [authenticate, chainId, setWalletConnectingState]
+    [authenticate, chainId, activateProvider, logout, setWalletConnectingState]
   );
 
   return (
