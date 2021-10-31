@@ -6,7 +6,6 @@ import { Contexts } from '@dehub/react/core';
 
 import { getChainId } from './config/constants';
 import { RefreshContextProvider } from './contexts/RefreshContext';
-import MoralisReactManager from './components/MoralisReactManager';
 import { store } from './states';
 import Lottery from './views/Lottery';
 
