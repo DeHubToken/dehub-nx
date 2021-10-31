@@ -22,8 +22,14 @@ export const MoralisEthersProvider = ({
   const [account, setAccount] = useState<string | undefined>(undefined);
   const [chainId, setChainId] = useState<string | undefined>(undefined);
 
-  const { enableWeb3, isAuthenticated, authenticate, user, logout } =
-    useMoralis();
+  const {
+    isWeb3Enabled,
+    enableWeb3,
+    isAuthenticated,
+    authenticate,
+    user,
+    logout,
+  } = useMoralis();
 
   const activateProvider = useCallback(async () => {
     // if (!newWeb3 || !newWeb3?.currentProvider) return;
@@ -60,16 +66,18 @@ export const MoralisEthersProvider = ({
     };
 
     if (user) {
-      const savedProviderName = window.localStorage.getItem('providerName');
-      enableWeb3({
-        provider: savedProviderName,
-        onSuccess,
-        onError,
-      });
-    } else {
-      clearProvider();
+      if (isWeb3Enabled) {
+        activateProvider();
+      } else {
+        const savedProviderName = window.localStorage.getItem('providerName');
+        enableWeb3({
+          provider: savedProviderName,
+          onSuccess,
+          onError,
+        });
+      }
     }
-  }, [user, enableWeb3, activateProvider, clearProvider]);
+  }, [user, isWeb3Enabled, enableWeb3, activateProvider, clearProvider]);
 
   useEffect(() => {
     Moralis.Web3.onAccountsChanged(([newAccount]) => {

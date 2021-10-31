@@ -12,7 +12,8 @@ import { clearUserData as clearUserStandardData } from '../../states/standard-lo
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();
-  const { account, isAuthenticated, logout } = Hooks.useMoralisEthers();
+  const { account, isAuthenticated, logout, clearProvider } =
+    Hooks.useMoralisEthers();
 
   const handleLogout = ({
     originalEvent,
@@ -22,6 +23,7 @@ const UserMenu = () => {
     item: MenuItem;
   }) => {
     logout();
+    clearProvider();
     dispatch(clearUserSpecialData());
     dispatch(clearUserStandardData());
   };
@@ -35,7 +37,7 @@ const UserMenu = () => {
   return (
     <ul className="layout-topbar-actions">
       <li>
-        {isAuthenticated && account ? (
+        {account ? (
           <SplitButton
             label={account ? shortenAddress(account) : 'Connect Wallet'}
             icon="fas fa-wallet"
