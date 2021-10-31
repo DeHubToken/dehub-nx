@@ -94,6 +94,7 @@ const DeLottoStage2 = () => {
                 <EventCountDown
                   nextEventTime={nextEventTime}
                   postCountDownText={postCountDownText}
+                  waiting="Draw completed!"
                 />
               ) : (
                 <Skeleton width="100%" height="2.4rem" />

@@ -10,7 +10,7 @@ interface EventCountDownProps {
   postCountDownText?: string;
   titleFontSize?: string;
   timerFontSize?: string;
-  isVertical?: boolean;
+  waiting?: string;
 }
 
 const EventCountDown = ({
@@ -18,7 +18,7 @@ const EventCountDown = ({
   postCountDownText,
   titleFontSize = '14px',
   timerFontSize = '22px',
-  isVertical = true,
+  waiting = 'Waiting...',
 }: EventCountDownProps) => {
   const secondsRemaining = useNextEventCountDown(nextEventTime);
   const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining);
@@ -47,7 +47,7 @@ const EventCountDown = ({
           </Title>
         </>
       ) : (
-        <Title style={{ fontSize: titleFontSize }}>Waiting...</Title>
+        <Title style={{ fontSize: titleFontSize }}>{waiting}</Title>
       )}
     </>
   );

@@ -1,3 +1,4 @@
+import { addMonths } from 'date-fns';
 import { Button } from 'primereact/button';
 
 import { EventCountDown } from './components/CountDown';
@@ -8,15 +9,18 @@ import Icon from '../components/Icon/Icon';
 
 const DeLottoStage2Waiting = () => {
   const now = new Date();
-  const startDate = new Date(0);
-  startDate.setUTCFullYear(
+  const startThisMonth = new Date(0);
+  startThisMonth.setUTCFullYear(
     now.getUTCFullYear(),
     now.getUTCMonth(),
     now.getUTCMonth() === 1
       ? environment.deGrandStartDayOnFebruary
       : environment.deGrandStartDay
   );
-  const startOfNextMonthAsInt = startDate.getTime();
+  const startOfNextMonthAsInt = addMonths(
+    startThisMonth.getTime(),
+    1
+  ).getTime();
 
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center h-30rem">
