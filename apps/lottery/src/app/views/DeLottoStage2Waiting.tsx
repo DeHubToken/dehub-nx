@@ -38,6 +38,12 @@ const DeLottoStage2Waiting = () => {
       <Button
         className="p-button-link p-0 mt-7"
         label="Read more about 'Stage Two'"
+        onClick={() => {
+          window.open(
+            'https://www.dehub.net/uploads/DeHub%20Prize%20Draw%20Whitepaper%20-%20V1.pdf',
+            '_blank'
+          );
+        }}
       />
     </FlexLine>
   );
