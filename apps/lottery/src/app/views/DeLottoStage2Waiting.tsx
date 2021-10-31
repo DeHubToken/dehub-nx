@@ -26,7 +26,7 @@ const DeLottoStage2Waiting = () => {
     <FlexLine className="md:flex-column justify-content-center align-items-center h-30rem">
       <Icon className="fad fa-alarm-clock mb-5" size="40px"></Icon>
       <EventCountDown
-        nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 501}
+        nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 301}
         timerFontSize="28px"
         titleFontSize="18px"
         postCountDownText="until the start"

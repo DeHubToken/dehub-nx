@@ -93,8 +93,8 @@ const DeLotto = () => {
         (now.getUTCMonth() === 1
           ? environment.deGrandStartDayOnFebruary
           : environment.deGrandStartDay)
-      ? 1
-      : 0;
+      ? 0 // if today is 26th ~ 31th, we are waiting first stage
+      : 1;
 
   const isSyncStage1 = standardLotteryId && !isNaN(standardEndTimeAsInt);
   const isSyncStage2 = specialLotteryId && !isNaN(specialEndTimeAsInt);
