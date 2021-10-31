@@ -180,7 +180,13 @@ const DeGrand = () => {
                 </Text>
                 <Button
                   className="p-button-link p-0 mt-3"
-                  label="Read more about the 'DeGrand'"
+                  label="Read more about 'DeGrand'"
+                  onClick={() => {
+                    window.open(
+                      'https://www.dehub.net/uploads/DeHub%20Prize%20Draw%20Whitepaper%20-%20V1.pdf',
+                      '_blank'
+                    );
+                  }}
                 />
               </div>
             )}
