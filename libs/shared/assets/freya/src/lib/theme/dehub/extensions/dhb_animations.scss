@@ -5,24 +5,30 @@
 }
 @keyframes float1 {
   0% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(0px) perspective(500px) rotateY(25deg) rotateZ(-5deg);
   }
   50% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(-20px) perspective(3000px) rotateY(5deg) rotateZ(0deg);
   }
   100% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(0px) perspective(500px) rotateY(25deg) rotateZ(-5deg);
   }
 }
@@ -33,24 +39,30 @@
 }
 @keyframes float2 {
   0% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(-20px) perspective(3000px) rotateY(5deg) rotateZ(0deg);
   }
   50% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(0px) perspective(500px) rotateY(-25deg) rotateZ(5deg);
   }
   100% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(-20px) perspective(3000px) rotateY(5deg) rotateZ(0deg);
   }
 }
@@ -61,39 +73,49 @@
 }
 @keyframes float3 {
   0% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(0px) perspective(500px) rotateY(25deg) rotateZ(-5deg);
   }
   25% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(-20px) perspective(3000px) rotateY(5deg) rotateZ(0deg);
   }
   50% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(0px) perspective(500px) rotateY(-25deg) rotateZ(5deg);
   }
   75% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(-20px) perspective(3000px) rotateY(-5deg)
       rotateZ(0deg);
   }
   100% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(0px) perspective(500px) rotateY(25deg) rotateZ(-5deg);
   }
 }
@@ -104,24 +126,30 @@
 }
 @keyframes float4 {
   0% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(0px) perspective(500px) rotateY(5deg) rotateZ(0);
   }
   50% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(-10px) perspective(2000px) rotateY(0deg) rotateZ(0deg);
   }
   100% {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
     transform: translateY(0px) perspective(500px) rotateY(5deg) rotateZ(0);
   }
 }

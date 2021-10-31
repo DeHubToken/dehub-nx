@@ -107,6 +107,11 @@ $menuBgColor: transparent;
       }
     }
   }
+
+  .layout-main {
+    // Fixes an issue with animated items overlaping with other items on safari
+    overflow: hidden;
+  }
 }
 
 /* ------------------------------ Media Queries ----------------------------- */
