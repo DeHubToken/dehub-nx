@@ -122,7 +122,9 @@ const DeGrandHistoryDialog = ({ open, onHide }: DeGrandHistoryDialogProps) => {
                         <Button
                           className="mt-1 justify-content-center"
                           onClick={() => {
-                            window.open('https://www.dehub.net', '_blank');
+                            window.open(
+                              `mailto:raffles@dehub.net?subject=I won DeGrand draw! What do I do now?`
+                            );
                           }}
                           label="Get in touch!"
                         />
