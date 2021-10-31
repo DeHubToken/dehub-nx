@@ -62,11 +62,11 @@ export const ContractAddresses: {
   [chainId in ChainId]: { [label: string]: string };
 } = {
   [ChainId.BSC_MAINNET]: {
-    DeHub: '',
+    DeHub: '0xFC206f429d55c71cb7294EfF40c6ADb20dC21508',
     BNB: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-    BUSD: '',
-    'DeHub-BNB': '',
-    'BNB-BUSD': '',
+    BUSD: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+    'DeHub-BNB': '0xE876eE0945CE80Ef821633f2C18950b33Fb85633',
+    'BNB-BUSD': '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
     StandardLottery: '',
     SpecialLottery: '',
     MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',

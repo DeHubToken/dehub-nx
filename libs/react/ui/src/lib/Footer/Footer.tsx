@@ -18,7 +18,10 @@ function Footer() {
         &nbsp;|&nbsp;
         <ul>
           <li>
-            <a href="/privacy-policy" className="p-link mb-2 mx-2">
+            <a
+              href="https://www.dehub.net/privacy-policy"
+              className="p-link mb-2 mx-2"
+            >
               Privacy Policy
             </a>
           </li>
@@ -26,7 +29,7 @@ function Footer() {
         &nbsp;|&nbsp;
         <ul>
           <li>
-            <a href="/terms" className="p-link mb-2 mx-2">
+            <a href="https://www.dehub.net/terms" className="p-link mb-2 mx-2">
               Terms & Conditions
             </a>
           </li>
@@ -34,7 +37,10 @@ function Footer() {
         &nbsp;|&nbsp;
         <ul>
           <li>
-            <a href="/careers" className="p-link mb-2 mx-2">
+            <a
+              href="https://www.dehub.net/careers"
+              className="p-link mb-2 mx-2"
+            >
               Careers
             </a>
           </li>
