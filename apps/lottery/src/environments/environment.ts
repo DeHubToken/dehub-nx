@@ -7,7 +7,7 @@ import { ChainId } from '@dehub/shared/config';
 
 export const environment = {
   production: false,
-  chainId: ChainId.BSC_TESTNET,
+  chainId: ChainId.BSC_MAINNET,
   deGrandStartDay: 26,
   deGrandStartDayOnFebruary: 25,
 };
