@@ -67,8 +67,8 @@ export const ContractAddresses: {
     BUSD: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
     'DeHub-BNB': '0xE876eE0945CE80Ef821633f2C18950b33Fb85633',
     'BNB-BUSD': '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
-    StandardLottery: '',
-    SpecialLottery: '',
+    StandardLottery: '0xF5A881B2c1Bc20DBE8E54674d65e8D66487da35e',
+    SpecialLottery: '0xdA9F2a546AfF5deDCF464205B229d18ab35B2d22',
     MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
   },
   [ChainId.BSC_TESTNET]: {
