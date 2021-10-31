@@ -246,13 +246,15 @@ const DeLottoStage1 = () => {
 
       {status !== LotteryStatus.PENDING && (
         <FlexLine className="md:flex-column align-items-center justify-content-between">
-          <Text className="mb-3">Are you a winner?</Text>
           {account && (
-            <Button
-              className="justify-content-center"
-              onClick={() => handleShowDialog('CheckStage1')}
-              label="Check Now"
-            />
+            <>
+              <Text className="mb-3">Are you a winner?</Text>
+              <Button
+                className="justify-content-center"
+                onClick={() => handleShowDialog('CheckStage1')}
+                label="Check Now"
+              />
+            </>
           )}
         </FlexLine>
       )}
