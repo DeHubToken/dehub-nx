@@ -132,7 +132,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
           ) : (
             <div className="mb-4">
               {winningRewards &&
-                winningRewards.allWinningTickets.map(
+                winningRewards.ticketsWithUnclaimedRewards.map(
                   (ticket: LotteryTicket, index: number) => {
                     return (
                       <TicketIdLabel
