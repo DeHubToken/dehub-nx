@@ -109,11 +109,8 @@ const getWinningTickets = async (
     };
   });
 
-  /**
-   * @todo, it must be > 0
-   */
   const allWinningTickets = ticketsWithRewardBrackets.filter(ticket => {
-    return ticket.rewardBracket >= 0;
+    return ticket.rewardBracket > 0;
   });
 
   // Any ticket wining a higher tier reward cancels all rewards for lower reward tiers winning tickets
