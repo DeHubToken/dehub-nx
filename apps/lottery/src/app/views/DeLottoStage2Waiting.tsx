@@ -32,12 +32,12 @@ const DeLottoStage2Waiting = () => {
         postCountDownText="until the start"
       />
       <Text className="mt-3 text-center">
-        Come back later to buy tickets for the DeRaffles second stage and the
+        Come back later to buy tickets for the second stage of DeRaffles and the
         DeGrand!
       </Text>
       <Button
         className="p-button-link p-0 mt-7"
-        label="Read more about the 'Stage Two'"
+        label="Read more about 'Stage Two'"
       />
     </FlexLine>
   );

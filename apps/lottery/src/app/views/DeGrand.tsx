@@ -180,7 +180,7 @@ const DeGrand = () => {
                 </Text>
                 <Button
                   className="p-button-link p-0 mt-3"
-                  label="Read more about the 'DeGrand'"
+                  label="Read more about 'DeGrand'"
                 />
               </div>
             )}

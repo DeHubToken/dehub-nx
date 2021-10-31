@@ -198,7 +198,7 @@ const DeLottoStage1 = () => {
                 ) : (
                   <>
                     <Text className="mb-2">
-                      Please connect your wallet fist.
+                      Please connect your wallet first.
                     </Text>
                     <ConnectWalletButton />
                   </>
