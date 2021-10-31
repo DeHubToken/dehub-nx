@@ -6,7 +6,6 @@ import { Contexts } from '@dehub/react/core';
 
 import { getChainId } from './config/constants';
 import { RefreshContextProvider } from './contexts/RefreshContext';
-import MoralisReactManager from './components/MoralisReactManager';
 import { store } from './states';
 import Lottery from './views/Lottery';
 
@@ -18,11 +17,9 @@ export function App() {
     <MoralisProvider appId={appId} serverUrl={serverUrl}>
       <Provider store={store}>
         <Contexts.MoralisEthersProvider>
-          <MoralisReactManager>
-            <RefreshContextProvider>
-              <Lottery />
-            </RefreshContextProvider>
-          </MoralisReactManager>
+          <RefreshContextProvider>
+            <Lottery />
+          </RefreshContextProvider>
         </Contexts.MoralisEthersProvider>
       </Provider>
     </MoralisProvider>

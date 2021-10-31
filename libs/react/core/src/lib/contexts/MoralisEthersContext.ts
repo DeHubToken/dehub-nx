@@ -10,6 +10,8 @@ export interface MoralisEthersContextValue {
   chainId: string | undefined;
   authenticate: (options?: AuthenticateOptions) => Promise<void>;
   logout: () => Promise<void>;
+  activateProvider: () => void;
+  clearProvider: () => void;
 }
 
 export const MoralisEthersContext =
