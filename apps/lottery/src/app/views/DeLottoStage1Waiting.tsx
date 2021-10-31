@@ -1,21 +1,24 @@
-import { endOfMonth } from 'date-fns';
+import { addMonths } from 'date-fns';
 import { Button } from 'primereact/button';
 
 import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
 import { Text } from '../components/Text';
-import { utcToLocal } from '../utils/dateHelpers';
 
 const DeLottoStage1Waiting = () => {
-  const startOfNextMonthAsInt = utcToLocal(
-    endOfMonth(new Date()).getTime()
-  ).getTime(); // after 5 min
+  const now = new Date();
+  const startThisMonth = new Date(0);
+  startThisMonth.setUTCFullYear(now.getUTCFullYear(), now.getUTCMonth(), 1);
+  const startOfNextMonthAsInt = addMonths(
+    startThisMonth.getTime(),
+    1
+  ).getTime();
 
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center h-30rem">
       <i className="fad fa-alarm-clock mb-4" style={{ fontSize: '30px' }}></i>
       <EventCountDown
-        nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 501}
+        nextEventTime={Math.floor(startOfNextMonthAsInt / 1000) + 301}
         timerFontSize="28px"
         titleFontSize="18px"
         postCountDownText="until the start"
