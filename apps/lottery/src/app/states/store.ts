@@ -7,11 +7,7 @@ import pauseReducer from './pause';
 import standardLotteryReducer from './standard-lottery';
 import specialLotteryReducer from './special-lottery';
 
-const PERSISTED_KEYS: string[] = [
-  'application',
-  'standardLottery',
-  'specialLottery',
-];
+const PERSISTED_KEYS: string[] = ['standardLottery', 'specialLottery'];
 
 export const store = configureStore({
   reducer: {
