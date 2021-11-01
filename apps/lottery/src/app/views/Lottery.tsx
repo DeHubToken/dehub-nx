@@ -4,8 +4,9 @@ import { Moralis } from 'moralis';
 import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
+import { iOS } from '@dehub/shared/utils';
 
-import { getChainId, getChainIdHex } from '../config/constants';
+import { getChainIdHex } from '../config/constants';
 import UserMenu from '../components/UserMenu';
 import { useWalletConnectingState } from '../states/application/hooks';
 import DeGrand from '../views/DeGrand';
@@ -23,6 +24,18 @@ export default function Lottery() {
   const walletConnectingState = useWalletConnectingState();
 
   const { clearProvider } = Hooks.useMoralisEthers();
+
+  /*
+   * Hack to avoid trustwallet redirecting to a open in app website on iOS...
+   * Ref: https://github.com/WalletConnect/walletconnect-monorepo/issues/552
+   */
+  useEffect(() => {
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden' && iOS()) {
+        window.localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
+      }
+    });
+  }, []);
 
   useEffect(() => {
     Moralis.Web3.onChainChanged(newChainId => {
