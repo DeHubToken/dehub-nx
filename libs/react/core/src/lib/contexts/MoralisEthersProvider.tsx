@@ -1,3 +1,4 @@
+/* eslint-disable multiline-comment-style */
 import {
   ExternalProvider,
   JsonRpcSigner,
@@ -37,12 +38,19 @@ export const MoralisEthersProvider = ({
     const provider = new Web3Provider(
       newWeb3?.currentProvider as ExternalProvider
     );
+
     setAuthProvider(provider);
 
+    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // const ethereum = (window as any).ethereum;
+    // const newChainId = await ethereum?.request({ method: 'eth_chainId' });
+    // setChainId(newChainId);
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const ethereum = (window as any).ethereum;
-    const newChainId = await ethereum?.request({ method: 'eth_chainId' });
-    setChainId(newChainId);
+    const newChainId = (provider.provider as any).chainId;
+    if (newChainId) {
+      setChainId(`0x${newChainId.toString(16)}`);
+    }
 
     const signerT = provider.getSigner();
     setSigner(signerT);
@@ -66,9 +74,7 @@ export const MoralisEthersProvider = ({
     };
 
     if (user) {
-      if (isWeb3Enabled) {
-        activateProvider();
-      } else {
+      if (!isWeb3Enabled) {
         const savedProviderName = window.localStorage.getItem('providerName');
         enableWeb3({
           provider: savedProviderName,
