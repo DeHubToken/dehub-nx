@@ -33,6 +33,16 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
           </Button>
         </div>
         <div className="flex flex-column mt-2 mb-3">
+          <Button className="p-shadow-4" onClick={() => doConnect('metamask')}>
+            <img
+              style={{ height: '16px', paddingRight: '10px' }}
+              src="assets/dehub/icons/trustwallet.svg"
+              alt=""
+            />
+            Trust Wallet
+          </Button>
+        </div>
+        <div className="flex flex-column mt-2 mb-3">
           <Button
             className="p-shadow-4"
             onClick={() => doConnect('walletconnect')}
