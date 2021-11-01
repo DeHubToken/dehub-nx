@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
-import { setupNetwork } from '@dehub/shared/utils';
+import { setupNetwork } from '@dehub/shared/moralis';
 
 import { useSetWalletConnectingState } from '../../states/application/hooks';
 import { getChainId } from '../../config/constants';
@@ -35,18 +35,27 @@ const ConnectWalletButton = () => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
         onSuccess: async () => {
-          const onSwitchNetwork = () => {
-            setWalletConnectingState(WalletConnectingState.SWITCH_NETWORK);
-          };
-          const onAddNetwork = () => {
-            setWalletConnectingState(WalletConnectingState.ADD_NETWORK);
-          };
-          if (await setupNetwork(getChainId(), onSwitchNetwork, onAddNetwork)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const ethereum = (window as any).ethereum;
+          if (ethereum) {
+            const onSwitchNetwork = () => {
+              setWalletConnectingState(WalletConnectingState.SWITCH_NETWORK);
+            };
+            const onAddNetwork = () => {
+              setWalletConnectingState(WalletConnectingState.ADD_NETWORK);
+            };
+            if (
+              await setupNetwork(getChainId(), onSwitchNetwork, onAddNetwork)
+            ) {
+              activateProvider();
+              setWalletConnectingState(WalletConnectingState.COMPLETE);
+            } else {
+              logout();
+              setWalletConnectingState(WalletConnectingState.INIT);
+            }
+          } else {
             activateProvider();
             setWalletConnectingState(WalletConnectingState.COMPLETE);
-          } else {
-            logout();
-            setWalletConnectingState(WalletConnectingState.INIT);
           }
 
           if (mountedRef.current) {

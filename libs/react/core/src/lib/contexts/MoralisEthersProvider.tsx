@@ -1,3 +1,4 @@
+/* eslint-disable multiline-comment-style */
 import {
   ExternalProvider,
   JsonRpcSigner,
@@ -22,8 +23,14 @@ export const MoralisEthersProvider = ({
   const [account, setAccount] = useState<string | undefined>(undefined);
   const [chainId, setChainId] = useState<string | undefined>(undefined);
 
-  const { enableWeb3, isAuthenticated, authenticate, user, logout } =
-    useMoralis();
+  const {
+    isWeb3Enabled,
+    enableWeb3,
+    isAuthenticated,
+    authenticate,
+    user,
+    logout,
+  } = useMoralis();
 
   const activateProvider = useCallback(async () => {
     // if (!newWeb3 || !newWeb3?.currentProvider) return;
@@ -31,12 +38,19 @@ export const MoralisEthersProvider = ({
     const provider = new Web3Provider(
       newWeb3?.currentProvider as ExternalProvider
     );
+
     setAuthProvider(provider);
 
+    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // const ethereum = (window as any).ethereum;
+    // const newChainId = await ethereum?.request({ method: 'eth_chainId' });
+    // setChainId(newChainId);
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const ethereum = (window as any).ethereum;
-    const newChainId = await ethereum?.request({ method: 'eth_chainId' });
-    setChainId(newChainId);
+    const newChainId = (provider.provider as any).chainId;
+    if (newChainId) {
+      setChainId(`0x${newChainId.toString(16)}`);
+    }
 
     const signerT = provider.getSigner();
     setSigner(signerT);
@@ -60,16 +74,16 @@ export const MoralisEthersProvider = ({
     };
 
     if (user) {
-      const savedProviderName = window.localStorage.getItem('providerName');
-      enableWeb3({
-        provider: savedProviderName,
-        onSuccess,
-        onError,
-      });
-    } else {
-      clearProvider();
+      if (!isWeb3Enabled) {
+        const savedProviderName = window.localStorage.getItem('providerName');
+        enableWeb3({
+          provider: savedProviderName,
+          onSuccess,
+          onError,
+        });
+      }
     }
-  }, [user, enableWeb3, activateProvider, clearProvider]);
+  }, [user, isWeb3Enabled, enableWeb3, activateProvider, clearProvider]);
 
   useEffect(() => {
     Moralis.Web3.onAccountsChanged(([newAccount]) => {
