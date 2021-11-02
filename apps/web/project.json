@@ -20,13 +20,13 @@
           {
             "input": "libs/shared/assets/dehub/src/lib",
             "glob": "**/*",
-            "ignore": ["**/ts"],
+            "ignore": ["**/*.ts"],
             "output": "assets/dehub"
           },
           {
             "input": "libs/shared/assets/freya/src/lib",
             "glob": "**/*",
-            "ignore": ["**/ts"],
+            "ignore": ["**/*.ts", "**/*.scss"],
             "output": "assets"
           }
         ],
