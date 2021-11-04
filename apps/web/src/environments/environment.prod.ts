@@ -1,3 +1,3 @@
-export const environment = {
-  production: true,
-};
+import { Env, environmentProd } from '@dehub/shared/config';
+
+export const environment: Env = environmentProd;

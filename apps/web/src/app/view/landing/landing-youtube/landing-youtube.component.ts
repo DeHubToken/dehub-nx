@@ -8,15 +8,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       class="max-w-full h-auto border-solid border-4"
     />
   `,
-  styles: [
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingYoutubeComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

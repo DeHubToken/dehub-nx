@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { GraphQLModule } from '@dehub/angular/core';
+import { ENV } from '@dehub/shared/config';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
@@ -54,6 +56,7 @@ const primeNgModules = [ButtonModule, RippleModule, MenuModule, ChartModule];
        */
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    GraphQLModule,
   ],
   declarations: [
     AppComponent,
@@ -81,7 +84,11 @@ const primeNgModules = [ButtonModule, RippleModule, MenuModule, ChartModule];
     LandingTrikenomicsComponent,
     LandingTrikenomicComponent,
   ],
-  providers: [MenuService, AppMainComponent],
+  providers: [
+    MenuService,
+    AppMainComponent,
+    { provide: ENV, useValue: environment },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

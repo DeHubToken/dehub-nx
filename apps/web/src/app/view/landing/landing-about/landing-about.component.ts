@@ -11,15 +11,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       technology.
     </p>
   `,
-  styles: [
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingAboutComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

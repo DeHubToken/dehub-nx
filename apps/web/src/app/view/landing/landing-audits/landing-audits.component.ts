@@ -35,15 +35,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       </a>
     </span>
   `,
-  styles: [
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingAuditsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

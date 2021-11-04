@@ -4,34 +4,39 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { TeamMember } from '@dehub/shared/contentful';
 
-export interface TeamMember {
-  avatar: string;
-  name: string;
-  title: string;
-  social: { icon: string; link: string }[];
+interface SocialLink {
+  icon: string;
+  url?: string;
 }
-
 @Component({
   selector: 'dhb-landing-team-member',
   template: `
-    <div *ngIf="teamMember" class="card image-card shadow-8">
-      <img
-        [src]="
-          'assets/landing/team/avatars/' + teamMember.avatar + '-avatar.jpg'
-        "
-        [alt]="teamMember.name"
-      />
+    <div
+      *ngIf="teamMember"
+      [class.opacity-40]="!teamMember.sys.publishedAt"
+      class="card image-card shadow-8"
+    >
+      <!-- Avatar -->
+      <img [src]="teamMember.avatar?.url" [alt]="teamMember.name" />
+
       <div class="image-content">
+        <!-- Name -->
         <h6>{{ teamMember.name }}</h6>
+
+        <!-- Title -->
         <p>{{ teamMember.title }}</p>
-        <ng-container *ngFor="let link of teamMember.social">
+
+        <!-- Social Links -->
+        <ng-container *ngFor="let link of socialLinks">
           <button
+            *ngIf="link.url"
             pButton
             pRipple
             type="button"
             [icon]="link.icon"
-            class="button-rounded button-text mr-2 mb-2 w-2rem"
+            class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem"
           ></button>
         </ng-container>
       </div>
@@ -43,7 +48,30 @@ export interface TeamMember {
 export class LandingTeamMemberComponent implements OnInit {
   @Input() teamMember?: TeamMember;
 
+  socialLinks?: SocialLink[];
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    if (!this.teamMember) return;
+
+    this.socialLinks = [
+      {
+        icon: 'fab fa-twitter',
+        url: this.teamMember.twitter,
+      },
+      {
+        icon: 'fab fa-linkedin',
+        url: this.teamMember.linkedin,
+      },
+      {
+        icon: 'fab fa-instagram',
+        url: this.teamMember.instagram,
+      },
+      {
+        icon: 'fab fa-github',
+        url: this.teamMember.github,
+      },
+    ];
+  }
 }
