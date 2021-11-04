@@ -30,7 +30,7 @@ const random = (minNumber: number, maxNumber: number): number => {
 export const generateLotteryNumber = (): number => {
   let num = 0;
   for (let idx = 0; idx < NUMBER_COUNT; idx++) {
-    num = num * 100 + random(1, 18);
+    num = num * 100 + ((random(0, 100) % 18) + 1);
   }
   return num + LIMIT_NUMBER;
 };
