@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { GraphQLModule } from '@dehub/angular/core';
-import { ENV } from '@dehub/shared/config';
+import { EnvToken } from '@dehub/angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
@@ -87,7 +87,7 @@ const primeNgModules = [ButtonModule, RippleModule, MenuModule, ChartModule];
   providers: [
     MenuService,
     AppMainComponent,
-    { provide: ENV, useValue: environment },
+    { provide: EnvToken, useValue: environment },
   ],
   bootstrap: [AppComponent],
 })

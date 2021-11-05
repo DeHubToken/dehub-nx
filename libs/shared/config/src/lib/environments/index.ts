@@ -1,3 +1,3 @@
-export { ENV, Env } from './env';
-export { environmentDev } from './environment';
-export { environmentProd } from './environment.prod';
+export * from './env';
+export * from './environment';
+export * from './environment.prod';

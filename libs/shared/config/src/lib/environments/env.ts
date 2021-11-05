@@ -1,5 +1,3 @@
-import { InjectionToken } from '@angular/core';
-
 interface ContentfulEnv {
   /** Contentful Space ID */
   spaceId: string;
@@ -48,5 +46,3 @@ export const defaultEnv: Env = {
     },
   },
 };
-
-export const ENV = new InjectionToken<Env>('DeHub Environment');

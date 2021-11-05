@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { InMemoryCache } from '@apollo/client/cache';
 import { from } from '@apollo/client/core';
 import { onError } from '@apollo/client/link/error';
-import { Env, ENV } from '@dehub/shared/config';
+import { Env } from '@dehub/shared/config';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
+import { EnvToken } from './models/injection-token';
 
 /**
  * Creating Apollo Client
@@ -13,7 +14,6 @@ import { HttpLink } from 'apollo-angular/http';
  * Apollo Angular Docs: https://apollo-angular.com/docs/get-started#installation-without-angular-schematics
  * Contentful Docs: https://www.contentful.com/developers/docs/references/graphql/#/introduction
  * Contentful Example: https://github.com/contentful/the-example-app.graphql.js/blob/master/src/index.js#L24
- *
  */
 export function createApollo(
   httpLink: HttpLink,
@@ -58,7 +58,7 @@ export function createApollo(
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpLink, ENV],
+      deps: [HttpLink, EnvToken],
     },
   ],
 })
