@@ -37,6 +37,7 @@ interface SocialLink {
             pRipple
             [icon]="link.icon"
             [title]="link.name"
+            [disabled]="link.url === '#'"
             type="button"
             class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem"
           ></button>
@@ -50,34 +51,49 @@ interface SocialLink {
 export class LandingTeamMemberComponent implements OnInit {
   @Input() teamMember?: TeamMember;
 
-  socialLinks?: SocialLink[];
+  socialLinks: SocialLink[] = [];
 
   constructor() {}
 
   ngOnInit() {
     if (!this.teamMember) return;
 
-    this.socialLinks = [
-      {
+    const { twitter, github, linkedin, instagram } = this.teamMember;
+
+    if (twitter)
+      this.socialLinks.push({
         icon: 'fab fa-twitter',
         url: this.teamMember.twitter,
         name: 'Twitter',
-      },
-      {
+      });
+
+    if (linkedin)
+      this.socialLinks.push({
         icon: 'fab fa-linkedin',
         url: this.teamMember.linkedin,
         name: 'LinkedIn',
-      },
-      {
+      });
+
+    if (instagram)
+      this.socialLinks.push({
         icon: 'fab fa-instagram',
         url: this.teamMember.instagram,
         name: 'Instagram',
-      },
-      {
+      });
+
+    if (github)
+      this.socialLinks.push({
         icon: 'fab fa-github',
         url: this.teamMember.github,
         name: 'GitHub',
-      },
-    ];
+      });
+
+    // Keep spacing in the team card
+    if (this.socialLinks.length === 0)
+      this.socialLinks.push({
+        icon: '',
+        url: '#',
+        name: '',
+      });
   }
 }
