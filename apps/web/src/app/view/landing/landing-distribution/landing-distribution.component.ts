@@ -10,15 +10,20 @@ import { ChartData, ChartOptions } from 'chart.js';
     <div class="grid">
       <div class="col-12 md:col-6">
         <h4 class="uppercase">Presale + Liquidity Pool</h4>
-        <p>
-          34% of the total supply is allocated to presale and liquidity pool.
-          Private sale rate: 0.001$ / DeHub Launchpad rate: 0.00135$ / DeHub
-          Listing rate: 0.0015$ / DeHub Note: LP locked for 3 years.
-        </p>
+
+        <ul class="list-disc text-3xl">
+          <li>
+            34% of the total supply is allocated to presale and liquidity pool
+          </li>
+          <li>Private sale rate: 0.001$ / $DEHUB</li>
+          <li>Launchpad rate: 0.00135$ / $DEHUB</li>
+          <li>Listing rate: 0.0015$ / $DEHUB</li>
+          <li>Note: LP locked for 3 years</li>
+        </ul>
       </div>
       <div class="col-12 md:col-6">
         <h4 class="uppercase">Burned Wallet</h4>
-        <p>
+        <p class="text-3xl">
           The DeHub Burned Wallet will receive its share from the 1% reflections
           in a process that slowly removes tokens from circulation thus
           increasing the value of the remaining tokens.
@@ -37,7 +42,7 @@ import { ChartData, ChartOptions } from 'chart.js';
 
       <div class="col-12 md:col-6">
         <h4 class="uppercase">Team Wallet</h4>
-        <p>
+        <p class="text-3xl">
           The DeHub Team Wallet contains funds reserved for founders who
           initially funded and started the project. No wallet can sell below
           their percentage allocation and only the reflections will be tradable
@@ -46,7 +51,7 @@ import { ChartData, ChartOptions } from 'chart.js';
       </div>
       <div class="col-12 md:col-6">
         <h4 class="uppercase">Operations & Marketing Wallet</h4>
-        <p>
+        <p class="text-3xl">
           8% of the total supply will be allocated to fund the following: 1-
           Marketing: Ongoing marketing campaigns, influencers and in-house
           marketing experts, social media moderators and designers. 2- Research
