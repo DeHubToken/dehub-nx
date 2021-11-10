@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 export interface Trikenomic {
-  icon: string[];
+  icon: string;
   percent?: number;
   title: string;
   subTitle: string;
@@ -14,7 +14,14 @@ export interface Trikenomic {
   selector: 'dhb-landing-trikenomic',
   template: `
     <div *ngIf="trikenomic" class="pricing-card enterprise shadow-8">
-      <span class="time"><i [ngClass]="trikenomic.icon"></i></span>
+      <span class="time">
+        <i
+          [ngClass]="trikenomic.icon"
+          class="text-7xl"
+          style="--fa-primary-color: #7C08A3; --fa-secondary-color: #00B7D3; --fa-secondary-opacity: 1.0;"
+        >
+        </i>
+      </span>
       <h2>{{ trikenomic.title }}</h2>
       <span *ngIf="trikenomic.percent" class="price"
         >{{ trikenomic.percent }}%</span
@@ -24,7 +31,15 @@ export interface Trikenomic {
       </ul>
     </div>
   `,
-  styles: [],
+  styles: [
+    `
+      .pricing-card {
+        .time {
+          opacity: 1 !important;
+        }
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingTrikenomicComponent implements OnInit {
