@@ -34,9 +34,9 @@ import { LandingTeamComponent } from './view/landing/landing-team/landing-team.c
 import { LandingTrikenomicComponent } from './view/landing/landing-trikenomic/landing-trikenomic.component';
 import { LandingTrikenomicsComponent } from './view/landing/landing-trikenomics/landing-trikenomics.component';
 import { LandingViewComponent } from './view/landing/landing-view.component';
-import { LandingYoutubeComponent } from './view/landing/landing-youtube/landing-youtube.component';
 import { LandingZoneComponent } from './view/landing/landing-zone/landing-zone.component';
 import { LandingZonesComponent } from './view/landing/landing-zones/landing-zones.component';
+
 const primeNgModules = [
   ButtonModule,
   RippleModule,
@@ -78,7 +78,6 @@ const primeNgModules = [
     LandingAboutComponent,
     LandingLinksComponent,
     LandingAuditsComponent,
-    LandingYoutubeComponent,
     LandingListedComponent,
     LandingTeamMemberComponent,
     LandingTeamComponent,

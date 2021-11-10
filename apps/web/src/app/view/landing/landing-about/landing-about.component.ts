@@ -3,12 +3,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'dhb-landing-about',
   template: `
-    <p class="col-12">
-      DeHub is blockchain's first entertainment aggregator and licensed producer
-      of original motion picture, exclusive Pay-Per-View events, and surreal
-      gaming experiences. This unified ecosystem is all fueled with $DEHUB
-      tokens through open-source software and secured by cutting-edge blockchain
-      technology.
+    <div class="col-6">
+      <h2>Your portal to the Metaverse</h2>
+    </div>
+
+    <p class="col-6 text-3xl mt-4 mb-5 ">
+      Blockchain’s first all-encompassing, highly-rewarding, ever-growing,
+      lifestyle and entertainment aggregator. Watch, play, shop and earn in one
+      ecosystem, powered by one token.
     </p>
   `,
   styles: [],

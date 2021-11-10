@@ -3,13 +3,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'dhb-landing-audits',
   template: `
-    <p class="col-3 uppercase">Audits:</p>
-    <span class="col-9">
+    <div class="col-12 flex align-items-center mt-4 mb-5">
+      <p class="uppercase bold  mr-4 mb-2">Audits:</p>
+
       <!-- TechRate -->
       <a
         href="https://github.com/TechRate/Smart-Contract-Audits/blob/main/Dehub%20Standart%20Smart%20Contract%20Security%20Audit%20(3).pdf"
         target="_blank"
-        class="m-1"
+        class="pr-3"
       >
         <button
           pButton
@@ -19,11 +20,12 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
           class="button-rounded"
         ></button>
       </a>
+
       <!-- CertiK -->
       <a
         href="https://leaderboard.certik.io/projects/dehub"
         target="_blank"
-        class="m-1"
+        class=""
       >
         <button
           pButton
@@ -33,7 +35,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
           class="button-rounded"
         ></button>
       </a>
-    </span>
+    </div>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

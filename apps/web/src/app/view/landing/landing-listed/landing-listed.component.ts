@@ -3,25 +3,27 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 @Component({
   selector: 'dhb-landing-listed',
   template: `
-    <p class="col-3 uppercase">Listed On:</p>
-    <span class="col-9">
+    <div class="col-12 flex align-items-center mt-4 mb-5">
+      <p class="uppercase bold mr-4">Listed On:</p>
+
       <!-- Coingecko -->
       <a
         href="https://www.coingecko.com/en/coins/dehub"
         target="_blank"
-        class="m-1"
+        class="pr-5"
       >
-        <img src="/assets/landing/svg/coingecko-logo.svg" class="w-2rem" />
+        <img src="/assets/landing/svg/coingecko-logo.svg" class="h-3rem" />
       </a>
+
       <!-- Coinmarketcap -->
       <a
         href="https://coinmarketcap.com/currencies/dehub/"
         target="_blank"
-        class="m-1"
+        class="pr-5"
       >
-        <img src="/assets/landing/svg/coinmarketcap-logo.svg" class="w-2rem" />
+        <img src="/assets/landing/svg/coinmarketcap-logo.svg" class="h-3rem" />
       </a>
-    </span>
+    </div>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

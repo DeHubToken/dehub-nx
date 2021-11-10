@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
       <a
         href="/uploads/Dehub%20Whitepaper%20V3%20-%202021.pdf"
         target="_blank"
-        class="m-1"
+        class="pr-3"
       >
         <button
           pButton
@@ -23,7 +23,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
       <a
         href="https://poocoin.app/tokens/0xfc206f429d55c71cb7294eff40c6adb20dc21508"
         target="_blank"
-        class="m-1"
+        class="pr-3"
       >
         <button
           pButton
@@ -33,29 +33,12 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
           class="button-rounded uppercase"
         ></button>
       </a>
-    </div>
-
-    <div class="col-12">
-      <!-- Prize Draw White Paper -->
-      <a
-        href="/uploads/DeHub%20Prize%20Draw%20Whitepaper%20-%20V1.pdf"
-        target="_blank"
-        class="m-1"
-      >
-        <button
-          pButton
-          pRipple
-          type="button"
-          label="Prize Draw White Paper"
-          class="button-rounded uppercase"
-        ></button>
-      </a>
 
       <!-- Buy -->
       <a
         href="https://pancakeswap.finance/swap?outputCurrency=0xFC206f429d55c71cb7294EfF40c6ADb20dC21508"
         target="_blank"
-        class="m-1"
+        class=""
       >
         <button
           pButton
