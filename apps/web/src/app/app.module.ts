@@ -23,6 +23,7 @@ import { AppTopBarComponent } from './topbar/app.topbar.component';
 import { LandingAboutComponent } from './view/landing/landing-about/landing-about.component';
 import { LandingAuditsComponent } from './view/landing/landing-audits/landing-audits.component';
 import { LandingDistributionComponent } from './view/landing/landing-distribution/landing-distribution.component';
+import { LandingExchangesComponent } from './view/landing/landing-exchanges/landing-exchanges.component';
 import { LandingLinksComponent } from './view/landing/landing-links/landing-links.component';
 import { LandingListedComponent } from './view/landing/landing-listed/landing-listed.component';
 import { LandingPartnerComponent } from './view/landing/landing-partner/landing-partner.component';
@@ -79,6 +80,7 @@ const primeNgModules = [
     LandingLinksComponent,
     LandingAuditsComponent,
     LandingListedComponent,
+    LandingExchangesComponent,
     LandingTeamMemberComponent,
     LandingTeamComponent,
     LandingTeamSkeletonComponent,
