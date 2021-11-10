@@ -7,6 +7,7 @@ import {
 import { TeamMember } from '@dehub/shared/contentful';
 
 interface SocialLink {
+  name: string;
   icon: string;
   url?: string;
 }
@@ -34,8 +35,9 @@ interface SocialLink {
             *ngIf="link.url"
             pButton
             pRipple
-            type="button"
             [icon]="link.icon"
+            [title]="link.name"
+            type="button"
             class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem"
           ></button>
         </ng-container>
@@ -59,18 +61,22 @@ export class LandingTeamMemberComponent implements OnInit {
       {
         icon: 'fab fa-twitter',
         url: this.teamMember.twitter,
+        name: 'Twitter',
       },
       {
         icon: 'fab fa-linkedin',
         url: this.teamMember.linkedin,
+        name: 'LinkedIn',
       },
       {
         icon: 'fab fa-instagram',
         url: this.teamMember.instagram,
+        name: 'Instagram',
       },
       {
         icon: 'fab fa-github',
         url: this.teamMember.github,
+        name: 'GitHub',
       },
     ];
   }

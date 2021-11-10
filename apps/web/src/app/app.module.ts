@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { GraphQLModule } from '@dehub/angular/core';
-import { EnvToken } from '@dehub/angular/core';
+import { EnvToken, GraphQLModule } from '@dehub/angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
+import { SkeletonModule } from 'primeng/skeleton';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { LandingPartnerComponent } from './view/landing/landing-partner/landing-
 import { LandingPartnersComponent } from './view/landing/landing-partners/landing-partners.component';
 import { LandingSlogenComponent } from './view/landing/landing-slogen/landing-slogen.component';
 import { LandingTeamMemberComponent } from './view/landing/landing-team-member/landing-team-member.component';
+import { LandingTeamSkeletonComponent } from './view/landing/landing-team/landing-team-skeleton.component';
 import { LandingTeamComponent } from './view/landing/landing-team/landing-team.component';
 import { LandingTrikenomicComponent } from './view/landing/landing-trikenomic/landing-trikenomic.component';
 import { LandingTrikenomicsComponent } from './view/landing/landing-trikenomics/landing-trikenomics.component';
@@ -36,9 +37,6 @@ import { LandingViewComponent } from './view/landing/landing-view.component';
 import { LandingYoutubeComponent } from './view/landing/landing-youtube/landing-youtube.component';
 import { LandingZoneComponent } from './view/landing/landing-zone/landing-zone.component';
 import { LandingZonesComponent } from './view/landing/landing-zones/landing-zones.component';
-import { SkeletonModule } from 'primeng/skeleton';
-import { LandingTeamSkeletonComponent } from './view/landing/landing-team/landing-team-skeleton.component';
-
 const primeNgModules = [
   ButtonModule,
   RippleModule,
