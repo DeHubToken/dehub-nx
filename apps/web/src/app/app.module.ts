@@ -36,8 +36,16 @@ import { LandingViewComponent } from './view/landing/landing-view.component';
 import { LandingYoutubeComponent } from './view/landing/landing-youtube/landing-youtube.component';
 import { LandingZoneComponent } from './view/landing/landing-zone/landing-zone.component';
 import { LandingZonesComponent } from './view/landing/landing-zones/landing-zones.component';
+import { SkeletonModule } from 'primeng/skeleton';
+import { LandingTeamSkeletonComponent } from './view/landing/landing-team/landing-team-skeleton.component';
 
-const primeNgModules = [ButtonModule, RippleModule, MenuModule, ChartModule];
+const primeNgModules = [
+  ButtonModule,
+  RippleModule,
+  MenuModule,
+  ChartModule,
+  SkeletonModule,
+];
 
 @NgModule({
   imports: [
@@ -76,6 +84,7 @@ const primeNgModules = [ButtonModule, RippleModule, MenuModule, ChartModule];
     LandingListedComponent,
     LandingTeamMemberComponent,
     LandingTeamComponent,
+    LandingTeamSkeletonComponent,
     LandingPartnersComponent,
     LandingPartnerComponent,
     LandingZonesComponent,
