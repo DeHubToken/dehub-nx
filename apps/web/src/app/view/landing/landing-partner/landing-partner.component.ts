@@ -19,13 +19,14 @@ export interface Partner {
       <img
         [src]="'assets/landing/partners/' + partner.logo + '-logo.svg'"
         [alt]="partner.title"
+        class="h-8rem mt-6"
       />
-      <div class="image-content">
-        <a [href]="partner.website"
-          ><h6>{{ partner.title }}</h6>
-          <i class="pi pi-external-link"></i
-        ></a>
-        <p>{{ partner.description }}</p>
+      <div class="image-content text-center">
+        <a [href]="partner.website" class="text-3xl uppercase">
+          {{ partner.title }}
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <p class="text-2xl">{{ partner.description }}</p>
       </div>
     </div>
   `,

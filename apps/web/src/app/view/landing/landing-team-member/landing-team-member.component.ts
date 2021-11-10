@@ -24,10 +24,10 @@ interface SocialLink {
 
       <div class="image-content">
         <!-- Name -->
-        <h6>{{ teamMember.name }}</h6>
+        <h3>{{ teamMember.name }}</h3>
 
         <!-- Title -->
-        <p>{{ teamMember.title }}</p>
+        <p class="text-2xl bold uppercase">{{ teamMember.title }}</p>
 
         <!-- Social Links -->
         <ng-container *ngFor="let link of socialLinks">
@@ -39,7 +39,7 @@ interface SocialLink {
             [title]="link.name"
             [disabled]="link.url === '#'"
             type="button"
-            class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem"
+            class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem text-xl"
           ></button>
         </ng-container>
       </div>

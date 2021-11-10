@@ -26,9 +26,7 @@ export interface Trikenomic {
       <span *ngIf="trikenomic.percent" class="price"
         >{{ trikenomic.percent }}%</span
       >
-      <ul>
-        <li>{{ trikenomic.subTitle }}</li>
-      </ul>
+      <span class="text-2xl">{{ trikenomic.subTitle }}</span>
     </div>
   `,
   styles: [
