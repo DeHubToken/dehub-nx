@@ -91,6 +91,7 @@
     "@graphql-codegen/cli": "2.2.2",
     "@graphql-codegen/typescript": "2.3.0",
     "@graphql-codegen/typescript-apollo-angular": "3.3.0",
+    "@graphql-codegen/typescript-graphql-request": "4.3.0",
     "@graphql-codegen/typescript-operations": "2.2.0",
     "@graphql-codegen/typescript-react-apollo": "3.2.0",
     "@nrwl/angular": "13.0.2",

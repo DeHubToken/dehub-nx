@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { TeamMember, TeamMembersGQL } from '@dehub/shared/contentful';
+import { TeamMembersService } from '@dehub/angular/core';
+import { TeamMember } from '@dehub/shared/contentful';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
@@ -32,10 +33,10 @@ export class TeamComponent implements OnInit {
   teamMembersLoading$?: Observable<boolean>;
   teamMembersSkeleton = [...Array(4)];
 
-  constructor(private teamMembersGQL: TeamMembersGQL) {}
+  constructor(private teamMembersService: TeamMembersService) {}
 
   ngOnInit() {
-    const temMembersQuery$ = this.teamMembersGQL.watch({
+    const temMembersQuery$ = this.teamMembersService.watch({
       isPreview: environment.contentful.isPreview,
     }).valueChanges;
 
