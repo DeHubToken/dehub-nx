@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TeamMembersService } from '@dehub/angular/core';
-import { TeamMember } from '@dehub/shared/contentful';
+import { TeamMember } from '@dehub/shared/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';

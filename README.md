@@ -56,7 +56,7 @@ Angular libs which can be consumed only from Angular apps like ui libs or core s
 ### `core`
 
 - Angular animations
-- GraphQL module
+- GraphQL module with generated services
 - PWA service _(coming soon...)_
 
 ## React
@@ -66,6 +66,8 @@ Angular libs which can be consumed only from Angular apps like ui libs or core s
 ### `core`
 
 _React core functionalities_
+
+- Contentful GraphQL generated hooks
 
 ### `ui`
 
@@ -83,13 +85,15 @@ _Common Moralis logic like authentication, walletconnect, etc_
 
 _Common Models, states used in react and angular apps_
 
+- Contentful GraphQL generated models
+
 ### `utils`
 
 _Common Utils used in react and angular apps_
 
-### `contentful`
+### `graphql`
 
-_Generated models from Contentful GraphQL via [graphql codegen](https://www.graphql-code-generator.com/)_
+_GraphQL queries like Contentful (use [graphql codegen](https://www.graphql-code-generator.com/))_
 
 ### `assets/dehub`
 

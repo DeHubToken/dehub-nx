@@ -1,1 +1,1 @@
-export * from './website-contentful.service';
+export * from './website-contentful.services';

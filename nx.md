@@ -155,12 +155,6 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/angular:library --name=core --directory=angular --standaloneConfig --strict
    ```
 
-1. Generate Contentful lib:
-
-   ```
-   nx generate @nrwl/workspace:library --name=contentful --directory=shared --standaloneConfig --strict
-   ```
-
 # Netlify Settings
 
 1. Configuration details found in `.env` with `NETLIFY_AUTH_TOKEN` created on the Netlify Team page

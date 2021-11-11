@@ -3,9 +3,13 @@ import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | undefined;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export interface Scalars {
   ID: string;
@@ -46,12 +50,10 @@ export interface Asset {
   width?: Maybe<Scalars['Int']>;
 }
 
-
 /** Represents a binary file in a space. An asset can be any file type. */
 export interface AssetLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
-
 
 /** Represents a binary file in a space. An asset can be any file type. */
 export interface AssetUrlArgs {
@@ -146,14 +148,12 @@ export interface AssetLinkingCollections {
   tournamentCollection?: Maybe<TournamentCollection>;
 }
 
-
 export interface AssetLinkingCollectionsEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
 }
-
 
 export interface AssetLinkingCollectionsPpvCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -162,14 +162,12 @@ export interface AssetLinkingCollectionsPpvCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
 }
 
-
 export interface AssetLinkingCollectionsPpvNftSliderPostCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
 }
-
 
 export interface AssetLinkingCollectionsPpvSliderPostCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -178,7 +176,6 @@ export interface AssetLinkingCollectionsPpvSliderPostCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
 }
 
-
 export interface AssetLinkingCollectionsPpvWebsiteBackgroundCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
@@ -186,14 +183,12 @@ export interface AssetLinkingCollectionsPpvWebsiteBackgroundCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
 }
 
-
 export interface AssetLinkingCollectionsTeamMemberCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
 }
-
 
 export interface AssetLinkingCollectionsTournamentCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -222,7 +217,7 @@ export enum AssetOrder {
   UrlAsc = 'url_ASC',
   UrlDesc = 'url_DESC',
   WidthAsc = 'width_ASC',
-  WidthDesc = 'width_DESC'
+  WidthDesc = 'width_DESC',
 }
 
 export interface ContentfulMetadata {
@@ -279,7 +274,7 @@ export enum EntryOrder {
   SysPublishedAtAsc = 'sys_publishedAt_ASC',
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum ImageFormat {
@@ -301,7 +296,7 @@ export enum ImageFormat {
    */
   Png8 = 'PNG8',
   /** WebP image format. */
-  Webp = 'WEBP'
+  Webp = 'WEBP',
 }
 
 export enum ImageResizeFocus {
@@ -326,7 +321,7 @@ export enum ImageResizeFocus {
   /** Focus the resizing on the top left. */
   TopLeft = 'TOP_LEFT',
   /** Focus the resizing on the top right. */
-  TopRight = 'TOP_RIGHT'
+  TopRight = 'TOP_RIGHT',
 }
 
 export enum ImageResizeStrategy {
@@ -344,7 +339,7 @@ export enum ImageResizeStrategy {
   /** Resizes the image to the specified dimensions, changing the original aspect ratio if needed. */
   Scale = 'SCALE',
   /** Creates a thumbnail from the image. */
-  Thumb = 'THUMB'
+  Thumb = 'THUMB',
 }
 
 export interface ImageTransformOptions {
@@ -393,24 +388,20 @@ export interface Ppv extends Entry {
   title?: Maybe<Scalars['String']>;
 }
 
-
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface PpvBadgeArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface PpvCallToActionButtonLabelArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface PpvCallToActionButtonLinkArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface PpvCoverImageArgs {
@@ -418,30 +409,25 @@ export interface PpvCoverImageArgs {
   preview?: Maybe<Scalars['Boolean']>;
 }
 
-
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface PpvDateArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface PpvDescriptionArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface PpvFeaturedArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface PpvLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
-
 
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface PpvTitleArgs {
@@ -537,7 +523,6 @@ export interface PpvLinkingCollections {
   entryCollection?: Maybe<EntryCollection>;
 }
 
-
 export interface PpvLinkingCollectionsEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
@@ -557,12 +542,10 @@ export interface PpvNftSliderPost extends Entry {
   title?: Maybe<Scalars['String']>;
 }
 
-
 /** Pay-Per-View small slider post for NFT cards [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvNftSliderPost) */
 export interface PpvNftSliderPostCallToActionLinkArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** Pay-Per-View small slider post for NFT cards [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvNftSliderPost) */
 export interface PpvNftSliderPostCoverImageArgs {
@@ -570,18 +553,15 @@ export interface PpvNftSliderPostCoverImageArgs {
   preview?: Maybe<Scalars['Boolean']>;
 }
 
-
 /** Pay-Per-View small slider post for NFT cards [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvNftSliderPost) */
 export interface PpvNftSliderPostLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
-
 /** Pay-Per-View small slider post for NFT cards [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvNftSliderPost) */
 export interface PpvNftSliderPostRarityArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** Pay-Per-View small slider post for NFT cards [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvNftSliderPost) */
 export interface PpvNftSliderPostTitleArgs {
@@ -630,7 +610,6 @@ export interface PpvNftSliderPostLinkingCollections {
   entryCollection?: Maybe<EntryCollection>;
 }
 
-
 export interface PpvNftSliderPostLinkingCollectionsEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
@@ -652,7 +631,7 @@ export enum PpvNftSliderPostOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  TitleDesc = 'title_DESC',
 }
 
 export enum PpvOrder {
@@ -675,7 +654,7 @@ export enum PpvOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  TitleDesc = 'title_DESC',
 }
 
 /** Pay-Per-View small slider post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvSliderPost) */
@@ -690,12 +669,10 @@ export interface PpvSliderPost extends Entry {
   title?: Maybe<Scalars['String']>;
 }
 
-
 /** Pay-Per-View small slider post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvSliderPost) */
 export interface PpvSliderPostCallToActionLinkArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** Pay-Per-View small slider post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvSliderPost) */
 export interface PpvSliderPostCoverImageArgs {
@@ -703,18 +680,15 @@ export interface PpvSliderPostCoverImageArgs {
   preview?: Maybe<Scalars['Boolean']>;
 }
 
-
 /** Pay-Per-View small slider post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvSliderPost) */
 export interface PpvSliderPostDescriptionArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** Pay-Per-View small slider post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvSliderPost) */
 export interface PpvSliderPostLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
-
 
 /** Pay-Per-View small slider post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvSliderPost) */
 export interface PpvSliderPostTitleArgs {
@@ -784,7 +758,6 @@ export interface PpvSliderPostLinkingCollections {
   entryCollection?: Maybe<EntryCollection>;
 }
 
-
 export interface PpvSliderPostLinkingCollectionsEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
@@ -804,7 +777,7 @@ export enum PpvSliderPostOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  TitleDesc = 'title_DESC',
 }
 
 /** Backgorund image for the PPV page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvWebsiteBackground) */
@@ -816,13 +789,11 @@ export interface PpvWebsiteBackground extends Entry {
   sys: Sys;
 }
 
-
 /** Backgorund image for the PPV page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvWebsiteBackground) */
 export interface PpvWebsiteBackgroundBackgroundImageArgs {
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
-
 
 /** Backgorund image for the PPV page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppvWebsiteBackground) */
 export interface PpvWebsiteBackgroundLinkedFromArgs {
@@ -850,7 +821,6 @@ export interface PpvWebsiteBackgroundLinkingCollections {
   entryCollection?: Maybe<EntryCollection>;
 }
 
-
 export interface PpvWebsiteBackgroundLinkingCollectionsEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
@@ -866,7 +836,7 @@ export enum PpvWebsiteBackgroundOrder {
   SysPublishedAtAsc = 'sys_publishedAt_ASC',
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export interface Query {
@@ -888,13 +858,11 @@ export interface Query {
   tournamentCollection?: Maybe<TournamentCollection>;
 }
 
-
 export interface QueryAssetArgs {
   id: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
-
 
 export interface QueryAssetCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -905,7 +873,6 @@ export interface QueryAssetCollectionArgs {
   where?: Maybe<AssetFilter>;
 }
 
-
 export interface QueryEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
@@ -915,13 +882,11 @@ export interface QueryEntryCollectionArgs {
   where?: Maybe<EntryFilter>;
 }
 
-
 export interface QueryPpvArgs {
   id: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
-
 
 export interface QueryPpvCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -932,13 +897,11 @@ export interface QueryPpvCollectionArgs {
   where?: Maybe<PpvFilter>;
 }
 
-
 export interface QueryPpvNftSliderPostArgs {
   id: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
-
 
 export interface QueryPpvNftSliderPostCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -949,13 +912,11 @@ export interface QueryPpvNftSliderPostCollectionArgs {
   where?: Maybe<PpvNftSliderPostFilter>;
 }
 
-
 export interface QueryPpvSliderPostArgs {
   id: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
-
 
 export interface QueryPpvSliderPostCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -966,13 +927,11 @@ export interface QueryPpvSliderPostCollectionArgs {
   where?: Maybe<PpvSliderPostFilter>;
 }
 
-
 export interface QueryPpvWebsiteBackgroundArgs {
   id: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
-
 
 export interface QueryPpvWebsiteBackgroundCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -983,13 +942,11 @@ export interface QueryPpvWebsiteBackgroundCollectionArgs {
   where?: Maybe<PpvWebsiteBackgroundFilter>;
 }
 
-
 export interface QueryTeamMemberArgs {
   id: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
-
 
 export interface QueryTeamMemberCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -1000,13 +957,11 @@ export interface QueryTeamMemberCollectionArgs {
   where?: Maybe<TeamMemberFilter>;
 }
 
-
 export interface QueryTournamentArgs {
   id: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
-
 
 export interface QueryTournamentCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
@@ -1079,49 +1034,41 @@ export interface TeamMember extends Entry {
   twitter?: Maybe<Scalars['String']>;
 }
 
-
 /** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
 export interface TeamMemberAvatarArgs {
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
 
-
 /** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
 export interface TeamMemberGithubArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
 export interface TeamMemberInstagramArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
 export interface TeamMemberLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
-
 
 /** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
 export interface TeamMemberLinkedinArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
 export interface TeamMemberNameArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
 export interface TeamMemberTitleArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
 export interface TeamMemberTwitterArgs {
@@ -1191,7 +1138,6 @@ export interface TeamMemberLinkingCollections {
   entryCollection?: Maybe<EntryCollection>;
 }
 
-
 export interface TeamMemberLinkingCollectionsEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
@@ -1219,7 +1165,7 @@ export enum TeamMemberOrder {
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
   TwitterAsc = 'twitter_ASC',
-  TwitterDesc = 'twitter_DESC'
+  TwitterDesc = 'twitter_DESC',
 }
 
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
@@ -1238,24 +1184,20 @@ export interface Tournament extends Entry {
   title?: Maybe<Scalars['String']>;
 }
 
-
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
 export interface TournamentBadgeArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
 export interface TournamentCallToActionButtonLabelArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
 export interface TournamentCallToActionButtonLinkArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
 export interface TournamentCoverImageArgs {
@@ -1263,30 +1205,25 @@ export interface TournamentCoverImageArgs {
   preview?: Maybe<Scalars['Boolean']>;
 }
 
-
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
 export interface TournamentDateArgs {
   locale?: Maybe<Scalars['String']>;
 }
-
 
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
 export interface TournamentDescriptionArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
 export interface TournamentFeaturedArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
 export interface TournamentLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
-
 
 /** Tournament information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournament) */
 export interface TournamentTitleArgs {
@@ -1382,7 +1319,6 @@ export interface TournamentLinkingCollections {
   entryCollection?: Maybe<EntryCollection>;
 }
 
-
 export interface TournamentLinkingCollectionsEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
@@ -1410,49 +1346,92 @@ export enum TournamentOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  TitleDesc = 'title_DESC',
 }
 
 export type TeamMembersQueryVariables = Exact<{
   isPreview?: Maybe<Scalars['Boolean']>;
 }>;
 
-
-export type TeamMembersQuery = { __typename?: 'Query', teamMemberCollection?: { __typename?: 'TeamMemberCollection', items: Array<{ __typename?: 'TeamMember', name?: string | null | undefined, title?: string | null | undefined, twitter?: string | null | undefined, linkedin?: string | null | undefined, instagram?: string | null | undefined, github?: string | null | undefined, sys: { __typename?: 'Sys', id: string, publishedAt?: any | null | undefined }, avatar?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined> } | null | undefined };
-
+export type TeamMembersQuery = {
+  __typename?: 'Query';
+  teamMemberCollection?:
+    | {
+        __typename?: 'TeamMemberCollection';
+        items: Array<
+          | {
+              __typename?: 'TeamMember';
+              name?: string | null | undefined;
+              title?: string | null | undefined;
+              twitter?: string | null | undefined;
+              linkedin?: string | null | undefined;
+              instagram?: string | null | undefined;
+              github?: string | null | undefined;
+              sys: {
+                __typename?: 'Sys';
+                id: string;
+                publishedAt?: any | null | undefined;
+              };
+              avatar?:
+                | { __typename?: 'Asset'; url?: string | null | undefined }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
 
 export const TeamMembersDocument = gql`
-    query teamMembers($isPreview: Boolean = false) {
-  teamMemberCollection(preview: $isPreview) {
-    items {
-      sys {
-        id
-        publishedAt
+  query teamMembers($isPreview: Boolean = false) {
+    teamMemberCollection(preview: $isPreview) {
+      items {
+        sys {
+          id
+          publishedAt
+        }
+        name
+        title
+        avatar {
+          url
+        }
+        twitter
+        linkedin
+        instagram
+        github
       }
-      name
-      title
-      avatar {
-        url
-      }
-      twitter
-      linkedin
-      instagram
-      github
     }
   }
-}
-    `;
+`;
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
-
+export type SdkFunctionWrapper = <T>(
+  action: (requestHeaders?: Record<string, string>) => Promise<T>,
+  operationName: string
+) => Promise<T>;
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
+export function getSdk(
+  client: GraphQLClient,
+  withWrapper: SdkFunctionWrapper = defaultWrapper
+) {
   return {
-    teamMembers(variables?: TeamMembersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TeamMembersQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<TeamMembersQuery>(TeamMembersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'teamMembers');
-    }
+    teamMembers(
+      variables?: TeamMembersQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<TeamMembersQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<TeamMembersQuery>(TeamMembersDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'teamMembers'
+      );
+    },
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;

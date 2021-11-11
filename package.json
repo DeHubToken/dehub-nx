@@ -24,7 +24,7 @@
     "deploy:prod": "nx affected --target=deploy-prod",
     "dep-graph": "nx dep-graph --watch=true",
     "dep-graph:a": "nx affected:dep-graph --watch=true",
-    "website:gql": "graphql-codegen --config libs/shared/contentful/website-codegen.yml --require dotenv/config"
+    "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config"
   },
   "husky": {
     "hooks": {
