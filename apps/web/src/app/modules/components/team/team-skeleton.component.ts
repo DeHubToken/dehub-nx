@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'dhb-landing-team-skeleton',
+  selector: 'dhb-team-skeleton',
   template: `
     <div class="card image-card shadow-8">
       <!-- Avatar -->
@@ -43,7 +43,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LandingTeamSkeletonComponent {
+export class TeamSkeletonComponent {
   socialLinks = [...Array(Math.floor(Math.random() * 3) + 1)];
 
   constructor() {}

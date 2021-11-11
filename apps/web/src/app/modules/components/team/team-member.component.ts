@@ -12,7 +12,7 @@ interface SocialLink {
   url?: string;
 }
 @Component({
-  selector: 'dhb-landing-team-member',
+  selector: 'dhb-team-member',
   template: `
     <div
       *ngIf="teamMember"
@@ -48,7 +48,7 @@ interface SocialLink {
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LandingTeamMemberComponent implements OnInit {
+export class TeamMemberComponent implements OnInit {
   @Input() teamMember?: TeamMember;
 
   socialLinks: SocialLink[] = [];

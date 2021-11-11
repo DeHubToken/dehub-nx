@@ -5,13 +5,12 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'dhb-landing-team',
   template: `
     <div class="grid">
       <!-- Team Members loading -->
       <ng-container *ngIf="teamMembersLoading$ | async; else teamMembersLoaded">
         <div *ngFor="let i of teamMembersSkeleton" class="col-12 md:col-3">
-          <dhb-landing-team-skeleton></dhb-landing-team-skeleton>
+          <dhb-team-skeleton></dhb-team-skeleton>
         </div>
       </ng-container>
 
@@ -21,16 +20,14 @@ import { environment } from '../../../../environments/environment';
           *ngFor="let teamMember of teamMembers$ | async"
           class="col-12 md:col-3"
         >
-          <dhb-landing-team-member
-            [teamMember]="teamMember"
-          ></dhb-landing-team-member>
+          <dhb-team-member [teamMember]="teamMember"></dhb-team-member>
         </div>
       </ng-template>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LandingTeamComponent implements OnInit {
+export class TeamComponent implements OnInit {
   teamMembers$?: Observable<TeamMember[]>;
   teamMembersLoading$?: Observable<boolean>;
   teamMembersSkeleton = [...Array(4)];
