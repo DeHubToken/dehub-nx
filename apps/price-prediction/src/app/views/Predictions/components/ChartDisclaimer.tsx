@@ -1,6 +1,6 @@
 import React from 'react'
 import { ModalContainer, ModalBody, Text, Button, InjectedModalProps, LinkExternal, Flex } from '@pancakeswap/uikit'
-import { useTranslation } from 'contexts/Localization'
+import { useTranslation } from '../../../contexts/Localization'
 
 interface ChartDisclaimerProps extends InjectedModalProps {
   onSuccess: () => void

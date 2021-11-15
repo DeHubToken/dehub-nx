@@ -12,8 +12,8 @@ import {
   Heading,
   Box,
 } from '@pancakeswap/uikit'
-import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
+import { useTranslation } from '../../../contexts/Localization'
 
 interface RiskDisclaimerProps extends InjectedModalProps {
   onSuccess: () => void

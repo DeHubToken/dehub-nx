@@ -2,19 +2,19 @@ import React, { useEffect, useRef } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { Helmet } from 'react-helmet-async'
 import { useMatchBreakpoints, useModal } from '@pancakeswap/uikit'
-import { useAppDispatch } from 'state'
-import { useGetPredictionsStatus, useInitialBlock, useIsChartPaneOpen } from 'state/hooks'
+import { useAppDispatch } from '../../state'
+import { useGetPredictionsStatus, useInitialBlock, useIsChartPaneOpen } from '../../state/hooks'
 import {
   getMarketData,
   getStaticPredictionsData,
   makeFutureRoundResponse,
   makeRoundData,
   transformRoundResponse,
-} from 'state/predictions/helpers'
-import { fetchCurrentBets, initialize, setPredictionStatus } from 'state/predictions'
-import { HistoryFilter, PredictionsState, PredictionStatus } from 'state/types'
-import usePersistState from 'hooks/usePersistState'
-import PageLoader from 'components/PageLoader'
+} from '../../state/predictions/helpers'
+import { fetchCurrentBets, initialize, setPredictionStatus } from '../../state/predictions'
+import { HistoryFilter, PredictionsState, PredictionStatus } from '../../state/types'
+import usePersistState from '../../hooks/usePersistState'
+import PageLoader from '../../components/PageLoader'
 import usePollOraclePrice from './hooks/usePollOraclePrice'
 import usePollRoundData from './hooks/usePollRoundData'
 import Container from './components/Container'

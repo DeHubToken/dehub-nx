@@ -1,4 +1,4 @@
-import { FarmConfig } from 'config/constants/types'
+import { FarmConfig } from '../config/constants/types'
 import fetchPublicFarmData from './fetchPublicFarmData'
 
 const fetchFarms = async (farmsToFetch: FarmConfig[]) => {

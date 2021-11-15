@@ -4,11 +4,12 @@ import Split from 'split-grid'
 import { ArrowDownIcon, Button, ChartIcon } from '@pancakeswap/uikit'
 import debounce from 'lodash/debounce'
 import delay from 'lodash/delay'
-import { useAppDispatch } from 'state'
-import { useGetPredictionsStatus, useIsChartPaneOpen, useIsHistoryPaneOpen } from 'state/hooks'
-import { setChartPaneState } from 'state/predictions'
-import { PredictionStatus } from 'state/types'
-import { useTranslation } from 'contexts/Localization'
+import set from 'lodash/set'
+import { useAppDispatch } from '../../state'
+import { useGetPredictionsStatus, useIsChartPaneOpen, useIsHistoryPaneOpen } from '../../state/hooks'
+import { setChartPaneState } from '../../state/predictions'
+import { PredictionStatus } from '../../state/types'
+import { useTranslation } from '../../contexts/Localization'
 import TradingView from './components/TradingView'
 import { ErrorNotification, PauseNotification } from './components/Notification'
 import History from './History'
@@ -112,14 +113,14 @@ const Desktop: React.FC = () => {
   const toggleChartPane = () => {
     const newChartPaneState = !isChartPaneOpen
 
-    if (newChartPaneState) {
-      splitWrapperRef.current.style.transition = 'grid-template-rows 150ms'
-      splitWrapperRef.current.style.gridTemplateRows = GRID_TEMPLATE_ROW
+    if (newChartPaneState && splitWrapperRef?.current?.style) {
+      set(splitWrapperRef, 'current.style.transition', 'grid-template-rows 150ms')
+      set(splitWrapperRef, 'current.style.gridTemplateRows', GRID_TEMPLATE_ROW)
 
       // Purely comedic: We only want to animate if we are clicking the open chart button
       // If we keep the transition on the resizing becomes very choppy
       delay(() => {
-        splitWrapperRef.current.style.transition = ''
+        set(splitWrapperRef, 'current.style.transition', '')
       }, 150)
     }
 
@@ -129,7 +130,7 @@ const Desktop: React.FC = () => {
   useEffect(() => {
     const threshold = 100
     const handleDrag = debounce(() => {
-      const { height } = chartRef.current.getBoundingClientRect()
+      const { height } = chartRef?.current?.getBoundingClientRect()
 
       // If the height of the chart pane goes below the "snapOffset" threshold mark the chart pane as closed
       dispatch(setChartPaneState(height > threshold))

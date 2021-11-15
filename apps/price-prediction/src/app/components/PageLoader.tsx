@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { Spinner } from '@pancakeswap/uikit'
 import { CircularProgress } from '@material-ui/core'
 import Page from './layout/Page'
 

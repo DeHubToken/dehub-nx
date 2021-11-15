@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js'
-import { Bet, BetPosition } from 'state/types'
 import { DefaultTheme } from 'styled-components'
-import { formatNumber, getBalanceAmount } from 'utils/formatBalance'
-import getTimePeriods from 'utils/getTimePeriods'
+import { Bet, BetPosition } from '../../state/types'
+import { formatNumber, getBalanceAmount } from '../../utils/formatBalance'
+import getTimePeriods from '../../utils/getTimePeriods'
 
 export const getBnbAmount = (bnbBn: BigNumber) => {
   return getBalanceAmount(bnbBn, 18)

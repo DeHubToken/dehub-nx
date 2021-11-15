@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useTranslation } from 'contexts/Localization'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router'
-import { DEFAULT_META, getCustomMeta } from 'config/constants/meta'
+import { useTranslation } from '../../contexts/Localization'
+import { DEFAULT_META, getCustomMeta } from '../../config/constants/meta'
 import Container from './Container'
 
 const StyledPage = styled(Container)`

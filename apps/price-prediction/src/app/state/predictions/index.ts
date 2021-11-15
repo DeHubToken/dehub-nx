@@ -2,8 +2,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import maxBy from 'lodash/maxBy'
 import merge from 'lodash/merge'
-import { BIG_ZERO } from 'utils/bigNumber'
-import { Bet, HistoryFilter, Market, PredictionsState, PredictionStatus, Round } from 'state/types'
+import { BIG_ZERO } from '../../utils/bigNumber'
+import { Bet, HistoryFilter, Market, PredictionsState, PredictionStatus, Round } from '../../state/types'
 import {
   makeFutureRoundResponse,
   transformRoundResponse,
@@ -64,8 +64,8 @@ export const fetchRoundBet = createAsyncThunk<
  * Used to poll the user bets of the current round cards
  */
 export const fetchCurrentBets = createAsyncThunk<
-  { account: string; bets: Bet[] },
-  { account: string; roundIds: string[] }
+  { account: string | null | undefined; bets: Bet[] },
+  { account: string | null | undefined; roundIds: string[] }
 >('predictions/fetchCurrentBets', async ({ account, roundIds }) => {
   const betResponses = await getBetHistory({
     user: account.toLowerCase(),

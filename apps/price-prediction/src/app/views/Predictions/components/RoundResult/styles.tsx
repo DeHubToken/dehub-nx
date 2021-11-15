@@ -1,9 +1,9 @@
 import React from 'react'
 import styled, { DefaultTheme } from 'styled-components'
 import { Box, Flex, FlexProps, Text } from '@pancakeswap/uikit'
-import { formatBnb, formatUsd } from 'views/Predictions/helpers'
-import { useTranslation } from 'contexts/Localization'
-import { BetPosition, Round } from 'state/types'
+import { formatBnb, formatUsd } from '../../../../views/Predictions/helpers'
+import { useTranslation } from '../../../../contexts/Localization'
+import { BetPosition, Round } from '../../../../state/types'
 
 // PrizePoolRow
 interface PrizePoolRowProps extends FlexProps {

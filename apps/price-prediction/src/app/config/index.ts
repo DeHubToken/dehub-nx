@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js/bignumber'
-import { BIG_TEN } from 'utils/bigNumber'
+import { BIG_TEN } from '../../utils/bigNumber'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,

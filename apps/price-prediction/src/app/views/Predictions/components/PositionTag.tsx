@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { ArrowUpIcon, ArrowDownIcon, Flex, FlexProps, Text } from '@pancakeswap/uikit'
-import { BetPosition } from 'state/types'
+import { BetPosition } from '../../../state/types'
 
 interface TagProps extends FlexProps {
   bg?: string

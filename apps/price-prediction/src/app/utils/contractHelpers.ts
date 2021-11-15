@@ -1,8 +1,8 @@
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
-import web3NoAccount from 'utils/web3'
-import { poolsConfig } from 'config/constants'
-import { PoolCategory } from 'config/constants/types'
+import web3NoAccount from '../utils/web3'
+import { poolsConfig } from '../config/constants'
+import { PoolCategory } from '../config/constants/types'
 
 // Addresses
 import {
@@ -22,32 +22,32 @@ import {
   getCakeVaultAddress,
   getPredictionsAddress,
   getChainlinkOracleAddress,
-} from 'utils/addressHelpers'
+} from '../utils/addressHelpers'
 
 // ABI
-import profileABI from 'config/abi/pancakeProfile.json'
-import pancakeRabbitsAbi from 'config/abi/pancakeRabbits.json'
-import bunnyFactoryAbi from 'config/abi/bunnyFactory.json'
-import bunnySpecialAbi from 'config/abi/bunnySpecial.json'
-import bep20Abi from 'config/abi/erc20.json'
-import erc721Abi from 'config/abi/erc721.json'
-import lpTokenAbi from 'config/abi/lpToken.json'
-import cakeAbi from 'config/abi/cake.json'
-import ifoV1Abi from 'config/abi/ifoV1.json'
-import ifoV2Abi from 'config/abi/ifoV2.json'
-import pointCenterIfo from 'config/abi/pointCenterIfo.json'
-import lotteryAbi from 'config/abi/lottery.json'
-import lotteryTicketAbi from 'config/abi/lotteryNft.json'
-import masterChef from 'config/abi/masterchef.json'
-import sousChef from 'config/abi/sousChef.json'
-import sousChefV2 from 'config/abi/sousChefV2.json'
-import sousChefBnb from 'config/abi/sousChefBnb.json'
-import claimRefundAbi from 'config/abi/claimRefund.json'
-import tradingCompetitionAbi from 'config/abi/tradingCompetition.json'
-import easterNftAbi from 'config/abi/easterNft.json'
-import cakeVaultAbi from 'config/abi/cakeVault.json'
-import predictionsAbi from 'config/abi/predictions.json'
-import chainlinkOracleAbi from 'config/abi/chainlinkOracle.json'
+import profileABI from '../config/abi/pancakeProfile.json'
+import pancakeRabbitsAbi from '../config/abi/pancakeRabbits.json'
+import bunnyFactoryAbi from '../config/abi/bunnyFactory.json'
+import bunnySpecialAbi from '../config/abi/bunnySpecial.json'
+import bep20Abi from '../config/abi/erc20.json'
+import erc721Abi from '../config/abi/erc721.json'
+import lpTokenAbi from '../config/abi/lpToken.json'
+import cakeAbi from '../config/abi/cake.json'
+import ifoV1Abi from '../config/abi/ifoV1.json'
+import ifoV2Abi from '../config/abi/ifoV2.json'
+import pointCenterIfo from '../config/abi/pointCenterIfo.json'
+import lotteryAbi from '../config/abi/lottery.json'
+import lotteryTicketAbi from '../config/abi/lotteryNft.json'
+import masterChef from '../config/abi/masterchef.json'
+import sousChef from '../config/abi/sousChef.json'
+import sousChefV2 from '../config/abi/sousChefV2.json'
+import sousChefBnb from '../config/abi/sousChefBnb.json'
+import claimRefundAbi from '../config/abi/claimRefund.json'
+import tradingCompetitionAbi from '../config/abi/tradingCompetition.json'
+import easterNftAbi from '../config/abi/easterNft.json'
+import cakeVaultAbi from '../config/abi/cakeVault.json'
+import predictionsAbi from '../config/abi/predictions.json'
+import chainlinkOracleAbi from '../config/abi/chainlinkOracle.json'
 
 const getContract = (abi: any, address: string, web3?: Web3) => {
   const _web3 = web3 ?? web3NoAccount

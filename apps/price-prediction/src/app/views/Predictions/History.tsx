@@ -3,19 +3,19 @@ import { Flex, Spinner, Text } from '@pancakeswap/uikit'
 import { CircularProgress } from '@material-ui/core'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
-import UnlockButton from 'components/UnlockButton'
-import { useTranslation } from 'contexts/Localization'
-import { fetchHistory } from 'state/predictions'
-import { getUnclaimedWinningBets } from 'state/predictions/helpers'
-import { HistoryFilter } from 'state/types'
-import { useAppDispatch } from 'state'
+import UnlockButton from '../../components/UnlockButton'
+import { useTranslation } from '../../contexts/Localization'
+import { fetchHistory } from '../../state/predictions'
+import { getUnclaimedWinningBets } from '../../state/predictions/helpers'
+import { HistoryFilter } from '../../state/types'
+import { useAppDispatch } from '../../state'
 import {
   useGetCurrentEpoch,
   useGetHistoryByAccount,
   useGetHistoryFilter,
   useGetIsFetchingHistory,
   useIsHistoryPaneOpen,
-} from 'state/hooks'
+} from '../../state/hooks'
 import { Header, HistoryTabs } from './components/History'
 import RoundsTab from './components/History/RoundsTab'
 import PnlTab from './components/History/PnlTab/PnlTab'

@@ -2,8 +2,8 @@ import React from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import { Flex, TrophyGoldIcon } from '@pancakeswap/uikit'
-import { useBetCanClaim } from 'state/hooks'
-import { useTranslation } from 'contexts/Localization'
+import { useBetCanClaim } from '../../../../state/hooks'
+import { useTranslation } from '../../../../contexts/Localization'
 import CollectWinningsButton from '../CollectWinningsButton'
 
 interface CollectWinningsOverlayProps {

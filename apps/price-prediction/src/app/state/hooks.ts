@@ -1,12 +1,12 @@
 import { useEffect, useMemo } from 'react'
 import BigNumber from 'bignumber.js'
 import { useSelector } from 'react-redux'
-import { useAppDispatch } from 'state'
 import { orderBy } from 'lodash'
-import { getWeb3NoAccount } from 'utils/web3'
-import { getBalanceAmount } from 'utils/formatBalance'
-import { BIG_ZERO } from 'utils/bigNumber'
-import { filterFarmsByQuoteToken } from 'utils/farmsPriceHelpers'
+import { useAppDispatch } from '../state'
+import { getWeb3NoAccount } from '../utils/web3'
+import { getBalanceAmount } from '../utils/formatBalance'
+import { BIG_ZERO } from '../utils/bigNumber'
+import { filterFarmsByQuoteToken } from '../utils/farmsPriceHelpers'
 import setBlock from './actions'
 import { State, Farm, FarmsState } from './types'
 import { getCanClaim } from './predictions/helpers'
@@ -124,7 +124,7 @@ export const useGetSortedRounds = () => {
   return orderBy(Object.values(roundData), ['epoch'], ['asc'])
 }
 
-export const useGetCurrentEpoch =   () => {
+export const useGetCurrentEpoch = () => {
   return useSelector((state: State) => state.predictions.currentEpoch)
 }
 
@@ -178,7 +178,7 @@ export const useGetHistory = () => {
   return useSelector((state: State) => state.predictions.history)
 }
 
-export const useGetHistoryByAccount = (account: string) => {
+export const useGetHistoryByAccount = (account: string | null | undefined) => {
   const bets = useGetHistory()
   return bets ? bets[account] : []
 }

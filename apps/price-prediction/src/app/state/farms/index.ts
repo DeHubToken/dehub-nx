@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
-import farmsConfig from 'config/constants/farms'
-import priceHelperLpsConfig from 'config/constants/priceHelperLps'
-import isArchivedPid from 'utils/farmHelpers'
+import farmsConfig from '../config/constants/farms'
+import priceHelperLpsConfig from '../config/constants/priceHelperLps'
+import isArchivedPid from '../utils/farmHelpers'
 import fetchFarms from './fetchFarms'
 import fetchFarmsPrices from './fetchFarmsPrices'
 import {

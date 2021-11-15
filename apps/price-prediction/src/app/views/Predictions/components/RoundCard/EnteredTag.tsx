@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { CheckmarkCircleIcon, Tag, useTooltip } from '@pancakeswap/uikit'
-import { useTranslation } from 'contexts/Localization'
+import { useTranslation } from '../../../../contexts/Localization'
 import { formatBnb } from '../../helpers'
 
 interface EnteredTagProps {

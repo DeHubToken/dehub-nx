@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { useAppDispatch } from 'state'
-import { setLastOraclePrice } from 'state/predictions'
+import { useAppDispatch } from '../../../state'
+import { setLastOraclePrice } from '../../../state/predictions'
 import useGetLatestOraclePrice from './useGetLatestOraclePrice'
 
 const usePollOraclePrice = (seconds = 30) => {

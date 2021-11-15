@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Box } from '@pancakeswap/uikit'
 import { DefaultTheme, useTheme } from 'styled-components'
-import { useTranslation } from 'contexts/Localization'
+import { useTranslation } from '../../../contexts/Localization'
 
 /**
  * When the script tag is injected the TradingView object is not immediately

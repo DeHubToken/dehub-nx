@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { usePredictionsContract } from 'hooks/useContract'
+import { usePredictionsContract } from '../../../hooks/useContract'
 import { useWeb3React } from '@web3-react/core'
 
 const useIsRefundable = (epoch: number) => {

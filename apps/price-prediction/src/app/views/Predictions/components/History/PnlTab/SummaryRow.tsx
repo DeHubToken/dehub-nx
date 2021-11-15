@@ -1,8 +1,8 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
 import { Flex, Text } from '@pancakeswap/uikit'
-import { formatBnb } from 'views/Predictions/helpers'
-import { useTranslation } from 'contexts/Localization'
+import { formatBnb } from '../../../../../views/Predictions/helpers'
+import { useTranslation } from '../../../../../contexts/Localization'
 
 type SummaryType = 'won' | 'lost' | 'entered'
 

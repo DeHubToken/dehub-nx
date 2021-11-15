@@ -17,12 +17,12 @@ import {
   ModalCloseButton,
 } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { useAppDispatch } from 'state'
-import { usePriceBnbBusd } from 'state/hooks'
-import { markBetAsCollected } from 'state/predictions'
-import { useTranslation } from 'contexts/Localization'
-import useToast from 'hooks/useToast'
-import { usePredictionsContract } from 'hooks/useContract'
+import { useAppDispatch } from '../../../state'
+import { usePriceBnbBusd } from '../../../state/hooks'
+import { markBetAsCollected } from '../../../state/predictions'
+import { useTranslation } from '../../../contexts/Localization'
+import useToast from '../../../hooks/useToast'
+import { usePredictionsContract } from '../../../hooks/useContract'
 import { formatBnb } from '../helpers'
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {

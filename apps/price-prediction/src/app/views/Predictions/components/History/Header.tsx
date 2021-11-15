@@ -11,12 +11,12 @@ import {
   ButtonMenu,
   ButtonMenuItem,
 } from '@pancakeswap/uikit'
-import { useAppDispatch } from 'state'
-import { HistoryFilter } from 'state/types'
-import { setHistoryFilter, setHistoryPaneState, fetchHistory } from 'state/predictions'
-import { useGetHistoryFilter, useGetIsFetchingHistory } from 'state/hooks'
-import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
+import { useAppDispatch } from '../../../../state'
+import { HistoryFilter } from '../../../../state/types'
+import { setHistoryFilter, setHistoryPaneState, fetchHistory } from '../../../../state/predictions'
+import { useGetHistoryFilter, useGetIsFetchingHistory } from '../../../../state/hooks'
+import { useTranslation } from '../../../../contexts/Localization'
 import { getBubbleGumBackground } from '../../helpers'
 
 const Filter = styled.label`

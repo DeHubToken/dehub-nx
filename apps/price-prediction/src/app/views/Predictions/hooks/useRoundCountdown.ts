@@ -1,5 +1,5 @@
-import { useGetCurrentRoundBlockNumber, useGetIntervalBlocks } from 'state/hooks'
-import useBlockCountdown from 'hooks/useGetBlockCountdown'
+import { useGetCurrentRoundBlockNumber, useGetIntervalBlocks } from '../../../state/hooks'
+import useBlockCountdown from '../../../hooks/useGetBlockCountdown'
 
 /**
  * Returns a countdown in seconds of a given block

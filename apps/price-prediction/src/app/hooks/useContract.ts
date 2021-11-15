@@ -22,7 +22,7 @@ import {
   getPredictionsContract,
   getChainlinkOracleContract,
   getSouschefV2Contract,
-} from 'utils/contractHelpers'
+} from '../../utils/contractHelpers'
 
 /**
  * Helper hooks to get specific contracts (by ABI)
