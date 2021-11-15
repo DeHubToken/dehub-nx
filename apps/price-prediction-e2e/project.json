@@ -1,0 +1,28 @@
+{
+  "root": "apps/price-prediction-e2e",
+  "sourceRoot": "apps/price-prediction-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/price-prediction-e2e/cypress.json",
+        "devServerTarget": "price-prediction:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "price-prediction:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/price-prediction-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["price-prediction"]
+}
