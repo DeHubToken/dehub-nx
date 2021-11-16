@@ -8,7 +8,6 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "extends": ["../../.eslintrc-overrides.json"],
       "rules": {}
     },
     {

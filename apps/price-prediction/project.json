@@ -49,14 +49,21 @@
         "production": {
           "buildTarget": "price-prediction:build:production",
           "hmr": false
-        }
+        },
+        "development": {
+          "buildTarget": "price-prediction:build:development",
+          "host": "dev.localhost",
+          "port": 8501
+        },
+        "defaultConfiguration": "development"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/price-prediction/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/price-prediction/**/*.{ts,tsx,js,jsx}"],
+        "maxWarnings": 0
       }
     },
     "test": {
@@ -65,6 +72,20 @@
       "options": {
         "jestConfig": "apps/price-prediction/jest.config.js",
         "passWithNoTests": true
+      }
+    },
+    "deploy-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run price-prediction:deploy:draft"
+      }
+    },
+    "deploy-prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run price-prediction:deploy:prod"
       }
     }
   },
