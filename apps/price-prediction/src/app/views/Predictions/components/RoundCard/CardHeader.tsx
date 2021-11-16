@@ -1,52 +1,55 @@
-import React, { ReactElement } from 'react'
-import { Flex, Text } from '@pancakeswap/uikit'
-import styled, { DefaultTheme } from 'styled-components'
+import React, { ReactElement } from 'react';
+import { Flex, Text } from '@pancakeswap/uikit';
+import styled, { DefaultTheme } from 'styled-components';
 
-type Status = 'expired' | 'live' | 'next' | 'soon' | 'canceled' | 'calculating'
+type Status = 'expired' | 'live' | 'next' | 'soon' | 'canceled' | 'calculating';
 
 interface CardHeaderProps {
-  status: Status
-  title: string
-  epoch: number
-  blockNumber: number
-  icon?: ReactElement
+  status: Status;
+  title: string;
+  epoch: number;
+  blockNumber: number;
+  icon?: ReactElement;
 }
 
 const getBackgroundColor = (theme: DefaultTheme, status: Status) => {
   switch (status) {
     case 'calculating':
-      return theme.colors.gradients.cardHeader
+      return theme.colors.gradients.cardHeader;
     case 'live':
-      return 'transparent'
+      return 'transparent';
     case 'canceled':
-      return theme.colors.warning
+      return theme.colors.warning;
     case 'next':
-      return theme.colors.secondary
+      return theme.colors.secondary;
     case 'expired':
     case 'soon':
     default:
-      return theme.colors.cardBorder
+      return theme.colors.cardBorder;
   }
-}
+};
 
-type TextColor = 'textDisabled' | 'white' | 'secondary' | 'text' | 'textSubtle'
-type FallbackColor = 'text' | 'textSubtle'
+type TextColor = 'textDisabled' | 'white' | 'secondary' | 'text' | 'textSubtle';
+type FallbackColor = 'text' | 'textSubtle';
 
-const getTextColorByStatus = (status: Status, fallback: FallbackColor): TextColor => {
+const getTextColorByStatus = (
+  status: Status,
+  fallback: FallbackColor
+): TextColor => {
   switch (status) {
     case 'expired':
-      return 'textDisabled'
+      return 'textDisabled';
     case 'next':
-      return 'white'
+      return 'white';
     case 'live':
-      return 'secondary'
+      return 'secondary';
     case 'canceled':
     case 'calculating':
-      return 'text'
+      return 'text';
     default:
-      return fallback
+      return fallback;
   }
-}
+};
 
 const StyledCardHeader = styled.div<{ status: Status }>`
   align-items: center;
@@ -55,31 +58,45 @@ const StyledCardHeader = styled.div<{ status: Status }>`
   display: flex;
   justify-content: space-between;
   padding: ${({ status }) => (status === 'live' ? '16px' : '8px')};
-`
+`;
 
 const Round = styled.div`
   justify-self: center;
-`
+`;
 
-const CardHeader: React.FC<CardHeaderProps> = ({ status, title, epoch, icon }) => {
-  const textColor = getTextColorByStatus(status, 'text')
-  const isLive = status === 'live'
+const CardHeader: React.FC<CardHeaderProps> = ({
+  status,
+  title,
+  epoch,
+  icon,
+}) => {
+  const textColor = getTextColorByStatus(status, 'text');
+  const isLive = status === 'live';
 
   return (
     <StyledCardHeader status={status}>
       <Flex alignItems="center">
         {icon}
-        <Text color={textColor} bold={isLive} textTransform={isLive ? 'uppercase' : 'capitalize'} lineHeight="21px">
+        <Text
+          color={textColor}
+          bold={isLive}
+          textTransform={isLive ? 'uppercase' : 'capitalize'}
+          lineHeight="21px"
+        >
           {title}
         </Text>
       </Flex>
       <Round>
-        <Text fontSize={isLive ? '14px' : '12px'} color={getTextColorByStatus(status, 'textSubtle')} textAlign="center">
+        <Text
+          fontSize={isLive ? '14px' : '12px'}
+          color={getTextColorByStatus(status, 'textSubtle')}
+          textAlign="center"
+        >
           {`#${epoch}`}
         </Text>
       </Round>
     </StyledCardHeader>
-  )
-}
+  );
+};
 
-export default CardHeader
+export default CardHeader;

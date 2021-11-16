@@ -7,22 +7,22 @@ export enum Tiers {
 }
 
 export interface Achievement {
-  champion?: number
-  teamPlayer?: number
-  trophy: number
+  champion?: number;
+  teamPlayer?: number;
+  trophy: number;
 }
 
 export interface Rank {
-  group: string
-  rank: string
-  tier: Tiers
-  cakePrizeInUsd: number
-  achievements: Achievement
-  hasNft: boolean
+  group: string;
+  rank: string;
+  tier: Tiers;
+  cakePrizeInUsd: number;
+  achievements: Achievement;
+  hasNft: boolean;
 }
 
 interface Config {
-  [key: string]: Rank[]
+  [key: string]: Rank[];
 }
 
 const easterPrizes: Config = {
@@ -199,6 +199,6 @@ const easterPrizes: Config = {
       hasNft: false,
     },
   ],
-}
+};
 
-export default easterPrizes
+export default easterPrizes;

@@ -1,33 +1,38 @@
-import React from 'react'
-import { CardBody, Text, Flex, BlockIcon, LinkExternal } from '@pancakeswap/uikit'
-import { useTranslation } from '../../../../contexts/Localization'
-import { Round, BetPosition } from '../../../../state/types'
-import { useGetTotalIntervalBlocks } from '../../../../state/hooks'
-import ReclaimPositionButton from '../ReclaimPositionButton'
-import useIsRefundable from '../../hooks/useIsRefundable'
-import { RoundResultBox } from '../RoundResult'
-import MultiplierArrow from './MultiplierArrow'
-import Card from './Card'
-import CardHeader from './CardHeader'
-
+import React from 'react';
+import {
+  CardBody,
+  Text,
+  Flex,
+  BlockIcon,
+  LinkExternal,
+} from '@pancakeswap/uikit';
+import { useTranslation } from '../../../../contexts/Localization';
+import { Round, BetPosition } from '../../../../state/types';
+import { useGetTotalIntervalBlocks } from '../../../../state/hooks';
+import ReclaimPositionButton from '../ReclaimPositionButton';
+import useIsRefundable from '../../hooks/useIsRefundable';
+import { RoundResultBox } from '../RoundResult';
+import MultiplierArrow from './MultiplierArrow';
+import Card from './Card';
+import CardHeader from './CardHeader';
 
 interface CanceledRoundCardProps {
-  round: Round
+  round: Round;
 }
 
 const CanceledRoundCard: React.FC<CanceledRoundCardProps> = ({ round }) => {
-  const { t } = useTranslation()
-  const interval = useGetTotalIntervalBlocks()
-  const { isRefundable, setIsRefundable } = useIsRefundable(round.epoch)
-  const { epoch, startBlock } = round
-  const estimatedEndBlock = startBlock + interval
+  const { t } = useTranslation();
+  const interval = useGetTotalIntervalBlocks();
+  const { isRefundable, setIsRefundable } = useIsRefundable(round.epoch);
+  const { epoch, startBlock } = round;
+  const estimatedEndBlock = startBlock + interval;
 
   const handleSuccess = async () => {
-    setIsRefundable(false)
-  }
+    setIsRefundable(false);
+  };
 
   return (
-    <Card >
+    <Card>
       <CardHeader
         status="canceled"
         icon={<BlockIcon mr="4px" width="21px" />}
@@ -42,13 +47,20 @@ const CanceledRoundCard: React.FC<CanceledRoundCardProps> = ({ round }) => {
             <Text color={isRefundable ? 'text' : 'white'}>
               {t('Round Canceled')}
             </Text>
-            {isRefundable && <ReclaimPositionButton epoch={epoch} onSuccess={handleSuccess} width="100%" my="8px" />}
+            {isRefundable && (
+              <ReclaimPositionButton
+                epoch={epoch}
+                onSuccess={handleSuccess}
+                width="100%"
+                my="8px"
+              />
+            )}
           </Flex>
         </RoundResultBox>
         <MultiplierArrow betPosition={BetPosition.BEAR} isDisabled />
       </CardBody>
     </Card>
-  )
-}
+  );
+};
 
-export default CanceledRoundCard
+export default CanceledRoundCard;

@@ -1,14 +1,22 @@
 /* eslint-disable */
-import React, { useEffect, useRef, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
-import styled, { css, keyframes } from 'styled-components'
-import { Button, CloseIcon, IconButton, TrophyGoldIcon } from '@pancakeswap/uikit'
-import { CSSTransition } from 'react-transition-group'
-import { useTranslation } from '../../../contexts/Localization'
-import { getBetHistory } from '../../../state/predictions/helpers'
-import { useGetPredictionsStatus, useIsHistoryPaneOpen } from '../../../state/hooks'
-import { useAppDispatch } from '../../../state'
-import { setHistoryPaneState } from '../../../state/predictions'
+import React, { useEffect, useRef, useState } from 'react';
+import { useWeb3React } from '@web3-react/core';
+import styled, { css, keyframes } from 'styled-components';
+import {
+  Button,
+  CloseIcon,
+  IconButton,
+  TrophyGoldIcon,
+} from '@pancakeswap/uikit';
+import { CSSTransition } from 'react-transition-group';
+import { useTranslation } from '../../../contexts/Localization';
+import { getBetHistory } from '../../../state/predictions/helpers';
+import {
+  useGetPredictionsStatus,
+  useIsHistoryPaneOpen,
+} from '../../../state/hooks';
+import { useAppDispatch } from '../../../state';
+import { setHistoryPaneState } from '../../../state/predictions';
 
 /**
  * @see https://github.com/animate-css/animate.css/tree/main/source
@@ -43,7 +51,7 @@ const bounceInKeyframe = keyframes`
   to {
     transform: translate3d(0, 0, 0);
   }
-`
+`;
 
 const bounceOutKeyframe = keyframes`
   20% {
@@ -60,15 +68,15 @@ const bounceOutKeyframe = keyframes`
     opacity: 0;
     transform: translate3d(0, 2000px, 0) scaleY(3);
   }
-`
+`;
 
 const bounceInAnimation = css`
   animation: ${bounceInKeyframe} 1s;
-`
+`;
 
 const bounceOutAnimation = css`
   animation: ${bounceOutKeyframe} 1s;
-`
+`;
 
 const Wrapper = styled.div`
   align-items: center;
@@ -107,7 +115,7 @@ const Wrapper = styled.div`
       bottom: 16px;
     }
   }
-`
+`;
 
 const Popup = styled.div`
   align-items: center;
@@ -117,62 +125,71 @@ const Popup = styled.div`
   display: flex;
   max-width: 320px;
   padding: 16px 8px;
-`
+`;
 
 const CollectWinningsPopup = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const { t } = useTranslation()
-  const ref = useRef(null)
-  const timer = useRef<any>(undefined)
-  const { account } = useWeb3React()
-  const predictionStatus = useGetPredictionsStatus()
-  const isHistoryPaneOpen = useIsHistoryPaneOpen()
-  const dispatch = useAppDispatch()
+  const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
+  const ref = useRef(null);
+  const timer = useRef<any>(undefined);
+  const { account } = useWeb3React();
+  const predictionStatus = useGetPredictionsStatus();
+  const isHistoryPaneOpen = useIsHistoryPaneOpen();
+  const dispatch = useAppDispatch();
 
   const handleOpenHistory = () => {
-    dispatch(setHistoryPaneState(true))
-  }
+    dispatch(setHistoryPaneState(true));
+  };
 
   const handleClick = () => {
-    setIsOpen(false)
-    clearInterval(timer.current)
-  }
+    setIsOpen(false);
+    clearInterval(timer.current);
+  };
 
   // Check user's history for unclaimed winners
   useEffect(() => {
-    let isCancelled = false
+    let isCancelled = false;
     if (account) {
       timer.current = setInterval(async () => {
-        const bets = await getBetHistory({ user: account.toLowerCase(), claimed: false })
+        const bets = await getBetHistory({
+          user: account.toLowerCase(),
+          claimed: false,
+        });
 
         if (!isCancelled) {
           // Filter out bets that were not winners
-          const winnerBets = bets.filter((bet) => {
-            return bet.position === bet?.round?.position
-          })
+          const winnerBets = bets.filter(bet => {
+            return bet.position === bet?.round?.position;
+          });
 
           if (!isHistoryPaneOpen) {
-            setIsOpen(winnerBets.length > 0)
+            setIsOpen(winnerBets.length > 0);
           }
         }
-      }, 30000)
+      }, 30000);
     }
 
     return () => {
-      clearInterval(timer?.current)
-      isCancelled = true
-    }
-  }, [account, timer, predictionStatus, setIsOpen, isHistoryPaneOpen])
+      clearInterval(timer?.current);
+      isCancelled = true;
+    };
+  }, [account, timer, predictionStatus, setIsOpen, isHistoryPaneOpen]);
 
   // Any time the history pane is open make sure the popup closes
   useEffect(() => {
     if (isHistoryPaneOpen) {
-      setIsOpen(false)
+      setIsOpen(false);
     }
-  }, [isHistoryPaneOpen, setIsOpen])
+  }, [isHistoryPaneOpen, setIsOpen]);
 
   return (
-    <CSSTransition in={isOpen} unmountOnExit nodeRef={ref} timeout={1000} classNames="popup">
+    <CSSTransition
+      in={isOpen}
+      unmountOnExit
+      nodeRef={ref}
+      timeout={1000}
+      classNames="popup"
+    >
       <Wrapper ref={ref}>
         <Popup>
           <TrophyGoldIcon width="64px" style={{ flex: 'none' }} mr="8px" />
@@ -185,7 +202,7 @@ const CollectWinningsPopup = () => {
         </Popup>
       </Wrapper>
     </CSSTransition>
-  )
-}
+  );
+};
 
-export default CollectWinningsPopup
+export default CollectWinningsPopup;

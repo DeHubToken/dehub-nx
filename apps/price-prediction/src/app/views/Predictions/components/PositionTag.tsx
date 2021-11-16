@@ -1,22 +1,34 @@
 /* eslint-disable */
 // @ts-nocheck
-import React, { ReactNode } from 'react'
-import styled from 'styled-components'
-import { ArrowUpIcon, ArrowDownIcon, Flex, FlexProps, Text } from '@pancakeswap/uikit'
-import { BetPosition } from '../../../state/types'
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+import {
+  ArrowUpIcon,
+  ArrowDownIcon,
+  Flex,
+  FlexProps,
+  Text,
+} from '@pancakeswap/uikit';
+import { BetPosition } from '../../../state/types';
 
 interface TagProps extends FlexProps {
-  bg?: string
-  startIcon?: ReactNode
+  bg?: string;
+  startIcon?: ReactNode;
 }
 
 const StyledTag = styled(Flex)<{ bg: TagProps['bg'] }>`
   background-color: ${({ bg, theme }) => theme.colors[bg!]};
   display: inline-flex;
-`
+`;
 
-export const Tag: React.FC<TagProps> = ({ bg = 'success', startIcon, children, onClick, ...props }) => {
-  const icon = startIcon || <ArrowUpIcon color="white" />
+export const Tag: React.FC<TagProps> = ({
+  bg = 'success',
+  startIcon,
+  children,
+  onClick,
+  ...props
+}) => {
+  const icon = startIcon || <ArrowUpIcon color="white" />;
 
   return (
     <StyledTag
@@ -35,22 +47,30 @@ export const Tag: React.FC<TagProps> = ({ bg = 'success', startIcon, children, o
         {children}
       </Text>
     </StyledTag>
-  )
-}
+  );
+};
 
 interface PositionTagProps extends FlexProps {
-  betPosition: BetPosition
+  betPosition: BetPosition;
 }
 
-const PositionTag: React.FC<PositionTagProps> = ({ betPosition, children, ...props }) => {
-  const isUpPosition = betPosition === BetPosition.BULL
-  const icon = isUpPosition ? <ArrowUpIcon color="white" /> : <ArrowDownIcon color="white" />
+const PositionTag: React.FC<PositionTagProps> = ({
+  betPosition,
+  children,
+  ...props
+}) => {
+  const isUpPosition = betPosition === BetPosition.BULL;
+  const icon = isUpPosition ? (
+    <ArrowUpIcon color="white" />
+  ) : (
+    <ArrowDownIcon color="white" />
+  );
 
   return (
     <Tag bg={isUpPosition ? 'success' : 'failure'} startIcon={icon} {...props}>
       {children}
     </Tag>
-  )
-}
+  );
+};
 
-export default PositionTag
+export default PositionTag;

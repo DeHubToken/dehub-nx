@@ -1,5 +1,5 @@
-import tokens from './tokens'
-import { FarmConfig } from './types'
+import tokens from './tokens';
+import { FarmConfig } from './types';
 
 const farms: FarmConfig[] = [
   /**
@@ -3858,6 +3858,6 @@ const farms: FarmConfig[] = [
     token: tokens.bake,
     quoteToken: tokens.wbnb,
   },
-]
+];
 
-export default farms
+export default farms;

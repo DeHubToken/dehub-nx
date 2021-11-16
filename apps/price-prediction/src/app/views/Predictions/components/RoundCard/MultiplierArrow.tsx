@@ -1,25 +1,28 @@
-import React from 'react'
-import styled, { CSSProperties } from 'styled-components'
-import { Box, Flex, Text } from '@pancakeswap/uikit'
-import { useTranslation } from '../../../../contexts/Localization'
-import { BetPosition } from '../../../../state/types'
-import { RoundMultiplierDownArrow, RoundMultiplierUpArrow } from '../../RoundMultiplierArrows'
-import EnteredTag from './EnteredTag'
+import React from 'react';
+import styled, { CSSProperties } from 'styled-components';
+import { Box, Flex, Text } from '@pancakeswap/uikit';
+import { useTranslation } from '../../../../contexts/Localization';
+import { BetPosition } from '../../../../state/types';
+import {
+  RoundMultiplierDownArrow,
+  RoundMultiplierUpArrow,
+} from '../../RoundMultiplierArrows';
+import EnteredTag from './EnteredTag';
 
 interface MultiplierArrowProps {
-  betAmount?: number
-  multiplier?: number
-  hasEntered?: boolean
-  betPosition?: BetPosition
-  isDisabled?: boolean
-  isActive?: boolean
+  betAmount?: number;
+  multiplier?: number;
+  hasEntered?: boolean;
+  betPosition?: BetPosition;
+  isDisabled?: boolean;
+  isActive?: boolean;
 }
 
 const ArrowWrapper = styled.div`
   height: 65px;
   margin: 0 auto;
   width: 240px;
-`
+`;
 
 const Content = styled.div`
   align-items: center;
@@ -31,26 +34,26 @@ const Content = styled.div`
   position: absolute;
   top: 0;
   width: 100%;
-`
+`;
 
 const EnteredTagWrapper = styled.div`
   position: absolute;
   z-index: 10;
-`
+`;
 
 const getTextColor =
   (fallback = 'textSubtle') =>
   (isActive: boolean, isDisabled: boolean) => {
     if (isDisabled) {
-      return 'textDisabled'
+      return 'textDisabled';
     }
 
     if (isActive) {
-      return 'white'
+      return 'white';
     }
 
-    return fallback
-  }
+    return fallback;
+  };
 
 const MultiplierArrow: React.FC<MultiplierArrowProps> = ({
   betAmount,
@@ -60,34 +63,38 @@ const MultiplierArrow: React.FC<MultiplierArrowProps> = ({
   isDisabled = false,
   isActive = false,
 }) => {
-  const { t } = useTranslation()
-  const upColor = getTextColor('success')(isActive, isDisabled)
-  const downColor = getTextColor('failure')(isActive, isDisabled)
-  const textColor = getTextColor()(isActive, isDisabled)
+  const { t } = useTranslation();
+  const upColor = getTextColor('success')(isActive, isDisabled);
+  const downColor = getTextColor('failure')(isActive, isDisabled);
+  const textColor = getTextColor()(isActive, isDisabled);
   const multiplierText = (
     <Box>
       <Flex justifyContent="center" height="14px">
         <Text fontSize="14px" color={textColor} bold lineHeight="14x">
-          {multiplier !== undefined ? `${multiplier.toLocaleString(undefined, { maximumFractionDigits: 2 })}x` : '-'}
+          {multiplier !== undefined
+            ? `${multiplier.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}x`
+            : '-'}
         </Text>
         <Text fontSize="14px" color={textColor} lineHeight="14x" ml="4px">
           {t('Payout')}
         </Text>
       </Flex>
     </Box>
-  )
+  );
 
   const getEnteredTag = (position: CSSProperties) => {
     if (!hasEntered) {
-      return null
+      return null;
     }
 
     return (
       <EnteredTagWrapper style={position}>
         <EnteredTag amount={betAmount} />
       </EnteredTagWrapper>
-    )
-  }
+    );
+  };
 
   if (betPosition === BetPosition.BEAR) {
     return (
@@ -97,13 +104,19 @@ const MultiplierArrow: React.FC<MultiplierArrowProps> = ({
           {getEnteredTag({ bottom: 0, right: 0 })}
           <Content>
             {!isDisabled && multiplierText}
-            <Text bold fontSize="20px" mb="8px" color={downColor} textTransform="uppercase">
+            <Text
+              bold
+              fontSize="20px"
+              mb="8px"
+              color={downColor}
+              textTransform="uppercase"
+            >
               {t('Down')}
             </Text>
           </Content>
         </ArrowWrapper>
       </Box>
-    )
+    );
   }
 
   return (
@@ -112,14 +125,20 @@ const MultiplierArrow: React.FC<MultiplierArrowProps> = ({
         <RoundMultiplierUpArrow isActive={isActive} />
         {getEnteredTag({ top: 0, left: 0 })}
         <Content>
-          <Text bold fontSize="20px" lineHeight="21px" color={upColor} textTransform="uppercase">
+          <Text
+            bold
+            fontSize="20px"
+            lineHeight="21px"
+            color={upColor}
+            textTransform="uppercase"
+          >
             {t('Up')}
           </Text>
           {!isDisabled && multiplierText}
         </Content>
       </ArrowWrapper>
     </Box>
-  )
-}
+  );
+};
 
-export default MultiplierArrow
+export default MultiplierArrow;

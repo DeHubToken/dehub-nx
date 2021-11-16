@@ -1,6 +1,6 @@
 /* eslint-disable */
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import {
   ModalContainer,
   ModalBody,
@@ -16,26 +16,26 @@ import {
   Box,
   LinkExternal,
   ModalCloseButton,
-} from '@pancakeswap/uikit'
-import { useWeb3React } from '@web3-react/core'
-import { useAppDispatch } from '../../../state'
-import { usePriceBnbBusd } from '../../../state/hooks'
-import { markBetAsCollected } from '../../../state/predictions'
-import { useTranslation } from '../../../contexts/Localization'
-import useToast from '../../../hooks/useToast'
-import { usePredictionsContract } from '../../../hooks/useContract'
-import { formatBnb } from '../helpers'
+} from '@pancakeswap/uikit';
+import { useWeb3React } from '@web3-react/core';
+import { useAppDispatch } from '../../../state';
+import { usePriceBnbBusd } from '../../../state/hooks';
+import { markBetAsCollected } from '../../../state/predictions';
+import { useTranslation } from '../../../contexts/Localization';
+import useToast from '../../../hooks/useToast';
+import { usePredictionsContract } from '../../../hooks/useContract';
+import { formatBnb } from '../helpers';
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
-  payout: number
-  roundId: string
-  epoch: number
-  onSuccess?: () => Promise<void>
+  payout: number;
+  roundId: string;
+  epoch: number;
+  onSuccess?: () => Promise<void>;
 }
 
 const Modal = styled(ModalContainer)`
   overflow: visible;
-`
+`;
 
 const BunnyDecoration = styled.div`
   position: absolute;
@@ -43,7 +43,7 @@ const BunnyDecoration = styled.div`
   left: 0px;
   text-align: center;
   width: 100%;
-`
+`;
 
 const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   payout,
@@ -52,33 +52,33 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   onDismiss,
   onSuccess,
 }) => {
-  const [isPendingTx, setIsPendingTx] = useState(false)
-  const { account } = useWeb3React()
-  const { t } = useTranslation()
-  const { toastSuccess, toastError } = useToast()
-  const predictionsContract = usePredictionsContract()
-  const bnbBusdPrice = usePriceBnbBusd()
-  const dispatch = useAppDispatch()
+  const [isPendingTx, setIsPendingTx] = useState(false);
+  const { account } = useWeb3React();
+  const { t } = useTranslation();
+  const { toastSuccess, toastError } = useToast();
+  const predictionsContract = usePredictionsContract();
+  const bnbBusdPrice = usePriceBnbBusd();
+  const dispatch = useAppDispatch();
 
   const handleClick = () => {
     predictionsContract.methods
       .claim(epoch)
       .send({ from: account })
       .once('sending', () => {
-        setIsPendingTx(true)
+        setIsPendingTx(true);
       })
       .once('receipt', async (result: any) => {
         if (onSuccess) {
-          await onSuccess()
+          await onSuccess();
         }
 
-        dispatch(markBetAsCollected({ account, roundId }))
-        
+        dispatch(markBetAsCollected({ account, roundId }));
+
         if (onDismiss) {
-          onDismiss()
+          onDismiss();
         }
 
-        setIsPendingTx(false)
+        setIsPendingTx(false);
         toastSuccess(
           t('Winnings collected!'),
           <Box>
@@ -86,19 +86,21 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
               {t('Your prizes have been sent to your wallet')}
             </Text>
             {result.transactionHash && (
-              <LinkExternal href={`https://bscscan.com/tx/${result.transactionHash}`}>
+              <LinkExternal
+                href={`https://bscscan.com/tx/${result.transactionHash}`}
+              >
                 {t('View on BscScan')}
               </LinkExternal>
             )}
-          </Box>,
-        )
+          </Box>
+        );
       })
       .once('error', (error: any) => {
-        setIsPendingTx(false)
-        toastError(t('Error'), error?.message)
-        console.error(error)
-      })
-  }
+        setIsPendingTx(false);
+        toastError(t('Error'), error?.message);
+        console.error(error);
+      });
+  };
 
   return (
     <Modal minWidth="288px" position="relative" mt="124px">
@@ -127,13 +129,15 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
           mb="8px"
           onClick={handleClick}
           isLoading={isPendingTx}
-          endIcon={isPendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
+          endIcon={
+            isPendingTx ? <AutoRenewIcon spin color="currentColor" /> : null
+          }
         >
           {t('Confirm')}
         </Button>
       </ModalBody>
     </Modal>
-  )
-}
+  );
+};
 
-export default CollectRoundWinningsModal
+export default CollectRoundWinningsModal;

@@ -1,8 +1,8 @@
-export const REGISTRATION = 'REGISTRATION'
-export const LIVE = 'LIVE'
-export const FINISHED = 'FINISHED'
-export const CLAIM = 'CLAIM'
-export const OVER = 'OVER'
+export const REGISTRATION = 'REGISTRATION';
+export const LIVE = 'LIVE';
+export const FINISHED = 'FINISHED';
+export const CLAIM = 'CLAIM';
+export const OVER = 'OVER';
 
 export const CompetitionPhases = {
   REGISTRATION: {
@@ -32,13 +32,13 @@ export const CompetitionPhases = {
     ends: null,
     step: { index: 2, text: 'End' },
   },
-}
+};
 
 export const CompetitionSteps = [
   CompetitionPhases.REGISTRATION.step,
   CompetitionPhases.LIVE.step,
   CompetitionPhases.FINISHED.step,
-]
+];
 
 export const SmartContractPhases = {
   0: CompetitionPhases.REGISTRATION,
@@ -46,4 +46,4 @@ export const SmartContractPhases = {
   2: CompetitionPhases.FINISHED,
   3: CompetitionPhases.CLAIM,
   4: CompetitionPhases.OVER,
-}
+};

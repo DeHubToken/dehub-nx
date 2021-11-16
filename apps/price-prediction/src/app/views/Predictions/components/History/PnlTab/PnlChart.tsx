@@ -1,7 +1,7 @@
-import React from 'react'
-import { Text } from '@pancakeswap/uikit'
-import { useTranslation } from '../../../../../contexts/Localization'
-import { SVG, WonSlice, LostSlice, Wrapper, Info } from './PnlChartStyles'
+import React from 'react';
+import { Text } from '@pancakeswap/uikit';
+import { useTranslation } from '../../../../../contexts/Localization';
+import { SVG, WonSlice, LostSlice, Wrapper, Info } from './PnlChartStyles';
 
 /**
  * Bare minimum chart that doesn't require any external dependencies
@@ -9,18 +9,18 @@ import { SVG, WonSlice, LostSlice, Wrapper, Info } from './PnlChartStyles'
  */
 
 interface PnlChartProps {
-  won: number
-  lost: number
+  won: number;
+  lost: number;
 }
 
 // 2 * Pi * R
-const CIRCUMFERENCE = 339.292
+const CIRCUMFERENCE = 339.292;
 
 const PnlChart: React.FC<PnlChartProps> = ({ lost, won }) => {
-  const { t } = useTranslation()
-  const percentageWon = ((won * 100) / (lost + won)).toFixed(2)
-  const paintLost = (lost / (won + lost)) * CIRCUMFERENCE
-  const paintWon = CIRCUMFERENCE - paintLost
+  const { t } = useTranslation();
+  const percentageWon = ((won * 100) / (lost + won)).toFixed(2);
+  const paintLost = (lost / (won + lost)) * CIRCUMFERENCE;
+  const paintWon = CIRCUMFERENCE - paintLost;
   return (
     <Wrapper>
       <SVG viewBox="0 0 128 128">
@@ -39,7 +39,7 @@ const PnlChart: React.FC<PnlChartProps> = ({ lost, won }) => {
         </Text>
       </Info>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default PnlChart
+export default PnlChart;

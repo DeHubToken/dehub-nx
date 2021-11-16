@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Button, Heading, Text, LogoIcon } from '@pancakeswap/uikit'
-import Page from '../components/layout/Page'
-import { useTranslation } from '../contexts/Localization'
+import React from 'react';
+import styled from 'styled-components';
+import { Button, Heading, Text, LogoIcon } from '@pancakeswap/uikit';
+import Page from '../components/layout/Page';
+import { useTranslation } from '../contexts/Localization';
 
 const StyledNotFound = styled.div`
   align-items: center;
@@ -10,10 +10,10 @@ const StyledNotFound = styled.div`
   flex-direction: column;
   height: calc(100vh - 64px);
   justify-content: center;
-`
+`;
 
 const NotFound = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <Page>
@@ -26,7 +26,7 @@ const NotFound = () => {
         </Button>
       </StyledNotFound>
     </Page>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;

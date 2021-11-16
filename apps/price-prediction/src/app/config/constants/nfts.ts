@@ -1,6 +1,6 @@
-import { Nft, NftSource, NftType } from './types'
+import { Nft, NftSource, NftType } from './types';
 
-export const IPFS_GATEWAY = 'https://gateway.pinata.cloud'
+export const IPFS_GATEWAY = 'https://gateway.pinata.cloud';
 
 export const nftSources: NftSource = {
   [NftType.PANCAKE]: {
@@ -17,12 +17,13 @@ export const nftSources: NftSource = {
     },
     identifierKey: 'image',
   },
-}
+};
 
 const Nfts: Nft[] = [
   {
     name: 'Mixie v1',
-    description: 'Stories were told, and songs were sung, about Chef Mixie’s pancakes and her big Syrup gun.',
+    description:
+      'Stories were told, and songs were sung, about Chef Mixie’s pancakes and her big Syrup gun.',
     images: {
       lg: 'mixie-1-lg.png',
       md: 'mixie-1-md.png',
@@ -36,7 +37,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Mixie v2',
-    description: 'Stories were told, and songs were sung, about Chef Mixie’s pancakes and her big Syrup gun.',
+    description:
+      'Stories were told, and songs were sung, about Chef Mixie’s pancakes and her big Syrup gun.',
     images: {
       lg: 'mixie-2-lg.png',
       md: 'mixie-2-md.png',
@@ -50,7 +52,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Mixie v3',
-    description: 'Stories were told, and songs were sung, about Chef Mixie’s pancakes and her big Syrup gun.',
+    description:
+      'Stories were told, and songs were sung, about Chef Mixie’s pancakes and her big Syrup gun.',
     images: {
       lg: 'mixie-3-lg.png',
       md: 'mixie-3-md.png',
@@ -64,7 +67,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Easter ‘21 Champions',
-    description: 'Eggscellent! Celebrating Syrup Storm winning the Easter Battle!',
+    description:
+      'Eggscellent! Celebrating Syrup Storm winning the Easter Battle!',
     images: {
       lg: 'easter-champion-storm-lg.png',
       md: 'easter-champion-storm-md.png',
@@ -124,7 +128,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Bullish',
-    description: 'Happy Niu Year! This bunny’s excited for the year of the bull (market!)',
+    description:
+      'Happy Niu Year! This bunny’s excited for the year of the bull (market!)',
     images: {
       lg: 'bullish-lg.png',
       md: 'bullish-md.png',
@@ -142,7 +147,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Hiccup',
-    description: "Oopsie daisy! Hiccup's had a bit of an accident. Poor little fella.",
+    description:
+      "Oopsie daisy! Hiccup's had a bit of an accident. Poor little fella.",
     images: {
       lg: 'hiccup-lg.png',
       md: 'hiccup-md.png',
@@ -156,7 +162,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Sleepy',
-    description: 'Aww, looks like eating pancakes all day is tough work. Sweet dreams!',
+    description:
+      'Aww, looks like eating pancakes all day is tough work. Sweet dreams!',
     images: {
       lg: 'sleepy-lg.png',
       md: 'sleepy-md.png',
@@ -171,7 +178,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Sunny',
-    description: 'Sunny is always cheerful when there are pancakes around. Smile!',
+    description:
+      'Sunny is always cheerful when there are pancakes around. Smile!',
     images: {
       lg: 'sunny-lg.png',
       md: 'sunny-md.png',
@@ -186,7 +194,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Churro',
-    description: "Don't let that dopey smile deceive you... Churro's a master CAKE chef!",
+    description:
+      "Don't let that dopey smile deceive you... Churro's a master CAKE chef!",
     images: {
       lg: 'churro-lg.png',
       md: 'churro-md.png',
@@ -216,7 +225,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Twinkle',
-    description: "Three guesses what's put that twinkle in those eyes! (Hint: it's CAKE)",
+    description:
+      "Three guesses what's put that twinkle in those eyes! (Hint: it's CAKE)",
     images: {
       lg: 'twinkle-lg.png',
       md: 'twinkle-md.png',
@@ -231,7 +241,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Swapsies',
-    description: 'These bunnies love nothing more than swapping pancakes. Especially on BSC.',
+    description:
+      'These bunnies love nothing more than swapping pancakes. Especially on BSC.',
     images: {
       lg: 'swapsies-lg.png',
       md: 'swapsies-md.png',
@@ -246,7 +257,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Drizzle',
-    description: "It's raining syrup on this bunny, but he doesn't seem to mind. Can you blame him?",
+    description:
+      "It's raining syrup on this bunny, but he doesn't seem to mind. Can you blame him?",
     images: {
       lg: 'drizzle-lg.png',
       md: 'drizzle-md.png',
@@ -261,7 +273,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Blueberries',
-    description: "These bunnies like their pancakes with blueberries. What's your favorite topping?",
+    description:
+      "These bunnies like their pancakes with blueberries. What's your favorite topping?",
     images: {
       lg: 'blueberries-lg.png',
       md: 'blueberries-md.png',
@@ -276,7 +289,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Circular',
-    description: "Love makes the world go 'round... but so do pancakes. And these bunnies know it.",
+    description:
+      "Love makes the world go 'round... but so do pancakes. And these bunnies know it.",
     images: {
       lg: 'circular-lg.png',
       md: 'circular-md.png',
@@ -291,7 +305,8 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Sparkle',
-    description: 'It’s sparkling syrup, pancakes, and even lottery tickets! This bunny really loves it.',
+    description:
+      'It’s sparkling syrup, pancakes, and even lottery tickets! This bunny really loves it.',
     images: {
       lg: 'sparkle-lg.png',
       md: 'sparkle-md.png',
@@ -304,6 +319,6 @@ const Nfts: Nft[] = [
     type: NftType.PANCAKE,
     variationId: 4,
   },
-]
+];
 
-export default Nfts
+export default Nfts;

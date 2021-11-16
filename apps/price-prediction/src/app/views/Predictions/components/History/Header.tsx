@@ -1,5 +1,5 @@
-import React from 'react'
-import { useWeb3React } from '@web3-react/core'
+import React from 'react';
+import { useWeb3React } from '@web3-react/core';
 import {
   ArrowForwardIcon,
   Box,
@@ -10,27 +10,34 @@ import {
   Text,
   ButtonMenu,
   ButtonMenuItem,
-} from '@pancakeswap/uikit'
-import styled from 'styled-components'
-import { useAppDispatch } from '../../../../state'
-import { HistoryFilter } from '../../../../state/types'
-import { setHistoryFilter, setHistoryPaneState, fetchHistory } from '../../../../state/predictions'
-import { useGetHistoryFilter, useGetIsFetchingHistory } from '../../../../state/hooks'
-import { useTranslation } from '../../../../contexts/Localization'
-import { getBubbleGumBackground } from '../../helpers'
+} from '@pancakeswap/uikit';
+import styled from 'styled-components';
+import { useAppDispatch } from '../../../../state';
+import { HistoryFilter } from '../../../../state/types';
+import {
+  setHistoryFilter,
+  setHistoryPaneState,
+  fetchHistory,
+} from '../../../../state/predictions';
+import {
+  useGetHistoryFilter,
+  useGetIsFetchingHistory,
+} from '../../../../state/hooks';
+import { useTranslation } from '../../../../contexts/Localization';
+import { getBubbleGumBackground } from '../../helpers';
 
 const Filter = styled.label`
   align-items: center;
   cursor: pointer;
   display: inline-flex;
   margin-right: 16px;
-`
+`;
 
 const StyledHeader = styled(Box)`
   background: ${({ theme }) => getBubbleGumBackground(theme)};
   flex: none;
   padding: 16px;
-`
+`;
 
 const ButtonMenuContainer = styled.div`
   width: 100%;
@@ -41,23 +48,23 @@ const ButtonMenuContainer = styled.div`
   & button {
     width: 100%;
   }
-`
+`;
 
 const getClaimParam = (historyFilter: HistoryFilter) => {
   switch (historyFilter) {
     case HistoryFilter.COLLECTED:
-      return true
+      return true;
     case HistoryFilter.UNCOLLECTED:
-      return false
+      return false;
     case HistoryFilter.ALL:
     default:
-      return undefined
+      return undefined;
   }
-}
+};
 
 interface HeaderProps {
-  activeTab: HistoryTabs
-  setActiveTab: (value: HistoryTabs) => void
+  activeTab: HistoryTabs;
+  setActiveTab: (value: HistoryTabs) => void;
 }
 
 export enum HistoryTabs {
@@ -66,27 +73,29 @@ export enum HistoryTabs {
 }
 
 const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
-  const historyFilter = useGetHistoryFilter()
-  const isFetchingHistory = useGetIsFetchingHistory()
-  const { t } = useTranslation()
-  const dispatch = useAppDispatch()
-  const { account } = useWeb3React()
+  const historyFilter = useGetHistoryFilter();
+  const isFetchingHistory = useGetIsFetchingHistory();
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { account } = useWeb3React();
 
   const handleClick = () => {
-    dispatch(setHistoryPaneState(false))
-  }
+    dispatch(setHistoryPaneState(false));
+  };
 
   const handleChange = (newFilter: HistoryFilter) => async () => {
     if (newFilter !== historyFilter) {
-      await dispatch(fetchHistory({ account, claimed: getClaimParam(newFilter) }))
-      dispatch(setHistoryFilter(newFilter))
+      await dispatch(
+        fetchHistory({ account, claimed: getClaimParam(newFilter) })
+      );
+      dispatch(setHistoryFilter(newFilter));
     }
-  }
+  };
 
   const switchTab = async (tabIndex: number) => {
-    setActiveTab(tabIndex)
-    await handleChange(HistoryFilter.ALL)()
-  }
+    setActiveTab(tabIndex);
+    await handleChange(HistoryFilter.ALL)();
+  };
 
   return (
     <StyledHeader>
@@ -94,12 +103,22 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
         <Heading as="h3" size="md">
           {t('History')}
         </Heading>
-        <Button onClick={handleClick} variant="text" endIcon={<ArrowForwardIcon color="primary" />} px="0">
+        <Button
+          onClick={handleClick}
+          variant="text"
+          endIcon={<ArrowForwardIcon color="primary" />}
+          px="0"
+        >
           {t('Close')}
         </Button>
       </Flex>
       <ButtonMenuContainer>
-        <ButtonMenu activeIndex={activeTab} scale="sm" variant="subtle" onItemClick={switchTab}>
+        <ButtonMenu
+          activeIndex={activeTab}
+          scale="sm"
+          variant="subtle"
+          onItemClick={switchTab}
+        >
           <ButtonMenuItem>{t('Rounds')}</ButtonMenuItem>
           <ButtonMenuItem>{t('PNL')}</ButtonMenuItem>
         </ButtonMenu>
@@ -141,7 +160,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
         </>
       )}
     </StyledHeader>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

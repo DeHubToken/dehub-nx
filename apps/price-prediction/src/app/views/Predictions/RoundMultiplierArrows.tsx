@@ -1,14 +1,17 @@
-import React from 'react'
-import { useTheme } from 'styled-components'
-import { Svg, SvgProps } from '@pancakeswap/uikit'
+import React from 'react';
+import { useTheme } from 'styled-components';
+import { Svg, SvgProps } from '@pancakeswap/uikit';
 
 interface MultiplierProps extends SvgProps {
-  isActive: boolean
+  isActive: boolean;
 }
 
-export const RoundMultiplierDownArrow: React.FC<MultiplierProps> = ({ isActive, ...props }) => {
-  const theme = useTheme()
-  const fill = theme.colors[isActive ? 'failure' : 'tertiary']
+export const RoundMultiplierDownArrow: React.FC<MultiplierProps> = ({
+  isActive,
+  ...props
+}) => {
+  const theme = useTheme();
+  const fill = theme.colors[isActive ? 'failure' : 'tertiary'];
 
   return (
     <Svg height="65px" width="240px" viewBox="0 0 240 65" {...props}>
@@ -29,7 +32,12 @@ export const RoundMultiplierDownArrow: React.FC<MultiplierProps> = ({ isActive, 
           colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -39,17 +47,23 @@ export const RoundMultiplierDownArrow: React.FC<MultiplierProps> = ({ isActive, 
           <feOffset />
           <feGaussianBlur stdDeviation="1" />
           <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
-          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"
+          />
           <feBlend mode="normal" in2="shape" result="effect1_innerShadow" />
         </filter>
       </defs>
     </Svg>
-  )
-}
+  );
+};
 
-export const RoundMultiplierUpArrow: React.FC<MultiplierProps> = ({ isActive, ...props }) => {
-  const theme = useTheme()
-  const fill = theme.colors[isActive ? 'success' : 'tertiary']
+export const RoundMultiplierUpArrow: React.FC<MultiplierProps> = ({
+  isActive,
+  ...props
+}) => {
+  const theme = useTheme();
+  const fill = theme.colors[isActive ? 'success' : 'tertiary'];
 
   return (
     <Svg height="65px" width="240px" viewBox="0 0 240 65" {...props}>
@@ -70,7 +84,12 @@ export const RoundMultiplierUpArrow: React.FC<MultiplierProps> = ({ isActive, ..
           colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -80,10 +99,13 @@ export const RoundMultiplierUpArrow: React.FC<MultiplierProps> = ({ isActive, ..
           <feOffset />
           <feGaussianBlur stdDeviation="1" />
           <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
-          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"
+          />
           <feBlend mode="normal" in2="shape" result="effect1_innerShadow" />
         </filter>
       </defs>
     </Svg>
-  )
-}
+  );
+};

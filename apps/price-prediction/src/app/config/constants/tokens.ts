@@ -1407,6 +1407,6 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://www.bitwellex.com/',
   },
-}
+};
 
-export default tokens
+export default tokens;

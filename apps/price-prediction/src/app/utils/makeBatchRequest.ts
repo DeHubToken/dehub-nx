@@ -1,6 +1,6 @@
 /* eslint-disable */
 // @ts-nocheck
-import { getWeb3NoAccount } from './web3'
+import { getWeb3NoAccount } from './web3';
 
 /**
  * Accepts an array of contract method calls and batches them
@@ -14,29 +14,29 @@ import { getWeb3NoAccount } from './web3'
  */
 const makeBatchRequest = (calls: any[]) => {
   try {
-    const web3 = getWeb3NoAccount()
-    const batch = new web3.BatchRequest()
+    const web3 = getWeb3NoAccount();
+    const batch = new web3.BatchRequest();
 
-    const promises = calls.map((call) => {
+    const promises = calls.map(call => {
       return new Promise((resolve, reject) => {
         batch.add(
           call.request({}, (err, result) => {
             if (err) {
-              reject(err)
+              reject(err);
             } else {
-              resolve(result)
+              resolve(result);
             }
-          }),
-        )
-      })
-    })
+          })
+        );
+      });
+    });
 
-    batch.execute()
+    batch.execute();
 
-    return Promise.all(promises)
+    return Promise.all(promises);
   } catch {
-    return null
+    return null;
   }
-}
+};
 
-export default makeBatchRequest
+export default makeBatchRequest;

@@ -1,5 +1,5 @@
-import tokens from './tokens'
-import { PoolConfig, PoolCategory } from './types'
+import tokens from './tokens';
+import { PoolConfig, PoolCategory } from './types';
 
 const pools: PoolConfig[] = [
   {
@@ -2104,6 +2104,6 @@ const pools: PoolConfig[] = [
     sortOrder: 999,
     isFinished: true,
   },
-]
+];
 
-export default pools
+export default pools;

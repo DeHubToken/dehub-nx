@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react'
-import styled from 'styled-components'
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
 
 interface CardFlipProps {
-  isFlipped: boolean
-  height: string
-  children: [ReactNode, ReactNode]
+  isFlipped: boolean;
+  height: string;
+  children: [ReactNode, ReactNode];
 }
 
 const Front = styled.div`
@@ -21,11 +21,11 @@ const Front = styled.div`
   & > div {
     flex: 1;
   }
-`
+`;
 
 const Back = styled(Front)`
   transform: rotateY(180deg);
-`
+`;
 
 const Inner = styled.div<{ isFlipped: CardFlipProps['isFlipped'] }>`
   height: 100%;
@@ -41,23 +41,23 @@ const Inner = styled.div<{ isFlipped: CardFlipProps['isFlipped'] }>`
   ${Back} {
     z-index: ${({ isFlipped }) => (isFlipped ? 10 : 5)};
   }
-`
+`;
 
 const StyledCardFlip = styled.div`
   perspective: 1000px;
   z-index: auto;
-`
+`;
 
 const getComponents = (children: CardFlipProps['children']) => {
   if (children.length !== 2) {
-    throw new Error('CardFlip: Two children are required')
+    throw new Error('CardFlip: Two children are required');
   }
 
-  return children
-}
+  return children;
+};
 
 const CardFlip: React.FC<CardFlipProps> = ({ isFlipped, height, children }) => {
-  const [front, back] = getComponents(children)
+  const [front, back] = getComponents(children);
 
   return (
     <StyledCardFlip style={{ height }}>
@@ -66,7 +66,7 @@ const CardFlip: React.FC<CardFlipProps> = ({ isFlipped, height, children }) => {
         <Back>{back}</Back>
       </Inner>
     </StyledCardFlip>
-  )
-}
+  );
+};
 
-export default CardFlip
+export default CardFlip;

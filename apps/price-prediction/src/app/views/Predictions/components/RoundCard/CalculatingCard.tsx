@@ -1,26 +1,35 @@
-import React from 'react'
-import { CardBody, Flex, WaitIcon, TooltipText, useTooltip, InfoIcon } from '@pancakeswap/uikit'
-import { CircularProgress } from '@material-ui/core'
-import { useTranslation } from '../../../../contexts/Localization'
-import { Round, BetPosition } from '../../../../state/types'
-import { useGetTotalIntervalBlocks } from '../../../../state/hooks'
-import { RoundResultBox } from '../RoundResult'
-import MultiplierArrow from './MultiplierArrow'
-import Card from './Card'
-import CardHeader from './CardHeader'
+import React from 'react';
+import {
+  CardBody,
+  Flex,
+  WaitIcon,
+  TooltipText,
+  useTooltip,
+  InfoIcon,
+} from '@pancakeswap/uikit';
+import { CircularProgress } from '@material-ui/core';
+import { useTranslation } from '../../../../contexts/Localization';
+import { Round, BetPosition } from '../../../../state/types';
+import { useGetTotalIntervalBlocks } from '../../../../state/hooks';
+import { RoundResultBox } from '../RoundResult';
+import MultiplierArrow from './MultiplierArrow';
+import Card from './Card';
+import CardHeader from './CardHeader';
 
 interface CalculatingCardProps {
-  round: Round
+  round: Round;
 }
 
 const CalculatingCard: React.FC<CalculatingCardProps> = ({ round }) => {
-  const { t } = useTranslation()
-  const interval = useGetTotalIntervalBlocks()
-  const estimatedEndBlock = round.startBlock + interval
+  const { t } = useTranslation();
+  const interval = useGetTotalIntervalBlocks();
+  const estimatedEndBlock = round.startBlock + interval;
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
-    t('This round’s closing transaction has been submitted to the blockchain, and is awaiting confirmation.'),
-    { placement: 'bottom' },
-  )
+    t(
+      'This round’s closing transaction has been submitted to the blockchain, and is awaiting confirmation.'
+    ),
+    { placement: 'bottom' }
+  );
 
   return (
     <>
@@ -35,8 +44,12 @@ const CalculatingCard: React.FC<CalculatingCardProps> = ({ round }) => {
         <CardBody p="16px">
           <MultiplierArrow isDisabled />
           <RoundResultBox>
-            <Flex alignItems="center" justifyContent="center" flexDirection="column">
-              <CircularProgress size='50px' />
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              flexDirection="column"
+            >
+              <CircularProgress size="50px" />
               <Flex mt="8px" ref={targetRef}>
                 <TooltipText>{t('Calculating')}</TooltipText>
                 <InfoIcon ml="4px" />
@@ -48,7 +61,7 @@ const CalculatingCard: React.FC<CalculatingCardProps> = ({ round }) => {
       </Card>
       {tooltipVisible && tooltip}
     </>
-  )
-}
+  );
+};
 
-export default CalculatingCard
+export default CalculatingCard;

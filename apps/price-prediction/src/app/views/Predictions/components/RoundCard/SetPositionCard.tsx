@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import {
   ArrowBackIcon,
   CardBody,
@@ -14,164 +14,195 @@ import {
   Slider,
   Box,
   AutoRenewIcon,
-} from '@pancakeswap/uikit'
-import BigNumber from 'bignumber.js'
-import { useWeb3React } from '@web3-react/core'
-import { DEFAULT_TOKEN_DECIMAL } from '../../../../config'
-import { useGetMinBetAmount } from '../../../../state/hooks'
-import { ContextData } from '../../../../contexts/Localization/types'
-import { useTranslation } from '../../../../contexts/Localization'
-import { useERC20, usePredictionsContract } from '../../../../hooks/useContract'
-import { useGetBnbBalance } from '../../../../hooks/useTokenBalance'
-import useToast from '../../../../hooks/useToast'
-import { BetPosition } from '../../../../state/types'
-import { getDecimalAmount } from '../../../../utils/formatBalance'
-import UnlockButton from '../../../../components/UnlockButton'
-import { BIG_NINE, BIG_TEN } from '../../../../utils/bigNumber'
-import PositionTag from '../PositionTag'
-import { getBnbAmount } from '../../helpers'
-import useSwiper from '../../hooks/useSwiper'
-import FlexRow from '../FlexRow'
-import Card from './Card'
-import { getPredictionsAddress } from '../../../../utils/addressHelpers'
+} from '@pancakeswap/uikit';
+import BigNumber from 'bignumber.js';
+import { useWeb3React } from '@web3-react/core';
+import { DEFAULT_TOKEN_DECIMAL } from '../../../../config';
+import { useGetMinBetAmount } from '../../../../state/hooks';
+import { ContextData } from '../../../../contexts/Localization/types';
+import { useTranslation } from '../../../../contexts/Localization';
+import {
+  useERC20,
+  usePredictionsContract,
+} from '../../../../hooks/useContract';
+import { useGetBnbBalance } from '../../../../hooks/useTokenBalance';
+import useToast from '../../../../hooks/useToast';
+import { BetPosition } from '../../../../state/types';
+import { getDecimalAmount } from '../../../../utils/formatBalance';
+import UnlockButton from '../../../../components/UnlockButton';
+import { BIG_NINE, BIG_TEN } from '../../../../utils/bigNumber';
+import PositionTag from '../PositionTag';
+import { getBnbAmount } from '../../helpers';
+import useSwiper from '../../hooks/useSwiper';
+import FlexRow from '../FlexRow';
+import Card from './Card';
+import { getPredictionsAddress } from '../../../../utils/addressHelpers';
 
 interface SetPositionCardProps {
-  position: BetPosition
-  togglePosition: () => void
-  onBack: () => void
-  onSuccess: (decimalValue: BigNumber, hash: string) => Promise<void>
+  position: BetPosition;
+  togglePosition: () => void;
+  onBack: () => void;
+  onSuccess: (decimalValue: BigNumber, hash: string) => Promise<void>;
 }
 
-const gasPrice = new BigNumber(6).times(BIG_TEN.pow(BIG_NINE)).toString()
+const gasPrice = new BigNumber(6).times(BIG_TEN.pow(BIG_NINE)).toString();
 
-const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL)
-const percentShortcuts = [10, 25, 50, 75]
+const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
+const percentShortcuts = [10, 25, 50, 75];
 
 const getPercentDisplay = (percentage: number) => {
   if (Number.isNaN(percentage)) {
-    return ''
+    return '';
   }
 
   if (percentage > 100) {
-    return ''
+    return '';
   }
 
   if (percentage < 0) {
-    return ''
+    return '';
   }
 
-  return `${percentage.toLocaleString(undefined, { maximumFractionDigits: 1 })}%`
-}
+  return `${percentage.toLocaleString(undefined, {
+    maximumFractionDigits: 1,
+  })}%`;
+};
 
-const getButtonProps = (value: BigNumber, bnbBalance: BigNumber, minBetAmountBalance: number) => {
+const getButtonProps = (
+  value: BigNumber,
+  bnbBalance: BigNumber,
+  minBetAmountBalance: number
+) => {
   if (bnbBalance.eq(0)) {
-    return { key: 'Insufficient BNB balance', disabled: true }
+    return { key: 'Insufficient BNB balance', disabled: true };
   }
 
   if (value.eq(0) || value.isNaN()) {
-    return { key: 'Enter an amount', disabled: true }
+    return { key: 'Enter an amount', disabled: true };
   }
-  return { key: 'Confirm', disabled: value.lt(minBetAmountBalance) }
-}
+  return { key: 'Confirm', disabled: value.lt(minBetAmountBalance) };
+};
 
-const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosition, onBack, onSuccess }) => {
-  const [value, setValue] = useState<string>('')
-  const [isTxPending, setIsTxPending] = useState(false)
-  const [errorMessage, setErrorMessage] = useState<{ key?: string; data?: ContextData } | null>(null)
-  const { account } = useWeb3React()
-  const { swiper } = useSwiper()
-  const { balance: bnbBalance } = useGetBnbBalance()
-  const minBetAmount = useGetMinBetAmount()
-  const { t } = useTranslation()
-  const { toastError } = useToast()
-  const predictionsContract = usePredictionsContract()
-  const betTokenContract = useERC20("0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735")
-  const predictionContractAddress = getPredictionsAddress()
+const SetPositionCard: React.FC<SetPositionCardProps> = ({
+  position,
+  togglePosition,
+  onBack,
+  onSuccess,
+}) => {
+  const [value, setValue] = useState<string>('');
+  const [isTxPending, setIsTxPending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<{
+    key?: string;
+    data?: ContextData;
+  } | null>(null);
+  const { account } = useWeb3React();
+  const { swiper } = useSwiper();
+  const { balance: bnbBalance } = useGetBnbBalance();
+  const minBetAmount = useGetMinBetAmount();
+  const { t } = useTranslation();
+  const { toastError } = useToast();
+  const predictionsContract = usePredictionsContract();
+  const betTokenContract = useERC20(
+    '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735'
+  );
+  const predictionContractAddress = getPredictionsAddress();
 
-  const balanceDisplay = getBnbAmount(bnbBalance).toNumber()
-  const maxBalance = getBnbAmount(bnbBalance.gt(dust) ? bnbBalance.minus(dust) : bnbBalance).toNumber()
-  const valueAsBn = new BigNumber(value)
+  const balanceDisplay = getBnbAmount(bnbBalance).toNumber();
+  const maxBalance = getBnbAmount(
+    bnbBalance.gt(dust) ? bnbBalance.minus(dust) : bnbBalance
+  ).toNumber();
+  const valueAsBn = new BigNumber(value);
 
-  const percentageOfMaxBalance = valueAsBn.div(maxBalance).times(100).toNumber()
-  const percentageDisplay = getPercentDisplay(percentageOfMaxBalance)
-  const showFieldWarning = account && valueAsBn.gt(0) && errorMessage !== null
-  const minBetAmountBalance = getBnbAmount(minBetAmount).toNumber()
+  const percentageOfMaxBalance = valueAsBn
+    .div(maxBalance)
+    .times(100)
+    .toNumber();
+  const percentageDisplay = getPercentDisplay(percentageOfMaxBalance);
+  const showFieldWarning = account && valueAsBn.gt(0) && errorMessage !== null;
+  const minBetAmountBalance = getBnbAmount(minBetAmount).toNumber();
 
   const handleChange = (input: string) => {
-    setValue(input)
-  }
+    setValue(input);
+  };
 
   const handleSliderChange = (newValue: number) => {
-    setValue(newValue.toString())
-  }
+    setValue(newValue.toString());
+  };
 
   const setMax = () => {
-    setValue(maxBalance.toString())
-  }
+    setValue(maxBalance.toString());
+  };
 
   // Clear value
   const handleGoBack = () => {
-    setValue('')
-    onBack()
-  }
+    setValue('');
+    onBack();
+  };
 
   // Disable the swiper events to avoid conflicts
   const handleMouseOver = () => {
-    swiper?.keyboard.disable()
-    swiper?.mousewheel.disable()
-    swiper?.detachEvents()
-  }
+    swiper?.keyboard.disable();
+    swiper?.mousewheel.disable();
+    swiper?.detachEvents();
+  };
 
   const handleMouseOut = () => {
-    swiper?.keyboard.enable()
-    swiper?.mousewheel.enable()
-    swiper?.attachEvents()
-  }
+    swiper?.keyboard.enable();
+    swiper?.mousewheel.enable();
+    swiper?.attachEvents();
+  };
 
-  const { key, disabled } = getButtonProps(valueAsBn, bnbBalance, minBetAmountBalance)
+  const { key, disabled } = getButtonProps(
+    valueAsBn,
+    bnbBalance,
+    minBetAmountBalance
+  );
 
   const handleEnterPosition = async () => {
-    const betMethod = position === BetPosition.BULL ? 'betBull' : 'betBear'
-    const decimalValue = getDecimalAmount(valueAsBn)
-    const allowance = await betTokenContract.methods.allowance(account, predictionContractAddress).call()
+    const betMethod = position === BetPosition.BULL ? 'betBull' : 'betBear';
+    const decimalValue = getDecimalAmount(valueAsBn);
+    const allowance = await betTokenContract.methods
+      .allowance(account, predictionContractAddress)
+      .call();
     if (allowance < decimalValue.toNumber()) {
-      await betTokenContract.methods.approve(predictionContractAddress, decimalValue).send({from: account})
+      await betTokenContract.methods
+        .approve(predictionContractAddress, decimalValue)
+        .send({ from: account });
     }
     predictionsContract.methods[betMethod](decimalValue)
       .send({ from: account, gasPrice })
       .once('sending', () => {
-        setIsTxPending(true)
+        setIsTxPending(true);
       })
       .once('receipt', async (result: any) => {
-        setIsTxPending(false)
-        onSuccess(decimalValue, result.transactionHash as string)
+        setIsTxPending(false);
+        onSuccess(decimalValue, result.transactionHash as string);
       })
       .once('error', (error: any) => {
-        const errorMsg = t('An error occurred, unable to enter your position')
+        const errorMsg = t('An error occurred, unable to enter your position');
 
-        toastError(t('Error'), error?.message)
-        setIsTxPending(false)
-        console.error(errorMsg, error)
-      })
-
-  }
+        toastError(t('Error'), error?.message);
+        setIsTxPending(false);
+        console.error(errorMsg, error);
+      });
+  };
 
   // Warnings
   useEffect(() => {
-    const bnValue = new BigNumber(value)
-    const hasSufficientBalance = bnValue.gt(0) && bnValue.lte(maxBalance)
+    const bnValue = new BigNumber(value);
+    const hasSufficientBalance = bnValue.gt(0) && bnValue.lte(maxBalance);
 
     if (!hasSufficientBalance) {
-      setErrorMessage({ key: 'Insufficient BNB balance' })
+      setErrorMessage({ key: 'Insufficient BNB balance' });
     } else if (bnValue.gt(0) && bnValue.lt(minBetAmountBalance)) {
       setErrorMessage({
         key: 'A minimum amount of %num% %token% is required',
         data: { num: minBetAmountBalance, token: 'BNB' },
-      })
+      });
     } else {
-      setErrorMessage(null)
+      setErrorMessage(null);
     }
-  }, [value, maxBalance, minBetAmountBalance, setErrorMessage])
+  }, [value, maxBalance, minBetAmountBalance, setErrorMessage]);
 
   return (
     <Card onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
@@ -211,7 +242,13 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
             {t(errorMessage?.key, errorMessage?.data)}
           </Text>
         )}
-        <Text textAlign="right" mb="16px" color="textSubtle" fontSize="12px" style={{ height: '18px' }}>
+        <Text
+          textAlign="right"
+          mb="16px"
+          color="textSubtle"
+          fontSize="12px"
+          style={{ height: '18px' }}
+        >
           {account && t('Balance: %balance%', { balance: balanceDisplay })}
         </Text>
         <Slider
@@ -226,10 +263,10 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
           mb="4px"
         />
         <Flex alignItems="center" justifyContent="space-between" mb="16px">
-          {percentShortcuts.map((percent) => {
+          {percentShortcuts.map(percent => {
             const handleClick = () => {
-              setValue(((percent / 100) * maxBalance).toString())
-            }
+              setValue(((percent / 100) * maxBalance).toString());
+            };
 
             return (
               <Button
@@ -242,9 +279,14 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
               >
                 {`${percent}%`}
               </Button>
-            )
+            );
           })}
-          <Button scale="xs" variant="tertiary" onClick={setMax} disabled={!account || isTxPending}>
+          <Button
+            scale="xs"
+            variant="tertiary"
+            onClick={setMax}
+            disabled={!account || isTxPending}
+          >
             {t('Max')}
           </Button>
         </Flex>
@@ -255,7 +297,9 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
               disabled={!account || disabled}
               onClick={handleEnterPosition}
               isLoading={isTxPending}
-              endIcon={isTxPending ? <AutoRenewIcon color="currentColor" spin /> : null}
+              endIcon={
+                isTxPending ? <AutoRenewIcon color="currentColor" spin /> : null
+              }
             >
               {t(key)}
             </Button>
@@ -264,11 +308,13 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
           )}
         </Box>
         <Text as="p" fontSize="12px" lineHeight={1} color="textSubtle">
-          {t('You won’t be able to remove or change your position once you enter it.')}
+          {t(
+            'You won’t be able to remove or change your position once you enter it.'
+          )}
         </Text>
       </CardBody>
     </Card>
-  )
-}
+  );
+};
 
-export default SetPositionCard
+export default SetPositionCard;

@@ -1,22 +1,29 @@
-import React from 'react'
-import { useWeb3React } from '@web3-react/core'
-import { Box, Flex, Heading, Text, PrizeIcon, BlockIcon } from '@pancakeswap/uikit'
-import styled from 'styled-components'
-import { useAppDispatch } from '../../../../state'
-import { useTranslation } from '../../../../contexts/Localization'
-import { useBetCanClaim, usePriceBnbBusd } from '../../../../state/hooks'
-import { Bet, BetPosition } from '../../../../state/types'
-import { fetchBet } from '../../../../state/predictions'
-import { Result } from '../../../../state/predictions/helpers'
-import useIsRefundable from '../../hooks/useIsRefundable'
-import { formatBnb, getPayout } from '../../helpers'
-import CollectWinningsButton from '../CollectWinningsButton'
-import PositionTag from '../PositionTag'
-import ReclaimPositionButton from '../ReclaimPositionButton'
+import React from 'react';
+import { useWeb3React } from '@web3-react/core';
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  PrizeIcon,
+  BlockIcon,
+} from '@pancakeswap/uikit';
+import styled from 'styled-components';
+import { useAppDispatch } from '../../../../state';
+import { useTranslation } from '../../../../contexts/Localization';
+import { useBetCanClaim, usePriceBnbBusd } from '../../../../state/hooks';
+import { Bet, BetPosition } from '../../../../state/types';
+import { fetchBet } from '../../../../state/predictions';
+import { Result } from '../../../../state/predictions/helpers';
+import useIsRefundable from '../../hooks/useIsRefundable';
+import { formatBnb, getPayout } from '../../helpers';
+import CollectWinningsButton from '../CollectWinningsButton';
+import PositionTag from '../PositionTag';
+import ReclaimPositionButton from '../ReclaimPositionButton';
 
 interface BetResultProps {
-  bet: Bet
-  result: Result
+  bet: Bet;
+  result: Result;
 }
 
 const StyledBetResult = styled(Box)`
@@ -24,79 +31,85 @@ const StyledBetResult = styled(Box)`
   border-radius: 16px;
   margin-bottom: 24px;
   padding: 16px;
-`
+`;
 
 const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
-  const { t } = useTranslation()
-  const dispatch = useAppDispatch()
-  const { account } = useWeb3React()
-  const { isRefundable } = useIsRefundable(bet.round.epoch)
-  const bnbBusdPrice = usePriceBnbBusd()
-  const canClaim = useBetCanClaim(account, bet.round.id)
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { account } = useWeb3React();
+  const { isRefundable } = useIsRefundable(bet.round.epoch);
+  const bnbBusdPrice = usePriceBnbBusd();
+  const canClaim = useBetCanClaim(account, bet.round.id);
 
   // Winners get the payout, otherwise the claim what they put it if it was canceled
-  const payout = result === Result.WIN ? getPayout(bet) : bet.amount
+  const payout = result === Result.WIN ? getPayout(bet) : bet.amount;
 
   const getHeaderColor = () => {
     switch (result) {
       case Result.WIN:
-        return 'warning'
+        return 'warning';
       case Result.LOSE:
-        return 'textSubtle'
+        return 'textSubtle';
       case Result.CANCELED:
-        return 'textDisabled'
+        return 'textDisabled';
       default:
-        return 'text'
+        return 'text';
     }
-  }
+  };
 
   const getHeaderText = () => {
     switch (result) {
       case Result.WIN:
-        return t('Win')
+        return t('Win');
       case Result.LOSE:
-        return t('Lose')
+        return t('Lose');
       case Result.CANCELED:
-        return t('Canceled')
+        return t('Canceled');
       default:
-        return ''
+        return '';
     }
-  }
+  };
 
   const getHeaderIcon = () => {
     switch (result) {
       case Result.WIN:
-        return <PrizeIcon color={getHeaderColor()} />
+        return <PrizeIcon color={getHeaderColor()} />;
       case Result.LOSE:
       case Result.CANCELED:
-        return <BlockIcon color={getHeaderColor()} />
+        return <BlockIcon color={getHeaderColor()} />;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   const getResultColor = () => {
     switch (result) {
       case Result.WIN:
-        return 'success'
+        return 'success';
       case Result.LOSE:
-        return 'failure'
+        return 'failure';
       case Result.CANCELED:
       default:
-        return 'text'
+        return 'text';
     }
-  }
+  };
 
   const handleSuccess = async () => {
-    await dispatch(fetchBet({ account, id: bet.id }))
-  }
+    await dispatch(fetchBet({ account, id: bet.id }));
+  };
 
   return (
     <>
       <Flex alignItems="center" justifyContent="space-between" mb="8px">
         <Heading>{t('Your History')}</Heading>
         <Flex alignItems="center">
-          <Heading as="h3" color={getHeaderColor()} textTransform="uppercase" bold mr="4px">
+          <Heading
+            as="h3"
+            color={getHeaderColor()}
+            textTransform="uppercase"
+            bold
+            mr="4px"
+          >
             {getHeaderText()}
           </Heading>
           {getHeaderIcon()}
@@ -117,7 +130,11 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
           </CollectWinningsButton>
         )}
         {result === Result.CANCELED && isRefundable && (
-          <ReclaimPositionButton epoch={bet.round.epoch} width="100%" mb="16px" />
+          <ReclaimPositionButton
+            epoch={bet.round.epoch}
+            width="100%"
+            mb="16px"
+          />
         )}
         <Flex alignItems="center" justifyContent="space-between" mb="16px">
           <Text>{t('Your direction')}</Text>
@@ -132,7 +149,9 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
         <Flex alignItems="start" justifyContent="space-between">
           <Text bold>{t('Your Result')}</Text>
           <Box style={{ textAlign: 'right' }}>
-            <Text bold color={getResultColor()}>{`${result === Result.LOSE ? '-' : '+'}${formatBnb(payout)} BNB`}</Text>
+            <Text bold color={getResultColor()}>{`${
+              result === Result.LOSE ? '-' : '+'
+            }${formatBnb(payout)} BNB`}</Text>
             <Text fontSize="12px" color="textSubtle">
               {`~$${formatBnb(bnbBusdPrice.times(payout).toNumber())}`}
             </Text>
@@ -140,7 +159,7 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
         </Flex>
       </StyledBetResult>
     </>
-  )
-}
+  );
+};
 
-export default BetResult
+export default BetResult;

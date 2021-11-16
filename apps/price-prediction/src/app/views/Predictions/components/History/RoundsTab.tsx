@@ -1,21 +1,21 @@
-import React from 'react'
-import { orderBy } from 'lodash'
-import { Box, Heading, Text } from '@pancakeswap/uikit'
-import { useTranslation } from '../../../../contexts/Localization'
-import { Bet } from '../../../../state/types'
-import HistoricalBet from './HistoricalBet'
+import React from 'react';
+import { orderBy } from 'lodash';
+import { Box, Heading, Text } from '@pancakeswap/uikit';
+import { useTranslation } from '../../../../contexts/Localization';
+import { Bet } from '../../../../state/types';
+import HistoricalBet from './HistoricalBet';
 
 interface RoundsTabProps {
-  hasBetHistory: boolean
-  bets: Bet[]
+  hasBetHistory: boolean;
+  bets: Bet[];
 }
 
 const RoundsTab: React.FC<RoundsTabProps> = ({ hasBetHistory, bets }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return hasBetHistory ? (
     <>
-      {orderBy(bets, ['round.epoch'], ['desc']).map((bet) => (
+      {orderBy(bets, ['round.epoch'], ['desc']).map(bet => (
         <HistoricalBet key={bet.id} bet={bet} />
       ))}
     </>
@@ -26,11 +26,11 @@ const RoundsTab: React.FC<RoundsTabProps> = ({ hasBetHistory, bets }) => {
       </Heading>
       <Text as="p" textAlign="center">
         {t(
-          'If you are sure you should see history here, make sure you’re connected to the correct wallet and try again.',
+          'If you are sure you should see history here, make sure you’re connected to the correct wallet and try again.'
         )}
       </Text>
     </Box>
-  )
-}
+  );
+};
 
-export default RoundsTab
+export default RoundsTab;

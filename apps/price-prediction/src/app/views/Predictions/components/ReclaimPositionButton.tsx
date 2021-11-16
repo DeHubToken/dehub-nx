@@ -1,44 +1,49 @@
 /* eslint-disable */
-import React, { ReactNode, useState } from 'react'
-import { AutoRenewIcon, Button, ButtonProps } from '@pancakeswap/uikit'
-import { useWeb3React } from '@web3-react/core'
-import { useTranslation } from '../../../contexts/Localization'
-import { usePredictionsContract } from '../../../hooks/useContract'
-import useToast from '../../../hooks/useToast'
+import React, { ReactNode, useState } from 'react';
+import { AutoRenewIcon, Button, ButtonProps } from '@pancakeswap/uikit';
+import { useWeb3React } from '@web3-react/core';
+import { useTranslation } from '../../../contexts/Localization';
+import { usePredictionsContract } from '../../../hooks/useContract';
+import useToast from '../../../hooks/useToast';
 
 interface ReclaimPositionButtonProps extends ButtonProps {
-  epoch: number
-  onSuccess?: () => Promise<void>
-  children?: ReactNode
+  epoch: number;
+  onSuccess?: () => Promise<void>;
+  children?: ReactNode;
 }
 
-const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({ epoch, onSuccess, children, ...props }) => {
-  const [isPendingTx, setIsPendingTx] = useState(false)
-  const { t } = useTranslation()
-  const { account } = useWeb3React()
-  const predictionsContract = usePredictionsContract()
-  const { toastSuccess, toastError } = useToast()
+const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({
+  epoch,
+  onSuccess,
+  children,
+  ...props
+}) => {
+  const [isPendingTx, setIsPendingTx] = useState(false);
+  const { t } = useTranslation();
+  const { account } = useWeb3React();
+  const predictionsContract = usePredictionsContract();
+  const { toastSuccess, toastError } = useToast();
 
   const handleReclaim = () => {
     predictionsContract.methods
       .claim(epoch)
       .send({ from: account })
       .once('sending', () => {
-        setIsPendingTx(true)
+        setIsPendingTx(true);
       })
       .once('receipt', async () => {
         if (onSuccess) {
-          await onSuccess()
+          await onSuccess();
         }
-        setIsPendingTx(false)
-        toastSuccess(t('Position reclaimed!'))
+        setIsPendingTx(false);
+        toastSuccess(t('Position reclaimed!'));
       })
       .once('error', (error: any) => {
-        setIsPendingTx(false)
-        toastError(t('Error'), error?.message)
-        console.error(error)
-      })
-  }
+        setIsPendingTx(false);
+        toastError(t('Error'), error?.message);
+        console.error(error);
+      });
+  };
 
   return (
     <Button
@@ -49,7 +54,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({ epoch, on
     >
       {children || t('Reclaim Position')}
     </Button>
-  )
-}
+  );
+};
 
-export default ReclaimPositionButton
+export default ReclaimPositionButton;

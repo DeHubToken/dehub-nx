@@ -1,11 +1,18 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { request, gql } from 'graphql-request'
-import { GRAPH_API_PREDICTION } from '../../config/constants/endpoints'
-import { Bet, BetPosition, Market, PredictionStatus, Round, RoundData } from '../types'
-import makeBatchRequest from '../../utils/makeBatchRequest'
-import { getPredictionsContract } from '../../utils/contractHelpers'
+import { request, gql } from 'graphql-request';
+import { GRAPH_API_PREDICTION } from '../../config/constants/endpoints';
+import {
+  Bet,
+  BetPosition,
+  Market,
+  PredictionStatus,
+  Round,
+  RoundData,
+} from '../types';
+import makeBatchRequest from '../../utils/makeBatchRequest';
+import { getPredictionsContract } from '../../utils/contractHelpers';
 import {
   BetResponse,
   getRoundBaseFields,
@@ -13,7 +20,7 @@ import {
   getUserBaseFields,
   RoundResponse,
   MarketResponse,
-} from './queries'
+} from './queries';
 
 export enum Result {
   WIN = 'win',
@@ -24,14 +31,17 @@ export enum Result {
 
 export const numberOrNull = (value: string) => {
   if (value === null) {
-    return null
+    return null;
   }
 
-  const valueNum = Number(value)
-  return Number.isNaN(valueNum) ? null : valueNum
-}
+  const valueNum = Number(value);
+  return Number.isNaN(valueNum) ? null : valueNum;
+};
 
-export const makeFutureRoundResponse = (epoch: number, startBlock: number): RoundResponse => {
+export const makeFutureRoundResponse = (
+  epoch: number,
+  startBlock: number
+): RoundResponse => {
   return {
     id: epoch.toString(),
     epoch: epoch.toString(),
@@ -51,15 +61,16 @@ export const makeFutureRoundResponse = (epoch: number, startBlock: number): Roun
     bullAmount: '0',
     position: null,
     bets: [],
-  }
-}
+  };
+};
 
 export const transformBetResponse = (betResponse: BetResponse): Bet => {
   const bet = {
     id: betResponse.id,
     hash: betResponse.hash,
     amount: betResponse.amount ? parseFloat(betResponse.amount) : 0,
-    position: betResponse.position === 'Bull' ? BetPosition.BULL : BetPosition.BEAR,
+    position:
+      betResponse.position === 'Bull' ? BetPosition.BULL : BetPosition.BEAR,
     claimed: betResponse.claimed,
     user: {
       id: betResponse.user.id,
@@ -68,14 +79,14 @@ export const transformBetResponse = (betResponse: BetResponse): Bet => {
       totalBets: numberOrNull(betResponse.user.totalBets),
       totalETH: numberOrNull(betResponse.user.totalETH),
     },
-  } as Bet
+  } as Bet;
 
   if (betResponse.round) {
-    bet.round = transformRoundResponse(betResponse.round)
+    bet.round = transformRoundResponse(betResponse.round);
   }
 
-  return bet
-}
+  return bet;
+};
 
 export const transformRoundResponse = (roundResponse: RoundResponse): Round => {
   const {
@@ -97,19 +108,19 @@ export const transformRoundResponse = (roundResponse: RoundResponse): Round => {
     bullAmount,
     position,
     bets = [],
-  } = roundResponse
+  } = roundResponse;
 
   const getRoundPosition = (positionResponse: string) => {
     if (positionResponse === 'Bull') {
-      return BetPosition.BULL
+      return BetPosition.BULL;
     }
 
     if (positionResponse === 'Bear') {
-      return BetPosition.BEAR
+      return BetPosition.BEAR;
     }
 
-    return null
-  }
+    return null;
+  };
 
   return {
     id,
@@ -130,67 +141,74 @@ export const transformRoundResponse = (roundResponse: RoundResponse): Round => {
     bullAmount: numberOrNull(bullAmount),
     position: getRoundPosition(position),
     bets: bets.map(transformBetResponse),
-  }
-}
+  };
+};
 
-export const transformMarketResponse = (marketResponse: MarketResponse): Market => {
+export const transformMarketResponse = (
+  marketResponse: MarketResponse
+): Market => {
   return {
     id: marketResponse.id,
     paused: marketResponse.paused,
     epoch: Number(marketResponse.epoch.epoch),
-  }
-}
+  };
+};
 
 export const makeRoundData = (rounds: Round[]): RoundData => {
   return rounds.reduce((accum, round) => {
     return {
       ...accum,
       [round.id]: round,
-    }
-  }, {})
-}
+    };
+  }, {});
+};
 
 export const getRoundResult = (bet: Bet, currentEpoch: number): Result => {
-  const { round } = bet
+  const { round } = bet;
   if (round.failed) {
-    return Result.CANCELED
+    return Result.CANCELED;
   }
 
   if (round.epoch >= currentEpoch - 1) {
-    return Result.LIVE
+    return Result.LIVE;
   }
-  const roundResultPosition = round.closePrice > round.lockPrice ? BetPosition.BULL : BetPosition.BEAR
+  const roundResultPosition =
+    round.closePrice > round.lockPrice ? BetPosition.BULL : BetPosition.BEAR;
 
-  return bet.position === roundResultPosition ? Result.WIN : Result.LOSE
-}
+  return bet.position === roundResultPosition ? Result.WIN : Result.LOSE;
+};
 
 /**
  * Given a bet object, check if it is eligible to be claimed or refunded
  */
 export const getCanClaim = (bet: Bet) => {
-  return !bet.claimed && (bet.position === bet.round.position || bet.round.failed === true)
-}
+  return (
+    !bet.claimed &&
+    (bet.position === bet.round.position || bet.round.failed === true)
+  );
+};
 
 /**
  * Returns only bets where the user has won.
  * This is necessary because the API currently cannot distinguish between an uncliamed bet that has won or lost
  */
 export const getUnclaimedWinningBets = (bets: Bet[]): Bet[] => {
-  return bets.filter(getCanClaim)
-}
+  return bets.filter(getCanClaim);
+};
 
 /**
  * Gets static data from the contract
  */
 export const getStaticPredictionsData = async () => {
-  const { methods } = getPredictionsContract()
-  const [currentEpoch, intervalBlocks, minBetAmount, isPaused, bufferBlocks] = await makeBatchRequest([
-    methods.currentEpoch().call,
-    methods.intervalBlocks().call,
-    methods.minBetAmount().call,
-    methods.paused().call,
-    methods.bufferBlocks().call,
-  ])
+  const { methods } = getPredictionsContract();
+  const [currentEpoch, intervalBlocks, minBetAmount, isPaused, bufferBlocks] =
+    await makeBatchRequest([
+      methods.currentEpoch().call,
+      methods.intervalBlocks().call,
+      methods.minBetAmount().call,
+      methods.paused().call,
+      methods.bufferBlocks().call,
+    ]);
 
   return {
     status: isPaused ? PredictionStatus.PAUSED : PredictionStatus.LIVE,
@@ -198,12 +216,12 @@ export const getStaticPredictionsData = async () => {
     intervalBlocks: Number(intervalBlocks),
     bufferBlocks: Number(bufferBlocks),
     minBetAmount,
-  }
-}
+  };
+};
 
 export const getMarketData = async (): Promise<{
-  rounds: Round[]
-  market: Market
+  rounds: Round[];
+  market: Market;
 }> => {
   const response = (await request(
     GRAPH_API_PREDICTION,
@@ -220,14 +238,14 @@ export const getMarketData = async (): Promise<{
           }
         }
       }
-    `,
-  )) as { rounds: RoundResponse[]; market: MarketResponse }
+    `
+  )) as { rounds: RoundResponse[]; market: MarketResponse };
 
   return {
     rounds: response.rounds.map(transformRoundResponse),
     market: transformMarketResponse(response.market),
-  }
-}
+  };
+};
 
 export const getRound = async (id: string) => {
   const response = await request(
@@ -245,17 +263,20 @@ export const getRound = async (id: string) => {
         }
       }
   `,
-    { id },
-  )
-  return response.round
-}
+    { id }
+  );
+  return response.round;
+};
 
-type BetHistoryWhereClause = Record<string, string | number | boolean | string[]>
+type BetHistoryWhereClause = Record<
+  string,
+  string | number | boolean | string[]
+>;
 
 export const getBetHistory = async (
   where: BetHistoryWhereClause = {},
   first = 1000,
-  skip = 0,
+  skip = 0
 ): Promise<BetResponse[]> => {
   const response = await request(
     GRAPH_API_PREDICTION,
@@ -272,10 +293,10 @@ export const getBetHistory = async (
         }
       }
     `,
-    { first, skip, where },
-  )
-  return response.bets
-}
+    { first, skip, where }
+  );
+  return response.bets;
+};
 
 export const getBet = async (betId: string): Promise<BetResponse> => {
   const response = await request(
@@ -295,7 +316,7 @@ export const getBet = async (betId: string): Promise<BetResponse> => {
   `,
     {
       id: betId.toLowerCase(),
-    },
-  )
-  return response.bet
-}
+    }
+  );
+  return response.bet;
+};

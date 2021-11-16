@@ -1,17 +1,17 @@
-import React from 'react'
-import styled from 'styled-components'
-import SwiperCore, { Keyboard, Mousewheel } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Box } from '@pancakeswap/uikit'
-import { useGetSortedRounds } from '../../state/hooks'
-import 'swiper/swiper.min.css'
-import RoundCard from './components/RoundCard'
-import Menu from './components/Menu'
-import useSwiper from './hooks/useSwiper'
-import useOnNextRound from './hooks/useOnNextRound'
-import { Round } from '../../state/types'
+import React from 'react';
+import styled from 'styled-components';
+import SwiperCore, { Keyboard, Mousewheel } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Box } from '@pancakeswap/uikit';
+import { useGetSortedRounds } from '../../state/hooks';
+import 'swiper/swiper.min.css';
+import RoundCard from './components/RoundCard';
+import Menu from './components/Menu';
+import useSwiper from './hooks/useSwiper';
+import useOnNextRound from './hooks/useOnNextRound';
+import { Round } from '../../state/types';
 
-SwiperCore.use([Keyboard, Mousewheel])
+SwiperCore.use([Keyboard, Mousewheel]);
 
 const StyledSwiper = styled.div`
   .swiper-wrapper {
@@ -22,13 +22,13 @@ const StyledSwiper = styled.div`
   .swiper-slide {
     width: 320px;
   }
-`
+`;
 const Positions: React.FC = () => {
-  const { setSwiper } = useSwiper()
-  const rounds = useGetSortedRounds()
-  const initialIndex = Math.floor(rounds.length / 2)
+  const { setSwiper } = useSwiper();
+  const rounds = useGetSortedRounds();
+  const initialIndex = Math.floor(rounds.length / 2);
 
-  useOnNextRound()
+  useOnNextRound();
 
   return (
     <Box overflow="hidden">
@@ -54,7 +54,7 @@ const Positions: React.FC = () => {
         </Swiper>
       </StyledSwiper>
     </Box>
-  )
-}
+  );
+};
 
-export default Positions
+export default Positions;

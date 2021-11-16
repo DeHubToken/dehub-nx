@@ -1,183 +1,189 @@
-import BigNumber from 'bignumber.js'
-import { CampaignType, FarmConfig, Nft, PoolConfig, Team } from '../config/constants/types' // eslint-disable-line
+import BigNumber from 'bignumber.js';
+import {
+  CampaignType,
+  FarmConfig,
+  Nft,
+  PoolConfig,
+  Team,
+} from '../config/constants/types'; // eslint-disable-line
 
 export type TranslatableText =
   | string
   | {
-    key?: string
-    data?: {
-      [key: string]: string | number
-    }
-  }
+      key?: string;
+      data?: {
+        [key: string]: string | number;
+      };
+    };
 
 export interface Farm extends FarmConfig {
-  tokenAmountMc?: BigNumber
-  quoteTokenAmountMc?: BigNumber
-  tokenAmountTotal?: BigNumber
-  quoteTokenAmountTotal?: BigNumber
-  lpTotalInQuoteToken?: BigNumber
-  lpTotalSupply?: BigNumber
-  tokenPriceVsQuote?: BigNumber
-  poolWeight?: BigNumber
+  tokenAmountMc?: BigNumber;
+  quoteTokenAmountMc?: BigNumber;
+  tokenAmountTotal?: BigNumber;
+  quoteTokenAmountTotal?: BigNumber;
+  lpTotalInQuoteToken?: BigNumber;
+  lpTotalSupply?: BigNumber;
+  tokenPriceVsQuote?: BigNumber;
+  poolWeight?: BigNumber;
   userData?: {
-    allowance: string
-    tokenBalance: string
-    stakedBalance: string
-    earnings: string
-  }
+    allowance: string;
+    tokenBalance: string;
+    stakedBalance: string;
+    earnings: string;
+  };
 }
 
 export interface Pool extends PoolConfig {
-  totalStaked?: BigNumber
-  stakingLimit?: BigNumber
-  startBlock?: number
-  endBlock?: number
+  totalStaked?: BigNumber;
+  stakingLimit?: BigNumber;
+  startBlock?: number;
+  endBlock?: number;
   userData?: {
-    allowance: BigNumber
-    stakingTokenBalance: BigNumber
-    stakedBalance: BigNumber
-    pendingReward: BigNumber
-  }
+    allowance: BigNumber;
+    stakingTokenBalance: BigNumber;
+    stakedBalance: BigNumber;
+    pendingReward: BigNumber;
+  };
 }
 
 export interface Profile {
-  userId: number
-  points: number
-  teamId: number
-  nftAddress: string
-  tokenId: number
-  isActive: boolean
-  username: string
-  nft?: Nft
-  team: Team
-  hasRegistered: boolean
+  userId: number;
+  points: number;
+  teamId: number;
+  nftAddress: string;
+  tokenId: number;
+  isActive: boolean;
+  username: string;
+  nft?: Nft;
+  team: Team;
+  hasRegistered: boolean;
 }
 
 // Slices states
 
 export interface FarmsState {
-  data: Farm[]
-  loadArchivedFarmsData: boolean
-  userDataLoaded: boolean
+  data: Farm[];
+  loadArchivedFarmsData: boolean;
+  userDataLoaded: boolean;
 }
 
 export interface VaultFees {
-  performanceFee: number
-  callFee: number
-  withdrawalFee: number
-  withdrawalFeePeriod: number
+  performanceFee: number;
+  callFee: number;
+  withdrawalFee: number;
+  withdrawalFeePeriod: number;
 }
 
 export interface VaultUser {
-  isLoading: boolean
-  userShares: string
-  cakeAtLastUserAction: string
-  lastDepositedTime: string
-  lastUserActionTime: string
+  isLoading: boolean;
+  userShares: string;
+  cakeAtLastUserAction: string;
+  lastDepositedTime: string;
+  lastUserActionTime: string;
 }
 export interface CakeVault {
-  totalShares?: string
-  pricePerFullShare?: string
-  totalCakeInVault?: string
-  estimatedCakeBountyReward?: string
-  totalPendingCakeHarvest?: string
-  fees?: VaultFees
-  userData?: VaultUser
+  totalShares?: string;
+  pricePerFullShare?: string;
+  totalCakeInVault?: string;
+  estimatedCakeBountyReward?: string;
+  totalPendingCakeHarvest?: string;
+  fees?: VaultFees;
+  userData?: VaultUser;
 }
 
 export interface PoolsState {
-  data: Pool[]
-  cakeVault: CakeVault
+  data: Pool[];
+  cakeVault: CakeVault;
 }
 
 export interface ProfileState {
-  isInitialized: boolean
-  isLoading: boolean
-  hasRegistered: boolean
-  data: Profile
+  isInitialized: boolean;
+  isLoading: boolean;
+  hasRegistered: boolean;
+  data: Profile;
 }
 
 export type TeamResponse = {
-  0: string
-  1: string
-  2: string
-  3: string
-  4: boolean
-}
+  0: string;
+  1: string;
+  2: string;
+  3: string;
+  4: boolean;
+};
 
 export type TeamsById = {
-  [key: string]: Team
-}
+  [key: string]: Team;
+};
 
 export interface TeamsState {
-  isInitialized: boolean
-  isLoading: boolean
-  data: TeamsById
+  isInitialized: boolean;
+  isLoading: boolean;
+  data: TeamsById;
 }
 
 export interface Achievement {
-  id: string
-  type: CampaignType
-  address: string
-  title: TranslatableText
-  description?: TranslatableText
-  badge: string
-  points: number
+  id: string;
+  type: CampaignType;
+  address: string;
+  title: TranslatableText;
+  description?: TranslatableText;
+  badge: string;
+  points: number;
 }
 
 export interface AchievementState {
-  data: Achievement[]
+  data: Achievement[];
 }
 
 // API Price State
 export interface PriceApiList {
   /* eslint-disable camelcase */
   [key: string]: {
-    name: string
-    symbol: string
-    price: string
-    price_BNB: string
-  }
+    name: string;
+    symbol: string;
+    price: string;
+    price_BNB: string;
+  };
 }
 
 export interface PriceApiListThunk {
   /* eslint-disable camelcase */
-  [key: string]: number
+  [key: string]: number;
 }
 
 export interface PriceApiResponse {
   /* eslint-disable camelcase */
-  updated_at: string
-  data: PriceApiList
+  updated_at: string;
+  data: PriceApiList;
 }
 
 export interface PriceApiThunk {
   /* eslint-disable camelcase */
-  updated_at: string
-  data: PriceApiListThunk
+  updated_at: string;
+  data: PriceApiListThunk;
 }
 
 export interface PriceApiState {
-  isLoading: boolean
-  lastUpdated: string
-  data: PriceApiListThunk
+  isLoading: boolean;
+  lastUpdated: string;
+  data: PriceApiListThunk;
 }
 
 // Block
 
 export interface BlockState {
-  currentBlock: number
-  initialBlock: number
+  currentBlock: number;
+  initialBlock: number;
 }
 
 // Collectibles
 
 export interface CollectiblesState {
-  isInitialized: boolean
-  isLoading: boolean
+  isInitialized: boolean;
+  isLoading: boolean;
   data: {
-    [key: string]: number[]
-  }
+    [key: string]: number[];
+  };
 }
 
 // Predictions
@@ -196,62 +202,62 @@ export enum PredictionStatus {
 }
 
 export interface Round {
-  id: string
-  epoch: number
-  failed?: boolean
-  startBlock: number
-  startAt: number
-  lockAt: number
-  lockBlock: number
-  lockPrice: number
-  endBlock: number
-  closePrice: number
-  totalBets: number
-  totalAmount: number
-  bullBets: number
-  bearBets: number
-  bearAmount: number
-  bullAmount: number
-  position: BetPosition
-  bets?: Bet[]
+  id: string;
+  epoch: number;
+  failed?: boolean;
+  startBlock: number;
+  startAt: number;
+  lockAt: number;
+  lockBlock: number;
+  lockPrice: number;
+  endBlock: number;
+  closePrice: number;
+  totalBets: number;
+  totalAmount: number;
+  bullBets: number;
+  bearBets: number;
+  bearAmount: number;
+  bullAmount: number;
+  position: BetPosition;
+  bets?: Bet[];
 }
 
 export interface Market {
-  id: string
-  paused: boolean
-  epoch: number
+  id: string;
+  paused: boolean;
+  epoch: number;
 }
 
 export interface Bet {
-  id?: string
-  hash?: string
-  amount: number
-  position: BetPosition
-  claimed: boolean
-  user?: PredictionUser
-  round: Round
+  id?: string;
+  hash?: string;
+  amount: number;
+  position: BetPosition;
+  claimed: boolean;
+  user?: PredictionUser;
+  round: Round;
 }
 
 export interface PredictionUser {
-  id: string
-  address: string
-  block: number
-  totalBets: number
-  totalETH: number
+  id: string;
+  address: string;
+  block: number;
+  totalBets: number;
+  totalETH: number;
 }
 
 export interface RoundData {
-  [key: string]: Round
+  [key: string]: Round;
 }
 
 export interface HistoryData {
-  [key: string]: Bet[]
+  [key: string]: Bet[];
 }
 
 export interface BetData {
   [key: string]: {
-    [key: string]: Bet
-  }
+    [key: string]: Bet;
+  };
 }
 
 export enum HistoryFilter {
@@ -261,33 +267,33 @@ export enum HistoryFilter {
 }
 
 export interface PredictionsState {
-  status: PredictionStatus
-  isLoading: boolean
-  isHistoryPaneOpen: boolean
-  isChartPaneOpen: boolean
-  isFetchingHistory: boolean
-  historyFilter: HistoryFilter
-  currentEpoch: number
-  currentRoundStartBlockNumber: number
-  intervalBlocks: number
-  bufferBlocks: number
-  minBetAmount: string
-  lastOraclePrice: string
-  rounds: RoundData
-  history: HistoryData
-  bets: BetData
+  status: PredictionStatus;
+  isLoading: boolean;
+  isHistoryPaneOpen: boolean;
+  isChartPaneOpen: boolean;
+  isFetchingHistory: boolean;
+  historyFilter: HistoryFilter;
+  currentEpoch: number;
+  currentRoundStartBlockNumber: number;
+  intervalBlocks: number;
+  bufferBlocks: number;
+  minBetAmount: string;
+  lastOraclePrice: string;
+  rounds: RoundData;
+  history: HistoryData;
+  bets: BetData;
 }
 
 // Global state
 
 export interface State {
-  achievements: AchievementState
-  block: BlockState
-  farms: FarmsState
-  apiPrices: PriceApiState
-  pools: PoolsState
-  predictions: PredictionsState
-  profile: ProfileState
-  teams: TeamsState
-  collectibles: CollectiblesState
+  achievements: AchievementState;
+  block: BlockState;
+  farms: FarmsState;
+  apiPrices: PriceApiState;
+  pools: PoolsState;
+  predictions: PredictionsState;
+  profile: ProfileState;
+  teams: TeamsState;
+  collectibles: CollectiblesState;
 }

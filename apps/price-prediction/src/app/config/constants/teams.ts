@@ -1,10 +1,11 @@
-import { Team } from './types'
+import { Team } from './types';
 
 const teams: Team[] = [
   {
     id: 1,
     name: 'Syrup Storm',
-    description: "The storm's a-comin! Watch out! These bulls are stampeding in a syrupy surge!",
+    description:
+      "The storm's a-comin! Watch out! These bulls are stampeding in a syrupy surge!",
     images: {
       lg: 'syrup-storm-lg.png',
       md: 'syrup-storm-md.png',
@@ -20,7 +21,8 @@ const teams: Team[] = [
   {
     id: 2,
     name: 'Fearsome Flippers',
-    description: "The flippening is coming. Don't get in these bunnies' way, or you'll get flipped too!",
+    description:
+      "The flippening is coming. Don't get in these bunnies' way, or you'll get flipped too!",
     images: {
       lg: 'fearsome-flippers-lg.png',
       md: 'fearsome-flippers-md.png',
@@ -36,7 +38,8 @@ const teams: Team[] = [
   {
     id: 3,
     name: 'Chaotic Cakers',
-    description: 'Can you stand the heat? Stay out of the kitchen or you might get burned to a crisp!',
+    description:
+      'Can you stand the heat? Stay out of the kitchen or you might get burned to a crisp!',
     images: {
       lg: 'chaotic-cakers-lg.png',
       md: 'chaotic-cakers-md.png',
@@ -49,6 +52,6 @@ const teams: Team[] = [
     users: 0,
     points: 0,
   },
-]
+];
 
-export default teams
+export default teams;

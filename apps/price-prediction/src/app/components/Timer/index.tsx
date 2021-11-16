@@ -1,32 +1,40 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import React from 'react'
-import styled from 'styled-components'
-import { Flex, Heading, Text, Link, useTooltip } from '@pancakeswap/uikit'
-import { useTranslation } from '../../contexts/Localization'
-import { ContextApi } from '../../contexts/Localization/types'
+import React from 'react';
+import styled from 'styled-components';
+import { Flex, Heading, Text, Link, useTooltip } from '@pancakeswap/uikit';
+import { useTranslation } from '../../contexts/Localization';
+import { ContextApi } from '../../contexts/Localization/types';
 
 export interface TimerProps {
-  timerStage?: string
-  minutes?: number
-  hours?: number
-  days?: number
-  showTooltip?: boolean
-  blockNumber?: number
-  HeadingTextComponent?: React.ElementType
-  BodyTextComponent?: React.ElementType
+  timerStage?: string;
+  minutes?: number;
+  hours?: number;
+  days?: number;
+  showTooltip?: boolean;
+  blockNumber?: number;
+  HeadingTextComponent?: React.ElementType;
+  BodyTextComponent?: React.ElementType;
 }
 
 const StyledTimerFlex = styled(Flex)<{ showTooltip?: boolean }>`
-  ${({ theme, showTooltip }) => (showTooltip ? ` border-bottom: 1px dashed ${theme.colors.textSubtle};` : ``)}
+  ${({ theme, showTooltip }) =>
+    showTooltip ? ` border-bottom: 1px dashed ${theme.colors.textSubtle};` : ``}
   div:last-of-type {
     margin-right: 0;
   }
-`
+`;
 
-const Timer = ({ minutes, hours, days, showTooltip, HeadingTextComponent, BodyTextComponent }) => {
-  const { t } = useTranslation()
+const Timer = ({
+  minutes,
+  hours,
+  days,
+  showTooltip,
+  HeadingTextComponent,
+  BodyTextComponent,
+}) => {
+  const { t } = useTranslation();
 
   return (
     <StyledTimerFlex alignItems="flex-end" showTooltip={showTooltip}>
@@ -37,21 +45,27 @@ const Timer = ({ minutes, hours, days, showTooltip, HeadingTextComponent, BodyTe
       <HeadingTextComponent mr="2px">{minutes}</HeadingTextComponent>
       <BodyTextComponent>{t('m')}</BodyTextComponent>
     </StyledTimerFlex>
-  )
-}
+  );
+};
 
 const DefaultHeadingTextComponent = ({ children, ...props }) => (
   <Heading scale="lg" {...props}>
     {children}
   </Heading>
-)
+);
 const DefaultBodyTextComponent = ({ children, ...props }) => (
   <Text fontSize="16px" fontWeight="600" {...props}>
     {children}
   </Text>
-)
+);
 
-const TooltipContent = ({ blockNumber, t }: { blockNumber: number; t: ContextApi['t'] }): JSX.Element => (
+const TooltipContent = ({
+  blockNumber,
+  t,
+}: {
+  blockNumber: number;
+  t: ContextApi['t'];
+}): JSX.Element => (
   <>
     <Text color="body" mb="10px" fontWeight="600">
       {t('Block %num%', { num: blockNumber })}
@@ -60,7 +74,7 @@ const TooltipContent = ({ blockNumber, t }: { blockNumber: number; t: ContextApi
       {t('View on BscScan')}
     </Link>
   </>
-)
+);
 
 const Wrapper: React.FC<TimerProps> = ({
   timerStage,
@@ -72,11 +86,14 @@ const Wrapper: React.FC<TimerProps> = ({
   HeadingTextComponent = DefaultHeadingTextComponent,
   BodyTextComponent = DefaultBodyTextComponent,
 }) => {
-  const { t } = useTranslation()
-  const { targetRef, tooltip, tooltipVisible } = useTooltip(<TooltipContent blockNumber={blockNumber} t={t} />, {
-    placement: 'bottom',
-  })
-  const shouldDisplayTooltip = showTooltip && tooltipVisible
+  const { t } = useTranslation();
+  const { targetRef, tooltip, tooltipVisible } = useTooltip(
+    <TooltipContent blockNumber={blockNumber} t={t} />,
+    {
+      placement: 'bottom',
+    }
+  );
+  const shouldDisplayTooltip = showTooltip && tooltipVisible;
   return (
     <Flex alignItems="flex-end" position="relative">
       <BodyTextComponent mr="16px">{timerStage}</BodyTextComponent>
@@ -92,7 +109,7 @@ const Wrapper: React.FC<TimerProps> = ({
         {shouldDisplayTooltip && tooltip}
       </div>
     </Flex>
-  )
-}
+  );
+};
 
-export default Wrapper
+export default Wrapper;

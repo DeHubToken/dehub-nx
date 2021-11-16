@@ -1,3 +1,3 @@
-import { setBlock } from './block'
+import { setBlock } from './block';
 
-export default setBlock
+export default setBlock;
