@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect } from 'react'
 import { Box } from '@pancakeswap/uikit'
 import { DefaultTheme, useTheme } from 'styled-components'
@@ -21,7 +23,6 @@ const tradingViewListener = async () =>
 const initializeTradingView = (TradingViewObj: any, theme: DefaultTheme, localeCode: string) => {
   /* eslint-disable new-cap */
   /* eslint-disable no-new */
-  // @ts-ignore
   new TradingViewObj.widget({
     autosize: true,
     height: '100%',
@@ -43,9 +44,7 @@ const TradingView = () => {
   const theme = useTheme()
 
   useEffect(() => {
-    // @ts-ignore
     if (window.TradingView) {
-      // @ts-ignore
       initializeTradingView(window.TradingView, theme, currentLanguage.code)
     } else {
       tradingViewListener().then((tv) => {

@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
+// @ts-nocheck
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import maxBy from 'lodash/maxBy'
 import merge from 'lodash/merge'
 import { BIG_ZERO } from '../../utils/bigNumber'
-import { Bet, HistoryFilter, Market, PredictionsState, PredictionStatus, Round } from '../../state/types'
+import { Bet, HistoryFilter, Market, PredictionsState, PredictionStatus, Round } from '../types'
 import {
   makeFutureRoundResponse,
   transformRoundResponse,
@@ -32,7 +33,7 @@ const initialState: PredictionsState = {
 }
 
 // Thunks
-export const fetchBet = createAsyncThunk<{ account: string; bet: Bet }, { account: string; id: string }>(
+export const fetchBet = createAsyncThunk<{ account: string | null | undefined; bet?: Bet }, { account: string | null | undefined; id?: string }>(
   'predictions/fetchBet',
   async ({ account, id }) => {
     const response = await getBet(id)
@@ -50,8 +51,6 @@ export const fetchRoundBet = createAsyncThunk<
     round: roundId,
   })
 
-  // This should always return 0 or 1 bet because a user can only place
-  // one bet per round
   if (betResponses && betResponses.length === 1) {
     const [betResponse] = betResponses
     return { account, roundId, bet: transformBetResponse(betResponse) }
@@ -75,7 +74,7 @@ export const fetchCurrentBets = createAsyncThunk<
   return { account, bets: betResponses.map(transformBetResponse) }
 })
 
-export const fetchHistory = createAsyncThunk<{ account: string; bets: Bet[] }, { account: string; claimed?: boolean }>(
+export const fetchHistory = createAsyncThunk<{ account: string | null | undefined; bets: Bet[] }, { account: string | null | undefined; claimed?: boolean }>(
   'predictions/fetchHistory',
   async ({ account, claimed }) => {
     const response = await getBetHistory({
@@ -134,7 +133,7 @@ export const predictionsSlice = createSlice({
     setCurrentEpoch: (state, action: PayloadAction<number>) => {
       state.currentEpoch = action.payload
     },
-    markBetAsCollected: (state, action: PayloadAction<{ account: string; roundId: string }>) => {
+    markBetAsCollected: (state, action: PayloadAction<{ account: string | null | undefined; roundId: string }>) => {
       const { account, roundId } = action.payload
       const accountBets = state.bets[account]
 
@@ -142,7 +141,7 @@ export const predictionsSlice = createSlice({
         accountBets[roundId].claimed = true
       }
     },
-    markPositionAsEntered: (state, action: PayloadAction<{ account: string; roundId: string; bet: Bet }>) => {
+    markPositionAsEntered: (state, action: PayloadAction<{ account: string | null | undefined; roundId: string; bet: Bet }>) => {
       const { account, roundId, bet } = action.payload
 
       state.bets = {

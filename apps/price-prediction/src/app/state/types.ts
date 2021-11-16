@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js'
-import { CampaignType, FarmConfig, Nft, PoolConfig, Team } from '../config/constants/types'
+import { CampaignType, FarmConfig, Nft, PoolConfig, Team } from '../config/constants/types' // eslint-disable-line
 
 export type TranslatableText =
   | string
   | {
-    key: string
+    key?: string
     data?: {
       [key: string]: string | number
     }

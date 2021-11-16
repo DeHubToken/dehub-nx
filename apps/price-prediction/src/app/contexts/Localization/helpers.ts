@@ -1,6 +1,8 @@
-import { EN } from 'config/localization/languages'
+// @ts-nocheck
 
-const publicUrl = process.env.PUBLIC_URL
+import { EN } from '../../config/localization/languages'
+
+const publicUrl = process.env.NX_PUBLIC_URL
 
 export const LS_KEY = 'pancakeswap_language'
 

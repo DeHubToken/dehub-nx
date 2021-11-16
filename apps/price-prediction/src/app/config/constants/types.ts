@@ -1,4 +1,4 @@
-import { TranslatableText } from '../../state/types'
+import { TranslatableText } from '../../state/types' // eslint-disable-line
 
 export interface Address {
   97?: string
@@ -114,8 +114,10 @@ export type Nft = {
   type: NftType
   video?: NftVideo
 
-  // Uniquely identifies the nft.
-  // Used for matching an NFT from the config with the data from the NFT's tokenURI
+  /*
+   * Uniquely identifies the nft.
+   * Used for matching an NFT from the config with the data from the NFT's tokenURI
+   */
   identifier: string
 
   // Used to be "bunnyId". Used when minting NFT

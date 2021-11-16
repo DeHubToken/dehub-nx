@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { createContext, useCallback, useEffect, useState } from 'react'
 import { Language } from '@pancakeswap/uikit'
 import { EN, languages } from '../../config/localization/languages'
@@ -76,7 +78,7 @@ export const LanguageProvider: React.FC = ({ children }) => {
   }
 
   const translate = useCallback(
-    (key: string, data?: ContextData) => {
+    (key?: string, data?: ContextData) => {
       const translationSet = languageMap.has(currentLanguage.locale)
         ? languageMap.get(currentLanguage.locale)
         : languageMap.get(EN.locale)

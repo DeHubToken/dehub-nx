@@ -11,7 +11,9 @@ const ChartDisclaimer: React.FC<ChartDisclaimerProps> = ({ onSuccess, onDismiss 
 
   const handleConfirm = () => {
     onSuccess()
-    onDismiss()
+    if (onDismiss) {
+      onDismiss()
+    }
   }
 
   return (

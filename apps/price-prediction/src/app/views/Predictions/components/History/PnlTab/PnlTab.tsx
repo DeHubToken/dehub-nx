@@ -5,7 +5,7 @@ import { Box, Flex, Heading, Text, Button, Link, OpenNewIcon } from '@pancakeswa
 import { useTranslation } from '../../../../../contexts/Localization'
 import { useGetCurrentEpoch, usePriceBnbBusd } from '../../../../../state/hooks'
 import { Bet, BetPosition } from '../../../../../state/types'
-import { formatBnb, getMultiplier, getPayout } from '../../../../../views/Predictions/helpers'
+import { formatBnb, getMultiplier, getPayout } from '../../../helpers'
 import { getRoundResult, Result } from '../../../../../state/predictions/helpers'
 import PnlChart from './PnlChart'
 import SummaryRow from './SummaryRow'

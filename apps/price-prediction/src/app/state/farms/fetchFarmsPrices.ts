@@ -1,7 +1,8 @@
+// @ts-nocheck
 import BigNumber from 'bignumber.js'
-import { BIG_ZERO } from '../utils/bigNumber'
-import { filterFarmsByQuoteToken } from '../utils/farmsPriceHelpers'
-import { Farm } from '../state/types'
+import { BIG_ZERO } from '../../utils/bigNumber'
+import { filterFarmsByQuoteToken } from '../../utils/farmsPriceHelpers'
+import { Farm } from '../types'
 
 const getFarmFromTokenSymbol = (farms: Farm[], tokenSymbol: string, preferredQuoteTokens?: string[]): Farm => {
   const farmsWithTokenSymbol = farms.filter((farm) => farm.token.symbol === tokenSymbol)
@@ -25,11 +26,13 @@ const getFarmBaseTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: B
     return BIG_ZERO
   }
 
-  // Possible alternative farm quoteTokens:
-  // UST (i.e. MIR-UST), pBTC (i.e. PNT-pBTC), BTCB (i.e. bBADGER-BTCB), ETH (i.e. SUSHI-ETH)
-  // If the farm's quote token isn't BUSD or wBNB, we then use the quote token, of the original farm's quote token
-  // i.e. for farm PNT - pBTC we use the pBTC farm's quote token - BNB, (pBTC - BNB)
-  // from the BNB - pBTC price, we can calculate the PNT - BUSD price
+  /*
+   * Possible alternative farm quoteTokens:
+   * UST (i.e. MIR-UST), pBTC (i.e. PNT-pBTC), BTCB (i.e. bBADGER-BTCB), ETH (i.e. SUSHI-ETH)
+   * If the farm's quote token isn't BUSD or wBNB, we then use the quote token, of the original farm's quote token
+   * i.e. for farm PNT - pBTC we use the pBTC farm's quote token - BNB, (pBTC - BNB)
+   * from the BNB - pBTC price, we can calculate the PNT - BUSD price
+   */
   if (quoteTokenFarm.quoteToken.symbol === 'wBNB') {
     const quoteTokenInBusd = bnbPriceBusd.times(quoteTokenFarm.tokenPriceVsQuote)
     return hasTokenPriceVsQuote && quoteTokenInBusd

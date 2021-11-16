@@ -1,10 +1,11 @@
+// @ts-nocheck
 import BigNumber from 'bignumber.js'
-import { Address, Token } from '../config/constants/types'
-import masterchefABI from '../config/abi/masterchef.json'
-import erc20 from '../config/abi/erc20.json'
-import { getAddress, getMasterChefAddress } from '../utils/addressHelpers'
-import { BIG_TEN, BIG_ZERO } from '../utils/bigNumber'
-import multicall from '../utils/multicall'
+import { Address, Token } from '../../config/constants/types'
+import masterchefABI from '../../config/abi/masterchef.json'
+import erc20 from '../../config/abi/erc20.json'
+import { getAddress, getMasterChefAddress } from '../../utils/addressHelpers'
+import { BIG_TEN, BIG_ZERO } from '../../utils/bigNumber'
+import multicall from '../../utils/multicall'
 
 const fetchFarm = async (pid: number, lpAddresses: Address, token: Token, quoteToken: Token) => {
   const lpAddress = getAddress(lpAddresses)

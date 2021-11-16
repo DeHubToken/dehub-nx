@@ -32,7 +32,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({ epoch, on
         setIsPendingTx(false)
         toastSuccess(t('Position reclaimed!'))
       })
-      .once('error', (error) => {
+      .once('error', (error: any) => {
         setIsPendingTx(false)
         toastError(t('Error'), error?.message)
         console.error(error)

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { DefaultTheme } from 'styled-components'
 import { Box, Flex, FlexProps, Text } from '@pancakeswap/uikit'
-import { formatBnb, formatUsd } from '../../../../views/Predictions/helpers'
+import { formatBnb, formatUsd } from '../../helpers'
 import { useTranslation } from '../../../../contexts/Localization'
 import { BetPosition, Round } from '../../../../state/types'
 
@@ -18,7 +18,7 @@ const getPrizePoolAmount = (totalAmount: PrizePoolRowProps['totalAmount']) => {
   return formatBnb(totalAmount)
 }
 
-const Row = ({ children, ...props }) => {
+const Row: React.FC<{}> = ({ children, ...props }) => {
   return (
     <Flex alignItems="center" justifyContent="space-between" {...props}>
       {children}

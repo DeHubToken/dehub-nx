@@ -2,15 +2,15 @@ import React, { createContext, Dispatch, useState } from 'react'
 import SwiperCore from 'swiper'
 
 interface Context {
-  swiper: SwiperCore
-  setSwiper: Dispatch<React.SetStateAction<SwiperCore>>
+  swiper: SwiperCore | null
+  setSwiper: Dispatch<React.SetStateAction<SwiperCore | null>>
   destroySwiper: () => void
 }
 
-export const SwiperContext = createContext<Context>(undefined)
+export const SwiperContext = createContext<Context | undefined>(undefined)
 
-const SwiperProvider = ({ children }) => {
-  const [swiper, setSwiper] = useState<SwiperCore>(null)
+const SwiperProvider: React.FC<{}> = ({ children }) => {
+  const [swiper, setSwiper] = useState<SwiperCore | null>(null)
 
   const destroySwiper = () => {
     if (swiper) {

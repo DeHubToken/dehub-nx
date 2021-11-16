@@ -1,28 +1,20 @@
+// @ts-nocheck
+
 import { useMemo } from 'react'
-import useWeb3 from 'hooks/useWeb3'
+import useWeb3 from '../hooks/useWeb3'
 import {
   getBep20Contract,
   getCakeContract,
   getBunnyFactoryContract,
   getBunnySpecialContract,
-  getPancakeRabbitContract,
   getProfileContract,
-  getIfoV1Contract,
-  getIfoV2Contract,
-  getLotteryContract,
-  getLotteryTicketContract,
-  getMasterchefContract,
   getPointCenterIfoContract,
   getSouschefContract,
   getClaimRefundContract,
-  getTradingCompetitionContract,
-  getEasterNftContract,
   getErc721Contract,
-  getCakeVaultContract,
   getPredictionsContract,
   getChainlinkOracleContract,
-  getSouschefV2Contract,
-} from '../../utils/contractHelpers'
+} from '../utils/contractHelpers'
 
 /**
  * Helper hooks to get specific contracts (by ABI)

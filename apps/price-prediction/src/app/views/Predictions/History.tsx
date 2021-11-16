@@ -63,8 +63,10 @@ const History = () => {
     }
   }, [account, currentEpoch, isHistoryPaneOpen, dispatch])
 
-  // Currently the api cannot filter by unclaimed AND won so we do it here
-  // when the user has selected Uncollected only include positions they won
+  /*
+   * Currently the api cannot filter by unclaimed AND won so we do it here
+   * when the user has selected Uncollected only include positions they won
+   */
   const results = historyFilter === HistoryFilter.UNCOLLECTED ? getUnclaimedWinningBets(bets) : bets
 
   const hasBetHistory = results && results.length > 0

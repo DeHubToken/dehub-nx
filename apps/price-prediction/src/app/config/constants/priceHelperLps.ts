@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import tokens from './tokens'
 import { FarmConfig } from './types'
 

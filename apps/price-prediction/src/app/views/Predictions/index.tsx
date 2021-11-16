@@ -46,20 +46,6 @@ const Predictions = () => {
   const onPresentRiskDisclaimerRef = useRef(onPresentRiskDisclaimer)
   const onPresentChartDisclaimerRef = useRef(onPresentChartDisclaimer)
 
-  // // Disclaimer
-  // useEffect(() => {
-  //   if (!hasAcceptedRisk) {
-  //     onPresentRiskDisclaimerRef.current()
-  //   }
-  // }, [hasAcceptedRisk, onPresentRiskDisclaimerRef])
-
-  // // Chart Disclaimer
-  // useEffect(() => {
-  //   if (!hasAcceptedChart && isChartPaneOpen) {
-  //     onPresentChartDisclaimerRef.current()
-  //   }
-  // }, [onPresentChartDisclaimerRef, hasAcceptedChart, isChartPaneOpen])
-
   useEffect(() => {
     const fetchInitialData = async () => {
       const [staticPredictionsData, marketData] = await Promise.all([getStaticPredictionsData(), getMarketData()])

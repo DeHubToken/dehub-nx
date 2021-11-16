@@ -12,7 +12,7 @@ export const formatUsd = (usd: number) => {
   return `$${formatNumber(usd || 0, 3, 3)}`
 }
 
-export const formatBnb = (bnb: number) => {
+export const formatBnb = (bnb?: number) => {
   return bnb ? bnb.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 }) : '0'
 }
 

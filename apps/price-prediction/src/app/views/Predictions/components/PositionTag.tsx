@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { ArrowUpIcon, ArrowDownIcon, Flex, FlexProps, Text } from '@pancakeswap/uikit'
@@ -9,7 +10,7 @@ interface TagProps extends FlexProps {
 }
 
 const StyledTag = styled(Flex)<{ bg: TagProps['bg'] }>`
-  background-color: ${({ bg, theme }) => theme.colors[bg]};
+  background-color: ${({ bg, theme }) => theme.colors[bg!]};
   display: inline-flex;
 `
 

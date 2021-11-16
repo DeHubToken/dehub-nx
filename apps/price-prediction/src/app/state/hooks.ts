@@ -1,8 +1,9 @@
+// @ts-nocheck
 import { useEffect, useMemo } from 'react'
 import BigNumber from 'bignumber.js'
 import { useSelector } from 'react-redux'
 import { orderBy } from 'lodash'
-import { useAppDispatch } from '../state'
+import { useAppDispatch } from '.'
 import { getWeb3NoAccount } from '../utils/web3'
 import { getBalanceAmount } from '../utils/formatBalance'
 import { BIG_ZERO } from '../utils/bigNumber'
@@ -183,7 +184,7 @@ export const useGetHistoryByAccount = (account: string | null | undefined) => {
   return bets ? bets[account] : []
 }
 
-export const useGetBetByRoundId = (account: string, roundId: string) => {
+export const useGetBetByRoundId = (account: string | null | undefined, roundId: string) => {
   const bets = useSelector((state: State) => state.predictions.bets)
 
   if (!bets[account]) {
@@ -197,7 +198,7 @@ export const useGetBetByRoundId = (account: string, roundId: string) => {
   return bets[account][roundId]
 }
 
-export const useBetCanClaim = (account: string, roundId: string) => {
+export const useBetCanClaim = (account: string | null | undefined, roundId: string) => {
   const bet = useGetBetByRoundId(account, roundId)
 
   if (!bet) {

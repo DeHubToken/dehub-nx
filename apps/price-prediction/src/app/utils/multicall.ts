@@ -1,8 +1,10 @@
+// @ts-nocheck
+
 import { AbiItem } from 'web3-utils'
 import { Interface } from '@ethersproject/abi'
-import { getWeb3NoAccount } from '../utils/web3'
+import { getWeb3NoAccount } from './web3'
 import MultiCallAbi from '../config/abi/Multicall.json'
-import { getMulticallAddress } from '../utils/addressHelpers'
+import { getMulticallAddress } from './addressHelpers'
 
 interface Call {
   address: string // Address of the contract

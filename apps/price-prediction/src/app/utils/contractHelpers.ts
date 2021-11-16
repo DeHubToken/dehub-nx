@@ -1,6 +1,7 @@
+// @ts-nocheck
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
-import web3NoAccount from '../utils/web3'
+import web3NoAccount from './web3'
 import { poolsConfig } from '../config/constants'
 import { PoolCategory } from '../config/constants/types'
 
@@ -22,7 +23,7 @@ import {
   getCakeVaultAddress,
   getPredictionsAddress,
   getChainlinkOracleAddress,
-} from '../utils/addressHelpers'
+} from './addressHelpers'
 
 // ABI
 import profileABI from '../config/abi/pancakeProfile.json'

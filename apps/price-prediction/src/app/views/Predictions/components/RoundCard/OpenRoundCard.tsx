@@ -56,8 +56,10 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
     { placement: 'top' },
   )
 
-  // Bettable rounds do not have an lockBlock set so we approximate it by adding the block interval
-  // to the start block
+  /*
+   * Bettable rounds do not have an lockBlock set so we approximate it by adding the block interval
+   * to the start block
+   */
   const estimatedLockBlock = round.startBlock + interval
 
   const getCanEnterPosition = () => {

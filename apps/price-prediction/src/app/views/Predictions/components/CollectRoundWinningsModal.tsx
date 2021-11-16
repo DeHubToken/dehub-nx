@@ -66,13 +66,17 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
       .once('sending', () => {
         setIsPendingTx(true)
       })
-      .once('receipt', async (result) => {
+      .once('receipt', async (result: any) => {
         if (onSuccess) {
           await onSuccess()
         }
 
         dispatch(markBetAsCollected({ account, roundId }))
-        onDismiss()
+        
+        if (onDismiss) {
+          onDismiss()
+        }
+
         setIsPendingTx(false)
         toastSuccess(
           t('Winnings collected!'),
@@ -88,7 +92,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
           </Box>,
         )
       })
-      .once('error', (error) => {
+      .once('error', (error: any) => {
         setIsPendingTx(false)
         toastError(t('Error'), error?.message)
         console.error(error)

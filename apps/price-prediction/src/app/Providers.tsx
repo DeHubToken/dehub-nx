@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import { ModalProvider } from '@pancakeswap/uikit'
 import { Web3ReactProvider } from '@web3-react/core'

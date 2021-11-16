@@ -18,6 +18,7 @@ import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { DEFAULT_TOKEN_DECIMAL } from '../../../../config'
 import { useGetMinBetAmount } from '../../../../state/hooks'
+import { ContextData } from '../../../../contexts/Localization/types'
 import { useTranslation } from '../../../../contexts/Localization'
 import { useERC20, usePredictionsContract } from '../../../../hooks/useContract'
 import { useGetBnbBalance } from '../../../../hooks/useTokenBalance'
@@ -40,9 +41,6 @@ interface SetPositionCardProps {
   onSuccess: (decimalValue: BigNumber, hash: string) => Promise<void>
 }
 
-// /!\ TEMPORARY /!\
-// Set default gasPrice (6 gwei) when calling BetBull/BetBear before new contract is released fixing this 'issue'.
-// TODO: Remove on beta-v2 smart contract release.
 const gasPrice = new BigNumber(6).times(BIG_TEN.pow(BIG_NINE)).toString()
 
 const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL)
@@ -76,9 +74,9 @@ const getButtonProps = (value: BigNumber, bnbBalance: BigNumber, minBetAmountBal
 }
 
 const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosition, onBack, onSuccess }) => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   const [isTxPending, setIsTxPending] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState<{ key?: string; data?: ContextData } | null>(null)
   const { account } = useWeb3React()
   const { swiper } = useSwiper()
   const { balance: bnbBalance } = useGetBnbBalance()
@@ -98,7 +96,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
   const showFieldWarning = account && valueAsBn.gt(0) && errorMessage !== null
   const minBetAmountBalance = getBnbAmount(minBetAmount).toNumber()
 
-  const handleChange = (input) => {
+  const handleChange = (input: string) => {
     setValue(input)
   }
 
@@ -118,15 +116,15 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
 
   // Disable the swiper events to avoid conflicts
   const handleMouseOver = () => {
-    swiper.keyboard.disable()
-    swiper.mousewheel.disable()
-    swiper.detachEvents()
+    swiper?.keyboard.disable()
+    swiper?.mousewheel.disable()
+    swiper?.detachEvents()
   }
 
   const handleMouseOut = () => {
-    swiper.keyboard.enable()
-    swiper.mousewheel.enable()
-    swiper.attachEvents()
+    swiper?.keyboard.enable()
+    swiper?.mousewheel.enable()
+    swiper?.attachEvents()
   }
 
   const { key, disabled } = getButtonProps(valueAsBn, bnbBalance, minBetAmountBalance)
@@ -135,7 +133,6 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
     const betMethod = position === BetPosition.BULL ? 'betBull' : 'betBear'
     const decimalValue = getDecimalAmount(valueAsBn)
     const allowance = await betTokenContract.methods.allowance(account, predictionContractAddress).call()
-    console.log('allowance < decimalValue.toNumber()', allowance < decimalValue.toNumber())
     if (allowance < decimalValue.toNumber()) {
       await betTokenContract.methods.approve(predictionContractAddress, decimalValue).send({from: account})
     }
@@ -144,11 +141,11 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
       .once('sending', () => {
         setIsTxPending(true)
       })
-      .once('receipt', async (result) => {
+      .once('receipt', async (result: any) => {
         setIsTxPending(false)
         onSuccess(decimalValue, result.transactionHash as string)
       })
-      .once('error', (error) => {
+      .once('error', (error: any) => {
         const errorMsg = t('An error occurred, unable to enter your position')
 
         toastError(t('Error'), error?.message)
@@ -210,7 +207,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ position, togglePosit
         />
         {showFieldWarning && (
           <Text color="failure" fontSize="12px" mt="4px" textAlign="right">
-            {t(errorMessage.key, errorMessage.data)}
+            {t(errorMessage?.key, errorMessage?.data)}
           </Text>
         )}
         <Text textAlign="right" mb="16px" color="textSubtle" fontSize="12px" style={{ height: '18px' }}>

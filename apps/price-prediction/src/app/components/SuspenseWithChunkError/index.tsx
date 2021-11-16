@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { Suspense, SuspenseProps } from 'react'
 
 interface State {
@@ -20,8 +22,10 @@ class SuspenseWithChunkError extends React.Component<SuspenseProps, State> {
     const isCssChunkLoadError = error.code === 'CSS_CHUNK_LOAD_FAILED'
     const isChunkLoadError = isJsChunkLoadError || isCssChunkLoadError
 
-    // Save a flag on the window object indicating that we have already had a chunk error.
-    // This prevents infinite reloads
+    /*
+     * Save a flag on the window object indicating that we have already had a chunk error.
+     * This prevents infinite reloads
+     */
     const isRecoveringFromChunkError = !!window.history.state?.isRecoveringFromChunkError
 
     // If was a chunk load error, refresh the page

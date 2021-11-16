@@ -6,13 +6,15 @@ interface NotificationProps {
   title: string
 }
 
-// const BunnyDecoration = styled.div`
-//   position: absolute;
-//   top: -130px; // line up bunny at the top of the modal
-//   left: 0px;
-//   text-align: center;
-//   width: 100%;
-// `
+/*
+ * const BunnyDecoration = styled.div`
+ *   position: absolute;
+ *   top: -130px; // line up bunny at the top of the modal
+ *   left: 0px;
+ *   text-align: center;
+ *   width: 100%;
+ * `
+ */
 
 const Wrapper = styled.div`
   align-items: center;

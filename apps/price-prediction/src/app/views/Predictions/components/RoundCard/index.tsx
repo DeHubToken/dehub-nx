@@ -18,8 +18,8 @@ const RoundCard: React.FC<RoundCardProps> = ({ round }) => {
   const { account } = useWeb3React()
   const bet = useGetBetByRoundId(account, id)
   const hasEntered = bet !== null
-  const hasEnteredUp = hasEntered && bet.position === BetPosition.BULL
-  const hasEnteredDown = hasEntered && bet.position === BetPosition.BEAR
+  const hasEnteredUp = hasEntered && bet?.position === BetPosition.BULL
+  const hasEnteredDown = hasEntered && bet?.position === BetPosition.BEAR
   const bullMultiplier = getMultiplier(totalAmount, bullAmount)
   const bearMultiplier = getMultiplier(totalAmount, bearAmount)
 

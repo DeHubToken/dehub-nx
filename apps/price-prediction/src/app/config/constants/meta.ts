@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ContextApi } from '../../contexts/Localization/types'
 import { PageMeta } from './types'
 

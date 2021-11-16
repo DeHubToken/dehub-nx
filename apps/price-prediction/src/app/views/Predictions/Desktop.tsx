@@ -101,9 +101,9 @@ const Gutter = styled.div`
 `
 
 const Desktop: React.FC = () => {
-  const splitWrapperRef = useRef<HTMLDivElement>()
-  const chartRef = useRef<HTMLDivElement>()
-  const gutterRef = useRef<HTMLDivElement>()
+  const splitWrapperRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const chartRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const gutterRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const isHistoryPaneOpen = useIsHistoryPaneOpen()
   const isChartPaneOpen = useIsChartPaneOpen()
   const dispatch = useAppDispatch()
@@ -117,8 +117,10 @@ const Desktop: React.FC = () => {
       set(splitWrapperRef, 'current.style.transition', 'grid-template-rows 150ms')
       set(splitWrapperRef, 'current.style.gridTemplateRows', GRID_TEMPLATE_ROW)
 
-      // Purely comedic: We only want to animate if we are clicking the open chart button
-      // If we keep the transition on the resizing becomes very choppy
+      /*
+       * Purely comedic: We only want to animate if we are clicking the open chart button
+       * If we keep the transition on the resizing becomes very choppy
+       */
       delay(() => {
         set(splitWrapperRef, 'current.style.transition', '')
       }, 150)

@@ -1,6 +1,7 @@
+// @ts-nocheck
 import { useEffect, useRef, useState } from 'react'
-import { BSC_BLOCK_TIME } from '../../config'
-import { getWeb3NoAccount } from '../../utils/web3'
+import { BSC_BLOCK_TIME } from '../config'
+import { getWeb3NoAccount } from '../utils/web3'
 
 /**
  * Returns a countdown in seconds of a given block

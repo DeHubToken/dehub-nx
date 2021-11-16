@@ -12,5 +12,5 @@ export interface ProviderState {
 
 export interface ContextApi extends ProviderState {
   setLanguage: (language: Language) => void
-  t: (key: string, data?: ContextData) => string
+  t: (key?: string, data?: ContextData) => string
 }

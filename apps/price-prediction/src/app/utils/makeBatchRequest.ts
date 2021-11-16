@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getWeb3NoAccount } from './web3'
 
 /**
