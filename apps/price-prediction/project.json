@@ -63,7 +63,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/price-prediction/**/*.{ts,tsx,js,jsx}"],
-        "maxWarnings": -1
+        "maxWarnings": 0
       }
     },
     "test": {
