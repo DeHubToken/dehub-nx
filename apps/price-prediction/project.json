@@ -54,9 +54,9 @@
           "buildTarget": "price-prediction:build:development",
           "host": "dev.localhost",
           "port": 8501
-        },
-        "defaultConfiguration": "development"
-      }
+        }
+      },
+      "defaultConfiguration": "development"
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
