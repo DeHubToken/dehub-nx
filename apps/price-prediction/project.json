@@ -20,7 +20,7 @@
         ],
         "styles": ["apps/price-prediction/src/styles.scss"],
         "scripts": [],
-        "webpackConfig": "apps/price-prediction/webpack.config.js"
+        "webpackConfig": "@nrwl/react/plugins/webpack"
       },
       "configurations": {
         "production": {
