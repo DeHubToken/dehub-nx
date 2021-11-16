@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 
 import { AbiItem } from 'web3-utils'

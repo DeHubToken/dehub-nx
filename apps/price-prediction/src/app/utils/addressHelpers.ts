@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 import addresses from '../config/constants/contracts'
 import tokens from '../config/constants/tokens'

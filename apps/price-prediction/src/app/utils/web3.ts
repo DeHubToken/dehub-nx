@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Web3 from 'web3'
 import { HttpProviderOptions } from 'web3-core-helpers'
 import getRpcUrl from './getRpcUrl'

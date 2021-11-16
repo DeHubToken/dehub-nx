@@ -1,5 +1,6 @@
+/* eslint-disable */
 // @ts-nocheck
-// Set of helper functions to facilitate wallet setup
+
 import { nodes } from './getRpcUrl'
 
 /**

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 
 import { EN } from '../../config/localization/languages'

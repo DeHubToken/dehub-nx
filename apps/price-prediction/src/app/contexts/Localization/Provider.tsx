@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 
 import React, { createContext, useCallback, useEffect, useState } from 'react'

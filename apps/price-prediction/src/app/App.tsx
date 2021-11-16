@@ -1,7 +1,10 @@
+/* eslint-disable */ 
 // @ts-nocheck
 
 import React, { lazy } from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
+import { MoralisProvider } from 'react-moralis';
+import { Contexts } from '@dehub/react/core';
+import { Constants } from '@dehub/shared/config';
 import { ResetCSS } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from './hooks/useEagerConnect'
@@ -12,13 +15,10 @@ import ToastListener from './components/ToastListener'
 import PageLoader from './components/PageLoader'
 import EasterEgg from './components/EasterEgg'
 import history from './routerHistory'
-
-/*
- * Route-based code splitting
- * Only pool is included in the main bundle because of it's the most visited page
- */
-const NotFound = lazy(() => import('./views/NotFound'))
-const Predictions = lazy(() => import('./views/Predictions'))
+import Providers from './Providers'
+import { getChainId } from './config/constants';
+import { RefreshContextProvider } from './contexts/RefreshContext';
+import Predictions from './views/Predictions'
 
 // This config is required for number formatting
 BigNumber.config({
@@ -26,27 +26,30 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-const App: React.FC = () => {
+const appId = Constants[getChainId()].MORALIS_ID;
+const serverUrl = Constants[getChainId()].MORALIS_SERVER;
+
+export function App() {
   usePollBlockNumber()
   useEagerConnect()
 
   return (
-    <Router history={history}>
-      <ResetCSS />
-      <GlobalStyle />
-        <SuspenseWithChunkError fallback={<PageLoader />}>
-          <Switch>
-            <Route path="/">
-              <Predictions />
-            </Route>
-            {/* 404 */}
-            <Route component={NotFound} />
-          </Switch>
-        </SuspenseWithChunkError>
-      <EasterEgg iterations={2} />
-      <ToastListener />
-    </Router>
+    <MoralisProvider appId={appId} serverUrl={serverUrl}>
+      <Providers>
+        <Contexts.MoralisEthersProvider>
+          <RefreshContextProvider>
+            <ResetCSS />
+            <GlobalStyle />
+              <SuspenseWithChunkError fallback={<PageLoader />}>
+                <Predictions />
+              </SuspenseWithChunkError>
+            <EasterEgg iterations={2} />
+            <ToastListener />
+          </RefreshContextProvider>
+        </Contexts.MoralisEthersProvider>
+      </Providers>
+    </MoralisProvider>
   )
 }
 
-export default React.memo(App)
+export default App

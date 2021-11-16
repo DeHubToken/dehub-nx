@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 import { useEffect, useRef, useState } from 'react'
 import { BSC_BLOCK_TIME } from '../config'

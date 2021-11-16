@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import styled, { DefaultTheme } from 'styled-components'
 import { Box, Flex, FlexProps, Text } from '@pancakeswap/uikit'

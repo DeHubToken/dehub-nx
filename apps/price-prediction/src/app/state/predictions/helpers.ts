@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 
 import { request, gql } from 'graphql-request'

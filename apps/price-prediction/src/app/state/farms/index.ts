@@ -1,4 +1,4 @@
-/* eslint-disable no-param-reassign */
+/* eslint-disable  */
 // @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit'
 import farmsConfig from '../../config/constants/farms'

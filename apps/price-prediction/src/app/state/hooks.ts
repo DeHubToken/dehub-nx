@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 import { useEffect, useMemo } from 'react'
 import BigNumber from 'bignumber.js'

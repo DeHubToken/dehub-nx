@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useRef, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled, { css, keyframes } from 'styled-components'
