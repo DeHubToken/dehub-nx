@@ -123,6 +123,7 @@
     "@nrwl/tao": "13.0.2",
     "@nrwl/web": "13.0.2",
     "@nrwl/workspace": "13.0.2",
+    "@pancakeswap/eslint-config-pancake": "1.2.0",
     "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "7.0.2",
     "@types/jest": "27.0.2",

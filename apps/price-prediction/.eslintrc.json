@@ -1,6 +1,7 @@
 {
   "extends": [
     "plugin:@nrwl/nx/react",
+    // "@pancakeswap/eslint-config-pancake",
     "../../.eslintrc.json",
     "../../.eslintrc-overrides.json"
   ],
