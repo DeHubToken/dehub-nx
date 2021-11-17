@@ -1,12 +1,9 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import React from 'react';
-import { Button, useWalletModal } from '@pancakeswap/uikit';
+import { Button, useWalletModal, ButtonProps } from '@pancakeswap/uikit';
 import useAuth from '../hooks/useAuth';
 import { useTranslation } from '../contexts/Localization';
 
-const UnlockButton = props => {
+const UnlockButton = (props: ButtonProps) => {
   const { t } = useTranslation();
   const { login, logout } = useAuth();
   const { onPresentConnectModal } = useWalletModal(login, logout);
