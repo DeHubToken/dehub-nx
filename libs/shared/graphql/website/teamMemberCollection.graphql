@@ -1,0 +1,19 @@
+query teamMembers($isPreview: Boolean = false) {
+  teamMemberCollection(preview: $isPreview) {
+    items {
+      sys {
+        id
+        publishedAt
+      }
+      name
+      title
+      avatar {
+        url
+      }
+      twitter
+      linkedin
+      instagram
+      github
+    }
+  }
+}
