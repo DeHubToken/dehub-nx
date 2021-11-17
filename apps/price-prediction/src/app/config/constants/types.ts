@@ -1,8 +1,7 @@
 import { TranslatableText } from '../../state/types'; // eslint-disable-line
 
 export interface Address {
-  97?: string;
-  56: string;
+  [key: string]: string;
 }
 
 export interface Token {

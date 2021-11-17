@@ -98,7 +98,11 @@ export const ZHTW: Language = {
   code: 'zh-tw',
 };
 
-export const languages = {
+interface LanguageType {
+  [key: string]: Language;
+}
+
+export const languages: LanguageType = {
   'ar-SA': AR,
   'en-US': EN,
   'de-DE': DE,

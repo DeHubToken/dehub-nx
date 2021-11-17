@@ -5,21 +5,25 @@ interface SliceProps {
   offset?: number;
 }
 
-export const DrawAnimation = keyframes`
+interface OffsetProps {
+  offset: number;
+}
+
+export const DrawAnimation = ({ length }: SliceProps) => keyframes`
   from {
     stroke-dasharray: 0, 339.292
   }
   to {
-    stroke-dasharray: ${({ length }: SliceProps) => length} 339.292;
+    stroke-dasharray: ${(() => length)()} 339.292;
   }
 `;
 
-export const OffsetAnimation = keyframes`
+export const OffsetAnimation = (props: OffsetProps) => keyframes`
   from {
     stroke-dashoffset: 0
   }
   to {
-    stroke-dashoffset: ${(props: any) => -props.offset};
+    stroke-dashoffset: ${(() => -props.offset)()};
   }
 `;
 
@@ -32,7 +36,7 @@ export const SVG = styled.svg`
 const DefaultSlice = styled.circle<SliceProps>`
   fill: none;
   stroke-width: 16;
-  stroke-dasharray: ${(props: any) => `${props.length} 339.292`};
+  stroke-dasharray: ${(props: SliceProps) => `${props.length} 339.292`};
 `;
 
 export const LostSlice = styled(DefaultSlice)`
@@ -42,7 +46,7 @@ export const LostSlice = styled(DefaultSlice)`
 
 export const WonSlice = styled(DefaultSlice)`
   stroke: #31d0aa;
-  stroke-dashoffset: ${(props: any) => -props.offset};
+  stroke-dashoffset: ${(props: OffsetProps) => -props.offset};
   animation: ${DrawAnimation} 1s ease, ${OffsetAnimation} 1s ease;
 `;
 

@@ -199,13 +199,13 @@ export const getUnclaimedWinningBets = (bets: Bet[]): Bet[] => {
 export const getStaticPredictionsData = async () => {
   const { methods } = getPredictionsContract();
   const [currentEpoch, intervalBlocks, minBetAmount, isPaused, bufferBlocks] =
-    await makeBatchRequest([
+    await (makeBatchRequest([
       methods.currentEpoch().call,
       methods.intervalBlocks().call,
       methods.minBetAmount().call,
       methods.paused().call,
       methods.bufferBlocks().call,
-    ]);
+    ]) as Promise<unknown[]>);
 
   return {
     status: isPaused ? PredictionStatus.PAUSED : PredictionStatus.LIVE,

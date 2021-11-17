@@ -8,6 +8,7 @@ import {
   Text,
 } from '@pancakeswap/uikit';
 import { BetPosition } from '../../../state/types';
+import { Colors } from '@pancakeswap/uikit/dist/theme/types';
 
 interface TagProps extends FlexProps {
   bg?: string;
@@ -15,7 +16,8 @@ interface TagProps extends FlexProps {
 }
 
 const StyledTag = styled(Flex)<{ bg: TagProps['bg'] }>`
-  background-color: ${({ bg, theme }) => theme.colors[bg]};
+  background-color: ${({ bg, theme }) =>
+    bg ? theme.colors[bg as keyof Colors] : ''};
   display: inline-flex;
 `;
 

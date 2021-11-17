@@ -47,27 +47,6 @@ export const fetchBet = createAsyncThunk<
   return { account, bet };
 });
 
-export const fetchRoundBet = createAsyncThunk<
-  {
-    account: string | null | undefined;
-    roundId: string | null | undefined;
-    bet: Bet;
-  },
-  { account: string | null | undefined; roundId: string | null | undefined }
->('predictions/fetchRoundBet', async ({ account, roundId }) => {
-  const betResponses = await getBetHistory({
-    user: account?.toLowerCase() as string,
-    round: roundId as string,
-  });
-
-  if (betResponses && betResponses.length === 1) {
-    const [betResponse] = betResponses;
-    return { account, roundId, bet: transformBetResponse(betResponse) };
-  }
-
-  return { account, roundId, bet: null };
-});
-
 /**
  * Used to poll the user bets of the current round cards
  */
@@ -203,30 +182,16 @@ export const predictionsSlice = createSlice({
       });
     });
 
-    // Get round bet
-    builder.addCase(fetchRoundBet.fulfilled, (state, action) => {
-      const { account, roundId, bet } = action.payload;
-
-      if (bet) {
-        state.bets = {
-          ...state.bets,
-          [account as string]: {
-            ...state.bets[account as string],
-            [roundId as string]: bet,
-          },
-        };
-      }
-    });
-
     // Update Bet
     builder.addCase(fetchBet.fulfilled, (state, action) => {
       const { account, bet } = action.payload;
-      state.history[account as string] = [
-        ...state.history[account as string].filter(
-          currentBet => currentBet.id !== bet?.id
-        ),
-        bet,
-      ];
+      if (account && bet)
+        state.history[account] = [
+          ...(state.history[account].filter(
+            currentBet => currentBet.id !== bet?.id
+          ) as Bet[]),
+          bet,
+        ];
     });
 
     // Show History
