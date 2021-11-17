@@ -45,7 +45,7 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
   const betPosition =
     closePrice > lockPrice ? BetPosition.BULL : BetPosition.BEAR;
   const bet = useGetBetByRoundId(account, round.id);
-  const payout = getPayout(bet);
+  const payout = bet ? getPayout(bet) : null;
 
   if (round.failed) {
     return <CanceledRoundCard round={round} />;

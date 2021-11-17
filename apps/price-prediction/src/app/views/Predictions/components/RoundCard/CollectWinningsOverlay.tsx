@@ -9,7 +9,7 @@ import CollectWinningsButton from '../CollectWinningsButton';
 interface CollectWinningsOverlayProps {
   roundId: string;
   epoch: number;
-  payout: number;
+  payout: number | null;
   isBottom?: boolean;
 }
 

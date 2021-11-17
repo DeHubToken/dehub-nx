@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import { useEffect, useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useSelector } from 'react-redux';
@@ -34,21 +32,21 @@ export const useFarms = (): FarmsState => {
   return farms;
 };
 
-export const useFarmFromPid = (pid): Farm => {
+export const useFarmFromPid = (pid: number): Farm => {
   const farm = useSelector((state: State) =>
     state.farms.data.find(f => f.pid === pid)
-  );
+  ) as Farm;
   return farm;
 };
 
 export const useFarmFromLpSymbol = (lpSymbol: string): Farm => {
   const farm = useSelector((state: State) =>
     state.farms.data.find(f => f.lpSymbol === lpSymbol)
-  );
+  ) as Farm;
   return farm;
 };
 
-export const useFarmUser = pid => {
+export const useFarmUser = (pid: number) => {
   const farm = useFarmFromPid(pid);
 
   return {
@@ -80,24 +78,24 @@ export const useFarmFromTokenSymbol = (
 // Return the base token price for a farm, from a given pid
 export const useBusdPriceFromPid = (pid: number): BigNumber => {
   const farm = useFarmFromPid(pid);
-  return farm && new BigNumber(farm.token.busdPrice);
+  return farm && new BigNumber(farm.token.busdPrice as BigNumber.Value);
 };
 
 export const useBusdPriceFromToken = (tokenSymbol: string): BigNumber => {
   const tokenFarm = useFarmFromTokenSymbol(tokenSymbol);
-  const tokenPrice = useBusdPriceFromPid(tokenFarm?.pid);
+  const tokenPrice = useBusdPriceFromPid(tokenFarm?.pid as number);
   return tokenPrice;
 };
 
 export const useLpTokenPrice = (symbol: string) => {
   const farm = useFarmFromLpSymbol(symbol);
-  const farmTokenPriceInUsd = useBusdPriceFromPid(farm.pid);
+  const farmTokenPriceInUsd = useBusdPriceFromPid(farm.pid as number);
   let lpTokenPrice = BIG_ZERO;
 
   if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
     // Total value of base token in LP
     const valueOfBaseTokenInFarm = farmTokenPriceInUsd.times(
-      farm.tokenAmountTotal
+      farm.tokenAmountTotal as BigNumber.Value
     );
     // Double it to get overall value in LP
     const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2);
@@ -113,7 +111,7 @@ export const useLpTokenPrice = (symbol: string) => {
 
 export const usePriceBnbBusd = (): BigNumber => {
   const bnbBusdFarm = useFarmFromPid(252);
-  return new BigNumber(bnbBusdFarm.quoteToken.busdPrice);
+  return new BigNumber(bnbBusdFarm.quoteToken.busdPrice as BigNumber.Value);
 };
 
 // Block
@@ -203,7 +201,8 @@ export const useGetHistory = () => {
 
 export const useGetHistoryByAccount = (account: string | null | undefined) => {
   const bets = useGetHistory();
-  return bets ? bets[account] : [];
+  if (account) return bets ? bets[account] : [];
+  return [];
 };
 
 export const useGetBetByRoundId = (
@@ -212,15 +211,17 @@ export const useGetBetByRoundId = (
 ) => {
   const bets = useSelector((state: State) => state.predictions.bets);
 
-  if (!bets[account]) {
+  if (account && !bets[account]) {
     return null;
   }
 
-  if (!bets[account][roundId]) {
+  if (account && !bets[account][roundId]) {
     return null;
   }
 
-  return bets[account][roundId];
+  if (account) return bets[account][roundId];
+
+  return null;
 };
 
 export const useBetCanClaim = (

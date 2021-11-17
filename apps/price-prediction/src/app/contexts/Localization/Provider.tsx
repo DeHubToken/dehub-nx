@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { Language } from '@pancakeswap/uikit';
 import { EN, languages } from '../../config/localization/languages';
@@ -85,25 +83,29 @@ export const LanguageProvider: React.FC = ({ children }) => {
       const translationSet = languageMap.has(currentLanguage.locale)
         ? languageMap.get(currentLanguage.locale)
         : languageMap.get(EN.locale);
-      const translatedText = translationSet[key] || key;
+      if (key) {
+        const translatedText = translationSet?.[key] || key;
+        const includesVariable = translatedText.match(/%\S+?%/gm);
 
-      // Check the existence of at least one combination of %%, separated by 1 or more non space characters
-      const includesVariable = translatedText.match(/%\S+?%/gm);
+        if (includesVariable && data) {
+          let interpolatedText = translatedText;
+          Object.keys(data).forEach(dataKey => {
+            const templateKey = new RegExp(`%${dataKey}%`, 'g');
+            interpolatedText = interpolatedText.replace(
+              templateKey,
+              data[dataKey].toString()
+            );
+          });
 
-      if (includesVariable && data) {
-        let interpolatedText = translatedText;
-        Object.keys(data).forEach(dataKey => {
-          const templateKey = new RegExp(`%${dataKey}%`, 'g');
-          interpolatedText = interpolatedText.replace(
-            templateKey,
-            data[dataKey].toString()
-          );
-        });
+          return interpolatedText;
+        }
 
-        return interpolatedText;
+        return translatedText;
       }
 
-      return translatedText;
+      return '';
+
+      // Check the existence of at least one combination of %%, separated by 1 or more non space characters
     },
     [currentLanguage]
   );

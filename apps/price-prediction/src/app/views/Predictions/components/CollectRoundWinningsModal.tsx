@@ -27,7 +27,7 @@ import { usePredictionsContract } from '../../../hooks/useContract';
 import { formatBnb } from '../helpers';
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
-  payout: number;
+  payout: number | null;
   roundId: string;
   epoch: number;
   onSuccess?: () => Promise<void>;
@@ -122,9 +122,11 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
         <Flex alignItems="start" justifyContent="space-between" mb="24px">
           <Text>{t('Collecting')}</Text>
           <Box style={{ textAlign: 'right' }}>
-            <Text>{`${formatBnb(payout)} BNB`}</Text>
+            <Text>{`${payout ? formatBnb(payout) : 0} BNB`}</Text>
             <Text fontSize="12px" color="textSubtle">
-              {`~$${formatBnb(bnbBusdPrice.times(payout).toNumber())}`}
+              {`~$${
+                payout ? formatBnb(bnbBusdPrice.times(payout).toNumber()) : 0
+              }`}
             </Text>
           </Box>
         </Flex>

@@ -3,7 +3,7 @@ import { Button, ButtonProps, useModal } from '@pancakeswap/uikit';
 import CollectRoundWinningsModal from './CollectRoundWinningsModal';
 
 interface CollectWinningsButtonProps extends ButtonProps {
-  payout: number;
+  payout: number | null;
   roundId: string;
   epoch: number;
   hasClaimed: boolean;

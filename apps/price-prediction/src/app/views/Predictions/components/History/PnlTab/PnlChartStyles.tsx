@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import styled, { keyframes } from 'styled-components';
 
 interface SliceProps {
