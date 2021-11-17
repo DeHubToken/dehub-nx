@@ -85,7 +85,7 @@ export const getRoundBaseFields = () => `
 
 export const getBetBaseFields = () => `
   id
-  hash  
+  hash
   amount
   position
   claimed

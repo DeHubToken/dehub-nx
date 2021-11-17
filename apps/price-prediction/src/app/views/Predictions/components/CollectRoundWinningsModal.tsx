@@ -33,6 +33,10 @@ interface CollectRoundWinningsModalProps extends InjectedModalProps {
   onSuccess?: () => Promise<void>;
 }
 
+interface TransactionResult {
+  transactionHash?: string;
+}
+
 const Modal = styled(ModalContainer)`
   overflow: visible;
 `;
@@ -67,7 +71,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
       .once('sending', () => {
         setIsPendingTx(true);
       })
-      .once('receipt', async result => {
+      .once('receipt', async (result: TransactionResult) => {
         if (onSuccess) {
           await onSuccess();
         }

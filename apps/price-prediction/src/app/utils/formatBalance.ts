@@ -24,7 +24,9 @@ export const getFullDisplayBalance = (
   decimals = 18,
   decimalsToAppear?: number
 ) => {
-  return getBalanceAmount(balance, decimals).toFixed(decimalsToAppear);
+  return getBalanceAmount(balance, decimals).toFixed(
+    decimalsToAppear as number
+  );
 };
 
 export const formatNumber = (

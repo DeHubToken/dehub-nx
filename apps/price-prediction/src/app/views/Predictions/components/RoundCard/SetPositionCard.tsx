@@ -44,6 +44,10 @@ interface SetPositionCardProps {
   onSuccess: (decimalValue: BigNumber, hash: string) => Promise<void>;
 }
 
+interface TransactionResult {
+  transactionHash?: string;
+}
+
 const gasPrice = new BigNumber(6).times(BIG_TEN.pow(BIG_NINE)).toString();
 
 const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
@@ -174,11 +178,11 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
       .once('sending', () => {
         setIsTxPending(true);
       })
-      .once('receipt', async result => {
+      .once('receipt', async (result: TransactionResult) => {
         setIsTxPending(false);
         onSuccess(decimalValue, result.transactionHash as string);
       })
-      .once('error', error => {
+      .once('error', (error: Error) => {
         const errorMsg = t('An error occurred, unable to enter your position');
 
         toastError(t('Error'), error?.message);

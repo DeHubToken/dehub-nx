@@ -1,5 +1,6 @@
 import { AbiItem } from 'web3-utils';
 import { Interface, JsonFragment, Fragment } from '@ethersproject/abi';
+import { BytesLike } from '@ethersproject/bytes';
 import { getWeb3NoAccount } from './web3';
 import MultiCallAbi from '../config/abi/Multicall.json';
 import { getMulticallAddress } from './addressHelpers';
@@ -26,7 +27,7 @@ const multicall = async (
     itf.encodeFunctionData(call.name, call.params),
   ]);
   const { returnData } = await multi.methods.aggregate(calldata).call();
-  const res = returnData.map((call, i) =>
+  const res = returnData.map((call: BytesLike, i: number) =>
     itf.decodeFunctionResult(calls[i].name, call)
   );
 

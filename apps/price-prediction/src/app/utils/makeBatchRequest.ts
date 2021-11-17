@@ -18,7 +18,7 @@ const makeBatchRequest = calls => {
     const promises = calls.map(call => {
       return new Promise((resolve, reject) => {
         batch.add(
-          call.request({}, (err, result) => {
+          call.request({}, (err: Error, result: string) => {
             if (err) {
               reject(err);
             } else {

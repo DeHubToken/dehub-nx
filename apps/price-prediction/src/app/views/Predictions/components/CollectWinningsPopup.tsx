@@ -130,7 +130,7 @@ const CollectWinningsPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
   const ref = useRef(null);
-  const timer = useRef(undefined);
+  const timer = useRef<NodeJS.Timeout | undefined>(undefined);
   const { account } = useWeb3React();
   const predictionStatus = useGetPredictionsStatus();
   const isHistoryPaneOpen = useIsHistoryPaneOpen();
@@ -142,7 +142,7 @@ const CollectWinningsPopup = () => {
 
   const handleClick = () => {
     setIsOpen(false);
-    clearInterval(timer.current);
+    clearInterval(timer.current as NodeJS.Timeout);
   };
 
   // Check user's history for unclaimed winners
@@ -169,7 +169,7 @@ const CollectWinningsPopup = () => {
     }
 
     return () => {
-      clearInterval(timer?.current);
+      clearInterval(timer.current as NodeJS.Timeout);
       isCancelled = true;
     };
   }, [account, timer, predictionStatus, setIsOpen, isHistoryPaneOpen]);

@@ -1,4 +1,5 @@
 import { InjectedConnector } from '@web3-react/injected-connector';
+import { IRPCMap } from '@walletconnect/types';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { BscConnector } from '@binance-chain/bsc-connector';
 import { ConnectorNames } from '@pancakeswap/uikit';
@@ -7,12 +8,12 @@ import getNodeUrl from './getRpcUrl';
 
 const POLLING_INTERVAL = 12000;
 const rpcUrl = getNodeUrl();
-const chainId = parseInt(process.env.NX_REACT_APP_CHAIN_ID, 10);
+const chainId = parseInt(process?.env?.NX_REACT_APP_CHAIN_ID as string, 10);
 
 const injected = new InjectedConnector({ supportedChainIds: [chainId] });
 
 const walletconnect = new WalletConnectConnector({
-  rpc: { [chainId]: rpcUrl },
+  rpc: { [chainId]: rpcUrl } as IRPCMap,
   bridge: 'https://pancakeswap.bridge.walletconnect.org/',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
@@ -20,7 +21,12 @@ const walletconnect = new WalletConnectConnector({
 
 const bscConnector = new BscConnector({ supportedChainIds: [chainId] });
 
-export const connectorsByName: { [connectorName in ConnectorNames] } = {
+export const connectorsByName: {
+  [connectorName in ConnectorNames]:
+    | InjectedConnector
+    | WalletConnectConnector
+    | BscConnector;
+} = {
   [ConnectorNames.Injected]: injected,
   [ConnectorNames.WalletConnect]: walletconnect,
   [ConnectorNames.BSC]: bscConnector,

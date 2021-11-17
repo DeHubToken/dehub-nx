@@ -37,7 +37,7 @@ export interface Ifo {
   releaseBlockNumber: number;
   articleUrl: string;
   campaignId: string;
-  tokenOfferingPrice: number;
+  tokenOfferingPrice: number | null;
   version: number;
   [PoolIds.poolBasic]?: IfoPoolInfo;
   [PoolIds.poolUnlimited]: IfoPoolInfo;
