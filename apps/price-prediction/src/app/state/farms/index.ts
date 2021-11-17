@@ -12,7 +12,9 @@ import {
 } from './fetchFarmUser';
 import { FarmsState, Farm } from '../types';
 
-const nonArchivedFarms = farmsConfig.filter(({ pid }) => !isArchivedPid(pid));
+const nonArchivedFarms = farmsConfig.filter(
+  ({ pid }) => !isArchivedPid(pid as number)
+);
 
 const noAccountFarmConfig = farmsConfig.map(farm => ({
   ...farm,
@@ -93,7 +95,7 @@ export const fetchFarmUserDataAsync =
     const userFarmEarnings = await fetchFarmUserEarnings(account, farmsToFetch);
 
     const arrayOfUserDataObjects = userFarmAllowances.map(
-      (farmAllowance, index) => {
+      (farmAllowance: string, index: number) => {
         return {
           pid: farmsToFetch[index].pid,
           allowance: userFarmAllowances[index],

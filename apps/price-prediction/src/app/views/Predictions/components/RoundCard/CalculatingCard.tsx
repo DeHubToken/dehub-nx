@@ -23,7 +23,7 @@ interface CalculatingCardProps {
 const CalculatingCard: React.FC<CalculatingCardProps> = ({ round }) => {
   const { t } = useTranslation();
   const interval = useGetTotalIntervalBlocks();
-  const estimatedEndBlock = round.startBlock + interval;
+  const estimatedEndBlock = (round.startBlock as number) + interval;
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     t(
       'This round’s closing transaction has been submitted to the blockchain, and is awaiting confirmation.'
@@ -38,7 +38,7 @@ const CalculatingCard: React.FC<CalculatingCardProps> = ({ round }) => {
           status="calculating"
           icon={<WaitIcon mr="4px" width="21px" />}
           title={t('Calculating')}
-          epoch={round.epoch}
+          epoch={round.epoch as number}
           blockNumber={estimatedEndBlock}
         />
         <CardBody p="16px">

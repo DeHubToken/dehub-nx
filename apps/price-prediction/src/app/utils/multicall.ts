@@ -5,7 +5,7 @@ import { getWeb3NoAccount } from './web3';
 import MultiCallAbi from '../config/abi/Multicall.json';
 import { getMulticallAddress } from './addressHelpers';
 
-interface Call {
+export interface Call {
   address: string; // Address of the contract
   name: string; // Function name on the contract (example: balanceOf)
   params?: (string | number | JsonFragment | Fragment)[]; // Function params

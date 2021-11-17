@@ -1,9 +1,13 @@
 import BigNumber from 'bignumber.js';
 import erc20ABI from '../../config/abi/erc20.json';
 import masterchefABI from '../../config/abi/masterchef.json';
-import multicall from '../../utils/multicall';
+import multicall, { Call } from '../../utils/multicall';
 import { getAddress, getMasterChefAddress } from '../../utils/addressHelpers';
 import { FarmConfig } from '../../config/constants/types';
+
+interface StakedBalanceHex {
+  _hex: BigNumber.Value;
+}
 
 export const fetchFarmUserAllowances = async (
   account: string,
@@ -21,30 +25,12 @@ export const fetchFarmUserAllowances = async (
   });
 
   const rawLpAllowances = await multicall(erc20ABI, calls);
-  const parsedLpAllowances = rawLpAllowances.map(lpBalance => {
-    return new BigNumber(lpBalance).toJSON();
-  });
+  const parsedLpAllowances = rawLpAllowances.map(
+    (lpBalance: BigNumber.Value) => {
+      return new BigNumber(lpBalance).toJSON();
+    }
+  );
   return parsedLpAllowances;
-};
-
-export const fetchFarmUserTokenBalances = async (
-  account: string,
-  farmsToFetch: FarmConfig[]
-) => {
-  const calls = farmsToFetch.map(farm => {
-    const lpContractAddress = getAddress(farm.lpAddresses);
-    return {
-      address: lpContractAddress,
-      name: 'balanceOf',
-      params: [account],
-    };
-  });
-
-  const rawTokenBalances = await multicall(erc20ABI, calls);
-  const parsedTokenBalances = rawTokenBalances.map(tokenBalance => {
-    return new BigNumber(tokenBalance).toJSON();
-  });
-  return parsedTokenBalances;
 };
 
 export const fetchFarmUserStakedBalances = async (
@@ -59,12 +45,14 @@ export const fetchFarmUserStakedBalances = async (
       name: 'userInfo',
       params: [farm.pid, account],
     };
-  });
+  }) as Call[];
 
   const rawStakedBalances = await multicall(masterchefABI, calls);
-  const parsedStakedBalances = rawStakedBalances.map(stakedBalance => {
-    return new BigNumber(stakedBalance[0]._hex).toJSON();
-  });
+  const parsedStakedBalances = rawStakedBalances.map(
+    (stakedBalance: StakedBalanceHex[]) => {
+      return new BigNumber(stakedBalance[0]._hex as BigNumber.Value).toJSON();
+    }
+  );
   return parsedStakedBalances;
 };
 
@@ -80,10 +68,10 @@ export const fetchFarmUserEarnings = async (
       name: 'pendingCake',
       params: [farm.pid, account],
     };
-  });
+  }) as Call[];
 
   const rawEarnings = await multicall(masterchefABI, calls);
-  const parsedEarnings = rawEarnings.map(earnings => {
+  const parsedEarnings = rawEarnings.map((earnings: BigNumber.Value) => {
     return new BigNumber(earnings).toJSON();
   });
   return parsedEarnings;

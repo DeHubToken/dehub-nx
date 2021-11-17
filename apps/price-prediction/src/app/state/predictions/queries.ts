@@ -33,21 +33,21 @@ export interface HistoricalBetResponse {
 export interface RoundResponse {
   id: string;
   epoch: string;
-  failed: boolean;
-  startBlock: string;
-  startAt: string;
-  lockAt: string;
-  lockBlock: string;
-  lockPrice: string;
-  endBlock: string;
-  closePrice: string;
+  failed: boolean | null;
+  startBlock: string | null;
+  startAt: string | null;
+  lockAt: string | null;
+  lockBlock: string | null;
+  lockPrice: string | null;
+  endBlock: string | null;
+  closePrice: string | null;
   totalBets: string;
   totalAmount: string;
   bearBets: string;
   bullBets: string;
   bearAmount: string;
   bullAmount: string;
-  position: string;
+  position: string | null;
   bets: BetResponse[];
 }
 

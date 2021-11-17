@@ -9,21 +9,23 @@ const ThemeContext = React.createContext({
   toggleTheme: () => null,
 });
 
-const ThemeContextProvider = ({ children }) => {
+const ThemeContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(() => {
     const isDarkUserSetting = localStorage.getItem(CACHE_KEY);
     return isDarkUserSetting ? JSON.parse(isDarkUserSetting) : false;
   });
 
   const toggleTheme = () => {
-    setIsDark(prevState => {
+    setIsDark((prevState: string) => {
       localStorage.setItem(CACHE_KEY, JSON.stringify(!prevState));
       return !prevState;
     });
   };
 
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{ isDark, toggleTheme: toggleTheme as () => null }}
+    >
       <SCThemeProvider theme={dark}>{children}</SCThemeProvider>
     </ThemeContext.Provider>
   );

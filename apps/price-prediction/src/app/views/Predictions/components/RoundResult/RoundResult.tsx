@@ -50,7 +50,7 @@ const RoundResult: React.FC<RoundResultProps> = ({
             bold
             fontSize="24px"
           >
-            {formatUsd(closePrice)}
+            {formatUsd(closePrice as number)}
           </Text>
           <PositionTag betPosition={betPosition}>
             {formatUsd(priceDifference)}

@@ -6,7 +6,7 @@ import { getWeb3NoAccount } from '../utils/web3';
  * Returns a countdown in seconds of a given block
  */
 const useBlockCountdown = (blockNumber: number) => {
-  const timer = useRef<ReturnType<typeof setTimeout>>(null);
+  const timer = useRef<NodeJS.Timeout | undefined>(undefined);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const useBlockCountdown = (blockNumber: number) => {
         timer.current = setInterval(() => {
           setSecondsRemaining(prevSecondsRemaining => {
             if (prevSecondsRemaining === 1) {
-              clearInterval(timer.current);
+              clearInterval(timer.current as NodeJS.Timeout);
             }
 
             return prevSecondsRemaining - 1;
@@ -37,7 +37,7 @@ const useBlockCountdown = (blockNumber: number) => {
     startCountdown();
 
     return () => {
-      clearInterval(timer.current);
+      clearInterval(timer.current as NodeJS.Timeout);
     };
   }, [setSecondsRemaining, blockNumber, timer]);
 

@@ -8,7 +8,10 @@ export const DEFAULT_META: PageMeta = {
   image: 'https://pancakeswap.finance/images/hero.png',
 };
 
-export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {
+export const getCustomMeta = (
+  path: string,
+  t: ContextApi['t']
+): PageMeta | null => {
   switch (path) {
     case '/':
       return {

@@ -31,8 +31,14 @@ const RoundCard: React.FC<RoundCardProps> = ({ round }) => {
   const hasEntered = bet !== null;
   const hasEnteredUp = hasEntered && bet?.position === BetPosition.BULL;
   const hasEnteredDown = hasEntered && bet?.position === BetPosition.BEAR;
-  const bullMultiplier = getMultiplier(totalAmount, bullAmount);
-  const bearMultiplier = getMultiplier(totalAmount, bearAmount);
+  const bullMultiplier = getMultiplier(
+    totalAmount as number,
+    bullAmount as number
+  );
+  const bearMultiplier = getMultiplier(
+    totalAmount as number,
+    bearAmount as number
+  );
 
   // Next (open) round
   if (epoch === currentEpoch && lockPrice === null) {
@@ -63,7 +69,7 @@ const RoundCard: React.FC<RoundCardProps> = ({ round }) => {
   }
 
   // Fake future rounds
-  if (epoch > currentEpoch) {
+  if ((epoch as number) > currentEpoch) {
     return <SoonRoundCard round={round} />;
   }
 

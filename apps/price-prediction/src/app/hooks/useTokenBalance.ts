@@ -73,7 +73,7 @@ export const useGetBnbBalance = () => {
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const walletBalance = await web3.eth.getBalance(account);
+      const walletBalance = await web3.eth.getBalance(account as string);
       setBalance(new BigNumber(walletBalance));
     };
 

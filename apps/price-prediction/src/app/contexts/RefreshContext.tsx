@@ -6,7 +6,11 @@ const SLOW_INTERVAL = 60000;
 const RefreshContext = React.createContext({ slow: 0, fast: 0 });
 
 // This context maintain 2 counters that can be used as a dependencies on other hooks to force a periodic refresh
-const RefreshContextProvider = ({ children }) => {
+const RefreshContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [slow, setSlow] = useState(0);
   const [fast, setFast] = useState(0);
 

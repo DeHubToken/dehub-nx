@@ -23,9 +23,11 @@ interface CanceledRoundCardProps {
 const CanceledRoundCard: React.FC<CanceledRoundCardProps> = ({ round }) => {
   const { t } = useTranslation();
   const interval = useGetTotalIntervalBlocks();
-  const { isRefundable, setIsRefundable } = useIsRefundable(round.epoch);
+  const { isRefundable, setIsRefundable } = useIsRefundable(
+    round.epoch as number
+  );
   const { epoch, startBlock } = round;
-  const estimatedEndBlock = startBlock + interval;
+  const estimatedEndBlock = (startBlock as number) + interval;
 
   const handleSuccess = async () => {
     setIsRefundable(false);
@@ -37,7 +39,7 @@ const CanceledRoundCard: React.FC<CanceledRoundCardProps> = ({ round }) => {
         status="canceled"
         icon={<BlockIcon mr="4px" width="21px" />}
         title={t('Canceled')}
-        epoch={round.epoch}
+        epoch={round.epoch as number}
         blockNumber={estimatedEndBlock}
       />
       <CardBody p="16px">
@@ -49,7 +51,7 @@ const CanceledRoundCard: React.FC<CanceledRoundCardProps> = ({ round }) => {
             </Text>
             {isRefundable && (
               <ReclaimPositionButton
-                epoch={epoch}
+                epoch={epoch as number}
                 onSuccess={handleSuccess}
                 width="100%"
                 my="8px"

@@ -56,7 +56,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
   const dispatch = useAppDispatch();
   const { currentBlock } = useBlock();
   const { isSettingPosition, position } = state;
-  const isBufferPhase = currentBlock >= round.startBlock + interval;
+  const isBufferPhase = currentBlock >= (round.startBlock as number) + interval;
   const positionDisplay =
     position === BetPosition.BULL
       ? t('Up').toUpperCase()
@@ -70,7 +70,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
    * Bettable rounds do not have an lockBlock set so we approximate it by adding the block interval
    * to the start block
    */
-  const estimatedLockBlock = round.startBlock + interval;
+  const estimatedLockBlock = (round.startBlock as number) + interval;
 
   const getCanEnterPosition = () => {
     if (hasEnteredUp || hasEnteredDown) {
@@ -149,7 +149,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
       <Card>
         <CardHeader
           status="next"
-          epoch={round.epoch}
+          epoch={round.epoch as number}
           blockNumber={estimatedLockBlock}
           icon={<PlayCircleOutlineIcon color="white" mr="4px" width="21px" />}
           title={t('Next')}

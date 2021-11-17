@@ -26,7 +26,7 @@ export enum Result {
   LIVE = 'live',
 }
 
-export const numberOrNull = (value: string) => {
+export const numberOrNull = (value: string | null) => {
   if (value === null) {
     return null;
   }
@@ -70,11 +70,11 @@ export const transformBetResponse = (betResponse: BetResponse): Bet => {
       betResponse.position === 'Bull' ? BetPosition.BULL : BetPosition.BEAR,
     claimed: betResponse.claimed,
     user: {
-      id: betResponse.user.id,
-      address: betResponse.user.address,
-      block: numberOrNull(betResponse.user.block),
-      totalBets: numberOrNull(betResponse.user.totalBets),
-      totalETH: numberOrNull(betResponse.user.totalETH),
+      id: betResponse?.user?.id,
+      address: betResponse?.user?.address,
+      block: numberOrNull(betResponse?.user?.block as string),
+      totalBets: numberOrNull(betResponse?.user?.totalBets as string),
+      totalETH: numberOrNull(betResponse?.user?.totalETH as string),
     },
   } as Bet;
 
@@ -107,7 +107,7 @@ export const transformRoundResponse = (roundResponse: RoundResponse): Round => {
     bets = [],
   } = roundResponse;
 
-  const getRoundPosition = (positionResponse: string) => {
+  const getRoundPosition = (positionResponse: string | null) => {
     if (positionResponse === 'Bull') {
       return BetPosition.BULL;
     }
@@ -121,22 +121,22 @@ export const transformRoundResponse = (roundResponse: RoundResponse): Round => {
 
   return {
     id,
-    failed,
-    epoch: numberOrNull(epoch),
-    startBlock: numberOrNull(startBlock),
-    startAt: numberOrNull(startAt),
-    lockAt: numberOrNull(lockAt),
-    lockBlock: numberOrNull(lockBlock),
-    lockPrice: lockPrice ? parseFloat(lockPrice) : null,
-    endBlock: numberOrNull(endBlock),
-    closePrice: closePrice ? parseFloat(closePrice) : null,
-    totalBets: numberOrNull(totalBets),
-    totalAmount: totalAmount ? parseFloat(totalAmount) : 0,
-    bullBets: numberOrNull(bullBets),
-    bearBets: numberOrNull(bearBets),
-    bearAmount: numberOrNull(bearAmount),
-    bullAmount: numberOrNull(bullAmount),
-    position: getRoundPosition(position),
+    failed: failed as boolean,
+    epoch: numberOrNull(epoch) as number,
+    startBlock: numberOrNull(startBlock as string) as number,
+    startAt: numberOrNull(startAt) as number,
+    lockAt: numberOrNull(lockAt) as number,
+    lockBlock: numberOrNull(lockBlock) as number,
+    lockPrice: (lockPrice ? parseFloat(lockPrice) : null) as number,
+    endBlock: numberOrNull(endBlock) as number,
+    closePrice: (closePrice ? parseFloat(closePrice) : null) as number,
+    totalBets: numberOrNull(totalBets) as number,
+    totalAmount: (totalAmount ? parseFloat(totalAmount) : 0) as number,
+    bullBets: numberOrNull(bullBets) as number,
+    bearBets: numberOrNull(bearBets) as number,
+    bearAmount: numberOrNull(bearAmount) as number,
+    bullAmount: numberOrNull(bullAmount) as number,
+    position: getRoundPosition(position) as BetPosition,
     bets: bets.map(transformBetResponse),
   };
 };
@@ -221,7 +221,7 @@ export const getMarketData = async (): Promise<{
   market: Market;
 }> => {
   const response = (await request(
-    GRAPH_API_PREDICTION,
+    GRAPH_API_PREDICTION as string,
     gql`
       query getMarketData {
         rounds(first: 5, orderBy: epoch, orderDirection: desc) {
@@ -246,7 +246,7 @@ export const getMarketData = async (): Promise<{
 
 export const getRound = async (id: string) => {
   const response = await request(
-    GRAPH_API_PREDICTION,
+    GRAPH_API_PREDICTION as string,
     gql`
       query getRound($id: ID!) {
         round(id: $id) {
@@ -276,7 +276,7 @@ export const getBetHistory = async (
   skip = 0
 ): Promise<BetResponse[]> => {
   const response = await request(
-    GRAPH_API_PREDICTION,
+    GRAPH_API_PREDICTION as string,
     gql`
       query getBetHistory($first: Int!, $skip: Int!, $where: Bet_filter) {
         bets(first: $first, skip: $skip, where: $where) {
@@ -297,7 +297,7 @@ export const getBetHistory = async (
 
 export const getBet = async (betId: string): Promise<BetResponse> => {
   const response = await request(
-    GRAPH_API_PREDICTION,
+    GRAPH_API_PREDICTION as string,
     gql`
       query getBet($id: ID!) {
         bet(id: $id) {

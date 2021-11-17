@@ -42,18 +42,22 @@ export const fetchBet = createAsyncThunk<
   { account: string | null | undefined; bet?: Bet },
   { account: string | null | undefined; id?: string }
 >('predictions/fetchBet', async ({ account, id }) => {
-  const response = await getBet(id);
+  const response = await getBet(id as string);
   const bet = transformBetResponse(response);
   return { account, bet };
 });
 
 export const fetchRoundBet = createAsyncThunk<
-  { account: string; roundId: string; bet: Bet },
-  { account: string; roundId: string }
+  {
+    account: string | null | undefined;
+    roundId: string | null | undefined;
+    bet: Bet;
+  },
+  { account: string | null | undefined; roundId: string | null | undefined }
 >('predictions/fetchRoundBet', async ({ account, roundId }) => {
   const betResponses = await getBetHistory({
-    user: account.toLowerCase(),
-    round: roundId,
+    user: account?.toLowerCase() as string,
+    round: roundId as string,
   });
 
   if (betResponses && betResponses.length === 1) {
@@ -72,7 +76,7 @@ export const fetchCurrentBets = createAsyncThunk<
   { account: string | null | undefined; roundIds: string[] }
 >('predictions/fetchCurrentBets', async ({ account, roundIds }) => {
   const betResponses = await getBetHistory({
-    user: account.toLowerCase(),
+    user: account?.toLowerCase() as string,
     round_in: roundIds,
   });
 
@@ -84,8 +88,8 @@ export const fetchHistory = createAsyncThunk<
   { account: string | null | undefined; claimed?: boolean }
 >('predictions/fetchHistory', async ({ account, claimed }) => {
   const response = await getBetHistory({
-    user: account.toLowerCase(),
-    claimed,
+    user: account?.toLowerCase() as string,
+    claimed: claimed as boolean,
   });
   const bets = response.map(transformBetResponse);
 
@@ -123,7 +127,7 @@ export const predictionsSlice = createSlice({
       const newRoundData = makeRoundData(rounds);
       const incomingCurrentRound = maxBy(rounds, 'epoch');
 
-      if (state.currentEpoch !== incomingCurrentRound.epoch) {
+      if (state.currentEpoch !== incomingCurrentRound?.epoch) {
         // Add new round
         const newestRound = maxBy(rounds, 'epoch') as Round;
         const futureRound = transformRoundResponse(
@@ -136,8 +140,9 @@ export const predictionsSlice = createSlice({
         newRoundData[futureRound.id] = futureRound;
       }
 
-      state.currentEpoch = incomingCurrentRound.epoch;
-      state.currentRoundStartBlockNumber = incomingCurrentRound.startBlock;
+      state.currentEpoch = incomingCurrentRound?.epoch as number;
+      state.currentRoundStartBlockNumber =
+        incomingCurrentRound?.startBlock as number;
       state.status = market.paused
         ? PredictionStatus.PAUSED
         : PredictionStatus.LIVE;
@@ -154,7 +159,7 @@ export const predictionsSlice = createSlice({
       }>
     ) => {
       const { account, roundId } = action.payload;
-      const accountBets = state.bets[account];
+      const accountBets = state.bets[account as string];
 
       if (accountBets && accountBets[roundId]) {
         accountBets[roundId].claimed = true;
@@ -172,8 +177,8 @@ export const predictionsSlice = createSlice({
 
       state.bets = {
         ...state.bets,
-        [account]: {
-          ...state.bets[account],
+        [account as string]: {
+          ...state.bets[account as string],
           [roundId]: bet,
         },
       };
@@ -194,7 +199,7 @@ export const predictionsSlice = createSlice({
       }, {});
 
       state.bets = merge({}, state.bets, {
-        [account]: betData,
+        [account as string]: betData,
       });
     });
 
@@ -205,9 +210,9 @@ export const predictionsSlice = createSlice({
       if (bet) {
         state.bets = {
           ...state.bets,
-          [account]: {
-            ...state.bets[account],
-            [roundId]: bet,
+          [account as string]: {
+            ...state.bets[account as string],
+            [roundId as string]: bet,
           },
         };
       }
@@ -216,9 +221,9 @@ export const predictionsSlice = createSlice({
     // Update Bet
     builder.addCase(fetchBet.fulfilled, (state, action) => {
       const { account, bet } = action.payload;
-      state.history[account] = [
-        ...state.history[account].filter(
-          currentBet => currentBet.id !== bet.id
+      state.history[account as string] = [
+        ...state.history[account as string].filter(
+          currentBet => currentBet.id !== bet?.id
         ),
         bet,
       ];
@@ -237,7 +242,7 @@ export const predictionsSlice = createSlice({
 
       state.isFetchingHistory = false;
       state.isHistoryPaneOpen = true;
-      state.history[account] = bets;
+      state.history[account as string] = bets;
 
       // Save any fetched bets in the "bets" namespace
       const betData = bets.reduce((accum, bet) => {
@@ -248,7 +253,7 @@ export const predictionsSlice = createSlice({
       }, {});
 
       state.bets = merge({}, state.bets, {
-        [account]: betData,
+        [account as string]: betData,
       });
     });
   },

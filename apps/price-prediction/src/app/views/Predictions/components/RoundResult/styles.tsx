@@ -90,7 +90,7 @@ export const LockPriceRow: React.FC<LockPriceRowProps> = ({
   return (
     <Row {...props}>
       <Text fontSize="14px">{t('Locked Price')}:</Text>
-      <Text fontSize="14px">{formatUsd(lockPrice)}</Text>
+      <Text fontSize="14px">{formatUsd(lockPrice as number)}</Text>
     </Row>
   );
 };

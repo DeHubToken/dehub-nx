@@ -21,8 +21,8 @@ const SoonRoundCard: React.FC<SoonRoundCardProps> = ({ round }) => {
   const { t } = useTranslation();
   const interval = useGetTotalIntervalBlocks();
   const currentEpoch = useGetCurrentEpoch();
-  const estimatedEndBlock = round.startBlock + interval;
-  const seconds = useRoundCountdown(round.epoch - currentEpoch + 1);
+  const estimatedEndBlock = (round.startBlock as number) + interval;
+  const seconds = useRoundCountdown((round.epoch as number) - currentEpoch + 1);
   const countdown = formatRoundTime(seconds);
 
   return (
@@ -31,7 +31,7 @@ const SoonRoundCard: React.FC<SoonRoundCardProps> = ({ round }) => {
         status="soon"
         icon={<WaitIcon mr="4px" width="21px" />}
         title={t('Later')}
-        epoch={round.epoch}
+        epoch={round.epoch as number}
         blockNumber={estimatedEndBlock}
       />
       <CardBody p="16px">

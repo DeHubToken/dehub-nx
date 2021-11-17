@@ -61,7 +61,7 @@ const LiveRoundCard: React.FC<LiveRoundCardProps> = ({
   const price = useGetLastOraclePrice();
   const isBull = price.gt(lockPrice);
   const priceColor = isBull ? 'success' : 'failure';
-  const estimatedEndBlock = lockBlock + totalInterval;
+  const estimatedEndBlock = (lockBlock as number) + totalInterval;
   const priceDifference = price.minus(lockPrice).toNumber();
   const { countUp, update } = useCountUp({
     start: 0,
@@ -97,13 +97,13 @@ const LiveRoundCard: React.FC<LiveRoundCardProps> = ({
             <PlayCircleOutlineIcon mr="4px" width="24px" color="secondary" />
           }
           title={t('Live')}
-          epoch={round.epoch}
+          epoch={round.epoch as number}
           blockNumber={estimatedEndBlock}
         />
         <BlockProgress
           variant="flat"
           scale="sm"
-          startBlock={lockBlock}
+          startBlock={lockBlock as number}
           endBlock={estimatedEndBlock}
         />
         <CardBody p="16px">

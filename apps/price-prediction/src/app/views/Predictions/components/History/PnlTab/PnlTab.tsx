@@ -88,8 +88,10 @@ const getPnlSummary = (bets: Bet[], currentEpoch: number): PnlSummary => {
       if (payout > bestRound.payout) {
         const { bullAmount, bearAmount, totalAmount } = bet.round;
         const multiplier = getMultiplier(
-          totalAmount,
-          bet.position === BetPosition.BULL ? bullAmount : bearAmount
+          totalAmount as number,
+          (bet.position === BetPosition.BULL
+            ? bullAmount
+            : bearAmount) as number
         );
         bestRound = { id: bet.round.id, payout, multiplier };
       }

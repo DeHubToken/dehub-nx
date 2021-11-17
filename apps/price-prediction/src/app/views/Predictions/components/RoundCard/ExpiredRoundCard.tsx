@@ -58,8 +58,8 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
           status="expired"
           icon={<BlockIcon mr="4px" width="21px" color="textDisabled" />}
           title={t('Expired')}
-          blockNumber={endBlock}
-          epoch={round.epoch}
+          blockNumber={endBlock as number}
+          epoch={round.epoch as number}
         />
         <CardBody p="16px" style={{ position: 'relative' }}>
           <MultiplierArrow
@@ -80,7 +80,7 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
       </StyledExpiredRoundCard>
       <CollectWinningsOverlay
         roundId={id}
-        epoch={epoch}
+        epoch={epoch as number}
         payout={payout}
         isBottom={hasEnteredDown}
       />

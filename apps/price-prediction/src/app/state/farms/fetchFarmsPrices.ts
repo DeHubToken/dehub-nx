@@ -27,13 +27,13 @@ const getFarmBaseTokenPrice = (
 
   if (farm.quoteToken.symbol === 'BUSD') {
     return hasTokenPriceVsQuote
-      ? new BigNumber(farm.tokenPriceVsQuote)
+      ? new BigNumber(farm.tokenPriceVsQuote as BigNumber.Value)
       : BIG_ZERO;
   }
 
   if (farm.quoteToken.symbol === 'wBNB') {
     return hasTokenPriceVsQuote
-      ? bnbPriceBusd.times(farm.tokenPriceVsQuote)
+      ? bnbPriceBusd.times(farm.tokenPriceVsQuote as BigNumber.Value)
       : BIG_ZERO;
   }
 
@@ -51,17 +51,21 @@ const getFarmBaseTokenPrice = (
    */
   if (quoteTokenFarm.quoteToken.symbol === 'wBNB') {
     const quoteTokenInBusd = bnbPriceBusd.times(
-      quoteTokenFarm.tokenPriceVsQuote
+      quoteTokenFarm.tokenPriceVsQuote as BigNumber.Value
     );
     return hasTokenPriceVsQuote && quoteTokenInBusd
-      ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd)
+      ? new BigNumber(farm.tokenPriceVsQuote as BigNumber.Value).times(
+          quoteTokenInBusd
+        )
       : BIG_ZERO;
   }
 
   if (quoteTokenFarm.quoteToken.symbol === 'BUSD') {
     const quoteTokenInBusd = quoteTokenFarm.tokenPriceVsQuote;
     return hasTokenPriceVsQuote && quoteTokenInBusd
-      ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd)
+      ? new BigNumber(farm.tokenPriceVsQuote as BigNumber.Value).times(
+          quoteTokenInBusd
+        )
       : BIG_ZERO;
   }
 
@@ -101,8 +105,8 @@ const getFarmQuoteTokenPrice = (
   return BIG_ZERO;
 };
 
-const fetchFarmsPrices = async farms => {
-  const bnbBusdFarm = farms.find((farm: Farm) => farm.pid === 252);
+const fetchFarmsPrices = async (farms: Farm[]) => {
+  const bnbBusdFarm = farms.find((farm: Farm) => farm.pid === 252) as Farm;
   const bnbPriceBusd = bnbBusdFarm.tokenPriceVsQuote
     ? new BigNumber(1).div(bnbBusdFarm.tokenPriceVsQuote)
     : BIG_ZERO;
