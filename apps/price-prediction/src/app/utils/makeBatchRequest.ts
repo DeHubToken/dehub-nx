@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 import { getWeb3NoAccount } from './web3';
 
 /**

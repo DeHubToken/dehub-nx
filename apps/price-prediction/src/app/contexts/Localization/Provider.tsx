@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { Language } from '@pancakeswap/uikit';
 import { EN, languages } from '../../config/localization/languages';

@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import maxBy from 'lodash/maxBy';
 import merge from 'lodash/merge';
