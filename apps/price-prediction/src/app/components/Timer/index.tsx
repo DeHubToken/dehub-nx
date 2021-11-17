@@ -10,7 +10,7 @@ export interface TimerProps {
   hours?: number;
   days?: number;
   showTooltip?: boolean;
-  blockNumber?: number;
+  blockNumber: number;
   HeadingTextComponent?: React.ElementType;
   BodyTextComponent?: React.ElementType;
 }
@@ -33,6 +33,8 @@ const Timer = ({
 }: TimerProps) => {
   const { t } = useTranslation();
 
+  if (!HeadingTextComponent || !BodyTextComponent) return null;
+
   return (
     <StyledTimerFlex alignItems="flex-end" showTooltip={showTooltip}>
       <HeadingTextComponent mr="2px">{days}</HeadingTextComponent>
@@ -45,12 +47,12 @@ const Timer = ({
   );
 };
 
-const DefaultHeadingTextComponent = ({ children, ...props }) => (
+const DefaultHeadingTextComponent: React.FC = ({ children, ...props }) => (
   <Heading scale="lg" {...props}>
     {children}
   </Heading>
 );
-const DefaultBodyTextComponent = ({ children, ...props }) => (
+const DefaultBodyTextComponent: React.FC = ({ children, ...props }) => (
   <Text fontSize="16px" fontWeight="600" {...props}>
     {children}
   </Text>
@@ -102,6 +104,7 @@ const Wrapper: React.FC<TimerProps> = ({
           HeadingTextComponent={HeadingTextComponent}
           BodyTextComponent={BodyTextComponent}
           showTooltip={showTooltip}
+          blockNumber={blockNumber}
         />
         {shouldDisplayTooltip && tooltip}
       </div>

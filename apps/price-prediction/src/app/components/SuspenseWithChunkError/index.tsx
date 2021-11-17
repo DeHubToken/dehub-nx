@@ -1,4 +1,4 @@
-import React, { Suspense, SuspenseProps } from 'react';
+import React, { ErrorInfo, Suspense, SuspenseProps } from 'react';
 
 interface State {
   hasError: boolean;
@@ -15,9 +15,10 @@ class SuspenseWithChunkError extends React.Component<SuspenseProps, State> {
     return { hasError: true };
   }
 
-  componentDidCatch(error) {
+  componentDidCatch(error: Error & { code?: string }, errorInfo: ErrorInfo) {
     const isJsChunkLoadError = error.name === 'ChunkLoadError';
-    const isCssChunkLoadError = error.code === 'CSS_CHUNK_LOAD_FAILED';
+    const isCssChunkLoadError =
+      error.code && error.code === 'CSS_CHUNK_LOAD_FAILED';
     const isChunkLoadError = isJsChunkLoadError || isCssChunkLoadError;
 
     /*
