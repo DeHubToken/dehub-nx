@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { createContext, Dispatch, useState } from 'react';
 import SwiperCore from 'swiper';
 
@@ -10,7 +9,7 @@ interface Context {
 
 export const SwiperContext = createContext<Context | undefined>(undefined);
 
-const SwiperProvider: React.FC<{}> = ({ children }) => {
+const SwiperProvider: React.FC = ({ children }) => {
   const [swiper, setSwiper] = useState<SwiperCore | null>(null);
 
   const destroySwiper = () => {

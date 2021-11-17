@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useEffect, useRef } from 'react';
 
 /**
@@ -6,7 +5,7 @@ import { useEffect, useRef } from 'react';
  *
  * @see https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state
  */
-const usePreviousValue = (value: any) => {
+const usePreviousValue = value => {
   const ref = useRef();
 
   useEffect(() => {

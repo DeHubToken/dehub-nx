@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import {
@@ -50,7 +49,7 @@ const HistoricalBet: React.FC<BetProps> = ({ bet }) => {
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
-  const getRoundColor = (result: any) => {
+  const getRoundColor = (result: string) => {
     switch (result) {
       case Result.WIN:
         return 'success';
@@ -63,7 +62,7 @@ const HistoricalBet: React.FC<BetProps> = ({ bet }) => {
     }
   };
 
-  const getRoundPrefix = (result: any) => {
+  const getRoundPrefix = (result: string) => {
     if (result === Result.LOSE) {
       return '-';
     }

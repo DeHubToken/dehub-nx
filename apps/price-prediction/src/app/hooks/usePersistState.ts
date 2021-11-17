@@ -1,10 +1,9 @@
-/* eslint-disable */
 import { useEffect, useState } from 'react';
 
 /**
  * Same as "useState" but saves the value to local storage each time it changes
  */
-const usePersistState = (initialValue: any, localStorageKey: string) => {
+const usePersistState = (initialValue: boolean, localStorageKey: string) => {
   const [value, setValue] = useState(() => {
     try {
       const valueFromLS = localStorage.getItem(localStorageKey);

@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import React, { createContext, ReactNode, useCallback, useState } from 'react';
 import { kebabCase } from 'lodash';
 import { Toast, toastTypes } from '@pancakeswap/uikit';

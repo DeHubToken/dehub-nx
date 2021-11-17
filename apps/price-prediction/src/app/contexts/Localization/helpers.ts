@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import { EN } from '../../config/localization/languages';
 
 const publicUrl = process.env.NX_PUBLIC_URL;

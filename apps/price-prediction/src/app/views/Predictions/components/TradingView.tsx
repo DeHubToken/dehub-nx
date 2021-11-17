@@ -1,10 +1,13 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import React, { useEffect } from 'react';
 import { Box } from '@pancakeswap/uikit';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useTranslation } from '../../../contexts/Localization';
+
+declare global {
+  interface Window {
+    TradingView: any; // eslint-disable-line
+  }
+}
 
 /**
  * When the script tag is injected the TradingView object is not immediately
@@ -22,7 +25,7 @@ const tradingViewListener = async () =>
   );
 
 const initializeTradingView = (
-  TradingViewObj: any,
+  TradingViewObj: any, // eslint-disable-line
   theme: DefaultTheme,
   localeCode: string
 ) => {

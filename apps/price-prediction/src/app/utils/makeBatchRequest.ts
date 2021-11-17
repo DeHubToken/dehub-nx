@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import { getWeb3NoAccount } from './web3';
 
 /**
@@ -12,7 +10,7 @@ import { getWeb3NoAccount } from './web3';
  *  contract.method.startBlockNumber().call
  * ]
  */
-const makeBatchRequest = (calls: any[]) => {
+const makeBatchRequest = calls => {
   try {
     const web3 = getWeb3NoAccount();
     const batch = new web3.BatchRequest();

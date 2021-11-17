@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import { request, gql } from 'graphql-request';
 import { GRAPH_API_PREDICTION } from '../../config/constants/endpoints';
 import {
@@ -289,7 +286,7 @@ export const getBetHistory = async (
           }
           user {
             ${getUserBaseFields()}
-          } 
+          }
         }
       }
     `,
@@ -310,7 +307,7 @@ export const getBet = async (betId: string): Promise<BetResponse> => {
           }
           user {
             ${getUserBaseFields()}
-          } 
+          }
         }
       }
   `,

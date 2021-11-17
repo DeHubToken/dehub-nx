@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { BscConnector } from '@binance-chain/bsc-connector';
@@ -9,7 +7,7 @@ import getNodeUrl from './getRpcUrl';
 
 const POLLING_INTERVAL = 12000;
 const rpcUrl = getNodeUrl();
-const chainId = parseInt(process.env.NX_REACT_APP_CHAIN_ID!, 10);
+const chainId = parseInt(process.env.NX_REACT_APP_CHAIN_ID, 10);
 
 const injected = new InjectedConnector({ supportedChainIds: [chainId] });
 
@@ -22,12 +20,12 @@ const walletconnect = new WalletConnectConnector({
 
 const bscConnector = new BscConnector({ supportedChainIds: [chainId] });
 
-export const connectorsByName: { [connectorName in ConnectorNames]: any } = {
+export const connectorsByName: { [connectorName in ConnectorNames] } = {
   [ConnectorNames.Injected]: injected,
   [ConnectorNames.WalletConnect]: walletconnect,
   [ConnectorNames.BSC]: bscConnector,
 };
 
-export const getLibrary = (provider: any): Web3 => {
+export const getLibrary = (provider: Web3): Web3 => {
   return provider;
 };

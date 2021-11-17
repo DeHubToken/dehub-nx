@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import BigNumber from 'bignumber.js';
 import { Address, Token } from '../../config/constants/types';
 import masterchefABI from '../../config/abi/masterchef.json';

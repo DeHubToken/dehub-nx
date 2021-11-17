@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import React, { Suspense, SuspenseProps } from 'react';
 
 interface State {
@@ -8,7 +5,7 @@ interface State {
 }
 
 class SuspenseWithChunkError extends React.Component<SuspenseProps, State> {
-  constructor(props) {
+  constructor(props: SuspenseProps) {
     super(props);
     this.state = { hasError: false };
   }

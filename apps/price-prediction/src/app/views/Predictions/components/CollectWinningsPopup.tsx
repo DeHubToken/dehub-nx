@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useRef, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import styled, { css, keyframes } from 'styled-components';
@@ -131,7 +130,7 @@ const CollectWinningsPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
   const ref = useRef(null);
-  const timer = useRef<any>(undefined);
+  const timer = useRef(undefined);
   const { account } = useWeb3React();
   const predictionStatus = useGetPredictionsStatus();
   const isHistoryPaneOpen = useIsHistoryPaneOpen();

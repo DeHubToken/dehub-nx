@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import React from 'react';
 import styled from 'styled-components';
 import { Flex, Heading, Text, Link, useTooltip } from '@pancakeswap/uikit';
@@ -33,7 +30,7 @@ const Timer = ({
   showTooltip,
   HeadingTextComponent,
   BodyTextComponent,
-}) => {
+}: TimerProps) => {
   const { t } = useTranslation();
 
   return (

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { ReactNode, useState } from 'react';
 import { AutoRenewIcon, Button, ButtonProps } from '@pancakeswap/uikit';
 import { useWeb3React } from '@web3-react/core';
@@ -38,7 +37,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({
         setIsPendingTx(false);
         toastSuccess(t('Position reclaimed!'));
       })
-      .once('error', (error: any) => {
+      .once('error', (error: Error) => {
         setIsPendingTx(false);
         toastError(t('Error'), error?.message);
         console.error(error);

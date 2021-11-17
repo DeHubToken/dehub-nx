@@ -1,8 +1,5 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import { AbiItem } from 'web3-utils';
-import { Interface } from '@ethersproject/abi';
+import { Interface, JsonFragment, Fragment } from '@ethersproject/abi';
 import { getWeb3NoAccount } from './web3';
 import MultiCallAbi from '../config/abi/Multicall.json';
 import { getMulticallAddress } from './addressHelpers';
@@ -10,10 +7,13 @@ import { getMulticallAddress } from './addressHelpers';
 interface Call {
   address: string; // Address of the contract
   name: string; // Function name on the contract (example: balanceOf)
-  params?: any[]; // Function params
+  params?: (string | number | JsonFragment | Fragment)[]; // Function params
 }
 
-const multicall = async (abi: any[], calls: Call[]) => {
+const multicall = async (
+  abi: (string | JsonFragment | Fragment)[],
+  calls: Call[]
+) => {
   const web3 = getWeb3NoAccount();
   const multi = new web3.eth.Contract(
     MultiCallAbi as unknown as AbiItem,

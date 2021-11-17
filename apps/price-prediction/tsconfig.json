@@ -9,7 +9,9 @@
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false
   },
   "files": [],
   "include": [],

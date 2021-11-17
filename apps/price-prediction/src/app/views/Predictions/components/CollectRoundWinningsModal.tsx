@@ -67,7 +67,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
       .once('sending', () => {
         setIsPendingTx(true);
       })
-      .once('receipt', async (result: any) => {
+      .once('receipt', async result => {
         if (onSuccess) {
           await onSuccess();
         }
@@ -95,7 +95,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
           </Box>
         );
       })
-      .once('error', (error: any) => {
+      .once('error', (error: Error) => {
         setIsPendingTx(false);
         toastError(t('Error'), error?.message);
         console.error(error);

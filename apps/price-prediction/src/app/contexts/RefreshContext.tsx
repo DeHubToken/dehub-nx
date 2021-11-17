@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import React, { useState, useEffect } from 'react';
 
 const FAST_INTERVAL = 10000;

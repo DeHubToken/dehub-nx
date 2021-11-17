@@ -34,7 +34,7 @@ interface PnlCategory {
   amount: number;
 }
 
-interface PnlSummary {
+export interface PnlSummary {
   won: PnlCategory & {
     payout: number;
     bestRound: { id: string; payout: number; multiplier: number };

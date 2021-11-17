@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-
 import React, { useState } from 'react';
 import { ThemeProvider as SCThemeProvider } from 'styled-components';
 import { light, dark } from '@pancakeswap/uikit';

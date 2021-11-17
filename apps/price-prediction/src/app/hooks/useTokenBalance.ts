@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';

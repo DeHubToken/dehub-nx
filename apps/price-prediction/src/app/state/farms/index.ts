@@ -1,5 +1,3 @@
-/* eslint-disable  */
-// @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit';
 import farmsConfig from '../../config/constants/farms';
 import priceHelperLpsConfig from '../../config/constants/priceHelperLps';

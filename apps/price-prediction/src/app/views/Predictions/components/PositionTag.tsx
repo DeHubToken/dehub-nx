@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import {
@@ -17,7 +15,7 @@ interface TagProps extends FlexProps {
 }
 
 const StyledTag = styled(Flex)<{ bg: TagProps['bg'] }>`
-  background-color: ${({ bg, theme }) => theme.colors[bg!]};
+  background-color: ${({ bg, theme }) => theme.colors[bg]};
   display: inline-flex;
 `;
 

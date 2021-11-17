@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 import { Box, Flex, FlexProps, Text } from '@pancakeswap/uikit';
@@ -19,7 +18,7 @@ const getPrizePoolAmount = (totalAmount: PrizePoolRowProps['totalAmount']) => {
   return formatBnb(totalAmount);
 };
 
-const Row: React.FC<{}> = ({ children, ...props }) => {
+const Row: React.FC = ({ children, ...props }) => {
   return (
     <Flex alignItems="center" justifyContent="space-between" {...props}>
       {children}

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import {
   ArrowBackIcon,
@@ -175,11 +174,11 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
       .once('sending', () => {
         setIsTxPending(true);
       })
-      .once('receipt', async (result: any) => {
+      .once('receipt', async result => {
         setIsTxPending(false);
         onSuccess(decimalValue, result.transactionHash as string);
       })
-      .once('error', (error: any) => {
+      .once('error', error => {
         const errorMsg = t('An error occurred, unable to enter your position');
 
         toastError(t('Error'), error?.message);
