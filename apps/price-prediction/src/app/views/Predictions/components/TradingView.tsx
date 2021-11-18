@@ -29,8 +29,6 @@ const initializeTradingView = (
   theme: DefaultTheme,
   localeCode: string
 ) => {
-  /* eslint-disable new-cap */
-  /* eslint-disable no-new */
   new TradingViewObj.widget({
     autosize: true,
     height: '100%',

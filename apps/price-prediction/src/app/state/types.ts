@@ -137,7 +137,6 @@ export interface AchievementState {
 
 // API Price State
 export interface PriceApiList {
-  /* eslint-disable camelcase */
   [key: string]: {
     name: string;
     symbol: string;
@@ -147,18 +146,15 @@ export interface PriceApiList {
 }
 
 export interface PriceApiListThunk {
-  /* eslint-disable camelcase */
   [key: string]: number;
 }
 
 export interface PriceApiResponse {
-  /* eslint-disable camelcase */
   updated_at: string;
   data: PriceApiList;
 }
 
 export interface PriceApiThunk {
-  /* eslint-disable camelcase */
   updated_at: string;
   data: PriceApiListThunk;
 }
