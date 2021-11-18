@@ -1,6 +1,9 @@
 import { Hooks } from '@dehub/react/core';
-import { Web3Provider } from '@ethersproject/providers';
-import { ethers } from 'ethers';
+import {
+  Web3Provider,
+  TransactionReceipt,
+  TransactionResponse,
+} from '@ethersproject/providers';
 import { useEffect, useReducer, useRef } from 'react';
 
 type LoadingState = 'idle' | 'loading' | 'success' | 'fail';
@@ -74,12 +77,12 @@ const reducer = (state: State, actions: Action): State => {
 
 interface OnSuccessProps {
   state: State;
-  receipt: ethers.providers.TransactionReceipt;
+  receipt: TransactionReceipt;
 }
 
 interface ApproveConfirmTransaction {
-  onApprove: () => Promise<ethers.providers.TransactionResponse>;
-  onConfirm: () => Promise<ethers.providers.TransactionResponse>;
+  onApprove: () => Promise<TransactionResponse>;
+  onConfirm: () => Promise<TransactionResponse>;
   onRequiresApproval?: (
     web3Provider: Web3Provider,
     account: string

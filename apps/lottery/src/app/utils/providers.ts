@@ -1,10 +1,10 @@
+import { JsonRpcProvider } from '@ethersproject/providers';
 import { Constants, NetworkInfo } from '@dehub/shared/config';
-import { ethers } from 'ethers';
 import { getRpcUrl } from '../config/constants';
 
 const RPC_URL = getRpcUrl();
 
-export const simpleRpcProvider = new ethers.providers.JsonRpcProvider(RPC_URL);
+export const simpleRpcProvider = new JsonRpcProvider(RPC_URL);
 
 export const switchNetwork = async (chainId: number): Promise<boolean> => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
