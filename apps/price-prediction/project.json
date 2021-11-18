@@ -16,9 +16,46 @@
         "tsConfig": "apps/price-prediction/tsconfig.app.json",
         "assets": [
           "apps/price-prediction/src/favicon.ico",
-          "apps/price-prediction/src/assets"
+          "apps/price-prediction/src/assets",
+          {
+            "input": "libs/shared/assets/dehub/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts"],
+            "output": "assets/dehub"
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts", "**/*.scss"],
+            "output": "assets"
+          }
         ],
-        "styles": ["apps/price-prediction/src/styles.scss"],
+        "styles": [
+          "apps/price-prediction/src/styles.scss",
+          "node_modules/primereact/resources/primereact.min.css",
+          "node_modules/primeflex/primeflex.scss",
+          "node_modules/primeicons/primeicons.css",
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/dehub/theme.scss",
+            "bundleName": "theme",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dehub.scss",
+            "bundleName": "layout",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/alternative/theme-light.scss",
+            "bundleName": "theme-alternative",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-light.scss",
+            "bundleName": "layout-alternative",
+            "inject": false
+          }
+        ],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
