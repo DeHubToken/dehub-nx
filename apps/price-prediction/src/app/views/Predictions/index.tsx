@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { useWeb3React } from '@web3-react/core';
+import { Footer, Header, Loader } from '@dehub/react/ui';
 import { Helmet } from 'react-helmet-async';
 import { useMatchBreakpoints, useModal } from '@pancakeswap/uikit';
+import UserMenu from '../../components/UserMenu';
 import { useAppDispatch } from '../../state';
 import {
   useGetPredictionsStatus,
@@ -150,10 +152,35 @@ const Predictions = () => {
         />
       </Helmet>
       <SwiperProvider>
-        <Container>
-          {isDesktop ? <Desktop /> : <Mobile />}
-          <CollectWinningsPopup />
-        </Container>
+        <div
+          className="layout-wrapper"
+          style={{
+            background:
+              'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover',
+          }}
+        >
+          <Header
+            userMenu={<UserMenu />}
+            logo={{
+              href: 'https://dehub.net',
+              icon: 'assets/dehub/logo-dehub-white.svg',
+            }}
+          />
+          <div className="layout-main">
+            <div
+              className="layout-content"
+              style={{
+                height: 'calc(100vh)',
+                minHeight: 'calc(100vh)',
+                overflow: 'hidden',
+                position: 'relative',
+              }}
+            >
+              {isDesktop ? <Desktop /> : <Mobile />}
+              <CollectWinningsPopup />
+            </div>
+          </div>
+        </div>
       </SwiperProvider>
     </>
   );

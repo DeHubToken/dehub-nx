@@ -70,6 +70,7 @@
           "optimization": true,
           "outputHashing": "all",
           "sourceMap": false,
+          "extractCss": true,
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false
@@ -126,5 +127,6 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["shared-assets-dehub", "shared-assets-freya"]
 }
