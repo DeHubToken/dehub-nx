@@ -69,7 +69,7 @@ const DeGrand = () => {
     <Container>
       <FlexLine className="md:flex-column align-items-start justify-content-between">
         <img
-          src="../../assets/img/degrand-logo.png"
+          src="../../lottery/assets/img/degrand-logo.png"
           className="anim-float-1"
           alt="DeGrand Logo"
           style={{ maxWidth: '300px' }}

@@ -1,5 +1,7 @@
-import { DOCUMENT } from '@angular/common';
+import { APP_BASE_HREF, DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
+import { EnvToken } from '@dehub/angular/core';
+import { Env } from '@dehub/shared/config';
 import { ThemeMode, Themes } from '@dehub/shared/models';
 
 @Injectable({
@@ -8,7 +10,11 @@ import { ThemeMode, Themes } from '@dehub/shared/models';
 export class ThemeService {
   private theme: Themes = '';
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(APP_BASE_HREF) private baseHref: string,
+    @Inject(EnvToken) private env: Env
+  ) {}
 
   /** Toggle Theme between Dehub and an alternative */
   toggleTheme(): ThemeMode {
@@ -21,8 +27,10 @@ export class ThemeService {
       'layout'
     ) as HTMLLinkElement | null;
 
-    if (themeLink) themeLink.href = `theme${this.theme}.css`;
-    if (layoutLink) layoutLink.href = `layout${this.theme}.css`;
+    const subPath = `${this.env.production ? `${this.baseHref}/` : ''}`;
+
+    if (themeLink) themeLink.href = `${subPath}theme${this.theme}.css`;
+    if (layoutLink) layoutLink.href = `${subPath}layout${this.theme}.css`;
 
     // Default theme is dark, alternative is light
     return this.theme === '' ? 'dark' : 'light';

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { EnvToken, GraphQLModule } from '@dehub/angular/core';
+import { Env } from '@dehub/shared/config';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
@@ -44,8 +45,9 @@ const layoutComponents = [
     angularModules,
     primeNgModules,
 
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register('web/ngsw-worker.js', {
       enabled: environment.production,
+      ...(environment.production && { scope: '/web/' }),
       /**
        * Register the ServiceWorker as soon as the app is stable
        * or after 30 seconds (whichever comes first)
@@ -56,7 +58,15 @@ const layoutComponents = [
     GraphQLModule,
   ],
   declarations: [AppComponent, layoutComponents],
-  providers: [MenuService, { provide: EnvToken, useValue: environment }],
+  providers: [
+    MenuService,
+    { provide: EnvToken, useValue: environment },
+    {
+      provide: APP_BASE_HREF,
+      useFactory: (env: Env) => (env.production ? '/web' : '/'),
+      deps: [EnvToken],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

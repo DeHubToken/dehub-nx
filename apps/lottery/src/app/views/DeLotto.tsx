@@ -115,7 +115,7 @@ const DeLotto = () => {
     <StyledContainer>
       <FlexLine className="md:flex-column align-items-start justify-content-between">
         <img
-          src="../../assets/img/deraffles-logo.png"
+          src="../../lottery/assets/img/deraffles-logo.png"
           className="anim-float-4"
           alt="DeRaffles Logo"
           style={{ maxWidth: '200px' }}

@@ -77,7 +77,9 @@
               "maximumWarning": "500kb",
               "maximumError": "1mb"
             }
-          ]
+          ],
+          "deployUrl": "/lottery/",
+          "baseHref": "/lottery"
         },
         "development": {
           "buildOptimizer": false,
