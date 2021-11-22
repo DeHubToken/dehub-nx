@@ -49,6 +49,7 @@
     "@apollo/client": "3.4.10",
     "@binance-chain/bsc-connector": "1.0.0",
     "@ethersproject/abi": "5.5.0",
+    "@ethersproject/abstract-provider": "5.5.0",
     "@ethersproject/abstract-signer": "5.5.0",
     "@ethersproject/constants": "5.5.0",
     "@ethersproject/contracts": "5.5.0",
