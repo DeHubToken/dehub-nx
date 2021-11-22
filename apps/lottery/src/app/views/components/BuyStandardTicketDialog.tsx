@@ -1,3 +1,10 @@
+import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { Toast } from 'primereact/toast';
+import { useRef, useState } from 'react';
+
+import { Web3Provider } from '@ethersproject/providers';
+import { MaxUint256 } from '@ethersproject/constants';
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
@@ -5,12 +12,7 @@ import {
   getContract,
   getFullDisplayBalance,
 } from '@dehub/shared/utils';
-import { Web3Provider } from '@ethersproject/providers';
-import { ethers } from 'ethers';
-import { Button } from 'primereact/button';
-import { Dialog } from 'primereact/dialog';
-import { Toast } from 'primereact/toast';
-import { useRef, useState } from 'react';
+
 import { Header, Text } from '../../components/Text';
 import Bep20Abi from '../../config/abis/erc20.json';
 import { LotteryTicket } from '../../config/constants/types';
@@ -101,7 +103,7 @@ const BuyStandardTicketDialog = ({
       try {
         return await dehubContract?.approve(
           getStandardLotteryAddress(),
-          ethers.constants.MaxUint256
+          MaxUint256
         );
       } catch (error) {
         console.error(error);

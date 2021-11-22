@@ -3,7 +3,7 @@ import {
   ethersToSerializedBigNumber,
 } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
-import { ethers } from 'ethers';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import { useMemo } from 'react';
 import SpecialLotteryAbi from '../../config/abis/SpecialLottery.json';
 import { TICKET_LIMIT_PER_REQUEST } from '../../config/constants';
@@ -83,7 +83,7 @@ const processRawTicketsReponse = (data: any): LotteryTicket[] => {
   const [ticketIds, claimStatuses] = data;
 
   if (ticketIds.length > 0) {
-    return ticketIds.map((ticketId: ethers.BigNumber, index: number) => {
+    return ticketIds.map((ticketId: EthersBigNumber, index: number) => {
       return {
         id: ticketId.toString(),
         number: '',
@@ -116,7 +116,7 @@ export const fetchCurrentLotteryIdAndMaxBuy = async () => {
     }));
 
     const [[currentLotteryId], [maxNumberTicketsPerBuyOrClaim]] =
-      (await multicallv2(SpecialLotteryAbi, calls)) as ethers.BigNumber[][];
+      (await multicallv2(SpecialLotteryAbi, calls)) as EthersBigNumber[][];
 
     return {
       currentLotteryId: currentLotteryId ? currentLotteryId.toString() : '',
@@ -243,7 +243,7 @@ export const fetchDeLottoRewardsForTicketIds = async (
 ): Promise<BigNumber> => {
   let cursor = 0;
   const numReturned = 100; // TICKET_LIMIT_PER_REQUEST; // @todo
-  let rewards: ethers.BigNumber = ethers.BigNumber.from('0');
+  let rewards: EthersBigNumber = EthersBigNumber.from('0');
 
   while (cursor < ticketIds.length) {
     const checkTicketIds: string[] = ticketIds.slice(
