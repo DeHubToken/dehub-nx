@@ -5,7 +5,7 @@ import {
   Flex,
   BlockIcon,
   LinkExternal,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
 import { Round, BetPosition } from '../../../../state/types';
 import { useGetTotalIntervalBlocks } from '../../../../state/hooks';

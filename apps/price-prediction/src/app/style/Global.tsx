@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { PancakeTheme } from '@pancakeswap/uikit/dist/theme';
+import { PancakeTheme } from '@dehub/react/pcsuikit';
 
 declare module 'styled-components' {
   /* eslint-disable @typescript-eslint/no-empty-interface */

@@ -5,7 +5,7 @@ import {
   BunnyCardsIcon,
   Card,
   IconButton,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import HomeIcon from '@material-ui/icons/Home';
 import styled from 'styled-components';
 import { useGetCurrentEpoch, useGetSortedRounds } from '../../../state/hooks';

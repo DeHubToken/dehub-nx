@@ -10,7 +10,7 @@ import {
   ChartIcon,
   HistoryIcon,
   IconButton,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import { useAppDispatch } from '../../../state';
 import { PredictionStatus } from '../../../state/types';
 import {

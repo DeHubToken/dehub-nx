@@ -9,7 +9,7 @@ import {
   Button,
   Link,
   OpenNewIcon,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../../contexts/Localization';
 import {
   useGetCurrentEpoch,

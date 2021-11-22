@@ -1,5 +1,5 @@
 import { Contexts } from '@dehub/react/core';
-import { ResetCSS } from '@pancakeswap/uikit';
+import { ResetCSS } from '@dehub/react/pcsuikit';
 import BigNumber from 'bignumber.js';
 import { Route, Router, Switch } from 'react-router-dom';
 import EasterEgg from './components/EasterEgg';

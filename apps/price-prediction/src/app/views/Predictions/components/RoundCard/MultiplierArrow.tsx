@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { CSSProperties } from 'styled-components';
-import { Box, Flex, Text } from '@pancakeswap/uikit';
+import { Box, Flex, Text } from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
 import { BetPosition } from '../../../../state/types';
 import {
