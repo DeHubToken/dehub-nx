@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { AppMainComponent } from './app.main.component';
-import { LandingViewComponent } from './view/landing/landing-view.component';
 
 enum Navigation {
-  Claim = 'claim',
+  Components = 'components',
 }
 
 @NgModule({
@@ -15,15 +14,15 @@ enum Navigation {
           path: '',
           component: AppMainComponent,
           children: [
-            { path: '', component: LandingViewComponent },
+            // { path: '', redirectTo: Navigation.Components, pathMatch: 'full' },
             {
-              path: Navigation.Claim,
+              path: Navigation.Components,
               loadChildren: () =>
-                import('./modules/claim/claim.module').then(
-                  module => module.ClaimModule
+                import('./modules/components/components.module').then(
+                  module => module.ComponentsModule
                 ),
               data: {
-                animation: Navigation.Claim,
+                animation: Navigation.Components,
               },
             },
           ],

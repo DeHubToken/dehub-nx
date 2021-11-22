@@ -12,6 +12,6 @@ export class AppMenuComponent implements OnInit {
   constructor(public appMain: AppMainComponent) {}
 
   ngOnInit() {
-    this.model = [{ label: 'Claim', routerLink: ['/claim'] }];
+    this.model = [{ label: 'Components', routerLink: ['/components'] }];
   }
 }

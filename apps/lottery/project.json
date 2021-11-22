@@ -17,13 +17,13 @@
           {
             "input": "libs/shared/assets/dehub/src/lib",
             "glob": "**/*",
-            "ignore": ["**/ts"],
+            "ignore": ["**/*.ts"],
             "output": "assets/dehub"
           },
           {
             "input": "libs/shared/assets/freya/src/lib",
             "glob": "**/*",
-            "ignore": ["**/ts"],
+            "ignore": ["**/*.ts", "**/*.scss"],
             "output": "assets"
           }
         ],
@@ -78,8 +78,17 @@
               "maximumError": "1mb"
             }
           ]
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "serve": {
       "executor": "@nrwl/web:dev-server",

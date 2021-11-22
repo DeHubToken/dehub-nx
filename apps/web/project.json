@@ -20,13 +20,13 @@
           {
             "input": "libs/shared/assets/dehub/src/lib",
             "glob": "**/*",
-            "ignore": ["**/ts"],
+            "ignore": ["**/*.ts"],
             "output": "assets/dehub"
           },
           {
             "input": "libs/shared/assets/freya/src/lib",
             "glob": "**/*",
-            "ignore": ["**/ts"],
+            "ignore": ["**/*.ts", "**/*.scss"],
             "output": "assets"
           }
         ],
@@ -66,8 +66,8 @@
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumWarning": "1mb",
+              "maximumError": "2mb"
             },
             {
               "type": "anyComponentStyle",
