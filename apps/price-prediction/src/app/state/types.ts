@@ -1,11 +1,5 @@
 import BigNumber from 'bignumber.js';
-import {
-  CampaignType,
-  FarmConfig,
-  Nft,
-  PoolConfig,
-  Team,
-} from '../config/constants/types'; // eslint-disable-line
+import { FarmConfig } from '../config/constants/types';
 
 export type TranslatableText =
   | string
@@ -33,32 +27,6 @@ export interface Farm extends FarmConfig {
   };
 }
 
-export interface Pool extends PoolConfig {
-  totalStaked?: BigNumber;
-  stakingLimit?: BigNumber;
-  startBlock?: number;
-  endBlock?: number;
-  userData?: {
-    allowance: BigNumber;
-    stakingTokenBalance: BigNumber;
-    stakedBalance: BigNumber;
-    pendingReward: BigNumber;
-  };
-}
-
-export interface Profile {
-  userId: number;
-  points: number;
-  teamId: number;
-  nftAddress: string;
-  tokenId: number;
-  isActive: boolean;
-  username: string;
-  nft?: Nft;
-  team: Team;
-  hasRegistered: boolean;
-}
-
 // Slices states
 
 export interface FarmsState {
@@ -66,120 +34,11 @@ export interface FarmsState {
   loadArchivedFarmsData: boolean;
   userDataLoaded: boolean;
 }
-
-export interface VaultFees {
-  performanceFee: number;
-  callFee: number;
-  withdrawalFee: number;
-  withdrawalFeePeriod: number;
-}
-
-export interface VaultUser {
-  isLoading: boolean;
-  userShares: string;
-  cakeAtLastUserAction: string;
-  lastDepositedTime: string;
-  lastUserActionTime: string;
-}
-export interface CakeVault {
-  totalShares?: string;
-  pricePerFullShare?: string;
-  totalCakeInVault?: string;
-  estimatedCakeBountyReward?: string;
-  totalPendingCakeHarvest?: string;
-  fees?: VaultFees;
-  userData?: VaultUser;
-}
-
-export interface PoolsState {
-  data: Pool[];
-  cakeVault: CakeVault;
-}
-
-export interface ProfileState {
-  isInitialized: boolean;
-  isLoading: boolean;
-  hasRegistered: boolean;
-  data: Profile;
-}
-
-export type TeamResponse = {
-  0: string;
-  1: string;
-  2: string;
-  3: string;
-  4: boolean;
-};
-
-export type TeamsById = {
-  [key: string]: Team;
-};
-
-export interface TeamsState {
-  isInitialized: boolean;
-  isLoading: boolean;
-  data: TeamsById;
-}
-
-export interface Achievement {
-  id: string;
-  type: CampaignType;
-  address: string;
-  title: TranslatableText;
-  description?: TranslatableText;
-  badge: string;
-  points: number;
-}
-
-export interface AchievementState {
-  data: Achievement[];
-}
-
-// API Price State
-export interface PriceApiList {
-  [key: string]: {
-    name: string;
-    symbol: string;
-    price: string;
-    price_BNB: string;
-  };
-}
-
-export interface PriceApiListThunk {
-  [key: string]: number;
-}
-
-export interface PriceApiResponse {
-  updated_at: string;
-  data: PriceApiList;
-}
-
-export interface PriceApiThunk {
-  updated_at: string;
-  data: PriceApiListThunk;
-}
-
-export interface PriceApiState {
-  isLoading: boolean;
-  lastUpdated: string;
-  data: PriceApiListThunk;
-}
-
 // Block
 
 export interface BlockState {
   currentBlock: number;
   initialBlock: number;
-}
-
-// Collectibles
-
-export interface CollectiblesState {
-  isInitialized: boolean;
-  isLoading: boolean;
-  data: {
-    [key: string]: number[];
-  };
 }
 
 // Predictions
@@ -283,13 +142,7 @@ export interface PredictionsState {
 // Global state
 
 export interface State {
-  achievements: AchievementState;
   block: BlockState;
   farms: FarmsState;
-  apiPrices: PriceApiState;
-  pools: PoolsState;
   predictions: PredictionsState;
-  profile: ProfileState;
-  teams: TeamsState;
-  collectibles: CollectiblesState;
 }

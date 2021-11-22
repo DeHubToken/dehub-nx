@@ -4,11 +4,8 @@ import { useSelector } from 'react-redux';
 import { orderBy } from 'lodash';
 import { useAppDispatch } from '.';
 import { getWeb3NoAccount } from '../utils/web3';
-import { getBalanceAmount } from '../utils/formatBalance';
-import { BIG_ZERO } from '../utils/bigNumber';
-import { filterFarmsByQuoteToken } from '../utils/farmsPriceHelpers';
 import setBlock from './actions';
-import { State, Farm, FarmsState } from './types';
+import { State, Farm } from './types';
 import { getCanClaim } from './predictions/helpers';
 
 export const usePollBlockNumber = () => {
@@ -27,84 +24,11 @@ export const usePollBlockNumber = () => {
 
 // Farms
 
-export const useFarms = (): FarmsState => {
-  const farms = useSelector((state: State) => state.farms);
-  return farms;
-};
-
 export const useFarmFromPid = (pid: number): Farm => {
   const farm = useSelector((state: State) =>
     state.farms.data.find(f => f.pid === pid)
   ) as Farm;
   return farm;
-};
-
-export const useFarmFromLpSymbol = (lpSymbol: string): Farm => {
-  const farm = useSelector((state: State) =>
-    state.farms.data.find(f => f.lpSymbol === lpSymbol)
-  ) as Farm;
-  return farm;
-};
-
-export const useFarmUser = (pid: number) => {
-  const farm = useFarmFromPid(pid);
-
-  return {
-    allowance: farm.userData
-      ? new BigNumber(farm.userData.allowance)
-      : BIG_ZERO,
-    tokenBalance: farm.userData
-      ? new BigNumber(farm.userData.tokenBalance)
-      : BIG_ZERO,
-    stakedBalance: farm.userData
-      ? new BigNumber(farm.userData.stakedBalance)
-      : BIG_ZERO,
-    earnings: farm.userData ? new BigNumber(farm.userData.earnings) : BIG_ZERO,
-  };
-};
-
-// Return a farm for a given token symbol. The farm is filtered based on attempting to return a farm with a quote token from an array of preferred quote tokens
-export const useFarmFromTokenSymbol = (
-  tokenSymbol: string,
-  preferredQuoteTokens?: string[]
-): Farm => {
-  const farms = useSelector((state: State) =>
-    state.farms.data.filter(farm => farm.token.symbol === tokenSymbol)
-  );
-  const filteredFarm = filterFarmsByQuoteToken(farms, preferredQuoteTokens);
-  return filteredFarm;
-};
-
-// Return the base token price for a farm, from a given pid
-export const useBusdPriceFromPid = (pid: number): BigNumber => {
-  const farm = useFarmFromPid(pid);
-  return farm && new BigNumber(farm.token.busdPrice as BigNumber.Value);
-};
-
-export const useBusdPriceFromToken = (tokenSymbol: string): BigNumber => {
-  const tokenFarm = useFarmFromTokenSymbol(tokenSymbol);
-  const tokenPrice = useBusdPriceFromPid(tokenFarm?.pid as number);
-  return tokenPrice;
-};
-
-export const useLpTokenPrice = (symbol: string) => {
-  const farm = useFarmFromLpSymbol(symbol);
-  const farmTokenPriceInUsd = useBusdPriceFromPid(farm.pid as number);
-  let lpTokenPrice = BIG_ZERO;
-
-  if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
-    // Total value of base token in LP
-    const valueOfBaseTokenInFarm = farmTokenPriceInUsd.times(
-      farm.tokenAmountTotal as BigNumber.Value
-    );
-    // Double it to get overall value in LP
-    const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2);
-    // Divide total value of all tokens, by the number of LP tokens
-    const totalLpTokens = getBalanceAmount(farm.lpTotalSupply);
-    lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens);
-  }
-
-  return lpTokenPrice;
 };
 
 // API Prices

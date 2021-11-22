@@ -30,6 +30,7 @@ const HeaderWrapper = styled.h4`
   text-transfer: uppercase !important;
   font-size: 20px;
   margin-top: -20px;
+  margin-bottom: 14px;
 `;
 
 const TextWrapper = styled.div`
@@ -48,8 +49,11 @@ const Loader = ({
       <table>
         <tbody>
           <tr>
-            <td className="align-middle text-center">
-              <div className="pt-2 mx-auto">
+            <td
+              className="align-middle text-center"
+              style={{ verticalAlign: 'middle' }}
+            >
+              <div className="pt-2 mx-auto" style={{ height: 'fit-content' }}>
                 <Player
                   src="assets/dehub/dehub-loader-light-blue.json"
                   background="transparent"

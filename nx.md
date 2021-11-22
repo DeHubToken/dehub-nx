@@ -155,12 +155,6 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/angular:library --name=core --directory=angular --standaloneConfig --strict
    ```
 
-1. Generate Contentful lib:
-
-   ```
-   nx generate @nrwl/workspace:library --name=contentful --directory=shared --standaloneConfig --strict
-   ```
-
 # Netlify Settings
 
 1. Configuration details found in `.env` with `NETLIFY_AUTH_TOKEN` created on the Netlify Team page
@@ -168,7 +162,7 @@ This project was generated using [Nx](https://nx.dev).
 1. Creating manual site (without ci) with the netlify cli
 
    ```
-   npx netlify sites:create --account-slug=dehub --name=dehub-ng-website-draft
+   npx netlify sites:create --account-slug=dehub --name=dapps-dehub
    npx netlify sites:create --account-slug=dehub --name=dehub-react-lottery-draft
    ```
 
@@ -177,8 +171,8 @@ This project was generated using [Nx](https://nx.dev).
    ```
    Site Created (Angular)
 
-   Admin URL: https://app.netlify.com/sites/dehub-ng-website-draft
-   URL:       https://dehub-ng-website-draft.netlify.app
+   Admin URL: https://app.netlify.com/sites/dapps-dehub
+   URL:       https://dapps-dehub.netlify.app
    Site ID:   355647c5-6e43-4c94-92bc-eac397ab80a8
 
    Site Created (React)

@@ -4,7 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { TeamMember } from '@dehub/shared/contentful';
+import { TeamMember } from '@dehub/shared/models';
 
 interface SocialLink {
   name: string;

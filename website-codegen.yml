@@ -1,0 +1,71 @@
+overwrite: true
+
+schema:
+  - https://graphql.contentful.com/content/v1/spaces/${WEBSITE_SPACE_ID}:
+      headers:
+        Authorization: 'Bearer ${WEBSITE_CPA_TOKEN}'
+
+config:
+  preResolveTypes: true
+  maybeValue: T | undefined
+  declarationKind: interface
+
+hooks:
+  afterAllFileWrite:
+    # https://www.graphql-code-generator.com/docs/integrations/prettier
+    - prettier --write
+
+documents: ['./libs/shared/graphql/**/*.graphql']
+generates:
+  ##############################################################################################
+  # Shared TypeScript GraphQL Models
+  ##############################################################################################
+  libs/shared/models/src/lib/website-contentful.models.ts:
+    plugins:
+      # https://www.graphql-code-generator.com/docs/plugins/add
+      - add:
+          content: '/* eslint-disable */'
+      # https://www.graphql-code-generator.com/docs/plugins/typescript
+      - typescript
+      # https://www.graphql-code-generator.com/docs/plugins/typescript-operations
+      - typescript-operations
+      # https://www.graphql-code-generator.com/docs/plugins/typescript-graphql-request
+      - typescript-graphql-request
+
+  ##############################################################################################
+  # Angular Core GraphQL Services
+  ##############################################################################################
+  libs/angular/core/src/lib/services/website-contentful.services.ts:
+    plugins:
+      - add:
+          content:
+            - '/* eslint-disable */'
+            - "import * as models from '@dehub/shared/models';"
+      # https://www.graphql-code-generator.com/docs/plugins/typescript-apollo-angular
+      - typescript-apollo-angular
+    config:
+      noExport: false
+      importOperationTypesFrom: 'models'
+      documentMode: external
+      importDocumentNodeExternallyFrom: '@dehub/shared/models'
+      ngModule: ../graphql.module#GraphQLModule
+      querySuffix: 'Service'
+
+  ##############################################################################################
+  # React Core GraphQL Hooks
+  ##############################################################################################
+  libs/react/core/src/lib/hooks/website-contentful.hooks.ts:
+    plugins:
+      - add:
+          content:
+            - '/* eslint-disable */'
+            - "import * as models from '@dehub/shared/models';"
+      # https://www.graphql-code-generator.com/docs/plugins/typescript-react-apollo
+      - typescript-react-apollo
+    config:
+      noExport: false
+      importOperationTypesFrom: 'models'
+      # ISSUE: https://github.com/dotansimha/graphql-code-generator/issues/4980
+      # -> gql is generated duplicately in react hooks (already in the models)
+      # documentMode: external
+      # importDocumentNodeExternallyFrom: '@dehub/shared/models'

@@ -1,7 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Moralis } from 'moralis';
+
 import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
+import { Footer, Header, Loader } from '@dehub/react/ui';
+import { WalletConnectingState } from '@dehub/shared/config';
+import { iOS } from '@dehub/shared/utils';
+
 import { Helmet } from 'react-helmet-async';
 import { useMatchBreakpoints, useModal } from '@pancakeswap/uikit';
+import { getChainIdHex } from '../../config/constants';
+import UserMenu from '../../components/UserMenu';
 import { useAppDispatch } from '../../state';
 import {
   useGetPredictionsStatus,
@@ -36,10 +45,20 @@ import Desktop from './Desktop';
 import Mobile from './Mobile';
 import RiskDisclaimer from './components/RiskDisclaimer';
 import ChartDisclaimer from './components/ChartDisclaimer';
+import { useWalletConnectingState } from '../../state/application/hooks';
 
 const FUTURE_ROUND_COUNT = 2; // the number of rounds in the future to show
 
+const initMessage = {
+  header: '',
+  text: '',
+};
+
 const Predictions = () => {
+  const [showLoader, setShowLoader] = useState(false);
+  const [message, setMessage] = useState(initMessage);
+  const walletConnectingState = useWalletConnectingState();
+
   const { isXl } = useMatchBreakpoints();
   const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(
     false,
@@ -69,6 +88,53 @@ const Predictions = () => {
   // TODO: memoize modal's handlers
   const onPresentRiskDisclaimerRef = useRef(onPresentRiskDisclaimer);
   const onPresentChartDisclaimerRef = useRef(onPresentChartDisclaimer);
+
+  const { clearProvider } = Hooks.useMoralisEthers();
+
+  /*
+   * Hack to avoid trustwallet redirecting to a open in app website on iOS...
+   * Ref: https://github.com/WalletConnect/walletconnect-monorepo/issues/552
+   */
+  useEffect(() => {
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden' && iOS()) {
+        window.localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    Moralis.Web3.onChainChanged(newChainId => {
+      if (newChainId !== getChainIdHex()) {
+        clearProvider();
+      }
+    });
+  }, [clearProvider]);
+
+  useEffect(() => {
+    if (walletConnectingState === WalletConnectingState.WAITING) {
+      setShowLoader(true);
+      setMessage({
+        header: 'Waiting',
+        text: 'Please confirm with your wallet.',
+      });
+    } else if (walletConnectingState === WalletConnectingState.SWITCH_NETWORK) {
+      setShowLoader(true);
+      setMessage({
+        header: 'Waiting',
+        text: 'Please confirm network switch with your wallet.',
+      });
+    } else if (walletConnectingState === WalletConnectingState.ADD_NETWORK) {
+      setShowLoader(true);
+      setMessage({
+        header: 'Waiting',
+        text: 'Please confirm network add with your wallet.',
+      });
+    } else {
+      setShowLoader(false);
+      setMessage(initMessage);
+    }
+  }, [walletConnectingState]);
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -141,21 +207,53 @@ const Predictions = () => {
   }
 
   return (
-    <>
-      <Helmet>
-        <script
-          src="https://s3.tradingview.com/tv.js"
-          type="text/javascript"
-          id="tradingViewWidget"
-        />
-      </Helmet>
-      <SwiperProvider>
-        <Container>
-          {isDesktop ? <Desktop /> : <Mobile />}
-          <CollectWinningsPopup />
-        </Container>
-      </SwiperProvider>
-    </>
+    <div>
+      {showLoader ? (
+        <Loader header={message.header} text={message.text} />
+      ) : (
+        <>
+          <Helmet>
+            <script
+              src="https://s3.tradingview.com/tv.js"
+              type="text/javascript"
+              id="tradingViewWidget"
+            />
+          </Helmet>
+          <SwiperProvider>
+            <div
+              className="layout-wrapper"
+              style={{
+                background:
+                  'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover',
+              }}
+            >
+              <Header
+                userMenu={<UserMenu />}
+                logo={{
+                  href: 'https://dehub.net',
+                  icon: 'assets/dehub/logo-dehub-white.svg',
+                }}
+              />
+              <div className="layout-main">
+                <div
+                  className="layout-content"
+                  style={{
+                    height: 'calc(100vh)',
+                    minHeight: 'calc(100vh)',
+                    overflow: 'hidden',
+                    position: 'relative',
+                  }}
+                >
+                  {isDesktop ? <Desktop /> : <Mobile />}
+                  <CollectWinningsPopup />
+                </div>
+              </div>
+              <Footer />
+            </div>
+          </SwiperProvider>
+        </>
+      )}
+    </div>
   );
 };
 
