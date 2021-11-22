@@ -8,23 +8,32 @@ _More libraries or apps are supported and will be added as we go under `apps` or
 
 # Applications
 
-_Apps represent standalone sites, which can be written in pure JS, React, Vue.JS or Angular and can consume common libraries (`libs`)_
+Apps represent standalone sites, which can be written in pure JS, React, Vue.JS or Angular and can consume common libraries (`libs`)
 
-## `apps/web` - [DeHub Angular Website]
+Dehub Nx Monorepo consists of the following type of applications:
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/355647c5-6e43-4c94-92bc-eac397ab80a8/deploy-status)](https://app.netlify.com/sites/dehub-ng-website-draft/deploys)
+- Angular
+- React
 
-_Angular DeHub website_
+## Angular
+
+### `web`
+
+DeHub Dapps
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/355647c5-6e43-4c94-92bc-eac397ab80a8/deploy-status)](https://app.netlify.com/sites/dapps-dehub/deploys)
 
 - Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
-- Hosting: **[Netlify](https://dehub-ng-website-draft.netlify.app/)**
+- Hosting: **[Netlify](https://dapps-dehub.netlify.app/)**
 
-## `apps/lottery` - [DeHub Lottery Dapp]
+## React
+
+### `lottery`
+
+DeHub Lottery Dapp
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/bacc9132-2b4b-438d-9b93-a377c12181fb/deploy-status)](https://app.netlify.com/sites/dehub-react-lottery-draft/deploys)
-
-_React DeHub Lottery Dapp_
 
 - Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
@@ -32,27 +41,67 @@ _React DeHub Lottery Dapp_
 
 # Libraries
 
-_Like UI, models, shared or moralis, etc._<br>
+Libraries in Nx are self-contained isolated group of logics. Can represent reusable functionalities or core logic shared across multiple framework (in)dependent apps.
 
-## `libs/shared/assets/dehub` - [Shared DeHub assets]
+Dehub Nx Monorepo consists of the following type of libraries:
 
-_Common sass styles of DeHUB_
+- Angular
+- React
+- Shared
 
-## `libs/shared/assets/freya` - [Shared Freya template]
+## Angular
 
-_Common sass styles from the Freya PrimeNG themes_
+Angular libs which can be consumed only from Angular apps like ui libs or core services for example.
 
-## `libs/shared/moralis` - [Shared Moralis functionality]
+### `core`
+
+- Angular animations
+- GraphQL module with generated services
+- PWA service _(coming soon...)_
+
+## React
+
+Angular libs which can be consumed only from Angular apps like ui libs or core services for example.
+
+### `core`
+
+_React core functionalities_
+
+- Contentful GraphQL generated hooks
+
+### `ui`
+
+_Reusable react ui components like header, footer, etc._
+
+## Shared
+
+Framework independent libs which can be consumed from any Angular or React apps like styles or simple TS utilities or models.
+
+### `moralis`
 
 _Common Moralis logic like authentication, walletconnect, etc_
 
-## `libs/shared/models` - [Shared types, states, models]
+### `models`
 
-_Common Models used in react and angular apps_
+_Common Models, states used in react and angular apps_
 
-## `libs/shared/utils` - [Shared utils and functions]
+- Contentful GraphQL generated models
+
+### `utils`
 
 _Common Utils used in react and angular apps_
+
+### `graphql`
+
+_GraphQL queries like Contentful (use [graphql codegen](https://www.graphql-code-generator.com/))_
+
+### `assets/dehub`
+
+_Common sass styles, variables, mixins, etc. of DeHUB_
+
+### `assets/freya`
+
+_Common sass styles, assets from the Freya PrimeNG themes_
 
 # Dev Setup
 
