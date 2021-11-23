@@ -1,7 +1,5 @@
-import { APP_BASE_HREF } from '@angular/common';
-import { Component, Inject, OnDestroy } from '@angular/core';
-import { EnvToken } from '@dehub/angular/core';
-import { Env } from '@dehub/shared/config';
+import { Component, OnDestroy } from '@angular/core';
+import { CoreService } from '@dehub/angular/core';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AppComponent } from '../app.component';
@@ -16,13 +14,12 @@ export class AppTopBarComponent implements OnDestroy {
 
   items?: MenuItem[];
 
-  subPath = `${this.env.production ? `${this.baseHref}/` : ''}`;
+  path = this.coreService.path;
 
   constructor(
-    @Inject(APP_BASE_HREF) public baseHref: string,
-    @Inject(EnvToken) private env: Env,
     public app: AppComponent,
-    public appMain: AppMainComponent
+    public appMain: AppMainComponent,
+    private coreService: CoreService
   ) {}
 
   ngOnDestroy() {

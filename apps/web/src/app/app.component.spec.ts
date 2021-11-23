@@ -1,6 +1,10 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { EnvToken } from '@dehub/angular/core';
+import { Env } from '@dehub/shared/config';
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
 import { AppFooterComponent } from './footer/app.footer.component';
@@ -18,6 +22,14 @@ describe('AppComponent', () => {
           AppTopBarComponent,
           AppMenuComponent,
           AppFooterComponent,
+        ],
+        providers: [
+          { provide: EnvToken, useValue: environment },
+          {
+            provide: APP_BASE_HREF,
+            useFactory: (env: Env) => (env.production ? '/web' : '/'),
+            deps: [EnvToken],
+          },
         ],
       }).compileComponents();
     })
