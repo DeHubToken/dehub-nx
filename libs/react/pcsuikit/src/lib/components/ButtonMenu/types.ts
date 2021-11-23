@@ -1,4 +1,4 @@
-import { BaseButtonProps, Scale, variants } from "../Button/types";
+import { BaseButtonProps, Scale, variants } from '../Button/types';
 
 export interface ButtonMenuItemProps extends BaseButtonProps {
   isActive?: boolean;

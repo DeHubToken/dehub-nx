@@ -1,8 +1,8 @@
-import React from "react";
-import Svg from "../Svg";
-import { SvgProps } from "../types";
+import React from 'react';
+import Svg from '../Svg';
+import { SvgProps } from '../types';
 
-const Icon: React.FC<SvgProps> = (props) => {
+const Icon: React.FC<SvgProps> = props => {
   return (
     <Svg viewBox="0 0 48 48" {...props}>
       <circle cx="24" cy="24" r="24" fill="url(#paint0_linear_ticketround)" />
@@ -89,7 +89,14 @@ const Icon: React.FC<SvgProps> = (props) => {
         fill="#53DEE9"
       />
       <defs>
-        <linearGradient id="paint0_linear_ticketround" x1="24" y1="0" x2="24" y2="48" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id="paint0_linear_ticketround"
+          x1="24"
+          y1="0"
+          x2="24"
+          y2="48"
+          gradientUnits="userSpaceOnUse"
+        >
           <stop stopColor="#54DADE" />
           <stop offset="0.762157" stopColor="#24C7D6" />
         </linearGradient>

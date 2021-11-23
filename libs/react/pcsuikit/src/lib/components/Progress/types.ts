@@ -1,11 +1,11 @@
 export const variants = {
-  ROUND: "round",
-  FLAT: "flat",
+  ROUND: 'round',
+  FLAT: 'flat',
 } as const;
 
 export const scales = {
-  MD: "md",
-  SM: "sm",
+  MD: 'md',
+  SM: 'sm',
 } as const;
 
 export type Scale = typeof scales[keyof typeof scales];

@@ -1,8 +1,8 @@
-import React from "react";
-import Svg from "../Svg";
-import { SvgProps } from "../types";
+import React from 'react';
+import Svg from '../Svg';
+import { SvgProps } from '../types';
 
-const Icon: React.FC<SvgProps> = (props) => {
+const Icon: React.FC<SvgProps> = props => {
   return (
     <Svg viewBox="0 0 25 25" {...props}>
       <path
@@ -21,7 +21,13 @@ const Icon: React.FC<SvgProps> = (props) => {
         d="M5.19774 24.1416L13.2431 16.0962C13.4384 15.901 13.4384 15.5844 13.2431 15.3891L9.70759 11.8536C9.51233 11.6583 9.19575 11.6583 9.00049 11.8536L0.955098 19.899C0.664132 20.1899 0.829575 20.6882 1.23679 20.7473L3.58535 21.0884C3.80441 21.1202 3.97648 21.2923 4.0083 21.5114L4.34938 23.8599C4.40852 24.2671 4.90677 24.4326 5.19774 24.1416Z"
         fill="#A880FD"
       />
-      <ellipse cx="12.5259" cy="14.0971" rx="8.89606" ry="8.22211" fill="#7645D9" />
+      <ellipse
+        cx="12.5259"
+        cy="14.0971"
+        rx="8.89606"
+        ry="8.22211"
+        fill="#7645D9"
+      />
       <ellipse
         rx="8.69974"
         ry="8.36325"

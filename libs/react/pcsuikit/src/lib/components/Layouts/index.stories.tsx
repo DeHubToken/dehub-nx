@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { BaseLayout, CardsLayout } from ".";
+import React from 'react';
+import styled from 'styled-components';
+import { BaseLayout, CardsLayout } from '.';
 
 export default {
-  title: "Components/Layouts",
+  title: 'Components/Layouts',
   argTypes: {},
 };
 
@@ -16,7 +16,7 @@ const Stub = styled.div`
 export const Base: React.FC = () => {
   return (
     <BaseLayout>
-      {[...Array(24)].map((value) => (
+      {[...Array(24)].map(value => (
         <Stub key={value} />
       ))}
     </BaseLayout>
@@ -26,7 +26,7 @@ export const Base: React.FC = () => {
 export const Cards: React.FC = () => {
   return (
     <CardsLayout>
-      {[...Array(10)].map((value) => (
+      {[...Array(10)].map(value => (
         <Stub key={value} />
       ))}
     </CardsLayout>

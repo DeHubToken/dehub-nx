@@ -1,7 +1,7 @@
-import styled, { DefaultTheme } from "styled-components";
-import { space, layout, variant } from "styled-system";
-import { scaleVariants, styleVariants } from "./theme";
-import { BaseButtonProps } from "./types";
+import styled, { DefaultTheme } from 'styled-components';
+import { space, layout, variant } from 'styled-system';
+import { scaleVariants, styleVariants } from './theme';
+import { BaseButtonProps } from './types';
 
 interface ThemedButtonProps extends BaseButtonProps {
   theme: DefaultTheme;
@@ -40,7 +40,7 @@ const getDisabledStyles = ({ $isLoading, theme }: TransientButtonProps) => {
  */
 
 const getOpacity = ({ $isLoading = false }: TransientButtonProps) => {
-  return $isLoading ? ".5" : "1";
+  return $isLoading ? '.5' : '1';
 };
 
 const StyledButton = styled.button<BaseButtonProps>`
@@ -72,7 +72,7 @@ const StyledButton = styled.button<BaseButtonProps>`
 
   ${getDisabledStyles}
   ${variant({
-    prop: "scale",
+    prop: 'scale',
     variants: scaleVariants,
   })}
   ${variant({

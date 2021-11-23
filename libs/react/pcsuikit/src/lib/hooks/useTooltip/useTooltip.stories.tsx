@@ -49,8 +49,10 @@ export default {
 };
 
 export const Placement: React.FC = () => {
-  // Trigger doesn't matter in this story, it just shows tooltips no matter what
-  // TOP
+  /*
+   * Trigger doesn't matter in this story, it just shows tooltips no matter what
+   * TOP
+   */
   const { targetRef: targetRefTopStart, tooltip: tooltipTopStart } = useTooltip("top-start", {
     placement: "top-start",
   });

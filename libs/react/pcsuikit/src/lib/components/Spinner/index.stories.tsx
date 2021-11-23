@@ -1,8 +1,8 @@
-import React from "react";
-import Spinner from "./Spinner";
+import React from 'react';
+import Spinner from './Spinner';
 
 export default {
-  title: "Components/Spinner",
+  title: 'Components/Spinner',
   component: Spinner,
   argTypes: {},
 };

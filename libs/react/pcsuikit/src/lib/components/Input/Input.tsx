@@ -1,5 +1,5 @@
-import styled, { DefaultTheme } from "styled-components";
-import { InputProps, scales } from "./types";
+import styled, { DefaultTheme } from 'styled-components';
+import { InputProps, scales } from './types';
 
 interface StyledInputProps extends InputProps {
   theme: DefaultTheme;
@@ -8,7 +8,11 @@ interface StyledInputProps extends InputProps {
 /**
  * Priority: Warning --> Success
  */
-const getBoxShadow = ({ isSuccess = false, isWarning = false, theme }: StyledInputProps) => {
+const getBoxShadow = ({
+  isSuccess = false,
+  isWarning = false,
+  theme,
+}: StyledInputProps) => {
   if (isWarning) {
     return theme.shadows.warning;
   }
@@ -23,12 +27,12 @@ const getBoxShadow = ({ isSuccess = false, isWarning = false, theme }: StyledInp
 const getHeight = ({ scale = scales.MD }: StyledInputProps) => {
   switch (scale) {
     case scales.SM:
-      return "32px";
+      return '32px';
     case scales.LG:
-      return "48px";
+      return '48px';
     case scales.MD:
     default:
-      return "40px";
+      return '40px';
   }
 };
 

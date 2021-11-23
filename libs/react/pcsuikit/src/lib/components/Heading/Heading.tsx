@@ -1,23 +1,23 @@
-import styled from "styled-components";
-import Text from "../Text/Text";
-import { tags, scales, HeadingProps } from "./types";
+import styled from 'styled-components';
+import Text from '../Text/Text';
+import { tags, scales, HeadingProps } from './types';
 
 const style = {
   [scales.MD]: {
-    fontSize: "20px",
-    fontSizeLg: "20px",
+    fontSize: '20px',
+    fontSizeLg: '20px',
   },
   [scales.LG]: {
-    fontSize: "24px",
-    fontSizeLg: "24px",
+    fontSize: '24px',
+    fontSizeLg: '24px',
   },
   [scales.XL]: {
-    fontSize: "32px",
-    fontSizeLg: "40px",
+    fontSize: '32px',
+    fontSizeLg: '40px',
   },
   [scales.XXL]: {
-    fontSize: "48px",
-    fontSizeLg: "64px",
+    fontSize: '48px',
+    fontSizeLg: '64px',
   },
 };
 

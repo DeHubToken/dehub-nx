@@ -1,8 +1,8 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-import PanIcon from "./PanIcon";
-import PancakeIcon from "./PancakeIcon";
-import { SpinnerProps } from "./types";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import PanIcon from './PanIcon';
+import PancakeIcon from './PancakeIcon';
+import { SpinnerProps } from './types';
 
 const rotate = keyframes`
   from {

@@ -1,11 +1,11 @@
-import React from "react";
-import BoxComponent from "./Box";
-import FlexComponent from "./Flex";
-import Text from "../Text/Text";
-import { Link } from "../Link";
+import React from 'react';
+import BoxComponent from './Box';
+import FlexComponent from './Flex';
+import Text from '../Text/Text';
+import { Link } from '../Link';
 
 export default {
-  title: "Components/Primitives",
+  title: 'Components/Primitives',
   component: BoxComponent,
   argTypes: {},
 };
@@ -14,7 +14,7 @@ export const Box: React.FC = () => {
   return (
     <div>
       <BoxComponent as="p">
-        Contains background, border, layout, position, and space from{" "}
+        Contains background, border, layout, position, and space from{' '}
         <Link href="https://styled-system.com/api" target="_blank">
           Styled System&lsquo;s API
         </Link>
@@ -26,7 +26,10 @@ export const Box: React.FC = () => {
 export const Flex: React.FC = () => {
   return (
     <div>
-      <Text>Based on the Box component. You can apply any flexbox properties on the Flex component.</Text>
+      <Text>
+        Based on the Box component. You can apply any flexbox properties on the
+        Flex component.
+      </Text>
       <Link href="https://styled-system.com/api#flexbox" target="_blank">
         List of applicable props
       </Link>

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 /* eslint-disable import/no-unresolved */
-import { Meta } from "@storybook/react/types-6-0";
-import ButtonMenu from "./ButtonMenu";
-import ButtonMenuItem from "./ButtonMenuItem";
+import { Meta } from '@storybook/react/types-6-0';
+import ButtonMenu from './ButtonMenu';
+import ButtonMenuItem from './ButtonMenuItem';
 
 const Row = styled.div`
   margin-bottom: 32px;
@@ -14,7 +14,7 @@ const Row = styled.div`
 `;
 
 export default {
-  title: "Components/Button Menu",
+  title: 'Components/Button Menu',
   component: ButtonMenu,
   argTypes: {},
 } as Meta;
@@ -23,8 +23,8 @@ export const Default: React.FC = () => {
   const [index, setIndex] = useState(0);
   const [index1, setIndex1] = useState(1);
 
-  const handleClick = (newIndex) => setIndex(newIndex);
-  const handleClick1 = (newIndex) => setIndex1(newIndex);
+  const handleClick = newIndex => setIndex(newIndex);
+  const handleClick1 = newIndex => setIndex1(newIndex);
 
   return (
     <>
@@ -45,7 +45,11 @@ export const Default: React.FC = () => {
         </ButtonMenu>
       </Row>
       <Row>
-        <ButtonMenu activeIndex={index} onItemClick={handleClick} variant="subtle">
+        <ButtonMenu
+          activeIndex={index}
+          onItemClick={handleClick}
+          variant="subtle"
+        >
           <ButtonMenuItem>Button 1</ButtonMenuItem>
           <ButtonMenuItem>Button 2</ButtonMenuItem>
           <ButtonMenuItem>Button 3</ButtonMenuItem>
@@ -53,7 +57,12 @@ export const Default: React.FC = () => {
         </ButtonMenu>
       </Row>
       <Row>
-        <ButtonMenu activeIndex={index1} onItemClick={handleClick1} scale="sm" variant="subtle">
+        <ButtonMenu
+          activeIndex={index1}
+          onItemClick={handleClick1}
+          scale="sm"
+          variant="subtle"
+        >
           <ButtonMenuItem>Button 1</ButtonMenuItem>
           <ButtonMenuItem>Button 2</ButtonMenuItem>
           <ButtonMenuItem>Button 3</ButtonMenuItem>

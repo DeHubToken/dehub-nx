@@ -148,8 +148,10 @@ const createReducer =
           throw new Error(`Invalid column, ${action.columnName} not found`);
         }
 
-        // loop through all columns and set the sort parameter to off unless
-        // it's the specified column (only one column at a time for )
+        /*
+         * loop through all columns and set the sort parameter to off unless
+         * it's the specified column (only one column at a time for )
+         */
         columnCopy = state.columns.map((column) => {
           // if the row was found
           if (action.columnName === column.name) {

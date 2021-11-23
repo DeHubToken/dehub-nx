@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import PancakeToggle from "./PancakeToggle";
+import React, { useState } from 'react';
+import PancakeToggle from './PancakeToggle';
 
 export default {
-  title: "Components/PancakeToggle",
+  title: 'Components/PancakeToggle',
   component: PancakeToggle,
 };
 
@@ -13,7 +13,7 @@ export const Default: React.FC = () => {
 
   return (
     <>
-      <div style={{ marginBottom: "32px" }}>
+      <div style={{ marginBottom: '32px' }}>
         <PancakeToggle checked={isChecked} onChange={toggle} />
       </div>
       <div>

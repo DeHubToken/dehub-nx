@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { space, SpaceProps } from "styled-system";
+import styled from 'styled-components';
+import { space, SpaceProps } from 'styled-system';
 
 export type CardFooterProps = SpaceProps;
 
@@ -9,7 +9,7 @@ const CardFooter = styled.div<CardFooterProps>`
 `;
 
 CardFooter.defaultProps = {
-  p: "24px",
+  p: '24px',
 };
 
 export default CardFooter;

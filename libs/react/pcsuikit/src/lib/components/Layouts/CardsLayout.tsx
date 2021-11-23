@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import BaseLayout from "./BaseLayout";
+import styled from 'styled-components';
+import BaseLayout from './BaseLayout';
 
 const GridLayout = styled(BaseLayout)`
   & > div {

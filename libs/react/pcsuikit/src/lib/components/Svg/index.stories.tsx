@@ -1,11 +1,11 @@
-import React from "react";
-import Box from "../Box/Box";
-import Flex from "../Box/Flex";
-import Text from "../Text/Text";
-import Svg from "./Svg";
+import React from 'react';
+import Box from '../Box/Box';
+import Flex from '../Box/Flex';
+import Text from '../Text/Text';
+import Svg from './Svg';
 
 export default {
-  title: "Components/Svg Icons",
+  title: 'Components/Svg Icons',
   component: Svg,
   argTypes: {},
 };
@@ -26,9 +26,9 @@ export const Default: React.FC = () => {
   );
 };
 
-const context = require.context("./Icons", true, /.tsx$/);
+const context = require.context('./Icons', true, /.tsx$/);
 const components = context.keys().reduce((accum, path) => {
-  const file = path.substring(2).replace(".tsx", "");
+  const file = path.substring(2).replace('.tsx', '');
   return {
     ...accum,
     [file]: context(path),
@@ -38,7 +38,7 @@ const components = context.keys().reduce((accum, path) => {
 export const Icons: React.FC = () => {
   return (
     <Flex justifyContent="start" alignItems="center" flexWrap="wrap">
-      {Object.keys(components).map((file) => {
+      {Object.keys(components).map(file => {
         const Icon = components[file].default;
         return (
           <Flex
@@ -46,12 +46,17 @@ export const Icons: React.FC = () => {
             flexDirection="column"
             alignItems="center"
             width="128px"
-            style={{ border: "1px solid #eee" }}
+            style={{ border: '1px solid #eee' }}
             justifyContent="center"
             py="8px"
             m="4px"
           >
-            <Flex alignItems="center" justifyContent="center" style={{ flex: 1 }} height="100%">
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              style={{ flex: 1 }}
+              height="100%"
+            >
               <Icon width="48px" />
               <Icon width="24px" color="secondary" ml="4px" />
             </Flex>

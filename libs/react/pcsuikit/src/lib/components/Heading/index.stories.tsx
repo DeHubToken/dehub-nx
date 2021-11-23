@@ -1,8 +1,8 @@
-import React from "react";
-import Heading from "./Heading";
+import React from 'react';
+import Heading from './Heading';
 
 export default {
-  title: "Components/Heading",
+  title: 'Components/Heading',
   component: Heading,
   argTypes: {},
 };

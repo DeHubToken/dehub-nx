@@ -1,4 +1,4 @@
-import { SpaceProps } from "styled-system";
+import { SpaceProps } from 'styled-system';
 
 export interface ContainerProps {
   width: number;

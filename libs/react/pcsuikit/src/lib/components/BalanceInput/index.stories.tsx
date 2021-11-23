@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Box from "../Box/Box";
-import BalanceInput from "./BalanceInput";
+import React, { useState } from 'react';
+import Box from '../Box/Box';
+import BalanceInput from './BalanceInput';
 
 export default {
-  title: "Components/BalanceInput",
+  title: 'Components/BalanceInput',
   component: BalanceInput,
   argTypes: {},
 };
@@ -19,11 +19,11 @@ export const Default: React.FC = () => {
     })} USD`;
   };
 
-  const handleDecimalChange = (input) => {
+  const handleDecimalChange = input => {
     setDecimalValue(input);
   };
 
-  const handleNumericChange = (input) => {
+  const handleNumericChange = input => {
     setNumericValue(input);
   };
 
@@ -47,7 +47,7 @@ export const Default: React.FC = () => {
       <BalanceInput
         value={numericValue}
         onUserInput={handleNumericChange}
-        inputProps={{ inputMode: "numeric" }}
+        inputProps={{ inputMode: 'numeric' }}
         currencyValue={currencyValue(numericValue)}
         placeholder="0"
         mb="32px"

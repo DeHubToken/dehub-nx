@@ -1,8 +1,8 @@
-import React from "react";
-import FallingBunnies from "./FallingBunnies";
+import React from 'react';
+import FallingBunnies from './FallingBunnies';
 
 export default {
-  title: "Components/FallingBunnies",
+  title: 'Components/FallingBunnies',
   component: FallingBunnies,
   argTypes: {},
 };

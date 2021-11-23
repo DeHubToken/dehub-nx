@@ -1,17 +1,17 @@
-import { capitalize } from "lodash";
-import React, { useState } from "react";
-import { BrowserRouter, Link } from "react-router-dom";
-import styled from "styled-components";
-import Box from "../Box/Box";
-import Flex from "../Box/Flex";
-import { AddIcon, AutoRenewIcon, LogoIcon } from "../Svg";
-import IconButton from "./IconButton";
-import Button from "./Button";
-import { ExpandableButton, ExpandableLabel } from "./ExpandableButton";
-import { scales, variants } from "./types";
+import { capitalize } from 'lodash';
+import React, { useState } from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
+import styled from 'styled-components';
+import Box from '../Box/Box';
+import Flex from '../Box/Flex';
+import { AddIcon, AutoRenewIcon, LogoIcon } from '../Svg';
+import IconButton from './IconButton';
+import Button from './Button';
+import { ExpandableButton, ExpandableLabel } from './ExpandableButton';
+import { scales, variants } from './types';
 
 export default {
-  title: "Components/Button",
+  title: 'Components/Button',
   component: Button,
   argTypes: {},
 };
@@ -31,10 +31,10 @@ export const Default: React.FC = () => {
         <button type="button">Unstyled Button</button>
       </Box>
       <Box mb="32px">
-        {Object.values(variants).map((variant) => {
+        {Object.values(variants).map(variant => {
           return (
             <Box key={variant} mb="32px">
-              {Object.values(scales).map((scale) => {
+              {Object.values(scales).map(scale => {
                 return (
                   <Button key={scale} variant={variant} scale={scale} mr="8px">
                     {`${capitalize(variant)} ${scale.toUpperCase()}`}
@@ -61,10 +61,10 @@ export const Anchors: React.FC = () => {
   return (
     <>
       <Box mb="32px">
-        {Object.values(variants).map((variant) => {
+        {Object.values(variants).map(variant => {
           return (
             <Box key={variant} mb="32px">
-              {Object.values(scales).map((scale) => {
+              {Object.values(scales).map(scale => {
                 return (
                   <Button
                     as="a"
@@ -84,10 +84,22 @@ export const Anchors: React.FC = () => {
         })}
       </Box>
       <Box>
-        <Button as="a" href="https://pancakeswap.finance" mr="8px" external disabled>
+        <Button
+          as="a"
+          href="https://pancakeswap.finance"
+          mr="8px"
+          external
+          disabled
+        >
           Disabled
         </Button>
-        <Button as="a" href="https://pancakeswap.finance" variant="secondary" external disabled>
+        <Button
+          as="a"
+          href="https://pancakeswap.finance"
+          variant="secondary"
+          external
+          disabled
+        >
           Disabled
         </Button>
       </Box>
@@ -108,7 +120,10 @@ export const Variants: React.FC = () => {
           <Button width="100%">Full size</Button>
         </Row>
         <Row>
-          <Button isLoading endIcon={<AutoRenewIcon spin color="currentColor" />}>
+          <Button
+            isLoading
+            endIcon={<AutoRenewIcon spin color="currentColor" />}
+          >
             Approving
           </Button>
           <Button isLoading variant="success">
@@ -149,8 +164,14 @@ export const Expandable: React.FC = () => {
     <Box width="640px">
       <BrowserRouter>
         <Row>
-          <ExpandableButton expanded={expanded} onClick={() => setExpanded((prev) => !prev)} />
-          <ExpandableLabel expanded={expanded} onClick={() => setExpanded((prev) => !prev)}>
+          <ExpandableButton
+            expanded={expanded}
+            onClick={() => setExpanded(prev => !prev)}
+          />
+          <ExpandableLabel
+            expanded={expanded}
+            onClick={() => setExpanded(prev => !prev)}
+          >
             ExpandableLabel
           </ExpandableLabel>
         </Row>

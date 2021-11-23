@@ -1,16 +1,16 @@
-import React from "react";
-import { PancakesIcon } from "../Svg";
-import { Link, LinkExternal } from "./index";
+import React from 'react';
+import { PancakesIcon } from '../Svg';
+import { Link, LinkExternal } from './index';
 
 export default {
-  title: "Components/Link",
+  title: 'Components/Link',
   component: Link,
   argTypes: {
     fontSize: {
-      name: "fontSize",
+      name: 'fontSize',
       table: {
-        type: { summary: "string", detail: "Fontsize in px or em" },
-        defaultValue: { summary: "16px" },
+        type: { summary: 'string', detail: 'Fontsize in px or em' },
+        defaultValue: { summary: '16px' },
       },
       control: {
         type: null,

@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import getExternalLinkProps from "../../util/getExternalLinkProps";
-import Text from "../Text/Text";
-import { LinkProps } from "./types";
+import React from 'react';
+import styled from 'styled-components';
+import getExternalLinkProps from '../../util/getExternalLinkProps';
+import Text from '../Text/Text';
+import { LinkProps } from './types';
 
 const StyledLink = styled(Text)<LinkProps>`
   display: flex;
@@ -19,7 +19,7 @@ const Link: React.FC<LinkProps> = ({ external, ...props }) => {
 };
 
 Link.defaultProps = {
-  color: "primary",
+  color: 'primary',
 };
 
 export default Link;

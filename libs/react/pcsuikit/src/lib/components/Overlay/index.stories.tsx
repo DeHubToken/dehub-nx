@@ -1,8 +1,8 @@
-import React from "react";
-import Overlay from "./Overlay";
+import React from 'react';
+import Overlay from './Overlay';
 
 export default {
-  title: "Components/Overlay",
+  title: 'Components/Overlay',
   argTypes: {},
 };
 

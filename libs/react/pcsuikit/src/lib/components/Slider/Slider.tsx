@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from "react";
-import { Box } from "../Box";
+import React, { ChangeEvent } from 'react';
+import { Box } from '../Box';
 import {
   BunnySlider,
   BarBackground,
@@ -8,8 +8,8 @@ import {
   StyledInput,
   SliderLabel,
   SliderLabelContainer,
-} from "./styles";
-import SliderProps from "./types";
+} from './styles';
+import SliderProps from './types';
 
 const Slider: React.FC<SliderProps> = ({
   name,
@@ -18,7 +18,7 @@ const Slider: React.FC<SliderProps> = ({
   value,
   onValueChanged,
   valueLabel,
-  step = "any",
+  step = 'any',
   disabled = false,
   ...props
 }) => {
@@ -38,8 +38,8 @@ const Slider: React.FC<SliderProps> = ({
   } else {
     progressWidth = `${progressPercentage}%`;
   }
-  const labelProgress = isMax ? "calc(100% - 12px)" : `${progressPercentage}%`;
-  const displayValueLabel = isMax ? "MAX" : valueLabel;
+  const labelProgress = isMax ? 'calc(100% - 12px)' : `${progressPercentage}%`;
+  const displayValueLabel = isMax ? 'MAX' : valueLabel;
   return (
     <Box position="relative" height="48px" {...props}>
       <BunnyButt disabled={disabled} />
@@ -60,7 +60,9 @@ const Slider: React.FC<SliderProps> = ({
       </BunnySlider>
       {valueLabel && (
         <SliderLabelContainer>
-          <SliderLabel progress={labelProgress}>{displayValueLabel}</SliderLabel>
+          <SliderLabel progress={labelProgress}>
+            {displayValueLabel}
+          </SliderLabel>
         </SliderLabelContainer>
       )}
     </Box>
