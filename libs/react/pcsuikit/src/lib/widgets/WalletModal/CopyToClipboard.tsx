@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Text from "../../components/Text/Text";
-import { CopyIcon } from "../../components/Svg";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Text from '../../components/Text/Text';
+import { CopyIcon } from '../../components/Svg';
 
 interface Props {
   toCopy: string;
 }
 
-const StyleButton = styled(Text).attrs({ role: "button" })`
+const StyleButton = styled(Text).attrs({ role: 'button' })`
   position: relative;
   display: flex;
   align-items: center;
@@ -15,7 +15,8 @@ const StyleButton = styled(Text).attrs({ role: "button" })`
 `;
 
 const Tooltip = styled.div<{ isTooltipDisplayed: boolean }>`
-  display: ${({ isTooltipDisplayed }) => (isTooltipDisplayed ? "block" : "none")};
+  display: ${({ isTooltipDisplayed }) =>
+    isTooltipDisplayed ? 'block' : 'none'};
   position: absolute;
   bottom: -22px;
   right: 0;
@@ -31,11 +32,11 @@ const CopyToClipboard: React.FC<Props> = ({ toCopy, children, ...props }) => {
   const [isTooltipDisplayed, setIsTooltipDisplayed] = useState(false);
 
   const copyToClipboardWithCommand = (content: string) => {
-    const el = document.createElement("textarea");
+    const el = document.createElement('textarea');
     el.value = content;
     document.body.appendChild(el);
     el.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(el);
   };
 
@@ -53,7 +54,7 @@ const CopyToClipboard: React.FC<Props> = ({ toCopy, children, ...props }) => {
       onClick={() => {
         if (navigator.clipboard && navigator.permissions) {
           navigator.clipboard.writeText(toCopy).then(() => displayTooltip());
-        } else if (document.queryCommandSupported("copy")) {
+        } else if (document.queryCommandSupported('copy')) {
           copyToClipboardWithCommand(toCopy);
           displayTooltip();
         }

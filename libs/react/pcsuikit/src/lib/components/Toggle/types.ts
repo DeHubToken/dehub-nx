@@ -1,12 +1,12 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from 'react';
 
 export type ToggleTheme = {
   handleBackground: string;
 };
 
 export const scales = {
-  SM: "sm",
-  MD: "md",
+  SM: 'sm',
+  MD: 'md',
 } as const;
 
 export type Scales = typeof scales[keyof typeof scales];
@@ -25,13 +25,13 @@ export interface InputProps {
 }
 
 export const scaleKeys = {
-  handleHeight: "handleHeight",
-  handleWidth: "handleWidth",
-  handleLeft: "handleLeft",
-  handleTop: "handleTop",
-  checkedLeft: "checkedLeft",
-  toggleHeight: "toggleHeight",
-  toggleWidth: "toggleWidth",
+  handleHeight: 'handleHeight',
+  handleWidth: 'handleWidth',
+  handleLeft: 'handleLeft',
+  handleTop: 'handleTop',
+  checkedLeft: 'checkedLeft',
+  toggleHeight: 'toggleHeight',
+  toggleWidth: 'toggleWidth',
 } as const;
 
 export type ScaleKeys = typeof scaleKeys[keyof typeof scaleKeys];

@@ -1,16 +1,16 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const useKonamiCheatCode = (matchedCodeHandler: () => void): void => {
   useEffect(() => {
     const pattern = [
-      "ArrowUp",
-      "ArrowUp",
-      "ArrowDown",
-      "ArrowDown",
-      "ArrowLeft",
-      "ArrowRight",
-      "ArrowLeft",
-      "ArrowRight",
+      'ArrowUp',
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowLeft',
+      'ArrowRight',
     ];
 
     let currentIndex = 0;
@@ -29,8 +29,8 @@ const useKonamiCheatCode = (matchedCodeHandler: () => void): void => {
       }
     };
 
-    document.addEventListener("keyup", onKeyUpHandler);
-    return () => document.removeEventListener("keyup", onKeyUpHandler);
+    document.addEventListener('keyup', onKeyUpHandler);
+    return () => document.removeEventListener('keyup', onKeyUpHandler);
   }, [matchedCodeHandler]);
 };
 

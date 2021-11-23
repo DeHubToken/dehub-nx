@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export const types = {
-  SUCCESS: "success",
-  DANGER: "danger",
-  WARNING: "warning",
-  INFO: "info",
+  SUCCESS: 'success',
+  DANGER: 'danger',
+  WARNING: 'warning',
+  INFO: 'info',
 };
 
 export type Types = typeof types[keyof typeof types];
@@ -25,7 +25,7 @@ export interface ToastContainerProps {
 
 export interface ToastProps {
   toast: Toast;
-  onRemove: ToastContainerProps["onRemove"];
+  onRemove: ToastContainerProps['onRemove'];
   ttl: number;
   style: Partial<CSSStyleDeclaration>;
 }

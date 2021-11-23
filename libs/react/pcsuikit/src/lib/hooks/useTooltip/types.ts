@@ -1,4 +1,4 @@
-import { Placement, Padding } from "@popperjs/core";
+import { Placement, Padding } from '@popperjs/core';
 
 export interface TooltipRefs {
   targetRef: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
@@ -14,4 +14,4 @@ export interface TooltipOptions {
   tooltipOffset?: [number, number];
 }
 
-export type TriggerType = "click" | "hover" | "focus";
+export type TriggerType = 'click' | 'hover' | 'focus';

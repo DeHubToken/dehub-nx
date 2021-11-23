@@ -1,7 +1,7 @@
-import React, { createContext, useState } from "react";
-import styled from "styled-components";
-import Overlay from "../../components/Overlay/Overlay";
-import { Handler } from "./types";
+import React, { createContext, useState } from 'react';
+import styled from 'styled-components';
+import Overlay from '../../components/Overlay/Overlay';
+import { Handler } from './types';
 
 interface ModalsContext {
   onPresent: (node: React.ReactNode, key?: string) => void;

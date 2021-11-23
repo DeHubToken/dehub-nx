@@ -1,5 +1,5 @@
-import { useCallback, useEffect } from "react";
-import debounce from "lodash/debounce";
+import { useCallback, useEffect } from 'react';
+import debounce from 'lodash/debounce';
 
 type ParticleOptions = {
   size?: number;
@@ -11,10 +11,15 @@ const defaultParticleOptions = {
   distance: 500,
 };
 
-const createParticle = (x: number, y: number, imgSrc: string, options: ParticleOptions = {}) => {
+const createParticle = (
+  x: number,
+  y: number,
+  imgSrc: string,
+  options: ParticleOptions = {}
+) => {
   const { size, distance } = { ...defaultParticleOptions, ...options };
 
-  const particle = document.createElement("particle");
+  const particle = document.createElement('particle');
   document.body.appendChild(particle);
 
   const width = Math.floor(Math.random() * size + 8);
@@ -24,14 +29,14 @@ const createParticle = (x: number, y: number, imgSrc: string, options: ParticleO
   const rotation = Math.random() * 520;
   const delay = Math.random() * 200;
 
-  particle.style.backgroundRepeat = "no-repeat";
-  particle.style.backgroundSize = "contain";
+  particle.style.backgroundRepeat = 'no-repeat';
+  particle.style.backgroundSize = 'contain';
   particle.style.backgroundImage = `url(${imgSrc})`;
-  particle.style.left = "0";
-  particle.style.top = "0";
-  particle.style.opacity = "0";
-  particle.style.pointerEvents = "none";
-  particle.style.position = "fixed";
+  particle.style.left = '0';
+  particle.style.top = '0';
+  particle.style.opacity = '0';
+  particle.style.pointerEvents = 'none';
+  particle.style.position = 'fixed';
   particle.style.width = `${width}px`;
   particle.style.height = `${height}px`;
 
@@ -50,7 +55,7 @@ const createParticle = (x: number, y: number, imgSrc: string, options: ParticleO
     ],
     {
       duration: Math.random() * 1000 + 5000,
-      easing: "cubic-bezier(0, .9, .57, 1)",
+      easing: 'cubic-bezier(0, .9, .57, 1)',
       delay,
     }
   );
@@ -78,8 +83,17 @@ const defaultOptions = {
 /**
  * @see https://css-tricks.com/playing-with-particles-using-the-web-animations-api/
  */
-const useParticleBurst = (options: Options): { initialize: () => void; teardown: () => void } => {
-  const { selector, numberOfParticles, debounceDuration, imgSrc, disableWhen, particleOptions } = {
+const useParticleBurst = (
+  options: Options
+): { initialize: () => void; teardown: () => void } => {
+  const {
+    selector,
+    numberOfParticles,
+    debounceDuration,
+    imgSrc,
+    disableWhen,
+    particleOptions,
+  } = {
     ...defaultOptions,
     ...options,
   };
@@ -103,7 +117,12 @@ const useParticleBurst = (options: Options): { initialize: () => void; teardown:
               }
             } else {
               for (let i = 0; i < numberOfParticles; i += 1) {
-                createParticle(event.clientX, event.clientY + window.scrollY, imgSrc, particleOptions);
+                createParticle(
+                  event.clientX,
+                  event.clientY + window.scrollY,
+                  imgSrc,
+                  particleOptions
+                );
               }
             }
           }
@@ -117,21 +136,21 @@ const useParticleBurst = (options: Options): { initialize: () => void; teardown:
 
   const initialize = useCallback(() => {
     if (selector) {
-      document.querySelectorAll<HTMLElement>(selector).forEach((element) => {
-        element.addEventListener("click", listener);
+      document.querySelectorAll<HTMLElement>(selector).forEach(element => {
+        element.addEventListener('click', listener);
       });
     } else {
-      document.addEventListener("click", listener);
+      document.addEventListener('click', listener);
     }
   }, [selector, listener]);
 
   const teardown = useCallback(() => {
     if (selector) {
-      document.querySelectorAll<HTMLElement>(selector).forEach((element) => {
-        element.removeEventListener("click", listener);
+      document.querySelectorAll<HTMLElement>(selector).forEach(element => {
+        element.removeEventListener('click', listener);
       });
     } else {
-      document.removeEventListener("click", listener);
+      document.removeEventListener('click', listener);
     }
   }, [selector, listener]);
 

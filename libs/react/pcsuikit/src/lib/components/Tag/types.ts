@@ -1,20 +1,20 @@
-import { ReactNode } from "react";
-import { SpaceProps } from "styled-system";
+import { ReactNode } from 'react';
+import { SpaceProps } from 'styled-system';
 
 export const variants = {
-  PRIMARY: "primary",
-  SECONDARY: "secondary",
-  SUCCESS: "success",
-  TEXTDISABLED: "textDisabled",
-  TEXTSUBTLE: "textSubtle",
-  BINANCE: "binance",
-  FAILURE: "failure",
-  WARNING: "warning",
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+  SUCCESS: 'success',
+  TEXTDISABLED: 'textDisabled',
+  TEXTSUBTLE: 'textSubtle',
+  BINANCE: 'binance',
+  FAILURE: 'failure',
+  WARNING: 'warning',
 } as const;
 
 export const scales = {
-  MD: "md",
-  SM: "sm",
+  MD: 'md',
+  SM: 'sm',
 } as const;
 
 export type Scale = typeof scales[keyof typeof scales];

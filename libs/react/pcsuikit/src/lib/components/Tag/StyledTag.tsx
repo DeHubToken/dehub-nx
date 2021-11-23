@@ -1,16 +1,21 @@
-import styled, { DefaultTheme } from "styled-components";
-import { space, variant } from "styled-system";
-import { Colors } from "../../theme/types";
-import { scaleVariants, styleVariants } from "./theme";
-import { TagProps, variants } from "./types";
+import styled, { DefaultTheme } from 'styled-components';
+import { space, variant } from 'styled-system';
+import { Colors } from '../../theme/types';
+import { scaleVariants, styleVariants } from './theme';
+import { TagProps, variants } from './types';
 
 interface ThemedProps extends TagProps {
   theme: DefaultTheme;
 }
 
-const getOutlineStyles = ({ outline, theme, variant: variantKey = variants.PRIMARY }: ThemedProps) => {
+const getOutlineStyles = ({
+  outline,
+  theme,
+  variant: variantKey = variants.PRIMARY,
+}: ThemedProps) => {
   if (outline) {
-    const themeColorKey = styleVariants[variantKey].backgroundColor as keyof Colors;
+    const themeColorKey = styleVariants[variantKey]
+      .backgroundColor as keyof Colors;
     const color = theme.colors[themeColorKey];
 
     return `
@@ -20,7 +25,7 @@ const getOutlineStyles = ({ outline, theme, variant: variantKey = variants.PRIMA
     `;
   }
 
-  return "";
+  return '';
 };
 
 export const StyledTag = styled.div<ThemedProps>`
@@ -36,7 +41,7 @@ export const StyledTag = styled.div<ThemedProps>`
   }
 
   ${variant({
-    prop: "scale",
+    prop: 'scale',
     variants: scaleVariants,
   })}
   ${variant({

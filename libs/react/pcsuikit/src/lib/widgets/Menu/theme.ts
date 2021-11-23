@@ -1,5 +1,5 @@
-import { darkColors, lightColors } from "../../theme/colors";
-import { NavTheme } from "./types";
+import { darkColors, lightColors } from '../../theme/colors';
+import { NavTheme } from './types';
 
 export const light: NavTheme = {
   background: lightColors.backgroundAlt,

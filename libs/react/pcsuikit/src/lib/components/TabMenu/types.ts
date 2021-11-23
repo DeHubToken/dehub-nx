@@ -1,4 +1,4 @@
-import { ColorProps } from "styled-system";
+import { ColorProps } from 'styled-system';
 
 export interface TabMenuProps {
   activeIndex?: number;
@@ -8,5 +8,5 @@ export interface TabMenuProps {
 export interface TabProps extends ColorProps {
   isActive?: boolean;
   onClick?: () => void;
-  scale?: "md" | "lg";
+  scale?: 'md' | 'lg';
 }

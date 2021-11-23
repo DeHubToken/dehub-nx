@@ -1,2 +1,2 @@
-export { default as useTooltip } from "./useTooltip";
-export type { TooltipRefs, TriggerType } from "./types";
+export { default as useTooltip } from './useTooltip';
+export type { TooltipRefs, TriggerType } from './types';

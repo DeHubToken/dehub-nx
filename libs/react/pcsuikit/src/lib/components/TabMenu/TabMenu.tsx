@@ -1,7 +1,7 @@
-import React, { cloneElement, Children, ReactElement } from "react";
-import styled from "styled-components";
-import Flex from "../Box/Flex";
-import { TabMenuProps } from "./types";
+import React, { cloneElement, Children, ReactElement } from 'react';
+import styled from 'styled-components';
+import Flex from '../Box/Flex';
+import { TabMenuProps } from './types';
 
 const Wrapper = styled(Flex)`
   border-bottom: 2px solid ${({ theme }) => theme.colors.textSubtle};
@@ -27,17 +27,21 @@ const Inner = styled(Flex)`
   }
 `;
 
-const ButtonMenu: React.FC<TabMenuProps> = ({ activeIndex = 0, onItemClick, children }) => {
+const ButtonMenu: React.FC<TabMenuProps> = ({
+  activeIndex = 0,
+  onItemClick,
+  children,
+}) => {
   return (
-    <Wrapper p={["0 4px", "0 16px"]}>
+    <Wrapper p={['0 4px', '0 16px']}>
       <Inner>
         {Children.map(children, (child: ReactElement, index) => {
           const isActive = activeIndex === index;
           return cloneElement(child, {
             isActive,
             onClick: onItemClick ? () => onItemClick(index) : undefined,
-            color: isActive ? "backgroundAlt" : "textSubtle",
-            backgroundColor: isActive ? "textSubtle" : "input",
+            color: isActive ? 'backgroundAlt' : 'textSubtle',
+            backgroundColor: isActive ? 'textSubtle' : 'input',
           });
         })}
       </Inner>

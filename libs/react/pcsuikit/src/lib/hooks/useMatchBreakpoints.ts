@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { breakpointMap } from "../theme/base";
+import { useEffect, useState } from 'react';
+import { breakpointMap } from '../theme/base';
 
 type State = {
   [key: string]: boolean;
@@ -30,11 +30,15 @@ const mediaQueries: MediaQueries = (() => {
     // Min width for next iteration
     prevMinWidth = breakpoint + 1;
 
-    return { ...accum, [size]: `(min-width: ${minWidth}px) and (max-width: ${breakpoint}px)` };
+    return {
+      ...accum,
+      [size]: `(min-width: ${minWidth}px) and (max-width: ${breakpoint}px)`,
+    };
   }, {});
 })();
 
-const getKey = (size: string) => `is${size.charAt(0).toUpperCase()}${size.slice(1)}`;
+const getKey = (size: string) =>
+  `is${size.charAt(0).toUpperCase()}${size.slice(1)}`;
 
 const useMatchBreakpoints = (): State => {
   const [state, setState] = useState<State>(() => {
@@ -47,12 +51,12 @@ const useMatchBreakpoints = (): State => {
 
   useEffect(() => {
     // Create listeners for each media query returning a function to unsubscribe
-    const handlers = Object.keys(mediaQueries).map((size) => {
+    const handlers = Object.keys(mediaQueries).map(size => {
       const mql = window.matchMedia(mediaQueries[size]);
 
       const handler = (matchMediaQuery: MediaQueryListEvent) => {
         const key = getKey(size);
-        setState((prevState) => ({
+        setState(prevState => ({
           ...prevState,
           [key]: matchMediaQuery.matches,
         }));
@@ -60,19 +64,19 @@ const useMatchBreakpoints = (): State => {
 
       // Safari < 14 fix
       if (mql.addEventListener) {
-        mql.addEventListener("change", handler);
+        mql.addEventListener('change', handler);
       }
 
       return () => {
         // Safari < 14 fix
         if (mql.removeEventListener) {
-          mql.removeEventListener("change", handler);
+          mql.removeEventListener('change', handler);
         }
       };
     });
 
     return () => {
-      handlers.forEach((unsubscribe) => {
+      handlers.forEach(unsubscribe => {
         unsubscribe();
       });
     };

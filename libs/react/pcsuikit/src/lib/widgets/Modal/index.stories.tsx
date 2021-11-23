@@ -1,12 +1,12 @@
-import React from "react";
-import { useTheme } from "styled-components";
-import { Modal, useModal } from ".";
-import { ModalProps } from "./types";
-import Button from "../../components/Button/Button";
-import Heading from "../../components/Heading/Heading";
+import React from 'react';
+import { useTheme } from 'styled-components';
+import { Modal, useModal } from '.';
+import { ModalProps } from './types';
+import Button from '../../components/Button/Button';
+import Heading from '../../components/Heading/Heading';
 
 export default {
-  title: "Widgets/Modal",
+  title: 'Widgets/Modal',
   component: Modal,
   argTypes: {},
 };
@@ -22,7 +22,12 @@ export const Default: React.FC = () => {
   const theme = useTheme();
   const [onPresent1] = useModal(<CustomModal title="Modal 1" />);
   const [onPresent2] = useModal(<CustomModal title="Modal 2" />);
-  const [onPresent3] = useModal(<CustomModal title="Modal 3" headerBackground={theme.colors.gradients.cardHeader} />);
+  const [onPresent3] = useModal(
+    <CustomModal
+      title="Modal 3"
+      headerBackground={theme.colors.gradients.cardHeader}
+    />
+  );
   return (
     <div>
       <Button onClick={onPresent1}>Open modal 1</Button>
@@ -48,7 +53,12 @@ const BackButtonModal: React.FC<ModalProps> = ({ title, onDismiss }) => {
   };
 
   return (
-    <Modal title={title} onDismiss={onDismiss} onBack={handleOnBack} hideCloseButton>
+    <Modal
+      title={title}
+      onDismiss={onDismiss}
+      onBack={handleOnBack}
+      hideCloseButton
+    >
       <Button onClick={onDismiss} variant="text">
         Consumer can still close it.
       </Button>
@@ -57,7 +67,10 @@ const BackButtonModal: React.FC<ModalProps> = ({ title, onDismiss }) => {
 };
 
 export const WithBackButton: React.FC = () => {
-  const [onPresent1] = useModal(<BackButtonModal title="Modal with no X" />, false);
+  const [onPresent1] = useModal(
+    <BackButtonModal title="Modal with no X" />,
+    false
+  );
 
   return <Button onClick={onPresent1}>Only Back Button</Button>;
 };

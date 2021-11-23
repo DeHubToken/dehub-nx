@@ -1,7 +1,7 @@
-import styled, { css, keyframes } from "styled-components";
-import { space } from "styled-system";
-import getThemeValue from "../../util/getThemeValue";
-import { SvgProps } from "./types";
+import styled, { css, keyframes } from 'styled-components';
+import { space } from 'styled-system';
+import getThemeValue from '../../util/getThemeValue';
+import { SvgProps } from './types';
 
 const rotate = keyframes`
   from {
@@ -25,9 +25,9 @@ const Svg = styled.svg<SvgProps>`
 `;
 
 Svg.defaultProps = {
-  color: "text",
-  width: "20px",
-  xmlns: "http://www.w3.org/2000/svg",
+  color: 'text',
+  width: '20px',
+  xmlns: 'http://www.w3.org/2000/svg',
   spin: false,
 };
 
