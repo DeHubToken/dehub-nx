@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, Text, Link, Heading } from '@pancakeswap/uikit';
+import { Flex, Text, Link, Heading } from '@dehub/react/pcsuikit';
 import { Bet } from '../../../../state/types';
 import { useTranslation } from '../../../../contexts/Localization';
 import { Result } from '../../../../state/predictions/helpers';

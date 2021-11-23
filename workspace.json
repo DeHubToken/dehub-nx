@@ -7,6 +7,7 @@
     "prediction": "apps/prediction",
     "prediction-e2e": "apps/prediction-e2e",
     "react-core": "libs/react/core",
+    "react-pcsuikit": "libs/react/pcsuikit",
     "react-ui": "libs/react/ui",
     "shared-assets-dehub": "libs/shared/assets/dehub",
     "shared-assets-freya": "libs/shared/assets/freya",

@@ -7,7 +7,7 @@ import {
   Card,
   PocketWatchIcon,
   Text,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import { useGetLastOraclePrice } from '../../../state/hooks';
 import { useTranslation } from '../../../contexts/Localization';
 import { formatRoundTime } from '../helpers';

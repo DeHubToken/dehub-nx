@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '@pancakeswap/uikit';
+import { Text } from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../../contexts/Localization';
 import { SVG, WonSlice, LostSlice, Wrapper, Info } from './PnlChartStyles';
 

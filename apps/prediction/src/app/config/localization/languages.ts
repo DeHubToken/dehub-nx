@@ -1,4 +1,4 @@
-import { Language } from '@pancakeswap/uikit';
+import { Language } from '@dehub/react/pcsuikit';
 
 export const AR: Language = {
   locale: 'ar-SA',

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Flex } from '@pancakeswap/uikit';
+import { Box, Flex } from '@dehub/react/pcsuikit';
 import {
   useGetPredictionsStatus,
   useIsChartPaneOpen,

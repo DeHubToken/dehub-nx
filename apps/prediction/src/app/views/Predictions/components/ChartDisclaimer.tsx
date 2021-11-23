@@ -7,7 +7,7 @@ import {
   InjectedModalProps,
   LinkExternal,
   Flex,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../contexts/Localization';
 
 interface ChartDisclaimerProps extends InjectedModalProps {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex } from '@pancakeswap/uikit';
+import { Flex } from '@dehub/react/pcsuikit';
 import Menu from './components/Menu';
 import TradingView from './components/TradingView';
 

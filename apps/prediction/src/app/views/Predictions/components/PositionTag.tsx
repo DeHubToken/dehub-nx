@@ -6,9 +6,9 @@ import {
   Flex,
   FlexProps,
   Text,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import { BetPosition } from '../../../state/types';
-import { Colors } from '@pancakeswap/uikit/dist/theme/types';
+import { Colors } from '@dehub/react/pcsuikit';
 
 interface TagProps extends FlexProps {
   bg?: string;
