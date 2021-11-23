@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 import { TabView, TabPanel } from 'primereact/tabview';
 
-import DeLottoStage1 from './DeLottoStage1';
-import DeLottoStage1Waiting from './DeLottoStage1Waiting';
-import DeLottoStage2 from './DeLottoStage2';
-import DeLottoStage2Waiting from './DeLottoStage2Waiting';
-import SyncWaiting from './SyncWaiting';
+import { environment } from '../../environments/environment';
 import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
-
+import { getBaseUrl } from '../config/constants';
 import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import {
   useFetchPaused,
@@ -25,9 +21,13 @@ import {
   useFetchLottery as useFetchSpecialLottery,
   useLottery as useSpecialLottery,
 } from '../states/special-lottery/hooks';
-import { environment } from '../../environments/environment';
 import { usePullBusdPrice } from '../states/application/hooks';
 import FlexLine from './components/FlexLine';
+import DeLottoStage1 from './DeLottoStage1';
+import DeLottoStage1Waiting from './DeLottoStage1Waiting';
+import DeLottoStage2 from './DeLottoStage2';
+import DeLottoStage2Waiting from './DeLottoStage2Waiting';
+import SyncWaiting from './SyncWaiting';
 
 const StyledContainer = styled(Container)`
   .p-tabview .p-tabview-nav li {
@@ -73,6 +73,8 @@ const DeLotto = () => {
   const specialPaused = useGetSpecialPaused();
   const now = new Date();
 
+  const path = getBaseUrl();
+
   /**
    * If standardEndTimeAsInt is equal to specialEndTimeAsInt,
    * means that waiting to start first round
@@ -115,7 +117,7 @@ const DeLotto = () => {
     <StyledContainer>
       <FlexLine className="md:flex-column align-items-start justify-content-between">
         <img
-          src="../../lottery/assets/img/deraffles-logo.png"
+          src={`${path}/assets/img/deraffles-logo.png`}
           className="anim-float-4"
           alt="DeRaffles Logo"
           style={{ maxWidth: '200px' }}

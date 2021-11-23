@@ -1,3 +1,4 @@
+import { HelmetProvider } from 'react-helmet-async';
 import { MoralisProvider } from 'react-moralis';
 import { Provider } from 'react-redux';
 
@@ -18,7 +19,9 @@ export function App() {
       <Provider store={store}>
         <Contexts.MoralisEthersProvider>
           <RefreshContextProvider>
-            <Lottery />
+            <HelmetProvider>
+              <Lottery />
+            </HelmetProvider>
           </RefreshContextProvider>
         </Contexts.MoralisEthersProvider>
       </Provider>

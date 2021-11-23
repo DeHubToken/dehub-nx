@@ -6,7 +6,8 @@ import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
 import { iOS } from '@dehub/shared/utils';
 
-import { getChainIdHex } from '../config/constants';
+import { getBaseUrl, getChainIdHex } from '../config/constants';
+import PageMeta from '../components/Layout/PageMeta';
 import UserMenu from '../components/UserMenu';
 import { useWalletConnectingState } from '../states/application/hooks';
 import DeGrand from '../views/DeGrand';
@@ -24,6 +25,8 @@ export default function Lottery() {
   const walletConnectingState = useWalletConnectingState();
 
   const { clearProvider } = Hooks.useMoralisEthers();
+
+  const path = getBaseUrl();
 
   /*
    * Hack to avoid trustwallet redirecting to a open in app website on iOS...
@@ -72,28 +75,28 @@ export default function Lottery() {
 
   return (
     <div>
+      <PageMeta />
       {showLoader ? (
         <Loader header={message.header} text={message.text} />
       ) : (
         <div
           className="layout-wrapper"
           style={{
-            background:
-              'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("lottery/assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover',
+            background: `linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("${path}/assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover`,
           }}
         >
           <Header
             userMenu={<UserMenu />}
             logo={{
               href: 'https://dehub.net',
-              icon: 'lottery/assets/dehub/logo-dehub-white.svg',
+              icon: `${path}/assets/dehub/logo-dehub-white.svg`,
             }}
           />
           <div className="layout-main">
             <div className="layout-content">
               <FlexLine className="md:flex-column align-items-center justify-content-between">
                 <img
-                  src="../../lottery/assets/img/prize-draw-logo.png"
+                  src={`${path}/assets/img/prize-draw-logo.png`}
                   className="anim-float-1"
                   alt="Prize Draw Logo"
                   style={{ maxWidth: '300px' }}

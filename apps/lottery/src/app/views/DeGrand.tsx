@@ -1,13 +1,16 @@
-import { Hooks } from '@dehub/react/core';
+import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
-import React, { useState } from 'react';
 import styled from 'styled-components';
+
+import { Hooks } from '@dehub/react/core';
+
 import ConnectWalletButton from '../components/ConnectWalletButton';
 import Icon from '../components/Icon/Icon';
 import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
 import { Header, Text, Title } from '../components/Text';
+import { getBaseUrl } from '../config/constants';
 import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import { useGetSpecialPaused } from '../states/pause/hooks';
 import {
@@ -41,6 +44,8 @@ const DeGrand = () => {
     useState(false);
   const currentSeconds = Math.floor(Date.now() / 1000);
 
+  const path = getBaseUrl();
+
   const handleShowDialog = (dialogKind: string) => {
     if (dialogKind === 'CheckDeGrand') {
       setCheckDeGrandDialog(true);
@@ -69,7 +74,7 @@ const DeGrand = () => {
     <Container>
       <FlexLine className="md:flex-column align-items-start justify-content-between">
         <img
-          src="../../lottery/assets/img/degrand-logo.png"
+          src={`${path}/assets/img/degrand-logo.png`}
           className="anim-float-1"
           alt="DeGrand Logo"
           style={{ maxWidth: '300px' }}
