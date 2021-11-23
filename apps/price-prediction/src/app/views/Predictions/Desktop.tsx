@@ -85,6 +85,7 @@ const PositionPane = styled.div`
   & > div {
     flex: 1;
     overflow: hidden;
+    height: calc(100% - 20px);
   }
 `;
 

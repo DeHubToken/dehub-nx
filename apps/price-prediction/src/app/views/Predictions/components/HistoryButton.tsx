@@ -1,5 +1,5 @@
 import React from 'react';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import { AutoRenewIcon, HistoryIcon, IconButton } from '@pancakeswap/uikit';
 import { useAppDispatch } from '../../../state';
 import { setHistoryPaneState } from '../../../state/predictions';
@@ -8,7 +8,7 @@ import { useGetIsFetchingHistory } from '../../../state/hooks';
 const HistoryButton = () => {
   const isFetchingHistory = useGetIsFetchingHistory();
   const dispatch = useAppDispatch();
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(true));

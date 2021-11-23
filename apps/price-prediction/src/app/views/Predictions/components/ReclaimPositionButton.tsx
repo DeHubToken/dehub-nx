@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import { AutoRenewIcon, Button, ButtonProps } from '@pancakeswap/uikit';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import { useTranslation } from '../../../contexts/Localization';
 import { usePredictionsContract } from '../../../hooks/useContract';
 import useToast from '../../../hooks/useToast';
@@ -19,7 +19,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({
 }) => {
   const [isPendingTx, setIsPendingTx] = useState(false);
   const { t } = useTranslation();
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const predictionsContract = usePredictionsContract();
   const { toastSuccess, toastError } = useToast();
 

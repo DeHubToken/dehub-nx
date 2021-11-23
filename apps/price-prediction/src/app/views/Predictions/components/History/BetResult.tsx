@@ -1,5 +1,5 @@
 import React from 'react';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import {
   Box,
   Flex,
@@ -36,7 +36,7 @@ const StyledBetResult = styled(Box)`
 const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const { isRefundable } = useIsRefundable(bet.round.epoch);
   const bnbBusdPrice = usePriceBnbBusd();
   const canClaim = useBetCanClaim(account, bet.round.id);

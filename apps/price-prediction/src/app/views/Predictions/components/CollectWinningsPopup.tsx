@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import styled, { css, keyframes } from 'styled-components';
 import {
   Button,
@@ -131,7 +131,7 @@ const CollectWinningsPopup = () => {
   const { t } = useTranslation();
   const ref = useRef(null);
   const timer = useRef<NodeJS.Timeout | undefined>(undefined);
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const predictionStatus = useGetPredictionsStatus();
   const isHistoryPaneOpen = useIsHistoryPaneOpen();
   const dispatch = useAppDispatch();

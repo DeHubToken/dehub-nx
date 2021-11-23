@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Moralis } from 'moralis';
 
-import { useWeb3React } from '@web3-react/core';
 import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
@@ -68,7 +67,7 @@ const Predictions = () => {
     false,
     'pancake_predictions_chart'
   );
-  const { account } = useWeb3React();
+  const { clearProvider, account } = Hooks.useMoralisEthers();
   const status = useGetPredictionsStatus();
   const isChartPaneOpen = useIsChartPaneOpen();
   const dispatch = useAppDispatch();
@@ -88,8 +87,6 @@ const Predictions = () => {
   // TODO: memoize modal's handlers
   const onPresentRiskDisclaimerRef = useRef(onPresentRiskDisclaimer);
   const onPresentChartDisclaimerRef = useRef(onPresentChartDisclaimer);
-
-  const { clearProvider } = Hooks.useMoralisEthers();
 
   /*
    * Hack to avoid trustwallet redirecting to a open in app website on iOS...

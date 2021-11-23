@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import {
   Box,
   Flex,
@@ -129,7 +129,7 @@ const getPnlSummary = (bets: Bet[], currentEpoch: number): PnlSummary => {
 
 const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
   const { t } = useTranslation();
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const currentEpoch = useGetCurrentEpoch();
   const bnbBusdPrice = usePriceBnbBusd();
 

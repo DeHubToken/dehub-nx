@@ -6,7 +6,6 @@ import EasterEgg from './components/EasterEgg';
 import PageLoader from './components/PageLoader';
 import SuspenseWithChunkError from './components/SuspenseWithChunkError';
 import ToastListener from './components/ToastListener';
-import useEagerConnect from './hooks/useEagerConnect';
 import history from './routerHistory';
 import { usePollBlockNumber } from './state/hooks';
 import GlobalStyle from './style/Global';
@@ -20,7 +19,6 @@ BigNumber.config({
 
 export function App() {
   usePollBlockNumber();
-  useEagerConnect();
 
   return (
     <Contexts.MoralisEthersProvider>

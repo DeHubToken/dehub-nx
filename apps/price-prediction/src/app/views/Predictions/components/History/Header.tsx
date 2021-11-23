@@ -1,5 +1,5 @@
 import React from 'react';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import {
   ArrowForwardIcon,
   Box,
@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
   const isFetchingHistory = useGetIsFetchingHistory();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(false));

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import {
   ArrowBackIcon,
   ArrowForwardIcon,
@@ -64,7 +64,7 @@ const MobileMenu = () => {
   const status = useGetPredictionsStatus();
   const activeIndex = getActiveIndex(isHistoryOpen, isChartOpen);
   const dispatch = useAppDispatch();
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
 
   const handleItemClick = (index: number) => {
     switch (index) {

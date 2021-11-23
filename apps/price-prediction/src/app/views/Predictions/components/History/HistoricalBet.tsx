@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import {
   Box,
   ChevronDownIcon,
@@ -43,7 +43,7 @@ const HistoricalBet: React.FC<BetProps> = ({ bet }) => {
   const { amount, round } = bet;
 
   const { t } = useTranslation();
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const currentEpoch = useGetCurrentEpoch();
   const status = useGetPredictionsStatus();
 

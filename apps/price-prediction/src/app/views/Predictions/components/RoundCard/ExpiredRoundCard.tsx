@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import { Box, BlockIcon, CardBody } from '@pancakeswap/uikit';
 import { useTranslation } from '../../../../contexts/Localization';
 import { Round, BetPosition } from '../../../../state/types';
@@ -40,7 +40,7 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
   bearMultiplier,
 }) => {
   const { t } = useTranslation();
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const { id, epoch, endBlock, lockPrice, closePrice } = round;
   const betPosition =
     closePrice > lockPrice ? BetPosition.BULL : BetPosition.BEAR;

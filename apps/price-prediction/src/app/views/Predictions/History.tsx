@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, Spinner, Text } from '@pancakeswap/uikit';
 import { CircularProgress } from '@material-ui/core';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import styled from 'styled-components';
 import UnlockButton from '../../components/UnlockButton';
 import { useTranslation } from '../../contexts/Localization';
@@ -47,7 +47,7 @@ const SpinnerWrapper = styled.div`
 `;
 
 const History = () => {
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const dispatch = useAppDispatch();
   const isHistoryPaneOpen = useIsHistoryPaneOpen();
   const isFetchingHistory = useGetIsFetchingHistory();

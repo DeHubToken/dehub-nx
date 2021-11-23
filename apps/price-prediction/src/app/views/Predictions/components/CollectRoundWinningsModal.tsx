@@ -16,7 +16,7 @@ import {
   LinkExternal,
   ModalCloseButton,
 } from '@pancakeswap/uikit';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import { useAppDispatch } from '../../../state';
 import { usePriceBnbBusd } from '../../../state/hooks';
 import { markBetAsCollected } from '../../../state/predictions';
@@ -56,7 +56,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   onSuccess,
 }) => {
   const [isPendingTx, setIsPendingTx] = useState(false);
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const { t } = useTranslation();
   const { toastSuccess, toastError } = useToast();
   const predictionsContract = usePredictionsContract();

@@ -15,7 +15,7 @@ import {
   AutoRenewIcon,
 } from '@pancakeswap/uikit';
 import BigNumber from 'bignumber.js';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import { DEFAULT_TOKEN_DECIMAL } from '../../../../config';
 import { useGetMinBetAmount } from '../../../../state/hooks';
 import { ContextData } from '../../../../contexts/Localization/types';
@@ -98,7 +98,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
     key?: string;
     data?: ContextData;
   } | null>(null);
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const { swiper } = useSwiper();
   const { balance: bnbBalance } = useGetBnbBalance();
   const minBetAmount = useGetMinBetAmount();
@@ -308,7 +308,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
               {t(key)}
             </Button>
           ) : (
-            <UnlockButton width="100%" />
+            <UnlockButton />
           )}
         </Box>
         <Text as="p" fontSize="12px" lineHeight={1} color="textSubtle">

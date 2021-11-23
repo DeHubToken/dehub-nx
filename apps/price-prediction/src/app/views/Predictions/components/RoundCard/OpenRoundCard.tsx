@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import {
   CardBody,
   PlayCircleOutlineIcon,
@@ -52,7 +52,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
   const { t } = useTranslation();
   const interval = useGetIntervalBlocks();
   const { toastSuccess } = useToast();
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const dispatch = useAppDispatch();
   const { currentBlock } = useBlock();
   const { isSettingPosition, position } = state;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import styled from 'styled-components';
 import { Flex, TrophyGoldIcon } from '@pancakeswap/uikit';
 import { useBetCanClaim } from '../../../../state/hooks';
@@ -41,7 +41,7 @@ const CollectWinningsOverlay: React.FC<CollectWinningsOverlayProps> = ({
   isBottom = false,
   ...props
 }) => {
-  const { account } = useWeb3React();
+  const { account } = Hooks.useMoralisEthers();
   const { t } = useTranslation();
   const canClaim = useBetCanClaim(account, roundId);
 
