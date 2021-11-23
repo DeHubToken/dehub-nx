@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('price-prediction', () => {
+describe('prediction', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
@@ -8,6 +8,6 @@ describe('price-prediction', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to price-prediction!');
+    getGreeting().contains('Welcome to prediction!');
   });
 });

@@ -1,6 +1,6 @@
 {
-  "root": "apps/price-prediction",
-  "sourceRoot": "apps/price-prediction/src",
+  "root": "apps/prediction",
+  "sourceRoot": "apps/prediction/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -8,15 +8,15 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/price-prediction",
-        "index": "apps/price-prediction/src/index.html",
+        "outputPath": "dist/apps/prediction",
+        "index": "apps/prediction/src/index.html",
         "baseHref": "/",
-        "main": "apps/price-prediction/src/main.tsx",
-        "polyfills": "apps/price-prediction/src/polyfills.ts",
-        "tsConfig": "apps/price-prediction/tsconfig.app.json",
+        "main": "apps/prediction/src/main.tsx",
+        "polyfills": "apps/prediction/src/polyfills.ts",
+        "tsConfig": "apps/prediction/tsconfig.app.json",
         "assets": [
-          "apps/price-prediction/src/favicon.ico",
-          "apps/price-prediction/src/assets",
+          "apps/prediction/src/favicon.ico",
+          "apps/prediction/src/assets",
           {
             "input": "libs/shared/assets/dehub/src/lib",
             "glob": "**/*",
@@ -31,7 +31,7 @@
           }
         ],
         "styles": [
-          "apps/price-prediction/src/styles.scss",
+          "apps/prediction/src/styles.scss",
           "node_modules/primereact/resources/primereact.min.css",
           "node_modules/primeflex/primeflex.scss",
           "node_modules/primeicons/primeicons.css",
@@ -63,8 +63,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/price-prediction/src/environments/environment.ts",
-              "with": "apps/price-prediction/src/environments/environment.prod.ts"
+              "replace": "apps/prediction/src/environments/environment.ts",
+              "with": "apps/prediction/src/environments/environment.prod.ts"
             }
           ],
           "optimization": true,
@@ -80,16 +80,16 @@
     "serve": {
       "executor": "@nrwl/web:dev-server",
       "options": {
-        "buildTarget": "price-prediction:build",
+        "buildTarget": "prediction:build",
         "hmr": true
       },
       "configurations": {
         "production": {
-          "buildTarget": "price-prediction:build:production",
+          "buildTarget": "prediction:build:production",
           "hmr": false
         },
         "development": {
-          "buildTarget": "price-prediction:build:development",
+          "buildTarget": "prediction:build:development",
           "host": "dev.localhost",
           "port": 8501
         }
@@ -100,15 +100,15 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/price-prediction/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": ["apps/prediction/**/*.{ts,tsx,js,jsx}"],
         "maxWarnings": 0
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/price-prediction"],
+      "outputs": ["coverage/apps/prediction"],
       "options": {
-        "jestConfig": "apps/price-prediction/jest.config.js",
+        "jestConfig": "apps/prediction/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -116,14 +116,14 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run price-prediction:deploy:draft"
+        "command": "npm run prediction:deploy:draft"
       }
     },
     "deploy-prod": {
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run price-prediction:deploy:prod"
+        "command": "npm run prediction:deploy:prod"
       }
     }
   },
