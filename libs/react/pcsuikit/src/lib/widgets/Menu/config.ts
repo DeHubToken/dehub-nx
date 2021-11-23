@@ -1,15 +1,15 @@
 import { LinkStatus } from './types';
 
-export const status = {
-  LIVE: <LinkStatus>{
+export const status: { [key: string]: LinkStatus } = {
+  LIVE: {
     text: 'LIVE',
     color: 'failure',
   },
-  SOON: <LinkStatus>{
+  SOON: {
     text: 'SOON',
     color: 'warning',
   },
-  NEW: <LinkStatus>{
+  NEW: {
     text: 'NEW',
     color: 'success',
   },

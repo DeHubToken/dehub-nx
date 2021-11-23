@@ -345,10 +345,8 @@ const sortDataInOrder = <T extends DataType>(
 export const makeRender = <T extends DataType>(
   // eslint-disable-next-line
   value: any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render:
-    | (({ value: val, row }: { value: any; row: T }) => ReactNode)
-    | undefined,
+  render: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (({ value: val, row }: { value: any; row: T }) => ReactNode) | undefined,
   row: T
 ): (() => React.ReactNode) => {
   return render ? () => render({ row, value }) : () => value;
