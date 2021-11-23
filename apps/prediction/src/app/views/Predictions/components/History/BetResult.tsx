@@ -7,7 +7,7 @@ import {
   Text,
   PrizeIcon,
   BlockIcon,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../../../state';
 import { useTranslation } from '../../../../contexts/Localization';

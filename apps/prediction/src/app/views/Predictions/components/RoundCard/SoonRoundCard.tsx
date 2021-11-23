@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardBody, Text, WaitIcon } from '@pancakeswap/uikit';
+import { CardBody, Text, WaitIcon } from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
 import { Round, BetPosition } from '../../../../state/types';
 import {

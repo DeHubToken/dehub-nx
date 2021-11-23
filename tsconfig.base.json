@@ -17,6 +17,7 @@
     "paths": {
       "@dehub/angular/core": ["libs/angular/core/src/index.ts"],
       "@dehub/react/core": ["libs/react/core/src/index.ts"],
+      "@dehub/react/pcsuikit": ["libs/react/pcsuikit/src/index.ts"],
       "@dehub/react/ui": ["libs/react/ui/src/index.ts"],
       "@dehub/shared/config": ["libs/shared/config/src/index.ts"],
       "@dehub/shared/models": ["libs/shared/models/src/index.ts"],

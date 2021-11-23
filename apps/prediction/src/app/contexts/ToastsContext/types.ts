@@ -1,4 +1,4 @@
-import { Toast } from '@pancakeswap/uikit';
+import { Toast } from '@dehub/react/pcsuikit';
 
 type ToastSignature = (
   title: Toast['title'],

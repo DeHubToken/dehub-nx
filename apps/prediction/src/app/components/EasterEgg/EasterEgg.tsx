@@ -3,7 +3,7 @@ import {
   FallingBunnies,
   FallingBunniesProps,
   useKonamiCheatCode,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 
 const EasterEgg: React.FC<FallingBunniesProps> = props => {
   const [show, setShow] = useState(false);

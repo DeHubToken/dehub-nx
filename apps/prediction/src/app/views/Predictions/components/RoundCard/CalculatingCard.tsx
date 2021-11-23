@@ -6,7 +6,7 @@ import {
   TooltipText,
   useTooltip,
   InfoIcon,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import { CircularProgress } from '@material-ui/core';
 import { useTranslation } from '../../../../contexts/Localization';
 import { Round, BetPosition } from '../../../../state/types';

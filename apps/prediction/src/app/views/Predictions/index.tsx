@@ -8,7 +8,7 @@ import { WalletConnectingState } from '@dehub/shared/config';
 import { iOS } from '@dehub/shared/utils';
 
 import { Helmet } from 'react-helmet-async';
-import { useMatchBreakpoints, useModal } from '@pancakeswap/uikit';
+import { useMatchBreakpoints, useModal } from '@dehub/react/pcsuikit';
 import { getChainIdHex } from '../../config/constants';
 import UserMenu from '../../components/UserMenu';
 import { useAppDispatch } from '../../state';

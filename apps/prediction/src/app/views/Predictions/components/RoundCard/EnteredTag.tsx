@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CheckmarkCircleIcon, Tag, useTooltip } from '@pancakeswap/uikit';
+import { CheckmarkCircleIcon, Tag, useTooltip } from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
 import { formatBnb } from '../../helpers';
 

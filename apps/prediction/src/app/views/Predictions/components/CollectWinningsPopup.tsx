@@ -6,7 +6,7 @@ import {
   CloseIcon,
   IconButton,
   TrophyGoldIcon,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import { CSSTransition } from 'react-transition-group';
 import { useTranslation } from '../../../contexts/Localization';
 import { getBetHistory } from '../../../state/predictions/helpers';

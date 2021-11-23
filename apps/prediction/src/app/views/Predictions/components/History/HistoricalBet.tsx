@@ -9,7 +9,7 @@ import {
   PlayCircleOutlineIcon,
   Text,
   WaitIcon,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import styled from 'styled-components';
 import { Bet, PredictionStatus } from '../../../../state/types';
 import {

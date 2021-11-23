@@ -1,4 +1,4 @@
-import { ModalProvider } from '@pancakeswap/uikit';
+import { ModalProvider } from '@dehub/react/pcsuikit';
 import { Web3ReactProvider } from '@web3-react/core';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';

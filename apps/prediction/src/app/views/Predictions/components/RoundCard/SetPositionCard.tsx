@@ -13,7 +13,7 @@ import {
   Slider,
   Box,
   AutoRenewIcon,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import BigNumber from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
 import { DEFAULT_TOKEN_DECIMAL } from '../../../../config';

@@ -2,7 +2,7 @@ import { InjectedConnector } from '@web3-react/injected-connector';
 import { IRPCMap } from '@walletconnect/types';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { BscConnector } from '@binance-chain/bsc-connector';
-import { ConnectorNames } from '@pancakeswap/uikit';
+import { ConnectorNames } from '@dehub/react/pcsuikit';
 import Web3 from 'web3';
 import getNodeUrl from './getRpcUrl';
 

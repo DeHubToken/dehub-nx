@@ -9,7 +9,7 @@ import {
   Text,
   TooltipText,
   useTooltip,
-} from '@pancakeswap/uikit';
+} from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
 import { Round, BetPosition } from '../../../../state/types';
 import {
