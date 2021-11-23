@@ -116,6 +116,8 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/react:lib --name=ui --directory=react --standaloneConfig --strict
 
    nx generate @nrwl/react:lib --name=core --directory=react --standaloneConfig --strict
+
+   nx generate @nrwl/react:lib --name=pcsuikit --directory=react --standaloneConfig --strict
    ```
 
 1. Run Commands generation
@@ -164,6 +166,7 @@ This project was generated using [Nx](https://nx.dev).
    ```
    npx netlify sites:create --account-slug=dehub --name=dapps-dehub
    npx netlify sites:create --account-slug=dehub --name=dehub-react-lottery-draft
+   npx netlify sites:create --account-slug=dehub --name=prediction-dehub
    ```
 
    Output sample:
@@ -180,6 +183,12 @@ This project was generated using [Nx](https://nx.dev).
    Admin URL: https://app.netlify.com/sites/dehub-react-lottery-draft
    URL:       https://dehub-react-lottery-draft.netlify.app
    Site ID:   bacc9132-2b4b-438d-9b93-a377c12181fb
+
+   Site Created (React)
+
+   Admin URL: https://app.netlify.com/sites/prediction-dehub
+   URL:       https://prediction-dehub.netlify.app
+   Site ID:   cb468f79-e012-4b6b-a4a6-bf85e3acae9a
    ```
 
 # Nx Cloud benefits
