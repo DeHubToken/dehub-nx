@@ -2,24 +2,26 @@ import { useEffect, useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useSelector } from 'react-redux';
 import { orderBy } from 'lodash';
+import { Hooks } from '@dehub/react/core';
 import { useAppDispatch } from '.';
-import { getWeb3NoAccount } from '../utils/web3';
 import setBlock from './actions';
 import { State, Farm } from './types';
 import { getCanClaim } from './predictions/helpers';
 
 export const usePollBlockNumber = () => {
   const dispatch = useAppDispatch();
-  const web3 = getWeb3NoAccount();
+  const { authProvider } = Hooks.useMoralisEthers();
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      const blockNumber = await web3.eth.getBlockNumber();
-      dispatch(setBlock(blockNumber));
+      if (authProvider) {
+        const blockNumber = await authProvider.getBlockNumber();
+        dispatch(setBlock(blockNumber));
+      }
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [dispatch, web3]);
+  }, [dispatch, authProvider]);
 };
 
 // Farms

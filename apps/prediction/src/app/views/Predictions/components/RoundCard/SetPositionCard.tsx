@@ -169,11 +169,11 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
       .allowance(account, predictionContractAddress)
       .call();
     if (allowance < decimalValue.toNumber()) {
-      await betTokenContract.methods
+      await betTokenContract
         .approve(predictionContractAddress, decimalValue)
         .send({ from: account });
     }
-    predictionsContract.methods[betMethod](decimalValue)
+    predictionsContract[betMethod](decimalValue)
       .send({ from: account, gasPrice })
       .once('sending', () => {
         setIsTxPending(true);

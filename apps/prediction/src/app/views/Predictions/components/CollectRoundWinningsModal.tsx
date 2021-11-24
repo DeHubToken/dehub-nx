@@ -64,7 +64,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
-    predictionsContract.methods
+    predictionsContract
       .claim(epoch)
       .send({ from: account })
       .once('sending', () => {

@@ -1,7 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import { Hooks } from '@dehub/react/core';
 import { AutoRenewIcon, Button, ButtonProps } from '@dehub/react/pcsuikit';
-import { useWeb3React } from '@web3-react/core';
 import { useTranslation } from '../../../contexts/Localization';
 import { usePredictionsContract } from '../../../hooks/useContract';
 import useToast from '../../../hooks/useToast';
@@ -25,7 +24,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({
   const { toastSuccess, toastError } = useToast();
 
   const handleReclaim = () => {
-    predictionsContract.methods
+    predictionsContract
       .claim(epoch)
       .send({ from: account })
       .once('sending', () => {

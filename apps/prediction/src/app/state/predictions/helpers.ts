@@ -8,7 +8,6 @@ import {
   Round,
   RoundData,
 } from '../types';
-import makeBatchRequest from '../../utils/makeBatchRequest';
 import { getPredictionsContract } from '../../utils/contractHelpers';
 import {
   BetResponse,
@@ -197,15 +196,13 @@ export const getUnclaimedWinningBets = (bets: Bet[]): Bet[] => {
  * Gets static data from the contract
  */
 export const getStaticPredictionsData = async () => {
-  const { methods } = getPredictionsContract();
-  const [currentEpoch, intervalBlocks, minBetAmount, isPaused, bufferBlocks] =
-    await (makeBatchRequest([
-      methods.currentEpoch().call,
-      methods.intervalBlocks().call,
-      methods.minBetAmount().call,
-      methods.paused().call,
-      methods.bufferBlocks().call,
-    ]) as Promise<unknown[]>);
+  const contract = getPredictionsContract();
+
+  const currentEpoch = await contract.currentEpoch();
+  const intervalBlocks = await contract.intervalBlocks();
+  const minBetAmount = await contract.minBetAmount();
+  const isPaused = await contract.paused();
+  const bufferBlocks = await contract.bufferBlocks();
 
   return {
     status: isPaused ? PredictionStatus.PAUSED : PredictionStatus.LIVE,

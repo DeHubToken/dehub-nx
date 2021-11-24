@@ -1,29 +1,27 @@
 import { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { useWeb3React } from '@web3-react/core';
+import { Hooks } from '@dehub/react/core';
 import { getBep20Contract, getCakeContract } from '../utils/contractHelpers';
 import { BIG_ZERO } from '../utils/bigNumber';
-import useWeb3 from './useWeb3';
 import useRefresh from './useRefresh';
 import useLastUpdated from './useLastUpdated';
 
 const useTokenBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(BIG_ZERO);
-  const { account } = useWeb3React();
-  const web3 = useWeb3();
+  const { account } = Hooks.useMoralisEthers();
   const { fastRefresh } = useRefresh();
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const contract = getBep20Contract(tokenAddress, web3);
-      const res = await contract.methods.balanceOf(account).call();
+      const contract = getBep20Contract(tokenAddress);
+      const res = await contract.balanceOf(account);
       setBalance(new BigNumber(res));
     };
 
     if (account) {
       fetchBalance();
     }
-  }, [account, tokenAddress, web3, fastRefresh]);
+  }, [account, tokenAddress, fastRefresh]);
 
   return balance;
 };
@@ -35,7 +33,7 @@ export const useTotalSupply = () => {
   useEffect(() => {
     async function fetchTotalSupply() {
       const cakeContract = getCakeContract();
-      const supply = await cakeContract.methods.totalSupply().call();
+      const supply = await cakeContract.totalSupply();
       setTotalSupply(new BigNumber(supply));
     }
 
@@ -48,39 +46,39 @@ export const useTotalSupply = () => {
 export const useBurnedBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(BIG_ZERO);
   const { slowRefresh } = useRefresh();
-  const web3 = useWeb3();
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const contract = getBep20Contract(tokenAddress, web3);
-      const res = await contract.methods
-        .balanceOf('0x000000000000000000000000000000000000dEaD')
-        .call();
+      const contract = getBep20Contract(tokenAddress);
+      const res = await contract.balanceOf(
+        '0x000000000000000000000000000000000000dEaD'
+      );
       setBalance(new BigNumber(res));
     };
 
     fetchBalance();
-  }, [web3, tokenAddress, slowRefresh]);
+  }, [tokenAddress, slowRefresh]);
 
   return balance;
 };
 
 export const useGetBnbBalance = () => {
   const [balance, setBalance] = useState(BIG_ZERO);
-  const { account } = useWeb3React();
+  const { account, authProvider } = Hooks.useMoralisEthers();
   const { lastUpdated, setLastUpdated } = useLastUpdated();
-  const web3 = useWeb3();
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const walletBalance = await web3.eth.getBalance(account as string);
-      setBalance(new BigNumber(walletBalance));
+      if (authProvider) {
+        const walletBalance = await authProvider.getBalance(account as string);
+        setBalance(new BigNumber(walletBalance.toNumber()));
+      }
     };
 
-    if (account) {
+    if (account && authProvider) {
       fetchBalance();
     }
-  }, [account, web3, lastUpdated, setBalance]);
+  }, [account, lastUpdated, authProvider, setBalance]);
 
   return { balance, refresh: setLastUpdated };
 };

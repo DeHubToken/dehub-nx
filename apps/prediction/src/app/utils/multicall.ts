@@ -1,9 +1,5 @@
-import { AbiItem } from 'web3-utils';
 import { Interface, JsonFragment, Fragment } from '@ethersproject/abi';
-import { BytesLike } from '@ethersproject/bytes';
-import { getWeb3NoAccount } from './web3';
-import MultiCallAbi from '../config/abi/Multicall.json';
-import { getMulticallAddress } from './addressHelpers';
+import { getMultiCallContract } from './contractHelpers';
 
 export interface Call {
   address: string; // Address of the contract
@@ -15,23 +11,30 @@ const multicall = async (
   abi: (string | JsonFragment | Fragment)[],
   calls: Call[]
 ) => {
-  const web3 = getWeb3NoAccount();
-  const multi = new web3.eth.Contract(
-    MultiCallAbi as unknown as AbiItem,
-    getMulticallAddress()
-  );
-  const itf = new Interface(abi);
+  try {
+    const multi = getMultiCallContract();
+    const itf = new Interface(abi);
 
-  const calldata = calls.map(call => [
-    call.address.toLowerCase(),
-    itf.encodeFunctionData(call.name, call.params),
-  ]);
-  const { returnData } = await multi.methods.aggregate(calldata).call();
-  const res = returnData.map((call: BytesLike, i: number) =>
-    itf.decodeFunctionResult(calls[i].name, call)
-  );
+    const calldata = calls.map(call => [
+      call.address.toLowerCase(),
+      itf.encodeFunctionData(call.name, call.params),
+    ]);
+    const { returnData } = await multi.aggregate(calldata);
 
-  return res;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const res = returnData.map((call: any, i: number) =>
+      itf.decodeFunctionResult(calls[i].name, call)
+    );
+
+    return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    } else {
+      console.error(error);
+      throw new Error('unknown error in multicall');
+    }
+  }
 };
 
 export default multicall;

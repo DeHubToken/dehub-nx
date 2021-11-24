@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Hooks } from '@dehub/react/core';
-import { useWeb3React } from '@web3-react/core';
 import { Box, BlockIcon, CardBody } from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
 import { Round, BetPosition } from '../../../../state/types';
