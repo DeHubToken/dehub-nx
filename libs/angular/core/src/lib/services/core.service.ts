@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
-import { Env } from '@dehub/shared/config';
+import { SharedEnv } from '@dehub/shared/config';
 import { EnvToken } from '../models';
 
 @Injectable({ providedIn: 'root' })
@@ -9,7 +9,7 @@ export class CoreService {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    @Inject(EnvToken) private env: Env
+    @Inject(EnvToken) private env: SharedEnv
   ) {}
 
   loadPrimeCss(

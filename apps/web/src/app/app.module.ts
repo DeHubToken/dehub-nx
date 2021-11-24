@@ -9,10 +9,10 @@ import {
   SwRegistrationOptions,
 } from '@angular/service-worker';
 import { EnvToken, GraphQLModule } from '@dehub/angular/core';
-import { Env } from '@dehub/shared/config';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
+import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

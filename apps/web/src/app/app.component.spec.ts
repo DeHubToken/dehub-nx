@@ -3,7 +3,7 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EnvToken } from '@dehub/angular/core';
-import { Env } from '@dehub/shared/config';
+import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
@@ -27,7 +27,7 @@ describe('AppComponent', () => {
           { provide: EnvToken, useValue: environment },
           {
             provide: APP_BASE_HREF,
-            useFactory: (env: Env) => (env.production ? '/web' : '/'),
+            useFactory: ({ baseUrl }: Env) => baseUrl,
             deps: [EnvToken],
           },
         ],

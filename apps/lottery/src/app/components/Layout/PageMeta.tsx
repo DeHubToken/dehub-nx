@@ -1,9 +1,8 @@
-import React, { memo } from 'react';
+import { environment } from '../../../environments/environment';
 import { Helmet } from 'react-helmet-async';
-import { getBaseUrl } from '../../config/constants';
 
 const PageMeta = () => {
-  const path = getBaseUrl();
+  const path = environment.baseUrl;
 
   return (
     <Helmet>

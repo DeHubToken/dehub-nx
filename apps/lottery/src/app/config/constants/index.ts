@@ -20,7 +20,3 @@ export const getNetworkInfo = (): NetworkInfo => {
 export const getRpcUrl = (): string => {
   return Constants[getChainId()].RPC_URL;
 };
-
-export const getBaseUrl = (): string => {
-  return environment.production ? '/lottery' : '';
-};

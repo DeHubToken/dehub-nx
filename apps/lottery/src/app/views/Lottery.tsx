@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Moralis } from 'moralis';
-
 import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
 import { iOS } from '@dehub/shared/utils';
-
-import { getBaseUrl, getChainIdHex } from '../config/constants';
+import { Moralis } from 'moralis';
+import { useEffect, useState } from 'react';
+import { environment } from '../../environments/environment';
 import PageMeta from '../components/Layout/PageMeta';
 import UserMenu from '../components/UserMenu';
+import { getChainIdHex } from '../config/constants';
 import { useWalletConnectingState } from '../states/application/hooks';
 import DeGrand from '../views/DeGrand';
 import DeLotto from '../views/DeLotto';
@@ -26,7 +25,7 @@ export default function Lottery() {
 
   const { clearProvider } = Hooks.useMoralisEthers();
 
-  const path = getBaseUrl();
+  const path = environment.baseUrl;
 
   /*
    * Hack to avoid trustwallet redirecting to a open in app website on iOS...

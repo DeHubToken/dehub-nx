@@ -1,8 +1,11 @@
-import { ChainId } from '@dehub/shared/config';
+import { ChainId, defaultSharedProdEnv } from '@dehub/shared/config';
+import { Env, defaultEnv } from './env';
 
-export const environment = {
-  production: true,
+export const environment: Env = {
+  ...defaultSharedProdEnv,
+  ...defaultEnv,
+
+  baseUrl: '/lottery',
+
   chainId: ChainId.BSC_MAINNET,
-  deGrandStartDay: 26,
-  deGrandStartDayOnFebruary: 25,
 };

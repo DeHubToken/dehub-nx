@@ -1,27 +1,25 @@
+import { TabPanel, TabView } from 'primereact/tabview';
 import styled from 'styled-components';
-import { TabView, TabPanel } from 'primereact/tabview';
-
 import { environment } from '../../environments/environment';
 import Box from '../components/Layout/Box';
 import Container from '../components/Layout/Container';
-import { getBaseUrl } from '../config/constants';
 import { LoadingStatus, LotteryStatus } from '../config/constants/types';
+import useSpecialLotteryStatusTransitions from '../hooks/special-lottery/useStatusTransitions';
+import useStandardLotteryStatusTransitions from '../hooks/standard-lottery/useStatusTransitions';
+import { usePullBusdPrice } from '../states/application/hooks';
 import {
   useFetchPaused,
   useGetSpecialPaused,
   useGetStandardPaused,
 } from '../states/pause/hooks';
-import useStandardLotteryStatusTransitions from '../hooks/standard-lottery/useStatusTransitions';
-import useSpecialLotteryStatusTransitions from '../hooks/special-lottery/useStatusTransitions';
-import {
-  useFetchLottery as useFetchStandardLottery,
-  useLottery as useStandardLottery,
-} from '../states/standard-lottery/hooks';
 import {
   useFetchLottery as useFetchSpecialLottery,
   useLottery as useSpecialLottery,
 } from '../states/special-lottery/hooks';
-import { usePullBusdPrice } from '../states/application/hooks';
+import {
+  useFetchLottery as useFetchStandardLottery,
+  useLottery as useStandardLottery,
+} from '../states/standard-lottery/hooks';
 import FlexLine from './components/FlexLine';
 import DeLottoStage1 from './DeLottoStage1';
 import DeLottoStage1Waiting from './DeLottoStage1Waiting';
@@ -73,7 +71,7 @@ const DeLotto = () => {
   const specialPaused = useGetSpecialPaused();
   const now = new Date();
 
-  const path = getBaseUrl();
+  const path = environment.baseUrl;
 
   /**
    * If standardEndTimeAsInt is equal to specialEndTimeAsInt,
