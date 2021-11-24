@@ -27,6 +27,24 @@ const PageMeta = () => {
         type="text/css"
         href={`${path}/layout.css`}
       />
+      <link
+        id="primereact"
+        rel="stylesheet"
+        type="text/css"
+        href={`${path}/primereact.css`}
+      />
+      <link
+        id="primeflex"
+        rel="stylesheet"
+        type="text/css"
+        href={`${path}/primeflex.css`}
+      />
+      <link
+        id="primeicons"
+        rel="stylesheet"
+        type="text/css"
+        href={`${path}/primeicons.css`}
+      />
     </Helmet>
   );
 };
