@@ -1,4 +1,3 @@
-import { Contexts } from '@dehub/react/core';
 import { ResetCSS } from '@dehub/react/pcsuikit';
 import BigNumber from 'bignumber.js';
 import { Route, Router, Switch } from 'react-router-dom';
@@ -21,21 +20,19 @@ export function App() {
   usePollBlockNumber();
 
   return (
-    <Contexts.MoralisEthersProvider>
-      <Router history={history}>
-        <ResetCSS />
-        <GlobalStyle />
-        <SuspenseWithChunkError fallback={<PageLoader />}>
-          <Switch>
-            <Route path="/">
-              <Predictions />
-            </Route>
-          </Switch>
-        </SuspenseWithChunkError>
-        <EasterEgg iterations={2} />
-        <ToastListener />
-      </Router>
-    </Contexts.MoralisEthersProvider>
+    <Router history={history}>
+      <ResetCSS />
+      <GlobalStyle />
+      <SuspenseWithChunkError fallback={<PageLoader />}>
+        <Switch>
+          <Route path="/">
+            <Predictions />
+          </Route>
+        </Switch>
+      </SuspenseWithChunkError>
+      <EasterEgg iterations={2} />
+      <ToastListener />
+    </Router>
   );
 }
 
