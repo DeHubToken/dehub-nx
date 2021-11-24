@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Hooks } from '@dehub/react/core';
 import {
   getBep20Contract,
   getPredictionsContract,
@@ -10,7 +11,8 @@ import {
  */
 
 export const useERC20 = (address: string) => {
-  return useMemo(() => getBep20Contract(address), [address]);
+  const { signer } = Hooks.useMoralisEthers();
+  return useMemo(() => getBep20Contract(address, signer), [address, signer]);
 };
 
 /**
@@ -18,7 +20,8 @@ export const useERC20 = (address: string) => {
  */
 
 export const usePredictionsContract = () => {
-  return useMemo(() => getPredictionsContract(), []);
+  const { signer } = Hooks.useMoralisEthers();
+  return useMemo(() => getPredictionsContract(signer), [signer]);
 };
 
 export const useChainlinkOracleContract = () => {

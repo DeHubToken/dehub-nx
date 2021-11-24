@@ -67,7 +67,7 @@ const Predictions = () => {
     false,
     'pancake_predictions_chart'
   );
-  const { clearProvider, account } = Hooks.useMoralisEthers();
+  const { clearProvider, account, signer } = Hooks.useMoralisEthers();
   const status = useGetPredictionsStatus();
   const isChartPaneOpen = useIsChartPaneOpen();
   const dispatch = useAppDispatch();
@@ -136,7 +136,7 @@ const Predictions = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       const [staticPredictionsData, marketData] = await Promise.all([
-        getStaticPredictionsData(),
+        getStaticPredictionsData(signer?.provider),
         getMarketData(),
       ]);
       const { currentEpoch, intervalBlocks, bufferBlocks } =
