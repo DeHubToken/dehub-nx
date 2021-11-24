@@ -1,17 +1,45 @@
-import { APP_BASE_HREF, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { Env } from '@dehub/shared/config';
 import { EnvToken } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class CoreService {
-  public path = `${this.env.production ? `${this.baseHref}/` : ''}`;
+  public path = `${this.env.baseUrl}`;
 
   constructor(
-    @Inject(APP_BASE_HREF) private baseHref: string,
     @Inject(DOCUMENT) private document: Document,
     @Inject(EnvToken) private env: Env
   ) {}
+
+  loadPrimeCss(
+    primengCss = 'primeng.css',
+    primeflexCss = 'primeflex.css',
+    primeiconsCss = 'primeicons.css'
+  ) {
+    const headEl = this.document.getElementsByTagName('head')[0];
+    const primengLinkEl = this.document.createElement('link');
+    const primeflexLinkEl = this.document.createElement('link');
+    const primeIconsLinkEl = this.document.createElement('link');
+
+    primengLinkEl.id = 'primeng';
+    primengLinkEl.rel = 'stylesheet';
+    primengLinkEl.type = 'text/css';
+    primengLinkEl.href = `${this.path}/${primengCss}`;
+    headEl.appendChild(primengLinkEl);
+
+    primeflexLinkEl.id = 'primeflex';
+    primeflexLinkEl.rel = 'stylesheet';
+    primeflexLinkEl.type = 'text/css';
+    primeflexLinkEl.href = `${this.path}/${primeflexCss}`;
+    headEl.appendChild(primeflexLinkEl);
+
+    primeIconsLinkEl.id = 'primeicons';
+    primeIconsLinkEl.rel = 'stylesheet';
+    primeIconsLinkEl.type = 'text/css';
+    primeIconsLinkEl.href = `${this.path}/${primeiconsCss}`;
+    headEl.appendChild(primeIconsLinkEl);
+  }
 
   /**
    * Loads the theme which consists of the theme and layout based on Freya.
@@ -28,13 +56,13 @@ export class CoreService {
     themeLinkEl.id = 'theme';
     themeLinkEl.rel = 'stylesheet';
     themeLinkEl.type = 'text/css';
-    themeLinkEl.href = `${this.path}${themeCss}`;
+    themeLinkEl.href = `${this.path}/${themeCss}`;
     headEl.appendChild(themeLinkEl);
 
     layoutLinkEl.id = 'layout';
     layoutLinkEl.rel = 'stylesheet';
     layoutLinkEl.type = 'text/css';
-    layoutLinkEl.href = `${this.path}${layoutCss}`;
+    layoutLinkEl.href = `${this.path}/${layoutCss}`;
     headEl.appendChild(layoutLinkEl);
   }
 
@@ -53,7 +81,7 @@ export class CoreService {
 
     iconLinkEl.rel = 'icon';
     iconLinkEl.type = 'image/x-icon';
-    iconLinkEl.href = `${this.path}${iconWithAssetPath}`;
+    iconLinkEl.href = `${this.path}/${iconWithAssetPath}`;
     headEl.appendChild(iconLinkEl);
   }
 
@@ -69,7 +97,7 @@ export class CoreService {
     const manifestLinkEl = this.document.createElement('link');
 
     manifestLinkEl.rel = 'manifest';
-    manifestLinkEl.href = `${this.path}${manifestFile}`;
+    manifestLinkEl.href = `${this.path}/${manifestFile}`;
     headEl.appendChild(manifestLinkEl);
   }
 
@@ -81,7 +109,7 @@ export class CoreService {
       'layout'
     ) as HTMLLinkElement | null;
 
-    if (themeLink) themeLink.href = `${this.path}${themeCss}`;
-    if (layoutLink) layoutLink.href = `${this.path}${layoutCss}`;
+    if (themeLink) themeLink.href = `${this.path}/${themeCss}`;
+    if (layoutLink) layoutLink.href = `${this.path}/${layoutCss}`;
   }
 }

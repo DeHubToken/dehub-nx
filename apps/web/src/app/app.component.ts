@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
     this.coreService.loadManifest();
     this.coreService.loadIcon();
     this.coreService.loadTheme();
+    this.coreService.loadPrimeCss();
     this.primengConfig.ripple = true;
   }
 

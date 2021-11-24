@@ -4,7 +4,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import {
+  ServiceWorkerModule,
+  SwRegistrationOptions,
+} from '@angular/service-worker';
 import { EnvToken, GraphQLModule } from '@dehub/angular/core';
 import { Env } from '@dehub/shared/config';
 import { ButtonModule } from 'primeng/button';
@@ -45,16 +48,10 @@ const layoutComponents = [
     angularModules,
     primeNgModules,
 
-    ServiceWorkerModule.register('web/ngsw-worker.js', {
-      enabled: environment.production,
-      ...(environment.production && { scope: '/web/' }),
-      /**
-       * Register the ServiceWorker as soon as the app is stable
-       * or after 30 seconds (whichever comes first)
-       */
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
+    // PWA
+    ServiceWorkerModule.register(`web/ngsw-worker.js`),
 
+    // GraphQL
     GraphQLModule,
   ],
   declarations: [AppComponent, layoutComponents],
@@ -63,7 +60,20 @@ const layoutComponents = [
     { provide: EnvToken, useValue: environment },
     {
       provide: APP_BASE_HREF,
-      useFactory: (env: Env) => (env.production ? '/web' : '/'),
+      useFactory: ({ baseUrl }: Env) => baseUrl,
+      deps: [EnvToken],
+    },
+    {
+      provide: SwRegistrationOptions,
+      useFactory: ({ production, baseUrl }: Env) => ({
+        enabled: production,
+        ...(production && { scope: `${baseUrl}/` }),
+        /**
+         * Register the ServiceWorker as soon as the app is stable
+         * or after 30 seconds (whichever comes first)
+         */
+        registrationStrategy: 'registerWhenStable:30000',
+      }),
       deps: [EnvToken],
     },
   ],

@@ -17,6 +17,16 @@ export interface Env {
   env: string;
   production: boolean;
 
+  /**
+   * Base URL of the project under sinßgle domain.
+   *
+   * project.json build artifact:
+   *   - deployUrl and baseHref should be in sync
+   * service worker:
+   *   - worker script path should be in sync
+   */
+  baseUrl: string;
+
   contentful: {
     /** Contentful GraphQL URI without Space ID */
     graphqlUri: string;
@@ -35,6 +45,7 @@ export interface Env {
 export const defaultEnv: Env = {
   env: '-',
   production: false,
+  baseUrl: '',
 
   contentful: {
     graphqlUri: 'https://graphql.contentful.com/content/v1/spaces',

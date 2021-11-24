@@ -32,9 +32,21 @@
         ],
         "styles": [
           "apps/web/src/styles.scss",
-          "node_modules/primeng/resources/primeng.min.css",
-          "node_modules/primeflex/primeflex.scss",
-          "node_modules/primeicons/primeicons.css",
+          {
+            "input": "node_modules/primeng/resources/primeng.min.css",
+            "bundleName": "primeng",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeflex/primeflex.scss",
+            "bundleName": "primeflex",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeicons/primeicons.css",
+            "bundleName": "primeicons",
+            "inject": false
+          },
           {
             "input": "libs/shared/assets/freya/src/lib/theme/dehub/theme.scss",
             "bundleName": "theme",
