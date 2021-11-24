@@ -136,7 +136,7 @@ const Predictions = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       const [staticPredictionsData, marketData] = await Promise.all([
-        getStaticPredictionsData(signer?.provider),
+        getStaticPredictionsData(),
         getMarketData(),
       ]);
       const { currentEpoch, intervalBlocks, bufferBlocks } =

@@ -1,6 +1,4 @@
 import { request, gql } from 'graphql-request';
-import { Signer } from '@ethersproject/abstract-signer';
-import { Provider } from '@ethersproject/providers';
 import { GRAPH_API_PREDICTION } from '../../config/constants/endpoints';
 import {
   Bet,
@@ -197,10 +195,8 @@ export const getUnclaimedWinningBets = (bets: Bet[]): Bet[] => {
 /**
  * Gets static data from the contract
  */
-export const getStaticPredictionsData = async (
-  signer: Signer | Provider | undefined
-) => {
-  const contract = getPredictionsContract(signer);
+export const getStaticPredictionsData = async () => {
+  const contract = getPredictionsContract();
 
   const currentEpoch = await contract.currentEpoch();
   const intervalBlocks = await contract.intervalBlocks();

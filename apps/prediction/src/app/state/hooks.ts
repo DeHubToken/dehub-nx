@@ -5,8 +5,10 @@ import { orderBy } from 'lodash';
 import { Hooks } from '@dehub/react/core';
 import { useAppDispatch } from '.';
 import setBlock from './actions';
+import farms from '../config/constants/farms';
 import { State, Farm } from './types';
 import { getCanClaim } from './predictions/helpers';
+import { FarmConfig } from '../config/constants/types';
 
 export const usePollBlockNumber = () => {
   const dispatch = useAppDispatch();
@@ -27,9 +29,7 @@ export const usePollBlockNumber = () => {
 // Farms
 
 export const useFarmFromPid = (pid: number): Farm => {
-  const farm = useSelector((state: State) =>
-    state.farms.data.find(f => f.pid === pid)
-  ) as Farm;
+  const farm = farms.find((f: FarmConfig) => f.pid === pid) as Farm;
   return farm;
 };
 
