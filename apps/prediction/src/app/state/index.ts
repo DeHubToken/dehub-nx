@@ -11,6 +11,8 @@ const store = configureStore({
     block: blockReducer,
     predictions: predictionsReducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 /**
