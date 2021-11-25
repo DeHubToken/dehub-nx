@@ -239,6 +239,7 @@ const Predictions = () => {
                     minHeight: 'calc(100vh)',
                     overflow: 'hidden',
                     position: 'relative',
+                    padding: '0',
                   }}
                 >
                   {isDesktop ? <Desktop /> : <Mobile />}
