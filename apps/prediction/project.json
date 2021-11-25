@@ -32,9 +32,21 @@
         ],
         "styles": [
           "apps/prediction/src/styles.scss",
-          "node_modules/primereact/resources/primereact.min.css",
-          "node_modules/primeflex/primeflex.scss",
-          "node_modules/primeicons/primeicons.css",
+          {
+            "input": "node_modules/primereact/resources/primereact.min.css",
+            "bundleName": "primereact",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeflex/primeflex.scss",
+            "bundleName": "primeflex",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeicons/primeicons.css",
+            "bundleName": "primeicons",
+            "inject": false
+          },
           {
             "input": "libs/shared/assets/freya/src/lib/theme/dehub/theme.scss",
             "bundleName": "theme",
@@ -73,7 +85,17 @@
           "extractCss": true,
           "namedChunks": false,
           "extractLicenses": true,
-          "vendorChunk": false
+          "vendorChunk": false,
+          "deployUrl": "/prediction/",
+          "baseHref": "/prediction"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         }
       }
     },

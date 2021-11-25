@@ -6,11 +6,11 @@ import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/config';
 import { iOS } from '@dehub/shared/utils';
 
-import { Helmet } from 'react-helmet-async';
 import { useMatchBreakpoints, useModal } from '@dehub/react/pcsuikit';
 import { getChainIdHex } from '../../config/constants';
 import UserMenu from '../../components/UserMenu';
 import { useAppDispatch } from '../../state';
+import { useWalletConnectingState } from '../../state/application/hooks';
 import {
   useGetPredictionsStatus,
   useInitialBlock,
@@ -35,6 +35,7 @@ import {
 } from '../../state/types';
 import usePersistState from '../../hooks/usePersistState';
 import PageLoader from '../../components/PageLoader';
+import PageMeta from '../../components/layout/PageMeta';
 import usePollOraclePrice from './hooks/usePollOraclePrice';
 import usePollRoundData from './hooks/usePollRoundData';
 import Container from './components/Container';
@@ -44,7 +45,6 @@ import Desktop from './Desktop';
 import Mobile from './Mobile';
 import RiskDisclaimer from './components/RiskDisclaimer';
 import ChartDisclaimer from './components/ChartDisclaimer';
-import { useWalletConnectingState } from '../../state/application/hooks';
 
 const FUTURE_ROUND_COUNT = 2; // the number of rounds in the future to show
 
@@ -205,50 +205,43 @@ const Predictions = () => {
 
   return (
     <div>
+      <PageMeta />
       {showLoader ? (
         <Loader header={message.header} text={message.text} />
       ) : (
-        <>
-          <Helmet>
-            <script
-              src="https://s3.tradingview.com/tv.js"
-              type="text/javascript"
-              id="tradingViewWidget"
-            />
-          </Helmet>
-          <SwiperProvider>
-            <div
-              className="layout-wrapper"
-              style={{
-                background:
-                  'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover',
+        <SwiperProvider>
+          <div
+            className="layout-wrapper"
+            style={{
+              background:
+                'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover',
+            }}
+          >
+            <Header
+              userMenu={<UserMenu />}
+              logo={{
+                href: 'https://dehub.net',
+                icon: 'assets/dehub/logo-dehub-white.svg',
               }}
-            >
-              <Header
-                userMenu={<UserMenu />}
-                logo={{
-                  href: 'https://dehub.net',
-                  icon: 'assets/dehub/logo-dehub-white.svg',
+            />
+            <div className="layout-main">
+              <div
+                className="layout-content"
+                style={{
+                  height: 'calc(100vh)',
+                  minHeight: 'calc(100vh)',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  padding: '0',
                 }}
-              />
-              <div className="layout-main">
-                <div
-                  className="layout-content"
-                  style={{
-                    height: 'calc(100vh)',
-                    minHeight: 'calc(100vh)',
-                    overflow: 'hidden',
-                    position: 'relative',
-                  }}
-                >
-                  {isDesktop ? <Desktop /> : <Mobile />}
-                  <CollectWinningsPopup />
-                </div>
+              >
+                {isDesktop ? <Desktop /> : <Mobile />}
+                <CollectWinningsPopup />
               </div>
-              <Footer />
             </div>
-          </SwiperProvider>
-        </>
+            <Footer />
+          </div>
+        </SwiperProvider>
       )}
     </div>
   );

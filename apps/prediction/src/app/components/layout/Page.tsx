@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Helmet } from 'react-helmet-async';
-import { useLocation } from 'react-router';
-import { useTranslation } from '../../contexts/Localization';
-import { DEFAULT_META, getCustomMeta } from '../../config/constants/meta';
 import Container from './Container';
+import PageMeta from './PageMeta';
 
 const StyledPage = styled(Container)`
   min-height: calc(100vh - 64px);
@@ -21,27 +18,6 @@ const StyledPage = styled(Container)`
     padding-bottom: 32px;
   }
 `;
-
-const PageMeta = () => {
-  const { t } = useTranslation();
-  const { pathname } = useLocation();
-  const cakePriceUsdDisplay = '';
-
-  const pageMeta = getCustomMeta(pathname, t) || {};
-  const { title, description, image } = { ...DEFAULT_META, ...pageMeta };
-  const pageTitle = cakePriceUsdDisplay
-    ? [title, cakePriceUsdDisplay].join(' - ')
-    : title;
-
-  return (
-    <Helmet>
-      <title>{pageTitle}</title>
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-    </Helmet>
-  );
-};
 
 const Page: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children,
