@@ -1,0 +1,29 @@
+{
+  "root": "apps/raffle-e2e",
+  "sourceRoot": "apps/raffle-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/raffle-e2e/cypress.json",
+        "devServerTarget": "raffle:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "raffle:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/raffle-e2e/**/*.{js,ts}"],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["raffle"]
+}

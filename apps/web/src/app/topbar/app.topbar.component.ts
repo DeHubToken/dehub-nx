@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { CoreService } from '@dehub/angular/core';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AppComponent } from '../app.component';
@@ -13,7 +14,13 @@ export class AppTopBarComponent implements OnDestroy {
 
   items?: MenuItem[];
 
-  constructor(public app: AppComponent, public appMain: AppMainComponent) {}
+  path = this.coreService.path;
+
+  constructor(
+    public app: AppComponent,
+    public appMain: AppMainComponent,
+    private coreService: CoreService
+  ) {}
 
   ngOnDestroy() {
     if (this.subscription) {

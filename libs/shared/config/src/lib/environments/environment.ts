@@ -1,11 +1,11 @@
-import { defaultEnv, Env } from './env';
+import { defaultSharedEnv, SharedEnv } from './env';
 
-export const environmentDev: Env = {
-  ...defaultEnv,
+export const defaultSharedDevEnv: SharedEnv = {
+  ...defaultSharedEnv,
   env: 'dev',
 
   contentful: {
-    ...defaultEnv.contentful,
+    ...defaultSharedEnv.contentful,
     isPreview: true,
   },
 };
