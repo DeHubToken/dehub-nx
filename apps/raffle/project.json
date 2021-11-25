@@ -139,14 +139,14 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run raffle:deploy:draft"
+        "command": "npm run netlify:draft"
       }
     },
     "deploy-prod": {
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run raffle:deploy:prod"
+        "command": "npm run netlify:prod"
       }
     }
   },
