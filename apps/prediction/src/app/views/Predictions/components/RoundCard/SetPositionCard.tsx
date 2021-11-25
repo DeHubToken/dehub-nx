@@ -10,10 +10,10 @@ import {
   BinanceIcon,
   Text,
   BalanceInput,
-  Slider,
   Box,
   AutoRenewIcon,
 } from '@dehub/react/pcsuikit';
+import { Slider, SliderChangeParams } from 'primereact/slider';
 import BigNumber from 'bignumber.js';
 import { Hooks } from '@dehub/react/core';
 import { DEFAULT_TOKEN_DECIMAL } from '../../../../config';
@@ -129,8 +129,8 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
     setValue(input);
   };
 
-  const handleSliderChange = (newValue: number) => {
-    setValue(newValue.toString());
+  const handleSliderChange = (e: SliderChangeParams) => {
+    setValue(e.value.toString());
   };
 
   const setMax = () => {
@@ -256,15 +256,13 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           {account && t('Balance: %balance%', { balance: balanceDisplay })}
         </Text>
         <Slider
-          name="balance"
           min={0}
           max={maxBalance}
           value={valueAsBn.lte(maxBalance) ? valueAsBn.toNumber() : 0}
-          onValueChanged={handleSliderChange}
+          onChange={handleSliderChange}
           step={0.000000000000001}
-          valueLabel={account ? percentageDisplay : ''}
           disabled={!account || isTxPending}
-          mb="4px"
+          style={{ marginBottom: '16px' }}
         />
         <Flex alignItems="center" justifyContent="space-between" mb="16px">
           {percentShortcuts.map(percent => {
