@@ -209,7 +209,7 @@ export const getStaticPredictionsData = async () => {
     currentEpoch: Number(currentEpoch),
     intervalBlocks: Number(intervalBlocks),
     bufferBlocks: Number(bufferBlocks),
-    minBetAmount,
+    minBetAmount: minBetAmount.toString(),
   };
 };
 
