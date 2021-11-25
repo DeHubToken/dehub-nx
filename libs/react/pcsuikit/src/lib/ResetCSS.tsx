@@ -18,7 +18,7 @@ const ResetCSS = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    font-size: 14px;
     vertical-align: baseline;
   }
   /* HTML5 display-role reset for older browsers */
@@ -29,7 +29,7 @@ const ResetCSS = createGlobalStyle`
   }
   body {
     line-height: 1;
-    font-size: 16px;
+    font-size: 14px;
   }
   ol,
   ul {
