@@ -103,7 +103,7 @@ interface RoundResultBoxProps {
   hasEntered?: boolean;
 }
 
-const getBackgroundColor = ({
+const getBorderColor = ({
   theme,
   betPosition,
   isNext,
@@ -130,13 +130,14 @@ const getBackgroundColor = ({
 };
 
 const Background = styled(Box)<RoundResultBoxProps>`
-  background: ${getBackgroundColor};
+  background: 'rgba(41,50,65,0.4)';
+  border: 1px solid ${getBorderColor};
   border-radius: 16px;
   padding: 2px;
 `;
 
 const StyledRoundResultBox = styled.div`
-  background: #3a6186;
+  background: rgba(41, 50, 65, 0.4);
   border-radius: 14px;
   padding: 16px;
 `;

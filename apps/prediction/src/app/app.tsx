@@ -1,8 +1,10 @@
-import { ResetCSS } from '@dehub/react/pcsuikit';
 import BigNumber from 'bignumber.js';
 import { Route, Router, Switch } from 'react-router-dom';
+
+import { ResetCSS } from '@dehub/react/pcsuikit';
+import { Loader } from '@dehub/react/ui';
+
 import EasterEgg from './components/EasterEgg';
-import PageLoader from './components/PageLoader';
 import SuspenseWithChunkError from './components/SuspenseWithChunkError';
 import ToastListener from './components/ToastListener';
 import history from './routerHistory';
@@ -23,7 +25,7 @@ export function App() {
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
-      <SuspenseWithChunkError fallback={<PageLoader />}>
+      <SuspenseWithChunkError fallback={<Loader />}>
         <Switch>
           <Route path="/">
             <Predictions />

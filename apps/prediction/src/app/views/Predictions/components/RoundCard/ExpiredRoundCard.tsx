@@ -25,7 +25,12 @@ interface ExpiredRoundCardProps {
 const StyledExpiredRoundCard = styled(Card)`
   opacity: 0.7;
   transition: opacity 300ms;
-  background: linear-gradient(0deg, #1a2942 0%, #26d0ce 100%);
+  background: linear-gradient(
+    128deg,
+    #0b1113 0%,
+    rgba(26, 50, 63, 0.8) 25%,
+    rgba(50, 19, 56, 0.8) 100%
+  );
   &:hover {
     opacity: 1;
   }
@@ -56,7 +61,7 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
       <StyledExpiredRoundCard>
         <CardHeader
           status="expired"
-          icon={<BlockIcon mr="4px" width="21px" color="textDisabled" />}
+          icon={<BlockIcon mr="4px" width="21px" color="white" />}
           title={t('Expired')}
           blockNumber={endBlock as number}
           epoch={round.epoch as number}

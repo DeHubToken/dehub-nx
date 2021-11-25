@@ -17,6 +17,7 @@ const StyledSwiper = styled.div`
   .swiper-wrapper {
     align-items: center;
     display: flex;
+    padding: 30px 0;
   }
 
   .swiper-slide {

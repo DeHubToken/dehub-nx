@@ -37,8 +37,13 @@ interface LiveRoundCardProps {
 }
 
 const GradientBorder = styled.div`
-  background: linear-gradient(0deg, #1a2942 0%, #26d0ce 100%);
-  border-radius: 16px;
+  background: linear-gradient(
+    128deg,
+    #0b1113 0%,
+    rgba(26, 50, 63, 0.8) 25%,
+    rgba(50, 19, 56, 0.8) 100%
+  );
+  border-radius: 6px;
   padding: 1px;
 `;
 
@@ -89,13 +94,11 @@ const LiveRoundCard: React.FC<LiveRoundCardProps> = ({
   }
 
   return (
-    <GradientBorder>
-      <GradientCard>
+    <GradientBorder className="border-neon-1">
+      <Card>
         <CardHeader
           status="live"
-          icon={
-            <PlayCircleOutlineIcon mr="4px" width="24px" color="secondary" />
-          }
+          icon={<PlayCircleOutlineIcon mr="4px" width="24px" color="white" />}
           title={t('Live')}
           epoch={round.epoch as number}
           blockNumber={estimatedEndBlock}
@@ -162,7 +165,7 @@ const LiveRoundCard: React.FC<LiveRoundCardProps> = ({
             isActive={!isBull}
           />
         </CardBody>
-      </GradientCard>
+      </Card>
       {tooltipVisible && tooltip}
     </GradientBorder>
   );

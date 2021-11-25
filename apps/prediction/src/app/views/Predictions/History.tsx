@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Flex, Spinner, Text } from '@dehub/react/pcsuikit';
+import { Flex, Text } from '@dehub/react/pcsuikit';
 import { CircularProgress } from '@material-ui/core';
 import { Hooks } from '@dehub/react/core';
 import styled from 'styled-components';

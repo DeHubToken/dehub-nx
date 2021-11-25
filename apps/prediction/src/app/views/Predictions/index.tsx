@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Moralis } from 'moralis';
-import { Helmet } from 'react-helmet-async';
 
 import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
@@ -35,7 +34,6 @@ import {
   PredictionStatus,
 } from '../../state/types';
 import usePersistState from '../../hooks/usePersistState';
-import PageLoader from '../../components/PageLoader';
 import PageMeta from '../../components/layout/PageMeta';
 import usePollOraclePrice from './hooks/usePollOraclePrice';
 import usePollRoundData from './hooks/usePollRoundData';
@@ -201,7 +199,7 @@ const Predictions = () => {
   usePollOraclePrice();
 
   if (status === PredictionStatus.INITIAL) {
-    return <PageLoader />;
+    return <Loader />;
   }
 
   return (
@@ -226,15 +224,19 @@ const Predictions = () => {
               }}
             />
             <div className="layout-main">
-              <div className="layout-content">
-                <div className="flex flex-column align-items-center justify-content-between">
-                  <img
-                    src="../../assets/img/prediction-logo.png"
-                    className="anim-float-1"
-                    alt="Price Prediction Logo"
-                    style={{ maxWidth: '300px' }}
-                  />
-                </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <img
+                  src="../../assets/img/prediction-logo.png"
+                  className="anim-float-1"
+                  alt="Price Prediction Logo"
+                  style={{ maxWidth: '300px' }}
+                />
               </div>
               <div
                 className="layout-content"

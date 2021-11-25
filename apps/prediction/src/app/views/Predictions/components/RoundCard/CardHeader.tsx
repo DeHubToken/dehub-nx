@@ -36,25 +36,27 @@ const getTextColorByStatus = (
   status: Status,
   fallback: FallbackColor
 ): TextColor => {
-  switch (status) {
-    case 'expired':
-      return 'textDisabled';
-    case 'next':
-      return 'white';
-    case 'live':
-      return 'secondary';
-    case 'canceled':
-    case 'calculating':
-      return 'text';
-    default:
-      return fallback;
-  }
+  // eslint-disable-next-line multiline-comment-style
+  // switch (status) {
+  //   case 'expired':
+  //     return 'textDisabled';
+  //   case 'next':
+  //     return 'white';
+  //   case 'live':
+  //     return 'secondary';
+  //   case 'canceled':
+  //   case 'calculating':
+  //     return 'text';
+  //   default:
+  //     return fallback;
+  // }
+  return 'white';
 };
 
 const StyledCardHeader = styled.div<{ status: Status }>`
   align-items: center;
-  background: linear-gradient(to right, #2c3e50 0%, #4ca1af 100%);
-  border-radius: 16px 16px 0 0;
+  background: rgba(47, 173, 190, 0.52);
+  border-radius: 6px 6px 0 0;
   display: flex;
   justify-content: space-between;
   padding: ${({ status }) => (status === 'live' ? '16px' : '8px')};
