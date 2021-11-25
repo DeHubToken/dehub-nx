@@ -133,9 +133,6 @@ const Desktop: React.FC = () => {
        * Purely comedic: We only want to animate if we are clicking the open chart button
        * If we keep the transition on the resizing becomes very choppy
        */
-      delay(() => {
-        set(splitWrapperRef, 'current.style.transition', '');
-      }, 150);
     }
 
     dispatch(setChartPaneState(newChartPaneState));
