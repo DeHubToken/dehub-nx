@@ -5,7 +5,7 @@ import { formatNumber, getBalanceAmount } from '../../utils/formatBalance';
 import getTimePeriods from '../../utils/getTimePeriods';
 
 export const getBnbAmount = (bnbBn: BigNumber) => {
-  return getBalanceAmount(bnbBn, 18);
+  return getBalanceAmount(bnbBn.toString(), 18);
 };
 
 export const formatUsd = (usd: number) => {

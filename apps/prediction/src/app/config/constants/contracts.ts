@@ -10,7 +10,7 @@ export default {
   },
   chainlinkOracle: {
     56: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e',
-    97: '',
+    97: '0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526',
     4: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e',
   },
 };
