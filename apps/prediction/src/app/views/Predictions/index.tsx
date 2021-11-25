@@ -234,6 +234,16 @@ const Predictions = () => {
                 }}
               />
               <div className="layout-main">
+                <div className="layout-content">
+                  <div className="flex flex-column align-items-center justify-content-between">
+                    <img
+                      src="../../assets/img/prediction-logo.png"
+                      className="anim-float-1"
+                      alt="Price Prediction Logo"
+                      style={{ maxWidth: '300px' }}
+                    />
+                  </div>
+                </div>
                 <div
                   className="layout-content"
                   style={{
@@ -245,14 +255,6 @@ const Predictions = () => {
                     paddingRight: '0',
                   }}
                 >
-                  <div className="flex flex-column align-items-center justify-content-between mb-8">
-                    <img
-                      src="../../assets/img/prediction-logo.png"
-                      className="anim-float-1"
-                      alt="Price Prediction Logo"
-                      style={{ maxWidth: '300px' }}
-                    />
-                  </div>
                   {isDesktop ? <Desktop /> : <Mobile />}
                   <CollectWinningsPopup />
                 </div>
