@@ -25,7 +25,7 @@ export class AppMenuComponent implements OnInit {
       },
     ];
 
-    if (!environment.production)
+    if (environment.env === 'dev')
       this.model.push({
         label: 'Demo',
         items: [{ label: 'Components', routerLink: ['/components'] }],

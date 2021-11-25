@@ -14,7 +14,7 @@ interface ContentfulEnv {
  * Used in Angular or React applications
  */
 export interface SharedEnv {
-  env: string;
+  env: 'dev' | 'prod';
   production: boolean;
 
   /**
@@ -43,7 +43,7 @@ export interface SharedEnv {
  * Default shared environment variables
  */
 export const defaultSharedEnv: SharedEnv = {
-  env: '-',
+  env: 'dev',
   production: false,
   baseUrl: '',
 
