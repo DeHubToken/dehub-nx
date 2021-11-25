@@ -232,9 +232,18 @@ const Predictions = () => {
                   minHeight: 'calc(100vh)',
                   overflow: 'hidden',
                   position: 'relative',
-                  padding: '0',
+                  paddingLeft: '0',
+                  paddingRight: '0',
                 }}
               >
+                <div className="flex flex-column align-items-center justify-content-between mb-8">
+                  <img
+                    src="../../assets/img/prediction-logo.png"
+                    className="anim-float-1"
+                    alt="Price Prediction Logo"
+                    style={{ maxWidth: '300px' }}
+                  />
+                </div>
                 {isDesktop ? <Desktop /> : <Mobile />}
                 <CollectWinningsPopup />
               </div>
