@@ -33,7 +33,7 @@ const CalculatingCard: React.FC<CalculatingCardProps> = ({ round }) => {
 
   return (
     <>
-      <Card>
+      <Card className="border-neon-2">
         <CardHeader
           status="calculating"
           icon={<WaitIcon mr="4px" width="21px" />}
