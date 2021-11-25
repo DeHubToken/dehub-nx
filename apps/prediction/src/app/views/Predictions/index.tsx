@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Moralis } from 'moralis';
+import { Helmet } from 'react-helmet-async';
 
 import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
@@ -209,39 +210,48 @@ const Predictions = () => {
       {showLoader ? (
         <Loader header={message.header} text={message.text} />
       ) : (
-        <SwiperProvider>
-          <div
-            className="layout-wrapper"
-            style={{
-              background:
-                'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover',
-            }}
-          >
-            <Header
-              userMenu={<UserMenu />}
-              logo={{
-                href: 'https://dehub.net',
-                icon: 'assets/dehub/logo-dehub-white.svg',
-              }}
+        <>
+          <Helmet>
+            <script
+              src="https://s3.tradingview.com/tv.js"
+              type="text/javascript"
+              id="tradingViewWidget"
             />
-            <div className="layout-main">
-              <div
-                className="layout-content"
-                style={{
-                  height: 'calc(100vh)',
-                  minHeight: 'calc(100vh)',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  padding: '0',
+          </Helmet>
+          <SwiperProvider>
+            <div
+              className="layout-wrapper"
+              style={{
+                background:
+                  'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover',
+              }}
+            >
+              <Header
+                userMenu={<UserMenu />}
+                logo={{
+                  href: 'https://dehub.net',
+                  icon: 'assets/dehub/logo-dehub-white.svg',
                 }}
-              >
-                {isDesktop ? <Desktop /> : <Mobile />}
-                <CollectWinningsPopup />
+              />
+              <div className="layout-main">
+                <div
+                  className="layout-content"
+                  style={{
+                    height: 'calc(100vh)',
+                    minHeight: 'calc(100vh)',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    padding: '0',
+                  }}
+                >
+                  {isDesktop ? <Desktop /> : <Mobile />}
+                  <CollectWinningsPopup />
+                </div>
               </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </SwiperProvider>
+          </SwiperProvider>
+        </>
       )}
     </div>
   );
