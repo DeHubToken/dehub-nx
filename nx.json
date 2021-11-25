@@ -8,7 +8,8 @@
       "dependencies": "*",
       "devDependencies": "*"
     },
-    ".eslintrc.json": "*"
+    ".eslintrc.json": "*",
+    ".github/workflows/dehub-nx.yml": "*"
   },
   "tasksRunnerOptions": {
     "default": {
