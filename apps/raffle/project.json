@@ -1,0 +1,155 @@
+{
+  "root": "apps/raffle",
+  "sourceRoot": "apps/raffle/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/raffle",
+        "index": "apps/raffle/src/index.html",
+        "main": "apps/raffle/src/main.tsx",
+        "polyfills": "apps/raffle/src/polyfills.ts",
+        "tsConfig": "apps/raffle/tsconfig.app.json",
+        "assets": [
+          "apps/raffle/src/assets",
+          {
+            "input": "libs/shared/assets/dehub/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts"],
+            "output": "assets/dehub"
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts", "**/*.scss"],
+            "output": "assets"
+          }
+        ],
+        "styles": [
+          "apps/raffle/src/styles.scss",
+          {
+            "input": "node_modules/primereact/resources/primereact.min.css",
+            "bundleName": "primereact",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeflex/primeflex.scss",
+            "bundleName": "primeflex",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeicons/primeicons.css",
+            "bundleName": "primeicons",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/dehub/theme.scss",
+            "bundleName": "theme",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dehub.scss",
+            "bundleName": "layout",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/alternative/theme-light.scss",
+            "bundleName": "theme-alternative",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-light.scss",
+            "bundleName": "layout-alternative",
+            "inject": false
+          }
+        ],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/raffle/src/environments/environment.ts",
+              "with": "apps/raffle/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "extractCss": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            }
+          ],
+          "deployUrl": "/raffle/",
+          "baseHref": "/raffle"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "raffle:build:production",
+          "hmr": false
+        },
+        "development": {
+          "buildTarget": "raffle:build:development",
+          "host": "dev.localhost",
+          "port": 8401
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/raffle/**/*.{ts,tsx,js,jsx}"],
+        "maxWarnings": 0
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/raffle"],
+      "options": {
+        "jestConfig": "apps/raffle/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "deploy-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run raffle:deploy:draft"
+      }
+    },
+    "deploy-prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run raffle:deploy:prod"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["shared-assets-dehub", "shared-assets-freya"]
+}

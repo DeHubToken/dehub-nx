@@ -2,4 +2,3 @@
   from = "/"
   to = "web/index.html"
   status = 200
-

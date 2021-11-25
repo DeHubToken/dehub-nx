@@ -29,7 +29,7 @@ DeHub Dapps
 
 ## React
 
-### `lottery`
+### `raffle`
 
 DeHub Lottery Dapp
 
@@ -105,7 +105,7 @@ _Common sass styles, assets from the Freya PrimeNG themes_
 
 # Dev Setup
 
-`<APP>` can be `web` or `lottery`
+`<APP>` can be `web` or `raffle`
 
 1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
 1. Open **VSCode** _(pre-configured editor settings involved)_
