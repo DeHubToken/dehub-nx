@@ -44,6 +44,11 @@ const PageMeta = () => {
         type="text/css"
         href={`${path}/primeicons.css`}
       />
+      <script
+        src="https://s3.tradingview.com/tv.js"
+        type="text/javascript"
+        id="tradingViewWidget"
+      />
     </Helmet>
   );
 };

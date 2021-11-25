@@ -210,59 +210,50 @@ const Predictions = () => {
       {showLoader ? (
         <Loader header={message.header} text={message.text} />
       ) : (
-        <>
-          <Helmet>
-            <script
-              src="https://s3.tradingview.com/tv.js"
-              type="text/javascript"
-              id="tradingViewWidget"
-            />
-          </Helmet>
-          <SwiperProvider>
-            <div
-              className="layout-wrapper"
-              style={{
-                background:
-                  'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("assets/img/prediction-bg.jpg") no-repeat fixed center center /cover',
+        <SwiperProvider>
+          <div
+            className="layout-wrapper"
+            style={{
+              background:
+                'linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover',
+            }}
+          >
+            <Header
+              userMenu={<UserMenu />}
+              logo={{
+                href: 'https://dehub.net',
+                icon: 'assets/dehub/logo-dehub-white.svg',
               }}
-            >
-              <Header
-                userMenu={<UserMenu />}
-                logo={{
-                  href: 'https://dehub.net',
-                  icon: 'assets/dehub/logo-dehub-white.svg',
-                }}
-              />
-              <div className="layout-main">
-                <div className="layout-content">
-                  <div className="flex flex-column align-items-center justify-content-between">
-                    <img
-                      src="../../assets/img/prediction-logo.png"
-                      className="anim-float-1"
-                      alt="Price Prediction Logo"
-                      style={{ maxWidth: '300px' }}
-                    />
-                  </div>
-                </div>
-                <div
-                  className="layout-content"
-                  style={{
-                    height: 'calc(100vh)',
-                    minHeight: 'calc(100vh)',
-                    overflow: 'hidden',
-                    position: 'relative',
-                    paddingLeft: '0',
-                    paddingRight: '0',
-                  }}
-                >
-                  {isDesktop ? <Desktop /> : <Mobile />}
-                  <CollectWinningsPopup />
+            />
+            <div className="layout-main">
+              <div className="layout-content">
+                <div className="flex flex-column align-items-center justify-content-between">
+                  <img
+                    src="../../assets/img/prediction-logo.png"
+                    className="anim-float-1"
+                    alt="Price Prediction Logo"
+                    style={{ maxWidth: '300px' }}
+                  />
                 </div>
               </div>
-              <Footer />
+              <div
+                className="layout-content"
+                style={{
+                  height: 'calc(100vh)',
+                  minHeight: 'calc(100vh)',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  paddingLeft: '0',
+                  paddingRight: '0',
+                }}
+              >
+                {isDesktop ? <Desktop /> : <Mobile />}
+                <CollectWinningsPopup />
+              </div>
             </div>
-          </SwiperProvider>
-        </>
+            <Footer />
+          </div>
+        </SwiperProvider>
       )}
     </div>
   );
