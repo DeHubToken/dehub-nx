@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '@dehub/shared/models';
+import { environment } from '../../environments/environment';
 import { AppMainComponent } from '../app.main.component';
 
 @Component({
@@ -13,7 +14,6 @@ export class AppMenuComponent implements OnInit {
 
   ngOnInit() {
     this.model = [
-      { label: 'Components', routerLink: ['/components'] },
       {
         label: 'Dapps',
         items: [
@@ -24,5 +24,11 @@ export class AppMenuComponent implements OnInit {
         ],
       },
     ];
+
+    if (!environment.production)
+      this.model.push({
+        label: 'Demo',
+        items: [{ label: 'Components', routerLink: ['/components'] }],
+      });
   }
 }
