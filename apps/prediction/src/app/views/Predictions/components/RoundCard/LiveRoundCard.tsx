@@ -94,8 +94,8 @@ const LiveRoundCard: React.FC<LiveRoundCardProps> = ({
   }
 
   return (
-    <GradientBorder className="border-neon-1">
-      <Card>
+    <>
+      <Card className="border-neon-2">
         <CardHeader
           status="live"
           icon={<PlayCircleOutlineIcon mr="4px" width="24px" color="white" />}
@@ -167,7 +167,7 @@ const LiveRoundCard: React.FC<LiveRoundCardProps> = ({
         </CardBody>
       </Card>
       {tooltipVisible && tooltip}
-    </GradientBorder>
+    </>
   );
 };
 

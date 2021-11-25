@@ -209,7 +209,11 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   }, [value, maxBalance, minBetAmountBalance, setErrorMessage]);
 
   return (
-    <Card onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <Card
+      className="border-neon-1"
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+    >
       <CardHeader p="16px">
         <Flex alignItems="center">
           <IconButton variant="text" scale="sm" onClick={handleGoBack} mr="8px">

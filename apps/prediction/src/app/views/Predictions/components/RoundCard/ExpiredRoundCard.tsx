@@ -58,7 +58,7 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
 
   return (
     <Box position="relative">
-      <StyledExpiredRoundCard>
+      <StyledExpiredRoundCard className="border-neon-1">
         <CardHeader
           status="expired"
           icon={<BlockIcon mr="4px" width="21px" color="white" />}

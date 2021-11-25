@@ -26,7 +26,7 @@ const SoonRoundCard: React.FC<SoonRoundCardProps> = ({ round }) => {
   const countdown = formatRoundTime(seconds);
 
   return (
-    <Card>
+    <Card className="border-neon-1">
       <CardHeader
         status="soon"
         icon={<WaitIcon mr="4px" width="21px" />}

@@ -146,7 +146,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
 
   return (
     <CardFlip isFlipped={isSettingPosition} height="404px">
-      <Card>
+      <Card className="border-neon-1">
         <CardHeader
           status="next"
           epoch={round.epoch as number}
