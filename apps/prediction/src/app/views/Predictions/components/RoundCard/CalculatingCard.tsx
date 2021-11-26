@@ -7,7 +7,7 @@ import {
   useTooltip,
   InfoIcon,
 } from '@dehub/react/pcsuikit';
-import { CircularProgress } from '@material-ui/core';
+import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from '../../../../contexts/Localization';
 import { Round, BetPosition } from '../../../../state/types';
 import { useGetTotalIntervalBlocks } from '../../../../state/hooks';
@@ -49,7 +49,7 @@ const CalculatingCard: React.FC<CalculatingCardProps> = ({ round }) => {
               justifyContent="center"
               flexDirection="column"
             >
-              <CircularProgress size="50px" />
+              <ProgressSpinner style={{ width: '50px', height: '50px' }} />
               <Flex mt="8px" ref={targetRef}>
                 <TooltipText>{t('Calculating')}</TooltipText>
                 <InfoIcon ml="4px" />

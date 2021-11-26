@@ -2,11 +2,9 @@ import React from 'react';
 import {
   ArrowBackIcon,
   ArrowForwardIcon,
-  BunnyCardsIcon,
   Card,
   IconButton,
 } from '@dehub/react/pcsuikit';
-import HomeIcon from '@material-ui/icons/Home';
 import styled from 'styled-components';
 import { useGetCurrentEpoch, useGetSortedRounds } from '../../../state/hooks';
 import useSwiper from '../hooks/useSwiper';
@@ -59,7 +57,7 @@ const PrevNextNav = () => {
         <ArrowBackIcon color="primary" width="24px" />
       </IconButton>
       <Icon onClick={handleSlideToLive}>
-        <HomeIcon />
+        <i className="fad fa-home"></i>
       </Icon>
       <IconButton variant="text" scale="sm" onClick={handleNextSlide}>
         <ArrowForwardIcon color="primary" width="24px" />

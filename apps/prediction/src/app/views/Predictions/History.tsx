@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, Text } from '@dehub/react/pcsuikit';
-import { CircularProgress } from '@material-ui/core';
+import { ProgressSpinner } from 'primereact/progressspinner';
 import { Hooks } from '@dehub/react/core';
 import styled from 'styled-components';
 import UnlockButton from '../../components/UnlockButton';
@@ -112,7 +112,7 @@ const History = () => {
       <BetWrapper>
         {isFetchingHistory ? (
           <SpinnerWrapper>
-            <CircularProgress size="50px" />
+            <ProgressSpinner style={{ width: '50px', height: '50px' }} />
           </SpinnerWrapper>
         ) : (
           activeTabComponent
