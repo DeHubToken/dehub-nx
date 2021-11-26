@@ -15,7 +15,7 @@ const useTokenBalance = (tokenAddress: string) => {
     const fetchBalance = async () => {
       const contract = getBep20Contract(tokenAddress, signer);
       const res = await contract.balanceOf(account);
-      setBalance(new BigNumber(res));
+      setBalance(new BigNumber(res.toString()));
     };
 
     if (account) {
