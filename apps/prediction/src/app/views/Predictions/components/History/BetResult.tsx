@@ -16,7 +16,7 @@ import { Bet, BetPosition } from '../../../../state/types';
 import { fetchBet } from '../../../../state/predictions';
 import { Result } from '../../../../state/predictions/helpers';
 import useIsRefundable from '../../hooks/useIsRefundable';
-import { formatBnb, getPayout } from '../../helpers';
+import { formatDehub, getPayout } from '../../helpers';
 import CollectWinningsButton from '../CollectWinningsButton';
 import PositionTag from '../PositionTag';
 import ReclaimPositionButton from '../ReclaimPositionButton';
@@ -144,16 +144,16 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
         </Flex>
         <Flex alignItems="center" justifyContent="space-between" mb="16px">
           <Text>{t('Your position')}</Text>
-          <Text>{`${formatBnb(bet.amount)} BNB`}</Text>
+          <Text>{`${formatDehub(bet.amount)} BNB`}</Text>
         </Flex>
         <Flex alignItems="start" justifyContent="space-between">
           <Text bold>{t('Your Result')}</Text>
           <Box style={{ textAlign: 'right' }}>
             <Text bold color={getResultColor()}>{`${
               result === Result.LOSE ? '-' : '+'
-            }${formatBnb(payout)} BNB`}</Text>
+            }${formatDehub(payout)} BNB`}</Text>
             <Text fontSize="12px" color="textSubtle">
-              {`~$${formatBnb(bnbBusdPrice.times(payout).toNumber())}`}
+              {`~$${formatDehub(bnbBusdPrice.times(payout).toNumber())}`}
             </Text>
           </Box>
         </Flex>

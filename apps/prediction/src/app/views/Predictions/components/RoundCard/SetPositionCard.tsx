@@ -31,11 +31,14 @@ import { getDecimalAmount } from '../../../../utils/formatBalance';
 import UnlockButton from '../../../../components/UnlockButton';
 import { BIG_NINE, BIG_TEN } from '../../../../utils/bigNumber';
 import PositionTag from '../PositionTag';
-import { getBnbAmount } from '../../helpers';
+import { getDehubAmount } from '../../helpers';
 import useSwiper from '../../hooks/useSwiper';
 import FlexRow from '../FlexRow';
 import Card from './Card';
-import { getPredictionsAddress } from '../../../../utils/addressHelpers';
+import {
+  getDehubAddress,
+  getPredictionsAddress,
+} from '../../../../utils/addressHelpers';
 
 interface SetPositionCardProps {
   position: BetPosition;
@@ -73,11 +76,11 @@ const getPercentDisplay = (percentage: number) => {
 
 const getButtonProps = (
   value: BigNumber,
-  bnbBalance: BigNumber,
+  dehubBalance: BigNumber,
   minBetAmountBalance: number
 ) => {
-  if (bnbBalance.eq(0)) {
-    return { key: 'Insufficient BNB balance', disabled: true };
+  if (dehubBalance.eq(0)) {
+    return { key: 'Insufficient DEHUB balance', disabled: true };
   }
 
   if (value.eq(0) || value.isNaN()) {
@@ -100,21 +103,17 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   } | null>(null);
   const { account } = Hooks.useMoralisEthers();
   const { swiper } = useSwiper();
-  const bnbBalance = useTokenBalance(
-    '0x5A5e32fE118E7c7b6536d143F446269123c0ba74'
-  );
+  const dehubBalance = useTokenBalance(getDehubAddress());
   const minBetAmount = useGetMinBetAmount();
   const { t } = useTranslation();
   const { toastError } = useToast();
   const predictionsContract = usePredictionsContract();
-  const betTokenContract = useERC20(
-    '0x5A5e32fE118E7c7b6536d143F446269123c0ba74'
-  );
+  const betTokenContract = useERC20(getDehubAddress());
   const predictionContractAddress = getPredictionsAddress();
 
-  const balanceDisplay = getBnbAmount(bnbBalance).toNumber();
-  const maxBalance = getBnbAmount(
-    bnbBalance.gt(dust) ? bnbBalance.minus(dust) : bnbBalance
+  const balanceDisplay = getDehubAmount(dehubBalance).toNumber();
+  const maxBalance = getDehubAmount(
+    dehubBalance.gt(dust) ? dehubBalance.minus(dust) : dehubBalance
   ).toNumber();
   const valueAsBn = new BigNumber(value);
 
@@ -125,7 +124,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   const percentageDisplay = getPercentDisplay(percentageOfMaxBalance);
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;
-  const minBetAmountBalance = getBnbAmount(minBetAmount).toNumber();
+  const minBetAmountBalance = getDehubAmount(minBetAmount).toNumber();
 
   const handleChange = (input: string) => {
     setValue(input);
@@ -160,13 +159,13 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
 
   const { key, disabled } = getButtonProps(
     valueAsBn,
-    bnbBalance,
+    dehubBalance,
     minBetAmountBalance
   );
 
   const handleEnterPosition = async () => {
     const betMethod = position === BetPosition.BULL ? 'betBull' : 'betBear';
-    const decimalValue = getDecimalAmount(valueAsBn);
+    const decimalValue = getDecimalAmount(valueAsBn, 5);
     const allowance = await betTokenContract.allowance(
       account,
       predictionContractAddress
@@ -202,11 +201,11 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
     const hasSufficientBalance = bnValue.gt(0) && bnValue.lte(maxBalance);
 
     if (!hasSufficientBalance) {
-      setErrorMessage({ key: 'Insufficient BNB balance' });
+      setErrorMessage({ key: 'Insufficient DEHUB balance' });
     } else if (bnValue.gt(0) && bnValue.lt(minBetAmountBalance)) {
       setErrorMessage({
         key: 'A minimum amount of %num% %token% is required',
-        data: { num: minBetAmountBalance, token: 'BNB' },
+        data: { num: minBetAmountBalance, token: 'DEHUB' },
       });
     } else {
       setErrorMessage(null);
@@ -238,9 +237,8 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
             {t('Commit')}:
           </Text>
           <Flex alignItems="center">
-            <BinanceIcon mr="4px  " />
             <Text bold textTransform="uppercase">
-              BNB
+              DEHUB
             </Text>
           </Flex>
         </Flex>

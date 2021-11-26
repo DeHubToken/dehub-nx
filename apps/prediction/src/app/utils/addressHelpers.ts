@@ -20,6 +20,10 @@ export const getMulticallAddress = () => {
   return getAddress(addresses.multiCall);
 };
 
+export const getDehubAddress = () => {
+  return getAddress(addresses.dehub);
+};
+
 export const getPredictionsAddress = () => {
   return getAddress(addresses.predictions);
 };

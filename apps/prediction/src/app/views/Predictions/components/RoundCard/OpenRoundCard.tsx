@@ -16,7 +16,7 @@ import { useBlock, useGetIntervalBlocks } from '../../../../state/hooks';
 import { markPositionAsEntered } from '../../../../state/predictions';
 import useToast from '../../../../hooks/useToast';
 import CardFlip from '../CardFlip';
-import { formatBnb, getBnbAmount } from '../../helpers';
+import { formatDehub, getDehubAmount } from '../../helpers';
 import { RoundResultBox, PrizePoolRow } from '../RoundResult';
 import MultiplierArrow from './MultiplierArrow';
 import Card from './Card';
@@ -62,7 +62,9 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
       ? t('Up').toUpperCase()
       : t('Down').toUpperCase();
   const { targetRef, tooltipVisible, tooltip } = useTooltip(
-    <div style={{ whiteSpace: 'nowrap' }}>{`${formatBnb(betAmount)} BNB`}</div>,
+    <div style={{ whiteSpace: 'nowrap' }}>{`${formatDehub(
+      betAmount
+    )} DEHUB`}</div>,
     { placement: 'top' }
   );
 
@@ -120,7 +122,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
           hash,
           round,
           position,
-          amount: getBnbAmount(decimalValue).toNumber(),
+          amount: getDehubAmount(decimalValue).toNumber(),
           claimed: false,
         },
       })

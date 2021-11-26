@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 import { Box, Flex, FlexProps, Text } from '@dehub/react/pcsuikit';
-import { formatBnb, formatUsd } from '../../helpers';
+import { formatDehub, formatUsd } from '../../helpers';
 import { useTranslation } from '../../../../contexts/Localization';
 import { BetPosition, Round } from '../../../../state/types';
 
@@ -15,7 +15,7 @@ const getPrizePoolAmount = (totalAmount: PrizePoolRowProps['totalAmount']) => {
     return '0';
   }
 
-  return formatBnb(totalAmount);
+  return formatDehub(totalAmount);
 };
 
 const Row: React.FC = ({ children, ...props }) => {
@@ -68,9 +68,9 @@ export const PayoutRow: React.FC<PayoutRowProps> = ({
           {t('%multiplier% Payout', { multiplier: formattedMultiplier })}
         </Text>
         <Text mx="4px">|</Text>
-        <Text fontSize="12px" lineHeight="18px">{`${formatBnb(
+        <Text fontSize="12px" lineHeight="18px">{`${formatDehub(
           amount
-        )} BNB`}</Text>
+        )} DEHUB`}</Text>
       </Flex>
     </Row>
   );

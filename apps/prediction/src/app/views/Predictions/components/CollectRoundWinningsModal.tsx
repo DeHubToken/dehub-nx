@@ -23,7 +23,7 @@ import { markBetAsCollected } from '../../../state/predictions';
 import { useTranslation } from '../../../contexts/Localization';
 import useToast from '../../../hooks/useToast';
 import { usePredictionsContract } from '../../../hooks/useContract';
-import { formatBnb } from '../helpers';
+import { formatDehub } from '../helpers';
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
   payout: number | null;
@@ -121,10 +121,10 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
         <Flex alignItems="start" justifyContent="space-between" mb="24px">
           <Text>{t('Collecting')}</Text>
           <Box style={{ textAlign: 'right' }}>
-            <Text>{`${payout ? formatBnb(payout) : 0} BNB`}</Text>
+            <Text>{`${payout ? formatDehub(payout) : 0} BNB`}</Text>
             <Text fontSize="12px" color="textSubtle">
               {`~$${
-                payout ? formatBnb(bnbBusdPrice.times(payout).toNumber()) : 0
+                payout ? formatDehub(bnbBusdPrice.times(payout).toNumber()) : 0
               }`}
             </Text>
           </Box>

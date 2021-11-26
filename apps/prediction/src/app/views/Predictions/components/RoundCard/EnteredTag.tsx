@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { CheckmarkCircleIcon, Tag, useTooltip } from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
-import { formatBnb } from '../../helpers';
+import { formatDehub } from '../../helpers';
 
 interface EnteredTagProps {
   amount?: number;
@@ -19,7 +19,7 @@ const StyledEnteredTag = styled(Tag).attrs({
 const EnteredTag: React.FC<EnteredTagProps> = ({ amount }) => {
   const { t } = useTranslation();
   const { targetRef, tooltipVisible, tooltip } = useTooltip(
-    <div style={{ whiteSpace: 'nowrap' }}>{`${formatBnb(amount)} BNB`}</div>,
+    <div style={{ whiteSpace: 'nowrap' }}>{`${formatDehub(amount)} BNB`}</div>,
     { placement: 'bottom' }
   );
 

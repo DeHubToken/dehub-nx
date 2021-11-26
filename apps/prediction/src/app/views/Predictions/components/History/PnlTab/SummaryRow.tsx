@@ -1,7 +1,7 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
 import { Flex, Text } from '@dehub/react/pcsuikit';
-import { formatBnb } from '../../../helpers';
+import { formatDehub } from '../../../helpers';
 import { useTranslation } from '../../../../../contexts/Localization';
 import { PnlSummary } from './PnlTab';
 
@@ -57,10 +57,10 @@ const SummaryRow: React.FC<SummaryRowProps> = ({
         </Flex>
         <Flex flex="3" flexDirection="column">
           <Text bold fontSize="20px" color={color}>
-            {`${summaryTypeSigns[type]}${formatBnb(displayAmount)} BNB`}
+            {`${summaryTypeSigns[type]}${formatDehub(displayAmount)} DEHUB`}
           </Text>
           <Text fontSize="12px" color="textSubtle">
-            {`~$${formatBnb(bnbBusdPrice.times(displayAmount).toNumber())}`}
+            {`~$${formatDehub(bnbBusdPrice.times(displayAmount).toNumber())}`}
           </Text>
         </Flex>
       </Flex>

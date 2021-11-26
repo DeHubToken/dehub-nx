@@ -19,7 +19,7 @@ import {
 } from '../../../../state/hooks';
 import { getRoundResult, Result } from '../../../../state/predictions/helpers';
 import { useTranslation } from '../../../../contexts/Localization';
-import { formatBnb, getPayout } from '../../helpers';
+import { formatDehub, getPayout } from '../../helpers';
 import CollectWinningsButton from '../CollectWinningsButton';
 import ReclaimPositionButton from '../ReclaimPositionButton';
 import BetDetails from './BetDetails';
@@ -116,7 +116,7 @@ const HistoricalBet: React.FC<BetProps> = ({ bet }) => {
         <Text bold color={resultTextColor} lineHeight={1}>
           {roundResult === Result.CANCELED
             ? t('Canceled')
-            : `${resultTextPrefix}${formatBnb(payout)}`}
+            : `${resultTextPrefix}${formatDehub(payout)}`}
         </Text>
       </>
     );

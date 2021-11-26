@@ -3,6 +3,11 @@ const tokens = {
     symbol: 'BNB',
     projectLink: 'https://www.binance.com/',
   },
+  dehub: {
+    symbol: 'DEHUB',
+    projectLink: 'https://www.dehub.net/',
+    decimals: 5,
+  },
   cake: {
     symbol: 'CAKE',
     address: {

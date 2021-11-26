@@ -4,25 +4,21 @@ import { Bet, BetPosition } from '../../state/types';
 import { formatNumber, getBalanceAmount } from '../../utils/formatBalance';
 import getTimePeriods from '../../utils/getTimePeriods';
 
-export const getBnbAmount = (bnbBn: BigNumber) => {
-  return getBalanceAmount(bnbBn.toString(), 18);
+export const getDehubAmount = (dehubBn: BigNumber) => {
+  return getBalanceAmount(dehubBn.toString(), 5);
 };
 
 export const formatUsd = (usd: number) => {
   return `$${formatNumber(usd || 0, 3, 3)}`;
 };
 
-export const formatBnb = (bnb?: number) => {
-  return bnb
-    ? bnb.toLocaleString(undefined, {
+export const formatDehub = (dehub?: number) => {
+  return dehub
+    ? dehub.toLocaleString(undefined, {
         minimumFractionDigits: 3,
         maximumFractionDigits: 3,
       })
     : '0';
-};
-
-export const formatBnbFromBigNumber = (bnbBn: BigNumber) => {
-  return formatBnb(getBnbAmount(bnbBn).toNumber());
 };
 
 export const padTime = (num: number) => num.toString().padStart(2, '0');
