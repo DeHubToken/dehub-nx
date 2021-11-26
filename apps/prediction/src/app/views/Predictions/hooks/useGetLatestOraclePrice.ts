@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
+import { Hooks } from '@dehub/react/core';
 import { useChainlinkOracleContract } from '../../../hooks/useContract';
-import useLastUpdated from '../../../hooks/useLastUpdated';
 import { getBalanceAmount } from '../../../utils/formatBalance';
 import { BIG_ZERO } from '../../../utils/bigNumber';
 
 const useGetLatestOraclePrice = () => {
   const [price, setPrice] = useState(BIG_ZERO);
-  const { lastUpdated, setLastUpdated: refresh } = useLastUpdated();
+  const { lastUpdated, setLastUpdated: refresh } = Hooks.useLastUpdated();
   const chainlinkOracleContract = useChainlinkOracleContract();
 
   useEffect(() => {

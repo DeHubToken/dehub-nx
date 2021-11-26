@@ -33,7 +33,6 @@ import {
   PredictionsState,
   PredictionStatus,
 } from '../../state/types';
-import usePersistState from '../../hooks/usePersistState';
 import PageMeta from '../../components/layout/PageMeta';
 import usePollOraclePrice from './hooks/usePollOraclePrice';
 import usePollRoundData from './hooks/usePollRoundData';
@@ -58,11 +57,11 @@ const Predictions = () => {
   const walletConnectingState = useWalletConnectingState();
 
   const { isXl } = useMatchBreakpoints();
-  const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(
+  const [hasAcceptedRisk, setHasAcceptedRisk] = Hooks.usePersistState(
     false,
     'pancake_predictions_accepted_risk'
   );
-  const [hasAcceptedChart, setHasAcceptedChart] = usePersistState(
+  const [hasAcceptedChart, setHasAcceptedChart] = Hooks.usePersistState(
     false,
     'pancake_predictions_chart'
   );

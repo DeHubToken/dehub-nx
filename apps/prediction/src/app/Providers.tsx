@@ -1,9 +1,11 @@
-import { ModalProvider } from '@dehub/react/pcsuikit';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
+
+import { Contexts } from '@dehub/react/core';
+import { ModalProvider } from '@dehub/react/pcsuikit';
+
 import { LanguageProvider } from './contexts/Localization';
-import { RefreshContextProvider } from './contexts/RefreshContext';
 import { ThemeContextProvider } from './contexts/ThemeContext';
 import { ToastsProvider } from './contexts/ToastsContext';
 import store from './state';
@@ -15,9 +17,9 @@ const Providers: React.FC = ({ children }) => {
         <HelmetProvider>
           <ThemeContextProvider>
             <LanguageProvider>
-              <RefreshContextProvider>
+              <Contexts.RefreshContextProvider>
                 <ModalProvider>{children}</ModalProvider>
-              </RefreshContextProvider>
+              </Contexts.RefreshContextProvider>
             </LanguageProvider>
           </ThemeContextProvider>
         </HelmetProvider>
