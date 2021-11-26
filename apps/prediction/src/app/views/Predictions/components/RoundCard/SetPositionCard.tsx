@@ -165,9 +165,10 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   const handleEnterPosition = async () => {
     const betMethod = position === BetPosition.BULL ? 'betBull' : 'betBear';
     const decimalValue = getDecimalAmount(valueAsBn);
-    const allowance = await betTokenContract
-      .allowance(account, predictionContractAddress)
-
+    const allowance = await betTokenContract.allowance(
+      account,
+      predictionContractAddress
+    );
     if (allowance < decimalValue.toNumber()) {
       await betTokenContract
         .approve(predictionContractAddress, decimalValue.toNumber(), {from: account})
