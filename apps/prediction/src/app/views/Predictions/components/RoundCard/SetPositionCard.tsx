@@ -24,7 +24,7 @@ import {
   useERC20,
   usePredictionsContract,
 } from '../../../../hooks/useContract';
-import { useGetBnbBalance } from '../../../../hooks/useTokenBalance';
+import useTokenBalance from '../../../../hooks/useTokenBalance';
 import useToast from '../../../../hooks/useToast';
 import { BetPosition } from '../../../../state/types';
 import { getDecimalAmount } from '../../../../utils/formatBalance';
@@ -100,13 +100,13 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   } | null>(null);
   const { account } = Hooks.useMoralisEthers();
   const { swiper } = useSwiper();
-  const { balance: bnbBalance } = useGetBnbBalance();
+  const bnbBalance = useTokenBalance("0x5A5e32fE118E7c7b6536d143F446269123c0ba74");
   const minBetAmount = useGetMinBetAmount();
   const { t } = useTranslation();
   const { toastError } = useToast();
   const predictionsContract = usePredictionsContract();
   const betTokenContract = useERC20(
-    '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735'
+    '0x5A5e32fE118E7c7b6536d143F446269123c0ba74'
   );
   const predictionContractAddress = getPredictionsAddress();
 
@@ -165,30 +165,26 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   const handleEnterPosition = async () => {
     const betMethod = position === BetPosition.BULL ? 'betBull' : 'betBear';
     const decimalValue = getDecimalAmount(valueAsBn);
-    const allowance = await betTokenContract.methods
+    const allowance = await betTokenContract
       .allowance(account, predictionContractAddress)
-      .call();
+
     if (allowance < decimalValue.toNumber()) {
       await betTokenContract
-        .approve(predictionContractAddress, decimalValue)
-        .send({ from: account });
+        .approve(predictionContractAddress, decimalValue.toNumber(), {from: account})
     }
-    predictionsContract[betMethod](decimalValue)
-      .send({ from: account, gasPrice })
-      .once('sending', () => {
-        setIsTxPending(true);
-      })
-      .once('receipt', async (result: TransactionResult) => {
-        setIsTxPending(false);
-        onSuccess(decimalValue, result.transactionHash as string);
-      })
-      .once('error', (error: Error) => {
-        const errorMsg = t('An error occurred, unable to enter your position');
+    try {
+      const tx = await predictionsContract[betMethod](decimalValue.toNumber(), { from: account })
+      setIsTxPending(true);
+      const result = await tx.wait()
+      setIsTxPending(false);
+      onSuccess(decimalValue, result.transactionHash as string);
+    } catch (error) {
+      const errorMsg = t('An error occurred, unable to enter your position');
 
-        toastError(t('Error'), error?.message);
-        setIsTxPending(false);
-        console.error(errorMsg, error);
-      });
+      toastError(t('Error'), error?.message);
+      setIsTxPending(false);
+      console.error(errorMsg, error);
+    }
   };
 
   // Warnings
