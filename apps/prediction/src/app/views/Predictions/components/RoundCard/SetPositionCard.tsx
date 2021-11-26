@@ -100,7 +100,9 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   } | null>(null);
   const { account } = Hooks.useMoralisEthers();
   const { swiper } = useSwiper();
-  const bnbBalance = useTokenBalance("0x5A5e32fE118E7c7b6536d143F446269123c0ba74");
+  const bnbBalance = useTokenBalance(
+    '0x5A5e32fE118E7c7b6536d143F446269123c0ba74'
+  );
   const minBetAmount = useGetMinBetAmount();
   const { t } = useTranslation();
   const { toastError } = useToast();
@@ -169,14 +171,20 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
       account,
       predictionContractAddress
     );
+
     if (allowance < decimalValue.toNumber()) {
-      await betTokenContract
-        .approve(predictionContractAddress, decimalValue.toNumber(), {from: account})
+      await betTokenContract.approve(
+        predictionContractAddress,
+        decimalValue.toNumber(),
+        { from: account }
+      );
     }
     try {
-      const tx = await predictionsContract[betMethod](decimalValue.toNumber(), { from: account })
+      const tx = await predictionsContract[betMethod](decimalValue.toNumber(), {
+        from: account,
+      });
       setIsTxPending(true);
-      const result = await tx.wait()
+      const result = await tx.wait();
       setIsTxPending(false);
       onSuccess(decimalValue, result.transactionHash as string);
     } catch (error) {
