@@ -7,7 +7,7 @@
       "executor": "@nrwl/web:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/raffle",
+        "outputPath": "dist/apps/raffle/raffle",
         "index": "apps/raffle/src/index.html",
         "main": "apps/raffle/src/main.tsx",
         "polyfills": "apps/raffle/src/polyfills.ts",
@@ -139,14 +139,20 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run netlify:draft"
+        "commands": [
+          "echo '[build]\n  base = \"apps/raffle\"' > netlify.toml",
+          "npm run raffle:deploy:draft"
+        ]
       }
     },
     "deploy-prod": {
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run netlify:prod"
+        "commands": [
+          "echo '[build]\n  base = \"apps/raffle\"' > netlify.toml",
+          "npm run raffle:deploy:prod"
+        ]
       }
     }
   },
