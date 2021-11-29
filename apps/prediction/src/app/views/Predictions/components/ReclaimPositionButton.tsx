@@ -23,25 +23,22 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({
   const predictionsContract = usePredictionsContract();
   const { toastSuccess, toastError } = useToast();
 
-  const handleReclaim = () => {
-    predictionsContract
-      .claim(epoch)
-      .send({ from: account })
-      .once('sending', () => {
-        setIsPendingTx(true);
-      })
-      .once('receipt', async () => {
-        if (onSuccess) {
-          await onSuccess();
-        }
-        setIsPendingTx(false);
-        toastSuccess(t('Position reclaimed!'));
-      })
-      .once('error', (error: Error) => {
-        setIsPendingTx(false);
-        toastError(t('Error'), error?.message);
-        console.error(error);
-      });
+  const handleReclaim = async () => {
+    try {
+      const tx = await predictionsContract.claim(epoch, { from: account })
+      setIsPendingTx(true);
+      const result = tx.wait()
+      if (onSuccess) {
+        await onSuccess();
+      }
+      setIsPendingTx(false);
+      toastSuccess(t('Position reclaimed!'));
+
+    } catch (error) {
+      setIsPendingTx(false);
+      toastError(t('Error'), error?.message);
+      console.error(error);
+    }
   };
 
   return (
