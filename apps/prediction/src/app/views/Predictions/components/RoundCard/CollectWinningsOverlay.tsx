@@ -55,7 +55,7 @@ const CollectWinningsOverlay: React.FC<CollectWinningsOverlayProps> = ({
       <Icon
         className="fad fa-gift pr-2"
         size="48px"
-        style={{ flex: 'none', marginRight: '8px', fill: 'rgb(47,173,190)' }}
+        style={{ flex: 'none', marginRight: '8px', color: '#cda714' }}
       ></Icon>
       {/* <TrophyGoldIcon width="64px" style={{ flex: 'none' }} mr="8px" /> */}
       <CollectWinningsButton
