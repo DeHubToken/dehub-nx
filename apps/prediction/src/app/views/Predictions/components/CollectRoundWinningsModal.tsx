@@ -8,7 +8,6 @@ import {
   InjectedModalProps,
   Button,
   AutoRenewIcon,
-  TrophyGoldIcon,
   Text,
   Flex,
   Heading,
@@ -17,6 +16,7 @@ import {
   ModalCloseButton,
 } from '@dehub/react/pcsuikit';
 import { Hooks } from '@dehub/react/core';
+import Icon from '../../../../components/Icon/Icon';
 import { useAppDispatch } from '../../../state';
 import { usePriceBnbBusd } from '../../../state/hooks';
 import { markBetAsCollected } from '../../../state/predictions';
@@ -117,7 +117,16 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
         <ModalCloseButton onDismiss={onDismiss} />
       </ModalHeader>
       <ModalBody p="24px">
-        <TrophyGoldIcon width="96px" mx="auto" mb="24px" />
+        <Icon
+          className="fad fa-gift pr-2"
+          size="96px"
+          style={{
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            marginBottom: '24px',
+            color: '#cda714',
+          }}
+        ></Icon>
         <Flex alignItems="start" justifyContent="space-between" mb="24px">
           <Text>{t('Collecting')}</Text>
           <Box style={{ textAlign: 'right' }}>
