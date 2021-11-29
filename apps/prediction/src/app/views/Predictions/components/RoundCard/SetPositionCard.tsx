@@ -28,7 +28,7 @@ import useTokenBalance from '../../../../hooks/useTokenBalance';
 import useToast from '../../../../hooks/useToast';
 import { BetPosition } from '../../../../state/types';
 import { getDecimalAmount } from '../../../../utils/formatBalance';
-import UnlockButton from '../../../../components/UnlockButton';
+import ConnectWalletButton from '../../../../components/ConnectWalletButton';
 import { BIG_NINE, BIG_TEN } from '../../../../utils/bigNumber';
 import PositionTag from '../PositionTag';
 import { getDehubAmount } from '../../helpers';
@@ -313,7 +313,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
               {t(key)}
             </Button>
           ) : (
-            <UnlockButton />
+            <ConnectWalletButton />
           )}
         </Box>
         <Text as="p" fontSize="12px" lineHeight={1} color="textSubtle">

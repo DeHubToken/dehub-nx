@@ -3,7 +3,7 @@ import { Flex, Text } from '@dehub/react/pcsuikit';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Hooks } from '@dehub/react/core';
 import styled from 'styled-components';
-import UnlockButton from '../../components/UnlockButton';
+import ConnectWalletButton from '../../components/ConnectWalletButton';
 import { useTranslation } from '../../contexts/Localization';
 import { fetchHistory } from '../../state/predictions';
 import { getUnclaimedWinningBets } from '../../state/predictions/helpers';
@@ -98,7 +98,7 @@ const History = () => {
         flexDirection="column"
         mt="32px"
       >
-        <UnlockButton />
+        <ConnectWalletButton />
         <Text mt="8px">
           {t('Connect your wallet to view your prediction history')}
         </Text>
