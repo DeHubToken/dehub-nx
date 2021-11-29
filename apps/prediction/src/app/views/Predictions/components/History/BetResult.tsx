@@ -144,14 +144,14 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
         </Flex>
         <Flex alignItems="center" justifyContent="space-between" mb="16px">
           <Text>{t('Your position')}</Text>
-          <Text>{`${formatDehub(bet.amount)} BNB`}</Text>
+          <Text>{`${formatDehub(bet.amount)} DEHUB`}</Text>
         </Flex>
         <Flex alignItems="start" justifyContent="space-between">
           <Text bold>{t('Your Result')}</Text>
           <Box style={{ textAlign: 'right' }}>
             <Text bold color={getResultColor()}>{`${
               result === Result.LOSE ? '-' : '+'
-            }${formatDehub(payout)} BNB`}</Text>
+            }${formatDehub(payout)} DEHUB`}</Text>
             <Text fontSize="12px" color="textSubtle">
               {`~$${formatDehub(bnbBusdPrice.times(payout).toNumber())}`}
             </Text>

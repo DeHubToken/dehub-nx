@@ -35,7 +35,7 @@ export const PrizePoolRow: React.FC<PrizePoolRowProps> = ({
   return (
     <Row {...props}>
       <Text bold>{t('Prize Pool')}:</Text>
-      <Text bold>{`${getPrizePoolAmount(totalAmount)} BNB`}</Text>
+      <Text bold>{`${getPrizePoolAmount(totalAmount)} DEHUB`}</Text>
     </Row>
   );
 };

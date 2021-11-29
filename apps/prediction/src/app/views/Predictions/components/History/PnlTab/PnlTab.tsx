@@ -162,7 +162,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
           >
             {`${netResultIsPositive ? '+' : ''}${formatDehub(
               netResultAmount
-            )} BNB`}
+            )} DEHUB`}
           </Text>
           <Text small color="textSubtle">
             {`~$${formatDehub(bnbBusdPrice.times(netResultAmount).toNumber())}`}
@@ -176,7 +176,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
         <Text bold color={avgBnbWonIsPositive ? 'success' : 'failure'}>
           {`${avgBnbWonIsPositive ? '+' : ''}${formatDehub(
             avgBnbWonPerRound
-          )} BNB`}
+          )} DEHUB`}
         </Text>
         <Text small color="textSubtle">
           {`~$${formatDehub(bnbBusdPrice.times(avgBnbWonPerRound).toNumber())}`}
@@ -192,7 +192,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
             <Flex alignItems="flex-end">
               <Text bold color="success">{`+${formatDehub(
                 summary.won.bestRound.payout
-              )} BNB`}</Text>
+              )} DEHUB`}</Text>
               <Text ml="4px" small color="textSubtle">
                 ({summary.won.bestRound.multiplier.toFixed(2)}x)
               </Text>
@@ -208,7 +208,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
         <Text mt="16px" bold color="textSubtle">
           {t('Average position entered / round')}
         </Text>
-        <Text bold>{`${formatDehub(avgPositionEntered)} BNB`}</Text>
+        <Text bold>{`${formatDehub(avgPositionEntered)} DEHUB`}</Text>
         <Text small color="textSubtle">
           {`~$${formatDehub(
             bnbBusdPrice.times(avgPositionEntered).toNumber()
