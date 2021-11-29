@@ -121,7 +121,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
         <Flex alignItems="start" justifyContent="space-between" mb="24px">
           <Text>{t('Collecting')}</Text>
           <Box style={{ textAlign: 'right' }}>
-            <Text>{`${payout ? formatDehub(payout) : 0} BNB`}</Text>
+            <Text>{`${payout ? formatDehub(payout) : 0} DEHUB`}</Text>
             <Text fontSize="12px" color="textSubtle">
               {`~$${
                 payout ? formatDehub(bnbBusdPrice.times(payout).toNumber()) : 0
