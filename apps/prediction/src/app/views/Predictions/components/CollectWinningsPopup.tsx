@@ -8,6 +8,7 @@ import {
   TrophyGoldIcon,
 } from '@dehub/react/pcsuikit';
 import { CSSTransition } from 'react-transition-group';
+import Icon from '../../../components/Icon/Icon';
 import { useTranslation } from '../../../contexts/Localization';
 import { getBetHistory } from '../../../state/predictions/helpers';
 import {
@@ -191,7 +192,11 @@ const CollectWinningsPopup = () => {
     >
       <Wrapper ref={ref}>
         <Popup>
-          <TrophyGoldIcon width="64px" style={{ flex: 'none' }} mr="8px" />
+          <Icon
+            className="fad fa-gift pr-2"
+            size="48px"
+            style={{ flex: 'none', marginRight: '8px', color: '#cda714' }}
+          ></Icon>
           <Button style={{ flex: 1 }} onClick={handleOpenHistory}>
             {t('Collect Winnings')}
           </Button>

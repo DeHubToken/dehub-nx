@@ -1,7 +1,7 @@
 import React from 'react';
 import { Hooks } from '@dehub/react/core';
 import styled from 'styled-components';
-import { Flex, TrophyGoldIcon } from '@dehub/react/pcsuikit';
+import { Flex } from '@dehub/react/pcsuikit';
 import { useBetCanClaim } from '../../../../state/hooks';
 import { useTranslation } from '../../../../contexts/Localization';
 import Icon from '../../../../components/Icon/Icon';
@@ -55,9 +55,8 @@ const CollectWinningsOverlay: React.FC<CollectWinningsOverlayProps> = ({
       <Icon
         className="fad fa-gift pr-2"
         size="48px"
-        style={{ flex: 'none', marginRight: '8px', fill: 'rgb(47,173,190)' }}
+        style={{ flex: 'none', marginRight: '8px', color: '#cda714' }}
       ></Icon>
-      {/* <TrophyGoldIcon width="64px" style={{ flex: 'none' }} mr="8px" /> */}
       <CollectWinningsButton
         payout={payout}
         roundId={roundId}
