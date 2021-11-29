@@ -171,14 +171,15 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
       predictionContractAddress
     );
 
-    if (allowance < decimalValue.toNumber()) {
-      await betTokenContract.approve(
-        predictionContractAddress,
-        decimalValue.toNumber(),
-        { from: account }
-      );
-    }
     try {
+      if (allowance < decimalValue.toNumber()) {
+        await betTokenContract.approve(
+          predictionContractAddress,
+          decimalValue.toNumber(),
+          { from: account }
+        );
+      }
+
       const tx = await predictionsContract[betMethod](decimalValue.toNumber(), {
         from: account,
       });
@@ -269,7 +270,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           max={maxBalance}
           value={valueAsBn.lte(maxBalance) ? valueAsBn.toNumber() : 0}
           onChange={handleSliderChange}
-          step={0.000000000000001}
+          step={0.00001}
           disabled={!account || isTxPending}
           style={{ marginBottom: '16px' }}
         />
