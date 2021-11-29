@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Flex, TrophyGoldIcon } from '@dehub/react/pcsuikit';
 import { useBetCanClaim } from '../../../../state/hooks';
 import { useTranslation } from '../../../../contexts/Localization';
+import Icon from '../../../../components/Icon/Icon';
 import CollectWinningsButton from '../CollectWinningsButton';
 
 interface CollectWinningsOverlayProps {
@@ -16,7 +17,7 @@ interface CollectWinningsOverlayProps {
 const Wrapper = styled(Flex)<{
   isBottom: CollectWinningsOverlayProps['isBottom'];
 }>`
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: rgb(41, 50, 65);
   left: 0;
   position: absolute;
   width: 100%;
@@ -51,7 +52,12 @@ const CollectWinningsOverlay: React.FC<CollectWinningsOverlayProps> = ({
 
   return (
     <Wrapper alignItems="center" p="16px" isBottom={isBottom} {...props}>
-      <TrophyGoldIcon width="64px" style={{ flex: 'none' }} mr="8px" />
+      <Icon
+        className="fad fa-gift pr-2"
+        size="48px"
+        style={{ flex: 'none', marginRight: '8px', fill: 'rgb(47,173,190)' }}
+      ></Icon>
+      {/* <TrophyGoldIcon width="64px" style={{ flex: 'none' }} mr="8px" /> */}
       <CollectWinningsButton
         payout={payout}
         roundId={roundId}

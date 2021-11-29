@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Button, ButtonProps, useModal } from '@dehub/react/pcsuikit';
 import CollectRoundWinningsModal from './CollectRoundWinningsModal';
 
@@ -34,6 +35,8 @@ const CollectWinningsButton: React.FC<CollectWinningsButtonProps> = ({
       onClick={onPresentCollectWinningsModal}
       disabled={hasClaimed}
       {...props}
+      scale="sm"
+      style={{ background: '#622f88', fontWeight: 400 }}
     >
       {children}
     </Button>

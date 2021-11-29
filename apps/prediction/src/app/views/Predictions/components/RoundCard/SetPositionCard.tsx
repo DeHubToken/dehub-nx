@@ -224,7 +224,9 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
             <ArrowBackIcon width="24px" />
           </IconButton>
           <FlexRow>
-            <Heading scale="md">{t('Set Position')}</Heading>
+            <Heading scale="md" style={{ margin: '0px' }}>
+              {t('Set Position')}
+            </Heading>
           </FlexRow>
           <PositionTag betPosition={position} onClick={togglePosition}>
             {position === BetPosition.BULL ? t('Up') : t('Down')}
