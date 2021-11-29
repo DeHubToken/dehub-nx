@@ -25,7 +25,7 @@ const Wrapper = styled(Flex)<{
   ${({ isBottom }) => {
     return isBottom
       ? `
-      border-radius: 0 0 16px 16px;
+      border-radius: 0 0 6px 6px;
       bottom: 0;
     `
       : `
