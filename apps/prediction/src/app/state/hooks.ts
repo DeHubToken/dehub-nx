@@ -9,21 +9,26 @@ import farms from '../config/constants/farms';
 import { State, Farm } from './types';
 import { getCanClaim } from './predictions/helpers';
 import { FarmConfig } from '../config/constants/types';
+import { Constants } from '@dehub/shared/config';
+import { getChainId } from '../config/constants';
 
 export const usePollBlockNumber = () => {
   const dispatch = useAppDispatch();
-  const { authProvider } = Hooks.useMoralisEthers();
+  const { authProvider, chainId } = Hooks.useMoralisEthers();
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      if (authProvider) {
+      if (
+        authProvider &&
+        chainId === '0x' + Constants[getChainId()].CHAIN_ID_HEX
+      ) {
         const blockNumber = await authProvider.getBlockNumber();
         dispatch(setBlock(blockNumber));
       }
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [dispatch, authProvider]);
+  }, [dispatch, authProvider, chainId]);
 };
 
 // Farms

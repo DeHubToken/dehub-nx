@@ -65,7 +65,7 @@ const Predictions = () => {
     false,
     'pancake_predictions_chart'
   );
-  const { clearProvider, account, signer } = Hooks.useMoralisEthers();
+  const { clearProvider, account, logout } = Hooks.useMoralisEthers();
   const status = useGetPredictionsStatus();
   const isChartPaneOpen = useIsChartPaneOpen();
   const dispatch = useAppDispatch();
@@ -101,10 +101,11 @@ const Predictions = () => {
   useEffect(() => {
     Moralis.Web3.onChainChanged(newChainId => {
       if (newChainId !== getChainIdHex()) {
+        logout();
         clearProvider();
       }
     });
-  }, [clearProvider]);
+  }, [clearProvider, logout]);
 
   useEffect(() => {
     if (walletConnectingState === WalletConnectingState.WAITING) {
