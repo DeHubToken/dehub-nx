@@ -1,7 +1,9 @@
-import { Hooks } from '@dehub/react/core';
 import BigNumber from 'bignumber.js';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+
+import { Hooks } from '@dehub/react/core';
+
 import {
   fetchCurrentLottery,
   fetchCurrentLotteryId,
@@ -10,7 +12,6 @@ import {
   fetchUserTicketsAndLotteries,
 } from '.';
 import { useAppDispatch } from '..';
-import useRefresh from '../../hooks/useRefresh';
 import { State } from '../types';
 import {
   fetchLottery,
@@ -39,7 +40,7 @@ export const useGetUserLotteryDataLoading = (): boolean => {
 
 export const useFetchLottery = () => {
   const { account } = Hooks.useMoralisEthers();
-  const { fastRefresh, slowRefresh } = useRefresh();
+  const { fastRefresh, slowRefresh } = Hooks.useRefresh();
 
   const dispatch = useAppDispatch();
   const { currentLotteryId, isTransitioning } = useLottery();

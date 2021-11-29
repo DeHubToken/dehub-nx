@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux';
 import BigNumber from 'bignumber.js';
 
 import { WalletConnectingState } from '@dehub/shared/config';
+import { Hooks } from '@dehub/react/core';
 
 import { fetchDehubPrice, setWalletConnectingState } from './';
 import { useAppDispatch } from '..';
 import { AppState } from '../store';
-
-import useRefresh from '../../hooks/useRefresh';
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(
@@ -42,7 +41,7 @@ export const useDehubBusdPrice = (): BigNumber => {
 
 export const usePullBusdPrice = () => {
   const dispatch = useAppDispatch();
-  const { slowRefresh } = useRefresh();
+  const { slowRefresh } = Hooks.useRefresh();
 
   useEffect(() => {
     dispatch(fetchDehubPrice());
