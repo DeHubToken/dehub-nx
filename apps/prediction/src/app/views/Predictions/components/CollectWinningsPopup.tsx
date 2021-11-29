@@ -8,7 +8,7 @@ import {
   TrophyGoldIcon,
 } from '@dehub/react/pcsuikit';
 import { CSSTransition } from 'react-transition-group';
-import Icon from '../../../../components/Icon/Icon';
+import Icon from '../../../components/Icon/Icon';
 import { useTranslation } from '../../../contexts/Localization';
 import { getBetHistory } from '../../../state/predictions/helpers';
 import {

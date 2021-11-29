@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from '@dehub/react/pcsuikit';
 import { Hooks } from '@dehub/react/core';
-import Icon from '../../../../components/Icon/Icon';
+import Icon from '../../../components/Icon/Icon';
 import { useAppDispatch } from '../../../state';
 import { usePriceBnbBusd } from '../../../state/hooks';
 import { markBetAsCollected } from '../../../state/predictions';
