@@ -243,7 +243,6 @@ const Predictions = () => {
                 style={{
                   height: 'calc(100vh)',
                   minHeight: 'calc(100vh)',
-                  overflow: 'hidden',
                   position: 'relative',
                   paddingLeft: '0',
                   paddingRight: '0',

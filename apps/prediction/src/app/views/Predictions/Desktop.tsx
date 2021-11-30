@@ -64,6 +64,7 @@ const HistoryPane = styled.div<{ isHistoryPaneOpen: boolean }>`
   overflow: hidden;
   transition: width 200ms ease-in-out;
   width: ${({ isHistoryPaneOpen }) => (isHistoryPaneOpen ? '384px' : 0)};
+  margin-top: -280px;
 `;
 
 const StyledDesktop = styled.div`
