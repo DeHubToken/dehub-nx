@@ -7,7 +7,6 @@ import {
   Heading,
   IconButton,
   Button,
-  BinanceIcon,
   Text,
   BalanceInput,
   Box,
@@ -21,10 +20,10 @@ import { useGetMinBetAmount } from '../../../../state/hooks';
 import { ContextData } from '../../../../contexts/Localization/types';
 import { useTranslation } from '../../../../contexts/Localization';
 import {
-  useERC20,
+  useDehubContract,
   usePredictionsContract,
 } from '../../../../hooks/useContract';
-import useTokenBalance from '../../../../hooks/useTokenBalance';
+import { useGetDehubBalance } from '../../../../hooks/useTokenBalance';
 import useToast from '../../../../hooks/useToast';
 import { BetPosition } from '../../../../state/types';
 import { getDecimalAmount } from '../../../../utils/formatBalance';
@@ -103,12 +102,12 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   } | null>(null);
   const { account } = Hooks.useMoralisEthers();
   const { swiper } = useSwiper();
-  const dehubBalance = useTokenBalance(getDehubAddress());
+  const dehubBalance = useGetDehubBalance();
   const minBetAmount = useGetMinBetAmount();
   const { t } = useTranslation();
   const { toastError } = useToast();
   const predictionsContract = usePredictionsContract();
-  const betTokenContract = useERC20(getDehubAddress());
+  const betTokenContract = useDehubContract();
   const predictionContractAddress = getPredictionsAddress();
 
   const balanceDisplay = getDehubAmount(dehubBalance).toNumber();
