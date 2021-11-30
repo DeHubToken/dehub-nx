@@ -14,22 +14,22 @@ import { formatRoundTime } from '../helpers';
 import useRoundCountdown from '../hooks/useRoundCountdown';
 
 const Token = styled(Box)`
-  margin-top: -24px;
+  margin-top: -44px;
   position: absolute;
   top: 50%;
   z-index: 30;
 
   & > svg {
-    height: 48px;
-    width: 48px;
+    height: 68px;
+    width: 68px;
   }
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    margin-top: -32px;
+    margin-top: -50px;
 
     & > svg {
-      height: 64px;
-      width: 64px;
+      height: 90px;
+      width: 90px;
     }
   }
 `;
@@ -124,7 +124,7 @@ export const TimerLabel: React.FC<TimerLabelProps> = ({ interval }) => {
         </Title>
         <Interval fontSize="12px">{interval}</Interval>
       </Label>
-      <Token right={0}>
+      <Token right={-10}>
         <PocketWatchIcon />
       </Token>
     </Box>
