@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import maxBy from 'lodash/maxBy';
 import merge from 'lodash/merge';
-import { BIG_ZERO } from '../../utils/bigNumber';
+import { BIG_ZERO } from '@dehub/shared/utils';
 import {
   Bet,
   HistoryFilter,

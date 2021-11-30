@@ -1,11 +1,12 @@
 import BigNumber from 'bignumber.js';
 import { DefaultTheme } from 'styled-components';
+import { formatNumber, getBalanceAmount } from '@dehub/shared/utils';
+
 import { Bet, BetPosition } from '../../state/types';
-import { formatNumber, getBalanceAmount } from '../../utils/formatBalance';
 import getTimePeriods from '../../utils/getTimePeriods';
 
 export const getDehubAmount = (dehubBn: BigNumber) => {
-  return getBalanceAmount(dehubBn.toString(), 5);
+  return getBalanceAmount(dehubBn, 5);
 };
 
 export const formatUsd = (usd: number) => {

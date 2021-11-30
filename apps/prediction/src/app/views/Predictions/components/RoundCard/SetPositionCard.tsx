@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Slider, SliderChangeParams } from 'primereact/slider';
+import BigNumber from 'bignumber.js';
+
 import {
   ArrowBackIcon,
   CardBody,
@@ -12,9 +15,9 @@ import {
   Box,
   AutoRenewIcon,
 } from '@dehub/react/pcsuikit';
-import { Slider, SliderChangeParams } from 'primereact/slider';
-import BigNumber from 'bignumber.js';
 import { Hooks } from '@dehub/react/core';
+import { getDecimalAmount, BIG_NINE, BIG_TEN } from '@dehub/shared/utils';
+
 import { DEFAULT_TOKEN_DECIMAL } from '../../../../config';
 import { useGetMinBetAmount } from '../../../../state/hooks';
 import { ContextData } from '../../../../contexts/Localization/types';
@@ -26,9 +29,7 @@ import {
 import { useGetDehubBalance } from '../../../../hooks/useTokenBalance';
 import useToast from '../../../../hooks/useToast';
 import { BetPosition } from '../../../../state/types';
-import { getDecimalAmount } from '../../../../utils/formatBalance';
 import ConnectWalletButton from '../../../../components/ConnectWalletButton';
-import { BIG_NINE, BIG_TEN } from '../../../../utils/bigNumber';
 import PositionTag from '../PositionTag';
 import { getDehubAmount } from '../../helpers';
 import useSwiper from '../../hooks/useSwiper';

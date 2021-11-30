@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Hooks } from '@dehub/react/core';
+import { getBalanceAmount, BIG_ZERO } from '@dehub/shared/utils';
+
 import { useChainlinkOracleContract } from '../../../hooks/useContract';
-import { getBalanceAmount } from '../../../utils/formatBalance';
-import { BIG_ZERO } from '../../../utils/bigNumber';
 
 const useGetLatestOraclePrice = () => {
   const [price, setPrice] = useState(BIG_ZERO);
