@@ -175,11 +175,17 @@ This project was generated using [Nx](https://nx.dev).
    URL:       https://dapps-dehub.netlify.app
    Site ID:   355647c5-6e43-4c94-92bc-eac397ab80a8
 
-   Site Created (React)
+   Site Created (React) - deprecated
 
    Admin URL: https://app.netlify.com/sites/dehub-react-lottery-draft
    URL:       https://dehub-react-lottery-draft.netlify.app
    Site ID:   bacc9132-2b4b-438d-9b93-a377c12181fb
+
+   Site Created (React)
+
+   Admin URL: https://app.netlify.com/sites/raffle-dehub
+   URL:       https://raffle-dehub.netlify.app
+   Site ID:   d1b6b0af-8fcd-4efa-a0ec-818a84cd9283
    ```
 
 # Nx Cloud benefits
