@@ -147,14 +147,20 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run web:deploy:draft"
+        "commands": [
+          "echo '[build]\n  base = \"apps/web\"' > netlify.toml",
+          "npm run web:deploy:draft"
+        ]
       }
     },
     "deploy-prod": {
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run web:deploy:prod"
+        "commands": [
+          "echo '[build]\n  base = \"apps/web\"' > netlify.toml",
+          "npm run web:deploy:prod"
+        ]
       }
     }
   },
