@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Slider, SliderChangeParams } from 'primereact/slider';
 import BigNumber from 'bignumber.js';
 
+import { MaxUint256 } from '@ethersproject/constants';
 import {
   ArrowBackIcon,
   CardBody,
@@ -173,16 +174,23 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
 
     try {
       if (allowance < decimalValue.toNumber()) {
-        await betTokenContract.approve(
+        const txApprove = await betTokenContract.approve(
           predictionContractAddress,
-          decimalValue.toNumber(),
-          { from: account }
+          MaxUint256
         );
+        const receipt = await txApprove.wait();
+        if (!receipt.status) {
+          const errorMsg = t(
+            'Please try again. Confirm the transaction and make sure you are paying enough gas!'
+          );
+
+          toastError(t('Error'), errorMsg);
+          setIsTxPending(false);
+          return;
+        }
       }
 
-      const tx = await predictionsContract[betMethod](decimalValue.toNumber(), {
-        from: account,
-      });
+      const tx = await predictionsContract[betMethod](decimalValue.toNumber());
       setIsTxPending(true);
       const result = await tx.wait();
       setIsTxPending(false);

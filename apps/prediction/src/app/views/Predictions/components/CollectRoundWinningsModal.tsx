@@ -65,8 +65,8 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
 
   const handleClick = async () => {
     try {
-      const tx = await predictionsContract.claim(epoch, { from: account })
-      setIsPendingTx(true)
+      const tx = await predictionsContract.claim(epoch);
+      setIsPendingTx(true);
       const result = await tx.wait();
       if (onSuccess) {
         await onSuccess();
@@ -93,7 +93,6 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
           )}
         </Box>
       );
-
     } catch (error) {
       setIsPendingTx(false);
       toastError(t('Error'), error?.message);
