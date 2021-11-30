@@ -125,14 +125,13 @@ const BuyStandardTicketDialog = ({
           newTickets.purchased,
           newTickets.tickets
         );
-      } catch (error) {
-        // eslint-disable-next-line
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
         console.error(error.message);
         toast?.current?.show({
           severity: 'error',
           summary: 'Purchase tickets',
           detail: `Purchase tickets failed - ${
-            // eslint-disable-next-line
             error?.data?.message ?? error.message
           }`,
           life: 3000,
