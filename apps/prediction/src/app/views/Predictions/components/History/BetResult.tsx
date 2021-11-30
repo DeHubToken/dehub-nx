@@ -101,7 +101,9 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
   return (
     <>
       <Flex alignItems="center" justifyContent="space-between" mb="8px">
-        <Heading>{t('Your History')}</Heading>
+        <Heading mx="0px" my="0px">
+          {t('Your History')}
+        </Heading>
         <Flex alignItems="center">
           <Heading
             as="h3"
@@ -109,6 +111,7 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
             textTransform="uppercase"
             bold
             mr="4px"
+            my="0px"
           >
             {getHeaderText()}
           </Heading>
