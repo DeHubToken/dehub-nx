@@ -30,11 +30,6 @@
     "affected": "nx print-affected --select=projects",
     "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "12.2.0",
@@ -133,7 +128,7 @@
     "eslint-plugin-react": "7.26.1",
     "eslint-plugin-react-hooks": "4.2.0",
     "graphql": "15.7.2",
-    "husky": "7.0.2",
+    "husky": "7.0.4",
     "jest": "27.2.3",
     "jest-preset-angular": "10.0.1",
     "lite-server": "2.6.1",
