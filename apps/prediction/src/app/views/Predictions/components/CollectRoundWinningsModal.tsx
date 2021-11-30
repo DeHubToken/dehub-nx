@@ -63,46 +63,42 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   const bnbBusdPrice = usePriceBnbBusd();
   const dispatch = useAppDispatch();
 
-  const handleClick = () => {
-    predictionsContract
-      .claim(epoch)
-      .send({ from: account })
-      .once('sending', () => {
-        setIsPendingTx(true);
-      })
-      .once('receipt', async (result: TransactionResult) => {
-        if (onSuccess) {
-          await onSuccess();
-        }
+  const handleClick = async () => {
+    try {
+      const tx = await predictionsContract.claim(epoch, { from: account })
+      setIsPendingTx(true)
+      const result = await tx.wait();
+      if (onSuccess) {
+        await onSuccess();
+      }
 
-        dispatch(markBetAsCollected({ account, roundId }));
+      dispatch(markBetAsCollected({ account, roundId }));
 
-        if (onDismiss) {
-          onDismiss();
-        }
+      if (onDismiss) {
+        onDismiss();
+      }
 
-        setIsPendingTx(false);
-        toastSuccess(
-          t('Winnings collected!'),
-          <Box>
-            <Text as="p" mb="8px">
-              {t('Your prizes have been sent to your wallet')}
-            </Text>
-            {result.transactionHash && (
-              <LinkExternal
-                href={`https://bscscan.com/tx/${result.transactionHash}`}
-              >
-                {t('View on BscScan')}
-              </LinkExternal>
-            )}
-          </Box>
-        );
-      })
-      .once('error', (error: Error) => {
-        setIsPendingTx(false);
-        toastError(t('Error'), error?.message);
-        console.error(error);
-      });
+      toastSuccess(
+        t('Winnings collected!'),
+        <Box>
+          <Text as="p" mb="8px">
+            {t('Your prizes have been sent to your wallet')}
+          </Text>
+          {result.transactionHash && (
+            <LinkExternal
+              href={`https://bscscan.com/tx/${result.transactionHash}`}
+            >
+              {t('View on BscScan')}
+            </LinkExternal>
+          )}
+        </Box>
+      );
+
+    } catch (error) {
+      setIsPendingTx(false);
+      toastError(t('Error'), error?.message);
+      console.error(error);
+    }
   };
 
   return (
