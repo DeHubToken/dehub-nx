@@ -25,6 +25,7 @@ interface ExpiredRoundCardProps {
 const StyledExpiredRoundCard = styled(Card)`
   opacity: 0.7;
   transition: opacity 300ms;
+  border: 2px solid rgb(41 50 65);
   background: linear-gradient(
     128deg,
     #0b1113 0%,
@@ -58,7 +59,7 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
 
   return (
     <Box position="relative">
-      <StyledExpiredRoundCard className="border-neon-1">
+      <StyledExpiredRoundCard>
         <CardHeader
           status="expired"
           icon={<BlockIcon mr="4px" width="21px" color="white" />}

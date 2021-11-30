@@ -36,7 +36,7 @@ const CollectWinningsButton: React.FC<CollectWinningsButtonProps> = ({
       disabled={hasClaimed}
       {...props}
       scale="sm"
-      style={{ background: '#622f88', fontWeight: 400 }}
+      style={{ background: '#622f88', fontWeight: 400, borderRadius: '8px' }}
     >
       {children}
     </Button>

@@ -12,9 +12,7 @@ export const Bar = styled.div<BarProps>`
   top: 0;
   left: 0;
   background-color: ${props =>
-    props.primary
-      ? props.theme.colors.secondary
-      : `${props.theme.colors.secondary}80`};
+    props.primary ? 'rgb(255, 216, 0)' : `${props.theme.colors.secondary}80`};
   height: 100%;
   transition: width 200ms ease;
 `;
@@ -30,7 +28,7 @@ interface StyledProgressProps {
 
 const StyledProgress = styled.div<StyledProgressProps>`
   position: relative;
-  background-color: ${({ theme }) => theme.colors.input};
+  background-color: ${({ theme }) => '#d7ca347a'};
   box-shadow: ${({ theme }) => theme.shadows.inset};
   overflow: hidden;
 

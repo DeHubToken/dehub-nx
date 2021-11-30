@@ -197,7 +197,10 @@ const CollectWinningsPopup = () => {
             size="48px"
             style={{ flex: 'none', marginRight: '8px', color: '#cda714' }}
           ></Icon>
-          <Button style={{ flex: 1 }} onClick={handleOpenHistory}>
+          <Button
+            style={{ flex: 1, borderRadius: '8px' }}
+            onClick={handleOpenHistory}
+          >
             {t('Collect Winnings')}
           </Button>
           <IconButton variant="text" onClick={handleClick}>

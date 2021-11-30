@@ -102,24 +102,22 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
 
   return (
     <Modal minWidth="288px" position="relative" mt="124px">
-      <BunnyDecoration>
-        {/* <img src="/images/decorations/prize-bunny.png" alt="bunny decoration" height="124px" width="168px" /> */}
-      </BunnyDecoration>
       <ModalHeader>
         <ModalTitle>
-          <Heading>{t('Collect Winnings')}</Heading>
+          <Heading style={{ margin: 0 }}>{t('Collect Winnings')}</Heading>
         </ModalTitle>
         <ModalCloseButton onDismiss={onDismiss} />
       </ModalHeader>
       <ModalBody p="24px">
         <Icon
-          className="fad fa-gift pr-2"
-          size="96px"
+          className="fad fa-trophy-alt pr-2"
+          size="86px"
           style={{
             marginLeft: 'auto',
             marginRight: 'auto',
-            marginBottom: '24px',
-            color: '#cda714',
+            marginTop: '10px',
+            marginBottom: '44px',
+            color: '#FFD800',
           }}
         ></Icon>
         <Flex alignItems="start" justifyContent="space-between" mb="24px">

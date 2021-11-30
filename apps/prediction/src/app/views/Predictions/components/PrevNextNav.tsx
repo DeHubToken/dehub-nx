@@ -22,13 +22,6 @@ const StyledPrevNextNav = styled(Card)`
   }
 `;
 
-const Icon = styled.div`
-  cursor: pointer;
-  left: 50%;
-  margin-left: -12px;
-  position: absolute;
-`;
-
 const PrevNextNav = () => {
   const { swiper } = useSwiper();
   const currentEpoch = useGetCurrentEpoch();
@@ -56,9 +49,9 @@ const PrevNextNav = () => {
       <IconButton variant="text" scale="sm" onClick={handlePrevSlide}>
         <ArrowBackIcon color="primary" width="24px" />
       </IconButton>
-      <Icon onClick={handleSlideToLive}>
+      <IconButton variant="text" scale="sm" onClick={handleSlideToLive}>
         <i className="fad fa-home"></i>
-      </Icon>
+      </IconButton>
       <IconButton variant="text" scale="sm" onClick={handleNextSlide}>
         <ArrowForwardIcon color="primary" width="24px" />
       </IconButton>

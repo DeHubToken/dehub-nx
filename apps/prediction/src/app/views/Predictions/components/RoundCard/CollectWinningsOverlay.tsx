@@ -53,9 +53,9 @@ const CollectWinningsOverlay: React.FC<CollectWinningsOverlayProps> = ({
   return (
     <Wrapper alignItems="center" p="16px" isBottom={isBottom} {...props}>
       <Icon
-        className="fad fa-gift pr-2"
-        size="48px"
-        style={{ flex: 'none', marginRight: '8px', color: '#cda714' }}
+        className="fad fa-trophy-alt pr-2"
+        size="34px"
+        style={{ flex: 'none', marginRight: '8px', color: '#FFD800' }}
       ></Icon>
       <CollectWinningsButton
         payout={payout}
@@ -63,6 +63,7 @@ const CollectWinningsOverlay: React.FC<CollectWinningsOverlayProps> = ({
         epoch={epoch}
         hasClaimed={false}
         width="100%"
+        height="50px"
       >
         {t('Collect Winnings')}
       </CollectWinningsButton>

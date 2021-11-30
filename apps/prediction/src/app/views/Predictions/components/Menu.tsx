@@ -56,7 +56,7 @@ const Menu = () => {
           <TimerLabelWrapper>
             <TimerLabel interval="5m" />
           </TimerLabelWrapper>
-          <HelpButtonWrapper>
+          {/* <HelpButtonWrapper>
             <IconButton
               variant="subtle"
               as="a"
@@ -66,7 +66,7 @@ const Menu = () => {
             >
               <HelpIcon width="24px" color="white" />
             </IconButton>
-          </HelpButtonWrapper>
+          </HelpButtonWrapper> */}
           <HistoryButtonWrapper>
             <HistoryButton />
           </HistoryButtonWrapper>

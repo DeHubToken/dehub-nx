@@ -130,7 +130,7 @@ const getBorderColor = ({
 };
 
 const Background = styled(Box)<RoundResultBoxProps>`
-  background: 'rgba(41,50,65,0.4)';
+  background: rgba(41, 50, 65, 0.4);
   border: 1px solid ${getBorderColor};
   border-radius: 16px;
   padding: 2px;
