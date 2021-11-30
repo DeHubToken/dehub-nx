@@ -59,11 +59,11 @@ const Predictions = () => {
   const { isXl } = useMatchBreakpoints();
   const [hasAcceptedRisk, setHasAcceptedRisk] = Hooks.usePersistState(
     false,
-    'pancake_predictions_accepted_risk'
+    'dehub_predictions_accepted_risk'
   );
   const [hasAcceptedChart, setHasAcceptedChart] = Hooks.usePersistState(
     false,
-    'pancake_predictions_chart'
+    'dehub_predictions_chart'
   );
   const { clearProvider, account, logout } = Hooks.useMoralisEthers();
   const status = useGetPredictionsStatus();

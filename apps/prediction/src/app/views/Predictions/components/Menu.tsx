@@ -60,7 +60,7 @@ const Menu = () => {
             <IconButton
               variant="subtle"
               as="a"
-              href="https://docs.pancakeswap.finance/products/prediction"
+              href="https://prediction-dehub.netlify.app/prediction/"
               target="_blank"
               rel="noreferrer noopener"
             >

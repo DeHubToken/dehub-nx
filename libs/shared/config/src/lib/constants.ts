@@ -69,6 +69,8 @@ export const ContractAddresses: {
     'BNB-BUSD': '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
     StandardLottery: '0xF5A881B2c1Bc20DBE8E54674d65e8D66487da35e',
     SpecialLottery: '0xdA9F2a546AfF5deDCF464205B229d18ab35B2d22',
+    Prediction: '0x05f3c9928df942e734bbb5b8027b063f8f308b48',
+    ChainLinkOracle: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e',
     MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
   },
   [ChainId.BSC_TESTNET]: {
@@ -79,6 +81,8 @@ export const ContractAddresses: {
     'BNB-BUSD': '0xe0e92035077c39594793e61802a350347c320cf2',
     StandardLottery: '0xe5f4683dE66F20A8E1A2135f657aE97502E01e66',
     SpecialLottery: '0xD17fB29e54f1CFeC6D56A9f46F69F24d4F5Feedb',
+    Prediction: '0x805Ae00834D1D8fD3ba65784A335C42366b7ecfb',
+    ChainLinkOracle: '0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526',
     MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
   },
 };
