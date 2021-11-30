@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { Hooks } from '@dehub/react/core';
 import {
@@ -83,6 +83,10 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
       return false;
     }
 
+    if (window.localStorage.getItem(`bet${round.id}`) !== null) {
+      return false;
+    }
+
     return true;
   };
 
@@ -145,6 +149,12 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
       <ArrowDownIcon color="currentColor" />
     );
   };
+
+  useEffect(() => {
+    if (!canEnterPosition) {
+      handleBack();
+    }
+  }, [canEnterPosition]);
 
   return (
     <CardFlip isFlipped={isSettingPosition} height="404px">
@@ -214,6 +224,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
         onSuccess={handleSuccess}
         position={position}
         togglePosition={togglePosition}
+        id={round.id}
       />
     </CardFlip>
   );

@@ -42,6 +42,7 @@ import {
 } from '../../../../utils/addressHelpers';
 
 interface SetPositionCardProps {
+  id: string;
   position: BetPosition;
   togglePosition: () => void;
   onBack: () => void;
@@ -91,6 +92,7 @@ const getButtonProps = (
 };
 
 const SetPositionCard: React.FC<SetPositionCardProps> = ({
+  id,
   position,
   togglePosition,
   onBack,
@@ -195,6 +197,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
       const result = await tx.wait();
       setIsTxPending(false);
       onSuccess(decimalValue, result.transactionHash as string);
+      window.localStorage.setItem(`bet${id}`, 'DONE');
     } catch (error) {
       const errorMsg = t('An error occurred, unable to enter your position');
 
