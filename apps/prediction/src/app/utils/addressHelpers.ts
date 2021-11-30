@@ -1,32 +1,22 @@
-import addresses from '../config/constants/contracts';
-import tokens from '../config/constants/tokens';
-import { Address } from '../config/constants/types';
+import { ContractAddresses } from '@dehub/shared/config';
+import { getChainId } from '../config/constants';
 
-export const getAddress = (address: Address): string => {
-  const mainNetChainId = 56;
-  const chainId = process.env.NX_REACT_APP_CHAIN_ID;
-  return chainId
-    ? address[chainId]
-      ? address[chainId]
-      : address[mainNetChainId]
-    : address[mainNetChainId];
-};
-
-export const getCakeAddress = () => {
-  return getAddress(tokens.cake.address);
+export const getAddress = (label: string): string => {
+  const chainId = getChainId();
+  return ContractAddresses[chainId][label];
 };
 
 export const getMulticallAddress = () => {
-  return getAddress(addresses.multiCall);
+  return getAddress('MultiCall');
 };
 
 export const getDehubAddress = () => {
-  return getAddress(addresses.dehub);
+  return getAddress('DeHub');
 };
 
 export const getPredictionsAddress = () => {
-  return getAddress(addresses.predictions);
+  return getAddress('Prediction');
 };
 export const getChainlinkOracleAddress = () => {
-  return getAddress(addresses.chainlinkOracle);
+  return getAddress('ChainLinkOracle');
 };

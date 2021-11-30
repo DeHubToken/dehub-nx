@@ -1,9 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
-import { PancakeTheme } from '@dehub/react/pcsuikit';
+import { DeHubTheme } from '@dehub/react/pcsuikit';
 
 declare module 'styled-components' {
   /* eslint-disable @typescript-eslint/no-empty-interface */
-  export interface DefaultTheme extends PancakeTheme {}
+  export interface DefaultTheme extends DeHubTheme {}
 }
 
 const GlobalStyle = createGlobalStyle`

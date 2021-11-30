@@ -16,7 +16,7 @@ import {
   ZIndices,
 } from './types';
 
-export interface PancakeTheme {
+export interface DeHubTheme {
   siteWidth: number;
   isDark: boolean;
   alert: AlertTheme;

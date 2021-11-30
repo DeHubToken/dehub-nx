@@ -31,9 +31,3 @@ export type Images = {
   sm: string;
   ipfs?: string;
 };
-
-export type PageMeta = {
-  title: string;
-  description?: string;
-  image?: string;
-};

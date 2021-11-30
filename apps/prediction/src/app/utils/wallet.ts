@@ -1,3 +1,5 @@
+import { Constants } from '@dehub/shared/config';
+import { getChainId } from '../config/constants';
 import { nodes } from './getRpcUrl';
 
 /**
@@ -7,7 +9,10 @@ import { nodes } from './getRpcUrl';
 export const setupNetwork = async () => {
   const provider = (window as WindowChain).ethereum;
   if (provider && provider.request) {
-    const chainId = parseInt(process.env.NX_REACT_APP_CHAIN_ID as string, 10);
+    const chainId = parseInt(
+      Constants[getChainId()].CHAIN_ID_DEC.toString(),
+      10
+    );
     try {
       await provider.request({
         method: 'wallet_addEthereumChain',
