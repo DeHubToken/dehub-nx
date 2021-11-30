@@ -56,7 +56,9 @@ const getTextColorByStatus = (
 const StyledCardHeader = styled.div<{ status: Status }>`
   align-items: center;
   background: ${({ status }) =>
-    status === 'live' ? 'rgba(255, 216, 0, 0.8)' : 'transparent'};
+    status === 'live' || status === 'calculating'
+      ? 'rgba(255, 216, 0, 0.8)'
+      : 'transparent'};
   border-radius: 0;
   display: flex;
   justify-content: space-between;
