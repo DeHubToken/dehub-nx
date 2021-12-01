@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
         <Button
           onClick={handleClick}
           variant="text"
-          endIcon={<ArrowForwardIcon color="primary" />}
+          endIcon={<ArrowForwardIcon color="secondary" />}
           px="0"
         >
           {t('Close')}
