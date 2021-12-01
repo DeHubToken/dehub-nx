@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Box, Flex } from '@dehub/react/pcsuikit';
+import { usePullBusdPrice } from '../../state/application/hooks';
 import {
   useGetPredictionsStatus,
   useIsChartPaneOpen,
@@ -58,6 +59,8 @@ const getView = (
 };
 
 const Mobile: React.FC = () => {
+  usePullBusdPrice();
+
   const isHistoryPaneOpen = useIsHistoryPaneOpen();
   const isChartPaneOpen = useIsChartPaneOpen();
   const view = getView(isHistoryPaneOpen, isChartPaneOpen);

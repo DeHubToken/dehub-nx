@@ -2,14 +2,14 @@ import { useEffect, useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useSelector } from 'react-redux';
 import { orderBy } from 'lodash';
+
 import { Hooks } from '@dehub/react/core';
+import { Constants } from '@dehub/shared/config';
+
 import { useAppDispatch } from '.';
 import setBlock from './actions';
-import farms from '../config/constants/farms';
-import { State, Farm } from './types';
+import { State } from './types';
 import { getCanClaim } from './predictions/helpers';
-import { FarmConfig } from '../config/constants/types';
-import { Constants } from '@dehub/shared/config';
 import { getChainId } from '../config/constants';
 
 export const usePollBlockNumber = () => {
@@ -29,20 +29,6 @@ export const usePollBlockNumber = () => {
 
     return () => clearInterval(interval);
   }, [dispatch, authProvider, chainId]);
-};
-
-// Farms
-
-export const useFarmFromPid = (pid: number): Farm => {
-  const farm = farms.find((f: FarmConfig) => f.pid === pid) as Farm;
-  return farm;
-};
-
-// API Prices
-
-export const usePriceBnbBusd = (): BigNumber => {
-  const bnbBusdFarm = useFarmFromPid(252);
-  return new BigNumber(bnbBusdFarm.quoteToken.busdPrice as BigNumber.Value);
 };
 
 // Block

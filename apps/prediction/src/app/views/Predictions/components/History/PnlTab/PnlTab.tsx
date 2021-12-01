@@ -1,5 +1,7 @@
 import React from 'react';
+import BigNumber from 'bignumber.js';
 import styled from 'styled-components';
+
 import { Hooks } from '@dehub/react/core';
 import {
   Box,
@@ -10,11 +12,16 @@ import {
   Link,
   OpenNewIcon,
 } from '@dehub/react/pcsuikit';
-import { useTranslation } from '../../../../../contexts/Localization';
 import {
-  useGetCurrentEpoch,
-  usePriceBnbBusd,
-} from '../../../../../state/hooks';
+  BUSD_DECIMALS,
+  DEHUB_DECIMALS,
+  BUSD_DISPLAY_DECIMALS,
+} from '@dehub/shared/config';
+import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
+
+import { useTranslation } from '../../../../../contexts/Localization';
+import { useDehubBusdPrice } from '../../../../../state/application/hooks';
+import { useGetCurrentEpoch } from '../../../../../state/hooks';
 import { Bet, BetPosition } from '../../../../../state/types';
 import { formatDehub, getMultiplier, getPayout } from '../../../helpers';
 import {
@@ -131,7 +138,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
   const { t } = useTranslation();
   const { account } = Hooks.useMoralisEthers();
   const currentEpoch = useGetCurrentEpoch();
-  const bnbBusdPrice = usePriceBnbBusd();
+  const dehubPrice = useDehubBusdPrice();
 
   const summary = getPnlSummary(bets, currentEpoch);
   const netResultAmount = summary.won.payout - summary.lost.amount;
@@ -165,7 +172,13 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
             )} DEHUB`}
           </Text>
           <Text small color="textSubtle">
-            {`~$${formatDehub(bnbBusdPrice.times(netResultAmount).toNumber())}`}
+            {`~$${getFullDisplayBalance(
+              dehubPrice.times(
+                getDecimalAmount(new BigNumber(netResultAmount), DEHUB_DECIMALS)
+              ),
+              BUSD_DECIMALS,
+              BUSD_DISPLAY_DECIMALS
+            )}`}
           </Text>
         </Flex>
       </Flex>
@@ -179,7 +192,13 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
           )} DEHUB`}
         </Text>
         <Text small color="textSubtle">
-          {`~$${formatDehub(bnbBusdPrice.times(avgBnbWonPerRound).toNumber())}`}
+          {`~$${getFullDisplayBalance(
+            dehubPrice.times(
+              getDecimalAmount(new BigNumber(avgBnbWonPerRound), DEHUB_DECIMALS)
+            ),
+            BUSD_DECIMALS,
+            BUSD_DISPLAY_DECIMALS
+          )}`}
         </Text>
 
         {hasBestRound && (
@@ -198,8 +217,15 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
               </Text>
             </Flex>
             <Text small color="textSubtle">
-              {`~$${formatDehub(
-                bnbBusdPrice.times(summary.won.bestRound.payout).toNumber()
+              {`~$${getFullDisplayBalance(
+                dehubPrice.times(
+                  getDecimalAmount(
+                    new BigNumber(summary.won.bestRound.payout),
+                    DEHUB_DECIMALS
+                  )
+                ),
+                BUSD_DECIMALS,
+                BUSD_DISPLAY_DECIMALS
               )}`}
             </Text>
           </>
@@ -210,20 +236,23 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
         </Text>
         <Text bold>{`${formatDehub(avgPositionEntered)} DEHUB`}</Text>
         <Text small color="textSubtle">
-          {`~$${formatDehub(
-            bnbBusdPrice.times(avgPositionEntered).toNumber()
+          {`~$${getFullDisplayBalance(
+            dehubPrice.times(
+              getDecimalAmount(
+                new BigNumber(avgPositionEntered),
+                DEHUB_DECIMALS
+              )
+            ),
+            BUSD_DECIMALS,
+            BUSD_DISPLAY_DECIMALS
           )}`}
         </Text>
 
         <Divider />
 
-        <SummaryRow type="won" summary={summary} bnbBusdPrice={bnbBusdPrice} />
-        <SummaryRow type="lost" summary={summary} bnbBusdPrice={bnbBusdPrice} />
-        <SummaryRow
-          type="entered"
-          summary={summary}
-          bnbBusdPrice={bnbBusdPrice}
-        />
+        <SummaryRow type="won" summary={summary} dehubPrice={dehubPrice} />
+        <SummaryRow type="lost" summary={summary} dehubPrice={dehubPrice} />
+        <SummaryRow type="entered" summary={summary} dehubPrice={dehubPrice} />
 
         <Flex justifyContent="center" mt="24px">
           <Link

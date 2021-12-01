@@ -3,7 +3,7 @@ import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import { ContractAddresses } from '@dehub/shared/config';
 import { ethersToBigNumber } from '@dehub/shared/utils';
 
-import PancakePairAbi from '../config/abis/PancakePair.json';
+import PancakePairAbi from '../config/abi/PancakePair.json';
 import { getChainId } from '../config/constants';
 import { getContract } from './contractHelpers';
 

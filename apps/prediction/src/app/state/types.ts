@@ -1,6 +1,3 @@
-import BigNumber from 'bignumber.js';
-import { FarmConfig } from '../config/constants/types';
-
 export type TranslatableText =
   | string
   | {
@@ -10,30 +7,8 @@ export type TranslatableText =
       };
     };
 
-export interface Farm extends FarmConfig {
-  tokenAmountMc?: BigNumber;
-  quoteTokenAmountMc?: BigNumber;
-  tokenAmountTotal?: BigNumber;
-  quoteTokenAmountTotal?: BigNumber;
-  lpTotalInQuoteToken?: BigNumber;
-  lpTotalSupply?: BigNumber;
-  tokenPriceVsQuote?: BigNumber;
-  poolWeight?: BigNumber;
-  userData?: {
-    allowance: string;
-    tokenBalance: string;
-    stakedBalance: string;
-    earnings: string;
-  };
-}
-
 // Slices states
 
-export interface FarmsState {
-  data: Farm[];
-  loadArchivedFarmsData: boolean;
-  userDataLoaded: boolean;
-}
 // Block
 
 export interface BlockState {
@@ -143,6 +118,5 @@ export interface PredictionsState {
 
 export interface State {
   block: BlockState;
-  farms: FarmsState;
   predictions: PredictionsState;
 }

@@ -6,6 +6,7 @@ import debounce from 'lodash/debounce';
 import delay from 'lodash/delay';
 import set from 'lodash/set';
 import { useAppDispatch } from '../../state';
+import { usePullBusdPrice } from '../../state/application/hooks';
 import {
   useGetPredictionsStatus,
   useIsChartPaneOpen,
@@ -110,6 +111,8 @@ const Gutter = styled.div`
 `;
 
 const Desktop: React.FC = () => {
+  usePullBusdPrice();
+
   const splitWrapperRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const chartRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const gutterRef = useRef() as React.MutableRefObject<HTMLDivElement>;

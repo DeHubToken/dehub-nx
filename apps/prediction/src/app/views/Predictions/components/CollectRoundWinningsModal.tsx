@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BigNumber from 'bignumber.js';
 import styled from 'styled-components';
 import {
   ModalContainer,
@@ -16,9 +17,15 @@ import {
   ModalCloseButton,
 } from '@dehub/react/pcsuikit';
 import { Hooks } from '@dehub/react/core';
+import {
+  BUSD_DECIMALS,
+  DEHUB_DECIMALS,
+  BUSD_DISPLAY_DECIMALS,
+} from '@dehub/shared/config';
+import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
 import Icon from '../../../components/Icon/Icon';
 import { useAppDispatch } from '../../../state';
-import { usePriceBnbBusd } from '../../../state/hooks';
+import { useDehubBusdPrice } from '../../../state/application/hooks';
 import { markBetAsCollected } from '../../../state/predictions';
 import { useTranslation } from '../../../contexts/Localization';
 import useToast from '../../../hooks/useToast';
@@ -60,7 +67,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   const { t } = useTranslation();
   const { toastSuccess, toastError } = useToast();
   const predictionsContract = usePredictionsContract();
-  const bnbBusdPrice = usePriceBnbBusd();
+  const dehubPrice = useDehubBusdPrice();
   const dispatch = useAppDispatch();
 
   const handleClick = async () => {
@@ -126,7 +133,15 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
             <Text>{`${payout ? formatDehub(payout) : 0} DEHUB`}</Text>
             <Text fontSize="12px" color="textSubtle">
               {`~$${
-                payout ? formatDehub(bnbBusdPrice.times(payout).toNumber()) : 0
+                payout
+                  ? getFullDisplayBalance(
+                      dehubPrice.times(
+                        getDecimalAmount(new BigNumber(payout), DEHUB_DECIMALS)
+                      ),
+                      BUSD_DECIMALS,
+                      BUSD_DISPLAY_DECIMALS
+                    )
+                  : 0
               }`}
             </Text>
           </Box>

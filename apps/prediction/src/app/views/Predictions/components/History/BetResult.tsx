@@ -1,4 +1,7 @@
 import React from 'react';
+import BigNumber from 'bignumber.js';
+import styled from 'styled-components';
+
 import { Hooks } from '@dehub/react/core';
 import {
   Box,
@@ -8,10 +11,17 @@ import {
   PrizeIcon,
   BlockIcon,
 } from '@dehub/react/pcsuikit';
-import styled from 'styled-components';
+import {
+  BUSD_DECIMALS,
+  DEHUB_DECIMALS,
+  BUSD_DISPLAY_DECIMALS,
+} from '@dehub/shared/config';
+import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
+
 import { useAppDispatch } from '../../../../state';
 import { useTranslation } from '../../../../contexts/Localization';
-import { useBetCanClaim, usePriceBnbBusd } from '../../../../state/hooks';
+import { useBetCanClaim } from '../../../../state/hooks';
+import { useDehubBusdPrice } from '../../../../state/application/hooks';
 import { Bet, BetPosition } from '../../../../state/types';
 import { fetchBet } from '../../../../state/predictions';
 import { Result } from '../../../../state/predictions/helpers';
@@ -38,7 +48,7 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
   const dispatch = useAppDispatch();
   const { account } = Hooks.useMoralisEthers();
   const { isRefundable } = useIsRefundable(bet.round.epoch);
-  const bnbBusdPrice = usePriceBnbBusd();
+  const dehubPrice = useDehubBusdPrice();
   const canClaim = useBetCanClaim(account, bet.round.id);
 
   // Winners get the payout, otherwise the claim what they put it if it was canceled
@@ -156,7 +166,13 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
               result === Result.LOSE ? '-' : '+'
             }${formatDehub(payout)} DEHUB`}</Text>
             <Text fontSize="12px" color="textSubtle">
-              {`~$${formatDehub(bnbBusdPrice.times(payout).toNumber())}`}
+              {`~$${getFullDisplayBalance(
+                dehubPrice.times(
+                  getDecimalAmount(new BigNumber(payout), DEHUB_DECIMALS)
+                ),
+                BUSD_DECIMALS,
+                BUSD_DISPLAY_DECIMALS
+              )}`}
             </Text>
           </Box>
         </Flex>

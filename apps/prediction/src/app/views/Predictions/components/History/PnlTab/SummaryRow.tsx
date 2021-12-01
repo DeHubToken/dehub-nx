@@ -1,6 +1,12 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
 import { Flex, Text } from '@dehub/react/pcsuikit';
+import {
+  BUSD_DECIMALS,
+  DEHUB_DECIMALS,
+  BUSD_DISPLAY_DECIMALS,
+} from '@dehub/shared/config';
+import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
 import { formatDehub } from '../../../helpers';
 import { useTranslation } from '../../../../../contexts/Localization';
 import { PnlSummary } from './PnlTab';
@@ -10,7 +16,7 @@ type SummaryType = 'won' | 'lost' | 'entered';
 interface SummaryRowProps {
   type: SummaryType;
   summary: PnlSummary;
-  bnbBusdPrice: BigNumber;
+  dehubPrice: BigNumber;
 }
 
 const summaryTypeColors = {
@@ -28,7 +34,7 @@ const summaryTypeSigns = {
 const SummaryRow: React.FC<SummaryRowProps> = ({
   type,
   summary,
-  bnbBusdPrice,
+  dehubPrice,
 }) => {
   const { t } = useTranslation();
 
@@ -60,7 +66,13 @@ const SummaryRow: React.FC<SummaryRowProps> = ({
             {`${summaryTypeSigns[type]}${formatDehub(displayAmount)} DEHUB`}
           </Text>
           <Text fontSize="12px" color="textSubtle">
-            {`~$${formatDehub(bnbBusdPrice.times(displayAmount).toNumber())}`}
+            {`~$${getFullDisplayBalance(
+              dehubPrice.times(
+                getDecimalAmount(new BigNumber(displayAmount), DEHUB_DECIMALS)
+              ),
+              BUSD_DECIMALS,
+              BUSD_DISPLAY_DECIMALS
+            )}`}
           </Text>
         </Flex>
       </Flex>
