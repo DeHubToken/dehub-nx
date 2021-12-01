@@ -85,13 +85,16 @@ const DeGrand = () => {
           className="border-neon-2 overflow-hidden"
           style={{ marginTop: '-80px' }}
           header={
+            lotteryMonthAsInt === currentMonthAsInt &&
             deGrandPrize.imageUrl && (
               <img src={deGrandPrize.imageUrl} alt="DeGrand prize this month" />
             )
           }
         >
           <StyledBox>
-            {deGrandPrize && deGrandPrize.drawTime > 0 ? (
+            {lotteryMonthAsInt === currentMonthAsInt &&
+            deGrandPrize &&
+            deGrandPrize.drawTime > 0 ? (
               <>
                 <FlexLine
                   className="md:flex-column align-items-start"
