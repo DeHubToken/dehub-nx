@@ -1,7 +1,7 @@
-import { defaultEnv, Env } from './env';
+import { defaultSharedEnv, SharedEnv } from './env';
 
-export const environmentProd: Env = {
-  ...defaultEnv,
+export const defaultSharedProdEnv: SharedEnv = {
+  ...defaultSharedEnv,
   env: 'prod',
   production: true,
 };

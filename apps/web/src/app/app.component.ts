@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { CoreService } from '@dehub/angular/core';
 import { MenuMode, ThemeMode } from '@dehub/shared/models';
 import { isThemeSwitchKey } from '@dehub/shared/utils';
 import { PrimeNGConfig } from 'primeng/api';
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   menuTheme: ThemeMode = 'dark';
 
   constructor(
+    private coreService: CoreService,
     private primengConfig: PrimeNGConfig,
     private themeService: ThemeService
   ) {}
@@ -27,6 +29,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.coreService.loadManifest();
+    this.coreService.loadIcon();
+    this.coreService.loadTheme();
+    this.coreService.loadPrimeCss();
     this.primengConfig.ripple = true;
   }
 

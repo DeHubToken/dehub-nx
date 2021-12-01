@@ -1,6 +1,8 @@
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { isMobile } from 'react-device-detect';
+import { ReactComponent as MetaMaskIcon } from '@dehub/shared/assets/dehub/icons/metamask.svg';
+import { ReactComponent as TrustWalletIcon } from '@dehub/shared/assets/dehub/icons/trustwallet.svg';
+import { ReactComponent as WalletConnectIcon } from '@dehub/shared/assets/dehub/icons/walletconnect.svg';
 
 export type ProviderTypes = 'walletconnect' | 'metamask';
 
@@ -24,24 +26,21 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
       <div className="flex flex-column">
         <div className="flex flex-column mt-2 mb-3">
           <Button className="p-shadow-4" onClick={() => doConnect('metamask')}>
-            <img
-              style={{ height: '16px', paddingRight: '10px' }}
-              src="assets/dehub/icons/metamask.svg"
-              alt=""
+            <MetaMaskIcon
+              style={{ width: '32px', height: '16px', paddingRight: '10px' }}
             />
             Metamask
           </Button>
         </div>
         <div className="flex flex-column mt-2 mb-3">
           <Button className="p-shadow-4" onClick={() => doConnect('metamask')}>
-            <img
+            <TrustWalletIcon
               style={{
+                width: '32px',
                 height: '20px',
                 paddingRight: '10px',
                 marginLeft: '-1px',
               }}
-              src="assets/dehub/icons/trustwallet.svg"
-              alt=""
             />
             Trust Wallet
           </Button>
@@ -51,10 +50,8 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
             className="p-shadow-4"
             onClick={() => doConnect('walletconnect')}
           >
-            <img
-              style={{ height: '11px', paddingRight: '10px' }}
-              src="assets/dehub/icons/walletconnect.svg"
-              alt=""
+            <WalletConnectIcon
+              style={{ width: '32px', height: '11px', paddingRight: '10px' }}
             />
             WalletConnect
           </Button>

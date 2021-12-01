@@ -7,7 +7,8 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/assets/dehub/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/assets/dehub/**/*.ts"],
+        "maxWarnings": 0
       }
     }
   },

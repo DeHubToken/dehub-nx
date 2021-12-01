@@ -7,7 +7,8 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/config/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/config/**/*.ts"],
+        "maxWarnings": 0
       }
     },
     "test": {

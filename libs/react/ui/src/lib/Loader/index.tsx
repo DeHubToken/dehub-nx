@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Player } from '@lottiefiles/react-lottie-player';
+import DehubLoaderJson from '@dehub/shared/assets/dehub/dehub-loader-light-blue.json';
 
 /**
  * @todo linear-gradient must be defined as $variable
@@ -53,7 +54,7 @@ const Loader = ({
             <td style={{ verticalAlign: 'middle', textAlign: 'center' }}>
               <div className="pt-2 mx-auto" style={{ height: 'fit-content' }}>
                 <Player
-                  src="assets/dehub/dehub-loader-light-blue.json"
+                  src={DehubLoaderJson}
                   background="transparent"
                   speed={1}
                   style={{ width: '180px' }}

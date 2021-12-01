@@ -1,5 +1,6 @@
 module.exports = {
   port: 9301,
+  startPath: '/web',
   open: 'external',
   host: 'dev.localhost',
   server: {

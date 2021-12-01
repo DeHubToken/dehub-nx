@@ -57,7 +57,7 @@ This project was generated using [Nx](https://nx.dev).
    ```
 
    ```
-   nx generate @nrwl/react:application --name=lottery --style=scss --standaloneConfig --strict
+   nx generate @nrwl/react:application --name=raffle --style=scss --standaloneConfig --strict
    ```
 
    upgrade to [webpack 5](https://nx.dev/l/r/guides/webpack-5#webpack-5-for-react-apps)
@@ -131,11 +131,11 @@ This project was generated using [Nx](https://nx.dev).
    ```
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run lottery:deploy:draft' --project=lottery
+   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run raffle:deploy:draft' --project=raffle
    ```
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run lottery:deploy:prod' --project=lottery
+   nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run raffle:deploy:prod' --project=raffle
    ```
 
 1. Angular lazy module under web:
@@ -180,9 +180,9 @@ This project was generated using [Nx](https://nx.dev).
 
    Site Created (React)
 
-   Admin URL: https://app.netlify.com/sites/dehub-react-lottery-draft
-   URL:       https://dehub-react-lottery-draft.netlify.app
-   Site ID:   bacc9132-2b4b-438d-9b93-a377c12181fb
+   Admin URL: https://app.netlify.com/sites/raffle-dehub
+   URL:       https://raffle-dehub.netlify.app
+   Site ID:   d1b6b0af-8fcd-4efa-a0ec-818a84cd9283
 
    Site Created (React)
 

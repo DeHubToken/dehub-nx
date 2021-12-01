@@ -53,7 +53,7 @@ export const Constants: { [key: number]: NetworkInfo } = {
       symbol: 'bnb',
       decimals: 18,
     },
-    RPC_URL: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+    RPC_URL: 'https://data-seed-prebsc-2-s2.binance.org:8545/',
     BLOCK_EXPLORER_URLS: 'https://testnet.bscscan.com',
   },
 };

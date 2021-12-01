@@ -19,6 +19,8 @@
       "@dehub/react/core": ["libs/react/core/src/index.ts"],
       "@dehub/react/pcsuikit": ["libs/react/pcsuikit/src/index.ts"],
       "@dehub/react/ui": ["libs/react/ui/src/index.ts"],
+      "@dehub/shared/assets/dehub/*": ["libs/shared/assets/dehub/src/lib/*"],
+      "@dehub/shared/assets/freya/*": ["libs/shared/assets/freya/src/lib/*"],
       "@dehub/shared/config": ["libs/shared/config/src/index.ts"],
       "@dehub/shared/models": ["libs/shared/models/src/index.ts"],
       "@dehub/shared/moralis": ["libs/shared/moralis/src/index.ts"],

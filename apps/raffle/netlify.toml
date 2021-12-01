@@ -1,0 +1,17 @@
+[[redirects]]
+  from = "/"
+  to = "raffle/index.html"
+  status = 200
+
+# Web alias
+[[redirects]]
+  from = "/raffle/*"
+  to = "raffle/index.html"
+  status = 200
+
+# Raffle alias
+[[redirects]]
+  from = "/web/*"
+  to = "https://dapps-dehub.netlify.app/web/:splat"
+  status = 200
+  force = true
