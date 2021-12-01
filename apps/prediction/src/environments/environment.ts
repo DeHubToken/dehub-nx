@@ -1,12 +1,5 @@
-/*
- * This file can be replaced during build by using the `fileReplacements` array.
- * When building for production, this file is replaced with `environment.prod.ts`.
- */
+import { defaultEnv, Env } from './env';
 
-import { ChainId } from '@dehub/shared/config';
-
-export const environment = {
-  production: false,
-  chainId: ChainId.BSC_TESTNET,
-  baseUrl: '',
+export const environment: Env = {
+  ...defaultEnv,
 };

@@ -15,7 +15,6 @@
         "polyfills": "apps/prediction/src/polyfills.ts",
         "tsConfig": "apps/prediction/tsconfig.app.json",
         "assets": [
-          "apps/prediction/src/favicon.ico",
           "apps/prediction/src/assets",
           {
             "input": "libs/shared/assets/dehub/src/lib",

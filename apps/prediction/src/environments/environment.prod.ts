@@ -1,7 +1,11 @@
-import { ChainId } from '@dehub/shared/config';
+import { ChainId, defaultSharedProdEnv } from '@dehub/shared/config';
+import { Env, defaultEnv } from './env';
 
-export const environment = {
-  production: true,
-  chainId: ChainId.BSC_MAINNET,
+export const environment: Env = {
+  ...defaultEnv,
+  ...defaultSharedProdEnv,
+
   baseUrl: '/prediction',
+
+  chainId: ChainId.BSC_MAINNET,
 };
