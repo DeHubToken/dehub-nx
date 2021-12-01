@@ -118,7 +118,7 @@ export const useGetHistory = () => {
 
 export const useGetHistoryByAccount = (account: string | null | undefined) => {
   const bets = useGetHistory();
-  if (account) return bets ? bets[account] : [];
+  if (account) return bets ? bets[account] || [] : [];
   return [];
 };
 
