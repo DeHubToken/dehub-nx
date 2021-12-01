@@ -68,14 +68,16 @@ const Label = styled(Card)<{ dir: 'left' | 'right' }>`
   display: flex;
   flex-direction: column;
   overflow: initial;
-  padding: ${({ dir }) => (dir === 'right' ? '0 28px 0 8px' : '0 8px 0 24px')};
+  padding: ${({ dir }) => (dir === 'right' ? '0 28px 0 8px' : '0 8px 0 40px')};
 
   ${({ theme }) => theme.mediaQueries.lg} {
     align-items: center;
-    border-radius: 16px;
+    border-radius: 8px;
     flex-direction: row;
     padding: ${({ dir }) =>
-      dir === 'right' ? '8px 40px 8px 8px' : '8px 8px 8px 40px'};
+      dir === 'right' ? '8px 55px 8px 8px' : '8px 8px 8px 8px'};
+    margin: ${({ dir }) =>
+      dir === 'right' ? '0px -15px 0px 0px' : '0px 0px 0px 65px'};
   }
 `;
 
@@ -119,7 +121,7 @@ export const TimerLabel: React.FC<TimerLabelProps> = ({ interval }) => {
   return (
     <Box pr="24px" position="relative">
       <Label dir="right">
-        <Title bold color="secondary">
+        <Title bold color="#f11484">
           {seconds === 0 ? t('Closing') : countdown}
         </Title>
         <Interval fontSize="12px">{interval}</Interval>
