@@ -197,7 +197,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
       const result = await tx.wait();
       setIsTxPending(false);
       onSuccess(decimalValue, result.transactionHash as string);
-      window.localStorage.setItem(`bet${id}`, 'DONE');
+      window.localStorage.setItem(`bet_${id}_${account}`, 'DONE');
     } catch (error) {
       const errorMsg = t('An error occurred, unable to enter your position');
 

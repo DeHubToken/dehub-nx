@@ -83,7 +83,10 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
       return false;
     }
 
-    if (account && window.localStorage.getItem(`bet${round.id}`) !== null) {
+    if (
+      account &&
+      window.localStorage.getItem(`bet_${round.id}_${account}`) !== null
+    ) {
       return false;
     }
 
