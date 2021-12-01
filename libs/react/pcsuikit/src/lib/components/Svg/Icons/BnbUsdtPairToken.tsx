@@ -16,7 +16,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -30,7 +30,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-2" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-2" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -44,7 +44,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-3" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-3" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -58,7 +58,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-4" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-4" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -72,7 +72,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-5" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-5" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -86,7 +86,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-6" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-6" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -100,7 +100,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-7" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-7" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -114,7 +114,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-8" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-8" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -128,7 +128,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-9" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-9" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -142,7 +142,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-10" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-10" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -156,7 +156,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-11" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-11" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -170,7 +170,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-12" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-12" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -184,7 +184,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-13" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-13" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -198,7 +198,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-14" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-14" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -212,7 +212,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-15" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-15" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -226,7 +226,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-16" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-16" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -240,7 +240,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-17" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-17" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -254,7 +254,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-18" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-18" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -268,7 +268,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="2" result="blur-19" />
-          <feFlood flood-color="#ffdf2e" />
+          <feFlood floodColor="#ffdf2e" />
           <feComposite operator="in" in2="blur-19" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -282,7 +282,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="1" result="blur-20" />
-          <feFlood flood-color="#ffe44e" />
+          <feFlood floodColor="#ffe44e" />
           <feComposite operator="in" in2="blur-20" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -296,7 +296,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="1" result="blur-21" />
-          <feFlood flood-color="#ffe44e" />
+          <feFlood floodColor="#ffe44e" />
           <feComposite operator="in" in2="blur-21" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -310,7 +310,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="1" result="blur-22" />
-          <feFlood flood-color="#ffe44e" />
+          <feFlood floodColor="#ffe44e" />
           <feComposite operator="in" in2="blur-22" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -324,7 +324,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="1" result="blur-23" />
-          <feFlood flood-color="#ffe44e" />
+          <feFlood floodColor="#ffe44e" />
           <feComposite operator="in" in2="blur-23" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -338,7 +338,7 @@ const Icon: React.FC<SvgProps> = props => {
         >
           <feOffset in="SourceAlpha" />
           <feGaussianBlur stdDeviation="1" result="blur-24" />
-          <feFlood flood-color="#ffe44e" />
+          <feFlood floodColor="#ffe44e" />
           <feComposite operator="in" in2="blur-24" />
           <feComposite in="SourceGraphic" />
         </filter>
