@@ -17,10 +17,7 @@ const DeLottoStage2Waiting = () => {
       ? environment.deGrandStartDayOnFebruary
       : environment.deGrandStartDay
   );
-  const startOfNextMonthAsInt = addMonths(
-    startThisMonth.getTime(),
-    1
-  ).getTime();
+  const startOfNextMonthAsInt = startThisMonth.getTime();
 
   return (
     <FlexLine className="md:flex-column justify-content-center align-items-center h-30rem">
