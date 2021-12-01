@@ -3,32 +3,23 @@ import BigNumber from 'bignumber.js';
 import { useSelector } from 'react-redux';
 import { orderBy } from 'lodash';
 
-import { Hooks } from '@dehub/react/core';
-import { Constants } from '@dehub/shared/config';
-
 import { useAppDispatch } from '.';
 import setBlock from './actions';
 import { State } from './types';
 import { getCanClaim } from './predictions/helpers';
-import { getChainId } from '../config/constants';
+import { simpleRpcProvider } from '../utils/contractHelpers';
 
 export const usePollBlockNumber = () => {
   const dispatch = useAppDispatch();
-  const { authProvider, chainId } = Hooks.useMoralisEthers();
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      if (
-        authProvider &&
-        chainId === '0x' + Constants[getChainId()].CHAIN_ID_HEX
-      ) {
-        const blockNumber = await authProvider.getBlockNumber();
-        dispatch(setBlock(blockNumber));
-      }
+      const blockNumber = await simpleRpcProvider.getBlockNumber();
+      dispatch(setBlock(blockNumber));
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [dispatch, authProvider, chainId]);
+  }, [dispatch]);
 };
 
 // Block

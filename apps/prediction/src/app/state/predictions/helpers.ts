@@ -207,7 +207,7 @@ export const getStaticPredictionsData = async () => {
   return {
     status: isPaused ? PredictionStatus.PAUSED : PredictionStatus.LIVE,
     currentEpoch: Number(currentEpoch),
-    intervalBlocks: Number(intervalBlocks),
+    intervalBlocks: intervalBlocks.toNumber(),
     bufferBlocks: Number(bufferBlocks),
     minBetAmount: minBetAmount.toString(),
   };
