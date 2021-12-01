@@ -241,8 +241,8 @@ const Predictions = () => {
               <div
                 className="layout-content"
                 style={{
-                  height: 'calc(100vh)',
-                  minHeight: 'calc(100vh)',
+                  height: 'calc(100vh - 370px)',
+                  minHeight: 'calc(100vh - 370px)',
                   position: 'relative',
                   paddingLeft: '0',
                   paddingRight: '0',
