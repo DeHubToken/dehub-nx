@@ -70,7 +70,7 @@ export const ContractAddresses: {
     StandardLottery: '0xF5A881B2c1Bc20DBE8E54674d65e8D66487da35e',
     SpecialLottery: '0xdA9F2a546AfF5deDCF464205B229d18ab35B2d22',
     Prediction: '0x05f3c9928df942e734bbb5b8027b063f8f308b48',
-    ChainLinkOracle: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e',
+    ChainLinkOracle: '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE',
     MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
   },
   [ChainId.BSC_TESTNET]: {
