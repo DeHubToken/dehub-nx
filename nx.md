@@ -165,7 +165,7 @@ This project was generated using [Nx](https://nx.dev).
 
    ```
    npx netlify sites:create --account-slug=dehub --name=dapps-dehub
-   npx netlify sites:create --account-slug=dehub --name=dehub-react-lottery-draft
+   npx netlify sites:create --account-slug=dehub --name=raffle-dehub
    npx netlify sites:create --account-slug=dehub --name=prediction-dehub
    ```
 

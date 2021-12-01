@@ -8,7 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/prediction",
+        "outputPath": "dist/apps/prediction/prediction",
         "index": "apps/prediction/src/index.html",
         "baseHref": "/",
         "main": "apps/prediction/src/main.tsx",
