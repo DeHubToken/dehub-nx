@@ -19,7 +19,7 @@ const Wrapper = styled.div<{
       : rewardBracket === LotteryPrizeLevel.BRONZE
       ? 'linear-gradient(50deg, rgba(89,63,46,1) 0%, rgba(179,109,45,1) 48%, rgba(89,63,46,1) 100%)'
       : 'var(--text-color-secondary)'};
-  border-radius: 16px;
+  border-radius: 8px;
   margin: auto;
   display: flex;
   justify-content: center;

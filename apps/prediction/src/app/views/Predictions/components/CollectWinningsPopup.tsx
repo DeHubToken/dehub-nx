@@ -119,8 +119,8 @@ const Wrapper = styled.div`
 
 const Popup = styled.div`
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.secondary};
-  border-radius: 32px;
+  background-color: rgb(41, 50, 65);
+  border-radius: 8px;
   color: #ffffff;
   display: flex;
   max-width: 320px;
@@ -193,9 +193,9 @@ const CollectWinningsPopup = () => {
       <Wrapper ref={ref}>
         <Popup>
           <Icon
-            className="fad fa-gift pr-2"
-            size="48px"
-            style={{ flex: 'none', marginRight: '8px', color: '#cda714' }}
+            className="fad fa-trophy-alt pr-2"
+            size="34px"
+            style={{ flex: 'none', margin: '0 8px', color: '#FFD800' }}
           ></Icon>
           <Button
             style={{ flex: 1, borderRadius: '8px' }}
@@ -204,7 +204,7 @@ const CollectWinningsPopup = () => {
             {t('Collect Winnings')}
           </Button>
           <IconButton variant="text" onClick={handleClick}>
-            <CloseIcon color="primary" width="24px" />
+            <CloseIcon color="secondary" width="24px" />
           </IconButton>
         </Popup>
       </Wrapper>

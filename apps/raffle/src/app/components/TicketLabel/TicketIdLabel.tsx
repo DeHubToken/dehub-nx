@@ -7,7 +7,7 @@ import { Text } from '../Text';
  */
 const Wrapper = styled.div`
   background-color: var(--text-color-secondary);
-  border-radius: 16px;
+  border-radius: 8px;
   margin: auto;
   display: flex;
   justify-content: center;

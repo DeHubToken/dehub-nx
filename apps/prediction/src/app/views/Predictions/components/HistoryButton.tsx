@@ -16,7 +16,7 @@ const HistoryButton = () => {
 
   return (
     <IconButton
-      variant="subtle"
+      variant="primary"
       ml="8px"
       onClick={handleClick}
       isLoading={isFetchingHistory}

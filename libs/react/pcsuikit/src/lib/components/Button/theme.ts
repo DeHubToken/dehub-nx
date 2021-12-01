@@ -18,7 +18,7 @@ export const scaleVariants = {
 
 export const styleVariants = {
   [variants.PRIMARY]: {
-    backgroundColor: 'primary',
+    backgroundColor: 'secondary',
     color: 'white',
   },
   [variants.SECONDARY]: {
@@ -34,7 +34,7 @@ export const styleVariants = {
   [variants.TERTIARY]: {
     backgroundColor: 'tertiary',
     boxShadow: 'none',
-    color: 'primary',
+    color: 'secondary',
   },
   [variants.SUBTLE]: {
     backgroundColor: 'textSubtle',

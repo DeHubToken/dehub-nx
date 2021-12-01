@@ -8,6 +8,7 @@ import {
 import styled from 'styled-components';
 import { useGetCurrentEpoch, useGetSortedRounds } from '../../../state/hooks';
 import useSwiper from '../hooks/useSwiper';
+import { color } from 'styled-system';
 
 const StyledPrevNextNav = styled(Card)`
   align-items: center;
@@ -47,13 +48,13 @@ const PrevNextNav = () => {
   return (
     <StyledPrevNextNav>
       <IconButton variant="text" scale="sm" onClick={handlePrevSlide}>
-        <ArrowBackIcon color="primary" width="24px" />
+        <ArrowBackIcon color="secondary" width="24px" />
       </IconButton>
-      <IconButton variant="text" scale="sm" onClick={handleSlideToLive}>
+      <IconButton variant="primary" scale="sm" onClick={handleSlideToLive}>
         <i className="fad fa-home"></i>
       </IconButton>
       <IconButton variant="text" scale="sm" onClick={handleNextSlide}>
-        <ArrowForwardIcon color="primary" width="24px" />
+        <ArrowForwardIcon color="secondary" width="24px" />
       </IconButton>
     </StyledPrevNextNav>
   );
