@@ -8,7 +8,7 @@
   to = "prediction/index.html"
   status = 200
 
-# Prediction
+# Web
 [[redirects]]
   from = "/web/*"
   to = "https://dapps-dehub.netlify.app/web/:splat"
