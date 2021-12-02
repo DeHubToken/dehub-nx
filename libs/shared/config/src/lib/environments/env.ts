@@ -37,6 +37,9 @@ export interface SharedEnv {
     isPreview: boolean;
     website: ContentfulEnv;
   };
+
+  // BSC network nodes
+  bscNodes: string[];
 }
 
 /**
@@ -56,4 +59,10 @@ export const defaultSharedEnv: SharedEnv = {
       cpaToken: 'HvmEh8YWfWNGKRzTSYDf-tIR93Rs8FjyKkH56c0svgo',
     },
   },
+
+  bscNodes: [
+    'https://bsc-dataseed.binance.org/',
+    'https://bsc-dataseed1.defibit.io/',
+    'https://bsc-dataseed1.ninicoin.io/',
+  ],
 };
