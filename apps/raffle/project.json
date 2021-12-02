@@ -139,20 +139,14 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "commands": [
-          "echo '[build]\n  base = \"apps/raffle\"' > netlify.toml",
-          "npm run raffle:deploy:draft"
-        ]
+        "command": "npm run raffle:deploy:draft"
       }
     },
     "deploy-prod": {
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "commands": [
-          "echo '[build]\n  base = \"apps/raffle\"' > netlify.toml",
-          "npm run raffle:deploy:prod"
-        ]
+        "command": "npm run raffle:deploy:prod"
       }
     }
   },

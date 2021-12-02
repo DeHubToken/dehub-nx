@@ -3,13 +3,12 @@
   to = "web/index.html"
   status = 200
 
-# Web alias
 [[redirects]]
   from = "/web/*"
   to = "web/index.html"
   status = 200
 
-# Raffle alias
+# Raffle
 [[redirects]]
   from = "/raffle/*"
   to = "https://raffle-dehub.netlify.app/raffle/:splat"
