@@ -31,7 +31,7 @@ import { useTranslation } from '../../../contexts/Localization';
 import useToast from '../../../hooks/useToast';
 import { usePredictionsContract } from '../../../hooks/useContract';
 import { formatDehub } from '../helpers';
-import DuotoneFontAwesomeIcon from 'apps/prediction/src/app/views/Predictions/components/DuotoneFontAwesomeIcon';
+import DuotoneFontAwesomeIcon from '../../Predictions/components/DuotoneFontAwesomeIcon';
 import useTheme from '../../../hooks/useTheme';
 import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
 
