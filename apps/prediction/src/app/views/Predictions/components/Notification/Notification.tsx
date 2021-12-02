@@ -6,16 +6,6 @@ interface NotificationProps {
   title: string;
 }
 
-/*
- * const BunnyDecoration = styled.div`
- *   position: absolute;
- *   top: -130px; // line up bunny at the top of the modal
- *   left: 0px;
- *   text-align: center;
- *   width: 100%;
- * `
- */
-
 const Wrapper = styled.div`
   align-items: center;
   display: flex;
@@ -27,15 +17,6 @@ const Wrapper = styled.div`
 const CardWrapper = styled.div`
   position: relative;
   width: 320px;
-`;
-
-const BunnyDecoration = styled.div`
-  position: absolute;
-  top: -130px;
-  left: 0px;
-  text-align: center;
-  width: 100%;
-  z-index: 5;
 `;
 
 const Notification: React.FC<NotificationProps> = ({ title, children }) => {

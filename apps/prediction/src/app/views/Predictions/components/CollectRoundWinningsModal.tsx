@@ -50,14 +50,6 @@ const Modal = styled(ModalContainer)`
   overflow: visible;
 `;
 
-const BunnyDecoration = styled.div`
-  position: absolute;
-  top: -116px; // line up bunny at the top of the modal
-  left: 0px;
-  text-align: center;
-  width: 100%;
-`;
-
 const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   payout,
   roundId,
