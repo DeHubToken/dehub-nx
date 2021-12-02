@@ -112,6 +112,8 @@ export interface PredictionsState {
   rounds: RoundData;
   history: HistoryData;
   bets: BetData;
+  rewardRate: number;
+  totalRate: number;
 }
 
 // Global state

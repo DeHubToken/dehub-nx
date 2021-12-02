@@ -151,3 +151,17 @@ export const useGetLastOraclePrice = (): BigNumber => {
   );
   return new BigNumber(lastOraclePrice);
 };
+
+export const useRewardRate = (): number => {
+  const rewardRate = useSelector(
+    (state: State) => state.predictions.rewardRate
+  );
+
+  return rewardRate;
+};
+
+export const useTotalRate = (): number => {
+  const totalRate = useSelector((state: State) => state.predictions.totalRate);
+
+  return totalRate;
+};

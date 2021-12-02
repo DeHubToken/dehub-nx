@@ -21,7 +21,11 @@ import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
 
 import { useTranslation } from '../../../../../contexts/Localization';
 import { useDehubBusdPrice } from '../../../../../state/application/hooks';
-import { useGetCurrentEpoch } from '../../../../../state/hooks';
+import {
+  useGetCurrentEpoch,
+  useRewardRate,
+  useTotalRate,
+} from '../../../../../state/hooks';
 import { Bet, BetPosition } from '../../../../../state/types';
 import { formatDehub, getMultiplier, getPayout } from '../../../helpers';
 import {
@@ -52,8 +56,8 @@ export interface PnlSummary {
 
 const TREASURY_FEE = 0.03;
 
-const getNetPayout = (bet: Bet) => {
-  const rawPayout = getPayout(bet);
+const getNetPayout = (bet: Bet, rewardRate: number, totalRate: number) => {
+  const rawPayout = getPayout(bet, rewardRate, totalRate);
   const fee = rawPayout * TREASURY_FEE;
   return rawPayout - fee - bet.amount;
 };
@@ -86,11 +90,16 @@ const initialPnlSummary: PnlSummary = {
   },
 };
 
-const getPnlSummary = (bets: Bet[], currentEpoch: number): PnlSummary => {
+const getPnlSummary = (
+  bets: Bet[],
+  currentEpoch: number,
+  rewardRate: number,
+  totalRate: number
+): PnlSummary => {
   return bets.reduce((summary: PnlSummary, bet) => {
     const roundResult = getRoundResult(bet, currentEpoch);
     if (roundResult === Result.WIN) {
-      const payout = getNetPayout(bet);
+      const payout = getNetPayout(bet, rewardRate, totalRate);
       let { bestRound } = summary.won;
       if (payout > bestRound.payout) {
         const { bullAmount, bearAmount, totalAmount } = bet.round;
@@ -139,8 +148,10 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
   const { account } = Hooks.useMoralisEthers();
   const currentEpoch = useGetCurrentEpoch();
   const dehubPrice = useDehubBusdPrice();
+  const rewardRate = useRewardRate();
+  const totalRate = useTotalRate();
 
-  const summary = getPnlSummary(bets, currentEpoch);
+  const summary = getPnlSummary(bets, currentEpoch, rewardRate, totalRate);
   const netResultAmount = summary.won.payout - summary.lost.amount;
   const netResultIsPositive = netResultAmount > 0;
   const avgPositionEntered = summary.entered.amount / summary.entered.rounds;

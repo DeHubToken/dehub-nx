@@ -16,6 +16,8 @@ import {
   useBetCanClaim,
   useGetCurrentEpoch,
   useGetPredictionsStatus,
+  useRewardRate,
+  useTotalRate,
 } from '../../../../state/hooks';
 import { getRoundResult, Result } from '../../../../state/predictions/helpers';
 import { useTranslation } from '../../../../contexts/Localization';
@@ -81,9 +83,12 @@ const HistoricalBet: React.FC<BetProps> = ({ bet }) => {
   const isLiveRound =
     status === PredictionStatus.LIVE && round.epoch === currentEpoch - 1;
   const canClaim = useBetCanClaim(account, bet.round.id);
+  const rewardRate = useRewardRate();
+  const totalRate = useTotalRate();
 
   // Winners get the payout, otherwise the claim what they put it if it was canceled
-  const payout = roundResult === Result.WIN ? getPayout(bet) : amount;
+  const payout =
+    roundResult === Result.WIN ? getPayout(bet, rewardRate, totalRate) : amount;
 
   const renderBetLabel = () => {
     if (isOpenRound) {

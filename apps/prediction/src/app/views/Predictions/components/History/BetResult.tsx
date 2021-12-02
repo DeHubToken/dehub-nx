@@ -20,7 +20,11 @@ import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
 
 import { useAppDispatch } from '../../../../state';
 import { useTranslation } from '../../../../contexts/Localization';
-import { useBetCanClaim } from '../../../../state/hooks';
+import {
+  useBetCanClaim,
+  useRewardRate,
+  useTotalRate,
+} from '../../../../state/hooks';
 import { useDehubBusdPrice } from '../../../../state/application/hooks';
 import { Bet, BetPosition } from '../../../../state/types';
 import { fetchBet } from '../../../../state/predictions';
@@ -50,9 +54,12 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
   const { isRefundable } = useIsRefundable(bet.round.epoch);
   const dehubPrice = useDehubBusdPrice();
   const canClaim = useBetCanClaim(account, bet.round.id);
+  const rewardRate = useRewardRate();
+  const totalRate = useTotalRate();
 
   // Winners get the payout, otherwise the claim what they put it if it was canceled
-  const payout = result === Result.WIN ? getPayout(bet) : bet.amount;
+  const payout =
+    result === Result.WIN ? getPayout(bet, rewardRate, totalRate) : bet.amount;
 
   const getHeaderColor = () => {
     switch (result) {

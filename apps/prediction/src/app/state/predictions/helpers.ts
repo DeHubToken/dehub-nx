@@ -203,6 +203,8 @@ export const getStaticPredictionsData = async () => {
   const minBetAmount = await contract.minBetAmount();
   const isPaused = await contract.paused();
   const bufferBlocks = await contract.bufferBlocks();
+  const rewardRate = await contract.rewardRate();
+  const totalRate = await contract.TOTAL_RATE();
 
   return {
     status: isPaused ? PredictionStatus.PAUSED : PredictionStatus.LIVE,
@@ -210,6 +212,8 @@ export const getStaticPredictionsData = async () => {
     intervalBlocks: intervalBlocks.toNumber(),
     bufferBlocks: Number(bufferBlocks),
     minBetAmount: minBetAmount.toString(),
+    rewardRate: Number(rewardRate),
+    totalRate: Number(totalRate),
   };
 };
 

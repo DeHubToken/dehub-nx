@@ -35,6 +35,8 @@ const initialState: PredictionsState = {
   rounds: {},
   history: {},
   bets: {},
+  rewardRate: 0,
+  totalRate: 100,
 };
 
 // Thunks

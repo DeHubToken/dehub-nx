@@ -4,7 +4,11 @@ import { Hooks } from '@dehub/react/core';
 import { Box, BlockIcon, CardBody } from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
 import { Round, BetPosition } from '../../../../state/types';
-import { useGetBetByRoundId } from '../../../../state/hooks';
+import {
+  useGetBetByRoundId,
+  useRewardRate,
+  useTotalRate,
+} from '../../../../state/hooks';
 import { RoundResult } from '../RoundResult';
 import { getPayout } from '../../helpers';
 import MultiplierArrow from './MultiplierArrow';
@@ -47,11 +51,13 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
 }) => {
   const { t } = useTranslation();
   const { account } = Hooks.useMoralisEthers();
+  const rewardRate = useRewardRate();
+  const totalRate = useTotalRate();
   const { id, epoch, endBlock, lockPrice, closePrice } = round;
   const betPosition =
     closePrice > lockPrice ? BetPosition.BULL : BetPosition.BEAR;
   const bet = useGetBetByRoundId(account, round.id);
-  const payout = bet ? getPayout(bet) : null;
+  const payout = bet ? getPayout(bet, rewardRate, totalRate) : null;
 
   if (round.failed) {
     return <CanceledRoundCard round={round} />;
