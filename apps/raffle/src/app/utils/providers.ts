@@ -1,6 +1,7 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
 import { Constants, NetworkInfo } from '@dehub/shared/config';
-import { getRpcUrl } from '../config/constants';
+
+import getRpcUrl from '../utils/getRpcUrl';
 
 const RPC_URL = getRpcUrl();
 
