@@ -38,7 +38,7 @@ export interface SharedEnv {
     website: ContentfulEnv;
   };
 
-  // BSC network nodes
+  /** BSC network nodes */
   bscNodes: string[];
 }
 
