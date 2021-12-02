@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { InMemoryCache } from '@apollo/client/cache';
 import { from } from '@apollo/client/core';
 import { onError } from '@apollo/client/link/error';
-import { Env } from '@dehub/shared/config';
+import { SharedEnv } from '@dehub/shared/config';
 import { APOLLO_FLAGS, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { EnvToken } from './models/injection-token';
@@ -23,7 +23,7 @@ export function createApollo(
       isPreview,
       website: { spaceId, cpaToken, cdaToken },
     },
-  }: Env
+  }: SharedEnv
 ) {
   return {
     link: from([

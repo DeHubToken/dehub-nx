@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+.angular/
 
 # dependencies
 /node_modules
@@ -41,3 +42,6 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+# Projects have specific netlify.toml
+# Dynamically set base dir during deploy
+/netlify.toml

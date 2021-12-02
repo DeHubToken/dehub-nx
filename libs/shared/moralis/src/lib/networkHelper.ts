@@ -59,18 +59,13 @@ export const getCurChainIdHex = async () => {
 };
 
 export const switchNetwork = async (chainId: number): Promise<boolean> => {
-  try {
-    const web3 = await Moralis.Web3.enable();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (web3.currentProvider as any).request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: `0x${chainId.toString(16)}` }],
-    });
-    return true;
-  } catch (switchError) {
-    console.error('switchEthereumChain', switchError);
-    return false;
-  }
+  const web3 = await Moralis.Web3.enable();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  await (web3.currentProvider as any).request({
+    method: 'wallet_switchEthereumChain',
+    params: [{ chainId: `0x${chainId.toString(16)}` }],
+  });
+  return true;
 };
 
 export const addNetwork = async (chainId: number): Promise<boolean> => {

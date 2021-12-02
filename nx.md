@@ -57,7 +57,7 @@ This project was generated using [Nx](https://nx.dev).
    ```
 
    ```
-   nx generate @nrwl/react:application --name=lottery --style=scss --standaloneConfig --strict
+   nx generate @nrwl/react:application --name=raffle --style=scss --standaloneConfig --strict
    ```
 
    upgrade to [webpack 5](https://nx.dev/l/r/guides/webpack-5#webpack-5-for-react-apps)
@@ -116,6 +116,8 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/react:lib --name=ui --directory=react --standaloneConfig --strict
 
    nx generate @nrwl/react:lib --name=core --directory=react --standaloneConfig --strict
+
+   nx generate @nrwl/react:lib --name=pcsuikit --directory=react --standaloneConfig --strict
    ```
 
 1. Run Commands generation
@@ -129,11 +131,11 @@ This project was generated using [Nx](https://nx.dev).
    ```
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run lottery:deploy:draft' --project=lottery
+   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run raffle:deploy:draft' --project=raffle
    ```
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run lottery:deploy:prod' --project=lottery
+   nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run raffle:deploy:prod' --project=raffle
    ```
 
 1. Angular lazy module under web:
@@ -163,7 +165,8 @@ This project was generated using [Nx](https://nx.dev).
 
    ```
    npx netlify sites:create --account-slug=dehub --name=dapps-dehub
-   npx netlify sites:create --account-slug=dehub --name=dehub-react-lottery-draft
+   npx netlify sites:create --account-slug=dehub --name=raffle-dehub
+   npx netlify sites:create --account-slug=dehub --name=prediction-dehub
    ```
 
    Output sample:
@@ -177,9 +180,15 @@ This project was generated using [Nx](https://nx.dev).
 
    Site Created (React)
 
-   Admin URL: https://app.netlify.com/sites/dehub-react-lottery-draft
-   URL:       https://dehub-react-lottery-draft.netlify.app
-   Site ID:   bacc9132-2b4b-438d-9b93-a377c12181fb
+   Admin URL: https://app.netlify.com/sites/raffle-dehub
+   URL:       https://raffle-dehub.netlify.app
+   Site ID:   d1b6b0af-8fcd-4efa-a0ec-818a84cd9283
+
+   Site Created (React)
+
+   Admin URL: https://app.netlify.com/sites/prediction-dehub
+   URL:       https://prediction-dehub.netlify.app
+   Site ID:   cb468f79-e012-4b6b-a4a6-bf85e3acae9a
    ```
 
 # Nx Cloud benefits

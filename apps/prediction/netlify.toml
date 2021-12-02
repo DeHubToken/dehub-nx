@@ -1,0 +1,23 @@
+[[redirects]]
+  from = "/"
+  to = "prediction/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/prediction/*"
+  to = "prediction/index.html"
+  status = 200
+
+# Web
+[[redirects]]
+  from = "/web/*"
+  to = "https://dapps-dehub.netlify.app/web/:splat"
+  status = 200
+  force = true
+
+# Raffle
+[[redirects]]
+  from = "/raffle/*"
+  to = "https://raffle-dehub.netlify.app/raffle/:splat"
+  status = 200
+  force = true

@@ -1,1 +1,2 @@
-export * from './website-contentful.services';
+export * from './website-contentful.service';
+export * from './core.service';

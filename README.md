@@ -10,6 +10,10 @@ _More libraries or apps are supported and will be added as we go under `apps` or
 
 Apps represent standalone sites, which can be written in pure JS, React, Vue.JS or Angular and can consume common libraries (`libs`)
 
+- Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
+- CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
+- Hosting: **[Netlify](https://dapps.netlify.app/)**
+
 Dehub Nx Monorepo consists of the following type of applications:
 
 - Angular
@@ -23,21 +27,25 @@ DeHub Dapps
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/355647c5-6e43-4c94-92bc-eac397ab80a8/deploy-status)](https://app.netlify.com/sites/dapps-dehub/deploys)
 
-- Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
-- CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
 - Hosting: **[Netlify](https://dapps-dehub.netlify.app/)**
 
 ## React
 
-### `lottery`
+### `raffle`
 
-DeHub Lottery Dapp
+DeHub Raffle Dapp
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bacc9132-2b4b-438d-9b93-a377c12181fb/deploy-status)](https://app.netlify.com/sites/dehub-react-lottery-draft/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d1b6b0af-8fcd-4efa-a0ec-818a84cd9283/deploy-status)](https://app.netlify.com/sites/raffle-dehub/deploys)
 
-- Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
-- CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
-- Hosting: **[Netlify](https://dehub-react-lottery-draft.netlify.app)**
+- Hosting: **[Netlify](https://dehub-raffle.netlify.app)**
+
+### `prediction`
+
+DeHub Prediction Dapp
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cb468f79-e012-4b6b-a4a6-bf85e3acae9a/deploy-status)](https://app.netlify.com/sites/prediction-dehub/deploys)
+
+- Hosting: **[Netlify](https://prediction-raffle.netlify.app)**
 
 # Libraries
 
@@ -105,7 +113,7 @@ _Common sass styles, assets from the Freya PrimeNG themes_
 
 # Dev Setup
 
-`<APP>` can be `web` or `lottery`
+`<APP>` can be `web` or `raffle`
 
 1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
 1. Open **VSCode** _(pre-configured editor settings involved)_

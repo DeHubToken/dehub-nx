@@ -13,9 +13,19 @@ interface ContentfulEnv {
  * Environment interface for shared environments
  * Used in Angular or React applications
  */
-export interface Env {
-  env: string;
+export interface SharedEnv {
+  env: 'dev' | 'prod';
   production: boolean;
+
+  /**
+   * Base URL of the project under sinßgle domain.
+   *
+   * project.json build artifact:
+   *   - deployUrl and baseHref should be in sync
+   * service worker:
+   *   - worker script path should be in sync
+   */
+  baseUrl: string;
 
   contentful: {
     /** Contentful GraphQL URI without Space ID */
@@ -32,9 +42,10 @@ export interface Env {
 /**
  * Default shared environment variables
  */
-export const defaultEnv: Env = {
-  env: '-',
+export const defaultSharedEnv: SharedEnv = {
+  env: 'dev',
   production: false,
+  baseUrl: '',
 
   contentful: {
     graphqlUri: 'https://graphql.contentful.com/content/v1/spaces',

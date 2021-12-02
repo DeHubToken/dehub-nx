@@ -1,14 +1,18 @@
-import { CommonModule } from '@angular/common';
+import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import {
+  ServiceWorkerModule,
+  SwRegistrationOptions,
+} from '@angular/service-worker';
 import { EnvToken, GraphQLModule } from '@dehub/angular/core';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
+import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,19 +48,35 @@ const layoutComponents = [
     angularModules,
     primeNgModules,
 
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      /**
-       * Register the ServiceWorker as soon as the app is stable
-       * or after 30 seconds (whichever comes first)
-       */
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
+    // PWA
+    ServiceWorkerModule.register(`web/ngsw-worker.js`),
 
+    // GraphQL
     GraphQLModule,
   ],
   declarations: [AppComponent, layoutComponents],
-  providers: [MenuService, { provide: EnvToken, useValue: environment }],
+  providers: [
+    MenuService,
+    { provide: EnvToken, useValue: environment },
+    {
+      provide: APP_BASE_HREF,
+      useFactory: ({ baseUrl }: Env) => baseUrl,
+      deps: [EnvToken],
+    },
+    {
+      provide: SwRegistrationOptions,
+      useFactory: ({ production, baseUrl }: Env) => ({
+        enabled: production,
+        ...(production && { scope: `${baseUrl}/` }),
+        /**
+         * Register the ServiceWorker as soon as the app is stable
+         * or after 30 seconds (whichever comes first)
+         */
+        registrationStrategy: 'registerWhenStable:30000',
+      }),
+      deps: [EnvToken],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

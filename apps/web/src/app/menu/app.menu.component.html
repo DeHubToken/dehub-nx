@@ -3,17 +3,6 @@
   [ngClass]="{ 'layout-sidebar-active': appMain.sidebarActive }"
   (click)="appMain.onSidebarClick()"
 >
-  <div class="sidebar-logo">
-    <a [routerLink]="['/']">
-      <img
-        src="assets/layout/images/logo-freya-single.svg"
-        alt="freya-layout"
-      />
-    </a>
-    <a href="#" class="sidebar-pin" (click)="appMain.onToggleMenu($event)">
-      <span class="pin"></span>
-    </a>
-  </div>
   <div class="layout-menu-container">
     <ul class="layout-menu">
       <li
