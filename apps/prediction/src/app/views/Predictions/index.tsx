@@ -43,6 +43,7 @@ import Desktop from './Desktop';
 import Mobile from './Mobile';
 import RiskDisclaimer from './components/RiskDisclaimer';
 import ChartDisclaimer from './components/ChartDisclaimer';
+import { environment } from '../../../environments/environment';
 
 const FUTURE_ROUND_COUNT = 2; // the number of rounds in the future to show
 
@@ -202,6 +203,8 @@ const Predictions = () => {
     return <Loader />;
   }
 
+  const path = environment.baseUrl;
+
   return (
     <div>
       <PageMeta />
@@ -220,7 +223,7 @@ const Predictions = () => {
               userMenu={<UserMenu />}
               logo={{
                 href: 'https://dehub.net',
-                icon: 'assets/dehub/logo-dehub-white.svg',
+                icon: `${path}/assets/dehub/logo-dehub-white.svg`,
               }}
             />
             <div className="layout-main">
@@ -232,7 +235,7 @@ const Predictions = () => {
                 }}
               >
                 <img
-                  src="../../assets/img/prediction-logo.png"
+                  src={`${path}/assets/img/prediction-logo.png`}
                   className="anim-float-1"
                   alt="Price Prediction Logo"
                   style={{ maxWidth: '300px' }}
