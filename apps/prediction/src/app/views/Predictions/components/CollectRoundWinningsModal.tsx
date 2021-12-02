@@ -120,17 +120,6 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
         <ModalCloseButton onDismiss={onDismiss} />
       </ModalHeader>
       <ModalBody p="24px">
-        {/* <Icon
-          className="fad fa-trophy-alt pr-2"
-          size="86px"
-          style={{
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            marginTop: '10px',
-            marginBottom: '44px',
-            color: '#FFD800',
-          }}
-        ></Icon> */}
         <DuotoneFontAwesomeIcon
           icon={faTrophyAlt}
           primaryColor="#FFD800"
