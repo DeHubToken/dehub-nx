@@ -8,11 +8,12 @@ export const baseColors = {
   secondary: '#1791a7',
   success: '#91db93',
   warning: '#ffecb3',
+  dhbWhite: '#b7c0cc',
 };
 
 export const additionalColors = {
   binance: '#F0B90B',
-  overlay: '#452a7a',
+  overlay: '#000000',
 };
 
 export const lightColors: Colors = {
@@ -51,7 +52,7 @@ export const darkColors: Colors = {
   background: '#08060B',
   backgroundDisabled: '#3c3742',
   backgroundAlt: '#27262c',
-  cardBorder: '#383241',
+  cardBorder: 'rgba(0,0,0,.125)',
   contrast: '#FFFFFF',
   dropdown: '#1E1D20',
   dropdownDeep: '#100C18',
