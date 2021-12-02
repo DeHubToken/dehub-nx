@@ -121,7 +121,7 @@ export const TimerLabel: React.FC<TimerLabelProps> = ({ interval }) => {
   return (
     <Box pr="24px" position="relative">
       <Label dir="right">
-        <Title bold color="#f11484" style={{ minWidth: '50px' }}>
+        <Title bold color="white" style={{ minWidth: '50px' }}>
           {seconds === 0 ? t('Closing') : countdown}
         </Title>
         <Interval fontSize="12px">{interval}</Interval>
