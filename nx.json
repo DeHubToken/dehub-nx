@@ -5,6 +5,7 @@
   },
   "implicitDependencies": {
     "package.json": {
+      "scripts": "*",
       "dependencies": "*",
       "devDependencies": "*"
     },
