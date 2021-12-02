@@ -31,6 +31,9 @@ import { useTranslation } from '../../../contexts/Localization';
 import useToast from '../../../hooks/useToast';
 import { usePredictionsContract } from '../../../hooks/useContract';
 import { formatDehub } from '../helpers';
+import DuotoneFontAwesomeIcon from 'apps/prediction/src/app/views/Predictions/components/DuotoneFontAwesomeIcon';
+import useTheme from '../../../hooks/useTheme';
+import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
   payout: number | null;
@@ -69,6 +72,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   const predictionsContract = usePredictionsContract();
   const dehubPrice = useDehubBusdPrice();
   const dispatch = useAppDispatch();
+  const { theme } = useTheme();
 
   const handleClick = async () => {
     try {
@@ -116,7 +120,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
         <ModalCloseButton onDismiss={onDismiss} />
       </ModalHeader>
       <ModalBody p="24px">
-        <Icon
+        {/* <Icon
           className="fad fa-trophy-alt pr-2"
           size="86px"
           style={{
@@ -126,7 +130,21 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
             marginBottom: '44px',
             color: '#FFD800',
           }}
-        ></Icon>
+        ></Icon> */}
+        <DuotoneFontAwesomeIcon
+          icon={faTrophyAlt}
+          primaryColor="#FFD800"
+          primaryOpacity="1"
+          secondaryColor={theme.colors.secondary}
+          secondaryOpacity="1"
+          style={{
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            marginTop: '10px',
+            marginBottom: '44px',
+            fontSize: '86px',
+          }}
+        />
         <Flex alignItems="start" justifyContent="space-between" mb="24px">
           <Text>{t('Collecting')}</Text>
           <Box style={{ textAlign: 'right' }}>

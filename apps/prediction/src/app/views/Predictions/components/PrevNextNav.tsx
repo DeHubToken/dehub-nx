@@ -1,17 +1,14 @@
-import React from 'react';
 import {
   ArrowBackIcon,
   ArrowForwardIcon,
   Card,
   IconButton,
 } from '@dehub/react/pcsuikit';
+import React from 'react';
 import styled from 'styled-components';
-import { faHome } from '@fortawesome/pro-duotone-svg-icons';
-
+import useTheme from '../../../hooks/useTheme';
 import { useGetCurrentEpoch, useGetSortedRounds } from '../../../state/hooks';
 import useSwiper from '../hooks/useSwiper';
-import DuotoneFontAwesomeIcon from './DuotoneFontAwesomeIcon';
-import useTheme from '../../../hooks/useTheme';
 
 const StyledPrevNextNav = styled(Card)`
   align-items: center;
@@ -54,22 +51,8 @@ const PrevNextNav = () => {
       <IconButton variant="text" scale="sm" onClick={handlePrevSlide}>
         <ArrowBackIcon color="secondary" width="24px" />
       </IconButton>
-      <IconButton variant="primary" scale="sm" onClick={handleSlideToLive}>
-        {/* <i className="fad fa-home"></i> */}
-        {/* <DuotoneFontAwesomeIcon
-          icon={faHome}
-          primaryColor="#f11484"
-          primaryOpacity="0.8"
-          secondaryColor="rgb(255,216,0)"
-          secondaryOpacity="0.8"
-        /> */}
-        <DuotoneFontAwesomeIcon
-          icon={faHome}
-          primaryColor={theme.colors.primary}
-          primaryOpacity="0.8"
-          secondaryColor={theme.colors.inputSecondary}
-          secondaryOpacity="0.8"
-        />
+      <IconButton variant="tertiary" scale="sm" onClick={handleSlideToLive}>
+        <i className="fas fa-home"></i>
       </IconButton>
       <IconButton variant="text" scale="sm" onClick={handleNextSlide}>
         <ArrowForwardIcon color="secondary" width="24px" />

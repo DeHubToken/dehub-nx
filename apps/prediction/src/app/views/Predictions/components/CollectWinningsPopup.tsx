@@ -1,22 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { Hooks } from '@dehub/react/core';
-import styled, { css, keyframes } from 'styled-components';
-import {
-  Button,
-  CloseIcon,
-  IconButton,
-  TrophyGoldIcon,
-} from '@dehub/react/pcsuikit';
+import { Button, CloseIcon, IconButton } from '@dehub/react/pcsuikit';
+import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
+import DuotoneFontAwesomeIcon from 'apps/prediction/src/app/views/Predictions/components/DuotoneFontAwesomeIcon';
+import React, { useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import Icon from '../../../components/Icon/Icon';
+import styled, { css, keyframes } from 'styled-components';
 import { useTranslation } from '../../../contexts/Localization';
-import { getBetHistory } from '../../../state/predictions/helpers';
+import useTheme from '../../../hooks/useTheme';
+import { useAppDispatch } from '../../../state';
 import {
   useGetPredictionsStatus,
   useIsHistoryPaneOpen,
 } from '../../../state/hooks';
-import { useAppDispatch } from '../../../state';
 import { setHistoryPaneState } from '../../../state/predictions';
+import { getBetHistory } from '../../../state/predictions/helpers';
 
 /**
  * @see https://github.com/animate-css/animate.css/tree/main/source
@@ -182,6 +179,8 @@ const CollectWinningsPopup = () => {
     }
   }, [isHistoryPaneOpen, setIsOpen]);
 
+  const { theme } = useTheme();
+
   return (
     <CSSTransition
       in={isOpen}
@@ -192,11 +191,14 @@ const CollectWinningsPopup = () => {
     >
       <Wrapper ref={ref}>
         <Popup>
-          <Icon
-            className="fad fa-trophy-alt pr-2"
-            size="34px"
-            style={{ flex: 'none', margin: '0 8px', color: '#FFD800' }}
-          ></Icon>
+          <DuotoneFontAwesomeIcon
+            icon={faTrophyAlt}
+            primaryColor="#FFD800"
+            primaryOpacity="1"
+            secondaryColor={theme.colors.secondary}
+            secondaryOpacity="1"
+            style={{ flex: 'none', margin: '0 20px 0 13px', fontSize: '34px' }}
+          />
           <Button
             style={{ flex: 1, borderRadius: '8px' }}
             onClick={handleOpenHistory}
