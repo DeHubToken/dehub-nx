@@ -8,12 +8,23 @@ import { simpleRpcProvider } from '../utils/contractHelpers';
 const useBlockCountdown = (blockNumber: number) => {
   const timer = useRef<NodeJS.Timeout | undefined>(undefined);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
+  const mountedRef = useRef(true);
 
   useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    mountedRef.current = true;
     const startCountdown = async () => {
       const currentBlock = await simpleRpcProvider.getBlockNumber();
 
       if (blockNumber > currentBlock) {
+        if (!mountedRef.current) {
+          return;
+        }
         setSecondsRemaining((blockNumber - currentBlock) * BSC_BLOCK_TIME);
 
         // Clear previous interval
@@ -22,6 +33,9 @@ const useBlockCountdown = (blockNumber: number) => {
         }
 
         timer.current = setInterval(() => {
+          if (!mountedRef.current) {
+            return;
+          }
           setSecondsRemaining(prevSecondsRemaining => {
             if (prevSecondsRemaining === 1) {
               clearInterval(timer.current as NodeJS.Timeout);

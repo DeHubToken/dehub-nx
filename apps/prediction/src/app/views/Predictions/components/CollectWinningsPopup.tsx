@@ -1,7 +1,7 @@
 import { Hooks } from '@dehub/react/core';
 import { Button, CloseIcon, IconButton } from '@dehub/react/pcsuikit';
 import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
-import DuotoneFontAwesomeIcon from 'apps/prediction/src/app/views/Predictions/components/DuotoneFontAwesomeIcon';
+import DuotoneFontAwesomeIcon from '../../Predictions/components/DuotoneFontAwesomeIcon';
 import React, { useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import styled, { css, keyframes } from 'styled-components';
