@@ -1,11 +1,8 @@
 import random from 'lodash/random';
+import { environment } from '../../environments/environment';
 
 // Array of available nodes to connect to
-export const nodes = [
-  process.env.NX_REACT_APP_NODE_1,
-  process.env.NX_REACT_APP_NODE_2,
-  process.env.NX_REACT_APP_NODE_3,
-];
+export const nodes = environment.bscNodes;
 
 const getNodeUrl = () => {
   const randomIndex = random(0, nodes.length - 1);
