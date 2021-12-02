@@ -56,8 +56,8 @@ export interface PnlSummary {
 
 const TREASURY_FEE = 0.03;
 
-const getNetPayout = (bet: Bet, rewardRate: number, totalRate: number) => {
-  const rawPayout = getPayout(bet, rewardRate, totalRate);
+const getNetPayout = (bet: Bet) => {
+  const rawPayout = getPayout(bet);
   const fee = rawPayout * TREASURY_FEE;
   return rawPayout - fee - bet.amount;
 };
@@ -99,7 +99,7 @@ const getPnlSummary = (
   return bets.reduce((summary: PnlSummary, bet) => {
     const roundResult = getRoundResult(bet, currentEpoch);
     if (roundResult === Result.WIN) {
-      const payout = getNetPayout(bet, rewardRate, totalRate);
+      const payout = getNetPayout(bet);
       let { bestRound } = summary.won;
       if (payout > bestRound.payout) {
         const { bullAmount, bearAmount, totalAmount } = bet.round;

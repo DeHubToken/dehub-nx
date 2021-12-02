@@ -58,8 +58,7 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
   const totalRate = useTotalRate();
 
   // Winners get the payout, otherwise the claim what they put it if it was canceled
-  const payout =
-    result === Result.WIN ? getPayout(bet, rewardRate, totalRate) : bet.amount;
+  const payout = result === Result.WIN ? getPayout(bet) : bet.amount;
 
   const getHeaderColor = () => {
     switch (result) {
@@ -171,7 +170,7 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
           <Box style={{ textAlign: 'right' }}>
             <Text bold color={getResultColor()}>{`${
               result === Result.LOSE ? '-' : '+'
-            }${formatDehub(payout)} DEHUB`}</Text>
+            }${formatDehub((payout * rewardRate) / totalRate)} DEHUB`}</Text>
             <Text fontSize="12px" color="textSubtle">
               {`~$${getFullDisplayBalance(
                 dehubPrice.times(

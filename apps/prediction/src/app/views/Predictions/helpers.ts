@@ -4,7 +4,6 @@ import { formatNumber, getBalanceAmount } from '@dehub/shared/utils';
 
 import { Bet, BetPosition } from '../../state/types';
 import getTimePeriods from '../../utils/getTimePeriods';
-import { useRewardRate, useTotalRate } from '../../state/hooks';
 
 export const getDehubAmount = (dehubBn: BigNumber) => {
   return getBalanceAmount(dehubBn, 5);
@@ -47,7 +46,7 @@ export const getMultiplier = (total: number, amount: number) => {
 /**
  * Calculates the total payout given a bet
  */
-export const getPayout = (bet: Bet, rewardRate: number, totalRate: number) => {
+export const getPayout = (bet: Bet) => {
   if (!bet || !bet.round) {
     return 0;
   }
@@ -55,9 +54,7 @@ export const getPayout = (bet: Bet, rewardRate: number, totalRate: number) => {
   const { bullAmount, bearAmount, totalAmount } = bet.round;
   const multiplier = getMultiplier(
     totalAmount as number,
-    (((bet.position === BetPosition.BULL ? bullAmount : bearAmount) *
-      rewardRate) /
-      totalRate) as number
+    (bet.position === BetPosition.BULL ? bullAmount : bearAmount) as number
   );
   return bet.amount * multiplier;
 };
