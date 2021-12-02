@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { ethers } from 'ethers';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import { ContractAddresses } from '@dehub/shared/config';
 import { ethersToBigNumber } from '@dehub/shared/utils';
 
@@ -47,8 +47,8 @@ export const getBNBPrice = async (): Promise<BigNumber> => {
 export const getDehubPrice = async (): Promise<BigNumber> => {
   const tokenBnbLp = await getPancakeLiquidityInfo('DeHub', 'BNB');
 
-  const bnbPrice = await getBNBPrice();
-  const bnbPriceAsEth = ethers.BigNumber.from(bnbPrice.toString());
+  const dehubPrice = await getBNBPrice();
+  const bnbPriceAsEth = EthersBigNumber.from(dehubPrice.toString());
   return ethersToBigNumber(
     tokenBnbLp.baseToken.reserve
       .mul(bnbPriceAsEth)

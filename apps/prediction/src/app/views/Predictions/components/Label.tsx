@@ -1,0 +1,134 @@
+import React, { useEffect } from 'react';
+import { useCountUp } from 'react-countup';
+import styled from 'styled-components';
+import {
+  BnbUsdtPairTokenIcon,
+  Box,
+  Card,
+  PocketWatchIcon,
+  Text,
+} from '@dehub/react/pcsuikit';
+import { useGetLastOraclePrice } from '../../../state/hooks';
+import { useTranslation } from '../../../contexts/Localization';
+import { formatRoundTime } from '../helpers';
+import useRoundCountdown from '../hooks/useRoundCountdown';
+
+const Token = styled(Box)`
+  margin-top: -44px;
+  position: absolute;
+  top: 50%;
+  z-index: 30;
+
+  & > svg {
+    height: 68px;
+    width: 68px;
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    margin-top: -50px;
+
+    & > svg {
+      height: 90px;
+      width: 90px;
+    }
+  }
+`;
+
+const Title = styled(Text)`
+  font-size: 16px;
+  line-height: 21px;
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    font-size: 20px;
+    line-height: 22px;
+  }
+`;
+
+const Price = styled(Text)`
+  height: 18px;
+  justify-self: start;
+  width: 60px;
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    text-align: center;
+  }
+`;
+
+const Interval = styled(Text)`
+  ${({ theme }) => theme.mediaQueries.lg} {
+    text-align: center;
+    width: 32px;
+  }
+`;
+
+const Label = styled(Card)<{ dir: 'left' | 'right' }>`
+  align-items: ${({ dir }) => (dir === 'right' ? 'flex-end' : 'flex-start')};
+  border-radius: ${({ dir }) =>
+    dir === 'right' ? '8px 8px 8px 24px' : '8px 8px 24px 8px'};
+  display: flex;
+  flex-direction: column;
+  overflow: initial;
+  padding: ${({ dir }) => (dir === 'right' ? '0 28px 0 8px' : '0 8px 0 40px')};
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    align-items: center;
+    border-radius: 8px;
+    flex-direction: row;
+    padding: ${({ dir }) =>
+      dir === 'right' ? '8px 55px 8px 8px' : '8px 8px 8px 8px'};
+    margin: ${({ dir }) =>
+      dir === 'right' ? '0px -15px 0px 0px' : '0px 0px 0px 65px'};
+  }
+`;
+
+export const PricePairLabel: React.FC = () => {
+  const price = useGetLastOraclePrice();
+  const { countUp, update } = useCountUp({
+    start: 0,
+    end: price.toNumber(),
+    duration: 1,
+    decimals: 3,
+  });
+
+  useEffect(() => {
+    update(price.toNumber());
+  }, [price, update]);
+
+  return (
+    <Box pl="24px" position="relative" display="inline-block">
+      <Token left={0}>
+        <BnbUsdtPairTokenIcon />
+      </Token>
+      <Label dir="left">
+        <Title bold textTransform="uppercase">
+          BNBUSDT
+        </Title>
+        <Price fontSize="12px">{`$${countUp}`}</Price>
+      </Label>
+    </Box>
+  );
+};
+
+interface TimerLabelProps {
+  interval: string;
+}
+
+export const TimerLabel: React.FC<TimerLabelProps> = ({ interval }) => {
+  const seconds = useRoundCountdown();
+  const countdown = formatRoundTime(seconds);
+  const { t } = useTranslation();
+
+  return (
+    <Box pr="24px" position="relative">
+      <Label dir="right">
+        <Title bold color="white" style={{ minWidth: '50px' }}>
+          {seconds === 0 ? t('Closing') : countdown}
+        </Title>
+        <Interval fontSize="12px">{interval}</Interval>
+      </Label>
+      <Token right={-10}>
+        <PocketWatchIcon />
+      </Token>
+    </Box>
+  );
+};

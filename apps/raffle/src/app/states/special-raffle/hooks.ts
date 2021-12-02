@@ -3,8 +3,6 @@ import BigNumber from 'bignumber.js';
 import { useSelector } from 'react-redux';
 import { Hooks } from '@dehub/react/core';
 
-import useRefresh from '../../hooks/useRefresh';
-
 import {
   fetchCurrentLottery,
   fetchCurrentLotteryId,
@@ -26,7 +24,7 @@ export const useGetCurrentLotteryId = (): string => {
 
 export const useFetchLottery = () => {
   const { account } = Hooks.useMoralisEthers();
-  const { fastRefresh, slowRefresh } = useRefresh();
+  const { fastRefresh, slowRefresh } = Hooks.useRefresh();
 
   const dispatch = useAppDispatch();
   const currentLotteryId: string = useGetCurrentLotteryId();

@@ -1,0 +1,153 @@
+{
+  "root": "apps/prediction",
+  "sourceRoot": "apps/prediction/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/prediction/prediction",
+        "index": "apps/prediction/src/index.html",
+        "baseHref": "/",
+        "main": "apps/prediction/src/main.tsx",
+        "polyfills": "apps/prediction/src/polyfills.ts",
+        "tsConfig": "apps/prediction/tsconfig.app.json",
+        "assets": [
+          "apps/prediction/src/assets",
+          {
+            "input": "libs/shared/assets/dehub/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts"],
+            "output": "assets/dehub"
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts", "**/*.scss"],
+            "output": "assets"
+          }
+        ],
+        "styles": [
+          "apps/prediction/src/styles.scss",
+          {
+            "input": "node_modules/primereact/resources/primereact.min.css",
+            "bundleName": "primereact",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeflex/primeflex.scss",
+            "bundleName": "primeflex",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeicons/primeicons.css",
+            "bundleName": "primeicons",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/dehub/theme.scss",
+            "bundleName": "theme",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dehub.scss",
+            "bundleName": "layout",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/alternative/theme-light.scss",
+            "bundleName": "theme-alternative",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-light.scss",
+            "bundleName": "layout-alternative",
+            "inject": false
+          }
+        ],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/prediction/src/environments/environment.ts",
+              "with": "apps/prediction/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "extractCss": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "deployUrl": "/prediction/",
+          "baseHref": "/prediction"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "prediction:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "prediction:build:production",
+          "hmr": false
+        },
+        "development": {
+          "buildTarget": "prediction:build:development",
+          "host": "dev.localhost",
+          "port": 8501
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/prediction/**/*.{ts,tsx,js,jsx}"],
+        "maxWarnings": 0
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/prediction"],
+      "options": {
+        "jestConfig": "apps/prediction/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "deploy-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run prediction:deploy:draft"
+      }
+    },
+    "deploy-prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm run prediction:deploy:prod"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["shared-assets-dehub", "shared-assets-freya"]
+}

@@ -1,17 +1,19 @@
-import { Hooks } from '@dehub/react/core';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
   ethersToBigNumber,
   getContract,
   getFullDisplayBalance,
 } from '@dehub/shared/utils';
-import { Web3Provider } from '@ethersproject/providers';
 import BigNumber from 'bignumber.js';
-import { ethers } from 'ethers';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import { useCallback, useRef, useState } from 'react';
+
+import { MaxUint256 } from '@ethersproject/constants';
+import { Web3Provider } from '@ethersproject/providers';
+import { Hooks } from '@dehub/react/core';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
+
 import BalanceInput from '../../components/BalanceInput/BalanceInput';
 import { Text } from '../../components/Text';
 import Bep20Abi from '../../config/abis/erc20.json';
@@ -138,7 +140,7 @@ const BuySpecialTicketDialog = ({
       try {
         return await dehubContract?.approve(
           getSpecialLotteryAddress(),
-          ethers.constants.MaxUint256
+          MaxUint256
         );
       } catch (error) {
         console.error(error);

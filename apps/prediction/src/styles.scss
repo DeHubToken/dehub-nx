@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+$gutter: 1rem; //for primeflex grid system
+
+.p-slider:not(.p-disabled) .p-slider-handle {
+  background: rgb(31, 199, 212);
+  border: none;
+
+  &:hover {
+    background: rgb(31, 199, 212);
+  }
+}
+
+.p-slider .p-slider-range {
+  background: rgb(31, 199, 212) !important;
+}

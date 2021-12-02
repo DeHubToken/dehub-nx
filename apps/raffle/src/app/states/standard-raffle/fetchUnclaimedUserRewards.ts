@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { ethers } from 'ethers';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import { BIG_ZERO, ethersToSerializedBigNumber } from '@dehub/shared/utils';
 import { fetchUserTicketsPerMultipleRounds } from './helpers';
 
@@ -44,7 +44,7 @@ const fetchDehubRewardsForTickets = async (
     const dehubRewards = await multicallv2(StandardLotteryAbi, calls);
 
     const dehubTotal = dehubRewards.reduce(
-      (accum: BigNumber, dehubReward: ethers.BigNumber) => {
+      (accum: BigNumber, dehubReward: EthersBigNumber) => {
         return accum.plus(new BigNumber(dehubReward.toString()));
       },
       BIG_ZERO

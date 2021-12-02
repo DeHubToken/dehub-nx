@@ -13,6 +13,7 @@ const LoaderWrapper = styled.div`
     #060c1d 71%,
     #321338
   );
+  color: #fff;
   position: fixed;
   padding: 0;
   margin: 0;
@@ -28,9 +29,10 @@ const LoaderWrapper = styled.div`
 `;
 
 const HeaderWrapper = styled.h4`
-  text-transfer: uppercase !important;
+  text-transform: uppercase !important;
   font-size: 20px;
   margin-top: -20px;
+  margin-bottom: 14px;
 `;
 
 const TextWrapper = styled.div`
@@ -49,8 +51,8 @@ const Loader = ({
       <table>
         <tbody>
           <tr>
-            <td className="align-middle text-center">
-              <div className="pt-2 mx-auto">
+            <td style={{ verticalAlign: 'middle', textAlign: 'center' }}>
+              <div className="pt-2 mx-auto" style={{ height: 'fit-content' }}>
                 <Player
                   src={DehubLoaderJson}
                   background="transparent"
