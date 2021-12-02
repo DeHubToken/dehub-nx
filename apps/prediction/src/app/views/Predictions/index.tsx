@@ -241,11 +241,16 @@ const Predictions = () => {
               <div
                 className="layout-content"
                 style={{
-                  height: 'calc(100vh - 370px)',
-                  minHeight: 'calc(100vh - 370px)',
+                  height: isDesktop
+                    ? 'calc(100vh - 370px)'
+                    : 'calc(100vh + 80px)',
+                  minHeight: isDesktop
+                    ? 'calc(100vh - 370px)'
+                    : 'calc(100vh + 80px)',
                   position: 'relative',
                   paddingLeft: '0',
                   paddingRight: '0',
+                  paddingTop: !isDesktop ? '0' : '32px',
                 }}
               >
                 {isDesktop ? <Desktop /> : <Mobile />}
