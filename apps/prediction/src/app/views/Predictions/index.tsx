@@ -17,12 +17,12 @@ import {
   useIsChartPaneOpen,
 } from '../../state/hooks';
 import {
-  getMarketData,
   getStaticPredictionsData,
   makeFutureRoundResponse,
   makeRoundData,
   transformRoundResponse,
 } from '../../state/predictions/helpers';
+import { fetchMarketData } from '../../state/predictions/helpers2';
 import {
   fetchCurrentBets,
   initialize,
@@ -137,10 +137,11 @@ const Predictions = () => {
     const fetchInitialData = async () => {
       const [staticPredictionsData, marketData] = await Promise.all([
         getStaticPredictionsData(),
-        getMarketData(),
+        fetchMarketData(),
       ]);
       const { currentEpoch, intervalBlocks, bufferBlocks } =
         staticPredictionsData;
+
       const latestRound = marketData.rounds.find(
         round => round.epoch === currentEpoch
       );
