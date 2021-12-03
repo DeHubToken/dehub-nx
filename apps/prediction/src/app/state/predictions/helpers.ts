@@ -1,3 +1,4 @@
+/* eslint-disable multiline-comment-style */
 import { request, gql } from 'graphql-request';
 import { GRAPH_API_PREDICTION } from '../../config/constants/endpoints';
 import {
@@ -217,54 +218,33 @@ export const getStaticPredictionsData = async () => {
   };
 };
 
-export const getMarketData = async (): Promise<{
-  rounds: Round[];
-  market: Market;
-}> => {
-  const response = (await request(
-    GRAPH_API_PREDICTION as string,
-    gql`
-      query getMarketData {
-        rounds(first: 5, orderBy: epoch, orderDirection: desc) {
-          ${getRoundBaseFields()}
-        }
-        market(id: 1) {
-          id
-          paused
-          epoch {
-            epoch
-          }
-        }
-      }
-    `
-  )) as { rounds: RoundResponse[]; market: MarketResponse };
+// export const getMarketData = async (): Promise<{
+//   rounds: Round[];
+//   market: Market;
+// }> => {
+//   const response = (await request(
+//     GRAPH_API_PREDICTION as string,
+//     gql`
+//       query getMarketData {
+//         rounds(first: 5, orderBy: epoch, orderDirection: desc) {
+//           ${getRoundBaseFields()}
+//         }
+//         market(id: 1) {
+//           id
+//           paused
+//           epoch {
+//             epoch
+//           }
+//         }
+//       }
+//     `
+//   )) as { rounds: RoundResponse[]; market: MarketResponse };
 
-  return {
-    rounds: response.rounds.map(transformRoundResponse),
-    market: transformMarketResponse(response.market),
-  };
-};
-
-export const getRound = async (id: string) => {
-  const response = await request(
-    GRAPH_API_PREDICTION as string,
-    gql`
-      query getRound($id: ID!) {
-        round(id: $id) {
-          ${getRoundBaseFields()}
-          bets {
-           ${getBetBaseFields()}
-            user {
-             ${getUserBaseFields()}
-            }
-          }
-        }
-      }
-  `,
-    { id }
-  );
-  return response.round;
-};
+//   return {
+//     rounds: response.rounds.map(transformRoundResponse),
+//     market: transformMarketResponse(response.market),
+//   };
+// };
 
 type BetHistoryWhereClause = Record<
   string,

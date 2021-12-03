@@ -1,5 +1,5 @@
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceNumber } from '@dehub/shared/utils';
+import { BNB_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
+import { getBalanceNumber, ethersToBigNumber } from '@dehub/shared/utils';
 
 import PredictionsAbi from '../../config/abi/predictions.json';
 import { getPredictionsAddress } from '../../utils/addressHelpers';
@@ -21,6 +21,8 @@ import {
   RoundResponse,
   MarketResponse,
 } from './queries';
+
+const EIGHT_DIGITS = 8;
 
 export const numberOrNull = (value: string | null) => {
   if (value === null) {
@@ -55,32 +57,35 @@ export const fetchMarketData = async (
   });
 
   try {
-    const rounds = await multicall(PredictionsAbi, calls);
+    const pureRounds = await multicall(PredictionsAbi, calls);
 
-    const roundsResponse = rounds.map((round: any) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const roundsResponse = pureRounds.map((round: any) => {
       return {
-        id: round.epoch.toNumber(),
-        epoch: round.epoch.toNumber(),
+        id: round[0].toNumber(),
+        epoch: round[0].toNumber(),
         failed: false,
-        startBlock: round.startBlock.toNumber(),
+        startBlock: round[1].toNumber(),
         startAt: 0,
         lockAt: 0,
-        lockBlock: round.lockBlock.toNumber(),
-        lockPrice: getBalanceNumber(round.lockPrice, DEHUB_DECIMALS),
-        endBlock: round.endBlock.toNumber(),
-        closePrice: getBalanceNumber(round.closePrice, DEHUB_DECIMALS),
+        lockBlock: round[2].toNumber(),
+        lockPrice: getBalanceNumber(ethersToBigNumber(round[4]), EIGHT_DIGITS),
+        endBlock: round[3].toNumber(),
+        closePrice: getBalanceNumber(ethersToBigNumber(round[5]), EIGHT_DIGITS),
         totalBets: 0,
-        totalAmount: getBalanceNumber(round.totalAmount, DEHUB_DECIMALS),
+        totalAmount: getBalanceNumber(
+          ethersToBigNumber(round[6]),
+          EIGHT_DIGITS
+        ),
         bullBets: 0,
         bearBets: 0,
-        bearAmount: getBalanceNumber(round.bearAmount, DEHUB_DECIMALS),
-        bullAmount: getBalanceNumber(round.bullAmount, DEHUB_DECIMALS),
-        position: round.closePrice.eq(round.lockPrice)
+        bearAmount: getBalanceNumber(ethersToBigNumber(round[8]), EIGHT_DIGITS),
+        bullAmount: getBalanceNumber(ethersToBigNumber(round[7]), EIGHT_DIGITS),
+        position: round[5].eq(round[4]) // close price === lock price
           ? 'House'
-          : round.closePrice.gt(round.lockPrice)
+          : round[5].gt(round[4])
           ? 'Bull'
-          : round.closePrice.lt(round.lockPrice)
+          : round[5].lt(round[4])
           ? 'Bear'
           : null,
         bets: [], // Bet[], todo
