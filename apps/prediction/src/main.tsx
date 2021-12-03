@@ -4,14 +4,14 @@ import { Constants } from '@dehub/shared/config';
 import { Contexts } from '@dehub/react/core';
 import { ModalProvider } from '@dehub/react/pcsuikit';
 import Providers from './app/Providers';
-import { getChainId } from './app/config/constants';
+import { environment } from './environments/environment';
 
 import * as ReactDOM from 'react-dom';
 
 import App from './app/app';
 
-const appId = Constants[getChainId()].MORALIS_ID;
-const serverUrl = Constants[getChainId()].MORALIS_SERVER;
+const appId = environment.moralis.id;
+const serverUrl = environment.moralis.server;
 
 ReactDOM.render(
   <StrictMode>
