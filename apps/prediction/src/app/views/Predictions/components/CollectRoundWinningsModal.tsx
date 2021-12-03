@@ -34,6 +34,7 @@ import { formatDehub } from '../helpers';
 import DuotoneFontAwesomeIcon from '../../Predictions/components/DuotoneFontAwesomeIcon';
 import useTheme from '../../../hooks/useTheme';
 import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
+import { useRewardRate, useTotalRate } from '../../../state/hooks';
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
   payout: number | null;
@@ -64,6 +65,8 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   const predictionsContract = usePredictionsContract();
   const dehubPrice = useDehubBusdPrice();
   const dispatch = useAppDispatch();
+  const rewardRate = useRewardRate();
+  const totalRate = useTotalRate();
   const { theme } = useTheme();
 
   const handleClick = async () => {
@@ -129,13 +132,18 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
         <Flex alignItems="start" justifyContent="space-between" mb="24px">
           <Text>{t('Collecting')}</Text>
           <Box style={{ textAlign: 'right' }}>
-            <Text>{`${payout ? formatDehub(payout) : 0} DEHUB`}</Text>
+            <Text>{`${
+              payout ? formatDehub((payout * rewardRate) / totalRate) : 0
+            } DEHUB`}</Text>
             <Text fontSize="12px" color="textSubtle">
               {`~$${
                 payout
                   ? getFullDisplayBalance(
                       dehubPrice.times(
-                        getDecimalAmount(new BigNumber(payout), DEHUB_DECIMALS)
+                        getDecimalAmount(
+                          new BigNumber((payout * rewardRate) / totalRate),
+                          DEHUB_DECIMALS
+                        )
                       ),
                       BUSD_DECIMALS,
                       BUSD_DISPLAY_DECIMALS

@@ -221,7 +221,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
             </Text>
             <Flex alignItems="flex-end">
               <Text bold color="success">{`+${formatDehub(
-                summary.won.bestRound.payout
+                (summary.won.bestRound.payout * rewardRate) / totalRate
               )} DEHUB`}</Text>
               <Text ml="4px" small color="textSubtle">
                 ({summary.won.bestRound.multiplier.toFixed(2)}x)
@@ -231,7 +231,9 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
               {`~$${getFullDisplayBalance(
                 dehubPrice.times(
                   getDecimalAmount(
-                    new BigNumber(summary.won.bestRound.payout),
+                    new BigNumber(
+                      (summary.won.bestRound.payout * rewardRate) / totalRate
+                    ),
                     DEHUB_DECIMALS
                   )
                 ),
