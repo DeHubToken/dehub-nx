@@ -8,4 +8,6 @@ export const environment: Env = {
   baseUrl: '/prediction',
 
   chainId: ChainId.BSC_MAINNET,
+  graphAPI:
+    'https://api.thegraph.com/subgraphs/name/dehubtoken/dehub-prediction',
 };

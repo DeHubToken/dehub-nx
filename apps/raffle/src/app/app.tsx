@@ -2,16 +2,16 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MoralisProvider } from 'react-moralis';
 import { Provider } from 'react-redux';
 
-import { Constants } from '@dehub/shared/config';
 import { Contexts } from '@dehub/react/core';
 
 import { getChainId } from './config/constants';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 import { store } from './states';
 import Lottery from './views/Lottery';
+import { environment } from '../environments/environment';
 
-const appId = Constants[getChainId()].MORALIS_ID;
-const serverUrl = Constants[getChainId()].MORALIS_SERVER;
+const appId = environment.moralis.id;
+const serverUrl = environment.moralis.server;
 
 export function App() {
   return (

@@ -12,7 +12,3 @@ export const getChainIdHex = (): string => {
 export const getNetworkInfo = (): NetworkInfo => {
   return Constants[getChainId()];
 };
-
-export const getRpcUrl = (): string => {
-  return Constants[getChainId()].RPC_URL;
-};

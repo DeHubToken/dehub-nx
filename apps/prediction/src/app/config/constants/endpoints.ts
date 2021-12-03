@@ -1,2 +1,3 @@
-export const GRAPH_API_PREDICTION =
-  process.env.NX_REACT_APP_GRAPH_API_PREDICTION;
+import { environment } from '../../../environments/environment';
+
+export const GRAPH_API_PREDICTION = environment.graphAPI;

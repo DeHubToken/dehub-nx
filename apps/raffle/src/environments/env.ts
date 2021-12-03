@@ -1,8 +1,4 @@
-import {
-  ChainId,
-  defaultSharedEnv as sharedDefaultEnv,
-  SharedEnv,
-} from '@dehub/shared/config';
+import { ChainId, defaultSharedDevEnv, SharedEnv } from '@dehub/shared/config';
 
 export interface Env extends SharedEnv {
   chainId: number;
@@ -11,7 +7,7 @@ export interface Env extends SharedEnv {
 }
 
 export const defaultEnv: Env = {
-  ...sharedDefaultEnv,
+  ...defaultSharedDevEnv,
   chainId: ChainId.BSC_TESTNET,
   deGrandStartDay: 26,
   deGrandStartDayOnFebruary: 25,

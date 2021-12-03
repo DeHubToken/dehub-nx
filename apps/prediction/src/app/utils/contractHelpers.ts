@@ -15,7 +15,7 @@ import predictionsAbi from '../config/abi/predictions.json';
 import chainlinkOracleAbi from '../config/abi/chainlinkOracle.json';
 import MulticallAbi from '../config/abi/Multicall.json';
 
-import { getRpcUrl } from '../config/constants';
+import getRpcUrl from '../utils/getRpcUrl';
 
 const RPC_URL = getRpcUrl();
 
