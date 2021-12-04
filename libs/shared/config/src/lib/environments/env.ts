@@ -72,7 +72,7 @@ export const defaultSharedEnv: SharedEnv = {
   },
 
   bscNodes: [
-    'https://bsc-dataseed.binance.org/',
+    'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
     'https://bsc-dataseed1.defibit.io/',
     'https://bsc-dataseed1.ninicoin.io/',
   ],
