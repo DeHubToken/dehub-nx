@@ -35,7 +35,8 @@ export const Constants: { [key: number]: NetworkInfo } = {
       symbol: 'bnb',
       decimals: 18,
     },
-    RPC_URL: 'https://bsc-dataseed.binance.org/',
+    RPC_URL:
+      'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
     BLOCK_EXPLORER_URLS: 'https://bscscan.com',
   },
   97: {
