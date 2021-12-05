@@ -41,7 +41,7 @@ const RoundCard: React.FC<RoundCardProps> = ({ round }) => {
   );
 
   // Next (open) round
-  if (epoch === currentEpoch && lockPrice === null) {
+  if (epoch === currentEpoch && lockPrice === 0) {
     return (
       <OpenRoundCard
         round={round}
@@ -55,7 +55,7 @@ const RoundCard: React.FC<RoundCardProps> = ({ round }) => {
   }
 
   // Live round
-  if (closePrice === null && epoch === currentEpoch - 1) {
+  if (closePrice === 0 && epoch === currentEpoch - 1) {
     return (
       <LiveRoundCard
         betAmount={bet?.amount}
