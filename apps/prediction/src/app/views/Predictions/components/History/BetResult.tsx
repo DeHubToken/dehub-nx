@@ -174,7 +174,10 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
             <Text fontSize="12px" color="textSubtle">
               {`~$${getFullDisplayBalance(
                 dehubPrice.times(
-                  getDecimalAmount(new BigNumber(payout), DEHUB_DECIMALS)
+                  getDecimalAmount(
+                    new BigNumber((payout * rewardRate) / totalRate),
+                    DEHUB_DECIMALS
+                  )
                 ),
                 BUSD_DECIMALS,
                 BUSD_DISPLAY_DECIMALS

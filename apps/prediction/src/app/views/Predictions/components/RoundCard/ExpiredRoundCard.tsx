@@ -51,8 +51,6 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
 }) => {
   const { t } = useTranslation();
   const { account } = Hooks.useMoralisEthers();
-  const rewardRate = useRewardRate();
-  const totalRate = useTotalRate();
   const { id, epoch, endBlock, lockPrice, closePrice } = round;
   const betPosition =
     closePrice > lockPrice ? BetPosition.BULL : BetPosition.BEAR;

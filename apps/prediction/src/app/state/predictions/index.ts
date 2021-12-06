@@ -19,6 +19,8 @@ import {
   makeRoundData,
 } from './helpers';
 
+import { fetchBetHistory } from './helpers2';
+
 const initialState: PredictionsState = {
   status: PredictionStatus.INITIAL,
   isLoading: false,
@@ -56,7 +58,7 @@ export const fetchCurrentBets = createAsyncThunk<
   { account: string | null | undefined; bets: Bet[] },
   { account: string | null | undefined; roundIds: string[] }
 >('predictions/fetchCurrentBets', async ({ account, roundIds }) => {
-  const betResponses = await getBetHistory({
+  const betResponses = await fetchBetHistory({
     user: account?.toLowerCase() as string,
     round_in: roundIds,
   });
