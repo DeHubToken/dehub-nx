@@ -23,6 +23,8 @@ import {
   BUSD_DISPLAY_DECIMALS,
 } from '@dehub/shared/config';
 import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
+import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
+
 import Icon from '../../../components/Icon/Icon';
 import { useAppDispatch } from '../../../state';
 import { useDehubBusdPrice } from '../../../state/application/hooks';
@@ -33,7 +35,6 @@ import { usePredictionsContract } from '../../../hooks/useContract';
 import { formatDehub } from '../helpers';
 import DuotoneFontAwesomeIcon from '../../Predictions/components/DuotoneFontAwesomeIcon';
 import useTheme from '../../../hooks/useTheme';
-import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
 import { useRewardRate, useTotalRate } from '../../../state/hooks';
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
