@@ -18,6 +18,7 @@ import {
   RoundResponse,
   MarketResponse,
 } from './queries';
+import { fetchBetHistory } from './helpers2';
 
 export enum Result {
   WIN = 'win',
@@ -252,28 +253,24 @@ type BetHistoryWhereClause = Record<
 >;
 
 export const getBetHistory = async (
-  where: BetHistoryWhereClause = {},
-  first = 1000,
-  skip = 0
+  where: BetHistoryWhereClause = {}
 ): Promise<BetResponse[]> => {
-  const response = await request(
-    GRAPH_API_PREDICTION as string,
-    gql`
-      query getBetHistory($first: Int!, $skip: Int!, $where: Bet_filter) {
-        bets(first: $first, skip: $skip, where: $where) {
-          ${getBetBaseFields()}
-          round {
-            ${getRoundBaseFields()}
-          }
-          user {
-            ${getUserBaseFields()}
-          }
-        }
-      }
-    `,
-    { first, skip, where }
+  const contract = getPredictionsContract();
+
+  const currentEpoch = await contract.currentEpoch();
+  const userRounds = await contract.getUserRounds(
+    where.user,
+    0,
+    Number(currentEpoch)
   );
-  return response.bets;
+  const history = await fetchBetHistory({
+    user: where.user.toString(),
+    round_in: userRounds[0].toString().split(','),
+  });
+
+  return history.filter(
+    a => where.claimed === undefined || where.claimed === a.claimed
+  );
 };
 
 export const getBet = async (betId: string): Promise<BetResponse> => {
