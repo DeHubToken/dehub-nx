@@ -1,30 +1,16 @@
-import { BNB_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
   getBalanceNumber,
   ethersToBigNumber,
   BIG_ZERO,
 } from '@dehub/shared/utils';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 
 import PredictionsAbi from '../../config/abi/predictions.json';
 import { getPredictionsAddress } from '../../utils/addressHelpers';
 import { getPredictionsContract } from '../../utils/contractHelpers';
 import multicall, { Call } from '../../utils/multicall';
-import {
-  Bet,
-  BetPosition,
-  Market,
-  PredictionStatus,
-  Round,
-  RoundData,
-} from '../types';
-import {
-  BetResponse,
-  getRoundBaseFields,
-  getBetBaseFields,
-  getUserBaseFields,
-  RoundResponse,
-  MarketResponse,
-} from './queries';
+import { BetPosition, Market, Round } from '../types';
+import { BetResponse } from './queries';
 
 const EIGHT_DIGITS = 8;
 const FIVE_DIGITS = 5;
@@ -38,9 +24,9 @@ export const numberOrNull = (value: string | null) => {
   return Number.isNaN(valueNum) ? null : valueNum;
 };
 
-const transformRoundResponse = (round: any): Round => {
+const transformRoundResponse = (round: EthersBigNumber[]): Round => {
   return {
-    id: round[0].toNumber(),
+    id: round[0].toString(),
     epoch: round[0].toNumber(),
     failed: false,
     startBlock: round[1].toNumber(),
@@ -76,8 +62,7 @@ const fetchRounds = async (rounds: string[]): Promise<Round[]> => {
 
   const pureRounds = await multicall(PredictionsAbi, calls);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const roundsResponse = pureRounds.map((round: any) => {
+  const roundsResponse = pureRounds.map((round: EthersBigNumber[]) => {
     return transformRoundResponse(round);
   });
 
@@ -145,7 +130,7 @@ export const fetchBetHistory = async ({
     const pureBets = await multicall(PredictionsAbi, calls);
 
     // eslint-disable-next-line prefer-const
-    let betsResponse = pureBets.map((bet: any, index: number) => {
+    let betsResponse = pureBets.map((bet: EthersBigNumber[], index: number) => {
       const amount = ethersToBigNumber(bet[1]);
       if (amount.eq(BIG_ZERO)) {
         return null;
@@ -165,7 +150,7 @@ export const fetchBetHistory = async ({
       betsResponse[idx].round = roundsResponse[idx];
     }
 
-    return betsResponse.filter((bet: any) => bet !== null);
+    return betsResponse.filter((bet: EthersBigNumber[]) => bet !== null);
   } catch (error) {
     console.error(error);
 
