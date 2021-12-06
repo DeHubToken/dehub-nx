@@ -131,6 +131,8 @@ export const fetchBetHistory = async ({
   user: string;
   round_in: string[];
 }): Promise<BetResponse[]> => {
+  if (!user) return [];
+
   const calls: Call[] = round_in.map(roundId => {
     return {
       name: 'ledger',
