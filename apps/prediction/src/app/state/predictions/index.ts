@@ -46,7 +46,7 @@ export const fetchBet = createAsyncThunk<
   { account: string | null | undefined; bet?: Bet },
   { account: string | null | undefined; id?: string }
 >('predictions/fetchBet', async ({ account, id }) => {
-  const response = await getBet(id as string);
+  const response = await getBet(account as string, id as string);
   const bet = transformBetResponse(response);
   return { account, bet };
 });

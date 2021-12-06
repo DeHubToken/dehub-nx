@@ -273,25 +273,14 @@ export const getBetHistory = async (
   );
 };
 
-export const getBet = async (betId: string): Promise<BetResponse> => {
-  const response = await request(
-    GRAPH_API_PREDICTION as string,
-    gql`
-      query getBet($id: ID!) {
-        bet(id: $id) {
-          ${getBetBaseFields()}
-          round {
-            ${getRoundBaseFields()}
-          }
-          user {
-            ${getUserBaseFields()}
-          }
-        }
-      }
-  `,
-    {
-      id: betId.toLowerCase(),
-    }
-  );
-  return response.bet;
+export const getBet = async (
+  user: string,
+  betId: string
+): Promise<BetResponse> => {
+  const history = await fetchBetHistory({
+    user: user,
+    round_in: [betId],
+  });
+
+  return history[0];
 };
