@@ -138,7 +138,7 @@ export const fetchBetHistory = async ({
       return {
         id: `${user}${round_in[index]}`,
         hash: '',
-        amount: getBalanceNumber(amount, EIGHT_DIGITS), // bet.amount
+        amount: getBalanceNumber(amount, FIVE_DIGITS), // bet.amount
         position: BetPosition.BULL, // bet[0].toNumber() === 0 ? BetPosition.BULL : BetPosition.BEAR,
         claimed: bet[3] ? true : false,
       };
