@@ -1,6 +1,4 @@
 /* eslint-disable multiline-comment-style */
-import { request, gql } from 'graphql-request';
-import { GRAPH_API_PREDICTION } from '../../config/constants/endpoints';
 import {
   Bet,
   BetPosition,
@@ -10,14 +8,7 @@ import {
   RoundData,
 } from '../types';
 import { getPredictionsContract } from '../../utils/contractHelpers';
-import {
-  BetResponse,
-  getRoundBaseFields,
-  getBetBaseFields,
-  getUserBaseFields,
-  RoundResponse,
-  MarketResponse,
-} from './queries';
+import { BetResponse, RoundResponse, MarketResponse } from './queries';
 import { fetchBetHistory } from './helpers2';
 
 export enum Result {
