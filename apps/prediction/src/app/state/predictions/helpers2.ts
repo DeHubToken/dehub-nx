@@ -1,5 +1,9 @@
 import { BNB_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceNumber, ethersToBigNumber } from '@dehub/shared/utils';
+import {
+  getBalanceNumber,
+  ethersToBigNumber,
+  BIG_ZERO,
+} from '@dehub/shared/utils';
 
 import PredictionsAbi from '../../config/abi/predictions.json';
 import { getPredictionsAddress } from '../../utils/addressHelpers';
@@ -139,10 +143,14 @@ export const fetchBetHistory = async ({
     const pureBets = await multicall(PredictionsAbi, calls);
 
     const betsResponse = pureBets.map((bet: any, index: number) => {
+      const amount = ethersToBigNumber(bet[1]);
+      if (amount.eq(BIG_ZERO)) {
+        return null;
+      }
       return {
         id: `${user}${round_in[index]}`,
         hash: '',
-        amount: getBalanceNumber(ethersToBigNumber(bet[1]), EIGHT_DIGITS), // bet.amount
+        amount: getBalanceNumber(amount, EIGHT_DIGITS), // bet.amount
         position: BetPosition.BULL, // bet[0].toNumber() === 0 ? BetPosition.BULL : BetPosition.BEAR,
         claimed: bet[3] ? true : false,
       };
@@ -153,7 +161,7 @@ export const fetchBetHistory = async ({
       betsResponse[idx].round = roundsResponse[idx];
     }
 
-    return betsResponse;
+    return betsResponse.filter((bet: any) => bet !== null);
   } catch (error) {
     console.error(error);
 
