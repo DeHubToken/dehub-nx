@@ -279,7 +279,7 @@ export const getBet = async (
 ): Promise<BetResponse> => {
   const history = await fetchBetHistory({
     user: user,
-    round_in: [betId],
+    round_in: [`${user}${betId}`],
   });
 
   return history[0];
