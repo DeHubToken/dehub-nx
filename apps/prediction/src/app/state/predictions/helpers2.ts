@@ -142,7 +142,8 @@ export const fetchBetHistory = async ({
   try {
     const pureBets = await multicall(PredictionsAbi, calls);
 
-    const betsResponse = pureBets.map((bet: any, index: number) => {
+    // eslint-disable-next-line prefer-const
+    let betsResponse = pureBets.map((bet: any, index: number) => {
       const amount = ethersToBigNumber(bet[1]);
       if (amount.eq(BIG_ZERO)) {
         return null;
@@ -158,6 +159,7 @@ export const fetchBetHistory = async ({
 
     const roundsResponse = await fetchRounds(round_in);
     for (let idx = 0; idx < round_in.length; idx++) {
+      if (betsResponse[idx] === null) continue;
       betsResponse[idx].round = roundsResponse[idx];
     }
 
