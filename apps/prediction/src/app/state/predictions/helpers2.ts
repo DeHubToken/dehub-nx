@@ -51,11 +51,11 @@ const transformRoundResponse = (round: any): Round => {
     endBlock: round[3].toNumber(),
     closePrice: getBalanceNumber(ethersToBigNumber(round[5]), EIGHT_DIGITS),
     totalBets: 0,
-    totalAmount: getBalanceNumber(ethersToBigNumber(round[6]), EIGHT_DIGITS),
+    totalAmount: getBalanceNumber(ethersToBigNumber(round[6]), FIVE_DIGITS),
     bullBets: 0,
     bearBets: 0,
-    bearAmount: getBalanceNumber(ethersToBigNumber(round[8]), EIGHT_DIGITS),
-    bullAmount: getBalanceNumber(ethersToBigNumber(round[7]), EIGHT_DIGITS),
+    bearAmount: getBalanceNumber(ethersToBigNumber(round[8]), FIVE_DIGITS),
+    bullAmount: getBalanceNumber(ethersToBigNumber(round[7]), FIVE_DIGITS),
     position: round[5].eq(round[4]) // close price === lock price
       ? BetPosition.HOUSE
       : round[5].gt(round[4])
