@@ -20,6 +20,7 @@ import {
 } from './helpers';
 
 import { fetchBetHistory } from './helpers2';
+import { BetResponse } from './queries';
 
 const initialState: PredictionsState = {
   status: PredictionStatus.INITIAL,
@@ -46,7 +47,10 @@ export const fetchBet = createAsyncThunk<
   { account: string | null | undefined; bet?: Bet },
   { account: string | null | undefined; id?: string }
 >('predictions/fetchBet', async ({ account, id }) => {
-  const response = await getBet(account as string, id as string);
+  const response = (await getBet(
+    account as string,
+    id as string
+  )) as BetResponse;
   const bet = transformBetResponse(response);
   return { account, bet };
 });
@@ -70,10 +74,10 @@ export const fetchHistory = createAsyncThunk<
   { account: string | null | undefined; bets: Bet[] },
   { account: string | null | undefined; claimed?: boolean }
 >('predictions/fetchHistory', async ({ account, claimed }) => {
-  const response = await getBetHistory({
-    user: account?.toLowerCase() as string,
-    claimed: claimed as boolean,
-  });
+  const response = await getBetHistory(
+    account?.toLowerCase() as string,
+    claimed as boolean
+  );
   const bets = response.map(transformBetResponse);
 
   return { account, bets };

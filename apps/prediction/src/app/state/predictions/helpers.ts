@@ -247,40 +247,38 @@ export const getStaticPredictionsData = async () => {
 //   };
 // };
 
-type BetHistoryWhereClause = Record<
-  string,
-  string | number | boolean | string[]
->;
-
 export const getBetHistory = async (
-  where: BetHistoryWhereClause = {}
+  user: string,
+  claimed?: boolean
 ): Promise<BetResponse[]> => {
   const contract = getPredictionsContract();
 
   const currentEpoch = await contract.currentEpoch();
   const userRounds = await contract.getUserRounds(
-    where.user,
+    user,
     Math.max(Number(currentEpoch) - 1400, 0),
     Number(currentEpoch)
   );
   const history = await fetchBetHistory({
-    user: where.user.toString(),
+    user: user.toString(),
     round_in: userRounds[0].toString().split(','),
   });
 
-  return history.filter(
-    a => where.claimed === undefined || where.claimed === a.claimed
-  );
+  return history.filter(a => claimed === undefined || claimed === a.claimed);
 };
 
 export const getBet = async (
   user: string,
   betId: string
-): Promise<BetResponse> => {
+): Promise<BetResponse | null> => {
   const history = await fetchBetHistory({
     user: user,
-    round_in: [`${user}${betId}`],
+    round_in: [`${betId.split('_')[1]}`],
   });
 
-  return history[0];
+  if (history && history.length > 0) {
+    return history[0];
+  } else {
+    return null;
+  }
 };
