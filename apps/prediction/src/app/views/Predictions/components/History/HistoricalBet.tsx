@@ -88,6 +88,7 @@ const HistoricalBet: React.FC<BetProps> = ({ bet }) => {
 
   // Winners get the payout, otherwise the claim what they put it if it was canceled
   const payout = roundResult === Result.WIN ? getPayout(bet) : amount;
+  const _rewardRate = roundResult === Result.WIN ? rewardRate : totalRate;
 
   const renderBetLabel = () => {
     if (isOpenRound) {
@@ -121,7 +122,7 @@ const HistoricalBet: React.FC<BetProps> = ({ bet }) => {
           {roundResult === Result.CANCELED
             ? t('Canceled')
             : `${resultTextPrefix}${formatDehub(
-                (payout * rewardRate) / totalRate
+                (payout * _rewardRate) / totalRate
               )}`}
         </Text>
       </>
