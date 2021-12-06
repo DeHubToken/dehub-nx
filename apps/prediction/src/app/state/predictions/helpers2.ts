@@ -136,10 +136,13 @@ export const fetchBetHistory = async ({
         return null;
       }
       return {
-        id: `${user}${round_in[index]}`,
+        id: `${user}_${round_in[index]}`,
         hash: '',
-        amount: getBalanceNumber(amount, EIGHT_DIGITS), // bet.amount
-        position: BetPosition.BULL, // bet[0].toNumber() === 0 ? BetPosition.BULL : BetPosition.BEAR,
+        amount: getBalanceNumber(amount, FIVE_DIGITS), // bet.amount
+        position:
+          ethersToBigNumber(bet[0]).toNumber() === 0
+            ? BetPosition.BULL
+            : BetPosition.BEAR,
         claimed: bet[3] ? true : false,
       };
     });

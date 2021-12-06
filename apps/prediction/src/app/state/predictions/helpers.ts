@@ -1,6 +1,4 @@
 /* eslint-disable multiline-comment-style */
-import { request, gql } from 'graphql-request';
-import { GRAPH_API_PREDICTION } from '../../config/constants/endpoints';
 import {
   Bet,
   BetPosition,
@@ -10,14 +8,8 @@ import {
   RoundData,
 } from '../types';
 import { getPredictionsContract } from '../../utils/contractHelpers';
-import {
-  BetResponse,
-  getRoundBaseFields,
-  getBetBaseFields,
-  getUserBaseFields,
-  RoundResponse,
-  MarketResponse,
-} from './queries';
+import { BetResponse, RoundResponse, MarketResponse } from './queries';
+import { fetchBetHistory } from './helpers2';
 
 export enum Result {
   WIN = 'win',
@@ -246,55 +238,38 @@ export const getStaticPredictionsData = async () => {
 //   };
 // };
 
-type BetHistoryWhereClause = Record<
-  string,
-  string | number | boolean | string[]
->;
-
 export const getBetHistory = async (
-  where: BetHistoryWhereClause = {},
-  first = 1000,
-  skip = 0
+  user: string,
+  claimed?: boolean
 ): Promise<BetResponse[]> => {
-  const response = await request(
-    GRAPH_API_PREDICTION as string,
-    gql`
-      query getBetHistory($first: Int!, $skip: Int!, $where: Bet_filter) {
-        bets(first: $first, skip: $skip, where: $where) {
-          ${getBetBaseFields()}
-          round {
-            ${getRoundBaseFields()}
-          }
-          user {
-            ${getUserBaseFields()}
-          }
-        }
-      }
-    `,
-    { first, skip, where }
+  const contract = getPredictionsContract();
+
+  const currentEpoch = await contract.currentEpoch();
+  const userRounds = await contract.getUserRounds(
+    user,
+    Math.max(Number(currentEpoch) - 1400, 0),
+    Number(currentEpoch)
   );
-  return response.bets;
+  const history = await fetchBetHistory({
+    user: user.toString(),
+    round_in: userRounds[0].toString().split(','),
+  });
+
+  return history.filter(a => claimed === undefined || claimed === a.claimed);
 };
 
-export const getBet = async (betId: string): Promise<BetResponse> => {
-  const response = await request(
-    GRAPH_API_PREDICTION as string,
-    gql`
-      query getBet($id: ID!) {
-        bet(id: $id) {
-          ${getBetBaseFields()}
-          round {
-            ${getRoundBaseFields()}
-          }
-          user {
-            ${getUserBaseFields()}
-          }
-        }
-      }
-  `,
-    {
-      id: betId.toLowerCase(),
-    }
-  );
-  return response.bet;
+export const getBet = async (
+  user: string,
+  betId: string
+): Promise<BetResponse | null> => {
+  const history = await fetchBetHistory({
+    user: user,
+    round_in: [`${betId.split('_')[1]}`],
+  });
+
+  if (history && history.length > 0) {
+    return history[0];
+  } else {
+    return null;
+  }
 };

@@ -148,10 +148,7 @@ const CollectWinningsPopup = () => {
     let isCancelled = false;
     if (account) {
       timer.current = setInterval(async () => {
-        const bets = await getBetHistory({
-          user: account.toLowerCase(),
-          claimed: false,
-        });
+        const bets = await getBetHistory(account.toLowerCase(), false);
 
         if (!isCancelled) {
           // Filter out bets that were not winners
