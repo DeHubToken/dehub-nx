@@ -260,7 +260,7 @@ export const getBetHistory = async (
   const currentEpoch = await contract.currentEpoch();
   const userRounds = await contract.getUserRounds(
     where.user,
-    0,
+    Math.max(Number(currentEpoch) - 1400, 0),
     Number(currentEpoch)
   );
   const history = await fetchBetHistory({
