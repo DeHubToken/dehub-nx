@@ -1,0 +1,28 @@
+{
+  "root": "apps/prediction-e2e",
+  "sourceRoot": "apps/prediction-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/prediction-e2e/cypress.json",
+        "devServerTarget": "prediction:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "prediction:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/prediction-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["prediction"]
+}

@@ -1,4 +1,5 @@
 export const DEHUB_DECIMALS = 5;
+export const BNB_DECIMALS = 18;
 export const BUSD_DECIMALS = 18;
 
 export const BUSD_DISPLAY_DECIMALS = 2;
@@ -17,8 +18,6 @@ interface NativeCurrencyInfo {
 }
 
 export interface NetworkInfo {
-  MORALIS_ID: string;
-  MORALIS_SERVER: string;
   CHAIN_ID_HEX: string;
   CHAIN_ID_DEC: number;
   CHAIN_NAME: string;
@@ -29,8 +28,6 @@ export interface NetworkInfo {
 
 export const Constants: { [key: number]: NetworkInfo } = {
   56: {
-    MORALIS_ID: 'QfgYJskOXrYJnSAiB3KZPMMesmlJB6JBqY3GOzHV',
-    MORALIS_SERVER: 'https://vamoxwojj7ht.moralisweb3.com:2053/server',
     CHAIN_ID_HEX: '0x38',
     CHAIN_ID_DEC: 56,
     CHAIN_NAME: 'Binance Smart Chain Mainnet',
@@ -39,12 +36,11 @@ export const Constants: { [key: number]: NetworkInfo } = {
       symbol: 'bnb',
       decimals: 18,
     },
-    RPC_URL: 'https://bsc-dataseed.binance.org/',
+    RPC_URL:
+      'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
     BLOCK_EXPLORER_URLS: 'https://bscscan.com',
   },
   97: {
-    MORALIS_ID: 'LQazohFSg15yR5ZtaRVqZQysUbzDI9olJjNKUrlE',
-    MORALIS_SERVER: 'https://3jucoi8srnps.moralisweb3.com:2053/server',
     CHAIN_ID_HEX: '0x61',
     CHAIN_ID_DEC: 97,
     CHAIN_NAME: 'Binance Smart Chain Testnet',
@@ -69,6 +65,8 @@ export const ContractAddresses: {
     'BNB-BUSD': '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
     StandardLottery: '0xF5A881B2c1Bc20DBE8E54674d65e8D66487da35e',
     SpecialLottery: '0xdA9F2a546AfF5deDCF464205B229d18ab35B2d22',
+    Prediction: '0xF73bee744210292973A51B1Cc4ef535519757dCc',
+    ChainLinkOracle: '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE',
     MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
   },
   [ChainId.BSC_TESTNET]: {
@@ -77,8 +75,10 @@ export const ContractAddresses: {
     BUSD: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
     'DeHub-BNB': '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
     'BNB-BUSD': '0xe0e92035077c39594793e61802a350347c320cf2',
-    StandardLottery: '0xee50eF31128678ffc2D70898190Bd705d6969660',
-    SpecialLottery: '0xBFC08d0428fe5FAcD503F1eA19433e8cB0A679D7',
+    StandardLottery: '0xe5f4683dE66F20A8E1A2135f657aE97502E01e66',
+    SpecialLottery: '0xD17fB29e54f1CFeC6D56A9f46F69F24d4F5Feedb',
+    Prediction: '0x805Ae00834D1D8fD3ba65784A335C42366b7ecfb',
+    ChainLinkOracle: '0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526',
     MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
   },
 };

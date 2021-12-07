@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
-import { ethers } from 'ethers';
-
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import { BIG_ZERO, ethersToSerializedBigNumber } from '@dehub/shared/utils';
 
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
@@ -47,17 +46,17 @@ const processViewLotterySuccessResponse = (
 
   const statusKey = Object.keys(LotteryStatus)[status];
   const serializedCountWinnersPerBracket = countWinnersPerBracket.map(
-    (winnersPerBracket: ethers.BigNumber) =>
+    (winnersPerBracket: EthersBigNumber) =>
       ethersToSerializedBigNumber(winnersPerBracket)
   );
   const serializedTokenPerBracket = tokenPerBracket.map(
-    (tokenPerBracket: ethers.BigNumber) =>
+    (tokenPerBracket: EthersBigNumber) =>
       ethersToSerializedBigNumber(tokenPerBracket)
   );
   const serializedRewardPerBracket = rewardBreakdown.map(
-    (reward: ethers.BigNumber) => ethersToSerializedBigNumber(reward)
+    (reward: EthersBigNumber) => ethersToSerializedBigNumber(reward)
   );
-  const wrappedFinalNumber = finalNumber.mod(ethers.BigNumber.from(100000000));
+  const wrappedFinalNumber = finalNumber.mod(EthersBigNumber.from(100000000));
 
   return {
     isLoading: false,
@@ -101,7 +100,7 @@ const processRawTicketsReponse = (data: any): LotteryTicket[] => {
   const [ticketIds, ticketNumbers, claimStatuses] = data;
 
   if (ticketIds.length > 0) {
-    return ticketIds.map((ticketId: ethers.BigNumber, index: number) => {
+    return ticketIds.map((ticketId: EthersBigNumber, index: number) => {
       return {
         id: ticketId.toString(),
         number: ticketNumbers[index].toString(),
@@ -134,7 +133,7 @@ export const fetchCurrentLotteryIdAndMaxBuy = async () => {
     }));
 
     const [[currentLotteryId], [maxNumberTicketsPerBuyOrClaim]] =
-      (await multicallv2(StandardLotteryAbi, calls)) as ethers.BigNumber[][];
+      (await multicallv2(StandardLotteryAbi, calls)) as EthersBigNumber[][];
 
     return {
       currentLotteryId: currentLotteryId ? currentLotteryId.toString() : '',
@@ -158,7 +157,7 @@ export const fetchLotteryBundleRules = async (): Promise<
     const [purchasedCounts, freeCounts] = data;
 
     return purchasedCounts.map(
-      (purchasedCount: ethers.BigNumber, index: number) => {
+      (purchasedCount: EthersBigNumber, index: number) => {
         return {
           index,
           purchasedCount: purchasedCount.toNumber(),

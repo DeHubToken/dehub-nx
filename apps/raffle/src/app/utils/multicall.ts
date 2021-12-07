@@ -1,6 +1,4 @@
-import { JsonFragment } from '@ethersproject/abi';
-import { ethers } from 'ethers';
-import { Fragment } from 'ethers/lib/utils';
+import { Fragment, Interface, JsonFragment } from '@ethersproject/abi';
 import { getMultiCallContract } from './contractHelpers';
 
 export type MultiCallResponse<T> = T | null;
@@ -19,7 +17,7 @@ interface MulticallOptions {
 const multicall = async <T>(abi: string[], calls: Call[]): Promise<T> => {
   try {
     const multi = getMultiCallContract();
-    const itf = new ethers.utils.Interface(abi);
+    const itf = new Interface(abi);
 
     const calldata = calls.map(call => [
       call.address.toLowerCase(),
@@ -58,7 +56,7 @@ export const multicallv2 = async <T = any>(
   const { requireSuccess } = options;
   const multi = getMultiCallContract();
 
-  const itf = new ethers.utils.Interface(abi);
+  const itf = new Interface(abi);
 
   const calldata = calls.map(call => [
     call.address.toLowerCase(),

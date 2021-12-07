@@ -37,6 +37,15 @@ export interface SharedEnv {
     isPreview: boolean;
     website: ContentfulEnv;
   };
+
+  /** Moralis configuration */
+  moralis: {
+    id: string;
+    server: string;
+  };
+
+  /** BSC network nodes */
+  bscNodes: string[];
 }
 
 /**
@@ -56,4 +65,15 @@ export const defaultSharedEnv: SharedEnv = {
       cpaToken: 'HvmEh8YWfWNGKRzTSYDf-tIR93Rs8FjyKkH56c0svgo',
     },
   },
+
+  moralis: {
+    id: 'QfgYJskOXrYJnSAiB3KZPMMesmlJB6JBqY3GOzHV',
+    server: 'https://vamoxwojj7ht.moralisweb3.com:2053/server',
+  },
+
+  bscNodes: [
+    'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
+    'https://bsc-dataseed1.defibit.io/',
+    'https://bsc-dataseed1.ninicoin.io/',
+  ],
 };

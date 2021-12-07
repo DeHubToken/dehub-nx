@@ -1,15 +1,16 @@
 import BigNumber from 'bignumber.js';
-import { ethers } from 'ethers';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 
 type SerializedBigNumber = string;
 
 export const BIG_ZERO = new BigNumber(0);
 export const BIG_ONE = new BigNumber(1);
+export const BIG_NINE = new BigNumber(9);
 export const BIG_TEN = new BigNumber(10);
 
 export const ethersToSerializedBigNumber = (
-  ethersBn: ethers.BigNumber
+  ethersBn: EthersBigNumber
 ): SerializedBigNumber => ethersToBigNumber(ethersBn).toJSON();
 
-export const ethersToBigNumber = (ethersBn: ethers.BigNumber): BigNumber =>
+export const ethersToBigNumber = (ethersBn: EthersBigNumber): BigNumber =>
   new BigNumber(ethersBn.toString());

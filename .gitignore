@@ -4,7 +4,6 @@
 /dist
 /tmp
 /out-tsc
-/.angular
 
 # dependencies
 /node_modules
@@ -27,6 +26,7 @@
 .history/*
 
 # misc
+/.angular
 /.sass-cache
 /connect.lock
 /coverage
