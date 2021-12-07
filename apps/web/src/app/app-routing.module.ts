@@ -4,6 +4,7 @@ import { AppMainComponent } from './app.main.component';
 
 enum Navigation {
   Components = 'components',
+  Tournaments = 'tournaments',
 }
 
 @NgModule({
@@ -23,6 +24,16 @@ enum Navigation {
                 ),
               data: {
                 animation: Navigation.Components,
+              },
+            },
+            {
+              path: Navigation.Tournaments,
+              loadChildren: () =>
+                import('./modules/tournaments/tournaments.module').then(
+                  module => module.TournamentsModule
+                ),
+              data: {
+                animation: Navigation.Tournaments,
               },
             },
           ],

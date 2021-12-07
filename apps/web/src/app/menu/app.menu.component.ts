@@ -18,8 +18,14 @@ export class AppMenuComponent implements OnInit {
         label: 'Dapps',
         items: [
           {
-            label: 'De Raffle',
+            label: 'Prize Draw',
             routerLink: [''],
+            icon: 'fa fa-ticket',
+          },
+          {
+            label: 'De Game',
+            routerLink: ['/tournaments'],
+            icon: 'fa fa-trophy',
           },
         ],
       },
