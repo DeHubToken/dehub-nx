@@ -102,7 +102,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
       );
     } catch (error) {
       setIsPendingTx(false);
-      toastError(t('Error'), error?.message);
+      if (error instanceof Error) toastError(t('Error'), error?.message);
       console.error(error);
     }
   };
