@@ -137,14 +137,16 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run prediction:deploy:draft"
+        "command": "npx netlify deploy --site=cb468f79-e012-4b6b-a4a6-bf85e3acae9a -d ../../dist/apps/prediction -o",
+        "cwd": "apps/prediction"
       }
     },
     "deploy-prod": {
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run prediction:deploy:prod"
+        "command": "npx netlify deploy --site=cb468f79-e012-4b6b-a4a6-bf85e3acae9a -d ../../dist/apps/prediction -p -o",
+        "cwd": "apps/prediction"
       }
     }
   },

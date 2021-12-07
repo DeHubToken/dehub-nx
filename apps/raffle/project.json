@@ -139,14 +139,16 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run raffle:deploy:draft"
+        "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/raffle -o",
+        "cwd": "apps/raffle"
       }
     },
     "deploy-prod": {
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npm run raffle:deploy:prod"
+        "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/raffle -p -o",
+        "cwd": "apps/raffle"
       }
     }
   },
