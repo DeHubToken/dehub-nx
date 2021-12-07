@@ -5,12 +5,13 @@ import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { light, dark } from '../../theme';
 import { StyledTooltip, Arrow } from './StyledTooltip';
 import { TooltipOptions, TooltipRefs } from './types';
+import { IENavigator } from '../../types';
 
 function isTouchDevice() {
   return (
     'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
-    navigator.msMaxTouchPoints > 0
+    (navigator as IENavigator).msMaxTouchPoints > 0
   );
 }
 

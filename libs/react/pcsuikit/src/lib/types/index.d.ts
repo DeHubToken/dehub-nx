@@ -3,7 +3,7 @@ declare module '*.svg' {
   export default content;
 }
 
-interface Navigator extends Navigator {
+export interface IENavigator extends Navigator {
   /** IE support */
   msMaxTouchPoints: number;
 }
