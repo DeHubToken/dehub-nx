@@ -100,13 +100,13 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
           });
         }
       }
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.error(error);
       toast?.current?.show({
         severity: 'error',
         summary: 'Claim tickets',
         detail: `Claim tickets failed - ${
-          // eslint-disable-next-line
           error?.data?.message ?? error.message
         }`,
         life: 3000,

@@ -201,7 +201,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
     } catch (error) {
       const errorMsg = t('An error occurred, unable to enter your position');
 
-      toastError(t('Error'), error?.message);
+      if (error instanceof Error) toastError(t('Error'), error?.message);
       setIsTxPending(false);
       console.error(errorMsg, error);
     }

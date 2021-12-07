@@ -35,7 +35,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({
       toastSuccess(t('Position reclaimed!'));
     } catch (error) {
       setIsPendingTx(false);
-      toastError(t('Error'), error?.message);
+      if (error instanceof Error) toastError(t('Error'), error?.message);
       console.error(error);
     }
   };
