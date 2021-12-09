@@ -1385,6 +1385,77 @@ export type TeamMembersQuery = {
     | undefined;
 };
 
+export type TournamentCollectionFieldsFragment = {
+  __typename?: 'TournamentCollection';
+  total: number;
+  items: Array<
+    | {
+        __typename?: 'Tournament';
+        title?: string | null | undefined;
+        date?: any | null | undefined;
+        badge?: string | null | undefined;
+        callToActionButtonLabel?: string | null | undefined;
+        callToActionButtonLink?: string | null | undefined;
+        featured?: boolean | null | undefined;
+        coverImage?:
+          | { __typename?: 'Asset'; url?: string | null | undefined }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined
+  >;
+};
+
+export type TournamentsQueryVariables = Exact<{
+  isFeatured?: Maybe<Scalars['Boolean']>;
+  isPreview?: Maybe<Scalars['Boolean']>;
+}>;
+
+export type TournamentsQuery = {
+  __typename?: 'Query';
+  tournamentCollection?:
+    | {
+        __typename?: 'TournamentCollection';
+        total: number;
+        items: Array<
+          | {
+              __typename?: 'Tournament';
+              title?: string | null | undefined;
+              date?: any | null | undefined;
+              badge?: string | null | undefined;
+              callToActionButtonLabel?: string | null | undefined;
+              callToActionButtonLink?: string | null | undefined;
+              featured?: boolean | null | undefined;
+              coverImage?:
+                | { __typename?: 'Asset'; url?: string | null | undefined }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
+export const TournamentCollectionFieldsFragmentDoc = gql`
+  fragment TournamentCollectionFields on TournamentCollection {
+    total
+    items {
+      coverImage {
+        url
+      }
+      title
+      date
+      badge
+      callToActionButtonLabel
+      callToActionButtonLink
+      featured
+    }
+  }
+`;
 export const TeamMembersDocument = gql`
   query teamMembers($isPreview: Boolean = false) {
     teamMemberCollection(preview: $isPreview) {
@@ -1405,6 +1476,17 @@ export const TeamMembersDocument = gql`
       }
     }
   }
+`;
+export const TournamentsDocument = gql`
+  query tournaments($isFeatured: Boolean, $isPreview: Boolean = false) {
+    tournamentCollection(
+      where: { featured: $isFeatured }
+      preview: $isPreview
+    ) {
+      ...TournamentCollectionFields
+    }
+  }
+  ${TournamentCollectionFieldsFragmentDoc}
 `;
 
 export type SdkFunctionWrapper = <T>(
@@ -1430,6 +1512,19 @@ export function getSdk(
             ...wrappedRequestHeaders,
           }),
         'teamMembers'
+      );
+    },
+    tournaments(
+      variables?: TournamentsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<TournamentsQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<TournamentsQuery>(TournamentsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'tournaments'
       );
     },
   };

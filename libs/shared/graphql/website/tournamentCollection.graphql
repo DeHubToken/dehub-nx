@@ -1,0 +1,23 @@
+fragment TournamentCollectionFields on TournamentCollection {
+  total
+  items {
+    coverImage {
+      url
+    }
+    title
+    date
+    badge
+    callToActionButtonLabel
+    callToActionButtonLink
+    featured
+    #       description{
+    #         json
+    #       }
+  }
+}
+
+query tournaments($isFeatured: Boolean, $isPreview: Boolean = false) {
+  tournamentCollection(where: { featured: $isFeatured }, preview: $isPreview) {
+    ...TournamentCollectionFields
+  }
+}

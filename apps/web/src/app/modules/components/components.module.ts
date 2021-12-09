@@ -8,10 +8,12 @@ import { TeamMemberComponent } from './team/team-member.component';
 import { TeamSkeletonComponent } from './team/team-skeleton.component';
 import { TeamComponent } from './team/team.component';
 
+const angularModules = [CommonModule];
+
 const primeNgModules = [ButtonModule, RippleModule, SkeletonModule];
 
 @NgModule({
-  imports: [CommonModule, ComponentsRoutingModule, primeNgModules],
+  imports: [angularModules, primeNgModules, ComponentsRoutingModule],
   declarations: [TeamComponent, TeamSkeletonComponent, TeamMemberComponent],
 })
 export class ComponentsModule {}

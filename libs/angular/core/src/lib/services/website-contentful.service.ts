@@ -18,3 +18,17 @@ export class TeamMembersService extends Apollo.Query<
     super(apollo);
   }
 }
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class TournamentsService extends Apollo.Query<
+  models.TournamentsQuery,
+  models.TournamentsQueryVariables
+> {
+  document = models.TournamentsDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}

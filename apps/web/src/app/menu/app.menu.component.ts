@@ -20,12 +20,12 @@ export class AppMenuComponent implements OnInit {
           {
             label: 'Prize Draw',
             routerLink: [''],
-            icon: 'fa fa-ticket',
+            icon: 'fa fa-ticket-alt',
           },
           {
             label: 'De Game',
             routerLink: ['/tournaments'],
-            icon: 'fa fa-trophy',
+            icon: 'fa fa-trophy-alt',
           },
         ],
       },

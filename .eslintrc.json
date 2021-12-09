@@ -25,17 +25,7 @@
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
       "rules": {
-        "no-console": ["error", { "allow": ["warn", "error"] }],
-        "multiline-comment-style": ["error", "starred-block"],
-        "spaced-comment": [
-          "warn",
-          "always",
-          {
-            "exceptions": ["-", "*"],
-            "line": { "exceptions": ["-"] },
-            "block": { "exceptions": ["*"] }
-          }
-        ]
+        "no-console": ["error", { "allow": ["warn", "error"] }]
       }
     },
     {
