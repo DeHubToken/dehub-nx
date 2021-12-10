@@ -33,7 +33,7 @@ export const transformRoundResponse = (
     id: round[0].toString(),
     epoch: round[0].toNumber(),
     failed:
-      round[0].toNumber() === currentEpoch.toNumber() ? false : !round[11], // oracle Called
+      round[0].toNumber() === currentEpoch.toNumber() - 1 ? false : !round[11], // oracle Called
     startBlock: round[1].toNumber(),
     startAt: 0,
     lockAt: 0,
