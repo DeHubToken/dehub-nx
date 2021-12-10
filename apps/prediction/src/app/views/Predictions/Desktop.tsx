@@ -145,7 +145,7 @@ const Desktop: React.FC = () => {
   useEffect(() => {
     const threshold = 100;
     const handleDrag = debounce(() => {
-      const { height } = chartRef?.current?.getBoundingClientRect();
+      const height = chartRef?.current?.getBoundingClientRect()?.height;
 
       // If the height of the chart pane goes below the "snapOffset" threshold mark the chart pane as closed
       dispatch(setChartPaneState(height > threshold));
