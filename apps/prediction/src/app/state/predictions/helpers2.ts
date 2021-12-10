@@ -4,6 +4,7 @@ import {
   BIG_ZERO,
 } from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import BigNumber from 'bignumber.js';
 
 import PredictionsAbi from '../../config/abi/predictions.json';
 import { getPredictionsAddress } from '../../utils/addressHelpers';
@@ -24,11 +25,15 @@ export const numberOrNull = (value: string | null) => {
   return Number.isNaN(valueNum) ? null : valueNum;
 };
 
-const transformRoundResponse = (round: EthersBigNumber[]): Round => {
+export const transformRoundResponse = (
+  round: EthersBigNumber[],
+  currentEpoch: BigNumber
+): Round => {
   return {
     id: round[0].toString(),
     epoch: round[0].toNumber(),
-    failed: false,
+    failed:
+      round[0].toNumber() === currentEpoch.toNumber() ? false : !round[11], // oracle Called
     startBlock: round[1].toNumber(),
     startAt: 0,
     lockAt: 0,
@@ -51,7 +56,10 @@ const transformRoundResponse = (round: EthersBigNumber[]): Round => {
   };
 };
 
-const fetchRounds = async (rounds: string[]): Promise<Round[]> => {
+const fetchRounds = async (
+  rounds: string[],
+  currentEpoch: BigNumber
+): Promise<Round[]> => {
   const calls: Call[] = rounds.map(roundId => {
     return {
       name: 'rounds',
@@ -63,7 +71,7 @@ const fetchRounds = async (rounds: string[]): Promise<Round[]> => {
   const pureRounds = await multicall(PredictionsAbi, calls);
 
   const roundsResponse = pureRounds.map((round: EthersBigNumber[]) => {
-    return transformRoundResponse(round);
+    return transformRoundResponse(round, currentEpoch);
   });
 
   return roundsResponse;
@@ -85,7 +93,10 @@ export const fetchMarketData = async (
   }
 
   try {
-    const roundsResponse = await fetchRounds(roundsToCheck);
+    const roundsResponse = await fetchRounds(
+      roundsToCheck,
+      currentEpoch as BigNumber
+    );
 
     return {
       rounds: roundsResponse,
@@ -127,6 +138,8 @@ export const fetchBetHistory = async ({
   });
 
   try {
+    const contract = getPredictionsContract();
+    const currentEpoch = await contract.currentEpoch();
     const pureBets = await multicall(PredictionsAbi, calls);
 
     // eslint-disable-next-line prefer-const
@@ -147,7 +160,10 @@ export const fetchBetHistory = async ({
       };
     });
 
-    const roundsResponse = await fetchRounds(round_in);
+    const roundsResponse = await fetchRounds(
+      round_in,
+      currentEpoch as BigNumber
+    );
     for (let idx = 0; idx < round_in.length; idx++) {
       if (betsResponse[idx] === null) continue;
       betsResponse[idx].round = roundsResponse[idx];
