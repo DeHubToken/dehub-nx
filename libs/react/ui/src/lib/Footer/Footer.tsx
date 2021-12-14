@@ -10,7 +10,7 @@ function Footer() {
       <div className="flex flex-wrap align-items-center justify-content-center card-container">
         <ul>
           <li>
-            <a href="/declaimer" className="p-link mb-2 mx-2">
+            <a href="https://www.dehub.net/#" className="p-link mb-2 mx-2">
               Disclaimer
             </a>
           </li>
