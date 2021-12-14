@@ -4,11 +4,13 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:build",
+      "executor": "@nrwl/web:webpack",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/raffle/raffle",
         "index": "apps/raffle/src/index.html",
+        "baseHref": "/",
         "main": "apps/raffle/src/main.tsx",
         "polyfills": "apps/raffle/src/polyfills.ts",
         "tsConfig": "apps/raffle/tsconfig.app.json",
@@ -101,8 +103,7 @@
           "sourceMap": true,
           "namedChunks": true
         }
-      },
-      "defaultConfiguration": "production"
+      }
     },
     "serve": {
       "executor": "@nrwl/web:dev-server",

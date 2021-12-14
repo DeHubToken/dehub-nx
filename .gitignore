@@ -26,7 +26,6 @@
 .history/*
 
 # misc
-/.angular
 /.sass-cache
 /connect.lock
 /coverage
@@ -42,3 +41,5 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+
+.angular
