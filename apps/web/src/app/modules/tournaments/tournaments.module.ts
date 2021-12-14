@@ -1,19 +1,36 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { TournamentsRoutingModule } from './tournaments-routing.module';
-import { TournamentComponent } from './tournament/tournament.component';
+import { NgModule } from '@angular/core';
+import { SafeHtmlPipeModule } from '@dehub/angular/pipes/safe-html';
+import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
+import { DialogModule } from 'primeng/dialog';
+import { RippleModule } from 'primeng/ripple';
 import { TagModule } from 'primeng/tag';
+import { CountDownComponent } from './tournament/count-down.component';
 import { TournamentBadgeComponent } from './tournament/tournament-badge.component';
 import { TournamentCardComponent } from './tournament/tournament-card.component';
-import { CountDownComponent } from './tournament/count-down.component';
+import { TournamentComponent } from './tournament/tournament.component';
+import { TournamentsRoutingModule } from './tournaments-routing.module';
 
 const angularModules = [CommonModule];
-const primeNgModules = [CarouselModule, TagModule];
+
+const libModules = [SafeHtmlPipeModule];
+
+const primeNgModules = [
+  CarouselModule,
+  TagModule,
+  ButtonModule,
+  RippleModule,
+  DialogModule,
+];
 
 @NgModule({
-  imports: [angularModules, primeNgModules, TournamentsRoutingModule],
+  imports: [
+    angularModules,
+    libModules,
+    primeNgModules,
+    TournamentsRoutingModule,
+  ],
   declarations: [
     TournamentComponent,
     TournamentCardComponent,

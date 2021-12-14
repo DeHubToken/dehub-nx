@@ -3,21 +3,30 @@ import * as models from '@dehub/shared/models';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {};
-export const TournamentCollectionFieldsFragmentDoc = gql`
-  fragment TournamentCollectionFields on TournamentCollection {
-    total
-    items {
-      coverImage {
-        url
-      }
-      title
-      date
-      badge
-      callToActionButtonLabel
-      callToActionButtonLink
-      featured
+export const TournamentFragmentDoc = gql`
+  fragment Tournament on Tournament {
+    coverImage {
+      url
+    }
+    title
+    date
+    badge
+    callToActionButtonLabel
+    callToActionButtonLink
+    featured
+    description {
+      json
     }
   }
+`;
+export const TournamentCollectionFragmentDoc = gql`
+  fragment TournamentCollection on TournamentCollection {
+    total
+    items {
+      ...Tournament
+    }
+  }
+  ${TournamentFragmentDoc}
 `;
 export const TeamMembersDocument = gql`
   query teamMembers($isPreview: Boolean = false) {
@@ -90,15 +99,20 @@ export type TeamMembersQueryResult = Apollo.QueryResult<
   models.TeamMembersQueryVariables
 >;
 export const TournamentsDocument = gql`
-  query tournaments($isFeatured: Boolean, $isPreview: Boolean = false) {
+  query tournaments(
+    $isFeatured: Boolean
+    $dateGte: DateTime
+    $isPreview: Boolean = false
+  ) {
     tournamentCollection(
-      where: { featured: $isFeatured }
+      where: { featured: $isFeatured, date_gte: $dateGte }
+      order: [date_DESC]
       preview: $isPreview
     ) {
-      ...TournamentCollectionFields
+      ...TournamentCollection
     }
   }
-  ${TournamentCollectionFieldsFragmentDoc}
+  ${TournamentCollectionFragmentDoc}
 `;
 
 /**
@@ -114,6 +128,7 @@ export const TournamentsDocument = gql`
  * const { data, loading, error } = useTournamentsQuery({
  *   variables: {
  *      isFeatured: // value for 'isFeatured'
+ *      dateGte: // value for 'dateGte'
  *      isPreview: // value for 'isPreview'
  *   },
  * });

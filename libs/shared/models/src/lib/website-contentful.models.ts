@@ -1385,7 +1385,25 @@ export type TeamMembersQuery = {
     | undefined;
 };
 
-export type TournamentCollectionFieldsFragment = {
+export type TournamentFragment = {
+  __typename?: 'Tournament';
+  title?: string | null | undefined;
+  date?: any | null | undefined;
+  badge?: string | null | undefined;
+  callToActionButtonLabel?: string | null | undefined;
+  callToActionButtonLink?: string | null | undefined;
+  featured?: boolean | null | undefined;
+  coverImage?:
+    | { __typename?: 'Asset'; url?: string | null | undefined }
+    | null
+    | undefined;
+  description?:
+    | { __typename?: 'TournamentDescription'; json: any }
+    | null
+    | undefined;
+};
+
+export type TournamentCollectionFragment = {
   __typename?: 'TournamentCollection';
   total: number;
   items: Array<
@@ -1401,6 +1419,10 @@ export type TournamentCollectionFieldsFragment = {
           | { __typename?: 'Asset'; url?: string | null | undefined }
           | null
           | undefined;
+        description?:
+          | { __typename?: 'TournamentDescription'; json: any }
+          | null
+          | undefined;
       }
     | null
     | undefined
@@ -1409,6 +1431,7 @@ export type TournamentCollectionFieldsFragment = {
 
 export type TournamentsQueryVariables = Exact<{
   isFeatured?: Maybe<Scalars['Boolean']>;
+  dateGte?: Maybe<Scalars['DateTime']>;
   isPreview?: Maybe<Scalars['Boolean']>;
 }>;
 
@@ -1431,6 +1454,10 @@ export type TournamentsQuery = {
                 | { __typename?: 'Asset'; url?: string | null | undefined }
                 | null
                 | undefined;
+              description?:
+                | { __typename?: 'TournamentDescription'; json: any }
+                | null
+                | undefined;
             }
           | null
           | undefined
@@ -1440,21 +1467,30 @@ export type TournamentsQuery = {
     | undefined;
 };
 
-export const TournamentCollectionFieldsFragmentDoc = gql`
-  fragment TournamentCollectionFields on TournamentCollection {
-    total
-    items {
-      coverImage {
-        url
-      }
-      title
-      date
-      badge
-      callToActionButtonLabel
-      callToActionButtonLink
-      featured
+export const TournamentFragmentDoc = gql`
+  fragment Tournament on Tournament {
+    coverImage {
+      url
+    }
+    title
+    date
+    badge
+    callToActionButtonLabel
+    callToActionButtonLink
+    featured
+    description {
+      json
     }
   }
+`;
+export const TournamentCollectionFragmentDoc = gql`
+  fragment TournamentCollection on TournamentCollection {
+    total
+    items {
+      ...Tournament
+    }
+  }
+  ${TournamentFragmentDoc}
 `;
 export const TeamMembersDocument = gql`
   query teamMembers($isPreview: Boolean = false) {
@@ -1478,15 +1514,20 @@ export const TeamMembersDocument = gql`
   }
 `;
 export const TournamentsDocument = gql`
-  query tournaments($isFeatured: Boolean, $isPreview: Boolean = false) {
+  query tournaments(
+    $isFeatured: Boolean
+    $dateGte: DateTime
+    $isPreview: Boolean = false
+  ) {
     tournamentCollection(
-      where: { featured: $isFeatured }
+      where: { featured: $isFeatured, date_gte: $dateGte }
+      order: [date_DESC]
       preview: $isPreview
     ) {
-      ...TournamentCollectionFields
+      ...TournamentCollection
     }
   }
-  ${TournamentCollectionFieldsFragmentDoc}
+  ${TournamentCollectionFragmentDoc}
 `;
 
 export type SdkFunctionWrapper = <T>(

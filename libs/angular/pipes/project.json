@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/pipes",
+  "sourceRoot": "libs/angular/pipes/src",
+  "prefix": "dehub",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/pipes"],
+      "options": {
+        "jestConfig": "libs/angular/pipes/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/pipes/src/**/*.ts",
+          "libs/angular/pipes/src/**/*.html"
+        ],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": []
+}

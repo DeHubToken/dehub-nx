@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Tournament } from '@dehub/shared/models';
+import { TournamentFragment } from '@dehub/shared/models';
 
 @Component({
   selector: 'dhb-tournament-badge',
@@ -8,7 +8,7 @@ import { Tournament } from '@dehub/shared/models';
   `,
 })
 export class TournamentBadgeComponent implements OnInit {
-  @Input() tournament?: Tournament;
+  @Input() tournament?: TournamentFragment;
   @Input() expired = false;
 
   badge: string | 'Finished' = 'Finished';

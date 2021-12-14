@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TournamentsService } from '@dehub/angular/core';
 import {
   CarouselResponsiveOptions,
-  TournamentCollectionFieldsFragment,
+  TournamentCollectionFragment,
 } from '@dehub/shared/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -68,9 +68,9 @@ import { environment } from '../../../../environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TournamentComponent implements OnInit {
-  featuredTournaments$?: Observable<TournamentCollectionFieldsFragment>;
+  featuredTournaments$?: Observable<TournamentCollectionFragment>;
   featuredTournamentsLoading$?: Observable<boolean>;
-  finishedTournaments$?: Observable<TournamentCollectionFieldsFragment>;
+  finishedTournaments$?: Observable<TournamentCollectionFragment>;
   finishedTournamentsLoading$?: Observable<boolean>;
 
   finishedCarouselResponsiveOptions: CarouselResponsiveOptions = [
@@ -93,8 +93,7 @@ export class TournamentComponent implements OnInit {
 
     this.featuredTournaments$ = featuredTounamentsQuery$.pipe(
       map(
-        ({ data }) =>
-          data?.tournamentCollection as TournamentCollectionFieldsFragment
+        ({ data }) => data?.tournamentCollection as TournamentCollectionFragment
       )
     );
 
@@ -102,12 +101,17 @@ export class TournamentComponent implements OnInit {
       map(({ loading }) => loading)
     );
 
-    const finishedTounamentsQuery$ = this.getTournaments(false);
+    const sinceLastTwoMonths = new Date(
+      new Date().setMonth(new Date().getMonth() - 2)
+    );
+    const finishedTounamentsQuery$ = this.getTournaments(
+      false,
+      sinceLastTwoMonths
+    );
 
     this.finishedTournaments$ = finishedTounamentsQuery$.pipe(
       map(
-        ({ data }) =>
-          data?.tournamentCollection as TournamentCollectionFieldsFragment
+        ({ data }) => data?.tournamentCollection as TournamentCollectionFragment
       )
     );
 
@@ -116,9 +120,10 @@ export class TournamentComponent implements OnInit {
     );
   }
 
-  private getTournaments(isFeatured = true) {
+  private getTournaments(isFeatured = true, dateGte = new Date()) {
     return this.tournamentService.watch({
       isFeatured,
+      dateGte: dateGte.toISOString(),
       isPreview: environment.contentful.isPreview,
     }).valueChanges;
   }
