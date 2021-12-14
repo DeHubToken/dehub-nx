@@ -5,6 +5,9 @@ import * as Apollo from '@apollo/client';
 const defaultOptions = {};
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
+    sys {
+      publishedAt
+    }
     coverImage {
       url
     }
@@ -33,7 +36,6 @@ export const TeamMembersDocument = gql`
     teamMemberCollection(preview: $isPreview) {
       items {
         sys {
-          id
           publishedAt
         }
         name

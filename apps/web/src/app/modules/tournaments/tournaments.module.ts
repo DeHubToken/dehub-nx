@@ -5,9 +5,11 @@ import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { DialogModule } from 'primeng/dialog';
 import { RippleModule } from 'primeng/ripple';
+import { SkeletonModule } from 'primeng/skeleton';
 import { TagModule } from 'primeng/tag';
 import { CountDownComponent } from './tournament/count-down.component';
 import { TournamentBadgeComponent } from './tournament/tournament-badge.component';
+import { TournamentCardSkeletonComponent } from './tournament/tournament-card-skeleton.component';
 import { TournamentCardComponent } from './tournament/tournament-card.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentsRoutingModule } from './tournaments-routing.module';
@@ -22,6 +24,7 @@ const primeNgModules = [
   ButtonModule,
   RippleModule,
   DialogModule,
+  SkeletonModule,
 ];
 
 @NgModule({
@@ -36,6 +39,7 @@ const primeNgModules = [
     TournamentCardComponent,
     TournamentBadgeComponent,
     CountDownComponent,
+    TournamentCardSkeletonComponent,
   ],
 })
 export class TournamentsModule {}

@@ -16,7 +16,7 @@ interface SocialLink {
   template: `
     <div
       *ngIf="teamMember"
-      [class.opacity-40]="!teamMember.sys.publishedAt"
+      [class.opacity-50]="!teamMember.sys.publishedAt"
       class="card image-card shadow-8"
     >
       <!-- Avatar -->

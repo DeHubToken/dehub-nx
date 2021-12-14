@@ -1,4 +1,7 @@
 fragment Tournament on Tournament {
+  sys {
+    publishedAt
+  }
   coverImage {
     url
   }

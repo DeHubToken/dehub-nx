@@ -19,7 +19,20 @@ import { environment } from '../../../../environments/environment';
             else featuredTournamentsLoaded
           "
         >
-          Loading featured tournaments...
+          <p-carousel
+            [value]="teamMembersSkeleton"
+            [circular]="teamMembersSkeleton.length > 1"
+            [autoplayInterval]="3000"
+            [numVisible]="1"
+            [numScroll]="1"
+          >
+            <ng-template pTemplate="header">
+              <h3><i class="fa fa-trophy-alt"></i> Featured Tournaments</h3>
+            </ng-template>
+            <ng-template let-tournament pTemplate="item">
+              <dhb-tournament-skeleton-card></dhb-tournament-skeleton-card>
+            </ng-template>
+          </p-carousel>
         </ng-container>
 
         <!-- Featured Tournaments loaded -->
@@ -52,7 +65,21 @@ import { environment } from '../../../../environments/environment';
             else finishedTournamentsLoaded
           "
         >
-          Loading finished tournaments...
+          <p-carousel
+            [value]="teamMembersSkeleton"
+            [responsiveOptions]="finishedCarouselResponsiveOptions"
+            [numVisible]="3"
+            [numScroll]="3"
+          >
+            <ng-template pTemplate="header">
+              <h3><i class="fa fa-trophy-alt"></i> Finished Tournaments</h3>
+            </ng-template>
+            <ng-template let-tournament pTemplate="item">
+              <dhb-tournament-skeleton-card
+                [expired]="true"
+              ></dhb-tournament-skeleton-card>
+            </ng-template>
+          </p-carousel>
         </ng-container>
 
         <!-- Finished Tournaments loaded -->
@@ -100,6 +127,8 @@ export class TournamentComponent implements OnInit {
       numScroll: 1,
     },
   ];
+
+  teamMembersSkeleton = [...Array(9)];
 
   constructor(private tournamentService: TournamentsService) {}
 

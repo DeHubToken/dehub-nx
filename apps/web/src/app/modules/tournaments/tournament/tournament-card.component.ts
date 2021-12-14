@@ -9,11 +9,7 @@ import { WINDOW } from '@ng-web-apis/common';
 @Component({
   selector: 'dhb-tournament-card',
   template: `
-    <div
-      *ngIf="tournament"
-      [class.opacity-50]="!tournament.featured"
-      class="tournament-card"
-    >
+    <div *ngIf="tournament" [class.opacity-50]="!tournament.sys.publishedAt">
       <div class="border-round m-2">
         <div class="mb-4">
           <img
@@ -23,7 +19,7 @@ import { WINDOW } from '@ng-web-apis/common';
           />
         </div>
 
-        <div class="tournament-card-content px-4">
+        <div class="px-4">
           <!-- Title -->
           <h4 class="mb-1">{{ tournament.title }}</h4>
 

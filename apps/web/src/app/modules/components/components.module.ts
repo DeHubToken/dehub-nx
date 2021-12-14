@@ -5,7 +5,7 @@ import { RippleModule } from 'primeng/ripple';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { TeamMemberComponent } from './team/team-member.component';
-import { TeamSkeletonComponent } from './team/team-skeleton.component';
+import { TeamMemberSkeletonComponent } from './team/team-member-skeleton.component';
 import { TeamComponent } from './team/team.component';
 
 const angularModules = [CommonModule];
@@ -14,6 +14,10 @@ const primeNgModules = [ButtonModule, RippleModule, SkeletonModule];
 
 @NgModule({
   imports: [angularModules, primeNgModules, ComponentsRoutingModule],
-  declarations: [TeamComponent, TeamSkeletonComponent, TeamMemberComponent],
+  declarations: [
+    TeamComponent,
+    TeamMemberComponent,
+    TeamMemberSkeletonComponent,
+  ],
 })
 export class ComponentsModule {}

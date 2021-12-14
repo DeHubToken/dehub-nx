@@ -1367,11 +1367,7 @@ export type TeamMembersQuery = {
               linkedin?: string | null | undefined;
               instagram?: string | null | undefined;
               github?: string | null | undefined;
-              sys: {
-                __typename?: 'Sys';
-                id: string;
-                publishedAt?: any | null | undefined;
-              };
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
               avatar?:
                 | { __typename?: 'Asset'; url?: string | null | undefined }
                 | null
@@ -1393,6 +1389,7 @@ export type TournamentFragment = {
   callToActionButtonLabel?: string | null | undefined;
   callToActionButtonLink?: string | null | undefined;
   featured?: boolean | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
   coverImage?:
     | { __typename?: 'Asset'; url?: string | null | undefined }
     | null
@@ -1415,6 +1412,7 @@ export type TournamentCollectionFragment = {
         callToActionButtonLabel?: string | null | undefined;
         callToActionButtonLink?: string | null | undefined;
         featured?: boolean | null | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
         coverImage?:
           | { __typename?: 'Asset'; url?: string | null | undefined }
           | null
@@ -1450,6 +1448,7 @@ export type TournamentsQuery = {
               callToActionButtonLabel?: string | null | undefined;
               callToActionButtonLink?: string | null | undefined;
               featured?: boolean | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
               coverImage?:
                 | { __typename?: 'Asset'; url?: string | null | undefined }
                 | null
@@ -1469,6 +1468,9 @@ export type TournamentsQuery = {
 
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
+    sys {
+      publishedAt
+    }
     coverImage {
       url
     }
@@ -1497,7 +1499,6 @@ export const TeamMembersDocument = gql`
     teamMemberCollection(preview: $isPreview) {
       items {
         sys {
-          id
           publishedAt
         }
         name
