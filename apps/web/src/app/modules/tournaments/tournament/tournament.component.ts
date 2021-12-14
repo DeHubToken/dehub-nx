@@ -22,21 +22,25 @@ import { environment } from '../../../../environments/environment';
 
     <!-- Featured Tournaments loaded -->
     <ng-template #featuredTournamentsLoaded>
-      <p-carousel
-        *ngIf="featuredTournaments$ | async as tournaments"
-        [value]="tournaments.items"
-        [circular]="tournaments.total > 1"
-        [autoplayInterval]="3000"
-        [numVisible]="1"
-        [numScroll]="1"
-      >
-        <ng-template pTemplate="header">
-          <h3><i class="fa fa-trophy-alt"></i> Tournaments</h3>
-        </ng-template>
-        <ng-template let-tournament pTemplate="item">
-          <dhb-tournament-card [tournament]="tournament"></dhb-tournament-card>
-        </ng-template>
-      </p-carousel>
+      <ng-container *ngIf="featuredTournaments$ | async as tournaments">
+        <p-carousel
+          *ngIf="tournaments.total > 0"
+          [value]="tournaments.items"
+          [circular]="tournaments.total > 1"
+          [autoplayInterval]="3000"
+          [numVisible]="1"
+          [numScroll]="1"
+        >
+          <ng-template pTemplate="header">
+            <h3><i class="fa fa-trophy-alt"></i> Featured Tournaments</h3>
+          </ng-template>
+          <ng-template let-tournament pTemplate="item">
+            <dhb-tournament-card
+              [tournament]="tournament"
+            ></dhb-tournament-card>
+          </ng-template>
+        </p-carousel>
+      </ng-container>
     </ng-template>
 
     <!-- Finished Tournaments loading -->
@@ -51,17 +55,24 @@ import { environment } from '../../../../environments/environment';
 
     <!-- Finished Tournaments loaded -->
     <ng-template #finishedTournamentsLoaded>
-      <p-carousel
-        *ngIf="finishedTournaments$ | async as tournaments"
-        [value]="tournaments.items"
-        [responsiveOptions]="finishedCarouselResponsiveOptions"
-        [numVisible]="3"
-        [numScroll]="3"
-      >
-        <ng-template let-tournament pTemplate="item">
-          <dhb-tournament-card [tournament]="tournament"></dhb-tournament-card>
-        </ng-template>
-      </p-carousel>
+      <ng-container *ngIf="finishedTournaments$ | async as tournaments">
+        <p-carousel
+          *ngIf="tournaments.total > 0"
+          [value]="tournaments.items"
+          [responsiveOptions]="finishedCarouselResponsiveOptions"
+          [numVisible]="3"
+          [numScroll]="3"
+        >
+          <ng-template pTemplate="header">
+            <h3><i class="fa fa-trophy-alt"></i> Finished Tournaments</h3>
+          </ng-template>
+          <ng-template let-tournament pTemplate="item">
+            <dhb-tournament-card
+              [tournament]="tournament"
+            ></dhb-tournament-card>
+          </ng-template>
+        </p-carousel>
+      </ng-container>
     </ng-template>
   `,
   styles: [``],
