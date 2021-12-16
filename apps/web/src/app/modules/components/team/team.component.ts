@@ -8,23 +8,22 @@ import { environment } from '../../../../environments/environment';
 @Component({
   template: `
     <div class="grid">
-      <div class="col-12 md:col-3">
-        <!-- Team Members loading -->
-        <ng-container
-          *ngIf="teamMembersLoading$ | async; else teamMembersLoaded"
-        >
-          <ng-container *ngFor="let i of teamMembersSkeleton">
-            <dhb-team-member-skeleton></dhb-team-member-skeleton>
-          </ng-container>
-        </ng-container>
+      <!-- Team Members loading -->
+      <ng-container *ngIf="teamMembersLoading$ | async; else teamMembersLoaded">
+        <div *ngFor="let i of teamMembersSkeleton" class="col-12 md:col-3">
+          <dhb-team-member-skeleton></dhb-team-member-skeleton>
+        </div>
+      </ng-container>
 
-        <!-- Team Members loaded -->
-        <ng-template #teamMembersLoaded>
-          <ng-container *ngFor="let teamMember of teamMembers$ | async">
-            <dhb-team-member [teamMember]="teamMember"></dhb-team-member>
-          </ng-container>
-        </ng-template>
-      </div>
+      <!-- Team Members loaded -->
+      <ng-template #teamMembersLoaded>
+        <div
+          *ngFor="let teamMember of teamMembers$ | async"
+          class="col-12 md:col-3"
+        >
+          <dhb-team-member [teamMember]="teamMember"></dhb-team-member>
+        </div>
+      </ng-template>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
