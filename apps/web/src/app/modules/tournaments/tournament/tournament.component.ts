@@ -4,6 +4,11 @@ import {
   CarouselResponsiveOptions,
   TournamentCollectionFragment,
 } from '@dehub/shared/models';
+import {
+  bounceInDownOnEnterAnimation,
+  bounceInLeftOnEnterAnimation,
+  bounceInRightOnEnterAnimation,
+} from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
@@ -11,48 +16,53 @@ import { environment } from '../../../../environments/environment';
 @Component({
   template: `
     <div class="grid">
-      <div class="col-12">
+      <div [@bounceInLeft] class="col-12">
         <h3><i class="fa fa-trophy-alt"></i> Tournaments</h3>
       </div>
+
       <div class="col-12 xl:col-9 xl:col-offset-1">
         <!-- Featured Tournaments loading -->
-        <ng-container
-          *ngIf="
-            featuredTournamentsLoading$ | async;
-            else featuredTournamentsLoaded
-          "
-        >
-          <p-carousel
-            [value]="teamMembersSkeleton"
-            [circular]="teamMembersSkeleton.length > 1"
-            [autoplayInterval]="3000"
-            [numVisible]="1"
-            [numScroll]="1"
+        <div [@bounceInRight]>
+          <ng-container
+            *ngIf="
+              featuredTournamentsLoading$ | async;
+              else featuredTournamentsLoaded
+            "
           >
-            <ng-template let-tournament pTemplate="item">
-              <dhb-tournament-skeleton-card></dhb-tournament-skeleton-card>
-            </ng-template>
-          </p-carousel>
-        </ng-container>
-
-        <!-- Featured Tournaments loaded -->
-        <ng-template #featuredTournamentsLoaded>
-          <ng-container *ngIf="featuredTournaments$ | async as tournaments">
             <p-carousel
-              *ngIf="tournaments.total > 0"
-              [value]="tournaments.items"
-              [circular]="tournaments.total > 1"
+              [value]="teamMembersSkeleton"
+              [circular]="teamMembersSkeleton.length > 1"
               [autoplayInterval]="3000"
               [numVisible]="1"
               [numScroll]="1"
             >
               <ng-template let-tournament pTemplate="item">
-                <dhb-tournament-card
-                  [tournament]="tournament"
-                ></dhb-tournament-card>
+                <dhb-tournament-skeleton-card></dhb-tournament-skeleton-card>
               </ng-template>
             </p-carousel>
           </ng-container>
+        </div>
+
+        <!-- Featured Tournaments loaded -->
+        <ng-template #featuredTournamentsLoaded>
+          <div [@bounceInRight]>
+            <ng-container *ngIf="featuredTournaments$ | async as tournaments">
+              <p-carousel
+                *ngIf="tournaments.total > 0"
+                [value]="tournaments.items"
+                [circular]="tournaments.total > 1"
+                [autoplayInterval]="3000"
+                [numVisible]="1"
+                [numScroll]="1"
+              >
+                <ng-template let-tournament pTemplate="item">
+                  <dhb-tournament-card
+                    [tournament]="tournament"
+                  ></dhb-tournament-card>
+                </ng-template>
+              </p-carousel>
+            </ng-container>
+          </div>
         </ng-template>
 
         <!-- Finished Tournaments loading -->
@@ -81,6 +91,7 @@ import { environment } from '../../../../environments/environment';
           <ng-container *ngIf="finishedTournaments$ | async as tournaments">
             <p-carousel
               *ngIf="tournaments.total > 0"
+              [@bounceInDown]
               [value]="tournaments.items"
               [responsiveOptions]="finishedCarouselResponsiveOptions"
               [numVisible]="3"
@@ -99,6 +110,11 @@ import { environment } from '../../../../environments/environment';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' }),
+    bounceInRightOnEnterAnimation({ anchor: 'bounceInRight', delay: 100 }),
+    bounceInDownOnEnterAnimation({ anchor: 'bounceInDown', delay: 100 }),
+  ],
 })
 export class TournamentComponent implements OnInit {
   featuredTournaments$?: Observable<TournamentCollectionFragment>;

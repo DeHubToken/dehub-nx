@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <!-- Avatar -->
       <p-skeleton
         width="100%"
-        height="200px"
+        height="230px"
         borderRadius="24px"
         styleClass="mb-6"
       ></p-skeleton>

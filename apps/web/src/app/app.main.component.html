@@ -13,11 +13,8 @@
   <dhb-topbar></dhb-topbar>
 
   <div class="layout-main">
-    <div
-      [@routeAnimations]="outlet?.activatedRouteData?.animation"
-      class="layout-content"
-    >
-      <router-outlet #outlet="outlet"></router-outlet>
+    <div class="layout-content">
+      <router-outlet></router-outlet>
     </div>
 
     <dhb-footer></dhb-footer>

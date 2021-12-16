@@ -15,16 +15,13 @@ enum Navigation {
           path: '',
           component: AppMainComponent,
           children: [
-            // { path: '', redirectTo: Navigation.Components, pathMatch: 'full' },
+            { path: '', redirectTo: Navigation.Tournaments, pathMatch: 'full' },
             {
               path: Navigation.Components,
               loadChildren: () =>
                 import('./modules/components/components.module').then(
                   module => module.ComponentsModule
                 ),
-              data: {
-                animation: Navigation.Components,
-              },
             },
             {
               path: Navigation.Tournaments,
@@ -32,9 +29,6 @@ enum Navigation {
                 import('./modules/tournaments/tournaments.module').then(
                   module => module.TournamentsModule
                 ),
-              data: {
-                animation: Navigation.Tournaments,
-              },
             },
           ],
         },

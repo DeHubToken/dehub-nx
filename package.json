@@ -60,6 +60,7 @@
     "@web3-react/core": "6.1.9",
     "@web3-react/injected-connector": "6.0.7",
     "@web3-react/walletconnect-connector": "6.2.0",
+    "angular-animations": "0.11.0",
     "apollo-angular": "2.6.0",
     "assert": "2.0.0",
     "bignumber.js": "9.0.1",

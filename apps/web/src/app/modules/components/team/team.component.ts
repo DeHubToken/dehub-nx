@@ -4,13 +4,13 @@ import { TeamMember } from '@dehub/shared/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 @Component({
   template: `
     <div class="grid">
       <!-- Team Members loading -->
       <ng-container *ngIf="teamMembersLoading$ | async; else teamMembersLoaded">
-        <div *ngFor="let i of teamMembersSkeleton" class="col-12 md:col-3">
+        <div *ngFor="let m of teamMembersSkeleton" class="col-12 md:col-3">
           <dhb-team-member-skeleton></dhb-team-member-skeleton>
         </div>
       </ng-container>
@@ -18,7 +18,8 @@ import { environment } from '../../../../environments/environment';
       <!-- Team Members loaded -->
       <ng-template #teamMembersLoaded>
         <div
-          *ngFor="let teamMember of teamMembers$ | async"
+          *ngFor="let teamMember of teamMembers$ | async; let i = index"
+          [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           class="col-12 md:col-3"
         >
           <dhb-team-member [teamMember]="teamMember"></dhb-team-member>
@@ -27,6 +28,7 @@ import { environment } from '../../../../environments/environment';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class TeamComponent implements OnInit {
   teamMembers$?: Observable<TeamMember[]>;
