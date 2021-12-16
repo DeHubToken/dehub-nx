@@ -11,6 +11,9 @@ import { environment } from '../../../../environments/environment';
 @Component({
   template: `
     <div class="grid">
+      <div class="col-12">
+        <h3><i class="fa fa-trophy-alt"></i> Tournaments</h3>
+      </div>
       <div class="col-12 xl:col-9 xl:col-offset-1">
         <!-- Featured Tournaments loading -->
         <ng-container
@@ -26,9 +29,6 @@ import { environment } from '../../../../environments/environment';
             [numVisible]="1"
             [numScroll]="1"
           >
-            <ng-template pTemplate="header">
-              <h3><i class="fa fa-trophy-alt"></i> Featured Tournaments</h3>
-            </ng-template>
             <ng-template let-tournament pTemplate="item">
               <dhb-tournament-skeleton-card></dhb-tournament-skeleton-card>
             </ng-template>
@@ -46,9 +46,6 @@ import { environment } from '../../../../environments/environment';
               [numVisible]="1"
               [numScroll]="1"
             >
-              <ng-template pTemplate="header">
-                <h3><i class="fa fa-trophy-alt"></i> Featured Tournaments</h3>
-              </ng-template>
               <ng-template let-tournament pTemplate="item">
                 <dhb-tournament-card
                   [tournament]="tournament"
@@ -71,9 +68,6 @@ import { environment } from '../../../../environments/environment';
             [numVisible]="3"
             [numScroll]="3"
           >
-            <ng-template pTemplate="header">
-              <h3><i class="fa fa-trophy-alt"></i> Finished Tournaments</h3>
-            </ng-template>
             <ng-template let-tournament pTemplate="item">
               <dhb-tournament-skeleton-card
                 [expired]="true"
@@ -92,9 +86,6 @@ import { environment } from '../../../../environments/environment';
               [numVisible]="3"
               [numScroll]="3"
             >
-              <ng-template pTemplate="header">
-                <h3><i class="fa fa-trophy-alt"></i> Finished Tournaments</h3>
-              </ng-template>
               <ng-template let-tournament pTemplate="item">
                 <dhb-tournament-card
                   [tournament]="tournament"

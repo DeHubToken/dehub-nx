@@ -45,7 +45,7 @@ import { WINDOW } from '@ng-web-apis/common';
           </div>
 
           <!-- Actions -->
-          <div *ngIf="!expired" class="mb-4">
+          <div *ngIf="!expired" class="mb-4 grid">
             <!-- Show Rules -->
             <p-button
               *ngIf="tournament.description?.json"
