@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SafeHtmlPipeModule } from '@dehub/angular/pipes/safe-html';
+import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { DialogModule } from 'primeng/dialog';
@@ -16,7 +17,7 @@ import { TournamentsRoutingModule } from './tournaments-routing.module';
 
 const angularModules = [CommonModule];
 
-const libModules = [SafeHtmlPipeModule];
+const libModules = [SafeHtmlPipeModule, ContentfulDraftDirectiveModule];
 
 const primeNgModules = [
   CarouselModule,
