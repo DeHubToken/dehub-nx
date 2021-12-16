@@ -2,6 +2,37 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'dhb-footer',
-  templateUrl: './app.footer.component.html',
+  template: `
+    <div class="layout-footer">
+      <div class="grid">
+        <div class="col-12 lg-4">
+          <div class="grid">
+            <div class="col-6">
+              <span class="footer-menutitle"></span>
+              <ul>
+                <li><a href="https://www.dehub.net/">Disclaimer</a></li>
+                <li>
+                  <a href="https://www.dehub.net/privacy-policy"
+                    >Privacy Policy</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.dehub.net/terms">Terms & Conditions</a>
+                </li>
+                <li><a href="https://www.dehub.net/careers">Careers</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="footer-bottom">
+            <h4>DeHub</h4>
+            <h6>© 2021 DeHub.</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
 })
 export class AppFooterComponent {}
