@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { AppMainComponent } from './app.main.component';
 
-enum Navigation {
-  Components = 'components',
+export enum Navigation {
+  Demo = 'demo',
   Tournaments = 'tournaments',
 }
 
@@ -17,10 +17,10 @@ enum Navigation {
           children: [
             { path: '', redirectTo: Navigation.Tournaments, pathMatch: 'full' },
             {
-              path: Navigation.Components,
+              path: Navigation.Demo,
               loadChildren: () =>
-                import('./modules/components/components.module').then(
-                  module => module.ComponentsModule
+                import('./modules/demos/demos.module').then(
+                  module => module.DemosModule
                 ),
             },
             {
