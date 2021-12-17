@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { TournamentFragment } from '@dehub/shared/models';
 
 @Component({
@@ -6,6 +11,7 @@ import { TournamentFragment } from '@dehub/shared/models';
   template: `
     <p-tag [rounded]="true" [severity]="severity" [value]="badge"></p-tag>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TournamentBadgeComponent implements OnInit {
   @Input() tournament?: TournamentFragment;

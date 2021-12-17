@@ -45,7 +45,6 @@ interface SocialLink {
       </div>
     </div>
   `,
-  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamMemberComponent implements OnInit {

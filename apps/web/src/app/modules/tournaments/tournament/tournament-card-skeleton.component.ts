@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 @Component({
   selector: 'dhb-tournament-skeleton-card',
   template: `
@@ -49,6 +54,7 @@ import { Component, Input, OnInit } from '@angular/core';
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TournamentCardSkeletonComponent implements OnInit {
   @Input() expired = false;

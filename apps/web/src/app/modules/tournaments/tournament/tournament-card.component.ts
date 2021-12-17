@@ -1,4 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  Input,
+  OnInit,
+} from '@angular/core';
 import {
   documentToHtmlString,
   Options,
@@ -100,6 +106,7 @@ import { WINDOW } from '@ng-web-apis/common';
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TournamentCardComponent implements OnInit {
   @Input() tournament?: TournamentFragment;

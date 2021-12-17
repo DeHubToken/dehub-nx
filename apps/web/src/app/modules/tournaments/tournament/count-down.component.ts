@@ -1,10 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { interval, Observable } from 'rxjs';
 import { map, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'dhb-count-down',
   template: ` <i [class]="icon"></i> {{ remaining$ | async }} `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountDownComponent implements OnInit {
   @Input() countDownDateStr = new Date().toDateString();

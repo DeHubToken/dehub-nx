@@ -47,7 +47,11 @@
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
-      "style": "scss"
+      "style": "scss",
+      "inlineStyle": true,
+      "inlineTemplate": true,
+      "changeDetection": "OnPush",
+      "prefix": "dhb"
     },
     "@nrwl/react": {
       "application": {
