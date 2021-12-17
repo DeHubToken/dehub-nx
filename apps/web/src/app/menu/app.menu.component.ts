@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from '@dehub/shared/models';
-import { environment } from '../../environments/environment';
+import { Component } from '@angular/core';
+import { menuItems } from '../app-routing.module';
 import { AppMainComponent } from '../app.main.component';
 
 @Component({
@@ -25,34 +24,8 @@ import { AppMainComponent } from '../app.main.component';
     </div>
   `,
 })
-export class AppMenuComponent implements OnInit {
-  model?: MenuItem[];
+export class AppMenuComponent {
+  model = menuItems;
 
   constructor(public appMain: AppMainComponent) {}
-
-  ngOnInit() {
-    this.model = [
-      {
-        label: 'Dapps',
-        items: [
-          {
-            label: 'Prize Draw',
-            routerLink: [''],
-            icon: 'fa fa-ticket-alt',
-          },
-          {
-            label: 'De Game',
-            routerLink: ['/tournaments'],
-            icon: 'fa fa-trophy-alt',
-          },
-        ],
-      },
-    ];
-
-    if (environment.env === 'dev')
-      this.model.push({
-        label: 'Demo',
-        items: [{ label: 'Components', routerLink: ['/components'] }],
-      });
-  }
 }

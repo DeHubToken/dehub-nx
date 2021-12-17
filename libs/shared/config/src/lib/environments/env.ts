@@ -27,6 +27,14 @@ export interface SharedEnv {
    */
   baseUrl: string;
 
+  /** DeHUB URLs */
+  dehub: {
+    /** Official DeHUB landing page */
+    landing: string;
+    /** Official DeHUB dapp pages */
+    dapps: { landing: string; raffle: string; prediction: string };
+  };
+
   contentful: {
     /** Contentful GraphQL URI without Space ID */
     graphqlUri: string;
@@ -55,6 +63,15 @@ export const defaultSharedEnv: SharedEnv = {
   env: 'dev',
   production: false,
   baseUrl: '',
+
+  dehub: {
+    landing: 'https://dehub.net',
+    dapps: {
+      landing: 'https://dapps.dehub.net',
+      raffle: `https://dapps.dehub.net/raffle`,
+      prediction: 'https://dapps.dehub.net/prediction',
+    },
+  },
 
   contentful: {
     graphqlUri: 'https://graphql.contentful.com/content/v1/spaces',

@@ -1,11 +1,47 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
+import { MenuItem } from '@dehub/shared/models';
+import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
 
 export enum Navigation {
-  Demo = 'demo',
+  Demos = 'demos',
   Tournaments = 'tournaments',
 }
+
+export const menuItems: MenuItem[] = [
+  {
+    label: 'Dapps',
+    items: [
+      {
+        label: 'Prize Draw',
+        url: `${environment.dehub.dapps.raffle}`,
+        icon: 'fa fa-ticket-alt',
+      },
+      {
+        label: 'Prediction Game',
+        url: `${environment.dehub.dapps.prediction}`,
+        icon: 'fa fa-chart-line',
+      },
+      {
+        label: 'DeGame',
+        routerLink: [Navigation.Tournaments],
+        icon: 'fa fa-trophy-alt',
+      },
+    ],
+  },
+  {
+    label: 'Demo',
+    visible: environment.env === 'dev',
+    items: [
+      {
+        label: 'Contentful Team',
+        routerLink: [Navigation.Demos],
+        icon: 'fa fa-puzzle-piece',
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [
@@ -17,7 +53,7 @@ export enum Navigation {
           children: [
             { path: '', redirectTo: Navigation.Tournaments, pathMatch: 'full' },
             {
-              path: Navigation.Demo,
+              path: Navigation.Demos,
               loadChildren: () =>
                 import('./modules/demos/demos.module').then(
                   module => module.DemosModule
