@@ -3,13 +3,39 @@ import * as models from '@dehub/shared/models';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {};
-
+export const TournamentFragmentDoc = gql`
+  fragment Tournament on Tournament {
+    sys {
+      publishedAt
+    }
+    coverImage {
+      url
+    }
+    title
+    date
+    badge
+    callToActionButtonLabel
+    callToActionButtonLink
+    featured
+    description {
+      json
+    }
+  }
+`;
+export const TournamentCollectionFragmentDoc = gql`
+  fragment TournamentCollection on TournamentCollection {
+    total
+    items {
+      ...Tournament
+    }
+  }
+  ${TournamentFragmentDoc}
+`;
 export const TeamMembersDocument = gql`
   query teamMembers($isPreview: Boolean = false) {
     teamMemberCollection(preview: $isPreview) {
       items {
         sys {
-          id
           publishedAt
         }
         name
@@ -73,4 +99,71 @@ export type TeamMembersLazyQueryHookResult = ReturnType<
 export type TeamMembersQueryResult = Apollo.QueryResult<
   models.TeamMembersQuery,
   models.TeamMembersQueryVariables
+>;
+export const TournamentsDocument = gql`
+  query tournaments(
+    $isFeatured: Boolean
+    $dateGte: DateTime
+    $isPreview: Boolean = false
+  ) {
+    tournamentCollection(
+      where: { featured: $isFeatured, date_gte: $dateGte }
+      order: [date_DESC]
+      preview: $isPreview
+    ) {
+      ...TournamentCollection
+    }
+  }
+  ${TournamentCollectionFragmentDoc}
+`;
+
+/**
+ * __useTournamentsQuery__
+ *
+ * To run a query within a React component, call `useTournamentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTournamentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTournamentsQuery({
+ *   variables: {
+ *      isFeatured: // value for 'isFeatured'
+ *      dateGte: // value for 'dateGte'
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useTournamentsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.TournamentsQuery,
+    models.TournamentsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.TournamentsQuery,
+    models.TournamentsQueryVariables
+  >(TournamentsDocument, options);
+}
+export function useTournamentsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.TournamentsQuery,
+    models.TournamentsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.TournamentsQuery,
+    models.TournamentsQueryVariables
+  >(TournamentsDocument, options);
+}
+export type TournamentsQueryHookResult = ReturnType<typeof useTournamentsQuery>;
+export type TournamentsLazyQueryHookResult = ReturnType<
+  typeof useTournamentsLazyQuery
+>;
+export type TournamentsQueryResult = Apollo.QueryResult<
+  models.TournamentsQuery,
+  models.TournamentsQueryVariables
 >;

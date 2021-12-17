@@ -204,7 +204,10 @@ const Predictions = () => {
     return <Loader />;
   }
 
-  const path = environment.baseUrl;
+  const {
+    baseUrl: path,
+    dehub: { landing },
+  } = environment;
 
   return (
     <div>
@@ -260,7 +263,7 @@ const Predictions = () => {
                 <CollectWinningsPopup />
               </div>
             </div>
-            <Footer />
+            <Footer landing={landing} />
           </div>
         </SwiperProvider>
       )}

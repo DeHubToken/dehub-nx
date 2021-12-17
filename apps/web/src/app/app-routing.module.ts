@@ -1,10 +1,47 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
+import { MenuItem } from '@dehub/shared/models';
+import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
 
-enum Navigation {
-  Components = 'components',
+export enum Navigation {
+  Demos = 'demos',
+  Tournaments = 'tournaments',
 }
+
+export const menuItems: MenuItem[] = [
+  {
+    label: 'Dapps',
+    items: [
+      {
+        label: 'Prize Draw',
+        url: `${environment.dehub.dapps.raffle}`,
+        icon: 'fa fa-ticket-alt',
+      },
+      {
+        label: 'Prediction Game',
+        url: `${environment.dehub.dapps.prediction}`,
+        icon: 'fa fa-chart-line',
+      },
+      {
+        label: 'DeGame',
+        routerLink: [Navigation.Tournaments],
+        icon: 'fa fa-trophy-alt',
+      },
+    ],
+  },
+  {
+    label: 'Demo',
+    visible: environment.env === 'dev',
+    items: [
+      {
+        label: 'Contentful Team',
+        routerLink: [Navigation.Demos],
+        icon: 'fa fa-puzzle-piece',
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [
@@ -14,16 +51,20 @@ enum Navigation {
           path: '',
           component: AppMainComponent,
           children: [
-            // { path: '', redirectTo: Navigation.Components, pathMatch: 'full' },
+            { path: '', redirectTo: Navigation.Tournaments, pathMatch: 'full' },
             {
-              path: Navigation.Components,
+              path: Navigation.Demos,
               loadChildren: () =>
-                import('./modules/components/components.module').then(
-                  module => module.ComponentsModule
+                import('./modules/demos/demos.module').then(
+                  module => module.DemosModule
                 ),
-              data: {
-                animation: Navigation.Components,
-              },
+            },
+            {
+              path: Navigation.Tournaments,
+              loadChildren: () =>
+                import('./modules/tournaments/tournaments.module').then(
+                  module => module.TournamentsModule
+                ),
             },
           ],
         },

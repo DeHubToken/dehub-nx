@@ -19,15 +19,15 @@ import { MenuService } from './app.menu.service';
   template: `
     <ng-container>
       <a
-        [attr.href]="item?.url"
-        (click)="itemClick($event)"
         *ngIf="(!item?.routerLink || item?.items) && item?.visible !== false"
+        [attr.href]="item?.url"
+        [attr.tabindex]="0"
+        [attr.target]="item?.target"
+        [ngClass]="item?.class || ''"
+        (click)="itemClick($event)"
         (mouseenter)="onMouseEnter()"
         (keydown.enter)="itemClick($event)"
-        [ngClass]="item?.class || ''"
         pRipple
-        [attr.target]="item?.target"
-        [attr.tabindex]="0"
       >
         <i [ngClass]="item?.icon || ''" class="layout-menuitem-icon"></i>
         <span class="layout-menuitem-text">{{ item?.label }}</span>

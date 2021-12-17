@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/ui",
+  "sourceRoot": "libs/angular/ui/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/ui"],
+      "options": {
+        "jestConfig": "libs/angular/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/ui/src/**/*.ts",
+          "libs/angular/ui/src/**/*.html"
+        ],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": []
+}

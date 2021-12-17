@@ -25,7 +25,10 @@ export default function Lottery() {
 
   const { clearProvider } = Hooks.useMoralisEthers();
 
-  const path = environment.baseUrl;
+  const {
+    baseUrl: path,
+    dehub: { landing },
+  } = environment;
 
   /*
    * Hack to avoid trustwallet redirecting to a open in app website on iOS...
@@ -109,7 +112,7 @@ export default function Lottery() {
               </div>
             </div>
           </div>
-          <Footer />
+          <Footer landing={landing} />
         </div>
       )}
     </div>

@@ -1367,11 +1367,7 @@ export type TeamMembersQuery = {
               linkedin?: string | null | undefined;
               instagram?: string | null | undefined;
               github?: string | null | undefined;
-              sys: {
-                __typename?: 'Sys';
-                id: string;
-                publishedAt?: any | null | undefined;
-              };
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
               avatar?:
                 | { __typename?: 'Asset'; url?: string | null | undefined }
                 | null
@@ -1385,12 +1381,124 @@ export type TeamMembersQuery = {
     | undefined;
 };
 
+export type TournamentFragment = {
+  __typename?: 'Tournament';
+  title?: string | null | undefined;
+  date?: any | null | undefined;
+  badge?: string | null | undefined;
+  callToActionButtonLabel?: string | null | undefined;
+  callToActionButtonLink?: string | null | undefined;
+  featured?: boolean | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  coverImage?:
+    | { __typename?: 'Asset'; url?: string | null | undefined }
+    | null
+    | undefined;
+  description?:
+    | { __typename?: 'TournamentDescription'; json: any }
+    | null
+    | undefined;
+};
+
+export type TournamentCollectionFragment = {
+  __typename?: 'TournamentCollection';
+  total: number;
+  items: Array<
+    | {
+        __typename?: 'Tournament';
+        title?: string | null | undefined;
+        date?: any | null | undefined;
+        badge?: string | null | undefined;
+        callToActionButtonLabel?: string | null | undefined;
+        callToActionButtonLink?: string | null | undefined;
+        featured?: boolean | null | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+        coverImage?:
+          | { __typename?: 'Asset'; url?: string | null | undefined }
+          | null
+          | undefined;
+        description?:
+          | { __typename?: 'TournamentDescription'; json: any }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined
+  >;
+};
+
+export type TournamentsQueryVariables = Exact<{
+  isFeatured?: Maybe<Scalars['Boolean']>;
+  dateGte?: Maybe<Scalars['DateTime']>;
+  isPreview?: Maybe<Scalars['Boolean']>;
+}>;
+
+export type TournamentsQuery = {
+  __typename?: 'Query';
+  tournamentCollection?:
+    | {
+        __typename?: 'TournamentCollection';
+        total: number;
+        items: Array<
+          | {
+              __typename?: 'Tournament';
+              title?: string | null | undefined;
+              date?: any | null | undefined;
+              badge?: string | null | undefined;
+              callToActionButtonLabel?: string | null | undefined;
+              callToActionButtonLink?: string | null | undefined;
+              featured?: boolean | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+              coverImage?:
+                | { __typename?: 'Asset'; url?: string | null | undefined }
+                | null
+                | undefined;
+              description?:
+                | { __typename?: 'TournamentDescription'; json: any }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
+export const TournamentFragmentDoc = gql`
+  fragment Tournament on Tournament {
+    sys {
+      publishedAt
+    }
+    coverImage {
+      url
+    }
+    title
+    date
+    badge
+    callToActionButtonLabel
+    callToActionButtonLink
+    featured
+    description {
+      json
+    }
+  }
+`;
+export const TournamentCollectionFragmentDoc = gql`
+  fragment TournamentCollection on TournamentCollection {
+    total
+    items {
+      ...Tournament
+    }
+  }
+  ${TournamentFragmentDoc}
+`;
 export const TeamMembersDocument = gql`
   query teamMembers($isPreview: Boolean = false) {
     teamMemberCollection(preview: $isPreview) {
       items {
         sys {
-          id
           publishedAt
         }
         name
@@ -1405,6 +1513,22 @@ export const TeamMembersDocument = gql`
       }
     }
   }
+`;
+export const TournamentsDocument = gql`
+  query tournaments(
+    $isFeatured: Boolean
+    $dateGte: DateTime
+    $isPreview: Boolean = false
+  ) {
+    tournamentCollection(
+      where: { featured: $isFeatured, date_gte: $dateGte }
+      order: [date_DESC]
+      preview: $isPreview
+    ) {
+      ...TournamentCollection
+    }
+  }
+  ${TournamentCollectionFragmentDoc}
 `;
 
 export type SdkFunctionWrapper = <T>(
@@ -1430,6 +1554,19 @@ export function getSdk(
             ...wrappedRequestHeaders,
           }),
         'teamMembers'
+      );
+    },
+    tournaments(
+      variables?: TournamentsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<TournamentsQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<TournamentsQuery>(TournamentsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'tournaments'
       );
     },
   };

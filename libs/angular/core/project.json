@@ -2,7 +2,7 @@
   "projectType": "library",
   "root": "libs/angular/core",
   "sourceRoot": "libs/angular/core/src",
-  "prefix": "dehub",
+  "prefix": "dhb",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

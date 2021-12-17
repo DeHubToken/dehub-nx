@@ -15,7 +15,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "dehub",
+            "prefix": "dhb",
             "style": "camelCase"
           }
         ],
@@ -23,7 +23,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "dehub",
+            "prefix": "dhb",
             "style": "kebab-case"
           }
         ]
