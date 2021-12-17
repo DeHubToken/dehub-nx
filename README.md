@@ -63,9 +63,12 @@ Angular libs which can be consumed only from Angular apps like ui libs or core s
 
 ### `core`
 
-- Angular animations
+- Theme switcher
 - GraphQL module with generated services
-- PWA service _(coming soon...)_
+
+### `ui`
+
+_Reusable angular ui components like directives, pipes or components, etc._
 
 ## React
 
@@ -81,13 +84,17 @@ _React core functionalities_
 
 _Reusable react ui components like header, footer, etc._
 
+### `pcsuikit`
+
+_Reusable Pancakeswap ui components_
+
 ## Shared
 
 Framework independent libs which can be consumed from any Angular or React apps like styles or simple TS utilities or models.
 
-### `moralis`
+### `config`
 
-_Common Moralis logic like authentication, walletconnect, etc_
+_Shared environment variables across react and angular apps_
 
 ### `models`
 
@@ -98,6 +105,10 @@ _Common Models, states used in react and angular apps_
 ### `utils`
 
 _Common Utils used in react and angular apps_
+
+### `moralis`
+
+_Common Moralis logic like authentication, walletconnect, etc_
 
 ### `graphql`
 
@@ -117,13 +128,14 @@ _Common sass styles, assets from the Freya PrimeNG themes_
 
 1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
 1. Open **VSCode** _(pre-configured editor settings involved)_
-1. **Install** dependencies: `npm i`
+1. Be sure to use `node >= 16.13.0`
+1. **Install** dependencies: `npm ci`
 1. While installing:
    Add the following line to `/etc/hosts` _(`c:/windows/system32/drivers/hosts`)_:
    ```
    127.0.0.1 dev.localhost
    ```
-1. Run **Dev mode**: `npm <APP>:start`
+1. Run **Dev mode**: `npm run <APP>:start`
 1. Run **Prod mode**: `npm run <APP>:demo` _(serve prod version locally)_
 1. Run **CI**: `npm run ci` _(lint, test, build from affected apps)_
 1. Deploy as **draft**: `npm run deploy:draft`
