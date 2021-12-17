@@ -22,8 +22,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        id: setSHAs
-        uses: nrwl/nx-set-shas@v2
+        uses: nrwl/nx-set-shas@v2.0.2
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
