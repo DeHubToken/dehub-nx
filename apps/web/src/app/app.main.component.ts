@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { routeAnimation } from '@dehub/angular/core';
 import { AppComponent } from './app.component';
 import { MenuService } from './menu/app.menu.service';
 
 @Component({
   templateUrl: './app.main.component.html',
-  animations: [routeAnimation],
 })
 export class AppMainComponent {
   sidebarStatic?: boolean;
