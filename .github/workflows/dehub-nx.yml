@@ -23,8 +23,9 @@ jobs:
           fetch-depth: 0
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2
-        with:
-          error-on-no-successful-workflow: true
+      - run: |
+          echo "BASE: ${{ env.NX_BASE }}"
+          echo "HEAD: ${{ env.NX_HEAD }}"
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
