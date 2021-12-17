@@ -1,6 +1,10 @@
 import { memo } from 'react';
 
-function Footer() {
+export interface FooterProps {
+  landing: string;
+}
+
+function Footer({ landing }: FooterProps) {
   return (
     <div className="layout-footer">
       <div className="flex flex-wrap align-items-center justify-content-center card-container">
@@ -10,7 +14,7 @@ function Footer() {
       <div className="flex flex-wrap align-items-center justify-content-center card-container">
         <ul>
           <li>
-            <a href="https://www.dehub.net/#" className="p-link mb-2 mx-2">
+            <a href={landing} className="p-link mb-2 mx-2">
               Disclaimer
             </a>
           </li>
@@ -18,10 +22,7 @@ function Footer() {
         &nbsp;|&nbsp;
         <ul>
           <li>
-            <a
-              href="https://www.dehub.net/privacy-policy"
-              className="p-link mb-2 mx-2"
-            >
+            <a href={`${landing}/privacy-policy`} className="p-link mb-2 mx-2">
               Privacy Policy
             </a>
           </li>
@@ -29,7 +30,7 @@ function Footer() {
         &nbsp;|&nbsp;
         <ul>
           <li>
-            <a href="https://www.dehub.net/terms" className="p-link mb-2 mx-2">
+            <a href={`${landing}/terms`} className="p-link mb-2 mx-2">
               Terms & Conditions
             </a>
           </li>
@@ -37,10 +38,7 @@ function Footer() {
         &nbsp;|&nbsp;
         <ul>
           <li>
-            <a
-              href="https://www.dehub.net/careers"
-              className="p-link mb-2 mx-2"
-            >
+            <a href={`${landing}/careers`} className="p-link mb-2 mx-2">
               Careers
             </a>
           </li>

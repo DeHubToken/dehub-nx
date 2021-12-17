@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'dhb-footer',
@@ -10,16 +11,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             <div class="col-6">
               <span class="footer-menutitle"></span>
               <ul>
-                <li><a href="https://www.dehub.net/">Disclaimer</a></li>
+                <li><a href="{{ landing }}">Disclaimer</a></li>
                 <li>
-                  <a href="https://www.dehub.net/privacy-policy"
-                    >Privacy Policy</a
-                  >
+                  <a href="{{ landing }}/privacy-policy">Privacy Policy</a>
                 </li>
                 <li>
-                  <a href="https://www.dehub.net/terms">Terms & Conditions</a>
+                  <a href="{{ landing }}/terms">Terms & Conditions</a>
                 </li>
-                <li><a href="https://www.dehub.net/careers">Careers</a></li>
+                <li><a href="{{ landing }}/careers">Careers</a></li>
               </ul>
             </div>
           </div>
@@ -36,4 +35,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppFooterComponent {}
+export class AppFooterComponent {
+  landing = environment.dehub.landing;
+}
