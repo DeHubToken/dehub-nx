@@ -35,6 +35,10 @@ const DeGrand = () => {
   const currentMonthAsInt = new Date().getUTCMonth();
 
   const deGrandPrize = useThisMonthDeGrandPrize();
+  const deGrandPrizeDrawTimeAsInt =
+    deGrandPrize.drawTime > 0
+      ? new Date(deGrandPrize.drawTime * 1000).getUTCMonth()
+      : -1;
 
   const { account } = Hooks.useMoralisEthers();
   const [checkDeGrandDialog, setCheckDeGrandDialog] = useState(false);
@@ -85,14 +89,15 @@ const DeGrand = () => {
           className="border-neon-2 overflow-hidden"
           style={{ marginTop: '-80px' }}
           header={
-            lotteryMonthAsInt === currentMonthAsInt &&
+            deGrandPrizeDrawTimeAsInt === currentMonthAsInt &&
+            deGrandPrize &&
             deGrandPrize.imageUrl && (
               <img src={deGrandPrize.imageUrl} alt="DeGrand prize this month" />
             )
           }
         >
           <StyledBox>
-            {lotteryMonthAsInt === currentMonthAsInt &&
+            {deGrandPrizeDrawTimeAsInt === currentMonthAsInt &&
             deGrandPrize &&
             deGrandPrize.drawTime > 0 ? (
               <>
