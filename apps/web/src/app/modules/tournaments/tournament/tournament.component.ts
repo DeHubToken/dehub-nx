@@ -5,9 +5,9 @@ import {
   TournamentCollectionFragment,
 } from '@dehub/shared/models';
 import {
-  bounceInDownOnEnterAnimation,
   bounceInLeftOnEnterAnimation,
   bounceInRightOnEnterAnimation,
+  bounceInUpOnEnterAnimation,
 } from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -66,44 +66,47 @@ import { environment } from '../../../../environments/environment';
         </ng-template>
 
         <!-- Finished Tournaments loading -->
-        <ng-container
-          *ngIf="
-            finishedTournamentsLoading$ | async;
-            else finishedTournamentsLoaded
-          "
-        >
-          <p-carousel
-            [value]="teamMembersSkeleton"
-            [responsiveOptions]="finishedCarouselResponsiveOptions"
-            [numVisible]="3"
-            [numScroll]="3"
+        <div [@bounceInUp]>
+          <ng-container
+            *ngIf="
+              finishedTournamentsLoading$ | async;
+              else finishedTournamentsLoaded
+            "
           >
-            <ng-template let-tournament pTemplate="item">
-              <dhb-tournament-skeleton-card
-                [expired]="true"
-              ></dhb-tournament-skeleton-card>
-            </ng-template>
-          </p-carousel>
-        </ng-container>
-
-        <!-- Finished Tournaments loaded -->
-        <ng-template #finishedTournamentsLoaded>
-          <ng-container *ngIf="finishedTournaments$ | async as tournaments">
             <p-carousel
-              *ngIf="tournaments.total > 0"
-              [@bounceInDown]
-              [value]="tournaments.items"
+              [value]="teamMembersSkeleton"
               [responsiveOptions]="finishedCarouselResponsiveOptions"
               [numVisible]="3"
               [numScroll]="3"
             >
               <ng-template let-tournament pTemplate="item">
-                <dhb-tournament-card
-                  [tournament]="tournament"
-                ></dhb-tournament-card>
+                <dhb-tournament-skeleton-card
+                  [expired]="true"
+                ></dhb-tournament-skeleton-card>
               </ng-template>
             </p-carousel>
           </ng-container>
+        </div>
+
+        <!-- Finished Tournaments loaded -->
+        <ng-template #finishedTournamentsLoaded>
+          <div [@bounceInUp]>
+            <ng-container *ngIf="finishedTournaments$ | async as tournaments">
+              <p-carousel
+                *ngIf="tournaments.total > 0"
+                [value]="tournaments.items"
+                [responsiveOptions]="finishedCarouselResponsiveOptions"
+                [numVisible]="3"
+                [numScroll]="3"
+              >
+                <ng-template let-tournament pTemplate="item">
+                  <dhb-tournament-card
+                    [tournament]="tournament"
+                  ></dhb-tournament-card>
+                </ng-template>
+              </p-carousel>
+            </ng-container>
+          </div>
         </ng-template>
       </div>
     </div>
@@ -112,8 +115,8 @@ import { environment } from '../../../../environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' }),
-    bounceInRightOnEnterAnimation({ anchor: 'bounceInRight', delay: 100 }),
-    bounceInDownOnEnterAnimation({ anchor: 'bounceInDown', delay: 100 }),
+    bounceInRightOnEnterAnimation({ anchor: 'bounceInRight', delay: 300 }),
+    bounceInUpOnEnterAnimation({ anchor: 'bounceInUp', delay: 300 }),
   ],
 })
 export class TournamentComponent implements OnInit {
