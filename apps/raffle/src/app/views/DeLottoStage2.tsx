@@ -107,7 +107,7 @@ const DeLottoStage2 = () => {
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header>Next Draw:</Header>
+              <Header className="pb-2">Next Draw:</Header>
               {deLottoStatus !== LotteryStatus.PENDING &&
               nextLotteryIdAsInt > 0 ? (
                 <>
