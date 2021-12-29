@@ -6,7 +6,6 @@ import Container from '../components/Layout/Container';
 import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import useSpecialLotteryStatusTransitions from '../hooks/special-raffle/useStatusTransitions';
 import useStandardLotteryStatusTransitions from '../hooks/standard-raffle/useStatusTransitions';
-import { usePullBusdPrice } from '../states/application/hooks';
 import {
   useFetchPaused,
   useGetSpecialPaused,
@@ -40,8 +39,6 @@ const StyledBox = styled(Box)`
 const DeLotto = () => {
   // pause status
   useFetchPaused();
-
-  usePullBusdPrice();
 
   // standard raffle
   useFetchStandardLottery();
