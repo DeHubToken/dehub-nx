@@ -33,19 +33,19 @@ DeHub Dapps
 
 ### `raffle`
 
-DeHub Raffle Dapp
+DeHub Raffle Dapp (Inactive)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d1b6b0af-8fcd-4efa-a0ec-818a84cd9283/deploy-status)](https://app.netlify.com/sites/raffle-dehub/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d1b6b0af-8fcd-4efa-a0ec-818a84cd9283/deploy-status)](https://app.netlify.com/sites/inactive-raffle-dehub/deploys)
 
-- Hosting: **[Netlify](https://dehub-raffle.netlify.app)**
+- Hosting: **[Netlify](https://inactive-raffle-dehub.netlify.app)**
 
 ### `prediction`
 
-DeHub Prediction Dapp
+DeHub Prediction Dapp (Inactive)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cb468f79-e012-4b6b-a4a6-bf85e3acae9a/deploy-status)](https://app.netlify.com/sites/prediction-dehub/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0343b7e0-60d7-4a95-b04f-6c1431544937/deploy-status)](https://app.netlify.com/sites/inactive-prediction-dehub/deploys)
 
-- Hosting: **[Netlify](https://prediction-raffle.netlify.app)**
+- Hosting: **[Netlify](https://inactive-prediction-dehub.netlify.app)**
 
 # Libraries
 

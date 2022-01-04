@@ -146,6 +146,7 @@ export interface AssetLinkingCollections {
   ppvWebsiteBackgroundCollection?: Maybe<PpvWebsiteBackgroundCollection>;
   teamMemberCollection?: Maybe<TeamMemberCollection>;
   tournamentCollection?: Maybe<TournamentCollection>;
+  tournamentSeriesCollection?: Maybe<TournamentSeriesCollection>;
 }
 
 export interface AssetLinkingCollectionsEntryCollectionArgs {
@@ -191,6 +192,13 @@ export interface AssetLinkingCollectionsTeamMemberCollectionArgs {
 }
 
 export interface AssetLinkingCollectionsTournamentCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface AssetLinkingCollectionsTournamentSeriesCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -856,6 +864,12 @@ export interface Query {
   teamMemberCollection?: Maybe<TeamMemberCollection>;
   tournament?: Maybe<Tournament>;
   tournamentCollection?: Maybe<TournamentCollection>;
+  tournamentSeries?: Maybe<TournamentSeries>;
+  tournamentSeriesCollection?: Maybe<TournamentSeriesCollection>;
+  tournamentSeriesPrize?: Maybe<TournamentSeriesPrize>;
+  tournamentSeriesPrizeCollection?: Maybe<TournamentSeriesPrizeCollection>;
+  tournamentSeriesRegistrationItem?: Maybe<TournamentSeriesRegistrationItem>;
+  tournamentSeriesRegistrationItemCollection?: Maybe<TournamentSeriesRegistrationItemCollection>;
 }
 
 export interface QueryAssetArgs {
@@ -970,6 +984,51 @@ export interface QueryTournamentCollectionArgs {
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
   where?: Maybe<TournamentFilter>;
+}
+
+export interface QueryTournamentSeriesArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryTournamentSeriesCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<TournamentSeriesOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<TournamentSeriesFilter>;
+}
+
+export interface QueryTournamentSeriesPrizeArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryTournamentSeriesPrizeCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<TournamentSeriesPrizeOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<TournamentSeriesPrizeFilter>;
+}
+
+export interface QueryTournamentSeriesRegistrationItemArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryTournamentSeriesRegistrationItemCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<TournamentSeriesRegistrationItemOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<TournamentSeriesRegistrationItemFilter>;
 }
 
 export interface Sys {
@@ -1347,6 +1406,466 @@ export enum TournamentOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeries extends Entry {
+  __typename?: 'TournamentSeries';
+  backgroundImage?: Maybe<Asset>;
+  contentfulMetadata: ContentfulMetadata;
+  dateLabel?: Maybe<Scalars['String']>;
+  disclaimerLabel?: Maybe<Scalars['String']>;
+  featuringLogo?: Maybe<Asset>;
+  linkedFrom?: Maybe<TournamentSeriesLinkingCollections>;
+  poweredLabel?: Maybe<Scalars['String']>;
+  prizePoolCollection?: Maybe<TournamentSeriesPrizePoolCollection>;
+  seriesLogo?: Maybe<Asset>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeriesBackgroundImageArgs {
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeriesDateLabelArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeriesDisclaimerLabelArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeriesFeaturingLogoArgs {
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeriesLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeriesPoweredLabelArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeriesPrizePoolCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeriesSeriesLogoArgs {
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+/** Tournament series page. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeries) */
+export interface TournamentSeriesTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface TournamentSeriesCollection {
+  __typename?: 'TournamentSeriesCollection';
+  items: Array<Maybe<TournamentSeries>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface TournamentSeriesFilter {
+  AND?: Maybe<Array<Maybe<TournamentSeriesFilter>>>;
+  OR?: Maybe<Array<Maybe<TournamentSeriesFilter>>>;
+  backgroundImage_exists?: Maybe<Scalars['Boolean']>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  dateLabel?: Maybe<Scalars['String']>;
+  dateLabel_contains?: Maybe<Scalars['String']>;
+  dateLabel_exists?: Maybe<Scalars['Boolean']>;
+  dateLabel_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  dateLabel_not?: Maybe<Scalars['String']>;
+  dateLabel_not_contains?: Maybe<Scalars['String']>;
+  dateLabel_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  disclaimerLabel?: Maybe<Scalars['String']>;
+  disclaimerLabel_contains?: Maybe<Scalars['String']>;
+  disclaimerLabel_exists?: Maybe<Scalars['Boolean']>;
+  disclaimerLabel_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  disclaimerLabel_not?: Maybe<Scalars['String']>;
+  disclaimerLabel_not_contains?: Maybe<Scalars['String']>;
+  disclaimerLabel_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  featuringLogo_exists?: Maybe<Scalars['Boolean']>;
+  poweredLabel?: Maybe<Scalars['String']>;
+  poweredLabel_contains?: Maybe<Scalars['String']>;
+  poweredLabel_exists?: Maybe<Scalars['Boolean']>;
+  poweredLabel_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  poweredLabel_not?: Maybe<Scalars['String']>;
+  poweredLabel_not_contains?: Maybe<Scalars['String']>;
+  poweredLabel_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  prizePoolCollection_exists?: Maybe<Scalars['Boolean']>;
+  seriesLogo_exists?: Maybe<Scalars['Boolean']>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+export interface TournamentSeriesLinkingCollections {
+  __typename?: 'TournamentSeriesLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  tournamentSeriesRegistrationItemCollection?: Maybe<TournamentSeriesRegistrationItemCollection>;
+}
+
+export interface TournamentSeriesLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface TournamentSeriesLinkingCollectionsTournamentSeriesRegistrationItemCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum TournamentSeriesOrder {
+  DateLabelAsc = 'dateLabel_ASC',
+  DateLabelDesc = 'dateLabel_DESC',
+  DisclaimerLabelAsc = 'disclaimerLabel_ASC',
+  DisclaimerLabelDesc = 'disclaimerLabel_DESC',
+  PoweredLabelAsc = 'poweredLabel_ASC',
+  PoweredLabelDesc = 'poweredLabel_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
+/** Holds information about the monetary prize for a specific winning place. Can be reused on multiple Tournament Series pages. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesPrize) */
+export interface TournamentSeriesPrize extends Entry {
+  __typename?: 'TournamentSeriesPrize';
+  contentfulMetadata: ContentfulMetadata;
+  currency?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<TournamentSeriesPrizeLinkingCollections>;
+  monetaryValue?: Maybe<Scalars['Int']>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+  winningPlace?: Maybe<Scalars['Int']>;
+}
+
+/** Holds information about the monetary prize for a specific winning place. Can be reused on multiple Tournament Series pages. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesPrize) */
+export interface TournamentSeriesPrizeCurrencyArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Holds information about the monetary prize for a specific winning place. Can be reused on multiple Tournament Series pages. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesPrize) */
+export interface TournamentSeriesPrizeLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Holds information about the monetary prize for a specific winning place. Can be reused on multiple Tournament Series pages. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesPrize) */
+export interface TournamentSeriesPrizeMonetaryValueArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Holds information about the monetary prize for a specific winning place. Can be reused on multiple Tournament Series pages. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesPrize) */
+export interface TournamentSeriesPrizeTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Holds information about the monetary prize for a specific winning place. Can be reused on multiple Tournament Series pages. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesPrize) */
+export interface TournamentSeriesPrizeWinningPlaceArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface TournamentSeriesPrizeCollection {
+  __typename?: 'TournamentSeriesPrizeCollection';
+  items: Array<Maybe<TournamentSeriesPrize>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface TournamentSeriesPrizeFilter {
+  AND?: Maybe<Array<Maybe<TournamentSeriesPrizeFilter>>>;
+  OR?: Maybe<Array<Maybe<TournamentSeriesPrizeFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  currency?: Maybe<Scalars['String']>;
+  currency_contains?: Maybe<Scalars['String']>;
+  currency_exists?: Maybe<Scalars['Boolean']>;
+  currency_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  currency_not?: Maybe<Scalars['String']>;
+  currency_not_contains?: Maybe<Scalars['String']>;
+  currency_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  monetaryValue?: Maybe<Scalars['Int']>;
+  monetaryValue_exists?: Maybe<Scalars['Boolean']>;
+  monetaryValue_gt?: Maybe<Scalars['Int']>;
+  monetaryValue_gte?: Maybe<Scalars['Int']>;
+  monetaryValue_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  monetaryValue_lt?: Maybe<Scalars['Int']>;
+  monetaryValue_lte?: Maybe<Scalars['Int']>;
+  monetaryValue_not?: Maybe<Scalars['Int']>;
+  monetaryValue_not_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  winningPlace?: Maybe<Scalars['Int']>;
+  winningPlace_exists?: Maybe<Scalars['Boolean']>;
+  winningPlace_gt?: Maybe<Scalars['Int']>;
+  winningPlace_gte?: Maybe<Scalars['Int']>;
+  winningPlace_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  winningPlace_lt?: Maybe<Scalars['Int']>;
+  winningPlace_lte?: Maybe<Scalars['Int']>;
+  winningPlace_not?: Maybe<Scalars['Int']>;
+  winningPlace_not_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+}
+
+export interface TournamentSeriesPrizeLinkingCollections {
+  __typename?: 'TournamentSeriesPrizeLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  tournamentSeriesCollection?: Maybe<TournamentSeriesCollection>;
+}
+
+export interface TournamentSeriesPrizeLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface TournamentSeriesPrizeLinkingCollectionsTournamentSeriesCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum TournamentSeriesPrizeOrder {
+  CurrencyAsc = 'currency_ASC',
+  CurrencyDesc = 'currency_DESC',
+  MonetaryValueAsc = 'monetaryValue_ASC',
+  MonetaryValueDesc = 'monetaryValue_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  WinningPlaceAsc = 'winningPlace_ASC',
+  WinningPlaceDesc = 'winningPlace_DESC',
+}
+
+export interface TournamentSeriesPrizePoolCollection {
+  __typename?: 'TournamentSeriesPrizePoolCollection';
+  items: Array<Maybe<TournamentSeriesPrize>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+/** The Registration Item holds information and the link to the registration to the series. Create at least one item for each series page. A tournament series page can hold up to two registration items. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesRegistrationItem) */
+export interface TournamentSeriesRegistrationItem extends Entry {
+  __typename?: 'TournamentSeriesRegistrationItem';
+  buttonLabel?: Maybe<Scalars['String']>;
+  buttonLink?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  dateAndTime?: Maybe<Scalars['DateTime']>;
+  linkedFrom?: Maybe<TournamentSeriesRegistrationItemLinkingCollections>;
+  privateTitle?: Maybe<Scalars['String']>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+  tournamentSeries?: Maybe<TournamentSeries>;
+}
+
+/** The Registration Item holds information and the link to the registration to the series. Create at least one item for each series page. A tournament series page can hold up to two registration items. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesRegistrationItem) */
+export interface TournamentSeriesRegistrationItemButtonLabelArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** The Registration Item holds information and the link to the registration to the series. Create at least one item for each series page. A tournament series page can hold up to two registration items. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesRegistrationItem) */
+export interface TournamentSeriesRegistrationItemButtonLinkArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** The Registration Item holds information and the link to the registration to the series. Create at least one item for each series page. A tournament series page can hold up to two registration items. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesRegistrationItem) */
+export interface TournamentSeriesRegistrationItemDateAndTimeArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** The Registration Item holds information and the link to the registration to the series. Create at least one item for each series page. A tournament series page can hold up to two registration items. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesRegistrationItem) */
+export interface TournamentSeriesRegistrationItemLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** The Registration Item holds information and the link to the registration to the series. Create at least one item for each series page. A tournament series page can hold up to two registration items. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesRegistrationItem) */
+export interface TournamentSeriesRegistrationItemPrivateTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** The Registration Item holds information and the link to the registration to the series. Create at least one item for each series page. A tournament series page can hold up to two registration items. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesRegistrationItem) */
+export interface TournamentSeriesRegistrationItemTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** The Registration Item holds information and the link to the registration to the series. Create at least one item for each series page. A tournament series page can hold up to two registration items. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/tournamentSeriesRegistrationItem) */
+export interface TournamentSeriesRegistrationItemTournamentSeriesArgs {
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface TournamentSeriesRegistrationItemCollection {
+  __typename?: 'TournamentSeriesRegistrationItemCollection';
+  items: Array<Maybe<TournamentSeriesRegistrationItem>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface TournamentSeriesRegistrationItemFilter {
+  AND?: Maybe<Array<Maybe<TournamentSeriesRegistrationItemFilter>>>;
+  OR?: Maybe<Array<Maybe<TournamentSeriesRegistrationItemFilter>>>;
+  buttonLabel?: Maybe<Scalars['String']>;
+  buttonLabel_contains?: Maybe<Scalars['String']>;
+  buttonLabel_exists?: Maybe<Scalars['Boolean']>;
+  buttonLabel_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  buttonLabel_not?: Maybe<Scalars['String']>;
+  buttonLabel_not_contains?: Maybe<Scalars['String']>;
+  buttonLabel_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  buttonLink?: Maybe<Scalars['String']>;
+  buttonLink_contains?: Maybe<Scalars['String']>;
+  buttonLink_exists?: Maybe<Scalars['Boolean']>;
+  buttonLink_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  buttonLink_not?: Maybe<Scalars['String']>;
+  buttonLink_not_contains?: Maybe<Scalars['String']>;
+  buttonLink_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  dateAndTime?: Maybe<Scalars['DateTime']>;
+  dateAndTime_exists?: Maybe<Scalars['Boolean']>;
+  dateAndTime_gt?: Maybe<Scalars['DateTime']>;
+  dateAndTime_gte?: Maybe<Scalars['DateTime']>;
+  dateAndTime_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  dateAndTime_lt?: Maybe<Scalars['DateTime']>;
+  dateAndTime_lte?: Maybe<Scalars['DateTime']>;
+  dateAndTime_not?: Maybe<Scalars['DateTime']>;
+  dateAndTime_not_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  privateTitle?: Maybe<Scalars['String']>;
+  privateTitle_contains?: Maybe<Scalars['String']>;
+  privateTitle_exists?: Maybe<Scalars['Boolean']>;
+  privateTitle_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  privateTitle_not?: Maybe<Scalars['String']>;
+  privateTitle_not_contains?: Maybe<Scalars['String']>;
+  privateTitle_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  tournamentSeries?: Maybe<CfTournamentSeriesNestedFilter>;
+  tournamentSeries_exists?: Maybe<Scalars['Boolean']>;
+}
+
+export interface TournamentSeriesRegistrationItemLinkingCollections {
+  __typename?: 'TournamentSeriesRegistrationItemLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface TournamentSeriesRegistrationItemLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum TournamentSeriesRegistrationItemOrder {
+  ButtonLabelAsc = 'buttonLabel_ASC',
+  ButtonLabelDesc = 'buttonLabel_DESC',
+  ButtonLinkAsc = 'buttonLink_ASC',
+  ButtonLinkDesc = 'buttonLink_DESC',
+  DateAndTimeAsc = 'dateAndTime_ASC',
+  DateAndTimeDesc = 'dateAndTime_DESC',
+  PrivateTitleAsc = 'privateTitle_ASC',
+  PrivateTitleDesc = 'privateTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
+export interface CfTournamentSeriesNestedFilter {
+  AND?: Maybe<Array<Maybe<CfTournamentSeriesNestedFilter>>>;
+  OR?: Maybe<Array<Maybe<CfTournamentSeriesNestedFilter>>>;
+  backgroundImage_exists?: Maybe<Scalars['Boolean']>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  dateLabel?: Maybe<Scalars['String']>;
+  dateLabel_contains?: Maybe<Scalars['String']>;
+  dateLabel_exists?: Maybe<Scalars['Boolean']>;
+  dateLabel_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  dateLabel_not?: Maybe<Scalars['String']>;
+  dateLabel_not_contains?: Maybe<Scalars['String']>;
+  dateLabel_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  disclaimerLabel?: Maybe<Scalars['String']>;
+  disclaimerLabel_contains?: Maybe<Scalars['String']>;
+  disclaimerLabel_exists?: Maybe<Scalars['Boolean']>;
+  disclaimerLabel_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  disclaimerLabel_not?: Maybe<Scalars['String']>;
+  disclaimerLabel_not_contains?: Maybe<Scalars['String']>;
+  disclaimerLabel_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  featuringLogo_exists?: Maybe<Scalars['Boolean']>;
+  poweredLabel?: Maybe<Scalars['String']>;
+  poweredLabel_contains?: Maybe<Scalars['String']>;
+  poweredLabel_exists?: Maybe<Scalars['Boolean']>;
+  poweredLabel_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  poweredLabel_not?: Maybe<Scalars['String']>;
+  poweredLabel_not_contains?: Maybe<Scalars['String']>;
+  poweredLabel_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  prizePoolCollection_exists?: Maybe<Scalars['Boolean']>;
+  seriesLogo_exists?: Maybe<Scalars['Boolean']>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
 export type TeamMembersQueryVariables = Exact<{
