@@ -165,6 +165,8 @@ This project was generated using [Nx](https://nx.dev).
 
    ```
    npx netlify sites:create --account-slug=dehub --name=dapps-dehub
+   npx netlify sites:create --account-slug=dehub --name=inactive-raffle-dehub
+   npx netlify sites:create --account-slug=dehub --name=inactive-prediction-dehub
    ```
 
    Output sample:
@@ -175,6 +177,18 @@ This project was generated using [Nx](https://nx.dev).
    Admin URL: https://app.netlify.com/sites/dapps-dehub
    URL:       https://dapps-dehub.netlify.app
    Site ID:   355647c5-6e43-4c94-92bc-eac397ab80a8
+
+   Site Created (React) - Inactive
+
+   Admin URL: https://app.netlify.com/sites/inactive-raffle-dehub
+   URL:       https://inactive-raffle-dehub.netlify.app
+   Site ID:   d1b6b0af-8fcd-4efa-a0ec-818a84cd9283
+
+   Site Created (React) - Inactive
+
+   Admin URL: https://app.netlify.com/sites/inactive-prediction-dehub
+   URL:       https://inactive-prediction-dehub.netlify.app
+   Site ID:   0343b7e0-60d7-4a95-b04f-6c1431544937
    ```
 
 # Nx Cloud benefits

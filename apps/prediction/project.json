@@ -137,7 +137,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=cb468f79-e012-4b6b-a4a6-bf85e3acae9a -d ../../dist/apps/prediction -o",
+        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/prediction -o",
         "cwd": "apps/prediction"
       }
     },
@@ -145,7 +145,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=cb468f79-e012-4b6b-a4a6-bf85e3acae9a -d ../../dist/apps/prediction -p -o",
+        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/prediction -p -o",
         "cwd": "apps/prediction"
       }
     }
