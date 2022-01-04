@@ -35,18 +35,6 @@ DeHub Dapps
 
 DeHub Raffle Dapp
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d1b6b0af-8fcd-4efa-a0ec-818a84cd9283/deploy-status)](https://app.netlify.com/sites/raffle-dehub/deploys)
-
-- Hosting: **[Netlify](https://dehub-raffle.netlify.app)**
-
-### `prediction`
-
-DeHub Prediction Dapp
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cb468f79-e012-4b6b-a4a6-bf85e3acae9a/deploy-status)](https://app.netlify.com/sites/prediction-dehub/deploys)
-
-- Hosting: **[Netlify](https://prediction-raffle.netlify.app)**
-
 # Libraries
 
 Libraries in Nx are self-contained isolated group of logics. Can represent reusable functionalities or core logic shared across multiple framework (in)dependent apps.

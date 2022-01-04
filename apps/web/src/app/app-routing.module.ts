@@ -14,16 +14,6 @@ export const menuItems: MenuItem[] = [
     label: 'Dapps',
     items: [
       {
-        label: 'Prize Draw',
-        url: `${environment.dehub.dapps.raffle}`,
-        icon: 'fa fa-ticket-alt',
-      },
-      {
-        label: 'Prediction Game',
-        url: `${environment.dehub.dapps.prediction}`,
-        icon: 'fa fa-chart-line',
-      },
-      {
         label: 'DeGame',
         routerLink: [Navigation.Tournaments],
         icon: 'fa fa-trophy-alt',
