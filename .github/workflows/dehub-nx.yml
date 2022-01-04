@@ -28,10 +28,10 @@ jobs:
           node-version: '16'
       - run: npm ci
       - run: npx nx-cloud start-ci-run
-      - run: npx nx affected --target=build --parallel --max-parallel=4
-      - run: npx nx affected --target=test --parallel --max-parallel=3
-      - run: npx nx affected --target=lint --parallel --max-parallel=2
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx affected --target=deploy-prod
+      - run: npm run build
+      - run: npm run test
+      - run: npm run lint
+      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod
       - run: npx nx-cloud stop-all-agents
 
   pr:
@@ -49,10 +49,10 @@ jobs:
           node-version: '16'
       - run: npm ci
       - run: npx nx-cloud start-ci-run
-      - run: npx nx affected --target=build --parallel --max-parallel=4
-      - run: npx nx affected --target=test --parallel --max-parallel=3
-      - run: npx nx affected --target=lint --parallel --max-parallel=2
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx affected --target=deploy-draft
+      - run: npm run build
+      - run: npm run test
+      - run: npm run lint
+      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:draft
       - run: npx nx-cloud stop-all-agents
 
   agents:
