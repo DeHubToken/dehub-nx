@@ -9,8 +9,8 @@ export const defaultSharedDevEnv: SharedEnv = {
   },
 
   moralis: {
-    id: 'LQazohFSg15yR5ZtaRVqZQysUbzDI9olJjNKUrlE',
-    server: 'https://3jucoi8srnps.moralisweb3.com:2053/server',
+    appId: 'LQazohFSg15yR5ZtaRVqZQysUbzDI9olJjNKUrlE',
+    serverUrl: 'https://3jucoi8srnps.moralisweb3.com:2053/server',
   },
 
   bscNodes: [

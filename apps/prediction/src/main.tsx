@@ -10,8 +10,7 @@ import * as ReactDOM from 'react-dom';
 
 import App from './app/app';
 
-const appId = environment.moralis.id;
-const serverUrl = environment.moralis.server;
+const { appId, serverUrl } = environment.moralis;
 
 ReactDOM.render(
   <StrictMode>
