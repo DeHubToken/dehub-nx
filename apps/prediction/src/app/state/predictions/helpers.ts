@@ -1,4 +1,3 @@
-/* eslint-disable multiline-comment-style */
 import {
   Bet,
   BetPosition,
