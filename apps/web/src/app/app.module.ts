@@ -9,6 +9,7 @@ import {
   SwRegistrationOptions,
 } from '@angular/service-worker';
 import { EnvToken, GraphQLModule } from '@dehub/angular/core';
+import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
@@ -53,6 +54,9 @@ const layoutComponents = [
 
     // GraphQL
     GraphQLModule,
+
+    // Moralis
+    AngularMoralisModule,
   ],
   declarations: [AppComponent, layoutComponents],
   providers: [
