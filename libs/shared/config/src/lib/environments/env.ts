@@ -32,7 +32,7 @@ export interface SharedEnv {
     /** Official DeHUB landing page */
     landing: string;
     /** Official DeHUB dapp pages */
-    dapps: { landing: string; raffle: string; prediction: string };
+    dapps: { landing: string };
   };
 
   contentful: {
@@ -68,8 +68,6 @@ export const defaultSharedEnv: SharedEnv = {
     landing: 'https://dehub.net',
     dapps: {
       landing: 'https://dapps.dehub.net',
-      raffle: `https://dapps.dehub.net/raffle`,
-      prediction: 'https://dapps.dehub.net/prediction',
     },
   },
 

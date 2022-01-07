@@ -14,10 +14,3 @@
   to = "https://dapps-dehub.netlify.app/web/:splat"
   status = 200
   force = true
-
-# Raffle
-[[redirects]]
-  from = "/raffle/*"
-  to = "https://raffle-dehub.netlify.app/raffle/:splat"
-  status = 200
-  force = true
