@@ -1,27 +1,14 @@
-import { render } from '@testing-library/react';
-
-import { BrowserRouter } from 'react-router-dom';
-
+import { act, render } from '@testing-library/react';
 import App from './app';
 
 describe('App', () => {
-  it('should render successfully', () => {
-    const { baseElement } = render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
+  it('should render successfully', async () => {
+    const promise = Promise.resolve();
+    const { baseElement } = render(<App />);
 
     expect(baseElement).toBeTruthy();
-  });
 
-  it('should have a greeting as the title', () => {
-    const { getByText } = render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
-
-    expect(getByText(/Welcome staking/gi)).toBeTruthy();
+    // Why act needed: https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning
+    await act(() => promise);
   });
 });
