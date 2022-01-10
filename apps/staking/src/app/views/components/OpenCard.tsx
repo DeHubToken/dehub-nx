@@ -1,14 +1,17 @@
+import { useModal } from '@dehub/react/pcsuikit';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
+import StakeModal from './StakeModal';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
 const OpenCard = () => {
+  const [onPresentStakeModal] = useModal(<StakeModal id="stake" />, false);
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
       <StyledBox>
@@ -50,9 +53,7 @@ const OpenCard = () => {
                   </Text>
                   <Button
                     className="p-button mt-2 justify-content-center w-5 mr-3"
-                    onClick={() => {
-                      console.log('clicked'); // eslint-disable-line
-                    }}
+                    onClick={onPresentStakeModal}
                     label="Stake"
                   />
                   <Button

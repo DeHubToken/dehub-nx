@@ -5,18 +5,18 @@ import BigNumber from 'bignumber.js';
 import styled from 'styled-components';
 
 import {
-  Card as UIKitCard,
-  ArrowBackIcon,
-  CardBody,
-  CardHeader,
   Flex,
   Heading,
-  IconButton,
   Button,
   Text,
   BalanceInput,
   Box,
   AutoRenewIcon,
+  ModalContainer,
+  ModalBody,
+  ModalTitle,
+  ModalHeader,
+  ModalCloseButton,
 } from '@dehub/react/pcsuikit';
 import { Hooks } from '@dehub/react/core';
 import { getBalanceAmount } from '@dehub/shared/utils';
@@ -27,24 +27,15 @@ import ConnectWalletButton from '../../components/ConnectWalletButton';
 
 interface StakeModalProps {
   id: string;
+  onDismiss?: () => void;
 }
+
+const Modal = styled(ModalContainer)`
+  overflow: visible;
+`;
 
 const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
 const percentShortcuts = [10, 25, 50, 75];
-
-const Card = styled(UIKitCard)`
-  border-radius: 6px;
-  background: linear-gradient(
-    128deg,
-    #0b1113 0%,
-    rgba(26, 50, 63, 0.8) 25%,
-    rgba(50, 19, 56, 0.8) 100%
-  );
-`;
-
-const FlexRow = styled(Flex).attrs({ alignItems: 'center' })`
-  flex: 1;
-`;
 
 const getPercentDisplay = (percentage: number) => {
   if (Number.isNaN(percentage)) {
@@ -75,7 +66,7 @@ const getButtonProps = (value: BigNumber, dehubBalance: BigNumber) => {
   return { key: 'Confirm', disabled: value.lt(0) };
 };
 
-const StakeModal: React.FC<StakeModalProps> = ({ id }) => {
+const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -118,7 +109,9 @@ const StakeModal: React.FC<StakeModalProps> = ({ id }) => {
   const { key, disabled } = getButtonProps(valueAsBn, dehubBalance);
 
   const handleEnterPosition = async () => {
-    console.log('clicked'); // eslint-disable-line
+    if (onDismiss) {
+      onDismiss();
+    }
   };
 
   // Warnings
@@ -136,20 +129,19 @@ const StakeModal: React.FC<StakeModalProps> = ({ id }) => {
   }, [value, maxBalance, minBetAmountBalance, setErrorMessage]);
 
   return (
-    <Card className="border-neon-1">
-      <CardHeader p="16px">
-        <Flex alignItems="center">
-          <IconButton variant="text" scale="sm" onClick={handleGoBack} mr="8px">
-            <ArrowBackIcon width="24px" />
-          </IconButton>
-          <FlexRow>
-            <Heading scale="md" style={{ margin: '0px' }}>
-              Stake
-            </Heading>
-          </FlexRow>
-        </Flex>
-      </CardHeader>
-      <CardBody py="16px">
+    <Modal
+      className="border-neon-1"
+      minWidth="288px"
+      position="relative"
+      mt="124px"
+    >
+      <ModalHeader>
+        <ModalTitle>
+          <Heading style={{ margin: 0 }}>Stake</Heading>
+        </ModalTitle>
+        <ModalCloseButton onDismiss={onDismiss} />
+      </ModalHeader>
+      <ModalBody p="16px">
         <Flex alignItems="center" justifyContent="space-between" mb="8px">
           <Text textAlign="right" color="textSubtle">
             Commit:
@@ -203,6 +195,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id }) => {
               <Button
                 key={percent}
                 scale="xs"
+                mx="4px"
                 variant="tertiary"
                 onClick={handleClick}
                 disabled={!account || isTxPending}
@@ -241,8 +234,8 @@ const StakeModal: React.FC<StakeModalProps> = ({ id }) => {
         <Text as="p" fontSize="12px" lineHeight={1} color="textSubtle">
           You won’t be able to remove or change your position once you enter it.
         </Text>
-      </CardBody>
-    </Card>
+      </ModalBody>
+    </Modal>
   );
 };
 
