@@ -1,38 +1,35 @@
-import { HelmetProvider } from 'react-helmet-async';
-import { MoralisProvider } from 'react-moralis';
-import { Provider } from 'react-redux';
-import { ModalProvider } from '@dehub/react/pcsuikit';
-import { Contexts } from '@dehub/react/core';
+import BigNumber from 'bignumber.js';
+import { Route, Router, Switch } from 'react-router-dom';
 
-import { RefreshContextProvider } from './contexts/RefreshContext';
-import { store } from './states';
+import { ResetCSS } from '@dehub/react/pcsuikit';
+import { Loader } from '@dehub/react/ui';
+
+import SuspenseWithChunkError from './components/SuspenseWithChunkError';
+import ToastListener from './components/ToastListener';
+import history from './routerHistory';
+import GlobalStyle from './style/Global';
 import Staking from './views/Staking';
-import { environment } from '../environments/environment';
-import { ToastsProvider } from './contexts/ToastsContext';
-import { ThemeContextProvider } from './contexts/ThemeContext';
 
-const appId = environment.moralis.id;
-const serverUrl = environment.moralis.server;
+// This config is required for number formatting
+BigNumber.config({
+  EXPONENTIAL_AT: 1000,
+  DECIMAL_PLACES: 80,
+});
 
 export function App() {
   return (
-    <MoralisProvider appId={appId} serverUrl={serverUrl}>
-      <Provider store={store}>
-        <ToastsProvider>
-          <HelmetProvider>
-            <ThemeContextProvider>
-              <RefreshContextProvider>
-                <Contexts.MoralisEthersProvider>
-                  <ModalProvider>
-                    <Staking />
-                  </ModalProvider>
-                </Contexts.MoralisEthersProvider>
-              </RefreshContextProvider>
-            </ThemeContextProvider>
-          </HelmetProvider>
-        </ToastsProvider>
-      </Provider>
-    </MoralisProvider>
+    <Router history={history}>
+      <ResetCSS />
+      <GlobalStyle />
+      <SuspenseWithChunkError fallback={<Loader />}>
+        <Switch>
+          <Route path="/">
+            <Staking />
+          </Route>
+        </Switch>
+      </SuspenseWithChunkError>
+      <ToastListener />
+    </Router>
   );
 }
 
