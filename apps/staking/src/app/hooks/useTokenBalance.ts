@@ -65,9 +65,9 @@ export const useTokenBalance = (tokenAddress: string) => {
 };
 
 export const useGetDehubBalance = () => {
-  const { balance, fetchStatus } = useTokenBalance(getDehubAddress());
+  const { balance } = useTokenBalance(getDehubAddress());
 
-  return { balance, fetchStatus };
+  return balance;
 };
 
 export default useTokenBalance;

@@ -8,8 +8,7 @@ import { getChainId } from '../config/constants';
 import { getBep20Contract } from '../utils/contractHelpers';
 import { getDehubAddress } from '../utils/addressHelpers';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function useContract(
+export function useContract(
   address?: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ABI?: any,
