@@ -1,3 +1,4 @@
+import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
@@ -23,7 +24,7 @@ const LiveCard = () => {
             <span style={{ fontWeight: 900 }}>Live</span>
           </Header>
 
-          <div className="grid mt-4">
+          <div className="grid mt-2">
             <div className="col-12 md:col-5 lg:col-5 align-self-start">
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
@@ -49,7 +50,7 @@ const LiveCard = () => {
             </div>
           </div>
 
-          <div className="grid mt-4">
+          <div className="grid mt-2">
             <div className="col-12 md:col-12 lg:col-12 align-self-start">
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
@@ -60,12 +61,19 @@ const LiveCard = () => {
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
                     1.3% of the total pool
                   </Text>
+                  <Button
+                    className="p-button mt-2 justify-content-center w-5"
+                    onClick={() => {
+                      console.log('clicked'); // eslint-disable-line
+                    }}
+                    label="Unstake"
+                  />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="grid mt-4">
+          <div className="grid mt-2">
             <div className="col-12 md:col-12 lg:col-12 align-self-start">
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
@@ -76,6 +84,13 @@ const LiveCard = () => {
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
                     Total BNB Reward Pool: 0.00
                   </Text>
+                  <Button
+                    className="p-button mt-2 justify-content-center w-5"
+                    onClick={() => {
+                      console.log('clicked'); // eslint-disable-line
+                    }}
+                    label="Claim BNB"
+                  />
                 </div>
               </div>
             </div>

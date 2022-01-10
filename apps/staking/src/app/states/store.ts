@@ -5,7 +5,7 @@ import { save, load } from 'redux-localstorage-simple';
 import applicationReducer from './application';
 import pauseReducer from './pause';
 
-const PERSISTED_KEYS: string[] = ['standardLottery', 'specialLottery'];
+const PERSISTED_KEYS: string[] = [];
 
 export const store = configureStore({
   reducer: {

@@ -23,7 +23,7 @@ const ComingSoon = () => {
             <span style={{ fontWeight: 900 }}>Coming Soon</span>
           </Header>
 
-          <div className="grid mt-4">
+          <div className="grid mt-2">
             <div className="col-12 md:col-4 lg:col-4 align-self-start">
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
@@ -39,8 +39,9 @@ const ComingSoon = () => {
                 <div className="overview-info text-left w-full">
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
                     You will have 10 days to stake your DeHub in this vault once
-                    it's oppened. Don't forget to come back to earn more DeHub
-                    and BNB!
+                    it's oppened. <br />
+                    <br />
+                    Don't forget to come back to earn more DeHub and BNB!
                   </Text>
                 </div>
               </div>

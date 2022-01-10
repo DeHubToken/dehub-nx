@@ -5,12 +5,10 @@ import { Hooks } from '@dehub/react/core';
 import { getContract } from '@dehub/shared/utils';
 
 import { getChainId } from '../config/constants';
-import StandardLotteryAbi from '../config/abis/StandardLottery.json';
-import SpecialLotteryAbi from '../config/abis/SpecialLottery.json';
 import { getBep20Contract } from '../utils/contractHelpers';
 import { getDehubAddress } from '../utils/addressHelpers';
 
-// returns null on errors
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function useContract(
   address?: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,16 +32,6 @@ function useContract(
     }
   }, [address, ABI, withSignerIfPossible, authProvider, account]);
 }
-
-export const useStandardLotteryContract = (): Contract | null => {
-  const contractAddress = ContractAddresses[getChainId()]['StandardLottery'];
-  return useContract(contractAddress, StandardLotteryAbi);
-};
-
-export const useSpecialLotteryContract = (): Contract | null => {
-  const contractAddress = ContractAddresses[getChainId()]['SpecialLottery'];
-  return useContract(contractAddress, SpecialLotteryAbi);
-};
 
 export const useDehubContract = (): Contract | null => {
   const { signer } = Hooks.useMoralisEthers();
