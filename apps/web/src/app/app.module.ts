@@ -44,6 +44,7 @@ const layoutComponents = [
   AppFooterComponent,
 ];
 
+const { appId, serverUrl } = environment.moralis;
 @NgModule({
   imports: [
     angularModules,
@@ -56,7 +57,7 @@ const layoutComponents = [
     GraphQLModule,
 
     // Moralis
-    AngularMoralisModule,
+    AngularMoralisModule.forRoot({ appId, serverUrl }),
   ],
   declarations: [AppComponent, layoutComponents],
   providers: [

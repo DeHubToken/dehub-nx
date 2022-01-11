@@ -66,6 +66,11 @@ Angular libs which can be consumed only from Angular apps like ui libs or core s
 - Theme switcher
 - GraphQL module with generated services
 
+### `moralis`
+
+- Angular Moralis wrapper _(candidate for [MoralisWeb3 opensource lib](https://github.com/MoralisWeb3/angular-moralis))_
+- Crypto Login, Logout, etc.
+
 ### `ui`
 
 _Reusable angular ui components like directives, pipes or components, etc._

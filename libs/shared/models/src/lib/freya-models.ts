@@ -28,3 +28,5 @@ export interface MenuItem {
   disabled?: boolean;
   command?: (event: unknown) => void;
 }
+
+export type TopbarItem = 'profile';

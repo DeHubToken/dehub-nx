@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TopbarItem } from '@dehub/shared/models';
 import { AppComponent } from './app.component';
 import { MenuService } from './menu/app.menu.service';
 
@@ -13,6 +14,9 @@ export class AppMainComponent {
   staticMenuMobileActive?: boolean;
 
   menuClick?: boolean;
+
+  topbarItemClick = false;
+  activeTopbarItem?: TopbarItem;
 
   topbarMenuActive?: boolean;
 
@@ -48,6 +52,18 @@ export class AppMainComponent {
       } else {
         this.unblockBodyScroll();
       }
+    }
+
+    event.preventDefault();
+  }
+
+  onTopbarItemClick(event: MouseEvent, item: TopbarItem) {
+    this.topbarItemClick = true;
+
+    if (this.activeTopbarItem === item) {
+      this.activeTopbarItem = undefined;
+    } else {
+      this.activeTopbarItem = item;
     }
 
     event.preventDefault();
