@@ -1,14 +1,17 @@
+import { useModal } from '@dehub/react/pcsuikit';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
+import StakeModal from './StakeModal';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
 const LiveCard = () => {
+  const [onPresentUnStakeModal] = useModal(<StakeModal id="unstake" />, false);
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
       <StyledBox>
@@ -63,9 +66,7 @@ const LiveCard = () => {
                   </Text>
                   <Button
                     className="p-button mt-2 justify-content-center w-5"
-                    onClick={() => {
-                      console.log('clicked'); // eslint-disable-line
-                    }}
+                    onClick={onPresentUnStakeModal}
                     label="Unstake"
                   />
                 </div>

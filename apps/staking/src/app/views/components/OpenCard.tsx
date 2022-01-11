@@ -12,6 +12,7 @@ const StyledBox = styled(Box)`
 
 const OpenCard = () => {
   const [onPresentStakeModal] = useModal(<StakeModal id="stake" />, false);
+  const [onPresentUnStakeModal] = useModal(<StakeModal id="unstake" />, false);
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
       <StyledBox>
@@ -58,9 +59,7 @@ const OpenCard = () => {
                   />
                   <Button
                     className="p-button mt-2 justify-content-center w-5"
-                    onClick={() => {
-                      console.log('clicked'); // eslint-disable-line
-                    }}
+                    onClick={onPresentUnStakeModal}
                     label="Unstake"
                   />
                 </div>

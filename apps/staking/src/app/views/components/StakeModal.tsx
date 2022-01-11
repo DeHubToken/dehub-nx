@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Slider, SliderChangeParams } from 'primereact/slider';
 import BigNumber from 'bignumber.js';
+import { capitalize } from 'lodash';
 
 import styled from 'styled-components';
 
@@ -26,7 +27,7 @@ import { useGetDehubBalance } from '../../hooks/useTokenBalance';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
 
 interface StakeModalProps {
-  id: string;
+  id: 'stake' | 'unstake';
   onDismiss?: () => void;
 }
 
@@ -35,7 +36,7 @@ const Modal = styled(ModalContainer)`
 `;
 
 const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
-const percentShortcuts = [10, 25, 50, 75];
+const percentShortcuts = [10, 25, 50, 75, 100];
 
 const getPercentDisplay = (percentage: number) => {
   if (Number.isNaN(percentage)) {
@@ -137,15 +138,12 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
     >
       <ModalHeader>
         <ModalTitle>
-          <Heading style={{ margin: 0 }}>Stake</Heading>
+          <Heading style={{ margin: 0 }}>{capitalize(id)} In Pool</Heading>
         </ModalTitle>
         <ModalCloseButton onDismiss={onDismiss} />
       </ModalHeader>
       <ModalBody p="16px">
         <Flex alignItems="center" justifyContent="space-between" mb="8px">
-          <Text textAlign="right" color="textSubtle">
-            Commit:
-          </Text>
           <Flex alignItems="center">
             <Text bold textTransform="uppercase">
               DEHUB
@@ -160,7 +158,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
         />
         {showFieldWarning && (
           <Text color="failure" fontSize="12px" mt="4px" textAlign="right">
-            {{ errorMessage }}
+            {errorMessage}
           </Text>
         )}
         <Text
@@ -205,14 +203,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
               </Button>
             );
           })}
-          <Button
-            scale="xs"
-            variant="tertiary"
-            onClick={setMax}
-            disabled={!account || isTxPending}
-          >
-            Max
-          </Button>
         </Flex>
         <Box mb="8px">
           {account ? (
@@ -225,15 +215,12 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
                 isTxPending ? <AutoRenewIcon color="currentColor" spin /> : null
               }
             >
-              {{ key }}
+              {capitalize(id)}
             </Button>
           ) : (
             <ConnectWalletButton />
           )}
         </Box>
-        <Text as="p" fontSize="12px" lineHeight={1} color="textSubtle">
-          You won’t be able to remove or change your position once you enter it.
-        </Text>
       </ModalBody>
     </Modal>
   );
