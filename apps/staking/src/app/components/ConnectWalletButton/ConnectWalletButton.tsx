@@ -6,7 +6,7 @@ import { WalletConnectingState } from '@dehub/shared/config';
 import { setupNetwork } from '@dehub/shared/moralis';
 import { Button } from 'primereact/button';
 
-import { useSetWalletConnectingState } from '../../states/application/hooks';
+import { useSetWalletConnectingState } from '../../state/application/hooks';
 import { getChainId } from '../../config/constants';
 
 const ConnectWalletButton = () => {

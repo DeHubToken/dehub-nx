@@ -2,6 +2,8 @@ import { Card } from 'primereact/card';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
+import { FIRST_LAUNCH_DATE } from '../../config/constants';
+import { timeFromNow } from '../../utils/timeFromNow';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
@@ -29,7 +31,7 @@ const ComingSoon = () => {
                 <div className="overview-info text-left w-full">
                   <Header className="pb-2">Opening in </Header>
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
-                    XXX
+                    {timeFromNow(FIRST_LAUNCH_DATE)}
                   </Text>
                 </div>
               </div>

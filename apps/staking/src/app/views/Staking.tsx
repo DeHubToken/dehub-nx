@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 import PageMeta from '../components/Layout/PageMeta';
 import UserMenu from '../components/UserMenu';
 import { getChainIdHex } from '../config/constants';
-import { useWalletConnectingState } from '../states/application/hooks';
+import { useWalletConnectingState } from '../state/application/hooks';
 import StakedBottomInfoBox from '../views/StakedBottomInfoBox';
 import StakedTopInfoBox from '../views/StakedTopInfoBox';
 

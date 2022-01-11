@@ -2,13 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
 import applicationReducer from './application';
-import pauseReducer from './pause';
 
-export const store = configureStore({
+const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
   reducer: {
     application: applicationReducer,
-    paused: pauseReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({ serializableCheck: false }),

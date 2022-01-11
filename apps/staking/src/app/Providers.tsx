@@ -7,7 +7,7 @@ import { ModalProvider } from '@dehub/react/pcsuikit';
 
 import { ThemeContextProvider } from './contexts/ThemeContext';
 import { ToastsProvider } from './contexts/ToastsContext';
-import { store } from './states';
+import store from './state';
 
 const Providers: React.FC = ({ children }) => {
   return (

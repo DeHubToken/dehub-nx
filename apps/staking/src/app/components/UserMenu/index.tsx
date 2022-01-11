@@ -5,7 +5,7 @@ import { Hooks } from '@dehub/react/core';
 import { shortenAddress } from '@dehub/shared/utils';
 
 import ConnectWalletButton from '../ConnectWalletButton';
-import { useAppDispatch } from '../../states';
+import { useAppDispatch } from '../../state';
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();

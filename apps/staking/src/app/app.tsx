@@ -9,6 +9,7 @@ import ToastListener from './components/ToastListener';
 import history from './routerHistory';
 import GlobalStyle from './style/Global';
 import Staking from './views/Staking';
+import EasterEgg from './components/EasterEgg';
 
 // This config is required for number formatting
 BigNumber.config({
@@ -28,6 +29,7 @@ export function App() {
           </Route>
         </Switch>
       </SuspenseWithChunkError>
+      <EasterEgg iterations={2} />
       <ToastListener />
     </Router>
   );

@@ -7,7 +7,7 @@ import { Hooks } from '@dehub/react/core';
 
 import { fetchDehubPrice, setWalletConnectingState } from './';
 import { useAppDispatch } from '..';
-import { AppState } from '../store';
+import { AppState } from '../index';
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(

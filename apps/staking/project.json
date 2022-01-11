@@ -85,13 +85,6 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false,
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
-            }
-          ],
           "deployUrl": "/staking/",
           "baseHref": "/staking"
         },
@@ -107,6 +100,10 @@
     },
     "serve": {
       "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "staking:build",
+        "hmr": true
+      },
       "configurations": {
         "production": {
           "buildTarget": "staking:build:production",
@@ -140,7 +137,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/staking -o",
+        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/staking -o",
         "cwd": "apps/staking"
       }
     },
@@ -148,7 +145,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/staking -p -o",
+        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/staking -p -o",
         "cwd": "apps/staking"
       }
     }

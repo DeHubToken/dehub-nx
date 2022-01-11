@@ -25,6 +25,7 @@ import { getBalanceAmount } from '@dehub/shared/utils';
 import { DEFAULT_TOKEN_DECIMAL } from '../../config';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
+import useToast from '../../hooks/useToast';
 
 interface StakeModalProps {
   id: 'stake' | 'unstake';
@@ -72,6 +73,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { account } = Hooks.useMoralisEthers();
+  const { toastSuccess, toastError } = useToast();
   const dehubBalance = useGetDehubBalance();
 
   const balanceDisplay = getBalanceAmount(dehubBalance, 5).toNumber();
@@ -110,8 +112,22 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
   const { key, disabled } = getButtonProps(valueAsBn, dehubBalance);
 
   const handleEnterPosition = async () => {
-    if (onDismiss) {
-      onDismiss();
+    try {
+      if (onDismiss) {
+        onDismiss();
+      }
+
+      toastSuccess(
+        'Winnings collected!',
+        <Box>
+          <Text as="p" mb="8px">
+            Your prizes have been sent to your wallet
+          </Text>
+        </Box>
+      );
+    } catch (error) {
+      if (error instanceof Error) toastError('Error', error?.message);
+      console.error(error);
     }
   };
 

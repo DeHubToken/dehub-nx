@@ -4,6 +4,8 @@ import { Card } from 'primereact/card';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
+import { FIRST_LAUNCH_DATE } from '../../config/constants';
+import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
 
 const StyledBox = styled(Box)`
@@ -33,7 +35,7 @@ const LiveCard = () => {
                 <div className="overview-info text-left w-full">
                   <Header className="pb-2">Ends In </Header>
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
-                    xx days
+                    {timeFromNow(FIRST_LAUNCH_DATE)}
                   </Text>
                 </div>
               </div>
