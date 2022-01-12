@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useModal } from '@dehub/react/pcsuikit';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -5,12 +6,14 @@ import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
 import StakeModal from './StakeModal';
+import { timeFromNow } from '../../utils/timeFromNow';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
 const OpenCard = () => {
+  const currentQ = `Q${moment().quarter()} ${moment().year()}`;
   const [onPresentStakeModal] = useModal(<StakeModal id="stake" />, false);
   const [onPresentUnStakeModal] = useModal(<StakeModal id="unstake" />, false);
   return (
@@ -25,7 +28,7 @@ const OpenCard = () => {
                 'linear-gradient(50deg, rgba(89,70,0,1) 0%, rgba(193,160,49,1) 48%, rgba(89,70,0,1) 100%)',
             }}
           >
-            <span style={{ fontWeight: 900 }}>Open</span>
+            <span style={{ fontWeight: 900 }}>Open: {currentQ}</span>
           </Header>
 
           <div className="grid mt-2">
@@ -34,7 +37,7 @@ const OpenCard = () => {
                 <div className="overview-info text-left w-full">
                   <Header className="pb-2">Starts In </Header>
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
-                    xx days
+                    {timeFromNow(moment().startOf('quarter').add(10, 'days'))}
                   </Text>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import { Card } from 'primereact/card';
 import styled from 'styled-components';
+import moment from 'moment';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
 import { FIRST_LAUNCH_DATE } from '../../config/constants';
@@ -10,6 +11,12 @@ const StyledBox = styled(Box)`
 `;
 
 const ComingSoon = () => {
+  const nextQ = `Q${moment().add(3, 'months').quarter()} ${moment()
+    .add(3, 'months')
+    .year()}`;
+  const currentQ = `Q${moment().quarter()} ${moment().year()}`;
+  const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
+
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
       <StyledBox>
@@ -22,7 +29,9 @@ const ComingSoon = () => {
                 'linear-gradient(50deg, rgba(89,70,0,1) 0%, rgba(193,160,49,1) 48%, rgba(89,70,0,1) 100%)',
             }}
           >
-            <span style={{ fontWeight: 900 }}>Coming Soon</span>
+            <span style={{ fontWeight: 900 }}>
+              Coming Soon: {isIn2022Q1 ? currentQ : nextQ}
+            </span>
           </Header>
 
           <div className="grid mt-2">
@@ -31,7 +40,11 @@ const ComingSoon = () => {
                 <div className="overview-info text-left w-full">
                   <Header className="pb-2">Opening in </Header>
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
-                    {timeFromNow(FIRST_LAUNCH_DATE)}
+                    {timeFromNow(
+                      isIn2022Q1
+                        ? moment(FIRST_LAUNCH_DATE)
+                        : moment().endOf('quarter')
+                    )}
                   </Text>
                 </div>
               </div>

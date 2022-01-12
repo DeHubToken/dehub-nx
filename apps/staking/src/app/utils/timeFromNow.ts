@@ -1,10 +1,12 @@
-export const timeFromNow = (time: Date) => {
-  const unixTime = new Date(time).getTime();
+import { Moment } from 'moment';
+
+export const timeFromNow = (time: Moment) => {
+  const unixTime = time.unix();
   if (!unixTime) return;
   const now = new Date().getTime();
 
   // Calculate difference
-  let difference = unixTime / 1000 - now / 1000;
+  let difference = unixTime - now / 1000;
   difference = Math.abs(difference);
 
   const days = Math.floor(difference / (60 * 60 * 24));

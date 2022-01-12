@@ -1,4 +1,5 @@
 import { useModal } from '@dehub/react/pcsuikit';
+import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import styled from 'styled-components';
@@ -13,6 +14,8 @@ const StyledBox = styled(Box)`
 `;
 
 const LiveCard = () => {
+  const currentQ = `Q${moment().quarter()} ${moment().year()}`;
+  const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
   const [onPresentUnStakeModal] = useModal(<StakeModal id="unstake" />, false);
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
@@ -26,7 +29,7 @@ const LiveCard = () => {
                 'linear-gradient(50deg, rgba(89,70,0,1) 0%, rgba(193,160,49,1) 48%, rgba(89,70,0,1) 100%)',
             }}
           >
-            <span style={{ fontWeight: 900 }}>Live</span>
+            <span style={{ fontWeight: 900 }}>Live: {currentQ}</span>
           </Header>
 
           <div className="grid mt-2">
@@ -35,7 +38,11 @@ const LiveCard = () => {
                 <div className="overview-info text-left w-full">
                   <Header className="pb-2">Ends In </Header>
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
-                    {timeFromNow(FIRST_LAUNCH_DATE)}
+                    {timeFromNow(
+                      isIn2022Q1
+                        ? moment(FIRST_LAUNCH_DATE)
+                        : moment().endOf('quarter')
+                    )}
                   </Text>
                 </div>
               </div>
