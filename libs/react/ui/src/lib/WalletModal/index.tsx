@@ -30,7 +30,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
             Metamask
           </Button>
         </div>
-        <div className="flex flex-column mt-2 mb-3">
+        <div className="flex flex-column mt-2 mb-3 md:hidden">
           <Button className="p-shadow-4" onClick={() => doConnect('metamask')}>
             <TrustWalletIcon
               style={{
