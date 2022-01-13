@@ -3,9 +3,7 @@ import { Dialog } from 'primereact/dialog';
 import { ReactComponent as MetaMaskIcon } from '@dehub/shared/assets/dehub/icons/metamask.svg';
 import { ReactComponent as TrustWalletIcon } from '@dehub/shared/assets/dehub/icons/trustwallet.svg';
 import { ReactComponent as WalletConnectIcon } from '@dehub/shared/assets/dehub/icons/walletconnect.svg';
-
-export type ProviderTypes = 'walletconnect' | 'metamask';
-
+import { ProviderTypes } from '@dehub/shared/moralis';
 interface WalletModalProps {
   visible: boolean;
   onDismiss: () => void;

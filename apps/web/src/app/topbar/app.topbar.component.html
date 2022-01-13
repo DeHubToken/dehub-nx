@@ -25,45 +25,8 @@
 
     <div class="layout-topbar-right">
       <ul class="layout-topbar-actions">
-        <li
-          class="topbar-item user-profile"
-          [ngClass]="{
-            'active-topmenuitem fadeInDown':
-              appMain.activeTopbarItem === 'profile'
-          }"
-        >
-          <a href="#" (click)="appMain.onTopbarItemClick($event, 'profile')">
-            <img
-              [src]="path + '/assets/layout/images/avatar-profilemenu.png'"
-              alt="freya-layout"
-            />
-          </a>
-          <ul class="fadeInDown">
-            <ng-container *ngIf="user$ | async as user; else needLogin">
-              <!-- Logout -->
-              <li>
-                <a>
-                  <span>{{ user.attributes.ethAddress }}</span>
-                </a>
-              </li>
-              <li>
-                <a (click)="logout()"> <span>Logout</span> </a>
-              </li>
-            </ng-container>
-            <ng-template #needLogin>
-              <!-- Logins -->
-              <li>
-                <a (click)="login()">
-                  <span>Login With Metamask</span>
-                </a>
-              </li>
-              <li>
-                <a (click)="login('walletconnect')">
-                  <span>Login With WalletConnect</span>
-                </a>
-              </li>
-            </ng-template>
-          </ul>
+        <li class="topbar-item">
+          <dhb-connect-wallet></dhb-connect-wallet>
         </li>
       </ul>
     </div>

@@ -7,7 +7,7 @@ import {
 } from '@angular/animations';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MenuItem } from '@dehub/shared/models';
+import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { AppMainComponent } from '../app.main.component';
@@ -23,7 +23,7 @@ import { MenuService } from './app.menu.service';
         [attr.href]="item?.url"
         [attr.tabindex]="0"
         [attr.target]="item?.target"
-        [ngClass]="item?.class || ''"
+        [ngClass]="item?.styleClass || ''"
         (click)="itemClick($event)"
         (mouseenter)="onMouseEnter()"
         (keydown.enter)="itemClick($event)"
@@ -42,7 +42,7 @@ import { MenuService } from './app.menu.service';
         *ngIf="item?.routerLink && !item?.items && item?.visible !== false"
         [routerLink]="item?.routerLink"
         routerLinkActive="active-route"
-        [ngClass]="item?.class || ''"
+        [ngClass]="item?.styleClass || ''"
         pRipple
         [routerLinkActiveOptions]="{ exact: true }"
         [attr.target]="item?.target"
@@ -80,7 +80,7 @@ import { MenuService } from './app.menu.service';
             [item]="child"
             [index]="i"
             [parentKey]="key"
-            [class]="child.badgeClass"
+            [class]="child.badgeStyleClass"
           ></li>
         </ng-template>
       </ul>

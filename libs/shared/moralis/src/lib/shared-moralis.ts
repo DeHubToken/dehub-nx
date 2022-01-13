@@ -1,3 +1,1 @@
-export function sharedMoralis(): string {
-  return 'shared-moralis';
-}
+export type ProviderTypes = 'walletconnect' | 'metamask';

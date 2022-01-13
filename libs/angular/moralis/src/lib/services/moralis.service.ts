@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { ProviderTypes } from '@dehub/shared/moralis';
 import { Moralis } from 'moralis';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
-import { AngularMoralisModule } from '../angular-moralis.module';
 import { User } from '../models/moralis.models';
 
-@Injectable({ providedIn: AngularMoralisModule })
+@Injectable(/* { providedIn: AngularMoralisModule.forRoot() } */)
 export class MoralisService {
   private userSubject = new BehaviorSubject<User | undefined>(
     Moralis.User.current()
@@ -28,7 +28,7 @@ export class MoralisService {
 
   constructor() {}
 
-  login(provider: 'metamask' | 'walletconnect' = 'metamask') {
+  login(provider: ProviderTypes) {
     const signingMessage = 'DeHub Dapp';
 
     (provider === 'metamask'

@@ -15,18 +15,4 @@ export type MenuMode = 'horizontal' | 'sidebar' | 'slim';
  */
 export type Themes = '' | '-alternative';
 
-export interface MenuItem {
-  label: string;
-  icon?: string;
-  routerLink?: string[];
-  class?: string;
-  badgeClass?: string;
-  url?: string | string[];
-  target?: '_blank' | '_parent' | '_top' | '_self';
-  items?: MenuItem[];
-  visible?: boolean;
-  disabled?: boolean;
-  command?: (event: unknown) => void;
-}
-
 export type TopbarItem = 'profile';

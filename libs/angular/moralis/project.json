@@ -2,7 +2,7 @@
   "projectType": "library",
   "root": "libs/angular/moralis",
   "sourceRoot": "libs/angular/moralis/src",
-  "prefix": "dehub",
+  "prefix": "dhb",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

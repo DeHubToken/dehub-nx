@@ -1,6 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { CoreService } from '@dehub/angular/core';
-import { MoralisService } from '@dehub/angular/moralis';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnDestroy,
+} from '@angular/core';
+import { EnvToken } from '@dehub/angular/core';
+import { SharedEnv } from '@dehub/shared/config';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AppComponent } from '../app.component';
@@ -16,25 +21,13 @@ export class AppTopBarComponent implements OnDestroy {
 
   items?: MenuItem[];
 
-  path = this.coreService.path;
-
-  user$ = this.moralisService.user$;
-  userLoggedIn$ = this.moralisService.userLoggedIn$;
+  path = this.env.baseUrl;
 
   constructor(
+    @Inject(EnvToken) private env: SharedEnv,
     public app: AppComponent,
-    public appMain: AppMainComponent,
-    private coreService: CoreService,
-    private moralisService: MoralisService
+    public appMain: AppMainComponent
   ) {}
-
-  login(provider: 'metamask' | 'walletconnect' = 'metamask') {
-    this.moralisService.login(provider);
-  }
-
-  logout() {
-    this.moralisService.logout();
-  }
 
   ngOnDestroy() {
     if (this.subscription) {
