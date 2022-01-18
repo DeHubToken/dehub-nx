@@ -1,3 +1,5 @@
+export type ProviderTypes = 'walletconnect' | 'metamask';
+
 export enum WalletConnectingState {
   INIT,
   WAITING,

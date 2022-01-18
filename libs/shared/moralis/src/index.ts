@@ -1,2 +1,2 @@
-export * from './lib/shared-moralis';
-export * from './lib/networkHelper';
+export * from './lib/moralis.models';
+export * from './lib/network.utils';

@@ -3,7 +3,7 @@ import { Moralis } from 'moralis';
 
 import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
-import { WalletConnectingState } from '@dehub/shared/config';
+import { WalletConnectingState } from '@dehub/shared/moralis';
 import { iOS } from '@dehub/shared/utils';
 
 import { useMatchBreakpoints, useModal } from '@dehub/react/pcsuikit';

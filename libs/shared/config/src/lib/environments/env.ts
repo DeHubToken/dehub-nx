@@ -18,7 +18,7 @@ export interface SharedEnv {
   production: boolean;
 
   /**
-   * Base URL of the project under sinßgle domain.
+   * Base URL of the project under single domain.
    *
    * project.json build artifact:
    *   - deployUrl and baseHref should be in sync

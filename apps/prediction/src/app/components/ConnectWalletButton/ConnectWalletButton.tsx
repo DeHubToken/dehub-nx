@@ -1,13 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
-import { WalletConnectingState } from '@dehub/shared/config';
-import { setupNetwork } from '@dehub/shared/moralis';
-
-import { useSetWalletConnectingState } from '../../state/application/hooks';
-import { getChainId } from '../../config/constants';
+import { setupNetwork, WalletConnectingState } from '@dehub/shared/moralis';
 import { Button } from 'primereact/button';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { getChainId } from '../../config/constants';
+import { useSetWalletConnectingState } from '../../state/application/hooks';
 
 const ConnectWalletButton = () => {
   const setWalletConnectingState = useSetWalletConnectingState();

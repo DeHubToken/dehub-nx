@@ -1,5 +1,4 @@
 import BigNumber from 'bignumber.js';
-import { SerializedBigNumber } from '@dehub/shared/config';
 import {
   LotteryStatus,
   LotteryTicket,
@@ -33,9 +32,9 @@ export interface LotteryRound extends LotteryRoundGenerics {
 }
 
 export interface LotteryResponse extends LotteryRoundGenerics {
-  priceTicketInDehub: SerializedBigNumber;
-  unwonPreviousPotInDehub: SerializedBigNumber;
-  amountCollectedInDehub: SerializedBigNumber;
+  priceTicketInDehub: string;
+  unwonPreviousPotInDehub: string;
+  amountCollectedInDehub: string;
 }
 
 export interface DeGrandPrize {
