@@ -57,18 +57,6 @@ export class AppMainComponent {
     event.preventDefault();
   }
 
-  onTopbarItemClick(event: MouseEvent, item: TopbarItem) {
-    this.topbarItemClick = true;
-
-    if (this.activeTopbarItem === item) {
-      this.activeTopbarItem = undefined;
-    } else {
-      this.activeTopbarItem = item;
-    }
-
-    event.preventDefault();
-  }
-
   onSidebarClick() {
     this.menuClick = true;
   }

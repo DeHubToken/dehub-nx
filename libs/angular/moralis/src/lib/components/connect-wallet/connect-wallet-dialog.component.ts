@@ -22,7 +22,6 @@ import { ProviderTypes } from '@dehub/shared/moralis';
       [style]="{ width: '350px' }"
       class="p-fluid"
     >
-      <!-- <div> -->
       <div class="mt-2 mb-3">
         <!-- Metamask -->
         <p-button label="Metamask" (onClick)="login.emit('metamask')">
@@ -63,7 +62,6 @@ import { ProviderTypes } from '@dehub/shared/moralis';
           />
         </p-button>
       </div>
-      <!-- </div> -->
     </p-dialog>
   `,
   styles: [],
