@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { ProviderTypes } from '@dehub/shared/moralis';
 import { shortenAddress } from '@dehub/shared/utils';
-import { MenuItem } from 'primeng/api';
 import { map } from 'rxjs/operators';
 import { MoralisService } from '../../services/moralis.service';
 

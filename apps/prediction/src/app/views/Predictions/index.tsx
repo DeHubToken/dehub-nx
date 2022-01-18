@@ -213,7 +213,7 @@ const Predictions = () => {
     <div>
       <PageMeta />
       {showLoader ? (
-        <Loader header={message.header} text={message.text} />
+        <Loader title={message.header} subtitle={message.text} />
       ) : (
         <SwiperProvider>
           <div

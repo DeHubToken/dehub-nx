@@ -10,6 +10,7 @@ import {
 } from '@angular/service-worker';
 import { EnvToken, GraphQLModule } from '@dehub/angular/core';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
+import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
@@ -35,6 +36,8 @@ const angularModules = [
 
 const primeNgModules = [ButtonModule, RippleModule, MenuModule];
 
+const libModules = [LoaderModule];
+
 /** Layout components from Freya */
 const layoutComponents = [
   AppMainComponent,
@@ -49,6 +52,7 @@ const { appId, serverUrl } = environment.moralis;
   imports: [
     angularModules,
     primeNgModules,
+    libModules,
 
     // PWA
     ServiceWorkerModule.register(`web/ngsw-worker.js`),
