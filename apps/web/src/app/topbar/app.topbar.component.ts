@@ -5,7 +5,6 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { EnvToken } from '@dehub/angular/core';
-import { SharedEnv } from '@dehub/shared/config';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { Env } from '../../environments/env';
