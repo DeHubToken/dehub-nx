@@ -2,17 +2,20 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
-  Input,
   OnInit,
 } from '@angular/core';
 import { EnvToken } from '@dehub/angular/core';
+import { MoralisService } from '@dehub/angular/moralis';
 import { SharedEnv } from '@dehub/shared/config';
+import { WalletConnectingState } from '@dehub/shared/moralis';
 import { AnimationOptions } from 'ngx-lottie';
+import { BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'dhb-loader',
   template: `
-    <div class="dhb-loader">
+    <div *ngIf="visible$ | async" class="dhb-loader">
       <table>
         <tbody>
           <tr>
@@ -26,10 +29,10 @@ import { AnimationOptions } from 'ngx-lottie';
               ></ng-lottie>
 
               <!-- Title -->
-              <h4 class="dhb-loader-title">{{ title }}</h4>
+              <h4 class="dhb-loader-title">Waiting</h4>
 
               <!-- Subtitle -->
-              <div class="dhb-loader-subtitle">{{ subtitle }}</div>
+              <div class="dhb-loader-subtitle">{{ subtitle$ | async }}</div>
             </td>
           </tr>
         </tbody>
@@ -39,13 +42,39 @@ import { AnimationOptions } from 'ngx-lottie';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoaderComponent implements OnInit {
-  @Input() title = 'Loading...';
-  @Input() subtitle = 'Please wait';
+  private subtitkeSubject = new BehaviorSubject<string>('');
+  subtitle$ = this.subtitkeSubject.asObservable();
 
   options: AnimationOptions = {};
   styles: Partial<CSSStyleDeclaration> = {};
 
-  constructor(@Inject(EnvToken) private env: SharedEnv) {}
+  visible$ = this.moralisService.walletConnectingState$.pipe(
+    tap(walletConnectingState => {
+      let subtitle = '';
+      switch (walletConnectingState) {
+        case WalletConnectingState.SWITCH_NETWORK:
+          subtitle = 'Please confirm network switch with your wallet.';
+          break;
+        case WalletConnectingState.ADD_NETWORK:
+          subtitle = 'Please confirm network switch with your wallet.';
+          break;
+        default:
+          subtitle = 'Please confirm with your wallet.';
+      }
+      this.subtitkeSubject.next(subtitle);
+    }),
+    map(
+      walletConnectingState =>
+        ![WalletConnectingState.INIT, WalletConnectingState.COMPLETE].includes(
+          walletConnectingState
+        )
+    )
+  );
+
+  constructor(
+    @Inject(EnvToken) private env: SharedEnv,
+    private moralisService: MoralisService
+  ) {}
 
   ngOnInit() {
     this.options = {

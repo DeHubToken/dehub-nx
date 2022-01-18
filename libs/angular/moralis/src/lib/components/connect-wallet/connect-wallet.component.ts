@@ -34,6 +34,7 @@ import { MoralisService } from '../../services/moralis.service';
 export class ConnectWalletComponent implements OnInit {
   @Input() label = 'Connect Wallet';
   @Input() icon = 'fas fa-wallet';
+  @Input() chainId!: number;
 
   showDialog = false;
 
@@ -50,7 +51,7 @@ export class ConnectWalletComponent implements OnInit {
   ngOnInit() {}
 
   onLogin(provider: ProviderTypes) {
-    this.moralisService.login(provider);
+    this.moralisService.login(provider, this.chainId);
     this.showDialog = false;
   }
 
