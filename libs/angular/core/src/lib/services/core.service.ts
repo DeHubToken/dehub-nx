@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import { EnvToken } from '../models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class CoreService {
   public path = `${this.env.baseUrl}`;
 

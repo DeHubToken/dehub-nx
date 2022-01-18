@@ -8,7 +8,11 @@ import {
   ServiceWorkerModule,
   SwRegistrationOptions,
 } from '@angular/service-worker';
-import { EnvToken, GraphQLModule } from '@dehub/angular/core';
+import {
+  AngularCoreModule,
+  EnvToken,
+  GraphQLModule,
+} from '@dehub/angular/core';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { ButtonModule } from 'primeng/button';
@@ -53,6 +57,8 @@ const { appId, serverUrl } = environment.moralis;
     angularModules,
     primeNgModules,
     libModules,
+
+    AngularCoreModule.forRoot(),
 
     // PWA
     ServiceWorkerModule.register(`web/ngsw-worker.js`),

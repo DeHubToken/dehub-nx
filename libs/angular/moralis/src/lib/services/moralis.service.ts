@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { LoggerService, LoggerToken } from '@dehub/angular/core';
 import { ProviderTypes } from '@dehub/shared/moralis';
 import { Moralis } from 'moralis';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
 import { User } from '../models/moralis.models';
 
-@Injectable(/* { providedIn: AngularMoralisModule.forRoot() } */)
+@Injectable()
 export class MoralisService {
   private userSubject = new BehaviorSubject<User | undefined>(
     Moralis.User.current()
   );
 
-  /** Current Moralis user */
   user$ = this.userSubject.asObservable().pipe(
     tap(loggedInUser =>
-      console.info(`Current user: ${loggedInUser?.attributes.username}`)
+      this.logger.info(`Current user: ${loggedInUser?.attributes.username}`)
     ),
     share({
       connector: () => new ReplaySubject(1),
@@ -26,7 +26,7 @@ export class MoralisService {
 
   userLoggedIn$ = this.user$.pipe(map(user => !!user));
 
-  constructor() {}
+  constructor(@Inject(LoggerToken) private logger: LoggerService) {}
 
   login(provider: ProviderTypes) {
     const signingMessage = 'DeHub Dapp';
@@ -36,7 +36,7 @@ export class MoralisService {
       : Moralis.Web3.authenticate({ signingMessage, provider })
     )
       .then(loggedInUser => this.userSubject.next(loggedInUser))
-      .catch(e => console.error(`Moralis '${provider}' login error:`, e));
+      .catch(e => this.logger.error(`Moralis '${provider}' login error:`, e));
   }
 
   logout() {
@@ -45,6 +45,6 @@ export class MoralisService {
       .then(() => this.userSubject.next(undefined))
       // Disconnect Web3 wallet
       .then(() => Moralis.Web3.cleanup())
-      .catch(e => console.error('Moralis logout error:', e));
+      .catch(e => this.logger.error('Moralis logout error:', e));
   }
 }
