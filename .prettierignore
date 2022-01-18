@@ -5,8 +5,10 @@
 /libs/shared/assets/freya/**/*.scss
 !/libs/shared/assets/freya/**/dhb_*.scss
 .history
+.angular
 .vscode
 .github
+**/*.insomnia.json
 !**/*.json
 !**/*.js
 
