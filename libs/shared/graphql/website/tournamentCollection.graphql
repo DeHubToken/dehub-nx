@@ -1,6 +1,6 @@
 fragment Tournament on Tournament {
   sys {
-    publishedAt
+    ...Sys
   }
   coverImage {
     url

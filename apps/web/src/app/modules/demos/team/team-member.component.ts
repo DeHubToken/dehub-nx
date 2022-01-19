@@ -14,36 +14,37 @@ interface SocialLink {
 @Component({
   selector: 'dhb-team-member',
   template: `
-    <div
-      *ngIf="teamMember"
-      [dhbContentfulDraft]="teamMember.sys"
-      class="card image-card shadow-8"
-    >
-      <!-- Avatar -->
-      <img [src]="teamMember.avatar?.url" [alt]="teamMember.name" />
+    <ng-container *ngIf="teamMember">
+      <div
+        [dhbContentfulDraft]="teamMember.sys"
+        class="card image-card shadow-8"
+      >
+        <!-- Avatar -->
+        <img [src]="teamMember.avatar?.url" [alt]="teamMember.name" />
 
-      <div class="image-content">
-        <!-- Name -->
-        <h3>{{ teamMember.name }}</h3>
+        <div class="image-content">
+          <!-- Name -->
+          <h3>{{ teamMember.name }}</h3>
 
-        <!-- Title -->
-        <p class="text-2xl bold uppercase">{{ teamMember.title }}</p>
+          <!-- Title -->
+          <p class="text-2xl bold uppercase">{{ teamMember.title }}</p>
 
-        <!-- Social Links -->
-        <ng-container *ngFor="let link of socialLinks">
-          <button
-            *ngIf="link.url"
-            pButton
-            pRipple
-            [icon]="link.icon"
-            [title]="link.name"
-            [disabled]="link.url === '#'"
-            type="button"
-            class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem text-xl"
-          ></button>
-        </ng-container>
+          <!-- Social Links -->
+          <ng-container *ngFor="let link of socialLinks">
+            <button
+              *ngIf="link.url"
+              pButton
+              pRipple
+              [icon]="link.icon"
+              [title]="link.name"
+              [disabled]="link.url === '#'"
+              type="button"
+              class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem text-xl"
+            ></button>
+          </ng-container>
+        </div>
       </div>
-    </div>
+    </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
