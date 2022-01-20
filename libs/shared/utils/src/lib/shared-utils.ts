@@ -4,18 +4,9 @@ import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
 
 /**
- * Theme Switch key checker
- *
- * @param param0 keyboard event
- * @returns true if theme switch key combo was pressed
- */
-export const isThemeSwitchKey = ({ code, shiftKey }: KeyboardEvent) =>
-  shiftKey && code === 'IntlBackslash';
-
-/**
- * Calculate the checksummed address
+ * Calculate the checksum address
  * @param value is the address
- * @returns checksummed address if the address is valid, otherwise returns false
+ * @returns checksum address if the address is valid, otherwise returns false
  */
 export const isAddress = (value: string): string | false => {
   try {
@@ -26,10 +17,10 @@ export const isAddress = (value: string): string | false => {
 };
 
 /**
- * Shorten the checksummed version
+ * Shorten the checksum version
  * @param address the address
  * @param chars
- * @returns checksummed version of the input address to have 0x + 4 characters at start and end
+ * @returns checksum version of the input address to have 0x + 4 characters at start and end
  */
 export const shortenAddress = (address: string, chars = 4): string => {
   const parsed = isAddress(address);
