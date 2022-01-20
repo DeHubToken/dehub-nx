@@ -1,4 +1,4 @@
-import { WalletConnectingState } from '@dehub/shared/moralis';
+import { WalletConnectingState } from '@dehub/shared/models';
 import { SerializedBigNumber } from '@dehub/shared/utils';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';

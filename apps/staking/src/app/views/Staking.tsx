@@ -1,6 +1,6 @@
 import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
-import { WalletConnectingState } from '@dehub/shared/moralis';
+import { WalletConnectingState } from '@dehub/shared/models';
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import { useEffect, useState } from 'react';
