@@ -1,20 +1,21 @@
-import moment from 'moment';
 import { useModal } from '@dehub/react/pcsuikit';
+import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
-import StakeModal from './StakeModal';
+import { FIRST_LAUNCH_DATE } from '../../config/constants';
 import { timeFromNow } from '../../utils/timeFromNow';
+import StakeModal from './StakeModal';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
-const OpenCard = () => {
+const PausedCard = () => {
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
-  const [onPresentStakeModal] = useModal(<StakeModal id="stake" />, false);
+  const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
   const [onPresentUnStakeModal] = useModal(<StakeModal id="unstake" />, false);
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
@@ -28,16 +29,33 @@ const OpenCard = () => {
                 'linear-gradient(50deg, rgba(89,70,0,1) 0%, rgba(193,160,49,1) 48%, rgba(89,70,0,1) 100%)',
             }}
           >
-            <span style={{ fontWeight: 900 }}>Open: {currentQ}</span>
+            <span style={{ fontWeight: 900 }}>Paused: {currentQ}</span>
           </Header>
 
           <div className="grid mt-2">
-            <div className="col-12 md:col-4 lg:col-4 align-self-start">
+            <div className="col-12 md:col-5 lg:col-5 align-self-start">
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
-                  <Header className="pb-2">Starts In </Header>
+                  <Header className="pb-2">Ends In </Header>
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
-                    {timeFromNow(moment().startOf('quarter').add(10, 'days'))}
+                    {timeFromNow(
+                      isIn2022Q1
+                        ? moment(FIRST_LAUNCH_DATE)
+                        : moment().endOf('quarter')
+                    )}
+                  </Text>
+                </div>
+              </div>
+            </div>
+            <div className="col-12 md:col-7 lg:col-7 align-self-start">
+              <div className="card overview-box gray shadow-2">
+                <div className="overview-info text-left w-full">
+                  <Header className="pb-2">Projected Rewards</Header>
+                  <Text fontSize="14px" fontWeight={900} className="pb-2">
+                    $4452
+                  </Text>
+                  <Text fontSize="12px" fontWeight={400} className="pb-2">
+                    3000 $Dehub
                   </Text>
                 </div>
               </div>
@@ -57,12 +75,12 @@ const OpenCard = () => {
                   </Text>
                   <Button
                     className="p-button mt-2 justify-content-center w-5 mr-3"
-                    onClick={onPresentStakeModal}
+                    disabled
                     label="Stake"
                   />
                   <Button
                     className="p-button mt-2 justify-content-center w-5"
-                    onClick={onPresentUnStakeModal}
+                    disabled
                     label="Unstake"
                   />
                 </div>
@@ -83,9 +101,7 @@ const OpenCard = () => {
                   </Text>
                   <Button
                     className="p-button mt-2 justify-content-center w-5"
-                    onClick={() => {
-                      console.log('clicked'); // eslint-disable-line
-                    }}
+                    disabled
                     label="Claim BNB"
                   />
                 </div>
@@ -98,4 +114,4 @@ const OpenCard = () => {
   );
 };
 
-export default OpenCard;
+export default PausedCard;

@@ -6,6 +6,7 @@ import { simpleRpcProvider } from './providers';
 import { getMultiCallAddress } from './addressHelpers';
 import Bep20Abi from '../config/abis/erc20.json';
 import MulticallAbi from '../config/abis/Multicall.json';
+import StakingAbi from '../config/abis/Staking.json';
 
 export const getContract = (
   address: string,
@@ -25,4 +26,11 @@ export const getBep20Contract = (
   signer?: Signer | Provider
 ) => {
   return getContract(address, Bep20Abi, signer);
+};
+
+export const getStakingContract = (
+  address: string,
+  signer?: Signer | Provider
+) => {
+  return getContract(address, StakingAbi, signer);
 };

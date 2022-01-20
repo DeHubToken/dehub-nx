@@ -16,6 +16,7 @@ const StyledBox = styled(Box)`
 const LiveCard = () => {
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
   const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
+  const [onPresentStakeModal] = useModal(<StakeModal id="stake" />, false);
   const [onPresentUnStakeModal] = useModal(<StakeModal id="unstake" />, false);
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
@@ -73,6 +74,11 @@ const LiveCard = () => {
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
                     1.3% of the total pool
                   </Text>
+                  <Button
+                    className="p-button mt-2 justify-content-center w-5 mr-3"
+                    onClick={onPresentStakeModal}
+                    label="Stake"
+                  />
                   <Button
                     className="p-button mt-2 justify-content-center w-5"
                     onClick={onPresentUnStakeModal}

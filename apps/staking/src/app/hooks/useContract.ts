@@ -5,7 +5,7 @@ import { Hooks } from '@dehub/react/core';
 import { getContract } from '@dehub/shared/utils';
 
 import { getChainId } from '../config/constants';
-import { getBep20Contract } from '../utils/contractHelpers';
+import { getBep20Contract, getStakingContract } from '../utils/contractHelpers';
 import { getDehubAddress } from '../utils/addressHelpers';
 
 export function useContract(
@@ -43,6 +43,13 @@ export const useDehubContract = (): Contract | null => {
 export const useBnbContract = (): Contract | null => {
   return useMemo(
     () => getBep20Contract(ContractAddresses[getChainId()]['BNB']),
+    []
+  );
+};
+
+export const useStakingContract = (): Contract | null => {
+  return useMemo(
+    () => getStakingContract(ContractAddresses[getChainId()]['BNB']),
     []
   );
 };
