@@ -1,5 +1,5 @@
 import { Hooks } from '@dehub/react/core';
-import { WalletConnectingState } from '@dehub/shared/moralis';
+import { WalletConnectingState } from '@dehub/shared/models';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
