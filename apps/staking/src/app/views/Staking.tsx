@@ -78,7 +78,7 @@ export default function Staking() {
     <div>
       <PageMeta />
       {showLoader ? (
-        <Loader header={message.header} text={message.text} />
+        <Loader title={message.header} subtitle={message.text} />
       ) : (
         <div
           className="layout-wrapper"
