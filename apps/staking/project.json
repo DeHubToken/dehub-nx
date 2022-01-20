@@ -1,0 +1,155 @@
+{
+  "root": "apps/staking",
+  "sourceRoot": "apps/staking/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/staking/staking",
+        "index": "apps/staking/src/index.html",
+        "baseHref": "/",
+        "main": "apps/staking/src/main.tsx",
+        "polyfills": "apps/staking/src/polyfills.ts",
+        "tsConfig": "apps/staking/tsconfig.app.json",
+        "assets": [
+          "apps/staking/src/assets",
+          {
+            "input": "libs/shared/assets/dehub/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts"],
+            "output": "assets/dehub"
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts", "**/*.scss"],
+            "output": "assets"
+          }
+        ],
+        "styles": [
+          "apps/staking/src/styles.scss",
+          {
+            "input": "node_modules/primereact/resources/primereact.min.css",
+            "bundleName": "primereact",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeflex/primeflex.scss",
+            "bundleName": "primeflex",
+            "inject": false
+          },
+          {
+            "input": "node_modules/primeicons/primeicons.css",
+            "bundleName": "primeicons",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/dehub/theme.scss",
+            "bundleName": "theme",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dehub.scss",
+            "bundleName": "layout",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/theme/alternative/theme-light.scss",
+            "bundleName": "theme-alternative",
+            "inject": false
+          },
+          {
+            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-light.scss",
+            "bundleName": "layout-alternative",
+            "inject": false
+          }
+        ],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/staking/src/environments/environment.ts",
+              "with": "apps/staking/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "extractCss": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "deployUrl": "/staking/",
+          "baseHref": "/staking"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "staking:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "staking:build:production",
+          "hmr": false
+        },
+        "development": {
+          "buildTarget": "staking:build:development",
+          "host": "dev.localhost",
+          "port": 8401
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/staking/**/*.{ts,tsx,js,jsx}"],
+        "maxWarnings": 0
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/staking"],
+      "options": {
+        "jestConfig": "apps/staking/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "deploy-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/staking -o",
+        "cwd": "apps/staking"
+      }
+    },
+    "deploy-prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/staking -p -o",
+        "cwd": "apps/staking"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["shared-assets-dehub", "shared-assets-freya"]
+}

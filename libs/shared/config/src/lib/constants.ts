@@ -69,6 +69,7 @@ export const ContractAddresses: {
     Prediction: '0xF73bee744210292973A51B1Cc4ef535519757dCc',
     ChainLinkOracle: '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE',
     MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
+    Staking: '',
   },
   [ChainId.BSC_TESTNET]: {
     DeHub: '0x5A5e32fE118E7c7b6536d143F446269123c0ba74',
@@ -81,5 +82,6 @@ export const ContractAddresses: {
     Prediction: '0x805Ae00834D1D8fD3ba65784A335C42366b7ecfb',
     ChainLinkOracle: '0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526',
     MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
+    Staking: '0xf2Ba23152797c5EF1f3Ab7A66704a05dDC7D7E5f',
   },
 };

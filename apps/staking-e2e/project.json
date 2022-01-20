@@ -1,0 +1,29 @@
+{
+  "root": "apps/staking-e2e",
+  "sourceRoot": "apps/staking-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/staking-e2e/cypress.json",
+        "devServerTarget": "staking:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "staking:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/staking-e2e/**/*.{js,ts}"],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["staking"]
+}
