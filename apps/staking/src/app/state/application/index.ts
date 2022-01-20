@@ -1,11 +1,7 @@
-import BigNumber from 'bignumber.js';
-
-import {
-  SerializedBigNumber,
-  WalletConnectingState,
-} from '@dehub/shared/config';
+import { WalletConnectingState } from '@dehub/shared/moralis';
+import { SerializedBigNumber } from '@dehub/shared/utils';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-
+import BigNumber from 'bignumber.js';
 import getDehubPrice from '../../utils/priceDehub';
 
 export interface ApplicationState {

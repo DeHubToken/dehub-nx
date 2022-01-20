@@ -1,16 +1,14 @@
-import { StrictMode } from 'react';
-import { MoralisProvider } from 'react-moralis';
 import { Contexts } from '@dehub/react/core';
 import { ModalProvider } from '@dehub/react/pcsuikit';
+import { StrictMode } from 'react';
+import * as ReactDOM from 'react-dom';
+import { MoralisProvider } from 'react-moralis';
+import App from './app/app';
 import Providers from './app/Providers';
 import { environment } from './environments/environment';
 
-import * as ReactDOM from 'react-dom';
-
-import App from './app/app';
-
-const appId = environment.moralis.id;
-const serverUrl = environment.moralis.server;
+const appId = environment.moralis.appId;
+const serverUrl = environment.moralis.serverUrl;
 
 ReactDOM.render(
   <StrictMode>

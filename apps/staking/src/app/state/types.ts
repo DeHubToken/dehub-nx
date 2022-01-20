@@ -1,8 +1,8 @@
-import { WalletConnectingState } from '@dehub/shared/config';
-
 /**
  * ApplicationState
  */
+
+import { WalletConnectingState } from '@dehub/shared/moralis';
 
 export interface ApplicationState {
   walletModalOpen: boolean;
