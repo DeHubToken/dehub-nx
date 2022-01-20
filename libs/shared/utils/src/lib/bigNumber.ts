@@ -1,7 +1,7 @@
-import BigNumber from 'bignumber.js';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import BigNumber from 'bignumber.js';
 
-type SerializedBigNumber = string;
+export type SerializedBigNumber = string;
 
 export const BIG_ZERO = new BigNumber(0);
 export const BIG_ONE = new BigNumber(1);
