@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "angular-core": "libs/angular/core",
+    "angular-moralis": "libs/angular/moralis",
     "angular-ui": "libs/angular/ui",
     "prediction": "apps/prediction",
     "prediction-e2e": "apps/prediction-e2e",

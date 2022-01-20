@@ -1,14 +1,14 @@
 import { Directive, HostBinding, Input } from '@angular/core';
-import { Sys } from '@dehub/shared/models';
+import { SysFragment } from '@dehub/shared/models';
 
 @Directive({
   selector: '[dhbContentfulDraft]',
 })
 export class ContentfulDraftDirective {
-  @Input() dhbContentfulDraft?: Sys;
+  @Input() dhbContentfulDraft?: SysFragment;
 
-  @HostBinding('class.opacity-50')
+  @HostBinding('class.opacity-20')
   get isDraft() {
-    return !!this.dhbContentfulDraft?.publishedAt;
+    return this.dhbContentfulDraft?.publishedAt === null;
   }
 }

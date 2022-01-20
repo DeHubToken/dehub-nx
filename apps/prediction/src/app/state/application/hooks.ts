@@ -1,13 +1,11 @@
-import { useCallback, useEffect, useMemo } from 'react';
-import BigNumber from 'bignumber.js';
-import { useSelector } from 'react-redux';
-
-import { WalletConnectingState } from '@dehub/shared/config';
 import { Hooks } from '@dehub/react/core';
-
-import { fetchDehubPrice, setWalletConnectingState } from './';
+import { WalletConnectingState } from '@dehub/shared/moralis';
+import BigNumber from 'bignumber.js';
+import { useCallback, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
 import { AppState } from '../';
+import { fetchDehubPrice, setWalletConnectingState } from './';
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(

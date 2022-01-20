@@ -18,7 +18,7 @@ export interface SharedEnv {
   production: boolean;
 
   /**
-   * Base URL of the project under sinßgle domain.
+   * Base URL of the project under single domain.
    *
    * project.json build artifact:
    *   - deployUrl and baseHref should be in sync
@@ -48,8 +48,10 @@ export interface SharedEnv {
 
   /** Moralis configuration */
   moralis: {
-    id: string;
-    server: string;
+    /** Application ID */
+    appId: string;
+    /** Server URL */
+    serverUrl: string;
   };
 
   /** BSC network nodes */
@@ -82,8 +84,8 @@ export const defaultSharedEnv: SharedEnv = {
   },
 
   moralis: {
-    id: 'QfgYJskOXrYJnSAiB3KZPMMesmlJB6JBqY3GOzHV',
-    server: 'https://vamoxwojj7ht.moralisweb3.com:2053/server',
+    appId: 'QfgYJskOXrYJnSAiB3KZPMMesmlJB6JBqY3GOzHV',
+    serverUrl: 'https://vamoxwojj7ht.moralisweb3.com:2053/server',
   },
 
   bscNodes: [

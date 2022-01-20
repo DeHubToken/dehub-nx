@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class MenuService {
   private menuSource = new Subject<string>();
-  private resetSource = new Subject();
+  private resetSource = new Subject<void>();
 
   menuSource$ = this.menuSource.asObservable();
   resetSource$ = this.resetSource.asObservable();

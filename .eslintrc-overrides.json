@@ -3,6 +3,14 @@
     {
       "files": ["*.ts"],
       "rules": {
+        "no-console": ["error", { "allow": ["warn", "error", "info"] }],
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(warn|error|info)$/]",
+            "message": "Unexpected property on console object was called"
+          }
+        ],
         "@typescript-eslint/no-unused-vars": [
           "error",
           { "argsIgnorePattern": "^_" }

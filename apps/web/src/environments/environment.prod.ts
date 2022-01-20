@@ -1,4 +1,4 @@
-import { defaultSharedProdEnv } from '@dehub/shared/config';
+import { ChainId, defaultSharedProdEnv } from '@dehub/shared/config';
 import { defaultEnv, Env } from './env';
 
 export const environment: Env = {
@@ -6,4 +6,6 @@ export const environment: Env = {
   ...defaultSharedProdEnv,
 
   baseUrl: '/web',
+
+  chainId: ChainId.BSC_MAINNET,
 };
