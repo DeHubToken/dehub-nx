@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { BIG_TEN } from './bigNumber';
+import { BIG_TEN } from './number.utils';
 
 export const getDecimalAmount = (amount: BigNumber, decimals = 18) => {
   return new BigNumber(amount).times(BIG_TEN.pow(decimals));
@@ -16,8 +16,6 @@ export const getFullDisplayBalance = (
 ) => {
   return getBalanceAmount(balance, decimals).toFixed(displayDecimals ?? 2);
 };
-
-// Private
 
 export const getBalanceAmount = (amount: BigNumber, decimals = 18) => {
   return new BigNumber(amount).dividedBy(BIG_TEN.pow(decimals));

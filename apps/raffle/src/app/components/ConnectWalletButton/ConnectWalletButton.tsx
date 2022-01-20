@@ -1,6 +1,7 @@
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
-import { setupNetwork, WalletConnectingState } from '@dehub/shared/moralis';
+import { WalletConnectingState } from '@dehub/shared/models';
+import { setupNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getChainId } from '../../config/constants';

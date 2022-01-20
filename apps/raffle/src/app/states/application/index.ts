@@ -1,4 +1,4 @@
-import { WalletConnectingState } from '@dehub/shared/moralis';
+import { WalletConnectingState } from '@dehub/shared/models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ApplicationState {

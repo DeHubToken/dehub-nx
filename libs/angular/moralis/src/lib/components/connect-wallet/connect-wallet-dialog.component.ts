@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { EnvToken } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
-import { ProviderTypes } from '@dehub/shared/moralis';
+import { ProviderTypes } from '@dehub/shared/models';
 
 @Component({
   selector: 'dhb-connect-wallet-dialog',
