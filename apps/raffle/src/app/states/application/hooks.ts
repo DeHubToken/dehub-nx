@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import { WalletConnectingState } from '@dehub/shared/config';
+import { WalletConnectingState } from '@dehub/shared/moralis';
 
 import { setWalletConnectingState } from './';
 import { useAppDispatch } from '..';

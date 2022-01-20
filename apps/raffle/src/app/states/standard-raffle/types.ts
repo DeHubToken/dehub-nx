@@ -1,5 +1,4 @@
 import BigNumber from 'bignumber.js';
-import { SerializedBigNumber } from '@dehub/shared/config';
 import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 
 /**
@@ -33,12 +32,12 @@ export interface LotteryRound extends LotteryRoundGenerics {
 }
 
 export interface LotteryResponse extends LotteryRoundGenerics {
-  priceTicketInDehub: SerializedBigNumber;
-  unwonPreviousPotInDehub: SerializedBigNumber;
-  amountCollectedInDehub: SerializedBigNumber;
-  dehubPerBracket: SerializedBigNumber[];
-  countWinnersPerBracket: SerializedBigNumber[];
-  rewardsBreakdown: SerializedBigNumber[];
+  priceTicketInDehub: string;
+  unwonPreviousPotInDehub: string;
+  amountCollectedInDehub: string;
+  dehubPerBracket: string[];
+  countWinnersPerBracket: string[];
+  rewardsBreakdown: string[];
 }
 
 export interface LotteryBundleRule {
@@ -48,7 +47,7 @@ export interface LotteryBundleRule {
 
 export interface LotteryUserData {
   account: string;
-  dehubTotal: SerializedBigNumber; // total unclaimed amount
+  dehubTotal: string; // total unclaimed amount
   rounds: LotteryUserRound[]; // array of user information per round
 }
 
@@ -56,7 +55,7 @@ export interface LotteryUserRound {
   // Similar with LotteryTicketClaimData
   status: LotteryStatus;
   roundId: string;
-  dehubTotal: SerializedBigNumber; // unclaimed amount in a round
+  dehubTotal: string; // unclaimed amount in a round
   ticketsWithUnclaimedRewards: LotteryTicket[];
   allWinningTickets: LotteryTicket[];
 }

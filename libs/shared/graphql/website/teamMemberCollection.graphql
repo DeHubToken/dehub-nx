@@ -2,7 +2,7 @@ query teamMembers($isPreview: Boolean = false) {
   teamMemberCollection(preview: $isPreview) {
     items {
       sys {
-        publishedAt
+        ...Sys
       }
       name
       title

@@ -1868,6 +1868,11 @@ export interface CfTournamentSeriesNestedFilter {
   title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
+export type SysFragment = {
+  __typename?: 'Sys';
+  publishedAt?: any | null | undefined;
+};
+
 export type TeamMembersQueryVariables = Exact<{
   isPreview?: Maybe<Scalars['Boolean']>;
 }>;
@@ -1985,10 +1990,15 @@ export type TournamentsQuery = {
     | undefined;
 };
 
+export const SysFragmentDoc = gql`
+  fragment Sys on Sys {
+    publishedAt
+  }
+`;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
     sys {
-      publishedAt
+      ...Sys
     }
     coverImage {
       url
@@ -2003,6 +2013,7 @@ export const TournamentFragmentDoc = gql`
       json
     }
   }
+  ${SysFragmentDoc}
 `;
 export const TournamentCollectionFragmentDoc = gql`
   fragment TournamentCollection on TournamentCollection {
@@ -2018,7 +2029,7 @@ export const TeamMembersDocument = gql`
     teamMemberCollection(preview: $isPreview) {
       items {
         sys {
-          publishedAt
+          ...Sys
         }
         name
         title
@@ -2032,6 +2043,7 @@ export const TeamMembersDocument = gql`
       }
     }
   }
+  ${SysFragmentDoc}
 `;
 export const TournamentsDocument = gql`
   query tournaments(

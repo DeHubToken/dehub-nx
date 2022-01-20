@@ -69,7 +69,6 @@ const BuySpecialTicketDialog = ({
 
   const validateInput = useCallback(
     (inputNumber: BigNumber): boolean => {
-      // eslint-disable-next-line multiline-comment-style
       // const totalNumber = inputNumber.plus(
       //   new BigNumber(
       //     userTickets && userTickets?.tickets ? userTickets?.tickets?.length : 0

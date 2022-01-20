@@ -138,23 +138,29 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run raffle:deploy:prod' --project=raffle
    ```
 
-1. Angular lazy module under web:
+1. Generate Angular lazy module under web:
 
    ```
    nx generate @schematics/angular:module --name=team --project=web --path=apps/web/src/app/modules --routing
 
    ```
 
-1. Angular component for landing page:
+1. Generate Angular component for landing page:
 
    ```
    nx generate @schematics/angular:component --name=landing-slogen --project=web --style=scss --changeDetection=OnPush --inlineStyle --inlineTemplate --path=apps/web/src/app/view/landing --skipTests
    ```
 
-1. Angular Core module:
+1. Generate Angular Core lib:
 
    ```
    nx generate @nrwl/angular:library --name=core --directory=angular --standaloneConfig --strict
+   ```
+
+1. Generate Angular Moralis lib:
+
+   ```
+   nx generate @nrwl/angular:library --name=moralis --directory=angular --standaloneConfig
    ```
 
 # Netlify Settings

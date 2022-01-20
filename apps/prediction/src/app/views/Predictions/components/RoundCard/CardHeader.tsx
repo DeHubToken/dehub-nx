@@ -36,7 +36,6 @@ const getTextColorByStatus = (
   status: Status,
   fallback: FallbackColor
 ): TextColor => {
-  // eslint-disable-next-line multiline-comment-style
   // switch (status) {
   //   case 'expired':
   //     return 'textDisabled';

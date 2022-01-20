@@ -22,8 +22,8 @@
   // Editor
   "window.title": "${rootName}${separator}${activeEditorLong} ${dirty}",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": false
+    "source.organizeImports": true,
+    "source.fixAll.eslint": true
   },
   "editor.formatOnSave": true,
   "editor.foldingImportsByDefault": true,

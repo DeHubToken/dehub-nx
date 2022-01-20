@@ -3,10 +3,15 @@ import * as models from '@dehub/shared/models';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {};
+export const SysFragmentDoc = gql`
+  fragment Sys on Sys {
+    publishedAt
+  }
+`;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
     sys {
-      publishedAt
+      ...Sys
     }
     coverImage {
       url
@@ -21,6 +26,7 @@ export const TournamentFragmentDoc = gql`
       json
     }
   }
+  ${SysFragmentDoc}
 `;
 export const TournamentCollectionFragmentDoc = gql`
   fragment TournamentCollection on TournamentCollection {
@@ -36,7 +42,7 @@ export const TeamMembersDocument = gql`
     teamMemberCollection(preview: $isPreview) {
       items {
         sys {
-          publishedAt
+          ...Sys
         }
         name
         title
@@ -50,6 +56,7 @@ export const TeamMembersDocument = gql`
       }
     }
   }
+  ${SysFragmentDoc}
 `;
 
 /**

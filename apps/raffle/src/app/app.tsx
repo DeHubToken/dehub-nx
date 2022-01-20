@@ -10,8 +10,7 @@ import { store } from './states';
 import Lottery from './views/Lottery';
 import { environment } from '../environments/environment';
 
-const appId = environment.moralis.id;
-const serverUrl = environment.moralis.server;
+const { appId, serverUrl } = environment.moralis;
 
 export function App() {
   return (

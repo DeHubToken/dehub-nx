@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@dehub/angular/core": ["libs/angular/core/src/index.ts"],
+      "@dehub/angular/moralis": ["libs/angular/moralis/src/index.ts"],
       "@dehub/angular/ui/*": ["libs/angular/ui/src/lib/*"],
       "@dehub/react/core": ["libs/react/core/src/index.ts"],
       "@dehub/react/pcsuikit": ["libs/react/pcsuikit/src/index.ts"],

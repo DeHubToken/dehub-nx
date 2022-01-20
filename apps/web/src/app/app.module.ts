@@ -8,7 +8,12 @@ import {
   ServiceWorkerModule,
   SwRegistrationOptions,
 } from '@angular/service-worker';
-import { EnvToken, GraphQLModule } from '@dehub/angular/core';
+import {
+  AngularCoreModule,
+  EnvToken,
+  GraphQLModule,
+} from '@dehub/angular/core';
+import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
@@ -43,16 +48,22 @@ const layoutComponents = [
   AppFooterComponent,
 ];
 
+const { appId, serverUrl } = environment.moralis;
 @NgModule({
   imports: [
     angularModules,
     primeNgModules,
+
+    AngularCoreModule.forRoot(),
 
     // PWA
     ServiceWorkerModule.register(`web/ngsw-worker.js`),
 
     // GraphQL
     GraphQLModule,
+
+    // Moralis
+    AngularMoralisModule.forRoot({ appId, serverUrl }),
   ],
   declarations: [AppComponent, layoutComponents],
   providers: [

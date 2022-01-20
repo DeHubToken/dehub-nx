@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
-import { MenuItem } from '@dehub/shared/models';
+import { MenuItem } from 'primeng/api';
+// import { MenuItem } from '@dehub/shared/models';
 import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
 

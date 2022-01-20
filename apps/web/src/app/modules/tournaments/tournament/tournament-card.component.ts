@@ -15,8 +15,8 @@ import { WINDOW } from '@ng-web-apis/common';
 @Component({
   selector: 'dhb-tournament-card',
   template: `
-    <div *ngIf="tournament" [class.opacity-50]="!tournament.sys.publishedAt">
-      <div class="border-round m-2">
+    <ng-container *ngIf="tournament">
+      <div [dhbContentfulDraft]="tournament.sys" class="border-round m-2">
         <div class="mb-4">
           <img
             [src]="tournament.coverImage?.url"
@@ -104,7 +104,7 @@ import { WINDOW } from '@ng-web-apis/common';
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

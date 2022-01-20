@@ -1,4 +1,3 @@
-/* eslint-disable multiline-comment-style */
 import {
   ExternalProvider,
   JsonRpcSigner,
@@ -75,9 +74,11 @@ export const MoralisEthersProvider = ({
 
     if (user) {
       if (!isWeb3Enabled) {
-        const savedProviderName = window.localStorage.getItem('providerName');
+        const savedProviderName = window.localStorage.getItem(
+          'providerName'
+        ) as 'wc' | 'walletconnect';
         enableWeb3({
-          provider: savedProviderName,
+          ...(savedProviderName !== null && { provider: savedProviderName }),
           onSuccess,
           onError,
         });
