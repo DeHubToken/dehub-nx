@@ -1,11 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { LoggerService, LoggerToken } from '@dehub/angular/core';
-import {
-  ProviderTypes,
-  setupNetwork,
-  WalletConnectingState,
-} from '@dehub/shared/moralis';
-import { publishReplayRefCount } from '@dehub/shared/utils';
+import { ProviderTypes, WalletConnectingState } from '@dehub/shared/models';
+import { publishReplayRefCount, setupNetwork } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';

@@ -11,7 +11,7 @@ import {
   ProviderTypes,
   WalletConnectingMessages,
   WalletConnectingState,
-} from '@dehub/shared/moralis';
+} from '@dehub/shared/models';
 import { shortenAddress } from '@dehub/shared/utils';
 import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
