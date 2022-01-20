@@ -1,6 +1,9 @@
 import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
-import { WalletConnectingState } from '@dehub/shared/moralis';
+import {
+  WalletConnectingMessages,
+  WalletConnectingState,
+} from '@dehub/shared/moralis';
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import { useEffect, useState } from 'react';
@@ -51,24 +54,16 @@ export default function Lottery() {
   }, [clearProvider]);
 
   useEffect(() => {
+    const header = 'Waiting';
     if (walletConnectingState === WalletConnectingState.WAITING) {
       setShowLoader(true);
-      setMessage({
-        header: 'Waiting',
-        text: 'Please confirm with your wallet.',
-      });
+      setMessage({ header, text: WalletConnectingMessages.WAITING });
     } else if (walletConnectingState === WalletConnectingState.SWITCH_NETWORK) {
       setShowLoader(true);
-      setMessage({
-        header: 'Waiting',
-        text: 'Please confirm network switch with your wallet.',
-      });
+      setMessage({ header, text: WalletConnectingMessages.SWITCH_NETWORK });
     } else if (walletConnectingState === WalletConnectingState.ADD_NETWORK) {
       setShowLoader(true);
-      setMessage({
-        header: 'Waiting',
-        text: 'Please confirm network add with your wallet.',
-      });
+      setMessage({ header, text: WalletConnectingMessages.ADD_NETWORK });
     } else {
       setShowLoader(false);
       setMessage(initMessage);

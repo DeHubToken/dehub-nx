@@ -1,14 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Moralis } from 'moralis';
-
 import { Hooks } from '@dehub/react/core';
-import { Footer, Header, Loader } from '@dehub/react/ui';
-import { WalletConnectingState } from '@dehub/shared/moralis';
-import { iOS } from '@dehub/shared/utils';
-
 import { useMatchBreakpoints, useModal } from '@dehub/react/pcsuikit';
-import { getChainIdHex } from '../../config/constants';
+import { Footer, Header, Loader } from '@dehub/react/ui';
+import {
+  WalletConnectingMessages,
+  WalletConnectingState,
+} from '@dehub/shared/moralis';
+import { iOS } from '@dehub/shared/utils';
+import { Moralis } from 'moralis';
+import React, { useEffect, useRef, useState } from 'react';
+import { environment } from '../../../environments/environment';
+import PageMeta from '../../components/layout/PageMeta';
 import UserMenu from '../../components/UserMenu';
+import { getChainIdHex } from '../../config/constants';
 import { useAppDispatch } from '../../state';
 import { useWalletConnectingState } from '../../state/application/hooks';
 import {
@@ -17,6 +20,11 @@ import {
   useIsChartPaneOpen,
 } from '../../state/hooks';
 import {
+  fetchCurrentBets,
+  initialize,
+  setPredictionStatus,
+} from '../../state/predictions';
+import {
   getStaticPredictionsData,
   makeFutureRoundResponse,
   makeRoundData,
@@ -24,26 +32,18 @@ import {
 } from '../../state/predictions/helpers';
 import { fetchMarketData } from '../../state/predictions/helpers2';
 import {
-  fetchCurrentBets,
-  initialize,
-  setPredictionStatus,
-} from '../../state/predictions';
-import {
   HistoryFilter,
   PredictionsState,
   PredictionStatus,
 } from '../../state/types';
-import PageMeta from '../../components/layout/PageMeta';
-import usePollOraclePrice from './hooks/usePollOraclePrice';
-import usePollRoundData from './hooks/usePollRoundData';
-import Container from './components/Container';
+import ChartDisclaimer from './components/ChartDisclaimer';
 import CollectWinningsPopup from './components/CollectWinningsPopup';
+import RiskDisclaimer from './components/RiskDisclaimer';
 import SwiperProvider from './context/SwiperProvider';
 import Desktop from './Desktop';
+import usePollOraclePrice from './hooks/usePollOraclePrice';
+import usePollRoundData from './hooks/usePollRoundData';
 import Mobile from './Mobile';
-import RiskDisclaimer from './components/RiskDisclaimer';
-import ChartDisclaimer from './components/ChartDisclaimer';
-import { environment } from '../../../environments/environment';
 
 const FUTURE_ROUND_COUNT = 2; // the number of rounds in the future to show
 
@@ -109,24 +109,16 @@ const Predictions = () => {
   }, [clearProvider, logout]);
 
   useEffect(() => {
+    const header = 'Waiting';
     if (walletConnectingState === WalletConnectingState.WAITING) {
       setShowLoader(true);
-      setMessage({
-        header: 'Waiting',
-        text: 'Please confirm with your wallet.',
-      });
+      setMessage({ header, text: WalletConnectingMessages.WAITING });
     } else if (walletConnectingState === WalletConnectingState.SWITCH_NETWORK) {
       setShowLoader(true);
-      setMessage({
-        header: 'Waiting',
-        text: 'Please confirm network switch with your wallet.',
-      });
+      setMessage({ header, text: WalletConnectingMessages.SWITCH_NETWORK });
     } else if (walletConnectingState === WalletConnectingState.ADD_NETWORK) {
       setShowLoader(true);
-      setMessage({
-        header: 'Waiting',
-        text: 'Please confirm network add with your wallet.',
-      });
+      setMessage({ header, text: WalletConnectingMessages.ADD_NETWORK });
     } else {
       setShowLoader(false);
       setMessage(initMessage);

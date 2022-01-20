@@ -7,7 +7,11 @@ import {
 } from '@angular/core';
 import { EnvToken } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
-import { ProviderTypes, WalletConnectingState } from '@dehub/shared/moralis';
+import {
+  ProviderTypes,
+  WalletConnectingMessages,
+  WalletConnectingState,
+} from '@dehub/shared/moralis';
 import { shortenAddress } from '@dehub/shared/utils';
 import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -65,13 +69,13 @@ export class ConnectWalletComponent implements OnInit {
       let subtitle = '';
       switch (walletConnectingState) {
         case WalletConnectingState.SWITCH_NETWORK:
-          subtitle = 'Please confirm network switch with your wallet.';
+          subtitle = WalletConnectingMessages.SWITCH_NETWORK;
           break;
         case WalletConnectingState.ADD_NETWORK:
-          subtitle = 'Please confirm network switch with your wallet.';
+          subtitle = WalletConnectingMessages.ADD_NETWORK;
           break;
         default:
-          subtitle = 'Please confirm with your wallet.';
+          subtitle = WalletConnectingMessages.WAITING;
       }
       this.subtitleSubject.next(subtitle);
     }),
@@ -90,9 +94,7 @@ export class ConnectWalletComponent implements OnInit {
     private moralisService: MoralisService
   ) {}
 
-  ngOnInit() {
-    // this.jsonPath = `${this.env.baseUrl}/assets/dehub/dehub-loader-light-blue.json`;
-  }
+  ngOnInit() {}
 
   onLogin(provider: ProviderTypes) {
     this.moralisService.login(provider, this.chainId);
