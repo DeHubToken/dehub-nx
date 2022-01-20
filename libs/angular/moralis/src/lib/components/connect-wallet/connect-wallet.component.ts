@@ -1,12 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Inject,
   Input,
   OnInit,
 } from '@angular/core';
-import { ProviderTypes } from '@dehub/shared/moralis';
+import { EnvToken } from '@dehub/angular/core';
+import { SharedEnv } from '@dehub/shared/config';
+import { ProviderTypes, WalletConnectingState } from '@dehub/shared/moralis';
 import { shortenAddress } from '@dehub/shared/utils';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { MoralisService } from '../../services/moralis.service';
 
 @Component({
@@ -27,6 +31,13 @@ import { MoralisService } from '../../services/moralis.service';
       (showDialog)="showDialog = !showDialog"
       (logout)="onLogout()"
     ></dhb-connect-wallet-button>
+
+    <!-- Loader -->
+    <dhb-loader
+      *ngIf="(visible$ | async)!"
+      [subtitle]="(subtitle$ | async)!"
+      [lottieJson]="lottieJson"
+    ></dhb-loader>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,9 +57,42 @@ export class ConnectWalletComponent implements OnInit {
   );
   userLoggedIn$ = this.moralisService.userLoggedIn$;
 
-  constructor(private moralisService: MoralisService) {}
+  private subtitleSubject = new BehaviorSubject<string>('');
+  subtitle$ = this.subtitleSubject.asObservable();
 
-  ngOnInit() {}
+  visible$ = this.moralisService.walletConnectingState$.pipe(
+    tap(walletConnectingState => {
+      let subtitle = '';
+      switch (walletConnectingState) {
+        case WalletConnectingState.SWITCH_NETWORK:
+          subtitle = 'Please confirm network switch with your wallet.';
+          break;
+        case WalletConnectingState.ADD_NETWORK:
+          subtitle = 'Please confirm network switch with your wallet.';
+          break;
+        default:
+          subtitle = 'Please confirm with your wallet.';
+      }
+      this.subtitleSubject.next(subtitle);
+    }),
+    map(
+      walletConnectingState =>
+        ![WalletConnectingState.INIT, WalletConnectingState.COMPLETE].includes(
+          walletConnectingState
+        )
+    )
+  );
+
+  lottieJson = `${this.env.baseUrl}/assets/dehub/dehub-loader-light-blue.json`;
+
+  constructor(
+    @Inject(EnvToken) private env: SharedEnv,
+    private moralisService: MoralisService
+  ) {}
+
+  ngOnInit() {
+    // this.jsonPath = `${this.env.baseUrl}/assets/dehub/dehub-loader-light-blue.json`;
+  }
 
   onLogin(provider: ProviderTypes) {
     this.moralisService.login(provider, this.chainId);

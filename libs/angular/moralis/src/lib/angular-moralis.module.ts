@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { Moralis } from 'moralis';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -20,8 +21,10 @@ const primeNgModules = [
   DialogModule,
 ];
 
+const libModules = [LoaderModule];
+
 @NgModule({
-  imports: [CommonModule, primeNgModules],
+  imports: [CommonModule, primeNgModules, libModules],
   declarations: [
     ConnectWalletComponent,
     ConnectWalletButtonComponent,
@@ -39,7 +42,7 @@ export class AngularMoralisModule {
      **/
     const initializeMoralis = () =>
       Moralis.start(options).then(() =>
-        console.info('Moralis has been initialised.')
+        console.info('Moralis has been initialized.')
       );
 
     return {

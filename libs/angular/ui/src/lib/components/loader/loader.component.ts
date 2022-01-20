@@ -1,38 +1,33 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
+  Input,
   OnInit,
 } from '@angular/core';
-import { EnvToken } from '@dehub/angular/core';
-import { MoralisService } from '@dehub/angular/moralis';
-import { SharedEnv } from '@dehub/shared/config';
-import { WalletConnectingState } from '@dehub/shared/moralis';
 import { AnimationOptions } from 'ngx-lottie';
-import { BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'dhb-loader',
   template: `
-    <div *ngIf="visible$ | async" class="dhb-loader">
+    <div class="dhb-loader">
       <table>
         <tbody>
           <tr>
             <td>
               <!-- DeHub Lottie -->
               <ng-lottie
-                [options]="options"
-                [styles]="styles"
+                *ngIf="lottieJson"
+                [options]="lottieOptions"
+                [styles]="lottieStyles"
                 width="180px"
                 containerClass="pt-2 mx-auto"
               ></ng-lottie>
 
               <!-- Title -->
-              <h4 class="dhb-loader-title">Waiting</h4>
+              <h4 *ngIf="subtitle" class="dhb-loader-title">{{ title }}</h4>
 
               <!-- Subtitle -->
-              <div class="dhb-loader-subtitle">{{ subtitle$ | async }}</div>
+              <div class="dhb-loader-subtitle">{{ subtitle }}</div>
             </td>
           </tr>
         </tbody>
@@ -42,47 +37,25 @@ import { map, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoaderComponent implements OnInit {
-  private subtitkeSubject = new BehaviorSubject<string>('');
-  subtitle$ = this.subtitkeSubject.asObservable();
+  @Input() title = 'Waiting';
+  @Input() subtitle?: string;
+  @Input() lottieJson?: string;
 
-  options: AnimationOptions = {};
-  styles: Partial<CSSStyleDeclaration> = {};
+  lottieOptions: AnimationOptions = {};
+  lottieStyles: Partial<CSSStyleDeclaration> = {};
 
-  visible$ = this.moralisService.walletConnectingState$.pipe(
-    tap(walletConnectingState => {
-      let subtitle = '';
-      switch (walletConnectingState) {
-        case WalletConnectingState.SWITCH_NETWORK:
-          subtitle = 'Please confirm network switch with your wallet.';
-          break;
-        case WalletConnectingState.ADD_NETWORK:
-          subtitle = 'Please confirm network switch with your wallet.';
-          break;
-        default:
-          subtitle = 'Please confirm with your wallet.';
-      }
-      this.subtitkeSubject.next(subtitle);
-    }),
-    map(
-      walletConnectingState =>
-        ![WalletConnectingState.INIT, WalletConnectingState.COMPLETE].includes(
-          walletConnectingState
-        )
-    )
-  );
-
-  constructor(
-    @Inject(EnvToken) private env: SharedEnv,
-    private moralisService: MoralisService
-  ) {}
+  constructor() {}
 
   ngOnInit() {
-    this.options = {
-      path: `${this.env.baseUrl}/assets/dehub/dehub-loader-light-blue.json`,
-    };
-    this.styles = {
-      background: 'transparent',
-      height: 'fit-content',
-    };
+    if (this.lottieJson) {
+      this.lottieOptions = {
+        path: this.lottieJson,
+      };
+
+      this.lottieStyles = {
+        background: 'transparent',
+        height: 'fit-content',
+      };
+    }
   }
 }
