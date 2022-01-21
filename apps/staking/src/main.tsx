@@ -1,5 +1,4 @@
 import { Contexts } from '@dehub/react/core';
-import { ModalProvider } from '@dehub/react/pcsuikit';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
 import { MoralisProvider } from 'react-moralis';
@@ -15,9 +14,7 @@ ReactDOM.render(
     <MoralisProvider appId={appId} serverUrl={serverUrl}>
       <Providers>
         <Contexts.MoralisEthersProvider>
-          <ModalProvider>
-            <App />
-          </ModalProvider>
+          <App />
         </Contexts.MoralisEthersProvider>
       </Providers>
     </MoralisProvider>

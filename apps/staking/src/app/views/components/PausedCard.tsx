@@ -1,4 +1,3 @@
-import { useModal } from '@dehub/react/pcsuikit';
 import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -7,7 +6,6 @@ import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
 import { FIRST_LAUNCH_DATE } from '../../config/constants';
 import { timeFromNow } from '../../utils/timeFromNow';
-import StakeModal from './StakeModal';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
@@ -16,7 +14,7 @@ const StyledBox = styled(Box)`
 const PausedCard = () => {
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
   const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
-  const [onPresentUnStakeModal] = useModal(<StakeModal id="unstake" />, false);
+
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
       <StyledBox>
