@@ -163,9 +163,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
             style={{ marginBottom: '8px' }}
           >
             <div className="flex align-items-center">
-              <Text fontWeight={600} textTransform="uppercase">
-                {`${id}:`}
-              </Text>
+              <Text fontWeight={600}>{`${capitalize(id)}:`}</Text>
             </div>
             <div className="flex align-items-center">
               <Text fontWeight={600} textTransform="uppercase">
