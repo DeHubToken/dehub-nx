@@ -1,40 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { Slider, SliderChangeParams } from 'primereact/slider';
-import BigNumber from 'bignumber.js';
-import { capitalize } from 'lodash';
-
-import styled from 'styled-components';
-
-import {
-  Flex,
-  Heading,
-  Button,
-  Text,
-  BalanceInput,
-  Box,
-  AutoRenewIcon,
-  ModalContainer,
-  ModalBody,
-  ModalTitle,
-  ModalHeader,
-  ModalCloseButton,
-} from '@dehub/react/pcsuikit';
 import { Hooks } from '@dehub/react/core';
 import { getBalanceAmount } from '@dehub/shared/utils';
-
+import BigNumber from 'bignumber.js';
+import { capitalize } from 'lodash';
+import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { SliderChangeParams } from 'primereact/slider';
+import { Toast } from 'primereact/toast';
+import React, { useEffect, useRef, useState } from 'react';
+import BalanceInput from '../../components/BalanceInput/BalanceInput';
+import ConnectWalletButton from '../../components/ConnectWalletButton';
+import { Box } from '../../components/Layout';
+import { Text } from '../../components/Text';
 import { DEFAULT_TOKEN_DECIMAL } from '../../config';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import ConnectWalletButton from '../../components/ConnectWalletButton';
-import useToast from '../../hooks/useToast';
 
 interface StakeModalProps {
   id: 'stake' | 'unstake';
-  onDismiss?: () => void;
+  open: boolean;
+  onHide: () => void;
 }
-
-const Modal = styled(ModalContainer)`
-  overflow: visible;
-`;
 
 const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
 const percentShortcuts = [10, 25, 50, 75, 100];
@@ -68,13 +52,14 @@ const getButtonProps = (value: BigNumber, dehubBalance: BigNumber) => {
   return { key: 'Confirm', disabled: value.lt(0) };
 };
 
-const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
+const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { account } = Hooks.useMoralisEthers();
-  const { toastSuccess, toastError } = useToast();
   const dehubBalance = useGetDehubBalance();
+
+  const toast = useRef<Toast>(null);
 
   const balanceDisplay = getBalanceAmount(dehubBalance, 5).toNumber();
   const maxBalance = getBalanceAmount(
@@ -113,20 +98,28 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
 
   const handleEnterPosition = async () => {
     try {
-      if (onDismiss) {
-        onDismiss();
-      }
+      onHide();
 
-      toastSuccess(
-        'Winnings collected!',
-        <Box>
-          <Text as="p" mb="8px">
-            Your prizes have been sent to your wallet
-          </Text>
-        </Box>
-      );
+      toast?.current?.show({
+        severity: 'success',
+        summary: 'Winnings collected!',
+        detail: (
+          <Box>
+            <Text style={{ marginBottom: '8px' }}>
+              Your prizes have been sent to your wallet
+            </Text>
+          </Box>
+        ),
+        life: 3000,
+      });
     } catch (error) {
-      if (error instanceof Error) toastError('Error', error?.message);
+      if (error instanceof Error)
+        toast?.current?.show({
+          severity: 'error',
+          summary: 'Error',
+          detail: error?.message,
+          life: 3000,
+        });
       console.error(error);
     }
   };
@@ -146,99 +139,100 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, onDismiss }) => {
   }, [value, maxBalance, minBetAmountBalance, setErrorMessage]);
 
   return (
-    <Modal
-      className="border-neon-1"
-      minWidth="288px"
-      position="relative"
-      mt="124px"
-    >
-      <ModalHeader>
-        <ModalTitle>
-          <Heading style={{ margin: 0 }}>{capitalize(id)} In Pool</Heading>
-        </ModalTitle>
-        <ModalCloseButton onDismiss={onDismiss} />
-      </ModalHeader>
-      <ModalBody p="16px">
-        <Flex alignItems="center" justifyContent="space-between" mb="8px">
-          <Flex alignItems="center">
-            <Text bold textTransform="uppercase">
+    <>
+      <Toast ref={toast} />
+      <Dialog
+        visible={open}
+        modal
+        className="border-neon-1"
+        header={`${capitalize(id)} In Pool`}
+        onHide={onHide}
+        style={{ minWidth: '288px', marginTop: '124px', position: 'relative' }}
+      >
+        <div
+          className="flex align-items-center justify-content-between"
+          style={{ marginBottom: '8px' }}
+        >
+          <div className="flex align-items-center">
+            <Text fontWeight={600} textTransform="uppercase">
               DEHUB
             </Text>
-          </Flex>
-        </Flex>
-        <BalanceInput
-          value={value}
-          onUserInput={handleChange}
-          isWarning={showFieldWarning}
-          inputProps={{ disabled: !account || isTxPending }}
-        />
-        {showFieldWarning && (
-          <Text color="failure" fontSize="12px" mt="4px" textAlign="right">
-            {errorMessage}
-          </Text>
-        )}
-        <Text
-          textAlign="right"
-          mb="16px"
-          color="textSubtle"
-          fontSize="12px"
-          style={{ height: '18px' }}
-        >
-          {account && `Balance: ${balanceDisplay}`}
-        </Text>
-        <Slider
-          min={0}
-          max={maxBalance}
-          value={valueAsBn.lte(maxBalance) ? valueAsBn.toNumber() : 0}
-          onChange={handleSliderChange}
-          step={0.00001}
-          disabled={!account || isTxPending}
-          style={{ marginBottom: '16px' }}
-        />
-        <Flex alignItems="center" justifyContent="space-between" mb="16px">
-          {percentShortcuts.map(percent => {
-            const handleClick = () => {
-              setValue(
-                new BigNumber(((percent / 100) * maxBalance).toString())
-                  .toFixed(5)
-                  .toString()
-              );
-            };
-
-            return (
-              <Button
-                key={percent}
-                scale="xs"
-                mx="4px"
-                variant="tertiary"
-                onClick={handleClick}
-                disabled={!account || isTxPending}
-                style={{ flex: 1 }}
-              >
-                {`${percent}%`}
-              </Button>
-            );
-          })}
-        </Flex>
-        <Box mb="8px">
-          {account ? (
-            <Button
-              width="100%"
-              disabled={!account || disabled}
-              onClick={handleEnterPosition}
-              isLoading={isTxPending}
-              endIcon={
-                isTxPending ? <AutoRenewIcon color="currentColor" spin /> : null
-              }
+          </div>
+          <BalanceInput
+            value={value}
+            onUserInput={handleChange}
+            isWarning={showFieldWarning}
+            inputProps={{ disabled: !account || isTxPending }}
+          />
+          {showFieldWarning && (
+            <Text
+              color="failure"
+              fontSize="12px"
+              textAlign="right"
+              style={{ marginTop: '4px' }}
             >
-              {capitalize(id)}
-            </Button>
-          ) : (
-            <ConnectWalletButton />
+              {errorMessage}
+            </Text>
           )}
-        </Box>
-      </ModalBody>
-    </Modal>
+          <Text
+            textAlign="right"
+            fontSize="12px"
+            style={{ height: '18px', marginBottom: '16px' }}
+          >
+            {account && `Balance: ${balanceDisplay}`}
+          </Text>
+          {/* <Slider
+            min={0}
+            max={maxBalance}
+            value={valueAsBn.lte(maxBalance) ? valueAsBn.toNumber() : 0}
+            onChange={handleSliderChange}
+            step={0.00001}
+            disabled={!account || isTxPending}
+            style={{ marginBottom: '16px' }}
+          /> */}
+          <div
+            className="flex align-items-center justify-content-between"
+            style={{ marginBottom: '16px' }}
+          >
+            {percentShortcuts.map(percent => {
+              const handleClick = () => {
+                setValue(
+                  new BigNumber(((percent / 100) * maxBalance).toString())
+                    .toFixed(5)
+                    .toString()
+                );
+              };
+
+              return (
+                <Button
+                  key={percent}
+                  onClick={handleClick}
+                  disabled={!account || isTxPending}
+                  style={{ flex: 1, marginLeft: '4px', marginRight: '4px' }}
+                >
+                  {`${percent}%`}
+                </Button>
+              );
+            })}
+          </div>
+          <Box style={{ marginBottom: '8px' }}>
+            {account ? (
+              <Button
+                disabled={!account || disabled}
+                onClick={handleEnterPosition}
+                icon={isTxPending ? 'pi pi-spin pi-spinner' : ''}
+                iconPos="right"
+                style={{ width: '100px' }}
+              >
+                {capitalize(id)}
+              </Button>
+            ) : (
+              <ConnectWalletButton />
+            )}
+          </Box>
+        </div>
+      </Dialog>
+    </>
   );
 };
 
