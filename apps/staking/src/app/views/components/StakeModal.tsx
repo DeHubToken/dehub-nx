@@ -4,9 +4,10 @@ import BigNumber from 'bignumber.js';
 import { capitalize } from 'lodash';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { SliderChangeParams } from 'primereact/slider';
+import { Slider, SliderChangeParams } from 'primereact/slider';
 import { Toast } from 'primereact/toast';
 import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 import BalanceInput from '../../components/BalanceInput/BalanceInput';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
 import { Box } from '../../components/Layout';
@@ -19,6 +20,13 @@ interface StakeModalProps {
   open: boolean;
   onHide: () => void;
 }
+
+const SimpleGrid = styled.div<{ columns: number }>`
+  display: grid;
+  grid-template-columns: repeat(${({ columns }) => columns}, 1fr);
+  column-gap: 10px;
+  margin-bottom: 16px;
+`;
 
 const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
 const percentShortcuts = [10, 25, 50, 75, 100];
@@ -149,14 +157,21 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
         onHide={onHide}
         style={{ minWidth: '288px', marginTop: '124px', position: 'relative' }}
       >
-        <div
-          className="flex align-items-center justify-content-between"
-          style={{ marginBottom: '8px' }}
-        >
-          <div className="flex align-items-center">
-            <Text fontWeight={600} textTransform="uppercase">
-              DEHUB
-            </Text>
+        <div className="flex flex-column">
+          <div
+            className="flex align-items-center justify-content-between"
+            style={{ marginBottom: '8px' }}
+          >
+            <div className="flex align-items-center">
+              <Text fontWeight={600} textTransform="uppercase">
+                {`${id}:`}
+              </Text>
+            </div>
+            <div className="flex align-items-center">
+              <Text fontWeight={600} textTransform="uppercase">
+                DEHUB
+              </Text>
+            </div>
           </div>
           <BalanceInput
             value={value}
@@ -174,14 +189,12 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
               {errorMessage}
             </Text>
           )}
-          <Text
-            textAlign="right"
-            fontSize="12px"
-            style={{ height: '18px', marginBottom: '16px' }}
-          >
-            {account && `Balance: ${balanceDisplay}`}
-          </Text>
-          {/* <Slider
+          <div className="flex justify-content-end mt-2 mb-5">
+            <Text textAlign="right" fontSize="12px">
+              {account && `Balance: ${balanceDisplay}`}
+            </Text>
+          </div>
+          <Slider
             min={0}
             max={maxBalance}
             value={valueAsBn.lte(maxBalance) ? valueAsBn.toNumber() : 0}
@@ -189,11 +202,8 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
             step={0.00001}
             disabled={!account || isTxPending}
             style={{ marginBottom: '16px' }}
-          /> */}
-          <div
-            className="flex align-items-center justify-content-between"
-            style={{ marginBottom: '16px' }}
-          >
+          />
+          <SimpleGrid columns={percentShortcuts.length}>
             {percentShortcuts.map(percent => {
               const handleClick = () => {
                 setValue(
@@ -208,13 +218,13 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
                   key={percent}
                   onClick={handleClick}
                   disabled={!account || isTxPending}
-                  style={{ flex: 1, marginLeft: '4px', marginRight: '4px' }}
+                  className="p-button-outlined text-white border-primary justify-content-center"
                 >
                   {`${percent}%`}
                 </Button>
               );
             })}
-          </div>
+          </SimpleGrid>
           <Box style={{ marginBottom: '8px' }}>
             {account ? (
               <Button
@@ -222,7 +232,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
                 onClick={handleEnterPosition}
                 icon={isTxPending ? 'pi pi-spin pi-spinner' : ''}
                 iconPos="right"
-                style={{ width: '100px' }}
+                style={{ width: '100%', justifyContent: 'center' }}
               >
                 {capitalize(id)}
               </Button>
