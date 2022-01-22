@@ -31,6 +31,17 @@ export interface LotteryTicket {
   dehubReward?: string; // as type of SerializedBigNumber
 }
 
+export interface PoolInfo {
+  closeTimeStamp: BigNumber;
+  emergencyPull: boolean;
+  harvestFund: BigNumber;
+  lastUpdateBlock: BigNumber;
+  openTimeStamp: BigNumber;
+  reflValuePerBlock: BigNumber;
+  stakeValuePerBlock: BigNumber;
+  totalStaked: BigNumber;
+}
+
 export interface LotteryTicketClaimData {
   status: LotteryStatus;
   ticketsWithUnclaimedRewards: LotteryTicket[];

@@ -1,7 +1,25 @@
-import { Skeleton } from 'primereact/skeleton';
-import { Header } from '../components/Text';
+import { Hooks } from '@dehub/react/core';
+import BigNumber from 'bignumber.js';
+import { useEffect, useState } from 'react';
+import { Header, Text } from '../components/Text';
+import { useStakingContract } from '../hooks/useContract';
 
 const StakedInfoBox = () => {
+  const stakingContract = useStakingContract();
+  const { account } = Hooks.useMoralisEthers();
+  const [totalStaked, setTotalStaked] = useState<BigNumber>(new BigNumber(0));
+
+  useEffect(() => {
+    const fetchInfo = async () => {
+      if (account) {
+        const pool = await stakingContract?.pool();
+        setTotalStaked(pool.totalStaked);
+      }
+    };
+
+    fetchInfo();
+  }, [stakingContract, account]);
+
   return (
     <>
       <div className="grid">
@@ -9,9 +27,10 @@ const StakedInfoBox = () => {
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header className="pb-2">Total Staked</Header>
-
-              <Skeleton width="100%" height="1.5rem" className="mt-4" />
-              <Skeleton width="100%" height="1rem" className="mt-2" />
+              <br />
+              <Text fontSize="14px" fontWeight={900}>
+                {totalStaked.toString()}
+              </Text>
             </div>
           </div>
         </div>
@@ -20,9 +39,7 @@ const StakedInfoBox = () => {
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header className="pb-2">Rewards Q1 2022</Header>
-
-              <Skeleton width="100%" height="1.5rem" className="mt-4" />
-              <Skeleton width="100%" height="1rem" className="mt-2" />
+              <br />
             </div>
           </div>
         </div>
@@ -33,9 +50,6 @@ const StakedInfoBox = () => {
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">TVL</Header>
-
-              <Skeleton width="100%" height="1.5rem" className="mt-4" />
-              <Skeleton width="100%" height="1rem" className="mt-2" />
             </div>
           </div>
         </div>
@@ -44,9 +58,6 @@ const StakedInfoBox = () => {
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Header className="pb-2">Total Rewards</Header>
-
-              <Skeleton width="100%" height="1.5rem" className="mt-4" />
-              <Skeleton width="100%" height="1rem" className="mt-2" />
             </div>
           </div>
         </div>

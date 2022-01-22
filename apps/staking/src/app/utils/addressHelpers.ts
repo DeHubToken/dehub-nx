@@ -13,3 +13,11 @@ export const getMultiCallAddress = (): string => {
 export const getDehubAddress = (): string => {
   return getAddress('DeHub');
 };
+
+export const getRewardsAddress = (): string => {
+  return getAddress('Rewards');
+};
+
+export const getStakingAddress = (): string => {
+  return getAddress('Staking');
+};

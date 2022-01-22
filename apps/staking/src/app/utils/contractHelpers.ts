@@ -1,12 +1,12 @@
 import { Signer } from '@ethersproject/abstract-signer';
-import { ContractInterface, Contract } from '@ethersproject/contracts';
+import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { Provider } from '@ethersproject/providers';
-
-import { simpleRpcProvider } from './providers';
-import { getMultiCallAddress } from './addressHelpers';
 import Bep20Abi from '../config/abis/erc20.json';
 import MulticallAbi from '../config/abis/Multicall.json';
+import RewardsAbi from '../config/abis/Reward.json';
 import StakingAbi from '../config/abis/Staking.json';
+import { getMultiCallAddress } from './addressHelpers';
+import { simpleRpcProvider } from './providers';
 
 export const getContract = (
   address: string,
@@ -33,4 +33,11 @@ export const getStakingContract = (
   signer?: Signer | Provider
 ) => {
   return getContract(address, StakingAbi, signer);
+};
+
+export const getRewardsContract = (
+  address: string,
+  signer?: Signer | Provider
+) => {
+  return getContract(address, RewardsAbi, signer);
 };

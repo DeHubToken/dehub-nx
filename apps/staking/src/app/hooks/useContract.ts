@@ -1,12 +1,19 @@
-import { useMemo } from 'react';
-import { Contract } from '@ethersproject/contracts';
-import { ContractAddresses } from '@dehub/shared/config';
 import { Hooks } from '@dehub/react/core';
+import { ContractAddresses } from '@dehub/shared/config';
 import { getContract } from '@dehub/shared/utils';
-
+import { Contract } from '@ethersproject/contracts';
+import { useMemo } from 'react';
 import { getChainId } from '../config/constants';
-import { getBep20Contract, getStakingContract } from '../utils/contractHelpers';
-import { getDehubAddress } from '../utils/addressHelpers';
+import {
+  getDehubAddress,
+  getRewardsAddress,
+  getStakingAddress,
+} from '../utils/addressHelpers';
+import {
+  getBep20Contract,
+  getRewardsContract,
+  getStakingContract,
+} from '../utils/contractHelpers';
 
 export function useContract(
   address?: string,
@@ -48,8 +55,17 @@ export const useBnbContract = (): Contract | null => {
 };
 
 export const useStakingContract = (): Contract | null => {
+  const { signer } = Hooks.useMoralisEthers();
   return useMemo(
-    () => getStakingContract(ContractAddresses[getChainId()]['BNB']),
-    []
+    () => (signer ? getStakingContract(getStakingAddress(), signer) : null),
+    [signer]
+  );
+};
+
+export const useRewardsContract = (): Contract | null => {
+  const { signer } = Hooks.useMoralisEthers();
+  return useMemo(
+    () => (signer ? getRewardsContract(getRewardsAddress(), signer) : null),
+    [signer]
   );
 };

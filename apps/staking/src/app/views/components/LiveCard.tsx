@@ -1,11 +1,13 @@
+import { Hooks } from '@dehub/react/core';
 import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
 import { FIRST_LAUNCH_DATE } from '../../config/constants';
+import { useStakingContract } from '../../hooks/useContract';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
 
@@ -17,8 +19,23 @@ const LiveCard = () => {
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
   const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
 
-  const [openStakeModal, setOpenStakeModal] = useState(false);
-  const [openUnstakeModal, setOpenUnstakeModal] = useState(false);
+  const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
+  const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
+  const [projectedRewards, setProjectedRewards] = useState(null);
+
+  const stakingContract = useStakingContract();
+  const { account } = Hooks.useMoralisEthers();
+
+  useEffect(() => {
+    const fetchInfo = async () => {
+      if (account) {
+        const pReward = await stakingContract?.projectedRewards(account);
+        setProjectedRewards(pReward);
+      }
+    };
+
+    fetchInfo();
+  }, [stakingContract, account]);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {
