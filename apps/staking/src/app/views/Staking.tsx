@@ -83,7 +83,7 @@ export default function Staking() {
         <div
           className="layout-wrapper"
           style={{
-            background: `linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("${path}/assets/img/prize-draw-bg.jpg") no-repeat fixed center center /cover`,
+            background: `linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95))`,
           }}
         >
           <Header
