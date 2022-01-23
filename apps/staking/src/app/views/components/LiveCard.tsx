@@ -62,11 +62,11 @@ const LiveCard = () => {
             </Header>
 
             <div className="grid mt-2">
-              <div className="col-12 md:col-5 lg:col-5 align-self-start">
+              <div className="col-12 md:col-5 lg:col-5">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Header className="pb-2">Ends In </Header>
-                    <Text fontSize="14px" fontWeight={900} className="pb-2">
+                    <Header className="pb-2">Ends In</Header>
+                    <Text fontSize="24px" className="pb-2">
                       {timeFromNow(
                         isIn2022Q1
                           ? moment(FIRST_LAUNCH_DATE)
