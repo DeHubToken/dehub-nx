@@ -210,13 +210,13 @@ const LiveCard = () => {
                           % of the total pool
                         </Text>
                         <Button
-                          className="p-button mt-2 justify-content-center w-5 mr-3"
+                          className="p-button mt-2 justify-content-center w-4 mr-3"
                           onClick={() => handleModal('stake', true)}
                           disabled={paused}
                           label="Stake"
                         />
                         <Button
-                          className="p-button mt-2 justify-content-center w-5"
+                          className="p-button-outlined mt-2 justify-content-center w-4"
                           onClick={() => handleModal('unstake', true)}
                           disabled={paused}
                           label="Unstake"

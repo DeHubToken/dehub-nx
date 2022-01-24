@@ -163,7 +163,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
         detail: (
           <Box>
             <Text style={{ marginBottom: '8px' }}>
-              {`${valueAsBn.toString()}$Dehub has been successfully ${id}!`}
+              {`${valueAsBn.toString()}$Dehub has been successfully ${id}d!`}
             </Text>
           </Box>
         ),
