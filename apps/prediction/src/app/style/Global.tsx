@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
 import { DeHubTheme } from '@dehub/react/pcsuikit';
+import { createGlobalStyle } from 'styled-components';
 
 declare module 'styled-components' {
   /* eslint-disable @typescript-eslint/no-empty-interface */
@@ -8,7 +8,7 @@ declare module 'styled-components' {
 
 const GlobalStyle = createGlobalStyle`
   * {
-    font-family: 'Metrophobic', sans-serif;
+    font-family: 'Exo', sans-serif;
   }
   body {
     background-color: ${({ theme }) => theme.colors.background};

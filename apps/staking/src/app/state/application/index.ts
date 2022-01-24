@@ -10,14 +10,14 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
-import { PoolInfo } from '../../config/constants/types';
 import { getStakingContract } from '../../utils/contractHelpers';
 import getDehubPrice from '../../utils/priceDehub';
+import { SerializedPoolInfo } from './types';
 
 export interface ApplicationState {
   walletConnectingState: WalletConnectingState;
   dehubPrice: SerializedBigNumber;
-  poolInfo?: PoolInfo;
+  poolInfo?: SerializedPoolInfo;
   readonly blockNumber: { readonly [chainId: string]: number };
 }
 
@@ -35,15 +35,15 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
   }
 );
 
-export const fetchPoolInfo = createAsyncThunk<PoolInfo>(
+export const fetchPoolInfo = createAsyncThunk<SerializedPoolInfo>(
   'application/fetchPoolInfo',
   async () => {
     const stakingContract = getStakingContract();
     const poolInfo = await stakingContract?.pool();
 
     return {
-      openTimeStamp: ethersToSerializedBigNumber(poolInfo?.openTimeStamp),
-      closeTimeStamp: ethersToSerializedBigNumber(poolInfo?.closeTimeStamp),
+      openTimeStamp: Number(poolInfo?.openTimeStamp),
+      closeTimeStamp: Number(poolInfo?.closeTimeStamp),
       emergencyPull: poolInfo?.emergencyPull,
       harvestFund: ethersToSerializedBigNumber(poolInfo?.harvestFund),
       lastUpdateBlock: ethersToSerializedBigNumber(poolInfo?.lastUpdateBlock),
@@ -84,7 +84,7 @@ export const ApplicationSlice = createSlice({
 
     builder.addCase(
       fetchPoolInfo.fulfilled,
-      (state, action: PayloadAction<PoolInfo>) => {
+      (state, action: PayloadAction<SerializedPoolInfo>) => {
         state.poolInfo = action.payload;
       }
     );

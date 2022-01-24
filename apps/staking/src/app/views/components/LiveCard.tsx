@@ -4,7 +4,8 @@ import {
   BUSD_DISPLAY_DECIMALS,
   DEHUB_DECIMALS,
 } from '@dehub/shared/config';
-import { getFullDisplayBalance } from '@dehub/shared/utils';
+import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
+import BigNumber from 'bignumber.js';
 import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -128,7 +129,7 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">Your Stake</Header>
-                    {fetchStakeStatus === FetchStatus.SUCCESS ? (
+                    {fetchStakeStatus === FetchStatus.SUCCESS && poolInfo ? (
                       <>
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
                           {getFullDisplayBalance(
@@ -138,7 +139,14 @@ const LiveCard = () => {
                           $Dehub
                         </Text>
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
-                          1.3% of the total pool
+                          {poolInfo.totalStaked.gt(BIG_ZERO)
+                            ? userStakeInfo.amount
+                                .times(new BigNumber(100))
+                                .div(poolInfo.totalStaked)
+                                .toNumber()
+                                .toFixed(2)
+                            : Number(0).toFixed(2)}
+                          % of the total pool
                         </Text>
                         <Button
                           className="p-button mt-2 justify-content-center w-5 mr-3"

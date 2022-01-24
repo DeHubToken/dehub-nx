@@ -3,15 +3,9 @@ import {
   BUSD_DISPLAY_DECIMALS,
   DEHUB_DECIMALS,
 } from '@dehub/shared/config';
-import {
-  getBalanceNumber,
-  getDecimalAmount,
-  getFullDisplayBalance,
-} from '@dehub/shared/utils';
-import BigNumber from 'bignumber.js';
+import { getFullDisplayBalance } from '@dehub/shared/utils';
 import { Skeleton } from 'primereact/skeleton';
 import { Header, Text } from '../components/Text';
-import { useStakingContract } from '../hooks/useContract';
 import {
   useDehubBusdPrice,
   usePoolInfo,
@@ -23,7 +17,6 @@ const StakedInfoBox = () => {
   usePullBusdPrice();
   usePullBlockNumber();
 
-  const stakingContract = useStakingContract();
   const dehubPrice = useDehubBusdPrice();
   const poolInfo = usePoolInfo();
 
@@ -38,10 +31,7 @@ const StakedInfoBox = () => {
               <br />
               {poolInfo ? (
                 <Text fontSize="14px" fontWeight={900}>
-                  {getBalanceNumber(
-                    new BigNumber(poolInfo?.totalStaked),
-                    DEHUB_DECIMALS
-                  )}{' '}
+                  {getFullDisplayBalance(poolInfo?.totalStaked, DEHUB_DECIMALS)}{' '}
                   $Dehub
                 </Text>
               ) : (
@@ -61,10 +51,7 @@ const StakedInfoBox = () => {
               <br />
               {poolInfo ? (
                 <Text fontSize="14px" fontWeight={900}>
-                  {getBalanceNumber(
-                    new BigNumber(poolInfo?.harvestFund),
-                    DEHUB_DECIMALS
-                  )}{' '}
+                  {getFullDisplayBalance(poolInfo?.harvestFund, DEHUB_DECIMALS)}{' '}
                   $Dehub
                 </Text>
               ) : (
@@ -87,18 +74,8 @@ const StakedInfoBox = () => {
                 <Text fontSize="14px" fontWeight={900}>
                   $
                   {getFullDisplayBalance(
-                    dehubPrice.times(
-                      getDecimalAmount(
-                        new BigNumber(
-                          getBalanceNumber(
-                            new BigNumber(poolInfo?.totalStaked),
-                            DEHUB_DECIMALS
-                          )
-                        ),
-                        DEHUB_DECIMALS
-                      )
-                    ),
-                    BUSD_DECIMALS,
+                    dehubPrice.times(poolInfo?.totalStaked),
+                    BUSD_DECIMALS + DEHUB_DECIMALS,
                     BUSD_DISPLAY_DECIMALS
                   )}
                 </Text>
@@ -119,10 +96,7 @@ const StakedInfoBox = () => {
               <br />
               {poolInfo ? (
                 <Text fontSize="14px" fontWeight={900}>
-                  {getBalanceNumber(
-                    new BigNumber(poolInfo?.harvestFund),
-                    DEHUB_DECIMALS
-                  )}{' '}
+                  {getFullDisplayBalance(poolInfo?.harvestFund, DEHUB_DECIMALS)}{' '}
                   $Dehub
                 </Text>
               ) : (

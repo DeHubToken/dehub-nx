@@ -4,7 +4,6 @@ import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
-import { PoolInfo } from '../../config/constants/types';
 import { AppState } from '../index';
 import {
   fetchDehubPrice,
@@ -12,6 +11,7 @@ import {
   setWalletConnectingState,
   updateBlockNumber,
 } from './';
+import { PoolInfo } from './types';
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(
@@ -46,7 +46,18 @@ export const useDehubBusdPrice = (): BigNumber => {
 export const usePoolInfo = (): PoolInfo | undefined => {
   const poolInfo = useSelector((state: AppState) => state.application.poolInfo);
 
-  return poolInfo;
+  return poolInfo
+    ? {
+        openTimeStamp: poolInfo.openTimeStamp,
+        closeTimeStamp: poolInfo.closeTimeStamp,
+        emergencyPull: poolInfo.emergencyPull,
+        harvestFund: new BigNumber(poolInfo.harvestFund),
+        lastUpdateBlock: new BigNumber(poolInfo.lastUpdateBlock),
+        reflValuePerBlock: new BigNumber(poolInfo.reflValuePerBlock),
+        stakeValuePerBlock: new BigNumber(poolInfo.stakeValuePerBlock),
+        totalStaked: new BigNumber(poolInfo.totalStaked),
+      }
+    : undefined;
 };
 
 export const usePullBusdPrice = () => {
