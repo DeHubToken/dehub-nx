@@ -269,7 +269,7 @@ const LiveCard = () => {
                         disabled={
                           paused ||
                           bnbRewards.gt(new BigNumber(0.01)) ||
-                          isClaimable
+                          !isClaimable
                         }
                         onClick={handleClaimBNB}
                         label="Claim BNB"
