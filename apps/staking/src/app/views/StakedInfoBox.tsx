@@ -21,13 +21,17 @@ const StakedInfoBox = () => {
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header className="pb-2">Total Staked</Header>
-              <br />
+              <Header className="pb-1">Total Staked</Header>
               {poolInfo ? (
-                <Text fontSize="14px" fontWeight={900}>
-                  {getFullDisplayBalance(poolInfo?.totalStaked, DEHUB_DECIMALS)}{' '}
-                  $Dehub
-                </Text>
+                <>
+                  <Text fontSize="24px" fontWeight={900}>
+                    {getFullDisplayBalance(
+                      poolInfo?.totalStaked,
+                      DEHUB_DECIMALS
+                    )}
+                  </Text>
+                  <Text>$Dehub</Text>
+                </>
               ) : (
                 <>
                   <Skeleton width="100%" height="1.5rem" />
@@ -41,13 +45,18 @@ const StakedInfoBox = () => {
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header className="pb-2">Rewards Q1 2022</Header>
-              <br />
+              {/* TODO: pull the current live vault data here. */}
+              <Header className="pb-1">Rewards Q1 2022</Header>
               {poolInfo ? (
-                <Text fontSize="14px" fontWeight={900}>
-                  {getFullDisplayBalance(poolInfo?.harvestFund, DEHUB_DECIMALS)}{' '}
-                  $Dehub
-                </Text>
+                <>
+                  <Text fontSize="24px" fontWeight={900}>
+                    {getFullDisplayBalance(
+                      poolInfo?.harvestFund,
+                      DEHUB_DECIMALS
+                    )}
+                  </Text>
+                  <Text>$Dehub</Text>
+                </>
               ) : (
                 <>
                   <Skeleton width="100%" height="1.5rem" />
@@ -62,10 +71,9 @@ const StakedInfoBox = () => {
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full flex flex-column align-items-start">
-              <Header className="pb-2">TVL</Header>
-              <br />
+              <Header className="pb-1">TVL</Header>
               {poolInfo ? (
-                <Text fontSize="14px" fontWeight={900}>
+                <Text fontSize="24px" fontWeight={900}>
                   $
                   {getFullDisplayBalance(
                     dehubPrice.times(poolInfo?.totalStaked),
@@ -86,13 +94,17 @@ const StakedInfoBox = () => {
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header className="pb-2">Total Rewards</Header>
-              <br />
+              <Header className="pb-1">Total Rewards</Header>
               {poolInfo ? (
-                <Text fontSize="14px" fontWeight={900}>
-                  {getFullDisplayBalance(poolInfo?.harvestFund, DEHUB_DECIMALS)}{' '}
-                  $Dehub
-                </Text>
+                <>
+                  <Text fontSize="24px" fontWeight={900}>
+                    {getFullDisplayBalance(
+                      poolInfo?.harvestFund,
+                      DEHUB_DECIMALS
+                    )}
+                  </Text>
+                  <Text>$Dehub</Text>
+                </>
               ) : (
                 <>
                   <Skeleton width="100%" height="1.5rem" />
