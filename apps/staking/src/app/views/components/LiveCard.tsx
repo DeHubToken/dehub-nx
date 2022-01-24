@@ -43,6 +43,8 @@ const LiveCard = () => {
     : '0';
 
   const projectedRewards = useProjectRewards(account);
+
+  console.log('-------', projectedRewards?.toString());
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
     useStakes(account);
 
@@ -99,6 +101,7 @@ const LiveCard = () => {
                     !projectedRewardsInBUSD.isNaN() ? (
                       <>
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          $
                           {getFullDisplayBalance(
                             projectedRewardsInBUSD,
                             BUSD_DECIMALS,
@@ -106,7 +109,12 @@ const LiveCard = () => {
                           )}
                         </Text>
                         <Text fontSize="12px" fontWeight={400} className="pb-2">
-                          {getFullDisplayBalance(projectedRewards)} $DeHub
+                          {getFullDisplayBalance(
+                            projectedRewards,
+                            BUSD_DECIMALS,
+                            BUSD_DISPLAY_DECIMALS
+                          )}{' '}
+                          $DeHub
                         </Text>
                       </>
                     ) : (
