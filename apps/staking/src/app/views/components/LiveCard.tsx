@@ -11,6 +11,7 @@ import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
 import { FetchStatus } from '../../config/constants/types';
 import { useStakingContract } from '../../hooks/useContract';
+import { useStakePaused } from '../../hooks/usePaused';
 import { useProjectRewards } from '../../hooks/useRewards';
 import { useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
@@ -29,6 +30,7 @@ const LiveCard = () => {
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
 
   const stakingContract = useStakingContract();
+  const paused = useStakePaused();
   const { account } = Hooks.useMoralisEthers();
   const poolInfo = usePoolInfo();
   const closeTimeStamp = poolInfo
@@ -50,6 +52,10 @@ const LiveCard = () => {
     }
   };
 
+  const handleClaimBNB = async () => {
+    await stakingContract?.claimBNBRewards();
+  };
+
   return (
     <>
       <Card className="border-neon-2 overflow-hidden mt-5">
@@ -63,7 +69,9 @@ const LiveCard = () => {
                   'linear-gradient(50deg, rgba(89,70,0,1) 0%, rgba(193,160,49,1) 48%, rgba(89,70,0,1) 100%)',
               }}
             >
-              <span style={{ fontWeight: 900 }}>Live: {currentQ}</span>
+              <span style={{ fontWeight: 900 }}>
+                {paused ? `Paused: ${currentQ}` : `Live: ${currentQ}`}
+              </span>
             </Header>
 
             <div className="grid mt-2">
@@ -127,11 +135,13 @@ const LiveCard = () => {
                         <Button
                           className="p-button mt-2 justify-content-center w-5 mr-3"
                           onClick={() => handleModal('stake', true)}
+                          disabled={paused}
                           label="Stake"
                         />
                         <Button
                           className="p-button mt-2 justify-content-center w-5"
                           onClick={() => handleModal('unstake', true)}
+                          disabled={paused}
                           label="Unstake"
                         />
                       </>
@@ -163,9 +173,8 @@ const LiveCard = () => {
                     </Text>
                     <Button
                       className="p-button mt-2 justify-content-center w-5"
-                      onClick={() => {
-                        console.log('clicked'); // eslint-disable-line
-                      }}
+                      disabled={paused}
+                      onClick={handleClaimBNB}
                       label="Claim BNB"
                     />
                   </div>
