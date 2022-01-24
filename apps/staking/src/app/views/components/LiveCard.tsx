@@ -1,8 +1,10 @@
 import { Hooks } from '@dehub/react/core';
 import {
   BNB_DECIMALS,
+  BUSD_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
   DEHUB_DECIMALS,
+  DEHUB_DISPLAY_DECIMALS,
 } from '@dehub/shared/config';
 import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
 import {
@@ -151,15 +153,15 @@ const LiveCard = () => {
                           $
                           {getFullDisplayBalance(
                             projectedRewardsInBUSD,
-                            16,
+                            2 + BUSD_DECIMALS,
                             BUSD_DISPLAY_DECIMALS
                           )}
                         </Text>
                         <Text fontSize="12px" fontWeight={400} className="pb-2">
                           {getFullDisplayBalance(
                             projectedRewards,
-                            16,
-                            BUSD_DISPLAY_DECIMALS
+                            15 + DEHUB_DECIMALS,
+                            DEHUB_DISPLAY_DECIMALS
                           )}{' '}
                           $DeHub
                         </Text>
