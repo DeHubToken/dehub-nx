@@ -1,19 +1,29 @@
 import { Hooks } from '@dehub/react/core';
-import { BUSD_DISPLAY_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
+import {
+  BNB_DECIMALS,
+  BUSD_DISPLAY_DECIMALS,
+  DEHUB_DECIMALS,
+} from '@dehub/shared/config';
 import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
+import {
+  TransactionReceipt,
+  TransactionResponse,
+} from '@ethersproject/abstract-provider';
 import BigNumber from 'bignumber.js';
 import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
-import { useState } from 'react';
+import { Toast } from 'primereact/toast';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import ConnectWalletButton from '../../components/ConnectWalletButton';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
 import { FetchStatus } from '../../config/constants/types';
 import { useStakingContract } from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
-import { useProjectRewards } from '../../hooks/useRewards';
+import { useProjectRewards, useWeeklyRewards } from '../../hooks/useRewards';
 import { useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
@@ -29,6 +39,7 @@ const LiveCard = () => {
 
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
+  const [claimed, setClaimed] = useState(false);
 
   const stakingContract = useStakingContract();
   const paused = useStakePaused();
@@ -42,10 +53,23 @@ const LiveCard = () => {
 
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
     useStakes(account);
+  const {
+    fetchBNBRewards,
+    fetchStatus: fetchRewardStatus,
+    bnbRewards,
+    totalBNBRewards,
+    isClaimable,
+  } = useWeeklyRewards(account);
 
   const deHubPriceInBUSD = useDehubBusdPrice();
 
   const projectedRewardsInBUSD = projectedRewards?.times(deHubPriceInBUSD);
+
+  const toast = useRef<Toast>(null);
+
+  useEffect(() => {
+    fetchBNBRewards(userStakeInfo?.amount);
+  }, [account, userStakeInfo, claimed]);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {
@@ -56,11 +80,38 @@ const LiveCard = () => {
   };
 
   const handleClaimBNB = async () => {
-    await stakingContract?.claimBNBRewards();
+    try {
+      if (stakingContract) {
+        const tx: TransactionResponse =
+          await stakingContract?.claimBNBRewards();
+        const receipt: TransactionReceipt = await tx.wait();
+        if (receipt.status) {
+          toast?.current?.show({
+            severity: 'info',
+            summary: 'Claim tickets',
+            detail: 'Claim tickets successfully. Please check your wallet.',
+            life: 3000,
+          });
+          setClaimed(true);
+        }
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error(error);
+      toast?.current?.show({
+        severity: 'error',
+        summary: 'Claim tickets',
+        detail: `Claim tickets failed - ${
+          error?.data?.message ?? error.message
+        }`,
+        life: 3000,
+      });
+    }
   };
 
   return (
     <>
+      <Toast ref={toast} />
       <Card className="border-neon-2 overflow-hidden mt-5">
         <StyledBox>
           <>
@@ -185,18 +236,40 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">Weekly BNB Rewards</Header>
-                    <Text fontSize="14px" fontWeight={900} className="pb-2">
-                      Your BNB Reward: 0.00
-                    </Text>
-                    <Text fontSize="14px" fontWeight={900} className="pb-2">
-                      Total BNB Reward Pool: 0.00
-                    </Text>
-                    <Button
-                      className="p-button mt-2 justify-content-center w-5"
-                      disabled={paused}
-                      onClick={handleClaimBNB}
-                      label="Claim BNB"
-                    />
+                    {account &&
+                      (fetchRewardStatus === FetchStatus.SUCCESS ? (
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          Your BNB Reward:{' '}
+                          {getFullDisplayBalance(bnbRewards, BNB_DECIMALS)}
+                        </Text>
+                      ) : (
+                        <Skeleton width="100%" height="1.5rem" />
+                      ))}
+                    {totalBNBRewards ? (
+                      <>
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          Total BNB Reward Pool:{' '}
+                          {getFullDisplayBalance(totalBNBRewards, BNB_DECIMALS)}
+                        </Text>
+                      </>
+                    ) : (
+                      <Skeleton width="100%" height="1.5rem" className="mt-2" />
+                    )}
+
+                    {account ? (
+                      <Button
+                        className="p-button mt-2 justify-content-center w-5"
+                        disabled={
+                          paused ||
+                          bnbRewards.gt(new BigNumber(0.01)) ||
+                          isClaimable
+                        }
+                        onClick={handleClaimBNB}
+                        label="Claim BNB"
+                      />
+                    ) : (
+                      <ConnectWalletButton />
+                    )}
                   </div>
                 </div>
               </div>
