@@ -42,6 +42,7 @@ const LiveCard = () => {
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
   const [claimed, setClaimed] = useState(false);
+  const [pendingClaimTx, setPendingClaimTx] = useState(false);
 
   const stakingContract = useStakingContract();
   const paused = useStakePaused();
@@ -83,6 +84,7 @@ const LiveCard = () => {
   };
 
   const handleClaimBNB = async () => {
+    setPendingClaimTx(true);
     try {
       if (stakingContract) {
         const tx: TransactionResponse =
@@ -110,6 +112,7 @@ const LiveCard = () => {
         life: 3000,
       });
     }
+    setPendingClaimTx(false);
   };
 
   return (
@@ -262,6 +265,7 @@ const LiveCard = () => {
                     {account ? (
                       <Button
                         className="p-button mt-2 justify-content-center w-5"
+                        icon={pendingClaimTx ? 'pi pi-spin pi-spinner' : ''}
                         disabled={
                           paused ||
                           bnbRewards.gt(new BigNumber(0.01)) ||
