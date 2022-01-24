@@ -1,5 +1,9 @@
 import { Hooks } from '@dehub/react/core';
-import { BUSD_DECIMALS, BUSD_DISPLAY_DECIMALS } from '@dehub/shared/config';
+import {
+  BUSD_DECIMALS,
+  BUSD_DISPLAY_DECIMALS,
+  DEHUB_DECIMALS,
+} from '@dehub/shared/config';
 import { getFullDisplayBalance } from '@dehub/shared/utils';
 import moment from 'moment';
 import { Button } from 'primereact/button';
@@ -127,7 +131,11 @@ const LiveCard = () => {
                     {fetchStakeStatus === FetchStatus.SUCCESS ? (
                       <>
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
-                          {getFullDisplayBalance(userStakeInfo.amount)} $Dehub
+                          {getFullDisplayBalance(
+                            userStakeInfo.amount,
+                            DEHUB_DECIMALS
+                          )}{' '}
+                          $Dehub
                         </Text>
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
                           1.3% of the total pool

@@ -73,7 +73,7 @@ export const ContractAddresses: {
     Rewards: '',
   },
   [ChainId.BSC_TESTNET]: {
-    DeHub: '0x5A5e32fE118E7c7b6536d143F446269123c0ba74',
+    DeHub: '0x5aac501a81d9e4f173c4215ecd4315072c6c40b2',
     BNB: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
     BUSD: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
     'DeHub-BNB': '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',

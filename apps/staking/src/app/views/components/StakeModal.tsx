@@ -1,5 +1,7 @@
 import { Hooks } from '@dehub/react/core';
-import { getBalanceAmount } from '@dehub/shared/utils';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
+import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
+import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';
 import { capitalize } from 'lodash';
 import { Button } from 'primereact/button';
@@ -13,7 +15,10 @@ import ConnectWalletButton from '../../components/ConnectWalletButton';
 import { Box } from '../../components/Layout';
 import { Text } from '../../components/Text';
 import { DEFAULT_TOKEN_DECIMAL } from '../../config';
+import { useDehubContract, useStakingContract } from '../../hooks/useContract';
+import { useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
+import { getDehubAddress } from '../../utils/addressHelpers';
 
 interface StakeModalProps {
   id: 'stake' | 'unstake';
@@ -65,13 +70,20 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { account } = Hooks.useMoralisEthers();
+  const { userInfo: userStakeInfo } = useStakes(account);
   const dehubBalance = useGetDehubBalance();
+  const stakingContract = useStakingContract();
 
   const toast = useRef<Toast>(null);
 
-  const balanceDisplay = getBalanceAmount(dehubBalance, 5).toNumber();
   const maxBalance = getBalanceAmount(
-    dehubBalance.gt(dust) ? dehubBalance.minus(dust) : dehubBalance,
+    id === 'stake'
+      ? dehubBalance.gt(dust)
+        ? dehubBalance.minus(dust)
+        : dehubBalance
+      : userStakeInfo.amount.gt(dust)
+      ? userStakeInfo.amount.minus(dust)
+      : userStakeInfo.amount,
     5
   ).toNumber();
   const valueAsBn = new BigNumber(value);
@@ -81,6 +93,8 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
     .times(100)
     .toNumber();
   const percentageDisplay = getPercentDisplay(percentageOfMaxBalance);
+  const dehubContractAddress = getDehubAddress();
+  const dehubContract = useDehubContract();
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;
   const minBetAmountBalance = 0;
@@ -105,27 +119,68 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   const { key, disabled } = getButtonProps(valueAsBn, dehubBalance);
 
   const handleEnterPosition = async () => {
+    const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
+    console.log('decimalValue: ', decimalValue.toString());
+    const allowance = await dehubContract?.allowance(
+      account,
+      dehubContractAddress
+    );
+
     try {
-      onHide();
+      if (allowance < decimalValue.toNumber()) {
+        const txApprove = await dehubContract?.approve(
+          dehubContractAddress,
+          MaxUint256
+        );
+
+        const receipt = await txApprove.wait();
+
+        if (!receipt.status) {
+          const errorMsg =
+            'Please try again. Confirm the transaction and make sure you are paying enough gas!';
+
+          toast?.current?.show({
+            severity: 'error',
+            summary: 'Error',
+            detail: errorMsg,
+            life: 3000,
+          });
+          setIsTxPending(false);
+          return;
+        }
+      }
+
+      if (id === 'stake') {
+        const tx = await stakingContract?.deposit(decimalValue.toNumber());
+        setIsTxPending(true);
+        await tx.wait();
+        setIsTxPending(false);
+      } else {
+        const tx = await stakingContract?.withdraw(decimalValue.toNumber());
+        setIsTxPending(true);
+        await tx.wait();
+        setIsTxPending(false);
+      }
 
       toast?.current?.show({
         severity: 'success',
-        summary: 'Winnings collected!',
+        summary: `Success`,
         detail: (
           <Box>
             <Text style={{ marginBottom: '8px' }}>
-              Your prizes have been sent to your wallet
+              {`${valueAsBn.toString()}$Dehub has been successfully ${id}!`}
             </Text>
           </Box>
         ),
         life: 3000,
       });
     } catch (error) {
+      const errorMsg = 'An error occurred, unable to stake';
       if (error instanceof Error)
         toast?.current?.show({
           severity: 'error',
           summary: 'Error',
-          detail: error?.message,
+          detail: errorMsg,
           life: 3000,
         });
       console.error(error);
@@ -189,7 +244,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
           )}
           <div className="flex justify-content-end mt-2 mb-5">
             <Text textAlign="right" fontSize="12px">
-              {account && `Balance: ${balanceDisplay}`}
+              {account && `Balance: ${maxBalance}`}
             </Text>
           </div>
           <Slider
