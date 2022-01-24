@@ -1,8 +1,4 @@
-import {
-  BUSD_DECIMALS,
-  BUSD_DISPLAY_DECIMALS,
-  DEHUB_DECIMALS,
-} from '@dehub/shared/config';
+import { BUSD_DISPLAY_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getFullDisplayBalance } from '@dehub/shared/utils';
 import { Skeleton } from 'primereact/skeleton';
 import { Header, Text } from '../components/Text';
@@ -10,11 +6,9 @@ import {
   useDehubBusdPrice,
   usePoolInfo,
   usePullBlockNumber,
-  usePullBusdPrice,
 } from '../state/application/hooks';
 
 const StakedInfoBox = () => {
-  usePullBusdPrice();
   usePullBlockNumber();
 
   const dehubPrice = useDehubBusdPrice();
@@ -75,7 +69,7 @@ const StakedInfoBox = () => {
                   $
                   {getFullDisplayBalance(
                     dehubPrice.times(poolInfo?.totalStaked),
-                    BUSD_DECIMALS + DEHUB_DECIMALS,
+                    DEHUB_DECIMALS,
                     BUSD_DISPLAY_DECIMALS
                   )}
                 </Text>

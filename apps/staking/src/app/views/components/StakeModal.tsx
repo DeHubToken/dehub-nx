@@ -120,7 +120,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
 
   const handleEnterPosition = async () => {
     const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
-    console.log('decimalValue: ', decimalValue.toString());
     const allowance = await dehubContract?.allowance(
       account,
       dehubContractAddress

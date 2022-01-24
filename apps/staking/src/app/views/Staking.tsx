@@ -11,6 +11,7 @@ import UserMenu from '../components/UserMenu';
 import { getChainIdHex } from '../config/constants';
 import {
   useFetchPoolInfo,
+  usePullBusdPrice,
   useWalletConnectingState,
 } from '../state/application/hooks';
 import StakedBottomInfoBox from '../views/StakedBottomInfoBox';
@@ -23,6 +24,8 @@ const initMessage = {
 
 export default function Staking() {
   useFetchPoolInfo();
+  usePullBusdPrice();
+
   const [showLoader, setShowLoader] = useState(false);
   const [message, setMessage] = useState(initMessage);
   const walletConnectingState = useWalletConnectingState();
