@@ -1,8 +1,7 @@
-import BigNumber from 'bignumber.js';
-import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import { ContractAddresses } from '@dehub/shared/config';
 import { ethersToBigNumber } from '@dehub/shared/utils';
-
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import BigNumber from 'bignumber.js';
 import PancakePairAbi from '../config/abis/PancakePair.json';
 import { getChainId } from '../config/constants';
 import { getContract } from './contractHelpers';

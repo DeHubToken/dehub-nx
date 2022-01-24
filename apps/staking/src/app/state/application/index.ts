@@ -2,11 +2,14 @@ import { WalletConnectingState } from '@dehub/shared/models';
 import { SerializedBigNumber } from '@dehub/shared/utils';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
+import { PoolInfo } from '../../config/constants/types';
+import { useStakingContract } from '../../hooks/useContract';
 import getDehubPrice from '../../utils/priceDehub';
 
 export interface ApplicationState {
   walletConnectingState: WalletConnectingState;
   dehubPrice: SerializedBigNumber;
+  poolInfo?: PoolInfo;
 }
 
 const initialState: ApplicationState = {
@@ -19,6 +22,16 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
   async () => {
     const dehubPrice = await getDehubPrice();
     return dehubPrice.toJSON();
+  }
+);
+
+export const fetchPoolInfo = createAsyncThunk<PoolInfo>(
+  'application/fetchPoolInfo',
+  async () => {
+    const stakingContract = useStakingContract();
+    const poolInfo = await stakingContract?.pool();
+
+    return poolInfo;
   }
 );
 
@@ -38,6 +51,13 @@ export const ApplicationSlice = createSlice({
       fetchDehubPrice.fulfilled,
       (state, action: PayloadAction<SerializedBigNumber>) => {
         state.dehubPrice = action.payload;
+      }
+    );
+
+    builder.addCase(
+      fetchPoolInfo.fulfilled,
+      (state, action: PayloadAction<PoolInfo>) => {
+        state.poolInfo = action.payload;
       }
     );
   },

@@ -4,8 +4,9 @@ import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
+import { PoolInfo } from '../../config/constants/types';
 import { AppState } from '../index';
-import { fetchDehubPrice, setWalletConnectingState } from './';
+import { fetchDehubPrice, fetchPoolInfo, setWalletConnectingState } from './';
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(
@@ -37,11 +38,26 @@ export const useDehubBusdPrice = (): BigNumber => {
   return dehubPriceBusd;
 };
 
+export const usePoolInfo = (): PoolInfo | undefined => {
+  const poolInfo = useSelector((state: AppState) => state.application.poolInfo);
+
+  return poolInfo;
+};
+
 export const usePullBusdPrice = () => {
   const dispatch = useAppDispatch();
   const { slowRefresh } = Hooks.useRefresh();
 
   useEffect(() => {
     dispatch(fetchDehubPrice());
+  }, [dispatch, slowRefresh]);
+};
+
+export const useFetchPoolInfo = () => {
+  const dispatch = useAppDispatch();
+  const { slowRefresh } = Hooks.useRefresh();
+
+  useEffect(() => {
+    dispatch(fetchPoolInfo());
   }, [dispatch, slowRefresh]);
 };

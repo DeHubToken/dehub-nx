@@ -57,7 +57,7 @@ export const useBnbContract = (): Contract | null => {
 export const useStakingContract = (): Contract | null => {
   const { signer } = Hooks.useMoralisEthers();
   return useMemo(
-    () => (signer ? getStakingContract(getStakingAddress(), signer) : null),
+    () => getStakingContract(getStakingAddress(), signer),
     [signer]
   );
 };

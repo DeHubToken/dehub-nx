@@ -1,3 +1,4 @@
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
 
 export enum LoadingStatus {
@@ -32,14 +33,14 @@ export interface LotteryTicket {
 }
 
 export interface PoolInfo {
-  closeTimeStamp: BigNumber;
+  openTimeStamp: EthersBigNumber;
+  closeTimeStamp: EthersBigNumber;
   emergencyPull: boolean;
-  harvestFund: BigNumber;
-  lastUpdateBlock: BigNumber;
-  openTimeStamp: BigNumber;
-  reflValuePerBlock: BigNumber;
-  stakeValuePerBlock: BigNumber;
-  totalStaked: BigNumber;
+  harvestFund: EthersBigNumber;
+  lastUpdateBlock: EthersBigNumber;
+  reflValuePerBlock: EthersBigNumber;
+  stakeValuePerBlock: EthersBigNumber;
+  totalStaked: EthersBigNumber;
 }
 
 export interface LotteryTicketClaimData {

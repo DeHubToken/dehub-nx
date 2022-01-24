@@ -30,6 +30,7 @@ const LiveCard = () => {
     const fetchInfo = async () => {
       if (account) {
         const pReward = await stakingContract?.projectedRewards(account);
+        const pool = await stakingContract?.pool();
         setProjectedRewards(pReward);
       }
     };
