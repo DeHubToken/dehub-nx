@@ -2,6 +2,7 @@ import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/models';
 import { iOS } from '@dehub/shared/utils';
+import { Container } from 'apps/staking/src/app/components/Layout';
 import { Moralis } from 'moralis';
 import { useEffect, useState } from 'react';
 import { environment } from '../../environments/environment';
@@ -99,6 +100,13 @@ export default function Staking() {
           />
           <div className="layout-main">
             <div className="layout-content">
+              <Container>
+                <h1>
+                  <span style={{ fontSize: '42px' }}>DeHub</span>
+                  <br />
+                  <span style={{ fontSize: '62px' }}>Staking</span>
+                </h1>
+              </Container>
               <div className="my-8">
                 <StakedTopInfoBox />
               </div>
