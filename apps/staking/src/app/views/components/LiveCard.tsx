@@ -246,7 +246,7 @@ const LiveCard = () => {
                       (fetchRewardStatus === FetchStatus.SUCCESS ? (
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
                           Your BNB Reward:{' '}
-                          {getFullDisplayBalance(bnbRewards, BNB_DECIMALS)}
+                          {getFullDisplayBalance(bnbRewards, BNB_DECIMALS, 10)}
                         </Text>
                       ) : (
                         <Skeleton width="100%" height="1.5rem" />
@@ -255,7 +255,11 @@ const LiveCard = () => {
                       <>
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
                           Total BNB Reward Pool:{' '}
-                          {getFullDisplayBalance(totalBNBRewards, BNB_DECIMALS)}
+                          {getFullDisplayBalance(
+                            totalBNBRewards,
+                            BNB_DECIMALS,
+                            10
+                          )}
                         </Text>
                       </>
                     ) : (
@@ -266,11 +270,7 @@ const LiveCard = () => {
                       <Button
                         className="p-button mt-2 justify-content-center w-5"
                         icon={pendingClaimTx ? 'pi pi-spin pi-spinner' : ''}
-                        disabled={
-                          paused ||
-                          bnbRewards.gt(new BigNumber(0.01)) ||
-                          !isClaimable
-                        }
+                        disabled={paused || !isClaimable}
                         onClick={handleClaimBNB}
                         label="Claim BNB"
                       />
