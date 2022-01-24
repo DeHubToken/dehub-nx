@@ -16,11 +16,14 @@ import { useStakingContract } from '../hooks/useContract';
 import {
   useDehubBusdPrice,
   usePoolInfo,
+  usePullBlockNumber,
   usePullBusdPrice,
 } from '../state/application/hooks';
 
 const StakedInfoBox = () => {
   usePullBusdPrice();
+  usePullBlockNumber();
+
   const stakingContract = useStakingContract();
   const dehubPrice = useDehubBusdPrice();
   const poolInfo = usePoolInfo();

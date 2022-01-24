@@ -1,6 +1,11 @@
 import { WalletConnectingState } from '@dehub/shared/models';
 import { SerializedBigNumber } from '@dehub/shared/utils';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
 import { PoolInfo } from '../../config/constants/types';
 import { getStakingContract } from '../../utils/contractHelpers';
@@ -10,11 +15,13 @@ export interface ApplicationState {
   walletConnectingState: WalletConnectingState;
   dehubPrice: SerializedBigNumber;
   poolInfo?: PoolInfo;
+  readonly blockNumber: { readonly [chainId: string]: number };
 }
 
 const initialState: ApplicationState = {
   walletConnectingState: WalletConnectingState.INIT,
   dehubPrice: new BigNumber(NaN).toJSON(),
+  blockNumber: {},
 };
 
 export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
@@ -34,6 +41,11 @@ export const fetchPoolInfo = createAsyncThunk<PoolInfo>(
     return poolInfo;
   }
 );
+
+export const updateBlockNumber = createAction<{
+  chainId: string;
+  blockNumber: number;
+}>('application/updateBlockNumber');
 
 export const ApplicationSlice = createSlice({
   name: 'Application',
@@ -60,6 +72,18 @@ export const ApplicationSlice = createSlice({
         state.poolInfo = action.payload;
       }
     );
+
+    builder.addCase(updateBlockNumber, (state, action) => {
+      const { chainId, blockNumber } = action.payload;
+      if (typeof state.blockNumber[chainId] !== 'number') {
+        state.blockNumber[chainId] = blockNumber;
+      } else {
+        state.blockNumber[chainId] = Math.max(
+          blockNumber,
+          state.blockNumber[chainId]
+        );
+      }
+    });
   },
 });
 

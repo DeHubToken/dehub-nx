@@ -1,12 +1,17 @@
 import { Hooks } from '@dehub/react/core';
 import { WalletConnectingState } from '@dehub/shared/models';
 import BigNumber from 'bignumber.js';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
 import { PoolInfo } from '../../config/constants/types';
 import { AppState } from '../index';
-import { fetchDehubPrice, fetchPoolInfo, setWalletConnectingState } from './';
+import {
+  fetchDehubPrice,
+  fetchPoolInfo,
+  setWalletConnectingState,
+  updateBlockNumber,
+} from './';
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(
@@ -60,4 +65,70 @@ export const useFetchPoolInfo = () => {
   useEffect(() => {
     dispatch(fetchPoolInfo());
   }, [dispatch, slowRefresh]);
+};
+
+export const usePullBlockNumber = () => {
+  const dispatch = useAppDispatch();
+  const { authProvider, chainId } = Hooks.useMoralisEthers();
+
+  const isTabActive = Hooks.useIsBrowserTabActive();
+
+  const [state, setState] = useState<{
+    chainId: string | undefined;
+    blockNumber: number | null;
+  }>({
+    chainId,
+    blockNumber: null,
+  });
+
+  const blockNumberCallback = useCallback(
+    (blockNumber: number) => {
+      setState(prev => {
+        if (chainId === prev.chainId) {
+          if (typeof prev.blockNumber !== 'number')
+            return {
+              chainId,
+              blockNumber,
+            };
+          return {
+            chainId,
+            blockNumber: Math.max(blockNumber, prev.blockNumber),
+          };
+        }
+        return prev;
+      });
+    },
+    [chainId, setState]
+  );
+
+  useEffect(() => {
+    if (!authProvider || !chainId || !isTabActive) return undefined;
+
+    setState({ chainId, blockNumber: null });
+
+    authProvider.getBlockNumber().then(blockNumberCallback);
+    authProvider.on('block', blockNumberCallback);
+
+    return () => {
+      authProvider.removeListener('block', blockNumberCallback);
+    };
+  }, [authProvider, chainId, isTabActive, blockNumberCallback]);
+
+  const debouncedState = Hooks.useDebounce(state, 100);
+
+  useEffect(() => {
+    if (!debouncedState.chainId || !debouncedState.blockNumber || !isTabActive)
+      return;
+    dispatch(
+      updateBlockNumber({
+        chainId: debouncedState.chainId,
+        blockNumber: debouncedState.blockNumber,
+      })
+    );
+  }, [
+    dispatch,
+    isTabActive,
+    debouncedState.chainId,
+    debouncedState.blockNumber,
+  ]);
 };
