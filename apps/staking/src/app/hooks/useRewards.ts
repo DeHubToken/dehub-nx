@@ -3,10 +3,9 @@ import { ethersToBigNumber } from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
 import { useEffect, useMemo, useState } from 'react';
-import { useStakingContract } from './useContract';
+import { getStakingContract } from '../utils/contractHelpers';
 
 export const useProjectRewards = (staker?: string): BigNumber | undefined => {
-  const stakingContract = useStakingContract();
   const [projectRewards, setProjectRewards] = useState<
     | {
         claimableReflection: EthersBigNumber;
@@ -18,14 +17,15 @@ export const useProjectRewards = (staker?: string): BigNumber | undefined => {
 
   useEffect(() => {
     const fetch = async () => {
+      const stakingContract = getStakingContract();
       const ret = await stakingContract?.projectedRewards(staker);
       setProjectRewards(ret);
     };
 
-    if (stakingContract && staker) {
+    if (staker) {
       fetch();
     }
-  }, [stakingContract, staker, fastRefresh]);
+  }, [staker, fastRefresh]);
 
   return useMemo(() => {
     if (!projectRewards) return undefined;
