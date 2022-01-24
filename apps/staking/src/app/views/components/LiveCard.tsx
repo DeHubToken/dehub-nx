@@ -1,15 +1,20 @@
 import { Hooks } from '@dehub/react/core';
-import { ethersToBigNumber } from '@dehub/shared/utils';
+import { BUSD_DECIMALS, BUSD_DISPLAY_DECIMALS } from '@dehub/shared/config';
+import { ethersToBigNumber, getFullDisplayBalance } from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
-import { useEffect, useState } from 'react';
+import { Skeleton } from 'primereact/skeleton';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
+import { FetchStatus } from '../../config/constants/types';
 import { useStakingContract } from '../../hooks/useContract';
-import { usePoolInfo } from '../../state/application/hooks';
+import { useProjectRewards } from '../../hooks/useRewards';
+import { useStakes } from '../../hooks/useStakes';
+import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
 
@@ -23,7 +28,6 @@ const LiveCard = () => {
 
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
-  const [projectedRewards, setProjectedRewards] = useState(null);
 
   const stakingContract = useStakingContract();
   const { account } = Hooks.useMoralisEthers();
@@ -33,17 +37,12 @@ const LiveCard = () => {
       poolInfo ? poolInfo?.closeTimeStamp : EthersBigNumber.from('0')
     ).toNumber() * 1000;
 
-  useEffect(() => {
-    const fetchInfo = async () => {
-      if (account) {
-        const pReward = await stakingContract?.projectedRewards(account);
-        const pool = await stakingContract?.pool();
-        setProjectedRewards(pReward);
-      }
-    };
+  const projectedRewards = useProjectRewards(account);
+  const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
+    useStakes(account);
 
-    fetchInfo();
-  }, [stakingContract, account]);
+  const deHubPriceInBUSD = useDehubBusdPrice();
+  const projectedRewardsInBUSD = projectedRewards?.times(deHubPriceInBUSD);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {
@@ -84,12 +83,31 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">Projected Rewards</Header>
-                    <Text fontSize="14px" fontWeight={900} className="pb-2">
-                      $4452
-                    </Text>
-                    <Text fontSize="12px" fontWeight={400} className="pb-2">
-                      3000 $Dehub
-                    </Text>
+                    {projectedRewards &&
+                    projectedRewardsInBUSD &&
+                    !projectedRewardsInBUSD.isNaN() ? (
+                      <>
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          {getFullDisplayBalance(
+                            projectedRewardsInBUSD,
+                            BUSD_DECIMALS,
+                            BUSD_DISPLAY_DECIMALS
+                          )}
+                        </Text>
+                        <Text fontSize="12px" fontWeight={400} className="pb-2">
+                          {getFullDisplayBalance(projectedRewards)} $DeHub
+                        </Text>
+                      </>
+                    ) : (
+                      <>
+                        <Skeleton width="100%" height="1.5rem" />
+                        <Skeleton
+                          width="100%"
+                          height="1.5rem"
+                          className="mt-2"
+                        />
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -100,22 +118,35 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">Your Stake</Header>
-                    <Text fontSize="14px" fontWeight={900} className="pb-2">
-                      20000 $Dehub
-                    </Text>
-                    <Text fontSize="14px" fontWeight={900} className="pb-2">
-                      1.3% of the total pool
-                    </Text>
-                    <Button
-                      className="p-button mt-2 justify-content-center w-5 mr-3"
-                      onClick={() => handleModal('stake', true)}
-                      label="Stake"
-                    />
-                    <Button
-                      className="p-button mt-2 justify-content-center w-5"
-                      onClick={() => handleModal('unstake', true)}
-                      label="Unstake"
-                    />
+                    {fetchStakeStatus === FetchStatus.SUCCESS ? (
+                      <>
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          {getFullDisplayBalance(userStakeInfo.amount)} $Dehub
+                        </Text>
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          1.3% of the total pool
+                        </Text>
+                        <Button
+                          className="p-button mt-2 justify-content-center w-5 mr-3"
+                          onClick={() => handleModal('stake', true)}
+                          label="Stake"
+                        />
+                        <Button
+                          className="p-button mt-2 justify-content-center w-5"
+                          onClick={() => handleModal('unstake', true)}
+                          label="Unstake"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Skeleton width="100%" height="1.5rem" />
+                        <Skeleton
+                          width="100%"
+                          height="1.5rem"
+                          className="mt-2"
+                        />
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

@@ -132,3 +132,11 @@ export const usePullBlockNumber = () => {
     debouncedState.blockNumber,
   ]);
 };
+
+export function useBlockNumber(): number | undefined {
+  const { chainId } = Hooks.useMoralisEthers();
+
+  return useSelector(
+    (state: AppState) => state.application.blockNumber[chainId ?? -1]
+  );
+}
