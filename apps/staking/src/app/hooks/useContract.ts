@@ -4,11 +4,7 @@ import { getContract } from '@dehub/shared/utils';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
 import { getChainId } from '../config/constants';
-import {
-  getDehubAddress,
-  getRewardsAddress,
-  getStakingAddress,
-} from '../utils/addressHelpers';
+import { getDehubAddress } from '../utils/addressHelpers';
 import {
   getBep20Contract,
   getRewardsContract,
@@ -56,16 +52,10 @@ export const useBnbContract = (): Contract | null => {
 
 export const useStakingContract = (): Contract | null => {
   const { signer } = Hooks.useMoralisEthers();
-  return useMemo(
-    () => getStakingContract(getStakingAddress(), signer),
-    [signer]
-  );
+  return useMemo(() => getStakingContract(signer), [signer]);
 };
 
 export const useRewardsContract = (): Contract | null => {
   const { signer } = Hooks.useMoralisEthers();
-  return useMemo(
-    () => (signer ? getRewardsContract(getRewardsAddress(), signer) : null),
-    [signer]
-  );
+  return useMemo(() => (signer ? getRewardsContract(signer) : null), [signer]);
 };

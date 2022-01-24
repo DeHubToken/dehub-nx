@@ -3,7 +3,7 @@ import { SerializedBigNumber } from '@dehub/shared/utils';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
 import { PoolInfo } from '../../config/constants/types';
-import { useStakingContract } from '../../hooks/useContract';
+import { getStakingContract } from '../../utils/contractHelpers';
 import getDehubPrice from '../../utils/priceDehub';
 
 export interface ApplicationState {
@@ -28,7 +28,7 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
 export const fetchPoolInfo = createAsyncThunk<PoolInfo>(
   'application/fetchPoolInfo',
   async () => {
-    const stakingContract = useStakingContract();
+    const stakingContract = getStakingContract();
     const poolInfo = await stakingContract?.pool();
 
     return poolInfo;
