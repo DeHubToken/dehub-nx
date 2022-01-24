@@ -2,7 +2,7 @@ import { BIG_ZERO, ethersToBigNumber } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { useEffect, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';
-import { useStakingContract } from './useContract';
+import { getStakingContract } from '../utils/contractHelpers';
 
 export type UserInfo = {
   amount: BigNumber;
@@ -35,7 +35,6 @@ const processUserInfo = (userInfo: any): UserInfo => {
 };
 
 export const useStakes = (staker?: string) => {
-  const stakingContract = useStakingContract();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     amount: BIG_ZERO,
@@ -48,16 +47,17 @@ export const useStakes = (staker?: string) => {
 
   useEffect(() => {
     const fetch = async () => {
+      const stakingContract = getStakingContract();
       const ret = await stakingContract?.userInfo(staker);
       if (ret) {
         setUserInfo(processUserInfo(ret));
       }
       setFetchStatus(ret ? FetchStatus.SUCCESS : FetchStatus.FAILED);
     };
-    if (staker && stakingContract) {
+    if (staker) {
       fetch();
     }
-  }, [staker, stakingContract]);
+  }, [staker]);
 
   return {
     fetchStatus,
