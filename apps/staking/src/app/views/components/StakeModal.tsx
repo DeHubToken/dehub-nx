@@ -14,7 +14,6 @@ import BalanceInput from '../../components/BalanceInput/BalanceInput';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
 import { Box } from '../../components/Layout';
 import { Text } from '../../components/Text';
-import { DEFAULT_TOKEN_DECIMAL } from '../../config';
 import { useDehubContract, useStakingContract } from '../../hooks/useContract';
 import { useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
@@ -33,7 +32,6 @@ const SimpleGrid = styled.div<{ columns: number }>`
   margin-bottom: 16px;
 `;
 
-const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
 const percentShortcuts = [10, 25, 50, 75, 100];
 
 const getPercentDisplay = (percentage: number) => {
@@ -77,13 +75,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   const toast = useRef<Toast>(null);
 
   const maxBalance = getBalanceAmount(
-    id === 'stake'
-      ? dehubBalance.gt(dust)
-        ? dehubBalance.minus(dust)
-        : dehubBalance
-      : userStakeInfo.amount.gt(dust)
-      ? userStakeInfo.amount.minus(dust)
-      : userStakeInfo.amount,
+    id === 'stake' ? dehubBalance : userStakeInfo.amount,
     5
   ).toNumber();
   const valueAsBn = new BigNumber(value);
@@ -160,6 +152,8 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
         await tx.wait();
         setIsTxPending(false);
       }
+
+      onHide();
 
       toast?.current?.show({
         severity: 'success',

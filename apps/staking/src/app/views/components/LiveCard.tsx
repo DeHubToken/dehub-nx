@@ -55,6 +55,7 @@ const LiveCard = () => {
 
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
     useStakes(account);
+
   const {
     fetchBNBRewards,
     fetchStatus: fetchRewardStatus,
