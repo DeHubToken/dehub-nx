@@ -1,9 +1,5 @@
 import { Hooks } from '@dehub/react/core';
-import {
-  BUSD_DECIMALS,
-  BUSD_DISPLAY_DECIMALS,
-  DEHUB_DECIMALS,
-} from '@dehub/shared/config';
+import { BUSD_DISPLAY_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import moment from 'moment';
@@ -44,11 +40,11 @@ const LiveCard = () => {
 
   const projectedRewards = useProjectRewards(account);
 
-  console.log('-------', projectedRewards?.toString());
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
     useStakes(account);
 
   const deHubPriceInBUSD = useDehubBusdPrice();
+
   const projectedRewardsInBUSD = projectedRewards?.times(deHubPriceInBUSD);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
@@ -104,14 +100,14 @@ const LiveCard = () => {
                           $
                           {getFullDisplayBalance(
                             projectedRewardsInBUSD,
-                            BUSD_DECIMALS,
+                            16,
                             BUSD_DISPLAY_DECIMALS
                           )}
                         </Text>
                         <Text fontSize="12px" fontWeight={400} className="pb-2">
                           {getFullDisplayBalance(
                             projectedRewards,
-                            BUSD_DECIMALS,
+                            16,
                             BUSD_DISPLAY_DECIMALS
                           )}{' '}
                           $DeHub

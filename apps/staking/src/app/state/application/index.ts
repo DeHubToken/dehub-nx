@@ -31,7 +31,8 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
   'application/fetchDehubPrice',
   async () => {
     const dehubPrice = await getDehubPrice();
-    return dehubPrice.toJSON();
+
+    return dehubPrice;
   }
 );
 
