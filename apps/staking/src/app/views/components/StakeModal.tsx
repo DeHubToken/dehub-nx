@@ -17,7 +17,7 @@ import { Text } from '../../components/Text';
 import { useDehubContract, useStakingContract } from '../../hooks/useContract';
 import { useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { getDehubAddress } from '../../utils/addressHelpers';
+import { getStakingAddress } from '../../utils/addressHelpers';
 
 interface StakeModalProps {
   id: 'stake' | 'unstake';
@@ -85,7 +85,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
     .times(100)
     .toNumber();
   const percentageDisplay = getPercentDisplay(percentageOfMaxBalance);
-  const dehubContractAddress = getDehubAddress();
+  const stakingContractAddress = getStakingAddress();
   const dehubContract = useDehubContract();
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;
@@ -114,15 +114,17 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
     const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
     const allowance = await dehubContract?.allowance(
       account,
-      dehubContractAddress
+      stakingContractAddress
     );
 
     try {
       if (allowance < decimalValue.toNumber()) {
+        setIsTxPending(true);
         const txApprove = await dehubContract?.approve(
-          dehubContractAddress,
+          stakingContractAddress,
           MaxUint256
         );
+        setIsTxPending(false);
 
         const receipt = await txApprove.wait();
 
