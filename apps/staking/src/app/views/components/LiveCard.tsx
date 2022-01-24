@@ -1,7 +1,6 @@
 import { Hooks } from '@dehub/react/core';
 import { BUSD_DECIMALS, BUSD_DISPLAY_DECIMALS } from '@dehub/shared/config';
-import { ethersToBigNumber, getFullDisplayBalance } from '@dehub/shared/utils';
-import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import { getFullDisplayBalance } from '@dehub/shared/utils';
 import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -32,10 +31,9 @@ const LiveCard = () => {
   const stakingContract = useStakingContract();
   const { account } = Hooks.useMoralisEthers();
   const poolInfo = usePoolInfo();
-  const closeTimeStamp =
-    ethersToBigNumber(
-      poolInfo ? poolInfo?.closeTimeStamp : EthersBigNumber.from('0')
-    ).toNumber() * 1000;
+  const closeTimeStamp = poolInfo
+    ? Number(poolInfo.closeTimeStamp) * 1000
+    : '0';
 
   const projectedRewards = useProjectRewards(account);
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =

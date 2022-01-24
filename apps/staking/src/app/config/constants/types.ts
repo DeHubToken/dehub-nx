@@ -1,4 +1,4 @@
-import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import { SerializedBigNumber } from '@dehub/shared/utils';
 
 export enum LoadingStatus {
   LOADING = 0,
@@ -8,14 +8,14 @@ export enum LoadingStatus {
 }
 
 export interface PoolInfo {
-  openTimeStamp: EthersBigNumber;
-  closeTimeStamp: EthersBigNumber;
+  openTimeStamp: SerializedBigNumber;
+  closeTimeStamp: SerializedBigNumber;
   emergencyPull: boolean;
-  harvestFund: EthersBigNumber;
-  lastUpdateBlock: EthersBigNumber;
-  reflValuePerBlock: EthersBigNumber;
-  stakeValuePerBlock: EthersBigNumber;
-  totalStaked: EthersBigNumber;
+  harvestFund: SerializedBigNumber;
+  lastUpdateBlock: SerializedBigNumber;
+  reflValuePerBlock: SerializedBigNumber;
+  stakeValuePerBlock: SerializedBigNumber;
+  totalStaked: SerializedBigNumber;
 }
 
 export enum FetchStatus {

@@ -1,5 +1,8 @@
 import { WalletConnectingState } from '@dehub/shared/models';
-import { SerializedBigNumber } from '@dehub/shared/utils';
+import {
+  ethersToSerializedBigNumber,
+  SerializedBigNumber,
+} from '@dehub/shared/utils';
 import {
   createAction,
   createAsyncThunk,
@@ -38,7 +41,20 @@ export const fetchPoolInfo = createAsyncThunk<PoolInfo>(
     const stakingContract = getStakingContract();
     const poolInfo = await stakingContract?.pool();
 
-    return poolInfo;
+    return {
+      openTimeStamp: ethersToSerializedBigNumber(poolInfo?.openTimeStamp),
+      closeTimeStamp: ethersToSerializedBigNumber(poolInfo?.closeTimeStamp),
+      emergencyPull: poolInfo?.emergencyPull,
+      harvestFund: ethersToSerializedBigNumber(poolInfo?.harvestFund),
+      lastUpdateBlock: ethersToSerializedBigNumber(poolInfo?.lastUpdateBlock),
+      reflValuePerBlock: ethersToSerializedBigNumber(
+        poolInfo?.reflValuePerBlock
+      ),
+      stakeValuePerBlock: ethersToSerializedBigNumber(
+        poolInfo?.stakeValuePerBlock
+      ),
+      totalStaked: ethersToSerializedBigNumber(poolInfo?.totalStaked),
+    };
   }
 );
 

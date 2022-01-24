@@ -1,5 +1,3 @@
-import { ethersToBigNumber } from '@dehub/shared/utils';
-import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import Container from '../components/Layout/Container';
@@ -15,14 +13,8 @@ const StakedBottomInfoBox = () => {
   const [paused, setPaused] = useState<boolean>(false);
   const stakingContract = useStakingContract();
   const poolInfo = usePoolInfo();
-  const openTimeStamp =
-    ethersToBigNumber(
-      poolInfo ? poolInfo?.openTimeStamp : EthersBigNumber.from('0')
-    ).toNumber() * 1000;
-  const closeTimeStamp =
-    ethersToBigNumber(
-      poolInfo ? poolInfo?.closeTimeStamp : EthersBigNumber.from('0')
-    ).toNumber() * 1000;
+  const openTimeStamp = poolInfo ? Number(poolInfo.openTimeStamp) * 1000 : 0;
+  const closeTimeStamp = poolInfo ? Number(poolInfo.closeTimeStamp) * 1000 : 0;
 
   useEffect(() => {
     const fetchPausedData = async () => {
