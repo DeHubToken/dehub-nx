@@ -1,9 +1,11 @@
+import { ethersToBigNumber } from '@dehub/shared/utils';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import Container from '../components/Layout/Container';
-import { FIRST_LAUNCH_DATE } from '../config/constants';
 import { useStakingContract } from '../hooks/useContract';
 import useCurrentTime from '../hooks/useTimer';
+import { usePoolInfo } from '../state/application/hooks';
 import ComingSoon from './components/ComingSoon';
 import LiveCard from './components/LiveCard';
 import PausedCard from './components/PausedCard';
@@ -12,7 +14,15 @@ const StakedBottomInfoBox = () => {
   useCurrentTime();
   const [paused, setPaused] = useState<boolean>(false);
   const stakingContract = useStakingContract();
-  const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
+  const poolInfo = usePoolInfo();
+  const openTimeStamp =
+    ethersToBigNumber(
+      poolInfo ? poolInfo?.openTimeStamp : EthersBigNumber.from('0')
+    ).toNumber() * 1000;
+  const closeTimeStamp =
+    ethersToBigNumber(
+      poolInfo ? poolInfo?.closeTimeStamp : EthersBigNumber.from('0')
+    ).toNumber() * 1000;
 
   useEffect(() => {
     const fetchPausedData = async () => {
@@ -25,16 +35,14 @@ const StakedBottomInfoBox = () => {
 
   const isLiveCard = () => {
     return (
-      (!paused && isIn2022Q1 && moment().isAfter(moment(FIRST_LAUNCH_DATE))) ||
-      (!paused && !isIn2022Q1 && moment().isAfter(moment().startOf('quarter')))
+      !paused &&
+      moment().isAfter(moment(new Date(openTimeStamp))) &&
+      moment().isBefore(moment(new Date(closeTimeStamp)))
     );
   };
 
   const isComingSoon = () => {
-    return (
-      (!paused && isIn2022Q1 && moment().isBefore(moment(FIRST_LAUNCH_DATE))) ||
-      (!paused && !isIn2022Q1 && moment().isAfter(moment().startOf('quarter')))
-    );
+    return !paused && moment().isBefore(moment(new Date(openTimeStamp)));
   };
 
   return (

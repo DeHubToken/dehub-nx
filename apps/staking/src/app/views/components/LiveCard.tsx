@@ -1,4 +1,6 @@
 import { Hooks } from '@dehub/react/core';
+import { ethersToBigNumber } from '@dehub/shared/utils';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -6,8 +8,8 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
-import { FIRST_LAUNCH_DATE } from '../../config/constants';
 import { useStakingContract } from '../../hooks/useContract';
+import { usePoolInfo } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
 
@@ -25,6 +27,11 @@ const LiveCard = () => {
 
   const stakingContract = useStakingContract();
   const { account } = Hooks.useMoralisEthers();
+  const poolInfo = usePoolInfo();
+  const closeTimeStamp =
+    ethersToBigNumber(
+      poolInfo ? poolInfo?.closeTimeStamp : EthersBigNumber.from('0')
+    ).toNumber() * 1000;
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -68,11 +75,7 @@ const LiveCard = () => {
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">Ends In</Header>
                     <Text fontSize="24px" className="pb-2">
-                      {timeFromNow(
-                        isIn2022Q1
-                          ? moment(FIRST_LAUNCH_DATE)
-                          : moment().endOf('quarter')
-                      )}
+                      {timeFromNow(moment(new Date(closeTimeStamp)))}
                     </Text>
                   </div>
                 </div>
