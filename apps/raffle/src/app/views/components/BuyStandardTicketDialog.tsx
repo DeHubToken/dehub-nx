@@ -1,10 +1,3 @@
-import { Button } from 'primereact/button';
-import { Dialog } from 'primereact/dialog';
-import { Toast } from 'primereact/toast';
-import { useRef, useState } from 'react';
-
-import { Web3Provider } from '@ethersproject/providers';
-import { MaxUint256 } from '@ethersproject/constants';
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
@@ -12,7 +5,12 @@ import {
   getContract,
   getFullDisplayBalance,
 } from '@dehub/shared/utils';
-
+import { MaxUint256 } from '@ethersproject/constants';
+import { Web3Provider } from '@ethersproject/providers';
+import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { Toast } from 'primereact/toast';
+import { useRef, useState } from 'react';
 import { Header, Text } from '../../components/Text';
 import Bep20Abi from '../../config/abis/erc20.json';
 import { LotteryTicket } from '../../config/constants/types';
@@ -116,7 +114,7 @@ const BuyStandardTicketDialog = ({
         severity: 'info',
         summary: 'Approved',
         detail: 'Contract enabled - you can now purchase tickets',
-        life: 3000,
+        life: 4000,
       });
       handleConfirm();
     },
@@ -136,7 +134,7 @@ const BuyStandardTicketDialog = ({
           detail: `Purchase tickets failed - ${
             error?.data?.message ?? error.message
           }`,
-          life: 3000,
+          life: 4000,
         });
         setPendingTx(-1);
         return false;
@@ -147,7 +145,7 @@ const BuyStandardTicketDialog = ({
         severity: 'info',
         summary: 'Purchase tickets',
         detail: 'Purchased tickets successfully',
-        life: 3000,
+        life: 4000,
       });
       dispatch(
         fetchUserTicketsAndLotteries({

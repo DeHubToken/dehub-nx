@@ -98,8 +98,8 @@ const LiveCard = () => {
             toast?.current?.show({
               severity: 'info',
               summary: 'Claim rewards',
-              detail: 'Claim rewards successfully. Please check your wallet.',
-              life: 3000,
+              detail: 'Claimed rewards successfully. Please check your wallet.',
+              life: 4000,
             });
             setClaimed(true);
           }
@@ -112,8 +112,8 @@ const LiveCard = () => {
           toast?.current?.show({
             severity: 'info',
             summary: 'Claim rewards',
-            detail: 'Claim rewards successfully. Please check your wallet.',
-            life: 3000,
+            detail: 'Claimed rewards successfully. Please check your wallet.',
+            life: 4000,
           });
           setClaimed(true);
         }
@@ -127,7 +127,7 @@ const LiveCard = () => {
         detail: `Claim rewards failed - ${
           error?.data?.message ?? error.message
         }`,
-        life: 3000,
+        life: 4000,
       });
     }
     setPendingClaimTx(false);

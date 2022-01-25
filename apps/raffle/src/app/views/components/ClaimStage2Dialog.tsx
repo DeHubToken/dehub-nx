@@ -1,20 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { Hooks } from '@dehub/react/core';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
+import { getBalanceNumber } from '@dehub/shared/utils';
+import {
+  TransactionReceipt,
+  TransactionResponse,
+} from '@ethersproject/abstract-provider';
 import { endOfMonth } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
-
-import {
-  TransactionReceipt,
-  TransactionResponse,
-} from '@ethersproject/abstract-provider';
-import { Hooks } from '@dehub/react/core';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceNumber } from '@dehub/shared/utils';
-
-import { SimpleCountDown } from './CountDown';
-
+import { useEffect, useRef, useState } from 'react';
 import { Text } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
 import { LotteryTicket } from '../../config/constants/types';
@@ -24,6 +20,7 @@ import useGetDeLottoWinningRewards, {
 import { useSpecialLotteryContract } from '../../hooks/useContract';
 import { useLottery } from '../../states/special-raffle/hooks';
 import { utcToLocal } from '../../utils/dateHelpers';
+import { SimpleCountDown } from './CountDown';
 
 interface ClaimStage2DialogProps {
   open: boolean;
@@ -75,7 +72,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
             severity: 'info',
             summary: 'Claim tickets',
             detail: 'Claim tickets successfully. Please check your wallet.',
-            life: 3000,
+            life: 4000,
           });
           setClaimed(true);
         }
@@ -89,7 +86,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
         detail: `Claim tickets failed - ${
           error?.data?.message ?? error.message
         }`,
-        life: 3000,
+        life: 4000,
       });
     }
     setPendingTx(false);

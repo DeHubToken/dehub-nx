@@ -136,7 +136,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
             severity: 'error',
             summary: 'Error',
             detail: errorMsg,
-            life: 3000,
+            life: 4000,
           });
           setIsTxPending(false);
           return;
@@ -167,7 +167,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
             </Text>
           </Box>
         ),
-        life: 3000,
+        life: 4000,
       });
     } catch (error) {
       const errorMsg = 'An error occurred, unable to stake';
@@ -176,7 +176,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
           severity: 'error',
           summary: 'Error',
           detail: errorMsg,
-          life: 3000,
+          life: 4000,
         });
       console.error(error);
     }

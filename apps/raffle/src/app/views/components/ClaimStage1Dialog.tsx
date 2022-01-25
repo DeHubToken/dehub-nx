@@ -1,21 +1,17 @@
-import { useRef, useState } from 'react';
+import { Hooks } from '@dehub/react/core';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
+import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
+import {
+  TransactionReceipt,
+  TransactionResponse,
+} from '@ethersproject/abstract-provider';
 import BigNumber from 'bignumber.js';
 import { endOfMonth } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
-
-import {
-  TransactionReceipt,
-  TransactionResponse,
-} from '@ethersproject/abstract-provider';
-import { Hooks } from '@dehub/react/core';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
-
-import { SimpleCountDown } from './CountDown';
-
+import { useRef, useState } from 'react';
 import { Text } from '../../components/Text';
 import { TicketNumberLabel } from '../../components/TicketLabel';
 import { LotteryTicket } from '../../config/constants/types';
@@ -23,12 +19,13 @@ import { useStandardLotteryContract } from '../../hooks/useContract';
 import { useAppDispatch } from '../../states';
 import { fetchUserData } from '../../states/standard-raffle';
 import {
-  useLottery,
   useGetUserLotteryData,
   useGetUserLotteryDataLoading,
+  useLottery,
 } from '../../states/standard-raffle/hooks';
 import { LotteryUserRound } from '../../states/standard-raffle/types';
 import { utcToLocal } from '../../utils/dateHelpers';
+import { SimpleCountDown } from './CountDown';
 
 interface ClaimStage1DialogProps {
   open: boolean;
@@ -96,7 +93,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
             severity: 'info',
             summary: 'Claim tickets',
             detail: 'Claim tickets successfully. Please check your wallet.',
-            life: 3000,
+            life: 4000,
           });
         }
       }
@@ -109,7 +106,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
         detail: `Claim tickets failed - ${
           error?.data?.message ?? error.message
         }`,
-        life: 3000,
+        life: 4000,
       });
     }
     setPendingTx(-1);
