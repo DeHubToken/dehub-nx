@@ -66,3 +66,23 @@ export const useStakes = (staker?: string) => {
     userInfo,
   };
 };
+
+export const usePendingHarvest = (staker?: string) => {
+  const { fastRefresh } = Hooks.useRefresh();
+  const [pendingHarvest, setPendingHarvest] = useState<BigNumber | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    const fetch = async () => {
+      const stakingContract = getStakingContract();
+      const ret = await stakingContract?.pendingHarvest(staker);
+      setPendingHarvest(ethersToBigNumber(ret));
+    };
+    if (staker) {
+      fetch();
+    }
+  }, [staker, fastRefresh]);
+
+  return pendingHarvest;
+};

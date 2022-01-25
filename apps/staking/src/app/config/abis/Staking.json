@@ -533,6 +533,15 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
+    "name": "pendingHarvest",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "pool",
     "outputs": [
@@ -663,6 +672,24 @@
     "inputs": [],
     "name": "updatePool",
     "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "updatePoolAndUserRewards",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "claimableReflection",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "claimableHarvest",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },

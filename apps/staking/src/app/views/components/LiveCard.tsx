@@ -29,7 +29,7 @@ import {
 } from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
 import { useProjectRewards, useWeeklyRewards } from '../../hooks/useRewards';
-import { useStakes } from '../../hooks/useStakes';
+import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
@@ -57,9 +57,9 @@ const LiveCard = () => {
     : '0';
 
   const projectedRewards = useProjectRewards(account);
-
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
     useStakes(account);
+  const pendingHarvest = usePendingHarvest(account);
 
   const {
     fetchBNBRewards,
@@ -207,11 +207,11 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">Pending Rewards</Header>
-                    {fetchStakeStatus === FetchStatus.SUCCESS ? (
+                    {pendingHarvest ? (
                       <Text fontSize="12px" fontWeight={400} className="pb-2">
                         {getFullDisplayBalance(
-                          userStakeInfo.harvestPending,
-                          15 + DEHUB_DECIMALS,
+                          pendingHarvest,
+                          DEHUB_DECIMALS,
                           DEHUB_DISPLAY_DECIMALS
                         )}{' '}
                         $DeHub
