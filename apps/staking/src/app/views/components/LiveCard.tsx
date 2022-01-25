@@ -153,7 +153,7 @@ const LiveCard = () => {
             </Header>
 
             <div className="grid mt-2">
-              <div className="col-12 md:col-5 lg:col-5">
+              <div className="col-12 md:col-6 lg:col-6">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-1">Harvest In</Header>
@@ -163,7 +163,7 @@ const LiveCard = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12 md:col-7 lg:col-7 align-self-start">
+              <div className="col-12 md:col-6 lg:col-6 align-self-start">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-1">Projected Rewards</Header>
@@ -203,36 +203,10 @@ const LiveCard = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12 md:col-7 lg:col-7 align-self-start">
-                <div className="card overview-box gray shadow-2">
-                  <div className="overview-info text-left w-full">
-                    <Header className="pb-2">Pending Rewards</Header>
-                    {pendingHarvest ? (
-                      <Text fontSize="12px" fontWeight={400} className="pb-2">
-                        {getFullDisplayBalance(
-                          pendingHarvest,
-                          5 + DEHUB_DECIMALS,
-                          DEHUB_DISPLAY_DECIMALS
-                        )}{' '}
-                        $DeHub
-                      </Text>
-                    ) : (
-                      <>
-                        <Skeleton width="100%" height="1.5rem" />
-                        <Skeleton
-                          width="100%"
-                          height="1.5rem"
-                          className="mt-2"
-                        />
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
             </div>
 
             <div className="grid mt-2">
-              <div className="col-12 md:col-12 lg:col-12 align-self-start">
+              <div className="col-12 md:col-6 lg:col-6 align-self-start">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-1">Your Stake</Header>
@@ -266,6 +240,35 @@ const LiveCard = () => {
                           disabled={paused}
                           label="Unstake"
                         />
+                      </>
+                    ) : (
+                      <>
+                        <Skeleton width="100%" height="1.5rem" />
+                        <Skeleton
+                          width="100%"
+                          height="1.5rem"
+                          className="mt-2"
+                        />
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 md:col-6 lg:col-6">
+                <div className="card overview-box gray shadow-2">
+                  <div className="overview-info text-left w-full">
+                    <Header className="pb-1">Pending Rewards</Header>
+                    {pendingHarvest ? (
+                      <>
+                        <Text fontSize="24px" fontWeight={900}>
+                          {getFullDisplayBalance(
+                            pendingHarvest,
+                            5 + DEHUB_DECIMALS,
+                            DEHUB_DISPLAY_DECIMALS
+                          )}
+                        </Text>
+                        <Text>$DeHub</Text>
                       </>
                     ) : (
                       <>
