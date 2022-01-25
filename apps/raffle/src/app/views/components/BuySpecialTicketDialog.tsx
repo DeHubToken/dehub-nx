@@ -1,19 +1,17 @@
+import { Hooks } from '@dehub/react/core';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
   ethersToBigNumber,
   getContract,
   getFullDisplayBalance,
 } from '@dehub/shared/utils';
+import { MaxUint256 } from '@ethersproject/constants';
+import { Web3Provider } from '@ethersproject/providers';
 import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import { useCallback, useRef, useState } from 'react';
-
-import { MaxUint256 } from '@ethersproject/constants';
-import { Web3Provider } from '@ethersproject/providers';
-import { Hooks } from '@dehub/react/core';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-
 import BalanceInput from '../../components/BalanceInput/BalanceInput';
 import { Text } from '../../components/Text';
 import Bep20Abi from '../../config/abis/erc20.json';
@@ -152,7 +150,7 @@ const BuySpecialTicketDialog = ({
         severity: 'info',
         summary: 'Approved',
         detail: 'Contract enabled - you can now purchase tickets',
-        life: 3000,
+        life: 4000,
       });
       handleConfirm();
     },
@@ -171,7 +169,7 @@ const BuySpecialTicketDialog = ({
           detail: `Purchase tickets failed - ${
             error?.data?.message ?? error.message
           }`,
-          life: 3000,
+          life: 4000,
         });
         setPendingTx(false);
         return false;
@@ -182,7 +180,7 @@ const BuySpecialTicketDialog = ({
         severity: 'info',
         summary: 'Purchase tickets',
         detail: 'Purchased tickets successfully',
-        life: 3000,
+        life: 4000,
       });
       dispatch(
         fetchUserTicketsAndLotteries({

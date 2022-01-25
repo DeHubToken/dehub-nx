@@ -5,7 +5,11 @@ import Bep20Abi from '../config/abis/erc20.json';
 import MulticallAbi from '../config/abis/Multicall.json';
 import RewardsAbi from '../config/abis/Reward.json';
 import StakingAbi from '../config/abis/Staking.json';
-import { getMultiCallAddress } from './addressHelpers';
+import {
+  getMultiCallAddress,
+  getRewardsAddress,
+  getStakingAddress,
+} from './addressHelpers';
 import { simpleRpcProvider } from './providers';
 
 export const getContract = (
@@ -28,16 +32,10 @@ export const getBep20Contract = (
   return getContract(address, Bep20Abi, signer);
 };
 
-export const getStakingContract = (
-  address: string,
-  signer?: Signer | Provider
-) => {
-  return getContract(address, StakingAbi, signer);
+export const getStakingContract = (signer?: Signer | Provider) => {
+  return getContract(getStakingAddress(), StakingAbi, signer);
 };
 
-export const getRewardsContract = (
-  address: string,
-  signer?: Signer | Provider
-) => {
-  return getContract(address, RewardsAbi, signer);
+export const getRewardsContract = (signer?: Signer | Provider) => {
+  return getContract(getRewardsAddress(), RewardsAbi, signer);
 };

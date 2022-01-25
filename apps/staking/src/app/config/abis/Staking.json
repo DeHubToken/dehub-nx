@@ -31,6 +31,11 @@
           },
           {
             "internalType": "uint256",
+            "name": "totalStakers",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
             "name": "stakeValuePerBlock",
             "type": "uint256"
           },
@@ -209,14 +214,57 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "poolAmount",
+        "name": "totalRefl",
         "type": "uint256"
       },
       {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "openTimeStamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "closeTimeStamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalStaked",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalStakers",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "stakeValuePerBlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reflValuePerBlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lastUpdateBlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "harvestFund",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "emergencyPull", "type": "bool" }
+        ],
         "indexed": false,
-        "internalType": "uint256",
-        "name": "reflectionsAmount",
-        "type": "uint256"
+        "internalType": "struct IDehubStaking.PoolInfo",
+        "name": "pool",
+        "type": "tuple"
       }
     ],
     "name": "PullAllReward",
@@ -370,13 +418,6 @@
   },
   {
     "inputs": [],
-    "name": "avgBlockTime",
-    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "bnbRewardContract",
     "outputs": [
       {
@@ -502,6 +543,7 @@
         "type": "uint256"
       },
       { "internalType": "uint256", "name": "totalStaked", "type": "uint256" },
+      { "internalType": "uint256", "name": "totalStakers", "type": "uint256" },
       {
         "internalType": "uint256",
         "name": "stakeValuePerBlock",
@@ -573,13 +615,6 @@
       { "internalType": "address", "name": "account", "type": "address" }
     ],
     "name": "revokeRole",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint8", "name": "_value", "type": "uint8" }],
-    "name": "setAverageBlockTime",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

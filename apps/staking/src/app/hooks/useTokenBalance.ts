@@ -1,22 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
-import BigNumber from 'bignumber.js';
-
 import { Hooks } from '@dehub/react/core';
 import { BIG_ZERO } from '@dehub/shared/utils';
-
-import { getBep20Contract } from '../utils/contractHelpers';
+import BigNumber from 'bignumber.js';
+import { useEffect, useRef, useState } from 'react';
+import { FetchStatus } from '../config/constants/types';
 import { getDehubAddress } from '../utils/addressHelpers';
+import { getBep20Contract } from '../utils/contractHelpers';
 
 type UseTokenBalanceState = {
   balance: BigNumber;
   fetchStatus: FetchStatus;
 };
-
-export enum FetchStatus {
-  NOT_FETCHED = 'not-fetched',
-  SUCCESS = 'success',
-  FAILED = 'failed',
-}
 
 export const useTokenBalance = (tokenAddress: string) => {
   const { NOT_FETCHED, SUCCESS, FAILED } = FetchStatus;

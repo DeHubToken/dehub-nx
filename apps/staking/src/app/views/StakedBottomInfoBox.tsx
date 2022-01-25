@@ -1,24 +1,34 @@
 import moment from 'moment';
 import Container from '../components/Layout/Container';
+import { useStakingContract } from '../hooks/useContract';
+import useCurrentTime from '../hooks/useTimer';
+import { usePoolInfo } from '../state/application/hooks';
 import ComingSoon from './components/ComingSoon';
 import LiveCard from './components/LiveCard';
-import useCurrentTime from '../hooks/useTimer';
-import { FIRST_LAUNCH_DATE } from '../config/constants';
 
 const StakedBottomInfoBox = () => {
   useCurrentTime();
-  const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
+  const stakingContract = useStakingContract();
+  const poolInfo = usePoolInfo();
+
+  const openTimeStamp = poolInfo ? Number(poolInfo.openTimeStamp) * 1000 : 0;
+  const closeTimeStamp = poolInfo ? Number(poolInfo.closeTimeStamp) * 1000 : 0;
+
+  const isLiveCard = () => {
+    return (
+      moment().isAfter(moment(new Date(openTimeStamp))) &&
+      moment().isBefore(moment(new Date(closeTimeStamp)))
+    );
+  };
+
+  const isComingSoon = () => {
+    return moment().isBefore(moment(new Date(openTimeStamp)));
+  };
 
   return (
     <Container>
-      {((isIn2022Q1 && moment().isBefore(moment(FIRST_LAUNCH_DATE))) ||
-        (!isIn2022Q1 && moment().isAfter(moment().startOf('quarter')))) && (
-        <ComingSoon />
-      )}
-      {((isIn2022Q1 && moment().isAfter(moment(FIRST_LAUNCH_DATE))) ||
-        (!isIn2022Q1 && moment().isAfter(moment().startOf('quarter')))) && (
-        <LiveCard />
-      )}
+      {isComingSoon() && <ComingSoon />}
+      {isLiveCard() && <LiveCard />}
     </Container>
   );
 };

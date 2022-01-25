@@ -16,5 +16,10 @@ export const timeFromNow = (time: Moment) => {
   );
   const seconds = Math.floor(difference % 60);
 
-  return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  const daysW = days > 0 ? `${days}d ` : ' ';
+  const hoursW = hours > 0 ? `${hours}h ` : ' ';
+  const minutesW = minutes > 0 ? `${minutes}m ` : ' ';
+  const secondsW = seconds > 0 ? `${seconds}s` : '';
+
+  return `${daysW}${hoursW}${minutesW}${secondsW}`;
 };

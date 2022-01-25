@@ -1,5 +1,8 @@
 import { Hooks } from '@dehub/react/core';
-import { getBalanceAmount } from '@dehub/shared/utils';
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
+import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
+import { TransactionReceipt } from '@ethersproject/abstract-provider';
+import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';
 import { capitalize } from 'lodash';
 import { Button } from 'primereact/button';
@@ -12,8 +15,10 @@ import BalanceInput from '../../components/BalanceInput/BalanceInput';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
 import { Box } from '../../components/Layout';
 import { Text } from '../../components/Text';
-import { DEFAULT_TOKEN_DECIMAL } from '../../config';
+import { useDehubContract, useStakingContract } from '../../hooks/useContract';
+import { useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
+import { getStakingAddress } from '../../utils/addressHelpers';
 
 interface StakeModalProps {
   id: 'stake' | 'unstake';
@@ -28,7 +33,6 @@ const SimpleGrid = styled.div<{ columns: number }>`
   margin-bottom: 16px;
 `;
 
-const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
 const percentShortcuts = [10, 25, 50, 75, 100];
 
 const getPercentDisplay = (percentage: number) => {
@@ -65,13 +69,14 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { account } = Hooks.useMoralisEthers();
+  const { userInfo: userStakeInfo } = useStakes(account);
   const dehubBalance = useGetDehubBalance();
+  const stakingContract = useStakingContract();
 
   const toast = useRef<Toast>(null);
 
-  const balanceDisplay = getBalanceAmount(dehubBalance, 5).toNumber();
   const maxBalance = getBalanceAmount(
-    dehubBalance.gt(dust) ? dehubBalance.minus(dust) : dehubBalance,
+    id === 'stake' ? dehubBalance : userStakeInfo.amount,
     5
   ).toNumber();
   const valueAsBn = new BigNumber(value);
@@ -81,6 +86,8 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
     .times(100)
     .toNumber();
   const percentageDisplay = getPercentDisplay(percentageOfMaxBalance);
+  const stakingContractAddress = getStakingAddress();
+  const dehubContract = useDehubContract();
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;
   const minBetAmountBalance = 0;
@@ -105,31 +112,72 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   const { key, disabled } = getButtonProps(valueAsBn, dehubBalance);
 
   const handleEnterPosition = async () => {
-    try {
-      onHide();
+    const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
+    const allowance = await dehubContract?.allowance(
+      account,
+      stakingContractAddress
+    );
 
-      toast?.current?.show({
-        severity: 'success',
-        summary: 'Winnings collected!',
-        detail: (
-          <Box>
-            <Text style={{ marginBottom: '8px' }}>
-              Your prizes have been sent to your wallet
-            </Text>
-          </Box>
-        ),
-        life: 3000,
-      });
+    try {
+      setIsTxPending(true);
+      if (allowance < decimalValue.toNumber()) {
+        const txApprove = await dehubContract?.approve(
+          stakingContractAddress,
+          MaxUint256
+        );
+        const receipt = await txApprove.wait();
+
+        if (!receipt.status) {
+          const errorMsg =
+            'Please try again. Confirm the transaction and make sure you are paying enough gas!';
+
+          toast?.current?.show({
+            severity: 'error',
+            summary: 'Error',
+            detail: errorMsg,
+            life: 4000,
+          });
+          setIsTxPending(false);
+          return;
+        }
+      }
+
+      let receipt: TransactionReceipt;
+      if (id === 'stake') {
+        const tx = await stakingContract?.deposit(decimalValue.toNumber());
+        receipt = await tx.wait();
+      } else {
+        const tx = await stakingContract?.withdraw(decimalValue.toNumber());
+        receipt = await tx.wait();
+      }
+
+      if (receipt.status) {
+        toast?.current?.show({
+          severity: 'success',
+          summary: `Success`,
+          detail: (
+            <Box>
+              <Text style={{ marginBottom: '8px' }}>
+                {`${valueAsBn.toString()}$Dehub has been successfully ${id}d!`}
+              </Text>
+            </Box>
+          ),
+          life: 4000,
+        });
+        onHide();
+      }
     } catch (error) {
+      const errorMsg = 'An error occurred, unable to stake';
       if (error instanceof Error)
         toast?.current?.show({
           severity: 'error',
           summary: 'Error',
-          detail: error?.message,
-          life: 3000,
+          detail: errorMsg,
+          life: 4000,
         });
       console.error(error);
     }
+    setIsTxPending(false);
   };
 
   // Warnings
@@ -189,7 +237,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
           )}
           <div className="flex justify-content-end mt-2 mb-5">
             <Text textAlign="right" fontSize="12px">
-              {account && `Balance: ${balanceDisplay}`}
+              {account && `Balance: ${maxBalance}`}
             </Text>
           </div>
           <Slider
@@ -223,21 +271,20 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
               );
             })}
           </SimpleGrid>
-          <Box style={{ marginBottom: '8px' }}>
+          <div className="overview-info text-left w-full mb-2">
             {account ? (
               <Button
+                className="p-button w-full"
                 disabled={!account || disabled}
                 onClick={handleEnterPosition}
-                icon={isTxPending ? 'pi pi-spin pi-spinner' : ''}
-                iconPos="right"
-                style={{ width: '100%', justifyContent: 'center' }}
-              >
-                {capitalize(id)}
-              </Button>
+                label={capitalize(id)}
+                loading={isTxPending}
+                loadingIcon={'pi pi-spin pi-spinner'}
+              />
             ) : (
               <ConnectWalletButton />
             )}
-          </Box>
+          </div>
         </div>
       </Dialog>
     </>

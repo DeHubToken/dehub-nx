@@ -1,8 +1,6 @@
-import BigNumber from 'bignumber.js';
-import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import { ContractAddresses } from '@dehub/shared/config';
 import { ethersToBigNumber } from '@dehub/shared/utils';
-
+import BigNumber from 'bignumber.js';
 import PancakePairAbi from '../config/abis/PancakePair.json';
 import { getChainId } from '../config/constants';
 import { getContract } from './contractHelpers';
@@ -11,6 +9,7 @@ const getPancakeLiquidityInfo = async (quote: string, base: string) => {
   const quoteToken = ContractAddresses[getChainId()][quote];
 
   const pairAddress = ContractAddresses[getChainId()][`${quote}-${base}`];
+
   const pairContract = getContract(pairAddress, PancakePairAbi);
 
   const reserves = await pairContract.getReserves();
@@ -44,16 +43,13 @@ export const getBNBPrice = async (): Promise<BigNumber> => {
   );
 };
 
-export const getDehubPrice = async (): Promise<BigNumber> => {
-  const tokenBnbLp = await getPancakeLiquidityInfo('DeHub', 'BNB');
-
-  const dehubPrice = await getBNBPrice();
-  const bnbPriceAsEth = EthersBigNumber.from(dehubPrice.toString());
-  return ethersToBigNumber(
-    tokenBnbLp.baseToken.reserve
-      .mul(bnbPriceAsEth)
-      .div(tokenBnbLp.quoteToken.reserve)
+export const getDehubPrice = async (): Promise<string> => {
+  const json = await fetch(
+    'https://api.coingecko.com/api/v3/simple/price?ids=dehub&vs_currencies=usd'
   );
+  const price = await json.json();
+
+  return price.dehub.usd;
 };
 
 export default getDehubPrice;
