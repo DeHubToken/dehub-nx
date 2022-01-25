@@ -171,6 +171,7 @@ This project was generated using [Nx](https://nx.dev).
 
    ```
    npx netlify sites:create --account-slug=dehub --name=dapps-dehub
+   npx netlify sites:create --account-slug=dehub --name=staking-dehub
    npx netlify sites:create --account-slug=dehub --name=inactive-raffle-dehub
    npx netlify sites:create --account-slug=dehub --name=inactive-prediction-dehub
    ```
@@ -183,6 +184,12 @@ This project was generated using [Nx](https://nx.dev).
    Admin URL: https://app.netlify.com/sites/dapps-dehub
    URL:       https://dapps-dehub.netlify.app
    Site ID:   355647c5-6e43-4c94-92bc-eac397ab80a8
+
+   Site Created (React)
+
+   Admin URL: https://app.netlify.com/sites/staking-dehub
+   URL:       https://staking-dehub.netlify.app
+   Site ID:   09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3
 
    Site Created (React) - Inactive
 

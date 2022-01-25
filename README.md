@@ -31,6 +31,14 @@ DeHub Dapps
 
 ## React
 
+### `staking`
+
+DeHub Staking Dapp
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3/deploy-status)](https://app.netlify.com/sites/staking-dehub/deploys)
+
+- Hosting: **[Netlify](https://staking-dehub.netlify.app)**
+
 ### `raffle`
 
 DeHub Raffle Dapp (Inactive)
