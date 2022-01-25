@@ -83,7 +83,7 @@ export const ContractAddresses: {
     Prediction: '0x805Ae00834D1D8fD3ba65784A335C42366b7ecfb',
     ChainLinkOracle: '0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526',
     MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
-    Staking: '0x0815ce2EDf97dF64182cF0fbf3bd2f52C273b1aF',
+    Staking: '0x0a58ae20A9DEa39F21fd1718E36B05d9B4697a95',
     Rewards: '0x746a1Ea2AF87474B77038963E4e7eAb3bb5f8082',
   },
 };
