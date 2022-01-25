@@ -1,26 +1,24 @@
 import { Signer } from '@ethersproject/abstract-signer';
-import { ContractInterface, Contract } from '@ethersproject/contracts';
-import { Provider, JsonRpcProvider } from '@ethersproject/providers';
-
-// Addresses
-import {
-  getPredictionsAddress,
-  getChainlinkOracleAddress,
-  getMulticallAddress,
-} from './addressHelpers';
-
+import { Contract, ContractInterface } from '@ethersproject/contracts';
+import { JsonRpcProvider, Provider } from '@ethersproject/providers';
+import chainlinkOracleAbi from '../config/abi/chainlinkOracle.json';
 // ABI
 import bep20Abi from '../config/abi/erc20.json';
-import predictionsAbi from '../config/abi/predictions.json';
-import chainlinkOracleAbi from '../config/abi/chainlinkOracle.json';
 import MulticallAbi from '../config/abi/Multicall.json';
-
+import predictionsAbi from '../config/abi/predictions.json';
 import getRpcUrl from '../utils/getRpcUrl';
+// Addresses
+import {
+  getChainlinkOracleAddress,
+  getMulticallAddress,
+  getPredictionsAddress,
+} from './addressHelpers';
 
 const RPC_URL = getRpcUrl();
 
 export const simpleRpcProvider = new JsonRpcProvider(RPC_URL);
 
+/** TODO: use or move to shared/utils/contract.utils.ts  */
 export const getContract = (
   address: string,
   abi: ContractInterface,

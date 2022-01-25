@@ -1,11 +1,9 @@
+import { WalletConnectingState } from '@dehub/shared/models';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-
-import { WalletConnectingState } from '@dehub/shared/moralis';
-
-import { setWalletConnectingState } from './';
 import { useAppDispatch } from '..';
 import { AppState } from '../store';
+import { setWalletConnectingState } from './';
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(
