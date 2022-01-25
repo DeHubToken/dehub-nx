@@ -211,7 +211,7 @@ const LiveCard = () => {
                       <Text fontSize="12px" fontWeight={400} className="pb-2">
                         {getFullDisplayBalance(
                           pendingHarvest,
-                          DEHUB_DECIMALS,
+                          5 + DEHUB_DECIMALS,
                           DEHUB_DISPLAY_DECIMALS
                         )}{' '}
                         $DeHub
