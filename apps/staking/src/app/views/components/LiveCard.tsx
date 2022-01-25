@@ -234,7 +234,7 @@ const LiveCard = () => {
                           label="Stake"
                         />
                         <Button
-                          className="p-button-outlined mt-2 justify-content-center w-4"
+                          className="p-button-outlined mt-2 justify-content-center w-4 text-white border-primary"
                           onClick={() => handleModal('unstake', true)}
                           disabled={paused}
                           label="Unstake"

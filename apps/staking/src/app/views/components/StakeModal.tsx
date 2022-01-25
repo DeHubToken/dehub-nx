@@ -1,6 +1,7 @@
 import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
+import { TransactionReceipt } from '@ethersproject/abstract-provider';
 import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';
 import { capitalize } from 'lodash';
@@ -118,14 +119,12 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
     );
 
     try {
+      setIsTxPending(true);
       if (allowance < decimalValue.toNumber()) {
-        setIsTxPending(true);
         const txApprove = await dehubContract?.approve(
           stakingContractAddress,
           MaxUint256
         );
-        setIsTxPending(false);
-
         const receipt = await txApprove.wait();
 
         if (!receipt.status) {
@@ -143,32 +142,30 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
         }
       }
 
+      let receipt: TransactionReceipt;
       if (id === 'stake') {
         const tx = await stakingContract?.deposit(decimalValue.toNumber());
-        setIsTxPending(true);
-        await tx.wait();
-        setIsTxPending(false);
+        receipt = await tx.wait();
       } else {
         const tx = await stakingContract?.withdraw(decimalValue.toNumber());
-        setIsTxPending(true);
-        await tx.wait();
-        setIsTxPending(false);
+        receipt = await tx.wait();
       }
 
-      onHide();
-
-      toast?.current?.show({
-        severity: 'success',
-        summary: `Success`,
-        detail: (
-          <Box>
-            <Text style={{ marginBottom: '8px' }}>
-              {`${valueAsBn.toString()}$Dehub has been successfully ${id}d!`}
-            </Text>
-          </Box>
-        ),
-        life: 4000,
-      });
+      if (receipt.status) {
+        toast?.current?.show({
+          severity: 'success',
+          summary: `Success`,
+          detail: (
+            <Box>
+              <Text style={{ marginBottom: '8px' }}>
+                {`${valueAsBn.toString()}$Dehub has been successfully ${id}d!`}
+              </Text>
+            </Box>
+          ),
+          life: 4000,
+        });
+        onHide();
+      }
     } catch (error) {
       const errorMsg = 'An error occurred, unable to stake';
       if (error instanceof Error)
@@ -180,6 +177,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
         });
       console.error(error);
     }
+    setIsTxPending(false);
   };
 
   // Warnings
@@ -273,21 +271,19 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
               );
             })}
           </SimpleGrid>
-          <Box style={{ marginBottom: '8px' }}>
+          <div className="overview-info text-left w-full mb-2">
             {account ? (
               <Button
+                className="p-button justify-content-center w-full"
                 disabled={!account || disabled}
                 onClick={handleEnterPosition}
                 icon={isTxPending ? 'pi pi-spin pi-spinner' : ''}
-                iconPos="right"
-                style={{ width: '100%', justifyContent: 'center' }}
-              >
-                {capitalize(id)}
-              </Button>
+                label={capitalize(id)}
+              />
             ) : (
               <ConnectWalletButton />
             )}
-          </Box>
+          </div>
         </div>
       </Dialog>
     </>
