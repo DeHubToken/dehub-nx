@@ -23,7 +23,10 @@ import ConnectWalletButton from '../../components/ConnectWalletButton';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
 import { FetchStatus } from '../../config/constants/types';
-import { useStakingContract } from '../../hooks/useContract';
+import {
+  useRewardsContract,
+  useStakingContract,
+} from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
 import { useProjectRewards, useWeeklyRewards } from '../../hooks/useRewards';
 import { useStakes } from '../../hooks/useStakes';
@@ -45,6 +48,7 @@ const LiveCard = () => {
   const [pendingClaimTx, setPendingClaimTx] = useState(false);
 
   const stakingContract = useStakingContract();
+  const rewardsContract = useRewardsContract();
   const paused = useStakePaused();
   const { account } = Hooks.useMoralisEthers();
   const poolInfo = usePoolInfo();
@@ -86,15 +90,29 @@ const LiveCard = () => {
   const handleClaimBNB = async () => {
     setPendingClaimTx(true);
     try {
-      if (stakingContract) {
+      if (userStakeInfo.amount === BIG_ZERO) {
+        if (rewardsContract) {
+          const tx: TransactionResponse = await rewardsContract?.claimReward();
+          const receipt: TransactionReceipt = await tx.wait();
+          if (receipt.status) {
+            toast?.current?.show({
+              severity: 'info',
+              summary: 'Claim rewards',
+              detail: 'Claim rewards successfully. Please check your wallet.',
+              life: 3000,
+            });
+            setClaimed(true);
+          }
+        }
+      } else if (stakingContract) {
         const tx: TransactionResponse =
           await stakingContract?.claimBNBRewards();
         const receipt: TransactionReceipt = await tx.wait();
         if (receipt.status) {
           toast?.current?.show({
             severity: 'info',
-            summary: 'Claim tickets',
-            detail: 'Claim tickets successfully. Please check your wallet.',
+            summary: 'Claim rewards',
+            detail: 'Claim rewards successfully. Please check your wallet.',
             life: 3000,
           });
           setClaimed(true);
@@ -105,8 +123,8 @@ const LiveCard = () => {
       console.error(error);
       toast?.current?.show({
         severity: 'error',
-        summary: 'Claim tickets',
-        detail: `Claim tickets failed - ${
+        summary: 'Claim rewards',
+        detail: `Claim rewards failed - ${
           error?.data?.message ?? error.message
         }`,
         life: 3000,
