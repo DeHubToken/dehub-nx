@@ -2,7 +2,7 @@ import { ChainId, Constants, NetworkInfo } from '@dehub/shared/config';
 import { environment } from '../../../environments/environment';
 
 export const getChainId = (): ChainId => {
-  return environment.chainId;
+  return environment.web3.networks.bsc.chainId;
 };
 
 export const getChainIdHex = (): string => {

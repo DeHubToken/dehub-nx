@@ -6,7 +6,7 @@ export const MAX_DELOTTO_REQUEST_SIZE = 100;
 export const MAX_DEGRAND_REQUEST_SIZE = 10;
 
 export const getChainId = (): ChainId => {
-  return environment.chainId;
+  return environment.web3.networks.bsc.chainId;
 };
 
 export const getChainIdHex = (): string => {

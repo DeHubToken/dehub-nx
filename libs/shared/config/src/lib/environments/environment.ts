@@ -13,9 +13,17 @@ export const defaultSharedDevEnv: SharedEnv = {
     serverUrl: 'https://xts3kxiqgzqj.usemoralis.com:2053/server',
   },
 
-  bscNodes: [
-    'https://data-seed-prebsc-2-s3.binance.org:8545',
-    'https://data-seed-prebsc-2-s3.binance.org:8545',
-    'https://data-seed-prebsc-2-s3.binance.org:8545',
-  ],
+  web3: {
+    ...defaultSharedEnv.web3,
+    networks: {
+      bsc: {
+        ...defaultSharedEnv.web3.networks.bsc,
+        nodes: [
+          'https://data-seed-prebsc-2-s3.binance.org:8545',
+          'https://data-seed-prebsc-2-s3.binance.org:8545',
+          'https://data-seed-prebsc-2-s3.binance.org:8545',
+        ],
+      },
+    },
+  },
 };

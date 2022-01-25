@@ -1,5 +1,5 @@
-import { ChainId, defaultSharedProdEnv } from '@dehub/shared/config';
-import { Env, defaultEnv } from './env';
+import { defaultSharedProdEnv } from '@dehub/shared/config';
+import { defaultEnv, Env } from './env';
 
 export const environment: Env = {
   ...defaultEnv,
@@ -7,5 +7,8 @@ export const environment: Env = {
 
   baseUrl: '/staking',
 
-  chainId: ChainId.BSC_MAINNET,
+  contracts: {
+    staking: '', // TODO: needs to specify
+    rewards: '', // TODO: needs to specify
+  },
 };

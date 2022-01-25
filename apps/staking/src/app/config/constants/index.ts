@@ -7,7 +7,7 @@ export const MAX_DEGRAND_REQUEST_SIZE = 10;
 export const FIRST_LAUNCH_DATE = new Date('2022-01-15');
 
 export const getChainId = (): ChainId => {
-  return environment.chainId;
+  return environment.web3.networks.bsc.chainId;
 };
 
 export const getChainIdHex = (): string => {
