@@ -274,11 +274,12 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
           <div className="overview-info text-left w-full mb-2">
             {account ? (
               <Button
-                className="p-button justify-content-center w-full"
+                className="p-button w-full"
                 disabled={!account || disabled}
                 onClick={handleEnterPosition}
-                icon={isTxPending ? 'pi pi-spin pi-spinner' : ''}
                 label={capitalize(id)}
+                loading={isTxPending}
+                loadingIcon={'pi pi-spin pi-spinner'}
               />
             ) : (
               <ConnectWalletButton />

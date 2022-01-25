@@ -287,10 +287,11 @@ const LiveCard = () => {
                     {account ? (
                       <Button
                         className="p-button mt-2 justify-content-center w-5"
-                        icon={pendingClaimTx ? 'pi pi-spin pi-spinner' : ''}
                         disabled={paused || !isClaimable}
                         onClick={handleClaimBNB}
                         label="Claim BNB"
+                        loading={pendingClaimTx}
+                        loadingIcon={'pi pi-spin pi-spinner'}
                       />
                     ) : (
                       <ConnectWalletButton />
