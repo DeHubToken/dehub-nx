@@ -90,7 +90,7 @@ const LiveCard = () => {
   const handleClaimBNB = async () => {
     setPendingClaimTx(true);
     try {
-      if (userStakeInfo.amount === BIG_ZERO) {
+      if (userStakeInfo.amount.eq(BIG_ZERO)) {
         if (rewardsContract) {
           const tx: TransactionResponse = await rewardsContract?.claimReward();
           const receipt: TransactionReceipt = await tx.wait();
