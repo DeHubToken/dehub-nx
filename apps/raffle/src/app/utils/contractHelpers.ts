@@ -1,18 +1,18 @@
 import { Signer } from '@ethersproject/abstract-signer';
-import { ContractInterface, Contract } from '@ethersproject/contracts';
+import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { Provider } from '@ethersproject/providers';
-
-import { simpleRpcProvider } from './providers';
-import {
-  getStandardLotteryAddress,
-  getSpecialLotteryAddress,
-  getMultiCallAddress,
-} from './addressHelpers';
 import Bep20Abi from '../config/abis/erc20.json';
-import StandardLotteryAbi from '../config/abis/StandardLottery.json';
-import SpecialLotteryAbi from '../config/abis/SpecialLottery.json';
 import MulticallAbi from '../config/abis/Multicall.json';
+import SpecialLotteryAbi from '../config/abis/SpecialLottery.json';
+import StandardLotteryAbi from '../config/abis/StandardLottery.json';
+import {
+  getMultiCallAddress,
+  getSpecialLotteryAddress,
+  getStandardLotteryAddress,
+} from './addressHelpers';
+import { simpleRpcProvider } from './providers';
 
+/** TODO: use or move to shared/utils/contract.utils.ts  */
 export const getContract = (
   address: string,
   abi: ContractInterface,

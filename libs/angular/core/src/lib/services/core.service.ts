@@ -100,16 +100,4 @@ export class CoreService {
     manifestLinkEl.href = `${this.path}/${manifestFile}`;
     headEl.appendChild(manifestLinkEl);
   }
-
-  setTheme(themeCss: string, layoutCss: string) {
-    const themeLink = this.document.getElementById(
-      'theme'
-    ) as HTMLLinkElement | null;
-    const layoutLink = this.document.getElementById(
-      'layout'
-    ) as HTMLLinkElement | null;
-
-    if (themeLink) themeLink.href = `${this.path}/${themeCss}`;
-    if (layoutLink) layoutLink.href = `${this.path}/${layoutCss}`;
-  }
 }

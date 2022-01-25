@@ -3,21 +3,10 @@ import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
 import { isAddress } from './address.utils';
 
-/**
- * Theme Switch key checker
- *
- * @param param0 keyboard event
- * @returns true if theme switch key combo was pressed
- */
-export const isThemeSwitchKey = ({ code, shiftKey }: KeyboardEvent) =>
-  shiftKey && code === 'IntlBackslash';
+const getSigner = (library: Web3Provider, account: string): JsonRpcSigner =>
+  library.getSigner(account).connectUnchecked();
 
-export const getSigner = (
-  library: Web3Provider,
-  account: string
-): JsonRpcSigner => library.getSigner(account).connectUnchecked();
-
-export const getProviderOrSigner = (
+const getProviderOrSigner = (
   library: Web3Provider,
   account?: string
 ): Web3Provider | JsonRpcSigner =>
@@ -25,7 +14,7 @@ export const getProviderOrSigner = (
 
 export const getContract = (
   address: string,
-  ABI: ContractInterface,
+  abi: ContractInterface,
   library: Web3Provider,
   account?: string
 ): Contract => {
@@ -33,5 +22,5 @@ export const getContract = (
     throw Error(`Invalid 'address' parameter '${address}'.`);
   }
 
-  return new Contract(address, ABI, getProviderOrSigner(library, account));
+  return new Contract(address, abi, getProviderOrSigner(library, account));
 };

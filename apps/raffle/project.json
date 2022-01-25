@@ -55,16 +55,6 @@
             "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dehub.scss",
             "bundleName": "layout",
             "inject": false
-          },
-          {
-            "input": "libs/shared/assets/freya/src/lib/theme/alternative/theme-light.scss",
-            "bundleName": "theme-alternative",
-            "inject": false
-          },
-          {
-            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-light.scss",
-            "bundleName": "layout-alternative",
-            "inject": false
           }
         ],
         "scripts": [],

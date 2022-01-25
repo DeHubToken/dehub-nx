@@ -1,9 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CoreService } from '@dehub/angular/core';
 import { MenuMode, ThemeMode } from '@dehub/shared/models';
-import { isThemeSwitchKey } from '@dehub/shared/utils';
 import { PrimeNGConfig } from 'primeng/api';
-import { ThemeService } from './theme.service';
 @Component({
   selector: 'dhb-root',
   template: `<router-outlet></router-outlet> `,
@@ -17,16 +15,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private coreService: CoreService,
-    private primengConfig: PrimeNGConfig,
-    private themeService: ThemeService
+    private primengConfig: PrimeNGConfig
   ) {}
-
-  @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (isThemeSwitchKey(event)) {
-      this.setMode(this.themeService.toggleTheme());
-    }
-  }
 
   ngOnInit() {
     this.coreService.loadManifest();
@@ -34,11 +24,5 @@ export class AppComponent implements OnInit {
     this.coreService.loadTheme();
     this.coreService.loadPrimeCss();
     this.primengConfig.ripple = true;
-  }
-
-  private setMode(mode: ThemeMode) {
-    this.darkMode = mode;
-    this.topbarTheme = mode;
-    this.menuTheme = mode;
   }
 }
