@@ -201,6 +201,32 @@ const LiveCard = () => {
                   </div>
                 </div>
               </div>
+              <div className="col-12 md:col-7 lg:col-7 align-self-start">
+                <div className="card overview-box gray shadow-2">
+                  <div className="overview-info text-left w-full">
+                    <Header className="pb-2">Pending Rewards</Header>
+                    {fetchStakeStatus === FetchStatus.SUCCESS ? (
+                      <Text fontSize="12px" fontWeight={400} className="pb-2">
+                        {getFullDisplayBalance(
+                          userStakeInfo.harvestPending,
+                          15 + DEHUB_DECIMALS,
+                          DEHUB_DISPLAY_DECIMALS
+                        )}{' '}
+                        $DeHub
+                      </Text>
+                    ) : (
+                      <>
+                        <Skeleton width="100%" height="1.5rem" />
+                        <Skeleton
+                          width="100%"
+                          height="1.5rem"
+                          className="mt-2"
+                        />
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="grid mt-2">
