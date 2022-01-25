@@ -156,8 +156,8 @@ const LiveCard = () => {
               <div className="col-12 md:col-5 lg:col-5">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Header className="pb-2">Ends In</Header>
-                    <Text fontSize="24px" className="pb-2">
+                    <Header className="pb-1">Harvest In</Header>
+                    <Text fontSize="24px" fontWeight={900}>
                       {timeFromNow(moment(new Date(closeTimeStamp)))}
                     </Text>
                   </div>
@@ -166,26 +166,28 @@ const LiveCard = () => {
               <div className="col-12 md:col-7 lg:col-7 align-self-start">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Header className="pb-2">Projected Rewards</Header>
+                    <Header className="pb-1">Projected Rewards</Header>
                     {projectedRewards &&
                     projectedRewardsInBUSD &&
                     !projectedRewardsInBUSD.isNaN() ? (
                       <>
-                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                        <Text fontSize="24px" fontWeight={900}>
+                          {getFullDisplayBalance(
+                            projectedRewards,
+                            15 + DEHUB_DECIMALS,
+                            DEHUB_DISPLAY_DECIMALS
+                          )}
+                          <span className="pl-2" style={{ fontSize: '14px' }}>
+                            $DeHub
+                          </span>
+                        </Text>
+                        <Text>
                           $
                           {getFullDisplayBalance(
                             projectedRewardsInBUSD,
                             2 + BUSD_DECIMALS,
                             BUSD_DISPLAY_DECIMALS
                           )}
-                        </Text>
-                        <Text fontSize="12px" fontWeight={400} className="pb-2">
-                          {getFullDisplayBalance(
-                            projectedRewards,
-                            15 + DEHUB_DECIMALS,
-                            DEHUB_DISPLAY_DECIMALS
-                          )}{' '}
-                          $DeHub
                         </Text>
                       </>
                     ) : (
@@ -207,17 +209,16 @@ const LiveCard = () => {
               <div className="col-12 md:col-12 lg:col-12 align-self-start">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Header className="pb-2">Your Stake</Header>
+                    <Header className="pb-1">Your Stake</Header>
                     {fetchStakeStatus === FetchStatus.SUCCESS && poolInfo ? (
                       <>
-                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                        <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
                             userStakeInfo.amount,
                             DEHUB_DECIMALS
-                          )}{' '}
-                          $Dehub
+                          )}
                         </Text>
-                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                        <Text fontWeight={900} className="pb-2">
                           {poolInfo.totalStaked.gt(BIG_ZERO)
                             ? userStakeInfo.amount
                                 .times(new BigNumber(100))
