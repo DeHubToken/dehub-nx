@@ -55,16 +55,6 @@
             "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dehub.scss",
             "bundleName": "layout",
             "inject": false
-          },
-          {
-            "input": "libs/shared/assets/freya/src/lib/theme/alternative/theme-light.scss",
-            "bundleName": "theme-alternative",
-            "inject": false
-          },
-          {
-            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-light.scss",
-            "bundleName": "layout-alternative",
-            "inject": false
           }
         ],
         "scripts": [],
@@ -122,7 +112,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/staking/**/*.{ts,tsx,js,jsx}"],
-        "maxWarnings": 0
+        "maxWarnings": 2
       }
     },
     "test": {
@@ -137,7 +127,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/staking -o",
+        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking -o",
         "cwd": "apps/staking"
       }
     },
@@ -145,7 +135,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/staking -p -o",
+        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking -p -o",
         "cwd": "apps/staking"
       }
     }
