@@ -74,7 +74,7 @@ export const ContractAddresses: {
     Rewards: '',
   },
   [ChainId.BSC_TESTNET]: {
-    DeHub: '0x5A5e32fE118E7c7b6536d143F446269123c0ba74',
+    DeHub: '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477',
     BNB: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
     BUSD: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
     'DeHub-BNB': '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
@@ -84,7 +84,7 @@ export const ContractAddresses: {
     Prediction: '0x805Ae00834D1D8fD3ba65784A335C42366b7ecfb',
     ChainLinkOracle: '0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526',
     MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
-    Staking: '0x9a659a49DBBDe4e1036c5A43cA1e4C959201aa29',
+    Staking: '0x311D70C218c3a555a49deD1e2bB0959A836dbd98',
     Rewards: '0x746a1Ea2AF87474B77038963E4e7eAb3bb5f8082',
   },
 };
