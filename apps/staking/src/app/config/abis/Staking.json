@@ -24,6 +24,12 @@
             "name": "closeTimeStamp",
             "type": "uint256"
           },
+          { "internalType": "uint256", "name": "openBlock", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "closeBlock",
+            "type": "uint256"
+          },
           {
             "internalType": "uint256",
             "name": "totalStaked",
@@ -36,12 +42,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "stakeValuePerBlock",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "reflValuePerBlock",
+            "name": "valuePerBlock",
             "type": "uint256"
           },
           {
@@ -229,6 +230,12 @@
             "name": "closeTimeStamp",
             "type": "uint256"
           },
+          { "internalType": "uint256", "name": "openBlock", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "closeBlock",
+            "type": "uint256"
+          },
           {
             "internalType": "uint256",
             "name": "totalStaked",
@@ -241,12 +248,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "stakeValuePerBlock",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "reflValuePerBlock",
+            "name": "valuePerBlock",
             "type": "uint256"
           },
           {
@@ -537,6 +539,18 @@
       { "internalType": "address", "name": "_user", "type": "address" }
     ],
     "name": "pendingHarvest",
+    "outputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
+    "name": "pendingReflections",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -551,18 +565,11 @@
         "name": "closeTimeStamp",
         "type": "uint256"
       },
+      { "internalType": "uint256", "name": "openBlock", "type": "uint256" },
+      { "internalType": "uint256", "name": "closeBlock", "type": "uint256" },
       { "internalType": "uint256", "name": "totalStaked", "type": "uint256" },
       { "internalType": "uint256", "name": "totalStakers", "type": "uint256" },
-      {
-        "internalType": "uint256",
-        "name": "stakeValuePerBlock",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "reflValuePerBlock",
-        "type": "uint256"
-      },
+      { "internalType": "uint256", "name": "valuePerBlock", "type": "uint256" },
       {
         "internalType": "uint256",
         "name": "lastUpdateBlock",
@@ -672,24 +679,6 @@
     "inputs": [],
     "name": "updatePool",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "updatePoolAndUserRewards",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "claimableReflection",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "claimableHarvest",
-        "type": "uint256"
-      }
-    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },

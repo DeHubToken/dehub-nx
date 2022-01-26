@@ -77,7 +77,7 @@ export const usePendingHarvest = (staker?: string) => {
     const fetch = async () => {
       const stakingContract = getStakingContract();
       const ret = await stakingContract?.pendingHarvest(staker);
-      setPendingHarvest(ethersToBigNumber(ret));
+      setPendingHarvest(ethersToBigNumber(ret[0].plus(ret[1])));
     };
     if (staker) {
       fetch();
