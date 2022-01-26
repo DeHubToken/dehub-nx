@@ -3,7 +3,7 @@ import { Card } from 'primereact/card';
 import styled from 'styled-components';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
-import { FIRST_LAUNCH_DATE } from '../../config/constants';
+import { usePoolInfo } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
 
 const StyledBox = styled(Box)`
@@ -16,6 +16,9 @@ const ComingSoon = () => {
     .year()}`;
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
   const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
+
+  const poolInfo = usePoolInfo();
+  const openTimeStamp = poolInfo ? Number(poolInfo.openTimeStamp) * 1000 : '0';
 
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
@@ -40,11 +43,7 @@ const ComingSoon = () => {
                 <div className="overview-info text-left w-full">
                   <Header className="pb-2">Opening in </Header>
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
-                    {timeFromNow(
-                      isIn2022Q1
-                        ? moment(FIRST_LAUNCH_DATE)
-                        : moment().endOf('quarter')
-                    )}
+                    {timeFromNow(moment(new Date(openTimeStamp)))}
                   </Text>
                 </div>
               </div>
