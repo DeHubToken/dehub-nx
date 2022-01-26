@@ -28,7 +28,7 @@ import {
   useStakingContract,
 } from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
-import { useProjectRewards, useWeeklyRewards } from '../../hooks/useRewards';
+import { useWeeklyRewards } from '../../hooks/useRewards';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
@@ -56,10 +56,23 @@ const LiveCard = () => {
     ? Number(poolInfo.closeTimeStamp) * 1000
     : '0';
 
-  const projectedRewards = useProjectRewards(account);
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
     useStakes(account);
   const pendingHarvest = usePendingHarvest(account);
+
+  const period = poolInfo
+    ? poolInfo?.closeTimeStamp - poolInfo?.openTimeStamp
+    : undefined;
+  const remainTimes = poolInfo
+    ? moment(new Date(poolInfo?.closeTimeStamp * 1000)).unix() -
+      new Date().getTime() / 1000
+    : undefined;
+  const projectedRewards =
+    poolInfo && pendingHarvest && remainTimes && period
+      ? pendingHarvest
+          ?.times(new BigNumber(period))
+          .div(new BigNumber(remainTimes))
+      : undefined;
 
   const {
     fetchBNBRewards,
@@ -174,7 +187,7 @@ const LiveCard = () => {
                         <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
                             projectedRewards,
-                            15 + DEHUB_DECIMALS,
+                            DEHUB_DECIMALS,
                             DEHUB_DISPLAY_DECIMALS
                           )}
                           <span className="pl-2" style={{ fontSize: '14px' }}>
