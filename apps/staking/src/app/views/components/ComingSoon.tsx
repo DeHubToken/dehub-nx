@@ -1,6 +1,6 @@
+import moment from 'moment';
 import { Card } from 'primereact/card';
 import styled from 'styled-components';
-import moment from 'moment';
 import Box from '../../components/Layout/Box';
 import { Header, Text } from '../../components/Text';
 import { FIRST_LAUNCH_DATE } from '../../config/constants';
@@ -53,8 +53,8 @@ const ComingSoon = () => {
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
                   <Text fontSize="14px" fontWeight={900} className="pb-2">
-                    You will have 10 days to stake your DeHub in this vault once
-                    it's oppened. <br />
+                    You will be able to stake your DeHub in this vault once it's
+                    opened. <br />
                     <br />
                     Don't forget to come back to earn more DeHub and BNB!
                   </Text>
