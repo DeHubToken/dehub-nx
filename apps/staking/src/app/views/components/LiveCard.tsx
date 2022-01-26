@@ -312,8 +312,7 @@ const LiveCard = () => {
                         <Skeleton width="100%" height="1.5rem" />
                       ))}
                     {totalBNBRewards ? (
-                      <>
-                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                      <Text fontSize="14px" fontWeight={900} className="pb-2">
                           Total BNB Reward Pool:{' '}
                           {getFullDisplayBalance(
                             totalBNBRewards,
@@ -321,7 +320,6 @@ const LiveCard = () => {
                             10
                           )}
                         </Text>
-                      </>
                     ) : (
                       <Skeleton width="100%" height="1.5rem" className="mt-2" />
                     )}

@@ -51,13 +51,49 @@ export interface Asset {
 }
 
 /** Represents a binary file in a space. An asset can be any file type. */
+export interface AssetContentTypeArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export interface AssetDescriptionArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export interface AssetFileNameArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export interface AssetHeightArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Represents a binary file in a space. An asset can be any file type. */
 export interface AssetLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
 /** Represents a binary file in a space. An asset can be any file type. */
+export interface AssetSizeArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export interface AssetTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Represents a binary file in a space. An asset can be any file type. */
 export interface AssetUrlArgs {
+  locale?: Maybe<Scalars['String']>;
   transform?: Maybe<ImageTransformOptions>;
+}
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export interface AssetWidthArgs {
+  locale?: Maybe<Scalars['String']>;
 }
 
 export interface AssetCollection {
