@@ -264,7 +264,7 @@ const LiveCard = () => {
                         <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
                             pendingHarvest,
-                            5 + DEHUB_DECIMALS,
+                            DEHUB_DECIMALS,
                             DEHUB_DISPLAY_DECIMALS
                           )}
                         </Text>
