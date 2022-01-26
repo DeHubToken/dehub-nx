@@ -7,8 +7,7 @@ export interface SerializedPoolInfo {
   emergencyPull: boolean;
   harvestFund: SerializedBigNumber;
   lastUpdateBlock: SerializedBigNumber;
-  reflValuePerBlock: SerializedBigNumber;
-  stakeValuePerBlock: SerializedBigNumber;
+  valuePerBlock: SerializedBigNumber;
   totalStaked: SerializedBigNumber;
 }
 
@@ -18,7 +17,6 @@ export interface PoolInfo {
   emergencyPull: boolean;
   harvestFund: BigNumber;
   lastUpdateBlock: BigNumber;
-  reflValuePerBlock: BigNumber;
-  stakeValuePerBlock: BigNumber;
+  valuePerBlock: BigNumber;
   totalStaked: BigNumber;
 }

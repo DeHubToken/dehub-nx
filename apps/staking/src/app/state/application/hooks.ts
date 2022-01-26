@@ -53,8 +53,7 @@ export const usePoolInfo = (): PoolInfo | undefined => {
         emergencyPull: poolInfo.emergencyPull,
         harvestFund: new BigNumber(poolInfo.harvestFund),
         lastUpdateBlock: new BigNumber(poolInfo.lastUpdateBlock),
-        reflValuePerBlock: new BigNumber(poolInfo.reflValuePerBlock),
-        stakeValuePerBlock: new BigNumber(poolInfo.stakeValuePerBlock),
+        valuePerBlock: new BigNumber(poolInfo.valuePerBlock),
         totalStaked: new BigNumber(poolInfo.totalStaked),
       }
     : undefined;

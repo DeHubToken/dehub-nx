@@ -48,12 +48,7 @@ export const fetchPoolInfo = createAsyncThunk<SerializedPoolInfo>(
       emergencyPull: poolInfo?.emergencyPull,
       harvestFund: ethersToSerializedBigNumber(poolInfo?.harvestFund),
       lastUpdateBlock: ethersToSerializedBigNumber(poolInfo?.lastUpdateBlock),
-      reflValuePerBlock: ethersToSerializedBigNumber(
-        poolInfo?.reflValuePerBlock
-      ),
-      stakeValuePerBlock: ethersToSerializedBigNumber(
-        poolInfo?.stakeValuePerBlock
-      ),
+      valuePerBlock: ethersToSerializedBigNumber(poolInfo?.valuePerBlock),
       totalStaked: ethersToSerializedBigNumber(poolInfo?.totalStaked),
     };
   }
