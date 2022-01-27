@@ -66,13 +66,13 @@ const LiveCard = () => {
     ? moment(new Date(poolInfo?.closeTimeStamp * 1000)).unix() -
       new Date().getTime() / 1000
     : undefined;
+  const elapsedTime = period && remainTimes ? period - remainTimes : undefined;
   const projectedRewards =
-    poolInfo && pendingHarvest && remainTimes && period
+    poolInfo && pendingHarvest && period && elapsedTime
       ? pendingHarvest
           ?.times(new BigNumber(period))
-          .div(new BigNumber(remainTimes))
+          .div(new BigNumber(elapsedTime))
       : undefined;
-
   const {
     fetchBNBRewards,
     fetchStatus: fetchRewardStatus,
