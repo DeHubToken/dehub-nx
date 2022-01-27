@@ -88,8 +88,8 @@ const LiveCard = () => {
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
-    fetchBNBRewards(userStakeInfo?.amount);
-  }, [account, userStakeInfo, claimed]);
+    fetchBNBRewards(userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO));
+  }, [account, pendingHarvest, claimed]);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {
@@ -102,7 +102,7 @@ const LiveCard = () => {
   const handleClaimBNB = async () => {
     setPendingClaimTx(true);
     try {
-      if (userStakeInfo.amount.eq(BIG_ZERO)) {
+      if (userStakeInfo.amount.eq(BIG_ZERO) && pendingHarvest?.eq(BIG_ZERO)) {
         if (rewardsContract) {
           const tx: TransactionResponse = await rewardsContract?.claimReward();
           const receipt: TransactionReceipt = await tx.wait();
@@ -110,7 +110,8 @@ const LiveCard = () => {
             toast?.current?.show({
               severity: 'info',
               summary: 'Claim rewards',
-              detail: 'Claimed rewards successfully. Please check your wallet.',
+              detail:
+                'Claimed BNB rewards successfully. Please check your wallet.',
               life: 4000,
             });
             setClaimed(true);
@@ -124,7 +125,8 @@ const LiveCard = () => {
           toast?.current?.show({
             severity: 'info',
             summary: 'Claim rewards',
-            detail: 'Claimed rewards successfully. Please check your wallet.',
+            detail:
+              'Claimed BNB rewards successfully. Please check your wallet.',
             life: 4000,
           });
           setClaimed(true);
@@ -136,7 +138,7 @@ const LiveCard = () => {
       toast?.current?.show({
         severity: 'error',
         summary: 'Claim rewards',
-        detail: `Claim rewards failed - ${
+        detail: `Claiming BNB rewards failed - ${
           error?.data?.message ?? error.message
         }`,
         life: 4000,
@@ -313,13 +315,13 @@ const LiveCard = () => {
                       ))}
                     {totalBNBRewards ? (
                       <Text fontSize="14px" fontWeight={900} className="pb-2">
-                          Total BNB Reward Pool:{' '}
-                          {getFullDisplayBalance(
-                            totalBNBRewards,
-                            BNB_DECIMALS,
-                            10
-                          )}
-                        </Text>
+                        Total BNB Reward Pool:{' '}
+                        {getFullDisplayBalance(
+                          totalBNBRewards,
+                          BNB_DECIMALS,
+                          10
+                        )}
+                      </Text>
                     ) : (
                       <Skeleton width="100%" height="1.5rem" className="mt-2" />
                     )}
