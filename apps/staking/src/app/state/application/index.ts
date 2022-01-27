@@ -45,6 +45,8 @@ export const fetchPoolInfo = createAsyncThunk<SerializedPoolInfo>(
     return {
       openTimeStamp: Number(poolInfo?.openTimeStamp),
       closeTimeStamp: Number(poolInfo?.closeTimeStamp),
+      openBlock: Number(poolInfo?.openBlock),
+      closeBlock: Number(poolInfo?.closeBlock),
       emergencyPull: poolInfo?.emergencyPull,
       harvestFund: ethersToSerializedBigNumber(poolInfo?.harvestFund),
       lastUpdateBlock: ethersToSerializedBigNumber(poolInfo?.lastUpdateBlock),

@@ -4,6 +4,8 @@ import BigNumber from 'bignumber.js';
 export interface SerializedPoolInfo {
   openTimeStamp: number;
   closeTimeStamp: number;
+  openBlock: number;
+  closeBlock: number;
   emergencyPull: boolean;
   harvestFund: SerializedBigNumber;
   lastUpdateBlock: SerializedBigNumber;
@@ -14,6 +16,8 @@ export interface SerializedPoolInfo {
 export interface PoolInfo {
   openTimeStamp: number;
   closeTimeStamp: number;
+  openBlock: number;
+  closeBlock: number;
   emergencyPull: boolean;
   harvestFund: BigNumber;
   lastUpdateBlock: BigNumber;
