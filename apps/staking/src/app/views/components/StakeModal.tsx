@@ -104,7 +104,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   };
 
   const handleSliderChange = (e: SliderChangeParams) => {
-    setValue(e.value.toString());
+    setValue((e.value as number).toFixed(5).toString());
   };
 
   const setMax = () => {
