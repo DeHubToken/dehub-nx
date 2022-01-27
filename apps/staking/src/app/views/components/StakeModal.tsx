@@ -16,7 +16,7 @@ import ConnectWalletButton from '../../components/ConnectWalletButton';
 import { Box } from '../../components/Layout';
 import { Text } from '../../components/Text';
 import { useDehubContract, useStakingContract } from '../../hooks/useContract';
-import { useStakes } from '../../hooks/useStakes';
+import { UserInfo, useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
 import { getStakingAddress } from '../../utils/addressHelpers';
 
@@ -53,9 +53,16 @@ const getPercentDisplay = (percentage: number) => {
   })}%`;
 };
 
-const getButtonProps = (value: BigNumber, dehubBalance: BigNumber) => {
-  if (dehubBalance.eq(0)) {
-    return { key: 'Insufficient DEHUB balance', disabled: true };
+const getButtonProps = (
+  value: BigNumber,
+  dehubBalance: BigNumber,
+  userStakeInfo: UserInfo,
+  id: 'stake' | 'unstake'
+) => {
+  if (id === 'stake' && dehubBalance.isZero()) {
+    return { key: 'Insufficient DeHub balance', disabled: true };
+  } else if (id === 'unstake' && userStakeInfo.amount.isZero()) {
+    return { key: 'No DeHub staked', disabled: true };
   }
 
   if (value.eq(0) || value.isNaN()) {
@@ -109,7 +116,12 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
     setValue('');
   };
 
-  const { key, disabled } = getButtonProps(valueAsBn, dehubBalance);
+  const { key, disabled } = getButtonProps(
+    valueAsBn,
+    dehubBalance,
+    userStakeInfo,
+    id
+  );
 
   const handleEnterPosition = async () => {
     const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
