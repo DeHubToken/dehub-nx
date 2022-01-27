@@ -55,6 +55,11 @@
             "name": "harvestFund",
             "type": "uint256"
           },
+          {
+            "internalType": "uint256",
+            "name": "reflectionSpanshot",
+            "type": "uint256"
+          },
           { "internalType": "bool", "name": "emergencyPull", "type": "bool" }
         ],
         "internalType": "struct IDehubStaking.PoolInfo",
@@ -259,6 +264,11 @@
           {
             "internalType": "uint256",
             "name": "harvestFund",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reflectionSpanshot",
             "type": "uint256"
           },
           { "internalType": "bool", "name": "emergencyPull", "type": "bool" }
@@ -547,15 +557,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
-    ],
-    "name": "pendingReflections",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "pool",
     "outputs": [
@@ -576,27 +577,12 @@
         "type": "uint256"
       },
       { "internalType": "uint256", "name": "harvestFund", "type": "uint256" },
-      { "internalType": "bool", "name": "emergencyPull", "type": "bool" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_staker", "type": "address" }
-    ],
-    "name": "projectedRewards",
-    "outputs": [
       {
         "internalType": "uint256",
-        "name": "claimableReflection",
+        "name": "reflectionSpanshot",
         "type": "uint256"
       },
-      {
-        "internalType": "uint256",
-        "name": "claimableHarvest",
-        "type": "uint256"
-      }
+      { "internalType": "bool", "name": "emergencyPull", "type": "bool" }
     ],
     "stateMutability": "view",
     "type": "function"
