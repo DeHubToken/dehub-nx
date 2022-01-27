@@ -4,21 +4,23 @@ import BigNumber from 'bignumber.js';
 export interface SerializedPoolInfo {
   openTimeStamp: number;
   closeTimeStamp: number;
+  openBlock: number;
+  closeBlock: number;
   emergencyPull: boolean;
   harvestFund: SerializedBigNumber;
   lastUpdateBlock: SerializedBigNumber;
-  reflValuePerBlock: SerializedBigNumber;
-  stakeValuePerBlock: SerializedBigNumber;
+  valuePerBlock: SerializedBigNumber;
   totalStaked: SerializedBigNumber;
 }
 
 export interface PoolInfo {
   openTimeStamp: number;
   closeTimeStamp: number;
+  openBlock: number;
+  closeBlock: number;
   emergencyPull: boolean;
   harvestFund: BigNumber;
   lastUpdateBlock: BigNumber;
-  reflValuePerBlock: BigNumber;
-  stakeValuePerBlock: BigNumber;
+  valuePerBlock: BigNumber;
   totalStaked: BigNumber;
 }

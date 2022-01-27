@@ -52,7 +52,8 @@ export const Constants: { [key: number]: NetworkInfo } = {
       symbol: 'bnb',
       decimals: 18,
     },
-    RPC_URL: 'https://data-seed-prebsc-2-s2.binance.org:8545/',
+    RPC_URL:
+      'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
     BLOCK_EXPLORER_URLS: 'https://testnet.bscscan.com',
   },
 };
@@ -83,13 +84,13 @@ export const ContractAddresses: {
     /** @deprecated please use from env */
     MultiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
     /** @deprecated please use from env */
-    Staking: '',
+    Staking: '0xDAa49168FEC0147c922b7Cf401aBCd5914f7af9c',
     /** @deprecated please use from env */
-    Rewards: '',
+    Rewards: '0x30E2181EDb3F38Fe00Cf242561875Df1ab617E6c',
   },
   [ChainId.BSC_TESTNET]: {
     /** @deprecated please use from env */
-    DeHub: '0x5aac501a81d9e4f173c4215ecd4315072c6c40b2',
+    DeHub: '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477',
     /** @deprecated please use from env */
     BNB: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
     /** @deprecated please use from env */
@@ -109,7 +110,7 @@ export const ContractAddresses: {
     /** @deprecated please use from env */
     MultiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
     /** @deprecated please use from env */
-    Staking: '0x0815ce2EDf97dF64182cF0fbf3bd2f52C273b1aF',
+    Staking: '0x1FB2EdfCFcAF5FDb8cb13B138c653De47F781163',
     /** @deprecated please use from env */
     Rewards: '0x746a1Ea2AF87474B77038963E4e7eAb3bb5f8082',
   },

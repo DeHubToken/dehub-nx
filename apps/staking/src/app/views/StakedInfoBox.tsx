@@ -30,7 +30,7 @@ const StakedInfoBox = () => {
                       DEHUB_DECIMALS
                     )}
                   </Text>
-                  <Text>$Dehub</Text>
+                  <Text>$DeHub</Text>
                 </>
               ) : (
                 <>
@@ -55,7 +55,7 @@ const StakedInfoBox = () => {
                       DEHUB_DECIMALS
                     )}
                   </Text>
-                  <Text>$Dehub</Text>
+                  <Text>$DeHub</Text>
                 </>
               ) : (
                 <>
@@ -103,7 +103,7 @@ const StakedInfoBox = () => {
                       DEHUB_DECIMALS
                     )}
                   </Text>
-                  <Text>$Dehub</Text>
+                  <Text>$DeHub</Text>
                 </>
               ) : (
                 <>

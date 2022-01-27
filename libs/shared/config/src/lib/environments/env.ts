@@ -60,7 +60,7 @@ export interface SharedEnv {
     /** Official DeHUB landing page */
     landing: string;
     /** Official DeHUB dapp pages */
-    dapps: { landing: string };
+    dapps: { landing: string; staking: string };
   };
 
   contentful: {
@@ -97,6 +97,7 @@ export const defaultSharedEnv: SharedEnv = {
     landing: 'https://dehub.net',
     dapps: {
       landing: 'https://dapps.dehub.net',
+      staking: 'https://staking.dehub.net',
     },
   },
 
@@ -126,7 +127,8 @@ export const defaultSharedEnv: SharedEnv = {
           symbol: 'bnb',
           decimals: 18,
         },
-        rpcUrl: 'https://data-seed-prebsc-2-s2.binance.org:8545/',
+        rpcUrl:
+          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
         blockExplorerUrl: 'https://testnet.bscscan.com',
         nodes: [
           'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
@@ -137,7 +139,7 @@ export const defaultSharedEnv: SharedEnv = {
     },
     addresses: {
       contracts: {
-        dehub: '0x5aac501a81d9e4f173c4215ecd4315072c6c40b2',
+        dehub: '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477',
         dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
         bnb: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
         bnbBusd: '0xe0e92035077c39594793e61802a350347c320cf2',

@@ -24,6 +24,12 @@
             "name": "closeTimeStamp",
             "type": "uint256"
           },
+          { "internalType": "uint256", "name": "openBlock", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "closeBlock",
+            "type": "uint256"
+          },
           {
             "internalType": "uint256",
             "name": "totalStaked",
@@ -36,12 +42,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "stakeValuePerBlock",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "reflValuePerBlock",
+            "name": "valuePerBlock",
             "type": "uint256"
           },
           {
@@ -52,6 +53,11 @@
           {
             "internalType": "uint256",
             "name": "harvestFund",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reflectionSpanshot",
             "type": "uint256"
           },
           { "internalType": "bool", "name": "emergencyPull", "type": "bool" }
@@ -229,6 +235,12 @@
             "name": "closeTimeStamp",
             "type": "uint256"
           },
+          { "internalType": "uint256", "name": "openBlock", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "closeBlock",
+            "type": "uint256"
+          },
           {
             "internalType": "uint256",
             "name": "totalStaked",
@@ -241,12 +253,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "stakeValuePerBlock",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "reflValuePerBlock",
+            "name": "valuePerBlock",
             "type": "uint256"
           },
           {
@@ -257,6 +264,11 @@
           {
             "internalType": "uint256",
             "name": "harvestFund",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reflectionSpanshot",
             "type": "uint256"
           },
           { "internalType": "bool", "name": "emergencyPull", "type": "bool" }
@@ -533,6 +545,18 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
+    "name": "pendingHarvest",
+    "outputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "pool",
     "outputs": [
@@ -542,45 +566,23 @@
         "name": "closeTimeStamp",
         "type": "uint256"
       },
+      { "internalType": "uint256", "name": "openBlock", "type": "uint256" },
+      { "internalType": "uint256", "name": "closeBlock", "type": "uint256" },
       { "internalType": "uint256", "name": "totalStaked", "type": "uint256" },
       { "internalType": "uint256", "name": "totalStakers", "type": "uint256" },
-      {
-        "internalType": "uint256",
-        "name": "stakeValuePerBlock",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "reflValuePerBlock",
-        "type": "uint256"
-      },
+      { "internalType": "uint256", "name": "valuePerBlock", "type": "uint256" },
       {
         "internalType": "uint256",
         "name": "lastUpdateBlock",
         "type": "uint256"
       },
       { "internalType": "uint256", "name": "harvestFund", "type": "uint256" },
-      { "internalType": "bool", "name": "emergencyPull", "type": "bool" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_staker", "type": "address" }
-    ],
-    "name": "projectedRewards",
-    "outputs": [
       {
         "internalType": "uint256",
-        "name": "claimableReflection",
+        "name": "reflectionSpanshot",
         "type": "uint256"
       },
-      {
-        "internalType": "uint256",
-        "name": "claimableHarvest",
-        "type": "uint256"
-      }
+      { "internalType": "bool", "name": "emergencyPull", "type": "bool" }
     ],
     "stateMutability": "view",
     "type": "function"

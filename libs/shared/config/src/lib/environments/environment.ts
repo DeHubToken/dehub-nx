@@ -19,9 +19,9 @@ export const defaultSharedDevEnv: SharedEnv = {
       bsc: {
         ...defaultSharedEnv.web3.networks.bsc,
         nodes: [
-          'https://data-seed-prebsc-2-s3.binance.org:8545',
-          'https://data-seed-prebsc-2-s3.binance.org:8545',
-          'https://data-seed-prebsc-2-s3.binance.org:8545',
+          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
+          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
+          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
         ],
       },
     },

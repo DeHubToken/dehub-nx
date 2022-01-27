@@ -1,7 +1,6 @@
 import { Hooks } from '@dehub/react/core';
 import {
   BNB_DECIMALS,
-  BUSD_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
   DEHUB_DECIMALS,
   DEHUB_DISPLAY_DECIMALS,
@@ -28,8 +27,8 @@ import {
   useStakingContract,
 } from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
-import { useProjectRewards, useWeeklyRewards } from '../../hooks/useRewards';
-import { useStakes } from '../../hooks/useStakes';
+import { useWeeklyRewards } from '../../hooks/useRewards';
+import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
@@ -56,11 +55,24 @@ const LiveCard = () => {
     ? Number(poolInfo.closeTimeStamp) * 1000
     : '0';
 
-  const projectedRewards = useProjectRewards(account);
-
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
     useStakes(account);
+  const pendingHarvest = usePendingHarvest(account);
 
+  const period = poolInfo
+    ? poolInfo?.closeTimeStamp - poolInfo?.openTimeStamp
+    : undefined;
+  const remainTimes = poolInfo
+    ? moment(new Date(poolInfo?.closeTimeStamp * 1000)).unix() -
+      new Date().getTime() / 1000
+    : undefined;
+  const elapsedTime = period && remainTimes ? period - remainTimes : undefined;
+  const projectedRewards =
+    poolInfo && pendingHarvest && period && elapsedTime
+      ? pendingHarvest
+          ?.times(new BigNumber(period))
+          .div(new BigNumber(elapsedTime))
+      : undefined;
   const {
     fetchBNBRewards,
     fetchStatus: fetchRewardStatus,
@@ -76,8 +88,8 @@ const LiveCard = () => {
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
-    fetchBNBRewards(userStakeInfo?.amount);
-  }, [account, userStakeInfo, claimed]);
+    fetchBNBRewards(userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO));
+  }, [account, pendingHarvest, claimed]);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {
@@ -90,7 +102,7 @@ const LiveCard = () => {
   const handleClaimBNB = async () => {
     setPendingClaimTx(true);
     try {
-      if (userStakeInfo.amount.eq(BIG_ZERO)) {
+      if (userStakeInfo.amount.eq(BIG_ZERO) && pendingHarvest?.eq(BIG_ZERO)) {
         if (rewardsContract) {
           const tx: TransactionResponse = await rewardsContract?.claimReward();
           const receipt: TransactionReceipt = await tx.wait();
@@ -98,7 +110,8 @@ const LiveCard = () => {
             toast?.current?.show({
               severity: 'info',
               summary: 'Claim rewards',
-              detail: 'Claimed rewards successfully. Please check your wallet.',
+              detail:
+                'Claimed BNB rewards successfully. Please check your wallet.',
               life: 4000,
             });
             setClaimed(true);
@@ -112,7 +125,8 @@ const LiveCard = () => {
           toast?.current?.show({
             severity: 'info',
             summary: 'Claim rewards',
-            detail: 'Claimed rewards successfully. Please check your wallet.',
+            detail:
+              'Claimed BNB rewards successfully. Please check your wallet.',
             life: 4000,
           });
           setClaimed(true);
@@ -124,7 +138,7 @@ const LiveCard = () => {
       toast?.current?.show({
         severity: 'error',
         summary: 'Claim rewards',
-        detail: `Claim rewards failed - ${
+        detail: `Claiming BNB rewards failed - ${
           error?.data?.message ?? error.message
         }`,
         life: 4000,
@@ -153,39 +167,41 @@ const LiveCard = () => {
             </Header>
 
             <div className="grid mt-2">
-              <div className="col-12 md:col-5 lg:col-5">
+              <div className="col-12 md:col-6 lg:col-6">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Header className="pb-2">Ends In</Header>
-                    <Text fontSize="24px" className="pb-2">
+                    <Header className="pb-1">Harvest In</Header>
+                    <Text fontSize="24px" fontWeight={900}>
                       {timeFromNow(moment(new Date(closeTimeStamp)))}
                     </Text>
                   </div>
                 </div>
               </div>
-              <div className="col-12 md:col-7 lg:col-7 align-self-start">
+              <div className="col-12 md:col-6 lg:col-6 align-self-start">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Header className="pb-2">Projected Rewards</Header>
+                    <Header className="pb-1">Projected Rewards</Header>
                     {projectedRewards &&
                     projectedRewardsInBUSD &&
                     !projectedRewardsInBUSD.isNaN() ? (
                       <>
-                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                        <Text fontSize="24px" fontWeight={900}>
+                          {getFullDisplayBalance(
+                            projectedRewards,
+                            DEHUB_DECIMALS,
+                            DEHUB_DISPLAY_DECIMALS
+                          )}
+                          <span className="pl-2" style={{ fontSize: '14px' }}>
+                            $DeHub
+                          </span>
+                        </Text>
+                        <Text>
                           $
                           {getFullDisplayBalance(
                             projectedRewardsInBUSD,
-                            2 + BUSD_DECIMALS,
+                            DEHUB_DECIMALS,
                             BUSD_DISPLAY_DECIMALS
                           )}
-                        </Text>
-                        <Text fontSize="12px" fontWeight={400} className="pb-2">
-                          {getFullDisplayBalance(
-                            projectedRewards,
-                            15 + DEHUB_DECIMALS,
-                            DEHUB_DISPLAY_DECIMALS
-                          )}{' '}
-                          $DeHub
                         </Text>
                       </>
                     ) : (
@@ -204,20 +220,19 @@ const LiveCard = () => {
             </div>
 
             <div className="grid mt-2">
-              <div className="col-12 md:col-12 lg:col-12 align-self-start">
+              <div className="col-12 md:col-6 lg:col-6 align-self-start">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Header className="pb-2">Your Stake</Header>
+                    <Header className="pb-1">Your Stake</Header>
                     {fetchStakeStatus === FetchStatus.SUCCESS && poolInfo ? (
                       <>
-                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                        <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
                             userStakeInfo.amount,
                             DEHUB_DECIMALS
-                          )}{' '}
-                          $Dehub
+                          )}
                         </Text>
-                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                        <Text fontWeight={900} className="pb-2">
                           {poolInfo.totalStaked.gt(BIG_ZERO)
                             ? userStakeInfo.amount
                                 .times(new BigNumber(100))
@@ -253,6 +268,35 @@ const LiveCard = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="col-12 md:col-6 lg:col-6">
+                <div className="card overview-box gray shadow-2">
+                  <div className="overview-info text-left w-full">
+                    <Header className="pb-1">Pending Rewards</Header>
+                    {pendingHarvest ? (
+                      <>
+                        <Text fontSize="24px" fontWeight={900}>
+                          {getFullDisplayBalance(
+                            pendingHarvest,
+                            DEHUB_DECIMALS,
+                            DEHUB_DISPLAY_DECIMALS
+                          )}
+                        </Text>
+                        <Text>$DeHub</Text>
+                      </>
+                    ) : (
+                      <>
+                        <Skeleton width="100%" height="1.5rem" />
+                        <Skeleton
+                          width="100%"
+                          height="1.5rem"
+                          className="mt-2"
+                        />
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="grid mt-2">
@@ -271,13 +315,13 @@ const LiveCard = () => {
                       ))}
                     {totalBNBRewards ? (
                       <Text fontSize="14px" fontWeight={900} className="pb-2">
-                          Total BNB Reward Pool:{' '}
-                          {getFullDisplayBalance(
-                            totalBNBRewards,
-                            BNB_DECIMALS,
-                            10
-                          )}
-                        </Text>
+                        Total BNB Reward Pool:{' '}
+                        {getFullDisplayBalance(
+                          totalBNBRewards,
+                          BNB_DECIMALS,
+                          10
+                        )}
+                      </Text>
                     ) : (
                       <Skeleton width="100%" height="1.5rem" className="mt-2" />
                     )}

@@ -8,6 +8,7 @@ import { AppMainComponent } from './app.main.component';
 export enum Navigation {
   Demos = 'demos',
   Tournaments = 'tournaments',
+  Staking = 'staking',
 }
 
 export const menuItems: MenuItem[] = [
@@ -18,6 +19,11 @@ export const menuItems: MenuItem[] = [
         label: 'DeGame',
         routerLink: [Navigation.Tournaments],
         icon: 'fa fa-trophy-alt',
+      },
+      {
+        label: 'DeStake',
+        url: environment.dehub.dapps.staking,
+        icon: 'far fa-coins',
       },
     ],
   },
