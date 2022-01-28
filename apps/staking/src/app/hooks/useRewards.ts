@@ -83,5 +83,6 @@ export const useWeeklyRewards = (staker?: string) => {
     bnbRewards,
     totalBNBRewards,
     isClaimable: isDistributionEnabled && !hasAlreadyClaimed,
+    hasAlreadyClaimed,
   };
 };
