@@ -80,6 +80,7 @@ const LiveCard = () => {
     totalBNBRewards,
     isClaimable,
     hasAlreadyClaimed,
+    nextCycleResetTimestamp,
   } = useWeeklyRewards(account);
 
   const deHubPriceInBUSD = useDehubBusdPrice();
@@ -342,10 +343,21 @@ const LiveCard = () => {
 
                     {fetchRewardStatus === FetchStatus.SUCCESS &&
                       hasAlreadyClaimed && (
-                        <Text fontSize="14px" fontWeight={900} className="pb-2">
-                          You already claimed this week. Please come back next
-                          week.
-                        </Text>
+                        <>
+                          <Text
+                            fontSize="14px"
+                            fontWeight={900}
+                            className="pb-2"
+                          >
+                            You already claimed this week. Please come back next
+                            week.
+                          </Text>
+                          <Text fontSize="14px" fontWeight={900}>
+                            {timeFromNow(
+                              moment(new Date(nextCycleResetTimestamp * 1000))
+                            )}
+                          </Text>
+                        </>
                       )}
 
                     {account ? (
