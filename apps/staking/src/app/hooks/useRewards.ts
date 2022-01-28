@@ -36,7 +36,7 @@ export const useProjectRewards = (staker?: string): BigNumber | undefined => {
     return ethersToBigNumber(projectRewards.claimableReflection).plus(
       ethersToBigNumber(projectRewards.claimableHarvest)
     );
-  }, [staker, projectRewards]);
+  }, [projectRewards]);
 };
 
 export const useWeeklyRewards = (staker?: string) => {

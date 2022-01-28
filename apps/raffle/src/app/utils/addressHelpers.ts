@@ -1,23 +1,30 @@
-import { ContractAddresses } from '@dehub/shared/config';
-import { getChainId } from '../config/constants';
+import { environment } from '../../environments/environment';
 
 export const getAddress = (label: string): string => {
-  const chainId = getChainId();
-  return ContractAddresses[chainId][label];
+  const contracts = {
+    ...environment.web3.addresses.contracts,
+    ...environment.contracts,
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (contracts as any)[label];
 };
 
 export const getStandardLotteryAddress = (): string => {
-  return getAddress('StandardLottery');
+  return getAddress('standardRaffle');
 };
 
 export const getSpecialLotteryAddress = (): string => {
-  return getAddress('SpecialLottery');
+  return getAddress('specialRaffle');
 };
 
 export const getMultiCallAddress = (): string => {
-  return getAddress('MultiCall');
+  return getAddress('multiCall');
 };
 
 export const getDehubAddress = (): string => {
-  return getAddress('DeHub');
+  return getAddress('dehub');
+};
+
+export const getBnbAddress = (): string => {
+  return getAddress('bnb');
 };
