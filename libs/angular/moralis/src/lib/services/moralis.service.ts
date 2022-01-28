@@ -1,7 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { LoggerService, LoggerToken } from '@dehub/angular/core';
 import { ProviderTypes, WalletConnectingState } from '@dehub/shared/models';
-import { publishReplayRefCount, setupNetwork } from '@dehub/shared/utils';
+import {
+  publishReplayRefCount,
+  setupMetamaskNetwork,
+} from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -52,27 +55,28 @@ export class MoralisService implements IMoralis {
     const signingMessage = 'DeHub Dapp';
 
     (provider === 'metamask'
-      ? Moralis.Web3.authenticate({ signingMessage })
-      : Moralis.Web3.authenticate({ signingMessage, provider })
+      ? Moralis.authenticate({ signingMessage }).then(async loggedInUser => {
+          if (
+            await setupMetamaskNetwork(
+              chainId,
+              () =>
+                this.setWalletConnectingState(
+                  WalletConnectingState.SWITCH_NETWORK
+                ),
+              () =>
+                this.setWalletConnectingState(WalletConnectingState.ADD_NETWORK)
+            )
+          ) {
+            this.userSubject.next(loggedInUser);
+          } else {
+            this.logout();
+          }
+        })
+      : Moralis.authenticate({ signingMessage, provider }).then(loggedInUser =>
+          this.userSubject.next(loggedInUser)
+        )
     )
-      .then(async loggedInUser => {
-        if (
-          await setupNetwork(
-            chainId,
-            () =>
-              this.setWalletConnectingState(
-                WalletConnectingState.SWITCH_NETWORK
-              ),
-            () =>
-              this.setWalletConnectingState(WalletConnectingState.ADD_NETWORK)
-          )
-        ) {
-          this.userSubject.next(loggedInUser);
-          this.setWalletConnectingState(WalletConnectingState.COMPLETE);
-        } else {
-          this.logout();
-        }
-      })
+      .then(() => this.setWalletConnectingState(WalletConnectingState.COMPLETE))
       .catch(e => {
         this.setWalletConnectingState(WalletConnectingState.INIT);
         this.logger.error(`Moralis '${provider}' login error:`, e);
@@ -84,7 +88,7 @@ export class MoralisService implements IMoralis {
       // Set user to undefined
       .then(() => this.userSubject.next(undefined))
       // Disconnect Web3 wallet
-      .then(() => Moralis.Web3.cleanup())
+      .then(() => Moralis.cleanup())
       .catch(e => this.logger.error('Moralis logout error:', e))
       // Update wallet connecting state
       .finally(() => this.setWalletConnectingState(WalletConnectingState.INIT));
@@ -92,5 +96,16 @@ export class MoralisService implements IMoralis {
 
   setWalletConnectingState(state: WalletConnectingState) {
     this.walletConnectingStateSubject.next(state);
+  }
+
+  async enableWeb3() {
+    const isWeb3Enabled = Moralis.isWeb3Enabled();
+
+    if (isWeb3Enabled) {
+      console.info('Moralis Web3 is enabled!');
+      return Moralis.provider;
+    } else {
+      return await Moralis.enableWeb3();
+    }
   }
 }

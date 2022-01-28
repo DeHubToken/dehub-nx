@@ -50,7 +50,7 @@ export default function Staking() {
   }, []);
 
   useEffect(() => {
-    Moralis.Web3.onChainChanged(newChainId => {
+    Moralis.onChainChanged(newChainId => {
       if (newChainId !== getChainIdHex()) {
         clearProvider();
       }

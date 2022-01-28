@@ -1,4 +1,10 @@
-export type ProviderTypes = 'walletconnect' | 'metamask';
+export type ProviderTypes =
+  | 'metamask'
+  | 'walletconnect'
+  | 'walletConnect'
+  | 'wc';
+
+export type ConnectorId = 'injected' | 'walletconnect';
 
 export enum WalletConnectingState {
   INIT,

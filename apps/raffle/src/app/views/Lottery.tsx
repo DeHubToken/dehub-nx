@@ -46,7 +46,7 @@ export default function Lottery() {
   }, []);
 
   useEffect(() => {
-    Moralis.Web3.onChainChanged(newChainId => {
+    Moralis.onChainChanged(newChainId => {
       if (newChainId !== getChainIdHex()) {
         clearProvider();
       }

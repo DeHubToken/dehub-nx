@@ -1,7 +1,7 @@
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
-import { WalletConnectingState } from '@dehub/shared/models';
-import { setupNetwork } from '@dehub/shared/utils';
+import { ConnectorId, WalletConnectingState } from '@dehub/shared/models';
+import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getChainId } from '../../config/constants';
@@ -23,12 +23,12 @@ const ConnectWalletButton = () => {
   }, []);
 
   const connectWallet = useCallback(
-    provider => {
+    (connectorId: ConnectorId) => {
       setWalletConnectingState(WalletConnectingState.WAITING);
-      window.localStorage.setItem('providerName', provider);
+      window.localStorage.setItem('connectorId', connectorId);
       authenticate({
         chainId: chainId,
-        provider,
+        provider: connectorId,
         signingMessage: 'DeHub Price Prediction',
         onError: (error: Error) => {
           setWalletConnectingState(WalletConnectingState.INIT);
@@ -44,7 +44,11 @@ const ConnectWalletButton = () => {
               setWalletConnectingState(WalletConnectingState.ADD_NETWORK);
             };
             if (
-              await setupNetwork(getChainId(), onSwitchNetwork, onAddNetwork)
+              await setupMetamaskNetwork(
+                getChainId(),
+                onSwitchNetwork,
+                onAddNetwork
+              )
             ) {
               activateProvider();
               setWalletConnectingState(WalletConnectingState.COMPLETE);

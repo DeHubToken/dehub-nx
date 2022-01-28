@@ -100,7 +100,7 @@ const Predictions = () => {
   }, []);
 
   useEffect(() => {
-    Moralis.Web3.onChainChanged(newChainId => {
+    Moralis.onChainChanged(newChainId => {
       if (newChainId !== getChainIdHex()) {
         logout();
         clearProvider();

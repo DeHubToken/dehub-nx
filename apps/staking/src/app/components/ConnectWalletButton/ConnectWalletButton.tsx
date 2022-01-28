@@ -25,7 +25,7 @@ const ConnectWalletButton = () => {
   const connectWallet = useCallback(
     provider => {
       setWalletConnectingState(WalletConnectingState.WAITING);
-      window.localStorage.setItem('providerName', provider);
+      window.localStorage.setItem('connectorId', provider);
       authenticate({
         chainId: chainId,
         provider,
