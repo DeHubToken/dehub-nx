@@ -9,6 +9,34 @@ interface ContentfulEnv {
   cpaToken: string;
 }
 
+interface NetworkEnv {
+  chainId: number;
+  chainIdHex: string;
+  chainName: string;
+  nativeCurrency: {
+    name: string;
+    symbol: string;
+    decimals: number;
+  };
+  nodes: string[];
+  rpcUrl: string;
+  blockExplorerUrl: string;
+}
+
+interface ContractsEnv {
+  dehub: string;
+  dehubBnb: string;
+  bnb: string;
+  bnbBusd: string;
+  busd: string;
+  multiCall: string;
+}
+
+interface Web3Env {
+  networks: { bsc: NetworkEnv };
+  addresses: { contracts: ContractsEnv };
+}
+
 /**
  * Environment interface for shared environments
  * Used in Angular or React applications
@@ -54,8 +82,7 @@ export interface SharedEnv {
     serverUrl: string;
   };
 
-  /** BSC network nodes */
-  bscNodes: string[];
+  web3: Web3Env;
 }
 
 /**
@@ -89,9 +116,36 @@ export const defaultSharedEnv: SharedEnv = {
     serverUrl: 'https://vamoxwojj7ht.moralisweb3.com:2053/server',
   },
 
-  bscNodes: [
-    'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
-    'https://bsc-dataseed1.defibit.io/',
-    'https://bsc-dataseed1.ninicoin.io/',
-  ],
+  web3: {
+    networks: {
+      bsc: {
+        chainId: 97,
+        chainIdHex: '0x61',
+        chainName: 'Binance Smart Chain Testnet',
+        nativeCurrency: {
+          name: 'BNB',
+          symbol: 'bnb',
+          decimals: 18,
+        },
+        rpcUrl:
+          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
+        blockExplorerUrl: 'https://testnet.bscscan.com',
+        nodes: [
+          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
+          'https://bsc-dataseed1.defibit.io/',
+          'https://bsc-dataseed1.ninicoin.io/',
+        ],
+      },
+    },
+    addresses: {
+      contracts: {
+        dehub: '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477',
+        dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
+        bnb: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
+        bnbBusd: '0xe0e92035077c39594793e61802a350347c320cf2',
+        busd: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
+        multiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
+      },
+    },
+  },
 };
