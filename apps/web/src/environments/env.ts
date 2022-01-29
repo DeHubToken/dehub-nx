@@ -1,10 +1,15 @@
-import { ChainId, defaultSharedDevEnv, SharedEnv } from '@dehub/shared/config';
+import { defaultSharedDevEnv, SharedEnv } from '@dehub/shared/config';
 
-export interface Env extends SharedEnv {
-  chainId: number;
-}
+export type Env = SharedEnv;
 
 export const defaultEnv: Env = {
   ...defaultSharedDevEnv,
-  chainId: ChainId.BSC_TESTNET,
+
+  dehub: {
+    ...defaultSharedDevEnv.dehub,
+    dapps: {
+      ...defaultSharedDevEnv.dehub.dapps,
+      staking: `${defaultSharedDevEnv.dehub.dapps.landing}/staking`,
+    },
+  },
 };

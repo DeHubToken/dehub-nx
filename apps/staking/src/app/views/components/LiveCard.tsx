@@ -91,7 +91,7 @@ const LiveCard = () => {
 
   useEffect(() => {
     fetchBNBRewards(userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO));
-  }, [account, pendingHarvest, claimed]);
+  }, [fetchBNBRewards, account, pendingHarvest, claimed, userStakeInfo.amount]);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {

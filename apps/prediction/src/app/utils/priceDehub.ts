@@ -1,16 +1,15 @@
-import BigNumber from 'bignumber.js';
-import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
-import { ContractAddresses } from '@dehub/shared/config';
 import { ethersToBigNumber } from '@dehub/shared/utils';
-
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import BigNumber from 'bignumber.js';
+import { camelCase } from 'lodash';
 import PancakePairAbi from '../config/abi/PancakePair.json';
-import { getChainId } from '../config/constants';
+import { getAddress } from './addressHelpers';
 import { getContract } from './contractHelpers';
 
 const getPancakeLiquidityInfo = async (quote: string, base: string) => {
-  const quoteToken = ContractAddresses[getChainId()][quote];
+  const quoteToken = getAddress(quote);
 
-  const pairAddress = ContractAddresses[getChainId()][`${quote}-${base}`];
+  const pairAddress = getAddress(camelCase(quote + base));
   const pairContract = getContract(pairAddress, PancakePairAbi);
 
   const reserves = await pairContract.getReserves();

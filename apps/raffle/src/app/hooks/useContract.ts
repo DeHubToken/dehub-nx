@@ -1,14 +1,16 @@
-import { useMemo } from 'react';
-import { Contract } from '@ethersproject/contracts';
-import { ContractAddresses } from '@dehub/shared/config';
 import { Hooks } from '@dehub/react/core';
 import { getContract } from '@dehub/shared/utils';
-
-import { getChainId } from '../config/constants';
-import StandardLotteryAbi from '../config/abis/StandardLottery.json';
+import { Contract } from '@ethersproject/contracts';
+import { useMemo } from 'react';
 import SpecialLotteryAbi from '../config/abis/SpecialLottery.json';
+import StandardLotteryAbi from '../config/abis/StandardLottery.json';
+import {
+  getBnbAddress,
+  getDehubAddress,
+  getSpecialLotteryAddress,
+  getStandardLotteryAddress,
+} from '../utils/addressHelpers';
 import { getBep20Contract } from '../utils/contractHelpers';
-import { getDehubAddress } from '../utils/addressHelpers';
 
 // returns null on errors
 function useContract(
@@ -36,13 +38,11 @@ function useContract(
 }
 
 export const useStandardLotteryContract = (): Contract | null => {
-  const contractAddress = ContractAddresses[getChainId()]['StandardLottery'];
-  return useContract(contractAddress, StandardLotteryAbi);
+  return useContract(getStandardLotteryAddress(), StandardLotteryAbi);
 };
 
 export const useSpecialLotteryContract = (): Contract | null => {
-  const contractAddress = ContractAddresses[getChainId()]['SpecialLottery'];
-  return useContract(contractAddress, SpecialLotteryAbi);
+  return useContract(getSpecialLotteryAddress(), SpecialLotteryAbi);
 };
 
 export const useDehubContract = (): Contract | null => {
@@ -54,8 +54,5 @@ export const useDehubContract = (): Contract | null => {
 };
 
 export const useBnbContract = (): Contract | null => {
-  return useMemo(
-    () => getBep20Contract(ContractAddresses[getChainId()]['BNB']),
-    []
-  );
+  return useMemo(() => getBep20Contract(getBnbAddress()), []);
 };
