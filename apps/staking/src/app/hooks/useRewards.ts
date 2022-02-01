@@ -36,7 +36,7 @@ export const useProjectRewards = (staker?: string): BigNumber | undefined => {
     return ethersToBigNumber(projectRewards.claimableReflection).plus(
       ethersToBigNumber(projectRewards.claimableHarvest)
     );
-  }, [staker, projectRewards]);
+  }, [projectRewards]);
 };
 
 export const useWeeklyRewards = (staker?: string) => {
@@ -48,6 +48,8 @@ export const useWeeklyRewards = (staker?: string) => {
   const [isDistributionEnabled, setDistributionEnabled] =
     useState<boolean>(false);
   const [hasAlreadyClaimed, setHasAlreadyClaimed] = useState<boolean>(false);
+  const [nextCycleResetTimestamp, setNextCycleResetTimestamp] =
+    useState<number>(0);
   const { fastRefresh } = Hooks.useRefresh();
 
   const fetchBNBRewards = useCallback(
@@ -61,6 +63,9 @@ export const useWeeklyRewards = (staker?: string) => {
       if (rewards) setBNBRewards(ethersToBigNumber(rewards));
       const claimed = await rewardsContract.hasAlreadyClaimed(staker);
       setHasAlreadyClaimed(claimed);
+      const nextCycle = await rewardsContract.nextCycleResetTimestamp();
+      setNextCycleResetTimestamp(nextCycle.toNumber());
+
       setFetchStatus(rewards ? FetchStatus.SUCCESS : FetchStatus.FAILED);
     },
     [staker]
@@ -83,5 +88,7 @@ export const useWeeklyRewards = (staker?: string) => {
     bnbRewards,
     totalBNBRewards,
     isClaimable: isDistributionEnabled && !hasAlreadyClaimed,
+    hasAlreadyClaimed,
+    nextCycleResetTimestamp,
   };
 };

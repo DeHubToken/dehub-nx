@@ -79,6 +79,8 @@ const LiveCard = () => {
     bnbRewards,
     totalBNBRewards,
     isClaimable,
+    hasAlreadyClaimed,
+    nextCycleResetTimestamp,
   } = useWeeklyRewards(account);
 
   const deHubPriceInBUSD = useDehubBusdPrice();
@@ -89,7 +91,7 @@ const LiveCard = () => {
 
   useEffect(() => {
     fetchBNBRewards(userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO));
-  }, [account, pendingHarvest, claimed]);
+  }, [fetchBNBRewards, account, pendingHarvest, claimed, userStakeInfo.amount]);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {
@@ -306,25 +308,57 @@ const LiveCard = () => {
                     <Header className="pb-2">Weekly BNB Rewards</Header>
                     {account &&
                       (fetchRewardStatus === FetchStatus.SUCCESS ? (
-                        <Text fontSize="14px" fontWeight={900} className="pb-2">
-                          Your BNB Reward:{' '}
-                          {getFullDisplayBalance(bnbRewards, BNB_DECIMALS, 10)}
-                        </Text>
+                        !hasAlreadyClaimed && (
+                          <Text
+                            fontSize="14px"
+                            fontWeight={900}
+                            className="pb-2"
+                          >
+                            Your BNB Reward:{' '}
+                            {getFullDisplayBalance(
+                              bnbRewards,
+                              BNB_DECIMALS,
+                              10
+                            )}
+                          </Text>
+                        )
                       ) : (
                         <Skeleton width="100%" height="1.5rem" />
                       ))}
-                    {totalBNBRewards ? (
-                      <Text fontSize="14px" fontWeight={900} className="pb-2">
-                        Total BNB Reward Pool:{' '}
-                        {getFullDisplayBalance(
-                          totalBNBRewards,
-                          BNB_DECIMALS,
-                          10
-                        )}
-                      </Text>
+                    {fetchRewardStatus === FetchStatus.SUCCESS &&
+                    totalBNBRewards ? (
+                      !hasAlreadyClaimed && (
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          Total BNB Reward Pool:{' '}
+                          {getFullDisplayBalance(
+                            totalBNBRewards,
+                            BNB_DECIMALS,
+                            10
+                          )}
+                        </Text>
+                      )
                     ) : (
                       <Skeleton width="100%" height="1.5rem" className="mt-2" />
                     )}
+
+                    {fetchRewardStatus === FetchStatus.SUCCESS &&
+                      hasAlreadyClaimed && (
+                        <>
+                          <Text
+                            fontSize="14px"
+                            fontWeight={900}
+                            className="pb-2"
+                          >
+                            You already claimed this week. Please come back next
+                            week.
+                          </Text>
+                          <Text fontSize="14px" fontWeight={900}>
+                            {timeFromNow(
+                              moment(new Date(nextCycleResetTimestamp * 1000))
+                            )}
+                          </Text>
+                        </>
+                      )}
 
                     {account ? (
                       <Button

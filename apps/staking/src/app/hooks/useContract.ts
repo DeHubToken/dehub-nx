@@ -1,10 +1,8 @@
 import { Hooks } from '@dehub/react/core';
-import { ContractAddresses } from '@dehub/shared/config';
 import { getContract } from '@dehub/shared/utils';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
-import { getChainId } from '../config/constants';
-import { getDehubAddress } from '../utils/addressHelpers';
+import { getBnbAddress, getDehubAddress } from '../utils/addressHelpers';
 import {
   getBep20Contract,
   getRewardsContract,
@@ -44,10 +42,7 @@ export const useDehubContract = (): Contract | null => {
 };
 
 export const useBnbContract = (): Contract | null => {
-  return useMemo(
-    () => getBep20Contract(ContractAddresses[getChainId()]['BNB']),
-    []
-  );
+  return useMemo(() => getBep20Contract(getBnbAddress()), []);
 };
 
 export const useStakingContract = (): Contract | null => {

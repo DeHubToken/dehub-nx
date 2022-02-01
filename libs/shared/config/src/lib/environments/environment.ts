@@ -13,9 +13,17 @@ export const defaultSharedDevEnv: SharedEnv = {
     serverUrl: 'https://xts3kxiqgzqj.usemoralis.com:2053/server',
   },
 
-  bscNodes: [
-    'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
-    'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
-    'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
-  ],
+  web3: {
+    ...defaultSharedEnv.web3,
+    networks: {
+      bsc: {
+        ...defaultSharedEnv.web3.networks.bsc,
+        nodes: [
+          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
+          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
+          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
+        ],
+      },
+    },
+  },
 };

@@ -17,5 +17,5 @@ export enum WalletConnectingState {
 export enum WalletConnectingMessages {
   WAITING = 'Please confirm with your wallet.',
   SWITCH_NETWORK = 'Please confirm network switch with your wallet.',
-  ADD_NETWORK = 'Please confirm network switch with your wallet.',
+  ADD_NETWORK = 'Please confirm network add with your wallet.',
 }
