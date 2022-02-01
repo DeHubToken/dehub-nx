@@ -33,18 +33,14 @@ const ConnectWalletButton = () => {
       setWalletConnectingState(WalletConnectingState.WAITING);
       window.localStorage.setItem('provider', provider);
       authenticate({
-        // ...(!isMetamaskLogin && { provider }),
         provider,
         ...(isMetamaskLogin && { chainId }),
         signingMessage: 'DeHub Prize Draw',
         onError: (_error: Error) => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
-        onSuccess: async account => {
-          console.log('account', account);
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          // const ethereum = (window as any).ethereum;
-          if (/* ethereum &&  */ isMetamaskLogin) {
+        onSuccess: async _account => {
+          if (isMetamaskLogin) {
             const onSwitchNetwork = () => {
               setWalletConnectingState(WalletConnectingState.SWITCH_NETWORK);
             };

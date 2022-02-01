@@ -56,7 +56,7 @@ const DeLottoStage1 = () => {
     ? parseInt(previousRound.endTime, 10)
     : 0;
 
-  const { isAuthenticated } = useMoralis();
+  const { account } = useMoralis();
 
   const [listTicketDialog, setListTicketDialog] = useState(false);
   const [buyStandardTicketDialog, setBuyStandardTicketDialog] = useState(false);
@@ -151,7 +151,7 @@ const DeLottoStage1 = () => {
               <Header className="pb-2">Your Tickets</Header>
               {status !== LotteryStatus.PENDING &&
               status !== LotteryStatus.BURNED ? (
-                isAuthenticated && userTickets && !userTickets.isLoading ? (
+                account && userTickets && !userTickets.isLoading ? (
                   <>
                     <Text>
                       You have{' '}
@@ -186,7 +186,7 @@ const DeLottoStage1 = () => {
                       />
                     )}
                   </>
-                ) : isAuthenticated ? (
+                ) : account ? (
                   <>
                     <Skeleton width="100%" height="2.4rem" />
                     <Skeleton width="8rem" height="1.5rem" className="mt-2" />
@@ -242,7 +242,7 @@ const DeLottoStage1 = () => {
 
       {status !== LotteryStatus.PENDING && (
         <FlexLine className="md:flex-column align-items-center justify-content-between">
-          {isAuthenticated && (
+          {account && (
             <>
               <Text className="mb-3">Are you a winner?</Text>
               <Button

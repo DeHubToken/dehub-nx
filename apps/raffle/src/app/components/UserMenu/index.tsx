@@ -11,9 +11,6 @@ const UserMenu = () => {
   const dispatch = useAppDispatch();
   const { isAuthenticated, logout, account } = useMoralis();
 
-  // const user = isAuthenticated && Moralis.User.current();
-  // const account = user && user.get('ethAddress');
-
   const handleLogout = ({
     originalEvent,
     item,
