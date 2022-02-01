@@ -9,7 +9,20 @@ import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();
-  const { isAuthenticated, logout, account } = useMoralis();
+  const { isAuthenticated, logout, account, Moralis } = useMoralis();
+
+  const unsubscribeFromWeb3Deactivated = Moralis.onWeb3Deactivated(error => {
+    console.info(
+      `Moralis ${error.connector.type} connector was deactivated! Logging out.`
+    );
+    doLogout();
+  });
+
+  const doLogout = () => {
+    logout();
+    dispatch(clearUserSpecialData());
+    dispatch(clearUserStandardData());
+  };
 
   const handleLogout = ({
     originalEvent,
@@ -18,10 +31,10 @@ const UserMenu = () => {
     originalEvent: React.SyntheticEvent;
     item: MenuItem;
   }) => {
-    logout();
-    dispatch(clearUserSpecialData());
-    dispatch(clearUserStandardData());
+    unsubscribeFromWeb3Deactivated();
+    doLogout();
   };
+
   const items: MenuItem[] = [
     {
       label: 'Logout',
