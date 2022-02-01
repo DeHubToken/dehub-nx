@@ -35,7 +35,7 @@ const UserMenu = () => {
   return (
     <ul className="layout-topbar-actions">
       <li>
-        {account ? (
+        {isAuthenticated ? (
           <SplitButton
             label={account ? shortenAddress(account) : 'Connect Wallet'}
             icon="fas fa-wallet"

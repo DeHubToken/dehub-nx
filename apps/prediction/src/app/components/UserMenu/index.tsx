@@ -1,9 +1,7 @@
-import { MenuItem } from 'primereact/menuitem';
-import { SplitButton } from 'primereact/splitbutton';
-
 import { Hooks } from '@dehub/react/core';
 import { shortenAddress } from '@dehub/shared/utils';
-
+import { MenuItem } from 'primereact/menuitem';
+import { SplitButton } from 'primereact/splitbutton';
 import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = () => {
