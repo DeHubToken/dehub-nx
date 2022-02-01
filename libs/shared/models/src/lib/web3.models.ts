@@ -1,10 +1,14 @@
-export type ProviderTypes =
+/** Same type as MoralisType.Web3ProviderType */
+export type MoralisWeb3ProviderType =
   | 'metamask'
   | 'walletconnect'
   | 'walletConnect'
-  | 'wc';
+  | 'wc'
+  | 'magicLink';
 
-export type ConnectorId = 'injected' | 'walletconnect';
+export const moralisProviderLocalStorageKey = 'provider';
+
+export type MoralisConnectorId = 'injected' | 'walletconnect';
 
 export enum WalletConnectingState {
   INIT,

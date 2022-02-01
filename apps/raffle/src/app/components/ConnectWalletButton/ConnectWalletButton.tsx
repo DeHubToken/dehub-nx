@@ -1,5 +1,8 @@
 import { WalletModal } from '@dehub/react/ui';
-import { ConnectorId, WalletConnectingState } from '@dehub/shared/models';
+import {
+  MoralisWeb3ProviderType,
+  WalletConnectingState,
+} from '@dehub/shared/models';
 import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -24,13 +27,14 @@ const ConnectWalletButton = () => {
   }, []);
 
   const connectWallet = useCallback(
-    (connectorId: ConnectorId) => {
-      const isMetamaskLogin = connectorId === 'injected';
+    (provider: MoralisWeb3ProviderType) => {
+      const isMetamaskLogin = provider === 'metamask';
 
       setWalletConnectingState(WalletConnectingState.WAITING);
-      window.localStorage.setItem('connectorId', connectorId);
+      window.localStorage.setItem('provider', provider);
       authenticate({
-        ...(!isMetamaskLogin && { provider: connectorId }),
+        // ...(!isMetamaskLogin && { provider }),
+        provider,
         ...(isMetamaskLogin && { chainId }),
         signingMessage: 'DeHub Prize Draw',
         onError: (_error: Error) => {
@@ -39,7 +43,7 @@ const ConnectWalletButton = () => {
         onSuccess: async account => {
           console.log('account', account);
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const ethereum = (window as any).ethereum;
+          // const ethereum = (window as any).ethereum;
           if (/* ethereum &&  */ isMetamaskLogin) {
             const onSwitchNetwork = () => {
               setWalletConnectingState(WalletConnectingState.SWITCH_NETWORK);

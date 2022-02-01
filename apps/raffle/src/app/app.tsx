@@ -10,7 +10,11 @@ const { appId, serverUrl } = environment.moralis;
 
 export function App() {
   return (
-    <MoralisProvider appId={appId} serverUrl={serverUrl}>
+    <MoralisProvider
+      appId={appId}
+      serverUrl={serverUrl}
+      initializeOnMount={true}
+    >
       <Provider store={store}>
         <RefreshContextProvider>
           <HelmetProvider>

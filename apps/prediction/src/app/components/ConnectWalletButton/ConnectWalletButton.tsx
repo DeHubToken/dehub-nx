@@ -1,6 +1,10 @@
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
-import { ConnectorId, WalletConnectingState } from '@dehub/shared/models';
+import {
+  moralisProviderLocalStorageKey,
+  MoralisWeb3ProviderType,
+  WalletConnectingState,
+} from '@dehub/shared/models';
 import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -23,12 +27,12 @@ const ConnectWalletButton = () => {
   }, []);
 
   const connectWallet = useCallback(
-    (connectorId: ConnectorId) => {
+    (provider: MoralisWeb3ProviderType) => {
       setWalletConnectingState(WalletConnectingState.WAITING);
-      window.localStorage.setItem('connectorId', connectorId);
+      window.localStorage.setItem(moralisProviderLocalStorageKey, provider);
       authenticate({
         chainId: chainId,
-        provider: connectorId,
+        provider: provider,
         signingMessage: 'DeHub Price Prediction',
         onError: (error: Error) => {
           setWalletConnectingState(WalletConnectingState.INIT);

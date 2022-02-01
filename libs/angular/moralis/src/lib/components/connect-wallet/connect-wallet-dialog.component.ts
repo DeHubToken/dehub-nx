@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { EnvToken } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
-import { ProviderTypes } from '@dehub/shared/models';
+import { MoralisWeb3ProviderType } from '@dehub/shared/models';
 
 @Component({
   selector: 'dhb-connect-wallet-dialog',
@@ -73,7 +73,7 @@ export class ConnectWalletDialogComponent implements OnInit {
 
   path = this.env.baseUrl;
 
-  @Output() login = new EventEmitter<ProviderTypes>();
+  @Output() login = new EventEmitter<MoralisWeb3ProviderType>();
 
   constructor(@Inject(EnvToken) private env: SharedEnv) {}
 

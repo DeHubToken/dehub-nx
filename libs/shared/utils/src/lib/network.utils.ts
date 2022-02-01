@@ -15,7 +15,7 @@ export const setupMetamaskNetwork = async (
     newChainIdHex: string
   ) => void,
   onAddNetwork?: (chainId: number, chainIdHex: string) => void
-  // provider: ProviderTypes = 'metamask'
+  // provider: Web3ProviderType = 'metamask'
 ) => {
   try {
     // if (provider !== 'metamask') return true;

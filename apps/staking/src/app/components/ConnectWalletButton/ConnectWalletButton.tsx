@@ -1,7 +1,10 @@
 import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
-import { WalletConnectingState } from '@dehub/shared/models';
-import { setupNetwork } from '@dehub/shared/utils';
+import {
+  moralisProviderLocalStorageKey,
+  WalletConnectingState,
+} from '@dehub/shared/models';
+import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getChainId } from '../../config/constants';
@@ -25,7 +28,7 @@ const ConnectWalletButton = () => {
   const connectWallet = useCallback(
     provider => {
       setWalletConnectingState(WalletConnectingState.WAITING);
-      window.localStorage.setItem('connectorId', provider);
+      window.localStorage.setItem(moralisProviderLocalStorageKey, provider);
       authenticate({
         chainId: chainId,
         provider,
@@ -44,7 +47,11 @@ const ConnectWalletButton = () => {
               setWalletConnectingState(WalletConnectingState.ADD_NETWORK);
             };
             if (
-              await setupNetwork(getChainId(), onSwitchNetwork, onAddNetwork)
+              await setupMetamaskNetwork(
+                getChainId(),
+                onSwitchNetwork,
+                onAddNetwork
+              )
             ) {
               activateProvider();
               setWalletConnectingState(WalletConnectingState.COMPLETE);
