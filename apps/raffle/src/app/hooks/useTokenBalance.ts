@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import BigNumber from 'bignumber.js';
-
 import { Hooks } from '@dehub/react/core';
 import { BIG_ZERO } from '@dehub/shared/utils';
-
-import { getBep20Contract } from '../utils/contractHelpers';
+import BigNumber from 'bignumber.js';
+import { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { getDehubAddress } from '../utils/addressHelpers';
+import { getBep20Contract } from '../utils/contractHelpers';
 
 type UseTokenBalanceState = {
   balance: BigNumber;
@@ -25,7 +24,7 @@ export const useTokenBalance = (tokenAddress: string) => {
     fetchStatus: NOT_FETCHED,
   });
 
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { fastRefresh } = Hooks.useRefresh();
   const mountedRef = useRef(true);
 
