@@ -128,13 +128,13 @@ export const MoralisEthersProvider = ({
         ...moralis,
         // isAuthenticated,
         // authProvider,
-        // signer,
+        signer,
         // account,
         // chainId,
         // authenticate,
         // logout,
-        // activateProvider,
-        // clearProvider
+        activateProvider,
+        clearProvider,
       }}
     >
       {children}

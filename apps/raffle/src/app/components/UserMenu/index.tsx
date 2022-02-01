@@ -1,19 +1,18 @@
+import { shortenAddress } from '@dehub/shared/utils';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
-
-import { Hooks } from '@dehub/react/core';
-import { shortenAddress } from '@dehub/shared/utils';
-
-import ConnectWalletButton from '../ConnectWalletButton';
+import { useMoralis } from 'react-moralis';
 import { useAppDispatch } from '../../states';
-
 import { clearUserData as clearUserSpecialData } from '../../states/special-raffle';
 import { clearUserData as clearUserStandardData } from '../../states/standard-raffle';
+import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();
-  const { account, isAuthenticated, logout, clearProvider } =
-    Hooks.useMoralisEthers();
+  const { isAuthenticated, logout, account } = useMoralis();
+
+  // const user = isAuthenticated && Moralis.User.current();
+  // const account = user && user.get('ethAddress');
 
   const handleLogout = ({
     originalEvent,
@@ -23,7 +22,6 @@ const UserMenu = () => {
     item: MenuItem;
   }) => {
     logout();
-    clearProvider();
     dispatch(clearUserSpecialData());
     dispatch(clearUserStandardData());
   };

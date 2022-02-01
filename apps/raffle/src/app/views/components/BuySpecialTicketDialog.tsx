@@ -1,4 +1,3 @@
-import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
   ethersToBigNumber,
@@ -12,6 +11,7 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import { useCallback, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import BalanceInput from '../../components/BalanceInput/BalanceInput';
 import { Text } from '../../components/Text';
 import Bep20Abi from '../../config/abis/erc20.json';
@@ -54,7 +54,7 @@ const BuySpecialTicketDialog = ({
   const dehubContract = useDehubContract();
   const specialLotteryContract = useSpecialLotteryContract();
 
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
 
   const limitNumberByMaxTicketsPerBuy = useCallback(
     (number: BigNumber) => {

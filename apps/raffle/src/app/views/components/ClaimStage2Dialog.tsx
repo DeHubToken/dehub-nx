@@ -1,4 +1,3 @@
-import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceNumber } from '@dehub/shared/utils';
 import {
@@ -11,6 +10,7 @@ import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { Text } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
 import { LotteryTicket } from '../../config/constants/types';
@@ -43,7 +43,7 @@ const ClaimStage2Dialog = ({ open, onHide }: ClaimStage2DialogProps) => {
   const isFetchingRewards =
     // fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const [pendingTx, setPendingTx] = useState(false);
   const lotteryContract = useSpecialLotteryContract();
   const [claimed, setClaimed] = useState(false);

@@ -1,29 +1,29 @@
-import { useEffect, useMemo, useState } from 'react';
-import BigNumber from 'bignumber.js';
-import { useSelector } from 'react-redux';
 import { Hooks } from '@dehub/react/core';
-
+import BigNumber from 'bignumber.js';
+import { useEffect, useMemo, useState } from 'react';
+import { useMoralis } from 'react-moralis';
+import { useSelector } from 'react-redux';
 import {
   fetchCurrentLottery,
   fetchCurrentLotteryId,
-  fetchUserTicketsAndLotteries,
   fetchThisMonthDeGrandPrize,
+  fetchUserTicketsAndLotteries,
 } from '.';
+import { useAppDispatch } from '..';
+import { State } from '../types';
 import {
   fetchLottery,
-  useProcessLotteryResponse,
   processLotteryResponse,
+  useProcessLotteryResponse,
 } from './helpers';
-import { useAppDispatch } from '..';
 import { DeGrandPrize, LotteryRound } from './types';
-import { State } from '../types';
 
 export const useGetCurrentLotteryId = (): string => {
   return useSelector((state: State) => state.specialLottery.currentLotteryId);
 };
 
 export const useFetchLottery = () => {
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { fastRefresh, slowRefresh } = Hooks.useRefresh();
 
   const dispatch = useAppDispatch();
