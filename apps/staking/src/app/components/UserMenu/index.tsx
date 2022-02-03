@@ -1,16 +1,11 @@
-import { MenuItem } from 'primereact/menuitem';
-import { SplitButton } from 'primereact/splitbutton';
-
 import { Hooks } from '@dehub/react/core';
 import { shortenAddress } from '@dehub/shared/utils';
-
+import { MenuItem } from 'primereact/menuitem';
+import { SplitButton } from 'primereact/splitbutton';
 import ConnectWalletButton from '../ConnectWalletButton';
-import { useAppDispatch } from '../../state';
 
 const UserMenu = () => {
-  const dispatch = useAppDispatch();
-  const { account, isAuthenticated, logout, clearProvider } =
-    Hooks.useMoralisEthers();
+  const { account, logout, clearProvider } = Hooks.useMoralisEthers();
 
   const handleLogout = ({
     originalEvent,
