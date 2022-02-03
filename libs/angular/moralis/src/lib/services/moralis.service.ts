@@ -16,7 +16,7 @@ import { User } from '../models/moralis.models';
 
 interface IMoralis {
   user$: Observable<User | undefined>;
-  userLoggedIn$: Observable<boolean>;
+  isAuthenticated$: Observable<boolean>;
   login: (provider: MoralisWeb3ProviderType, chainId: number) => void;
   logout: () => void;
 
@@ -36,7 +36,7 @@ export class MoralisService implements IMoralis {
     publishReplayRefCount()
   );
 
-  userLoggedIn$ = this.user$.pipe(map(user => !!user));
+  isAuthenticated$ = this.user$.pipe(map(user => !!user));
 
   private walletConnectingStateSubject =
     new BehaviorSubject<WalletConnectingState>(WalletConnectingState.INIT);
@@ -119,4 +119,8 @@ export class MoralisService implements IMoralis {
   private unsubscribeEvents() {
     this.unsubscribeFromWeb3Deactivated?.();
   }
+
+  // TODO: set account Moralis.onAccountChanged
+  // window.localStorage.removeItem(moralisProviderLocalStorageKey);
+  // EnableWEb3
 }

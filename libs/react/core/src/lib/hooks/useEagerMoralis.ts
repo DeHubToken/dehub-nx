@@ -25,10 +25,8 @@ export default function useEagerMoralis() {
         const provider = window.localStorage.getItem(
           moralisProviderLocalStorageKey
         ) as MoralisWeb3ProviderType;
-
-        // TODO: Ben why we need this? User will always see walletconnect login without requesting it
-        // I think logout should clear the local storage item
-        // enableWeb3({ provider });
+        console.log('enableWeb3', provider);
+        enableWeb3({ provider });
       }
     };
 

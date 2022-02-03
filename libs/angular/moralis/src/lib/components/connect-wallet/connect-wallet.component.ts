@@ -59,7 +59,7 @@ export class ConnectWalletComponent implements OnInit {
       user ? shortenAddress(user.attributes.ethAddress) : this.label
     )
   );
-  userLoggedIn$ = this.moralisService.userLoggedIn$;
+  userLoggedIn$ = this.moralisService.isAuthenticated$;
 
   private subtitleSubject = new BehaviorSubject<string>('');
   subtitle$ = this.subtitleSubject.asObservable();

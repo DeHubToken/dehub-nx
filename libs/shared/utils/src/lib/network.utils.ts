@@ -15,13 +15,9 @@ export const setupMetamaskNetwork = async (
     newChainIdHex: string
   ) => void,
   onAddNetwork?: (chainId: number, chainIdHex: string) => void
-  // provider: Web3ProviderType = 'metamask'
 ) => {
   try {
-    // if (provider !== 'metamask') return true;
-
-    const currentChainIdHex =
-      /* await getCurChainIdHex() */ await Moralis.chainId;
+    const currentChainIdHex = await Moralis.chainId;
 
     const requestedChainIdHex = `0x${requestedChainId.toString(16)}`;
 
@@ -36,19 +32,18 @@ export const setupMetamaskNetwork = async (
         );
       }
 
-      try {
-        // return await switchNetwork(chainId);
-        await Moralis.switchNetwork(requestedChainIdHex).then(() => true);
-      } catch (switchError) {
-        // This error code indicates that the chain has not been added to MetaMask.
-        if ((<{ code: number }>switchError).code === 4902) {
-          if (onAddNetwork) {
-            onAddNetwork(requestedChainId, requestedChainIdHex);
+      await Moralis.switchNetwork(requestedChainIdHex)
+        .then(() => true)
+        .catch(async switchError => {
+          // This error code indicates that the chain has not been added to MetaMask.
+          if ((<{ code: number }>switchError).code === 4902) {
+            if (onAddNetwork) {
+              onAddNetwork(requestedChainId, requestedChainIdHex);
+            }
+            return await addNetwork(requestedChainId);
           }
-          return await addNetwork(requestedChainId);
-        }
-        return false;
-      }
+          return false;
+        });
     }
     return true;
   } catch (error) {
@@ -57,67 +52,11 @@ export const setupMetamaskNetwork = async (
   }
 };
 
-export const getCurChainId = async () => {
-  // const web3 = await Moralis.Web3.enable();
-  // return await web3.eth.getChainId();
-  const chainId = await Moralis.chainId;
-  console.log('chainId', chainId);
-  return chainId;
-};
-
-export const getCurChainIdHex = async () => {
-  const chainId = await getCurChainId();
-  const chainIdHex = chainId !== null ? `0x${(+chainId).toString(16)}` : null;
-  console.log('chainIdHex', chainIdHex);
-  return chainIdHex;
-  // const web3 = await Moralis.Web3.enable();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // return (web3.currentProvider as any).chainId;
-};
-
-// export const switchNetwork = async (chainId: number): Promise<boolean> => {
-//   const web3 = await Moralis.Web3.enable();
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   await (web3.currentProvider as any).request({
-//     // await (web3.currentProvider as any).request({
-//     method: 'wallet_switchEthereumChain',
-//     params: [{ chainId: `0x${chainId.toString(16)}` }],
-//   });
-//   return true;
-// };
-
-export const switchNetwork = async (chainId: number) => {
-  // const web3 = await Moralis.enableWeb3();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // await (web3.currentProvider as any).request({
-  //   // await (web3.currentProvider as any).request({
-  //   method: 'wallet_switchEthereumChain',
-  //   params: [{ chainId: `0x${chainId.toString(16)}` }],
-  // });
-  // return true;
-  await Moralis.switchNetwork(`0x${chainId.toString(16)}`);
-  return true;
-};
-
 export const addNetwork = async (
   requestedChainIdHex: number
 ): Promise<boolean> => {
   try {
     const networkInfo: NetworkInfo = Constants[requestedChainIdHex];
-    // const web3 = await Moralis.Web3.enable();
-    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // return (web3.currentProvider as any).request({
-    //   method: 'wallet_addEthereumChain',
-    //   params: [
-    //     {
-    //       chainId: networkInfo.CHAIN_ID_HEX,
-    //       chainName: networkInfo.CHAIN_NAME,
-    //       rpcUrls: [networkInfo.RPC_URL],
-    //       nativeCurrency: networkInfo.NATIVE_CURRENCY,
-    //       blockExplorerUrls: [networkInfo.BLOCK_EXPLORER_URLS],
-    //     },
-    //   ],
-    // });
 
     const chainId = requestedChainIdHex;
     const chainName = networkInfo.CHAIN_NAME;

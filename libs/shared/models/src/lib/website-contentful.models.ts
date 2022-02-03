@@ -183,6 +183,7 @@ export interface AssetLinkingCollections {
   teamMemberCollection?: Maybe<TeamMemberCollection>;
   tournamentCollection?: Maybe<TournamentCollection>;
   tournamentSeriesCollection?: Maybe<TournamentSeriesCollection>;
+  websiteBackgroundCollection?: Maybe<WebsiteBackgroundCollection>;
 }
 
 export interface AssetLinkingCollectionsEntryCollectionArgs {
@@ -235,6 +236,13 @@ export interface AssetLinkingCollectionsTournamentCollectionArgs {
 }
 
 export interface AssetLinkingCollectionsTournamentSeriesCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface AssetLinkingCollectionsWebsiteBackgroundCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -906,6 +914,8 @@ export interface Query {
   tournamentSeriesPrizeCollection?: Maybe<TournamentSeriesPrizeCollection>;
   tournamentSeriesRegistrationItem?: Maybe<TournamentSeriesRegistrationItem>;
   tournamentSeriesRegistrationItemCollection?: Maybe<TournamentSeriesRegistrationItemCollection>;
+  websiteBackground?: Maybe<WebsiteBackground>;
+  websiteBackgroundCollection?: Maybe<WebsiteBackgroundCollection>;
 }
 
 export interface QueryAssetArgs {
@@ -1065,6 +1075,21 @@ export interface QueryTournamentSeriesRegistrationItemCollectionArgs {
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
   where?: Maybe<TournamentSeriesRegistrationItemFilter>;
+}
+
+export interface QueryWebsiteBackgroundArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryWebsiteBackgroundCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<WebsiteBackgroundOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<WebsiteBackgroundFilter>;
 }
 
 export interface Sys {
@@ -1863,6 +1888,65 @@ export enum TournamentSeriesRegistrationItemOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
+}
+
+/** Main background image. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/websiteBackground) */
+export interface WebsiteBackground extends Entry {
+  __typename?: 'WebsiteBackground';
+  backgroundImage?: Maybe<Asset>;
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<WebsiteBackgroundLinkingCollections>;
+  sys: Sys;
+}
+
+/** Main background image. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/websiteBackground) */
+export interface WebsiteBackgroundBackgroundImageArgs {
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+/** Main background image. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/websiteBackground) */
+export interface WebsiteBackgroundLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+export interface WebsiteBackgroundCollection {
+  __typename?: 'WebsiteBackgroundCollection';
+  items: Array<Maybe<WebsiteBackground>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface WebsiteBackgroundFilter {
+  AND?: Maybe<Array<Maybe<WebsiteBackgroundFilter>>>;
+  OR?: Maybe<Array<Maybe<WebsiteBackgroundFilter>>>;
+  backgroundImage_exists?: Maybe<Scalars['Boolean']>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  sys?: Maybe<SysFilter>;
+}
+
+export interface WebsiteBackgroundLinkingCollections {
+  __typename?: 'WebsiteBackgroundLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface WebsiteBackgroundLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum WebsiteBackgroundOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export interface CfTournamentSeriesNestedFilter {

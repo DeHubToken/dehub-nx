@@ -39,7 +39,7 @@ const ConnectWalletButton = () => {
         onError: (_error: Error) => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
-        onSuccess: async _account => {
+        onSuccess: async _user => {
           if (isMetamaskLogin) {
             const onSwitchNetwork = () => {
               setWalletConnectingState(WalletConnectingState.SWITCH_NETWORK);
