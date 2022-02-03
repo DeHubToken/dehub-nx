@@ -1,4 +1,3 @@
-export * from './moralis.hooks';
 export { default as useDebounce } from './useDebounce';
 export { default as useEagerMoralis } from './useEagerMoralis';
 export { default as useIsBrowserTabActive } from './useIsBrowserTabActive';
