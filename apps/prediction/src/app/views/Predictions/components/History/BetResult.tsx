@@ -1,36 +1,34 @@
-import React from 'react';
-import BigNumber from 'bignumber.js';
-import styled from 'styled-components';
-
-import { Hooks } from '@dehub/react/core';
 import {
+  BlockIcon,
   Box,
   Flex,
   Heading,
-  Text,
   PrizeIcon,
-  BlockIcon,
+  Text,
 } from '@dehub/react/pcsuikit';
 import {
   BUSD_DECIMALS,
-  DEHUB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
+  DEHUB_DECIMALS,
 } from '@dehub/shared/config';
 import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
-
-import { useAppDispatch } from '../../../../state';
+import BigNumber from 'bignumber.js';
+import React from 'react';
+import { useMoralis } from 'react-moralis';
+import styled from 'styled-components';
 import { useTranslation } from '../../../../contexts/Localization';
+import { useAppDispatch } from '../../../../state';
+import { useDehubBusdPrice } from '../../../../state/application/hooks';
 import {
   useBetCanClaim,
   useRewardRate,
   useTotalRate,
 } from '../../../../state/hooks';
-import { useDehubBusdPrice } from '../../../../state/application/hooks';
-import { Bet, BetPosition } from '../../../../state/types';
 import { fetchBet } from '../../../../state/predictions';
 import { Result } from '../../../../state/predictions/helpers';
-import useIsRefundable from '../../hooks/useIsRefundable';
+import { Bet, BetPosition } from '../../../../state/types';
 import { formatDehub, getPayout } from '../../helpers';
+import useIsRefundable from '../../hooks/useIsRefundable';
 import CollectWinningsButton from '../CollectWinningsButton';
 import PositionTag from '../PositionTag';
 import ReclaimPositionButton from '../ReclaimPositionButton';
@@ -50,7 +48,7 @@ const StyledBetResult = styled(Box)`
 const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { isRefundable } = useIsRefundable(bet.round.epoch);
   const dehubPrice = useDehubBusdPrice();
   const canClaim = useBetCanClaim(account, bet.round.id);

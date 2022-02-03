@@ -1,45 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { Slider, SliderChangeParams } from 'primereact/slider';
-import BigNumber from 'bignumber.js';
-
-import { MaxUint256 } from '@ethersproject/constants';
 import {
   ArrowBackIcon,
+  AutoRenewIcon,
+  BalanceInput,
+  Box,
+  Button,
   CardBody,
   CardHeader,
   Flex,
   Heading,
   IconButton,
-  Button,
   Text,
-  BalanceInput,
-  Box,
-  AutoRenewIcon,
 } from '@dehub/react/pcsuikit';
-import { Hooks } from '@dehub/react/core';
-import { getDecimalAmount, BIG_NINE, BIG_TEN } from '@dehub/shared/utils';
-
+import { BIG_NINE, BIG_TEN, getDecimalAmount } from '@dehub/shared/utils';
+import { MaxUint256 } from '@ethersproject/constants';
+import BigNumber from 'bignumber.js';
+import { Slider, SliderChangeParams } from 'primereact/slider';
+import React, { useEffect, useState } from 'react';
+import { useMoralis } from 'react-moralis';
+import ConnectWalletButton from '../../../../components/ConnectWalletButton';
 import { DEFAULT_TOKEN_DECIMAL } from '../../../../config';
-import { useGetMinBetAmount } from '../../../../state/hooks';
-import { ContextData } from '../../../../contexts/Localization/types';
 import { useTranslation } from '../../../../contexts/Localization';
+import { ContextData } from '../../../../contexts/Localization/types';
 import {
   useDehubContract,
   usePredictionsContract,
 } from '../../../../hooks/useContract';
-import { useGetDehubBalance } from '../../../../hooks/useTokenBalance';
 import useToast from '../../../../hooks/useToast';
+import { useGetDehubBalance } from '../../../../hooks/useTokenBalance';
+import { useGetMinBetAmount } from '../../../../state/hooks';
 import { BetPosition } from '../../../../state/types';
-import ConnectWalletButton from '../../../../components/ConnectWalletButton';
-import PositionTag from '../PositionTag';
+import { getPredictionsAddress } from '../../../../utils/addressHelpers';
 import { getDehubAmount } from '../../helpers';
 import useSwiper from '../../hooks/useSwiper';
 import FlexRow from '../FlexRow';
+import PositionTag from '../PositionTag';
 import Card from './Card';
-import {
-  getDehubAddress,
-  getPredictionsAddress,
-} from '../../../../utils/addressHelpers';
 
 interface SetPositionCardProps {
   id: string;
@@ -104,7 +99,8 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
     key?: string;
     data?: ContextData;
   } | null>(null);
-  const { account } = Hooks.useMoralisEthers();
+  const { account, isAuthenticated } = useMoralis();
+  const isAuth = isAuthenticated && account;
   const { swiper } = useSwiper();
   const dehubBalance = useGetDehubBalance();
   const minBetAmount = useGetMinBetAmount();
@@ -125,8 +121,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
     .times(100)
     .toNumber();
   const percentageDisplay = getPercentDisplay(percentageOfMaxBalance);
-  const showFieldWarning =
-    !!account && valueAsBn.gt(0) && errorMessage !== null;
+  const showFieldWarning = !!isAuth && valueAsBn.gt(0) && errorMessage !== null;
   const minBetAmountBalance = getDehubAmount(minBetAmount).toNumber();
 
   const handleChange = (input: string) => {
@@ -260,7 +255,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           value={value}
           onUserInput={handleChange}
           isWarning={showFieldWarning}
-          inputProps={{ disabled: !account || isTxPending }}
+          inputProps={{ disabled: !isAuth || isTxPending }}
         />
         {showFieldWarning && (
           <Text color="failure" fontSize="12px" mt="4px" textAlign="right">
@@ -274,7 +269,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           fontSize="12px"
           style={{ height: '18px' }}
         >
-          {account && t('Balance: %balance%', { balance: balanceDisplay })}
+          {isAuth && t('Balance: %balance%', { balance: balanceDisplay })}
         </Text>
         <Slider
           min={0}
@@ -282,7 +277,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           value={valueAsBn.lte(maxBalance) ? valueAsBn.toNumber() : 0}
           onChange={handleSliderChange}
           step={0.00001}
-          disabled={!account || isTxPending}
+          disabled={!isAuth || isTxPending}
           style={{ marginBottom: '16px' }}
         />
         <Flex alignItems="center" justifyContent="space-between" mb="16px">
@@ -301,7 +296,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
                 scale="xs"
                 variant="tertiary"
                 onClick={handleClick}
-                disabled={!account || isTxPending}
+                disabled={!isAuth || isTxPending}
                 style={{ flex: 1 }}
               >
                 {`${percent}%`}
@@ -312,16 +307,16 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
             scale="xs"
             variant="tertiary"
             onClick={setMax}
-            disabled={!account || isTxPending}
+            disabled={!isAuth || isTxPending}
           >
             {t('Max')}
           </Button>
         </Flex>
         <Box mb="8px">
-          {account ? (
+          {isAuth ? (
             <Button
               width="100%"
-              disabled={!account || disabled}
+              disabled={!isAuth || disabled}
               onClick={handleEnterPosition}
               isLoading={isTxPending}
               endIcon={

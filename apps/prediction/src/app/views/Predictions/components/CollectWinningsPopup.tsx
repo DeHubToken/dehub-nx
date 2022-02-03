@@ -1,8 +1,7 @@
-import { Hooks } from '@dehub/react/core';
 import { Button, CloseIcon, IconButton } from '@dehub/react/pcsuikit';
 import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
-import DuotoneFontAwesomeIcon from '../../Predictions/components/DuotoneFontAwesomeIcon';
 import React, { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { CSSTransition } from 'react-transition-group';
 import styled, { css, keyframes } from 'styled-components';
 import { useTranslation } from '../../../contexts/Localization';
@@ -14,6 +13,7 @@ import {
 } from '../../../state/hooks';
 import { setHistoryPaneState } from '../../../state/predictions';
 import { getBetHistory } from '../../../state/predictions/helpers';
+import DuotoneFontAwesomeIcon from '../../Predictions/components/DuotoneFontAwesomeIcon';
 
 /**
  * @see https://github.com/animate-css/animate.css/tree/main/source
@@ -129,7 +129,7 @@ const CollectWinningsPopup = () => {
   const { t } = useTranslation();
   const ref = useRef(null);
   const timer = useRef<NodeJS.Timeout | undefined>(undefined);
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const predictionStatus = useGetPredictionsStatus();
   const isHistoryPaneOpen = useIsHistoryPaneOpen();
   const dispatch = useAppDispatch();

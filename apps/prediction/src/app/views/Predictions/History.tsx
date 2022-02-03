@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import { Flex, Text } from '@dehub/react/pcsuikit';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { Hooks } from '@dehub/react/core';
+import React, { useEffect, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
 import { useTranslation } from '../../contexts/Localization';
-import { fetchHistory } from '../../state/predictions';
-import { getUnclaimedWinningBets } from '../../state/predictions/helpers';
-import { HistoryFilter } from '../../state/types';
 import { useAppDispatch } from '../../state';
 import {
   useGetCurrentEpoch,
@@ -16,9 +13,12 @@ import {
   useGetIsFetchingHistory,
   useIsHistoryPaneOpen,
 } from '../../state/hooks';
+import { fetchHistory } from '../../state/predictions';
+import { getUnclaimedWinningBets } from '../../state/predictions/helpers';
+import { HistoryFilter } from '../../state/types';
 import { Header, HistoryTabs } from './components/History';
-import RoundsTab from './components/History/RoundsTab';
 import PnlTab from './components/History/PnlTab/PnlTab';
+import RoundsTab from './components/History/RoundsTab';
 
 const StyledHistory = styled.div`
   background-color: ${({ theme }) => theme.card.background};
@@ -47,7 +47,7 @@ const SpinnerWrapper = styled.div`
 `;
 
 const History = () => {
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const dispatch = useAppDispatch();
   const isHistoryPaneOpen = useIsHistoryPaneOpen();
   const isFetchingHistory = useGetIsFetchingHistory();

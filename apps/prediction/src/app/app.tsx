@@ -1,9 +1,8 @@
-import BigNumber from 'bignumber.js';
-import { Route, Router, Switch } from 'react-router-dom';
-
+import { Hooks } from '@dehub/react/core';
 import { ResetCSS } from '@dehub/react/pcsuikit';
 import { Loader } from '@dehub/react/ui';
-
+import BigNumber from 'bignumber.js';
+import { Route, Router, Switch } from 'react-router-dom';
 import EasterEgg from './components/EasterEgg';
 import SuspenseWithChunkError from './components/SuspenseWithChunkError';
 import ToastListener from './components/ToastListener';
@@ -19,6 +18,7 @@ BigNumber.config({
 });
 
 export function App() {
+  Hooks.useEagerMoralis();
   usePollBlockNumber();
 
   return (

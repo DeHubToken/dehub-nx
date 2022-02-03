@@ -8,6 +8,7 @@ import {
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import React, { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { environment } from '../../../environments/environment';
 import PageMeta from '../../components/layout/PageMeta';
 import UserMenu from '../../components/UserMenu';
@@ -66,7 +67,7 @@ const Predictions = () => {
     false,
     'dehub_predictions_chart'
   );
-  const { clearProvider, account, logout } = Hooks.useMoralisEthers();
+  const { account, logout } = useMoralis();
   const status = useGetPredictionsStatus();
   const isChartPaneOpen = useIsChartPaneOpen();
   const dispatch = useAppDispatch();
@@ -103,10 +104,9 @@ const Predictions = () => {
     Moralis.onChainChanged(newChainId => {
       if (newChainId !== getChainIdHex()) {
         logout();
-        clearProvider();
       }
     });
-  }, [clearProvider, logout]);
+  }, [logout]);
 
   useEffect(() => {
     const header = 'Waiting';

@@ -1,29 +1,29 @@
-import React from 'react';
-import { Hooks } from '@dehub/react/core';
 import {
   ArrowForwardIcon,
   Box,
   Button,
-  Radio,
-  Flex,
-  Heading,
-  Text,
   ButtonMenu,
   ButtonMenuItem,
+  Flex,
+  Heading,
+  Radio,
+  Text,
 } from '@dehub/react/pcsuikit';
+import React from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
+import { useTranslation } from '../../../../contexts/Localization';
 import { useAppDispatch } from '../../../../state';
-import { HistoryFilter } from '../../../../state/types';
-import {
-  setHistoryFilter,
-  setHistoryPaneState,
-  fetchHistory,
-} from '../../../../state/predictions';
 import {
   useGetHistoryFilter,
   useGetIsFetchingHistory,
 } from '../../../../state/hooks';
-import { useTranslation } from '../../../../contexts/Localization';
+import {
+  fetchHistory,
+  setHistoryFilter,
+  setHistoryPaneState,
+} from '../../../../state/predictions';
+import { HistoryFilter } from '../../../../state/types';
 import { getBubbleGumBackground } from '../../helpers';
 
 const Filter = styled.label`
@@ -77,7 +77,8 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
   const isFetchingHistory = useGetIsFetchingHistory();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { account } = Hooks.useMoralisEthers();
+  const { account, isAuthenticated } = useMoralis();
+  const isAuth = account && isAuthenticated;
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(false));
@@ -133,7 +134,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
               <Radio
                 scale="sm"
                 checked={historyFilter === HistoryFilter.ALL}
-                disabled={isFetchingHistory || !account}
+                disabled={isFetchingHistory || !isAuth}
                 onChange={handleChange(HistoryFilter.ALL)}
               />
               <Text ml="4px">{t('All')}</Text>
@@ -142,7 +143,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
               <Radio
                 scale="sm"
                 checked={historyFilter === HistoryFilter.COLLECTED}
-                disabled={isFetchingHistory || !account}
+                disabled={isFetchingHistory || !isAuth}
                 onChange={handleChange(HistoryFilter.COLLECTED)}
               />
               <Text ml="4px">{t('Collected')}</Text>
@@ -151,7 +152,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
               <Radio
                 scale="sm"
                 checked={historyFilter === HistoryFilter.UNCOLLECTED}
-                disabled={isFetchingHistory || !account}
+                disabled={isFetchingHistory || !isAuth}
                 onChange={handleChange(HistoryFilter.UNCOLLECTED)}
               />
               <Text ml="4px">{t('Uncollected')}</Text>

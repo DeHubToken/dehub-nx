@@ -1,14 +1,14 @@
-import React from 'react';
-import { Hooks } from '@dehub/react/core';
 import { AutoRenewIcon, HistoryIcon, IconButton } from '@dehub/react/pcsuikit';
+import { useMoralis } from 'react-moralis';
 import { useAppDispatch } from '../../../state';
-import { setHistoryPaneState } from '../../../state/predictions';
 import { useGetIsFetchingHistory } from '../../../state/hooks';
+import { setHistoryPaneState } from '../../../state/predictions';
 
 const HistoryButton = () => {
   const isFetchingHistory = useGetIsFetchingHistory();
   const dispatch = useAppDispatch();
-  const { account } = Hooks.useMoralisEthers();
+  const { isAuthenticated, account } = useMoralis();
+  const isAuth = isAuthenticated && account;
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(true));
@@ -20,7 +20,7 @@ const HistoryButton = () => {
       ml="8px"
       onClick={handleClick}
       isLoading={isFetchingHistory}
-      disabled={!account}
+      disabled={!isAuth}
     >
       {isFetchingHistory ? (
         <AutoRenewIcon spin color="white" />
