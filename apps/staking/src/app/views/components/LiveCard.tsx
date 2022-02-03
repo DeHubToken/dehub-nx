@@ -50,6 +50,8 @@ const LiveCard = () => {
   const rewardsContract = useRewardsContract();
   const paused = useStakePaused();
   const { account } = Hooks.useMoralisEthers();
+  const { slowRefresh } = Hooks.useRefresh();
+
   const poolInfo = usePoolInfo();
   const closeTimeStamp = poolInfo
     ? Number(poolInfo.closeTimeStamp) * 1000
@@ -91,7 +93,14 @@ const LiveCard = () => {
 
   useEffect(() => {
     fetchBNBRewards(userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO));
-  }, [fetchBNBRewards, account, pendingHarvest, claimed, userStakeInfo.amount]);
+  }, [
+    fetchBNBRewards,
+    account,
+    pendingHarvest,
+    claimed,
+    userStakeInfo.amount,
+    slowRefresh,
+  ]);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {
