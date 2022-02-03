@@ -1,4 +1,4 @@
-import { Contexts } from '@dehub/react/core';
+import { RefreshContextProvider } from '@dehub/react/core';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { MoralisProvider } from 'react-moralis';
@@ -16,9 +16,9 @@ const Providers: React.FC = ({ children }) => {
       initializeOnMount={true}
     >
       <Provider store={store}>
-        <Contexts.RefreshContextProvider>
+        <RefreshContextProvider>
           <HelmetProvider>{children}</HelmetProvider>
-        </Contexts.RefreshContextProvider>
+        </RefreshContextProvider>
       </Provider>
     </MoralisProvider>
   );

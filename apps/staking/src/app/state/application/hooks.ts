@@ -1,4 +1,8 @@
-import { Hooks } from '@dehub/react/core';
+import {
+  useDebounce,
+  useIsBrowserTabActive,
+  useRefresh,
+} from '@dehub/react/core';
 import { WalletConnectingState } from '@dehub/shared/models';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -64,7 +68,7 @@ export const usePoolInfo = (): PoolInfo | undefined => {
 
 export const usePullBusdPrice = () => {
   const dispatch = useAppDispatch();
-  const { slowRefresh } = Hooks.useRefresh();
+  const { slowRefresh } = useRefresh();
 
   useEffect(() => {
     dispatch(fetchDehubPrice());
@@ -73,7 +77,7 @@ export const usePullBusdPrice = () => {
 
 export const useFetchPoolInfo = () => {
   const dispatch = useAppDispatch();
-  const { slowRefresh } = Hooks.useRefresh();
+  const { slowRefresh } = useRefresh();
 
   useEffect(() => {
     dispatch(fetchPoolInfo());
@@ -84,7 +88,7 @@ export const usePullBlockNumber = () => {
   const dispatch = useAppDispatch();
   const { chainId, web3 } = useMoralis();
 
-  const isTabActive = Hooks.useIsBrowserTabActive();
+  const isTabActive = useIsBrowserTabActive();
 
   const [state, setState] = useState<{
     chainId: string | null;
@@ -127,7 +131,7 @@ export const usePullBlockNumber = () => {
     };
   }, [web3, chainId, isTabActive, blockNumberCallback]);
 
-  const debouncedState = Hooks.useDebounce(state, 100);
+  const debouncedState = useDebounce(state, 100);
 
   useEffect(() => {
     if (!debouncedState.chainId || !debouncedState.blockNumber || !isTabActive)

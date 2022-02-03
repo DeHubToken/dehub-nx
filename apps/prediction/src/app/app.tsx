@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { useEagerMoralis } from '@dehub/react/core';
 import { ResetCSS } from '@dehub/react/pcsuikit';
 import { Loader } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
@@ -18,7 +18,7 @@ BigNumber.config({
 });
 
 export function App() {
-  Hooks.useEagerMoralis();
+  useEagerMoralis();
   usePollBlockNumber();
 
   return (

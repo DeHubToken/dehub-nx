@@ -1,4 +1,4 @@
-import { Contexts } from '@dehub/react/core';
+import { RefreshContextProvider } from '@dehub/react/core';
 import { ModalProvider } from '@dehub/react/pcsuikit';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
@@ -24,9 +24,9 @@ const Providers: React.FC = ({ children }) => {
           <HelmetProvider>
             <ThemeContextProvider>
               <LanguageProvider>
-                <Contexts.RefreshContextProvider>
+                <RefreshContextProvider>
                   <ModalProvider>{children}</ModalProvider>
-                </Contexts.RefreshContextProvider>
+                </RefreshContextProvider>
               </LanguageProvider>
             </ThemeContextProvider>
           </HelmetProvider>

@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { useEagerMoralis } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import {
   WalletConnectingMessages,
@@ -29,7 +29,7 @@ export default function Lottery() {
 
   const { logout } = useMoralis();
 
-  Hooks.useEagerMoralis();
+  useEagerMoralis();
 
   const {
     baseUrl: path,

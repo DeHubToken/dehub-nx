@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import usePrevious from '../usePrevious';
 import { LotteryStatus } from '../../config/constants/types';
 import { useAppDispatch } from '../../states';
-import { useLottery } from '../../states/special-raffle/hooks';
 import {
   fetchCurrentLottery,
   fetchCurrentLotteryId,
 } from '../../states/special-raffle';
+import { useLottery } from '../../states/special-raffle/hooks';
+import usePrevious from '../usePrevious';
 
 const useStatusTransitions = () => {
   const {

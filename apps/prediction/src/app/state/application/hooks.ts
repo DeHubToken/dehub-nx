@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { useRefresh } from '@dehub/react/core';
 import { WalletConnectingState } from '@dehub/shared/models';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo } from 'react';
@@ -39,7 +39,7 @@ export const useDehubBusdPrice = (): BigNumber => {
 
 export const usePullBusdPrice = () => {
   const dispatch = useAppDispatch();
-  const { slowRefresh } = Hooks.useRefresh();
+  const { slowRefresh } = useRefresh();
 
   useEffect(() => {
     dispatch(fetchDehubPrice());

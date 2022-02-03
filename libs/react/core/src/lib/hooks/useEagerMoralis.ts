@@ -5,7 +5,7 @@ import {
 import { useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
 
-export default function useEagerMoralis() {
+export function useEagerMoralis() {
   const {
     enableWeb3,
     isAuthenticated,

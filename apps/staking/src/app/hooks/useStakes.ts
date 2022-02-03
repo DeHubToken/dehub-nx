@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { useRefresh } from '@dehub/react/core';
 import { BIG_ZERO, ethersToBigNumber } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { useEffect, useState } from 'react';
@@ -45,7 +45,7 @@ export const useStakes = (staker: string | null) => {
     harvestPending: BIG_ZERO,
     harvested: false,
   });
-  const { fastRefresh } = Hooks.useRefresh();
+  const { fastRefresh } = useRefresh();
 
   useEffect(() => {
     const fetch = async () => {
@@ -68,7 +68,7 @@ export const useStakes = (staker: string | null) => {
 };
 
 export const usePendingHarvest = (staker: string | null) => {
-  const { fastRefresh } = Hooks.useRefresh();
+  const { fastRefresh } = useRefresh();
   const [pendingHarvest, setPendingHarvest] = useState<BigNumber | undefined>(
     undefined
   );

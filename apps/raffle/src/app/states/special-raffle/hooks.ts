@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { useRefresh } from '@dehub/react/core';
 import BigNumber from 'bignumber.js';
 import { useEffect, useMemo, useState } from 'react';
 import { useMoralis } from 'react-moralis';
@@ -24,7 +24,7 @@ export const useGetCurrentLotteryId = (): string => {
 
 export const useFetchLottery = () => {
   const { account } = useMoralis();
-  const { fastRefresh, slowRefresh } = Hooks.useRefresh();
+  const { fastRefresh, slowRefresh } = useRefresh();
 
   const dispatch = useAppDispatch();
   const currentLotteryId: string = useGetCurrentLotteryId();

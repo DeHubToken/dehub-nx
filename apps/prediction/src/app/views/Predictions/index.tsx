@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { usePersistState } from '@dehub/react/core';
 import { useMatchBreakpoints, useModal } from '@dehub/react/pcsuikit';
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import {
@@ -59,11 +59,11 @@ const Predictions = () => {
   const walletConnectingState = useWalletConnectingState();
 
   const { isXl } = useMatchBreakpoints();
-  const [hasAcceptedRisk, setHasAcceptedRisk] = Hooks.usePersistState(
+  const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(
     false,
     'dehub_predictions_accepted_risk'
   );
-  const [hasAcceptedChart, setHasAcceptedChart] = Hooks.usePersistState(
+  const [hasAcceptedChart, setHasAcceptedChart] = usePersistState(
     false,
     'dehub_predictions_chart'
   );

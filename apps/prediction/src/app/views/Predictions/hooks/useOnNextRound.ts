@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { usePreviousValue } from '@dehub/react/core';
 import { useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
 import { useAppDispatch } from '../../../state';
@@ -13,7 +13,7 @@ const useOnNextRound = () => {
   const currentEpoch = useGetCurrentEpoch();
   const rounds = useGetSortedRounds();
   const { account } = useMoralis();
-  const previousEpoch = Hooks.usePreviousValue(currentEpoch);
+  const previousEpoch = usePreviousValue(currentEpoch);
   const { swiper } = useSwiper();
   const dispatch = useAppDispatch();
 

@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { useRefresh } from '@dehub/react/core';
 import { BIG_ZERO } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { useEffect, useRef, useState } from 'react';
@@ -9,7 +9,7 @@ import { getBep20Contract } from '../utils/contractHelpers';
 const useTokenBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(BIG_ZERO);
   const { account } = useMoralis();
-  const { fastRefresh } = Hooks.useRefresh();
+  const { fastRefresh } = useRefresh();
   const mountedRef = useRef(true);
 
   useEffect(() => {
