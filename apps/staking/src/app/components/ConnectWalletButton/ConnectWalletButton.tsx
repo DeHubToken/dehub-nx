@@ -1,4 +1,3 @@
-import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
 import {
   moralisProviderLocalStorageKey,
@@ -7,6 +6,7 @@ import {
 import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { getChainId } from '../../config/constants';
 import { useSetWalletConnectingState } from '../../state/application/hooks';
 
@@ -16,7 +16,8 @@ const ConnectWalletButton = () => {
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const mountedRef = useRef(true);
 
-  const { authenticate, logout, activateProvider } = Hooks.useMoralisEthers();
+  const { authenticate, logout } = useMoralis();
+
   const chainId = getChainId();
 
   useEffect(() => {
@@ -53,14 +54,12 @@ const ConnectWalletButton = () => {
                 onAddNetwork
               )
             ) {
-              activateProvider();
               setWalletConnectingState(WalletConnectingState.COMPLETE);
             } else {
               logout();
               setWalletConnectingState(WalletConnectingState.INIT);
             }
           } else {
-            activateProvider();
             setWalletConnectingState(WalletConnectingState.COMPLETE);
           }
 
@@ -70,7 +69,7 @@ const ConnectWalletButton = () => {
         },
       });
     },
-    [authenticate, chainId, activateProvider, logout, setWalletConnectingState]
+    [authenticate, chainId, logout, setWalletConnectingState]
   );
 
   return (

@@ -2,6 +2,7 @@ import { Hooks } from '@dehub/react/core';
 import { WalletConnectingState } from '@dehub/shared/models';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useChain, useMoralis } from 'react-moralis';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
 import { AppState } from '../index';
@@ -81,12 +82,12 @@ export const useFetchPoolInfo = () => {
 
 export const usePullBlockNumber = () => {
   const dispatch = useAppDispatch();
-  const { authProvider, chainId } = Hooks.useMoralisEthers();
+  const { chainId, web3 } = useMoralis();
 
   const isTabActive = Hooks.useIsBrowserTabActive();
 
   const [state, setState] = useState<{
-    chainId: string | undefined;
+    chainId: string | null;
     blockNumber: number | null;
   }>({
     chainId,
@@ -114,17 +115,17 @@ export const usePullBlockNumber = () => {
   );
 
   useEffect(() => {
-    if (!authProvider || !chainId || !isTabActive) return undefined;
+    if (!web3 || !chainId || !isTabActive) return undefined;
 
     setState({ chainId, blockNumber: null });
 
-    authProvider.getBlockNumber().then(blockNumberCallback);
-    authProvider.on('block', blockNumberCallback);
+    web3.getBlockNumber().then(blockNumberCallback);
+    web3.on('block', blockNumberCallback);
 
     return () => {
-      authProvider.removeListener('block', blockNumberCallback);
+      web3.removeListener('block', blockNumberCallback);
     };
-  }, [authProvider, chainId, isTabActive, blockNumberCallback]);
+  }, [web3, chainId, isTabActive, blockNumberCallback]);
 
   const debouncedState = Hooks.useDebounce(state, 100);
 
@@ -146,7 +147,7 @@ export const usePullBlockNumber = () => {
 };
 
 export function useBlockNumber(): number | undefined {
-  const { chainId } = Hooks.useMoralisEthers();
+  const { chainId } = useChain();
 
   return useSelector(
     (state: AppState) => state.application.blockNumber[chainId ?? -1]

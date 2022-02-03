@@ -1,4 +1,3 @@
-import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
@@ -10,6 +9,7 @@ import { Dialog } from 'primereact/dialog';
 import { Slider, SliderChangeParams } from 'primereact/slider';
 import { Toast } from 'primereact/toast';
 import React, { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import BalanceInput from '../../components/BalanceInput/BalanceInput';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
@@ -75,7 +75,8 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { account } = Hooks.useMoralisEthers();
+  const { account, isAuthenticated } = useMoralis();
+  const isAuth = isAuthenticated && account;
   const { userInfo: userStakeInfo } = useStakes(account);
   const dehubBalance = useGetDehubBalance();
   const stakingContract = useStakingContract();
@@ -249,7 +250,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
           )}
           <div className="flex justify-content-end mt-2 mb-5">
             <Text textAlign="right" fontSize="12px">
-              {account && `Balance: ${maxBalance}`}
+              {isAuth && `Balance: ${maxBalance}`}
             </Text>
           </div>
           <Slider
@@ -258,7 +259,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
             value={valueAsBn.lte(maxBalance) ? valueAsBn.toNumber() : 0}
             onChange={handleSliderChange}
             step={0.00001}
-            disabled={!account || isTxPending}
+            disabled={!isAuth || isTxPending}
             style={{ marginBottom: '16px' }}
           />
           <SimpleGrid columns={percentShortcuts.length}>
@@ -275,7 +276,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
                 <Button
                   key={percent}
                   onClick={handleClick}
-                  disabled={!account || isTxPending}
+                  disabled={!isAuth || isTxPending}
                   className="p-button-outlined text-white border-primary justify-content-center"
                 >
                   {`${percent}%`}
@@ -284,10 +285,10 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
             })}
           </SimpleGrid>
           <div className="overview-info text-left w-full mb-2">
-            {account ? (
+            {isAuth ? (
               <Button
                 className="p-button w-full"
-                disabled={!account || disabled}
+                disabled={!isAuth || disabled}
                 onClick={handleEnterPosition}
                 label={capitalize(id)}
                 loading={isTxPending}

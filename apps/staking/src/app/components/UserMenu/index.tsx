@@ -1,16 +1,12 @@
+import { shortenAddress } from '@dehub/shared/utils';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
-
-import { Hooks } from '@dehub/react/core';
-import { shortenAddress } from '@dehub/shared/utils';
-
+import { useMoralis } from 'react-moralis';
 import ConnectWalletButton from '../ConnectWalletButton';
-import { useAppDispatch } from '../../state';
 
 const UserMenu = () => {
-  const dispatch = useAppDispatch();
-  const { account, isAuthenticated, logout, clearProvider } =
-    Hooks.useMoralisEthers();
+  const { isAuthenticated, logout, account } = useMoralis();
+  const isAuth = isAuthenticated && account;
 
   const handleLogout = ({
     originalEvent,
@@ -20,7 +16,6 @@ const UserMenu = () => {
     item: MenuItem;
   }) => {
     logout();
-    clearProvider();
   };
   const items: MenuItem[] = [
     {
@@ -32,7 +27,7 @@ const UserMenu = () => {
   return (
     <ul className="layout-topbar-actions">
       <li>
-        {account ? (
+        {isAuth ? (
           <SplitButton
             label={account ? shortenAddress(account) : 'Connect Wallet'}
             icon="fas fa-wallet"

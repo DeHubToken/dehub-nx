@@ -1,4 +1,3 @@
-import { Hooks } from '@dehub/react/core';
 import {
   BNB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
@@ -17,6 +16,7 @@ import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
 import Box from '../../components/Layout/Box';
@@ -46,10 +46,11 @@ const LiveCard = () => {
   const [claimed, setClaimed] = useState(false);
   const [pendingClaimTx, setPendingClaimTx] = useState(false);
 
+  const { isAuthenticated, account } = useMoralis();
+  const isAuth = isAuthenticated && account;
   const stakingContract = useStakingContract();
   const rewardsContract = useRewardsContract();
   const paused = useStakePaused();
-  const { account } = Hooks.useMoralisEthers();
   const poolInfo = usePoolInfo();
   const closeTimeStamp = poolInfo
     ? Number(poolInfo.closeTimeStamp) * 1000
@@ -306,7 +307,7 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">Weekly BNB Rewards</Header>
-                    {account &&
+                    {isAuth &&
                       (fetchRewardStatus === FetchStatus.SUCCESS ? (
                         !hasAlreadyClaimed && (
                           <Text
@@ -360,7 +361,7 @@ const LiveCard = () => {
                         </>
                       )}
 
-                    {account ? (
+                    {isAuth ? (
                       <Button
                         className="p-button mt-2 justify-content-center w-5"
                         disabled={paused || !isClaimable}

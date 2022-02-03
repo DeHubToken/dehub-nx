@@ -1,4 +1,3 @@
-import { Hooks } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import {
   WalletConnectingMessages,
@@ -7,6 +6,7 @@ import {
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import { useEffect, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { environment } from '../../environments/environment';
 import { Container } from '../components/Layout';
 import PageMeta from '../components/Layout/PageMeta';
@@ -17,8 +17,8 @@ import {
   usePullBusdPrice,
   useWalletConnectingState,
 } from '../state/application/hooks';
-import StakedBottomInfoBox from '../views/StakedBottomInfoBox';
-import StakedTopInfoBox from '../views/StakedTopInfoBox';
+import StakedBottomInfoBox from './StakedBottomInfoBox';
+import StakedTopInfoBox from './StakedTopInfoBox';
 
 const initMessage = {
   header: '',
@@ -33,7 +33,7 @@ export default function Staking() {
   const [message, setMessage] = useState(initMessage);
   const walletConnectingState = useWalletConnectingState();
 
-  const { clearProvider } = Hooks.useMoralisEthers();
+  const { logout } = useMoralis();
 
   const {
     baseUrl: path,
@@ -55,10 +55,10 @@ export default function Staking() {
   useEffect(() => {
     Moralis.onChainChanged(newChainId => {
       if (newChainId !== getChainIdHex()) {
-        clearProvider();
+        logout();
       }
     });
-  }, [clearProvider]);
+  }, [logout]);
 
   useEffect(() => {
     const header = 'Waiting';

@@ -39,7 +39,7 @@ export const useProjectRewards = (staker?: string): BigNumber | undefined => {
   }, [projectRewards]);
 };
 
-export const useWeeklyRewards = (staker?: string) => {
+export const useWeeklyRewards = (staker: string | null) => {
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [bnbRewards, setBNBRewards] = useState(BIG_ZERO);
   const [totalBNBRewards, setTotalBNBRewards] = useState<BigNumber | undefined>(

@@ -35,7 +35,7 @@ const processUserInfo = (userInfo: any): UserInfo => {
   };
 };
 
-export const useStakes = (staker?: string) => {
+export const useStakes = (staker: string | null) => {
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     amount: BIG_ZERO,
@@ -67,7 +67,7 @@ export const useStakes = (staker?: string) => {
   };
 };
 
-export const usePendingHarvest = (staker?: string) => {
+export const usePendingHarvest = (staker: string | null) => {
   const { fastRefresh } = Hooks.useRefresh();
   const [pendingHarvest, setPendingHarvest] = useState<BigNumber | undefined>(
     undefined
