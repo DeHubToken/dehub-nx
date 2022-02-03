@@ -164,13 +164,13 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   const handleEnterPosition = async () => {
     const betMethod = position === BetPosition.BULL ? 'betBull' : 'betBear';
     const decimalValue = getDecimalAmount(valueAsBn, 5);
-    const allowance = await betTokenContract.allowance(
+    const allowance = await betTokenContract?.allowance(
       account,
       predictionContractAddress
     );
 
     try {
-      if (allowance < decimalValue.toNumber()) {
+      if (betTokenContract && allowance < decimalValue.toNumber()) {
         const txApprove = await betTokenContract.approve(
           predictionContractAddress,
           MaxUint256
@@ -186,13 +186,18 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           return;
         }
       }
-
-      const tx = await predictionsContract[betMethod](decimalValue.toNumber());
-      setIsTxPending(true);
-      const result = await tx.wait();
-      setIsTxPending(false);
-      onSuccess(decimalValue, result.transactionHash as string);
-      window.localStorage.setItem(`bet_${id}_${account}`, 'DONE');
+      if (predictionsContract) {
+        const tx = await predictionsContract[betMethod](
+          decimalValue.toNumber()
+        );
+        setIsTxPending(true);
+        const result = await tx.wait();
+        setIsTxPending(false);
+        onSuccess(decimalValue, result.transactionHash as string);
+        window.localStorage.setItem(`bet_${id}_${account}`, 'DONE');
+      } else {
+        console.error('Predictions contract not set!');
+      }
     } catch (error) {
       const errorMsg = t('An error occurred, unable to enter your position');
 

@@ -9,9 +9,9 @@ const useIsRefundable = (epoch: number) => {
 
   useEffect(() => {
     const fetchRefundableStatus = async () => {
-      const canClaim = await predictionsContract.claimable(epoch, account);
+      const canClaim = await predictionsContract?.claimable(epoch, account);
 
-      if (canClaim) {
+      if (predictionsContract && canClaim) {
         const refundable = await predictionsContract.refundable(epoch, account);
         setIsRefundable(refundable);
       } else {
