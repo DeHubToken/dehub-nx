@@ -1,20 +1,14 @@
+import { BlockIcon, CardBody, Flex, Text } from '@dehub/react/pcsuikit';
 import React from 'react';
-import {
-  CardBody,
-  Text,
-  Flex,
-  BlockIcon,
-  LinkExternal,
-} from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
-import { Round, BetPosition } from '../../../../state/types';
 import { useGetTotalIntervalBlocks } from '../../../../state/hooks';
-import ReclaimPositionButton from '../ReclaimPositionButton';
+import { BetPosition, Round } from '../../../../state/types';
 import useIsRefundable from '../../hooks/useIsRefundable';
+import ReclaimPositionButton from '../ReclaimPositionButton';
 import { RoundResultBox } from '../RoundResult';
-import MultiplierArrow from './MultiplierArrow';
 import Card from './Card';
 import CardHeader from './CardHeader';
+import MultiplierArrow from './MultiplierArrow';
 
 interface CanceledRoundCardProps {
   round: Round;

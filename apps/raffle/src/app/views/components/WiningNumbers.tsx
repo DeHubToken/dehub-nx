@@ -1,19 +1,6 @@
 import { Avatar } from 'primereact/avatar';
-import styled from 'styled-components';
 import { Text } from '../../components/Text';
 import { toLotteryNumbers } from '../../utils/numbers';
-
-const Grid = styled.div`
-  display: flex;
-  grid-template-columns: auto;
-  grid-column-gap: 5px;
-`;
-
-interface NumberComponentProps {
-  size?: string;
-  fontSize?: string;
-  number: number;
-}
 
 /*
  * const RoundNumber: React.FC<NumberComponentProps> = ({

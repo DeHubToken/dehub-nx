@@ -7,18 +7,14 @@ import {
 } from '@dehub/shared/models';
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { environment } from '../../../environments/environment';
 import PageMeta from '../../components/layout/PageMeta';
 import UserMenu from '../../components/UserMenu';
 import { getChainIdHex } from '../../config/constants';
 import { useAppDispatch } from '../../state';
 import { useWalletConnectingState } from '../../state/application/hooks';
-import {
-  useGetPredictionsStatus,
-  useInitialBlock,
-  useIsChartPaneOpen,
-} from '../../state/hooks';
+import { useGetPredictionsStatus, useInitialBlock } from '../../state/hooks';
 import {
   fetchCurrentBets,
   initialize,
@@ -58,37 +54,26 @@ const Predictions = () => {
   const walletConnectingState = useWalletConnectingState();
 
   const { isXl } = useMatchBreakpoints();
-  const [hasAcceptedRisk, setHasAcceptedRisk] = Hooks.usePersistState(
+  const [, setHasAcceptedRisk] = Hooks.usePersistState(
     false,
     'dehub_predictions_accepted_risk'
   );
-  const [hasAcceptedChart, setHasAcceptedChart] = Hooks.usePersistState(
+  const [, setHasAcceptedChart] = Hooks.usePersistState(
     false,
     'dehub_predictions_chart'
   );
   const { clearProvider, account, logout } = Hooks.useMoralisEthers();
   const status = useGetPredictionsStatus();
-  const isChartPaneOpen = useIsChartPaneOpen();
   const dispatch = useAppDispatch();
   const initialBlock = useInitialBlock();
   const isDesktop = isXl;
   const handleAcceptRiskSuccess = () => setHasAcceptedRisk(true);
   const handleAcceptChart = () => setHasAcceptedChart(true);
-  const [onPresentRiskDisclaimer] = useModal(
-    <RiskDisclaimer onSuccess={handleAcceptRiskSuccess} />,
-    false
-  );
-  const [onPresentChartDisclaimer] = useModal(
-    <ChartDisclaimer onSuccess={handleAcceptChart} />,
-    false
-  );
-
-  // TODO: memoize modal's handlers
-  const onPresentRiskDisclaimerRef = useRef(onPresentRiskDisclaimer);
-  const onPresentChartDisclaimerRef = useRef(onPresentChartDisclaimer);
+  useModal(<RiskDisclaimer onSuccess={handleAcceptRiskSuccess} />, false);
+  useModal(<ChartDisclaimer onSuccess={handleAcceptChart} />, false);
 
   /*
-   * Hack to avoid trustwallet redirecting to a open in app website on iOS...
+   * Hack to avoid trust wallet redirecting to a open in app website on iOS...
    * Ref: https://github.com/WalletConnect/walletconnect-monorepo/issues/552
    */
   useEffect(() => {

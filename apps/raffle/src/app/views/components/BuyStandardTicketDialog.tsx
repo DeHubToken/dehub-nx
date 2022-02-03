@@ -67,96 +67,90 @@ const BuyStandardTicketDialog = ({
   const { account } = Hooks.useMoralisEthers();
   const [pendingTx, setPendingTx] = useState(-1);
 
-  const {
-    isApproving,
-    isApproved,
-    isConfirmed,
-    isConfirming,
-    handleApprove,
-    handleConfirm,
-  } = useApproveConfirmTransaction({
-    onRequiresApproval: async (
-      provider: Web3Provider,
-      approvalAccount: string
-    ) => {
-      try {
-        const tokenContract = getContract(
-          getDehubAddress(),
-          Bep20Abi,
-          provider,
-          approvalAccount
-        );
-        const response = await tokenContract.allowance(
-          approvalAccount,
-          getStandardLotteryAddress()
-        );
-        const currentAllowance = ethersToBigNumber(response);
-        return currentAllowance.gt(0);
-      } catch (error) {
-        // console.error(error);
-        return false;
-      }
-    },
-    onApprove: async () => {
-      try {
-        return await dehubContract?.approve(
-          getStandardLotteryAddress(),
-          MaxUint256
-        );
-      } catch (error) {
-        console.error(error);
-        setPendingTx(-1);
-        return false;
-      }
-    },
-    onApproveSuccess: async () => {
-      toast?.current?.show({
-        severity: 'info',
-        summary: 'Approved',
-        detail: 'Contract enabled - you can now purchase tickets',
-        life: 4000,
-      });
-      handleConfirm();
-    },
-    onConfirm: async () => {
-      try {
-        return await standardLotteryContract?.buyTickets(
-          currentLotteryId,
-          newTickets.purchased,
-          newTickets.tickets
-        );
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (error: any) {
-        console.error(error.message);
+  const { isApproved, handleApprove, handleConfirm } =
+    useApproveConfirmTransaction({
+      onRequiresApproval: async (
+        provider: Web3Provider,
+        approvalAccount: string
+      ) => {
+        try {
+          const tokenContract = getContract(
+            getDehubAddress(),
+            Bep20Abi,
+            provider,
+            approvalAccount
+          );
+          const response = await tokenContract.allowance(
+            approvalAccount,
+            getStandardLotteryAddress()
+          );
+          const currentAllowance = ethersToBigNumber(response);
+          return currentAllowance.gt(0);
+        } catch (error) {
+          // console.error(error);
+          return false;
+        }
+      },
+      onApprove: async () => {
+        try {
+          return await dehubContract?.approve(
+            getStandardLotteryAddress(),
+            MaxUint256
+          );
+        } catch (error) {
+          console.error(error);
+          setPendingTx(-1);
+          return false;
+        }
+      },
+      onApproveSuccess: async () => {
         toast?.current?.show({
-          severity: 'error',
-          summary: 'Purchase tickets',
-          detail: `Purchase tickets failed - ${
-            error?.data?.message ?? error.message
-          }`,
+          severity: 'info',
+          summary: 'Approved',
+          detail: 'Contract enabled - you can now purchase tickets',
           life: 4000,
         });
+        handleConfirm();
+      },
+      onConfirm: async () => {
+        try {
+          return await standardLotteryContract?.buyTickets(
+            currentLotteryId,
+            newTickets.purchased,
+            newTickets.tickets
+          );
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+          console.error(error.message);
+          toast?.current?.show({
+            severity: 'error',
+            summary: 'Purchase tickets',
+            detail: `Purchase tickets failed - ${
+              error?.data?.message ?? error.message
+            }`,
+            life: 4000,
+          });
+          setPendingTx(-1);
+          return false;
+        }
+      },
+      onSuccess: () => {
+        toast?.current?.show({
+          severity: 'info',
+          summary: 'Purchase tickets',
+          detail: 'Purchased tickets successfully',
+          life: 4000,
+        });
+        dispatch(
+          fetchUserTicketsAndLotteries({
+            account: account?.toString() ?? '',
+            currentLotteryId,
+          })
+        );
         setPendingTx(-1);
-        return false;
-      }
-    },
-    onSuccess: () => {
-      toast?.current?.show({
-        severity: 'info',
-        summary: 'Purchase tickets',
-        detail: 'Purchased tickets successfully',
-        life: 4000,
-      });
-      dispatch(
-        fetchUserTicketsAndLotteries({
-          account: account?.toString() ?? '',
-          currentLotteryId,
-        })
-      );
-      setPendingTx(-1);
-      // onHide();
-    },
-  });
+        // onHide();
+      },
+    });
 
   const toast = useRef<Toast>(null);
 
