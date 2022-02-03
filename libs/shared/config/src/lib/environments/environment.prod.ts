@@ -6,17 +6,8 @@ export const defaultSharedProdEnv: SharedEnv = {
   production: true,
 
   web3: {
-    networks: {
-      bsc: {
-        ...defaultSharedEnv.web3.networks.bsc,
-        chainId: 56,
-        chainIdHex: '0x38',
-        chainName: 'Binance Smart Chain Mainnet',
-        rpcUrl:
-          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
-        blockExplorerUrl: 'https://bscscan.com',
-      },
-    },
+    ...defaultSharedEnv.web3,
+    chainId: 56,
     addresses: {
       contracts: {
         dehub: '0xFC206f429d55c71cb7294EfF40c6ADb20dC21508',

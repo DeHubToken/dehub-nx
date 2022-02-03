@@ -11,7 +11,11 @@ const serverUrl = environment.moralis.serverUrl;
 
 ReactDOM.render(
   <StrictMode>
-    <MoralisProvider appId={appId} serverUrl={serverUrl}>
+    <MoralisProvider
+      appId={appId}
+      serverUrl={serverUrl}
+      initializeOnMount={true}
+    >
       <Providers>
         <Contexts.MoralisEthersProvider>
           <App />

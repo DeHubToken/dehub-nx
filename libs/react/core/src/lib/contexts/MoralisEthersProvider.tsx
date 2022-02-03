@@ -60,7 +60,7 @@ export const MoralisEthersProvider = ({
     // const newChainId = chainId; //(provider.provider as any).chainId;
     // console.log('moralis chainId', newChainId);
     // if (newChainId) {
-    //   setChainId(newChainId/* `0x${newChainId.toString(16)}` */);
+    //   setChainId(newChainId/* decimalToHex(newChainId) */);
     // }
 
     const signerT = provider.getSigner();

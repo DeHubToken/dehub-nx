@@ -1,12 +1,10 @@
-import random from 'lodash/random';
+import { Networks } from '@dehub/shared/config';
+import { getRandomRpcUrl } from '@dehub/shared/utils';
 import { environment } from '../../environments/environment';
 
 // Array of available nodes to connect to
-export const { nodes } = environment.web3.networks.bsc;
+export const { nodes } = Networks[environment.web3.chainId];
 
-const getRpcUrl = () => {
-  const randomIndex = random(0, nodes.length - 1);
-  return nodes[randomIndex];
-};
+const getRpcUrl = () => getRandomRpcUrl(nodes);
 
 export default getRpcUrl;

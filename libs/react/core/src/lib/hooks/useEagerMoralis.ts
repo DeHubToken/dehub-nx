@@ -25,7 +25,6 @@ export default function useEagerMoralis() {
         const provider = window.localStorage.getItem(
           moralisProviderLocalStorageKey
         ) as MoralisWeb3ProviderType;
-        console.log('enableWeb3', provider);
         enableWeb3({ provider });
       }
     };
