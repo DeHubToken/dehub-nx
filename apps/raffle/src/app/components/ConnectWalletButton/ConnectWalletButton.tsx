@@ -1,5 +1,6 @@
 import { WalletModal } from '@dehub/react/ui';
 import {
+  moralisProviderLocalStorageKey,
   MoralisWeb3ProviderType,
   WalletConnectingState,
 } from '@dehub/shared/models';
@@ -31,7 +32,8 @@ const ConnectWalletButton = () => {
       const isMetamaskLogin = provider === 'metamask';
 
       setWalletConnectingState(WalletConnectingState.WAITING);
-      window.localStorage.setItem('provider', provider);
+      window.localStorage.setItem(moralisProviderLocalStorageKey, provider);
+
       authenticate({
         provider,
         ...(isMetamaskLogin && { chainId }),
