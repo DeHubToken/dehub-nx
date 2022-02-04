@@ -49,10 +49,8 @@ const LiveCard = () => {
   const stakingContract = useStakingContract();
   const rewardsContract = useRewardsContract();
   const paused = useStakePaused();
-  const { account, isAuthenticated } = Hooks.useMoralisEthers();
+  const { account } = Hooks.useMoralisEthers();
   const { slowRefresh } = Hooks.useRefresh();
-
-  const isAuth = account && isAuthenticated;
 
   const poolInfo = usePoolInfo();
   const closeTimeStamp = poolInfo
@@ -317,7 +315,7 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">Weekly BNB Rewards</Header>
-                    {isAuth &&
+                    {account &&
                       (fetchRewardStatus === FetchStatus.SUCCESS ? (
                         !hasAlreadyClaimed && (
                           <Text
@@ -371,7 +369,7 @@ const LiveCard = () => {
                         </>
                       )}
 
-                    {isAuth ? (
+                    {account ? (
                       <Button
                         className="p-button mt-2 justify-content-center w-5"
                         disabled={paused || !isClaimable}
