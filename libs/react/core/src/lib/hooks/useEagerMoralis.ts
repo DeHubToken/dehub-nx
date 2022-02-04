@@ -25,7 +25,9 @@ export function useEagerMoralis() {
         const provider = window.localStorage.getItem(
           moralisProviderLocalStorageKey
         ) as MoralisWeb3ProviderType;
-        enableWeb3({ provider });
+        if (provider === 'metamask') {
+          enableWeb3({ provider });
+        }
       }
     };
 
