@@ -11,7 +11,8 @@ import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();
-  const { isAuthenticated, logout, account, Moralis } = useMoralis();
+  const { isAuthenticated, isAuthenticating, logout, account, Moralis } =
+    useMoralis();
   const isAuth = isAuthenticated && account;
 
   const doLogout = useCallback(() => {
@@ -24,23 +25,18 @@ const UserMenu = () => {
   useEffect(() => {
     // TODO: Ben rethink
     const unsubscribeFromWeb3Deactivated = Moralis.onWeb3Deactivated(error => {
-      console.info(
-        `Moralis ${error.connector.type} connector was deactivated! Logging out.`
-      );
-      doLogout();
+      if (!isAuthenticating) {
+        console.info(
+          `Moralis ${error.connector.type} connector was deactivated! Logging out.`
+        );
+        doLogout();
+      }
     });
 
     return () => {
       unsubscribeFromWeb3Deactivated();
     };
-  }, [Moralis, doLogout]);
-
-  // const doLogout = () => {
-  //   logout();
-  //   window.localStorage.removeItem(moralisProviderLocalStorageKey);
-  //   dispatch(clearUserSpecialData());
-  //   dispatch(clearUserStandardData());
-  // };
+  }, [Moralis, isAuthenticating, doLogout]);
 
   const handleLogout = ({
     originalEvent,
