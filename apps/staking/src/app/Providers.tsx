@@ -1,4 +1,4 @@
-import { Contexts } from '@dehub/react/core';
+import { RefreshContextProvider } from '@dehub/react/core';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
@@ -8,9 +8,7 @@ const Providers: React.FC = ({ children }) => {
   return (
     <Provider store={store}>
       <HelmetProvider>
-        <Contexts.RefreshContextProvider>
-          {children}
-        </Contexts.RefreshContextProvider>
+        <RefreshContextProvider>{children}</RefreshContextProvider>
       </HelmetProvider>
     </Provider>
   );
