@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const FAST_INTERVAL = 10000;
 const SLOW_INTERVAL = 60000;
