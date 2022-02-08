@@ -1,11 +1,9 @@
-import { addMonths } from 'date-fns';
 import { Button } from 'primereact/button';
-
-import { EventCountDown } from './components/CountDown';
-import FlexLine from './components/FlexLine';
-import { Text } from '../components/Text';
 import { environment } from '../../environments/environment';
 import Icon from '../components/Icon/Icon';
+import { Text } from '../components/Text';
+import { EventCountDown } from './components/CountDown';
+import FlexLine from './components/FlexLine';
 
 const DeLottoStage2Waiting = () => {
   const now = new Date();

@@ -1,9 +1,7 @@
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-
-import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
-import { Text } from '../../components/Text';
 import { TicketIdLabel, TicketNumberLabel } from '../../components/TicketLabel';
+import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
 
 interface ListTicketDialogProps {
   open: boolean;

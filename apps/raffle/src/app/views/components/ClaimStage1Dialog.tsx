@@ -21,7 +21,6 @@ import { fetchUserData } from '../../states/standard-raffle';
 import {
   useGetUserLotteryData,
   useGetUserLotteryDataLoading,
-  useLottery,
 } from '../../states/standard-raffle/hooks';
 import { LotteryUserRound } from '../../states/standard-raffle/types';
 import { utcToLocal } from '../../utils/dateHelpers';
@@ -34,7 +33,6 @@ interface ClaimStage1DialogProps {
 
 const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
   const dispatch = useAppDispatch();
-  const { currentLotteryId } = useLottery();
 
   const { dehubTotal, rounds: unclaimedRewards } = useGetUserLotteryData();
   const isFetchingRewards = useGetUserLotteryDataLoading();

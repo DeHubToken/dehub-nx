@@ -11,7 +11,7 @@ import {
   IconButton,
   Text,
 } from '@dehub/react/pcsuikit';
-import { BIG_NINE, BIG_TEN, getDecimalAmount } from '@dehub/shared/utils';
+import { getDecimalAmount } from '@dehub/shared/utils';
 import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';
 import { Slider, SliderChangeParams } from 'primereact/slider';
@@ -44,32 +44,8 @@ interface SetPositionCardProps {
   onSuccess: (decimalValue: BigNumber, hash: string) => Promise<void>;
 }
 
-interface TransactionResult {
-  transactionHash?: string;
-}
-
-const gasPrice = new BigNumber(6).times(BIG_TEN.pow(BIG_NINE)).toString();
-
 const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
 const percentShortcuts = [10, 25, 50, 75];
-
-const getPercentDisplay = (percentage: number) => {
-  if (Number.isNaN(percentage)) {
-    return '';
-  }
-
-  if (percentage > 100) {
-    return '';
-  }
-
-  if (percentage < 0) {
-    return '';
-  }
-
-  return `${percentage.toLocaleString(undefined, {
-    maximumFractionDigits: 1,
-  })}%`;
-};
 
 const getButtonProps = (
   value: BigNumber,

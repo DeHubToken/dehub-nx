@@ -39,7 +39,6 @@ const StyledBox = styled(Box)`
 
 const LiveCard = () => {
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
-  const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
 
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
@@ -92,7 +91,14 @@ const LiveCard = () => {
 
   useEffect(() => {
     fetchBNBRewards(userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO));
-  }, [fetchBNBRewards, account, pendingHarvest, claimed, userStakeInfo.amount]);
+  }, [
+    fetchBNBRewards,
+    account,
+    pendingHarvest,
+    claimed,
+    userStakeInfo.amount,
+    slowRefresh,
+  ]);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {

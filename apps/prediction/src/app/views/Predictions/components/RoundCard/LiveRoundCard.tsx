@@ -1,6 +1,3 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { useCountUp } from 'react-countup';
 import {
   CardBody,
   Flex,
@@ -10,22 +7,24 @@ import {
   TooltipText,
   useTooltip,
 } from '@dehub/react/pcsuikit';
+import React, { useEffect } from 'react';
+import { useCountUp } from 'react-countup';
+import BlockProgress from '../../../../components/BlockProgress';
 import { useTranslation } from '../../../../contexts/Localization';
-import { Round, BetPosition } from '../../../../state/types';
 import {
   useBlock,
   useGetIntervalBlocks,
   useGetLastOraclePrice,
 } from '../../../../state/hooks';
-import BlockProgress from '../../../../components/BlockProgress';
-import { formatUsd, getBubbleGumBackground } from '../../helpers';
+import { BetPosition, Round } from '../../../../state/types';
+import { formatUsd } from '../../helpers';
 import PositionTag from '../PositionTag';
-import { RoundResultBox, LockPriceRow, PrizePoolRow } from '../RoundResult';
-import MultiplierArrow from './MultiplierArrow';
+import { LockPriceRow, PrizePoolRow, RoundResultBox } from '../RoundResult';
+import CalculatingCard from './CalculatingCard';
+import CanceledRoundCard from './CanceledRoundCard';
 import Card from './Card';
 import CardHeader from './CardHeader';
-import CanceledRoundCard from './CanceledRoundCard';
-import CalculatingCard from './CalculatingCard';
+import MultiplierArrow from './MultiplierArrow';
 
 interface LiveRoundCardProps {
   round: Round;
@@ -35,21 +34,6 @@ interface LiveRoundCardProps {
   bullMultiplier: number;
   bearMultiplier: number;
 }
-
-const GradientBorder = styled.div`
-  background: linear-gradient(
-    128deg,
-    #0b1113 0%,
-    rgba(26, 50, 63, 0.8) 25%,
-    rgba(50, 19, 56, 0.8) 100%
-  );
-  border-radius: 6px;
-  padding: 1px;
-`;
-
-const GradientCard = styled(Card)`
-  background: ${({ theme }) => getBubbleGumBackground(theme)};
-`;
 
 const LiveRoundCard: React.FC<LiveRoundCardProps> = ({
   round,

@@ -25,7 +25,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({
     try {
       const tx = await predictionsContract?.claim(epoch);
       setIsPendingTx(true);
-      const result = tx.wait();
+      tx.wait();
       if (onSuccess) {
         await onSuccess();
       }

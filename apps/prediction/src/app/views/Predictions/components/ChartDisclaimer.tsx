@@ -1,13 +1,11 @@
-import React from 'react';
 import {
-  ModalContainer,
-  ModalBody,
-  Text,
   Button,
   InjectedModalProps,
-  LinkExternal,
-  Flex,
+  ModalBody,
+  ModalContainer,
+  Text,
 } from '@dehub/react/pcsuikit';
+import React from 'react';
 import { useTranslation } from '../../../contexts/Localization';
 
 interface ChartDisclaimerProps extends InjectedModalProps {

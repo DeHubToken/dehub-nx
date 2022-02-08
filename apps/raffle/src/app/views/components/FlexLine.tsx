@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
 const FlexLine: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className,

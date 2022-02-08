@@ -25,7 +25,6 @@ const DeLottoStage1 = () => {
     isTransitioning,
     currentRound: {
       status,
-      startTime,
       endTime,
       unwonPreviousPotInDehub,
       amountCollectedInDehub,
@@ -39,11 +38,6 @@ const DeLottoStage1 = () => {
     currentLotteryId,
     status
   );
-
-  const nextLotteryIdAsInt =
-    status === LotteryStatus.OPEN
-      ? currentLotteryIdAsInt
-      : currentLotteryIdAsInt + 1;
 
   const previousLotteryIdAsInt =
     status === LotteryStatus.CLAIMABLE

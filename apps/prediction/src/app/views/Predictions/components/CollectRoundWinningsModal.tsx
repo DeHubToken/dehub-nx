@@ -42,10 +42,6 @@ interface CollectRoundWinningsModalProps extends InjectedModalProps {
   onSuccess?: () => Promise<void>;
 }
 
-interface TransactionResult {
-  transactionHash?: string;
-}
-
 const Modal = styled(ModalContainer)`
   overflow: visible;
 `;
