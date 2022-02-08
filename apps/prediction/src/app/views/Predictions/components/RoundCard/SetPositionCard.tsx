@@ -92,11 +92,6 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   ).toNumber();
   const valueAsBn = new BigNumber(value);
 
-  const percentageOfMaxBalance = valueAsBn
-    .div(maxBalance)
-    .times(100)
-    .toNumber();
-  const percentageDisplay = getPercentDisplay(percentageOfMaxBalance);
   const showFieldWarning = !!isAuth && valueAsBn.gt(0) && errorMessage !== null;
   const minBetAmountBalance = getDehubAmount(minBetAmount).toNumber();
 

@@ -1,3 +1,4 @@
+import { useRefresh } from '@dehub/react/core';
 import {
   BNB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
@@ -50,6 +51,7 @@ const LiveCard = () => {
   const stakingContract = useStakingContract();
   const rewardsContract = useRewardsContract();
   const paused = useStakePaused();
+  const { slowRefresh } = useRefresh();
   const poolInfo = usePoolInfo();
   const closeTimeStamp = poolInfo
     ? Number(poolInfo.closeTimeStamp) * 1000
