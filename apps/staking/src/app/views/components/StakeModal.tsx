@@ -35,24 +35,6 @@ const SimpleGrid = styled.div<{ columns: number }>`
 
 const percentShortcuts = [10, 25, 50, 75, 100];
 
-const getPercentDisplay = (percentage: number) => {
-  if (Number.isNaN(percentage)) {
-    return '';
-  }
-
-  if (percentage > 100) {
-    return '';
-  }
-
-  if (percentage < 0) {
-    return '';
-  }
-
-  return `${percentage.toLocaleString(undefined, {
-    maximumFractionDigits: 1,
-  })}%`;
-};
-
 const getButtonProps = (
   value: BigNumber,
   dehubBalance: BigNumber,
@@ -89,10 +71,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   ).toNumber();
   const valueAsBn = new BigNumber(value);
 
-  const percentageOfMaxBalance = valueAsBn
-    .div(maxBalance)
-    .times(100)
-    .toNumber();
   const stakingContractAddress = getStakingAddress();
   const dehubContract = useDehubContract();
   const showFieldWarning =
