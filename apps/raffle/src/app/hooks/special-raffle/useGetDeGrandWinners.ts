@@ -1,11 +1,10 @@
-import { useCallback, useState, useEffect, useRef } from 'react';
-
-import { Hooks } from '@dehub/react/core';
-import { useLottery } from '../../states/special-raffle/hooks';
-import { LotteryTicketOwner } from '../../config/constants/types';
-import { fetchUserDeGrandWinners } from '../../states/special-raffle/helpers';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { MAX_DEGRAND_REQUEST_SIZE } from '../../config/constants';
+import { LotteryTicketOwner } from '../../config/constants/types';
 import { fetchHistoricalDeGrands } from '../../states/special-raffle/fetchHistoricalDeGrands';
+import { fetchUserDeGrandWinners } from '../../states/special-raffle/helpers';
+import { useLottery } from '../../states/special-raffle/hooks';
 import { DeGrandHistory } from '../../states/special-raffle/types';
 
 export enum FetchStatus {
@@ -15,7 +14,7 @@ export enum FetchStatus {
 }
 
 const useGetDeGrandWinners = () => {
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { isTransitioning } = useLottery();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [winners, setWinners] = useState<LotteryTicketOwner[]>([]);
@@ -47,7 +46,7 @@ const useGetDeGrandWinners = () => {
 };
 
 export const useGetHistoricalDeGrands = () => {
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { isTransitioning } = useLottery();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [historicalDeGrands, setHistoricalDeGrands] = useState<

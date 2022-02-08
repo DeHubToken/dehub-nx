@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
-import usePreviousValue from './usePreviousValue';
+import { usePreviousValue } from './usePreviousValue';
 
 /**
  * A helper hook to keep track of the time between events
  * Can also be used to force an effect to re-run
  */
-const useLastUpdated = () => {
+export const useLastUpdated = () => {
   const [lastUpdated, setStateLastUpdated] = useState(Date.now());
   const previousLastUpdated = usePreviousValue(lastUpdated);
 
@@ -15,5 +15,3 @@ const useLastUpdated = () => {
 
   return { lastUpdated, previousLastUpdated, setLastUpdated };
 };
-
-export default useLastUpdated;

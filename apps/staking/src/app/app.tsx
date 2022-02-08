@@ -1,3 +1,4 @@
+import { useEagerMoralis } from '@dehub/react/core';
 import { Loader } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
 import { Route, Router, Switch } from 'react-router-dom';
@@ -12,6 +13,8 @@ BigNumber.config({
 });
 
 export function App() {
+  useEagerMoralis();
+
   return (
     <Router history={history}>
       <SuspenseWithChunkError fallback={<Loader />}>

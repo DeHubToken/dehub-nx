@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { useEagerMoralis } from '@dehub/react/core';
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import {
   WalletConnectingMessages,
@@ -7,14 +7,15 @@ import {
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import { useEffect, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { environment } from '../../environments/environment';
 import PageMeta from '../components/Layout/PageMeta';
 import UserMenu from '../components/UserMenu';
 import { getChainIdHex } from '../config/constants';
 import { useWalletConnectingState } from '../states/application/hooks';
-import DeGrand from '../views/DeGrand';
-import DeLotto from '../views/DeLotto';
 import FlexLine from './components/FlexLine';
+import DeGrand from './DeGrand';
+import DeLotto from './DeLotto';
 
 const initMessage = {
   header: '',
@@ -26,7 +27,9 @@ export default function Lottery() {
   const [message, setMessage] = useState(initMessage);
   const walletConnectingState = useWalletConnectingState();
 
-  const { clearProvider } = Hooks.useMoralisEthers();
+  const { logout } = useMoralis();
+
+  useEagerMoralis();
 
   const {
     baseUrl: path,
@@ -46,12 +49,12 @@ export default function Lottery() {
   }, []);
 
   useEffect(() => {
-    Moralis.Web3.onChainChanged(newChainId => {
+    Moralis.onChainChanged(newChainId => {
       if (newChainId !== getChainIdHex()) {
-        clearProvider();
+        logout();
       }
     });
-  }, [clearProvider]);
+  }, [logout]);
 
   useEffect(() => {
     const header = 'Waiting';

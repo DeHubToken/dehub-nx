@@ -1,2 +1,2 @@
-export * as Contexts from './lib/contexts';
-export * as Hooks from './lib/hooks';
+export * from './lib/contexts';
+export * from './lib/hooks';

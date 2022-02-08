@@ -1,10 +1,10 @@
-import { Hooks } from '@dehub/react/core';
 import {
-  Web3Provider,
   TransactionReceipt,
   TransactionResponse,
+  Web3Provider,
 } from '@ethersproject/providers';
 import { useEffect, useReducer, useRef } from 'react';
+import { useMoralis } from 'react-moralis';
 
 type LoadingState = 'idle' | 'loading' | 'success' | 'fail';
 
@@ -100,7 +100,8 @@ const useApproveConfirmTransaction = ({
   onApproveSuccess, // = noop,
   onToast,
 }: ApproveConfirmTransaction) => {
-  const { account, authProvider } = Hooks.useMoralisEthers();
+  const { account, web3 } = useMoralis();
+
   const [state, dispatch] = useReducer(reducer, initialState);
   // https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
   const mountedRef = useRef(true);
@@ -115,8 +116,8 @@ const useApproveConfirmTransaction = ({
 
   useEffect(() => {
     mountedRef.current = true;
-    if (account && handlePreApprove.current && authProvider) {
-      handlePreApprove.current(authProvider, account).then(result => {
+    if (account && handlePreApprove.current && web3) {
+      handlePreApprove.current(web3, account).then(result => {
         if (!mountedRef.current) {
           return;
         }
@@ -127,7 +128,7 @@ const useApproveConfirmTransaction = ({
         }
       });
     }
-  }, [account, authProvider, handlePreApprove]);
+  }, [account, web3, handlePreApprove]);
 
   return {
     isApproving: state.approvalState === 'loading',

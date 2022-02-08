@@ -1,11 +1,8 @@
 import React from 'react';
-import uniqueId from 'lodash/uniqueId';
 import Svg from '../Svg';
 import { SvgProps } from '../types';
 
 const Icon: React.FC<SvgProps> = props => {
-  const id = uniqueId('svg');
-
   return (
     <Svg viewBox="0 0 62.16 62.16" {...props}>
       <g id="_ÎÓÈ_4" data-name="—ÎÓÈ_4" transform="translate(-20.36 -16.32)">

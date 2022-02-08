@@ -1,20 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
-import { endOfMonth } from 'date-fns';
+import { shortenAddress } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
-
-import { Hooks } from '@dehub/react/core';
-import { shortenAddress } from '@dehub/shared/utils';
-
+import { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { Header, Text } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
 import { LotteryTicketOwner } from '../../config/constants/types';
 import useGetDeGrandWinners, {
   FetchStatus,
 } from '../../hooks/special-raffle/useGetDeGrandWinners';
-import { useSpecialLotteryContract } from '../../hooks/useContract';
 import {
   useLottery,
   useThisMonthDeGrandPrize,
@@ -35,7 +31,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
   const isFetchingWinners =
     // fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const deGrandPrize = useThisMonthDeGrandPrize();
   const [myWinningTicketIds, setMyWinningTicketIds] = useState<string[]>([]);
   const [filteredWinners, setFilteredWiners] = useState<string[]>([]);

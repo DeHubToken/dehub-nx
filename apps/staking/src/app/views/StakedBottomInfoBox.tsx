@@ -1,6 +1,5 @@
 import moment from 'moment';
 import Container from '../components/Layout/Container';
-import { useStakingContract } from '../hooks/useContract';
 import useCurrentTime from '../hooks/useTimer';
 import { usePoolInfo } from '../state/application/hooks';
 import ComingSoon from './components/ComingSoon';
@@ -8,7 +7,6 @@ import LiveCard from './components/LiveCard';
 
 const StakedBottomInfoBox = () => {
   useCurrentTime();
-  const stakingContract = useStakingContract();
   const poolInfo = usePoolInfo();
 
   const openTimeStamp = poolInfo ? Number(poolInfo.openTimeStamp) * 1000 : 0;

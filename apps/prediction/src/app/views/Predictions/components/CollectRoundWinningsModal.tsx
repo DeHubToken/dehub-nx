@@ -1,51 +1,45 @@
-import React, { useState } from 'react';
-import BigNumber from 'bignumber.js';
-import styled from 'styled-components';
 import {
-  ModalContainer,
-  ModalBody,
-  ModalTitle,
-  ModalHeader,
-  InjectedModalProps,
-  Button,
   AutoRenewIcon,
-  Text,
+  Box,
+  Button,
   Flex,
   Heading,
-  Box,
+  InjectedModalProps,
   LinkExternal,
+  ModalBody,
   ModalCloseButton,
+  ModalContainer,
+  ModalHeader,
+  ModalTitle,
+  Text,
 } from '@dehub/react/pcsuikit';
-import { Hooks } from '@dehub/react/core';
 import {
   BUSD_DECIMALS,
-  DEHUB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
+  DEHUB_DECIMALS,
 } from '@dehub/shared/config';
 import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
 import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
-
-import Icon from '../../../components/Icon/Icon';
+import BigNumber from 'bignumber.js';
+import React, { useState } from 'react';
+import { useMoralis } from 'react-moralis';
+import styled from 'styled-components';
+import { useTranslation } from '../../../contexts/Localization';
+import { usePredictionsContract } from '../../../hooks/useContract';
+import useTheme from '../../../hooks/useTheme';
+import useToast from '../../../hooks/useToast';
 import { useAppDispatch } from '../../../state';
 import { useDehubBusdPrice } from '../../../state/application/hooks';
-import { markBetAsCollected } from '../../../state/predictions';
-import { useTranslation } from '../../../contexts/Localization';
-import useToast from '../../../hooks/useToast';
-import { usePredictionsContract } from '../../../hooks/useContract';
-import { formatDehub } from '../helpers';
-import DuotoneFontAwesomeIcon from '../../Predictions/components/DuotoneFontAwesomeIcon';
-import useTheme from '../../../hooks/useTheme';
 import { useRewardRate, useTotalRate } from '../../../state/hooks';
+import { markBetAsCollected } from '../../../state/predictions';
+import DuotoneFontAwesomeIcon from '../../Predictions/components/DuotoneFontAwesomeIcon';
+import { formatDehub } from '../helpers';
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
   payout: number | null;
   roundId: string;
   epoch: number;
   onSuccess?: () => Promise<void>;
-}
-
-interface TransactionResult {
-  transactionHash?: string;
 }
 
 const Modal = styled(ModalContainer)`
@@ -60,7 +54,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   onSuccess,
 }) => {
   const [isPendingTx, setIsPendingTx] = useState(false);
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { t } = useTranslation();
   const { toastSuccess, toastError } = useToast();
   const predictionsContract = usePredictionsContract();
@@ -72,7 +66,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
 
   const handleClick = async () => {
     try {
-      const tx = await predictionsContract.claim(epoch);
+      const tx = await predictionsContract?.claim(epoch);
       setIsPendingTx(true);
       const result = await tx.wait();
       if (onSuccess) {

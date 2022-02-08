@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
 import { Flex, Text } from '@dehub/react/pcsuikit';
-import styled, { DefaultTheme } from 'styled-components';
+import React, { ReactElement } from 'react';
+import styled from 'styled-components';
 
 type Status = 'expired' | 'live' | 'next' | 'soon' | 'canceled' | 'calculating';
 
@@ -11,23 +11,6 @@ interface CardHeaderProps {
   blockNumber: number;
   icon?: ReactElement;
 }
-
-const getBackgroundColor = (theme: DefaultTheme, status: Status) => {
-  switch (status) {
-    case 'calculating':
-      return theme.colors.gradients.cardHeader;
-    case 'live':
-      return 'transparent';
-    case 'canceled':
-      return theme.colors.warning;
-    case 'next':
-      return theme.colors.secondary;
-    case 'expired':
-    case 'soon':
-    default:
-      return theme.colors.cardBorder;
-  }
-};
 
 type TextColor = 'textDisabled' | 'white' | 'secondary' | 'text' | 'textSubtle';
 type FallbackColor = 'text' | 'textSubtle';

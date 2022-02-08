@@ -1,6 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
 import { Button, ButtonProps, useModal } from '@dehub/react/pcsuikit';
+import React from 'react';
 import CollectRoundWinningsModal from './CollectRoundWinningsModal';
 
 interface CollectWinningsButtonProps extends ButtonProps {

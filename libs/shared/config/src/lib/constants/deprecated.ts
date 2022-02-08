@@ -12,53 +12,6 @@ export enum ChainId {
 }
 
 /** @deprecated please use from env */
-interface NativeCurrencyInfo {
-  name: string;
-  symbol: string;
-  decimals: number;
-}
-
-/** @deprecated please use from env */
-export interface NetworkInfo {
-  CHAIN_ID_HEX: string;
-  CHAIN_ID_DEC: number;
-  CHAIN_NAME: string;
-  NATIVE_CURRENCY: NativeCurrencyInfo;
-  RPC_URL: string;
-  BLOCK_EXPLORER_URLS: string;
-}
-
-/** @deprecated please use from env */
-export const Constants: { [key: number]: NetworkInfo } = {
-  56: {
-    CHAIN_ID_HEX: '0x38',
-    CHAIN_ID_DEC: 56,
-    CHAIN_NAME: 'Binance Smart Chain Mainnet',
-    NATIVE_CURRENCY: {
-      name: 'BNB',
-      symbol: 'bnb',
-      decimals: 18,
-    },
-    RPC_URL:
-      'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
-    BLOCK_EXPLORER_URLS: 'https://bscscan.com',
-  },
-  97: {
-    CHAIN_ID_HEX: '0x61',
-    CHAIN_ID_DEC: 97,
-    CHAIN_NAME: 'Binance Smart Chain Testnet',
-    NATIVE_CURRENCY: {
-      name: 'BNB',
-      symbol: 'bnb',
-      decimals: 18,
-    },
-    RPC_URL:
-      'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
-    BLOCK_EXPLORER_URLS: 'https://testnet.bscscan.com',
-  },
-};
-
-/** @deprecated please use from env */
 export const ContractAddresses: {
   [chainId in ChainId]: { [label: string]: string };
 } = {

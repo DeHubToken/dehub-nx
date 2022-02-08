@@ -1,19 +1,40 @@
+import { moralisProviderLocalStorageKey } from '@dehub/shared/models';
+import { shortenAddress } from '@dehub/shared/utils';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
-
-import { Hooks } from '@dehub/react/core';
-import { shortenAddress } from '@dehub/shared/utils';
-
-import ConnectWalletButton from '../ConnectWalletButton';
+import { useCallback, useEffect } from 'react';
+import { useMoralis } from 'react-moralis';
 import { useAppDispatch } from '../../states';
-
 import { clearUserData as clearUserSpecialData } from '../../states/special-raffle';
 import { clearUserData as clearUserStandardData } from '../../states/standard-raffle';
+import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();
-  const { account, isAuthenticated, logout, clearProvider } =
-    Hooks.useMoralisEthers();
+  const { isAuthenticating, logout, account, Moralis } = useMoralis();
+
+  const doLogout = useCallback(() => {
+    window.localStorage.removeItem(moralisProviderLocalStorageKey);
+    logout();
+    dispatch(clearUserSpecialData());
+    dispatch(clearUserStandardData());
+  }, [dispatch, logout]);
+
+  useEffect(() => {
+    const unsubscribeFromWeb3Deactivated = Moralis.onWeb3Deactivated(error => {
+      if (!isAuthenticating) {
+        console.info(
+          `Moralis ${error.connector.type} connector was deactivated! Logging out.`
+        );
+        unsubscribeFromWeb3Deactivated();
+        doLogout();
+      }
+    });
+
+    return () => {
+      unsubscribeFromWeb3Deactivated();
+    };
+  }, [Moralis, isAuthenticating, doLogout]);
 
   const handleLogout = ({
     originalEvent,
@@ -22,11 +43,10 @@ const UserMenu = () => {
     originalEvent: React.SyntheticEvent;
     item: MenuItem;
   }) => {
-    logout();
-    clearProvider();
-    dispatch(clearUserSpecialData());
-    dispatch(clearUserStandardData());
+    // unsubscribeFromWeb3Deactivated();
+    doLogout();
   };
+
   const items: MenuItem[] = [
     {
       label: 'Logout',
@@ -39,7 +59,7 @@ const UserMenu = () => {
       <li>
         {account ? (
           <SplitButton
-            label={account ? shortenAddress(account) : 'Connect Wallet'}
+            label={shortenAddress(account)}
             icon="fas fa-wallet"
             model={items}
             className="p-button-primary"

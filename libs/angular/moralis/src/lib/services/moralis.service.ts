@@ -1,7 +1,14 @@
 import { Inject, Injectable } from '@angular/core';
 import { LoggerService, LoggerToken } from '@dehub/angular/core';
-import { ProviderTypes, WalletConnectingState } from '@dehub/shared/models';
-import { publishReplayRefCount, setupNetwork } from '@dehub/shared/utils';
+import {
+  MoralisWeb3ProviderType,
+  WalletConnectingState,
+} from '@dehub/shared/models';
+import {
+  publishReplayRefCount,
+  setupMetamaskNetwork,
+} from '@dehub/shared/utils';
+import * as events from 'events';
 import { Moralis } from 'moralis';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -9,8 +16,8 @@ import { User } from '../models/moralis.models';
 
 interface IMoralis {
   user$: Observable<User | undefined>;
-  userLoggedIn$: Observable<boolean>;
-  login: (provider: ProviderTypes, chainId: number) => void;
+  isAuthenticated$: Observable<boolean>;
+  login: (provider: MoralisWeb3ProviderType, chainId: number) => void;
   logout: () => void;
 
   walletConnectingState$: Observable<WalletConnectingState>;
@@ -29,7 +36,7 @@ export class MoralisService implements IMoralis {
     publishReplayRefCount()
   );
 
-  userLoggedIn$ = this.user$.pipe(map(user => !!user));
+  isAuthenticated$ = this.user$.pipe(map(user => !!user));
 
   private walletConnectingStateSubject =
     new BehaviorSubject<WalletConnectingState>(WalletConnectingState.INIT);
@@ -45,46 +52,52 @@ export class MoralisService implements IMoralis {
       publishReplayRefCount()
     );
 
+  /** Triggered after user closed the session from his wallet (Walletconnect) */
+  private unsubscribeFromWeb3Deactivated?: () => events.EventEmitter;
+
   constructor(@Inject(LoggerToken) private logger: LoggerService) {}
 
-  login(provider: ProviderTypes, chainId: number) {
+  login(provider: MoralisWeb3ProviderType, chainId: number) {
     this.setWalletConnectingState(WalletConnectingState.WAITING);
     const signingMessage = 'DeHub Dapp';
 
     (provider === 'metamask'
-      ? Moralis.Web3.authenticate({ signingMessage })
-      : Moralis.Web3.authenticate({ signingMessage, provider })
+      ? Moralis.authenticate({ signingMessage }).then(async loggedInUser => {
+          if (
+            await setupMetamaskNetwork(
+              chainId,
+              () =>
+                this.setWalletConnectingState(
+                  WalletConnectingState.SWITCH_NETWORK
+                ),
+              () =>
+                this.setWalletConnectingState(WalletConnectingState.ADD_NETWORK)
+            )
+          ) {
+            this.userSubject.next(loggedInUser);
+          } else {
+            this.logout();
+          }
+        })
+      : Moralis.authenticate({ signingMessage, provider }).then(loggedInUser =>
+          this.userSubject.next(loggedInUser)
+        )
     )
-      .then(async loggedInUser => {
-        if (
-          await setupNetwork(
-            chainId,
-            () =>
-              this.setWalletConnectingState(
-                WalletConnectingState.SWITCH_NETWORK
-              ),
-            () =>
-              this.setWalletConnectingState(WalletConnectingState.ADD_NETWORK)
-          )
-        ) {
-          this.userSubject.next(loggedInUser);
-          this.setWalletConnectingState(WalletConnectingState.COMPLETE);
-        } else {
-          this.logout();
-        }
-      })
+      .then(() => this.setWalletConnectingState(WalletConnectingState.COMPLETE))
       .catch(e => {
         this.setWalletConnectingState(WalletConnectingState.INIT);
         this.logger.error(`Moralis '${provider}' login error:`, e);
-      });
+      })
+      .finally(() => this.subscribeEvents());
   }
 
   logout() {
+    this.unsubscribeEvents();
     Moralis.User.logOut()
       // Set user to undefined
       .then(() => this.userSubject.next(undefined))
       // Disconnect Web3 wallet
-      .then(() => Moralis.Web3.cleanup())
+      .then(() => Moralis.cleanup())
       .catch(e => this.logger.error('Moralis logout error:', e))
       // Update wallet connecting state
       .finally(() => this.setWalletConnectingState(WalletConnectingState.INIT));
@@ -93,4 +106,21 @@ export class MoralisService implements IMoralis {
   setWalletConnectingState(state: WalletConnectingState) {
     this.walletConnectingStateSubject.next(state);
   }
+
+  private subscribeEvents() {
+    this.unsubscribeFromWeb3Deactivated = Moralis.onWeb3Deactivated(error => {
+      this.logger.info(
+        `Moralis ${error.connector.type} connector was deactivated! Logging out.`
+      );
+      this.logout();
+    });
+  }
+
+  private unsubscribeEvents() {
+    this.unsubscribeFromWeb3Deactivated?.();
+  }
+
+  // TODO: set account Moralis.onAccountChanged
+  // window.localStorage.removeItem(moralisProviderLocalStorageKey);
+  // EnableWEb3
 }

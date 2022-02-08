@@ -1,24 +1,20 @@
-import { useMemo, useState } from 'react';
-import { format, addMonths } from 'date-fns';
+import { addMonths, format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
-
-import { Hooks } from '@dehub/react/core';
-
+import { useMemo, useState } from 'react';
+import { useMoralis } from 'react-moralis';
+import ConnectWalletButton from '../components/ConnectWalletButton';
+import { Icon } from '../components/Icon';
+import { Header, Text } from '../components/Text';
+import { LotteryStatus } from '../config/constants/types';
+import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
+import { useLottery } from '../states/special-raffle/hooks';
 import BuySpecialTicketDialog from './components/BuySpecialTicketDialog';
 import ClaimStage1Dialog from './components/ClaimStage1Dialog';
 import ClaimStage2Dialog from './components/ClaimStage2Dialog';
 import { EventCountDown } from './components/CountDown';
 import ListTicketDialog from './components/ListTicketDialog';
 import PrizePot from './components/PrizePot';
-
-import { LotteryStatus } from '../config/constants/types';
-import ConnectWalletButton from '../components/ConnectWalletButton';
-import { Header, Text } from '../components/Text';
-import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
-import { useLottery } from '../states/special-raffle/hooks';
-import { localToUTC } from '../utils/dateHelpers';
-import { Icon } from '../components/Icon';
 
 const DeLottoStage2 = () => {
   const {
@@ -47,7 +43,7 @@ const DeLottoStage2 = () => {
       ? currentLotteryIdAsInt
       : currentLotteryIdAsInt + 1;
 
-  const { account } = Hooks.useMoralisEthers();
+  const { isAuthenticated } = useMoralis();
 
   const [listTicketDialog, setListTicketDialog] = useState(false);
   const [buySpecialTicketDialog, setBuySpecialTicketDialog] = useState(false);
@@ -146,7 +142,7 @@ const DeLottoStage2 = () => {
             <div className="overview-info text-left w-full flex flex-column align-items-start">
               <Header className="pb-2">Your Tickets</Header>
               {deLottoStatus !== LotteryStatus.PENDING ? (
-                account && userTickets && !userTickets.isLoading ? (
+                isAuthenticated && userTickets && !userTickets.isLoading ? (
                   <>
                     <Text>
                       You have{' '}
@@ -181,7 +177,7 @@ const DeLottoStage2 = () => {
                         />
                       )}
                   </>
-                ) : account ? (
+                ) : isAuthenticated ? (
                   <>
                     <Skeleton width="100%" height="2.4rem" />
                     <Skeleton width="8rem" height="1.5rem" className="mt-2" />
@@ -205,13 +201,13 @@ const DeLottoStage2 = () => {
           </div>
         </div>
 
-        {deLottoStatus !== LotteryStatus.PENDING && account && (
+        {deLottoStatus !== LotteryStatus.PENDING && isAuthenticated && (
           <div className="col-12 md:col-6 lg:col-6">
             <div className="card overview-box gray shadow-2">
               <div className="overview-info text-left w-full">
                 <Header className="pb-2">History</Header>
                 <Text className="mb-3">Check and claim previous draws.</Text>
-                {account ? (
+                {isAuthenticated ? (
                   <>
                     <Button
                       className="mt-2 justify-content-center mr-3"

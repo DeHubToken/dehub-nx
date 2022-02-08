@@ -1,93 +1,90 @@
+import { Networks } from '@dehub/shared/config';
+import { random } from 'lodash';
 import { Moralis } from 'moralis';
-import { Constants, NetworkInfo } from '@dehub/shared/config';
 
 /**
- * Ask current chain id and switch network if different
- * @param chainId Destination ChainId
+ * Setup network for Metamask which involves adding or switching network as requested.
+ *
+ * @param requestedChainId the requested chain id
  */
-export const setupNetwork = async (
-  chainId: number,
-  onSwitchNetwork?: (
-    currentChainIdHex: string,
-    newChainId: number,
-    newChainIdHex: string
-  ) => void,
-  onAddNetwork?: (chainId: number, chainIdHex: string) => void
-) => {
-  try {
-    const curChainIdHex = await getCurChainIdHex();
+export const setupMetamaskNetwork = async (
+  requestedChainId: number,
+  onSwitchNetwork?: (currentChainId: number, requestedChainId: number) => void,
+  onAddNetwork?: (currentChainId: number, requestedChainId: number) => void
+): Promise<boolean> => {
+  const currentChainIdHex = Moralis.chainId;
+  const requestedChainIdHex = decimalToHex(requestedChainId);
 
-    const chainIdHex = `0x${chainId.toString(16)}`;
+  // Switch Network
+  if (currentChainIdHex && currentChainIdHex !== requestedChainIdHex) {
+    const currentChainId = hexToDecimal(currentChainIdHex);
+    console.warn('Please switch network!');
 
-    // If wrong chain id, ask to switch network
-    if (curChainIdHex !== chainIdHex) {
-      console.warn('Ask to switch network');
-      if (onSwitchNetwork) {
-        onSwitchNetwork(curChainIdHex, chainId, chainIdHex);
-      }
+    if (onSwitchNetwork) onSwitchNetwork(currentChainId, requestedChainId);
+    await Moralis.switchNetwork(requestedChainIdHex)
+      .then(() => true)
+      .catch(async switchError => {
+        // The chain has not been added to MetaMask
+        if ((<{ code: number }>switchError).code === 4902) {
+          if (onAddNetwork) onAddNetwork(currentChainId, requestedChainId);
 
-      try {
-        return await switchNetwork(chainId);
-      } catch (switchError) {
-        // This error code indicates that the chain has not been added to MetaMask.
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if ((switchError as any).code === 4902) {
-          if (onAddNetwork) {
-            onAddNetwork(chainId, chainIdHex);
-          }
-          return await addNetwork(chainId);
+          return await addNetwork(requestedChainId);
         }
         return false;
-      }
-    }
-    return true;
-  } catch (error) {
-    console.error(error);
-    return false;
+      });
   }
-};
-
-export const getCurChainId = async () => {
-  const web3 = await Moralis.Web3.enable();
-  return await web3.eth.getChainId();
-};
-
-export const getCurChainIdHex = async () => {
-  const web3 = await Moralis.Web3.enable();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (web3.currentProvider as any).chainId;
-};
-
-export const switchNetwork = async (chainId: number): Promise<boolean> => {
-  const web3 = await Moralis.Web3.enable();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await (web3.currentProvider as any).request({
-    method: 'wallet_switchEthereumChain',
-    params: [{ chainId: `0x${chainId.toString(16)}` }],
-  });
   return true;
 };
 
-export const addNetwork = async (chainId: number): Promise<boolean> => {
-  try {
-    const networkInfo: NetworkInfo = Constants[chainId];
-    const web3 = await Moralis.Web3.enable();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (web3.currentProvider as any).request({
-      method: 'wallet_addEthereumChain',
-      params: [
-        {
-          chainId: networkInfo.CHAIN_ID_HEX,
-          chainName: networkInfo.CHAIN_NAME,
-          rpcUrls: [networkInfo.RPC_URL],
-          nativeCurrency: networkInfo.NATIVE_CURRENCY,
-          blockExplorerUrls: [networkInfo.BLOCK_EXPLORER_URLS],
-        },
-      ],
+export const addNetwork = async (
+  requestedChainId: number
+): Promise<boolean> => {
+  const {
+    chainId,
+    chainName,
+    blockExplorerUrl,
+    nodes,
+    nativeCurrency: { name: currencyName, symbol: currencySymbol },
+  } = Networks[requestedChainId];
+
+  const rpcUrl = getRandomRpcUrl(nodes);
+
+  return await Moralis.addNetwork(
+    chainId,
+    chainName,
+    currencyName,
+    currencySymbol,
+    rpcUrl,
+    blockExplorerUrl
+  )
+    .then(() => true)
+    .catch(error => {
+      console.error('Moralis addNetwork failed', error);
+      return false;
     });
-  } catch (addError) {
-    // TODO: handle "add" error by showing error alert
-    console.error('addEthereumChain', addError);
-  }
-  return false;
 };
+
+/**
+ * Convert decimal number to hex.
+ *
+ * @param decimal the decimal number
+ * @returns the hex number
+ */
+export const decimalToHex = (decimal: number) => `0x${decimal.toString(16)}`;
+
+/**
+ * Convert hex number to decimal.
+ *
+ * @param decimal the hex number
+ * @returns the decimal number
+ */
+export const hexToDecimal = (hex: string) => parseInt(hex, 16);
+
+/**
+ * Pick random RPC url from nodes.
+ *
+ * @param nodes the network nodes
+ * @returns random node url as rpc
+ */
+export const getRandomRpcUrl = (nodes: string[]) =>
+  nodes[random(0, nodes.length - 1)];

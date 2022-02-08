@@ -1,7 +1,7 @@
-import { Hooks } from '@dehub/react/core';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import React, { useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { environment } from '../../environments/environment';
 import ConnectWalletButton from '../components/ConnectWalletButton';
@@ -40,7 +40,7 @@ const DeGrand = () => {
       ? new Date(deGrandPrize.drawTime * 1000).getUTCMonth()
       : -1;
 
-  const { account } = Hooks.useMoralisEthers();
+  const { isAuthenticated } = useMoralis();
   const [checkDeGrandDialog, setCheckDeGrandDialog] = useState(false);
   const [checkDeGrandHistoryDialog, setCheckDeGrandHistoryDialog] =
     useState(false);
@@ -153,7 +153,7 @@ const DeGrand = () => {
                             >
                               Completed!
                             </Text>
-                            {account ? (
+                            {isAuthenticated ? (
                               <>
                                 <Text>Are you a winner?</Text>
                                 <Button
@@ -208,7 +208,7 @@ const DeGrand = () => {
                   <div className="overview-info text-left w-full">
                     <Header className="pb-2">History</Header>
                     <Text className="mb-3">Check previous DeGrand draws.</Text>
-                    {account ? (
+                    {isAuthenticated ? (
                       <Button
                         className="mt-2 justify-content-center"
                         onClick={() => handleShowDialog('CheckDeGrandHistory')}

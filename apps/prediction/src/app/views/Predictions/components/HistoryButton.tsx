@@ -1,14 +1,13 @@
-import React from 'react';
-import { Hooks } from '@dehub/react/core';
 import { AutoRenewIcon, HistoryIcon, IconButton } from '@dehub/react/pcsuikit';
+import { useMoralis } from 'react-moralis';
 import { useAppDispatch } from '../../../state';
-import { setHistoryPaneState } from '../../../state/predictions';
 import { useGetIsFetchingHistory } from '../../../state/hooks';
+import { setHistoryPaneState } from '../../../state/predictions';
 
 const HistoryButton = () => {
   const isFetchingHistory = useGetIsFetchingHistory();
   const dispatch = useAppDispatch();
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(true));

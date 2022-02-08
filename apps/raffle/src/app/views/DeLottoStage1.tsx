@@ -1,10 +1,16 @@
-import { useMemo, useState } from 'react';
 import { format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
-
-import { Hooks } from '@dehub/react/core';
-
+import { useMemo, useState } from 'react';
+import { useMoralis } from 'react-moralis';
+import ConnectWalletButton from '../components/ConnectWalletButton';
+import { Header, Text } from '../components/Text';
+import { LotteryStatus } from '../config/constants/types';
+import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
+import {
+  useLottery,
+  usePreviousLottery,
+} from '../states/standard-raffle/hooks';
 import BuyStandardTicketDialog from './components/BuyStandardTicketDialog';
 import ClaimStage1Dialog from './components/ClaimStage1Dialog';
 import { EventCountDown } from './components/CountDown';
@@ -13,23 +19,12 @@ import ListTicketDialog from './components/ListTicketDialog';
 import PrizePot from './components/PrizePot';
 import WinningNumbers from './components/WiningNumbers';
 
-import { LotteryStatus } from '../config/constants/types';
-import ConnectWalletButton from '../components/ConnectWalletButton';
-import { Header, Text } from '../components/Text';
-import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
-import {
-  useLottery,
-  usePreviousLottery,
-} from '../states/standard-raffle/hooks';
-import { localToUTC } from '../utils/dateHelpers';
-
 const DeLottoStage1 = () => {
   const {
     currentLotteryId,
     isTransitioning,
     currentRound: {
       status,
-      startTime,
       endTime,
       unwonPreviousPotInDehub,
       amountCollectedInDehub,
@@ -44,11 +39,6 @@ const DeLottoStage1 = () => {
     status
   );
 
-  const nextLotteryIdAsInt =
-    status === LotteryStatus.OPEN
-      ? currentLotteryIdAsInt
-      : currentLotteryIdAsInt + 1;
-
   const previousLotteryIdAsInt =
     status === LotteryStatus.CLAIMABLE
       ? currentLotteryIdAsInt
@@ -60,7 +50,7 @@ const DeLottoStage1 = () => {
     ? parseInt(previousRound.endTime, 10)
     : 0;
 
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
 
   const [listTicketDialog, setListTicketDialog] = useState(false);
   const [buyStandardTicketDialog, setBuyStandardTicketDialog] = useState(false);

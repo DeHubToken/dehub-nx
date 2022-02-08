@@ -1,10 +1,10 @@
-import React from 'react';
-import { Hooks } from '@dehub/react/core';
-import styled from 'styled-components';
 import { Flex } from '@dehub/react/pcsuikit';
-import { useBetCanClaim } from '../../../../state/hooks';
-import { useTranslation } from '../../../../contexts/Localization';
+import React from 'react';
+import { useMoralis } from 'react-moralis';
+import styled from 'styled-components';
 import Icon from '../../../../components/Icon/Icon';
+import { useTranslation } from '../../../../contexts/Localization';
+import { useBetCanClaim } from '../../../../state/hooks';
 import CollectWinningsButton from '../CollectWinningsButton';
 
 interface CollectWinningsOverlayProps {
@@ -42,7 +42,7 @@ const CollectWinningsOverlay: React.FC<CollectWinningsOverlayProps> = ({
   isBottom = false,
   ...props
 }) => {
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { t } = useTranslation();
   const canClaim = useBetCanClaim(account, roundId);
 

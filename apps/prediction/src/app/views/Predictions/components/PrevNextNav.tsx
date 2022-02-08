@@ -6,7 +6,6 @@ import {
 } from '@dehub/react/pcsuikit';
 import React from 'react';
 import styled from 'styled-components';
-import useTheme from '../../../hooks/useTheme';
 import { useGetCurrentEpoch, useGetSortedRounds } from '../../../state/hooks';
 import useSwiper from '../hooks/useSwiper';
 
@@ -27,7 +26,6 @@ const PrevNextNav = () => {
   const { swiper } = useSwiper();
   const currentEpoch = useGetCurrentEpoch();
   const rounds = useGetSortedRounds();
-  const { theme } = useTheme();
 
   const handlePrevSlide = () => {
     swiper?.slidePrev();

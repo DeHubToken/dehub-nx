@@ -1,14 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import { endOfMonth } from 'date-fns';
-import { Button } from 'primereact/button';
+import { shortenAddress } from '@dehub/shared/utils';
 import { Dialog } from 'primereact/dialog';
-import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
-
+import { useRef } from 'react';
 import { Header } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
 import { DeGrandHistory } from '../../states/special-raffle/types';
-import { shortenAddress } from '@dehub/shared/utils';
 
 interface DeGrandWinnersDialogProps {
   open: boolean;

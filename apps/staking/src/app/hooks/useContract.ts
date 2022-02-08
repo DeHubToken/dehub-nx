@@ -1,7 +1,7 @@
-import { Hooks } from '@dehub/react/core';
 import { getContract } from '@dehub/shared/utils';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
+import { useMoralis } from 'react-moralis';
 import { getBnbAddress, getDehubAddress } from '../utils/addressHelpers';
 import {
   getBep20Contract,
@@ -15,29 +15,29 @@ export function useContract(
   ABI?: any,
   withSignerIfPossible = true
 ): Contract | null {
-  const { authProvider, account } = Hooks.useMoralisEthers();
+  const { account, web3 } = useMoralis();
 
   return useMemo(() => {
-    if (!address || !ABI || !authProvider) return null;
+    if (!address || !ABI || !web3) return null;
     try {
       return getContract(
         address,
         ABI,
-        authProvider,
+        web3,
         withSignerIfPossible && account ? account : undefined
       );
     } catch (error) {
       console.error('Failed to get contract', error);
       return null;
     }
-  }, [address, ABI, withSignerIfPossible, authProvider, account]);
+  }, [address, ABI, withSignerIfPossible, web3, account]);
 }
 
 export const useDehubContract = (): Contract | null => {
-  const { signer } = Hooks.useMoralisEthers();
+  const { web3 } = useMoralis();
   return useMemo(
-    () => (signer ? getBep20Contract(getDehubAddress(), signer) : null),
-    [signer]
+    () => (web3 ? getBep20Contract(getDehubAddress(), web3.getSigner()) : null),
+    [web3]
   );
 };
 
@@ -46,11 +46,17 @@ export const useBnbContract = (): Contract | null => {
 };
 
 export const useStakingContract = (): Contract | null => {
-  const { signer } = Hooks.useMoralisEthers();
-  return useMemo(() => getStakingContract(signer), [signer]);
+  const { web3 } = useMoralis();
+  return useMemo(
+    () => (web3 ? getStakingContract(web3.getSigner()) : null),
+    [web3]
+  );
 };
 
 export const useRewardsContract = (): Contract | null => {
-  const { signer } = Hooks.useMoralisEthers();
-  return useMemo(() => (signer ? getRewardsContract(signer) : null), [signer]);
+  const { web3 } = useMoralis();
+  return useMemo(
+    () => (web3 ? getRewardsContract(web3.getSigner()) : null),
+    [web3]
+  );
 };

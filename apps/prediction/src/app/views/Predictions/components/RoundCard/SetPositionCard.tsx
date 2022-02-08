@@ -1,45 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { Slider, SliderChangeParams } from 'primereact/slider';
-import BigNumber from 'bignumber.js';
-
-import { MaxUint256 } from '@ethersproject/constants';
 import {
   ArrowBackIcon,
+  AutoRenewIcon,
+  BalanceInput,
+  Box,
+  Button,
   CardBody,
   CardHeader,
   Flex,
   Heading,
   IconButton,
-  Button,
   Text,
-  BalanceInput,
-  Box,
-  AutoRenewIcon,
 } from '@dehub/react/pcsuikit';
-import { Hooks } from '@dehub/react/core';
-import { getDecimalAmount, BIG_NINE, BIG_TEN } from '@dehub/shared/utils';
-
+import { getDecimalAmount } from '@dehub/shared/utils';
+import { MaxUint256 } from '@ethersproject/constants';
+import BigNumber from 'bignumber.js';
+import { Slider, SliderChangeParams } from 'primereact/slider';
+import React, { useEffect, useState } from 'react';
+import { useMoralis } from 'react-moralis';
+import ConnectWalletButton from '../../../../components/ConnectWalletButton';
 import { DEFAULT_TOKEN_DECIMAL } from '../../../../config';
-import { useGetMinBetAmount } from '../../../../state/hooks';
-import { ContextData } from '../../../../contexts/Localization/types';
 import { useTranslation } from '../../../../contexts/Localization';
+import { ContextData } from '../../../../contexts/Localization/types';
 import {
   useDehubContract,
   usePredictionsContract,
 } from '../../../../hooks/useContract';
-import { useGetDehubBalance } from '../../../../hooks/useTokenBalance';
 import useToast from '../../../../hooks/useToast';
+import { useGetDehubBalance } from '../../../../hooks/useTokenBalance';
+import { useGetMinBetAmount } from '../../../../state/hooks';
 import { BetPosition } from '../../../../state/types';
-import ConnectWalletButton from '../../../../components/ConnectWalletButton';
-import PositionTag from '../PositionTag';
+import { getPredictionsAddress } from '../../../../utils/addressHelpers';
 import { getDehubAmount } from '../../helpers';
 import useSwiper from '../../hooks/useSwiper';
 import FlexRow from '../FlexRow';
+import PositionTag from '../PositionTag';
 import Card from './Card';
-import {
-  getDehubAddress,
-  getPredictionsAddress,
-} from '../../../../utils/addressHelpers';
 
 interface SetPositionCardProps {
   id: string;
@@ -49,32 +44,8 @@ interface SetPositionCardProps {
   onSuccess: (decimalValue: BigNumber, hash: string) => Promise<void>;
 }
 
-interface TransactionResult {
-  transactionHash?: string;
-}
-
-const gasPrice = new BigNumber(6).times(BIG_TEN.pow(BIG_NINE)).toString();
-
 const dust = new BigNumber(0.01).times(DEFAULT_TOKEN_DECIMAL);
 const percentShortcuts = [10, 25, 50, 75];
-
-const getPercentDisplay = (percentage: number) => {
-  if (Number.isNaN(percentage)) {
-    return '';
-  }
-
-  if (percentage > 100) {
-    return '';
-  }
-
-  if (percentage < 0) {
-    return '';
-  }
-
-  return `${percentage.toLocaleString(undefined, {
-    maximumFractionDigits: 1,
-  })}%`;
-};
 
 const getButtonProps = (
   value: BigNumber,
@@ -104,7 +75,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
     key?: string;
     data?: ContextData;
   } | null>(null);
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { swiper } = useSwiper();
   const dehubBalance = useGetDehubBalance();
   const minBetAmount = useGetMinBetAmount();
@@ -120,11 +91,6 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   ).toNumber();
   const valueAsBn = new BigNumber(value);
 
-  const percentageOfMaxBalance = valueAsBn
-    .div(maxBalance)
-    .times(100)
-    .toNumber();
-  const percentageDisplay = getPercentDisplay(percentageOfMaxBalance);
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;
   const minBetAmountBalance = getDehubAmount(minBetAmount).toNumber();
@@ -169,13 +135,13 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   const handleEnterPosition = async () => {
     const betMethod = position === BetPosition.BULL ? 'betBull' : 'betBear';
     const decimalValue = getDecimalAmount(valueAsBn, 5);
-    const allowance = await betTokenContract.allowance(
+    const allowance = await betTokenContract?.allowance(
       account,
       predictionContractAddress
     );
 
     try {
-      if (allowance < decimalValue.toNumber()) {
+      if (betTokenContract && allowance < decimalValue.toNumber()) {
         const txApprove = await betTokenContract.approve(
           predictionContractAddress,
           MaxUint256
@@ -191,13 +157,18 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           return;
         }
       }
-
-      const tx = await predictionsContract[betMethod](decimalValue.toNumber());
-      setIsTxPending(true);
-      const result = await tx.wait();
-      setIsTxPending(false);
-      onSuccess(decimalValue, result.transactionHash as string);
-      window.localStorage.setItem(`bet_${id}_${account}`, 'DONE');
+      if (predictionsContract) {
+        const tx = await predictionsContract[betMethod](
+          decimalValue.toNumber()
+        );
+        setIsTxPending(true);
+        const result = await tx.wait();
+        setIsTxPending(false);
+        onSuccess(decimalValue, result.transactionHash as string);
+        window.localStorage.setItem(`bet_${id}_${account}`, 'DONE');
+      } else {
+        console.error('Predictions contract not set!');
+      }
     } catch (error) {
       const errorMsg = t('An error occurred, unable to enter your position');
 

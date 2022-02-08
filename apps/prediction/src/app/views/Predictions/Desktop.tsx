@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
-import Split from 'split-grid';
 import { ArrowDownIcon, Button, ChartIcon } from '@dehub/react/pcsuikit';
 import debounce from 'lodash/debounce';
-import delay from 'lodash/delay';
 import set from 'lodash/set';
+import React, { useEffect, useRef } from 'react';
+import Split from 'split-grid';
+import styled from 'styled-components';
+import { useTranslation } from '../../contexts/Localization';
 import { useAppDispatch } from '../../state';
 import { usePullBusdPrice } from '../../state/application/hooks';
 import {
@@ -14,12 +14,11 @@ import {
 } from '../../state/hooks';
 import { setChartPaneState } from '../../state/predictions';
 import { PredictionStatus } from '../../state/types';
-import { useTranslation } from '../../contexts/Localization';
-import TradingView from './components/TradingView';
 import {
   ErrorNotification,
   PauseNotification,
 } from './components/Notification';
+import TradingView from './components/TradingView';
 import History from './History';
 import Positions from './Positions';
 

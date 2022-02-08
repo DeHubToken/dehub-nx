@@ -1,9 +1,8 @@
-import { useCallback, useState, useEffect, useRef } from 'react';
-
-import { Hooks } from '@dehub/react/core';
-import { useLottery } from '../../states/special-raffle/hooks';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { LotteryTicketClaimData } from '../../config/constants/types';
 import { fetchUserDeLottoWinningRewards } from '../../states/special-raffle/helpers';
+import { useLottery } from '../../states/special-raffle/hooks';
 
 export enum FetchStatus {
   NOT_FETCHED = 'not-fetched',
@@ -12,7 +11,7 @@ export enum FetchStatus {
 }
 
 const useGetDeLottoWinningRewards = () => {
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { currentLotteryId, isTransitioning } = useLottery();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [winningRewards, setWinningRewards] =

@@ -1,13 +1,13 @@
 import { ReactComponent as MetaMaskIcon } from '@dehub/shared/assets/dehub/icons/metamask.svg';
 import { ReactComponent as TrustWalletIcon } from '@dehub/shared/assets/dehub/icons/trustwallet.svg';
 import { ReactComponent as WalletConnectIcon } from '@dehub/shared/assets/dehub/icons/walletconnect.svg';
-import { ProviderTypes } from '@dehub/shared/models';
+import { MoralisWeb3ProviderType } from '@dehub/shared/models';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 interface WalletModalProps {
   visible: boolean;
   onDismiss: () => void;
-  doConnect: (provider: ProviderTypes) => void;
+  doConnect: (provider: MoralisWeb3ProviderType) => void;
 }
 
 const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {

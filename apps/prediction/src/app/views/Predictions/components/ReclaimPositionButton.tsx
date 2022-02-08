@@ -1,6 +1,5 @@
-import React, { ReactNode, useState } from 'react';
-import { Hooks } from '@dehub/react/core';
 import { AutoRenewIcon, Button, ButtonProps } from '@dehub/react/pcsuikit';
+import React, { ReactNode, useState } from 'react';
 import { useTranslation } from '../../../contexts/Localization';
 import { usePredictionsContract } from '../../../hooks/useContract';
 import useToast from '../../../hooks/useToast';
@@ -19,15 +18,14 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({
 }) => {
   const [isPendingTx, setIsPendingTx] = useState(false);
   const { t } = useTranslation();
-  const { account } = Hooks.useMoralisEthers();
   const predictionsContract = usePredictionsContract();
   const { toastSuccess, toastError } = useToast();
 
   const handleReclaim = async () => {
     try {
-      const tx = await predictionsContract.claim(epoch);
+      const tx = await predictionsContract?.claim(epoch);
       setIsPendingTx(true);
-      const result = tx.wait();
+      tx.wait();
       if (onSuccess) {
         await onSuccess();
       }

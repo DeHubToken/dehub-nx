@@ -1,4 +1,3 @@
-import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
 import {
@@ -12,6 +11,7 @@ import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { Text } from '../../components/Text';
 import { TicketNumberLabel } from '../../components/TicketLabel';
 import { LotteryTicket } from '../../config/constants/types';
@@ -21,7 +21,6 @@ import { fetchUserData } from '../../states/standard-raffle';
 import {
   useGetUserLotteryData,
   useGetUserLotteryDataLoading,
-  useLottery,
 } from '../../states/standard-raffle/hooks';
 import { LotteryUserRound } from '../../states/standard-raffle/types';
 import { utcToLocal } from '../../utils/dateHelpers';
@@ -34,7 +33,6 @@ interface ClaimStage1DialogProps {
 
 const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
   const dispatch = useAppDispatch();
-  const { currentLotteryId } = useLottery();
 
   const { dehubTotal, rounds: unclaimedRewards } = useGetUserLotteryData();
   const isFetchingRewards = useGetUserLotteryDataLoading();
@@ -42,7 +40,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
   const endOfMonthAsInt = utcToLocal(
     endOfMonth(new Date()).getTime()
   ).getTime(); // end of month with 23:59:59
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const [pendingTx, setPendingTx] = useState(-1);
   const lotteryContract = useStandardLotteryContract();
   const toast = useRef<Toast>(null);

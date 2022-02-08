@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { useRefresh } from '@dehub/react/core';
 import {
   BNB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
@@ -17,6 +17,7 @@ import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
 import Box from '../../components/Layout/Box';
@@ -39,19 +40,17 @@ const StyledBox = styled(Box)`
 
 const LiveCard = () => {
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
-  const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
 
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
   const [claimed, setClaimed] = useState(false);
   const [pendingClaimTx, setPendingClaimTx] = useState(false);
 
+  const { account } = useMoralis();
   const stakingContract = useStakingContract();
   const rewardsContract = useRewardsContract();
   const paused = useStakePaused();
-  const { account } = Hooks.useMoralisEthers();
-  const { slowRefresh } = Hooks.useRefresh();
-
+  const { slowRefresh } = useRefresh();
   const poolInfo = usePoolInfo();
   const closeTimeStamp = poolInfo
     ? Number(poolInfo.closeTimeStamp) * 1000
@@ -83,7 +82,7 @@ const LiveCard = () => {
     isClaimable,
     hasAlreadyClaimed,
     nextCycleResetTimestamp,
-  } = useWeeklyRewards(account);
+  } = useWeeklyRewards(account!);
 
   const deHubPriceInBUSD = useDehubBusdPrice();
 
