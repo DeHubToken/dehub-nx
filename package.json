@@ -28,11 +28,6 @@
     "affected": "nx print-affected --select=projects",
     "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config"
   },
-  "commitlint": {
-    "extends": [
-      "@namics/commitlint-conventional-changelog"
-    ]
-  },
   "dependencies": {
     "@angular/animations": "13.2.1",
     "@angular/common": "13.2.1",
