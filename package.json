@@ -26,7 +26,8 @@
     "dep-graph": "nx dep-graph --watch=true",
     "dep-graph:a": "nx affected:dep-graph --watch=true",
     "affected": "nx print-affected --select=projects",
-    "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config"
+    "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@angular/animations": "13.2.1",
