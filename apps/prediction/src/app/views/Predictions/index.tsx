@@ -55,11 +55,11 @@ const Predictions = () => {
   const walletConnectingState = useWalletConnectingState();
 
   const { isXl } = useMatchBreakpoints();
-  const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(
+  const [, setHasAcceptedRisk] = usePersistState(
     false,
     'dehub_predictions_accepted_risk'
   );
-  const [hasAcceptedChart, setHasAcceptedChart] = usePersistState(
+  const [, setHasAcceptedChart] = usePersistState(
     false,
     'dehub_predictions_chart'
   );
