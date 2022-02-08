@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
 interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;

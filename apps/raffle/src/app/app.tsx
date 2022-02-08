@@ -1,14 +1,11 @@
+import { Contexts } from '@dehub/react/core';
 import { HelmetProvider } from 'react-helmet-async';
 import { MoralisProvider } from 'react-moralis';
 import { Provider } from 'react-redux';
-
-import { Contexts } from '@dehub/react/core';
-
-import { getChainId } from './config/constants';
+import { environment } from '../environments/environment';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 import { store } from './states';
 import Lottery from './views/Lottery';
-import { environment } from '../environments/environment';
 
 const { appId, serverUrl } = environment.moralis;
 

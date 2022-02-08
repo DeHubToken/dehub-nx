@@ -1,19 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { Hooks } from '@dehub/react/core';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
-
-import { Hooks } from '@dehub/react/core';
-import { shortenAddress } from '@dehub/shared/utils';
-
-import { LotteryTicketOwner } from '../../config/constants/types';
-import { Text } from '../../components/Text';
-import { Header } from '../../components/Text';
+import { useEffect, useRef, useState } from 'react';
+import { Header, Text } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
+import { LotteryTicketOwner } from '../../config/constants/types';
 import {
-  useGetHistoricalDeGrands,
   FetchStatus,
+  useGetHistoricalDeGrands,
 } from '../../hooks/special-raffle/useGetDeGrandWinners';
 import { useLottery } from '../../states/special-raffle/hooks';
 import { DeGrandHistory } from '../../states/special-raffle/types';

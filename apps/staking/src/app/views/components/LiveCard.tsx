@@ -39,7 +39,6 @@ const StyledBox = styled(Box)`
 
 const LiveCard = () => {
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
-  const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
 
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);

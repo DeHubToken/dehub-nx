@@ -1,21 +1,17 @@
+import { Hooks } from '@dehub/react/core';
+import { BlockIcon, Box, CardBody } from '@dehub/react/pcsuikit';
 import React from 'react';
 import styled from 'styled-components';
-import { Hooks } from '@dehub/react/core';
-import { Box, BlockIcon, CardBody } from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../../../contexts/Localization';
-import { Round, BetPosition } from '../../../../state/types';
-import {
-  useGetBetByRoundId,
-  useRewardRate,
-  useTotalRate,
-} from '../../../../state/hooks';
-import { RoundResult } from '../RoundResult';
+import { useGetBetByRoundId } from '../../../../state/hooks';
+import { BetPosition, Round } from '../../../../state/types';
 import { getPayout } from '../../helpers';
-import MultiplierArrow from './MultiplierArrow';
+import { RoundResult } from '../RoundResult';
+import CanceledRoundCard from './CanceledRoundCard';
 import Card from './Card';
 import CardHeader from './CardHeader';
 import CollectWinningsOverlay from './CollectWinningsOverlay';
-import CanceledRoundCard from './CanceledRoundCard';
+import MultiplierArrow from './MultiplierArrow';
 
 interface ExpiredRoundCardProps {
   round: Round;

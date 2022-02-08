@@ -1,10 +1,10 @@
+import { Flex } from '@dehub/react/pcsuikit';
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, HelpIcon, IconButton } from '@dehub/react/pcsuikit';
 import FlexRow from './FlexRow';
+import HistoryButton from './HistoryButton';
 import { PricePairLabel, TimerLabel } from './Label';
 import PrevNextNav from './PrevNextNav';
-import HistoryButton from './HistoryButton';
 
 const SetCol = styled.div`
   flex: none;
@@ -12,16 +12,6 @@ const SetCol = styled.div`
 
   ${({ theme }) => theme.mediaQueries.lg} {
     width: 270px;
-  }
-`;
-
-const HelpButtonWrapper = styled.div`
-  order: 1;
-  margin: 0 8px 0 0;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    order: 2;
-    margin: 0 0 0 8px;
   }
 `;
 

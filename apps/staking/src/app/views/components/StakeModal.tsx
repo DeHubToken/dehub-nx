@@ -92,7 +92,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
     .div(maxBalance)
     .times(100)
     .toNumber();
-  const percentageDisplay = getPercentDisplay(percentageOfMaxBalance);
   const stakingContractAddress = getStakingAddress();
   const dehubContract = useDehubContract();
   const showFieldWarning =
@@ -107,16 +106,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
     setValue((e.value as number).toFixed(5).toString());
   };
 
-  const setMax = () => {
-    setValue(maxBalance.toString());
-  };
-
-  // Clear value
-  const handleGoBack = () => {
-    setValue('');
-  };
-
-  const { key, disabled } = getButtonProps(
+  const { disabled } = getButtonProps(
     valueAsBn,
     dehubBalance,
     userStakeInfo,

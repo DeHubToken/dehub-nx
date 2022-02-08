@@ -1,24 +1,20 @@
-import { useMemo, useState } from 'react';
-import { format, addMonths } from 'date-fns';
+import { Hooks } from '@dehub/react/core';
+import { addMonths, format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
-
-import { Hooks } from '@dehub/react/core';
-
+import { useMemo, useState } from 'react';
+import ConnectWalletButton from '../components/ConnectWalletButton';
+import { Icon } from '../components/Icon';
+import { Header, Text } from '../components/Text';
+import { LotteryStatus } from '../config/constants/types';
+import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
+import { useLottery } from '../states/special-raffle/hooks';
 import BuySpecialTicketDialog from './components/BuySpecialTicketDialog';
 import ClaimStage1Dialog from './components/ClaimStage1Dialog';
 import ClaimStage2Dialog from './components/ClaimStage2Dialog';
 import { EventCountDown } from './components/CountDown';
 import ListTicketDialog from './components/ListTicketDialog';
 import PrizePot from './components/PrizePot';
-
-import { LotteryStatus } from '../config/constants/types';
-import ConnectWalletButton from '../components/ConnectWalletButton';
-import { Header, Text } from '../components/Text';
-import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
-import { useLottery } from '../states/special-raffle/hooks';
-import { localToUTC } from '../utils/dateHelpers';
-import { Icon } from '../components/Icon';
 
 const DeLottoStage2 = () => {
   const {

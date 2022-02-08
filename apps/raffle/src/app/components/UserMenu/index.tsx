@@ -1,19 +1,15 @@
-import { MenuItem } from 'primereact/menuitem';
-import { SplitButton } from 'primereact/splitbutton';
-
 import { Hooks } from '@dehub/react/core';
 import { shortenAddress } from '@dehub/shared/utils';
-
-import ConnectWalletButton from '../ConnectWalletButton';
+import { MenuItem } from 'primereact/menuitem';
+import { SplitButton } from 'primereact/splitbutton';
 import { useAppDispatch } from '../../states';
-
 import { clearUserData as clearUserSpecialData } from '../../states/special-raffle';
 import { clearUserData as clearUserStandardData } from '../../states/standard-raffle';
+import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();
-  const { account, isAuthenticated, logout, clearProvider } =
-    Hooks.useMoralisEthers();
+  const { account, logout, clearProvider } = Hooks.useMoralisEthers();
 
   const handleLogout = ({
     originalEvent,
