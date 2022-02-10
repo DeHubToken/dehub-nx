@@ -17,5 +17,3 @@ export const Title = styled.div<{
   color: ${({ color }) => color ?? 'inherit'};
   font-size: ${({ fontSize }) => fontSize ?? '30px'};
 `;
-
-export default Heading;
