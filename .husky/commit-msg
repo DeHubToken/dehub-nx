@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname $0)/_/husky.sh"
+
+set +e
+
+npx --no-install commitlint --edit $1
+if [ $? -ne 0 ]; then
+  echo "WARNING: failed to run commit message validation (npx --no-install commitlint)"
+  exit 1;
+fi
+
+exit 0;

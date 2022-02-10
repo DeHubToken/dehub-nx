@@ -26,7 +26,8 @@
     "dep-graph": "nx dep-graph --watch=true",
     "dep-graph:a": "nx affected:dep-graph --watch=true",
     "affected": "nx print-affected --select=projects",
-    "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config"
+    "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@angular/animations": "13.2.1",
@@ -111,6 +112,8 @@
     "@angular/cli": "13.2.2",
     "@angular/compiler-cli": "13.2.1",
     "@angular/language-service": "13.2.1",
+    "@commitlint/cli": "16.1.0",
+    "@commitlint/config-conventional": "16.0.0",
     "@graphql-codegen/add": "3.1.0",
     "@graphql-codegen/cli": "2.2.2",
     "@graphql-codegen/typescript": "2.3.0",
@@ -118,6 +121,7 @@
     "@graphql-codegen/typescript-graphql-request": "4.3.0",
     "@graphql-codegen/typescript-operations": "2.2.0",
     "@graphql-codegen/typescript-react-apollo": "3.2.0",
+    "@namics/commitlint-conventional-changelog": "1.2.2",
     "@ng-web-apis/common": "1.12.1",
     "@nrwl/angular": "13.7.2",
     "@nrwl/cli": "13.7.2",
