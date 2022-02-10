@@ -1,3 +1,4 @@
+import { useApproveConfirmTransaction } from '@dehub/react/core';
 import { BalanceInput, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
@@ -14,7 +15,6 @@ import { Toast } from 'primereact/toast';
 import { useCallback, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import Bep20Abi from '../../config/abis/erc20.json';
-import useApproveConfirmTransaction from '../../hooks/useApproveConfirmTransaction';
 import {
   useDehubContract,
   useSpecialLotteryContract,

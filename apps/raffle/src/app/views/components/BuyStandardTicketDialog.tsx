@@ -1,3 +1,4 @@
+import { useApproveConfirmTransaction } from '@dehub/react/core';
 import { Heading, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
@@ -14,7 +15,6 @@ import { useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import Bep20Abi from '../../config/abis/erc20.json';
 import { LotteryTicket } from '../../config/constants/types';
-import useApproveConfirmTransaction from '../../hooks/useApproveConfirmTransaction';
 import {
   useDehubContract,
   useStandardLotteryContract,

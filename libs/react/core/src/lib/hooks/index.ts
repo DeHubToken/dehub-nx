@@ -1,3 +1,4 @@
+export * from './useApproveConfirmTransaction';
 export * from './useConnectContext';
 export * from './useDebounce';
 export * from './useEagerMoralis';
