@@ -1,14 +1,12 @@
+import { useRefresh } from '@dehub/react/core';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
-import { Hooks } from '@dehub/react/core';
-
-import { fetchCurrentStandardPaused, fetchCurrentSpecialPaused } from '.';
+import { fetchCurrentSpecialPaused, fetchCurrentStandardPaused } from '.';
 import { useAppDispatch } from '..';
 import { State } from '../types';
 
 export const useFetchPaused = () => {
-  const { slowRefresh } = Hooks.useRefresh();
+  const { slowRefresh } = useRefresh();
   const dispatch = useAppDispatch();
 
   useEffect(() => {

@@ -1,9 +1,13 @@
-import { Hooks } from '@dehub/react/core';
 import { WalletModal } from '@dehub/react/ui';
-import { WalletConnectingState } from '@dehub/shared/models';
-import { setupNetwork } from '@dehub/shared/utils';
+import {
+  moralisProviderLocalStorageKey,
+  MoralisWeb3ProviderType,
+  WalletConnectingState,
+} from '@dehub/shared/models';
+import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { getChainId } from '../../config/constants';
 import { useSetWalletConnectingState } from '../../states/application/hooks';
 
@@ -13,7 +17,8 @@ const ConnectWalletButton = () => {
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const mountedRef = useRef(true);
 
-  const { authenticate, logout, activateProvider } = Hooks.useMoralisEthers();
+  const { authenticate, logout } = useMoralis();
+
   const chainId = getChainId();
 
   useEffect(() => {
@@ -23,20 +28,21 @@ const ConnectWalletButton = () => {
   }, []);
 
   const connectWallet = useCallback(
-    provider => {
+    (provider: MoralisWeb3ProviderType) => {
+      const isMetamaskLogin = provider === 'metamask';
+
       setWalletConnectingState(WalletConnectingState.WAITING);
-      window.localStorage.setItem('providerName', provider);
+      window.localStorage.setItem(moralisProviderLocalStorageKey, provider);
+
       authenticate({
-        chainId: chainId,
         provider,
+        ...(isMetamaskLogin && { chainId }),
         signingMessage: 'DeHub Prize Draw',
-        onError: (error: Error) => {
+        onError: (_error: Error) => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
-        onSuccess: async () => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const ethereum = (window as any).ethereum;
-          if (ethereum) {
+        onSuccess: async _user => {
+          if (isMetamaskLogin) {
             const onSwitchNetwork = () => {
               setWalletConnectingState(WalletConnectingState.SWITCH_NETWORK);
             };
@@ -44,16 +50,18 @@ const ConnectWalletButton = () => {
               setWalletConnectingState(WalletConnectingState.ADD_NETWORK);
             };
             if (
-              await setupNetwork(getChainId(), onSwitchNetwork, onAddNetwork)
+              await setupMetamaskNetwork(
+                getChainId(),
+                onSwitchNetwork,
+                onAddNetwork
+              )
             ) {
-              activateProvider();
               setWalletConnectingState(WalletConnectingState.COMPLETE);
             } else {
               logout();
               setWalletConnectingState(WalletConnectingState.INIT);
             }
           } else {
-            activateProvider();
             setWalletConnectingState(WalletConnectingState.COMPLETE);
           }
 
@@ -63,7 +71,7 @@ const ConnectWalletButton = () => {
         },
       });
     },
-    [authenticate, chainId, activateProvider, logout, setWalletConnectingState]
+    [authenticate, chainId, logout, setWalletConnectingState]
   );
 
   return (

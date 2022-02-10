@@ -1,4 +1,3 @@
-import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
@@ -10,6 +9,7 @@ import { Dialog } from 'primereact/dialog';
 import { Slider, SliderChangeParams } from 'primereact/slider';
 import { Toast } from 'primereact/toast';
 import React, { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import BalanceInput from '../../components/BalanceInput/BalanceInput';
 import ConnectWalletButton from '../../components/ConnectWalletButton';
@@ -35,24 +35,6 @@ const SimpleGrid = styled.div<{ columns: number }>`
 
 const percentShortcuts = [10, 25, 50, 75, 100];
 
-const getPercentDisplay = (percentage: number) => {
-  if (Number.isNaN(percentage)) {
-    return '';
-  }
-
-  if (percentage > 100) {
-    return '';
-  }
-
-  if (percentage < 0) {
-    return '';
-  }
-
-  return `${percentage.toLocaleString(undefined, {
-    maximumFractionDigits: 1,
-  })}%`;
-};
-
 const getButtonProps = (
   value: BigNumber,
   dehubBalance: BigNumber,
@@ -75,7 +57,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { userInfo: userStakeInfo } = useStakes(account);
   const dehubBalance = useGetDehubBalance();
   const stakingContract = useStakingContract();
@@ -88,10 +70,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
   ).toNumber();
   const valueAsBn = new BigNumber(value);
 
-  const percentageOfMaxBalance = valueAsBn
-    .div(maxBalance)
-    .times(100)
-    .toNumber();
   const stakingContractAddress = getStakingAddress();
   const dehubContract = useDehubContract();
   const showFieldWarning =

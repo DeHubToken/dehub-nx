@@ -13,12 +13,12 @@ import { MenuItem } from 'primeng/api';
   template: `
     <!-- Logout State -->
     <p-splitButton
-      *ngIf="userLoggedIn; else userLoggedOut"
+      *ngIf="isAuthenticated; else notAuthenticated"
       [label]="label"
       [icon]="icon"
       [model]="items"
     ></p-splitButton>
-    <ng-template #userLoggedOut>
+    <ng-template #notAuthenticated>
       <!-- Login State -->
       <p-button
         [label]="label"
@@ -33,7 +33,7 @@ import { MenuItem } from 'primeng/api';
 export class ConnectWalletButtonComponent implements OnInit {
   @Input() label = 'Connect Wallet';
   @Input() icon = 'fas fa-wallet';
-  @Input() userLoggedIn = false;
+  @Input() isAuthenticated = false;
 
   @Output() showDialog = new EventEmitter<void>();
   @Output() logout = new EventEmitter<void>();

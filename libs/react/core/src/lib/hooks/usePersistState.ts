@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 /**
  * Same as "useState" but saves the value to local storage each time it changes
  */
-const usePersistState = (initialValue: boolean, localStorageKey: string) => {
+export const usePersistState = (
+  initialValue: boolean,
+  localStorageKey: string
+) => {
   const [value, setValue] = useState(() => {
     try {
       const valueFromLS = localStorage.getItem(localStorageKey);
@@ -20,5 +23,3 @@ const usePersistState = (initialValue: boolean, localStorageKey: string) => {
 
   return [value, setValue];
 };
-
-export default usePersistState;

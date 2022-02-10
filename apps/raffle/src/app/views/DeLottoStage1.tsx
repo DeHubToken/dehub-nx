@@ -1,8 +1,8 @@
-import { Hooks } from '@dehub/react/core';
 import { format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 import { useMemo, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import ConnectWalletButton from '../components/ConnectWalletButton';
 import { Header, Text } from '../components/Text';
 import { LotteryStatus } from '../config/constants/types';
@@ -50,7 +50,7 @@ const DeLottoStage1 = () => {
     ? parseInt(previousRound.endTime, 10)
     : 0;
 
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
 
   const [listTicketDialog, setListTicketDialog] = useState(false);
   const [buyStandardTicketDialog, setBuyStandardTicketDialog] = useState(false);

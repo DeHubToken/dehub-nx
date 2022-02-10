@@ -23,7 +23,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({
 
   const handleReclaim = async () => {
     try {
-      const tx = await predictionsContract.claim(epoch);
+      const tx = await predictionsContract?.claim(epoch);
       setIsPendingTx(true);
       tx.wait();
       if (onSuccess) {

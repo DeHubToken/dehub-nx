@@ -1,4 +1,3 @@
-import { Hooks } from '@dehub/react/core';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
   ethersToBigNumber,
@@ -11,6 +10,7 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import { useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { Header, Text } from '../../components/Text';
 import Bep20Abi from '../../config/abis/erc20.json';
 import { LotteryTicket } from '../../config/constants/types';
@@ -64,7 +64,7 @@ const BuyStandardTicketDialog = ({
   const dehubContract = useDehubContract();
   const standardLotteryContract = useStandardLotteryContract();
 
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const [pendingTx, setPendingTx] = useState(-1);
 
   const { isApproved, handleApprove, handleConfirm } =

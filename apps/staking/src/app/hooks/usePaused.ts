@@ -1,10 +1,10 @@
-import { Hooks } from '@dehub/react/core';
+import { useRefresh } from '@dehub/react/core';
 import { useEffect, useState } from 'react';
 import { getStakingContract } from '../utils/contractHelpers';
 
 export const useStakePaused = () => {
   const [paused, setPaused] = useState(false);
-  const { slowRefresh } = Hooks.useRefresh();
+  const { slowRefresh } = useRefresh();
 
   useEffect(() => {
     const fetch = async () => {

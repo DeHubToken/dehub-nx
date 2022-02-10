@@ -1,24 +1,22 @@
-import React from 'react';
-import BigNumber from 'bignumber.js';
-import styled from 'styled-components';
-
-import { Hooks } from '@dehub/react/core';
 import {
   Box,
+  Button,
   Flex,
   Heading,
-  Text,
-  Button,
   Link,
   OpenNewIcon,
+  Text,
 } from '@dehub/react/pcsuikit';
 import {
   BUSD_DECIMALS,
-  DEHUB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
+  DEHUB_DECIMALS,
 } from '@dehub/shared/config';
 import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
-
+import BigNumber from 'bignumber.js';
+import React from 'react';
+import { useMoralis } from 'react-moralis';
+import styled from 'styled-components';
 import { useTranslation } from '../../../../../contexts/Localization';
 import { useDehubBusdPrice } from '../../../../../state/application/hooks';
 import {
@@ -26,12 +24,12 @@ import {
   useRewardRate,
   useTotalRate,
 } from '../../../../../state/hooks';
-import { Bet, BetPosition } from '../../../../../state/types';
-import { formatDehub, getMultiplier, getPayout } from '../../../helpers';
 import {
   getRoundResult,
   Result,
 } from '../../../../../state/predictions/helpers';
+import { Bet, BetPosition } from '../../../../../state/types';
+import { formatDehub, getMultiplier, getPayout } from '../../../helpers';
 import PnlChart from './PnlChart';
 import SummaryRow from './SummaryRow';
 
@@ -145,7 +143,7 @@ const getPnlSummary = (
 
 const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
   const { t } = useTranslation();
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const currentEpoch = useGetCurrentEpoch();
   const dehubPrice = useDehubBusdPrice();
   const rewardRate = useRewardRate();

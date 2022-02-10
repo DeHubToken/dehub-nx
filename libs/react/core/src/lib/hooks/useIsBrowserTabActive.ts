@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 // Check if the tab is active in the user browser
-const useIsBrowserTabActive = () => {
+export const useIsBrowserTabActive = () => {
   const isBrowserTabActiveRef = useRef(true);
 
   useEffect(() => {
@@ -18,5 +18,3 @@ const useIsBrowserTabActive = () => {
 
   return isBrowserTabActiveRef;
 };
-
-export default useIsBrowserTabActive;

@@ -1,4 +1,3 @@
-import { Contexts } from '@dehub/react/core';
 import { HelmetProvider } from 'react-helmet-async';
 import { MoralisProvider } from 'react-moralis';
 import { Provider } from 'react-redux';
@@ -11,15 +10,17 @@ const { appId, serverUrl } = environment.moralis;
 
 export function App() {
   return (
-    <MoralisProvider appId={appId} serverUrl={serverUrl}>
+    <MoralisProvider
+      appId={appId}
+      serverUrl={serverUrl}
+      initializeOnMount={true}
+    >
       <Provider store={store}>
-        <Contexts.MoralisEthersProvider>
-          <RefreshContextProvider>
-            <HelmetProvider>
-              <Lottery />
-            </HelmetProvider>
-          </RefreshContextProvider>
-        </Contexts.MoralisEthersProvider>
+        <RefreshContextProvider>
+          <HelmetProvider>
+            <Lottery />
+          </HelmetProvider>
+        </RefreshContextProvider>
       </Provider>
     </MoralisProvider>
   );

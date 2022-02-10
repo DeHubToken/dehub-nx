@@ -1,29 +1,29 @@
-import React from 'react';
-import { Hooks } from '@dehub/react/core';
 import {
   ArrowForwardIcon,
   Box,
   Button,
-  Radio,
-  Flex,
-  Heading,
-  Text,
   ButtonMenu,
   ButtonMenuItem,
+  Flex,
+  Heading,
+  Radio,
+  Text,
 } from '@dehub/react/pcsuikit';
+import React from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
+import { useTranslation } from '../../../../contexts/Localization';
 import { useAppDispatch } from '../../../../state';
-import { HistoryFilter } from '../../../../state/types';
-import {
-  setHistoryFilter,
-  setHistoryPaneState,
-  fetchHistory,
-} from '../../../../state/predictions';
 import {
   useGetHistoryFilter,
   useGetIsFetchingHistory,
 } from '../../../../state/hooks';
-import { useTranslation } from '../../../../contexts/Localization';
+import {
+  fetchHistory,
+  setHistoryFilter,
+  setHistoryPaneState,
+} from '../../../../state/predictions';
+import { HistoryFilter } from '../../../../state/types';
 import { getBubbleGumBackground } from '../../helpers';
 
 const Filter = styled.label`
@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
   const isFetchingHistory = useGetIsFetchingHistory();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(false));

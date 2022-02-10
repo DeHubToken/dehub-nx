@@ -1,6 +1,3 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Hooks } from '@dehub/react/core';
 import {
   ArrowBackIcon,
   ArrowForwardIcon,
@@ -11,8 +8,10 @@ import {
   HistoryIcon,
   IconButton,
 } from '@dehub/react/pcsuikit';
+import React from 'react';
+import { useMoralis } from 'react-moralis';
+import styled from 'styled-components';
 import { useAppDispatch } from '../../../state';
-import { PredictionStatus } from '../../../state/types';
 import {
   useGetPredictionsStatus,
   useIsChartPaneOpen,
@@ -22,6 +21,7 @@ import {
   setChartPaneState,
   setHistoryPaneState,
 } from '../../../state/predictions';
+import { PredictionStatus } from '../../../state/types';
 import useSwiper from '../hooks/useSwiper';
 
 const ButtonNav = styled.div`
@@ -64,7 +64,7 @@ const MobileMenu = () => {
   const status = useGetPredictionsStatus();
   const activeIndex = getActiveIndex(isHistoryOpen, isChartOpen);
   const dispatch = useAppDispatch();
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
 
   const handleItemClick = (index: number) => {
     switch (index) {

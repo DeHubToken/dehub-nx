@@ -1,9 +1,9 @@
-import { Hooks } from '@dehub/react/core';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { Header, Text } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
 import { LotteryTicketOwner } from '../../config/constants/types';
@@ -27,7 +27,7 @@ const DeGrandHistoryDialog = ({ open, onHide }: DeGrandHistoryDialogProps) => {
   const isFetchingWinners =
     // fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const [deGrand, setDeGrand] = useState<DeGrandHistory>();
   const [allWinnersDialog, setAllWinnersDialog] = useState(false);
 

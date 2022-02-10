@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import BigNumber from 'bignumber.js';
-import { Hooks } from '@dehub/react/core';
 import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  Button,
   CardBody,
   PlayCircleOutlineIcon,
-  Button,
   useTooltip,
-  ArrowUpIcon,
-  ArrowDownIcon,
 } from '@dehub/react/pcsuikit';
+import BigNumber from 'bignumber.js';
+import React, { useEffect, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { useTranslation } from '../../../../contexts/Localization';
+import useToast from '../../../../hooks/useToast';
 import { useAppDispatch } from '../../../../state';
-import { BetPosition, Round } from '../../../../state/types';
 import { useBlock, useGetIntervalBlocks } from '../../../../state/hooks';
 import { markPositionAsEntered } from '../../../../state/predictions';
-import useToast from '../../../../hooks/useToast';
-import CardFlip from '../CardFlip';
+import { BetPosition, Round } from '../../../../state/types';
 import { formatDehub, getDehubAmount } from '../../helpers';
-import { RoundResultBox, PrizePoolRow } from '../RoundResult';
-import MultiplierArrow from './MultiplierArrow';
+import CardFlip from '../CardFlip';
+import { PrizePoolRow, RoundResultBox } from '../RoundResult';
 import Card from './Card';
 import CardHeader from './CardHeader';
+import MultiplierArrow from './MultiplierArrow';
 import SetPositionCard from './SetPositionCard';
 
 interface OpenRoundCardProps {
@@ -52,7 +52,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
   const { t } = useTranslation();
   const interval = useGetIntervalBlocks();
   const { toastSuccess } = useToast();
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const dispatch = useAppDispatch();
   const { currentBlock } = useBlock();
   const { isSettingPosition, position } = state;

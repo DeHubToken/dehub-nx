@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Hooks } from '@dehub/react/core';
+import { useMoralis } from 'react-moralis';
 import { usePredictionsContract } from '../../../hooks/useContract';
 
 const useIsRefundable = (epoch: number) => {
   const [isRefundable, setIsRefundable] = useState(false);
   const predictionsContract = usePredictionsContract();
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
 
   useEffect(() => {
     const fetchRefundableStatus = async () => {
-      const canClaim = await predictionsContract.claimable(epoch, account);
+      const canClaim = await predictionsContract?.claimable(epoch, account);
 
-      if (canClaim) {
+      if (predictionsContract && canClaim) {
         const refundable = await predictionsContract.refundable(epoch, account);
         setIsRefundable(refundable);
       } else {
@@ -19,7 +19,7 @@ const useIsRefundable = (epoch: number) => {
       }
     };
 
-    if (account) {
+    if (account && predictionsContract) {
       fetchRefundableStatus();
     }
   }, [account, epoch, predictionsContract, setIsRefundable]);

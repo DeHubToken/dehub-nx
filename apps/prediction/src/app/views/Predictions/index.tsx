@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { usePersistState } from '@dehub/react/core';
 import { useMatchBreakpoints, useModal } from '@dehub/react/pcsuikit';
 import { Footer, Header, Loader } from '@dehub/react/ui';
 import {
@@ -8,6 +8,7 @@ import {
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import React, { useEffect, useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import { environment } from '../../../environments/environment';
 import PageMeta from '../../components/layout/PageMeta';
 import UserMenu from '../../components/UserMenu';
@@ -54,15 +55,15 @@ const Predictions = () => {
   const walletConnectingState = useWalletConnectingState();
 
   const { isXl } = useMatchBreakpoints();
-  const [, setHasAcceptedRisk] = Hooks.usePersistState(
+  const [, setHasAcceptedRisk] = usePersistState(
     false,
     'dehub_predictions_accepted_risk'
   );
-  const [, setHasAcceptedChart] = Hooks.usePersistState(
+  const [, setHasAcceptedChart] = usePersistState(
     false,
     'dehub_predictions_chart'
   );
-  const { clearProvider, account, logout } = Hooks.useMoralisEthers();
+  const { account, logout } = useMoralis();
   const status = useGetPredictionsStatus();
   const dispatch = useAppDispatch();
   const initialBlock = useInitialBlock();
@@ -85,13 +86,12 @@ const Predictions = () => {
   }, []);
 
   useEffect(() => {
-    Moralis.Web3.onChainChanged(newChainId => {
+    Moralis.onChainChanged(newChainId => {
       if (newChainId !== getChainIdHex()) {
         logout();
-        clearProvider();
       }
     });
-  }, [clearProvider, logout]);
+  }, [logout]);
 
   useEffect(() => {
     const header = 'Waiting';

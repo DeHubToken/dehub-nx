@@ -9,20 +9,6 @@ interface ContentfulEnv {
   cpaToken: string;
 }
 
-interface NetworkEnv {
-  chainId: number;
-  chainIdHex: string;
-  chainName: string;
-  nativeCurrency: {
-    name: string;
-    symbol: string;
-    decimals: number;
-  };
-  nodes: string[];
-  rpcUrl: string;
-  blockExplorerUrl: string;
-}
-
 interface ContractsEnv {
   dehub: string;
   dehubBnb: string;
@@ -33,7 +19,8 @@ interface ContractsEnv {
 }
 
 interface Web3Env {
-  networks: { bsc: NetworkEnv };
+  /** Default Network ChainId */
+  chainId: number;
   addresses: { contracts: ContractsEnv };
 }
 
@@ -117,26 +104,7 @@ export const defaultSharedEnv: SharedEnv = {
   },
 
   web3: {
-    networks: {
-      bsc: {
-        chainId: 97,
-        chainIdHex: '0x61',
-        chainName: 'Binance Smart Chain Testnet',
-        nativeCurrency: {
-          name: 'BNB',
-          symbol: 'bnb',
-          decimals: 18,
-        },
-        rpcUrl:
-          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
-        blockExplorerUrl: 'https://testnet.bscscan.com',
-        nodes: [
-          'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
-          'https://bsc-dataseed1.defibit.io/',
-          'https://bsc-dataseed1.ninicoin.io/',
-        ],
-      },
-    },
+    chainId: 97,
     addresses: {
       contracts: {
         dehub: '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477',

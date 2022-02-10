@@ -8,7 +8,7 @@ import {
 import { EnvToken } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import {
-  ProviderTypes,
+  MoralisWeb3ProviderType,
   WalletConnectingMessages,
   WalletConnectingState,
 } from '@dehub/shared/models';
@@ -30,7 +30,7 @@ import { MoralisService } from '../../services/moralis.service';
     <!-- Wallet Connect Button -->
     <dhb-connect-wallet-button
       [label]="(label$ | async)!"
-      [userLoggedIn]="(userLoggedIn$ | async)!"
+      [isAuthenticated]="(isAuthenticated$ | async)!"
       [icon]="icon"
       (showDialog)="showDialog = !showDialog"
       (logout)="onLogout()"
@@ -59,7 +59,7 @@ export class ConnectWalletComponent implements OnInit {
       user ? shortenAddress(user.attributes.ethAddress) : this.label
     )
   );
-  userLoggedIn$ = this.moralisService.userLoggedIn$;
+  isAuthenticated$ = this.moralisService.isAuthenticated$;
 
   private subtitleSubject = new BehaviorSubject<string>('');
   subtitle$ = this.subtitleSubject.asObservable();
@@ -96,7 +96,7 @@ export class ConnectWalletComponent implements OnInit {
 
   ngOnInit() {}
 
-  onLogin(provider: ProviderTypes) {
+  onLogin(provider: MoralisWeb3ProviderType) {
     this.moralisService.login(provider, this.chainId);
     this.showDialog = false;
   }

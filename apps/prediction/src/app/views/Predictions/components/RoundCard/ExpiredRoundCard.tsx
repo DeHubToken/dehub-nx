@@ -1,6 +1,6 @@
-import { Hooks } from '@dehub/react/core';
 import { BlockIcon, Box, CardBody } from '@dehub/react/pcsuikit';
 import React from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { useTranslation } from '../../../../contexts/Localization';
 import { useGetBetByRoundId } from '../../../../state/hooks';
@@ -46,7 +46,7 @@ const ExpiredRoundCard: React.FC<ExpiredRoundCardProps> = ({
   bearMultiplier,
 }) => {
   const { t } = useTranslation();
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const { id, epoch, endBlock, lockPrice, closePrice } = round;
   const betPosition =
     closePrice > lockPrice ? BetPosition.BULL : BetPosition.BEAR;

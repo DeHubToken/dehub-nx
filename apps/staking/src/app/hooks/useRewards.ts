@@ -1,4 +1,4 @@
-import { Hooks } from '@dehub/react/core';
+import { useRefresh } from '@dehub/react/core';
 import { BIG_ZERO, ethersToBigNumber } from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
@@ -17,7 +17,7 @@ export const useProjectRewards = (staker?: string): BigNumber | undefined => {
       }
     | undefined
   >();
-  const { fastRefresh } = Hooks.useRefresh();
+  const { fastRefresh } = useRefresh();
 
   useEffect(() => {
     const fetch = async () => {
@@ -39,7 +39,7 @@ export const useProjectRewards = (staker?: string): BigNumber | undefined => {
   }, [projectRewards]);
 };
 
-export const useWeeklyRewards = (staker?: string) => {
+export const useWeeklyRewards = (staker: string | null) => {
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [bnbRewards, setBNBRewards] = useState(BIG_ZERO);
   const [totalBNBRewards, setTotalBNBRewards] = useState<BigNumber | undefined>(
@@ -50,7 +50,7 @@ export const useWeeklyRewards = (staker?: string) => {
   const [hasAlreadyClaimed, setHasAlreadyClaimed] = useState<boolean>(false);
   const [nextCycleResetTimestamp, setNextCycleResetTimestamp] =
     useState<number>(0);
-  const { fastRefresh } = Hooks.useRefresh();
+  const { fastRefresh } = useRefresh();
 
   const fetchBNBRewards = useCallback(
     async (amount: BigNumber) => {

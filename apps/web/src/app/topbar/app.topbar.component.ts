@@ -22,7 +22,7 @@ export class AppTopBarComponent implements OnDestroy {
   items?: MenuItem[];
 
   path = this.env.baseUrl;
-  chainId = this.env.web3.networks.bsc.chainId;
+  chainId = this.env.web3.chainId;
 
   constructor(
     @Inject(EnvToken) private env: Env,

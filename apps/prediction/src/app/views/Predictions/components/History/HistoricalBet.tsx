@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { Hooks } from '@dehub/react/core';
 import {
   Box,
   ChevronDownIcon,
@@ -10,8 +8,10 @@ import {
   Text,
   WaitIcon,
 } from '@dehub/react/pcsuikit';
+import React, { useState } from 'react';
+import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
-import { Bet, PredictionStatus } from '../../../../state/types';
+import { useTranslation } from '../../../../contexts/Localization';
 import {
   useBetCanClaim,
   useGetCurrentEpoch,
@@ -20,7 +20,7 @@ import {
   useTotalRate,
 } from '../../../../state/hooks';
 import { getRoundResult, Result } from '../../../../state/predictions/helpers';
-import { useTranslation } from '../../../../contexts/Localization';
+import { Bet, PredictionStatus } from '../../../../state/types';
 import { formatDehub, getPayout } from '../../helpers';
 import CollectWinningsButton from '../CollectWinningsButton';
 import ReclaimPositionButton from '../ReclaimPositionButton';
@@ -45,7 +45,7 @@ const HistoricalBet: React.FC<BetProps> = ({ bet }) => {
   const { amount, round } = bet;
 
   const { t } = useTranslation();
-  const { account } = Hooks.useMoralisEthers();
+  const { account } = useMoralis();
   const currentEpoch = useGetCurrentEpoch();
   const status = useGetPredictionsStatus();
 
