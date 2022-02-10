@@ -7,8 +7,7 @@ import { setHistoryPaneState } from '../../../state/predictions';
 const HistoryButton = () => {
   const isFetchingHistory = useGetIsFetchingHistory();
   const dispatch = useAppDispatch();
-  const { isAuthenticated, account } = useMoralis();
-  const isAuth = isAuthenticated && account;
+  const { account } = useMoralis();
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(true));
@@ -20,7 +19,7 @@ const HistoryButton = () => {
       ml="8px"
       onClick={handleClick}
       isLoading={isFetchingHistory}
-      disabled={!isAuth}
+      disabled={!account}
     >
       {isFetchingHistory ? (
         <AutoRenewIcon spin color="white" />

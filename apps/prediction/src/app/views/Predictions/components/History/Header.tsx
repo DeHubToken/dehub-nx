@@ -77,8 +77,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
   const isFetchingHistory = useGetIsFetchingHistory();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { account, isAuthenticated } = useMoralis();
-  const isAuth = account && isAuthenticated;
+  const { account } = useMoralis();
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(false));
@@ -134,7 +133,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
               <Radio
                 scale="sm"
                 checked={historyFilter === HistoryFilter.ALL}
-                disabled={isFetchingHistory || !isAuth}
+                disabled={isFetchingHistory || !account}
                 onChange={handleChange(HistoryFilter.ALL)}
               />
               <Text ml="4px">{t('All')}</Text>
@@ -143,7 +142,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
               <Radio
                 scale="sm"
                 checked={historyFilter === HistoryFilter.COLLECTED}
-                disabled={isFetchingHistory || !isAuth}
+                disabled={isFetchingHistory || !account}
                 onChange={handleChange(HistoryFilter.COLLECTED)}
               />
               <Text ml="4px">{t('Collected')}</Text>
@@ -152,7 +151,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
               <Radio
                 scale="sm"
                 checked={historyFilter === HistoryFilter.UNCOLLECTED}
-                disabled={isFetchingHistory || !isAuth}
+                disabled={isFetchingHistory || !account}
                 onChange={handleChange(HistoryFilter.UNCOLLECTED)}
               />
               <Text ml="4px">{t('Uncollected')}</Text>

@@ -52,8 +52,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
   const { t } = useTranslation();
   const interval = useGetIntervalBlocks();
   const { toastSuccess } = useToast();
-  const { account, isAuthenticated } = useMoralis();
-  const isAuth = isAuthenticated && account;
+  const { account } = useMoralis();
   const dispatch = useAppDispatch();
   const { currentBlock } = useBlock();
   const { isSettingPosition, position } = state;
@@ -85,7 +84,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
     }
 
     if (
-      isAuth &&
+      account &&
       window.localStorage.getItem(`bet_${round.id}_${account}`) !== null
     ) {
       return false;

@@ -64,8 +64,7 @@ const MobileMenu = () => {
   const status = useGetPredictionsStatus();
   const activeIndex = getActiveIndex(isHistoryOpen, isChartOpen);
   const dispatch = useAppDispatch();
-  const { account, isAuthenticated } = useMoralis();
-  const isAuth = isAuthenticated && account;
+  const { account } = useMoralis();
 
   const handleItemClick = (index: number) => {
     switch (index) {
@@ -107,7 +106,7 @@ const MobileMenu = () => {
           <ButtonMenuItem>
             <ChartIcon color="currentColor" />
           </ButtonMenuItem>
-          <ButtonMenuItem disabled={!isAuth}>
+          <ButtonMenuItem disabled={!account}>
             <HistoryIcon color="currentColor" />
           </ButtonMenuItem>
         </ButtonMenu>

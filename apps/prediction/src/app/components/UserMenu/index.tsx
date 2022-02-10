@@ -7,9 +7,7 @@ import { useMoralis } from 'react-moralis';
 import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = () => {
-  const { isAuthenticated, isAuthenticating, logout, account, Moralis } =
-    useMoralis();
-  const isAuth = isAuthenticated && account;
+  const { isAuthenticating, logout, account, Moralis } = useMoralis();
 
   const doLogout = useCallback(() => {
     window.localStorage.removeItem(moralisProviderLocalStorageKey);
@@ -22,6 +20,7 @@ const UserMenu = () => {
         console.info(
           `Moralis ${error.connector.type} connector was deactivated! Logging out.`
         );
+        unsubscribeFromWeb3Deactivated();
         doLogout();
       }
     });
@@ -50,7 +49,7 @@ const UserMenu = () => {
   return (
     <ul className="layout-topbar-actions">
       <li>
-        {isAuth ? (
+        {account ? (
           <SplitButton
             label={account ? shortenAddress(account) : 'Connect Wallet'}
             icon="fas fa-wallet"

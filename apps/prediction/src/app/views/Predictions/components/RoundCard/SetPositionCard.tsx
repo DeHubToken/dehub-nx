@@ -75,8 +75,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
     key?: string;
     data?: ContextData;
   } | null>(null);
-  const { account, isAuthenticated } = useMoralis();
-  const isAuth = isAuthenticated && account;
+  const { account } = useMoralis();
   const { swiper } = useSwiper();
   const dehubBalance = useGetDehubBalance();
   const minBetAmount = useGetMinBetAmount();
@@ -92,7 +91,8 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   ).toNumber();
   const valueAsBn = new BigNumber(value);
 
-  const showFieldWarning = !!isAuth && valueAsBn.gt(0) && errorMessage !== null;
+  const showFieldWarning =
+    !!account && valueAsBn.gt(0) && errorMessage !== null;
   const minBetAmountBalance = getDehubAmount(minBetAmount).toNumber();
 
   const handleChange = (input: string) => {
@@ -231,7 +231,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           value={value}
           onUserInput={handleChange}
           isWarning={showFieldWarning}
-          inputProps={{ disabled: !isAuth || isTxPending }}
+          inputProps={{ disabled: !account || isTxPending }}
         />
         {showFieldWarning && (
           <Text color="failure" fontSize="12px" mt="4px" textAlign="right">
@@ -245,7 +245,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           fontSize="12px"
           style={{ height: '18px' }}
         >
-          {isAuth && t('Balance: %balance%', { balance: balanceDisplay })}
+          {account && t('Balance: %balance%', { balance: balanceDisplay })}
         </Text>
         <Slider
           min={0}
@@ -253,7 +253,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
           value={valueAsBn.lte(maxBalance) ? valueAsBn.toNumber() : 0}
           onChange={handleSliderChange}
           step={0.00001}
-          disabled={!isAuth || isTxPending}
+          disabled={!account || isTxPending}
           style={{ marginBottom: '16px' }}
         />
         <Flex alignItems="center" justifyContent="space-between" mb="16px">
@@ -272,7 +272,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
                 scale="xs"
                 variant="tertiary"
                 onClick={handleClick}
-                disabled={!isAuth || isTxPending}
+                disabled={!account || isTxPending}
                 style={{ flex: 1 }}
               >
                 {`${percent}%`}
@@ -283,16 +283,16 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
             scale="xs"
             variant="tertiary"
             onClick={setMax}
-            disabled={!isAuth || isTxPending}
+            disabled={!account || isTxPending}
           >
             {t('Max')}
           </Button>
         </Flex>
         <Box mb="8px">
-          {isAuth ? (
+          {account ? (
             <Button
               width="100%"
-              disabled={!isAuth || disabled}
+              disabled={!account || disabled}
               onClick={handleEnterPosition}
               isLoading={isTxPending}
               endIcon={
