@@ -1,48 +1,45 @@
-import { environment } from '../../../environments/environment';
 import { Helmet } from 'react-helmet-async';
 
-const PageMeta = () => {
-  const path = environment.baseUrl;
-
+const PageMeta = ({ baseUrl, title }: { baseUrl: string; title: string }) => {
   return (
     <Helmet>
-      <title>DeHub Staking</title>
-      <base href={`${path}/`} />
+      <title>{title}</title>
+      <base href={`${baseUrl}/`} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link
         rel="icon"
         type="image/x-icon"
-        href={`${path}/assets/dehub/icon-dehub-white.svg`}
+        href={`${baseUrl}/assets/dehub/icon-dehub-white.svg`}
       />
       <link
         id="theme"
         rel="stylesheet"
         type="text/css"
-        href={`${path}/theme.css`}
+        href={`${baseUrl}/theme.css`}
       />
       <link
         id="layout"
         rel="stylesheet"
         type="text/css"
-        href={`${path}/layout.css`}
+        href={`${baseUrl}/layout.css`}
       />
       <link
         id="primereact"
         rel="stylesheet"
         type="text/css"
-        href={`${path}/primereact.css`}
+        href={`${baseUrl}/primereact.css`}
       />
       <link
         id="primeflex"
         rel="stylesheet"
         type="text/css"
-        href={`${path}/primeflex.css`}
+        href={`${baseUrl}/primeflex.css`}
       />
       <link
         id="primeicons"
         rel="stylesheet"
         type="text/css"
-        href={`${path}/primeicons.css`}
+        href={`${baseUrl}/primeicons.css`}
       />
     </Helmet>
   );

@@ -1,5 +1,4 @@
-import React, { ReactNode, ReactText } from 'react';
-import { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, ReactNode, ReactText } from 'react';
 
 export interface BalanceInputProps {
   value: ReactText;

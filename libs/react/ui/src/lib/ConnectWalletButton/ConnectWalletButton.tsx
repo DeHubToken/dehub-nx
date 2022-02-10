@@ -1,4 +1,4 @@
-import { WalletModal } from '@dehub/react/ui';
+import { useConnectContext } from '@dehub/react/core';
 import {
   moralisProviderLocalStorageKey,
   WalletConnectingState,
@@ -7,18 +7,15 @@ import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
-import { getChainId } from '../../config/constants';
-import { useSetWalletConnectingState } from '../../state/application/hooks';
+import WalletModal from '../WalletModal';
 
 const ConnectWalletButton = () => {
-  const setWalletConnectingState = useSetWalletConnectingState();
+  const { setWalletConnectingState, defaultChainId } = useConnectContext();
 
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const mountedRef = useRef(true);
 
   const { authenticate, logout } = useMoralis();
-
-  const chainId = getChainId();
 
   useEffect(() => {
     return () => {
@@ -31,7 +28,7 @@ const ConnectWalletButton = () => {
       setWalletConnectingState(WalletConnectingState.WAITING);
       window.localStorage.setItem(moralisProviderLocalStorageKey, provider);
       authenticate({
-        chainId: chainId,
+        chainId: defaultChainId,
         provider,
         signingMessage: 'DeHub Staking',
         onError: (error: Error) => {
@@ -49,7 +46,7 @@ const ConnectWalletButton = () => {
             };
             if (
               await setupMetamaskNetwork(
-                getChainId(),
+                defaultChainId,
                 onSwitchNetwork,
                 onAddNetwork
               )
@@ -69,7 +66,7 @@ const ConnectWalletButton = () => {
         },
       });
     },
-    [authenticate, chainId, logout, setWalletConnectingState]
+    [authenticate, defaultChainId, logout, setWalletConnectingState]
   );
 
   return (
