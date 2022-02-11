@@ -143,6 +143,6 @@
       }
     }
   },
-  "tags": [],
+  "tags": ["scope:react", "type:app"],
   "implicitDependencies": ["shared-assets-dehub", "shared-assets-freya"]
 }

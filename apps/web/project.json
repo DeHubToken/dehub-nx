@@ -157,6 +157,6 @@
       }
     }
   },
-  "tags": [],
+  "tags": ["scope:angular", "type:app"],
   "implicitDependencies": ["shared-assets-dehub", "shared-assets-freya"]
 }

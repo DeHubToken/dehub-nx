@@ -2,7 +2,6 @@
   "root": "libs/react/core",
   "sourceRoot": "libs/react/core/src",
   "projectType": "library",
-  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -20,5 +19,6 @@
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "tags": ["scope:react", "type:feature"]
 }

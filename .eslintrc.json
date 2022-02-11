@@ -9,12 +9,81 @@
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
+            "banTransitiveDependencies": true,
             "enforceBuildableLibDependency": true,
             "allow": [],
             "depConstraints": [
+              // Scope boundaries
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "scope:angular",
+                "onlyDependOnLibsWithTags": ["scope:angular", "scope:shared"],
+                // projects tagged with "scope:angular" can't import from "react" or related projects
+                "bannedExternalImports": ["*react*"]
+              },
+              {
+                "sourceTag": "scope:react",
+                "onlyDependOnLibsWithTags": ["scope:react", "scope:shared"],
+                // projects tagged with "scope:react" can't import from "angular" or related projects
+                "bannedExternalImports": ["*angular*"]
+              },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"],
+                // projects tagged with "scope:angular" can't import from "react" or related projects
+                "bannedExternalImports": ["*angular*", "*react*"]
+              },
+              // Type boundaries
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": [
+                  "type:feature",
+                  "type:ui",
+                  "type:util",
+                  "type:model",
+                  "type:config",
+                  "type:asset"
+                ]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:feature",
+                  "type:ui",
+                  "type:util",
+                  "type:model",
+                  "type:config",
+                  "type:asset"
+                ]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": [
+                  "type:ui",
+                  "type:util",
+                  "type:model",
+                  "type:config",
+                  "type:asset"
+                ]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": [
+                  "type:util",
+                  "type:model",
+                  "type:config"
+                ]
+              },
+              {
+                "sourceTag": "type:model",
+                "onlyDependOnLibsWithTags": ["type:model"]
+              },
+              {
+                "sourceTag": "type:config",
+                "onlyDependOnLibsWithTags": ["type:config"]
+              },
+              {
+                "sourceTag": "type:asset",
+                "onlyDependOnLibsWithTags": ["type:asset"]
               }
             ]
           }

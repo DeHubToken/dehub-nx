@@ -153,18 +153,17 @@ Let's follow Nx recommendations: [guideline 1](https://nx.dev/structure/monorepo
 
 ## Scopes
 
-1. `scope:shared` - frameworks independent project
 1. `scope:angular` - angular project
 1. `scope:react` - react project
-   ... under design
+1. `scope:core` - frameworks dependent core project
+1. `scope:shared` - frameworks independent project
 
 ## Types
 
 1. `type:app` - application
-1. `type:core` - core lib
 1. `type:feature` - feature lib
 1. `type:ui` - dumb/stateless ui lib
-1. `type:util` - util lib
+1. `type:util` - utility lib
 1. `type:model` - model/type lib _(pure interfaces or classes)_
 1. `type:config` - environments/constants lib
 1. `type:asset` - asset lib _(styles, themes, fonts, images)_
