@@ -164,4 +164,4 @@ Generated with [PWA Manifest Generator](https://www.simicart.com/manifest-genera
 1. Description: `DeHub - Decentralized Entertainment Hub`
 1. Theme color: `#060d1b`
 1. Background color: `#622f88`
-1. Icon: `shared/assets/dehub/ulogo.png`
+1. Icon: `shared/asset/dehub/ulogo.png`

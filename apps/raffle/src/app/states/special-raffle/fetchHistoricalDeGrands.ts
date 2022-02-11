@@ -1,7 +1,4 @@
-import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
-
-import { DeGrandHistory } from './types';
-
+import { ethersToSerializedBigNumber } from '@dehub/shared/util';
 import SpecialLotteryAbi from '../../config/abis/SpecialLottery.json';
 import {
   LotteryStatus,
@@ -9,6 +6,7 @@ import {
 } from '../../config/constants/types';
 import { getSpecialLotteryAddress } from '../../utils/addressHelpers';
 import { Call, multicallv2 } from '../../utils/multicall';
+import { DeGrandHistory } from './types';
 
 interface LotteryDrawable {
   roundId: string;

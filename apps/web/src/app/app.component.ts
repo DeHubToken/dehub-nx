@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreService } from '@dehub/angular/core';
-import { MenuMode, ThemeMode } from '@dehub/shared/models';
+import { MenuMode, ThemeMode } from '@dehub/shared/model';
 import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'dhb-root',

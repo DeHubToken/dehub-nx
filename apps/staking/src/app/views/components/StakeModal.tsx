@@ -1,5 +1,5 @@
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
+import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/util';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
 import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';

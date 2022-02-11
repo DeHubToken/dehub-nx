@@ -1,4 +1,4 @@
-import { shortenAddress } from '@dehub/shared/utils';
+import { shortenAddress } from '@dehub/shared/util';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';

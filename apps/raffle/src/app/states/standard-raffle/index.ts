@@ -1,25 +1,23 @@
+import { BIG_ZERO } from '@dehub/shared/util';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
-
-import { BIG_ZERO } from '@dehub/shared/utils';
-
+import { MAX_DELOTTO_REQUEST_SIZE } from '../../config/constants';
+import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
+import { processLotteryUserClaimData } from '../../states/standard-raffle/helpers';
+import { fetchUnclaimedUserRewards } from './fetchUnclaimedUserRewards';
 import {
   fetchCurrentLotteryIdAndMaxBuy,
   fetchLottery,
   fetchLotteryBundleRules,
   fetchUserTicketsPerOneRound,
 } from './helpers';
-import { fetchUnclaimedUserRewards } from './fetchUnclaimedUserRewards';
 import {
-  LotteryState,
-  LotteryResponse,
   LotteryBundleRule,
+  LotteryResponse,
+  LotteryState,
   LotteryUserData,
   LotteryUserRound,
 } from './types';
-import { MAX_DELOTTO_REQUEST_SIZE } from '../../config/constants';
-import { LotteryStatus, LotteryTicket } from '../../config/constants/types';
-import { processLotteryUserClaimData } from '../../states/standard-raffle/helpers';
 
 interface PublicLotteryData {
   currentLotteryId: string;

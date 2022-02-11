@@ -1,4 +1,4 @@
-import { decimalToHex } from '@dehub/shared/utils';
+import { decimalToHex } from '@dehub/shared/util';
 import { environment } from '../../../environments/environment';
 
 export const getChainId = (): number => {

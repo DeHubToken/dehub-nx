@@ -1,9 +1,7 @@
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
+import { getBalanceNumber } from '@dehub/shared/util';
 import BigNumber from 'bignumber.js';
 import { Skeleton } from 'primereact/skeleton';
-
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceNumber } from '@dehub/shared/utils';
-
 import { Text } from '../../components/Text';
 import { LotteryStatus } from '../../config/constants/types';
 

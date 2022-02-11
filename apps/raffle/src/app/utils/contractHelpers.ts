@@ -12,7 +12,7 @@ import {
 } from './addressHelpers';
 import { simpleRpcProvider } from './providers';
 
-/** TODO: use or move to shared/utils/contract.utils.ts  */
+/** TODO: use or move to shared/util/contract.utils.ts  */
 export const getContract = (
   address: string,
   abi: ContractInterface,

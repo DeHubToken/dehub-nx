@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as models from '@dehub/shared/models';
+import * as models from '@dehub/shared/model';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {};

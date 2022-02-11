@@ -1,5 +1,5 @@
 import { useLastUpdated } from '@dehub/react/core';
-import { BIG_ZERO, getBalanceAmount } from '@dehub/shared/utils';
+import { BIG_ZERO, getBalanceAmount } from '@dehub/shared/util';
 import { useEffect, useState } from 'react';
 import { useChainlinkOracleContract } from '../../../hooks/useContract';
 

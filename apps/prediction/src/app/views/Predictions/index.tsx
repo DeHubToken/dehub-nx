@@ -4,8 +4,8 @@ import { Footer, Header, Loader } from '@dehub/react/ui';
 import {
   WalletConnectingMessages,
   WalletConnectingState,
-} from '@dehub/shared/models';
-import { iOS } from '@dehub/shared/utils';
+} from '@dehub/shared/model';
+import { iOS } from '@dehub/shared/util';
 import { Moralis } from 'moralis';
 import React, { useEffect, useState } from 'react';
 import { useMoralis } from 'react-moralis';

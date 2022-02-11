@@ -1,0 +1,16 @@
+{
+  "root": "libs/shared/asset/freya",
+  "sourceRoot": "libs/shared/asset/freya/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/asset/freya/**/*.ts"],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:asset"]
+}

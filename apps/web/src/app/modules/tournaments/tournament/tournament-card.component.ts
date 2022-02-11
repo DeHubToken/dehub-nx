@@ -10,7 +10,7 @@ import {
   Options,
 } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
-import { TournamentFragment } from '@dehub/shared/models';
+import { TournamentFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
 @Component({
   selector: 'dhb-tournament-card',

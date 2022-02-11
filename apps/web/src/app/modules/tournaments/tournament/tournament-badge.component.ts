@@ -4,7 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { TournamentFragment } from '@dehub/shared/models';
+import { TournamentFragment } from '@dehub/shared/model';
 
 @Component({
   selector: 'dhb-tournament-badge',

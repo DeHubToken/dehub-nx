@@ -1,5 +1,5 @@
+import { BIG_TEN } from '@dehub/shared/util';
 import BigNumber from 'bignumber.js/bignumber';
-import { BIG_TEN } from '@dehub/shared/utils';
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,

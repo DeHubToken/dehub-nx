@@ -18,7 +18,7 @@ import {
   BUSD_DISPLAY_DECIMALS,
   DEHUB_DECIMALS,
 } from '@dehub/shared/config';
-import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
+import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/util';
 import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
 import BigNumber from 'bignumber.js';
 import React, { useState } from 'react';

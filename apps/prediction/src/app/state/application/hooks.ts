@@ -1,5 +1,5 @@
 import { useRefresh } from '@dehub/react/core';
-import { WalletConnectingState } from '@dehub/shared/models';
+import { WalletConnectingState } from '@dehub/shared/model';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';

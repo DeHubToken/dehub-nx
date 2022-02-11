@@ -1,5 +1,5 @@
-import { moralisProviderLocalStorageKey } from '@dehub/shared/models';
-import { shortenAddress } from '@dehub/shared/utils';
+import { moralisProviderLocalStorageKey } from '@dehub/shared/model';
+import { shortenAddress } from '@dehub/shared/util';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
 import { useCallback, useEffect } from 'react';

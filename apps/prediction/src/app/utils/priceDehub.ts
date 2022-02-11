@@ -1,4 +1,4 @@
-import { ethersToBigNumber } from '@dehub/shared/utils';
+import { ethersToBigNumber } from '@dehub/shared/util';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
 import { camelCase } from 'lodash';

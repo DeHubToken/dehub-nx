@@ -1,4 +1,4 @@
-import { WalletConnectingState } from '@dehub/shared/models';
+import { WalletConnectingState } from '@dehub/shared/model';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
 import { getDehubPrice } from '../../utils/priceDehub';

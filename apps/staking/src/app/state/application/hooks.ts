@@ -3,7 +3,7 @@ import {
   useIsBrowserTabActive,
   useRefresh,
 } from '@dehub/react/core';
-import { WalletConnectingState } from '@dehub/shared/models';
+import { WalletConnectingState } from '@dehub/shared/model';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useChain, useMoralis } from 'react-moralis';
