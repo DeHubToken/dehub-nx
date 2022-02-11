@@ -167,7 +167,6 @@ Let's follow Nx recommendations: [guideline 1](https://nx.dev/structure/monorepo
 1. `type:model` - model/type lib _(pure interfaces or classes)_
 1. `type:config` - environments/constants lib
 1. `type:asset` - asset lib _(styles, themes, fonts, images)_
-   ... under design
 
 # Nx Cloud benefits
 
