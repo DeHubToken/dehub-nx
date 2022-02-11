@@ -155,7 +155,6 @@ Let's follow Nx recommendations: [guideline 1](https://nx.dev/structure/monorepo
 
 1. `scope:angular` - angular project
 1. `scope:react` - react project
-1. `scope:core` - frameworks dependent core project
 1. `scope:shared` - frameworks independent project
 
 ## Types
