@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { BalanceInputProps } from './types';
 import { Box } from '../Layout';
 import { Text } from '../Text';
-import { BalanceInputProps } from './types';
 
 export const UnitContainer = styled(Text)`
   margin-left: 4px;

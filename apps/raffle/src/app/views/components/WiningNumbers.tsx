@@ -1,5 +1,5 @@
-import { Text } from '@dehub/react/ui';
 import { Avatar } from 'primereact/avatar';
+import { Text } from '../../components/Text';
 import { toLotteryNumbers } from '../../utils/numbers';
 
 /*

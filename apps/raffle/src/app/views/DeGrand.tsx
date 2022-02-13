@@ -1,18 +1,14 @@
-import {
-  Box,
-  ConnectWalletButton,
-  Container,
-  Heading,
-  Text,
-  Title,
-} from '@dehub/react/ui';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import React, { useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { environment } from '../../environments/environment';
+import ConnectWalletButton from '../components/ConnectWalletButton';
 import Icon from '../components/Icon/Icon';
+import Box from '../components/Layout/Box';
+import Container from '../components/Layout/Container';
+import { Header, Text, Title } from '../components/Text';
 import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import { useGetSpecialPaused } from '../states/pause/hooks';
 import {
@@ -111,7 +107,7 @@ const DeGrand = () => {
                     marginTop: '-65px',
                   }}
                 >
-                  <Heading
+                  <Header
                     className="py-2 px-3 inline-flex border-neon-2"
                     style={{
                       borderRadius: '8px',
@@ -129,23 +125,23 @@ const DeGrand = () => {
                     </span>
                     &nbsp;Lucky Winner
                     {deGrandPrize.maxWinnerCount > 1 ? `s` : ``}
-                  </Heading>
+                  </Header>
                 </FlexLine>
 
                 <div className="grid mt-4">
                   <div className="col-12 md:col-8 lg:col-8">
-                    <Heading className="mb-2" fontSize="24px">
+                    <Header className="mb-2" fontSize="24px">
                       {deGrandPrize.title}
-                    </Heading>
-                    <Heading fontSize="14px" className="opacity-60 pb-4">
+                    </Header>
+                    <Header fontSize="14px" className="opacity-60 pb-4">
                       {deGrandPrize.subtitle}
-                    </Heading>
+                    </Header>
                     <Text className="pb-2">{deGrandPrize.description}</Text>
                   </div>
                   <div className="col-12 md:col-4 lg:col-4 align-self-start">
                     <div className="card overview-box gray shadow-2">
                       <div className="overview-info text-left w-full">
-                        <Heading className="pb-2">DeGrand Draw</Heading>
+                        <Header className="pb-2">DeGrand Draw</Header>
                         {lotteryMonthAsInt === currentMonthAsInt &&
                         deGrandStatus === LotteryStatus.CLAIMABLE ? (
                           <>
@@ -210,7 +206,7 @@ const DeGrand = () => {
               <div className="col-12 md:col-5 lg:colo-5">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Heading className="pb-2">History</Heading>
+                    <Header className="pb-2">History</Header>
                     <Text className="mb-3">Check previous DeGrand draws.</Text>
                     {isAuthenticated ? (
                       <Button

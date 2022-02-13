@@ -1,10 +1,10 @@
-import { Heading, Text } from '@dehub/react/ui';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
+import { Header, Text } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
 import { LotteryTicketOwner } from '../../config/constants/types';
 import {
@@ -90,10 +90,10 @@ const DeGrandHistoryDialog = ({ open, onHide }: DeGrandHistoryDialogProps) => {
               return (
                 <div className="flex flex-column" key={`${index}`}>
                   <div className="mb-2 flex justify-content-center">
-                    <Heading>{`Round #${deGrand.roundId}`}</Heading>
+                    <Header>{`Round #${deGrand.roundId}`}</Header>
                   </div>
                   <div className="mb-2 flex justify-content-center">
-                    <Heading>{`Prize: ${deGrand.prize.title}`}</Heading>
+                    <Header>{`Prize: ${deGrand.prize.title}`}</Header>
                   </div>
                   <div className="mb-3 flex flex-column">
                     {deGrand.myWinningTickets &&

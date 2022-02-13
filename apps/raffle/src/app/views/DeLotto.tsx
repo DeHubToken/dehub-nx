@@ -1,7 +1,8 @@
-import { Box, Container } from '@dehub/react/ui';
 import { TabPanel, TabView } from 'primereact/tabview';
 import styled from 'styled-components';
 import { environment } from '../../environments/environment';
+import Box from '../components/Layout/Box';
+import Container from '../components/Layout/Container';
 import { LoadingStatus, LotteryStatus } from '../config/constants/types';
 import useSpecialLotteryStatusTransitions from '../hooks/special-raffle/useStatusTransitions';
 import useStandardLotteryStatusTransitions from '../hooks/standard-raffle/useStatusTransitions';

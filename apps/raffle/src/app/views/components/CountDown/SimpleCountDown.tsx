@@ -1,7 +1,7 @@
-import { Text } from '@dehub/react/ui';
 import { useEffect, useRef, useState } from 'react';
-import getTimePeriods from '../../../utils/getTimePeriods';
 import Timer from './Timer';
+import { Text } from '../../../components/Text';
+import getTimePeriods from '../../../utils/getTimePeriods';
 
 interface SimpleCountDownProps {
   limitTime: number;

@@ -1,5 +1,4 @@
 import { useRefresh } from '@dehub/react/core';
-import { Box, ConnectWalletButton, Heading, Text } from '@dehub/react/ui';
 import {
   BNB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
@@ -20,6 +19,9 @@ import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
+import ConnectWalletButton from '../../components/ConnectWalletButton';
+import Box from '../../components/Layout/Box';
+import { Header, Text } from '../../components/Text';
 import { FetchStatus } from '../../config/constants/types';
 import {
   useRewardsContract,
@@ -80,7 +82,7 @@ const LiveCard = () => {
     isClaimable,
     hasAlreadyClaimed,
     nextCycleResetTimestamp,
-  } = useWeeklyRewards(account);
+  } = useWeeklyRewards(account!);
 
   const deHubPriceInBUSD = useDehubBusdPrice();
 
@@ -161,7 +163,7 @@ const LiveCard = () => {
       <Card className="border-neon-2 overflow-hidden mt-5">
         <StyledBox>
           <>
-            <Heading
+            <Header
               className="py-2 px-3 inline-flex border-neon-2"
               style={{
                 borderRadius: '8px',
@@ -172,13 +174,13 @@ const LiveCard = () => {
               <span style={{ fontWeight: 900 }}>
                 {paused ? `Paused: ${currentQ}` : `Live: ${currentQ}`}
               </span>
-            </Heading>
+            </Header>
 
             <div className="grid mt-2">
               <div className="col-12 md:col-6 lg:col-6">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Heading className="pb-1">Harvest In</Heading>
+                    <Header className="pb-1">Harvest In</Header>
                     <Text fontSize="24px" fontWeight={900}>
                       {timeFromNow(moment(new Date(closeTimeStamp)))}
                     </Text>
@@ -188,7 +190,7 @@ const LiveCard = () => {
               <div className="col-12 md:col-6 lg:col-6 align-self-start">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Heading className="pb-1">Projected Rewards</Heading>
+                    <Header className="pb-1">Projected Rewards</Header>
                     {projectedRewards &&
                     projectedRewardsInBUSD &&
                     !projectedRewardsInBUSD.isNaN() ? (
@@ -231,7 +233,7 @@ const LiveCard = () => {
               <div className="col-12 md:col-6 lg:col-6 align-self-start">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Heading className="pb-1">Your Stake</Heading>
+                    <Header className="pb-1">Your Stake</Header>
                     {fetchStakeStatus === FetchStatus.SUCCESS && poolInfo ? (
                       <>
                         <Text fontSize="24px" fontWeight={900}>
@@ -280,7 +282,7 @@ const LiveCard = () => {
               <div className="col-12 md:col-6 lg:col-6">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Heading className="pb-1">Pending Rewards</Heading>
+                    <Header className="pb-1">Pending Rewards</Header>
                     {pendingHarvest ? (
                       <>
                         <Text fontSize="24px" fontWeight={900}>
@@ -311,7 +313,7 @@ const LiveCard = () => {
               <div className="col-12 md:col-12 lg:col-12 align-self-start">
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
-                    <Heading className="pb-2">Weekly BNB Rewards</Heading>
+                    <Header className="pb-2">Weekly BNB Rewards</Header>
                     {account &&
                       (fetchRewardStatus === FetchStatus.SUCCESS ? (
                         !hasAlreadyClaimed && (

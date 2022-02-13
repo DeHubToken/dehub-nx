@@ -11,13 +11,13 @@ import {
   IconButton,
   Text,
 } from '@dehub/react/pcsuikit';
-import { ConnectWalletButton } from '@dehub/react/ui';
 import { getDecimalAmount } from '@dehub/shared/utils';
 import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';
 import { Slider, SliderChangeParams } from 'primereact/slider';
 import React, { useEffect, useState } from 'react';
 import { useMoralis } from 'react-moralis';
+import ConnectWalletButton from '../../../../components/ConnectWalletButton';
 import { DEFAULT_TOKEN_DECIMAL } from '../../../../config';
 import { useTranslation } from '../../../../contexts/Localization';
 import { ContextData } from '../../../../contexts/Localization/types';

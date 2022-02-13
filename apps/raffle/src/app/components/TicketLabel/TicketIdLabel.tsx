@@ -1,5 +1,6 @@
-import { Text } from '@dehub/react/ui';
 import styled from 'styled-components';
+
+import { Text } from '../Text';
 
 /**
  * @todo set color with freya variables

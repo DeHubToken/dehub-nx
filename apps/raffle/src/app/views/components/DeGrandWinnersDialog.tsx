@@ -1,8 +1,8 @@
-import { Heading } from '@dehub/react/ui';
 import { shortenAddress } from '@dehub/shared/utils';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import { useRef } from 'react';
+import { Header } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
 import { DeGrandHistory } from '../../states/special-raffle/types';
 
@@ -32,10 +32,10 @@ const DeGrandWinnersDialog = ({
       >
         <div className="flex flex-column">
           <div className="mb-2 flex justify-content-center">
-            <Heading>{`Round #${deGrand.roundId}`}</Heading>
+            <Header>{`Round #${deGrand.roundId}`}</Header>
           </div>
           <div className="mb-2 flex justify-content-center">
-            <Heading>{`Prize: ${deGrand.prize.title}`}</Heading>
+            <Header>{`Prize: ${deGrand.prize.title}`}</Header>
           </div>
           <div className="mb-3 flex flex-column">
             <div className="mb-4">

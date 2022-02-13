@@ -1,4 +1,4 @@
-import { Title } from '@dehub/react/ui';
+import { Title } from '../../../components/Text';
 import useNextEventCountDown from '../../../hooks/standard-raffle/useNextEventCountDown';
 import getTimePeriods from '../../../utils/getTimePeriods';
 import Timer from './Timer';

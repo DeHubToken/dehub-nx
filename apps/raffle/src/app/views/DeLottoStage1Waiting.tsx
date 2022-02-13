@@ -1,8 +1,9 @@
-import { Text } from '@dehub/react/ui';
 import { addMonths } from 'date-fns';
 import { Button } from 'primereact/button';
+
 import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
+import { Text } from '../components/Text';
 
 const DeLottoStage1Waiting = () => {
   const now = new Date();

@@ -1,21 +1,25 @@
-import { useConnectContext } from '@dehub/react/core';
+import { WalletModal } from '@dehub/react/ui';
 import {
   moralisProviderLocalStorageKey,
+  MoralisWeb3ProviderType,
   WalletConnectingState,
 } from '@dehub/shared/models';
 import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
-import WalletModal from '../WalletModal';
+import { getChainId } from '../../config/constants';
+import { useSetWalletConnectingState } from '../../state/application/hooks';
 
 const ConnectWalletButton = () => {
-  const { setWalletConnectingState, defaultChainId } = useConnectContext();
+  const setWalletConnectingState = useSetWalletConnectingState();
 
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const mountedRef = useRef(true);
 
   const { authenticate, logout } = useMoralis();
+
+  const chainId = getChainId();
 
   useEffect(() => {
     return () => {
@@ -24,13 +28,13 @@ const ConnectWalletButton = () => {
   }, []);
 
   const connectWallet = useCallback(
-    provider => {
+    (provider: MoralisWeb3ProviderType) => {
       setWalletConnectingState(WalletConnectingState.WAITING);
       window.localStorage.setItem(moralisProviderLocalStorageKey, provider);
       authenticate({
-        chainId: defaultChainId,
-        provider,
-        signingMessage: 'DeHub Staking',
+        chainId: chainId,
+        provider: provider,
+        signingMessage: 'DeHub Price Prediction',
         onError: (error: Error) => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
@@ -46,7 +50,7 @@ const ConnectWalletButton = () => {
             };
             if (
               await setupMetamaskNetwork(
-                defaultChainId,
+                getChainId(),
                 onSwitchNetwork,
                 onAddNetwork
               )
@@ -66,7 +70,7 @@ const ConnectWalletButton = () => {
         },
       });
     },
-    [authenticate, defaultChainId, logout, setWalletConnectingState]
+    [authenticate, chainId, logout, setWalletConnectingState]
   );
 
   return (

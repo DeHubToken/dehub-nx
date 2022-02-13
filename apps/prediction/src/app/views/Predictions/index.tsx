@@ -1,9 +1,20 @@
 import { usePersistState } from '@dehub/react/core';
 import { useMatchBreakpoints, useModal } from '@dehub/react/pcsuikit';
-import { Loader } from '@dehub/react/ui';
-import React, { useEffect } from 'react';
+import { Footer, Header, Loader } from '@dehub/react/ui';
+import {
+  WalletConnectingMessages,
+  WalletConnectingState,
+} from '@dehub/shared/models';
+import { iOS } from '@dehub/shared/utils';
+import { Moralis } from 'moralis';
+import React, { useEffect, useState } from 'react';
 import { useMoralis } from 'react-moralis';
+import { environment } from '../../../environments/environment';
+import PageMeta from '../../components/layout/PageMeta';
+import UserMenu from '../../components/UserMenu';
+import { getChainIdHex } from '../../config/constants';
 import { useAppDispatch } from '../../state';
+import { useWalletConnectingState } from '../../state/application/hooks';
 import { useGetPredictionsStatus, useInitialBlock } from '../../state/hooks';
 import {
   fetchCurrentBets,
@@ -33,7 +44,16 @@ import Mobile from './Mobile';
 
 const FUTURE_ROUND_COUNT = 2; // the number of rounds in the future to show
 
-export default function Predictions({ baseUrl }: { baseUrl: string }) {
+const initMessage = {
+  header: '',
+  text: '',
+};
+
+const Predictions = () => {
+  const [showLoader, setShowLoader] = useState(false);
+  const [message, setMessage] = useState(initMessage);
+  const walletConnectingState = useWalletConnectingState();
+
   const { isXl } = useMatchBreakpoints();
   const [, setHasAcceptedRisk] = usePersistState(
     false,
@@ -43,7 +63,7 @@ export default function Predictions({ baseUrl }: { baseUrl: string }) {
     false,
     'dehub_predictions_chart'
   );
-  const { account } = useMoralis();
+  const { account, logout } = useMoralis();
   const status = useGetPredictionsStatus();
   const dispatch = useAppDispatch();
   const initialBlock = useInitialBlock();
@@ -52,6 +72,43 @@ export default function Predictions({ baseUrl }: { baseUrl: string }) {
   const handleAcceptChart = () => setHasAcceptedChart(true);
   useModal(<RiskDisclaimer onSuccess={handleAcceptRiskSuccess} />, false);
   useModal(<ChartDisclaimer onSuccess={handleAcceptChart} />, false);
+
+  /*
+   * Hack to avoid trust wallet redirecting to a open in app website on iOS...
+   * Ref: https://github.com/WalletConnect/walletconnect-monorepo/issues/552
+   */
+  useEffect(() => {
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden' && iOS()) {
+        window.localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    Moralis.onChainChanged(newChainId => {
+      if (newChainId !== getChainIdHex()) {
+        logout();
+      }
+    });
+  }, [logout]);
+
+  useEffect(() => {
+    const header = 'Waiting';
+    if (walletConnectingState === WalletConnectingState.WAITING) {
+      setShowLoader(true);
+      setMessage({ header, text: WalletConnectingMessages.WAITING });
+    } else if (walletConnectingState === WalletConnectingState.SWITCH_NETWORK) {
+      setShowLoader(true);
+      setMessage({ header, text: WalletConnectingMessages.SWITCH_NETWORK });
+    } else if (walletConnectingState === WalletConnectingState.ADD_NETWORK) {
+      setShowLoader(true);
+      setMessage({ header, text: WalletConnectingMessages.ADD_NETWORK });
+    } else {
+      setShowLoader(false);
+      setMessage(initMessage);
+    }
+  }, [walletConnectingState]);
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -124,36 +181,71 @@ export default function Predictions({ baseUrl }: { baseUrl: string }) {
     return <Loader />;
   }
 
-  return (
-    <SwiperProvider>
-      <div
-        style={{
-          height: isDesktop ? 'calc(100vh - 370px)' : 'calc(100vh + 80px)',
-          minHeight: isDesktop ? 'calc(100vh - 370px)' : 'calc(100vh + 80px)',
-          position: 'relative',
-          paddingLeft: '0',
-          paddingRight: '0',
-          paddingTop: !isDesktop ? '0' : '32px',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <img
-            src={`${baseUrl}/assets/img/prediction-logo.png`}
-            className="anim-float-1"
-            alt="Price Prediction Logo"
-            style={{ maxWidth: '300px' }}
-          />
-        </div>
+  const {
+    baseUrl: path,
+    dehub: { landing },
+  } = environment;
 
-        {isDesktop ? <Desktop /> : <Mobile />}
-        <CollectWinningsPopup />
-      </div>
-    </SwiperProvider>
+  return (
+    <div>
+      <PageMeta />
+      {showLoader ? (
+        <Loader title={message.header} subtitle={message.text} />
+      ) : (
+        <SwiperProvider>
+          <div
+            className="layout-wrapper"
+            style={{
+              background: `linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("${path}/assets/img/prediction-bg.jpg") no-repeat fixed center center /cover`,
+            }}
+          >
+            <Header
+              userMenu={<UserMenu />}
+              logo={{
+                href: 'https://dehub.net',
+                icon: `${path}/assets/dehub/logo-dehub-white.svg`,
+              }}
+            />
+            <div className="layout-main">
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <img
+                  src={`${path}/assets/img/prediction-logo.png`}
+                  className="anim-float-1"
+                  alt="Price Prediction Logo"
+                  style={{ maxWidth: '300px' }}
+                />
+              </div>
+              <div
+                className="layout-content"
+                style={{
+                  height: isDesktop
+                    ? 'calc(100vh - 370px)'
+                    : 'calc(100vh + 80px)',
+                  minHeight: isDesktop
+                    ? 'calc(100vh - 370px)'
+                    : 'calc(100vh + 80px)',
+                  position: 'relative',
+                  paddingLeft: '0',
+                  paddingRight: '0',
+                  paddingTop: !isDesktop ? '0' : '32px',
+                }}
+              >
+                {isDesktop ? <Desktop /> : <Mobile />}
+                <CollectWinningsPopup />
+              </div>
+            </div>
+            <Footer landing={landing} />
+          </div>
+        </SwiperProvider>
+      )}
+    </div>
   );
-}
+};
+
+export default Predictions;

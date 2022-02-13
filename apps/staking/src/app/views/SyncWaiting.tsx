@@ -1,5 +1,7 @@
-import { Container, Heading, Text } from '@dehub/react/ui';
 import { Card } from 'primereact/card';
+
+import Container from '../components/Layout/Container';
+import { Header, Text } from '../components/Text';
 import { LoadingStatus } from '../config/constants/types';
 
 const SyncWaiting = ({ loadingStatus }: { loadingStatus: LoadingStatus }) => {
@@ -11,24 +13,24 @@ const SyncWaiting = ({ loadingStatus }: { loadingStatus: LoadingStatus }) => {
             <div className="fa-3x pb-5 text-center">
               <i className="fad fa-circle-notch fa-spin"></i>
             </div>
-            <Heading className="text-center">Loading</Heading>
+            <Header className="text-center">Loading</Header>
           </>
         ) : loadingStatus === LoadingStatus.SYNCHRONIZING ? (
           <>
             <div className="fa-3x pb-5 text-center">
               <i className="fad fa-circle-notch fa-spin"></i>
             </div>
-            <Heading className="text-center">
+            <Header className="text-center">
               Syncing with $DeHub Contract
-            </Heading>
+            </Header>
             <Text className="text-center">Please give it a second.</Text>
           </>
         ) : loadingStatus === LoadingStatus.PAUSED ? (
-          <Heading className="text-center">
+          <Header className="text-center">
             staking is paused for a while. Please wait...
-          </Heading>
+          </Header>
         ) : (
-          <Heading className="text-center">Welcome to DeHub staking!</Heading>
+          <Header className="text-center">Welcome to DeHub staking!</Header>
         )}
       </Card>
     </Container>
