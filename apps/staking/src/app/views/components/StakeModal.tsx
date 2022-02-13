@@ -1,3 +1,4 @@
+import { BalanceInput, Box, ConnectWalletButton, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
@@ -11,10 +12,6 @@ import { Toast } from 'primereact/toast';
 import React, { useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
-import BalanceInput from '../../components/BalanceInput/BalanceInput';
-import ConnectWalletButton from '../../components/ConnectWalletButton';
-import { Box } from '../../components/Layout';
-import { Text } from '../../components/Text';
 import { useDehubContract, useStakingContract } from '../../hooks/useContract';
 import { UserInfo, useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';

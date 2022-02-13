@@ -4,7 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MoralisProvider } from 'react-moralis';
 import { Provider } from 'react-redux';
 import { environment } from '../environments/environment';
-import store from './state';
+import { store } from './states';
 
 const { landing } = environment.dehub;
 const { appId, serverUrl } = environment.moralis;

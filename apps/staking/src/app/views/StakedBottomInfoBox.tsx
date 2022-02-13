@@ -1,5 +1,5 @@
+import { Container } from '@dehub/react/ui';
 import moment from 'moment';
-import Container from '../components/Layout/Container';
 import useCurrentTime from '../hooks/useTimer';
 import { usePoolInfo } from '../state/application/hooks';
 import ComingSoon from './components/ComingSoon';

@@ -9,7 +9,7 @@ function Footer({ landing }: FooterProps) {
     <div className="layout-footer">
       <div className="flex flex-wrap align-items-center justify-content-center card-container">
         <div className="text-lg">DeHub&nbsp;</div>
-        <div className="text-lg">&nbsp;© 2021 DeHub.</div>
+        <div className="text-lg">&nbsp;© 2022 DeHub.</div>
       </div>
       <div className="flex flex-wrap align-items-center justify-content-center card-container">
         <ul>
