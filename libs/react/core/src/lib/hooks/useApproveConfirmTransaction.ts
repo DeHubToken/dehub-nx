@@ -92,7 +92,7 @@ interface ApproveConfirmTransaction {
   onToast?: (severity: string, detail: string) => void;
 }
 
-const useApproveConfirmTransaction = ({
+export const useApproveConfirmTransaction = ({
   onApprove,
   onConfirm,
   onRequiresApproval,
@@ -173,5 +173,3 @@ const useApproveConfirmTransaction = ({
     },
   };
 };
-
-export default useApproveConfirmTransaction;

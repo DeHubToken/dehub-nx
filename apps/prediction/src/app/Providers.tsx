@@ -1,4 +1,4 @@
-import { RefreshContextProvider } from '@dehub/react/core';
+import { ConnectProvider, RefreshContextProvider } from '@dehub/react/core';
 import { ModalProvider } from '@dehub/react/pcsuikit';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
@@ -10,7 +10,10 @@ import { ThemeContextProvider } from './contexts/ThemeContext';
 import { ToastsProvider } from './contexts/ToastsContext';
 import store from './state';
 
+const { landing } = environment.dehub;
 const { appId, serverUrl } = environment.moralis;
+const { chainId } = environment.web3;
+const { baseUrl } = environment;
 
 const Providers: React.FC = ({ children }) => {
   return (
@@ -25,7 +28,14 @@ const Providers: React.FC = ({ children }) => {
             <ThemeContextProvider>
               <LanguageProvider>
                 <RefreshContextProvider>
-                  <ModalProvider>{children}</ModalProvider>
+                  <ConnectProvider
+                    defaultChainId={chainId}
+                    baseUrl={baseUrl}
+                    pageTitle={'DeHub Prediction'}
+                    landingUrl={landing}
+                  >
+                    <ModalProvider>{children}</ModalProvider>
+                  </ConnectProvider>
                 </RefreshContextProvider>
               </LanguageProvider>
             </ThemeContextProvider>

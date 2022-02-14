@@ -4,7 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MoralisProvider } from 'react-moralis';
 import { Provider } from 'react-redux';
 import { environment } from '../environments/environment';
-import store from './state';
+import { store } from './states';
 
 const { landing } = environment.dehub;
 const { appId, serverUrl } = environment.moralis;
@@ -23,7 +23,7 @@ const Providers: React.FC = ({ children }) => {
           <ConnectProvider
             defaultChainId={chainId}
             baseUrl={baseUrl}
-            pageTitle={'DeHub Staking'}
+            pageTitle={'DeHub Raffle'}
             landingUrl={landing}
           >
             <HelmetProvider>{children}</HelmetProvider>

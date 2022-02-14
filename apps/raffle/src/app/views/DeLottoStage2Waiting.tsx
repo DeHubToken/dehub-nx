@@ -1,7 +1,7 @@
+import { Text } from '@dehub/react/ui';
 import { Button } from 'primereact/button';
 import { environment } from '../../environments/environment';
 import Icon from '../components/Icon/Icon';
-import { Text } from '../components/Text';
 import { EventCountDown } from './components/CountDown';
 import FlexLine from './components/FlexLine';
 

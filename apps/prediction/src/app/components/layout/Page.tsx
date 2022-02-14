@@ -1,7 +1,10 @@
+import { PageMeta } from '@dehub/react/ui';
 import React from 'react';
 import styled from 'styled-components';
+import { environment } from '../../../environments/environment';
 import Container from './Container';
-import PageMeta from './PageMeta';
+
+const { baseUrl } = environment;
 
 const StyledPage = styled(Container)`
   min-height: calc(100vh - 64px);
@@ -25,7 +28,7 @@ const Page: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 }) => {
   return (
     <>
-      <PageMeta />
+      <PageMeta baseUrl={baseUrl} title={'DeHub Prediction'} />
       <StyledPage {...props}>{children}</StyledPage>
     </>
   );
