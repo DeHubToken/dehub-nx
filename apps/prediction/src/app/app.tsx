@@ -1,6 +1,10 @@
 import { useEagerMoralis } from '@dehub/react/core';
 import { ResetCSS } from '@dehub/react/pcsuikit';
-import { Loader, SuspenseWithChunkError, withLayout } from '@dehub/react/ui';
+import {
+  FullScreenLoader,
+  SuspenseWithChunkError,
+  withLayout,
+} from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
 import { lazy } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
@@ -29,7 +33,7 @@ export function App() {
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
-      <SuspenseWithChunkError fallback={<Loader />}>
+      <SuspenseWithChunkError fallback={<FullScreenLoader />}>
         <Switch>
           <Route path="/">
             <Predictions baseUrl={baseUrl} />
