@@ -23,6 +23,6 @@
       }
     }
   },
-  "tags": [],
+  "tags": ["scope:react"],
   "implicitDependencies": ["prediction"]
 }

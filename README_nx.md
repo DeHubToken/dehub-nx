@@ -16,18 +16,6 @@ This project was generated using [Nx](https://nx.dev).
    ```
    nx generate @nrwl/angular:application --name=web --style=scss --prefix=dhb --routing --standaloneConfig
    ```
-1. Precommit hook with formatting (git >= v2.9):
-   ```
-   npm i husky pretty-quick --save-dev
-   ```
-   add the following into `package.json`:
-   ```
-   "husky": {
-     "hooks": {
-       "pre-commit": "pretty-quick --staged"
-     }
-   }
-   ```
 1. Local website serving with [lite-server](https://github.com/johnpapa/lite-server)
    ```
    npm i lite-server compression --save-dev
@@ -90,12 +78,6 @@ This project was generated using [Nx](https://nx.dev).
 
    ```
    nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
-   ```
-
-1. Generate Moralis lib:
-
-   ```
-   nx generate @nrwl/workspace:library --name=moralis --directory=shared --standaloneConfig --strict
    ```
 
 1. Generate Config lib:
@@ -163,57 +145,32 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/angular:library --name=moralis --directory=angular --standaloneConfig
    ```
 
-# Netlify Settings
+# Monorepo Tagging
 
-1. Configuration details found in `.env` with `NETLIFY_AUTH_TOKEN` created on the Netlify Team page
+We define the following **scopes** and **types** for each `project.json` under the `"tags": [...]` section.
 
-1. Creating manual site (without ci) with the netlify cli
+Let's follow Nx recommendations: [guideline 1](https://nx.dev/structure/monorepo-tags) , [guideline 2](https://blog.nrwl.io/mastering-the-project-boundaries-in-nx-f095852f5bf4)
 
-   ```
-   npx netlify sites:create --account-slug=dehub --name=dapps-dehub
-   npx netlify sites:create --account-slug=dehub --name=staking-dehub
-   npx netlify sites:create --account-slug=dehub --name=inactive-raffle-dehub
-   npx netlify sites:create --account-slug=dehub --name=inactive-prediction-dehub
-   ```
+## Scopes
 
-   Output sample:
+1. `scope:angular` - angular project
+1. `scope:react` - react project
+1. `scope:shared` - frameworks independent project
 
-   ```
-   Site Created (Angular)
+## Types
 
-   Admin URL: https://app.netlify.com/sites/dapps-dehub
-   URL:       https://dapps-dehub.netlify.app
-   Site ID:   355647c5-6e43-4c94-92bc-eac397ab80a8
-
-   Site Created (React)
-
-   Admin URL: https://app.netlify.com/sites/staking-dehub
-   URL:       https://staking-dehub.netlify.app
-   Site ID:   09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3
-
-   Site Created (React) - Inactive
-
-   Admin URL: https://app.netlify.com/sites/inactive-raffle-dehub
-   URL:       https://inactive-raffle-dehub.netlify.app
-   Site ID:   d1b6b0af-8fcd-4efa-a0ec-818a84cd9283
-
-   Site Created (React) - Inactive
-
-   Admin URL: https://app.netlify.com/sites/inactive-prediction-dehub
-   URL:       https://inactive-prediction-dehub.netlify.app
-   Site ID:   0343b7e0-60d7-4a95-b04f-6c1431544937
-   ```
+1. `type:app` - application
+1. `type:feature` - feature lib
+1. `type:ui` - dumb/stateless ui lib
+1. `type:util` - utility lib
+1. `type:model` - model/type lib _(pure interfaces or classes)_
+1. `type:config` - environments/constants lib
+1. `type:asset` - asset lib _(styles, themes, fonts, images)_
 
 # Nx Cloud benefits
 
 - [Nx Cloud 8 mins pitch](https://www.youtube.com/watch?v=GT7XIwG1i5A&feature=emb_title)
 - [Run Details monitoring](https://blog.nrwl.io/introducing-run-details-available-now-on-nx-cloud-d2da86361862)
-
-# PrimeNG & Freya Theme
-
-Custom purchased [Angular Freya template](https://primefaces.org/freya-ng/#/documentation).
-
-- Grid system is [PrimeFlex 2.0.0!](https://www.primefaces.org/primeflex/setup) ([intro](https://www.youtube.com/watch?v=6DfUHUDt9mw)) ([migration](https://www.primefaces.org/primeflex/migration), [video](https://www.youtube.com/watch?v=2HGkuo1nOns))
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
