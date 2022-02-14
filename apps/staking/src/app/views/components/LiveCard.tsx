@@ -1,4 +1,4 @@
-import { useRefresh } from '@dehub/react/core';
+import { useConnectContext, useRefresh } from '@dehub/react/core';
 import { Box, ConnectWalletButton, Heading, Text } from '@dehub/react/ui';
 import {
   BNB_DECIMALS,
@@ -31,12 +31,12 @@ import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
-
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
 const LiveCard = () => {
+  const { setWalletConnectingState, defaultChainId } = useConnectContext();
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
 
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
@@ -376,7 +376,10 @@ const LiveCard = () => {
                         loadingIcon={'pi pi-spin pi-spinner'}
                       />
                     ) : (
-                      <ConnectWalletButton />
+                      <ConnectWalletButton
+                        setWalletConnectingState={setWalletConnectingState}
+                        defaultChainId={defaultChainId}
+                      />
                     )}
                   </div>
                 </div>

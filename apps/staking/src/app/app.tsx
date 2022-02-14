@@ -1,4 +1,4 @@
-import { useEagerMoralis } from '@dehub/react/core';
+import { useConnectContext, useEagerMoralis } from '@dehub/react/core';
 import {
   FullScreenLoader,
   SuspenseWithChunkError,
@@ -23,9 +23,13 @@ export function App() {
   useFetchPoolInfo();
   usePullBusdPrice();
 
+  const { baseUrl, pageTitle } = useConnectContext();
+
   return (
     <Router history={history}>
-      <SuspenseWithChunkError fallback={<FullScreenLoader />}>
+      <SuspenseWithChunkError
+        fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
+      >
         <Switch>
           <Route path="/">
             <Staking />

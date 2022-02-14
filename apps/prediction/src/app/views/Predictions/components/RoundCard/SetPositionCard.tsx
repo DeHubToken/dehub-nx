@@ -1,3 +1,4 @@
+import { useConnectContext } from '@dehub/react/core';
 import {
   ArrowBackIcon,
   AutoRenewIcon,
@@ -69,6 +70,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   onBack,
   onSuccess,
 }) => {
+  const { setWalletConnectingState, defaultChainId } = useConnectContext();
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<{
@@ -302,7 +304,10 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
               {t(key)}
             </Button>
           ) : (
-            <ConnectWalletButton />
+            <ConnectWalletButton
+              setWalletConnectingState={setWalletConnectingState}
+              defaultChainId={defaultChainId}
+            />
           )}
         </Box>
         <Text as="p" fontSize="12px" lineHeight={1} color="textSubtle">

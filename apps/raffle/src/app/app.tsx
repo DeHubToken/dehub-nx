@@ -1,4 +1,4 @@
-import { useEagerMoralis } from '@dehub/react/core';
+import { useConnectContext, useEagerMoralis } from '@dehub/react/core';
 import {
   FullScreenLoader,
   SuspenseWithChunkError,
@@ -7,12 +7,9 @@ import {
 import BigNumber from 'bignumber.js';
 import { lazy } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
-import { environment } from '../environments/environment';
 import history from './routerHistory';
 
 const Lottery = withLayout(lazy(() => import('./views/Lottery')));
-
-const { baseUrl } = environment;
 
 // This config is required for number formatting
 BigNumber.config({
@@ -23,9 +20,13 @@ BigNumber.config({
 export function App() {
   useEagerMoralis();
 
+  const { baseUrl, pageTitle } = useConnectContext();
+
   return (
     <Router history={history}>
-      <SuspenseWithChunkError fallback={<FullScreenLoader />}>
+      <SuspenseWithChunkError
+        fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
+      >
         <Switch>
           <Route path="/">
             <Lottery baseUrl={baseUrl} />

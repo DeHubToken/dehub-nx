@@ -23,6 +23,7 @@ const withLayout =
 
     const { logout } = useMoralis();
     const {
+      setWalletConnectingState,
       walletConnectingState,
       defaultChainId,
       baseUrl,
@@ -90,7 +91,12 @@ const withLayout =
             }}
           >
             <Header
-              userMenu={<UserMenu />}
+              userMenu={
+                <UserMenu
+                  setWalletConnectingState={setWalletConnectingState}
+                  defaultChainId={defaultChainId}
+                />
+              }
               logo={{
                 href: 'https://dehub.net',
                 icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,

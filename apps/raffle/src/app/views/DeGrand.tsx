@@ -1,3 +1,4 @@
+import { useConnectContext } from '@dehub/react/core';
 import {
   Box,
   ConnectWalletButton,
@@ -30,6 +31,7 @@ const StyledBox = styled(Box)`
 `;
 
 const DeGrand = () => {
+  const { setWalletConnectingState, defaultChainId } = useConnectContext();
   const specialPaused = useGetSpecialPaused();
   const {
     currentRound: { deGrandStatus, endTime },
@@ -169,7 +171,12 @@ const DeGrand = () => {
                                 />
                               </>
                             ) : (
-                              <ConnectWalletButton />
+                              <ConnectWalletButton
+                                setWalletConnectingState={
+                                  setWalletConnectingState
+                                }
+                                defaultChainId={defaultChainId}
+                              />
                             )}
                           </>
                         ) : deGrandPrize &&
@@ -219,7 +226,10 @@ const DeGrand = () => {
                         label="Check Now"
                       />
                     ) : (
-                      <ConnectWalletButton />
+                      <ConnectWalletButton
+                        setWalletConnectingState={setWalletConnectingState}
+                        defaultChainId={defaultChainId}
+                      />
                     )}
                   </div>
                   <Icon className="fad fa-history"></Icon>

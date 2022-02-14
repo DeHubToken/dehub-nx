@@ -1,4 +1,4 @@
-import { useEagerMoralis } from '@dehub/react/core';
+import { useConnectContext, useEagerMoralis } from '@dehub/react/core';
 import { ResetCSS } from '@dehub/react/pcsuikit';
 import {
   FullScreenLoader,
@@ -29,11 +29,15 @@ export function App() {
   useEagerMoralis();
   usePollBlockNumber();
 
+  const { baseUrl, pageTitle } = useConnectContext();
+
   return (
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
-      <SuspenseWithChunkError fallback={<FullScreenLoader />}>
+      <SuspenseWithChunkError
+        fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
+      >
         <Switch>
           <Route path="/">
             <Predictions baseUrl={baseUrl} />
