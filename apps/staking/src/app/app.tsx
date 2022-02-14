@@ -1,5 +1,9 @@
 import { useEagerMoralis } from '@dehub/react/core';
-import { Loader, SuspenseWithChunkError, withLayout } from '@dehub/react/ui';
+import {
+  FullScreenLoader,
+  SuspenseWithChunkError,
+  withLayout,
+} from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
 import { lazy } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
@@ -21,7 +25,7 @@ export function App() {
 
   return (
     <Router history={history}>
-      <SuspenseWithChunkError fallback={<Loader />}>
+      <SuspenseWithChunkError fallback={<FullScreenLoader />}>
         <Switch>
           <Route path="/">
             <Staking />
