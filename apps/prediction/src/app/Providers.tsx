@@ -31,7 +31,7 @@ const Providers: React.FC = ({ children }) => {
                   <ConnectProvider
                     defaultChainId={chainId}
                     baseUrl={baseUrl}
-                    pageTitle={'DeHub Staking'}
+                    pageTitle={'DeHub Prediction'}
                     landingUrl={landing}
                   >
                     <ModalProvider>{children}</ModalProvider>

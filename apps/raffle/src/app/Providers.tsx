@@ -23,7 +23,7 @@ const Providers: React.FC = ({ children }) => {
           <ConnectProvider
             defaultChainId={chainId}
             baseUrl={baseUrl}
-            pageTitle={'DeHub Staking'}
+            pageTitle={'DeHub Raffle'}
             landingUrl={landing}
           >
             <HelmetProvider>{children}</HelmetProvider>

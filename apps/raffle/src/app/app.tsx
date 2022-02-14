@@ -23,7 +23,7 @@ export function App() {
     <Router history={history}>
       <SuspenseWithChunkError fallback={<Loader />}>
         <Switch>
-          <Route path="/" exact>
+          <Route path="/">
             <Lottery baseUrl={baseUrl} />
           </Route>
         </Switch>

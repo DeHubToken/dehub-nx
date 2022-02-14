@@ -30,7 +30,7 @@ const ConnectWalletButton = () => {
       authenticate({
         chainId: defaultChainId,
         provider,
-        signingMessage: 'DeHub Staking',
+        signingMessage: 'DeHub dApps',
         onError: (error: Error) => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
