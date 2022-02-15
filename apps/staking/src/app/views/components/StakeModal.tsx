@@ -1,5 +1,5 @@
-import { useConnectContext } from '@dehub/react/core';
-import { BalanceInput, Box, ConnectWalletButton, Text } from '@dehub/react/ui';
+import { ConnectWalletButton } from '@dehub/react/core';
+import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
@@ -52,7 +52,6 @@ const getButtonProps = (
 };
 
 const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
-  const { setWalletConnectingState, defaultChainId } = useConnectContext();
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -261,10 +260,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
                 loadingIcon={'pi pi-spin pi-spinner'}
               />
             ) : (
-              <ConnectWalletButton
-                setWalletConnectingState={setWalletConnectingState}
-                defaultChainId={defaultChainId}
-              />
+              <ConnectWalletButton />
             )}
           </div>
         </div>

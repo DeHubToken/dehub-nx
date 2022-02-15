@@ -1,12 +1,5 @@
-import { useConnectContext } from '@dehub/react/core';
-import {
-  Box,
-  ConnectWalletButton,
-  Container,
-  Heading,
-  Text,
-  Title,
-} from '@dehub/react/ui';
+import { ConnectWalletButton } from '@dehub/react/core';
+import { Box, Container, Heading, Text, Title } from '@dehub/react/ui';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import React, { useState } from 'react';
@@ -31,7 +24,6 @@ const StyledBox = styled(Box)`
 `;
 
 const DeGrand = () => {
-  const { setWalletConnectingState, defaultChainId } = useConnectContext();
   const specialPaused = useGetSpecialPaused();
   const {
     currentRound: { deGrandStatus, endTime },
@@ -171,12 +163,7 @@ const DeGrand = () => {
                                 />
                               </>
                             ) : (
-                              <ConnectWalletButton
-                                setWalletConnectingState={
-                                  setWalletConnectingState
-                                }
-                                defaultChainId={defaultChainId}
-                              />
+                              <ConnectWalletButton />
                             )}
                           </>
                         ) : deGrandPrize &&
@@ -226,10 +213,7 @@ const DeGrand = () => {
                         label="Check Now"
                       />
                     ) : (
-                      <ConnectWalletButton
-                        setWalletConnectingState={setWalletConnectingState}
-                        defaultChainId={defaultChainId}
-                      />
+                      <ConnectWalletButton />
                     )}
                   </div>
                   <Icon className="fad fa-history"></Icon>

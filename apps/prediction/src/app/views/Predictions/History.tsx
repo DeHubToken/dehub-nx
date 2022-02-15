@@ -1,6 +1,5 @@
-import { useConnectContext } from '@dehub/react/core';
+import { ConnectWalletButton } from '@dehub/react/core';
 import { Flex, Text } from '@dehub/react/pcsuikit';
-import { ConnectWalletButton } from '@dehub/react/ui';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import React, { useEffect, useState } from 'react';
 import { useMoralis } from 'react-moralis';
@@ -57,7 +56,6 @@ const History = () => {
   const { t } = useTranslation();
   const bets = useGetHistoryByAccount(account);
   const [activeTab, setActiveTab] = useState(HistoryTabs.ROUNDS);
-  const { setWalletConnectingState, defaultChainId } = useConnectContext();
 
   useEffect(() => {
     if (account && isHistoryPaneOpen) {
@@ -100,10 +98,7 @@ const History = () => {
         flexDirection="column"
         mt="32px"
       >
-        <ConnectWalletButton
-          setWalletConnectingState={setWalletConnectingState}
-          defaultChainId={defaultChainId}
-        />
+        <ConnectWalletButton />
         <Text mt="8px">
           {t('Connect your wallet to view your prediction history')}
         </Text>

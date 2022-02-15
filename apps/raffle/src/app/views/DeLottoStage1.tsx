@@ -1,5 +1,5 @@
-import { useConnectContext } from '@dehub/react/core';
-import { ConnectWalletButton, Heading, Text } from '@dehub/react/ui';
+import { ConnectWalletButton } from '@dehub/react/core';
+import { Heading, Text } from '@dehub/react/ui';
 import { format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
@@ -20,7 +20,6 @@ import PrizePot from './components/PrizePot';
 import WinningNumbers from './components/WiningNumbers';
 
 const DeLottoStage1 = () => {
-  const { setWalletConnectingState, defaultChainId } = useConnectContext();
   const {
     currentLotteryId,
     isTransitioning,
@@ -191,10 +190,7 @@ const DeLottoStage1 = () => {
                     <Text className="mb-2">
                       Please connect your wallet first.
                     </Text>
-                    <ConnectWalletButton
-                      setWalletConnectingState={setWalletConnectingState}
-                      defaultChainId={defaultChainId}
-                    />
+                    <ConnectWalletButton />
                   </>
                 )
               ) : (

@@ -1,4 +1,4 @@
-import { useConnectContext } from '@dehub/react/core';
+import { ConnectWalletButton } from '@dehub/react/core';
 import {
   ArrowBackIcon,
   AutoRenewIcon,
@@ -12,7 +12,6 @@ import {
   IconButton,
   Text,
 } from '@dehub/react/pcsuikit';
-import { ConnectWalletButton } from '@dehub/react/ui';
 import { getDecimalAmount } from '@dehub/shared/utils';
 import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';
@@ -70,7 +69,6 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
   onBack,
   onSuccess,
 }) => {
-  const { setWalletConnectingState, defaultChainId } = useConnectContext();
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<{
@@ -304,10 +302,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
               {t(key)}
             </Button>
           ) : (
-            <ConnectWalletButton
-              setWalletConnectingState={setWalletConnectingState}
-              defaultChainId={defaultChainId}
-            />
+            <ConnectWalletButton />
           )}
         </Box>
         <Text as="p" fontSize="12px" lineHeight={1} color="textSubtle">

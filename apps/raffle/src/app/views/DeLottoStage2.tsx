@@ -1,5 +1,5 @@
-import { useConnectContext } from '@dehub/react/core';
-import { ConnectWalletButton, Heading, Text } from '@dehub/react/ui';
+import { ConnectWalletButton } from '@dehub/react/core';
+import { Heading, Text } from '@dehub/react/ui';
 import { addMonths, format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
@@ -17,7 +17,6 @@ import ListTicketDialog from './components/ListTicketDialog';
 import PrizePot from './components/PrizePot';
 
 const DeLottoStage2 = () => {
-  const { setWalletConnectingState, defaultChainId } = useConnectContext();
   const {
     currentLotteryId,
     isTransitioning,
@@ -188,10 +187,7 @@ const DeLottoStage2 = () => {
                     <Text className="mb-3">
                       Please connect your wallet first.
                     </Text>
-                    <ConnectWalletButton
-                      setWalletConnectingState={setWalletConnectingState}
-                      defaultChainId={defaultChainId}
-                    />
+                    <ConnectWalletButton />
                   </>
                 )
               ) : (
@@ -226,10 +222,7 @@ const DeLottoStage2 = () => {
                     />
                   </>
                 ) : (
-                  <ConnectWalletButton
-                    setWalletConnectingState={setWalletConnectingState}
-                    defaultChainId={defaultChainId}
-                  />
+                  <ConnectWalletButton />
                 )}
               </div>
               <Icon className="fad fa-history"></Icon>

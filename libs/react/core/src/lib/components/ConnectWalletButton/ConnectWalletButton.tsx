@@ -1,3 +1,4 @@
+import { WalletModal } from '@dehub/react/ui';
 import {
   moralisProviderLocalStorageKey,
   WalletConnectingState,
@@ -6,15 +7,11 @@ import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
-import WalletModal from '../WalletModal';
+import { useConnectContext } from '../../hooks';
 
-const ConnectWalletButton = ({
-  setWalletConnectingState,
-  defaultChainId,
-}: {
-  setWalletConnectingState: (connectingState: WalletConnectingState) => void;
-  defaultChainId: number;
-}) => {
+const ConnectWalletButton = () => {
+  const { setWalletConnectingState, defaultChainId } = useConnectContext();
+
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const mountedRef = useRef(true);
 

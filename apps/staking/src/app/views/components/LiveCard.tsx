@@ -1,5 +1,5 @@
-import { useConnectContext, useRefresh } from '@dehub/react/core';
-import { Box, ConnectWalletButton, Heading, Text } from '@dehub/react/ui';
+import { ConnectWalletButton, useRefresh } from '@dehub/react/core';
+import { Box, Heading, Text } from '@dehub/react/ui';
 import {
   BNB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
@@ -36,7 +36,6 @@ const StyledBox = styled(Box)`
 `;
 
 const LiveCard = () => {
-  const { setWalletConnectingState, defaultChainId } = useConnectContext();
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
 
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
@@ -376,10 +375,7 @@ const LiveCard = () => {
                         loadingIcon={'pi pi-spin pi-spinner'}
                       />
                     ) : (
-                      <ConnectWalletButton
-                        setWalletConnectingState={setWalletConnectingState}
-                        defaultChainId={defaultChainId}
-                      />
+                      <ConnectWalletButton />
                     )}
                   </div>
                 </div>
