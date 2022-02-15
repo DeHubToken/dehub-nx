@@ -1,5 +1,5 @@
 import { Directive, HostBinding, Input } from '@angular/core';
-import { SysFragment } from '@dehub/shared/models';
+import { SysFragment } from '@dehub/shared/model';
 
 @Directive({
   selector: '[dhbContentfulDraft]',

@@ -1,8 +1,6 @@
-import BigNumber from 'bignumber.js';
+import { BIG_ZERO, ethersToSerializedBigNumber } from '@dehub/shared/util';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
-import { BIG_ZERO, ethersToSerializedBigNumber } from '@dehub/shared/utils';
-import { fetchUserTicketsPerMultipleRounds } from './helpers';
-
+import BigNumber from 'bignumber.js';
 import StandardLotteryAbi from '../../config/abis/StandardLottery.json';
 import {
   LotteryStatus,
@@ -11,6 +9,7 @@ import {
 } from '../../config/constants/types';
 import { getStandardLotteryAddress } from '../../utils/addressHelpers';
 import { Call, multicallv2 } from '../../utils/multicall';
+import { fetchUserTicketsPerMultipleRounds } from './helpers';
 import { LotteryUserData, LotteryUserRound } from './types';
 
 interface LotteryStatusAndFinalNumber {

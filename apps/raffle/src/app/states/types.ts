@@ -1,4 +1,4 @@
-import { WalletConnectingState } from '@dehub/shared/models';
+import { WalletConnectingState } from '@dehub/shared/model';
 import { LotteryState as PauseState } from './pause';
 import { LotteryState as SpecialLotteryState } from './special-raffle/types';
 import { LotteryState as StandardLotteryState } from './standard-raffle/types';

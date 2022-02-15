@@ -3,11 +3,11 @@ import { LoggerService, LoggerToken } from '@dehub/angular/core';
 import {
   MoralisWeb3ProviderType,
   WalletConnectingState,
-} from '@dehub/shared/models';
+} from '@dehub/shared/model';
 import {
   publishReplayRefCount,
   setupMetamaskNetwork,
-} from '@dehub/shared/utils';
+} from '@dehub/shared/util';
 import * as events from 'events';
 import { Moralis } from 'moralis';
 import { BehaviorSubject, Observable } from 'rxjs';

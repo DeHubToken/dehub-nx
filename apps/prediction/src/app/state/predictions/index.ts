@@ -1,7 +1,7 @@
+import { BIG_ZERO } from '@dehub/shared/util';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import maxBy from 'lodash/maxBy';
 import merge from 'lodash/merge';
-import { BIG_ZERO } from '@dehub/shared/utils';
 import {
   Bet,
   HistoryFilter,
@@ -11,14 +11,13 @@ import {
   Round,
 } from '../types';
 import {
-  makeFutureRoundResponse,
-  transformRoundResponse,
-  getBetHistory,
-  transformBetResponse,
   getBet,
+  getBetHistory,
+  makeFutureRoundResponse,
   makeRoundData,
+  transformBetResponse,
+  transformRoundResponse,
 } from './helpers';
-
 import { fetchBetHistory } from './helpers2';
 import { BetResponse } from './queries';
 

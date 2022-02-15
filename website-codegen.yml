@@ -20,7 +20,7 @@ generates:
   ##############################################################################################
   # Shared TypeScript GraphQL Models
   ##############################################################################################
-  libs/shared/models/src/lib/website-contentful.models.ts:
+  libs/shared/model/src/lib/website-contentful.model.ts:
     plugins:
       # https://www.graphql-code-generator.com/docs/plugins/add
       - add:
@@ -40,14 +40,14 @@ generates:
       - add:
           content:
             - '/* eslint-disable */'
-            - "import * as models from '@dehub/shared/models';"
+            - "import * as models from '@dehub/shared/model';"
       # https://www.graphql-code-generator.com/docs/plugins/typescript-apollo-angular
       - typescript-apollo-angular
     config:
       noExport: false
       importOperationTypesFrom: 'models'
       documentMode: external
-      importDocumentNodeExternallyFrom: '@dehub/shared/models'
+      importDocumentNodeExternallyFrom: '@dehub/shared/model'
       ngModule: ../graphql.module#GraphQLModule
       querySuffix: 'Service'
 
@@ -59,7 +59,7 @@ generates:
       - add:
           content:
             - '/* eslint-disable */'
-            - "import * as models from '@dehub/shared/models';"
+            - "import * as models from '@dehub/shared/model';"
       # https://www.graphql-code-generator.com/docs/plugins/typescript-react-apollo
       - typescript-react-apollo
     config:
@@ -68,4 +68,4 @@ generates:
       # ISSUE: https://github.com/dotansimha/graphql-code-generator/issues/4980
       # -> gql is generated duplicately in react hooks (already in the models)
       # documentMode: external
-      # importDocumentNodeExternallyFrom: '@dehub/shared/models'
+      # importDocumentNodeExternallyFrom: '@dehub/shared/model'

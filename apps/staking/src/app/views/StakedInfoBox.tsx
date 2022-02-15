@@ -1,6 +1,6 @@
 import { Heading, Text } from '@dehub/react/ui';
 import { BUSD_DISPLAY_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getFullDisplayBalance } from '@dehub/shared/utils';
+import { getFullDisplayBalance } from '@dehub/shared/util';
 import { Skeleton } from 'primereact/skeleton';
 import {
   useDehubBusdPrice,

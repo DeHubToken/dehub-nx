@@ -1,9 +1,9 @@
 import {
   ethersToBigNumber,
   ethersToSerializedBigNumber,
-} from '@dehub/shared/utils';
-import BigNumber from 'bignumber.js';
+} from '@dehub/shared/util';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import BigNumber from 'bignumber.js';
 import { useMemo } from 'react';
 import SpecialLotteryAbi from '../../config/abis/SpecialLottery.json';
 import { TICKET_LIMIT_PER_REQUEST } from '../../config/constants';

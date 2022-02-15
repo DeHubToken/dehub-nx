@@ -2,8 +2,8 @@
 
 /dist
 /coverage
-/libs/shared/assets/freya/**/*.scss
-!/libs/shared/assets/freya/**/dhb_*.scss
+/libs/shared/asset/freya/**/*.scss
+!/libs/shared/asset/freya/**/dhb_*.scss
 .history
 .angular
 .vscode

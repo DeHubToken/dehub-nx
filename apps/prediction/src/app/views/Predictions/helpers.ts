@@ -1,7 +1,6 @@
+import { formatNumber, getBalanceAmount } from '@dehub/shared/util';
 import BigNumber from 'bignumber.js';
 import { DefaultTheme } from 'styled-components';
-import { formatNumber, getBalanceAmount } from '@dehub/shared/utils';
-
 import { Bet, BetPosition } from '../../state/types';
 import getTimePeriods from '../../utils/getTimePeriods';
 

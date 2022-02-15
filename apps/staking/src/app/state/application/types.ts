@@ -1,4 +1,4 @@
-import { SerializedBigNumber } from '@dehub/shared/utils';
+import { SerializedBigNumber } from '@dehub/shared/util';
 import BigNumber from 'bignumber.js';
 
 export interface SerializedPoolInfo {

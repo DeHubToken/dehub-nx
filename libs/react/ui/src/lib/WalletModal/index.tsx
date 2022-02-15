@@ -1,7 +1,7 @@
-import { ReactComponent as MetaMaskIcon } from '@dehub/shared/assets/dehub/icons/metamask.svg';
-import { ReactComponent as TrustWalletIcon } from '@dehub/shared/assets/dehub/icons/trustwallet.svg';
-import { ReactComponent as WalletConnectIcon } from '@dehub/shared/assets/dehub/icons/walletconnect.svg';
-import { MoralisWeb3ProviderType } from '@dehub/shared/models';
+import { ReactComponent as MetaMaskIcon } from '@dehub/shared/asset/dehub/icons/metamask.svg';
+import { ReactComponent as TrustWalletIcon } from '@dehub/shared/asset/dehub/icons/trustwallet.svg';
+import { ReactComponent as WalletConnectIcon } from '@dehub/shared/asset/dehub/icons/walletconnect.svg';
+import { MoralisWeb3ProviderType } from '@dehub/shared/model';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 interface WalletModalProps {

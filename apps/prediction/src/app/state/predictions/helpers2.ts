@@ -1,11 +1,10 @@
 import {
-  getBalanceNumber,
-  ethersToBigNumber,
   BIG_ZERO,
-} from '@dehub/shared/utils';
+  ethersToBigNumber,
+  getBalanceNumber,
+} from '@dehub/shared/util';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
-
 import PredictionsAbi from '../../config/abi/predictions.json';
 import { getPredictionsAddress } from '../../utils/addressHelpers';
 import { getPredictionsContract } from '../../utils/contractHelpers';

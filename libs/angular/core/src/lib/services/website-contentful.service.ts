@@ -1,6 +1,6 @@
 /* eslint-disable */
-import * as models from '@dehub/shared/models';
-import * as Operations from '@dehub/shared/models';
+import * as models from '@dehub/shared/model';
+import * as Operations from '@dehub/shared/model';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
 import { GraphQLModule } from '../graphql.module';

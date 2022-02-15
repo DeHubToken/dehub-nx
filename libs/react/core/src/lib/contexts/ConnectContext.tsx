@@ -1,4 +1,4 @@
-import { WalletConnectingState } from '@dehub/shared/models';
+import { WalletConnectingState } from '@dehub/shared/model';
 import { createContext, ReactNode, useState } from 'react';
 
 interface PageMetaProps {

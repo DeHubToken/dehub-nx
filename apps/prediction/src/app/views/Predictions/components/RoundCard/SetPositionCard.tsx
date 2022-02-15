@@ -12,7 +12,7 @@ import {
   IconButton,
   Text,
 } from '@dehub/react/pcsuikit';
-import { getDecimalAmount } from '@dehub/shared/utils';
+import { getDecimalAmount } from '@dehub/shared/util';
 import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';
 import { Slider, SliderChangeParams } from 'primereact/slider';

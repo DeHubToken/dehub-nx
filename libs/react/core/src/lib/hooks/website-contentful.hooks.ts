@@ -1,6 +1,6 @@
 import * as Apollo from '@apollo/client';
 import { gql } from '@apollo/client';
-import * as models from '@dehub/shared/models';
+import * as models from '@dehub/shared/model';
 const defaultOptions = {};
 export const SysFragmentDoc = gql`
   fragment Sys on Sys {

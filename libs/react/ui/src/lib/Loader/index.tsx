@@ -1,4 +1,4 @@
-import DehubLoaderJson from '@dehub/shared/assets/dehub/dehub-loader-light-blue.json';
+import DehubLoaderJson from '@dehub/shared/asset/dehub/dehub-loader-light-blue.json';
 import { Player } from '@lottiefiles/react-lottie-player';
 
 const Loader = ({

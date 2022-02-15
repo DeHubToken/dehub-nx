@@ -1,7 +1,7 @@
 import {
   moralisProviderLocalStorageKey,
   MoralisWeb3ProviderType,
-} from '@dehub/shared/models';
+} from '@dehub/shared/model';
 import { useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
 

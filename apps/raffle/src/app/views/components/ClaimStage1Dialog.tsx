@@ -1,6 +1,6 @@
 import { Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
+import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/util';
 import {
   TransactionReceipt,
   TransactionResponse,

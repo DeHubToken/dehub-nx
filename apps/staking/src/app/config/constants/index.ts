@@ -1,4 +1,4 @@
-import { decimalToHex } from '@dehub/shared/utils';
+import { decimalToHex } from '@dehub/shared/util';
 import { environment } from '../../../environments/environment';
 
 export const TICKET_LIMIT_PER_REQUEST = 2500;

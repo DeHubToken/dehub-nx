@@ -1,6 +1,6 @@
 import { Footer, Header, Loader, PageMeta } from '@dehub/react/ui';
-import { WalletConnectingState } from '@dehub/shared/models';
-import { decimalToHex, iOS } from '@dehub/shared/utils';
+import { WalletConnectingState } from '@dehub/shared/model';
+import { decimalToHex, iOS } from '@dehub/shared/util';
 import { Moralis } from 'moralis';
 import React, { useEffect, useState } from 'react';
 import { useMoralis } from 'react-moralis';

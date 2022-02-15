@@ -58,13 +58,13 @@ This project was generated using [Nx](https://nx.dev).
    **Freya** _Used to store Primefaces template assets_
 
    ```
-   nx generate @nrwl/workspace:library --name=freya --directory=shared/assets --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
+   nx generate @nrwl/workspace:library --name=freya --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
 
    **DeHUB** _Used to store common assets like logo, etc._
 
    ```
-   nx generate @nrwl/workspace:library --name=dehub --directory=shared/assets --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
+   nx generate @nrwl/workspace:library --name=dehub --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
 
 1. Generate Shared Models _used for types, states, custom models_

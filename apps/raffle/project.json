@@ -17,13 +17,13 @@
         "assets": [
           "apps/raffle/src/assets",
           {
-            "input": "libs/shared/assets/dehub/src/lib",
+            "input": "libs/shared/asset/dehub/src/lib",
             "glob": "**/*",
             "ignore": ["**/*.ts"],
             "output": "assets/dehub"
           },
           {
-            "input": "libs/shared/assets/freya/src/lib",
+            "input": "libs/shared/asset/freya/src/lib",
             "glob": "**/*",
             "ignore": ["**/*.ts", "**/*.scss"],
             "output": "assets"
@@ -47,12 +47,12 @@
             "inject": false
           },
           {
-            "input": "libs/shared/assets/freya/src/lib/theme/dehub/theme.scss",
+            "input": "libs/shared/asset/freya/src/lib/theme/dehub/theme.scss",
             "bundleName": "theme",
             "inject": false
           },
           {
-            "input": "libs/shared/assets/freya/src/lib/layout/css/layout-dehub.scss",
+            "input": "libs/shared/asset/freya/src/lib/layout/css/layout-dehub.scss",
             "bundleName": "layout",
             "inject": false
           }
@@ -144,5 +144,5 @@
     }
   },
   "tags": ["scope:react", "type:app"],
-  "implicitDependencies": ["shared-assets-dehub", "shared-assets-freya"]
+  "implicitDependencies": ["shared-asset-dehub", "shared-asset-freya"]
 }

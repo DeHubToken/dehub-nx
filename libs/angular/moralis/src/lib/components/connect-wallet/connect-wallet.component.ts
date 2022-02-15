@@ -11,8 +11,8 @@ import {
   MoralisWeb3ProviderType,
   WalletConnectingMessages,
   WalletConnectingState,
-} from '@dehub/shared/models';
-import { shortenAddress } from '@dehub/shared/utils';
+} from '@dehub/shared/model';
+import { shortenAddress } from '@dehub/shared/util';
 import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { MoralisService } from '../../services/moralis.service';

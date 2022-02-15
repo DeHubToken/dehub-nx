@@ -18,7 +18,7 @@ const RPC_URL = getRpcUrl();
 
 export const simpleRpcProvider = new JsonRpcProvider(RPC_URL);
 
-/** TODO: use or move to shared/utils/contract.utils.ts  */
+/** TODO: use or move to shared/util/contract.utils.ts  */
 export const getContract = (
   address: string,
   abi: ContractInterface,

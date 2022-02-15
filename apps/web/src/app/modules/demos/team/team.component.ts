@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TeamMembersService } from '@dehub/angular/core';
-import { TeamMember } from '@dehub/shared/models';
+import { TeamMember } from '@dehub/shared/model';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
 @Component({
   template: `
     <div class="grid">

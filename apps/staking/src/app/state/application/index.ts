@@ -1,8 +1,8 @@
-import { WalletConnectingState } from '@dehub/shared/models';
+import { WalletConnectingState } from '@dehub/shared/model';
 import {
   ethersToSerializedBigNumber,
   SerializedBigNumber,
-} from '@dehub/shared/utils';
+} from '@dehub/shared/util';
 import {
   createAction,
   createAsyncThunk,

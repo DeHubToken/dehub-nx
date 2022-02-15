@@ -6,7 +6,7 @@ import {
   DEHUB_DECIMALS,
   DEHUB_DISPLAY_DECIMALS,
 } from '@dehub/shared/config';
-import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
+import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/util';
 import {
   TransactionReceipt,
   TransactionResponse,

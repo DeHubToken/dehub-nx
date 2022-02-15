@@ -1,14 +1,14 @@
-import React from 'react';
-import BigNumber from 'bignumber.js';
 import { Flex, Text } from '@dehub/react/pcsuikit';
 import {
   BUSD_DECIMALS,
-  DEHUB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
+  DEHUB_DECIMALS,
 } from '@dehub/shared/config';
-import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
-import { formatDehub } from '../../../helpers';
+import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/util';
+import BigNumber from 'bignumber.js';
+import React from 'react';
 import { useTranslation } from '../../../../../contexts/Localization';
+import { formatDehub } from '../../../helpers';
 import { PnlSummary } from './PnlTab';
 
 type SummaryType = 'won' | 'lost' | 'entered';

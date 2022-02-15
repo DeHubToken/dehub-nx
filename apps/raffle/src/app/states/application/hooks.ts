@@ -1,4 +1,4 @@
-import { WalletConnectingState } from '@dehub/shared/models';
+import { WalletConnectingState } from '@dehub/shared/model';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';

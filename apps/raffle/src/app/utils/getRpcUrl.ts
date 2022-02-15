@@ -1,5 +1,5 @@
 import { Networks } from '@dehub/shared/config';
-import { getRandomRpcUrl } from '@dehub/shared/utils';
+import { getRandomRpcUrl } from '@dehub/shared/util';
 import { environment } from '../../environments/environment';
 
 // Array of available nodes to connect to

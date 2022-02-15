@@ -3,7 +3,7 @@ import { TournamentsService } from '@dehub/angular/core';
 import {
   CarouselResponsiveOptions,
   TournamentCollectionFragment,
-} from '@dehub/shared/models';
+} from '@dehub/shared/model';
 import {
   bounceInLeftOnEnterAnimation,
   bounceInRightOnEnterAnimation,
