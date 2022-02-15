@@ -9,6 +9,7 @@ export enum Navigation {
   Demos = 'demos',
   Tournaments = 'tournaments',
   Staking = 'staking',
+  Home = 'home',
 }
 
 export const menuItems: MenuItem[] = [
@@ -48,7 +49,7 @@ export const menuItems: MenuItem[] = [
           path: '',
           component: AppMainComponent,
           children: [
-            { path: '', redirectTo: Navigation.Tournaments, pathMatch: 'full' },
+            { path: '', redirectTo: Navigation.Home, pathMatch: 'full' },
             {
               path: Navigation.Demos,
               loadChildren: () =>
@@ -61,6 +62,13 @@ export const menuItems: MenuItem[] = [
               loadChildren: () =>
                 import('./modules/tournaments/tournaments.module').then(
                   module => module.TournamentsModule
+                ),
+            },
+            {
+              path: Navigation.Home,
+              loadChildren: () =>
+                import('./modules/home/home.module').then(
+                  module => module.HomeModule
                 ),
             },
           ],

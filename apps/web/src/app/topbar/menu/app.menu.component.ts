@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { menuItems } from '../app-routing.module';
-import { AppMainComponent } from '../app.main.component';
+import { menuItems } from '../../app-routing.module';
+import { AppMainComponent } from '../../app.main.component';
 
 @Component({
   selector: 'dhb-menu',

@@ -18,16 +18,18 @@ import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { TabMenuModule } from 'primeng/tabmenu';
 import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
 import { AppFooterComponent } from './footer/app.footer.component';
-import { AppMenuComponent } from './menu/app.menu.component';
-import { MenuService } from './menu/app.menu.service';
-import { AppMenuitemComponent } from './menu/app.menuitem.component';
+import { TabMenuComponent } from './tab-menu/tab-menu.component';
 import { AppTopBarComponent } from './topbar/app.topbar.component';
+import { AppMenuComponent } from './topbar/menu/app.menu.component';
+import { MenuService } from './topbar/menu/app.menu.service';
+import { AppMenuitemComponent } from './topbar/menu/app.menuitem.component';
 
 const angularModules = [
   CommonModule,
@@ -43,6 +45,7 @@ const primeNgModules = [
   RippleModule,
   MenuModule,
   SplitButtonModule,
+  TabMenuModule,
 ];
 
 /** Layout components from Freya */
@@ -71,7 +74,7 @@ const { appId, serverUrl } = environment.moralis;
     // Moralis
     AngularMoralisModule.forRoot({ appId, serverUrl }),
   ],
-  declarations: [AppComponent, layoutComponents],
+  declarations: [AppComponent, layoutComponents, TabMenuComponent],
   providers: [
     MenuService,
     { provide: EnvToken, useValue: environment },
