@@ -62,22 +62,22 @@ export const tabMenuItems: MenuItem[] = [
   },
   {
     label: 'Game',
-    icon: 'fa fa-game',
+    icon: 'fa fa-gamepad',
     routerLink: [NavigationTabMenu.Game],
   },
   {
     label: 'Shop',
-    icon: 'fa fa-shop',
+    icon: 'fa fa-store',
     routerLink: [NavigationTabMenu.Shop],
   },
   {
     label: 'Learn',
-    icon: 'fa fa-learn',
+    icon: 'fa fa-graduation-cap',
     routerLink: [NavigationTabMenu.Learn],
   },
   {
     label: 'Earn',
-    icon: 'fa fa-earn',
+    icon: 'fa fa-dollar-sign',
     routerLink: [NavigationTabMenu.Earn],
   },
 ];
