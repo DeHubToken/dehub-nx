@@ -1,31 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { Navigation } from '../app-routing.module';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { tabMenuItems } from '../app-routing.module';
 
 @Component({
   selector: 'dhb-tab-menu',
   template: `
-    <p-tabMenu [model]="items" [activeItem]="activeItem!"></p-tabMenu>
+    <p-tabMenu [model]="model" [activeItem]="activeMenuItem!"></p-tabMenu>
   `,
-  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabMenuComponent implements OnInit {
-  constructor() {}
+export class TabMenuComponent implements OnInit, OnDestroy {
+  model = tabMenuItems;
 
-  items: MenuItem[] = [];
+  /** Can be undefined if none of the tab menu items is active */
+  activeMenuItem: MenuItem | undefined;
 
-  activeItem?: MenuItem;
+  private sub: Subscription;
 
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'Home',
-        icon: 'fa fa-home-alt',
-        routerLink: [Navigation.Home],
-        routerLinkActiveOptions: '{ exact: true }',
-      },
-    ];
+  constructor(private router: Router) {
+    const isNavigationEnd = (event: unknown): event is NavigationEnd =>
+      event instanceof NavigationEnd;
 
-    this.activeItem = this.items[0];
+    // Issue: PrimeNG TabLink not shows the activated route, so we need to set it manually based on url
+    // Docs: https://www.primefaces.org/primeng/showcase/#/tabmenu
+    this.sub = this.router.events
+      .pipe(filter(isNavigationEnd))
+      .subscribe(
+        ({ url }) =>
+          (this.activeMenuItem = tabMenuItems.find(
+            ({ routerLink }) => routerLink && url.includes(routerLink[0])
+          ))
+      );
+  }
+
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

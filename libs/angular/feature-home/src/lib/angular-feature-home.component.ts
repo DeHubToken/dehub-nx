@@ -5,7 +5,7 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
   template: `
     <div class="grid">
       <div [@bounceInLeft] class="col-12">
-        <h3><i class="fa fa-home-alt"></i> Home</h3>
+        <h3>Welcome to DeHub</h3>
       </div>
     </div>
   `,

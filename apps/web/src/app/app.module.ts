@@ -31,50 +31,42 @@ import { AppMenuComponent } from './topbar/menu/app.menu.component';
 import { MenuService } from './topbar/menu/app.menu.service';
 import { AppMenuitemComponent } from './topbar/menu/app.menuitem.component';
 
-const angularModules = [
-  CommonModule,
-  BrowserModule,
-  FormsModule,
-  AppRoutingModule,
-  HttpClientModule,
-  BrowserAnimationsModule,
-];
-
-const primeNgModules = [
-  ButtonModule,
-  RippleModule,
-  MenuModule,
-  SplitButtonModule,
-  TabMenuModule,
-];
-
-/** Layout components from Freya */
-const layoutComponents = [
-  AppMainComponent,
-  AppMenuComponent,
-  AppMenuitemComponent,
-  AppTopBarComponent,
-  AppFooterComponent,
-];
-
 const { appId, serverUrl } = environment.moralis;
 @NgModule({
   imports: [
-    angularModules,
-    primeNgModules,
-
-    AngularCoreModule.forRoot(),
-
-    // PWA
+    // Angular
+    CommonModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     ServiceWorkerModule.register(`web/ngsw-worker.js`),
 
-    // GraphQL
-    GraphQLModule,
+    // PrimeNg
+    ButtonModule,
+    RippleModule,
+    MenuModule,
+    SplitButtonModule,
+    TabMenuModule,
 
-    // Moralis
+    // Core
+    GraphQLModule,
+    AngularCoreModule.forRoot(),
     AngularMoralisModule.forRoot({ appId, serverUrl }),
+
+    AppRoutingModule,
   ],
-  declarations: [AppComponent, layoutComponents, TabMenuComponent],
+  declarations: [
+    AppComponent,
+
+    // Layout from Freya
+    AppMainComponent,
+    AppMenuComponent,
+    AppMenuitemComponent,
+    AppTopBarComponent,
+    AppFooterComponent,
+    TabMenuComponent,
+  ],
   providers: [
     MenuService,
     { provide: EnvToken, useValue: environment },

@@ -5,11 +5,15 @@ import { MenuItem } from 'primeng/api';
 import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
 
-export enum Navigation {
+enum NavigationMenu {
   Demos = 'demos',
   Tournaments = 'tournaments',
   Staking = 'staking',
+}
+
+enum NavigationTabMenu {
   Home = 'home',
+  Stream = 'stream',
 }
 
 export const menuItems: MenuItem[] = [
@@ -18,7 +22,7 @@ export const menuItems: MenuItem[] = [
     items: [
       {
         label: 'DeGame',
-        routerLink: [Navigation.Tournaments],
+        routerLink: [NavigationMenu.Tournaments],
         icon: 'fa fa-trophy-alt',
       },
       {
@@ -34,13 +38,27 @@ export const menuItems: MenuItem[] = [
     items: [
       {
         label: 'Contentful Team',
-        routerLink: [Navigation.Demos],
+        routerLink: [NavigationMenu.Demos],
         icon: 'fa fa-puzzle-piece',
       },
     ],
   },
 ];
 
+export const tabMenuItems: MenuItem[] = [
+  {
+    label: 'Home',
+    icon: 'fa fa-home-alt',
+    routerLink: [NavigationTabMenu.Home],
+    // routerLinkActiveOptions: '{ exact: true }',
+  },
+  {
+    label: 'Stream',
+    icon: 'fa fa-stream',
+    routerLink: [NavigationTabMenu.Stream],
+    // routerLinkActiveOptions: '{ exact: true }',
+  },
+];
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -49,26 +67,33 @@ export const menuItems: MenuItem[] = [
           path: '',
           component: AppMainComponent,
           children: [
-            { path: '', redirectTo: Navigation.Home, pathMatch: 'full' },
+            { path: '', redirectTo: NavigationTabMenu.Home, pathMatch: 'full' },
             {
-              path: Navigation.Demos,
+              path: NavigationMenu.Demos,
               loadChildren: () =>
                 import('./modules/demos/demos.module').then(
                   module => module.DemosModule
                 ),
             },
             {
-              path: Navigation.Tournaments,
+              path: NavigationMenu.Tournaments,
               loadChildren: () =>
                 import('./modules/tournaments/tournaments.module').then(
                   module => module.TournamentsModule
                 ),
             },
             {
-              path: Navigation.Home,
+              path: NavigationTabMenu.Home,
               loadChildren: () =>
                 import('@dehub/angular/feature-home').then(
                   module => module.AngularFeatureHomeModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Stream,
+              loadChildren: () =>
+                import('@dehub/angular/feature-stream').then(
+                  module => module.AngularFeatureStreamModule
                 ),
             },
           ],
