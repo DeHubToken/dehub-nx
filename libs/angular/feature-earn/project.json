@@ -18,7 +18,8 @@
         "lintFilePatterns": [
           "libs/angular/feature-earn/src/**/*.ts",
           "libs/angular/feature-earn/src/**/*.html"
-        ]
+        ],
+        "maxWarnings": 0
       }
     }
   },
