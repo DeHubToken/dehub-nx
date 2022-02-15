@@ -2,6 +2,7 @@
   <div class="layout-topbar-wrapper">
     <div class="layout-topbar-left">
       <a
+        *ngIf="isDev"
         tabindex="0"
         class="menu-button"
         (click)="appMain.onMenuButtonClick($event)"
@@ -21,7 +22,7 @@
       </a>
     </div>
 
-    <dhb-menu></dhb-menu>
+    <dhb-menu *ngIf="isDev"></dhb-menu>
 
     <div class="layout-topbar-right">
       <ul class="layout-topbar-actions">
