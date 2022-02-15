@@ -1,6 +1,7 @@
-import * as Apollo from '@apollo/client';
-import { gql } from '@apollo/client';
+/* eslint-disable */
 import * as models from '@dehub/shared/model';
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 const defaultOptions = {};
 export const SysFragmentDoc = gql`
   fragment Sys on Sys {

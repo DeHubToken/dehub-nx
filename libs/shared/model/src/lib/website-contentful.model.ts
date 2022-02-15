@@ -177,6 +177,7 @@ export interface AssetFilter {
 
 export interface AssetLinkingCollections {
   __typename?: 'AssetLinkingCollections';
+  basicPostCollection?: Maybe<BasicPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
   ppvCollection?: Maybe<PpvCollection>;
   ppvNftSliderPostCollection?: Maybe<PpvNftSliderPostCollection>;
@@ -185,7 +186,13 @@ export interface AssetLinkingCollections {
   teamMemberCollection?: Maybe<TeamMemberCollection>;
   tournamentCollection?: Maybe<TournamentCollection>;
   tournamentSeriesCollection?: Maybe<TournamentSeriesCollection>;
-  websiteBackgroundCollection?: Maybe<WebsiteBackgroundCollection>;
+}
+
+export interface AssetLinkingCollectionsBasicPostCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
 }
 
 export interface AssetLinkingCollectionsEntryCollectionArgs {
@@ -244,13 +251,6 @@ export interface AssetLinkingCollectionsTournamentSeriesCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
 }
 
-export interface AssetLinkingCollectionsWebsiteBackgroundCollectionArgs {
-  limit?: Maybe<Scalars['Int']>;
-  locale?: Maybe<Scalars['String']>;
-  preview?: Maybe<Scalars['Boolean']>;
-  skip?: Maybe<Scalars['Int']>;
-}
-
 export enum AssetOrder {
   ContentTypeAsc = 'contentType_ASC',
   ContentTypeDesc = 'contentType_DESC',
@@ -272,6 +272,243 @@ export enum AssetOrder {
   UrlDesc = 'url_DESC',
   WidthAsc = 'width_ASC',
   WidthDesc = 'width_DESC',
+}
+
+/** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
+export interface BasicPost extends Entry {
+  __typename?: 'BasicPost';
+  category?: Maybe<BasicPostCategory>;
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<BasicPostDescription>;
+  linkedFrom?: Maybe<BasicPostLinkingCollections>;
+  mainPicture?: Maybe<Asset>;
+  slug?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
+export interface BasicPostCategoryArgs {
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+/** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
+export interface BasicPostDescriptionArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
+export interface BasicPostLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
+export interface BasicPostMainPictureArgs {
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+/** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
+export interface BasicPostSlugArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
+export interface BasicPostSummaryArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
+export interface BasicPostTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** A category for the basic post allows filtering basic posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPostCategory) */
+export interface BasicPostCategory extends Entry {
+  __typename?: 'BasicPostCategory';
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<BasicPostCategoryLinkingCollections>;
+  name?: Maybe<Scalars['String']>;
+  sys: Sys;
+}
+
+/** A category for the basic post allows filtering basic posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPostCategory) */
+export interface BasicPostCategoryLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** A category for the basic post allows filtering basic posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPostCategory) */
+export interface BasicPostCategoryNameArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface BasicPostCategoryCollection {
+  __typename?: 'BasicPostCategoryCollection';
+  items: Array<Maybe<BasicPostCategory>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface BasicPostCategoryFilter {
+  AND?: Maybe<Array<Maybe<BasicPostCategoryFilter>>>;
+  OR?: Maybe<Array<Maybe<BasicPostCategoryFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  name?: Maybe<Scalars['String']>;
+  name_contains?: Maybe<Scalars['String']>;
+  name_exists?: Maybe<Scalars['Boolean']>;
+  name_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name_not?: Maybe<Scalars['String']>;
+  name_not_contains?: Maybe<Scalars['String']>;
+  name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sys?: Maybe<SysFilter>;
+}
+
+export interface BasicPostCategoryLinkingCollections {
+  __typename?: 'BasicPostCategoryLinkingCollections';
+  basicPostCollection?: Maybe<BasicPostCollection>;
+  entryCollection?: Maybe<EntryCollection>;
+  pageSectionBasicPostsCollection?: Maybe<PageSectionBasicPostsCollection>;
+}
+
+export interface BasicPostCategoryLinkingCollectionsBasicPostCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface BasicPostCategoryLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface BasicPostCategoryLinkingCollectionsPageSectionBasicPostsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum BasicPostCategoryOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export interface BasicPostCollection {
+  __typename?: 'BasicPostCollection';
+  items: Array<Maybe<BasicPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface BasicPostDescription {
+  __typename?: 'BasicPostDescription';
+  json: Scalars['JSON'];
+  links: BasicPostDescriptionLinks;
+}
+
+export interface BasicPostDescriptionAssets {
+  __typename?: 'BasicPostDescriptionAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+}
+
+export interface BasicPostDescriptionEntries {
+  __typename?: 'BasicPostDescriptionEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+}
+
+export interface BasicPostDescriptionLinks {
+  __typename?: 'BasicPostDescriptionLinks';
+  assets: BasicPostDescriptionAssets;
+  entries: BasicPostDescriptionEntries;
+}
+
+export interface BasicPostFilter {
+  AND?: Maybe<Array<Maybe<BasicPostFilter>>>;
+  OR?: Maybe<Array<Maybe<BasicPostFilter>>>;
+  category?: Maybe<CfBasicPostCategoryNestedFilter>;
+  category_exists?: Maybe<Scalars['Boolean']>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  description_contains?: Maybe<Scalars['String']>;
+  description_exists?: Maybe<Scalars['Boolean']>;
+  description_not_contains?: Maybe<Scalars['String']>;
+  mainPicture_exists?: Maybe<Scalars['Boolean']>;
+  slug?: Maybe<Scalars['String']>;
+  slug_contains?: Maybe<Scalars['String']>;
+  slug_exists?: Maybe<Scalars['Boolean']>;
+  slug_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug_not?: Maybe<Scalars['String']>;
+  slug_not_contains?: Maybe<Scalars['String']>;
+  slug_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  summary?: Maybe<Scalars['String']>;
+  summary_contains?: Maybe<Scalars['String']>;
+  summary_exists?: Maybe<Scalars['Boolean']>;
+  summary_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  summary_not?: Maybe<Scalars['String']>;
+  summary_not_contains?: Maybe<Scalars['String']>;
+  summary_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+export interface BasicPostLinkingCollections {
+  __typename?: 'BasicPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageSectionBasicPostsCollection?: Maybe<PageSectionBasicPostsCollection>;
+}
+
+export interface BasicPostLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface BasicPostLinkingCollectionsPageSectionBasicPostsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum BasicPostOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SummaryAsc = 'summary_ASC',
+  SummaryDesc = 'summary_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export interface ContentfulMetadata {
@@ -329,6 +566,291 @@ export enum EntryOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqCollection) */
+export interface FaqCollection extends Entry {
+  __typename?: 'FaqCollection';
+  contentfulMetadata: ContentfulMetadata;
+  faqItemCollection?: Maybe<FaqCollectionFaqItemCollection>;
+  linkedFrom?: Maybe<FaqCollectionLinkingCollections>;
+  name?: Maybe<Scalars['String']>;
+  sys: Sys;
+}
+
+/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqCollection) */
+export interface FaqCollectionFaqItemCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqCollection) */
+export interface FaqCollectionLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqCollection) */
+export interface FaqCollectionNameArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface FaqCollectionCollection {
+  __typename?: 'FaqCollectionCollection';
+  items: Array<Maybe<FaqCollection>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface FaqCollectionFaqItemCollection {
+  __typename?: 'FaqCollectionFaqItemCollection';
+  items: Array<Maybe<FaqItem>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface FaqCollectionFilter {
+  AND?: Maybe<Array<Maybe<FaqCollectionFilter>>>;
+  OR?: Maybe<Array<Maybe<FaqCollectionFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  faqItemCollection_exists?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  name_contains?: Maybe<Scalars['String']>;
+  name_exists?: Maybe<Scalars['Boolean']>;
+  name_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name_not?: Maybe<Scalars['String']>;
+  name_not_contains?: Maybe<Scalars['String']>;
+  name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sys?: Maybe<SysFilter>;
+}
+
+export interface FaqCollectionLinkingCollections {
+  __typename?: 'FaqCollectionLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageSectionFaQsCollection?: Maybe<PageSectionFaQsCollection>;
+}
+
+export interface FaqCollectionLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface FaqCollectionLinkingCollectionsPageSectionFaQsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum FaqCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+/** A single FAQ item which can be used in different FAQ collections. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqItem) */
+export interface FaqItem extends Entry {
+  __typename?: 'FaqItem';
+  answer?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<FaqItemLinkingCollections>;
+  question?: Maybe<Scalars['String']>;
+  sys: Sys;
+}
+
+/** A single FAQ item which can be used in different FAQ collections. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqItem) */
+export interface FaqItemAnswerArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** A single FAQ item which can be used in different FAQ collections. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqItem) */
+export interface FaqItemLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** A single FAQ item which can be used in different FAQ collections. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqItem) */
+export interface FaqItemQuestionArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface FaqItemCollection {
+  __typename?: 'FaqItemCollection';
+  items: Array<Maybe<FaqItem>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface FaqItemFilter {
+  AND?: Maybe<Array<Maybe<FaqItemFilter>>>;
+  OR?: Maybe<Array<Maybe<FaqItemFilter>>>;
+  answer?: Maybe<Scalars['String']>;
+  answer_contains?: Maybe<Scalars['String']>;
+  answer_exists?: Maybe<Scalars['Boolean']>;
+  answer_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  answer_not?: Maybe<Scalars['String']>;
+  answer_not_contains?: Maybe<Scalars['String']>;
+  answer_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  question?: Maybe<Scalars['String']>;
+  question_contains?: Maybe<Scalars['String']>;
+  question_exists?: Maybe<Scalars['Boolean']>;
+  question_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  question_not?: Maybe<Scalars['String']>;
+  question_not_contains?: Maybe<Scalars['String']>;
+  question_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sys?: Maybe<SysFilter>;
+}
+
+export interface FaqItemLinkingCollections {
+  __typename?: 'FaqItemLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  faqCollectionCollection?: Maybe<FaqCollectionCollection>;
+}
+
+export interface FaqItemLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface FaqItemLinkingCollectionsFaqCollectionCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum FaqItemOrder {
+  AnswerAsc = 'answer_ASC',
+  AnswerDesc = 'answer_DESC',
+  QuestionAsc = 'question_ASC',
+  QuestionDesc = 'question_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+/** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
+export interface IconTile extends Entry {
+  __typename?: 'IconTile';
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<IconTileLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
+export interface IconTileDescriptionArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
+export interface IconTileIconArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
+export interface IconTileLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
+export interface IconTileTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface IconTileCollection {
+  __typename?: 'IconTileCollection';
+  items: Array<Maybe<IconTile>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface IconTileFilter {
+  AND?: Maybe<Array<Maybe<IconTileFilter>>>;
+  OR?: Maybe<Array<Maybe<IconTileFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  description?: Maybe<Scalars['String']>;
+  description_contains?: Maybe<Scalars['String']>;
+  description_exists?: Maybe<Scalars['Boolean']>;
+  description_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  description_not?: Maybe<Scalars['String']>;
+  description_not_contains?: Maybe<Scalars['String']>;
+  description_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  icon?: Maybe<Scalars['String']>;
+  icon_contains?: Maybe<Scalars['String']>;
+  icon_exists?: Maybe<Scalars['Boolean']>;
+  icon_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  icon_not?: Maybe<Scalars['String']>;
+  icon_not_contains?: Maybe<Scalars['String']>;
+  icon_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+export interface IconTileLinkingCollections {
+  __typename?: 'IconTileLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageSectionIconTilesCollection?: Maybe<PageSectionIconTilesCollection>;
+}
+
+export interface IconTileLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface IconTileLinkingCollectionsPageSectionIconTilesCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum IconTileOrder {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum ImageFormat {
@@ -424,6 +946,523 @@ export interface ImageTransformOptions {
   resizeStrategy?: Maybe<ImageResizeStrategy>;
   /** Desired width in pixels. Defaults to the original image width. */
   width?: Maybe<Scalars['Dimension']>;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHome extends Entry {
+  __typename?: 'PageHome';
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<PageHomeLinkingCollections>;
+  mainTitle?: Maybe<Scalars['String']>;
+  sectionsCollection?: Maybe<PageHomeSectionsCollection>;
+  subtitle?: Maybe<Scalars['String']>;
+  sys: Sys;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeMainTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeSectionsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeSubtitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface PageHomeCollection {
+  __typename?: 'PageHomeCollection';
+  items: Array<Maybe<PageHome>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageHomeFilter {
+  AND?: Maybe<Array<Maybe<PageHomeFilter>>>;
+  OR?: Maybe<Array<Maybe<PageHomeFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  mainTitle?: Maybe<Scalars['String']>;
+  mainTitle_contains?: Maybe<Scalars['String']>;
+  mainTitle_exists?: Maybe<Scalars['Boolean']>;
+  mainTitle_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  mainTitle_not?: Maybe<Scalars['String']>;
+  mainTitle_not_contains?: Maybe<Scalars['String']>;
+  mainTitle_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sectionsCollection_exists?: Maybe<Scalars['Boolean']>;
+  subtitle?: Maybe<Scalars['String']>;
+  subtitle_contains?: Maybe<Scalars['String']>;
+  subtitle_exists?: Maybe<Scalars['Boolean']>;
+  subtitle_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  subtitle_not?: Maybe<Scalars['String']>;
+  subtitle_not_contains?: Maybe<Scalars['String']>;
+  subtitle_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sys?: Maybe<SysFilter>;
+}
+
+export interface PageHomeLinkingCollections {
+  __typename?: 'PageHomeLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface PageHomeLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum PageHomeOrder {
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export interface PageHomeSectionsCollection {
+  __typename?: 'PageHomeSectionsCollection';
+  items: Array<Maybe<PageHomeSectionsItem>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export type PageHomeSectionsItem =
+  | PageSectionBasicPosts
+  | PageSectionFaQs
+  | PageSectionIconTiles;
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearn extends Entry {
+  __typename?: 'PageLearn';
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<PageLearnLinkingCollections>;
+  mainTitle?: Maybe<Scalars['String']>;
+  sectionsCollection?: Maybe<PageLearnSectionsCollection>;
+  subtitle?: Maybe<Scalars['String']>;
+  sys: Sys;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnMainTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnSectionsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnSubtitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface PageLearnCollection {
+  __typename?: 'PageLearnCollection';
+  items: Array<Maybe<PageLearn>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageLearnFilter {
+  AND?: Maybe<Array<Maybe<PageLearnFilter>>>;
+  OR?: Maybe<Array<Maybe<PageLearnFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  mainTitle?: Maybe<Scalars['String']>;
+  mainTitle_contains?: Maybe<Scalars['String']>;
+  mainTitle_exists?: Maybe<Scalars['Boolean']>;
+  mainTitle_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  mainTitle_not?: Maybe<Scalars['String']>;
+  mainTitle_not_contains?: Maybe<Scalars['String']>;
+  mainTitle_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sectionsCollection_exists?: Maybe<Scalars['Boolean']>;
+  subtitle?: Maybe<Scalars['String']>;
+  subtitle_contains?: Maybe<Scalars['String']>;
+  subtitle_exists?: Maybe<Scalars['Boolean']>;
+  subtitle_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  subtitle_not?: Maybe<Scalars['String']>;
+  subtitle_not_contains?: Maybe<Scalars['String']>;
+  subtitle_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sys?: Maybe<SysFilter>;
+}
+
+export interface PageLearnLinkingCollections {
+  __typename?: 'PageLearnLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface PageLearnLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum PageLearnOrder {
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export interface PageLearnSectionsCollection {
+  __typename?: 'PageLearnSectionsCollection';
+  items: Array<Maybe<PageLearnSectionsItem>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export type PageLearnSectionsItem =
+  | PageSectionBasicPosts
+  | PageSectionFaQs
+  | PageSectionIconTiles;
+
+/** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
+export interface PageSectionBasicPosts extends Entry {
+  __typename?: 'PageSectionBasicPosts';
+  contentfulMetadata: ContentfulMetadata;
+  handpickedPostsCollection?: Maybe<PageSectionBasicPostsHandpickedPostsCollection>;
+  linkedFrom?: Maybe<PageSectionBasicPostsLinkingCollections>;
+  postsByCategory?: Maybe<BasicPostCategory>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
+export interface PageSectionBasicPostsHandpickedPostsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+/** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
+export interface PageSectionBasicPostsLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
+export interface PageSectionBasicPostsPostsByCategoryArgs {
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+/** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
+export interface PageSectionBasicPostsTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface PageSectionBasicPostsCollection {
+  __typename?: 'PageSectionBasicPostsCollection';
+  items: Array<Maybe<PageSectionBasicPosts>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionBasicPostsFilter {
+  AND?: Maybe<Array<Maybe<PageSectionBasicPostsFilter>>>;
+  OR?: Maybe<Array<Maybe<PageSectionBasicPostsFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  handpickedPostsCollection_exists?: Maybe<Scalars['Boolean']>;
+  postsByCategory?: Maybe<CfBasicPostCategoryNestedFilter>;
+  postsByCategory_exists?: Maybe<Scalars['Boolean']>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+export interface PageSectionBasicPostsHandpickedPostsCollection {
+  __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
+  items: Array<Maybe<BasicPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionBasicPostsLinkingCollections {
+  __typename?: 'PageSectionBasicPostsLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
+  pageLearnCollection?: Maybe<PageLearnCollection>;
+}
+
+export interface PageSectionBasicPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface PageSectionBasicPostsLinkingCollectionsPageHomeCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface PageSectionBasicPostsLinkingCollectionsPageLearnCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum PageSectionBasicPostsOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
+/** Page section with FAQs. Displays a limited amount of handpicked FAQ groups. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFaQs) */
+export interface PageSectionFaQs extends Entry {
+  __typename?: 'PageSectionFaQs';
+  contentfulMetadata: ContentfulMetadata;
+  handpickedFaqGroupsCollection?: Maybe<PageSectionFaQsHandpickedFaqGroupsCollection>;
+  linkedFrom?: Maybe<PageSectionFaQsLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Page section with FAQs. Displays a limited amount of handpicked FAQ groups. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFaQs) */
+export interface PageSectionFaQsHandpickedFaqGroupsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+/** Page section with FAQs. Displays a limited amount of handpicked FAQ groups. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFaQs) */
+export interface PageSectionFaQsLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Page section with FAQs. Displays a limited amount of handpicked FAQ groups. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFaQs) */
+export interface PageSectionFaQsTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface PageSectionFaQsCollection {
+  __typename?: 'PageSectionFaQsCollection';
+  items: Array<Maybe<PageSectionFaQs>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionFaQsFilter {
+  AND?: Maybe<Array<Maybe<PageSectionFaQsFilter>>>;
+  OR?: Maybe<Array<Maybe<PageSectionFaQsFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  handpickedFAQGroupsCollection_exists?: Maybe<Scalars['Boolean']>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+export interface PageSectionFaQsHandpickedFaqGroupsCollection {
+  __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
+  items: Array<Maybe<FaqCollection>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionFaQsLinkingCollections {
+  __typename?: 'PageSectionFaQsLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
+  pageLearnCollection?: Maybe<PageLearnCollection>;
+}
+
+export interface PageSectionFaQsLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface PageSectionFaQsLinkingCollectionsPageHomeCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface PageSectionFaQsLinkingCollectionsPageLearnCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum PageSectionFaQsOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
+/** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
+export interface PageSectionIconTiles extends Entry {
+  __typename?: 'PageSectionIconTiles';
+  contentfulMetadata: ContentfulMetadata;
+  handpickedIconTilesCollection?: Maybe<PageSectionIconTilesHandpickedIconTilesCollection>;
+  linkedFrom?: Maybe<PageSectionIconTilesLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
+export interface PageSectionIconTilesHandpickedIconTilesCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+/** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
+export interface PageSectionIconTilesLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
+export interface PageSectionIconTilesTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface PageSectionIconTilesCollection {
+  __typename?: 'PageSectionIconTilesCollection';
+  items: Array<Maybe<PageSectionIconTiles>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionIconTilesFilter {
+  AND?: Maybe<Array<Maybe<PageSectionIconTilesFilter>>>;
+  OR?: Maybe<Array<Maybe<PageSectionIconTilesFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  handpickedIconTilesCollection_exists?: Maybe<Scalars['Boolean']>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+export interface PageSectionIconTilesHandpickedIconTilesCollection {
+  __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
+  items: Array<Maybe<IconTile>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionIconTilesLinkingCollections {
+  __typename?: 'PageSectionIconTilesLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
+  pageLearnCollection?: Maybe<PageLearnCollection>;
+}
+
+export interface PageSectionIconTilesLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface PageSectionIconTilesLinkingCollectionsPageHomeCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface PageSectionIconTilesLinkingCollectionsPageLearnCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum PageSectionIconTilesOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
@@ -897,7 +1936,27 @@ export interface Query {
   __typename?: 'Query';
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
+  basicPost?: Maybe<BasicPost>;
+  basicPostCategory?: Maybe<BasicPostCategory>;
+  basicPostCategoryCollection?: Maybe<BasicPostCategoryCollection>;
+  basicPostCollection?: Maybe<BasicPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  faqCollection?: Maybe<FaqCollection>;
+  faqCollectionCollection?: Maybe<FaqCollectionCollection>;
+  faqItem?: Maybe<FaqItem>;
+  faqItemCollection?: Maybe<FaqItemCollection>;
+  iconTile?: Maybe<IconTile>;
+  iconTileCollection?: Maybe<IconTileCollection>;
+  pageHome?: Maybe<PageHome>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
+  pageLearn?: Maybe<PageLearn>;
+  pageLearnCollection?: Maybe<PageLearnCollection>;
+  pageSectionBasicPosts?: Maybe<PageSectionBasicPosts>;
+  pageSectionBasicPostsCollection?: Maybe<PageSectionBasicPostsCollection>;
+  pageSectionFaQs?: Maybe<PageSectionFaQs>;
+  pageSectionFaQsCollection?: Maybe<PageSectionFaQsCollection>;
+  pageSectionIconTiles?: Maybe<PageSectionIconTiles>;
+  pageSectionIconTilesCollection?: Maybe<PageSectionIconTilesCollection>;
   ppv?: Maybe<Ppv>;
   ppvCollection?: Maybe<PpvCollection>;
   ppvNftSliderPost?: Maybe<PpvNftSliderPost>;
@@ -916,8 +1975,6 @@ export interface Query {
   tournamentSeriesPrizeCollection?: Maybe<TournamentSeriesPrizeCollection>;
   tournamentSeriesRegistrationItem?: Maybe<TournamentSeriesRegistrationItem>;
   tournamentSeriesRegistrationItemCollection?: Maybe<TournamentSeriesRegistrationItemCollection>;
-  websiteBackground?: Maybe<WebsiteBackground>;
-  websiteBackgroundCollection?: Maybe<WebsiteBackgroundCollection>;
 }
 
 export interface QueryAssetArgs {
@@ -935,6 +1992,36 @@ export interface QueryAssetCollectionArgs {
   where?: Maybe<AssetFilter>;
 }
 
+export interface QueryBasicPostArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryBasicPostCategoryArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryBasicPostCategoryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<BasicPostCategoryOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<BasicPostCategoryFilter>;
+}
+
+export interface QueryBasicPostCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<BasicPostOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<BasicPostFilter>;
+}
+
 export interface QueryEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
@@ -942,6 +2029,126 @@ export interface QueryEntryCollectionArgs {
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
   where?: Maybe<EntryFilter>;
+}
+
+export interface QueryFaqCollectionArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryFaqCollectionCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<FaqCollectionOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<FaqCollectionFilter>;
+}
+
+export interface QueryFaqItemArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryFaqItemCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<FaqItemOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<FaqItemFilter>;
+}
+
+export interface QueryIconTileArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryIconTileCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<IconTileOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<IconTileFilter>;
+}
+
+export interface QueryPageHomeArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageHomeCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<PageHomeOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<PageHomeFilter>;
+}
+
+export interface QueryPageLearnArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageLearnCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<PageLearnOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<PageLearnFilter>;
+}
+
+export interface QueryPageSectionBasicPostsArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionBasicPostsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<PageSectionBasicPostsOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<PageSectionBasicPostsFilter>;
+}
+
+export interface QueryPageSectionFaQsArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionFaQsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<PageSectionFaQsOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<PageSectionFaQsFilter>;
+}
+
+export interface QueryPageSectionIconTilesArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionIconTilesCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<PageSectionIconTilesOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<PageSectionIconTilesFilter>;
 }
 
 export interface QueryPpvArgs {
@@ -1077,21 +2284,6 @@ export interface QueryTournamentSeriesRegistrationItemCollectionArgs {
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
   where?: Maybe<TournamentSeriesRegistrationItemFilter>;
-}
-
-export interface QueryWebsiteBackgroundArgs {
-  id: Scalars['String'];
-  locale?: Maybe<Scalars['String']>;
-  preview?: Maybe<Scalars['Boolean']>;
-}
-
-export interface QueryWebsiteBackgroundCollectionArgs {
-  limit?: Maybe<Scalars['Int']>;
-  locale?: Maybe<Scalars['String']>;
-  order?: Maybe<Array<Maybe<WebsiteBackgroundOrder>>>;
-  preview?: Maybe<Scalars['Boolean']>;
-  skip?: Maybe<Scalars['Int']>;
-  where?: Maybe<WebsiteBackgroundFilter>;
 }
 
 export interface Sys {
@@ -1892,63 +3084,18 @@ export enum TournamentSeriesRegistrationItemOrder {
   TitleDesc = 'title_DESC',
 }
 
-/** Main background image. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/websiteBackground) */
-export interface WebsiteBackground extends Entry {
-  __typename?: 'WebsiteBackground';
-  backgroundImage?: Maybe<Asset>;
-  contentfulMetadata: ContentfulMetadata;
-  linkedFrom?: Maybe<WebsiteBackgroundLinkingCollections>;
-  sys: Sys;
-}
-
-/** Main background image. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/websiteBackground) */
-export interface WebsiteBackgroundBackgroundImageArgs {
-  locale?: Maybe<Scalars['String']>;
-  preview?: Maybe<Scalars['Boolean']>;
-}
-
-/** Main background image. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/websiteBackground) */
-export interface WebsiteBackgroundLinkedFromArgs {
-  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
-}
-
-export interface WebsiteBackgroundCollection {
-  __typename?: 'WebsiteBackgroundCollection';
-  items: Array<Maybe<WebsiteBackground>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export interface WebsiteBackgroundFilter {
-  AND?: Maybe<Array<Maybe<WebsiteBackgroundFilter>>>;
-  OR?: Maybe<Array<Maybe<WebsiteBackgroundFilter>>>;
-  backgroundImage_exists?: Maybe<Scalars['Boolean']>;
+export interface CfBasicPostCategoryNestedFilter {
+  AND?: Maybe<Array<Maybe<CfBasicPostCategoryNestedFilter>>>;
+  OR?: Maybe<Array<Maybe<CfBasicPostCategoryNestedFilter>>>;
   contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  name?: Maybe<Scalars['String']>;
+  name_contains?: Maybe<Scalars['String']>;
+  name_exists?: Maybe<Scalars['Boolean']>;
+  name_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name_not?: Maybe<Scalars['String']>;
+  name_not_contains?: Maybe<Scalars['String']>;
+  name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
   sys?: Maybe<SysFilter>;
-}
-
-export interface WebsiteBackgroundLinkingCollections {
-  __typename?: 'WebsiteBackgroundLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-}
-
-export interface WebsiteBackgroundLinkingCollectionsEntryCollectionArgs {
-  limit?: Maybe<Scalars['Int']>;
-  locale?: Maybe<Scalars['String']>;
-  preview?: Maybe<Scalars['Boolean']>;
-  skip?: Maybe<Scalars['Int']>;
-}
-
-export enum WebsiteBackgroundOrder {
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export interface CfTournamentSeriesNestedFilter {
