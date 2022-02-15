@@ -67,8 +67,8 @@ export const menuItems: MenuItem[] = [
             {
               path: Navigation.Home,
               loadChildren: () =>
-                import('./modules/home/home.module').then(
-                  module => module.HomeModule
+                import('@dehub/angular/feature-home').then(
+                  module => module.AngularFeatureHomeModule
                 ),
             },
           ],

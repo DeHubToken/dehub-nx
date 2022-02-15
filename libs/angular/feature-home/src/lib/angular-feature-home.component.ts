@@ -13,7 +13,7 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
 })
-export class HomeComponent implements OnInit {
+export class AngularFeatureHomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
