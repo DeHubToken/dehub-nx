@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/feature-earn",
+  "sourceRoot": "libs/angular/feature-earn/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/feature-earn"],
+      "options": {
+        "jestConfig": "libs/angular/feature-earn/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/feature-earn/src/**/*.ts",
+          "libs/angular/feature-earn/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}

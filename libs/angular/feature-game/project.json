@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/feature-game",
+  "sourceRoot": "libs/angular/feature-game/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/feature-game"],
+      "options": {
+        "jestConfig": "libs/angular/feature-game/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/feature-game/src/**/*.ts",
+          "libs/angular/feature-game/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}

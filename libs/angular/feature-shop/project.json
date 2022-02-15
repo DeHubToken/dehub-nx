@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/feature-shop",
+  "sourceRoot": "libs/angular/feature-shop/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/feature-shop"],
+      "options": {
+        "jestConfig": "libs/angular/feature-shop/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/feature-shop/src/**/*.ts",
+          "libs/angular/feature-shop/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}
