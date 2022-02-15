@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/feature-home",
+  "sourceRoot": "libs/angular/feature-home/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/feature-home"],
+      "options": {
+        "jestConfig": "libs/angular/feature-home/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/feature-home/src/**/*.ts",
+          "libs/angular/feature-home/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}
