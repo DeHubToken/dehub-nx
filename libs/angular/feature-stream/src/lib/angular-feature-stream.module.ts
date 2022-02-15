@@ -1,10 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
-
-export const angularFeatureStreamRoutes: Route[] = [];
+import { NgModule } from '@angular/core';
+import { AngularFeatureStreamRoutingModule } from './angular-feature-stream-routing.module';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [
+    // Angular Modules
+    CommonModule,
+
+    // Lib Modules
+
+    // PrimeNg Modules
+
+    AngularFeatureStreamRoutingModule,
+  ],
 })
 export class AngularFeatureStreamModule {}

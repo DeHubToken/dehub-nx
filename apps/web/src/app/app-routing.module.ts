@@ -14,6 +14,10 @@ enum NavigationMenu {
 enum NavigationTabMenu {
   Home = 'home',
   Stream = 'stream',
+  Game = 'game',
+  Shop = 'shop',
+  Learn = 'learn',
+  Earn = 'earn',
 }
 
 export const menuItems: MenuItem[] = [
@@ -50,13 +54,31 @@ export const tabMenuItems: MenuItem[] = [
     label: 'Home',
     icon: 'fa fa-home-alt',
     routerLink: [NavigationTabMenu.Home],
-    // routerLinkActiveOptions: '{ exact: true }',
   },
   {
     label: 'Stream',
     icon: 'fa fa-stream',
     routerLink: [NavigationTabMenu.Stream],
-    // routerLinkActiveOptions: '{ exact: true }',
+  },
+  {
+    label: 'Game',
+    icon: 'fa fa-game',
+    routerLink: [NavigationTabMenu.Game],
+  },
+  {
+    label: 'Shop',
+    icon: 'fa fa-shop',
+    routerLink: [NavigationTabMenu.Shop],
+  },
+  {
+    label: 'Learn',
+    icon: 'fa fa-learn',
+    routerLink: [NavigationTabMenu.Learn],
+  },
+  {
+    label: 'Earn',
+    icon: 'fa fa-earn',
+    routerLink: [NavigationTabMenu.Earn],
   },
 ];
 @NgModule({
@@ -94,6 +116,34 @@ export const tabMenuItems: MenuItem[] = [
               loadChildren: () =>
                 import('@dehub/angular/feature-stream').then(
                   module => module.AngularFeatureStreamModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Game,
+              loadChildren: () =>
+                import('@dehub/angular/feature-game').then(
+                  module => module.AngularFeatureGameModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Shop,
+              loadChildren: () =>
+                import('@dehub/angular/feature-shop').then(
+                  module => module.AngularFeatureShopModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Learn,
+              loadChildren: () =>
+                import('@dehub/angular/feature-learn').then(
+                  module => module.AngularFeatureLearnModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Earn,
+              loadChildren: () =>
+                import('@dehub/angular/feature-earn').then(
+                  module => module.AngularFeatureEarnModule
                 ),
             },
           ],

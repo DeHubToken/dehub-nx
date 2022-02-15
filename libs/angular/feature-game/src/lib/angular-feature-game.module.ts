@@ -1,10 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
-
-export const angularFeatureGameRoutes: Route[] = [];
+import { NgModule } from '@angular/core';
+import { AngularFeatureGameRoutingModule } from './angular-feature-game-routing.module';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [
+    // Angular Modules
+    CommonModule,
+
+    // Lib Modules
+
+    // PrimeNg Modules
+
+    AngularFeatureGameRoutingModule,
+  ],
 })
 export class AngularFeatureGameModule {}

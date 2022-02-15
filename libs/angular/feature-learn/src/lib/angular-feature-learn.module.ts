@@ -1,10 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
-
-export const angularFeatureLearnRoutes: Route[] = [];
+import { NgModule } from '@angular/core';
+import { AngularFeatureLearnRoutingModule } from './angular-feature-learn-routing.module';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [
+    // Angular Modules
+    CommonModule,
+
+    // Lib Modules
+
+    // PrimeNg Modules
+
+    AngularFeatureLearnRoutingModule,
+  ],
 })
 export class AngularFeatureLearnModule {}

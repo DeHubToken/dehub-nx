@@ -1,10 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
-
-export const angularFeatureShopRoutes: Route[] = [];
+import { NgModule } from '@angular/core';
+import { AngularFeatureShopRoutingModule } from './angular-feature-shop-routing.module';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [
+    // Angular Modules
+    CommonModule,
+
+    // Lib Modules
+
+    // PrimeNg Modules
+
+    AngularFeatureShopRoutingModule,
+  ],
 })
 export class AngularFeatureShopModule {}
