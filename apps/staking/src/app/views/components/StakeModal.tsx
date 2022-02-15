@@ -1,4 +1,5 @@
-import { BalanceInput, Box, ConnectWalletButton, Text } from '@dehub/react/ui';
+import { ConnectWalletButton } from '@dehub/react/core';
+import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';

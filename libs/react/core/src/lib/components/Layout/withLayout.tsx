@@ -1,14 +1,11 @@
-import { useConnectContext } from '@dehub/react/core';
+import { Footer, Header, Loader, PageMeta } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/models';
 import { decimalToHex, iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import React, { useEffect, useState } from 'react';
 import { useMoralis } from 'react-moralis';
-import Footer from '../Footer';
-import Header from '../Header';
-import Loader from '../Loader';
+import { useConnectContext } from '../../hooks';
 import UserMenu from '../UserMenu';
-import PageMeta from './PageMeta';
 
 const initMessage = {
   title: '',

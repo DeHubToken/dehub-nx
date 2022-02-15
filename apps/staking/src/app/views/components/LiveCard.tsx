@@ -1,5 +1,5 @@
-import { useRefresh } from '@dehub/react/core';
-import { Box, ConnectWalletButton, Heading, Text } from '@dehub/react/ui';
+import { ConnectWalletButton, useRefresh } from '@dehub/react/core';
+import { Box, Heading, Text } from '@dehub/react/ui';
 import {
   BNB_DECIMALS,
   BUSD_DISPLAY_DECIMALS,
@@ -31,7 +31,6 @@ import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
-
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;

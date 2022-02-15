@@ -1,11 +1,5 @@
-import {
-  Box,
-  ConnectWalletButton,
-  Container,
-  Heading,
-  Text,
-  Title,
-} from '@dehub/react/ui';
+import { ConnectWalletButton } from '@dehub/react/core';
+import { Box, Container, Heading, Text, Title } from '@dehub/react/ui';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import React, { useState } from 'react';

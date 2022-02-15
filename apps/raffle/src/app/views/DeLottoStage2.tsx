@@ -1,4 +1,5 @@
-import { ConnectWalletButton, Heading, Text } from '@dehub/react/ui';
+import { ConnectWalletButton } from '@dehub/react/core';
+import { Heading, Text } from '@dehub/react/ui';
 import { addMonths, format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';

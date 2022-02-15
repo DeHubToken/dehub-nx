@@ -1,5 +1,5 @@
+import { ConnectWalletButton } from '@dehub/react/core';
 import { Flex, Text } from '@dehub/react/pcsuikit';
-import { ConnectWalletButton } from '@dehub/react/ui';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import React, { useEffect, useState } from 'react';
 import { useMoralis } from 'react-moralis';

@@ -1,9 +1,9 @@
-import { useEagerMoralis } from '@dehub/react/core';
 import {
-  FullScreenLoader,
-  SuspenseWithChunkError,
+  useConnectContext,
+  useEagerMoralis,
   withLayout,
-} from '@dehub/react/ui';
+} from '@dehub/react/core';
+import { FullScreenLoader, SuspenseWithChunkError } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
 import { lazy } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
@@ -23,9 +23,13 @@ export function App() {
   useFetchPoolInfo();
   usePullBusdPrice();
 
+  const { baseUrl, pageTitle } = useConnectContext();
+
   return (
     <Router history={history}>
-      <SuspenseWithChunkError fallback={<FullScreenLoader />}>
+      <SuspenseWithChunkError
+        fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
+      >
         <Switch>
           <Route path="/">
             <Staking />

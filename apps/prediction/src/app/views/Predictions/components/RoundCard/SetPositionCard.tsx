@@ -1,3 +1,4 @@
+import { ConnectWalletButton } from '@dehub/react/core';
 import {
   ArrowBackIcon,
   AutoRenewIcon,
@@ -11,7 +12,6 @@ import {
   IconButton,
   Text,
 } from '@dehub/react/pcsuikit';
-import { ConnectWalletButton } from '@dehub/react/ui';
 import { getDecimalAmount } from '@dehub/shared/utils';
 import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';
