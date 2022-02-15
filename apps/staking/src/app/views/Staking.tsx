@@ -1,121 +1,23 @@
-import { Footer, Header, Loader } from '@dehub/react/ui';
-import {
-  WalletConnectingMessages,
-  WalletConnectingState,
-} from '@dehub/shared/model';
-import { iOS } from '@dehub/shared/util';
-import { Moralis } from 'moralis';
-import { useEffect, useState } from 'react';
-import { useMoralis } from 'react-moralis';
-import { environment } from '../../environments/environment';
-import { Container } from '../components/Layout';
-import PageMeta from '../components/Layout/PageMeta';
-import UserMenu from '../components/UserMenu';
-import { getChainIdHex } from '../config/constants';
-import {
-  useFetchPoolInfo,
-  usePullBusdPrice,
-  useWalletConnectingState,
-} from '../state/application/hooks';
+import { Container } from '@dehub/react/ui';
 import StakedBottomInfoBox from './StakedBottomInfoBox';
 import StakedTopInfoBox from './StakedTopInfoBox';
 
-const initMessage = {
-  header: '',
-  text: '',
-};
-
 export default function Staking() {
-  useFetchPoolInfo();
-  usePullBusdPrice();
-
-  const [showLoader, setShowLoader] = useState(false);
-  const [message, setMessage] = useState(initMessage);
-  const walletConnectingState = useWalletConnectingState();
-
-  const { logout } = useMoralis();
-
-  const {
-    baseUrl: path,
-    dehub: { landing },
-  } = environment;
-
-  /*
-   * Hack to avoid trustwallet redirecting to a open in app website on iOS...
-   * Ref: https://github.com/WalletConnect/walletconnect-monorepo/issues/552
-   */
-  useEffect(() => {
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden' && iOS()) {
-        window.localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    Moralis.onChainChanged(newChainId => {
-      if (newChainId !== getChainIdHex()) {
-        logout();
-      }
-    });
-  }, [logout]);
-
-  useEffect(() => {
-    const header = 'Waiting';
-    if (walletConnectingState === WalletConnectingState.WAITING) {
-      setShowLoader(true);
-      setMessage({ header, text: WalletConnectingMessages.WAITING });
-    } else if (walletConnectingState === WalletConnectingState.SWITCH_NETWORK) {
-      setShowLoader(true);
-      setMessage({ header, text: WalletConnectingMessages.SWITCH_NETWORK });
-    } else if (walletConnectingState === WalletConnectingState.ADD_NETWORK) {
-      setShowLoader(true);
-      setMessage({ header, text: WalletConnectingMessages.ADD_NETWORK });
-    } else {
-      setShowLoader(false);
-      setMessage(initMessage);
-    }
-  }, [walletConnectingState]);
-
   return (
-    <div>
-      <PageMeta />
-      {showLoader ? (
-        <Loader title={message.header} subtitle={message.text} />
-      ) : (
-        <div
-          className="layout-wrapper"
-          style={{
-            background: `linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95))`,
-          }}
-        >
-          <Header
-            userMenu={<UserMenu />}
-            logo={{
-              href: 'https://dehub.net',
-              icon: `${path}/assets/dehub/logo-dehub-white.svg`,
-            }}
-          />
-          <div className="layout-main">
-            <div className="layout-content">
-              <Container>
-                <h1>
-                  <span style={{ fontSize: '42px' }}>DeHub</span>
-                  <br />
-                  <span style={{ fontSize: '62px' }}>Staking</span>
-                </h1>
-              </Container>
-              <div className="my-8">
-                <StakedTopInfoBox />
-              </div>
-              <div className="my-8">
-                <StakedBottomInfoBox />
-              </div>
-            </div>
-          </div>
-          <Footer landing={landing} />
-        </div>
-      )}
-    </div>
+    <>
+      <Container>
+        <h1>
+          <span style={{ fontSize: '42px' }}>DeHub</span>
+          <br />
+          <span style={{ fontSize: '62px' }}>Staking</span>
+        </h1>
+      </Container>
+      <div className="my-8">
+        <StakedTopInfoBox />
+      </div>
+      <div className="my-8">
+        <StakedBottomInfoBox />
+      </div>
+    </>
   );
 }

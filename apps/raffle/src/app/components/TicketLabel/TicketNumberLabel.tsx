@@ -1,9 +1,7 @@
+import { Text } from '@dehub/react/ui';
 import styled from 'styled-components';
-
-import { Text } from '../Text';
-import { toLotteryNumbers } from '../../utils/numbers';
-
 import { LotteryPrizeLevel } from '../../config/constants/types';
+import { toLotteryNumbers } from '../../utils/numbers';
 
 /**
  * @todo set color with freya variables

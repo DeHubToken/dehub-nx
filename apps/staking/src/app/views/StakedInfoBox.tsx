@@ -1,7 +1,7 @@
+import { Heading, Text } from '@dehub/react/ui';
 import { BUSD_DISPLAY_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getFullDisplayBalance } from '@dehub/shared/util';
 import { Skeleton } from 'primereact/skeleton';
-import { Header, Text } from '../components/Text';
 import {
   useDehubBusdPrice,
   usePoolInfo,
@@ -21,7 +21,7 @@ const StakedInfoBox = () => {
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header className="pb-1">Total Staked</Header>
+              <Heading className="pb-1">Total Staked</Heading>
               {poolInfo ? (
                 <>
                   <Text fontSize="24px" fontWeight={900}>
@@ -46,7 +46,7 @@ const StakedInfoBox = () => {
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               {/* TODO: pull the current live vault data here. */}
-              <Header className="pb-1">Rewards Q1 2022</Header>
+              <Heading className="pb-1">Rewards Q1 2022</Heading>
               {poolInfo ? (
                 <>
                   <Text fontSize="24px" fontWeight={900}>
@@ -71,7 +71,7 @@ const StakedInfoBox = () => {
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full flex flex-column align-items-start">
-              <Header className="pb-1">TVL</Header>
+              <Heading className="pb-1">TVL</Heading>
               {poolInfo ? (
                 <Text fontSize="24px" fontWeight={900}>
                   $
@@ -94,7 +94,7 @@ const StakedInfoBox = () => {
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header className="pb-1">Total Rewards</Header>
+              <Heading className="pb-1">Total Rewards</Heading>
               {poolInfo ? (
                 <>
                   <Text fontSize="24px" fontWeight={900}>

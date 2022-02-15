@@ -1,11 +1,11 @@
+import { ConnectWalletButton } from '@dehub/react/core';
+import { Heading, Text } from '@dehub/react/ui';
 import { addMonths, format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 import { useMemo, useState } from 'react';
 import { useMoralis } from 'react-moralis';
-import ConnectWalletButton from '../components/ConnectWalletButton';
 import { Icon } from '../components/Icon';
-import { Header, Text } from '../components/Text';
 import { LotteryStatus } from '../config/constants/types';
 import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
 import { useLottery } from '../states/special-raffle/hooks';
@@ -83,7 +83,7 @@ const DeLottoStage2 = () => {
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header className="pb-2">Current Draw</Header>
+              <Heading className="pb-2">Current Draw</Heading>
               {deLottoStatus !== LotteryStatus.PENDING &&
               nextEventTime &&
               postCountDownText ? (
@@ -103,7 +103,7 @@ const DeLottoStage2 = () => {
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header className="pb-2">Next Draw:</Header>
+              <Heading className="pb-2">Next Draw:</Heading>
               {deLottoStatus !== LotteryStatus.PENDING &&
               nextLotteryIdAsInt > 0 ? (
                 <>
@@ -128,7 +128,7 @@ const DeLottoStage2 = () => {
         <div className="col-12 md:col-4 lg:col-4">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
-              <Header className="pb-2">Prize Pot</Header>
+              <Heading className="pb-2">Prize Pot</Heading>
               <PrizePot pot={prize} status={deLottoStatus} />
             </div>
             <Icon className="fad fa-coins"></Icon>
@@ -140,7 +140,7 @@ const DeLottoStage2 = () => {
         <div className="col-12 md:col-6 lg:col-6">
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full flex flex-column align-items-start">
-              <Header className="pb-2">Your Tickets</Header>
+              <Heading className="pb-2">Your Tickets</Heading>
               {deLottoStatus !== LotteryStatus.PENDING ? (
                 isAuthenticated && userTickets && !userTickets.isLoading ? (
                   <>
@@ -205,7 +205,7 @@ const DeLottoStage2 = () => {
           <div className="col-12 md:col-6 lg:col-6">
             <div className="card overview-box gray shadow-2">
               <div className="overview-info text-left w-full">
-                <Header className="pb-2">History</Header>
+                <Heading className="pb-2">History</Heading>
                 <Text className="mb-3">Check and claim previous draws.</Text>
                 {isAuthenticated ? (
                   <>

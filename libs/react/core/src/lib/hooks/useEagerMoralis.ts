@@ -12,7 +12,6 @@ export function useEagerMoralis() {
     isWeb3Enabled,
     isWeb3EnableLoading,
     isAuthenticating,
-    web3,
   } = useMoralis();
 
   useEffect(() => {
@@ -21,13 +20,12 @@ export function useEagerMoralis() {
         isAuthenticated &&
         !isAuthenticating &&
         !isWeb3Enabled &&
-        !isWeb3EnableLoading &&
-        web3
+        !isWeb3EnableLoading
       ) {
         const provider = window.localStorage.getItem(
           moralisProviderLocalStorageKey
         ) as MoralisWeb3ProviderType;
-        if (provider && web3) enableWeb3({ provider });
+        if (provider) enableWeb3({ provider });
       }
     };
 
@@ -38,6 +36,5 @@ export function useEagerMoralis() {
     isAuthenticating,
     isWeb3Enabled,
     isWeb3EnableLoading,
-    web3,
   ]);
 }

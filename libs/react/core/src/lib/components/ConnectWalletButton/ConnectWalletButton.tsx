@@ -1,25 +1,21 @@
 import { WalletModal } from '@dehub/react/ui';
 import {
   moralisProviderLocalStorageKey,
-  MoralisWeb3ProviderType,
   WalletConnectingState,
 } from '@dehub/shared/model';
 import { setupMetamaskNetwork } from '@dehub/shared/util';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
-import { getChainId } from '../../config/constants';
-import { useSetWalletConnectingState } from '../../states/application/hooks';
+import { useConnectContext } from '../../hooks';
 
 const ConnectWalletButton = () => {
-  const setWalletConnectingState = useSetWalletConnectingState();
+  const { setWalletConnectingState, defaultChainId } = useConnectContext();
 
   const [walletModalOpen, setWalletModalOpen] = useState(false);
   const mountedRef = useRef(true);
 
   const { authenticate, logout } = useMoralis();
-
-  const chainId = getChainId();
 
   useEffect(() => {
     return () => {
@@ -28,21 +24,20 @@ const ConnectWalletButton = () => {
   }, []);
 
   const connectWallet = useCallback(
-    (provider: MoralisWeb3ProviderType) => {
-      const isMetamaskLogin = provider === 'metamask';
-
+    provider => {
       setWalletConnectingState(WalletConnectingState.WAITING);
       window.localStorage.setItem(moralisProviderLocalStorageKey, provider);
-
       authenticate({
+        chainId: defaultChainId,
         provider,
-        ...(isMetamaskLogin && { chainId }),
-        signingMessage: 'DeHub Prize Draw',
-        onError: (_error: Error) => {
+        signingMessage: 'DeHub dApps',
+        onError: (error: Error) => {
           setWalletConnectingState(WalletConnectingState.INIT);
         },
-        onSuccess: async _user => {
-          if (isMetamaskLogin) {
+        onSuccess: async () => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const ethereum = (window as any).ethereum;
+          if (ethereum) {
             const onSwitchNetwork = () => {
               setWalletConnectingState(WalletConnectingState.SWITCH_NETWORK);
             };
@@ -51,7 +46,7 @@ const ConnectWalletButton = () => {
             };
             if (
               await setupMetamaskNetwork(
-                getChainId(),
+                defaultChainId,
                 onSwitchNetwork,
                 onAddNetwork
               )
@@ -71,7 +66,7 @@ const ConnectWalletButton = () => {
         },
       });
     },
-    [authenticate, chainId, logout, setWalletConnectingState]
+    [authenticate, defaultChainId, logout, setWalletConnectingState]
   );
 
   return (

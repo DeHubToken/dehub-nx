@@ -1,15 +1,23 @@
-import { useEagerMoralis } from '@dehub/react/core';
+import {
+  useConnectContext,
+  useEagerMoralis,
+  withLayout,
+} from '@dehub/react/core';
 import { ResetCSS } from '@dehub/react/pcsuikit';
-import { Loader } from '@dehub/react/ui';
+import { FullScreenLoader, SuspenseWithChunkError } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
+import { lazy } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
+import { environment } from '../environments/environment';
 import EasterEgg from './components/EasterEgg';
-import SuspenseWithChunkError from './components/SuspenseWithChunkError';
 import ToastListener from './components/ToastListener';
 import history from './routerHistory';
 import { usePollBlockNumber } from './state/hooks';
 import GlobalStyle from './style/Global';
-import Predictions from './views/Predictions';
+
+const Predictions = withLayout(lazy(() => import('./views/Predictions')));
+
+const { baseUrl } = environment;
 
 // This config is required for number formatting
 BigNumber.config({
@@ -21,14 +29,18 @@ export function App() {
   useEagerMoralis();
   usePollBlockNumber();
 
+  const { baseUrl, pageTitle } = useConnectContext();
+
   return (
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
-      <SuspenseWithChunkError fallback={<Loader />}>
+      <SuspenseWithChunkError
+        fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
+      >
         <Switch>
           <Route path="/">
-            <Predictions />
+            <Predictions baseUrl={baseUrl} />
           </Route>
         </Switch>
       </SuspenseWithChunkError>

@@ -1,3 +1,4 @@
+import { Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceNumber } from '@dehub/shared/util';
 import {
@@ -11,7 +12,6 @@ import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
-import { Text } from '../../components/Text';
 import { TicketIdLabel } from '../../components/TicketLabel';
 import { LotteryTicket } from '../../config/constants/types';
 import useGetDeLottoWinningRewards, {

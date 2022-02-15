@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Header = styled.div<{
+export const Heading = styled.div<{
   color?: string;
   fontSize?: string;
   fontWeight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
@@ -17,5 +17,3 @@ export const Title = styled.div<{
   color: ${({ color }) => color ?? 'inherit'};
   font-size: ${({ fontSize }) => fontSize ?? '30px'};
 `;
-
-export default Header;

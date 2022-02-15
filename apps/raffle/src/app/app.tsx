@@ -1,28 +1,39 @@
-import { HelmetProvider } from 'react-helmet-async';
-import { MoralisProvider } from 'react-moralis';
-import { Provider } from 'react-redux';
-import { environment } from '../environments/environment';
-import { RefreshContextProvider } from './contexts/RefreshContext';
-import { store } from './states';
-import Lottery from './views/Lottery';
+import {
+  useConnectContext,
+  useEagerMoralis,
+  withLayout,
+} from '@dehub/react/core';
+import { FullScreenLoader, SuspenseWithChunkError } from '@dehub/react/ui';
+import BigNumber from 'bignumber.js';
+import { lazy } from 'react';
+import { Route, Router, Switch } from 'react-router-dom';
+import history from './routerHistory';
 
-const { appId, serverUrl } = environment.moralis;
+const Lottery = withLayout(lazy(() => import('./views/Lottery')));
+
+// This config is required for number formatting
+BigNumber.config({
+  EXPONENTIAL_AT: 1000,
+  DECIMAL_PLACES: 80,
+});
 
 export function App() {
+  useEagerMoralis();
+
+  const { baseUrl, pageTitle } = useConnectContext();
+
   return (
-    <MoralisProvider
-      appId={appId}
-      serverUrl={serverUrl}
-      initializeOnMount={true}
-    >
-      <Provider store={store}>
-        <RefreshContextProvider>
-          <HelmetProvider>
-            <Lottery />
-          </HelmetProvider>
-        </RefreshContextProvider>
-      </Provider>
-    </MoralisProvider>
+    <Router history={history}>
+      <SuspenseWithChunkError
+        fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
+      >
+        <Switch>
+          <Route path="/">
+            <Lottery baseUrl={baseUrl} />
+          </Route>
+        </Switch>
+      </SuspenseWithChunkError>
+    </Router>
   );
 }
 
