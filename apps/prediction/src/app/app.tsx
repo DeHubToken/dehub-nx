@@ -1,23 +1,14 @@
-import {
-  useConnectContext,
-  useEagerMoralis,
-  withLayout,
-} from '@dehub/react/core';
+import { useConnectContext, useEagerMoralis } from '@dehub/react/core';
 import { ResetCSS } from '@dehub/react/pcsuikit';
 import { FullScreenLoader, SuspenseWithChunkError } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
-import { lazy } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
-import { environment } from '../environments/environment';
 import EasterEgg from './components/EasterEgg';
 import ToastListener from './components/ToastListener';
 import history from './routerHistory';
 import { usePollBlockNumber } from './state/hooks';
 import GlobalStyle from './style/Global';
-
-const Predictions = withLayout(lazy(() => import('./views/Predictions')));
-
-const { baseUrl } = environment;
+import Predictions from './views/Predictions';
 
 // This config is required for number formatting
 BigNumber.config({
