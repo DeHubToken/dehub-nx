@@ -17,6 +17,7 @@ import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
+import { SplitButtonModule } from 'primeng/splitbutton';
 import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +38,12 @@ const angularModules = [
   BrowserAnimationsModule,
 ];
 
-const primeNgModules = [ButtonModule, RippleModule, MenuModule];
+const primeNgModules = [
+  ButtonModule,
+  RippleModule,
+  MenuModule,
+  SplitButtonModule,
+];
 
 /** Layout components from Freya */
 const layoutComponents = [
