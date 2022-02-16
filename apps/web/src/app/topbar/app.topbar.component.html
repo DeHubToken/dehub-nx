@@ -1,5 +1,5 @@
 <div class="layout-topbar">
-  <div class="layout-topbar-wrapper">
+  <div class="layout-topbar-wrapper flex-column sm:flex-row">
     <div class="layout-topbar-left">
       <a
         tabindex="0"
@@ -23,14 +23,10 @@
 
     <dhb-menu></dhb-menu>
 
-    <div class="layout-topbar-right hidden md:flex">
+    <div class="layout-topbar-right">
       <ul class="layout-topbar-actions">
         <li class="topbar-item">
-          <p-splitButton
-            label="Buy DeHub"
-            icon="pi pi-shopping-cart"
-            [model]="[]"
-          ></p-splitButton>
+          <p-splitButton label="Buy DeHub" [model]="[]"></p-splitButton>
         </li>
         <li class="topbar-item ml-4">
           <dhb-connect-wallet [chainId]="chainId"></dhb-connect-wallet>
