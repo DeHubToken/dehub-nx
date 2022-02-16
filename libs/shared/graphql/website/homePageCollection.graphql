@@ -31,6 +31,58 @@ fragment FaqItem on FaqItem {
   answer
 }
 
+fragment PageSectionBasicPosts on PageSectionBasicPosts {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    items {
+      ...BasicPost
+    }
+  }
+  postsByCategory {
+    linkedFrom {
+      basicPostCollection(limit: 20, preview: $isPreview) {
+        items {
+          ...BasicPost
+        }
+      }
+    }
+  }
+}
+
+fragment PageSectionIconTiles on PageSectionIconTiles {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
+    items {
+      ...IconTile
+    }
+  }
+}
+
+fragment PageSectionFaQs on PageSectionFaQs {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
+    items {
+      faqItemCollection(limit: 50, preview: $isPreview) {
+        items {
+          ...FaqItem
+        }
+      }
+    }
+  }
+}
+
 fragment PageHome on PageHome {
   sys {
     id
@@ -38,57 +90,10 @@ fragment PageHome on PageHome {
   mainTitle
   subtitle
   sectionsCollection(limit: 10, preview: $isPreview) {
-    total
     items {
-      kind: __typename
-      ... on PageSectionBasicPosts {
-        sys {
-          ...Sys
-        }
-        title
-        handpickedPostsCollection(limit: 5, preview: $isPreview) {
-          items {
-            ...BasicPost
-          }
-        }
-        postsByCategory {
-          linkedFrom {
-            basicPostCollection(limit: 20, preview: $isPreview) {
-              items {
-                ...BasicPost
-              }
-            }
-          }
-        }
-      }
-      kind: __typename
-      ... on PageSectionIconTiles {
-        sys {
-          ...Sys
-        }
-        title
-        handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
-          items {
-            ...IconTile
-          }
-        }
-      }
-      kind: __typename
-      ... on PageSectionFaQs {
-        sys {
-          ...Sys
-        }
-        title
-        handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
-          items {
-            faqItemCollection(limit: 50, preview: $isPreview) {
-              items {
-                ...FaqItem
-              }
-            }
-          }
-        }
-      }
+      ...PageSectionBasicPosts
+      ...PageSectionIconTiles
+      ...PageSectionFaQs
     }
   }
 }

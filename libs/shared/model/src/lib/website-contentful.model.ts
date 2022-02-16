@@ -3173,6 +3173,138 @@ export type FaqItemFragment = {
   sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
 };
 
+export type PageSectionBasicPostsFragment = {
+  __typename: 'PageSectionBasicPosts';
+  title?: string | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  handpickedPostsCollection?:
+    | {
+        __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
+        items: Array<
+          | {
+              __typename?: 'BasicPost';
+              title?: string | null | undefined;
+              summary?: string | null | undefined;
+              slug?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+              mainPicture?:
+                | {
+                    __typename?: 'Asset';
+                    title?: string | null | undefined;
+                    url?: string | null | undefined;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+  postsByCategory?:
+    | {
+        __typename?: 'BasicPostCategory';
+        linkedFrom?:
+          | {
+              __typename?: 'BasicPostCategoryLinkingCollections';
+              basicPostCollection?:
+                | {
+                    __typename?: 'BasicPostCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'BasicPost';
+                          title?: string | null | undefined;
+                          summary?: string | null | undefined;
+                          slug?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                          mainPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | null | undefined;
+                                url?: string | null | undefined;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined
+                    >;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined;
+};
+
+export type PageSectionIconTilesFragment = {
+  __typename: 'PageSectionIconTiles';
+  title?: string | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  handpickedIconTilesCollection?:
+    | {
+        __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
+        items: Array<
+          | {
+              __typename?: 'IconTile';
+              icon?: string | null | undefined;
+              title?: string | null | undefined;
+              description?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
+export type PageSectionFaQsFragment = {
+  __typename: 'PageSectionFaQs';
+  title?: string | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  handpickedFaqGroupsCollection?:
+    | {
+        __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
+        items: Array<
+          | {
+              __typename?: 'FaqCollection';
+              faqItemCollection?:
+                | {
+                    __typename?: 'FaqCollectionFaqItemCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FaqItem';
+                          question?: string | null | undefined;
+                          answer?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                        }
+                      | null
+                      | undefined
+                    >;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
 export type PageHomeFragment = {
   __typename?: 'PageHome';
   mainTitle?: string | null | undefined;
@@ -3181,12 +3313,10 @@ export type PageHomeFragment = {
   sectionsCollection?:
     | {
         __typename?: 'PageHomeSectionsCollection';
-        total: number;
         items: Array<
           | {
-              __typename?: 'PageSectionBasicPosts';
+              __typename: 'PageSectionBasicPosts';
               title?: string | null | undefined;
-              kind: 'PageSectionBasicPosts';
               sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
               handpickedPostsCollection?:
                 | {
@@ -3258,9 +3388,8 @@ export type PageHomeFragment = {
                 | undefined;
             }
           | {
-              __typename?: 'PageSectionFaQs';
+              __typename: 'PageSectionFaQs';
               title?: string | null | undefined;
-              kind: 'PageSectionFaQs';
               sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
               handpickedFaqGroupsCollection?:
                 | {
@@ -3296,9 +3425,8 @@ export type PageHomeFragment = {
                 | undefined;
             }
           | {
-              __typename?: 'PageSectionIconTiles';
+              __typename: 'PageSectionIconTiles';
               title?: string | null | undefined;
-              kind: 'PageSectionIconTiles';
               sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -3347,12 +3475,10 @@ export type PageHomeCollectionQuery = {
               sectionsCollection?:
                 | {
                     __typename?: 'PageHomeSectionsCollection';
-                    total: number;
                     items: Array<
                       | {
-                          __typename?: 'PageSectionBasicPosts';
+                          __typename: 'PageSectionBasicPosts';
                           title?: string | null | undefined;
-                          kind: 'PageSectionBasicPosts';
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | null | undefined;
@@ -3445,9 +3571,8 @@ export type PageHomeCollectionQuery = {
                             | undefined;
                         }
                       | {
-                          __typename?: 'PageSectionFaQs';
+                          __typename: 'PageSectionFaQs';
                           title?: string | null | undefined;
-                          kind: 'PageSectionFaQs';
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | null | undefined;
@@ -3495,9 +3620,8 @@ export type PageHomeCollectionQuery = {
                             | undefined;
                         }
                       | {
-                          __typename?: 'PageSectionIconTiles';
+                          __typename: 'PageSectionIconTiles';
                           title?: string | null | undefined;
-                          kind: 'PageSectionIconTiles';
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | null | undefined;
@@ -3675,6 +3799,31 @@ export const BasicPostFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const PageSectionBasicPostsFragmentDoc = gql`
+  fragment PageSectionBasicPosts on PageSectionBasicPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...BasicPost
+      }
+    }
+    postsByCategory {
+      linkedFrom {
+        basicPostCollection(limit: 20, preview: $isPreview) {
+          items {
+            ...BasicPost
+          }
+        }
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${BasicPostFragmentDoc}
+`;
 export const IconTileFragmentDoc = gql`
   fragment IconTile on IconTile {
     sys {
@@ -3686,6 +3835,22 @@ export const IconTileFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const PageSectionIconTilesFragmentDoc = gql`
+  fragment PageSectionIconTiles on PageSectionIconTiles {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...IconTile
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${IconTileFragmentDoc}
+`;
 export const FaqItemFragmentDoc = gql`
   fragment FaqItem on FaqItem {
     sys {
@@ -3696,6 +3861,26 @@ export const FaqItemFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const PageSectionFaQsFragmentDoc = gql`
+  fragment PageSectionFaQs on PageSectionFaQs {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
+      items {
+        faqItemCollection(limit: 50, preview: $isPreview) {
+          items {
+            ...FaqItem
+          }
+        }
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FaqItemFragmentDoc}
+`;
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
     sys {
@@ -3704,64 +3889,16 @@ export const PageHomeFragmentDoc = gql`
     mainTitle
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
-      total
       items {
-        kind: __typename
-        ... on PageSectionBasicPosts {
-          sys {
-            ...Sys
-          }
-          title
-          handpickedPostsCollection(limit: 5, preview: $isPreview) {
-            items {
-              ...BasicPost
-            }
-          }
-          postsByCategory {
-            linkedFrom {
-              basicPostCollection(limit: 20, preview: $isPreview) {
-                items {
-                  ...BasicPost
-                }
-              }
-            }
-          }
-        }
-        kind: __typename
-        ... on PageSectionIconTiles {
-          sys {
-            ...Sys
-          }
-          title
-          handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
-            items {
-              ...IconTile
-            }
-          }
-        }
-        kind: __typename
-        ... on PageSectionFaQs {
-          sys {
-            ...Sys
-          }
-          title
-          handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
-            items {
-              faqItemCollection(limit: 50, preview: $isPreview) {
-                items {
-                  ...FaqItem
-                }
-              }
-            }
-          }
-        }
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
       }
     }
   }
-  ${SysFragmentDoc}
-  ${BasicPostFragmentDoc}
-  ${IconTileFragmentDoc}
-  ${FaqItemFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
 `;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {

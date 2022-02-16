@@ -23,6 +23,31 @@ export const BasicPostFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const PageSectionBasicPostsFragmentDoc = gql`
+  fragment PageSectionBasicPosts on PageSectionBasicPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...BasicPost
+      }
+    }
+    postsByCategory {
+      linkedFrom {
+        basicPostCollection(limit: 20, preview: $isPreview) {
+          items {
+            ...BasicPost
+          }
+        }
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${BasicPostFragmentDoc}
+`;
 export const IconTileFragmentDoc = gql`
   fragment IconTile on IconTile {
     sys {
@@ -34,6 +59,22 @@ export const IconTileFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const PageSectionIconTilesFragmentDoc = gql`
+  fragment PageSectionIconTiles on PageSectionIconTiles {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...IconTile
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${IconTileFragmentDoc}
+`;
 export const FaqItemFragmentDoc = gql`
   fragment FaqItem on FaqItem {
     sys {
@@ -44,6 +85,26 @@ export const FaqItemFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const PageSectionFaQsFragmentDoc = gql`
+  fragment PageSectionFaQs on PageSectionFaQs {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
+      items {
+        faqItemCollection(limit: 50, preview: $isPreview) {
+          items {
+            ...FaqItem
+          }
+        }
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FaqItemFragmentDoc}
+`;
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
     sys {
@@ -52,64 +113,16 @@ export const PageHomeFragmentDoc = gql`
     mainTitle
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
-      total
       items {
-        kind: __typename
-        ... on PageSectionBasicPosts {
-          sys {
-            ...Sys
-          }
-          title
-          handpickedPostsCollection(limit: 5, preview: $isPreview) {
-            items {
-              ...BasicPost
-            }
-          }
-          postsByCategory {
-            linkedFrom {
-              basicPostCollection(limit: 20, preview: $isPreview) {
-                items {
-                  ...BasicPost
-                }
-              }
-            }
-          }
-        }
-        kind: __typename
-        ... on PageSectionIconTiles {
-          sys {
-            ...Sys
-          }
-          title
-          handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
-            items {
-              ...IconTile
-            }
-          }
-        }
-        kind: __typename
-        ... on PageSectionFaQs {
-          sys {
-            ...Sys
-          }
-          title
-          handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
-            items {
-              faqItemCollection(limit: 50, preview: $isPreview) {
-                items {
-                  ...FaqItem
-                }
-              }
-            }
-          }
-        }
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
       }
     }
   }
-  ${SysFragmentDoc}
-  ${BasicPostFragmentDoc}
-  ${IconTileFragmentDoc}
-  ${FaqItemFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
 `;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
