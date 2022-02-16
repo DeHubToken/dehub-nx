@@ -141,8 +141,8 @@ $menuBgColor: transparent;
 }
 
 @import 'layout/dhb_typography.scss';
-@import 'widgets/dhb_card_layout_styles';
 @import 'widgets/dhb_tabview_layout_styles';
 @import 'widgets/dhb_overview_box_layout_styles';
+@import 'components/panel/dhb_card.scss';
 @import 'components/overlay/dhb_dialog';
 @import 'components/overlay/dhb_loader';
