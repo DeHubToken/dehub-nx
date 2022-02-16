@@ -1,10 +1,15 @@
 import { act, render } from '@testing-library/react';
 import App from './app';
+import Providers from './app/Providers';
 
 describe('App', () => {
   it('should render successfully', async () => {
     const promise = Promise.resolve();
-    const { baseElement } = render(<App />);
+    const { baseElement } = render(
+      <Providers>
+        <App />
+      </Providers>
+    );
 
     expect(baseElement).toBeTruthy();
 

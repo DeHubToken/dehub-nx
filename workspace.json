@@ -2,6 +2,12 @@
   "version": 2,
   "projects": {
     "angular-core": "libs/angular/core",
+    "angular-feature-earn": "libs/angular/feature-earn",
+    "angular-feature-game": "libs/angular/feature-game",
+    "angular-feature-home": "libs/angular/feature-home",
+    "angular-feature-learn": "libs/angular/feature-learn",
+    "angular-feature-shop": "libs/angular/feature-shop",
+    "angular-feature-stream": "libs/angular/feature-stream",
     "angular-moralis": "libs/angular/moralis",
     "angular-ui": "libs/angular/ui",
     "prediction": "apps/prediction",

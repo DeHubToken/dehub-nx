@@ -10,7 +10,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { AppMainComponent } from '../app.main.component';
+import { AppMainComponent } from '../../app.main.component';
 import { MenuService } from './app.menu.service';
 
 @Component({

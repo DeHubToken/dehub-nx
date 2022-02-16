@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppComponent } from './app.component';
-import { MenuService } from './menu/app.menu.service';
+import { MenuService } from './topbar/menu/app.menu.service';
 
 @Component({
   templateUrl: './app.main.component.html',

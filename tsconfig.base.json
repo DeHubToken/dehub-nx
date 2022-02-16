@@ -16,6 +16,16 @@
     "baseUrl": ".",
     "paths": {
       "@dehub/angular/core": ["libs/angular/core/src/index.ts"],
+      "@dehub/angular/feature-earn": ["libs/angular/feature-earn/src/index.ts"],
+      "@dehub/angular/feature-game": ["libs/angular/feature-game/src/index.ts"],
+      "@dehub/angular/feature-home": ["libs/angular/feature-home/src/index.ts"],
+      "@dehub/angular/feature-learn": [
+        "libs/angular/feature-learn/src/index.ts"
+      ],
+      "@dehub/angular/feature-shop": ["libs/angular/feature-shop/src/index.ts"],
+      "@dehub/angular/feature-stream": [
+        "libs/angular/feature-stream/src/index.ts"
+      ],
       "@dehub/angular/moralis": ["libs/angular/moralis/src/index.ts"],
       "@dehub/angular/ui/*": ["libs/angular/ui/src/lib/*"],
       "@dehub/react/core": ["libs/react/core/src/index.ts"],

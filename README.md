@@ -153,6 +153,9 @@ _Common sass styles, assets from the Freya PrimeNG themes_
 1. Run **CI**: `npm run ci` _(lint, test, build from affected apps)_
 1. Deploy as **draft**: `npm run deploy:draft`
 1. Deploy to **prod**: `npm run deploy:prod`
+1. We follow [commitlint](https://github.com/merkle-open/frontend-defaults/blob/master/repo/commitlint-conventional-changelog/index.js) guide, so please use these scopes:
+
+   `'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'`
 
 # PWA Manifest
 

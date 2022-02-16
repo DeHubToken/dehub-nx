@@ -16,6 +16,10 @@ This project was generated using [Nx](https://nx.dev).
    ```
    nx generate @nrwl/angular:application --name=web --style=scss --prefix=dhb --routing --standaloneConfig
    ```
+1. Generate Angular app feature:
+   ```
+   nx generate @nrwl/angular:library --name=feature-home --directory=angular --importPath=@dehub/angular/feature-home --prefix=dhb --routing --standaloneConfig --tags='scope:angular, type:feature'
+   ```
 1. Local website serving with [lite-server](https://github.com/johnpapa/lite-server)
    ```
    npm i lite-server compression --save-dev

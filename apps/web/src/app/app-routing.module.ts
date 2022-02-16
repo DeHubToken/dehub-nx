@@ -5,10 +5,19 @@ import { MenuItem } from 'primeng/api';
 import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
 
-export enum Navigation {
+enum NavigationMenu {
   Demos = 'demos',
   Tournaments = 'tournaments',
   Staking = 'staking',
+}
+
+enum NavigationTabMenu {
+  Home = 'home',
+  Stream = 'stream',
+  Game = 'game',
+  Shop = 'shop',
+  Learn = 'learn',
+  Earn = 'earn',
 }
 
 export const menuItems: MenuItem[] = [
@@ -17,7 +26,7 @@ export const menuItems: MenuItem[] = [
     items: [
       {
         label: 'DeGame',
-        routerLink: [Navigation.Tournaments],
+        routerLink: [NavigationMenu.Tournaments],
         icon: 'fa fa-trophy-alt',
       },
       {
@@ -33,13 +42,45 @@ export const menuItems: MenuItem[] = [
     items: [
       {
         label: 'Contentful Team',
-        routerLink: [Navigation.Demos],
+        routerLink: [NavigationMenu.Demos],
         icon: 'fa fa-puzzle-piece',
       },
     ],
   },
 ];
 
+export const tabMenuItems: MenuItem[] = [
+  {
+    label: 'Home',
+    icon: 'fa fa-home-alt',
+    routerLink: [NavigationTabMenu.Home],
+  },
+  {
+    label: 'Stream',
+    icon: 'fa fa-stream',
+    routerLink: [NavigationTabMenu.Stream],
+  },
+  {
+    label: 'Game',
+    icon: 'fa fa-gamepad',
+    routerLink: [NavigationTabMenu.Game],
+  },
+  {
+    label: 'Shop',
+    icon: 'fa fa-store',
+    routerLink: [NavigationTabMenu.Shop],
+  },
+  {
+    label: 'Learn',
+    icon: 'fa fa-graduation-cap',
+    routerLink: [NavigationTabMenu.Learn],
+  },
+  {
+    label: 'Earn',
+    icon: 'fa fa-dollar-sign',
+    routerLink: [NavigationTabMenu.Earn],
+  },
+];
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -48,19 +89,61 @@ export const menuItems: MenuItem[] = [
           path: '',
           component: AppMainComponent,
           children: [
-            { path: '', redirectTo: Navigation.Tournaments, pathMatch: 'full' },
+            { path: '', redirectTo: NavigationTabMenu.Home, pathMatch: 'full' },
             {
-              path: Navigation.Demos,
+              path: NavigationMenu.Demos,
               loadChildren: () =>
                 import('./modules/demos/demos.module').then(
                   module => module.DemosModule
                 ),
             },
             {
-              path: Navigation.Tournaments,
+              path: NavigationMenu.Tournaments,
               loadChildren: () =>
                 import('./modules/tournaments/tournaments.module').then(
                   module => module.TournamentsModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Home,
+              loadChildren: () =>
+                import('@dehub/angular/feature-home').then(
+                  module => module.AngularFeatureHomeModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Stream,
+              loadChildren: () =>
+                import('@dehub/angular/feature-stream').then(
+                  module => module.AngularFeatureStreamModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Game,
+              loadChildren: () =>
+                import('@dehub/angular/feature-game').then(
+                  module => module.AngularFeatureGameModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Shop,
+              loadChildren: () =>
+                import('@dehub/angular/feature-shop').then(
+                  module => module.AngularFeatureShopModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Learn,
+              loadChildren: () =>
+                import('@dehub/angular/feature-learn').then(
+                  module => module.AngularFeatureLearnModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.Earn,
+              loadChildren: () =>
+                import('@dehub/angular/feature-earn').then(
+                  module => module.AngularFeatureEarnModule
                 ),
             },
           ],

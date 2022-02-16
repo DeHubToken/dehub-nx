@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/feature-learn",
+  "sourceRoot": "libs/angular/feature-learn/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/feature-learn"],
+      "options": {
+        "jestConfig": "libs/angular/feature-learn/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/feature-learn/src/**/*.ts",
+          "libs/angular/feature-learn/src/**/*.html"
+        ],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}
