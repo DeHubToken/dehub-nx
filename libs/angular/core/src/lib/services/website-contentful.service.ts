@@ -8,6 +8,20 @@ import { GraphQLModule } from '../graphql.module';
 @Injectable({
   providedIn: GraphQLModule,
 })
+export class PageHomeCollectionService extends Apollo.Query<
+  models.PageHomeCollectionQuery,
+  models.PageHomeCollectionQueryVariables
+> {
+  document = models.PageHomeCollectionDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
 export class TeamMembersService extends Apollo.Query<
   models.TeamMembersQuery,
   models.TeamMembersQueryVariables

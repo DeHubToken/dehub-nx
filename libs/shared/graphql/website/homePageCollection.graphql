@@ -1,0 +1,98 @@
+fragment BasicPost on BasicPost {
+  sys {
+    ...Sys
+  }
+  title
+  mainPicture {
+    title
+    url
+  }
+  summary
+  # 	description {
+  # 		json
+  # 	}
+  slug
+}
+
+fragment IconTile on IconTile {
+  sys {
+    ...Sys
+  }
+  icon
+  title
+  description
+}
+
+fragment FaqItem on FaqItem {
+  sys {
+    ...Sys
+  }
+  question
+  answer
+}
+
+query pageHomeCollection($isPreview: Boolean = false) {
+  pageHomeCollection(limit: 2, preview: $isPreview) {
+    items {
+      sys {
+        id
+      }
+      mainTitle
+      subtitle
+      sectionsCollection(limit: 10, preview: $isPreview) {
+        total
+        items {
+          kind: __typename
+          ... on PageSectionBasicPosts {
+            sys {
+              ...Sys
+            }
+            title
+            handpickedPostsCollection(limit: 5, preview: $isPreview) {
+              items {
+                ...BasicPost
+              }
+            }
+            postsByCategory {
+              linkedFrom {
+                basicPostCollection(limit: 20, preview: $isPreview) {
+                  items {
+                    ...BasicPost
+                  }
+                }
+              }
+            }
+          }
+          kind: __typename
+          ... on PageSectionIconTiles {
+            sys {
+              ...Sys
+            }
+            title
+            handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
+              items {
+                ...IconTile
+              }
+            }
+          }
+          kind: __typename
+          ... on PageSectionFaQs {
+            sys {
+              ...Sys
+            }
+            title
+            handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
+              items {
+                faqItemCollection(limit: 50, preview: $isPreview) {
+                  items {
+                    ...FaqItem
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
