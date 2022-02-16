@@ -52,32 +52,32 @@ export const menuItems: MenuItem[] = [
 export const tabMenuItems: MenuItem[] = [
   {
     label: 'Home',
-    icon: 'fa fa-home-alt',
+    icon: 'fad fa-home',
     routerLink: [NavigationTabMenu.Home],
   },
   {
     label: 'Stream',
-    icon: 'fa fa-stream',
+    icon: 'fad fa-tv',
     routerLink: [NavigationTabMenu.Stream],
   },
   {
     label: 'Game',
-    icon: 'fa fa-gamepad',
+    icon: 'fad fa-gamepad-alt',
     routerLink: [NavigationTabMenu.Game],
   },
   {
     label: 'Shop',
-    icon: 'fa fa-store',
+    icon: 'fad fa-shopping-bag',
     routerLink: [NavigationTabMenu.Shop],
   },
   {
     label: 'Learn',
-    icon: 'fa fa-graduation-cap',
+    icon: 'fad fa-lightbulb-on',
     routerLink: [NavigationTabMenu.Learn],
   },
   {
     label: 'Earn',
-    icon: 'fa fa-dollar-sign',
+    icon: 'fad fa-coins',
     routerLink: [NavigationTabMenu.Earn],
   },
 ];
