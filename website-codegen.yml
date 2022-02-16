@@ -1,3 +1,7 @@
+##############################################################################################
+# Docs: https://www.graphql-code-generator.com
+# Best Practices: https://www.the-guild.dev/blog/graphql-codegen-best-practices
+##############################################################################################
 overwrite: true
 
 schema:
@@ -66,6 +70,6 @@ generates:
       noExport: false
       importOperationTypesFrom: 'models'
       # ISSUE: https://github.com/dotansimha/graphql-code-generator/issues/4980
-      # -> gql is generated duplicately in react hooks (already in the models)
+      # -> gql is generated duplicated in react hooks (already in the models)
       # documentMode: external
       # importDocumentNodeExternallyFrom: '@dehub/shared/model'
