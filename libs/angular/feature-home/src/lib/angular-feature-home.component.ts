@@ -1,11 +1,22 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import { EnvToken, PageHomeCollectionService } from '@dehub/angular/core';
+import { SharedEnv } from '@dehub/shared/config';
+import { PageHomeFragment } from '@dehub/shared/model';
 import { bounceInLeftOnEnterAnimation } from 'angular-animations';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   template: `
     <div class="grid">
-      <div [@bounceInLeft] class="col-12">
-        <h3>Welcome to DeHub</h3>
+      <div *ngIf="pageHome$ | async as pageHome" [@bounceInLeft] class="col-12">
+        <h3>{{ pageHome.mainTitle }}</h3>
+        <h4>{{ pageHome.subtitle }}</h4>
       </div>
     </div>
   `,
@@ -14,7 +25,23 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
   animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
 })
 export class AngularFeatureHomeComponent implements OnInit {
-  constructor() {}
+  pageHome$?: Observable<PageHomeFragment | undefined>;
 
-  ngOnInit() {}
+  constructor(
+    @Inject(EnvToken) private env: SharedEnv,
+    private pageHomeCollection: PageHomeCollectionService
+  ) {}
+
+  ngOnInit() {
+    this.pageHome$ = this.pageHomeCollection
+      .fetch({
+        isPreview: this.env.contentful.isPreview,
+      })
+      .pipe(
+        map(
+          ({ data: { pageHomeCollection } }) =>
+            pageHomeCollection?.items[0] ?? undefined
+        )
+      );
+  }
 }
