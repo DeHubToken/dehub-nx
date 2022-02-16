@@ -13,7 +13,19 @@ import { tabMenuItems } from '../app-routing.module';
 @Component({
   selector: 'dhb-tab-menu',
   template: `
-    <p-tabMenu [model]="model" [activeItem]="activeMenuItem!"></p-tabMenu>
+    <div class="dhb-tab-menu">
+      <button
+        *ngFor="let item of model"
+        class="p-button-text p-button-plain p-button-lg mt-3 mr-3"
+        [ngClass]="{ active: item.routerLink === activeMenuItem?.routerLink }"
+        pButton
+        pRipple
+        type="button"
+        label="{{ item.label }}"
+        icon="{{ item.icon }}"
+        routerLink="{{ item.routerLink }}"
+      ></button>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

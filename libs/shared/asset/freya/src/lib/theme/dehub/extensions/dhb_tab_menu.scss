@@ -1,0 +1,8 @@
+.dhb-tab-menu {
+  border-bottom: 1px solid #cadadd1c;
+  padding-bottom: 18px;
+  .active {
+    font-weight: 900;
+    background: rgba($buttonActiveBg, 0.4);
+  }
+}
