@@ -23,6 +23,15 @@ fragment IconTile on IconTile {
   description
 }
 
+fragment FaqGroup on FaqGroup {
+  name
+  faqItemCollection(limit: 50, preview: $isPreview) {
+    items {
+      ...FaqItem
+    }
+  }
+}
+
 fragment FaqItem on FaqItem {
   sys {
     ...Sys
@@ -74,11 +83,7 @@ fragment PageSectionFaQs on PageSectionFaQs {
   title
   handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
     items {
-      faqItemCollection(limit: 50, preview: $isPreview) {
-        items {
-          ...FaqItem
-        }
-      }
+      ...FaqGroup
     }
   }
 }

@@ -576,53 +576,53 @@ export enum EntryOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
-/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqCollection) */
-export interface FaqCollection extends Entry {
-  __typename?: 'FaqCollection';
+/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqGroup) */
+export interface FaqGroup extends Entry {
+  __typename?: 'FaqGroup';
   contentfulMetadata: ContentfulMetadata;
-  faqItemCollection?: Maybe<FaqCollectionFaqItemCollection>;
-  linkedFrom?: Maybe<FaqCollectionLinkingCollections>;
+  faqItemCollection?: Maybe<FaqGroupFaqItemCollection>;
+  linkedFrom?: Maybe<FaqGroupLinkingCollections>;
   name?: Maybe<Scalars['String']>;
   sys: Sys;
 }
 
-/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqCollection) */
-export interface FaqCollectionFaqItemCollectionArgs {
+/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqGroup) */
+export interface FaqGroupFaqItemCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
 }
 
-/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqCollection) */
-export interface FaqCollectionLinkedFromArgs {
+/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqGroup) */
+export interface FaqGroupLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
-/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqCollection) */
-export interface FaqCollectionNameArgs {
+/** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqGroup) */
+export interface FaqGroupNameArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-export interface FaqCollectionCollection {
-  __typename?: 'FaqCollectionCollection';
-  items: Array<Maybe<FaqCollection>>;
+export interface FaqGroupCollection {
+  __typename?: 'FaqGroupCollection';
+  items: Array<Maybe<FaqGroup>>;
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
 }
 
-export interface FaqCollectionFaqItemCollection {
-  __typename?: 'FaqCollectionFaqItemCollection';
+export interface FaqGroupFaqItemCollection {
+  __typename?: 'FaqGroupFaqItemCollection';
   items: Array<Maybe<FaqItem>>;
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
 }
 
-export interface FaqCollectionFilter {
-  AND?: Maybe<Array<Maybe<FaqCollectionFilter>>>;
-  OR?: Maybe<Array<Maybe<FaqCollectionFilter>>>;
+export interface FaqGroupFilter {
+  AND?: Maybe<Array<Maybe<FaqGroupFilter>>>;
+  OR?: Maybe<Array<Maybe<FaqGroupFilter>>>;
   contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
   faqItemCollection_exists?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
@@ -635,27 +635,27 @@ export interface FaqCollectionFilter {
   sys?: Maybe<SysFilter>;
 }
 
-export interface FaqCollectionLinkingCollections {
-  __typename?: 'FaqCollectionLinkingCollections';
+export interface FaqGroupLinkingCollections {
+  __typename?: 'FaqGroupLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
   pageSectionFaQsCollection?: Maybe<PageSectionFaQsCollection>;
 }
 
-export interface FaqCollectionLinkingCollectionsEntryCollectionArgs {
+export interface FaqGroupLinkingCollectionsEntryCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
 }
 
-export interface FaqCollectionLinkingCollectionsPageSectionFaQsCollectionArgs {
+export interface FaqGroupLinkingCollectionsPageSectionFaQsCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
 }
 
-export enum FaqCollectionOrder {
+export enum FaqGroupOrder {
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -725,7 +725,7 @@ export interface FaqItemFilter {
 export interface FaqItemLinkingCollections {
   __typename?: 'FaqItemLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  faqCollectionCollection?: Maybe<FaqCollectionCollection>;
+  faqGroupCollection?: Maybe<FaqGroupCollection>;
 }
 
 export interface FaqItemLinkingCollectionsEntryCollectionArgs {
@@ -735,7 +735,7 @@ export interface FaqItemLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
 }
 
-export interface FaqItemLinkingCollectionsFaqCollectionCollectionArgs {
+export interface FaqItemLinkingCollectionsFaqGroupCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -766,7 +766,7 @@ export interface FeaturePost extends Entry {
   picture?: Maybe<Asset>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
-  videoEmbedCode?: Maybe<Scalars['String']>;
+  videoUrl?: Maybe<Scalars['String']>;
 }
 
 /** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
@@ -801,7 +801,7 @@ export interface FeaturePostTitleArgs {
 }
 
 /** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
-export interface FeaturePostVideoEmbedCodeArgs {
+export interface FeaturePostVideoUrlArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
@@ -847,13 +847,13 @@ export interface FeaturePostFilter {
   title_not?: Maybe<Scalars['String']>;
   title_not_contains?: Maybe<Scalars['String']>;
   title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  videoEmbedCode?: Maybe<Scalars['String']>;
-  videoEmbedCode_contains?: Maybe<Scalars['String']>;
-  videoEmbedCode_exists?: Maybe<Scalars['Boolean']>;
-  videoEmbedCode_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  videoEmbedCode_not?: Maybe<Scalars['String']>;
-  videoEmbedCode_not_contains?: Maybe<Scalars['String']>;
-  videoEmbedCode_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  videoUrl?: Maybe<Scalars['String']>;
+  videoUrl_contains?: Maybe<Scalars['String']>;
+  videoUrl_exists?: Maybe<Scalars['Boolean']>;
+  videoUrl_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  videoUrl_not?: Maybe<Scalars['String']>;
+  videoUrl_not_contains?: Maybe<Scalars['String']>;
+  videoUrl_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
 export interface FeaturePostLinkingCollections {
@@ -891,6 +891,8 @@ export enum FeaturePostOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
+  VideoUrlAsc = 'videoUrl_ASC',
+  VideoUrlDesc = 'videoUrl_DESC',
 }
 
 /** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
@@ -1462,7 +1464,7 @@ export interface PageSectionFaQsFilter {
 
 export interface PageSectionFaQsHandpickedFaqGroupsCollection {
   __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
-  items: Array<Maybe<FaqCollection>>;
+  items: Array<Maybe<FaqGroup>>;
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
@@ -2169,8 +2171,8 @@ export interface Query {
   basicPostCategoryCollection?: Maybe<BasicPostCategoryCollection>;
   basicPostCollection?: Maybe<BasicPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
-  faqCollection?: Maybe<FaqCollection>;
-  faqCollectionCollection?: Maybe<FaqCollectionCollection>;
+  faqGroup?: Maybe<FaqGroup>;
+  faqGroupCollection?: Maybe<FaqGroupCollection>;
   faqItem?: Maybe<FaqItem>;
   faqItemCollection?: Maybe<FaqItemCollection>;
   featurePost?: Maybe<FeaturePost>;
@@ -2263,19 +2265,19 @@ export interface QueryEntryCollectionArgs {
   where?: Maybe<EntryFilter>;
 }
 
-export interface QueryFaqCollectionArgs {
+export interface QueryFaqGroupArgs {
   id: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
 }
 
-export interface QueryFaqCollectionCollectionArgs {
+export interface QueryFaqGroupCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
-  order?: Maybe<Array<Maybe<FaqCollectionOrder>>>;
+  order?: Maybe<Array<Maybe<FaqGroupOrder>>>;
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
-  where?: Maybe<FaqCollectionFilter>;
+  where?: Maybe<FaqGroupFilter>;
 }
 
 export interface QueryFaqItemArgs {
@@ -3428,6 +3430,27 @@ export type IconTileFragment = {
   sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
 };
 
+export type FaqGroupFragment = {
+  __typename?: 'FaqGroup';
+  name?: string | null | undefined;
+  faqItemCollection?:
+    | {
+        __typename?: 'FaqGroupFaqItemCollection';
+        items: Array<
+          | {
+              __typename?: 'FaqItem';
+              question?: string | null | undefined;
+              answer?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
 export type FaqItemFragment = {
   __typename?: 'FaqItem';
   question?: string | null | undefined;
@@ -3538,10 +3561,11 @@ export type PageSectionFaQsFragment = {
         __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
         items: Array<
           | {
-              __typename?: 'FaqCollection';
+              __typename?: 'FaqGroup';
+              name?: string | null | undefined;
               faqItemCollection?:
                 | {
-                    __typename?: 'FaqCollectionFaqItemCollection';
+                    __typename?: 'FaqGroupFaqItemCollection';
                     items: Array<
                       | {
                           __typename?: 'FaqItem';
@@ -3658,10 +3682,11 @@ export type PageHomeFragment = {
                     __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
                     items: Array<
                       | {
-                          __typename?: 'FaqCollection';
+                          __typename?: 'FaqGroup';
+                          name?: string | null | undefined;
                           faqItemCollection?:
                             | {
-                                __typename?: 'FaqCollectionFaqItemCollection';
+                                __typename?: 'FaqGroupFaqItemCollection';
                                 items: Array<
                                   | {
                                       __typename?: 'FaqItem';
@@ -3844,10 +3869,11 @@ export type PageHomeCollectionQuery = {
                                 __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
                                 items: Array<
                                   | {
-                                      __typename?: 'FaqCollection';
+                                      __typename?: 'FaqGroup';
+                                      name?: string | null | undefined;
                                       faqItemCollection?:
                                         | {
-                                            __typename?: 'FaqCollectionFaqItemCollection';
+                                            __typename?: 'FaqGroupFaqItemCollection';
                                             items: Array<
                                               | {
                                                   __typename?: 'FaqItem';
@@ -4123,6 +4149,17 @@ export const FaqItemFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const FaqGroupFragmentDoc = gql`
+  fragment FaqGroup on FaqGroup {
+    name
+    faqItemCollection(limit: 50, preview: $isPreview) {
+      items {
+        ...FaqItem
+      }
+    }
+  }
+  ${FaqItemFragmentDoc}
+`;
 export const PageSectionFaQsFragmentDoc = gql`
   fragment PageSectionFaQs on PageSectionFaQs {
     __typename
@@ -4132,16 +4169,12 @@ export const PageSectionFaQsFragmentDoc = gql`
     title
     handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
       items {
-        faqItemCollection(limit: 50, preview: $isPreview) {
-          items {
-            ...FaqItem
-          }
-        }
+        ...FaqGroup
       }
     }
   }
   ${SysFragmentDoc}
-  ${FaqItemFragmentDoc}
+  ${FaqGroupFragmentDoc}
 `;
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {

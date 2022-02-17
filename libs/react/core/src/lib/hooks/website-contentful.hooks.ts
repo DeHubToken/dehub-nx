@@ -85,6 +85,17 @@ export const FaqItemFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const FaqGroupFragmentDoc = gql`
+  fragment FaqGroup on FaqGroup {
+    name
+    faqItemCollection(limit: 50, preview: $isPreview) {
+      items {
+        ...FaqItem
+      }
+    }
+  }
+  ${FaqItemFragmentDoc}
+`;
 export const PageSectionFaQsFragmentDoc = gql`
   fragment PageSectionFaQs on PageSectionFaQs {
     __typename
@@ -94,16 +105,12 @@ export const PageSectionFaQsFragmentDoc = gql`
     title
     handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
       items {
-        faqItemCollection(limit: 50, preview: $isPreview) {
-          items {
-            ...FaqItem
-          }
-        }
+        ...FaqGroup
       }
     }
   }
   ${SysFragmentDoc}
-  ${FaqItemFragmentDoc}
+  ${FaqGroupFragmentDoc}
 `;
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
