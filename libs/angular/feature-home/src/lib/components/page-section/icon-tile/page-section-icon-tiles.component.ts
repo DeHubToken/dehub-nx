@@ -22,14 +22,16 @@ import {
         <h3 [@bounceInRight] class="col-12">{{ section.title }}</h3>
 
         <!-- Icon Tiles -->
-        <div
-          *ngFor="let iconTile of iconTiles; let i = index"
-          [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-          class="col-12 md:col-3"
-        >
-          <dhb-page-section-icon-tile
-            [iconTile]="iconTile"
-          ></dhb-page-section-icon-tile>
+        <div class="grid">
+          <div
+            *ngFor="let iconTile of iconTiles; let i = index"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+            class="col-12 md:col-3"
+          >
+            <dhb-page-section-icon-tile
+              [iconTile]="iconTile"
+            ></dhb-page-section-icon-tile>
+          </div>
         </div>
       </div>
     </div>

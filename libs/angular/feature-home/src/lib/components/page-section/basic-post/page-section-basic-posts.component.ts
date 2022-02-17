@@ -22,14 +22,16 @@ import {
         <h3 [@bounceInRight] class="col-12">{{ section.title }}</h3>
 
         <!-- Basic Posts -->
-        <div
-          *ngFor="let basicPost of basicPosts; let i = index"
-          [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-          class="col-12 md:col-3"
-        >
-          <dhb-page-section-basic-post
-            [basicPost]="basicPost"
-          ></dhb-page-section-basic-post>
+        <div class="grid">
+          <div
+            *ngFor="let basicPost of basicPosts; let i = index"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+            class="col-12 md:col-3"
+          >
+            <dhb-page-section-basic-post
+              [basicPost]="basicPost"
+            ></dhb-page-section-basic-post>
+          </div>
         </div>
       </div>
     </div>
