@@ -4,7 +4,7 @@ import { InMemoryCache } from '@apollo/client/cache';
 import { from } from '@apollo/client/core';
 import { onError } from '@apollo/client/link/error';
 import { SharedEnv } from '@dehub/shared/config';
-import { APOLLO_FLAGS, APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloModule, APOLLO_FLAGS, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { EnvToken } from './models/injection-token';
 
@@ -53,13 +53,14 @@ export function createApollo(
 }
 
 @NgModule({
-  exports: [HttpClientModule],
+  exports: [HttpClientModule, ApolloModule],
   providers: [
     {
       provide: APOLLO_FLAGS,
       useValue: {
         // https://github.com/kamilkisiela/apollo-angular/blob/master/website/docs/data/queries.md#loading-state
         useInitialLoading: true,
+        useMutationLoading: true,
       },
     },
     {
