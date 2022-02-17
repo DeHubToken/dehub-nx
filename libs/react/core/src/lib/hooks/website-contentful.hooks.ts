@@ -87,6 +87,9 @@ export const FaqItemFragmentDoc = gql`
 `;
 export const FaqGroupFragmentDoc = gql`
   fragment FaqGroup on FaqGroup {
+    sys {
+      ...Sys
+    }
     name
     faqItemCollection(limit: 50, preview: $isPreview) {
       items {
@@ -94,6 +97,7 @@ export const FaqGroupFragmentDoc = gql`
       }
     }
   }
+  ${SysFragmentDoc}
   ${FaqItemFragmentDoc}
 `;
 export const PageSectionFaQsFragmentDoc = gql`

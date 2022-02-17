@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
 import { AngularFeatureHomeRoutingModule } from './angular-feature-home-routing.module';
 import { AngularFeatureHomeComponent } from './angular-feature-home.component';
@@ -8,7 +9,10 @@ import {
   PageSectionBasicPostComponent,
   PageSectionBasicPostsComponent,
 } from './components/page-section/basic-post';
-import { PageSectionFaQsComponent } from './components/page-section/faqs/page-section-faqs.component';
+import {
+  PageSectionFaqGroupComponent,
+  PageSectionFaQsComponent,
+} from './components/page-section/faqs';
 import {
   PageSectionIconTileComponent,
   PageSectionIconTilesComponent,
@@ -24,6 +28,7 @@ import {
 
     // PrimeNg Modules
     ButtonModule,
+    AccordionModule,
 
     AngularFeatureHomeRoutingModule,
   ],
@@ -36,6 +41,7 @@ import {
     PageSectionIconTilesComponent,
     PageSectionIconTileComponent,
     PageSectionFaQsComponent,
+    PageSectionFaqGroupComponent,
   ],
 })
 export class AngularFeatureHomeModule {}

@@ -3433,6 +3433,7 @@ export type IconTileFragment = {
 export type FaqGroupFragment = {
   __typename?: 'FaqGroup';
   name?: string | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
   faqItemCollection?:
     | {
         __typename?: 'FaqGroupFaqItemCollection';
@@ -3563,6 +3564,7 @@ export type PageSectionFaQsFragment = {
           | {
               __typename?: 'FaqGroup';
               name?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
               faqItemCollection?:
                 | {
                     __typename?: 'FaqGroupFaqItemCollection';
@@ -3684,6 +3686,10 @@ export type PageHomeFragment = {
                       | {
                           __typename?: 'FaqGroup';
                           name?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
                           faqItemCollection?:
                             | {
                                 __typename?: 'FaqGroupFaqItemCollection';
@@ -3871,6 +3877,10 @@ export type PageHomeCollectionQuery = {
                                   | {
                                       __typename?: 'FaqGroup';
                                       name?: string | null | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | null | undefined;
+                                      };
                                       faqItemCollection?:
                                         | {
                                             __typename?: 'FaqGroupFaqItemCollection';
@@ -4151,6 +4161,9 @@ export const FaqItemFragmentDoc = gql`
 `;
 export const FaqGroupFragmentDoc = gql`
   fragment FaqGroup on FaqGroup {
+    sys {
+      ...Sys
+    }
     name
     faqItemCollection(limit: 50, preview: $isPreview) {
       items {
@@ -4158,6 +4171,7 @@ export const FaqGroupFragmentDoc = gql`
       }
     }
   }
+  ${SysFragmentDoc}
   ${FaqItemFragmentDoc}
 `;
 export const PageSectionFaQsFragmentDoc = gql`

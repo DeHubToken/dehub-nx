@@ -24,6 +24,9 @@ fragment IconTile on IconTile {
 }
 
 fragment FaqGroup on FaqGroup {
+  sys {
+    ...Sys
+  }
   name
   faqItemCollection(limit: 50, preview: $isPreview) {
     items {
