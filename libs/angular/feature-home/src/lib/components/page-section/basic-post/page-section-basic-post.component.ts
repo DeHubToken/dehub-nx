@@ -12,7 +12,7 @@ import { BasicPostFragment } from '@dehub/shared/model';
     <ng-container *ngIf="basicPost">
       <div
         [dhbContentfulDraft]="basicPost.sys"
-        class="card image-card shadow-8"
+        class="card image-card shadow-8 mx-4"
       >
         <!-- Main Picture -->
         <ng-container *ngIf="basicPost.mainPicture as mainPicture">
