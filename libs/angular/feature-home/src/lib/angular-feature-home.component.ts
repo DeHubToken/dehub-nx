@@ -12,7 +12,10 @@ import {
   PageSectionFaQsFragment,
   PageSectionIconTilesFragment,
 } from '@dehub/shared/model';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
+import {
+  bounceInLeftOnEnterAnimation,
+  bounceInRightOnEnterAnimation,
+} from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -26,9 +29,12 @@ type PageHomeSectionsItemType =
 @Component({
   template: `
     <div class="grid">
-      <div *ngIf="pageHome$ | async as pageHome" [@bounceInLeft] class="col-12">
-        <h3>{{ pageHome.mainTitle }}</h3>
-        <h4>{{ pageHome.subtitle }}</h4>
+      <div *ngIf="pageHome$ | async as pageHome">
+        <!-- Titles -->
+        <div [@bounceInLeft] class="col-12">
+          <h3>{{ pageHome.mainTitle }}</h3>
+          <h4>{{ pageHome.subtitle }}</h4>
+        </div>
 
         <!-- Page Sections -->
         <ng-container
@@ -58,18 +64,21 @@ type PageHomeSectionsItemType =
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
+  animations: [
+    bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' }),
+    bounceInRightOnEnterAnimation({ anchor: 'bounceInRight', delay: 300 }),
+  ],
 })
 export class AngularFeatureHomeComponent implements OnInit {
   pageHome$?: Observable<PageHomeFragment | undefined>;
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
-    private pageHomeCollection: PageHomeCollectionService
+    private pageHomeCollectionService: PageHomeCollectionService
   ) {}
 
   ngOnInit() {
-    this.pageHome$ = this.pageHomeCollection
+    this.pageHome$ = this.pageHomeCollectionService
       .fetch({
         isPreview: this.env.contentful.isPreview,
       })

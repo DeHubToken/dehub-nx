@@ -1,21 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DemosRoutingModule } from './demos-routing.module';
-import { TeamMemberComponent } from './team/team-member.component';
 import { TeamMemberSkeletonComponent } from './team/team-member-skeleton.component';
+import { TeamMemberComponent } from './team/team-member.component';
 import { TeamComponent } from './team/team.component';
-import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
-
-const angularModules = [CommonModule];
-
-const libModules = [ContentfulDraftDirectiveModule];
-const primeNgModules = [ButtonModule, RippleModule, SkeletonModule];
 
 @NgModule({
-  imports: [angularModules, libModules, primeNgModules, DemosRoutingModule],
+  imports: [
+    // Angular
+    CommonModule,
+
+    // PrimeNg
+    ButtonModule,
+    RippleModule,
+    SkeletonModule,
+
+    // Libs
+    ContentfulDraftDirectiveModule,
+
+    DemosRoutingModule,
+  ],
   declarations: [
     TeamComponent,
     TeamMemberComponent,

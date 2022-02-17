@@ -1,10 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { ButtonModule } from 'primeng/button';
 import { AngularFeatureHomeRoutingModule } from './angular-feature-home-routing.module';
 import { AngularFeatureHomeComponent } from './angular-feature-home.component';
-import { PageSectionBasicPostsComponent } from './components/page-section/page-section-basic-posts.component';
-import { PageSectionFaQsComponent } from './components/page-section/page-section-faqs.component';
-import { PageSectionIconTilesComponent } from './components/page-section/page-section-icon-tiles.component';
+import {
+  PageSectionBasicPostComponent,
+  PageSectionBasicPostsComponent,
+} from './components/page-section/basic-post';
+import { PageSectionFaQsComponent } from './components/page-section/faqs/page-section-faqs.component';
+import { PageSectionIconTilesComponent } from './components/page-section/icon-tile/page-section-icon-tiles.component';
 
 @NgModule({
   imports: [
@@ -12,8 +17,10 @@ import { PageSectionIconTilesComponent } from './components/page-section/page-se
     CommonModule,
 
     // Lib Modules
+    ContentfulDraftDirectiveModule,
 
     // PrimeNg Modules
+    ButtonModule,
 
     AngularFeatureHomeRoutingModule,
   ],
@@ -22,6 +29,7 @@ import { PageSectionIconTilesComponent } from './components/page-section/page-se
 
     // Page Section Components
     PageSectionBasicPostsComponent,
+    PageSectionBasicPostComponent,
     PageSectionIconTilesComponent,
     PageSectionFaQsComponent,
   ],
