@@ -18,6 +18,7 @@ enum NavigationTabMenu {
   Shop = 'shop',
   Learn = 'learn',
   Earn = 'earn',
+  News = 'news',
 }
 
 export const menuItems: MenuItem[] = [
@@ -137,6 +138,13 @@ export const tabMenuItems: MenuItem[] = [
               loadChildren: () =>
                 import('@dehub/angular/feature-learn').then(
                   module => module.AngularFeatureLearnModule
+                ),
+            },
+            {
+              path: NavigationTabMenu.News,
+              loadChildren: () =>
+                import('@dehub/angular/feature-news').then(
+                  module => module.AngularFeatureNewsModule
                 ),
             },
             {

@@ -36,6 +36,7 @@ import { BasicPostFragment } from '@dehub/shared/model';
           <!-- Read More -->
           <p-button
             label="Read More"
+            [routerLink]="['/news/' + basicPost.slug]"
             styleClass="p-button-link p-mr-2"
           ></p-button>
         </div>

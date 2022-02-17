@@ -111,7 +111,6 @@ import { environment } from '../../../../environments/environment';
       </div>
     </div>
   `,
-  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' }),
