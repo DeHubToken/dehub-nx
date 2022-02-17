@@ -14,8 +14,8 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 @Component({
   selector: 'dhb-page-section-icon-tiles',
   template: `
-    <div *ngIf="section">
-      <h3 [@fadeInUp] class="col-12">{{ section.title }}</h3>
+    <div *ngIf="section" class="col-12">
+      <h3 [@fadeInUp]>{{ section.title }}</h3>
 
       <!-- Icon Tiles -->
       <div class="grid">

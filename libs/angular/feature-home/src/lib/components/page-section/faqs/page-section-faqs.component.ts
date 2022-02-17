@@ -14,20 +14,19 @@ import {
 @Component({
   selector: 'dhb-page-section-faqs',
   template: `
-    <div class="grid">
-      <div *ngIf="section">
-        <h3 [@bounceInRight] class="col-12">{{ section.title }}</h3>
+    <div *ngIf="section" class="col-12">
+      <h3 [@bounceInRight]>{{ section.title }}</h3>
 
-        <!-- Faq Groups -->
-        <div class="grid">
-          <div
-            *ngFor="let faqGroup of faqGroups; let i = index"
-            [@bounceInUp]="{ value: '', params: { delay: i * 100 } }"
-          >
-            <dhb-page-section-faq-group
-              [faqGroup]="faqGroup"
-            ></dhb-page-section-faq-group>
-          </div>
+      <!-- Faq Groups -->
+      <div class="grid">
+        <div
+          *ngFor="let faqGroup of faqGroups; let i = index"
+          [@bounceInUp]="{ value: '', params: { delay: i * 100 } }"
+          class="col-12 md:col-6"
+        >
+          <dhb-page-section-faq-group
+            [faqGroup]="faqGroup"
+          ></dhb-page-section-faq-group>
         </div>
       </div>
     </div>

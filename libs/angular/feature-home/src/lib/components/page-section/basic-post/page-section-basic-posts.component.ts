@@ -14,8 +14,8 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
 @Component({
   selector: 'dhb-page-section-basic-posts',
   template: `
-    <div *ngIf="section">
-      <h3 [@bounceInRight] class="col-12">{{ section.title }}</h3>
+    <div *ngIf="section" class="col-12">
+      <h3 [@bounceInRight]>{{ section.title }}</h3>
 
       <!-- Basic Posts -->
       <div class="grid">
