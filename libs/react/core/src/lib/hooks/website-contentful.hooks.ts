@@ -144,6 +144,25 @@ export const PageHomeFragmentDoc = gql`
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
 `;
+export const PageLearnFragmentDoc = gql`
+  fragment PageLearn on PageLearn {
+    sys {
+      id
+    }
+    mainTitle
+    subtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+      }
+    }
+  }
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+`;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
     sys {
@@ -295,6 +314,67 @@ export type PageHomeCollectionLazyQueryHookResult = ReturnType<
 export type PageHomeCollectionQueryResult = Apollo.QueryResult<
   models.PageHomeCollectionQuery,
   models.PageHomeCollectionQueryVariables
+>;
+export const PageLearnCollectionDocument = gql`
+  query pageLearnCollection($isPreview: Boolean = false) {
+    pageLearnCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageLearn
+      }
+    }
+  }
+  ${PageLearnFragmentDoc}
+`;
+
+/**
+ * __usePageLearnCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageLearnCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageLearnCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageLearnCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageLearnCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageLearnCollectionQuery,
+    models.PageLearnCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageLearnCollectionQuery,
+    models.PageLearnCollectionQueryVariables
+  >(PageLearnCollectionDocument, options);
+}
+export function usePageLearnCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageLearnCollectionQuery,
+    models.PageLearnCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageLearnCollectionQuery,
+    models.PageLearnCollectionQueryVariables
+  >(PageLearnCollectionDocument, options);
+}
+export type PageLearnCollectionQueryHookResult = ReturnType<
+  typeof usePageLearnCollectionQuery
+>;
+export type PageLearnCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageLearnCollectionLazyQuery
+>;
+export type PageLearnCollectionQueryResult = Apollo.QueryResult<
+  models.PageLearnCollectionQuery,
+  models.PageLearnCollectionQueryVariables
 >;
 export const TeamMembersDocument = gql`
   query teamMembers($isPreview: Boolean = false) {

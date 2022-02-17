@@ -3636,6 +3636,163 @@ export type PageHomeFragment = {
     | undefined;
 };
 
+export type PageLearnFragment = {
+  __typename?: 'PageLearn';
+  mainTitle?: string | null | undefined;
+  subtitle?: string | null | undefined;
+  sys: { __typename?: 'Sys'; id: string };
+  sectionsCollection?:
+    | {
+        __typename?: 'PageLearnSectionsCollection';
+        items: Array<
+          | {
+              __typename: 'PageSectionBasicPosts';
+              title?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'BasicPost';
+                          title?: string | null | undefined;
+                          summary?: string | null | undefined;
+                          slug?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                          mainPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | null | undefined;
+                                url?: string | null | undefined;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined
+                    >;
+                  }
+                | null
+                | undefined;
+              postsByCategory?:
+                | {
+                    __typename?: 'BasicPostCategory';
+                    linkedFrom?:
+                      | {
+                          __typename?: 'BasicPostCategoryLinkingCollections';
+                          basicPostCollection?:
+                            | {
+                                __typename?: 'BasicPostCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'BasicPost';
+                                      title?: string | null | undefined;
+                                      summary?: string | null | undefined;
+                                      slug?: string | null | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | null | undefined;
+                                      };
+                                      mainPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | null | undefined;
+                                            url?: string | null | undefined;
+                                          }
+                                        | null
+                                        | undefined;
+                                    }
+                                  | null
+                                  | undefined
+                                >;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined;
+                  }
+                | null
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionFaQs';
+              title?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+              handpickedFaqGroupsCollection?:
+                | {
+                    __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FaqGroup';
+                          name?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                          faqItemCollection?:
+                            | {
+                                __typename?: 'FaqGroupFaqItemCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FaqItem';
+                                      question?: string | null | undefined;
+                                      answer?: string | null | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | null | undefined;
+                                      };
+                                    }
+                                  | null
+                                  | undefined
+                                >;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined
+                    >;
+                  }
+                | null
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionIconTiles';
+              title?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+              handpickedIconTilesCollection?:
+                | {
+                    __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'IconTile';
+                          icon?: string | null | undefined;
+                          title?: string | null | undefined;
+                          description?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                        }
+                      | null
+                      | undefined
+                    >;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
 export type PageSectionBasicPostsFragment = {
   __typename: 'PageSectionBasicPosts';
   title?: string | null | undefined;
@@ -4064,6 +4221,216 @@ export type PageHomeCollectionQuery = {
     | undefined;
 };
 
+export type PageLearnCollectionQueryVariables = Exact<{
+  isPreview?: Maybe<Scalars['Boolean']>;
+}>;
+
+export type PageLearnCollectionQuery = {
+  __typename?: 'Query';
+  pageLearnCollection?:
+    | {
+        __typename?: 'PageLearnCollection';
+        items: Array<
+          | {
+              __typename?: 'PageLearn';
+              mainTitle?: string | null | undefined;
+              subtitle?: string | null | undefined;
+              sys: { __typename?: 'Sys'; id: string };
+              sectionsCollection?:
+                | {
+                    __typename?: 'PageLearnSectionsCollection';
+                    items: Array<
+                      | {
+                          __typename: 'PageSectionBasicPosts';
+                          title?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'BasicPost';
+                                      title?: string | null | undefined;
+                                      summary?: string | null | undefined;
+                                      slug?: string | null | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | null | undefined;
+                                      };
+                                      mainPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | null | undefined;
+                                            url?: string | null | undefined;
+                                          }
+                                        | null
+                                        | undefined;
+                                    }
+                                  | null
+                                  | undefined
+                                >;
+                              }
+                            | null
+                            | undefined;
+                          postsByCategory?:
+                            | {
+                                __typename?: 'BasicPostCategory';
+                                linkedFrom?:
+                                  | {
+                                      __typename?: 'BasicPostCategoryLinkingCollections';
+                                      basicPostCollection?:
+                                        | {
+                                            __typename?: 'BasicPostCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'BasicPost';
+                                                  title?:
+                                                    | string
+                                                    | null
+                                                    | undefined;
+                                                  summary?:
+                                                    | string
+                                                    | null
+                                                    | undefined;
+                                                  slug?:
+                                                    | string
+                                                    | null
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | null
+                                                      | undefined;
+                                                  };
+                                                  mainPicture?:
+                                                    | {
+                                                        __typename?: 'Asset';
+                                                        title?:
+                                                          | string
+                                                          | null
+                                                          | undefined;
+                                                        url?:
+                                                          | string
+                                                          | null
+                                                          | undefined;
+                                                      }
+                                                    | null
+                                                    | undefined;
+                                                }
+                                              | null
+                                              | undefined
+                                            >;
+                                          }
+                                        | null
+                                        | undefined;
+                                    }
+                                  | null
+                                  | undefined;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionFaQs';
+                          title?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                          handpickedFaqGroupsCollection?:
+                            | {
+                                __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FaqGroup';
+                                      name?: string | null | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | null | undefined;
+                                      };
+                                      faqItemCollection?:
+                                        | {
+                                            __typename?: 'FaqGroupFaqItemCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'FaqItem';
+                                                  question?:
+                                                    | string
+                                                    | null
+                                                    | undefined;
+                                                  answer?:
+                                                    | string
+                                                    | null
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | null
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | null
+                                              | undefined
+                                            >;
+                                          }
+                                        | null
+                                        | undefined;
+                                    }
+                                  | null
+                                  | undefined
+                                >;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionIconTiles';
+                          title?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                          handpickedIconTilesCollection?:
+                            | {
+                                __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'IconTile';
+                                      icon?: string | null | undefined;
+                                      title?: string | null | undefined;
+                                      description?: string | null | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | null | undefined;
+                                      };
+                                    }
+                                  | null
+                                  | undefined
+                                >;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined
+                    >;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
 export type TeamMembersQueryVariables = Exact<{
   isPreview?: Maybe<Scalars['Boolean']>;
 }>;
@@ -4276,6 +4643,25 @@ export const PageHomeFragmentDoc = gql`
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
 `;
+export const PageLearnFragmentDoc = gql`
+  fragment PageLearn on PageLearn {
+    sys {
+      id
+    }
+    mainTitle
+    subtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+      }
+    }
+  }
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+`;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
     sys {
@@ -4324,6 +4710,16 @@ export const PageHomeCollectionDocument = gql`
     }
   }
   ${PageHomeFragmentDoc}
+`;
+export const PageLearnCollectionDocument = gql`
+  query pageLearnCollection($isPreview: Boolean = false) {
+    pageLearnCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageLearn
+      }
+    }
+  }
+  ${PageLearnFragmentDoc}
 `;
 export const TeamMembersDocument = gql`
   query teamMembers($isPreview: Boolean = false) {
@@ -4401,6 +4797,20 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'pageHomeCollection'
+      );
+    },
+    pageLearnCollection(
+      variables?: PageLearnCollectionQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<PageLearnCollectionQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<PageLearnCollectionQuery>(
+            PageLearnCollectionDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'pageLearnCollection'
       );
     },
     teamMembers(

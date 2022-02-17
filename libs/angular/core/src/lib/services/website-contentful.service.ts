@@ -36,6 +36,20 @@ export class PageHomeCollectionService extends Apollo.Query<
 @Injectable({
   providedIn: GraphQLModule,
 })
+export class PageLearnCollectionService extends Apollo.Query<
+  models.PageLearnCollectionQuery,
+  models.PageLearnCollectionQueryVariables
+> {
+  document = models.PageLearnCollectionDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
 export class TeamMembersService extends Apollo.Query<
   models.TeamMembersQuery,
   models.TeamMembersQueryVariables
