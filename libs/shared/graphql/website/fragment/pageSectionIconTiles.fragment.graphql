@@ -1,0 +1,12 @@
+fragment PageSectionIconTiles on PageSectionIconTiles {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
+    items {
+      ...IconTile
+    }
+  }
+}

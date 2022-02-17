@@ -3401,11 +3401,6 @@ export interface CfTournamentSeriesNestedFilter {
   title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
-export type SysFragment = {
-  __typename?: 'Sys';
-  publishedAt?: any | null | undefined;
-};
-
 export type BasicPostFragment = {
   __typename?: 'BasicPost';
   title?: string | null | undefined;
@@ -3422,12 +3417,9 @@ export type BasicPostFragment = {
     | undefined;
 };
 
-export type IconTileFragment = {
-  __typename?: 'IconTile';
-  icon?: string | null | undefined;
-  title?: string | null | undefined;
-  description?: string | null | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+export type SysFragment = {
+  __typename?: 'Sys';
+  publishedAt?: any | null | undefined;
 };
 
 export type FaqGroupFragment = {
@@ -3459,138 +3451,12 @@ export type FaqItemFragment = {
   sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
 };
 
-export type PageSectionBasicPostsFragment = {
-  __typename: 'PageSectionBasicPosts';
+export type IconTileFragment = {
+  __typename?: 'IconTile';
+  icon?: string | null | undefined;
   title?: string | null | undefined;
+  description?: string | null | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
-  handpickedPostsCollection?:
-    | {
-        __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
-        items: Array<
-          | {
-              __typename?: 'BasicPost';
-              title?: string | null | undefined;
-              summary?: string | null | undefined;
-              slug?: string | null | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
-              mainPicture?:
-                | {
-                    __typename?: 'Asset';
-                    title?: string | null | undefined;
-                    url?: string | null | undefined;
-                  }
-                | null
-                | undefined;
-            }
-          | null
-          | undefined
-        >;
-      }
-    | null
-    | undefined;
-  postsByCategory?:
-    | {
-        __typename?: 'BasicPostCategory';
-        linkedFrom?:
-          | {
-              __typename?: 'BasicPostCategoryLinkingCollections';
-              basicPostCollection?:
-                | {
-                    __typename?: 'BasicPostCollection';
-                    items: Array<
-                      | {
-                          __typename?: 'BasicPost';
-                          title?: string | null | undefined;
-                          summary?: string | null | undefined;
-                          slug?: string | null | undefined;
-                          sys: {
-                            __typename?: 'Sys';
-                            publishedAt?: any | null | undefined;
-                          };
-                          mainPicture?:
-                            | {
-                                __typename?: 'Asset';
-                                title?: string | null | undefined;
-                                url?: string | null | undefined;
-                              }
-                            | null
-                            | undefined;
-                        }
-                      | null
-                      | undefined
-                    >;
-                  }
-                | null
-                | undefined;
-            }
-          | null
-          | undefined;
-      }
-    | null
-    | undefined;
-};
-
-export type PageSectionIconTilesFragment = {
-  __typename: 'PageSectionIconTiles';
-  title?: string | null | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
-  handpickedIconTilesCollection?:
-    | {
-        __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
-        items: Array<
-          | {
-              __typename?: 'IconTile';
-              icon?: string | null | undefined;
-              title?: string | null | undefined;
-              description?: string | null | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
-            }
-          | null
-          | undefined
-        >;
-      }
-    | null
-    | undefined;
-};
-
-export type PageSectionFaQsFragment = {
-  __typename: 'PageSectionFaQs';
-  title?: string | null | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
-  handpickedFaqGroupsCollection?:
-    | {
-        __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
-        items: Array<
-          | {
-              __typename?: 'FaqGroup';
-              name?: string | null | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
-              faqItemCollection?:
-                | {
-                    __typename?: 'FaqGroupFaqItemCollection';
-                    items: Array<
-                      | {
-                          __typename?: 'FaqItem';
-                          question?: string | null | undefined;
-                          answer?: string | null | undefined;
-                          sys: {
-                            __typename?: 'Sys';
-                            publishedAt?: any | null | undefined;
-                          };
-                        }
-                      | null
-                      | undefined
-                    >;
-                  }
-                | null
-                | undefined;
-            }
-          | null
-          | undefined
-        >;
-      }
-    | null
-    | undefined;
 };
 
 export type PageHomeFragment = {
@@ -3748,6 +3614,186 @@ export type PageHomeFragment = {
       }
     | null
     | undefined;
+};
+
+export type PageSectionBasicPostsFragment = {
+  __typename: 'PageSectionBasicPosts';
+  title?: string | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  handpickedPostsCollection?:
+    | {
+        __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
+        items: Array<
+          | {
+              __typename?: 'BasicPost';
+              title?: string | null | undefined;
+              summary?: string | null | undefined;
+              slug?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+              mainPicture?:
+                | {
+                    __typename?: 'Asset';
+                    title?: string | null | undefined;
+                    url?: string | null | undefined;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+  postsByCategory?:
+    | {
+        __typename?: 'BasicPostCategory';
+        linkedFrom?:
+          | {
+              __typename?: 'BasicPostCategoryLinkingCollections';
+              basicPostCollection?:
+                | {
+                    __typename?: 'BasicPostCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'BasicPost';
+                          title?: string | null | undefined;
+                          summary?: string | null | undefined;
+                          slug?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                          mainPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | null | undefined;
+                                url?: string | null | undefined;
+                              }
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined
+                    >;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined;
+};
+
+export type PageSectionFaQsFragment = {
+  __typename: 'PageSectionFaQs';
+  title?: string | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  handpickedFaqGroupsCollection?:
+    | {
+        __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
+        items: Array<
+          | {
+              __typename?: 'FaqGroup';
+              name?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+              faqItemCollection?:
+                | {
+                    __typename?: 'FaqGroupFaqItemCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FaqItem';
+                          question?: string | null | undefined;
+                          answer?: string | null | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | null | undefined;
+                          };
+                        }
+                      | null
+                      | undefined
+                    >;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
+export type PageSectionIconTilesFragment = {
+  __typename: 'PageSectionIconTiles';
+  title?: string | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  handpickedIconTilesCollection?:
+    | {
+        __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
+        items: Array<
+          | {
+              __typename?: 'IconTile';
+              icon?: string | null | undefined;
+              title?: string | null | undefined;
+              description?: string | null | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
+export type TournamentFragment = {
+  __typename?: 'Tournament';
+  title?: string | null | undefined;
+  date?: any | null | undefined;
+  badge?: string | null | undefined;
+  callToActionButtonLabel?: string | null | undefined;
+  callToActionButtonLink?: string | null | undefined;
+  featured?: boolean | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  coverImage?:
+    | { __typename?: 'Asset'; url?: string | null | undefined }
+    | null
+    | undefined;
+  description?:
+    | { __typename?: 'TournamentDescription'; json: any }
+    | null
+    | undefined;
+};
+
+export type TournamentCollectionFragment = {
+  __typename?: 'TournamentCollection';
+  total: number;
+  items: Array<
+    | {
+        __typename?: 'Tournament';
+        title?: string | null | undefined;
+        date?: any | null | undefined;
+        badge?: string | null | undefined;
+        callToActionButtonLabel?: string | null | undefined;
+        callToActionButtonLink?: string | null | undefined;
+        featured?: boolean | null | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+        coverImage?:
+          | { __typename?: 'Asset'; url?: string | null | undefined }
+          | null
+          | undefined;
+        description?:
+          | { __typename?: 'TournamentDescription'; json: any }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined
+  >;
 };
 
 export type PageHomeCollectionQueryVariables = Exact<{
@@ -3990,52 +4036,6 @@ export type TeamMembersQuery = {
       }
     | null
     | undefined;
-};
-
-export type TournamentFragment = {
-  __typename?: 'Tournament';
-  title?: string | null | undefined;
-  date?: any | null | undefined;
-  badge?: string | null | undefined;
-  callToActionButtonLabel?: string | null | undefined;
-  callToActionButtonLink?: string | null | undefined;
-  featured?: boolean | null | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
-  coverImage?:
-    | { __typename?: 'Asset'; url?: string | null | undefined }
-    | null
-    | undefined;
-  description?:
-    | { __typename?: 'TournamentDescription'; json: any }
-    | null
-    | undefined;
-};
-
-export type TournamentCollectionFragment = {
-  __typename?: 'TournamentCollection';
-  total: number;
-  items: Array<
-    | {
-        __typename?: 'Tournament';
-        title?: string | null | undefined;
-        date?: any | null | undefined;
-        badge?: string | null | undefined;
-        callToActionButtonLabel?: string | null | undefined;
-        callToActionButtonLink?: string | null | undefined;
-        featured?: boolean | null | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
-        coverImage?:
-          | { __typename?: 'Asset'; url?: string | null | undefined }
-          | null
-          | undefined;
-        description?:
-          | { __typename?: 'TournamentDescription'; json: any }
-          | null
-          | undefined;
-      }
-    | null
-    | undefined
-  >;
 };
 
 export type TournamentsQueryVariables = Exact<{

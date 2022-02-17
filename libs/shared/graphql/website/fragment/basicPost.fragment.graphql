@@ -1,0 +1,12 @@
+fragment BasicPost on BasicPost {
+  sys {
+    ...Sys
+  }
+  title
+  mainPicture {
+    title
+    url
+  }
+  summary
+  slug
+}
