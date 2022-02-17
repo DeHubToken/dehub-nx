@@ -179,6 +179,7 @@ export interface AssetLinkingCollections {
   __typename?: 'AssetLinkingCollections';
   basicPostCollection?: Maybe<BasicPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  featurePostCollection?: Maybe<FeaturePostCollection>;
   ppvCollection?: Maybe<PpvCollection>;
   ppvNftSliderPostCollection?: Maybe<PpvNftSliderPostCollection>;
   ppvSliderPostCollection?: Maybe<PpvSliderPostCollection>;
@@ -196,6 +197,13 @@ export interface AssetLinkingCollectionsBasicPostCollectionArgs {
 }
 
 export interface AssetLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface AssetLinkingCollectionsFeaturePostCollectionArgs {
   limit?: Maybe<Scalars['Int']>;
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -735,8 +743,6 @@ export interface FaqItemLinkingCollectionsFaqCollectionCollectionArgs {
 }
 
 export enum FaqItemOrder {
-  AnswerAsc = 'answer_ASC',
-  AnswerDesc = 'answer_DESC',
   QuestionAsc = 'question_ASC',
   QuestionDesc = 'question_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -747,6 +753,144 @@ export enum FaqItemOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePost extends Entry {
+  __typename?: 'FeaturePost';
+  callToActionButtonLabel?: Maybe<Scalars['String']>;
+  callToActionUrl?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<FeaturePostLinkingCollections>;
+  picture?: Maybe<Asset>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+  videoEmbedCode?: Maybe<Scalars['String']>;
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePostCallToActionButtonLabelArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePostCallToActionUrlArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePostDescriptionArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePostLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePostPictureArgs {
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePostTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePostVideoEmbedCodeArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface FeaturePostCollection {
+  __typename?: 'FeaturePostCollection';
+  items: Array<Maybe<FeaturePost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface FeaturePostFilter {
+  AND?: Maybe<Array<Maybe<FeaturePostFilter>>>;
+  OR?: Maybe<Array<Maybe<FeaturePostFilter>>>;
+  callToActionButtonLabel?: Maybe<Scalars['String']>;
+  callToActionButtonLabel_contains?: Maybe<Scalars['String']>;
+  callToActionButtonLabel_exists?: Maybe<Scalars['Boolean']>;
+  callToActionButtonLabel_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  callToActionButtonLabel_not?: Maybe<Scalars['String']>;
+  callToActionButtonLabel_not_contains?: Maybe<Scalars['String']>;
+  callToActionButtonLabel_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  callToActionUrl?: Maybe<Scalars['String']>;
+  callToActionUrl_contains?: Maybe<Scalars['String']>;
+  callToActionUrl_exists?: Maybe<Scalars['Boolean']>;
+  callToActionUrl_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  callToActionUrl_not?: Maybe<Scalars['String']>;
+  callToActionUrl_not_contains?: Maybe<Scalars['String']>;
+  callToActionUrl_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  description?: Maybe<Scalars['String']>;
+  description_contains?: Maybe<Scalars['String']>;
+  description_exists?: Maybe<Scalars['Boolean']>;
+  description_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  description_not?: Maybe<Scalars['String']>;
+  description_not_contains?: Maybe<Scalars['String']>;
+  description_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  picture_exists?: Maybe<Scalars['Boolean']>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  videoEmbedCode?: Maybe<Scalars['String']>;
+  videoEmbedCode_contains?: Maybe<Scalars['String']>;
+  videoEmbedCode_exists?: Maybe<Scalars['Boolean']>;
+  videoEmbedCode_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  videoEmbedCode_not?: Maybe<Scalars['String']>;
+  videoEmbedCode_not_contains?: Maybe<Scalars['String']>;
+  videoEmbedCode_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+export interface FeaturePostLinkingCollections {
+  __typename?: 'FeaturePostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageSectionFeaturePostsCollection?: Maybe<PageSectionFeaturePostsCollection>;
+}
+
+export interface FeaturePostLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export interface FeaturePostLinkingCollectionsPageSectionFeaturePostsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum FeaturePostOrder {
+  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
+  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
+  CallToActionUrlAsc = 'callToActionUrl_ASC',
+  CallToActionUrlDesc = 'callToActionUrl_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 /** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
@@ -1365,6 +1509,90 @@ export enum PageSectionFaQsOrder {
   TitleDesc = 'title_DESC',
 }
 
+/** Page section with Feature Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFeaturePosts) */
+export interface PageSectionFeaturePosts extends Entry {
+  __typename?: 'PageSectionFeaturePosts';
+  contentfulMetadata: ContentfulMetadata;
+  handpickedPostsCollection?: Maybe<PageSectionFeaturePostsHandpickedPostsCollection>;
+  linkedFrom?: Maybe<PageSectionFeaturePostsLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Page section with Feature Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFeaturePosts) */
+export interface PageSectionFeaturePostsHandpickedPostsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+/** Page section with Feature Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFeaturePosts) */
+export interface PageSectionFeaturePostsLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+/** Page section with Feature Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFeaturePosts) */
+export interface PageSectionFeaturePostsTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface PageSectionFeaturePostsCollection {
+  __typename?: 'PageSectionFeaturePostsCollection';
+  items: Array<Maybe<PageSectionFeaturePosts>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionFeaturePostsFilter {
+  AND?: Maybe<Array<Maybe<PageSectionFeaturePostsFilter>>>;
+  OR?: Maybe<Array<Maybe<PageSectionFeaturePostsFilter>>>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  handpickedPostsCollection_exists?: Maybe<Scalars['Boolean']>;
+  sys?: Maybe<SysFilter>;
+  title?: Maybe<Scalars['String']>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+export interface PageSectionFeaturePostsHandpickedPostsCollection {
+  __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+  items: Array<Maybe<FeaturePost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionFeaturePostsLinkingCollections {
+  __typename?: 'PageSectionFeaturePostsLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface PageSectionFeaturePostsLinkingCollectionsEntryCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+}
+
+export enum PageSectionFeaturePostsOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 /** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
 export interface PageSectionIconTiles extends Entry {
   __typename?: 'PageSectionIconTiles';
@@ -1945,6 +2173,8 @@ export interface Query {
   faqCollectionCollection?: Maybe<FaqCollectionCollection>;
   faqItem?: Maybe<FaqItem>;
   faqItemCollection?: Maybe<FaqItemCollection>;
+  featurePost?: Maybe<FeaturePost>;
+  featurePostCollection?: Maybe<FeaturePostCollection>;
   iconTile?: Maybe<IconTile>;
   iconTileCollection?: Maybe<IconTileCollection>;
   pageHome?: Maybe<PageHome>;
@@ -1955,6 +2185,8 @@ export interface Query {
   pageSectionBasicPostsCollection?: Maybe<PageSectionBasicPostsCollection>;
   pageSectionFaQs?: Maybe<PageSectionFaQs>;
   pageSectionFaQsCollection?: Maybe<PageSectionFaQsCollection>;
+  pageSectionFeaturePosts?: Maybe<PageSectionFeaturePosts>;
+  pageSectionFeaturePostsCollection?: Maybe<PageSectionFeaturePostsCollection>;
   pageSectionIconTiles?: Maybe<PageSectionIconTiles>;
   pageSectionIconTilesCollection?: Maybe<PageSectionIconTilesCollection>;
   ppv?: Maybe<Ppv>;
@@ -2061,6 +2293,21 @@ export interface QueryFaqItemCollectionArgs {
   where?: Maybe<FaqItemFilter>;
 }
 
+export interface QueryFeaturePostArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryFeaturePostCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<FeaturePostOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<FeaturePostFilter>;
+}
+
 export interface QueryIconTileArgs {
   id: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
@@ -2134,6 +2381,21 @@ export interface QueryPageSectionFaQsCollectionArgs {
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
   where?: Maybe<PageSectionFaQsFilter>;
+}
+
+export interface QueryPageSectionFeaturePostsArgs {
+  id: Scalars['String'];
+  locale?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionFeaturePostsCollectionArgs {
+  limit?: Maybe<Scalars['Int']>;
+  locale?: Maybe<Scalars['String']>;
+  order?: Maybe<Array<Maybe<PageSectionFeaturePostsOrder>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<PageSectionFeaturePostsFilter>;
 }
 
 export interface QueryPageSectionIconTilesArgs {
