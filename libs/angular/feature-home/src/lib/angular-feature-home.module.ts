@@ -9,7 +9,10 @@ import {
   PageSectionBasicPostsComponent,
 } from './components/page-section/basic-post';
 import { PageSectionFaQsComponent } from './components/page-section/faqs/page-section-faqs.component';
-import { PageSectionIconTilesComponent } from './components/page-section/icon-tile/page-section-icon-tiles.component';
+import {
+  PageSectionIconTileComponent,
+  PageSectionIconTilesComponent,
+} from './components/page-section/icon-tile';
 
 @NgModule({
   imports: [
@@ -31,6 +34,7 @@ import { PageSectionIconTilesComponent } from './components/page-section/icon-ti
     PageSectionBasicPostsComponent,
     PageSectionBasicPostComponent,
     PageSectionIconTilesComponent,
+    PageSectionIconTileComponent,
     PageSectionFaQsComponent,
   ],
 })

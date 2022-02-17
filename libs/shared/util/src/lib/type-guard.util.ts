@@ -37,6 +37,7 @@ export function isString(arg: unknown): arg is string {
 export function isUndefined(obj: unknown): obj is undefined {
   return typeof obj === 'undefined';
 }
+
 export function isNotUndefined<T>(obj: T): obj is T {
   return typeof obj !== 'undefined';
 }
