@@ -23,6 +23,7 @@ export class AppTopBarComponent implements OnDestroy {
 
   path = this.env.baseUrl;
   chainId = this.env.web3.chainId;
+  isDev = this.env.env === 'dev';
 
   constructor(
     @Inject(EnvToken) private env: Env,
