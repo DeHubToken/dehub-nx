@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
+import { CarouselModule } from 'primeng/carousel';
 import { AngularFeatureHomeRoutingModule } from './angular-feature-home-routing.module';
 import { AngularFeatureHomeComponent } from './angular-feature-home.component';
 import {
@@ -29,6 +30,7 @@ import {
     // PrimeNg Modules
     ButtonModule,
     AccordionModule,
+    CarouselModule,
 
     AngularFeatureHomeRoutingModule,
   ],

@@ -18,16 +18,21 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
       <h3 [@bounceInRight]>{{ section.title }}</h3>
 
       <!-- Basic Posts -->
-      <div class="grid">
-        <div
-          *ngFor="let basicPost of basicPosts; let i = index"
-          [@bounceInRight]="{ value: '', params: { delay: i * 100 } }"
-          class="col-12 md:col-3"
+      <div [@bounceInRight]>
+        <p-carousel
+          *ngIf="basicPosts.length > 0"
+          [value]="basicPosts"
+          [circular]="basicPosts.length > 1"
+          [autoplayInterval]="3000"
+          [numVisible]="5"
+          [numScroll]="1"
         >
-          <dhb-page-section-basic-post
-            [basicPost]="basicPost"
-          ></dhb-page-section-basic-post>
-        </div>
+          <ng-template let-basicPost pTemplate="item">
+            <dhb-page-section-basic-post
+              [basicPost]="basicPost"
+            ></dhb-page-section-basic-post>
+          </ng-template>
+        </p-carousel>
       </div>
     </div>
   `,
