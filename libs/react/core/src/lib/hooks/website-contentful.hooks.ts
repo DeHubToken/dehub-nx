@@ -23,6 +23,15 @@ export const BasicPostFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const BasicPostDetailFragmentDoc = gql`
+  fragment BasicPostDetail on BasicPost {
+    ...BasicPost
+    description {
+      json
+    }
+  }
+  ${BasicPostFragmentDoc}
+`;
 export const PageSectionBasicPostsFragmentDoc = gql`
   fragment PageSectionBasicPosts on PageSectionBasicPosts {
     __typename
@@ -164,6 +173,68 @@ export const TournamentCollectionFragmentDoc = gql`
   }
   ${TournamentFragmentDoc}
 `;
+export const BasicPostCollectionBySlugDocument = gql`
+  query basicPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+    basicPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+      items {
+        ...BasicPostDetail
+      }
+    }
+  }
+  ${BasicPostDetailFragmentDoc}
+`;
+
+/**
+ * __useBasicPostCollectionBySlugQuery__
+ *
+ * To run a query within a React component, call `useBasicPostCollectionBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBasicPostCollectionBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBasicPostCollectionBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useBasicPostCollectionBySlugQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.BasicPostCollectionBySlugQuery,
+    models.BasicPostCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.BasicPostCollectionBySlugQuery,
+    models.BasicPostCollectionBySlugQueryVariables
+  >(BasicPostCollectionBySlugDocument, options);
+}
+export function useBasicPostCollectionBySlugLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.BasicPostCollectionBySlugQuery,
+    models.BasicPostCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.BasicPostCollectionBySlugQuery,
+    models.BasicPostCollectionBySlugQueryVariables
+  >(BasicPostCollectionBySlugDocument, options);
+}
+export type BasicPostCollectionBySlugQueryHookResult = ReturnType<
+  typeof useBasicPostCollectionBySlugQuery
+>;
+export type BasicPostCollectionBySlugLazyQueryHookResult = ReturnType<
+  typeof useBasicPostCollectionBySlugLazyQuery
+>;
+export type BasicPostCollectionBySlugQueryResult = Apollo.QueryResult<
+  models.BasicPostCollectionBySlugQuery,
+  models.BasicPostCollectionBySlugQueryVariables
+>;
 export const PageHomeCollectionDocument = gql`
   query pageHomeCollection($isPreview: Boolean = false) {
     pageHomeCollection(limit: 2, preview: $isPreview) {

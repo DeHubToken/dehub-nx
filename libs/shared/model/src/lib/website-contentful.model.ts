@@ -3417,6 +3417,26 @@ export type BasicPostFragment = {
     | undefined;
 };
 
+export type BasicPostDetailFragment = {
+  __typename?: 'BasicPost';
+  title?: string | null | undefined;
+  summary?: string | null | undefined;
+  slug?: string | null | undefined;
+  description?:
+    | { __typename?: 'BasicPostDescription'; json: any }
+    | null
+    | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  mainPicture?:
+    | {
+        __typename?: 'Asset';
+        title?: string | null | undefined;
+        url?: string | null | undefined;
+      }
+    | null
+    | undefined;
+};
+
 export type SysFragment = {
   __typename?: 'Sys';
   publishedAt?: any | null | undefined;
@@ -3796,6 +3816,44 @@ export type TournamentCollectionFragment = {
   >;
 };
 
+export type BasicPostCollectionBySlugQueryVariables = Exact<{
+  slug?: Maybe<Scalars['String']>;
+  isPreview?: Maybe<Scalars['Boolean']>;
+}>;
+
+export type BasicPostCollectionBySlugQuery = {
+  __typename?: 'Query';
+  basicPostCollection?:
+    | {
+        __typename?: 'BasicPostCollection';
+        items: Array<
+          | {
+              __typename?: 'BasicPost';
+              title?: string | null | undefined;
+              summary?: string | null | undefined;
+              slug?: string | null | undefined;
+              description?:
+                | { __typename?: 'BasicPostDescription'; json: any }
+                | null
+                | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+              mainPicture?:
+                | {
+                    __typename?: 'Asset';
+                    title?: string | null | undefined;
+                    url?: string | null | undefined;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >;
+      }
+    | null
+    | undefined;
+};
+
 export type PageHomeCollectionQueryVariables = Exact<{
   isPreview?: Maybe<Scalars['Boolean']>;
 }>;
@@ -4097,6 +4155,15 @@ export const BasicPostFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const BasicPostDetailFragmentDoc = gql`
+  fragment BasicPostDetail on BasicPost {
+    ...BasicPost
+    description {
+      json
+    }
+  }
+  ${BasicPostFragmentDoc}
+`;
 export const PageSectionBasicPostsFragmentDoc = gql`
   fragment PageSectionBasicPosts on PageSectionBasicPosts {
     __typename
@@ -4238,6 +4305,16 @@ export const TournamentCollectionFragmentDoc = gql`
   }
   ${TournamentFragmentDoc}
 `;
+export const BasicPostCollectionBySlugDocument = gql`
+  query basicPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+    basicPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+      items {
+        ...BasicPostDetail
+      }
+    }
+  }
+  ${BasicPostDetailFragmentDoc}
+`;
 export const PageHomeCollectionDocument = gql`
   query pageHomeCollection($isPreview: Boolean = false) {
     pageHomeCollection(limit: 2, preview: $isPreview) {
@@ -4298,6 +4375,20 @@ export function getSdk(
   withWrapper: SdkFunctionWrapper = defaultWrapper
 ) {
   return {
+    basicPostCollectionBySlug(
+      variables?: BasicPostCollectionBySlugQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<BasicPostCollectionBySlugQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<BasicPostCollectionBySlugQuery>(
+            BasicPostCollectionBySlugDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'basicPostCollectionBySlug'
+      );
+    },
     pageHomeCollection(
       variables?: PageHomeCollectionQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']

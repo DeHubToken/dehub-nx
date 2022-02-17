@@ -10,3 +10,10 @@ fragment BasicPost on BasicPost {
   summary
   slug
 }
+
+fragment BasicPostDetail on BasicPost {
+  ...BasicPost
+  description {
+    json
+  }
+}
