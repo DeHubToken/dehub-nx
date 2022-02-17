@@ -9,39 +9,31 @@ import {
   PageSectionBasicPostsFragment,
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
-import {
-  bounceInRightOnEnterAnimation,
-  fadeInUpOnEnterAnimation,
-} from 'angular-animations';
+import { bounceInRightOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-page-section-basic-posts',
   template: `
-    <div class="grid">
-      <div *ngIf="section">
-        <h3 [@bounceInRight] class="col-12">{{ section.title }}</h3>
+    <div *ngIf="section">
+      <h3 [@bounceInRight] class="col-12">{{ section.title }}</h3>
 
-        <!-- Basic Posts -->
-        <div class="grid">
-          <div
-            *ngFor="let basicPost of basicPosts; let i = index"
-            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-            class="col-12 md:col-3"
-          >
-            <dhb-page-section-basic-post
-              [basicPost]="basicPost"
-            ></dhb-page-section-basic-post>
-          </div>
+      <!-- Basic Posts -->
+      <div class="grid">
+        <div
+          *ngFor="let basicPost of basicPosts; let i = index"
+          [@bounceInRight]="{ value: '', params: { delay: i * 100 } }"
+          class="col-12 md:col-3"
+        >
+          <dhb-page-section-basic-post
+            [basicPost]="basicPost"
+          ></dhb-page-section-basic-post>
         </div>
       </div>
     </div>
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    bounceInRightOnEnterAnimation({ anchor: 'bounceInRight' }),
-    fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' }),
-  ],
+  animations: [bounceInRightOnEnterAnimation({ anchor: 'bounceInRight' })],
 })
 export class PageSectionBasicPostsComponent implements OnInit {
   @Input() section!: PageSectionBasicPostsFragment;
