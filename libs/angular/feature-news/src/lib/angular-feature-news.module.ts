@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { AngularFeatureNewsDetailComponent } from './angular-feature-news-detail.component';
 import { AngularFeatureNewsRoutingModule } from './angular-feature-news-routing.module';
 import { AngularFeatureNewsComponent } from './angular-feature-news.component';
+import { BasicPostDetailComponent } from './components/basic-post-detail.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { AngularFeatureNewsComponent } from './angular-feature-news.component';
   declarations: [
     AngularFeatureNewsComponent,
     AngularFeatureNewsDetailComponent,
+    BasicPostDetailComponent,
   ],
 })
 export class AngularFeatureNewsModule {}

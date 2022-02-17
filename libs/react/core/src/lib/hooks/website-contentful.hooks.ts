@@ -8,8 +8,8 @@ export const SysFragmentDoc = gql`
     publishedAt
   }
 `;
-export const BasicPostFragmentDoc = gql`
-  fragment BasicPost on BasicPost {
+export const BasicPostCommonFragmentDoc = gql`
+  fragment BasicPostCommon on BasicPost {
     sys {
       ...Sys
     }
@@ -18,19 +18,25 @@ export const BasicPostFragmentDoc = gql`
       title
       url
     }
-    summary
-    slug
   }
   ${SysFragmentDoc}
 `;
 export const BasicPostDetailFragmentDoc = gql`
   fragment BasicPostDetail on BasicPost {
-    ...BasicPost
+    ...BasicPostCommon
     description {
       json
     }
   }
-  ${BasicPostFragmentDoc}
+  ${BasicPostCommonFragmentDoc}
+`;
+export const BasicPostFragmentDoc = gql`
+  fragment BasicPost on BasicPost {
+    ...BasicPostCommon
+    summary
+    slug
+  }
+  ${BasicPostCommonFragmentDoc}
 `;
 export const PageSectionBasicPostsFragmentDoc = gql`
   fragment PageSectionBasicPosts on PageSectionBasicPosts {

@@ -3401,11 +3401,25 @@ export interface CfTournamentSeriesNestedFilter {
   title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
-export type BasicPostFragment = {
+export type BasicPostCommonFragment = {
   __typename?: 'BasicPost';
   title?: string | null | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
+  mainPicture?:
+    | {
+        __typename?: 'Asset';
+        title?: string | null | undefined;
+        url?: string | null | undefined;
+      }
+    | null
+    | undefined;
+};
+
+export type BasicPostFragment = {
+  __typename?: 'BasicPost';
   summary?: string | null | undefined;
   slug?: string | null | undefined;
+  title?: string | null | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
   mainPicture?:
     | {
@@ -3420,8 +3434,6 @@ export type BasicPostFragment = {
 export type BasicPostDetailFragment = {
   __typename?: 'BasicPost';
   title?: string | null | undefined;
-  summary?: string | null | undefined;
-  slug?: string | null | undefined;
   description?:
     | { __typename?: 'BasicPostDescription'; json: any }
     | null
@@ -3498,9 +3510,9 @@ export type PageHomeFragment = {
                     items: Array<
                       | {
                           __typename?: 'BasicPost';
-                          title?: string | null | undefined;
                           summary?: string | null | undefined;
                           slug?: string | null | undefined;
+                          title?: string | null | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | null | undefined;
@@ -3532,9 +3544,9 @@ export type PageHomeFragment = {
                                 items: Array<
                                   | {
                                       __typename?: 'BasicPost';
-                                      title?: string | null | undefined;
                                       summary?: string | null | undefined;
                                       slug?: string | null | undefined;
+                                      title?: string | null | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | null | undefined;
@@ -3655,9 +3667,9 @@ export type PageLearnFragment = {
                     items: Array<
                       | {
                           __typename?: 'BasicPost';
-                          title?: string | null | undefined;
                           summary?: string | null | undefined;
                           slug?: string | null | undefined;
+                          title?: string | null | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | null | undefined;
@@ -3689,9 +3701,9 @@ export type PageLearnFragment = {
                                 items: Array<
                                   | {
                                       __typename?: 'BasicPost';
-                                      title?: string | null | undefined;
                                       summary?: string | null | undefined;
                                       slug?: string | null | undefined;
+                                      title?: string | null | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | null | undefined;
@@ -3803,9 +3815,9 @@ export type PageSectionBasicPostsFragment = {
         items: Array<
           | {
               __typename?: 'BasicPost';
-              title?: string | null | undefined;
               summary?: string | null | undefined;
               slug?: string | null | undefined;
+              title?: string | null | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | null | undefined };
               mainPicture?:
                 | {
@@ -3834,9 +3846,9 @@ export type PageSectionBasicPostsFragment = {
                     items: Array<
                       | {
                           __typename?: 'BasicPost';
-                          title?: string | null | undefined;
                           summary?: string | null | undefined;
                           slug?: string | null | undefined;
+                          title?: string | null | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | null | undefined;
@@ -3987,8 +3999,6 @@ export type BasicPostCollectionBySlugQuery = {
           | {
               __typename?: 'BasicPost';
               title?: string | null | undefined;
-              summary?: string | null | undefined;
-              slug?: string | null | undefined;
               description?:
                 | { __typename?: 'BasicPostDescription'; json: any }
                 | null
@@ -4043,9 +4053,9 @@ export type PageHomeCollectionQuery = {
                                 items: Array<
                                   | {
                                       __typename?: 'BasicPost';
-                                      title?: string | null | undefined;
                                       summary?: string | null | undefined;
                                       slug?: string | null | undefined;
+                                      title?: string | null | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | null | undefined;
@@ -4077,15 +4087,15 @@ export type PageHomeCollectionQuery = {
                                             items: Array<
                                               | {
                                                   __typename?: 'BasicPost';
-                                                  title?:
-                                                    | string
-                                                    | null
-                                                    | undefined;
                                                   summary?:
                                                     | string
                                                     | null
                                                     | undefined;
                                                   slug?:
+                                                    | string
+                                                    | null
+                                                    | undefined;
+                                                  title?:
                                                     | string
                                                     | null
                                                     | undefined;
@@ -4253,9 +4263,9 @@ export type PageLearnCollectionQuery = {
                                 items: Array<
                                   | {
                                       __typename?: 'BasicPost';
-                                      title?: string | null | undefined;
                                       summary?: string | null | undefined;
                                       slug?: string | null | undefined;
+                                      title?: string | null | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | null | undefined;
@@ -4287,15 +4297,15 @@ export type PageLearnCollectionQuery = {
                                             items: Array<
                                               | {
                                                   __typename?: 'BasicPost';
-                                                  title?:
-                                                    | string
-                                                    | null
-                                                    | undefined;
                                                   summary?:
                                                     | string
                                                     | null
                                                     | undefined;
                                                   slug?:
+                                                    | string
+                                                    | null
+                                                    | undefined;
+                                                  title?:
                                                     | string
                                                     | null
                                                     | undefined;
@@ -4507,8 +4517,8 @@ export const SysFragmentDoc = gql`
     publishedAt
   }
 `;
-export const BasicPostFragmentDoc = gql`
-  fragment BasicPost on BasicPost {
+export const BasicPostCommonFragmentDoc = gql`
+  fragment BasicPostCommon on BasicPost {
     sys {
       ...Sys
     }
@@ -4517,19 +4527,25 @@ export const BasicPostFragmentDoc = gql`
       title
       url
     }
-    summary
-    slug
   }
   ${SysFragmentDoc}
 `;
 export const BasicPostDetailFragmentDoc = gql`
   fragment BasicPostDetail on BasicPost {
-    ...BasicPost
+    ...BasicPostCommon
     description {
       json
     }
   }
-  ${BasicPostFragmentDoc}
+  ${BasicPostCommonFragmentDoc}
+`;
+export const BasicPostFragmentDoc = gql`
+  fragment BasicPost on BasicPost {
+    ...BasicPostCommon
+    summary
+    slug
+  }
+  ${BasicPostCommonFragmentDoc}
 `;
 export const PageSectionBasicPostsFragmentDoc = gql`
   fragment PageSectionBasicPosts on PageSectionBasicPosts {

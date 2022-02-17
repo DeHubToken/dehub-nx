@@ -1,4 +1,4 @@
-fragment BasicPost on BasicPost {
+fragment BasicPostCommon on BasicPost {
   sys {
     ...Sys
   }
@@ -7,12 +7,16 @@ fragment BasicPost on BasicPost {
     title
     url
   }
+}
+
+fragment BasicPost on BasicPost {
+  ...BasicPostCommon
   summary
   slug
 }
 
 fragment BasicPostDetail on BasicPost {
-  ...BasicPost
+  ...BasicPostCommon
   description {
     json
   }
