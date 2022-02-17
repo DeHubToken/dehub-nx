@@ -140,6 +140,14 @@ $menuBgColor: transparent;
   }
 }
 
+@media (max-width: $mobileBreakpoint) {
+  .layout-wrapper {
+    .layout-topbar {
+      height: 120px;
+    }
+  }
+}
+
 @import 'layout/dhb_typography.scss';
 @import 'widgets/dhb_tabview_layout_styles';
 @import 'widgets/dhb_overview_box_layout_styles';
