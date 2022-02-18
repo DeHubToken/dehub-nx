@@ -2,7 +2,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CoreService, EnvToken } from '@dehub/angular/core';
+import { CoreService, EnvToken, GraphQLModule } from '@dehub/angular/core';
 import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -15,7 +15,7 @@ describe('AppComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [NoopAnimationsModule, RouterTestingModule],
+        imports: [NoopAnimationsModule, RouterTestingModule, GraphQLModule],
         declarations: [
           AppComponent,
           AppMainComponent,
