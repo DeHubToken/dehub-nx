@@ -86,7 +86,7 @@
       "name": "Base Environment",
       "data": {
         "graphQLEndpint": "https://graphql.contentful.com/content/v1/spaces/4jicnfvodfm8",
-        "cpaToken": "HvmEh8YWfWNGKRzTSYDf-tIR93Rs8FjyKkH56c0svgo"
+        "cpaToken": "C__6WRbPa01sIs-K6MAWXGHJkIPTY0aS3_Fg9hGp9xY"
       },
       "dataPropertyOrder": { "&": ["graphQLEndpint", "cpaToken"] },
       "color": null,

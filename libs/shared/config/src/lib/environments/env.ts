@@ -93,8 +93,8 @@ export const defaultSharedEnv: SharedEnv = {
     isPreview: false,
     website: {
       spaceId: '4jicnfvodfm8',
-      cdaToken: 'pmOsfUcVSGtQhB0Qo35kJF9lqL4V5R4yH-xACKCJIw8',
-      cpaToken: 'HvmEh8YWfWNGKRzTSYDf-tIR93Rs8FjyKkH56c0svgo',
+      cdaToken: 'P-LDCxYvG6uzay9AVZP28I3usarvMw2mTPeDGqfxTVI',
+      cpaToken: 'C__6WRbPa01sIs-K6MAWXGHJkIPTY0aS3_Fg9hGp9xY',
     },
   },
 
