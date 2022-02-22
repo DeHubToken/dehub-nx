@@ -6,6 +6,8 @@ import {
 } from '@angular/core';
 import {
   BasicPostFragment,
+  BreakPoint,
+  CarouselResponsiveOptions,
   PageSectionBasicPostsFragment,
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
@@ -24,13 +26,16 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
           [value]="basicPosts"
           [circular]="basicPosts.length > 1"
           [autoplayInterval]="3000"
-          [numVisible]="5"
-          [numScroll]="1"
+          [responsiveOptions]="carouselResponsiveOptions"
+          [numVisible]="carouselResponsiveOptions[0].numVisible"
+          [numScroll]="carouselResponsiveOptions[0].numScroll"
         >
           <ng-template let-basicPost pTemplate="item">
-            <dhb-page-section-basic-post
-              [basicPost]="basicPost"
-            ></dhb-page-section-basic-post>
+            <div class="">
+              <dhb-page-section-basic-post
+                [basicPost]="basicPost"
+              ></dhb-page-section-basic-post>
+            </div>
           </ng-template>
         </p-carousel>
       </div>
@@ -44,6 +49,29 @@ export class PageSectionBasicPostsComponent implements OnInit {
   @Input() section!: PageSectionBasicPostsFragment;
 
   basicPosts: BasicPostFragment[] = [];
+
+  carouselResponsiveOptions: CarouselResponsiveOptions = [
+    {
+      breakpoint: BreakPoint.sm,
+      numVisible: 1,
+      numScroll: 1,
+    },
+    {
+      breakpoint: BreakPoint.md,
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: BreakPoint.lg,
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: BreakPoint.xl,
+      numVisible: 4,
+      numScroll: 1,
+    },
+  ];
 
   constructor() {}
 

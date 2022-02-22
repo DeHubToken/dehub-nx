@@ -16,7 +16,11 @@ import { BasicPostFragment } from '@dehub/shared/model';
       >
         <!-- Main Picture -->
         <ng-container *ngIf="basicPost.mainPicture as mainPicture">
-          <img [src]="mainPicture.url" [alt]="mainPicture.title" />
+          <img
+            [dhbContentfulDraft]="mainPicture.sys"
+            [src]="mainPicture.url"
+            [alt]="mainPicture.title"
+          />
         </ng-container>
 
         <div class="image-content">

@@ -14,7 +14,10 @@ export const BasicPostCommonFragmentDoc = gql`
       ...Sys
     }
     title
-    mainPicture {
+    mainPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
       title
       url
     }
@@ -29,6 +32,42 @@ export const BasicPostDetailFragmentDoc = gql`
     }
   }
   ${BasicPostCommonFragmentDoc}
+`;
+export const FeaturePostFragmentDoc = gql`
+  fragment FeaturePost on FeaturePost {
+    sys {
+      ...Sys
+    }
+    videoUrl
+    picture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    title
+    description
+    callToActionUrl
+    callToActionButtonLabel
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionFeaturePostsFragmentDoc = gql`
+  fragment PageSectionFeaturePosts on PageSectionFeaturePosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...FeaturePost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FeaturePostFragmentDoc}
 `;
 export const BasicPostFragmentDoc = gql`
   fragment BasicPost on BasicPost {
@@ -140,12 +179,14 @@ export const PageHomeFragmentDoc = gql`
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
+        ...PageSectionFeaturePosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
       }
     }
   }
+  ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
@@ -159,12 +200,14 @@ export const PageLearnFragmentDoc = gql`
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
+        ...PageSectionFeaturePosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
       }
     }
   }
+  ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
@@ -174,7 +217,10 @@ export const TournamentFragmentDoc = gql`
     sys {
       ...Sys
     }
-    coverImage {
+    coverImage(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
       url
     }
     title
@@ -391,7 +437,10 @@ export const TeamMembersDocument = gql`
         }
         name
         title
-        avatar {
+        avatar(preview: $isPreview) {
+          sys {
+            ...Sys
+          }
           url
         }
         twitter

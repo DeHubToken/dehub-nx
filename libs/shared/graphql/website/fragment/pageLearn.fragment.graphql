@@ -6,6 +6,7 @@ fragment PageLearn on PageLearn {
   subtitle
   sectionsCollection(limit: 10, preview: $isPreview) {
     items {
+      ...PageSectionFeaturePosts
       ...PageSectionBasicPosts
       ...PageSectionIconTiles
       ...PageSectionFaQs

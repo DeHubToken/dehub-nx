@@ -1199,6 +1199,7 @@ export interface PageHomeSectionsCollection {
 export type PageHomeSectionsItem =
   | PageSectionBasicPosts
   | PageSectionFaQs
+  | PageSectionFeaturePosts
   | PageSectionIconTiles;
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
@@ -1303,6 +1304,7 @@ export interface PageLearnSectionsCollection {
 export type PageLearnSectionsItem =
   | PageSectionBasicPosts
   | PageSectionFaQs
+  | PageSectionFeaturePosts
   | PageSectionIconTiles;
 
 /** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
@@ -1576,9 +1578,25 @@ export interface PageSectionFeaturePostsHandpickedPostsCollection {
 export interface PageSectionFeaturePostsLinkingCollections {
   __typename?: 'PageSectionFeaturePostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
+  pageLearnCollection?: Maybe<PageLearnCollection>;
 }
 
 export interface PageSectionFeaturePostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionFeaturePostsLinkingCollectionsPageHomeCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionFeaturePostsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3421,6 +3439,7 @@ export type BasicPostCommonFragment = {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
       }
     | undefined;
 };
@@ -3436,6 +3455,7 @@ export type BasicPostFragment = {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
       }
     | undefined;
 };
@@ -3450,6 +3470,7 @@ export type BasicPostDetailFragment = {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
       }
     | undefined;
 };
@@ -3481,6 +3502,24 @@ export type FaqItemFragment = {
   question?: string | undefined;
   answer?: string | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+};
+
+export type FeaturePostFragment = {
+  __typename?: 'FeaturePost';
+  videoUrl?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  callToActionUrl?: string | undefined;
+  callToActionButtonLabel?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  picture?:
+    | {
+        __typename?: 'Asset';
+        title?: string | undefined;
+        url?: string | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+      }
+    | undefined;
 };
 
 export type IconTileFragment = {
@@ -3522,6 +3561,10 @@ export type PageHomeFragment = {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
                                 url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
                               }
                             | undefined;
                         }
@@ -3553,6 +3596,10 @@ export type PageHomeFragment = {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
                                             url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
                                           }
                                         | undefined;
                                     }
@@ -3595,6 +3642,42 @@ export type PageHomeFragment = {
                                     }
                                   | undefined
                                 >;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionFeaturePosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FeaturePost';
+                          videoUrl?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
                               }
                             | undefined;
                         }
@@ -3663,6 +3746,10 @@ export type PageLearnFragment = {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
                                 url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
                               }
                             | undefined;
                         }
@@ -3694,6 +3781,10 @@ export type PageLearnFragment = {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
                                             url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
                                           }
                                         | undefined;
                                     }
@@ -3736,6 +3827,42 @@ export type PageLearnFragment = {
                                     }
                                   | undefined
                                 >;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionFeaturePosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FeaturePost';
+                          videoUrl?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
                               }
                             | undefined;
                         }
@@ -3792,6 +3919,7 @@ export type PageSectionBasicPostsFragment = {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
+                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
                   }
                 | undefined;
             }
@@ -3823,6 +3951,10 @@ export type PageSectionBasicPostsFragment = {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
                                 url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
                               }
                             | undefined;
                         }
@@ -3872,6 +4004,37 @@ export type PageSectionFaQsFragment = {
     | undefined;
 };
 
+export type PageSectionFeaturePostsFragment = {
+  __typename: 'PageSectionFeaturePosts';
+  title?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  handpickedPostsCollection?:
+    | {
+        __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+        items: Array<
+          | {
+              __typename?: 'FeaturePost';
+              videoUrl?: string | undefined;
+              title?: string | undefined;
+              description?: string | undefined;
+              callToActionUrl?: string | undefined;
+              callToActionButtonLabel?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              picture?:
+                | {
+                    __typename?: 'Asset';
+                    title?: string | undefined;
+                    url?: string | undefined;
+                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                  }
+                | undefined;
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
 export type PageSectionIconTilesFragment = {
   __typename: 'PageSectionIconTiles';
   title?: string | undefined;
@@ -3902,7 +4065,13 @@ export type TournamentFragment = {
   callToActionButtonLink?: string | undefined;
   featured?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
-  coverImage?: { __typename?: 'Asset'; url?: string | undefined } | undefined;
+  coverImage?:
+    | {
+        __typename?: 'Asset';
+        url?: string | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+      }
+    | undefined;
   description?: { __typename?: 'TournamentDescription'; json: any } | undefined;
 };
 
@@ -3920,7 +4089,11 @@ export type TournamentCollectionFragment = {
         featured?: boolean | undefined;
         sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
         coverImage?:
-          | { __typename?: 'Asset'; url?: string | undefined }
+          | {
+              __typename?: 'Asset';
+              url?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+            }
           | undefined;
         description?:
           | { __typename?: 'TournamentDescription'; json: any }
@@ -3953,6 +4126,7 @@ export type BasicPostCollectionBySlugQuery = {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
+                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
                   }
                 | undefined;
             }
@@ -4006,6 +4180,10 @@ export type PageHomeCollectionQuery = {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
                                             url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
                                           }
                                         | undefined;
                                     }
@@ -4043,6 +4221,12 @@ export type PageHomeCollectionQuery = {
                                                         url?:
                                                           | string
                                                           | undefined;
+                                                        sys: {
+                                                          __typename?: 'Sys';
+                                                          publishedAt?:
+                                                            | any
+                                                            | undefined;
+                                                        };
                                                       }
                                                     | undefined;
                                                 }
@@ -4090,6 +4274,47 @@ export type PageHomeCollectionQuery = {
                                                 }
                                               | undefined
                                             >;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionFeaturePosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FeaturePost';
+                                      videoUrl?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
                                           }
                                         | undefined;
                                     }
@@ -4179,6 +4404,10 @@ export type PageLearnCollectionQuery = {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
                                             url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
                                           }
                                         | undefined;
                                     }
@@ -4216,6 +4445,12 @@ export type PageLearnCollectionQuery = {
                                                         url?:
                                                           | string
                                                           | undefined;
+                                                        sys: {
+                                                          __typename?: 'Sys';
+                                                          publishedAt?:
+                                                            | any
+                                                            | undefined;
+                                                        };
                                                       }
                                                     | undefined;
                                                 }
@@ -4263,6 +4498,47 @@ export type PageLearnCollectionQuery = {
                                                 }
                                               | undefined
                                             >;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionFeaturePosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FeaturePost';
+                                      videoUrl?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
                                           }
                                         | undefined;
                                     }
@@ -4328,7 +4604,11 @@ export type TeamMembersQuery = {
               github?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               avatar?:
-                | { __typename?: 'Asset'; url?: string | undefined }
+                | {
+                    __typename?: 'Asset';
+                    url?: string | undefined;
+                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                  }
                 | undefined;
             }
           | undefined
@@ -4360,7 +4640,11 @@ export type TournamentsQuery = {
               featured?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               coverImage?:
-                | { __typename?: 'Asset'; url?: string | undefined }
+                | {
+                    __typename?: 'Asset';
+                    url?: string | undefined;
+                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                  }
                 | undefined;
               description?:
                 | { __typename?: 'TournamentDescription'; json: any }
@@ -4383,7 +4667,10 @@ export const BasicPostCommonFragmentDoc = gql`
       ...Sys
     }
     title
-    mainPicture {
+    mainPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
       title
       url
     }
@@ -4398,6 +4685,42 @@ export const BasicPostDetailFragmentDoc = gql`
     }
   }
   ${BasicPostCommonFragmentDoc}
+`;
+export const FeaturePostFragmentDoc = gql`
+  fragment FeaturePost on FeaturePost {
+    sys {
+      ...Sys
+    }
+    videoUrl
+    picture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    title
+    description
+    callToActionUrl
+    callToActionButtonLabel
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionFeaturePostsFragmentDoc = gql`
+  fragment PageSectionFeaturePosts on PageSectionFeaturePosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...FeaturePost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FeaturePostFragmentDoc}
 `;
 export const BasicPostFragmentDoc = gql`
   fragment BasicPost on BasicPost {
@@ -4509,12 +4832,14 @@ export const PageHomeFragmentDoc = gql`
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
+        ...PageSectionFeaturePosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
       }
     }
   }
+  ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
@@ -4528,12 +4853,14 @@ export const PageLearnFragmentDoc = gql`
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
+        ...PageSectionFeaturePosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
       }
     }
   }
+  ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
@@ -4543,7 +4870,10 @@ export const TournamentFragmentDoc = gql`
     sys {
       ...Sys
     }
-    coverImage {
+    coverImage(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
       url
     }
     title
@@ -4606,7 +4936,10 @@ export const TeamMembersDocument = gql`
         }
         name
         title
-        avatar {
+        avatar(preview: $isPreview) {
+          sys {
+            ...Sys
+          }
           url
         }
         twitter

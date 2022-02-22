@@ -10,6 +10,7 @@ import {
   PageHomeFragment,
   PageSectionBasicPostsFragment,
   PageSectionFaQsFragment,
+  PageSectionFeaturePostsFragment,
   PageSectionIconTilesFragment,
 } from '@dehub/shared/model';
 import {
@@ -20,6 +21,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 type PageHomeSectionsItemType =
+  | PageSectionFeaturePostsFragment
   | PageSectionBasicPostsFragment
   | PageSectionIconTilesFragment
   | PageSectionFaQsFragment
@@ -40,6 +42,13 @@ type PageHomeSectionsItemType =
         <ng-container
           *ngFor="let section of pageHome.sectionsCollection?.items"
         >
+          <!-- Feature Posts -->
+          <ng-container *ngIf="isPageSectionFeaturePosts(section)">
+            <dhb-page-section-feature-posts
+              [section]="section"
+            ></dhb-page-section-feature-posts>
+          </ng-container>
+
           <!-- Basic Posts -->
           <ng-container *ngIf="isPageSectionBasicPosts(section)">
             <dhb-page-section-basic-posts
@@ -88,6 +97,15 @@ export class AngularFeatureHomeComponent implements OnInit {
             pageHomeCollection?.items[0] ?? undefined
         )
       );
+  }
+
+  isPageSectionFeaturePosts(
+    pageHomeSectionsItem: PageHomeSectionsItemType
+  ): pageHomeSectionsItem is PageSectionFeaturePostsFragment {
+    return (
+      !!pageHomeSectionsItem &&
+      pageHomeSectionsItem.__typename === 'PageSectionFeaturePosts'
+    );
   }
 
   isPageSectionBasicPosts(

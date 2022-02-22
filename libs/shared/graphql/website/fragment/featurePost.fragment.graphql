@@ -1,0 +1,17 @@
+fragment FeaturePost on FeaturePost {
+  sys {
+    ...Sys
+  }
+  videoUrl
+  picture(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
+    title
+    url
+  }
+  title
+  description
+  callToActionUrl
+  callToActionButtonLabel
+}
