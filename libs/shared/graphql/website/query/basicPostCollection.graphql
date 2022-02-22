@@ -1,0 +1,7 @@
+query basicPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+  basicPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+    items {
+      ...BasicPostDetail
+    }
+  }
+}

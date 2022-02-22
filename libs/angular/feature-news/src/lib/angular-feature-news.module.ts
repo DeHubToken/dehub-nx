@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { Route } from '@angular/router';
+import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { ButtonModule } from 'primeng/button';
 import { AngularFeatureNewsDetailComponent } from './angular-feature-news-detail.component';
 import { AngularFeatureNewsRoutingModule } from './angular-feature-news-routing.module';
 import { AngularFeatureNewsComponent } from './angular-feature-news.component';
-
-export const angularFeatureNewsRoutes: Route[] = [];
+import { BasicPostDetailComponent } from './components/basic-post-detail.component';
 
 @NgModule({
   imports: [
@@ -14,6 +14,8 @@ export const angularFeatureNewsRoutes: Route[] = [];
     CommonModule,
 
     // Lib Modules
+    ContentfulDraftDirectiveModule,
+    SafeHtmlPipeModule,
 
     // PrimeNg Modules
     ButtonModule,
@@ -23,6 +25,7 @@ export const angularFeatureNewsRoutes: Route[] = [];
   declarations: [
     AngularFeatureNewsComponent,
     AngularFeatureNewsDetailComponent,
+    BasicPostDetailComponent,
   ],
 })
 export class AngularFeatureNewsModule {}

@@ -1,0 +1,13 @@
+query tournaments(
+  $isFeatured: Boolean
+  $dateGte: DateTime
+  $isPreview: Boolean = false
+) {
+  tournamentCollection(
+    where: { featured: $isFeatured, date_gte: $dateGte }
+    order: [date_DESC]
+    preview: $isPreview
+  ) {
+    ...TournamentCollection
+  }
+}

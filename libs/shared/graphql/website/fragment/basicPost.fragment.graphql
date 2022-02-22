@@ -1,0 +1,23 @@
+fragment BasicPostCommon on BasicPost {
+  sys {
+    ...Sys
+  }
+  title
+  mainPicture {
+    title
+    url
+  }
+}
+
+fragment BasicPost on BasicPost {
+  ...BasicPostCommon
+  summary
+  slug
+}
+
+fragment BasicPostDetail on BasicPost {
+  ...BasicPostCommon
+  description {
+    json
+  }
+}

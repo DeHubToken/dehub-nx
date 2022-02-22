@@ -1,0 +1,14 @@
+fragment PageLearn on PageLearn {
+  sys {
+    id
+  }
+  mainTitle
+  subtitle
+  sectionsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...PageSectionBasicPosts
+      ...PageSectionIconTiles
+      ...PageSectionFaQs
+    }
+  }
+}

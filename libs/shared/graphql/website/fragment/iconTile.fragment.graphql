@@ -1,0 +1,8 @@
+fragment IconTile on IconTile {
+  sys {
+    ...Sys
+  }
+  icon
+  title
+  description
+}

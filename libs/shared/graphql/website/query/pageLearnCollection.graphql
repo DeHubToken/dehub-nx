@@ -1,0 +1,7 @@
+query pageLearnCollection($isPreview: Boolean = false) {
+  pageLearnCollection(limit: 2, preview: $isPreview) {
+    items {
+      ...PageLearn
+    }
+  }
+}

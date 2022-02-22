@@ -8,11 +8,39 @@ import { GraphQLModule } from '../graphql.module';
 @Injectable({
   providedIn: GraphQLModule,
 })
+export class BasicPostCollectionBySlugService extends Apollo.Query<
+  models.BasicPostCollectionBySlugQuery,
+  models.BasicPostCollectionBySlugQueryVariables
+> {
+  document = models.BasicPostCollectionBySlugDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
 export class PageHomeCollectionService extends Apollo.Query<
   models.PageHomeCollectionQuery,
   models.PageHomeCollectionQueryVariables
 > {
   document = models.PageHomeCollectionDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class PageLearnCollectionService extends Apollo.Query<
+  models.PageLearnCollectionQuery,
+  models.PageLearnCollectionQueryVariables
+> {
+  document = models.PageLearnCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

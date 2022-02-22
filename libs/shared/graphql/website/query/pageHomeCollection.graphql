@@ -1,0 +1,7 @@
+query pageHomeCollection($isPreview: Boolean = false) {
+  pageHomeCollection(limit: 2, preview: $isPreview) {
+    items {
+      ...PageHome
+    }
+  }
+}
