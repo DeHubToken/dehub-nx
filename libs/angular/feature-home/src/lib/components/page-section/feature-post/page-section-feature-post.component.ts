@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { FeaturePostFragment } from '@dehub/shared/model';
 
+let youtubeApiLoaded = false;
 @Component({
   selector: 'dhb-page-section-feature-post',
   template: `
@@ -14,10 +15,18 @@ import { FeaturePostFragment } from '@dehub/shared/model';
         [dhbContentfulDraft]="featurePost.sys"
         class="card image-card shadow-8 mx-4"
       >
+        <!-- Video Url -->
+        <youtube-player
+          *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
+          [videoId]="videoUrl | dhbYoutubeVideoId"
+        ></youtube-player>
+
         <!-- Picture -->
-        <ng-container *ngIf="featurePost.picture as picture">
-          <img [src]="picture.url" [alt]="picture.title" />
-        </ng-container>
+        <ng-template #showPicture>
+          <ng-container *ngIf="featurePost.picture as picture">
+            <img [src]="picture.url" [alt]="picture.title" />
+          </ng-container>
+        </ng-template>
 
         <div class="image-content">
           <!-- Title -->
@@ -55,5 +64,14 @@ export class PageSectionFeaturePostComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!youtubeApiLoaded) {
+      // This code loads the IFrame Player API code asynchronously, according to the instructions at
+      // https://developers.google.com/youtube/iframe_api_reference#Getting_Started
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.body.appendChild(tag);
+      youtubeApiLoaded = true;
+    }
+  }
 }
