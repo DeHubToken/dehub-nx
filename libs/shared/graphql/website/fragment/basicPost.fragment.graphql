@@ -3,7 +3,10 @@ fragment BasicPostCommon on BasicPost {
     ...Sys
   }
   title
-  mainPicture {
+  mainPicture(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
     title
     url
   }

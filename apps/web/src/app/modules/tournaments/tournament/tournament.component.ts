@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TournamentsService } from '@dehub/angular/core';
 import {
+  BreakPoint,
   CarouselResponsiveOptions,
   TournamentCollectionFragment,
 } from '@dehub/shared/model';
@@ -126,14 +127,14 @@ export class TournamentComponent implements OnInit {
 
   finishedCarouselResponsiveOptions: CarouselResponsiveOptions = [
     {
-      breakpoint: '768px',
-      numVisible: 2,
-      numScroll: 2,
-    },
-    {
-      breakpoint: '560px',
+      breakpoint: BreakPoint.sm,
       numVisible: 1,
       numScroll: 1,
+    },
+    {
+      breakpoint: BreakPoint.md,
+      numVisible: 2,
+      numScroll: 2,
     },
   ];
 

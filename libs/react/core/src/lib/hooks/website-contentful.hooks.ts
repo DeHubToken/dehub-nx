@@ -14,7 +14,10 @@ export const BasicPostCommonFragmentDoc = gql`
       ...Sys
     }
     title
-    mainPicture {
+    mainPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
       title
       url
     }
@@ -36,7 +39,10 @@ export const FeaturePostFragmentDoc = gql`
       ...Sys
     }
     videoUrl
-    picture {
+    picture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
       title
       url
     }
@@ -211,7 +217,10 @@ export const TournamentFragmentDoc = gql`
     sys {
       ...Sys
     }
-    coverImage {
+    coverImage(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
       url
     }
     title
@@ -428,7 +437,10 @@ export const TeamMembersDocument = gql`
         }
         name
         title
-        avatar {
+        avatar(preview: $isPreview) {
+          sys {
+            ...Sys
+          }
           url
         }
         twitter

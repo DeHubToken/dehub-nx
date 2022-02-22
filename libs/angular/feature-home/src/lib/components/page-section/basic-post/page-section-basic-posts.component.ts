@@ -30,9 +30,11 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
           [responsiveOptions]="carouselResponsiveOptions"
         >
           <ng-template let-basicPost pTemplate="item">
-            <dhb-page-section-basic-post
-              [basicPost]="basicPost"
-            ></dhb-page-section-basic-post>
+            <div class="">
+              <dhb-page-section-basic-post
+                [basicPost]="basicPost"
+              ></dhb-page-section-basic-post>
+            </div>
           </ng-template>
         </p-carousel>
       </div>

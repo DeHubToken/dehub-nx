@@ -6,7 +6,10 @@ query teamMembers($isPreview: Boolean = false) {
       }
       name
       title
-      avatar {
+      avatar(preview: $isPreview) {
+        sys {
+          ...Sys
+        }
         url
       }
       twitter

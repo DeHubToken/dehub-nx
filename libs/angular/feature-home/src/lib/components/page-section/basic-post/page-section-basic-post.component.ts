@@ -21,6 +21,7 @@ import { BasicPostFragment } from '@dehub/shared/model';
       <ng-template pTemplate="header">
         <img
           *ngIf="basicPost.mainPicture as mainPicture"
+          [dhbContentfulDraft]="mainPicture.sys"
           [src]="mainPicture.url"
           [alt]="mainPicture.title"
         />
