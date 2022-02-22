@@ -17,9 +17,11 @@ import { WINDOW } from '@ng-web-apis/common';
   template: `
     <ng-container *ngIf="tournament">
       <div [dhbContentfulDraft]="tournament.sys" class="border-round m-2">
-        <div class="mb-4">
+        <!-- Cover Image -->
+        <div *ngIf="tournament.coverImage as coverImage" class="mb-4">
           <img
-            [src]="tournament.coverImage?.url"
+            [dhbContentfulDraft]="coverImage.sys"
+            [src]="coverImage.url"
             [alt]="tournament.title"
             class="w-full"
           />

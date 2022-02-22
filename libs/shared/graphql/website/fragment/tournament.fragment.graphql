@@ -2,7 +2,10 @@ fragment Tournament on Tournament {
   sys {
     ...Sys
   }
-  coverImage {
+  coverImage(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
     url
   }
   title

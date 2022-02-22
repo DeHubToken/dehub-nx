@@ -3,7 +3,10 @@ fragment FeaturePost on FeaturePost {
     ...Sys
   }
   videoUrl
-  picture {
+  picture(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
     title
     url
   }

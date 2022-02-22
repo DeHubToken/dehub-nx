@@ -24,7 +24,11 @@ let youtubeApiLoaded = false;
         <!-- Picture -->
         <ng-template #showPicture>
           <ng-container *ngIf="featurePost.picture as picture">
-            <img [src]="picture.url" [alt]="picture.title" />
+            <img
+              [dhbContentfulDraft]="picture.sys"
+              [src]="picture.url"
+              [alt]="picture.title"
+            />
           </ng-container>
         </ng-template>
 
