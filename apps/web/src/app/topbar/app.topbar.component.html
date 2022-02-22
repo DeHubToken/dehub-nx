@@ -27,7 +27,10 @@
     <div class="layout-topbar-right">
       <ul class="layout-topbar-actions">
         <li class="topbar-item">
-          <p-splitButton label="Buy DeHub" [model]="[]"></p-splitButton>
+          <dhb-buy-dehub-button
+            [cexUrl]="cexUrl"
+            (dexSelected)="onDexSelected()"
+          ></dhb-buy-dehub-button>
         </li>
         <li class="topbar-item ml-4">
           <dhb-connect-wallet [chainId]="chainId"></dhb-connect-wallet>

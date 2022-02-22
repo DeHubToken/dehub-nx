@@ -23,6 +23,7 @@ export class AppTopBarComponent implements OnDestroy {
 
   path = this.env.baseUrl;
   chainId = this.env.web3.chainId;
+  cexUrl = this.env.dehub.cexUrl;
   isDev = this.env.env === 'dev';
 
   constructor(
@@ -30,6 +31,8 @@ export class AppTopBarComponent implements OnDestroy {
     public app: AppComponent,
     public appMain: AppMainComponent
   ) {}
+
+  onDexSelected() {}
 
   ngOnDestroy() {
     if (this.subscription) {

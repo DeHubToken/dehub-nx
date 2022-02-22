@@ -14,10 +14,10 @@ import {
   GraphQLModule,
 } from '@dehub/angular/core';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
+import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button/buy-dehub-button.module';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
-import { SplitButtonModule } from 'primeng/splitbutton';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
@@ -46,13 +46,15 @@ const { appId, serverUrl } = environment.moralis;
     ButtonModule,
     RippleModule,
     MenuModule,
-    SplitButtonModule,
     TabMenuModule,
 
     // Core
     GraphQLModule,
     AngularCoreModule.forRoot(),
     AngularMoralisModule.forRoot({ appId, serverUrl }),
+
+    // Libs
+    BuyDehubButtonModule,
 
     AppRoutingModule,
   ],
