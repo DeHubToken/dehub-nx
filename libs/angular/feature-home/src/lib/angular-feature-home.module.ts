@@ -15,6 +15,10 @@ import {
   PageSectionFaQsComponent,
 } from './components/page-section/faqs';
 import {
+  PageSectionFeaturePostComponent,
+  PageSectionFeaturePostsComponent,
+} from './components/page-section/feature-post';
+import {
   PageSectionIconTileComponent,
   PageSectionIconTilesComponent,
 } from './components/page-section/icon-tile';
@@ -38,6 +42,8 @@ import {
     AngularFeatureHomeComponent,
 
     // Page Section Components
+    PageSectionFeaturePostsComponent,
+    PageSectionFeaturePostComponent,
     PageSectionBasicPostsComponent,
     PageSectionBasicPostComponent,
     PageSectionIconTilesComponent,
