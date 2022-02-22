@@ -30,6 +30,39 @@ export const BasicPostDetailFragmentDoc = gql`
   }
   ${BasicPostCommonFragmentDoc}
 `;
+export const FeaturePostFragmentDoc = gql`
+  fragment FeaturePost on FeaturePost {
+    sys {
+      ...Sys
+    }
+    videoUrl
+    picture {
+      title
+      url
+    }
+    title
+    description
+    callToActionUrl
+    callToActionButtonLabel
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionFeaturePostsFragmentDoc = gql`
+  fragment PageSectionFeaturePosts on PageSectionFeaturePosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...FeaturePost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FeaturePostFragmentDoc}
+`;
 export const BasicPostFragmentDoc = gql`
   fragment BasicPost on BasicPost {
     ...BasicPostCommon
@@ -140,12 +173,14 @@ export const PageHomeFragmentDoc = gql`
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
+        ...PageSectionFeaturePosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
       }
     }
   }
+  ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
@@ -159,12 +194,14 @@ export const PageLearnFragmentDoc = gql`
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
+        ...PageSectionFeaturePosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
       }
     }
   }
+  ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}

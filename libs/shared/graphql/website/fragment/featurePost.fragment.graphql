@@ -1,0 +1,14 @@
+fragment FeaturePost on FeaturePost {
+  sys {
+    ...Sys
+  }
+  videoUrl
+  picture {
+    title
+    url
+  }
+  title
+  description
+  callToActionUrl
+  callToActionButtonLabel
+}

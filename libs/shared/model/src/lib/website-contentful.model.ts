@@ -1199,6 +1199,7 @@ export interface PageHomeSectionsCollection {
 export type PageHomeSectionsItem =
   | PageSectionBasicPosts
   | PageSectionFaQs
+  | PageSectionFeaturePosts
   | PageSectionIconTiles;
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
@@ -1303,6 +1304,7 @@ export interface PageLearnSectionsCollection {
 export type PageLearnSectionsItem =
   | PageSectionBasicPosts
   | PageSectionFaQs
+  | PageSectionFeaturePosts
   | PageSectionIconTiles;
 
 /** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
@@ -1576,9 +1578,25 @@ export interface PageSectionFeaturePostsHandpickedPostsCollection {
 export interface PageSectionFeaturePostsLinkingCollections {
   __typename?: 'PageSectionFeaturePostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
+  pageLearnCollection?: Maybe<PageLearnCollection>;
 }
 
 export interface PageSectionFeaturePostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionFeaturePostsLinkingCollectionsPageHomeCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionFeaturePostsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3483,6 +3501,23 @@ export type FaqItemFragment = {
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
 };
 
+export type FeaturePostFragment = {
+  __typename?: 'FeaturePost';
+  videoUrl?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  callToActionUrl?: string | undefined;
+  callToActionButtonLabel?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  picture?:
+    | {
+        __typename?: 'Asset';
+        title?: string | undefined;
+        url?: string | undefined;
+      }
+    | undefined;
+};
+
 export type IconTileFragment = {
   __typename?: 'IconTile';
   icon?: string | undefined;
@@ -3595,6 +3630,38 @@ export type PageHomeFragment = {
                                     }
                                   | undefined
                                 >;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionFeaturePosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FeaturePost';
+                          videoUrl?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
                               }
                             | undefined;
                         }
@@ -3745,6 +3812,38 @@ export type PageLearnFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionFeaturePosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FeaturePost';
+                          videoUrl?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
@@ -3863,6 +3962,36 @@ export type PageSectionFaQsFragment = {
                         }
                       | undefined
                     >;
+                  }
+                | undefined;
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
+export type PageSectionFeaturePostsFragment = {
+  __typename: 'PageSectionFeaturePosts';
+  title?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  handpickedPostsCollection?:
+    | {
+        __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+        items: Array<
+          | {
+              __typename?: 'FeaturePost';
+              videoUrl?: string | undefined;
+              title?: string | undefined;
+              description?: string | undefined;
+              callToActionUrl?: string | undefined;
+              callToActionButtonLabel?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              picture?:
+                | {
+                    __typename?: 'Asset';
+                    title?: string | undefined;
+                    url?: string | undefined;
                   }
                 | undefined;
             }
@@ -4099,6 +4228,43 @@ export type PageHomeCollectionQuery = {
                             | undefined;
                         }
                       | {
+                          __typename: 'PageSectionFeaturePosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FeaturePost';
+                                      videoUrl?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
                           sys: {
@@ -4272,6 +4438,43 @@ export type PageLearnCollectionQuery = {
                             | undefined;
                         }
                       | {
+                          __typename: 'PageSectionFeaturePosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FeaturePost';
+                                      videoUrl?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
                           sys: {
@@ -4399,6 +4602,39 @@ export const BasicPostDetailFragmentDoc = gql`
   }
   ${BasicPostCommonFragmentDoc}
 `;
+export const FeaturePostFragmentDoc = gql`
+  fragment FeaturePost on FeaturePost {
+    sys {
+      ...Sys
+    }
+    videoUrl
+    picture {
+      title
+      url
+    }
+    title
+    description
+    callToActionUrl
+    callToActionButtonLabel
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionFeaturePostsFragmentDoc = gql`
+  fragment PageSectionFeaturePosts on PageSectionFeaturePosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...FeaturePost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FeaturePostFragmentDoc}
+`;
 export const BasicPostFragmentDoc = gql`
   fragment BasicPost on BasicPost {
     ...BasicPostCommon
@@ -4509,12 +4745,14 @@ export const PageHomeFragmentDoc = gql`
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
+        ...PageSectionFeaturePosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
       }
     }
   }
+  ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
@@ -4528,12 +4766,14 @@ export const PageLearnFragmentDoc = gql`
     subtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
+        ...PageSectionFeaturePosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
       }
     }
   }
+  ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
