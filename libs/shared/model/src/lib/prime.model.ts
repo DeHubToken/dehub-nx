@@ -1,3 +1,7 @@
+/**
+ * Default Primeflex breakpoints
+ * Source: https://github.com/primefaces/primeflex/blob/4906c3d69d1366f5f1f7bbebc6cbad53753434ea/_sass/lib/src/_variables.scss#L3
+ * */
 export enum BreakPoint {
   sm = '576px',
   md = '768px',
@@ -8,7 +12,7 @@ export enum BreakPoint {
 // Carousel: https://www.primefaces.org/primeng/showcase/#/carousel
 interface CarouselResponsiveOption {
   /** width in pixel like: '1024px' */
-  breakpoint: BreakPoint;
+  breakpoint: string;
   numVisible: number;
   numScroll: number;
 }
