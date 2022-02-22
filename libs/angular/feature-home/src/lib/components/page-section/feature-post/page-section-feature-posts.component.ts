@@ -5,6 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import {
+  CarouselResponsiveOptions,
   FeaturePostFragment,
   PageSectionFeaturePostsFragment,
 } from '@dehub/shared/model';
@@ -24,8 +25,9 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
           [value]="featurePosts"
           [circular]="featurePosts.length > 1"
           [autoplayInterval]="3000"
-          [numVisible]="5"
+          [numVisible]="3"
           [numScroll]="1"
+          [responsiveOptions]="carouselResponsiveOptions"
         >
           <ng-template let-featurePost pTemplate="item">
             <dhb-page-section-feature-post
@@ -44,6 +46,19 @@ export class PageSectionFeaturePostsComponent implements OnInit {
   @Input() section!: PageSectionFeaturePostsFragment;
 
   featurePosts: FeaturePostFragment[] = [];
+
+  carouselResponsiveOptions: CarouselResponsiveOptions = [
+    {
+      breakpoint: '1290px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '960px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
 
   constructor() {}
 
