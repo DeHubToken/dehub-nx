@@ -111,7 +111,6 @@ import { environment } from '../../../../environments/environment';
       </div>
     </div>
   `,
-  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' }),
@@ -143,33 +142,33 @@ export class TournamentComponent implements OnInit {
   constructor(private tournamentService: TournamentsService) {}
 
   ngOnInit() {
-    const featuredTounamentsQuery$ = this.getTournaments(true);
+    const featuredTournamentsQuery$ = this.getTournaments(true);
 
-    this.featuredTournaments$ = featuredTounamentsQuery$.pipe(
+    this.featuredTournaments$ = featuredTournamentsQuery$.pipe(
       map(
         ({ data }) => data?.tournamentCollection as TournamentCollectionFragment
       )
     );
 
-    this.featuredTournamentsLoading$ = featuredTounamentsQuery$.pipe(
+    this.featuredTournamentsLoading$ = featuredTournamentsQuery$.pipe(
       map(({ loading }) => loading)
     );
 
     const sinceLastTwoMonths = new Date(
       new Date().setMonth(new Date().getMonth() - 2)
     );
-    const finishedTounamentsQuery$ = this.getTournaments(
+    const finishedTournamentsQuery$ = this.getTournaments(
       false,
       sinceLastTwoMonths
     );
 
-    this.finishedTournaments$ = finishedTounamentsQuery$.pipe(
+    this.finishedTournaments$ = finishedTournamentsQuery$.pipe(
       map(
         ({ data }) => data?.tournamentCollection as TournamentCollectionFragment
       )
     );
 
-    this.finishedTournamentsLoading$ = finishedTounamentsQuery$.pipe(
+    this.finishedTournamentsLoading$ = finishedTournamentsQuery$.pipe(
       map(({ loading }) => loading)
     );
   }

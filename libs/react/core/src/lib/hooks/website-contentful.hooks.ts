@@ -8,6 +8,133 @@ export const SysFragmentDoc = gql`
     publishedAt
   }
 `;
+export const BasicPostFragmentDoc = gql`
+  fragment BasicPost on BasicPost {
+    sys {
+      ...Sys
+    }
+    title
+    mainPicture {
+      title
+      url
+    }
+    summary
+    slug
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionBasicPostsFragmentDoc = gql`
+  fragment PageSectionBasicPosts on PageSectionBasicPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...BasicPost
+      }
+    }
+    postsByCategory {
+      linkedFrom {
+        basicPostCollection(limit: 20, preview: $isPreview) {
+          items {
+            ...BasicPost
+          }
+        }
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${BasicPostFragmentDoc}
+`;
+export const IconTileFragmentDoc = gql`
+  fragment IconTile on IconTile {
+    sys {
+      ...Sys
+    }
+    icon
+    title
+    description
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionIconTilesFragmentDoc = gql`
+  fragment PageSectionIconTiles on PageSectionIconTiles {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...IconTile
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${IconTileFragmentDoc}
+`;
+export const FaqItemFragmentDoc = gql`
+  fragment FaqItem on FaqItem {
+    sys {
+      ...Sys
+    }
+    question
+    answer
+  }
+  ${SysFragmentDoc}
+`;
+export const FaqGroupFragmentDoc = gql`
+  fragment FaqGroup on FaqGroup {
+    sys {
+      ...Sys
+    }
+    name
+    faqItemCollection(limit: 50, preview: $isPreview) {
+      items {
+        ...FaqItem
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FaqItemFragmentDoc}
+`;
+export const PageSectionFaQsFragmentDoc = gql`
+  fragment PageSectionFaQs on PageSectionFaQs {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...FaqGroup
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FaqGroupFragmentDoc}
+`;
+export const PageHomeFragmentDoc = gql`
+  fragment PageHome on PageHome {
+    sys {
+      id
+    }
+    mainTitle
+    subtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+      }
+    }
+  }
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+`;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
     sys {
@@ -37,6 +164,67 @@ export const TournamentCollectionFragmentDoc = gql`
   }
   ${TournamentFragmentDoc}
 `;
+export const PageHomeCollectionDocument = gql`
+  query pageHomeCollection($isPreview: Boolean = false) {
+    pageHomeCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageHome
+      }
+    }
+  }
+  ${PageHomeFragmentDoc}
+`;
+
+/**
+ * __usePageHomeCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageHomeCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageHomeCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageHomeCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageHomeCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageHomeCollectionQuery,
+    models.PageHomeCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageHomeCollectionQuery,
+    models.PageHomeCollectionQueryVariables
+  >(PageHomeCollectionDocument, options);
+}
+export function usePageHomeCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageHomeCollectionQuery,
+    models.PageHomeCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageHomeCollectionQuery,
+    models.PageHomeCollectionQueryVariables
+  >(PageHomeCollectionDocument, options);
+}
+export type PageHomeCollectionQueryHookResult = ReturnType<
+  typeof usePageHomeCollectionQuery
+>;
+export type PageHomeCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageHomeCollectionLazyQuery
+>;
+export type PageHomeCollectionQueryResult = Apollo.QueryResult<
+  models.PageHomeCollectionQuery,
+  models.PageHomeCollectionQueryVariables
+>;
 export const TeamMembersDocument = gql`
   query teamMembers($isPreview: Boolean = false) {
     teamMemberCollection(preview: $isPreview) {
