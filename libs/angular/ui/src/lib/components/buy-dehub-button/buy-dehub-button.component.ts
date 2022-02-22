@@ -10,27 +10,35 @@ import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'dhb-buy-dehub-button',
-  template: `<p-splitButton [label]="label" [model]="items"></p-splitButton>`,
+  template: `<p-splitButton
+    [label]="label"
+    [model]="items"
+    (onClick)="buy.emit()"
+  ></p-splitButton>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BuyDehubButtonComponent implements OnInit {
   @Input() label = 'Buy DeHub';
   @Input() cexUrl?: string;
 
+  @Output() buy = new EventEmitter<void>();
   @Output() dexSelected = new EventEmitter<void>();
 
-  items: MenuItem[] = [
-    {
-      label: 'DEX',
-      command: () => this.dexSelected.emit(),
-    },
-    {
-      label: 'CEX',
-      url: this.cexUrl,
-    },
-  ];
+  items: MenuItem[] = [];
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.items = [
+      {
+        label: 'DEX',
+        command: () => this.dexSelected.emit(),
+      },
+      {
+        label: 'CEX',
+        url: this.cexUrl,
+        target: '_blank',
+      },
+    ];
+  }
 }

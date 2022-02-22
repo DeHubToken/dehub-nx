@@ -5,7 +5,9 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { EnvToken } from '@dehub/angular/core';
+import { BuyDehubFloozComponent } from '@dehub/angular/ui/components/buy-dehub-flooz';
 import { MenuItem } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
@@ -29,10 +31,18 @@ export class AppTopBarComponent implements OnDestroy {
   constructor(
     @Inject(EnvToken) private env: Env,
     public app: AppComponent,
-    public appMain: AppMainComponent
+    public appMain: AppMainComponent,
+    private dialogService: DialogService
   ) {}
 
-  onDexSelected() {}
+  onDexSelected() {
+    this.dialogService.open(BuyDehubFloozComponent, {
+      showHeader: false,
+      width: '420px',
+      closeOnEscape: true,
+      dismissableMask: true,
+    });
+  }
 
   ngOnDestroy() {
     if (this.subscription) {

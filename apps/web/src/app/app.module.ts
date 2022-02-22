@@ -14,8 +14,10 @@ import {
   GraphQLModule,
 } from '@dehub/angular/core';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
-import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button/buy-dehub-button.module';
+import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button';
+import { BuyDehubFloozModule } from '@dehub/angular/ui/components/buy-dehub-flooz';
 import { ButtonModule } from 'primeng/button';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
 import { TabMenuModule } from 'primeng/tabmenu';
@@ -47,6 +49,7 @@ const { appId, serverUrl } = environment.moralis;
     RippleModule,
     MenuModule,
     TabMenuModule,
+    DynamicDialogModule,
 
     // Core
     GraphQLModule,
@@ -55,6 +58,7 @@ const { appId, serverUrl } = environment.moralis;
 
     // Libs
     BuyDehubButtonModule,
+    BuyDehubFloozModule,
 
     AppRoutingModule,
   ],
@@ -71,6 +75,7 @@ const { appId, serverUrl } = environment.moralis;
   ],
   providers: [
     MenuService,
+    DialogService,
     { provide: EnvToken, useValue: environment },
     {
       provide: APP_BASE_HREF,
