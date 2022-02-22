@@ -10,10 +10,7 @@ import { FeaturePostFragment } from '@dehub/shared/model';
   selector: 'dhb-page-section-feature-post',
   template: `
     <ng-container *ngIf="featurePost">
-      <div
-        [dhbContentfulDraft]="featurePost.sys"
-        class="card image-card shadow-8 mx-4"
-      >
+      <div [dhbContentfulDraft]="featurePost.sys" class="card image-card mx-4">
         <!-- Picture -->
         <ng-container *ngIf="featurePost.picture as picture">
           <img [src]="picture.url" [alt]="picture.title" />
