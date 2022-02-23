@@ -12,7 +12,10 @@
 >
   <dhb-topbar></dhb-topbar>
   <div class="layout-content py-0">
-    <dhb-tab-menu></dhb-tab-menu>
+    <dhb-tab-menu
+      [menuItems]="tabMenuItems"
+      [activeMenuItem]="activeMenuItem"
+    ></dhb-tab-menu>
   </div>
 
   <div class="layout-main">
