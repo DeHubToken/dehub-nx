@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { tabMenuItems } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuService } from './topbar/menu/app.menu.service';
 
 @Component({
   templateUrl: './app.main.component.html',
 })
-export class AppMainComponent {
+export class AppMainComponent implements OnDestroy {
   sidebarStatic?: boolean;
 
   sidebarActive = false;
@@ -20,7 +25,30 @@ export class AppMainComponent {
 
   menuHoverActive = false;
 
-  constructor(private menuService: MenuService, public app: AppComponent) {}
+  /** Can be undefined if none of the tab menu items is active */
+  activeMenuItem?: MenuItem;
+  tabMenuItems = tabMenuItems;
+  private sub: Subscription;
+
+  constructor(
+    private menuService: MenuService,
+    public app: AppComponent,
+    private router: Router
+  ) {
+    const isNavigationEnd = (event: unknown): event is NavigationEnd =>
+      event instanceof NavigationEnd;
+
+    // Issue: PrimeNG TabLink not shows the activated route, so we need to set it manually based on url
+    // Docs: https://www.primefaces.org/primeng/showcase/#/tabmenu
+    this.sub = this.router.events
+      .pipe(filter(isNavigationEnd))
+      .subscribe(
+        ({ url }) =>
+          (this.activeMenuItem = tabMenuItems.find(
+            ({ routerLink }) => routerLink && url.includes(routerLink[0])
+          ))
+      );
+  }
 
   onLayoutClick() {
     if (!this.menuClick && (this.isHorizontal() || this.isSlim())) {
@@ -102,5 +130,9 @@ export class AppMainComponent {
         ' '
       );
     }
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
