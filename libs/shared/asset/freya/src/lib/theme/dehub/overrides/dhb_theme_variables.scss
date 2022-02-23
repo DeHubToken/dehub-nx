@@ -144,10 +144,10 @@ $plainButtonTextColor: $textSecondaryColor;
 $plainButtonHoverBgColor: $hoverBg;
 $plainButtonActiveBgColor: rgba(255, 255, 255, 0.16);
 
-$secondaryButtonBg: #78909c;
+$secondaryButtonBg: transparent;
 $secondaryButtonTextColor: #ffffff;
-$secondaryButtonBorder: 1px solid $secondaryButtonBg;
-$secondaryButtonHoverBg: scale-color($secondaryButtonBg, $lightness: -10%);
+$secondaryButtonBorder: 1px solid $primaryColor;
+$secondaryButtonHoverBg: scale-color($primaryColor, $lightness: -10%);
 $secondaryButtonTextHoverColor: $secondaryButtonTextColor;
 $secondaryButtonHoverBorderColor: scale-color(
   $secondaryButtonBg,
