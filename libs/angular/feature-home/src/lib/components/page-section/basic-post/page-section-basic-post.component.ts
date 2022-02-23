@@ -30,7 +30,11 @@ import { BasicPostFragment } from '@dehub/shared/model';
         {{ basicPost.summary }}
       </p>
       <ng-template pTemplate="footer">
-        <p-button label="Read More" styleClass="p-button-link"></p-button>
+        <p-button
+          label="Read More"
+          styleClass="p-button-link"
+          [routerLink]="['/news/' + basicPost.slug]"
+        ></p-button>
       </ng-template>
     </p-card>
   `,
