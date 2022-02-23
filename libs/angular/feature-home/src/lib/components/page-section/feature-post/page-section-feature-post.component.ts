@@ -62,7 +62,7 @@ import { DialogService } from 'primeng/dynamicdialog';
       >
         <p-button
           label="{{ featurePost.callToActionButtonLabel }}"
-          styleClass="p-button-primary"
+          styleClass="p-button-primary p-button-lg p-button-raised"
           (onClick)="onCTAClicked($event)"
         ></p-button>
       </ng-template>
