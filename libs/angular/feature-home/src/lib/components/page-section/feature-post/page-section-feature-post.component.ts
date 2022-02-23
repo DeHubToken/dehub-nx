@@ -4,75 +4,106 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { YoutubeEmbedComponent } from '@dehub/angular/ui/components/youtube-embed';
 import { FeaturePostFragment } from '@dehub/shared/model';
+import { DialogService } from 'primeng/dynamicdialog';
 
-let youtubeApiLoaded = false;
 @Component({
   selector: 'dhb-page-section-feature-post',
   template: `
-    <ng-container *ngIf="featurePost">
-      <div [dhbContentfulDraft]="featurePost.sys" class="card image-card mx-4">
-        <!-- Video Url -->
-        <youtube-player
-          *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
-          [videoId]="videoUrl | dhbYoutubeVideoId"
-        ></youtube-player>
-
-        <!-- Picture -->
-        <ng-template #showPicture>
-          <ng-container *ngIf="featurePost.picture as picture">
+    <p-card
+      *ngIf="featurePost"
+      [dhbContentfulDraft]="featurePost.sys"
+      header="{{ featurePost.title }}"
+      subheader="{{
+        featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz'
+      }}"
+      styleClass="p-card-shadow m-3"
+    >
+      <ng-template pTemplate="header">
+        <div class="frame">
+          <!-- Video Url -->
+          <ng-container
+            *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
+          >
             <img
-              [dhbContentfulDraft]="picture.sys"
-              [src]="picture.url"
-              [alt]="picture.title"
+              class="video-cover"
+              [src]="
+                'https://i1.ytimg.com/vi/' +
+                (videoUrl | dhbYoutubeVideoId) +
+                '/hqdefault.jpg'
+              "
+              alt="Video Cover Image"
+              (click)="onPlayClicked()"
             />
           </ng-container>
-        </ng-template>
 
-        <div class="image-content">
-          <!-- Title -->
-          <h3>{{ featurePost.title }}</h3>
-
-          <!-- Date -->
-          <p>
-            {{
-              featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz'
-            }}
-          </p>
-
-          <!-- Description -->
-          <p>{{ featurePost.description }}</p>
-
-          <!-- Call To Action -->
-          <a
-            *ngIf="
-              featurePost.callToActionButtonLabel && featurePost.callToActionUrl
-            "
-            [href]="featurePost.callToActionUrl"
-            target="_blank"
-            styleClass="p-button-link p-mr-2"
-            >{{ featurePost.callToActionButtonLabel }}</a
-          >
+          <!-- Picture -->
+          <ng-template #showPicture>
+            <ng-container *ngIf="featurePost.picture as picture">
+              <img
+                [dhbContentfulDraft]="picture.sys"
+                [src]="picture.url"
+                [alt]="picture.title"
+              />
+            </ng-container>
+          </ng-template>
         </div>
-      </div>
-    </ng-container>
+      </ng-template>
+
+      <!-- Description -->
+      <p>{{ featurePost.description }}</p>
+      <ng-template
+        *ngIf="
+          featurePost.callToActionButtonLabel && featurePost.callToActionUrl
+        "
+        pTemplate="footer"
+      >
+        <p-button
+          label="{{ featurePost.callToActionButtonLabel }}"
+          styleClass="p-button-primary"
+          (onClick)="onCTAClicked($event)"
+        ></p-button>
+      </ng-template>
+    </p-card>
   `,
-  styles: [``],
+  styles: [
+    `
+      .frame {
+        overflow: hidden;
+      }
+      .video-cover {
+        margin: -9.3% 0 -10.5% 0;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageSectionFeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
 
-  constructor() {}
+  constructor(private dialogService: DialogService) {}
 
-  ngOnInit() {
-    if (!youtubeApiLoaded) {
-      // This code loads the IFrame Player API code asynchronously, according to the instructions at
-      // https://developers.google.com/youtube/iframe_api_reference#Getting_Started
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.body.appendChild(tag);
-      youtubeApiLoaded = true;
+  ngOnInit() {}
+
+  onPlayClicked() {
+    this.dialogService.open(YoutubeEmbedComponent, {
+      data: {
+        videoUrl: this.featurePost.videoUrl!,
+      },
+      showHeader: true,
+      header: this.featurePost.title,
+      width: '80%',
+      styleClass: 'bg-gradient-2',
+      closeOnEscape: true,
+      dismissableMask: true,
+    });
+  }
+
+  onCTAClicked(event: Event) {
+    event.preventDefault();
+    if (this.featurePost.callToActionUrl) {
+      window.open(this.featurePost.callToActionUrl);
     }
   }
 }
