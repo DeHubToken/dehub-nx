@@ -1,11 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Inject,
   Input,
   OnInit,
 } from '@angular/core';
 import { YoutubeEmbedComponent } from '@dehub/angular/ui/components/youtube-embed';
 import { FeaturePostFragment } from '@dehub/shared/model';
+import { WINDOW } from '@ng-web-apis/common';
 import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
@@ -93,7 +95,10 @@ import { DialogService } from 'primeng/dynamicdialog';
 export class PageSectionFeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
 
-  constructor(private dialogService: DialogService) {}
+  constructor(
+    @Inject(WINDOW) readonly windowRef: Window,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit() {}
 
@@ -116,7 +121,11 @@ export class PageSectionFeaturePostComponent implements OnInit {
   onCTAClicked(event: Event) {
     event.preventDefault();
     if (this.featurePost.callToActionUrl) {
-      window.open(this.featurePost.callToActionUrl);
+      this.windowRef.open(
+        this.featurePost.callToActionUrl,
+        '_blank',
+        'noopener,noreferrer'
+      );
     }
   }
 }
