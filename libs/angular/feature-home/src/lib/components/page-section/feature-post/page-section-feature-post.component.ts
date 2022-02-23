@@ -46,13 +46,9 @@ import { DialogService } from 'primeng/dynamicdialog';
         <ng-template #showPicture>
           <ng-container *ngIf="featurePost.picture as picture">
             <img
-              class="video-cover"
-              [src]="
-                'https://i1.ytimg.com/vi/' +
-                (videoUrl | dhbYoutubeVideoId) +
-                '/hqdefault.jpg'
-              "
-              alt="Video Cover Image"
+              [dhbContentfulDraft]="picture.sys"
+              [src]="picture.url"
+              [alt]="picture.title"
             />
           </ng-container>
         </ng-template>
