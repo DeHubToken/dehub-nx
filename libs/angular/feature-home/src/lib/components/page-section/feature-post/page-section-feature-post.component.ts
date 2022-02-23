@@ -21,34 +21,35 @@ import { DialogService } from 'primeng/dynamicdialog';
       styleClass="p-card-shadow m-3"
     >
       <ng-template pTemplate="header">
-        <div class="frame" (click)="onPlayClicked()">
-          <i class="fad fa-play-circle"></i>
+        <div
+          *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
+          class="video-frame"
+          (click)="onVideoFrameClicked()"
+        >
           <!-- Video Url -->
-          <ng-container
-            *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
-          >
+
+          <i class="fad fa-play-circle"></i>
+          <img
+            class="video-cover"
+            [src]="
+              'https://i1.ytimg.com/vi/' +
+              (videoUrl | dhbYoutubeVideoId) +
+              '/hqdefault.jpg'
+            "
+            alt="Video Cover Image"
+          />
+        </div>
+
+        <!-- Picture -->
+        <ng-template #showPicture>
+          <ng-container *ngIf="featurePost.picture as picture">
             <img
-              class="video-cover"
-              [src]="
-                'https://i1.ytimg.com/vi/' +
-                (videoUrl | dhbYoutubeVideoId) +
-                '/hqdefault.jpg'
-              "
-              alt="Video Cover Image"
+              [dhbContentfulDraft]="picture.sys"
+              [src]="picture.url"
+              [alt]="picture.title"
             />
           </ng-container>
-
-          <!-- Picture -->
-          <ng-template #showPicture>
-            <ng-container *ngIf="featurePost.picture as picture">
-              <img
-                [dhbContentfulDraft]="picture.sys"
-                [src]="picture.url"
-                [alt]="picture.title"
-              />
-            </ng-container>
-          </ng-template>
-        </div>
+        </ng-template>
       </ng-template>
 
       <!-- Description -->
@@ -69,7 +70,7 @@ import { DialogService } from 'primeng/dynamicdialog';
   `,
   styles: [
     `
-      .frame {
+      .video-frame {
         overflow: hidden;
         position: relative;
         cursor: pointer;
@@ -96,7 +97,7 @@ export class PageSectionFeaturePostComponent implements OnInit {
 
   ngOnInit() {}
 
-  onPlayClicked() {
+  onVideoFrameClicked() {
     if (this.featurePost.videoUrl) {
       this.dialogService.open(YoutubeEmbedComponent, {
         data: {
