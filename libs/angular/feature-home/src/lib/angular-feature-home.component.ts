@@ -30,46 +30,42 @@ type PageHomeSectionsItemType =
 
 @Component({
   template: `
-    <div class="grid">
-      <div *ngIf="pageHome$ | async as pageHome">
-        <!-- Titles -->
-        <div [@bounceInLeft] class="col-12">
-          <h3>{{ pageHome.mainTitle }}</h3>
-          <h4>{{ pageHome.subtitle }}</h4>
-        </div>
-
-        <!-- Page Sections -->
-        <ng-container
-          *ngFor="let section of pageHome.sectionsCollection?.items"
-        >
-          <!-- Feature Posts -->
-          <ng-container *ngIf="isPageSectionFeaturePosts(section)">
-            <dhb-page-section-feature-posts
-              [section]="section"
-            ></dhb-page-section-feature-posts>
-          </ng-container>
-
-          <!-- Basic Posts -->
-          <ng-container *ngIf="isPageSectionBasicPosts(section)">
-            <dhb-page-section-basic-posts
-              [section]="section"
-            ></dhb-page-section-basic-posts>
-          </ng-container>
-
-          <!-- Icon Tiles -->
-          <ng-container *ngIf="isPageSectionIconTiles(section)">
-            <dhb-page-section-icon-tiles
-              [section]="section"
-            ></dhb-page-section-icon-tiles>
-          </ng-container>
-
-          <!-- FaQs -->
-          <ng-container *ngIf="isPageSectionFaQs(section)">
-            <dhb-page-section-faqs [section]="section"></dhb-page-section-faqs>
-          </ng-container>
-        </ng-container>
+    <ng-container *ngIf="pageHome$ | async as pageHome" class="grid">
+      <!-- Titles -->
+      <div [@bounceInLeft] class="col-12">
+        <h3>{{ pageHome.mainTitle }}</h3>
+        <h4>{{ pageHome.subtitle }}</h4>
       </div>
-    </div>
+
+      <!-- Page Sections -->
+      <ng-container *ngFor="let section of pageHome.sectionsCollection?.items">
+        <!-- Feature Posts -->
+        <ng-container *ngIf="isPageSectionFeaturePosts(section)">
+          <dhb-page-section-feature-posts
+            [section]="section"
+          ></dhb-page-section-feature-posts>
+        </ng-container>
+
+        <!-- Basic Posts -->
+        <ng-container *ngIf="isPageSectionBasicPosts(section)">
+          <dhb-page-section-basic-posts
+            [section]="section"
+          ></dhb-page-section-basic-posts>
+        </ng-container>
+
+        <!-- Icon Tiles -->
+        <ng-container *ngIf="isPageSectionIconTiles(section)">
+          <dhb-page-section-icon-tiles
+            [section]="section"
+          ></dhb-page-section-icon-tiles>
+        </ng-container>
+
+        <!-- FaQs -->
+        <ng-container *ngIf="isPageSectionFaQs(section)">
+          <dhb-page-section-faqs [section]="section"></dhb-page-section-faqs>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,

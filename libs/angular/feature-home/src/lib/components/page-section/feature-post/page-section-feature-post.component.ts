@@ -11,10 +11,7 @@ let youtubeApiLoaded = false;
   selector: 'dhb-page-section-feature-post',
   template: `
     <ng-container *ngIf="featurePost">
-      <div
-        [dhbContentfulDraft]="featurePost.sys"
-        class="card image-card shadow-8 mx-4"
-      >
+      <div [dhbContentfulDraft]="featurePost.sys" class="card image-card mx-4">
         <!-- Video Url -->
         <youtube-player
           *ngIf="featurePost.videoUrl as videoUrl; else showPicture"

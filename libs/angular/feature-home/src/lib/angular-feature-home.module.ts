@@ -5,6 +5,7 @@ import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/con
 import { YoutubeVideoIdPipeModule } from '@dehub/angular/ui/pipes/youtube-video-id';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 import { CarouselModule } from 'primeng/carousel';
 import { AngularFeatureHomeRoutingModule } from './angular-feature-home-routing.module';
 import { AngularFeatureHomeComponent } from './angular-feature-home.component';
@@ -38,6 +39,7 @@ import {
     ButtonModule,
     AccordionModule,
     CarouselModule,
+    CardModule,
 
     AngularFeatureHomeRoutingModule,
   ],

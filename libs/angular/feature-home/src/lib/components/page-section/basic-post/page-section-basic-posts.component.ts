@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import {
   BasicPostFragment,
-  BreakPoint,
   CarouselResponsiveOptions,
   PageSectionBasicPostsFragment,
 } from '@dehub/shared/model';
@@ -26,9 +25,9 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
           [value]="basicPosts"
           [circular]="basicPosts.length > 1"
           [autoplayInterval]="3000"
+          [numVisible]="5"
+          [numScroll]="1"
           [responsiveOptions]="carouselResponsiveOptions"
-          [numVisible]="carouselResponsiveOptions[0].numVisible"
-          [numScroll]="carouselResponsiveOptions[0].numScroll"
         >
           <ng-template let-basicPost pTemplate="item">
             <div class="">
@@ -52,23 +51,23 @@ export class PageSectionBasicPostsComponent implements OnInit {
 
   carouselResponsiveOptions: CarouselResponsiveOptions = [
     {
-      breakpoint: BreakPoint.sm,
-      numVisible: 1,
+      breakpoint: '1570px',
+      numVisible: 4,
       numScroll: 1,
     },
     {
-      breakpoint: BreakPoint.md,
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: BreakPoint.lg,
+      breakpoint: '1200px',
       numVisible: 3,
       numScroll: 1,
     },
     {
-      breakpoint: BreakPoint.xl,
-      numVisible: 4,
+      breakpoint: '960px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '700px',
+      numVisible: 1,
       numScroll: 1,
     },
   ];
