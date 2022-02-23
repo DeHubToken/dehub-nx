@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { YouTubePlayerModule } from '@angular/youtube-player';
-import { YoutubeEmbedComponent } from '@dehub/angular/ui/components/youtube-embed/youtube-embed.component';
-import { YoutubeVideoIdPipeModule } from '@dehub/angular/ui/pipes/youtube-video-id';
+import { YoutubeVideoIdPipeModule } from '../../pipes/youtube-video-id/youtube-video-id.pipe.module';
+import { YoutubeEmbedComponent } from './youtube-embed.component';
 
 @NgModule({
   declarations: [YoutubeEmbedComponent],

@@ -56,13 +56,15 @@ export class YoutubeEmbedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onResize = (): void => {
-    // Automatically expand the video to fit the page up to 1200px x 720px
-    this.videoWidth = Math.min(
-      this.youTubePlayer!.nativeElement.clientWidth,
-      1200
-    );
-    this.videoHeight = this.videoWidth * 0.6;
-    this.cdRef.detectChanges();
+    if (this.youTubePlayer) {
+      // Automatically expand the video to fit the page up to 1200px x 720px
+      this.videoWidth = Math.min(
+        this.youTubePlayer.nativeElement.clientWidth,
+        1200
+      );
+      this.videoHeight = this.videoWidth * 0.6;
+      this.cdRef.detectChanges();
+    }
   };
 
   ngOnDestroy(): void {

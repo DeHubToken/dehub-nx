@@ -87,17 +87,19 @@ export class PageSectionFeaturePostComponent implements OnInit {
   ngOnInit() {}
 
   onPlayClicked() {
-    this.dialogService.open(YoutubeEmbedComponent, {
-      data: {
-        videoUrl: this.featurePost.videoUrl!,
-      },
-      showHeader: true,
-      header: this.featurePost.title,
-      width: '80%',
-      styleClass: 'bg-gradient-2',
-      closeOnEscape: true,
-      dismissableMask: true,
-    });
+    if (this.featurePost.videoUrl) {
+      this.dialogService.open(YoutubeEmbedComponent, {
+        data: {
+          videoUrl: this.featurePost.videoUrl,
+        },
+        showHeader: true,
+        header: this.featurePost.title,
+        width: '80%',
+        styleClass: 'bg-gradient-2',
+        closeOnEscape: true,
+        dismissableMask: true,
+      });
+    }
   }
 
   onCTAClicked(event: Event) {
