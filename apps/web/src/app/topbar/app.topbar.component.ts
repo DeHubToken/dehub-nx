@@ -37,8 +37,10 @@ export class AppTopBarComponent implements OnDestroy {
 
   onDexSelected() {
     this.dialogService.open(BuyDehubFloozComponent, {
-      showHeader: false,
+      showHeader: true,
+      header: 'Decentralised Exchange',
       width: '420px',
+      styleClass: 'bg-gradient-3 border-neon-2',
       closeOnEscape: true,
       dismissableMask: true,
     });
