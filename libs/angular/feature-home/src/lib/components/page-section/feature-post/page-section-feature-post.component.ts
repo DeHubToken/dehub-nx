@@ -1,11 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Inject,
   Input,
   OnInit,
 } from '@angular/core';
 import { YoutubeEmbedComponent } from '@dehub/angular/ui/components/youtube-embed';
 import { FeaturePostFragment } from '@dehub/shared/model';
+import { WINDOW } from '@ng-web-apis/common';
 import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
@@ -21,12 +23,28 @@ import { DialogService } from 'primeng/dynamicdialog';
       styleClass="p-card-shadow mx-3 h-full"
     >
       <ng-template pTemplate="header">
-        <div class="frame" (click)="onPlayClicked()">
-          <i class="fad fa-play-circle"></i>
+        <div
+          *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
+          class="video-frame"
+          (click)="onVideoFrameClicked()"
+        >
           <!-- Video Url -->
-          <ng-container
-            *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
-          >
+
+          <i class="fad fa-play-circle"></i>
+          <img
+            class="video-cover"
+            [src]="
+              'https://i1.ytimg.com/vi/' +
+              (videoUrl | dhbYoutubeVideoId) +
+              '/hqdefault.jpg'
+            "
+            alt="Video Cover Image"
+          />
+        </div>
+
+        <!-- Picture -->
+        <ng-template #showPicture>
+          <ng-container *ngIf="featurePost.picture as picture">
             <img
               class="video-cover"
               [src]="
@@ -37,18 +55,7 @@ import { DialogService } from 'primeng/dynamicdialog';
               alt="Video Cover Image"
             />
           </ng-container>
-
-          <!-- Picture -->
-          <ng-template #showPicture>
-            <ng-container *ngIf="featurePost.picture as picture">
-              <img
-                [dhbContentfulDraft]="picture.sys"
-                [src]="picture.url"
-                [alt]="picture.title"
-              />
-            </ng-container>
-          </ng-template>
-        </div>
+        </ng-template>
       </ng-template>
 
       <!-- Description -->
@@ -70,7 +77,7 @@ import { DialogService } from 'primeng/dynamicdialog';
   `,
   styles: [
     `
-      .frame {
+      .video-frame {
         overflow: hidden;
         position: relative;
         cursor: pointer;
@@ -93,11 +100,14 @@ import { DialogService } from 'primeng/dynamicdialog';
 export class PageSectionFeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
 
-  constructor(private dialogService: DialogService) {}
+  constructor(
+    @Inject(WINDOW) readonly windowRef: Window,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit() {}
 
-  onPlayClicked() {
+  onVideoFrameClicked() {
     if (this.featurePost.videoUrl) {
       this.dialogService.open(YoutubeEmbedComponent, {
         data: {
@@ -116,7 +126,11 @@ export class PageSectionFeaturePostComponent implements OnInit {
   onCTAClicked(event: Event) {
     event.preventDefault();
     if (this.featurePost.callToActionUrl) {
-      window.open(this.featurePost.callToActionUrl);
+      this.windowRef.open(
+        this.featurePost.callToActionUrl,
+        '_blank',
+        'noopener,noreferrer'
+      );
     }
   }
 }
