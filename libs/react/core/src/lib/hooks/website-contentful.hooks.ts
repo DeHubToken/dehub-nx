@@ -173,7 +173,7 @@ export const PageSectionFaQsFragmentDoc = gql`
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
     sys {
-      id
+      ...Sys
     }
     mainTitle
     subtitle
@@ -186,6 +186,7 @@ export const PageHomeFragmentDoc = gql`
       }
     }
   }
+  ${SysFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}

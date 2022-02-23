@@ -14,7 +14,7 @@ import {
 @Component({
   selector: 'dhb-page-section-faqs',
   template: `
-    <div *ngIf="section" class="col-12">
+    <div *ngIf="section" [dhbContentfulDraft]="section.sys" class="col-12">
       <h3 [@bounceInRight]>{{ section.title }}</h3>
 
       <!-- Faq Groups -->

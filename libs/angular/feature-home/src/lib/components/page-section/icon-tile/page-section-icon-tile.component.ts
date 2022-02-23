@@ -9,18 +9,16 @@ import { IconTileFragment } from '@dehub/shared/model';
 @Component({
   selector: 'dhb-page-section-icon-tile',
   template: `
-    <ng-container *ngIf="iconTile">
-      <div [dhbContentfulDraft]="iconTile.sys">
-        <!-- Icon -->
-        <i [class]="iconTile.icon"></i>
+    <div *ngIf="iconTile" [dhbContentfulDraft]="iconTile.sys">
+      <!-- Icon -->
+      <i [class]="iconTile.icon"></i>
 
-        <!-- Title -->
-        <h3>{{ iconTile.title }}</h3>
+      <!-- Title -->
+      <h3>{{ iconTile.title }}</h3>
 
-        <!-- Description -->
-        <p>{{ iconTile.description }}</p>
-      </div>
-    </ng-container>
+      <!-- Description -->
+      <p>{{ iconTile.description }}</p>
+    </div>
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,

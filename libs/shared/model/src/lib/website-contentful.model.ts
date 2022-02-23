@@ -3534,7 +3534,7 @@ export type PageHomeFragment = {
   __typename?: 'PageHome';
   mainTitle?: string | undefined;
   subtitle?: string | undefined;
-  sys: { __typename?: 'Sys'; id: string };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
         __typename?: 'PageHomeSectionsCollection';
@@ -4150,7 +4150,7 @@ export type PageHomeCollectionQuery = {
               __typename?: 'PageHome';
               mainTitle?: string | undefined;
               subtitle?: string | undefined;
-              sys: { __typename?: 'Sys'; id: string };
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
                     __typename?: 'PageHomeSectionsCollection';
@@ -4826,7 +4826,7 @@ export const PageSectionFaQsFragmentDoc = gql`
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
     sys {
-      id
+      ...Sys
     }
     mainTitle
     subtitle
@@ -4839,6 +4839,7 @@ export const PageHomeFragmentDoc = gql`
       }
     }
   }
+  ${SysFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}

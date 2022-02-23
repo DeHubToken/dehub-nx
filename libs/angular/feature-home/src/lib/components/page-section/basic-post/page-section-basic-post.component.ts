@@ -12,10 +12,10 @@ import { BasicPostFragment } from '@dehub/shared/model';
     <p-card
       *ngIf="basicPost"
       [dhbContentfulDraft]="basicPost.sys"
-      header="{{ basicPost.title }}"
-      subheader="{{
-        basicPost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz'
-      }}"
+      [header]="basicPost.title ?? ''"
+      [subheader]="
+        (basicPost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz')!
+      "
       styleClass="p-card-shadow m-3"
     >
       <ng-template pTemplate="header">
@@ -31,9 +31,9 @@ import { BasicPostFragment } from '@dehub/shared/model';
       </p>
       <ng-template pTemplate="footer">
         <p-button
+          [routerLink]="['/news/' + basicPost.slug]"
           label="Read More"
           styleClass="p-button-secondary"
-          [routerLink]="['/news/' + basicPost.slug]"
         ></p-button>
       </ng-template>
     </p-card>

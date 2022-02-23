@@ -11,14 +11,14 @@ import { environment } from '../../environments/environment';
             <div class="col-6">
               <span class="footer-menutitle"></span>
               <ul>
-                <li><a href="{{ landing }}">Disclaimer</a></li>
+                <li><a [href]="landing">Disclaimer</a></li>
                 <li>
-                  <a href="{{ landing }}/privacy-policy">Privacy Policy</a>
+                  <a [href]="landing + '/privacy-policy'">Privacy Policy</a>
                 </li>
                 <li>
-                  <a href="{{ landing }}/terms">Terms & Conditions</a>
+                  <a [href]="landing + '/terms'">Terms & Conditions</a>
                 </li>
-                <li><a href="{{ landing }}/careers">Careers</a></li>
+                <li><a [href]="landing + '/careers'">Careers</a></li>
               </ul>
             </div>
           </div>
