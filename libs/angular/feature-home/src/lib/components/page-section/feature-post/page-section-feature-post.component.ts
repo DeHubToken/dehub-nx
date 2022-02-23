@@ -21,7 +21,8 @@ import { DialogService } from 'primeng/dynamicdialog';
       styleClass="p-card-shadow m-3"
     >
       <ng-template pTemplate="header">
-        <div class="frame">
+        <div class="frame" (click)="onPlayClicked()">
+          <i class="fad fa-play-circle"></i>
           <!-- Video Url -->
           <ng-container
             *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
@@ -34,7 +35,6 @@ import { DialogService } from 'primeng/dynamicdialog';
                 '/hqdefault.jpg'
               "
               alt="Video Cover Image"
-              (click)="onPlayClicked()"
             />
           </ng-container>
 
@@ -71,9 +71,19 @@ import { DialogService } from 'primeng/dynamicdialog';
     `
       .frame {
         overflow: hidden;
+        position: relative;
+        cursor: pointer;
       }
       .video-cover {
         margin: -9.3% 0 -10.5% 0;
+      }
+      .fa-play-circle {
+        font-size: 5em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-shadow: 4px 2px 4px rgb(0 0 0 / 75%);
       }
     `,
   ],
