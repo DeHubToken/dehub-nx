@@ -18,7 +18,7 @@ import { DialogService } from 'primeng/dynamicdialog';
       subheader="{{
         featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz'
       }}"
-      styleClass="p-card-shadow m-3"
+      styleClass="p-card-shadow mx-3 h-full"
     >
       <ng-template pTemplate="header">
         <div class="frame" (click)="onPlayClicked()">
@@ -53,6 +53,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 
       <!-- Description -->
       <p>{{ featurePost.description }}</p>
+
       <ng-template
         *ngIf="
           featurePost.callToActionButtonLabel && featurePost.callToActionUrl

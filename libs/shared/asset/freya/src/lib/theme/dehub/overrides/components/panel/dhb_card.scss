@@ -1,4 +1,16 @@
 .p-card {
   background: $dhb_gradient2;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .p-card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p-card-content {
+    flex-grow: 1;
+  }
 }
