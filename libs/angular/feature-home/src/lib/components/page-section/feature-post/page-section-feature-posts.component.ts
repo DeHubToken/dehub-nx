@@ -24,7 +24,7 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
           *ngIf="featurePosts.length > 0"
           [value]="featurePosts"
           [circular]="featurePosts.length > 1"
-          [autoplayInterval]="3000"
+          [autoplayInterval]="0"
           [numVisible]="3"
           [numScroll]="1"
           [responsiveOptions]="carouselResponsiveOptions"

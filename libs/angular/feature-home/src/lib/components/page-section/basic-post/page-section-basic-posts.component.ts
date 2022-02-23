@@ -24,7 +24,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
           *ngIf="basicPosts.length > 0"
           [value]="basicPosts"
           [circular]="basicPosts.length > 1"
-          [autoplayInterval]="3000"
+          [autoplayInterval]="0"
           [numVisible]="5"
           [numScroll]="1"
           [responsiveOptions]="carouselResponsiveOptions"
