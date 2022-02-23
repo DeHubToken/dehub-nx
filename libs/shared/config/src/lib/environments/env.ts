@@ -44,6 +44,8 @@ export interface SharedEnv {
 
   /** DeHUB URLs */
   dehub: {
+    /** CEX trade */
+    cexUrl: string;
     /** Official DeHUB landing page */
     landing: string;
     /** Official DeHUB dapp pages */
@@ -81,6 +83,7 @@ export const defaultSharedEnv: SharedEnv = {
   baseUrl: '',
 
   dehub: {
+    cexUrl: 'https://www.gate.io/trade/DEHUB_USDT',
     landing: 'https://dehub.net',
     dapps: {
       landing: 'https://dapps.dehub.net',

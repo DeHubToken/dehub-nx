@@ -5,7 +5,9 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { EnvToken } from '@dehub/angular/core';
+import { BuyDehubFloozComponent } from '@dehub/angular/ui/components/buy-dehub-flooz';
 import { MenuItem } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
@@ -23,13 +25,26 @@ export class AppTopBarComponent implements OnDestroy {
 
   path = this.env.baseUrl;
   chainId = this.env.web3.chainId;
+  cexUrl = this.env.dehub.cexUrl;
   isDev = this.env.env === 'dev';
 
   constructor(
     @Inject(EnvToken) private env: Env,
     public app: AppComponent,
-    public appMain: AppMainComponent
+    public appMain: AppMainComponent,
+    private dialogService: DialogService
   ) {}
+
+  onDexSelected() {
+    this.dialogService.open(BuyDehubFloozComponent, {
+      showHeader: true,
+      header: 'Decentralised Exchange',
+      width: '420px',
+      styleClass: 'bg-gradient-3 border-neon-2',
+      closeOnEscape: true,
+      dismissableMask: true,
+    });
+  }
 
   ngOnDestroy() {
     if (this.subscription) {
