@@ -20,4 +20,4 @@ import { BasicPostComponent } from './basic-post.component';
   ],
   exports: [BasicPostComponent],
 })
-export class BasicPostComponentModule {}
+export class BasicPostModule {}

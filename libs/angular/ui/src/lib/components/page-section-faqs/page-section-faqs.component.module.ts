@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
-import { FaqGroupComponentModule } from '../faq-group';
+import { FaqGroupModule } from '../faq-group';
 import { PageSectionFaQsComponent } from './page-section-faqs.component';
 
 @NgModule({
@@ -12,8 +12,8 @@ import { PageSectionFaQsComponent } from './page-section-faqs.component';
 
     // Libs
     ContentfulDraftDirectiveModule,
-    FaqGroupComponentModule,
+    FaqGroupModule,
   ],
   exports: [PageSectionFaQsComponent],
 })
-export class PageSectionFaQsComponentModule {}
+export class PageSectionFaQsModule {}

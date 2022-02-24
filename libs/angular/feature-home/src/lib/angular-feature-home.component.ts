@@ -7,6 +7,7 @@ import {
 import { EnvToken, PageHomeCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import {
+  CarouselResponsiveOptions,
   PageHomeFragment,
   PageSectionBasicPostsFragment,
   PageSectionFaQsFragment,
@@ -40,16 +41,17 @@ type PageHomeSectionsItemType =
       <!-- Page Sections -->
       <ng-container *ngFor="let section of pageHome.sectionsCollection?.items">
         <!-- Feature Posts -->
-        <ng-container *ngIf="isPageSectionFeaturePosts(section)">
-          <dhb-page-section-feature-posts
-            [section]="section"
-          ></dhb-page-section-feature-posts>
-        </ng-container>
+        <dhb-page-section-feature-posts
+          *ngIf="isPageSectionFeaturePosts(section)"
+          [section]="section"
+          [carouselResponsiveOptions]="featurePostsResponsiveOptions"
+        ></dhb-page-section-feature-posts>
 
         <!-- Basic Posts -->
         <dhb-page-section-basic-posts
           *ngIf="isPageSectionBasicPosts(section)"
           [section]="section"
+          [carouselResponsiveOptions]="basicPostsResponsiveOptions"
         ></dhb-page-section-basic-posts>
 
         <!-- Icon Tiles -->
@@ -75,6 +77,42 @@ type PageHomeSectionsItemType =
 })
 export class AngularFeatureHomeComponent implements OnInit {
   pageHome$?: Observable<PageHomeFragment | undefined>;
+
+  featurePostsResponsiveOptions: CarouselResponsiveOptions = [
+    {
+      breakpoint: '1290px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '960px',
+      numVisible: 1.15,
+      numScroll: 1.15,
+    },
+  ];
+
+  basicPostsResponsiveOptions: CarouselResponsiveOptions = [
+    {
+      breakpoint: '1570px',
+      numVisible: 4,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '1200px',
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '960px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '700px',
+      numVisible: 1.15,
+      numScroll: 1.15,
+    },
+  ];
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

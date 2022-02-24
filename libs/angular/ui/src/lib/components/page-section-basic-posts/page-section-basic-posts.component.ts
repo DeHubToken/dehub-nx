@@ -47,31 +47,9 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
 })
 export class PageSectionBasicPostsComponent implements OnInit {
   @Input() section!: PageSectionBasicPostsFragment;
+  @Input() carouselResponsiveOptions: CarouselResponsiveOptions = [];
 
   basicPosts: BasicPostFragment[] = [];
-
-  carouselResponsiveOptions: CarouselResponsiveOptions = [
-    {
-      breakpoint: '1570px',
-      numVisible: 4,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '1200px',
-      numVisible: 3,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '960px',
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '700px',
-      numVisible: 1.15,
-      numScroll: 1.15,
-    },
-  ];
 
   constructor() {}
 

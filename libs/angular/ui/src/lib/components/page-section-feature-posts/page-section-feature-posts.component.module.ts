@@ -1,0 +1,23 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CarouselModule } from 'primeng/carousel';
+import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
+import { FeaturePostModule } from '../feature-post';
+import { PageSectionFeaturePostsComponent } from './page-section-feature-posts.component';
+
+@NgModule({
+  declarations: [PageSectionFeaturePostsComponent],
+  imports: [
+    // Angular
+    CommonModule,
+
+    // PrimeNg
+    CarouselModule,
+
+    // Libs
+    ContentfulDraftDirectiveModule,
+    FeaturePostModule,
+  ],
+  exports: [PageSectionFeaturePostsComponent],
+})
+export class PageSectionFeaturePostsModule {}

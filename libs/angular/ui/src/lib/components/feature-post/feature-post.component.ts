@@ -5,13 +5,13 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { YoutubeEmbedComponent } from '@dehub/angular/ui/components/youtube-embed';
 import { FeaturePostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
 import { DialogService } from 'primeng/dynamicdialog';
+import { YoutubeEmbedComponent } from '../youtube-embed';
 
 @Component({
-  selector: 'dhb-page-section-feature-post',
+  selector: 'dhb-feature-post',
   template: `
     <p-card
       *ngIf="featurePost"
@@ -93,7 +93,7 @@ import { DialogService } from 'primeng/dynamicdialog';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageSectionFeaturePostComponent implements OnInit {
+export class FeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
 
   constructor(
