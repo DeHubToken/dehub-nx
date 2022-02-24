@@ -13,6 +13,7 @@ import {
   PageSectionFaQsFragment,
   PageSectionFeaturePostsFragment,
   PageSectionIconTilesFragment,
+  SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import {
   bounceInLeftOnEnterAnimation,
@@ -44,7 +45,7 @@ type PageHomeSectionsItemType =
         <dhb-page-section-feature-posts
           *ngIf="isPageSectionFeaturePosts(section)"
           [section]="section"
-          [carouselResponsiveOptions]="featurePostsResponsiveOptions"
+          [swiperResponsiveOptions]="featurePostsResponsiveOptions"
         ></dhb-page-section-feature-posts>
 
         <!-- Basic Posts -->
@@ -78,18 +79,24 @@ type PageHomeSectionsItemType =
 export class AngularFeatureHomeComponent implements OnInit {
   pageHome$?: Observable<PageHomeFragment | undefined>;
 
-  featurePostsResponsiveOptions: CarouselResponsiveOptions = [
-    {
-      breakpoint: '1290px',
-      numVisible: 2,
-      numScroll: 1,
+  featurePostsResponsiveOptions: SwiperResponsiveOptions = {
+    '1300': {
+      slidesPerView: 4,
+      spaceBetween: 20,
     },
-    {
-      breakpoint: '960px',
-      numVisible: 1.15,
-      numScroll: 1.15,
+    '960': {
+      slidesPerView: 3,
+      spaceBetween: 20,
     },
-  ];
+    '620': {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    '320': {
+      slidesPerView: 1.15,
+      spaceBetween: 20,
+    },
+  };
 
   basicPostsResponsiveOptions: CarouselResponsiveOptions = [
     {

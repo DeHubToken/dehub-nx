@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CarouselModule } from 'primeng/carousel';
+import { SwiperModule } from 'swiper/angular';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
 import { FeaturePostModule } from '../feature-post';
 import { PageSectionFeaturePostsComponent } from './page-section-feature-posts.component';
@@ -11,8 +11,8 @@ import { PageSectionFeaturePostsComponent } from './page-section-feature-posts.c
     // Angular
     CommonModule,
 
-    // PrimeNg
-    CarouselModule,
+    // Swiper
+    SwiperModule,
 
     // Libs
     ContentfulDraftDirectiveModule,
