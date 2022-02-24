@@ -15,29 +15,30 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
 @Component({
   selector: 'dhb-page-section-basic-posts',
   template: `
-    <div *ngIf="section" [dhbContentfulDraft]="section.sys" class="col-12">
-      <h3 [@bounceInRight]>{{ section.title }}</h3>
+    <div
+      *ngIf="section"
+      [dhbContentfulDraft]="section.sys"
+      [@bounceInRight]
+      class="col-12"
+    >
+      <h3>{{ section.title }}</h3>
 
       <!-- Basic Posts -->
-      <div [@bounceInRight]>
-        <p-carousel
-          *ngIf="basicPosts.length > 0"
-          [value]="basicPosts"
-          [circular]="false"
-          [autoplayInterval]="0"
-          [numVisible]="5"
-          [numScroll]="1"
-          [responsiveOptions]="carouselResponsiveOptions"
-        >
-          <ng-template let-basicPost pTemplate="item">
-            <div class="">
-              <dhb-page-section-basic-post
-                [basicPost]="basicPost"
-              ></dhb-page-section-basic-post>
-            </div>
-          </ng-template>
-        </p-carousel>
-      </div>
+      <p-carousel
+        *ngIf="basicPosts.length > 0"
+        [value]="basicPosts"
+        [circular]="false"
+        [autoplayInterval]="0"
+        [numVisible]="5"
+        [numScroll]="1"
+        [responsiveOptions]="carouselResponsiveOptions"
+      >
+        <ng-template let-basicPost pTemplate="item">
+          <div class="">
+            <dhb-basic-post [basicPost]="basicPost"></dhb-basic-post>
+          </div>
+        </ng-template>
+      </p-carousel>
     </div>
   `,
   styles: [``],

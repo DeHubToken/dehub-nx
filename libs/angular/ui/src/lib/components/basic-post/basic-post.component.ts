@@ -7,7 +7,7 @@ import {
 import { BasicPostFragment } from '@dehub/shared/model';
 
 @Component({
-  selector: 'dhb-page-section-basic-post',
+  selector: 'dhb-basic-post',
   template: `
     <p-card
       *ngIf="basicPost"
@@ -41,7 +41,7 @@ import { BasicPostFragment } from '@dehub/shared/model';
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageSectionBasicPostComponent implements OnInit {
+export class BasicPostComponent implements OnInit {
   @Input() basicPost!: BasicPostFragment;
 
   constructor() {}

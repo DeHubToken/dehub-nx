@@ -47,11 +47,10 @@ type PageHomeSectionsItemType =
         </ng-container>
 
         <!-- Basic Posts -->
-        <ng-container *ngIf="isPageSectionBasicPosts(section)">
-          <dhb-page-section-basic-posts
-            [section]="section"
-          ></dhb-page-section-basic-posts>
-        </ng-container>
+        <dhb-page-section-basic-posts
+          *ngIf="isPageSectionBasicPosts(section)"
+          [section]="section"
+        ></dhb-page-section-basic-posts>
 
         <!-- Icon Tiles -->
         <dhb-page-section-icon-tiles
