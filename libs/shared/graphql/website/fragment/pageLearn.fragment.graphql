@@ -1,6 +1,6 @@
 fragment PageLearn on PageLearn {
   sys {
-    id
+    ...Sys
   }
   mainTitle
   subtitle
