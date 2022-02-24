@@ -74,6 +74,9 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
   `,
   styles: [
     `
+      :host {
+        display: flex;
+      }
       .video-frame {
         overflow: hidden;
         position: relative;
