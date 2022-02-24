@@ -14,8 +14,13 @@ import {
 @Component({
   selector: 'dhb-page-section-faqs',
   template: `
-    <div *ngIf="section" [dhbContentfulDraft]="section.sys" class="col-12">
-      <h3 [@bounceInRight]>{{ section.title }}</h3>
+    <div
+      *ngIf="section"
+      [dhbContentfulDraft]="section.sys"
+      [@bounceInRight]
+      class="col-12"
+    >
+      <h3>{{ section.title }}</h3>
 
       <!-- Faq Groups -->
       <div class="grid">
@@ -24,9 +29,7 @@ import {
           [@bounceInUp]="{ value: '', params: { delay: i * 100 } }"
           class="col-12 md:col-6"
         >
-          <dhb-page-section-faq-group
-            [faqGroup]="faqGroup"
-          ></dhb-page-section-faq-group>
+          <dhb-faq-group [faqGroup]="faqGroup"></dhb-faq-group>
         </div>
       </div>
     </div>

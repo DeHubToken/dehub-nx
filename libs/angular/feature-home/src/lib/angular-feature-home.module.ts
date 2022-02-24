@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PageSectionFaQsComponentModule } from '@dehub/angular/ui/components/page-section-faqs';
 import { PageSectionIconTilesComponentModule } from '@dehub/angular/ui/components/page-section-icon-tiles';
 import { YoutubeEmbedModule } from '@dehub/angular/ui/components/youtube-embed';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { YoutubeVideoIdPipeModule } from '@dehub/angular/ui/pipes/youtube-video-id';
-import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { CarouselModule } from 'primeng/carousel';
@@ -15,10 +15,6 @@ import {
   PageSectionBasicPostComponent,
   PageSectionBasicPostsComponent,
 } from './components/page-section/basic-post';
-import {
-  PageSectionFaqGroupComponent,
-  PageSectionFaQsComponent,
-} from './components/page-section/faqs';
 import {
   PageSectionFeaturePostComponent,
   PageSectionFeaturePostsComponent,
@@ -33,10 +29,10 @@ import {
     YoutubeVideoIdPipeModule,
     YoutubeEmbedModule,
     PageSectionIconTilesComponentModule,
+    PageSectionFaQsComponentModule,
 
     // PrimeNg Modules
     ButtonModule,
-    AccordionModule,
     CarouselModule,
     CardModule,
 
@@ -50,8 +46,6 @@ import {
     PageSectionFeaturePostComponent,
     PageSectionBasicPostsComponent,
     PageSectionBasicPostComponent,
-    PageSectionFaQsComponent,
-    PageSectionFaqGroupComponent,
   ],
   providers: [DialogService],
 })
