@@ -13,63 +13,64 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
 @Component({
   selector: 'dhb-feature-post',
   template: `
-    <p-card
-      *ngIf="featurePost"
-      [dhbContentfulDraft]="featurePost.sys"
-      [header]="featurePost.title ?? ''"
-      [subheader]="
-        (featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz')!
-      "
-      styleClass="p-card-shadow h-full"
-    >
-      <ng-template pTemplate="header">
-        <div
-          *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
-          (click)="onVideoFrameClicked()"
-          class="video-frame"
-        >
-          <!-- Video Url -->
-
-          <i class="fad fa-play-circle"></i>
-          <img
-            [src]="
-              'https://i1.ytimg.com/vi/' +
-              (videoUrl | dhbYoutubeVideoId) +
-              '/hqdefault.jpg'
-            "
-            alt="Video Cover Image"
-            class="video-cover"
-          />
-        </div>
-
-        <!-- Picture -->
-        <ng-template #showPicture>
-          <ng-container *ngIf="featurePost.picture as picture">
-            <img
-              [dhbContentfulDraft]="picture.sys"
-              [src]="picture.url"
-              [alt]="picture.title"
-            />
-          </ng-container>
-        </ng-template>
-      </ng-template>
-
-      <!-- Description -->
-      <p>{{ featurePost.description }}</p>
-
-      <ng-template
-        *ngIf="
-          featurePost.callToActionButtonLabel && featurePost.callToActionUrl
+    <div [dhbContentfulDraft]="featurePost.sys">
+      <p-card
+        *ngIf="featurePost"
+        [header]="featurePost.title ?? ''"
+        [subheader]="
+          (featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz')!
         "
-        pTemplate="footer"
+        styleClass="p-card-shadow h-full"
       >
-        <p-button
-          [label]="featurePost.callToActionButtonLabel"
-          (onClick)="onCTAClicked($event)"
-          styleClass="p-button-primary p-button-lg p-button-raised"
-        ></p-button>
-      </ng-template>
-    </p-card>
+        <ng-template pTemplate="header">
+          <div
+            *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
+            (click)="onVideoFrameClicked()"
+            class="video-frame"
+          >
+            <!-- Video Url -->
+
+            <i class="fad fa-play-circle"></i>
+            <img
+              [src]="
+                'https://i1.ytimg.com/vi/' +
+                (videoUrl | dhbYoutubeVideoId) +
+                '/hqdefault.jpg'
+              "
+              alt="Video Cover Image"
+              class="video-cover"
+            />
+          </div>
+
+          <!-- Picture -->
+          <ng-template #showPicture>
+            <ng-container *ngIf="featurePost.picture as picture">
+              <img
+                [dhbContentfulDraft]="picture.sys"
+                [src]="picture.url"
+                [alt]="picture.title"
+              />
+            </ng-container>
+          </ng-template>
+        </ng-template>
+
+        <!-- Description -->
+        <p>{{ featurePost.description }}</p>
+
+        <ng-template
+          *ngIf="
+            featurePost.callToActionButtonLabel && featurePost.callToActionUrl
+          "
+          pTemplate="footer"
+        >
+          <p-button
+            [label]="featurePost.callToActionButtonLabel"
+            (onClick)="onCTAClicked($event)"
+            styleClass="p-button-primary p-button-lg p-button-raised"
+          ></p-button>
+        </ng-template>
+      </p-card>
+    </div>
   `,
   styles: [
     `

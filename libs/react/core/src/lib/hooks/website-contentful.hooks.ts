@@ -195,7 +195,7 @@ export const PageHomeFragmentDoc = gql`
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
     sys {
-      id
+      ...Sys
     }
     mainTitle
     subtitle
@@ -208,6 +208,7 @@ export const PageLearnFragmentDoc = gql`
       }
     }
   }
+  ${SysFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
