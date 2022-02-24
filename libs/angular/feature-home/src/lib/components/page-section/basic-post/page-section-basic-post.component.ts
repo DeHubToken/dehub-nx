@@ -16,7 +16,7 @@ import { BasicPostFragment } from '@dehub/shared/model';
       [subheader]="
         (basicPost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz')!
       "
-      styleClass="p-card-shadow m-3"
+      styleClass="p-card-shadow mx-2 md:mx-3"
     >
       <ng-template pTemplate="header">
         <img

@@ -23,7 +23,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
         <p-carousel
           *ngIf="basicPosts.length > 0"
           [value]="basicPosts"
-          [circular]="basicPosts.length > 1"
+          [circular]="false"
           [autoplayInterval]="0"
           [numVisible]="5"
           [numScroll]="1"
@@ -67,8 +67,8 @@ export class PageSectionBasicPostsComponent implements OnInit {
     },
     {
       breakpoint: '700px',
-      numVisible: 1,
-      numScroll: 1,
+      numVisible: 1.15,
+      numScroll: 1.15,
     },
   ];
 
