@@ -102,7 +102,6 @@ SwiperCore.use([Navigation]);
     `,
   ],
   encapsulation: ViewEncapsulation.None,
-  // styleUrls: ['./page-section-feature-posts.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
 })
