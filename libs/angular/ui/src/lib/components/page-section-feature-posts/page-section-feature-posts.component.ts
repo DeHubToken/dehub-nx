@@ -15,27 +15,28 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 @Component({
   selector: 'dhb-page-section-feature-posts',
   template: `
-    <div *ngIf="section" [dhbContentfulDraft]="section.sys" class="col-12">
-      <h3 [@bounceInLeft]>{{ section.title }}</h3>
+    <div
+      *ngIf="section"
+      [dhbContentfulDraft]="section.sys"
+      [@bounceInLeft]
+      class="col-12"
+    >
+      <h3>{{ section.title }}</h3>
 
       <!-- Feature Posts -->
-      <div [@bounceInLeft]>
-        <p-carousel
-          *ngIf="featurePosts.length > 0"
-          [value]="featurePosts"
-          [circular]="false"
-          [autoplayInterval]="0"
-          [numVisible]="4"
-          [numScroll]="1"
-          [responsiveOptions]="carouselResponsiveOptions"
-        >
-          <ng-template let-featurePost pTemplate="item">
-            <dhb-page-section-feature-post
-              [featurePost]="featurePost"
-            ></dhb-page-section-feature-post>
-          </ng-template>
-        </p-carousel>
-      </div>
+      <p-carousel
+        *ngIf="featurePosts.length > 0"
+        [value]="featurePosts"
+        [circular]="false"
+        [autoplayInterval]="0"
+        [numVisible]="4"
+        [numScroll]="1"
+        [responsiveOptions]="carouselResponsiveOptions"
+      >
+        <ng-template let-featurePost pTemplate="item">
+          <dhb-feature-post [featurePost]="featurePost"></dhb-feature-post>
+        </ng-template>
+      </p-carousel>
     </div>
   `,
   styles: [``],

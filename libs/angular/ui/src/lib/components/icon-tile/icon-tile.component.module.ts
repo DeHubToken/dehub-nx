@@ -14,4 +14,4 @@ import { IconTileComponent } from './icon-tile.component';
   ],
   exports: [IconTileComponent],
 })
-export class IconTileComponentModule {}
+export class IconTileModule {}

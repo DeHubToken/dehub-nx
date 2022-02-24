@@ -18,4 +18,4 @@ import { FaqGroupComponent } from './faq-group.component';
   ],
   exports: [FaqGroupComponent],
 })
-export class FaqGroupComponentModule {}
+export class FaqGroupModule {}

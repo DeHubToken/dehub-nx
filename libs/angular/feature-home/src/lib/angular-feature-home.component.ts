@@ -40,11 +40,10 @@ type PageHomeSectionsItemType =
       <!-- Page Sections -->
       <ng-container *ngFor="let section of pageHome.sectionsCollection?.items">
         <!-- Feature Posts -->
-        <ng-container *ngIf="isPageSectionFeaturePosts(section)">
-          <dhb-page-section-feature-posts
-            [section]="section"
-          ></dhb-page-section-feature-posts>
-        </ng-container>
+        <dhb-page-section-feature-posts
+          *ngIf="isPageSectionFeaturePosts(section)"
+          [section]="section"
+        ></dhb-page-section-feature-posts>
 
         <!-- Basic Posts -->
         <dhb-page-section-basic-posts

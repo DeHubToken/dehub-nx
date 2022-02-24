@@ -1,27 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { CarouselModule } from 'primeng/carousel';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
-import { BasicPostModule } from '../basic-post';
-import { PageSectionBasicPostsComponent } from './page-section-basic-posts.component';
+import { YoutubeVideoIdPipeModule } from '../../pipes/youtube-video-id';
+import { YoutubeEmbedModule } from '../youtube-embed';
+import { FeaturePostComponent } from './feature-post.component';
 
 @NgModule({
-  declarations: [PageSectionBasicPostsComponent],
+  declarations: [FeaturePostComponent],
   imports: [
     // Angular
     CommonModule,
     RouterModule,
 
     // PrimeNg
+    ButtonModule,
     CardModule,
-    CarouselModule,
 
     // Libs
     ContentfulDraftDirectiveModule,
-    BasicPostModule,
+    YoutubeEmbedModule,
+    YoutubeVideoIdPipeModule,
   ],
-  exports: [PageSectionBasicPostsComponent],
+  exports: [FeaturePostComponent],
 })
-export class PageSectionBasicPostsModule {}
+export class FeaturePostModule {}
