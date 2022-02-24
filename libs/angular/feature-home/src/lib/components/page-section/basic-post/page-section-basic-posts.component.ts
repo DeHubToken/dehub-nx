@@ -23,7 +23,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
         <p-carousel
           *ngIf="basicPosts.length > 0"
           [value]="basicPosts"
-          [circular]="basicPosts.length > 1"
+          [circular]="false"
           [autoplayInterval]="0"
           [numVisible]="5"
           [numScroll]="1"

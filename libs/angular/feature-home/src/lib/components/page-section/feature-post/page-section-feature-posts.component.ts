@@ -23,7 +23,7 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
         <p-carousel
           *ngIf="featurePosts.length > 0"
           [value]="featurePosts"
-          [circular]="featurePosts.length > 1"
+          [circular]="false"
           [autoplayInterval]="0"
           [numVisible]="4"
           [numScroll]="1"
