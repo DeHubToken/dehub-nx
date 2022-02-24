@@ -4,6 +4,11 @@
     .p-carousel-content {
       .p-carousel-items-content {
         overflow-x: scroll;
+        .p-carousel-items-container {
+          .p-carousel-item-cloned {
+            display: none;
+          }
+        }
       }
       .p-carousel-prev,
       .p-carousel-next {
