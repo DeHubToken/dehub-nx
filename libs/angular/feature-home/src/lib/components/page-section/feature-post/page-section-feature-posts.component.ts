@@ -15,7 +15,7 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 @Component({
   selector: 'dhb-page-section-feature-posts',
   template: `
-    <div *ngIf="section" class="col-12">
+    <div *ngIf="section" [dhbContentfulDraft]="section.sys" class="col-12">
       <h3 [@bounceInLeft]>{{ section.title }}</h3>
 
       <!-- Feature Posts -->

@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-02-22T14:45:01.179Z",
+  "__export_date": "2022-02-23T19:44:55.387Z",
   "__export_source": "insomnia.desktop.app:v2021.7.2",
   "resources": [
     {
@@ -13230,7 +13230,7 @@
     {
       "_id": "req_08a838d14c4d490fb42a02079a602fc2",
       "parentId": "fld_1554157532264422802883df85b58e34",
-      "modified": 1645541052303,
+      "modified": 1645643770271,
       "created": 1645018936768,
       "url": "{{ _.graphQLEndpint }}",
       "name": "PageHomeCollectionBySections",
@@ -13274,7 +13274,7 @@
     {
       "_id": "req_089193e9aef34c06834c9c5aacd0a2d0",
       "parentId": "fld_1554157532264422802883df85b58e34",
-      "modified": 1645541040049,
+      "modified": 1645645481436,
       "created": 1645022662646,
       "url": "{{ _.graphQLEndpint }}",
       "name": "PageHomeCollection",
@@ -13282,7 +13282,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/graphql",
-        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment BasicPost on BasicPost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\tmainPicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\tsummary\\n\\tslug\\n}\\n\\nfragment FeaturePost on FeaturePost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tvideoUrl\\n\\tpicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\ttitle\\n\\tdescription\\n\\tcallToActionUrl\\n\\tcallToActionButtonLabel\\n}\\n\\nfragment IconTile on IconTile {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ticon\\n\\ttitle\\n\\tdescription\\n}\\n\\nfragment FaqGroup on FaqGroup {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tname\\n\\tfaqItemCollection(limit: 50, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqItem\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment FaqItem on FaqItem {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tquestion\\n\\tanswer\\n}\\n\\nfragment PageSectionFeaturePosts on PageSectionFeaturePosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FeaturePost\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionBasicPosts on PageSectionBasicPosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...BasicPost\\n\\t\\t}\\n\\t}\\n\\tpostsByCategory {\\n\\t\\tlinkedFrom {\\n\\t\\t\\tbasicPostCollection(limit: 20, preview: $isPreview) {\\n\\t\\t\\t\\titems {\\n\\t\\t\\t\\t\\t...BasicPost\\n\\t\\t\\t\\t}\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionIconTiles on PageSectionIconTiles {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedIconTilesCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...IconTile\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionFaQs on PageSectionFaQs {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqGroup\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageHome on PageHome {\\n\\tsys {\\n\\t\\tid\\n\\t}\\n\\tmainTitle\\n\\tsubtitle\\n\\tsectionsCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...PageSectionFeaturePosts\\n\\t\\t\\t...PageSectionBasicPosts\\n\\t\\t\\t...PageSectionIconTiles\\n\\t\\t\\t...PageSectionFaQs\\n\\t\\t}\\n\\t}\\n}\\n\\nquery pageHomeCollection($isPreview: Boolean = false) {\\n\\tpageHomeCollection(limit: 2, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...PageHome\\n\\t\\t}\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":true}}"
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment BasicPost on BasicPost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\tmainPicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\tsummary\\n\\tslug\\n}\\n\\nfragment FeaturePost on FeaturePost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tvideoUrl\\n\\tpicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\ttitle\\n\\tdescription\\n\\tcallToActionUrl\\n\\tcallToActionButtonLabel\\n}\\n\\nfragment IconTile on IconTile {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ticon\\n\\ttitle\\n\\tdescription\\n}\\n\\nfragment FaqGroup on FaqGroup {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tname\\n\\tfaqItemCollection(limit: 50, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqItem\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment FaqItem on FaqItem {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tquestion\\n\\tanswer\\n}\\n\\nfragment PageSectionFeaturePosts on PageSectionFeaturePosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FeaturePost\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionBasicPosts on PageSectionBasicPosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...BasicPost\\n\\t\\t}\\n\\t}\\n\\tpostsByCategory {\\n\\t\\tlinkedFrom {\\n\\t\\t\\tbasicPostCollection(limit: 20, preview: $isPreview) {\\n\\t\\t\\t\\titems {\\n\\t\\t\\t\\t\\t...BasicPost\\n\\t\\t\\t\\t}\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionIconTiles on PageSectionIconTiles {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedIconTilesCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...IconTile\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionFaQs on PageSectionFaQs {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqGroup\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageHome on PageHome {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tmainTitle\\n\\tsubtitle\\n\\tsectionsCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...PageSectionFeaturePosts\\n\\t\\t\\t...PageSectionBasicPosts\\n\\t\\t\\t...PageSectionIconTiles\\n\\t\\t\\t...PageSectionFaQs\\n\\t\\t}\\n\\t}\\n}\\n\\nquery pageHomeCollection($isPreview: Boolean = false) {\\n\\tpageHomeCollection(limit: 2, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...PageHome\\n\\t\\t}\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":true}}"
       },
       "parameters": [],
       "headers": [

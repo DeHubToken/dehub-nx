@@ -16,29 +16,29 @@ import { DialogService } from 'primeng/dynamicdialog';
     <p-card
       *ngIf="featurePost"
       [dhbContentfulDraft]="featurePost.sys"
-      header="{{ featurePost.title }}"
-      subheader="{{
-        featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz'
-      }}"
+      [header]="featurePost.title ?? ''"
+      [subheader]="
+        (featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz')!
+      "
       styleClass="p-card-shadow mx-2 md:mx-3 h-full"
     >
       <ng-template pTemplate="header">
         <div
           *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
-          class="video-frame"
           (click)="onVideoFrameClicked()"
+          class="video-frame"
         >
           <!-- Video Url -->
 
           <i class="fad fa-play-circle"></i>
           <img
-            class="video-cover"
             [src]="
               'https://i1.ytimg.com/vi/' +
               (videoUrl | dhbYoutubeVideoId) +
               '/hqdefault.jpg'
             "
             alt="Video Cover Image"
+            class="video-cover"
           />
         </div>
 
@@ -64,9 +64,9 @@ import { DialogService } from 'primeng/dynamicdialog';
         pTemplate="footer"
       >
         <p-button
-          label="{{ featurePost.callToActionButtonLabel }}"
-          styleClass="p-button-primary p-button-lg p-button-raised"
+          [label]="featurePost.callToActionButtonLabel"
           (onClick)="onCTAClicked($event)"
+          styleClass="p-button-primary p-button-lg p-button-raised"
         ></p-button>
       </ng-template>
     </p-card>

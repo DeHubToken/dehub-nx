@@ -14,19 +14,22 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 @Component({
   selector: 'dhb-page-section-icon-tiles',
   template: `
-    <div *ngIf="section" class="col-12">
-      <h3 [@fadeInUp]>{{ section.title }}</h3>
+    <div
+      *ngIf="section"
+      [dhbContentfulDraft]="section.sys"
+      [@fadeInUp]
+      class="col-12"
+    >
+      <h3>{{ section.title }}</h3>
 
       <!-- Icon Tiles -->
       <div class="grid">
         <div
           *ngFor="let iconTile of iconTiles; let i = index"
-          [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
           class="col-12 md:col-3"
         >
-          <dhb-page-section-icon-tile
-            [iconTile]="iconTile"
-          ></dhb-page-section-icon-tile>
+          <dhb-icon-tile [iconTile]="iconTile"></dhb-icon-tile>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 fragment PageHome on PageHome {
   sys {
-    id
+    ...Sys
   }
   mainTitle
   subtitle

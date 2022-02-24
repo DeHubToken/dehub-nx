@@ -54,16 +54,16 @@ type PageHomeSectionsItemType =
         </ng-container>
 
         <!-- Icon Tiles -->
-        <ng-container *ngIf="isPageSectionIconTiles(section)">
-          <dhb-page-section-icon-tiles
-            [section]="section"
-          ></dhb-page-section-icon-tiles>
-        </ng-container>
+        <dhb-page-section-icon-tiles
+          *ngIf="isPageSectionIconTiles(section)"
+          [section]="section"
+        ></dhb-page-section-icon-tiles>
 
         <!-- FaQs -->
-        <ng-container *ngIf="isPageSectionFaQs(section)">
-          <dhb-page-section-faqs [section]="section"></dhb-page-section-faqs>
-        </ng-container>
+        <dhb-page-section-faqs
+          *ngIf="isPageSectionFaQs(section)"
+          [section]="section"
+        ></dhb-page-section-faqs>
       </ng-container>
     </ng-container>
   `,
