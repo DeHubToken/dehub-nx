@@ -3719,7 +3719,7 @@ export type PageLearnFragment = {
   __typename?: 'PageLearn';
   mainTitle?: string | undefined;
   subtitle?: string | undefined;
-  sys: { __typename?: 'Sys'; id: string };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
         __typename?: 'PageLearnSectionsCollection';
@@ -4374,7 +4374,7 @@ export type PageLearnCollectionQuery = {
               __typename?: 'PageLearn';
               mainTitle?: string | undefined;
               subtitle?: string | undefined;
-              sys: { __typename?: 'Sys'; id: string };
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
                     __typename?: 'PageLearnSectionsCollection';
@@ -4848,7 +4848,7 @@ export const PageHomeFragmentDoc = gql`
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
     sys {
-      id
+      ...Sys
     }
     mainTitle
     subtitle
@@ -4861,6 +4861,7 @@ export const PageLearnFragmentDoc = gql`
       }
     }
   }
+  ${SysFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
