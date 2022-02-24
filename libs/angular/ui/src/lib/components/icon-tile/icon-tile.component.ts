@@ -7,7 +7,7 @@ import {
 import { IconTileFragment } from '@dehub/shared/model';
 
 @Component({
-  selector: 'dhb-page-section-icon-tile',
+  selector: 'dhb-icon-tile',
   template: `
     <div *ngIf="iconTile" [dhbContentfulDraft]="iconTile.sys">
       <!-- Icon -->
@@ -23,7 +23,7 @@ import { IconTileFragment } from '@dehub/shared/model';
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageSectionIconTileComponent implements OnInit {
+export class IconTileComponent implements OnInit {
   @Input() iconTile!: IconTileFragment;
 
   constructor() {}

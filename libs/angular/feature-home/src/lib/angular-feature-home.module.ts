@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PageSectionIconTilesComponentModule } from '@dehub/angular/ui/components/page-section-icon-tiles';
 import { YoutubeEmbedModule } from '@dehub/angular/ui/components/youtube-embed';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { YoutubeVideoIdPipeModule } from '@dehub/angular/ui/pipes/youtube-video-id';
@@ -22,10 +23,6 @@ import {
   PageSectionFeaturePostComponent,
   PageSectionFeaturePostsComponent,
 } from './components/page-section/feature-post';
-import {
-  PageSectionIconTileComponent,
-  PageSectionIconTilesComponent,
-} from './components/page-section/icon-tile';
 @NgModule({
   imports: [
     // Angular Modules
@@ -35,6 +32,7 @@ import {
     ContentfulDraftDirectiveModule,
     YoutubeVideoIdPipeModule,
     YoutubeEmbedModule,
+    PageSectionIconTilesComponentModule,
 
     // PrimeNg Modules
     ButtonModule,
@@ -52,8 +50,6 @@ import {
     PageSectionFeaturePostComponent,
     PageSectionBasicPostsComponent,
     PageSectionBasicPostComponent,
-    PageSectionIconTilesComponent,
-    PageSectionIconTileComponent,
     PageSectionFaQsComponent,
     PageSectionFaqGroupComponent,
   ],
