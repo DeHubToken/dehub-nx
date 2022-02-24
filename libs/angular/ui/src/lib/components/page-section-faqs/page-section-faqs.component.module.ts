@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
-import { FaqGroupComponentModule } from '../faq-group/faq-group.component.module';
+import { FaqGroupComponentModule } from '../faq-group';
 import { PageSectionFaQsComponent } from './page-section-faqs.component';
 
 @NgModule({

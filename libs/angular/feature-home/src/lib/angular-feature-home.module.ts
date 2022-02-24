@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PageSectionBasicPostsComponentModule } from '@dehub/angular/ui/components/page-section-basic-posts';
 import { PageSectionFaQsComponentModule } from '@dehub/angular/ui/components/page-section-faqs';
 import { PageSectionIconTilesComponentModule } from '@dehub/angular/ui/components/page-section-icon-tiles';
 import { YoutubeEmbedModule } from '@dehub/angular/ui/components/youtube-embed';
@@ -11,10 +12,6 @@ import { CarouselModule } from 'primeng/carousel';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AngularFeatureHomeRoutingModule } from './angular-feature-home-routing.module';
 import { AngularFeatureHomeComponent } from './angular-feature-home.component';
-import {
-  PageSectionBasicPostComponent,
-  PageSectionBasicPostsComponent,
-} from './components/page-section/basic-post';
 import {
   PageSectionFeaturePostComponent,
   PageSectionFeaturePostsComponent,
@@ -28,6 +25,7 @@ import {
     ContentfulDraftDirectiveModule,
     YoutubeVideoIdPipeModule,
     YoutubeEmbedModule,
+    PageSectionBasicPostsComponentModule,
     PageSectionIconTilesComponentModule,
     PageSectionFaQsComponentModule,
 
@@ -44,8 +42,6 @@ import {
     // Page Section Components
     PageSectionFeaturePostsComponent,
     PageSectionFeaturePostComponent,
-    PageSectionBasicPostsComponent,
-    PageSectionBasicPostComponent,
   ],
   providers: [DialogService],
 })
