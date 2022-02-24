@@ -17,8 +17,19 @@ import { isNotNil } from '@dehub/shared/util';
       <p-accordion>
         <ng-container *ngFor="let faqItem of faqItems; let i = index">
           <ng-container *ngIf="faqItem.question">
-            <p-accordionTab [header]="faqItem.question" [selected]="i === 0">
-              {{ faqItem.answer }}
+            <p-accordionTab [selected]="i === 0">
+              <!-- Header -->
+              <ng-template pTemplate="header">
+                <div [dhbContentfulDraft]="faqItem.sys">
+                  {{ faqItem.question }}
+                </div>
+              </ng-template>
+              <!-- Content -->
+              <ng-template pTemplate="content">
+                <div [dhbContentfulDraft]="faqItem.sys">
+                  {{ faqItem.answer }}
+                </div>
+              </ng-template>
             </p-accordionTab>
           </ng-container>
         </ng-container>
