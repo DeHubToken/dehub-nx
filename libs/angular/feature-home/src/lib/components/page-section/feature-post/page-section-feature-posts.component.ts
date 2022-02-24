@@ -55,8 +55,8 @@ export class PageSectionFeaturePostsComponent implements OnInit {
     },
     {
       breakpoint: '960px',
-      numVisible: 1,
-      numScroll: 1,
+      numVisible: 1.15,
+      numScroll: 1.15,
     },
   ];
 
