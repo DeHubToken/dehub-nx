@@ -45,21 +45,9 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 })
 export class PageSectionFeaturePostsComponent implements OnInit {
   @Input() section!: PageSectionFeaturePostsFragment;
+  @Input() carouselResponsiveOptions: CarouselResponsiveOptions = [];
 
   featurePosts: FeaturePostFragment[] = [];
-
-  carouselResponsiveOptions: CarouselResponsiveOptions = [
-    {
-      breakpoint: '1290px',
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '960px',
-      numVisible: 1.15,
-      numScroll: 1.15,
-    },
-  ];
 
   constructor() {}
 
