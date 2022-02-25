@@ -18,19 +18,18 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
       [@fadeInUp]
-      class="col-12"
+      class="col-12 sm:col-12 md:col-8 xl:col-8 col-offset-0 sm:col-offset-0 md:col-offset-2 xl:col-offset-2 flex flex-column"
     >
       <h3>{{ section.title }}</h3>
 
       <!-- Icon Tiles -->
       <div class="grid">
-        <div
+        <dhb-icon-tile
           *ngFor="let iconTile of iconTiles; let i = index"
+          [iconTile]="iconTile"
           [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
-          class="col-12 md:col-3"
-        >
-          <dhb-icon-tile [iconTile]="iconTile"></dhb-icon-tile>
-        </div>
+          class="col-12 sm:col-12 md:col-6 xl:col-4 flex flex-auto"
+        ></dhb-icon-tile>
       </div>
     </div>
   `,
