@@ -102,7 +102,8 @@
     "stream-browserify": "3.0.0",
     "stream-http": "3.2.0",
     "tslib": "2.0.0",
-    "zone.js": "0.11.4"
+    "zone.js": "0.11.4",
+    "@dehub/swiper": "file:libs/shared/asset/dehub/src/lib/swiper"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "13.2.2",
