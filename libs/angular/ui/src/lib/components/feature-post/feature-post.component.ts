@@ -20,30 +20,16 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
         [subheader]="
           (featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz')!
         "
-        styleClass="p-card-shadow h-full"
+        styleClass="feature p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
-          <div
-            *ngIf="featurePost.videoUrl as videoUrl; else showPicture"
-            (click)="onVideoFrameClicked()"
-            class="video-frame"
-          >
-            <!-- Video Url -->
-
-            <i class="fad fa-play-circle"></i>
-            <img
-              [src]="
-                'https://i1.ytimg.com/vi/' +
-                (videoUrl | dhbYoutubeVideoId) +
-                '/hqdefault.jpg'
-              "
-              alt="Video Cover Image"
-              class="video-cover"
-            />
-          </div>
-
-          <!-- Picture -->
-          <ng-template #showPicture>
+          <div class="picture-frame">
+            <i
+              *ngIf="featurePost.videoUrl"
+              class="fad fa-play-circle"
+              (click)="onVideoPlayClicked()"
+            ></i>
+            <!-- Picture -->
             <ng-container *ngIf="featurePost.picture as picture">
               <img
                 [dhbContentfulDraft]="picture.sys"
@@ -51,7 +37,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
                 [alt]="picture.title"
               />
             </ng-container>
-          </ng-template>
+          </div>
         </ng-template>
 
         <!-- Description -->
@@ -77,22 +63,6 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
       :host {
         display: flex;
       }
-      .video-frame {
-        overflow: hidden;
-        position: relative;
-        cursor: pointer;
-      }
-      .video-cover {
-        margin: -9.3% 0 -10.5% 0;
-      }
-      .fa-play-circle {
-        font-size: 5em;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        text-shadow: 4px 2px 4px rgb(0 0 0 / 75%);
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -107,7 +77,7 @@ export class FeaturePostComponent implements OnInit {
 
   ngOnInit() {}
 
-  onVideoFrameClicked() {
+  onVideoPlayClicked() {
     if (this.featurePost.videoUrl) {
       this.dialogService.open(YoutubeEmbedComponent, {
         data: {

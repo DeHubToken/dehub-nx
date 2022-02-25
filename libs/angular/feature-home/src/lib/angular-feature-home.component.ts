@@ -36,15 +36,11 @@ export class AngularFeatureHomeComponent implements OnInit {
   pageHome$?: Observable<PageHomeFragment | undefined>;
 
   featurePostsResponsiveOptions: SwiperResponsiveOptions = {
-    '1700': {
-      slidesPerView: 4,
-      spaceBetween: 30,
-    },
-    '1350': {
+    '1800': {
       slidesPerView: 3,
       spaceBetween: 30,
     },
-    '960': {
+    '1250': {
       slidesPerView: 2,
       spaceBetween: 30,
     },
