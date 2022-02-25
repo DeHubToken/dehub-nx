@@ -6,11 +6,7 @@ import {
 } from '@angular/core';
 import { EnvToken, PageHomeCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
-import {
-  CarouselResponsiveOptions,
-  PageHomeFragment,
-  SwiperResponsiveOptions,
-} from '@dehub/shared/model';
+import { PageHomeFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
 import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -40,17 +36,17 @@ export class AngularFeatureHomeComponent implements OnInit {
   pageHome$?: Observable<PageHomeFragment | undefined>;
 
   featurePostsResponsiveOptions: SwiperResponsiveOptions = {
-    '1300': {
+    '1700': {
       slidesPerView: 4,
-      spaceBetween: 20,
+      spaceBetween: 30,
+    },
+    '1350': {
+      slidesPerView: 3,
+      spaceBetween: 30,
     },
     '960': {
-      slidesPerView: 3,
-      spaceBetween: 20,
-    },
-    '620': {
       slidesPerView: 2,
-      spaceBetween: 20,
+      spaceBetween: 30,
     },
     '320': {
       slidesPerView: 1.15,
@@ -58,28 +54,32 @@ export class AngularFeatureHomeComponent implements OnInit {
     },
   };
 
-  basicPostsResponsiveOptions: CarouselResponsiveOptions = [
-    {
-      breakpoint: '1570px',
-      numVisible: 4,
-      numScroll: 1,
+  basicPostsResponsiveOptions: SwiperResponsiveOptions = {
+    '1900': {
+      slidesPerView: 6,
+      spaceBetween: 20,
     },
-    {
-      breakpoint: '1200px',
-      numVisible: 3,
-      numScroll: 1,
+    '1700': {
+      slidesPerView: 5,
+      spaceBetween: 20,
     },
-    {
-      breakpoint: '960px',
-      numVisible: 2,
-      numScroll: 1,
+    '1350': {
+      slidesPerView: 4,
+      spaceBetween: 20,
     },
-    {
-      breakpoint: '700px',
-      numVisible: 1.15,
-      numScroll: 1.15,
+    '960': {
+      slidesPerView: 3,
+      spaceBetween: 20,
     },
-  ];
+    '750': {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    '320': {
+      slidesPerView: 1.3,
+      spaceBetween: 20,
+    },
+  };
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

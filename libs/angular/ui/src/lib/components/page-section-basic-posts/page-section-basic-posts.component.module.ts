@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CardModule } from 'primeng/card';
-import { CarouselModule } from 'primeng/carousel';
+import { SwiperModule } from 'swiper/angular';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
 import { BasicPostModule } from '../basic-post';
 import { PageSectionBasicPostsComponent } from './page-section-basic-posts.component';
@@ -14,9 +13,8 @@ import { PageSectionBasicPostsComponent } from './page-section-basic-posts.compo
     CommonModule,
     RouterModule,
 
-    // PrimeNg
-    CardModule,
-    CarouselModule,
+    // Swiper
+    SwiperModule,
 
     // Libs
     ContentfulDraftDirectiveModule,

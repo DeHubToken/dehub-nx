@@ -5,7 +5,6 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  CarouselResponsiveOptions,
   PageSectionBasicPostsFragment,
   PageSectionFaQsFragment,
   PageSectionFeaturePostsFragment,
@@ -36,7 +35,7 @@ type PageSection =
       <dhb-page-section-basic-posts
         *ngIf="isPageSectionBasicPosts(section)"
         [section]="section"
-        [carouselResponsiveOptions]="basicPostsResponsiveOptions"
+        [swiperResponsiveOptions]="basicPostsResponsiveOptions"
       ></dhb-page-section-basic-posts>
 
       <!-- Icon Tiles -->
@@ -58,7 +57,7 @@ type PageSection =
 export class PageSectionsComponent implements OnInit {
   @Input() sections?: PageSection[];
   @Input() featurePostsResponsiveOptions?: SwiperResponsiveOptions;
-  @Input() basicPostsResponsiveOptions: CarouselResponsiveOptions = [];
+  @Input() basicPostsResponsiveOptions?: SwiperResponsiveOptions;
 
   constructor() {}
 

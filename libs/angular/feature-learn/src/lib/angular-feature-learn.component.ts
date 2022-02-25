@@ -7,7 +7,6 @@ import {
 import { EnvToken, PageLearnCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import {
-  CarouselResponsiveOptions,
   PageLearnFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
@@ -40,7 +39,7 @@ export class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;
 
   featurePostsResponsiveOptions: SwiperResponsiveOptions = {
-    '1300': {
+    '1700': {
       slidesPerView: 4,
       spaceBetween: 20,
     },
@@ -58,28 +57,16 @@ export class AngularFeatureLearnComponent implements OnInit {
     },
   };
 
-  basicPostsResponsiveOptions: CarouselResponsiveOptions = [
-    {
-      breakpoint: '1570px',
-      numVisible: 4,
-      numScroll: 1,
+  basicPostsResponsiveOptions: SwiperResponsiveOptions = {
+    '1300': {
+      slidesPerView: 5,
+      spaceBetween: 20,
     },
-    {
-      breakpoint: '1200px',
-      numVisible: 3,
-      numScroll: 1,
+    '1200': {
+      slidesPerView: 3,
+      spaceBetween: 20,
     },
-    {
-      breakpoint: '960px',
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '700px',
-      numVisible: 1.15,
-      numScroll: 1.15,
-    },
-  ];
+  };
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
