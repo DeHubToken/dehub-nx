@@ -16,7 +16,7 @@ import { BasicPostFragment } from '@dehub/shared/model';
         [subheader]="
           (basicPost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz')!
         "
-        styleClass="p-card-shadow mx-2 md:mx-3"
+        styleClass="p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
           <img
@@ -39,7 +39,13 @@ import { BasicPostFragment } from '@dehub/shared/model';
       </p-card>
     </div>
   `,
-  styles: [``],
+  styles: [
+    `
+      :host {
+        display: flex;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicPostComponent implements OnInit {

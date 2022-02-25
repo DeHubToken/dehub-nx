@@ -20,7 +20,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
         [subheader]="
           (featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz')!
         "
-        styleClass="p-card-shadow mx-2 md:mx-3 h-full"
+        styleClass="p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
           <div
@@ -74,6 +74,9 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
   `,
   styles: [
     `
+      :host {
+        display: flex;
+      }
       .video-frame {
         overflow: hidden;
         position: relative;

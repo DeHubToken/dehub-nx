@@ -3,11 +3,12 @@ import {
   Component,
   Input,
   OnInit,
+  ViewEncapsulation,
 } from '@angular/core';
 import {
   BasicPostFragment,
-  CarouselResponsiveOptions,
   PageSectionBasicPostsFragment,
+  SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
 import { bounceInRightOnEnterAnimation } from 'angular-animations';
@@ -24,30 +25,28 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
       <h3>{{ section.title }}</h3>
 
       <!-- Basic Posts -->
-      <p-carousel
-        *ngIf="basicPosts.length > 0"
-        [value]="basicPosts"
-        [circular]="false"
-        [autoplayInterval]="0"
-        [numVisible]="5"
-        [numScroll]="1"
-        [responsiveOptions]="carouselResponsiveOptions"
-      >
-        <ng-template let-basicPost pTemplate="item">
-          <div class="">
+      <swiper [navigation]="true" [breakpoints]="swiperResponsiveOptions">
+        <ng-container *ngFor="let basicPost of basicPosts">
+          <ng-template swiperSlide>
             <dhb-basic-post [basicPost]="basicPost"></dhb-basic-post>
-          </div>
-        </ng-template>
-      </p-carousel>
+          </ng-template>
+        </ng-container>
+      </swiper>
     </div>
   `,
-  styles: [``],
+  styles: [
+    `
+      @import '~swiper/scss';
+      @import '~@dehub/swiper/dhb_swiper_navigation';
+    `,
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [bounceInRightOnEnterAnimation({ anchor: 'bounceInRight' })],
 })
 export class PageSectionBasicPostsComponent implements OnInit {
   @Input() section!: PageSectionBasicPostsFragment;
-  @Input() carouselResponsiveOptions: CarouselResponsiveOptions = [];
+  @Input() swiperResponsiveOptions?: SwiperResponsiveOptions;
 
   basicPosts: BasicPostFragment[] = [];
 

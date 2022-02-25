@@ -7,8 +7,8 @@ import {
 import { EnvToken, PageLearnCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import {
-  CarouselResponsiveOptions,
   PageLearnFragment,
+  SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
@@ -38,41 +38,35 @@ import { map } from 'rxjs/operators';
 export class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;
 
-  featurePostsResponsiveOptions: CarouselResponsiveOptions = [
-    {
-      breakpoint: '1290px',
-      numVisible: 2,
-      numScroll: 1,
+  featurePostsResponsiveOptions: SwiperResponsiveOptions = {
+    '1700': {
+      slidesPerView: 4,
+      spaceBetween: 20,
     },
-    {
-      breakpoint: '960px',
-      numVisible: 1.15,
-      numScroll: 1.15,
+    '960': {
+      slidesPerView: 3,
+      spaceBetween: 20,
     },
-  ];
+    '620': {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    '320': {
+      slidesPerView: 1.15,
+      spaceBetween: 20,
+    },
+  };
 
-  basicPostsResponsiveOptions: CarouselResponsiveOptions = [
-    {
-      breakpoint: '1570px',
-      numVisible: 4,
-      numScroll: 1,
+  basicPostsResponsiveOptions: SwiperResponsiveOptions = {
+    '1300': {
+      slidesPerView: 5,
+      spaceBetween: 20,
     },
-    {
-      breakpoint: '1200px',
-      numVisible: 3,
-      numScroll: 1,
+    '1200': {
+      slidesPerView: 3,
+      spaceBetween: 20,
     },
-    {
-      breakpoint: '960px',
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '700px',
-      numVisible: 1.15,
-      numScroll: 1.15,
-    },
-  ];
+  };
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

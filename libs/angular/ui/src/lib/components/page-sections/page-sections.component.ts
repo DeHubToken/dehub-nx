@@ -5,11 +5,11 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  CarouselResponsiveOptions,
   PageSectionBasicPostsFragment,
   PageSectionFaQsFragment,
   PageSectionFeaturePostsFragment,
   PageSectionIconTilesFragment,
+  SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 
 type PageSection =
@@ -28,14 +28,14 @@ type PageSection =
       <dhb-page-section-feature-posts
         *ngIf="isPageSectionFeaturePosts(section)"
         [section]="section"
-        [carouselResponsiveOptions]="featurePostsResponsiveOptions"
+        [swiperResponsiveOptions]="featurePostsResponsiveOptions"
       ></dhb-page-section-feature-posts>
 
       <!-- Basic Posts -->
       <dhb-page-section-basic-posts
         *ngIf="isPageSectionBasicPosts(section)"
         [section]="section"
-        [carouselResponsiveOptions]="basicPostsResponsiveOptions"
+        [swiperResponsiveOptions]="basicPostsResponsiveOptions"
       ></dhb-page-section-basic-posts>
 
       <!-- Icon Tiles -->
@@ -56,8 +56,8 @@ type PageSection =
 })
 export class PageSectionsComponent implements OnInit {
   @Input() sections?: PageSection[];
-  @Input() featurePostsResponsiveOptions: CarouselResponsiveOptions = [];
-  @Input() basicPostsResponsiveOptions: CarouselResponsiveOptions = [];
+  @Input() featurePostsResponsiveOptions?: SwiperResponsiveOptions;
+  @Input() basicPostsResponsiveOptions?: SwiperResponsiveOptions;
 
   constructor() {}
 
