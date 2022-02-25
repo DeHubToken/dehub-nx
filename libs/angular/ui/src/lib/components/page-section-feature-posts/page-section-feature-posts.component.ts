@@ -12,11 +12,6 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
 import { bounceInLeftOnEnterAnimation } from 'angular-animations';
-// import Swiper core and required modules
-import SwiperCore, { Navigation } from 'swiper';
-
-// install Swiper modules
-SwiperCore.use([Navigation]);
 
 @Component({
   selector: 'dhb-page-section-feature-posts',
