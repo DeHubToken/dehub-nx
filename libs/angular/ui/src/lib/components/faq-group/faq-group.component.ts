@@ -10,7 +10,11 @@ import { isNotNil } from '@dehub/shared/util';
 @Component({
   selector: 'dhb-faq-group',
   template: `
-    <div *ngIf="faqGroup" [dhbContentfulDraft]="faqGroup.sys" class="card">
+    <div
+      *ngIf="faqGroup"
+      [dhbContentfulDraft]="faqGroup.sys"
+      class="card border-round bg-gradient-2"
+    >
       <h3>{{ faqGroup.name }}</h3>
 
       <!-- Faq Items -->

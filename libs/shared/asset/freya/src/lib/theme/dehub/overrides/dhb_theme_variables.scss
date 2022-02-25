@@ -384,7 +384,7 @@ $panelFooterPadding: 0.5rem 1rem;
 //accordion
 $accordionSpacing: 0;
 $accordionHeaderBorder: $panelHeaderBorder;
-$accordionHeaderBg: $panelHeaderBg;
+$accordionHeaderBg: $dhb_gradient2;
 $accordionHeaderTextColor: $panelHeaderTextColor;
 $accordionHeaderFontWeight: $panelHeaderFontWeight;
 $accordionHeaderPadding: $panelHeaderPadding;
@@ -393,7 +393,7 @@ $accordionHeaderHoverBg: $hoverBg;
 $accordionHeaderHoverBorderColor: $shade600;
 $accordionHeaderTextHoverColor: $shade000;
 
-$accordionHeaderActiveBg: $panelHeaderBg;
+$accordionHeaderActiveBg: $dhb_gradient4;
 $accordionHeaderActiveBorderColor: $shade600;
 $accordionHeaderTextActiveColor: $shade000;
 
@@ -402,7 +402,7 @@ $accordionHeaderActiveHoverBorderColor: $shade600;
 $accordionHeaderTextActiveHoverColor: $shade000;
 
 $accordionContentBorder: $panelContentBorder;
-$accordionContentBg: $panelContentBg;
+$accordionContentBg: $dhb_gradient3;
 $accordionContentTextColor: $panelContentTextColor;
 $accordionContentPadding: $panelContentPadding;
 
