@@ -39,17 +39,13 @@ export class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;
 
   featurePostsResponsiveOptions: SwiperResponsiveOptions = {
-    '1700': {
-      slidesPerView: 4,
-      spaceBetween: 20,
-    },
-    '960': {
+    '1800': {
       slidesPerView: 3,
-      spaceBetween: 20,
+      spaceBetween: 30,
     },
-    '620': {
+    '1250': {
       slidesPerView: 2,
-      spaceBetween: 20,
+      spaceBetween: 30,
     },
     '320': {
       slidesPerView: 1.15,
@@ -58,12 +54,28 @@ export class AngularFeatureLearnComponent implements OnInit {
   };
 
   basicPostsResponsiveOptions: SwiperResponsiveOptions = {
-    '1300': {
+    '1900': {
+      slidesPerView: 6,
+      spaceBetween: 20,
+    },
+    '1700': {
       slidesPerView: 5,
       spaceBetween: 20,
     },
-    '1200': {
+    '1350': {
+      slidesPerView: 4,
+      spaceBetween: 20,
+    },
+    '960': {
       slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    '750': {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    '320': {
+      slidesPerView: 1.3,
       spaceBetween: 20,
     },
   };
