@@ -1,8 +1,24 @@
 .dhb-tab-menu {
+  overflow-x: scroll;
   border-bottom: 1px solid #cadadd1c;
   padding-bottom: 18px;
+
+  // Hide scrollbar
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  .dhb-tab-menu-wrapper {
+    display: flex;
+    flex-flow: row;
+  }
   .active {
     font-weight: 900;
     background: rgba($buttonActiveBg, 0.4);
+  }
+  button {
+    flex: none;
   }
 }
