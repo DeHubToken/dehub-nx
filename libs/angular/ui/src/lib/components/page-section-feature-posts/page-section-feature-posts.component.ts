@@ -42,63 +42,7 @@ SwiperCore.use([Navigation]);
   styles: [
     `
       @import '~swiper/scss';
-      @import '~swiper/scss/navigation';
-      @import '~swiper/scss/pagination';
-
-      .swiper {
-        padding: 0 0 60px 0;
-      }
-
-      .swiper-slide {
-        /* Stretch slide vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: stretch;
-        -ms-flex-align: stretch;
-        -webkit-align-items: stretch;
-        align-items: stretch;
-        height: auto;
-      }
-
-      :root {
-        --swiper-theme-color: #fafafa;
-      }
-      .swiper-button-prev {
-        background-image: url('/assets/dehub/icons/prev.svg');
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        background-position: center;
-        width: 40px;
-        height: 40px;
-        top: auto;
-        bottom: 0px;
-        right: 60px;
-        left: auto;
-
-        &:after {
-          display: none;
-        }
-      }
-      .swiper-button-next {
-        background-image: url('/assets/dehub/icons/next.svg');
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        background-position: center;
-        width: 40px;
-        height: 40px;
-        top: auto;
-        bottom: 0px;
-
-        &:after {
-          display: none;
-        }
-      }
+      @import '~@dehub/swiper/dhb_swiper_navigation';
     `,
   ],
   encapsulation: ViewEncapsulation.None,
