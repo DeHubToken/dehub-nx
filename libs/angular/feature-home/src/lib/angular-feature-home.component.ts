@@ -16,8 +16,8 @@ import { map } from 'rxjs/operators';
     <ng-container *ngIf="pageHome$ | async as pageHome" class="grid">
       <!-- Titles -->
       <div [@bounceInLeft] class="col-12">
-        <h3>{{ pageHome.mainTitle }}</h3>
-        <h4>{{ pageHome.subtitle }}</h4>
+        <h1>{{ pageHome.mainTitle }}</h1>
+        <h5 class="mt-1">{{ pageHome.subtitle }}</h5>
       </div>
 
       <!-- Page Sections -->
