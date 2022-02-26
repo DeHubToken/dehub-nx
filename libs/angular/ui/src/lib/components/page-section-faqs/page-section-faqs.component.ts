@@ -18,7 +18,7 @@ import {
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
       [@bounceInRight]
-      class="col-12"
+      class="col-12 sm:col-12 md:col-12 xl:col-8 col-offset-0 sm:col-offset-0 md:col-offset-0 xl:col-offset-2"
     >
       <h3>{{ section.title }}</h3>
 
@@ -27,7 +27,7 @@ import {
         <div
           *ngFor="let faqGroup of faqGroups; let i = index"
           [@bounceInUp]="{ value: '', params: { delay: i * 100 } }"
-          class="col-12 md:col-6"
+          class="col-12"
         >
           <dhb-faq-group [faqGroup]="faqGroup"></dhb-faq-group>
         </div>
