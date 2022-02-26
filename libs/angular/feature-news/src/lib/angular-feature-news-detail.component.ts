@@ -11,28 +11,32 @@ import {
 } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import { BasicPostDetailFragment } from '@dehub/shared/model';
-import { bounceInRightOnEnterAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
   template: `
-    <div [@bounceInRight] class="grid">
-      <!-- Back -->
-      <p-button
-        label="Back"
-        [routerLink]="['/home']"
-        styleClass="p-button-link p-mr-2"
-      ></p-button>
+    <div [@fadeInUp] class="grid">
+      <div class="col-12 xl:col-8 col-offset-0 xl:col-offset-2">
+        <!-- Back -->
+        <p-button
+          label="Back"
+          icon="fas fa-long-arrow-left"
+          [routerLink]="['/home']"
+          styleClass="p-button-link p-button-lg mb-2"
+        >
+        </p-button>
 
-      <!-- Basic Post Detail -->
-      <dhb-basic-post-detail
-        [basicPostDetail]="(basicPostDetail$ | async)!"
-      ></dhb-basic-post-detail>
+        <!-- Basic Post Detail -->
+        <dhb-basic-post-detail
+          [basicPostDetail]="(basicPostDetail$ | async)!"
+        ></dhb-basic-post-detail>
+      </div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInRightOnEnterAnimation({ anchor: 'bounceInRight' })],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
 })
 export class AngularFeatureNewsDetailComponent implements OnInit {
   basicPostDetail$!: Observable<BasicPostDetailFragment | undefined>;
