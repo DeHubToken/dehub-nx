@@ -45,7 +45,7 @@ export class AngularFeatureHomeComponent implements OnInit {
       spaceBetween: 30,
     },
     '320': {
-      slidesPerView: 1.15,
+      slidesPerView: 1,
       spaceBetween: 20,
     },
   };
@@ -72,7 +72,7 @@ export class AngularFeatureHomeComponent implements OnInit {
       spaceBetween: 20,
     },
     '320': {
-      slidesPerView: 1.3,
+      slidesPerView: 1,
       spaceBetween: 20,
     },
   };
