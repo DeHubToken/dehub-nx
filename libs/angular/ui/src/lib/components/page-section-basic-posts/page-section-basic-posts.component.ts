@@ -20,7 +20,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
       [@bounceInRight]
-      class="col-12"
+      class="col-12 mb-8"
     >
       <h3>{{ section.title }}</h3>
 
