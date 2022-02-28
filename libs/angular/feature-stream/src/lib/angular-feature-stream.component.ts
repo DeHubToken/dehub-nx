@@ -41,24 +41,61 @@ export class AngularFeatureStreamComponent implements OnInit {
     private pageStreamCollectionService: PageStreamCollectionService
   ) {}
 
-  thumbnailPostsResponsiveOptions: SwiperResponsiveOptions = {
-    '1800': {
-      slidesPerView: 7,
-      spaceBetween: 20,
+  thumbnailPostsResponsiveOptions: SwiperResponsiveOptions[] = [
+    // First Swiper
+    {
+      '1440': {
+        slidesPerView: 4,
+        spaceBetween: 20,
+      },
+      '860': {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      '320': {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
     },
-    '1440': {
-      slidesPerView: 6,
-      spaceBetween: 20,
+    // Second Swiper
+    {
+      '1800': {
+        slidesPerView: 7,
+        spaceBetween: 20,
+      },
+      '1440': {
+        slidesPerView: 6,
+        spaceBetween: 20,
+      },
+      '860': {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      '320': {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
     },
-    '860': {
-      slidesPerView: 3,
-      spaceBetween: 20,
+    // Third Swiper
+    {
+      '1800': {
+        slidesPerView: 7,
+        spaceBetween: 20,
+      },
+      '1440': {
+        slidesPerView: 6,
+        spaceBetween: 20,
+      },
+      '860': {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      '320': {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
     },
-    '320': {
-      slidesPerView: 1,
-      spaceBetween: 20,
-    },
-  };
+  ];
 
   ngOnInit() {
     this.pageStream$ = this.pageStreamCollectionService

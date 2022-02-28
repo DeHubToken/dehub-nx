@@ -32,21 +32,21 @@ type PageSection =
       <dhb-page-section-feature-posts
         *ngIf="isPageSectionFeaturePosts(section)"
         [section]="section"
-        [swiperResponsiveOptions]="featurePostsResponsiveOptions"
+        [swiperResponsiveOptions]="featurePostsResponsiveOptions.shift()"
       ></dhb-page-section-feature-posts>
 
       <!-- Thumbnail Posts -->
       <dhb-page-section-thumbnail-posts
         *ngIf="isPageSectionThumbnailPosts(section)"
         [section]="section"
-        [swiperResponsiveOptions]="thumbnailPostsResponsiveOptions"
+        [swiperResponsiveOptions]="thumbnailPostsResponsiveOptions.shift()"
       ></dhb-page-section-thumbnail-posts>
 
       <!-- Basic Posts -->
       <dhb-page-section-basic-posts
         *ngIf="isPageSectionBasicPosts(section)"
         [section]="section"
-        [swiperResponsiveOptions]="basicPostsResponsiveOptions"
+        [swiperResponsiveOptions]="basicPostsResponsiveOptions.shift()"
       ></dhb-page-section-basic-posts>
 
       <!-- Icon Tiles -->
@@ -73,9 +73,9 @@ type PageSection =
 })
 export class PageSectionsComponent implements OnInit {
   @Input() sections?: PageSection[];
-  @Input() featurePostsResponsiveOptions?: SwiperResponsiveOptions;
-  @Input() thumbnailPostsResponsiveOptions?: SwiperResponsiveOptions;
-  @Input() basicPostsResponsiveOptions?: SwiperResponsiveOptions;
+  @Input() featurePostsResponsiveOptions: SwiperResponsiveOptions[] = [];
+  @Input() thumbnailPostsResponsiveOptions: SwiperResponsiveOptions[] = [];
+  @Input() basicPostsResponsiveOptions: SwiperResponsiveOptions[] = [];
 
   constructor() {}
 

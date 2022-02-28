@@ -38,47 +38,51 @@ import { map } from 'rxjs/operators';
 export class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;
 
-  featurePostsResponsiveOptions: SwiperResponsiveOptions = {
-    '1800': {
-      slidesPerView: 3,
-      spaceBetween: 30,
+  featurePostsResponsiveOptions: SwiperResponsiveOptions[] = [
+    {
+      '1800': {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      '1250': {
+        slidesPerView: 2,
+        spaceBetween: 30,
+      },
+      '320': {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
     },
-    '1250': {
-      slidesPerView: 2,
-      spaceBetween: 30,
-    },
-    '320': {
-      slidesPerView: 1,
-      spaceBetween: 20,
-    },
-  };
+  ];
 
-  basicPostsResponsiveOptions: SwiperResponsiveOptions = {
-    '1900': {
-      slidesPerView: 6,
-      spaceBetween: 20,
+  basicPostsResponsiveOptions: SwiperResponsiveOptions[] = [
+    {
+      '1900': {
+        slidesPerView: 6,
+        spaceBetween: 20,
+      },
+      '1700': {
+        slidesPerView: 5,
+        spaceBetween: 20,
+      },
+      '1350': {
+        slidesPerView: 4,
+        spaceBetween: 20,
+      },
+      '960': {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      '750': {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      '320': {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
     },
-    '1700': {
-      slidesPerView: 5,
-      spaceBetween: 20,
-    },
-    '1350': {
-      slidesPerView: 4,
-      spaceBetween: 20,
-    },
-    '960': {
-      slidesPerView: 3,
-      spaceBetween: 20,
-    },
-    '750': {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    '320': {
-      slidesPerView: 1,
-      spaceBetween: 20,
-    },
-  };
+  ];
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
