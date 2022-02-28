@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PageSectionThumbnailPostsModule } from '@dehub/angular/ui/components/page-section-thumbnail-posts';
 import { PageSectionBasicPostsModule } from '../page-section-basic-posts';
 import { PageSectionFaQsModule } from '../page-section-faqs';
 import { PageSectionFeaturePostsModule } from '../page-section-feature-posts';
 import { PageSectionIconTilesModule } from '../page-section-icon-tiles';
+import { PageSectionThumbnailPostsModule } from '../page-section-thumbnail-posts';
 import { PageSectionsComponent } from './page-sections.component';
 
 @NgModule({
