@@ -42,6 +42,13 @@
       flex: 1 1 0;
     }
   }
+
+  // THumbnail Post Style
+  &.thumbnail {
+    .p-card-body {
+      display: none;
+    }
+  }
 }
 
 /* ------------------------------ Media Queries ----------------------------- */

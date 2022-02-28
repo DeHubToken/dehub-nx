@@ -69,6 +69,39 @@ export const PageSectionFeaturePostsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${FeaturePostFragmentDoc}
 `;
+export const ThumbnailPostFragmentDoc = gql`
+  fragment ThumbnailPost on ThumbnailPost {
+    sys {
+      ...Sys
+    }
+    picture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    title
+    link
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionThumbnailPostsFragmentDoc = gql`
+  fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
+      items {
+        ...ThumbnailPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${ThumbnailPostFragmentDoc}
+`;
 export const BasicPostFragmentDoc = gql`
   fragment BasicPost on BasicPost {
     ...BasicPostCommon
@@ -180,6 +213,7 @@ export const PageHomeFragmentDoc = gql`
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
@@ -188,6 +222,7 @@ export const PageHomeFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
@@ -202,6 +237,7 @@ export const PageLearnFragmentDoc = gql`
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
@@ -210,6 +246,7 @@ export const PageLearnFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}

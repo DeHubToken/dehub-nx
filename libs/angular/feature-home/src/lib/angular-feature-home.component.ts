@@ -24,6 +24,7 @@ import { map } from 'rxjs/operators';
       <dhb-page-sections
         [sections]="pageHome.sectionsCollection?.items"
         [featurePostsResponsiveOptions]="featurePostsResponsiveOptions"
+        [thumbnailPostsResponsiveOptions]="thumbnailPostsResponsiveOptions"
         [basicPostsResponsiveOptions]="basicPostsResponsiveOptions"
       ></dhb-page-sections>
     </ng-container>
@@ -43,6 +44,25 @@ export class AngularFeatureHomeComponent implements OnInit {
     '1250': {
       slidesPerView: 2,
       spaceBetween: 30,
+    },
+    '320': {
+      slidesPerView: 1,
+      spaceBetween: 20,
+    },
+  };
+
+  thumbnailPostsResponsiveOptions: SwiperResponsiveOptions = {
+    '1800': {
+      slidesPerView: 7,
+      spaceBetween: 20,
+    },
+    '1440': {
+      slidesPerView: 6,
+      spaceBetween: 20,
+    },
+    '860': {
+      slidesPerView: 3,
+      spaceBetween: 20,
     },
     '320': {
       slidesPerView: 1,

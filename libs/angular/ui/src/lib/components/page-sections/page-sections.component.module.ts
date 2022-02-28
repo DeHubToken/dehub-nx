@@ -4,6 +4,7 @@ import { PageSectionBasicPostsModule } from '../page-section-basic-posts';
 import { PageSectionFaQsModule } from '../page-section-faqs';
 import { PageSectionFeaturePostsModule } from '../page-section-feature-posts';
 import { PageSectionIconTilesModule } from '../page-section-icon-tiles';
+import { PageSectionThumbnailPostsModule } from '../page-section-thumbnail-posts';
 import { PageSectionsComponent } from './page-sections.component';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { PageSectionsComponent } from './page-sections.component';
 
     // Libs
     PageSectionFeaturePostsModule,
+    PageSectionThumbnailPostsModule,
     PageSectionBasicPostsModule,
     PageSectionIconTilesModule,
     PageSectionFaQsModule,
