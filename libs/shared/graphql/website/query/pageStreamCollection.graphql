@@ -1,0 +1,7 @@
+query pageStreamCollection($isPreview: Boolean = false) {
+  pageStreamCollection(limit: 2, preview: $isPreview) {
+    items {
+      ...PageStream
+    }
+  }
+}

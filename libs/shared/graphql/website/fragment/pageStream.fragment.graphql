@@ -1,0 +1,17 @@
+fragment PageStream on PageStream {
+  sys {
+    ...Sys
+  }
+  mainTitle
+  subtitle
+  sectionsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...PageSectionFeaturePosts
+      ...PageSectionThumbnailPosts
+      ...PageSectionBasicPosts
+      ...PageSectionIconTiles
+      ...PageSectionFaQs
+      ...PageSectionDappPosts
+    }
+  }
+}
