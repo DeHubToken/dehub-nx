@@ -9,11 +9,13 @@ import {
   PageSectionFaQsFragment,
   PageSectionFeaturePostsFragment,
   PageSectionIconTilesFragment,
+  PageSectionThumbnailPostsFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 
 type PageSection =
   | PageSectionFeaturePostsFragment
+  | PageSectionThumbnailPostsFragment
   | PageSectionBasicPostsFragment
   | PageSectionIconTilesFragment
   | PageSectionFaQsFragment

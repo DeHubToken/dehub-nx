@@ -1,0 +1,12 @@
+fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  handpickedPostsCollection(limit: 20, preview: $isPreview) {
+    items {
+      ...ThumbnailPost
+    }
+  }
+}

@@ -1,0 +1,14 @@
+fragment ThumbnailPost on ThumbnailPost {
+  sys {
+    ...Sys
+  }
+  picture(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
+    title
+    url
+  }
+  title
+  link
+}
