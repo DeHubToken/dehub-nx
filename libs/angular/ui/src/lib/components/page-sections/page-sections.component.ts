@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import {
   PageSectionBasicPostsFragment,
+  PageSectionDappPostsFragment,
   PageSectionFaQsFragment,
   PageSectionFeaturePostsFragment,
   PageSectionIconTilesFragment,
@@ -19,6 +20,7 @@ type PageSection =
   | PageSectionBasicPostsFragment
   | PageSectionIconTilesFragment
   | PageSectionFaQsFragment
+  | PageSectionDappPostsFragment
   | undefined
   | null;
 
@@ -58,6 +60,12 @@ type PageSection =
         *ngIf="isPageSectionFaQs(section)"
         [section]="section"
       ></dhb-page-section-faqs>
+
+      <!-- Dapp Posts -->
+      <dhb-page-section-dapp-posts
+        *ngIf="isPageSectionDappPosts(section)"
+        [section]="section"
+      ></dhb-page-section-dapp-posts>
     </ng-container>
   `,
   styles: [``],
@@ -105,5 +113,11 @@ export class PageSectionsComponent implements OnInit {
     pageSection: PageSection
   ): pageSection is PageSectionFaQsFragment {
     return !!pageSection && pageSection.__typename === 'PageSectionFaQs';
+  }
+
+  isPageSectionDappPosts(
+    pageSection: PageSection
+  ): pageSection is PageSectionDappPostsFragment {
+    return !!pageSection && pageSection.__typename === 'PageSectionDappPosts';
   }
 }

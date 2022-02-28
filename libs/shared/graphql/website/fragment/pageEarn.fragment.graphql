@@ -1,4 +1,4 @@
-fragment PageLearn on PageLearn {
+fragment PageEarn on PageEarn {
   sys {
     ...Sys
   }
