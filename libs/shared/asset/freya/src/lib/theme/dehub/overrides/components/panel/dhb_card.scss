@@ -43,7 +43,7 @@
     }
   }
 
-  // THumbnail Post Style
+  // Thumbnail Post Style
   &.thumbnail {
     .p-card-header {
       .fa-play-circle {
@@ -61,6 +61,19 @@
       display: none;
     }
   }
+
+  // Dapp post style
+  &.dapp {
+    flex-direction: row;
+    padding: 30px;
+    .p-card-header {
+      flex: 0.5 1 0;
+    }
+    .p-card-body {
+      flex: 1 1 0;
+      padding-left: 30px;
+    }
+  }
 }
 
 /* ------------------------------ Media Queries ----------------------------- */
@@ -69,6 +82,15 @@
     // Feature Post Style
     &.feature {
       flex-direction: column;
+    }
+    // Dapp post style
+    &.dapp {
+      flex-direction: column;
+
+      .p-card-body {
+        padding-top: 30px;
+        padding-left: 10px;
+      }
     }
   }
 }
