@@ -22,6 +22,20 @@ export class BasicPostCollectionBySlugService extends Apollo.Query<
 @Injectable({
   providedIn: GraphQLModule,
 })
+export class PageEarnCollectionService extends Apollo.Query<
+  models.PageEarnCollectionQuery,
+  models.PageEarnCollectionQueryVariables
+> {
+  document = models.PageEarnCollectionDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
 export class PageHomeCollectionService extends Apollo.Query<
   models.PageHomeCollectionQuery,
   models.PageHomeCollectionQueryVariables

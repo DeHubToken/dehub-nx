@@ -204,6 +204,62 @@ export const PageSectionFaQsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${FaqGroupFragmentDoc}
 `;
+export const DappPostFragmentDoc = gql`
+  fragment DappPost on DappPost {
+    sys {
+      ...Sys
+    }
+    icon
+    iconTitle
+    title
+    description
+    urlToDapp
+    urlToLearnMore
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionDappPostsFragmentDoc = gql`
+  fragment PageSectionDappPosts on PageSectionDappPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...DappPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${DappPostFragmentDoc}
+`;
+export const PageEarnFragmentDoc = gql`
+  fragment PageEarn on PageEarn {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    subtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+`;
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
     sys {
@@ -218,6 +274,7 @@ export const PageHomeFragmentDoc = gql`
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
+        ...PageSectionDappPosts
       }
     }
   }
@@ -227,6 +284,7 @@ export const PageHomeFragmentDoc = gql`
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
 `;
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
@@ -242,6 +300,7 @@ export const PageLearnFragmentDoc = gql`
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
+        ...PageSectionDappPosts
       }
     }
   }
@@ -251,6 +310,7 @@ export const PageLearnFragmentDoc = gql`
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
 `;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
@@ -345,6 +405,67 @@ export type BasicPostCollectionBySlugLazyQueryHookResult = ReturnType<
 export type BasicPostCollectionBySlugQueryResult = Apollo.QueryResult<
   models.BasicPostCollectionBySlugQuery,
   models.BasicPostCollectionBySlugQueryVariables
+>;
+export const PageEarnCollectionDocument = gql`
+  query pageEarnCollection($isPreview: Boolean = false) {
+    pageEarnCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageEarn
+      }
+    }
+  }
+  ${PageEarnFragmentDoc}
+`;
+
+/**
+ * __usePageEarnCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageEarnCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageEarnCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageEarnCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageEarnCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageEarnCollectionQuery,
+    models.PageEarnCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageEarnCollectionQuery,
+    models.PageEarnCollectionQueryVariables
+  >(PageEarnCollectionDocument, options);
+}
+export function usePageEarnCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageEarnCollectionQuery,
+    models.PageEarnCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageEarnCollectionQuery,
+    models.PageEarnCollectionQueryVariables
+  >(PageEarnCollectionDocument, options);
+}
+export type PageEarnCollectionQueryHookResult = ReturnType<
+  typeof usePageEarnCollectionQuery
+>;
+export type PageEarnCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageEarnCollectionLazyQuery
+>;
+export type PageEarnCollectionQueryResult = Apollo.QueryResult<
+  models.PageEarnCollectionQuery,
+  models.PageEarnCollectionQueryVariables
 >;
 export const PageHomeCollectionDocument = gql`
   query pageHomeCollection($isPreview: Boolean = false) {

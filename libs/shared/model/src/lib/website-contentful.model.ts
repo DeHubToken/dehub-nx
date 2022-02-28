@@ -554,6 +554,153 @@ export interface ContentfulTag {
   name?: Maybe<Scalars['String']>;
 }
 
+/** A special post to link to a specific D`App. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/dappPost) */
+export interface DappPost extends Entry {
+  __typename?: 'DappPost';
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  iconTitle?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<DappPostLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+  urlToDapp?: Maybe<Scalars['String']>;
+  urlToLearnMore?: Maybe<Scalars['String']>;
+}
+
+/** A special post to link to a specific D`App. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/dappPost) */
+export interface DappPostDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A special post to link to a specific D`App. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/dappPost) */
+export interface DappPostIconArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A special post to link to a specific D`App. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/dappPost) */
+export interface DappPostIconTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A special post to link to a specific D`App. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/dappPost) */
+export interface DappPostLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** A special post to link to a specific D`App. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/dappPost) */
+export interface DappPostTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A special post to link to a specific D`App. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/dappPost) */
+export interface DappPostUrlToDappArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A special post to link to a specific D`App. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/dappPost) */
+export interface DappPostUrlToLearnMoreArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface DappPostCollection {
+  __typename?: 'DappPostCollection';
+  items: Array<Maybe<DappPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface DappPostFilter {
+  AND?: InputMaybe<Array<InputMaybe<DappPostFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<DappPostFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon?: InputMaybe<Scalars['String']>;
+  iconTitle?: InputMaybe<Scalars['String']>;
+  iconTitle_contains?: InputMaybe<Scalars['String']>;
+  iconTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  iconTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  iconTitle_not?: InputMaybe<Scalars['String']>;
+  iconTitle_not_contains?: InputMaybe<Scalars['String']>;
+  iconTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_contains?: InputMaybe<Scalars['String']>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_not?: InputMaybe<Scalars['String']>;
+  icon_not_contains?: InputMaybe<Scalars['String']>;
+  icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  urlToDapp?: InputMaybe<Scalars['String']>;
+  urlToDapp_contains?: InputMaybe<Scalars['String']>;
+  urlToDapp_exists?: InputMaybe<Scalars['Boolean']>;
+  urlToDapp_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  urlToDapp_not?: InputMaybe<Scalars['String']>;
+  urlToDapp_not_contains?: InputMaybe<Scalars['String']>;
+  urlToDapp_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  urlToLearnMore?: InputMaybe<Scalars['String']>;
+  urlToLearnMore_contains?: InputMaybe<Scalars['String']>;
+  urlToLearnMore_exists?: InputMaybe<Scalars['Boolean']>;
+  urlToLearnMore_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  urlToLearnMore_not?: InputMaybe<Scalars['String']>;
+  urlToLearnMore_not_contains?: InputMaybe<Scalars['String']>;
+  urlToLearnMore_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface DappPostLinkingCollections {
+  __typename?: 'DappPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageSectionDappPostsCollection?: Maybe<PageSectionDappPostsCollection>;
+}
+
+export interface DappPostLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface DappPostLinkingCollectionsPageSectionDappPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum DappPostOrder {
+  IconTitleAsc = 'iconTitle_ASC',
+  IconTitleDesc = 'iconTitle_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UrlToDappAsc = 'urlToDapp_ASC',
+  UrlToDappDesc = 'urlToDapp_DESC',
+  UrlToLearnMoreAsc = 'urlToLearnMore_ASC',
+  UrlToLearnMoreDesc = 'urlToLearnMore_DESC',
+}
+
 export interface Entry {
   contentfulMetadata: ContentfulMetadata;
   sys: Sys;
@@ -1105,6 +1252,113 @@ export interface ImageTransformOptions {
   width?: InputMaybe<Scalars['Dimension']>;
 }
 
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarn extends Entry {
+  __typename?: 'PageEarn';
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<PageEarnLinkingCollections>;
+  mainTitle?: Maybe<Scalars['String']>;
+  sectionsCollection?: Maybe<PageEarnSectionsCollection>;
+  subtitle?: Maybe<Scalars['String']>;
+  sys: Sys;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnMainTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnSectionsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnSubtitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface PageEarnCollection {
+  __typename?: 'PageEarnCollection';
+  items: Array<Maybe<PageEarn>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageEarnFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageEarnFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageEarnFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  mainTitle?: InputMaybe<Scalars['String']>;
+  mainTitle_contains?: InputMaybe<Scalars['String']>;
+  mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  mainTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  mainTitle_not?: InputMaybe<Scalars['String']>;
+  mainTitle_not_contains?: InputMaybe<Scalars['String']>;
+  mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  subtitle?: InputMaybe<Scalars['String']>;
+  subtitle_contains?: InputMaybe<Scalars['String']>;
+  subtitle_exists?: InputMaybe<Scalars['Boolean']>;
+  subtitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subtitle_not?: InputMaybe<Scalars['String']>;
+  subtitle_not_contains?: InputMaybe<Scalars['String']>;
+  subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+}
+
+export interface PageEarnLinkingCollections {
+  __typename?: 'PageEarnLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface PageEarnLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageEarnOrder {
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export interface PageEarnSectionsCollection {
+  __typename?: 'PageEarnSectionsCollection';
+  items: Array<Maybe<PageEarnSectionsItem>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export type PageEarnSectionsItem =
+  | PageSectionBasicPosts
+  | PageSectionDappPosts
+  | PageSectionFaQs
+  | PageSectionFeaturePosts
+  | PageSectionIconTiles
+  | PageSectionThumbnailPosts;
+
 /** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
 export interface PageHome extends Entry {
   __typename?: 'PageHome';
@@ -1206,6 +1460,7 @@ export interface PageHomeSectionsCollection {
 
 export type PageHomeSectionsItem =
   | PageSectionBasicPosts
+  | PageSectionDappPosts
   | PageSectionFaQs
   | PageSectionFeaturePosts
   | PageSectionIconTiles
@@ -1312,6 +1567,7 @@ export interface PageLearnSectionsCollection {
 
 export type PageLearnSectionsItem =
   | PageSectionBasicPosts
+  | PageSectionDappPosts
   | PageSectionFaQs
   | PageSectionFeaturePosts
   | PageSectionIconTiles
@@ -1388,11 +1644,19 @@ export interface PageSectionBasicPostsHandpickedPostsCollection {
 export interface PageSectionBasicPostsLinkingCollections {
   __typename?: 'PageSectionBasicPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageEarnCollection?: Maybe<PageEarnCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
 }
 
 export interface PageSectionBasicPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionBasicPostsLinkingCollectionsPageEarnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1414,6 +1678,114 @@ export interface PageSectionBasicPostsLinkingCollectionsPageLearnCollectionArgs 
 }
 
 export enum PageSectionBasicPostsOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
+/** Page section with D`App Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionDappPosts) */
+export interface PageSectionDappPosts extends Entry {
+  __typename?: 'PageSectionDappPosts';
+  contentfulMetadata: ContentfulMetadata;
+  handpickedPostsCollection?: Maybe<PageSectionDappPostsHandpickedPostsCollection>;
+  linkedFrom?: Maybe<PageSectionDappPostsLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Page section with D`App Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionDappPosts) */
+export interface PageSectionDappPostsHandpickedPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Page section with D`App Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionDappPosts) */
+export interface PageSectionDappPostsLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Page section with D`App Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionDappPosts) */
+export interface PageSectionDappPostsTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface PageSectionDappPostsCollection {
+  __typename?: 'PageSectionDappPostsCollection';
+  items: Array<Maybe<PageSectionDappPosts>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionDappPostsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageSectionDappPostsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageSectionDappPostsFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  handpickedPostsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface PageSectionDappPostsHandpickedPostsCollection {
+  __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
+  items: Array<Maybe<DappPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionDappPostsLinkingCollections {
+  __typename?: 'PageSectionDappPostsLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
+  pageLearnCollection?: Maybe<PageLearnCollection>;
+}
+
+export interface PageSectionDappPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionDappPostsLinkingCollectionsPageEarnCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionDappPostsLinkingCollectionsPageHomeCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionDappPostsLinkingCollectionsPageLearnCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionDappPostsOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1488,11 +1860,19 @@ export interface PageSectionFaQsHandpickedFaqGroupsCollection {
 export interface PageSectionFaQsLinkingCollections {
   __typename?: 'PageSectionFaQsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageEarnCollection?: Maybe<PageEarnCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
 }
 
 export interface PageSectionFaQsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionFaQsLinkingCollectionsPageEarnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1588,11 +1968,19 @@ export interface PageSectionFeaturePostsHandpickedPostsCollection {
 export interface PageSectionFeaturePostsLinkingCollections {
   __typename?: 'PageSectionFeaturePostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageEarnCollection?: Maybe<PageEarnCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
 }
 
 export interface PageSectionFeaturePostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionFeaturePostsLinkingCollectionsPageEarnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1688,11 +2076,19 @@ export interface PageSectionIconTilesHandpickedIconTilesCollection {
 export interface PageSectionIconTilesLinkingCollections {
   __typename?: 'PageSectionIconTilesLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageEarnCollection?: Maybe<PageEarnCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
 }
 
 export interface PageSectionIconTilesLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionIconTilesLinkingCollectionsPageEarnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1788,11 +2184,19 @@ export interface PageSectionThumbnailPostsHandpickedPostsCollection {
 export interface PageSectionThumbnailPostsLinkingCollections {
   __typename?: 'PageSectionThumbnailPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageEarnCollection?: Maybe<PageEarnCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
 }
 
 export interface PageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionThumbnailPostsLinkingCollectionsPageEarnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -2305,6 +2709,8 @@ export interface Query {
   basicPostCategory?: Maybe<BasicPostCategory>;
   basicPostCategoryCollection?: Maybe<BasicPostCategoryCollection>;
   basicPostCollection?: Maybe<BasicPostCollection>;
+  dappPost?: Maybe<DappPost>;
+  dappPostCollection?: Maybe<DappPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
   faqGroup?: Maybe<FaqGroup>;
   faqGroupCollection?: Maybe<FaqGroupCollection>;
@@ -2314,12 +2720,16 @@ export interface Query {
   featurePostCollection?: Maybe<FeaturePostCollection>;
   iconTile?: Maybe<IconTile>;
   iconTileCollection?: Maybe<IconTileCollection>;
+  pageEarn?: Maybe<PageEarn>;
+  pageEarnCollection?: Maybe<PageEarnCollection>;
   pageHome?: Maybe<PageHome>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearn?: Maybe<PageLearn>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
   pageSectionBasicPosts?: Maybe<PageSectionBasicPosts>;
   pageSectionBasicPostsCollection?: Maybe<PageSectionBasicPostsCollection>;
+  pageSectionDappPosts?: Maybe<PageSectionDappPosts>;
+  pageSectionDappPostsCollection?: Maybe<PageSectionDappPostsCollection>;
   pageSectionFaQs?: Maybe<PageSectionFaQs>;
   pageSectionFaQsCollection?: Maybe<PageSectionFaQsCollection>;
   pageSectionFeaturePosts?: Maybe<PageSectionFeaturePosts>;
@@ -2395,6 +2805,21 @@ export interface QueryBasicPostCollectionArgs {
   where?: InputMaybe<BasicPostFilter>;
 }
 
+export interface QueryDappPostArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryDappPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<DappPostOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DappPostFilter>;
+}
+
 export interface QueryEntryCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
@@ -2464,6 +2889,21 @@ export interface QueryIconTileCollectionArgs {
   where?: InputMaybe<IconTileFilter>;
 }
 
+export interface QueryPageEarnArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageEarnCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageEarnOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageEarnFilter>;
+}
+
 export interface QueryPageHomeArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -2507,6 +2947,21 @@ export interface QueryPageSectionBasicPostsCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<PageSectionBasicPostsFilter>;
+}
+
+export interface QueryPageSectionDappPostsArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionDappPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageSectionDappPostsOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionDappPostsFilter>;
 }
 
 export interface QueryPageSectionFaQsArgs {
@@ -3729,6 +4184,17 @@ export type BasicPostDetailFragment = {
 
 export type SysFragment = { __typename?: 'Sys'; publishedAt?: any | undefined };
 
+export type DappPostFragment = {
+  __typename?: 'DappPost';
+  icon?: string | undefined;
+  iconTitle?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  urlToDapp?: string | undefined;
+  urlToLearnMore?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+};
+
 export type FaqGroupFragment = {
   __typename?: 'FaqGroup';
   name?: string | undefined;
@@ -3780,6 +4246,251 @@ export type IconTileFragment = {
   title?: string | undefined;
   description?: string | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+};
+
+export type PageEarnFragment = {
+  __typename?: 'PageEarn';
+  mainTitle?: string | undefined;
+  subtitle?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sectionsCollection?:
+    | {
+        __typename?: 'PageEarnSectionsCollection';
+        items: Array<
+          | {
+              __typename: 'PageSectionBasicPosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'BasicPost';
+                          summary?: string | undefined;
+                          slug?: string | undefined;
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          mainPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+              postsByCategory?:
+                | {
+                    __typename?: 'BasicPostCategory';
+                    linkedFrom?:
+                      | {
+                          __typename?: 'BasicPostCategoryLinkingCollections';
+                          basicPostCollection?:
+                            | {
+                                __typename?: 'BasicPostCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'BasicPost';
+                                      summary?: string | undefined;
+                                      slug?: string | undefined;
+                                      title?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      mainPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | undefined;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionDappPosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'DappPost';
+                          icon?: string | undefined;
+                          iconTitle?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          urlToDapp?: string | undefined;
+                          urlToLearnMore?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionFaQs';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedFaqGroupsCollection?:
+                | {
+                    __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FaqGroup';
+                          name?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          faqItemCollection?:
+                            | {
+                                __typename?: 'FaqGroupFaqItemCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FaqItem';
+                                      question?: string | undefined;
+                                      answer?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionFeaturePosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FeaturePost';
+                          videoUrl?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionIconTiles';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedIconTilesCollection?:
+                | {
+                    __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'IconTile';
+                          icon?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionThumbnailPosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'ThumbnailPost';
+                          title?: string | undefined;
+                          link?: string | undefined;
+                          isVideo?: boolean | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | undefined
+        >;
+      }
+    | undefined;
 };
 
 export type PageHomeFragment = {
@@ -3861,6 +4572,32 @@ export type PageHomeFragment = {
                             | undefined;
                         }
                       | undefined;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionDappPosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'DappPost';
+                          icon?: string | undefined;
+                          iconTitle?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          urlToDapp?: string | undefined;
+                          urlToLearnMore?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                        }
+                      | undefined
+                    >;
                   }
                 | undefined;
             }
@@ -4084,6 +4821,32 @@ export type PageLearnFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionDappPosts';
+              title?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'DappPost';
+                          icon?: string | undefined;
+                          iconTitle?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          urlToDapp?: string | undefined;
+                          urlToLearnMore?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionFaQs';
               title?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
@@ -4284,6 +5047,30 @@ export type PageSectionBasicPostsFragment = {
                 | undefined;
             }
           | undefined;
+      }
+    | undefined;
+};
+
+export type PageSectionDappPostsFragment = {
+  __typename: 'PageSectionDappPosts';
+  title?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  handpickedPostsCollection?:
+    | {
+        __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
+        items: Array<
+          | {
+              __typename?: 'DappPost';
+              icon?: string | undefined;
+              iconTitle?: string | undefined;
+              title?: string | undefined;
+              description?: string | undefined;
+              urlToDapp?: string | undefined;
+              urlToLearnMore?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+            }
+          | undefined
+        >;
       }
     | undefined;
 };
@@ -4501,6 +5288,296 @@ export type BasicPostCollectionBySlugQuery = {
     | undefined;
 };
 
+export type PageEarnCollectionQueryVariables = Exact<{
+  isPreview?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+export type PageEarnCollectionQuery = {
+  __typename?: 'Query';
+  pageEarnCollection?:
+    | {
+        __typename?: 'PageEarnCollection';
+        items: Array<
+          | {
+              __typename?: 'PageEarn';
+              mainTitle?: string | undefined;
+              subtitle?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sectionsCollection?:
+                | {
+                    __typename?: 'PageEarnSectionsCollection';
+                    items: Array<
+                      | {
+                          __typename: 'PageSectionBasicPosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'BasicPost';
+                                      summary?: string | undefined;
+                                      slug?: string | undefined;
+                                      title?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      mainPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                          postsByCategory?:
+                            | {
+                                __typename?: 'BasicPostCategory';
+                                linkedFrom?:
+                                  | {
+                                      __typename?: 'BasicPostCategoryLinkingCollections';
+                                      basicPostCollection?:
+                                        | {
+                                            __typename?: 'BasicPostCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'BasicPost';
+                                                  summary?: string | undefined;
+                                                  slug?: string | undefined;
+                                                  title?: string | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                  mainPicture?:
+                                                    | {
+                                                        __typename?: 'Asset';
+                                                        title?:
+                                                          | string
+                                                          | undefined;
+                                                        url?:
+                                                          | string
+                                                          | undefined;
+                                                        sys: {
+                                                          __typename?: 'Sys';
+                                                          publishedAt?:
+                                                            | any
+                                                            | undefined;
+                                                        };
+                                                      }
+                                                    | undefined;
+                                                }
+                                              | undefined
+                                            >;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionDappPosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'DappPost';
+                                      icon?: string | undefined;
+                                      iconTitle?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      urlToDapp?: string | undefined;
+                                      urlToLearnMore?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionFaQs';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedFaqGroupsCollection?:
+                            | {
+                                __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FaqGroup';
+                                      name?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      faqItemCollection?:
+                                        | {
+                                            __typename?: 'FaqGroupFaqItemCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'FaqItem';
+                                                  question?: string | undefined;
+                                                  answer?: string | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionFeaturePosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FeaturePost';
+                                      videoUrl?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionIconTiles';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedIconTilesCollection?:
+                            | {
+                                __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'IconTile';
+                                      icon?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionThumbnailPosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'ThumbnailPost';
+                                      title?: string | undefined;
+                                      link?: string | undefined;
+                                      isVideo?: boolean | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
 export type PageHomeCollectionQueryVariables = Exact<{
   isPreview?: InputMaybe<Scalars['Boolean']>;
 }>;
@@ -4601,6 +5678,35 @@ export type PageHomeCollectionQuery = {
                                         | undefined;
                                     }
                                   | undefined;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionDappPosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'DappPost';
+                                      icon?: string | undefined;
+                                      iconTitle?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      urlToDapp?: string | undefined;
+                                      urlToLearnMore?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
                               }
                             | undefined;
                         }
@@ -4862,6 +5968,35 @@ export type PageLearnCollectionQuery = {
                                         | undefined;
                                     }
                                   | undefined;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionDappPosts';
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'DappPost';
+                                      icon?: string | undefined;
+                                      iconTitle?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      urlToDapp?: string | undefined;
+                                      urlToLearnMore?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
                               }
                             | undefined;
                         }
@@ -5296,6 +6431,62 @@ export const PageSectionFaQsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${FaqGroupFragmentDoc}
 `;
+export const DappPostFragmentDoc = gql`
+  fragment DappPost on DappPost {
+    sys {
+      ...Sys
+    }
+    icon
+    iconTitle
+    title
+    description
+    urlToDapp
+    urlToLearnMore
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionDappPostsFragmentDoc = gql`
+  fragment PageSectionDappPosts on PageSectionDappPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...DappPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${DappPostFragmentDoc}
+`;
+export const PageEarnFragmentDoc = gql`
+  fragment PageEarn on PageEarn {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    subtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+`;
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
     sys {
@@ -5310,6 +6501,7 @@ export const PageHomeFragmentDoc = gql`
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
+        ...PageSectionDappPosts
       }
     }
   }
@@ -5319,6 +6511,7 @@ export const PageHomeFragmentDoc = gql`
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
 `;
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
@@ -5334,6 +6527,7 @@ export const PageLearnFragmentDoc = gql`
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
         ...PageSectionFaQs
+        ...PageSectionDappPosts
       }
     }
   }
@@ -5343,6 +6537,7 @@ export const PageLearnFragmentDoc = gql`
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
 `;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
@@ -5385,6 +6580,16 @@ export const BasicPostCollectionBySlugDocument = gql`
     }
   }
   ${BasicPostDetailFragmentDoc}
+`;
+export const PageEarnCollectionDocument = gql`
+  query pageEarnCollection($isPreview: Boolean = false) {
+    pageEarnCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageEarn
+      }
+    }
+  }
+  ${PageEarnFragmentDoc}
 `;
 export const PageHomeCollectionDocument = gql`
   query pageHomeCollection($isPreview: Boolean = false) {
@@ -5471,6 +6676,20 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'basicPostCollectionBySlug'
+      );
+    },
+    pageEarnCollection(
+      variables?: PageEarnCollectionQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<PageEarnCollectionQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<PageEarnCollectionQuery>(
+            PageEarnCollectionDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'pageEarnCollection'
       );
     },
     pageHomeCollection(

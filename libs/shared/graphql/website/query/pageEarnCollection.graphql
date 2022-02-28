@@ -1,0 +1,7 @@
+query pageEarnCollection($isPreview: Boolean = false) {
+  pageEarnCollection(limit: 2, preview: $isPreview) {
+    items {
+      ...PageEarn
+    }
+  }
+}
