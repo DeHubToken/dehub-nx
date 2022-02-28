@@ -9,4 +9,5 @@ fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {
       ...ThumbnailPost
     }
   }
+  swiperResponsiveOptions
 }

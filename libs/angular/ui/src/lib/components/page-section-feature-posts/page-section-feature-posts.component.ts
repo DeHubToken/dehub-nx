@@ -25,7 +25,12 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
       <h3>{{ section.title }}</h3>
 
       <!-- Feature Posts -->
-      <swiper [navigation]="true" [breakpoints]="swiperResponsiveOptions">
+      <swiper
+        [navigation]="true"
+        [breakpoints]="
+          section.swiperResponsiveOptions || swiperResponsiveOptions
+        "
+      >
         <ng-container *ngFor="let featurePost of featurePosts">
           <ng-template swiperSlide>
             <dhb-feature-post [featurePost]="featurePost"></dhb-feature-post>

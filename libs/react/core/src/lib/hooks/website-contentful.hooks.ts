@@ -65,6 +65,7 @@ export const PageSectionFeaturePostsFragmentDoc = gql`
         ...FeaturePost
       }
     }
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${FeaturePostFragmentDoc}
@@ -99,6 +100,7 @@ export const PageSectionThumbnailPostsFragmentDoc = gql`
         ...ThumbnailPost
       }
     }
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${ThumbnailPostFragmentDoc}
@@ -132,6 +134,7 @@ export const PageSectionBasicPostsFragmentDoc = gql`
         }
       }
     }
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${BasicPostFragmentDoc}
