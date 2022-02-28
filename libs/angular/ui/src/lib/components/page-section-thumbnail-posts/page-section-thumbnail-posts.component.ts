@@ -1,0 +1,64 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  PageSectionThumbnailPostsFragment,
+  SwiperResponsiveOptions,
+  ThumbnailPostFragment,
+} from '@dehub/shared/model';
+import { isNotNil } from '@dehub/shared/util';
+import { bounceInLeftOnEnterAnimation } from 'angular-animations';
+
+@Component({
+  selector: 'dhb-page-section-thumbnail-posts',
+  template: `
+    <div
+      *ngIf="section"
+      [dhbContentfulDraft]="section.sys"
+      [@bounceInLeft]
+      class="col-12 mb-5"
+    >
+      <h3>{{ section.title }}</h3>
+
+      <!-- Thumbnail Posts -->
+      <swiper [navigation]="true" [breakpoints]="swiperResponsiveOptions">
+        <ng-container *ngFor="let thumbnailPost of thumbnailPosts">
+          <ng-template swiperSlide>
+            <dhb-thumbnail-post
+              [thumbnailPost]="thumbnailPost"
+            ></dhb-thumbnail-post>
+          </ng-template>
+        </ng-container>
+      </swiper>
+    </div>
+  `,
+  styles: [
+    `
+      @import '~swiper/scss';
+      @import '~@dehub/swiper/dhb_swiper_navigation';
+    `,
+  ],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
+})
+export class PageSectionThumbnailPostsComponent implements OnInit {
+  @Input() section!: PageSectionThumbnailPostsFragment;
+  @Input() swiperResponsiveOptions?: SwiperResponsiveOptions;
+
+  thumbnailPosts: ThumbnailPostFragment[] = [];
+
+  constructor() {}
+
+  ngOnInit() {
+    if (!this.section) return;
+
+    this.thumbnailPosts = (
+      this.section.handpickedPostsCollection?.items ?? []
+    ).filter(isNotNil);
+  }
+}

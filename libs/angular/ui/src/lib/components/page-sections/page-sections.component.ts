@@ -33,6 +33,13 @@ type PageSection =
         [swiperResponsiveOptions]="featurePostsResponsiveOptions"
       ></dhb-page-section-feature-posts>
 
+      <!-- Thumbnail Posts -->
+      <dhb-page-section-thumbnail-posts
+        *ngIf="isPageSectionThumbnailPosts(section)"
+        [section]="section"
+        [swiperResponsiveOptions]="thumbnailPostsResponsiveOptions"
+      ></dhb-page-section-thumbnail-posts>
+
       <!-- Basic Posts -->
       <dhb-page-section-basic-posts
         *ngIf="isPageSectionBasicPosts(section)"
@@ -59,6 +66,7 @@ type PageSection =
 export class PageSectionsComponent implements OnInit {
   @Input() sections?: PageSection[];
   @Input() featurePostsResponsiveOptions?: SwiperResponsiveOptions;
+  @Input() thumbnailPostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() basicPostsResponsiveOptions?: SwiperResponsiveOptions;
 
   constructor() {}
@@ -70,6 +78,14 @@ export class PageSectionsComponent implements OnInit {
   ): pageSection is PageSectionFeaturePostsFragment {
     return (
       !!pageSection && pageSection.__typename === 'PageSectionFeaturePosts'
+    );
+  }
+
+  isPageSectionThumbnailPosts(
+    pageSection: PageSection
+  ): pageSection is PageSectionThumbnailPostsFragment {
+    return (
+      !!pageSection && pageSection.__typename === 'PageSectionThumbnailPosts'
     );
   }
 
