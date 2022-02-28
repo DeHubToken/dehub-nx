@@ -45,6 +45,18 @@
 
   // THumbnail Post Style
   &.thumbnail {
+    .p-card-header {
+      .fa-play-circle {
+        cursor: pointer;
+        font-size: 5em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-shadow: 4px 2px 4px rgb(0 0 0 / 75%);
+        color: #fff;
+      }
+    }
     .p-card-body {
       display: none;
     }
