@@ -1580,6 +1580,7 @@ export interface PageSectionBasicPosts extends Entry {
   handpickedPostsCollection?: Maybe<PageSectionBasicPostsHandpickedPostsCollection>;
   linkedFrom?: Maybe<PageSectionBasicPostsLinkingCollections>;
   postsByCategory?: Maybe<BasicPostCategory>;
+  swiperResponsiveOptions?: Maybe<Scalars['JSON']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 }
@@ -1604,6 +1605,11 @@ export interface PageSectionBasicPostsPostsByCategoryArgs {
 }
 
 /** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
+export interface PageSectionBasicPostsSwiperResponsiveOptionsArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
 export interface PageSectionBasicPostsTitleArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
@@ -1623,6 +1629,7 @@ export interface PageSectionBasicPostsFilter {
   handpickedPostsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   postsByCategory?: InputMaybe<CfBasicPostCategoryNestedFilter>;
   postsByCategory_exists?: InputMaybe<Scalars['Boolean']>;
+  swiperResponsiveOptions_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -1936,6 +1943,7 @@ export interface PageSectionFeaturePosts extends Entry {
   contentfulMetadata: ContentfulMetadata;
   handpickedPostsCollection?: Maybe<PageSectionFeaturePostsHandpickedPostsCollection>;
   linkedFrom?: Maybe<PageSectionFeaturePostsLinkingCollections>;
+  swiperResponsiveOptions?: Maybe<Scalars['JSON']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 }
@@ -1951,6 +1959,11 @@ export interface PageSectionFeaturePostsHandpickedPostsCollectionArgs {
 /** Page section with Feature Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFeaturePosts) */
 export interface PageSectionFeaturePostsLinkedFromArgs {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Page section with Feature Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFeaturePosts) */
+export interface PageSectionFeaturePostsSwiperResponsiveOptionsArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Page section with Feature Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFeaturePosts) */
@@ -1971,6 +1984,7 @@ export interface PageSectionFeaturePostsFilter {
   OR?: InputMaybe<Array<InputMaybe<PageSectionFeaturePostsFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   handpickedPostsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  swiperResponsiveOptions_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -2168,6 +2182,7 @@ export interface PageSectionThumbnailPosts extends Entry {
   contentfulMetadata: ContentfulMetadata;
   handpickedPostsCollection?: Maybe<PageSectionThumbnailPostsHandpickedPostsCollection>;
   linkedFrom?: Maybe<PageSectionThumbnailPostsLinkingCollections>;
+  swiperResponsiveOptions?: Maybe<Scalars['JSON']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 }
@@ -2183,6 +2198,11 @@ export interface PageSectionThumbnailPostsHandpickedPostsCollectionArgs {
 /** Page section with Thumbnail Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionThumbnailPosts) */
 export interface PageSectionThumbnailPostsLinkedFromArgs {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Page section with Thumbnail Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionThumbnailPosts) */
+export interface PageSectionThumbnailPostsSwiperResponsiveOptionsArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Page section with Thumbnail Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionThumbnailPosts) */
@@ -2203,6 +2223,7 @@ export interface PageSectionThumbnailPostsFilter {
   OR?: InputMaybe<Array<InputMaybe<PageSectionThumbnailPostsFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   handpickedPostsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  swiperResponsiveOptions_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -4432,6 +4453,7 @@ export type PageEarnFragment = {
           | {
               __typename: 'PageSectionBasicPosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -4569,6 +4591,7 @@ export type PageEarnFragment = {
           | {
               __typename: 'PageSectionFeaturePosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -4628,6 +4651,7 @@ export type PageEarnFragment = {
           | {
               __typename: 'PageSectionThumbnailPosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -4677,6 +4701,7 @@ export type PageHomeFragment = {
           | {
               __typename: 'PageSectionBasicPosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -4814,6 +4839,7 @@ export type PageHomeFragment = {
           | {
               __typename: 'PageSectionFeaturePosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -4873,6 +4899,7 @@ export type PageHomeFragment = {
           | {
               __typename: 'PageSectionThumbnailPosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -4922,6 +4949,7 @@ export type PageLearnFragment = {
           | {
               __typename: 'PageSectionBasicPosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -5059,6 +5087,7 @@ export type PageLearnFragment = {
           | {
               __typename: 'PageSectionFeaturePosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -5118,6 +5147,7 @@ export type PageLearnFragment = {
           | {
               __typename: 'PageSectionThumbnailPosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -5158,6 +5188,7 @@ export type PageLearnFragment = {
 export type PageSectionBasicPostsFragment = {
   __typename: 'PageSectionBasicPosts';
   title?: string | undefined;
+  swiperResponsiveOptions?: any | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   handpickedPostsCollection?:
     | {
@@ -5286,6 +5317,7 @@ export type PageSectionFaQsFragment = {
 export type PageSectionFeaturePostsFragment = {
   __typename: 'PageSectionFeaturePosts';
   title?: string | undefined;
+  swiperResponsiveOptions?: any | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   handpickedPostsCollection?:
     | {
@@ -5338,6 +5370,7 @@ export type PageSectionIconTilesFragment = {
 export type PageSectionThumbnailPostsFragment = {
   __typename: 'PageSectionThumbnailPosts';
   title?: string | undefined;
+  swiperResponsiveOptions?: any | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   handpickedPostsCollection?:
     | {
@@ -5376,6 +5409,7 @@ export type PageStreamFragment = {
           | {
               __typename: 'PageSectionBasicPosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -5513,6 +5547,7 @@ export type PageStreamFragment = {
           | {
               __typename: 'PageSectionFeaturePosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -5572,6 +5607,7 @@ export type PageStreamFragment = {
           | {
               __typename: 'PageSectionThumbnailPosts';
               title?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -5727,6 +5763,7 @@ export type PageEarnCollectionQuery = {
                       | {
                           __typename: 'PageSectionBasicPosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -5883,6 +5920,7 @@ export type PageEarnCollectionQuery = {
                       | {
                           __typename: 'PageSectionFeaturePosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -5950,6 +5988,7 @@ export type PageEarnCollectionQuery = {
                       | {
                           __typename: 'PageSectionThumbnailPosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6017,6 +6056,7 @@ export type PageHomeCollectionQuery = {
                       | {
                           __typename: 'PageSectionBasicPosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6173,6 +6213,7 @@ export type PageHomeCollectionQuery = {
                       | {
                           __typename: 'PageSectionFeaturePosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6240,6 +6281,7 @@ export type PageHomeCollectionQuery = {
                       | {
                           __typename: 'PageSectionThumbnailPosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6307,6 +6349,7 @@ export type PageLearnCollectionQuery = {
                       | {
                           __typename: 'PageSectionBasicPosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6463,6 +6506,7 @@ export type PageLearnCollectionQuery = {
                       | {
                           __typename: 'PageSectionFeaturePosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6530,6 +6574,7 @@ export type PageLearnCollectionQuery = {
                       | {
                           __typename: 'PageSectionThumbnailPosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6597,6 +6642,7 @@ export type PageStreamCollectionQuery = {
                       | {
                           __typename: 'PageSectionBasicPosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6753,6 +6799,7 @@ export type PageStreamCollectionQuery = {
                       | {
                           __typename: 'PageSectionFeaturePosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6820,6 +6867,7 @@ export type PageStreamCollectionQuery = {
                       | {
                           __typename: 'PageSectionThumbnailPosts';
                           title?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6999,6 +7047,7 @@ export const PageSectionFeaturePostsFragmentDoc = gql`
         ...FeaturePost
       }
     }
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${FeaturePostFragmentDoc}
@@ -7033,6 +7082,7 @@ export const PageSectionThumbnailPostsFragmentDoc = gql`
         ...ThumbnailPost
       }
     }
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${ThumbnailPostFragmentDoc}
@@ -7066,6 +7116,7 @@ export const PageSectionBasicPostsFragmentDoc = gql`
         }
       }
     }
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${BasicPostFragmentDoc}

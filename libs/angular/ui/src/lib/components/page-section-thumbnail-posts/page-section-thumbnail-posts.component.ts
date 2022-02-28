@@ -25,7 +25,12 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
       <h3>{{ section.title }}</h3>
 
       <!-- Thumbnail Posts -->
-      <swiper [navigation]="true" [breakpoints]="swiperResponsiveOptions">
+      <swiper
+        [navigation]="true"
+        [breakpoints]="
+          section.swiperResponsiveOptions || swiperResponsiveOptions
+        "
+      >
         <ng-container *ngFor="let thumbnailPost of thumbnailPosts">
           <ng-template swiperSlide>
             <dhb-thumbnail-post

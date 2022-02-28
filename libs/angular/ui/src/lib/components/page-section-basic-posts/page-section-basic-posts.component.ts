@@ -25,7 +25,12 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
       <h3>{{ section.title }}</h3>
 
       <!-- Basic Posts -->
-      <swiper [navigation]="true" [breakpoints]="swiperResponsiveOptions">
+      <swiper
+        [navigation]="true"
+        [breakpoints]="
+          section.swiperResponsiveOptions || swiperResponsiveOptions
+        "
+      >
         <ng-container *ngFor="let basicPost of basicPosts">
           <ng-template swiperSlide>
             <dhb-basic-post [basicPost]="basicPost"></dhb-basic-post>

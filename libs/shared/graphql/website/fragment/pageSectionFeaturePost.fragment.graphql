@@ -9,4 +9,5 @@ fragment PageSectionFeaturePosts on PageSectionFeaturePosts {
       ...FeaturePost
     }
   }
+  swiperResponsiveOptions
 }
