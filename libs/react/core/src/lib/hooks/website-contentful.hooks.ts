@@ -312,6 +312,32 @@ export const PageLearnFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
 `;
+export const PageStreamFragmentDoc = gql`
+  fragment PageStream on PageStream {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    subtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+`;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
     sys {
@@ -588,6 +614,67 @@ export type PageLearnCollectionLazyQueryHookResult = ReturnType<
 export type PageLearnCollectionQueryResult = Apollo.QueryResult<
   models.PageLearnCollectionQuery,
   models.PageLearnCollectionQueryVariables
+>;
+export const PageStreamCollectionDocument = gql`
+  query pageStreamCollection($isPreview: Boolean = false) {
+    pageStreamCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageStream
+      }
+    }
+  }
+  ${PageStreamFragmentDoc}
+`;
+
+/**
+ * __usePageStreamCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageStreamCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageStreamCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageStreamCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageStreamCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageStreamCollectionQuery,
+    models.PageStreamCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageStreamCollectionQuery,
+    models.PageStreamCollectionQueryVariables
+  >(PageStreamCollectionDocument, options);
+}
+export function usePageStreamCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageStreamCollectionQuery,
+    models.PageStreamCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageStreamCollectionQuery,
+    models.PageStreamCollectionQueryVariables
+  >(PageStreamCollectionDocument, options);
+}
+export type PageStreamCollectionQueryHookResult = ReturnType<
+  typeof usePageStreamCollectionQuery
+>;
+export type PageStreamCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageStreamCollectionLazyQuery
+>;
+export type PageStreamCollectionQueryResult = Apollo.QueryResult<
+  models.PageStreamCollectionQuery,
+  models.PageStreamCollectionQueryVariables
 >;
 export const TeamMembersDocument = gql`
   query teamMembers($isPreview: Boolean = false) {
