@@ -13,6 +13,7 @@ import { ThumbnailPostFragment } from '@dehub/shared/model';
       <p-card *ngIf="thumbnailPost" styleClass="thumbnail p-card-shadow">
         <ng-template pTemplate="header">
           <a *ngIf="thumbnailPost.link as link" [href]="link" target="_blank">
+            <i *ngIf="thumbnailPost.isVideo" class="fad fa-play-circle"></i>
             <img
               *ngIf="thumbnailPost.picture as picture"
               [dhbContentfulDraft]="picture.sys"

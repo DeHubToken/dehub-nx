@@ -2919,11 +2919,17 @@ export enum TeamMemberOrder {
 export interface ThumbnailPost extends Entry {
   __typename?: 'ThumbnailPost';
   contentfulMetadata: ContentfulMetadata;
+  isVideo?: Maybe<Scalars['Boolean']>;
   link?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<ThumbnailPostLinkingCollections>;
   picture?: Maybe<Asset>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+}
+
+/** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
+export interface ThumbnailPostIsVideoArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
@@ -2959,6 +2965,9 @@ export interface ThumbnailPostFilter {
   AND?: InputMaybe<Array<InputMaybe<ThumbnailPostFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ThumbnailPostFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  isVideo?: InputMaybe<Scalars['Boolean']>;
+  isVideo_exists?: InputMaybe<Scalars['Boolean']>;
+  isVideo_not?: InputMaybe<Scalars['Boolean']>;
   link?: InputMaybe<Scalars['String']>;
   link_contains?: InputMaybe<Scalars['String']>;
   link_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2998,6 +3007,8 @@ export interface ThumbnailPostLinkingCollectionsPageSectionThumbnailPostsCollect
 }
 
 export enum ThumbnailPostOrder {
+  IsVideoAsc = 'isVideo_ASC',
+  IsVideoDesc = 'isVideo_DESC',
   LinkAsc = 'link_ASC',
   LinkDesc = 'link_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -3962,6 +3973,7 @@ export type PageHomeFragment = {
                           __typename?: 'ThumbnailPost';
                           title?: string | undefined;
                           link?: string | undefined;
+                          isVideo?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -4180,6 +4192,7 @@ export type PageLearnFragment = {
                           __typename?: 'ThumbnailPost';
                           title?: string | undefined;
                           link?: string | undefined;
+                          isVideo?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -4375,6 +4388,7 @@ export type PageSectionThumbnailPostsFragment = {
               __typename?: 'ThumbnailPost';
               title?: string | undefined;
               link?: string | undefined;
+              isVideo?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               picture?:
                 | {
@@ -4395,6 +4409,7 @@ export type ThumbnailPostFragment = {
   __typename?: 'ThumbnailPost';
   title?: string | undefined;
   link?: string | undefined;
+  isVideo?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   picture?:
     | {
@@ -4714,6 +4729,7 @@ export type PageHomeCollectionQuery = {
                                       __typename?: 'ThumbnailPost';
                                       title?: string | undefined;
                                       link?: string | undefined;
+                                      isVideo?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -4974,6 +4990,7 @@ export type PageLearnCollectionQuery = {
                                       __typename?: 'ThumbnailPost';
                                       title?: string | undefined;
                                       link?: string | undefined;
+                                      isVideo?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -5158,6 +5175,7 @@ export const ThumbnailPostFragmentDoc = gql`
     }
     title
     link
+    isVideo
   }
   ${SysFragmentDoc}
 `;

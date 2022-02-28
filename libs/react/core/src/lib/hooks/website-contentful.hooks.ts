@@ -83,6 +83,7 @@ export const ThumbnailPostFragmentDoc = gql`
     }
     title
     link
+    isVideo
   }
   ${SysFragmentDoc}
 `;
