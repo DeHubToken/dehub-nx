@@ -36,7 +36,7 @@ import {
       >
         <ng-container *ngFor="let iconTile of iconTiles">
           <ng-template swiperSlide>
-            <dhb-icon-tile [iconTile]="iconTile"></dhb-icon-tile>
+            <dhb-icon-tile [iconTile]="iconTile" class="w-full"></dhb-icon-tile>
           </ng-template>
         </ng-container>
       </swiper>
