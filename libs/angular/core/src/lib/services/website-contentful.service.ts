@@ -36,6 +36,20 @@ export class PageEarnCollectionService extends Apollo.Query<
 @Injectable({
   providedIn: GraphQLModule,
 })
+export class PageGameCollectionService extends Apollo.Query<
+  models.PageGameCollectionQuery,
+  models.PageGameCollectionQueryVariables
+> {
+  document = models.PageGameCollectionDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
 export class PageHomeCollectionService extends Apollo.Query<
   models.PageHomeCollectionQuery,
   models.PageHomeCollectionQueryVariables

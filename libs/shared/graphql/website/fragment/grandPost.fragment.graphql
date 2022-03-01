@@ -1,0 +1,25 @@
+fragment GrandPost on GrandPost {
+  sys {
+    ...Sys
+  }
+  videoUrl
+  picture(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
+    title
+    url
+  }
+  heavyPicture(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
+    title
+    url
+  }
+  title
+  subtitle
+  description
+  callToActionUrl
+  callToActionButtonLabel
+}

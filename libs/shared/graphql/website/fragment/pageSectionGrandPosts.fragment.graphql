@@ -1,0 +1,12 @@
+fragment PageSectionGrandPosts on PageSectionGrandPosts {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    items {
+      ...GrandPost
+    }
+  }
+}

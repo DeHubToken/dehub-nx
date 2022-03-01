@@ -12,6 +12,7 @@ fragment PageStream on PageStream {
       ...PageSectionIconTiles
       ...PageSectionFaQs
       ...PageSectionDappPosts
+      ...PageSectionGrandPosts
     }
   }
 }
