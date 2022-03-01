@@ -164,6 +164,7 @@ export const PageSectionIconTilesFragmentDoc = gql`
         ...IconTile
       }
     }
+    isSwiper
   }
   ${SysFragmentDoc}
   ${IconTileFragmentDoc}

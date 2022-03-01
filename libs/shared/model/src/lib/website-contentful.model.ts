@@ -2537,6 +2537,7 @@ export interface PageSectionIconTiles extends Entry {
   __typename?: 'PageSectionIconTiles';
   contentfulMetadata: ContentfulMetadata;
   handpickedIconTilesCollection?: Maybe<PageSectionIconTilesHandpickedIconTilesCollection>;
+  isSwiper?: Maybe<Scalars['Boolean']>;
   linkedFrom?: Maybe<PageSectionIconTilesLinkingCollections>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
@@ -2548,6 +2549,11 @@ export interface PageSectionIconTilesHandpickedIconTilesCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
+export interface PageSectionIconTilesIsSwiperArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
@@ -2573,6 +2579,9 @@ export interface PageSectionIconTilesFilter {
   OR?: InputMaybe<Array<InputMaybe<PageSectionIconTilesFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   handpickedIconTilesCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_not?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -2644,6 +2653,8 @@ export interface PageSectionIconTilesLinkingCollectionsPageStreamCollectionArgs 
 }
 
 export enum PageSectionIconTilesOrder {
+  IsSwiperAsc = 'isSwiper_ASC',
+  IsSwiperDesc = 'isSwiper_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -5245,6 +5256,7 @@ export type PageEarnFragment = {
           | {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
+              isSwiper?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -5543,6 +5555,7 @@ export type PageGameFragment = {
           | {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
+              isSwiper?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -5841,6 +5854,7 @@ export type PageHomeFragment = {
           | {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
+              isSwiper?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -6139,6 +6153,7 @@ export type PageLearnFragment = {
           | {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
+              isSwiper?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -6406,6 +6421,7 @@ export type PageSectionGrandPostsFragment = {
 export type PageSectionIconTilesFragment = {
   __typename: 'PageSectionIconTiles';
   title?: string | undefined;
+  isSwiper?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   handpickedIconTilesCollection?:
     | {
@@ -6691,6 +6707,7 @@ export type PageStreamFragment = {
           | {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
+              isSwiper?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -7124,6 +7141,7 @@ export type PageEarnCollectionQuery = {
                       | {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
+                          isSwiper?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -7474,6 +7492,7 @@ export type PageGameCollectionQuery = {
                       | {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
+                          isSwiper?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -7824,6 +7843,7 @@ export type PageHomeCollectionQuery = {
                       | {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
+                          isSwiper?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -8174,6 +8194,7 @@ export type PageLearnCollectionQuery = {
                       | {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
+                          isSwiper?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -8524,6 +8545,7 @@ export type PageStreamCollectionQuery = {
                       | {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
+                          isSwiper?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -8833,6 +8855,7 @@ export const PageSectionIconTilesFragmentDoc = gql`
         ...IconTile
       }
     }
+    isSwiper
   }
   ${SysFragmentDoc}
   ${IconTileFragmentDoc}
