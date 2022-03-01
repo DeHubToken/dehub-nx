@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/feature-legal",
+  "sourceRoot": "libs/angular/feature-legal/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/feature-legal"],
+      "options": {
+        "jestConfig": "libs/angular/feature-legal/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/feature-legal/src/**/*.ts",
+          "libs/angular/feature-legal/src/**/*.html"
+        ],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}

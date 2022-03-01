@@ -22,6 +22,9 @@
       "@dehub/angular/feature-learn": [
         "libs/angular/feature-learn/src/index.ts"
       ],
+      "@dehub/angular/feature-legal": [
+        "libs/angular/feature-legal/src/index.ts"
+      ],
       "@dehub/angular/feature-news": ["libs/angular/feature-news/src/index.ts"],
       "@dehub/angular/feature-shop": ["libs/angular/feature-shop/src/index.ts"],
       "@dehub/angular/feature-stream": [
