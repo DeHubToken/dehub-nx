@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment';
               <ul>
                 <li><a [href]="landing">Disclaimer</a></li>
                 <li>
-                  <a [href]="landing + '/privacy-policy'">Privacy Policy</a>
+                  <a [routerLink]="['/legal/privacy']">Privacy Policy</a>
                 </li>
                 <li>
                   <a [href]="landing + '/terms'">Terms & Conditions</a>

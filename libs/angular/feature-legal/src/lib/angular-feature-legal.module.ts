@@ -1,10 +1,31 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
-
-export const angularFeatureLegalRoutes: Route[] = [];
+import { NgModule } from '@angular/core';
+import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
+import { ButtonModule } from 'primeng/button';
+import { AngularFeatureLegalDetailComponent } from './angular-feature-legal-detail.component';
+import { AngularFeatureLegalRoutingModule } from './angular-feature-legal-routing.module';
+import { AngularFeatureLegalComponent } from './angular-feature-legal.component';
+import { LegalPostComponent } from './components/legal-post.component';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [
+    // Angular Modules
+    CommonModule,
+
+    // Lib Modules
+    ContentfulDraftDirectiveModule,
+    SafeHtmlPipeModule,
+
+    // PrimeNg Modules
+    ButtonModule,
+
+    AngularFeatureLegalRoutingModule,
+  ],
+  declarations: [
+    AngularFeatureLegalComponent,
+    AngularFeatureLegalDetailComponent,
+    LegalPostComponent,
+  ],
 })
 export class AngularFeatureLegalModule {}

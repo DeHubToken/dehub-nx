@@ -1,0 +1,10 @@
+fragment LegalPost on LegalPost {
+  sys {
+    ...Sys
+  }
+  title
+  description {
+    json
+  }
+  slug
+}

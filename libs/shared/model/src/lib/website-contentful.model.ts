@@ -1229,12 +1229,24 @@ export enum GrandPostOrder {
 /** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
 export interface IconTile extends Entry {
   __typename?: 'IconTile';
+  callToActionButtonLabel?: Maybe<Scalars['String']>;
+  callToActionUrl?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<IconTileLinkingCollections>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+}
+
+/** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
+export interface IconTileCallToActionButtonLabelArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
+export interface IconTileCallToActionUrlArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
@@ -1268,6 +1280,22 @@ export interface IconTileCollection {
 export interface IconTileFilter {
   AND?: InputMaybe<Array<InputMaybe<IconTileFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<IconTileFilter>>>;
+  callToActionButtonLabel?: InputMaybe<Scalars['String']>;
+  callToActionButtonLabel_contains?: InputMaybe<Scalars['String']>;
+  callToActionButtonLabel_exists?: InputMaybe<Scalars['Boolean']>;
+  callToActionButtonLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  callToActionButtonLabel_not?: InputMaybe<Scalars['String']>;
+  callToActionButtonLabel_not_contains?: InputMaybe<Scalars['String']>;
+  callToActionButtonLabel_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  callToActionUrl?: InputMaybe<Scalars['String']>;
+  callToActionUrl_contains?: InputMaybe<Scalars['String']>;
+  callToActionUrl_exists?: InputMaybe<Scalars['Boolean']>;
+  callToActionUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  callToActionUrl_not?: InputMaybe<Scalars['String']>;
+  callToActionUrl_not_contains?: InputMaybe<Scalars['String']>;
+  callToActionUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   description?: InputMaybe<Scalars['String']>;
   description_contains?: InputMaybe<Scalars['String']>;
@@ -1314,6 +1342,10 @@ export interface IconTileLinkingCollectionsPageSectionIconTilesCollectionArgs {
 }
 
 export enum IconTileOrder {
+  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
+  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
+  CallToActionUrlAsc = 'callToActionUrl_ASC',
+  CallToActionUrlDesc = 'callToActionUrl_DESC',
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
   IconAsc = 'icon_ASC',
@@ -1423,6 +1455,121 @@ export interface ImageTransformOptions {
   resizeStrategy?: InputMaybe<ImageResizeStrategy>;
   /** Desired width in pixels. Defaults to the original image width. */
   width?: InputMaybe<Scalars['Dimension']>;
+}
+
+/** Legal post model for Privacy, Terms of Use, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/legalPost) */
+export interface LegalPost extends Entry {
+  __typename?: 'LegalPost';
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<LegalPostDescription>;
+  linkedFrom?: Maybe<LegalPostLinkingCollections>;
+  slug?: Maybe<Scalars['String']>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Legal post model for Privacy, Terms of Use, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/legalPost) */
+export interface LegalPostDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Legal post model for Privacy, Terms of Use, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/legalPost) */
+export interface LegalPostLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Legal post model for Privacy, Terms of Use, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/legalPost) */
+export interface LegalPostSlugArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Legal post model for Privacy, Terms of Use, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/legalPost) */
+export interface LegalPostTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface LegalPostCollection {
+  __typename?: 'LegalPostCollection';
+  items: Array<Maybe<LegalPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface LegalPostDescription {
+  __typename?: 'LegalPostDescription';
+  json: Scalars['JSON'];
+  links: LegalPostDescriptionLinks;
+}
+
+export interface LegalPostDescriptionAssets {
+  __typename?: 'LegalPostDescriptionAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+}
+
+export interface LegalPostDescriptionEntries {
+  __typename?: 'LegalPostDescriptionEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+}
+
+export interface LegalPostDescriptionLinks {
+  __typename?: 'LegalPostDescriptionLinks';
+  assets: LegalPostDescriptionAssets;
+  entries: LegalPostDescriptionEntries;
+}
+
+export interface LegalPostFilter {
+  AND?: InputMaybe<Array<InputMaybe<LegalPostFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<LegalPostFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
+  slug_contains?: InputMaybe<Scalars['String']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  slug_not?: InputMaybe<Scalars['String']>;
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface LegalPostLinkingCollections {
+  __typename?: 'LegalPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface LegalPostLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum LegalPostOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 /** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
@@ -2505,7 +2652,9 @@ export interface PageSectionIconTiles extends Entry {
   __typename?: 'PageSectionIconTiles';
   contentfulMetadata: ContentfulMetadata;
   handpickedIconTilesCollection?: Maybe<PageSectionIconTilesHandpickedIconTilesCollection>;
+  isSwiper?: Maybe<Scalars['Boolean']>;
   linkedFrom?: Maybe<PageSectionIconTilesLinkingCollections>;
+  swiperResponsiveOptions?: Maybe<Scalars['JSON']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 }
@@ -2519,8 +2668,18 @@ export interface PageSectionIconTilesHandpickedIconTilesCollectionArgs {
 }
 
 /** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
+export interface PageSectionIconTilesIsSwiperArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
 export interface PageSectionIconTilesLinkedFromArgs {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
+export interface PageSectionIconTilesSwiperResponsiveOptionsArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
@@ -2541,6 +2700,10 @@ export interface PageSectionIconTilesFilter {
   OR?: InputMaybe<Array<InputMaybe<PageSectionIconTilesFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   handpickedIconTilesCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_not?: InputMaybe<Scalars['Boolean']>;
+  swiperResponsiveOptions_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -2612,6 +2775,8 @@ export interface PageSectionIconTilesLinkingCollectionsPageStreamCollectionArgs 
 }
 
 export enum PageSectionIconTilesOrder {
+  IsSwiperAsc = 'isSwiper_ASC',
+  IsSwiperDesc = 'isSwiper_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -3355,6 +3520,8 @@ export interface Query {
   grandPostCollection?: Maybe<GrandPostCollection>;
   iconTile?: Maybe<IconTile>;
   iconTileCollection?: Maybe<IconTileCollection>;
+  legalPost?: Maybe<LegalPost>;
+  legalPostCollection?: Maybe<LegalPostCollection>;
   pageEarn?: Maybe<PageEarn>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGame?: Maybe<PageGame>;
@@ -3543,6 +3710,21 @@ export interface QueryIconTileCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<IconTileFilter>;
+}
+
+export interface QueryLegalPostArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryLegalPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<LegalPostOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<LegalPostFilter>;
 }
 
 export interface QueryPageEarnArgs {
@@ -4974,6 +5156,14 @@ export type IconTileFragment = {
   title?: string | undefined;
   description?: string | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+};
+
+export type LegalPostFragment = {
+  __typename?: 'LegalPost';
+  title?: string | undefined;
+  slug?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  description?: { __typename?: 'LegalPostDescription'; json: any } | undefined;
 };
 
 export type PageEarnFragment = {
@@ -6796,6 +6986,32 @@ export type BasicPostCollectionBySlugQuery = {
                     url?: string | undefined;
                     sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
                   }
+                | undefined;
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
+export type LegalPostCollectionBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']>;
+  isPreview?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+export type LegalPostCollectionBySlugQuery = {
+  __typename?: 'Query';
+  legalPostCollection?:
+    | {
+        __typename?: 'LegalPostCollection';
+        items: Array<
+          | {
+              __typename?: 'LegalPost';
+              title?: string | undefined;
+              slug?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              description?:
+                | { __typename?: 'LegalPostDescription'; json: any }
                 | undefined;
             }
           | undefined
@@ -8636,6 +8852,19 @@ export const BasicPostDetailFragmentDoc = gql`
   }
   ${BasicPostCommonFragmentDoc}
 `;
+export const LegalPostFragmentDoc = gql`
+  fragment LegalPost on LegalPost {
+    sys {
+      ...Sys
+    }
+    title
+    description {
+      json
+    }
+    slug
+  }
+  ${SysFragmentDoc}
+`;
 export const FeaturePostFragmentDoc = gql`
   fragment FeaturePost on FeaturePost {
     sys {
@@ -9066,6 +9295,16 @@ export const BasicPostCollectionBySlugDocument = gql`
   }
   ${BasicPostDetailFragmentDoc}
 `;
+export const LegalPostCollectionBySlugDocument = gql`
+  query legalPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+    legalPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+      items {
+        ...LegalPost
+      }
+    }
+  }
+  ${LegalPostFragmentDoc}
+`;
 export const PageEarnCollectionDocument = gql`
   query pageEarnCollection($isPreview: Boolean = false) {
     pageEarnCollection(limit: 2, preview: $isPreview) {
@@ -9181,6 +9420,20 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'basicPostCollectionBySlug'
+      );
+    },
+    legalPostCollectionBySlug(
+      variables?: LegalPostCollectionBySlugQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<LegalPostCollectionBySlugQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<LegalPostCollectionBySlugQuery>(
+            LegalPostCollectionBySlugDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'legalPostCollectionBySlug'
       );
     },
     pageEarnCollection(
