@@ -6,7 +6,10 @@ import {
 } from '@angular/core';
 import { EnvToken, PageLearnCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
-import { PageLearnFragment } from '@dehub/shared/model';
+import {
+  PageLearnFragment,
+  SwiperResponsiveOptions,
+} from '@dehub/shared/model';
 import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -23,6 +26,7 @@ import { map } from 'rxjs/operators';
       <!-- Page Sections -->
       <dhb-page-sections
         [sections]="pageLearn.sectionsCollection?.items"
+        [iconTilesResponsiveOptions]="iconTilesResponsiveOptions"
       ></dhb-page-sections>
     </ng-container>
   `,
@@ -32,6 +36,25 @@ import { map } from 'rxjs/operators';
 })
 export class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;
+
+  iconTilesResponsiveOptions: SwiperResponsiveOptions = {
+    '1800': {
+      slidesPerView: 4,
+      spaceBetween: 20,
+    },
+    '1440': {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    '860': {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    '320': {
+      slidesPerView: 1,
+      spaceBetween: 20,
+    },
+  };
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

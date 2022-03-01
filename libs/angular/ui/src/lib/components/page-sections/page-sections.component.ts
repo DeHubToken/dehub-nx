@@ -51,11 +51,23 @@ type PageSection =
         [swiperResponsiveOptions]="basicPostsResponsiveOptions"
       ></dhb-page-section-basic-posts>
 
-      <!-- Icon Tiles -->
-      <dhb-page-section-icon-tiles
-        *ngIf="isPageSectionIconTiles(section)"
+      <!-- Icon Tiles Swiper -->
+      <dhb-page-section-icon-tiles-swiper
+        *ngIf="
+          isPageSectionIconTiles(section) && section.isSwiper;
+          else iconTiles
+        "
         [section]="section"
-      ></dhb-page-section-icon-tiles>
+        [swiperResponsiveOptions]="iconTilesResponsiveOptions"
+      ></dhb-page-section-icon-tiles-swiper>
+
+      <!-- Icon Tiles -->
+      <ng-template #iconTiles>
+        <dhb-page-section-icon-tiles
+          *ngIf="isPageSectionIconTiles(section)"
+          [section]="section"
+        ></dhb-page-section-icon-tiles>
+      </ng-template>
 
       <!-- FaQs -->
       <dhb-page-section-faqs
@@ -84,6 +96,7 @@ export class PageSectionsComponent implements OnInit {
   @Input() featurePostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() thumbnailPostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() basicPostsResponsiveOptions?: SwiperResponsiveOptions;
+  @Input() iconTilesResponsiveOptions?: SwiperResponsiveOptions;
 
   constructor() {}
 
