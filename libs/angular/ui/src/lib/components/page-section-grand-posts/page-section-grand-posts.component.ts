@@ -26,18 +26,6 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
       <div *ngFor="let grandPost of grandPosts">
         <dhb-grand-post [grandPost]="grandPost"></dhb-grand-post>
       </div>
-      <!-- <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-      >
-        <ng-container *ngFor="let featurePost of featurePosts">
-          <ng-template swiperSlide>
-            <dhb-feature-post [featurePost]="featurePost"></dhb-feature-post>
-          </ng-template>
-        </ng-container>
-      </swiper> -->
     </div>
   `,
   styles: [``],
