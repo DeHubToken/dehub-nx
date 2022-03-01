@@ -2539,6 +2539,7 @@ export interface PageSectionIconTiles extends Entry {
   handpickedIconTilesCollection?: Maybe<PageSectionIconTilesHandpickedIconTilesCollection>;
   isSwiper?: Maybe<Scalars['Boolean']>;
   linkedFrom?: Maybe<PageSectionIconTilesLinkingCollections>;
+  swiperResponsiveOptions?: Maybe<Scalars['JSON']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 }
@@ -2562,6 +2563,11 @@ export interface PageSectionIconTilesLinkedFromArgs {
 }
 
 /** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
+export interface PageSectionIconTilesSwiperResponsiveOptionsArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
 export interface PageSectionIconTilesTitleArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
@@ -2582,6 +2588,7 @@ export interface PageSectionIconTilesFilter {
   isSwiper?: InputMaybe<Scalars['Boolean']>;
   isSwiper_exists?: InputMaybe<Scalars['Boolean']>;
   isSwiper_not?: InputMaybe<Scalars['Boolean']>;
+  swiperResponsiveOptions_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -5257,6 +5264,7 @@ export type PageEarnFragment = {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
               isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -5556,6 +5564,7 @@ export type PageGameFragment = {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
               isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -5855,6 +5864,7 @@ export type PageHomeFragment = {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
               isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -6154,6 +6164,7 @@ export type PageLearnFragment = {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
               isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -6422,6 +6433,7 @@ export type PageSectionIconTilesFragment = {
   __typename: 'PageSectionIconTiles';
   title?: string | undefined;
   isSwiper?: boolean | undefined;
+  swiperResponsiveOptions?: any | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   handpickedIconTilesCollection?:
     | {
@@ -6708,6 +6720,7 @@ export type PageStreamFragment = {
               __typename: 'PageSectionIconTiles';
               title?: string | undefined;
               isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedIconTilesCollection?:
                 | {
@@ -7142,6 +7155,7 @@ export type PageEarnCollectionQuery = {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
                           isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -7493,6 +7507,7 @@ export type PageGameCollectionQuery = {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
                           isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -7844,6 +7859,7 @@ export type PageHomeCollectionQuery = {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
                           isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -8195,6 +8211,7 @@ export type PageLearnCollectionQuery = {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
                           isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -8546,6 +8563,7 @@ export type PageStreamCollectionQuery = {
                           __typename: 'PageSectionIconTiles';
                           title?: string | undefined;
                           isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -8856,6 +8874,7 @@ export const PageSectionIconTilesFragmentDoc = gql`
       }
     }
     isSwiper
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${IconTileFragmentDoc}
