@@ -34,10 +34,7 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
 
           <!-- Date -->
           <p>
-            {{
-              basicPostDetail.sys.publishedAt
-                | date: 'EEE, MMM d, y, hh:mm:ss zzzz'
-            }}
+            {{ basicPostDetail.sys.publishedAt | date: 'fullDate' }}
           </p>
 
           <!-- Description -->
