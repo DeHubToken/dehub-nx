@@ -147,6 +147,8 @@ export const IconTileFragmentDoc = gql`
     icon
     title
     description
+    callToActionUrl
+    callToActionButtonLabel
   }
   ${SysFragmentDoc}
 `;

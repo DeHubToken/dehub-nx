@@ -1229,12 +1229,24 @@ export enum GrandPostOrder {
 /** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
 export interface IconTile extends Entry {
   __typename?: 'IconTile';
+  callToActionButtonLabel?: Maybe<Scalars['String']>;
+  callToActionUrl?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<IconTileLinkingCollections>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+}
+
+/** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
+export interface IconTileCallToActionButtonLabelArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
+export interface IconTileCallToActionUrlArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
@@ -1268,6 +1280,22 @@ export interface IconTileCollection {
 export interface IconTileFilter {
   AND?: InputMaybe<Array<InputMaybe<IconTileFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<IconTileFilter>>>;
+  callToActionButtonLabel?: InputMaybe<Scalars['String']>;
+  callToActionButtonLabel_contains?: InputMaybe<Scalars['String']>;
+  callToActionButtonLabel_exists?: InputMaybe<Scalars['Boolean']>;
+  callToActionButtonLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  callToActionButtonLabel_not?: InputMaybe<Scalars['String']>;
+  callToActionButtonLabel_not_contains?: InputMaybe<Scalars['String']>;
+  callToActionButtonLabel_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  callToActionUrl?: InputMaybe<Scalars['String']>;
+  callToActionUrl_contains?: InputMaybe<Scalars['String']>;
+  callToActionUrl_exists?: InputMaybe<Scalars['Boolean']>;
+  callToActionUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  callToActionUrl_not?: InputMaybe<Scalars['String']>;
+  callToActionUrl_not_contains?: InputMaybe<Scalars['String']>;
+  callToActionUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   description?: InputMaybe<Scalars['String']>;
   description_contains?: InputMaybe<Scalars['String']>;
@@ -1314,6 +1342,10 @@ export interface IconTileLinkingCollectionsPageSectionIconTilesCollectionArgs {
 }
 
 export enum IconTileOrder {
+  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
+  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
+  CallToActionUrlAsc = 'callToActionUrl_ASC',
+  CallToActionUrlDesc = 'callToActionUrl_DESC',
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
   IconAsc = 'icon_ASC',
@@ -4973,6 +5005,8 @@ export type IconTileFragment = {
   icon?: string | undefined;
   title?: string | undefined;
   description?: string | undefined;
+  callToActionUrl?: string | undefined;
+  callToActionButtonLabel?: string | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
 };
 
@@ -5221,6 +5255,8 @@ export type PageEarnFragment = {
                           icon?: string | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -5517,6 +5553,8 @@ export type PageGameFragment = {
                           icon?: string | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -5813,6 +5851,8 @@ export type PageHomeFragment = {
                           icon?: string | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6109,6 +6149,8 @@ export type PageLearnFragment = {
                           icon?: string | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6374,6 +6416,8 @@ export type PageSectionIconTilesFragment = {
               icon?: string | undefined;
               title?: string | undefined;
               description?: string | undefined;
+              callToActionUrl?: string | undefined;
+              callToActionButtonLabel?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
             }
           | undefined
@@ -6657,6 +6701,8 @@ export type PageStreamFragment = {
                           icon?: string | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -7091,6 +7137,10 @@ export type PageEarnCollectionQuery = {
                                       icon?: string | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -7437,6 +7487,10 @@ export type PageGameCollectionQuery = {
                                       icon?: string | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -7783,6 +7837,10 @@ export type PageHomeCollectionQuery = {
                                       icon?: string | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -8129,6 +8187,10 @@ export type PageLearnCollectionQuery = {
                                       icon?: string | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -8475,6 +8537,10 @@ export type PageStreamCollectionQuery = {
                                       icon?: string | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -8750,6 +8816,8 @@ export const IconTileFragmentDoc = gql`
     icon
     title
     description
+    callToActionUrl
+    callToActionButtonLabel
   }
   ${SysFragmentDoc}
 `;
