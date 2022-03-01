@@ -9,7 +9,7 @@ import {
   PageSectionGrandPostsFragment,
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-page-section-grand-posts',
@@ -17,20 +17,25 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
     <div
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
-      [@bounceInLeft]
-      class="col-12 mb-5"
+      [@fadeInUp]
+      class="col-12 md:col-12 lg:col-12 xl:col-10 col-offset-0 md:col-offset-0 lg:col-offset-0 xl:col-offset-1 mb-5"
     >
       <h3>{{ section.title }}</h3>
 
       <!-- Grand Posts -->
-      <div *ngFor="let grandPost of grandPosts">
-        <dhb-grand-post [grandPost]="grandPost"></dhb-grand-post>
+      <div class="grid">
+        <div
+          *ngFor="let grandPost of grandPosts"
+          class="col-12 md:col-6 flex sm:mb-5"
+        >
+          <dhb-grand-post [grandPost]="grandPost"></dhb-grand-post>
+        </div>
       </div>
     </div>
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class PageSectionGrandPostsComponent implements OnInit {
   @Input() section!: PageSectionGrandPostsFragment;

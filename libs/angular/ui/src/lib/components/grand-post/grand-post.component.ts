@@ -18,7 +18,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
         *ngIf="grandPost"
         [header]="grandPost.title ?? ''"
         [subheader]="grandPost.subtitle ?? ''"
-        styleClass="feature p-card-shadow h-full"
+        styleClass="grand p-card-shadow h-full border-neon-3"
       >
         <ng-template pTemplate="header">
           <div class="picture-frame">
