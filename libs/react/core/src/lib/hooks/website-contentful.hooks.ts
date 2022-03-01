@@ -33,6 +33,19 @@ export const BasicPostDetailFragmentDoc = gql`
   }
   ${BasicPostCommonFragmentDoc}
 `;
+export const LegalPostFragmentDoc = gql`
+  fragment LegalPost on LegalPost {
+    sys {
+      ...Sys
+    }
+    title
+    description {
+      json
+    }
+    slug
+  }
+  ${SysFragmentDoc}
+`;
 export const FeaturePostFragmentDoc = gql`
   fragment FeaturePost on FeaturePost {
     sys {
@@ -518,6 +531,68 @@ export type BasicPostCollectionBySlugLazyQueryHookResult = ReturnType<
 export type BasicPostCollectionBySlugQueryResult = Apollo.QueryResult<
   models.BasicPostCollectionBySlugQuery,
   models.BasicPostCollectionBySlugQueryVariables
+>;
+export const LegalPostCollectionBySlugDocument = gql`
+  query legalPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+    legalPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+      items {
+        ...LegalPost
+      }
+    }
+  }
+  ${LegalPostFragmentDoc}
+`;
+
+/**
+ * __useLegalPostCollectionBySlugQuery__
+ *
+ * To run a query within a React component, call `useLegalPostCollectionBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLegalPostCollectionBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLegalPostCollectionBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useLegalPostCollectionBySlugQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.LegalPostCollectionBySlugQuery,
+    models.LegalPostCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.LegalPostCollectionBySlugQuery,
+    models.LegalPostCollectionBySlugQueryVariables
+  >(LegalPostCollectionBySlugDocument, options);
+}
+export function useLegalPostCollectionBySlugLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.LegalPostCollectionBySlugQuery,
+    models.LegalPostCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.LegalPostCollectionBySlugQuery,
+    models.LegalPostCollectionBySlugQueryVariables
+  >(LegalPostCollectionBySlugDocument, options);
+}
+export type LegalPostCollectionBySlugQueryHookResult = ReturnType<
+  typeof useLegalPostCollectionBySlugQuery
+>;
+export type LegalPostCollectionBySlugLazyQueryHookResult = ReturnType<
+  typeof useLegalPostCollectionBySlugLazyQuery
+>;
+export type LegalPostCollectionBySlugQueryResult = Apollo.QueryResult<
+  models.LegalPostCollectionBySlugQuery,
+  models.LegalPostCollectionBySlugQueryVariables
 >;
 export const PageEarnCollectionDocument = gql`
   query pageEarnCollection($isPreview: Boolean = false) {
