@@ -131,7 +131,7 @@
       "outputs": [],
       "options": {
         "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/raffle -o",
-        "cwd": "apps/raffle"
+        "cwd": "netlify/raffle.prod"
       }
     },
     "deploy-prod": {
@@ -139,7 +139,7 @@
       "outputs": [],
       "options": {
         "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/raffle -p -o",
-        "cwd": "apps/raffle"
+        "cwd": "netlify/raffle.prod"
       }
     }
   },
