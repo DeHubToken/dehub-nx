@@ -9,6 +9,7 @@ import {
   PageSectionDappPostsFragment,
   PageSectionFaQsFragment,
   PageSectionFeaturePostsFragment,
+  PageSectionGrandPostsFragment,
   PageSectionIconTilesFragment,
   PageSectionThumbnailPostsFragment,
   SwiperResponsiveOptions,
@@ -21,6 +22,7 @@ type PageSection =
   | PageSectionIconTilesFragment
   | PageSectionFaQsFragment
   | PageSectionDappPostsFragment
+  | PageSectionGrandPostsFragment
   | undefined
   | null;
 
@@ -66,6 +68,12 @@ type PageSection =
         *ngIf="isPageSectionDappPosts(section)"
         [section]="section"
       ></dhb-page-section-dapp-posts>
+
+      <!-- Grand Posts -->
+      <dhb-page-section-grand-posts
+        *ngIf="isPageSectionGrandPosts(section)"
+        [section]="section"
+      ></dhb-page-section-grand-posts>
     </ng-container>
   `,
   styles: [``],
@@ -119,5 +127,11 @@ export class PageSectionsComponent implements OnInit {
     pageSection: PageSection
   ): pageSection is PageSectionDappPostsFragment {
     return !!pageSection && pageSection.__typename === 'PageSectionDappPosts';
+  }
+
+  isPageSectionGrandPosts(
+    pageSection: PageSection
+  ): pageSection is PageSectionGrandPostsFragment {
+    return !!pageSection && pageSection.__typename === 'PageSectionGrandPosts';
   }
 }
