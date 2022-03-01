@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Inject,
   Input,
   OnInit,
 } from '@angular/core';
 import { IconTileFragment } from '@dehub/shared/model';
+import { WINDOW } from '@ng-web-apis/common';
 
 @Component({
   selector: 'dhb-icon-tile',
@@ -22,6 +24,13 @@ import { IconTileFragment } from '@dehub/shared/model';
 
       <!-- Description -->
       <p>{{ iconTile.description }}</p>
+
+      <p-button
+        *ngIf="iconTile.callToActionUrl as ctaUrl"
+        [label]="iconTile.callToActionButtonLabel ?? 'Click'"
+        (onClick)="onCTAClicked($event)"
+        styleClass="p-button-secondary p-button-lg p-button-raised w-9"
+      ></p-button>
     </div>
   `,
   styles: [``],
@@ -30,7 +39,18 @@ import { IconTileFragment } from '@dehub/shared/model';
 export class IconTileComponent implements OnInit {
   @Input() iconTile!: IconTileFragment;
 
-  constructor() {}
+  constructor(@Inject(WINDOW) readonly windowRef: Window) {}
 
   ngOnInit() {}
+
+  onCTAClicked(event: Event) {
+    event.preventDefault();
+    if (this.iconTile.callToActionUrl) {
+      this.windowRef.open(
+        this.iconTile.callToActionUrl,
+        '_blank',
+        'noopener,noreferrer'
+      );
+    }
+  }
 }

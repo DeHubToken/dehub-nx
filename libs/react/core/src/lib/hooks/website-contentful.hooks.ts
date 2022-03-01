@@ -147,6 +147,8 @@ export const IconTileFragmentDoc = gql`
     icon
     title
     description
+    callToActionUrl
+    callToActionButtonLabel
   }
   ${SysFragmentDoc}
 `;
@@ -162,6 +164,8 @@ export const PageSectionIconTilesFragmentDoc = gql`
         ...IconTile
       }
     }
+    isSwiper
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${IconTileFragmentDoc}

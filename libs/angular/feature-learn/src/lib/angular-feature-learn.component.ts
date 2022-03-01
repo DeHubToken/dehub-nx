@@ -26,8 +26,7 @@ import { map } from 'rxjs/operators';
       <!-- Page Sections -->
       <dhb-page-sections
         [sections]="pageLearn.sectionsCollection?.items"
-        [featurePostsResponsiveOptions]="featurePostsResponsiveOptions"
-        [basicPostsResponsiveOptions]="basicPostsResponsiveOptions"
+        [iconTilesResponsiveOptions]="iconTilesResponsiveOptions"
       ></dhb-page-sections>
     </ng-container>
   `,
@@ -38,39 +37,16 @@ import { map } from 'rxjs/operators';
 export class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;
 
-  featurePostsResponsiveOptions: SwiperResponsiveOptions = {
+  iconTilesResponsiveOptions: SwiperResponsiveOptions = {
     '1800': {
-      slidesPerView: 3,
-      spaceBetween: 30,
-    },
-    '1250': {
-      slidesPerView: 2,
-      spaceBetween: 30,
-    },
-    '320': {
-      slidesPerView: 1,
-      spaceBetween: 20,
-    },
-  };
-
-  basicPostsResponsiveOptions: SwiperResponsiveOptions = {
-    '1900': {
-      slidesPerView: 6,
-      spaceBetween: 20,
-    },
-    '1700': {
-      slidesPerView: 5,
-      spaceBetween: 20,
-    },
-    '1350': {
       slidesPerView: 4,
       spaceBetween: 20,
     },
-    '960': {
+    '1440': {
       slidesPerView: 3,
       spaceBetween: 20,
     },
-    '750': {
+    '860': {
       slidesPerView: 2,
       spaceBetween: 20,
     },

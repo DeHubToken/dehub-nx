@@ -9,4 +9,6 @@ fragment PageSectionIconTiles on PageSectionIconTiles {
       ...IconTile
     }
   }
+  isSwiper
+  swiperResponsiveOptions
 }

@@ -6,10 +6,7 @@ import {
 } from '@angular/core';
 import { FaqGroupFragment, PageSectionFaQsFragment } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
-import {
-  bounceInRightOnEnterAnimation,
-  bounceInUpOnEnterAnimation,
-} from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-page-section-faqs',
@@ -17,7 +14,7 @@ import {
     <div
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
-      [@bounceInRight]
+      [@fadeInUp]
       class="col-12 sm:col-12 md:col-12 xl:col-8 col-offset-0 sm:col-offset-0 md:col-offset-0 xl:col-offset-2"
     >
       <h3>{{ section.title }}</h3>
@@ -26,7 +23,7 @@ import {
       <div class="grid">
         <div
           *ngFor="let faqGroup of faqGroups; let i = index"
-          [@bounceInUp]="{ value: '', params: { delay: i * 100 } }"
+          [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           class="col-12"
         >
           <dhb-faq-group [faqGroup]="faqGroup"></dhb-faq-group>
@@ -35,10 +32,7 @@ import {
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    bounceInRightOnEnterAnimation({ anchor: 'bounceInRight' }),
-    bounceInUpOnEnterAnimation({ anchor: 'bounceInUp' }),
-  ],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class PageSectionFaQsComponent implements OnInit {
   @Input() section!: PageSectionFaQsFragment;
