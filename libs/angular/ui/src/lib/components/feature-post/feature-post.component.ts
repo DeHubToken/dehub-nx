@@ -17,9 +17,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
       <p-card
         *ngIf="featurePost"
         [header]="featurePost.title ?? ''"
-        [subheader]="
-          (featurePost.sys.publishedAt | date: 'EEE, MMM d, y, hh:mm:ss zzzz')!
-        "
+        [subheader]="(featurePost.sys.publishedAt | date: 'fullDate')!"
         styleClass="feature p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
