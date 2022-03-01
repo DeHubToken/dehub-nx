@@ -12,6 +12,7 @@ fragment PageHome on PageHome {
       ...PageSectionIconTiles
       ...PageSectionFaQs
       ...PageSectionDappPosts
+      ...PageSectionGrandPosts
     }
   }
 }

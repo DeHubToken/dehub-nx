@@ -12,6 +12,7 @@ fragment PageEarn on PageEarn {
       ...PageSectionIconTiles
       ...PageSectionFaQs
       ...PageSectionDappPosts
+      ...PageSectionGrandPosts
     }
   }
 }

@@ -74,6 +74,31 @@
       padding-left: 30px;
     }
   }
+
+  // Grand post style
+  &.grand {
+    margin: 0 20px;
+    .p-card-header {
+      .picture-frame {
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+      }
+      .fa-play-circle {
+        cursor: pointer;
+        font-size: 5em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-shadow: 4px 2px 4px rgb(0 0 0 / 75%);
+      }
+      img {
+        object-fit: cover;
+        height: 100%;
+      }
+    }
+  }
 }
 
 /* ------------------------------ Media Queries ----------------------------- */

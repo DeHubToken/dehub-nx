@@ -4,6 +4,7 @@ import { PageSectionBasicPostsModule } from '../page-section-basic-posts';
 import { PageSectionDappPostsModule } from '../page-section-dapp-posts';
 import { PageSectionFaQsModule } from '../page-section-faqs';
 import { PageSectionFeaturePostsModule } from '../page-section-feature-posts';
+import { PageSectionGrandPostsModule } from '../page-section-grand-posts';
 import { PageSectionIconTilesModule } from '../page-section-icon-tiles';
 import { PageSectionThumbnailPostsModule } from '../page-section-thumbnail-posts';
 import { PageSectionsComponent } from './page-sections.component';
@@ -21,6 +22,7 @@ import { PageSectionsComponent } from './page-sections.component';
     PageSectionIconTilesModule,
     PageSectionFaQsModule,
     PageSectionDappPostsModule,
+    PageSectionGrandPostsModule,
   ],
   exports: [PageSectionsComponent],
 })

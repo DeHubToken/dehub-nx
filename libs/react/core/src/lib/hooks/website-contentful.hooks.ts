@@ -237,6 +237,50 @@ export const PageSectionDappPostsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${DappPostFragmentDoc}
 `;
+export const GrandPostFragmentDoc = gql`
+  fragment GrandPost on GrandPost {
+    sys {
+      ...Sys
+    }
+    videoUrl
+    picture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    heavyPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    title
+    subtitle
+    description
+    callToActionUrl
+    callToActionButtonLabel
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionGrandPostsFragmentDoc = gql`
+  fragment PageSectionGrandPosts on PageSectionGrandPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...GrandPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${GrandPostFragmentDoc}
+`;
 export const PageEarnFragmentDoc = gql`
   fragment PageEarn on PageEarn {
     sys {
@@ -252,6 +296,7 @@ export const PageEarnFragmentDoc = gql`
         ...PageSectionIconTiles
         ...PageSectionFaQs
         ...PageSectionDappPosts
+        ...PageSectionGrandPosts
       }
     }
   }
@@ -262,6 +307,35 @@ export const PageEarnFragmentDoc = gql`
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+`;
+export const PageGameFragmentDoc = gql`
+  fragment PageGame on PageGame {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    subtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+        ...PageSectionGrandPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
 `;
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
@@ -278,6 +352,7 @@ export const PageHomeFragmentDoc = gql`
         ...PageSectionIconTiles
         ...PageSectionFaQs
         ...PageSectionDappPosts
+        ...PageSectionGrandPosts
       }
     }
   }
@@ -288,6 +363,7 @@ export const PageHomeFragmentDoc = gql`
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
 `;
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
@@ -304,6 +380,7 @@ export const PageLearnFragmentDoc = gql`
         ...PageSectionIconTiles
         ...PageSectionFaQs
         ...PageSectionDappPosts
+        ...PageSectionGrandPosts
       }
     }
   }
@@ -314,6 +391,7 @@ export const PageLearnFragmentDoc = gql`
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
 `;
 export const PageStreamFragmentDoc = gql`
   fragment PageStream on PageStream {
@@ -330,6 +408,7 @@ export const PageStreamFragmentDoc = gql`
         ...PageSectionIconTiles
         ...PageSectionFaQs
         ...PageSectionDappPosts
+        ...PageSectionGrandPosts
       }
     }
   }
@@ -340,6 +419,7 @@ export const PageStreamFragmentDoc = gql`
   ${PageSectionIconTilesFragmentDoc}
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
 `;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {
@@ -495,6 +575,67 @@ export type PageEarnCollectionLazyQueryHookResult = ReturnType<
 export type PageEarnCollectionQueryResult = Apollo.QueryResult<
   models.PageEarnCollectionQuery,
   models.PageEarnCollectionQueryVariables
+>;
+export const PageGameCollectionDocument = gql`
+  query pageGameCollection($isPreview: Boolean = false) {
+    pageGameCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageGame
+      }
+    }
+  }
+  ${PageGameFragmentDoc}
+`;
+
+/**
+ * __usePageGameCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageGameCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageGameCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageGameCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageGameCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageGameCollectionQuery,
+    models.PageGameCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageGameCollectionQuery,
+    models.PageGameCollectionQueryVariables
+  >(PageGameCollectionDocument, options);
+}
+export function usePageGameCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageGameCollectionQuery,
+    models.PageGameCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageGameCollectionQuery,
+    models.PageGameCollectionQueryVariables
+  >(PageGameCollectionDocument, options);
+}
+export type PageGameCollectionQueryHookResult = ReturnType<
+  typeof usePageGameCollectionQuery
+>;
+export type PageGameCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageGameCollectionLazyQuery
+>;
+export type PageGameCollectionQueryResult = Apollo.QueryResult<
+  models.PageGameCollectionQuery,
+  models.PageGameCollectionQueryVariables
 >;
 export const PageHomeCollectionDocument = gql`
   query pageHomeCollection($isPreview: Boolean = false) {
