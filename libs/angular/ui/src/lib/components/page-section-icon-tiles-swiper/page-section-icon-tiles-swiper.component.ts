@@ -64,7 +64,6 @@ export class PageSectionIconTilesSwiperComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.swiperResponsiveOptions);
     this.iconTiles = (
       this.section.handpickedIconTilesCollection?.items ?? []
     ).filter(isNotNil);
