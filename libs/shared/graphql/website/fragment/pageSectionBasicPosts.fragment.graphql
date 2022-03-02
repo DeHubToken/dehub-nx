@@ -4,6 +4,7 @@ fragment PageSectionBasicPosts on PageSectionBasicPosts {
     ...Sys
   }
   title
+  description
   handpickedPostsCollection(limit: 5, preview: $isPreview) {
     items {
       ...BasicPost
