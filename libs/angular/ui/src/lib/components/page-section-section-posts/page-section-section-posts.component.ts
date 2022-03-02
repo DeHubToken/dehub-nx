@@ -54,7 +54,7 @@ export class PageSectionSectionPostsComponent implements OnInit {
 
   ngOnInit() {
     if (!this.section) return;
-    console.log(this.section.description);
+
     this.sectionPosts = (
       this.section.handpickedPostsCollection?.items ?? []
     ).filter(isNotNil);
