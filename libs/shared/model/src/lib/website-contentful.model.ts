@@ -536,6 +536,120 @@ export enum BasicPostOrder {
   TitleDesc = 'title_DESC',
 }
 
+/** A chart graphic post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/chartPost) */
+export interface ChartPost extends Entry {
+  __typename?: 'ChartPost';
+  chartData?: Maybe<Scalars['JSON']>;
+  chartOptions?: Maybe<Scalars['JSON']>;
+  chartType?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  hideTitle?: Maybe<Scalars['Boolean']>;
+  linkedFrom?: Maybe<ChartPostLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** A chart graphic post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/chartPost) */
+export interface ChartPostChartDataArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A chart graphic post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/chartPost) */
+export interface ChartPostChartOptionsArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A chart graphic post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/chartPost) */
+export interface ChartPostChartTypeArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A chart graphic post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/chartPost) */
+export interface ChartPostHideTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A chart graphic post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/chartPost) */
+export interface ChartPostLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** A chart graphic post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/chartPost) */
+export interface ChartPostTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface ChartPostCollection {
+  __typename?: 'ChartPostCollection';
+  items: Array<Maybe<ChartPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface ChartPostFilter {
+  AND?: InputMaybe<Array<InputMaybe<ChartPostFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ChartPostFilter>>>;
+  chartData_exists?: InputMaybe<Scalars['Boolean']>;
+  chartOptions_exists?: InputMaybe<Scalars['Boolean']>;
+  chartType?: InputMaybe<Scalars['String']>;
+  chartType_contains?: InputMaybe<Scalars['String']>;
+  chartType_exists?: InputMaybe<Scalars['Boolean']>;
+  chartType_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  chartType_not?: InputMaybe<Scalars['String']>;
+  chartType_not_contains?: InputMaybe<Scalars['String']>;
+  chartType_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  hideTitle?: InputMaybe<Scalars['Boolean']>;
+  hideTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  hideTitle_not?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface ChartPostLinkingCollections {
+  __typename?: 'ChartPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  sectionPostCollection?: Maybe<SectionPostCollection>;
+}
+
+export interface ChartPostLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface ChartPostLinkingCollectionsSectionPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum ChartPostOrder {
+  ChartTypeAsc = 'chartType_ASC',
+  ChartTypeDesc = 'chartType_DESC',
+  HideTitleAsc = 'hideTitle_ASC',
+  HideTitleDesc = 'hideTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 export interface ContentfulMetadata {
   __typename?: 'ContentfulMetadata';
   tags: Array<Maybe<ContentfulTag>>;
@@ -3740,6 +3854,8 @@ export interface Query {
   basicPostCategory?: Maybe<BasicPostCategory>;
   basicPostCategoryCollection?: Maybe<BasicPostCategoryCollection>;
   basicPostCollection?: Maybe<BasicPostCollection>;
+  chartPost?: Maybe<ChartPost>;
+  chartPostCollection?: Maybe<ChartPostCollection>;
   dappPost?: Maybe<DappPost>;
   dappPostCollection?: Maybe<DappPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
@@ -3848,6 +3964,21 @@ export interface QueryBasicPostCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<BasicPostFilter>;
+}
+
+export interface QueryChartPostArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryChartPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ChartPostOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ChartPostFilter>;
 }
 
 export interface QueryDappPostArgs {
@@ -4327,12 +4458,28 @@ export interface QueryTournamentSeriesRegistrationItemCollectionArgs {
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
 export interface SectionPost extends Entry {
   __typename?: 'SectionPost';
+  alignCenter?: Maybe<Scalars['Boolean']>;
+  chartCollection?: Maybe<SectionPostChartCollection>;
   columnWidth?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<SectionPostDescription>;
   linkedFrom?: Maybe<SectionPostLinkingCollections>;
+  showTitle?: Maybe<Scalars['Boolean']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPostAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPostChartCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
 }
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
@@ -4351,8 +4498,21 @@ export interface SectionPostLinkedFromArgs {
 }
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPostShowTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
 export interface SectionPostTitleArgs {
   locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface SectionPostChartCollection {
+  __typename?: 'SectionPostChartCollection';
+  items: Array<Maybe<ChartPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
 }
 
 export interface SectionPostCollection {
@@ -4391,6 +4551,10 @@ export interface SectionPostDescriptionLinks {
 export interface SectionPostFilter {
   AND?: InputMaybe<Array<InputMaybe<SectionPostFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<SectionPostFilter>>>;
+  alignCenter?: InputMaybe<Scalars['Boolean']>;
+  alignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  alignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  chartCollection_exists?: InputMaybe<Scalars['Boolean']>;
   columnWidth?: InputMaybe<Scalars['String']>;
   columnWidth_contains?: InputMaybe<Scalars['String']>;
   columnWidth_exists?: InputMaybe<Scalars['Boolean']>;
@@ -4402,6 +4566,9 @@ export interface SectionPostFilter {
   description_contains?: InputMaybe<Scalars['String']>;
   description_exists?: InputMaybe<Scalars['Boolean']>;
   description_not_contains?: InputMaybe<Scalars['String']>;
+  showTitle?: InputMaybe<Scalars['Boolean']>;
+  showTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showTitle_not?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -4433,8 +4600,12 @@ export interface SectionPostLinkingCollectionsPageSectionSectionPostsCollectionA
 }
 
 export enum SectionPostOrder {
+  AlignCenterAsc = 'alignCenter_ASC',
+  AlignCenterDesc = 'alignCenter_DESC',
   ColumnWidthAsc = 'columnWidth_ASC',
   ColumnWidthDesc = 'columnWidth_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -5455,6 +5626,16 @@ export type BasicPostDetailFragment = {
     | undefined;
 };
 
+export type ChartPostFragment = {
+  __typename?: 'ChartPost';
+  title?: string | undefined;
+  hideTitle?: boolean | undefined;
+  chartType?: string | undefined;
+  chartData?: any | undefined;
+  chartOptions?: any | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+};
+
 export type SysFragment = { __typename?: 'Sys'; publishedAt?: any | undefined };
 
 export type DappPostFragment = {
@@ -5835,7 +6016,9 @@ export type PageEarnFragment = {
                       | {
                           __typename?: 'SectionPost';
                           title?: string | undefined;
+                          showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
+                          alignCenter?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -5844,6 +6027,26 @@ export type PageEarnFragment = {
                             | {
                                 __typename?: 'SectionPostDescription';
                                 json: any;
+                              }
+                            | undefined;
+                          chartCollection?:
+                            | {
+                                __typename?: 'SectionPostChartCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'ChartPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      chartType?: string | undefined;
+                                      chartData?: any | undefined;
+                                      chartOptions?: any | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
                               }
                             | undefined;
                         }
@@ -6171,7 +6374,9 @@ export type PageGameFragment = {
                       | {
                           __typename?: 'SectionPost';
                           title?: string | undefined;
+                          showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
+                          alignCenter?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6180,6 +6385,26 @@ export type PageGameFragment = {
                             | {
                                 __typename?: 'SectionPostDescription';
                                 json: any;
+                              }
+                            | undefined;
+                          chartCollection?:
+                            | {
+                                __typename?: 'SectionPostChartCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'ChartPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      chartType?: string | undefined;
+                                      chartData?: any | undefined;
+                                      chartOptions?: any | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
                               }
                             | undefined;
                         }
@@ -6507,7 +6732,9 @@ export type PageHomeFragment = {
                       | {
                           __typename?: 'SectionPost';
                           title?: string | undefined;
+                          showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
+                          alignCenter?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6516,6 +6743,26 @@ export type PageHomeFragment = {
                             | {
                                 __typename?: 'SectionPostDescription';
                                 json: any;
+                              }
+                            | undefined;
+                          chartCollection?:
+                            | {
+                                __typename?: 'SectionPostChartCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'ChartPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      chartType?: string | undefined;
+                                      chartData?: any | undefined;
+                                      chartOptions?: any | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
                               }
                             | undefined;
                         }
@@ -6843,7 +7090,9 @@ export type PageLearnFragment = {
                       | {
                           __typename?: 'SectionPost';
                           title?: string | undefined;
+                          showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
+                          alignCenter?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6852,6 +7101,26 @@ export type PageLearnFragment = {
                             | {
                                 __typename?: 'SectionPostDescription';
                                 json: any;
+                              }
+                            | undefined;
+                          chartCollection?:
+                            | {
+                                __typename?: 'SectionPostChartCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'ChartPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      chartType?: string | undefined;
+                                      chartData?: any | undefined;
+                                      chartOptions?: any | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
                               }
                             | undefined;
                         }
@@ -7146,10 +7415,32 @@ export type PageSectionSectionPostsFragment = {
           | {
               __typename?: 'SectionPost';
               title?: string | undefined;
+              showTitle?: boolean | undefined;
               columnWidth?: string | undefined;
+              alignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               richDescription?:
                 | { __typename?: 'SectionPostDescription'; json: any }
+                | undefined;
+              chartCollection?:
+                | {
+                    __typename?: 'SectionPostChartCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'ChartPost';
+                          title?: string | undefined;
+                          hideTitle?: boolean | undefined;
+                          chartType?: string | undefined;
+                          chartData?: any | undefined;
+                          chartOptions?: any | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                        }
+                      | undefined
+                    >;
+                  }
                 | undefined;
             }
           | undefined
@@ -7466,7 +7757,9 @@ export type PageStreamFragment = {
                       | {
                           __typename?: 'SectionPost';
                           title?: string | undefined;
+                          showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
+                          alignCenter?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -7475,6 +7768,26 @@ export type PageStreamFragment = {
                             | {
                                 __typename?: 'SectionPostDescription';
                                 json: any;
+                              }
+                            | undefined;
+                          chartCollection?:
+                            | {
+                                __typename?: 'SectionPostChartCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'ChartPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      chartType?: string | undefined;
+                                      chartData?: any | undefined;
+                                      chartOptions?: any | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
                               }
                             | undefined;
                         }
@@ -7528,10 +7841,29 @@ export type PageStreamFragment = {
 export type SectionPostFragment = {
   __typename?: 'SectionPost';
   title?: string | undefined;
+  showTitle?: boolean | undefined;
   columnWidth?: string | undefined;
+  alignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   richDescription?:
     | { __typename?: 'SectionPostDescription'; json: any }
+    | undefined;
+  chartCollection?:
+    | {
+        __typename?: 'SectionPostChartCollection';
+        items: Array<
+          | {
+              __typename?: 'ChartPost';
+              title?: string | undefined;
+              hideTitle?: boolean | undefined;
+              chartType?: string | undefined;
+              chartData?: any | undefined;
+              chartOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+            }
+          | undefined
+        >;
+      }
     | undefined;
 };
 
@@ -7981,7 +8313,9 @@ export type PageEarnCollectionQuery = {
                                   | {
                                       __typename?: 'SectionPost';
                                       title?: string | undefined;
+                                      showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
+                                      alignCenter?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -7990,6 +8324,34 @@ export type PageEarnCollectionQuery = {
                                         | {
                                             __typename?: 'SectionPostDescription';
                                             json: any;
+                                          }
+                                        | undefined;
+                                      chartCollection?:
+                                        | {
+                                            __typename?: 'SectionPostChartCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'ChartPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  chartType?:
+                                                    | string
+                                                    | undefined;
+                                                  chartData?: any | undefined;
+                                                  chartOptions?:
+                                                    | any
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
                                           }
                                         | undefined;
                                     }
@@ -8372,7 +8734,9 @@ export type PageGameCollectionQuery = {
                                   | {
                                       __typename?: 'SectionPost';
                                       title?: string | undefined;
+                                      showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
+                                      alignCenter?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -8381,6 +8745,34 @@ export type PageGameCollectionQuery = {
                                         | {
                                             __typename?: 'SectionPostDescription';
                                             json: any;
+                                          }
+                                        | undefined;
+                                      chartCollection?:
+                                        | {
+                                            __typename?: 'SectionPostChartCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'ChartPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  chartType?:
+                                                    | string
+                                                    | undefined;
+                                                  chartData?: any | undefined;
+                                                  chartOptions?:
+                                                    | any
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
                                           }
                                         | undefined;
                                     }
@@ -8763,7 +9155,9 @@ export type PageHomeCollectionQuery = {
                                   | {
                                       __typename?: 'SectionPost';
                                       title?: string | undefined;
+                                      showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
+                                      alignCenter?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -8772,6 +9166,34 @@ export type PageHomeCollectionQuery = {
                                         | {
                                             __typename?: 'SectionPostDescription';
                                             json: any;
+                                          }
+                                        | undefined;
+                                      chartCollection?:
+                                        | {
+                                            __typename?: 'SectionPostChartCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'ChartPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  chartType?:
+                                                    | string
+                                                    | undefined;
+                                                  chartData?: any | undefined;
+                                                  chartOptions?:
+                                                    | any
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
                                           }
                                         | undefined;
                                     }
@@ -9154,7 +9576,9 @@ export type PageLearnCollectionQuery = {
                                   | {
                                       __typename?: 'SectionPost';
                                       title?: string | undefined;
+                                      showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
+                                      alignCenter?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -9163,6 +9587,34 @@ export type PageLearnCollectionQuery = {
                                         | {
                                             __typename?: 'SectionPostDescription';
                                             json: any;
+                                          }
+                                        | undefined;
+                                      chartCollection?:
+                                        | {
+                                            __typename?: 'SectionPostChartCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'ChartPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  chartType?:
+                                                    | string
+                                                    | undefined;
+                                                  chartData?: any | undefined;
+                                                  chartOptions?:
+                                                    | any
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
                                           }
                                         | undefined;
                                     }
@@ -9545,7 +9997,9 @@ export type PageStreamCollectionQuery = {
                                   | {
                                       __typename?: 'SectionPost';
                                       title?: string | undefined;
+                                      showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
+                                      alignCenter?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -9554,6 +10008,34 @@ export type PageStreamCollectionQuery = {
                                         | {
                                             __typename?: 'SectionPostDescription';
                                             json: any;
+                                          }
+                                        | undefined;
+                                      chartCollection?:
+                                        | {
+                                            __typename?: 'SectionPostChartCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'ChartPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  chartType?:
+                                                    | string
+                                                    | undefined;
+                                                  chartData?: any | undefined;
+                                                  chartOptions?:
+                                                    | any
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
                                           }
                                         | undefined;
                                     }
@@ -9986,18 +10468,39 @@ export const PageSectionGrandPostsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${GrandPostFragmentDoc}
 `;
+export const ChartPostFragmentDoc = gql`
+  fragment ChartPost on ChartPost {
+    sys {
+      ...Sys
+    }
+    title
+    hideTitle
+    chartType
+    chartData
+    chartOptions
+  }
+  ${SysFragmentDoc}
+`;
 export const SectionPostFragmentDoc = gql`
   fragment SectionPost on SectionPost {
     sys {
       ...Sys
     }
     title
+    showTitle
     richDescription: description {
       json
     }
+    chartCollection(limit: 1, preview: $isPreview) {
+      items {
+        ...ChartPost
+      }
+    }
     columnWidth
+    alignCenter
   }
   ${SysFragmentDoc}
+  ${ChartPostFragmentDoc}
 `;
 export const PageSectionSectionPostsFragmentDoc = gql`
   fragment PageSectionSectionPosts on PageSectionSectionPosts {
