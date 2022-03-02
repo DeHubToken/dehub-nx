@@ -11,6 +11,7 @@ import {
   PageSectionFeaturePostsFragment,
   PageSectionGrandPostsFragment,
   PageSectionIconTilesFragment,
+  PageSectionSectionPostsFragment,
   PageSectionThumbnailPostsFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
@@ -23,6 +24,7 @@ type PageSection =
   | PageSectionFaQsFragment
   | PageSectionDappPostsFragment
   | PageSectionGrandPostsFragment
+  | PageSectionSectionPostsFragment
   | undefined
   | null;
 
@@ -86,6 +88,12 @@ type PageSection =
         *ngIf="isPageSectionGrandPosts(section)"
         [section]="section"
       ></dhb-page-section-grand-posts>
+
+      <!-- Section Posts -->
+      <dhb-page-section-section-posts
+        *ngIf="isPageSectionSectionPosts(section)"
+        [section]="section"
+      ></dhb-page-section-section-posts>
     </ng-container>
   `,
   styles: [``],
@@ -146,5 +154,13 @@ export class PageSectionsComponent implements OnInit {
     pageSection: PageSection
   ): pageSection is PageSectionGrandPostsFragment {
     return !!pageSection && pageSection.__typename === 'PageSectionGrandPosts';
+  }
+
+  isPageSectionSectionPosts(
+    pageSection: PageSection
+  ): pageSection is PageSectionSectionPostsFragment {
+    return (
+      !!pageSection && pageSection.__typename === 'PageSectionSectionPosts'
+    );
   }
 }
