@@ -1,17 +1,18 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   template: `
     <div class="grid">
-      <div [@bounceInLeft] class="col-12">
-        <h3>Welcome to DeHub Shop</h3>
+      <div [@fadeInUp] class="col-12 text-center mt-8">
+        <h1 class="bold uppercase text-8xl">Coming Soon</h1>
+        <h5>( no countdown 😅 )</h5>
       </div>
     </div>
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class AngularFeatureShopComponent implements OnInit {
   constructor() {}
