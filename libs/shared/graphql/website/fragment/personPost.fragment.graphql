@@ -1,0 +1,17 @@
+fragment PersonPost on PersonPost {
+  sys {
+    ...Sys
+  }
+  name
+  title
+  avatar(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
+    url
+  }
+  twitter
+  linkedin
+  instagram
+  github
+}

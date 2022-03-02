@@ -1,0 +1,15 @@
+fragment PageSectionPersonPosts on PageSectionPersonPosts {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  description
+  handpickedPostsCollection(limit: 6, preview: $isPreview) {
+    items {
+      ...PersonPost
+    }
+  }
+  isSwiper
+  swiperResponsiveOptions
+}
