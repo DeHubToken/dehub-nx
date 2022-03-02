@@ -4,6 +4,7 @@ fragment PageSectionFaQs on PageSectionFaQs {
     ...Sys
   }
   title
+  description
   handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
     items {
       ...FaqGroup

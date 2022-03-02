@@ -4,6 +4,7 @@ fragment PageSectionDappPosts on PageSectionDappPosts {
     ...Sys
   }
   title
+  description
   handpickedPostsCollection(limit: 5, preview: $isPreview) {
     items {
       ...DappPost

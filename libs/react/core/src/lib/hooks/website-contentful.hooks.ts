@@ -73,6 +73,7 @@ export const PageSectionFeaturePostsFragmentDoc = gql`
       ...Sys
     }
     title
+    description
     handpickedPostsCollection(limit: 5, preview: $isPreview) {
       items {
         ...FeaturePost
@@ -108,6 +109,7 @@ export const PageSectionThumbnailPostsFragmentDoc = gql`
       ...Sys
     }
     title
+    description
     handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...ThumbnailPost
@@ -133,6 +135,7 @@ export const PageSectionBasicPostsFragmentDoc = gql`
       ...Sys
     }
     title
+    description
     handpickedPostsCollection(limit: 5, preview: $isPreview) {
       items {
         ...BasicPost
@@ -172,6 +175,7 @@ export const PageSectionIconTilesFragmentDoc = gql`
       ...Sys
     }
     title
+    description
     handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
       items {
         ...IconTile
@@ -215,6 +219,7 @@ export const PageSectionFaQsFragmentDoc = gql`
       ...Sys
     }
     title
+    description
     handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
       items {
         ...FaqGroup
@@ -245,6 +250,7 @@ export const PageSectionDappPostsFragmentDoc = gql`
       ...Sys
     }
     title
+    description
     handpickedPostsCollection(limit: 5, preview: $isPreview) {
       items {
         ...DappPost
@@ -289,6 +295,7 @@ export const PageSectionGrandPostsFragmentDoc = gql`
       ...Sys
     }
     title
+    description
     handpickedPostsCollection(limit: 5, preview: $isPreview) {
       items {
         ...GrandPost

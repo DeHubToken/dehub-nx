@@ -4,6 +4,7 @@ fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {
     ...Sys
   }
   title
+  description
   handpickedPostsCollection(limit: 20, preview: $isPreview) {
     items {
       ...ThumbnailPost
