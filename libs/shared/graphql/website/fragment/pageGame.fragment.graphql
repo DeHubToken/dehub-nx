@@ -13,6 +13,7 @@ fragment PageGame on PageGame {
       ...PageSectionFaQs
       ...PageSectionDappPosts
       ...PageSectionGrandPosts
+      ...PageSectionSectionPosts
     }
   }
 }

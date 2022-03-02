@@ -13,6 +13,7 @@ fragment PageStream on PageStream {
       ...PageSectionFaQs
       ...PageSectionDappPosts
       ...PageSectionGrandPosts
+      ...PageSectionSectionPosts
     }
   }
 }

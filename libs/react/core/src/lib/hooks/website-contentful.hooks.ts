@@ -305,6 +305,36 @@ export const PageSectionGrandPostsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${GrandPostFragmentDoc}
 `;
+export const SectionPostFragmentDoc = gql`
+  fragment SectionPost on SectionPost {
+    sys {
+      ...Sys
+    }
+    title
+    richDescription: description {
+      json
+    }
+    columnWidth
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionSectionPostsFragmentDoc = gql`
+  fragment PageSectionSectionPosts on PageSectionSectionPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...SectionPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${SectionPostFragmentDoc}
+`;
 export const PageEarnFragmentDoc = gql`
   fragment PageEarn on PageEarn {
     sys {
@@ -321,6 +351,7 @@ export const PageEarnFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -332,6 +363,7 @@ export const PageEarnFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const PageGameFragmentDoc = gql`
   fragment PageGame on PageGame {
@@ -349,6 +381,7 @@ export const PageGameFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -360,6 +393,7 @@ export const PageGameFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
@@ -377,6 +411,7 @@ export const PageHomeFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -388,6 +423,7 @@ export const PageHomeFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
@@ -405,6 +441,7 @@ export const PageLearnFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -416,6 +453,7 @@ export const PageLearnFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const PageStreamFragmentDoc = gql`
   fragment PageStream on PageStream {
@@ -433,6 +471,7 @@ export const PageStreamFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -444,6 +483,7 @@ export const PageStreamFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {

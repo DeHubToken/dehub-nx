@@ -13,6 +13,7 @@ fragment PageLearn on PageLearn {
       ...PageSectionFaQs
       ...PageSectionDappPosts
       ...PageSectionGrandPosts
+      ...PageSectionSectionPosts
     }
   }
 }

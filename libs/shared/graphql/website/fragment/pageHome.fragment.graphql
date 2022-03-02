@@ -13,6 +13,7 @@ fragment PageHome on PageHome {
       ...PageSectionFaQs
       ...PageSectionDappPosts
       ...PageSectionGrandPosts
+      ...PageSectionSectionPosts
     }
   }
 }
