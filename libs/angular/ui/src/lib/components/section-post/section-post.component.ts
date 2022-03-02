@@ -4,11 +4,6 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import {
-  documentToHtmlString,
-  Options,
-} from '@contentful/rich-text-html-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
 import { SectionPostFragment } from '@dehub/shared/model';
 
 @Component({
@@ -27,7 +22,11 @@ import { SectionPostFragment } from '@dehub/shared/model';
 
       <!-- Description -->
       <div
-        [innerHtml]="getRichMarkup(sectionPost) | dhbSafeHtml"
+        [innerHtml]="
+          sectionPost.richDescription?.json
+            | dhbContentfulRichMarkup
+            | dhbSafeHtml
+        "
         class="line-height-3"
       ></div>
 
@@ -46,21 +45,6 @@ export class SectionPostComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
-  /** TODO: this can be a util */
-  getRichMarkup({ richDescription }: SectionPostFragment) {
-    const richOptions: Options = {
-      renderNode: {
-        [BLOCKS.UL_LIST]: (node, next) =>
-          `<ul class="pl-4 mb-0">${next(node.content)}</ul>`,
-        [BLOCKS.OL_LIST]: (node, next) =>
-          `<ol class="pl-3 mb-0">${next(node.content)}</ol>`,
-        [BLOCKS.LIST_ITEM]: (node, next) =>
-          `<li class="pb-2">${next(node.content)}</li>`,
-      },
-    };
-    return documentToHtmlString(richDescription?.json, richOptions);
-  }
 
   hasChart() {
     return (
