@@ -28,14 +28,9 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
           />
         </ng-container>
 
-        <div class="image-content">
+        <div class="image-content px-8">
           <!-- Title -->
-          <h3>{{ basicPostDetail.title }}</h3>
-
-          <!-- Date -->
-          <p>
-            {{ basicPostDetail.sys.publishedAt | date: 'fullDate' }}
-          </p>
+          <h2>{{ basicPostDetail.title }}</h2>
 
           <!-- Description -->
           <div
