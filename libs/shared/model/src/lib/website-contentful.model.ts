@@ -1678,6 +1678,7 @@ export type PageEarnSectionsItem =
   | PageSectionFeaturePosts
   | PageSectionGrandPosts
   | PageSectionIconTiles
+  | PageSectionSectionPosts
   | PageSectionThumbnailPosts;
 
 /** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
@@ -1786,6 +1787,7 @@ export type PageGameSectionsItem =
   | PageSectionFeaturePosts
   | PageSectionGrandPosts
   | PageSectionIconTiles
+  | PageSectionSectionPosts
   | PageSectionThumbnailPosts;
 
 /** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
@@ -1894,6 +1896,7 @@ export type PageHomeSectionsItem =
   | PageSectionFeaturePosts
   | PageSectionGrandPosts
   | PageSectionIconTiles
+  | PageSectionSectionPosts
   | PageSectionThumbnailPosts;
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
@@ -2002,6 +2005,7 @@ export type PageLearnSectionsItem =
   | PageSectionFeaturePosts
   | PageSectionGrandPosts
   | PageSectionIconTiles
+  | PageSectionSectionPosts
   | PageSectionThumbnailPosts;
 
 /** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
@@ -2867,6 +2871,143 @@ export enum PageSectionIconTilesOrder {
   TitleDesc = 'title_DESC',
 }
 
+/** Page section with Section Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionSectionPosts) */
+export interface PageSectionSectionPosts extends Entry {
+  __typename?: 'PageSectionSectionPosts';
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  handpickedPostsCollection?: Maybe<PageSectionSectionPostsHandpickedPostsCollection>;
+  linkedFrom?: Maybe<PageSectionSectionPostsLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Page section with Section Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionSectionPosts) */
+export interface PageSectionSectionPostsDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Page section with Section Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionSectionPosts) */
+export interface PageSectionSectionPostsHandpickedPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Page section with Section Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionSectionPosts) */
+export interface PageSectionSectionPostsLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Page section with Section Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionSectionPosts) */
+export interface PageSectionSectionPostsTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface PageSectionSectionPostsCollection {
+  __typename?: 'PageSectionSectionPostsCollection';
+  items: Array<Maybe<PageSectionSectionPosts>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionSectionPostsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageSectionSectionPostsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageSectionSectionPostsFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  handpickedPostsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface PageSectionSectionPostsHandpickedPostsCollection {
+  __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+  items: Array<Maybe<SectionPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionSectionPostsLinkingCollections {
+  __typename?: 'PageSectionSectionPostsLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageGameCollection?: Maybe<PageGameCollection>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
+  pageLearnCollection?: Maybe<PageLearnCollection>;
+  pageStreamCollection?: Maybe<PageStreamCollection>;
+}
+
+export interface PageSectionSectionPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionSectionPostsLinkingCollectionsPageEarnCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionSectionPostsLinkingCollectionsPageGameCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionSectionPostsLinkingCollectionsPageHomeCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionSectionPostsLinkingCollectionsPageLearnCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionSectionPostsLinkingCollectionsPageStreamCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionSectionPostsOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 /** Page section with Thumbnail Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionThumbnailPosts) */
 export interface PageSectionThumbnailPosts extends Entry {
   __typename?: 'PageSectionThumbnailPosts';
@@ -3117,6 +3258,7 @@ export type PageStreamSectionsItem =
   | PageSectionFeaturePosts
   | PageSectionGrandPosts
   | PageSectionIconTiles
+  | PageSectionSectionPosts
   | PageSectionThumbnailPosts;
 
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
@@ -3633,6 +3775,8 @@ export interface Query {
   pageSectionGrandPostsCollection?: Maybe<PageSectionGrandPostsCollection>;
   pageSectionIconTiles?: Maybe<PageSectionIconTiles>;
   pageSectionIconTilesCollection?: Maybe<PageSectionIconTilesCollection>;
+  pageSectionSectionPosts?: Maybe<PageSectionSectionPosts>;
+  pageSectionSectionPostsCollection?: Maybe<PageSectionSectionPostsCollection>;
   pageSectionThumbnailPosts?: Maybe<PageSectionThumbnailPosts>;
   pageSectionThumbnailPostsCollection?: Maybe<PageSectionThumbnailPostsCollection>;
   pageStream?: Maybe<PageStream>;
@@ -3645,6 +3789,8 @@ export interface Query {
   ppvSliderPostCollection?: Maybe<PpvSliderPostCollection>;
   ppvWebsiteBackground?: Maybe<PpvWebsiteBackground>;
   ppvWebsiteBackgroundCollection?: Maybe<PpvWebsiteBackgroundCollection>;
+  sectionPost?: Maybe<SectionPost>;
+  sectionPostCollection?: Maybe<SectionPostCollection>;
   teamMember?: Maybe<TeamMember>;
   teamMemberCollection?: Maybe<TeamMemberCollection>;
   thumbnailPost?: Maybe<ThumbnailPost>;
@@ -3968,6 +4114,21 @@ export interface QueryPageSectionIconTilesCollectionArgs {
   where?: InputMaybe<PageSectionIconTilesFilter>;
 }
 
+export interface QueryPageSectionSectionPostsArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionSectionPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageSectionSectionPostsOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionSectionPostsFilter>;
+}
+
 export interface QueryPageSectionThumbnailPostsArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -4058,6 +4219,21 @@ export interface QueryPpvWebsiteBackgroundCollectionArgs {
   where?: InputMaybe<PpvWebsiteBackgroundFilter>;
 }
 
+export interface QuerySectionPostArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QuerySectionPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<SectionPostOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SectionPostFilter>;
+}
+
 export interface QueryTeamMemberArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -4146,6 +4322,129 @@ export interface QueryTournamentSeriesRegistrationItemCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<TournamentSeriesRegistrationItemFilter>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPost extends Entry {
+  __typename?: 'SectionPost';
+  columnWidth?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<SectionPostDescription>;
+  linkedFrom?: Maybe<SectionPostLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPostColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPostDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPostLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPostTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface SectionPostCollection {
+  __typename?: 'SectionPostCollection';
+  items: Array<Maybe<SectionPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface SectionPostDescription {
+  __typename?: 'SectionPostDescription';
+  json: Scalars['JSON'];
+  links: SectionPostDescriptionLinks;
+}
+
+export interface SectionPostDescriptionAssets {
+  __typename?: 'SectionPostDescriptionAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+}
+
+export interface SectionPostDescriptionEntries {
+  __typename?: 'SectionPostDescriptionEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+}
+
+export interface SectionPostDescriptionLinks {
+  __typename?: 'SectionPostDescriptionLinks';
+  assets: SectionPostDescriptionAssets;
+  entries: SectionPostDescriptionEntries;
+}
+
+export interface SectionPostFilter {
+  AND?: InputMaybe<Array<InputMaybe<SectionPostFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<SectionPostFilter>>>;
+  columnWidth?: InputMaybe<Scalars['String']>;
+  columnWidth_contains?: InputMaybe<Scalars['String']>;
+  columnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  columnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  columnWidth_not?: InputMaybe<Scalars['String']>;
+  columnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  columnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface SectionPostLinkingCollections {
+  __typename?: 'SectionPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageSectionSectionPostsCollection?: Maybe<PageSectionSectionPostsCollection>;
+}
+
+export interface SectionPostLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface SectionPostLinkingCollectionsPageSectionSectionPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum SectionPostOrder {
+  ColumnWidthAsc = 'columnWidth_ASC',
+  ColumnWidthDesc = 'columnWidth_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export interface Sys {
@@ -5525,6 +5824,35 @@ export type PageEarnFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionSectionPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'SectionPost';
+                          title?: string | undefined;
+                          columnWidth?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          richDescription?:
+                            | {
+                                __typename?: 'SectionPostDescription';
+                                json: any;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionThumbnailPosts';
               title?: string | undefined;
               description?: string | undefined;
@@ -5825,6 +6153,35 @@ export type PageGameFragment = {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
                           };
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionSectionPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'SectionPost';
+                          title?: string | undefined;
+                          columnWidth?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          richDescription?:
+                            | {
+                                __typename?: 'SectionPostDescription';
+                                json: any;
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -6139,6 +6496,35 @@ export type PageHomeFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionSectionPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'SectionPost';
+                          title?: string | undefined;
+                          columnWidth?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          richDescription?:
+                            | {
+                                __typename?: 'SectionPostDescription';
+                                json: any;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionThumbnailPosts';
               title?: string | undefined;
               description?: string | undefined;
@@ -6446,6 +6832,35 @@ export type PageLearnFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionSectionPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'SectionPost';
+                          title?: string | undefined;
+                          columnWidth?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          richDescription?:
+                            | {
+                                __typename?: 'SectionPostDescription';
+                                json: any;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionThumbnailPosts';
               title?: string | undefined;
               description?: string | undefined;
@@ -6712,6 +7127,30 @@ export type PageSectionIconTilesFragment = {
               callToActionUrl?: string | undefined;
               callToActionButtonLabel?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
+export type PageSectionSectionPostsFragment = {
+  __typename: 'PageSectionSectionPosts';
+  title?: string | undefined;
+  description?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  handpickedPostsCollection?:
+    | {
+        __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+        items: Array<
+          | {
+              __typename?: 'SectionPost';
+              title?: string | undefined;
+              columnWidth?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              richDescription?:
+                | { __typename?: 'SectionPostDescription'; json: any }
+                | undefined;
             }
           | undefined
         >;
@@ -7016,6 +7455,35 @@ export type PageStreamFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionSectionPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'SectionPost';
+                          title?: string | undefined;
+                          columnWidth?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          richDescription?:
+                            | {
+                                __typename?: 'SectionPostDescription';
+                                json: any;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionThumbnailPosts';
               title?: string | undefined;
               description?: string | undefined;
@@ -7054,6 +7522,16 @@ export type PageStreamFragment = {
           | undefined
         >;
       }
+    | undefined;
+};
+
+export type SectionPostFragment = {
+  __typename?: 'SectionPost';
+  title?: string | undefined;
+  columnWidth?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  richDescription?:
+    | { __typename?: 'SectionPostDescription'; json: any }
     | undefined;
 };
 
@@ -7489,6 +7967,38 @@ export type PageEarnCollectionQuery = {
                             | undefined;
                         }
                       | {
+                          __typename: 'PageSectionSectionPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'SectionPost';
+                                      title?: string | undefined;
+                                      columnWidth?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      richDescription?:
+                                        | {
+                                            __typename?: 'SectionPostDescription';
+                                            json: any;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
                           __typename: 'PageSectionThumbnailPosts';
                           title?: string | undefined;
                           description?: string | undefined;
@@ -7841,6 +8351,38 @@ export type PageGameCollectionQuery = {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
                                       };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionSectionPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'SectionPost';
+                                      title?: string | undefined;
+                                      columnWidth?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      richDescription?:
+                                        | {
+                                            __typename?: 'SectionPostDescription';
+                                            json: any;
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -8207,6 +8749,38 @@ export type PageHomeCollectionQuery = {
                             | undefined;
                         }
                       | {
+                          __typename: 'PageSectionSectionPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'SectionPost';
+                                      title?: string | undefined;
+                                      columnWidth?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      richDescription?:
+                                        | {
+                                            __typename?: 'SectionPostDescription';
+                                            json: any;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
                           __typename: 'PageSectionThumbnailPosts';
                           title?: string | undefined;
                           description?: string | undefined;
@@ -8566,6 +9140,38 @@ export type PageLearnCollectionQuery = {
                             | undefined;
                         }
                       | {
+                          __typename: 'PageSectionSectionPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'SectionPost';
+                                      title?: string | undefined;
+                                      columnWidth?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      richDescription?:
+                                        | {
+                                            __typename?: 'SectionPostDescription';
+                                            json: any;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
                           __typename: 'PageSectionThumbnailPosts';
                           title?: string | undefined;
                           description?: string | undefined;
@@ -8918,6 +9524,38 @@ export type PageStreamCollectionQuery = {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
                                       };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionSectionPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'SectionPost';
+                                      title?: string | undefined;
+                                      columnWidth?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      richDescription?:
+                                        | {
+                                            __typename?: 'SectionPostDescription';
+                                            json: any;
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -9348,6 +9986,36 @@ export const PageSectionGrandPostsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${GrandPostFragmentDoc}
 `;
+export const SectionPostFragmentDoc = gql`
+  fragment SectionPost on SectionPost {
+    sys {
+      ...Sys
+    }
+    title
+    richDescription: description {
+      json
+    }
+    columnWidth
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionSectionPostsFragmentDoc = gql`
+  fragment PageSectionSectionPosts on PageSectionSectionPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...SectionPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${SectionPostFragmentDoc}
+`;
 export const PageEarnFragmentDoc = gql`
   fragment PageEarn on PageEarn {
     sys {
@@ -9364,6 +10032,7 @@ export const PageEarnFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -9375,6 +10044,7 @@ export const PageEarnFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const PageGameFragmentDoc = gql`
   fragment PageGame on PageGame {
@@ -9392,6 +10062,7 @@ export const PageGameFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -9403,6 +10074,7 @@ export const PageGameFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const PageHomeFragmentDoc = gql`
   fragment PageHome on PageHome {
@@ -9420,6 +10092,7 @@ export const PageHomeFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -9431,6 +10104,7 @@ export const PageHomeFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
@@ -9448,6 +10122,7 @@ export const PageLearnFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -9459,6 +10134,7 @@ export const PageLearnFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const PageStreamFragmentDoc = gql`
   fragment PageStream on PageStream {
@@ -9476,6 +10152,7 @@ export const PageStreamFragmentDoc = gql`
         ...PageSectionFaQs
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
       }
     }
   }
@@ -9487,6 +10164,7 @@ export const PageStreamFragmentDoc = gql`
   ${PageSectionFaQsFragmentDoc}
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
 `;
 export const TournamentFragmentDoc = gql`
   fragment Tournament on Tournament {

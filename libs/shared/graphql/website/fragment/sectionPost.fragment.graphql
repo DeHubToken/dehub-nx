@@ -1,0 +1,10 @@
+fragment SectionPost on SectionPost {
+  sys {
+    ...Sys
+  }
+  title
+  richDescription: description {
+    json
+  }
+  columnWidth
+}

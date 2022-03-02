@@ -5,8 +5,13 @@ h4,
 h5,
 h6 {
   line-height: 2.2rem;
+  white-space: pre-line;
 }
 
 p {
   line-height: 1.8rem;
+}
+
+hr {
+  border-color: $dhb_neon_1;
 }

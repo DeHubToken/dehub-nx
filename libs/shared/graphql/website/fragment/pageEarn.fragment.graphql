@@ -13,6 +13,7 @@ fragment PageEarn on PageEarn {
       ...PageSectionFaQs
       ...PageSectionDappPosts
       ...PageSectionGrandPosts
+      ...PageSectionSectionPosts
     }
   }
 }
