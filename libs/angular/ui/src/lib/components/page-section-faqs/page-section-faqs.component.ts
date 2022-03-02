@@ -18,6 +18,9 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       class="col-12 sm:col-12 md:col-12 xl:col-8 col-offset-0 sm:col-offset-0 md:col-offset-0 xl:col-offset-2"
     >
       <h3>{{ section.title }}</h3>
+      <h5 class="w-full lg:w-8 xl:w-6 mt-0 mb-7 font-normal">
+        {{ section.description }}
+      </h5>
 
       <!-- Faq Groups -->
       <div class="grid">
