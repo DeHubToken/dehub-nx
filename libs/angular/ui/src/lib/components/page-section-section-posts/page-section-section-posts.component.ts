@@ -92,9 +92,6 @@ export class PageSectionSectionPostsComponent implements OnInit {
         col += 'col-12';
     }
 
-    if (sectionPost.alignCenter) {
-    }
-
     return col;
   }
 }
