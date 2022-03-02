@@ -20,6 +20,7 @@ import { MenuItem } from 'primeng/api';
 export class BuyDehubButtonComponent implements OnInit {
   @Input() label = 'Buy DeHub';
   @Input() cexUrl?: string;
+  @Input() downloadWalletUrl?: string;
 
   @Output() buy = new EventEmitter<void>();
   @Output() dexSelected = new EventEmitter<void>();
@@ -37,6 +38,11 @@ export class BuyDehubButtonComponent implements OnInit {
       {
         label: 'CEX',
         url: this.cexUrl,
+        target: '_blank',
+      },
+      {
+        label: 'Download Wallet',
+        url: this.downloadWalletUrl,
         target: '_blank',
       },
     ];
