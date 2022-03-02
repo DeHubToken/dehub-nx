@@ -32,7 +32,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       <div class="grid mt-4">
         <div
           *ngFor="let sectionPost of sectionPosts; let i = index"
-          [class]="resolveCol(sectionPost.columnWidth)"
+          [class]="resolveCol(sectionPost)"
         >
           <div [@fadeInUp]="{ value: '', params: { delay: i * 200 } }">
             <dhb-section-post [sectionPost]="sectionPost"></dhb-section-post>
@@ -60,18 +60,41 @@ export class PageSectionSectionPostsComponent implements OnInit {
     ).filter(isNotNil);
   }
 
-  resolveCol(colWidth?: string) {
-    switch (colWidth) {
+  // TODO: this could be a util ;)
+  resolveCol(sectionPost: SectionPostFragment) {
+    let col = '';
+    let common = ' col-12 sm:col-12 md:col-12 ';
+    let offsetCommon = ' col-offset-0 ';
+
+    switch (sectionPost.columnWidth) {
       case 'narrow':
-        return 'col-12 sm:col-12 md:col-12 xl:col-4';
+        col += common += 'xl:col-4';
+        if (sectionPost.alignCenter) {
+          col += offsetCommon += 'xl:col-offset-4';
+        }
+        break;
       case 'wide':
-        return 'col-12 sm:col-12 md:col-12 xl:col-6';
+        col += common += 'xl:col-6';
+        if (sectionPost.alignCenter) {
+          col += offsetCommon += 'xl:col-offset-3';
+        }
+        break;
       case 'wider':
-        return 'col-12 sm:col-12 md:col-12 xl:col-8';
+        col += common += 'xl:col-8';
+        if (sectionPost.alignCenter) {
+          col += offsetCommon += 'xl:col-offset-2';
+        }
+        break;
       case 'full':
-        return 'col-12';
+        col += 'col-12';
+        break;
       default:
-        return 'col-12';
+        col += 'col-12';
     }
+
+    if (sectionPost.alignCenter) {
+    }
+
+    return col;
   }
 }
