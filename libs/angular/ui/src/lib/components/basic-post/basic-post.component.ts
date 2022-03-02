@@ -13,7 +13,6 @@ import { BasicPostFragment } from '@dehub/shared/model';
       <p-card
         *ngIf="basicPost"
         [header]="basicPost.title ?? ''"
-        [subheader]="(basicPost.sys.publishedAt | date: 'fullDate')!"
         styleClass="p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
