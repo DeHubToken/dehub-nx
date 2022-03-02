@@ -22,9 +22,12 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
       [@bounceInLeft]
       class="col-12 mb-5"
     >
-      <h3>{{ section.title }}</h3>
-      <h5 class="w-full lg:w-8 xl:w-6 mt-0 mb-7 font-normal">
-        {{ section.description }}
+      <h3 *ngIf="section.title as title">{{ title }}</h3>
+      <h5
+        *ngIf="section.description as description"
+        class="w-full lg:w-8 xl:w-6 mt-0 mb-7 font-normal"
+      >
+        {{ description }}
       </h5>
 
       <!-- Feature Posts -->
