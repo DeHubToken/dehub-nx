@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 // Swiper core and required modules
 import SwiperCore, { Navigation } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
@@ -16,7 +15,6 @@ SwiperCore.use([Navigation]);
   imports: [
     // Angular
     CommonModule,
-    RouterModule,
 
     // Swiper
     SwiperModule,
