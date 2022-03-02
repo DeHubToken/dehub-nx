@@ -4,12 +4,12 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 2.2rem;
+  line-height: $dhb_header_line_height;
   white-space: pre-line;
 }
 
 p {
-  line-height: 1.8rem;
+  line-height: $dhb_paragraph_line_height;
 }
 
 hr {
