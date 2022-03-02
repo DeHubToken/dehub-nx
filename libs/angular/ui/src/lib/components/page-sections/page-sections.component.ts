@@ -94,6 +94,9 @@ type PageSection =
         *ngIf="isPageSectionSectionPosts(section)"
         [section]="section"
       ></dhb-page-section-section-posts>
+
+      <!-- Pie Chart Posts -->
+      <!-- <dhb-page-section-chart-posts> </dhb-page-section-chart-posts> -->
     </ng-container>
   `,
   styles: [``],

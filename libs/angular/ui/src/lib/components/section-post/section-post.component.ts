@@ -20,14 +20,21 @@ import { SectionPostFragment } from '@dehub/shared/model';
       class="px-5 pb-3"
     >
       <!-- Title -->
-      <h5 class="pt-2 mb-0 uppercase text-sm">{{ sectionPost.title }}</h5>
-      <hr class="mt-2" />
+      <ng-container *ngIf="sectionPost.showTitle">
+        <h5 class="pt-2 mb-0 uppercase text-sm">{{ sectionPost.title }}</h5>
+        <hr class="mt-2" />
+      </ng-container>
 
       <!-- Description -->
       <div
         [innerHtml]="getRichMarkup(sectionPost) | dhbSafeHtml"
         class="line-height-3"
       ></div>
+
+      <dhb-chart-post
+        *ngIf="hasChart()"
+        [chartPost]="sectionPost.chartCollection!.items[0]!"
+      ></dhb-chart-post>
     </div>
   `,
   styles: [``],
@@ -53,5 +60,12 @@ export class SectionPostComponent implements OnInit {
       },
     };
     return documentToHtmlString(richDescription?.json, richOptions);
+  }
+
+  hasChart() {
+    return (
+      this.sectionPost.chartCollection &&
+      this.sectionPost.chartCollection.items.length > 0
+    );
   }
 }

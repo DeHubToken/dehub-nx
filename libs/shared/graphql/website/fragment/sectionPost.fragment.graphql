@@ -3,8 +3,15 @@ fragment SectionPost on SectionPost {
     ...Sys
   }
   title
+  showTitle
   richDescription: description {
     json
   }
+  chartCollection(limit: 1, preview: $isPreview) {
+    items {
+      ...ChartPost
+    }
+  }
   columnWidth
+  alignCenter
 }

@@ -1,0 +1,10 @@
+fragment ChartPost on ChartPost {
+  sys {
+    ...Sys
+  }
+  title
+  hideTitle
+  chartType
+  chartData
+  chartOptions
+}

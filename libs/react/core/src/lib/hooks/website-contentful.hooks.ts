@@ -305,18 +305,39 @@ export const PageSectionGrandPostsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${GrandPostFragmentDoc}
 `;
+export const ChartPostFragmentDoc = gql`
+  fragment ChartPost on ChartPost {
+    sys {
+      ...Sys
+    }
+    title
+    hideTitle
+    chartType
+    chartData
+    chartOptions
+  }
+  ${SysFragmentDoc}
+`;
 export const SectionPostFragmentDoc = gql`
   fragment SectionPost on SectionPost {
     sys {
       ...Sys
     }
     title
+    showTitle
     richDescription: description {
       json
     }
+    chartCollection(limit: 1, preview: $isPreview) {
+      items {
+        ...ChartPost
+      }
+    }
     columnWidth
+    alignCenter
   }
   ${SysFragmentDoc}
+  ${ChartPostFragmentDoc}
 `;
 export const PageSectionSectionPostsFragmentDoc = gql`
   fragment PageSectionSectionPosts on PageSectionSectionPosts {
