@@ -4,8 +4,14 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: $dhb_header_line_height;
   white-space: pre-line;
+}
+
+h2 {
+  line-height: $dhb_h2_line_height;
+}
+h5 {
+  line-height: $dhb_h5_line_height;
 }
 
 p {
