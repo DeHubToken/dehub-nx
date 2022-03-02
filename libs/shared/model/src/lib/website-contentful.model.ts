@@ -7560,6 +7560,7 @@ export type PageLearnFragment = {
                           avatar?:
                             | {
                                 __typename?: 'Asset';
+                                title?: string | undefined;
                                 url?: string | undefined;
                                 sys: {
                                   __typename?: 'Sys';
@@ -7921,6 +7922,7 @@ export type PageSectionPersonPostsFragment = {
               avatar?:
                 | {
                     __typename?: 'Asset';
+                    title?: string | undefined;
                     url?: string | undefined;
                     sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
                   }
@@ -8379,6 +8381,7 @@ export type PersonPostFragment = {
   avatar?:
     | {
         __typename?: 'Asset';
+        title?: string | undefined;
         url?: string | undefined;
         sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
       }
@@ -10137,6 +10140,7 @@ export type PageLearnCollectionQuery = {
                                       avatar?:
                                         | {
                                             __typename?: 'Asset';
+                                            title?: string | undefined;
                                             url?: string | undefined;
                                             sys: {
                                               __typename?: 'Sys';
@@ -11209,6 +11213,7 @@ export const PersonPostFragmentDoc = gql`
       sys {
         ...Sys
       }
+      title
       url
     }
     twitter

@@ -8,6 +8,7 @@ fragment PersonPost on PersonPost {
     sys {
       ...Sys
     }
+    title
     url
   }
   twitter
