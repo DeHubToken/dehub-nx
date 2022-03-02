@@ -24,7 +24,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <div class="col-12">
           <div class="footer-bottom">
             <h4>DeHub</h4>
-            <h6>© 2021 DeHub.</h6>
+            <h6>© 2022 DeHub.</h6>
           </div>
         </div>
       </div>
