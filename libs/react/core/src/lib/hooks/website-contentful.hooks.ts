@@ -340,15 +340,11 @@ export const SectionPostFragmentDoc = gql`
     richDescription: description {
       json
     }
-    chartCollection(limit: 1, preview: $isPreview) {
-      items {
-        ...ChartPost
-      }
+    chartPost {
+      ...ChartPost
     }
-    embedCollection(limit: 1, preview: $isPreview) {
-      items {
-        ...EmbedPost
-      }
+    embedPost {
+      ...EmbedPost
     }
     columnWidth
     alignCenter
