@@ -23,9 +23,9 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
           />
         </ng-container>
 
-        <div class="image-content px-8">
+        <div class="image-content px-4 xl:px-8">
           <!-- Title -->
-          <h2>{{ basicPostDetail.title }}</h2>
+          <h3>{{ basicPostDetail.title }}</h3>
 
           <!-- Description -->
           <div
