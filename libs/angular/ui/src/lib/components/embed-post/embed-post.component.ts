@@ -9,12 +9,7 @@ import { EmbedPostFragment } from '@dehub/shared/model';
 
 @Component({
   selector: 'dhb-embed-post',
-  template: `
-    <div
-      [innerHtml]="embedPost.embedCode! | dhbSafeHtml"
-      class="px-5 pt-6 pb-7"
-    ></div>
-  `,
+  template: ` <div [innerHtml]="embedPost.embedCode! | dhbSafeHtml"></div> `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

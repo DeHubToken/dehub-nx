@@ -12,7 +12,7 @@ import { SectionPostFragment } from '@dehub/shared/model';
     <div
       *ngIf="sectionPost"
       [dhbContentfulDraft]="sectionPost.sys"
-      class="px-5 pb-3"
+      class="px-0 md:px-0 lg:px-0 xl:px-3 pb-3"
     >
       <!-- Title -->
       <ng-container *ngIf="sectionPost.showTitle">
