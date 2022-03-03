@@ -446,6 +446,46 @@ export const PageHomeFragmentDoc = gql`
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
 `;
+export const PersonPostFragmentDoc = gql`
+  fragment PersonPost on PersonPost {
+    sys {
+      ...Sys
+    }
+    name
+    title
+    avatar(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    twitter
+    linkedin
+    instagram
+    github
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionPersonPostsFragmentDoc = gql`
+  fragment PageSectionPersonPosts on PageSectionPersonPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 6, preview: $isPreview) {
+      items {
+        ...PersonPost
+      }
+    }
+    isSwiper
+    swiperResponsiveOptions
+  }
+  ${SysFragmentDoc}
+  ${PersonPostFragmentDoc}
+`;
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
     sys {
@@ -463,6 +503,7 @@ export const PageLearnFragmentDoc = gql`
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
         ...PageSectionSectionPosts
+        ...PageSectionPersonPosts
       }
     }
   }
@@ -475,6 +516,7 @@ export const PageLearnFragmentDoc = gql`
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
+  ${PageSectionPersonPostsFragmentDoc}
 `;
 export const PageStreamFragmentDoc = gql`
   fragment PageStream on PageStream {

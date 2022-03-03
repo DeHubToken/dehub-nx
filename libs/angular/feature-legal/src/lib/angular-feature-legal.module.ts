@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { ButtonModule } from 'primeng/button';
 import { AngularFeatureLegalDetailComponent } from './angular-feature-legal-detail.component';
@@ -15,6 +16,7 @@ import { LegalPostComponent } from './components/legal-post.component';
 
     // Lib Modules
     ContentfulDraftDirectiveModule,
+    ContentfulRichMarkupPipeModule,
     SafeHtmlPipeModule,
 
     // PrimeNg Modules

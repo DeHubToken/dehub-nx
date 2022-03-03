@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
-import { DappPostComponent } from '../dapp-post/dapp-post.component';
+import { PersonPostComponent } from './person-post.component';
 
 @NgModule({
-  declarations: [DappPostComponent],
+  declarations: [PersonPostComponent],
   imports: [
     // Angular
     CommonModule,
@@ -18,6 +18,6 @@ import { DappPostComponent } from '../dapp-post/dapp-post.component';
     // Libs
     ContentfulDraftDirectiveModule,
   ],
-  exports: [DappPostComponent],
+  exports: [PersonPostComponent],
 })
-export class DappPostModule {}
+export class PersonPostModule {}

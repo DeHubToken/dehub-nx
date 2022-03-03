@@ -4,14 +4,14 @@ import { NgModule } from '@angular/core';
 import SwiperCore, { Navigation } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
-import { BasicPostModule } from '../basic-post';
-import { PageSectionBasicPostsComponent } from './page-section-basic-posts.component';
+import { PersonPostModule } from '../person-post';
+import { PageSectionPersonPostsComponent } from './page-section-person-posts.component';
 
 // Install Swiper modules
 SwiperCore.use([Navigation]);
 
 @NgModule({
-  declarations: [PageSectionBasicPostsComponent],
+  declarations: [PageSectionPersonPostsComponent],
   imports: [
     // Angular
     CommonModule,
@@ -21,8 +21,8 @@ SwiperCore.use([Navigation]);
 
     // Libs
     ContentfulDraftDirectiveModule,
-    BasicPostModule,
+    PersonPostModule,
   ],
-  exports: [PageSectionBasicPostsComponent],
+  exports: [PageSectionPersonPostsComponent],
 })
-export class PageSectionBasicPostsModule {}
+export class PageSectionPersonPostsModule {}

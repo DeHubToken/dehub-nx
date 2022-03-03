@@ -7,7 +7,7 @@ import { SysFragment } from '@dehub/shared/model';
 export class ContentfulDraftDirective {
   @Input() dhbContentfulDraft?: SysFragment;
 
-  @HostBinding('class.opacity-20')
+  @HostBinding('class.opacity-50')
   get isDraft() {
     return this.dhbContentfulDraft?.publishedAt === null;
   }

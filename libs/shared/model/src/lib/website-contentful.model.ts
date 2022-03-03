@@ -182,6 +182,7 @@ export interface AssetLinkingCollections {
   entryCollection?: Maybe<EntryCollection>;
   featurePostCollection?: Maybe<FeaturePostCollection>;
   grandPostCollection?: Maybe<GrandPostCollection>;
+  personPostCollection?: Maybe<PersonPostCollection>;
   ppvCollection?: Maybe<PpvCollection>;
   ppvNftSliderPostCollection?: Maybe<PpvNftSliderPostCollection>;
   ppvSliderPostCollection?: Maybe<PpvSliderPostCollection>;
@@ -214,6 +215,13 @@ export interface AssetLinkingCollectionsFeaturePostCollectionArgs {
 }
 
 export interface AssetLinkingCollectionsGrandPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface AssetLinkingCollectionsPersonPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -821,6 +829,104 @@ export enum DappPostOrder {
   UrlToDappDesc = 'urlToDapp_DESC',
   UrlToLearnMoreAsc = 'urlToLearnMore_ASC',
   UrlToLearnMoreDesc = 'urlToLearnMore_DESC',
+}
+
+/** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
+export interface EmbedPost extends Entry {
+  __typename?: 'EmbedPost';
+  contentfulMetadata: ContentfulMetadata;
+  embedCode?: Maybe<Scalars['String']>;
+  hideTitle?: Maybe<Scalars['Boolean']>;
+  linkedFrom?: Maybe<EmbedPostLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
+export interface EmbedPostEmbedCodeArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
+export interface EmbedPostHideTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
+export interface EmbedPostLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
+export interface EmbedPostTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface EmbedPostCollection {
+  __typename?: 'EmbedPostCollection';
+  items: Array<Maybe<EmbedPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface EmbedPostFilter {
+  AND?: InputMaybe<Array<InputMaybe<EmbedPostFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<EmbedPostFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  embedCode?: InputMaybe<Scalars['String']>;
+  embedCode_contains?: InputMaybe<Scalars['String']>;
+  embedCode_exists?: InputMaybe<Scalars['Boolean']>;
+  embedCode_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  embedCode_not?: InputMaybe<Scalars['String']>;
+  embedCode_not_contains?: InputMaybe<Scalars['String']>;
+  embedCode_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  hideTitle?: InputMaybe<Scalars['Boolean']>;
+  hideTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  hideTitle_not?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface EmbedPostLinkingCollections {
+  __typename?: 'EmbedPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  sectionPostCollection?: Maybe<SectionPostCollection>;
+}
+
+export interface EmbedPostLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface EmbedPostLinkingCollectionsSectionPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum EmbedPostOrder {
+  HideTitleAsc = 'hideTitle_ASC',
+  HideTitleDesc = 'hideTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export interface Entry {
@@ -2119,6 +2225,7 @@ export type PageLearnSectionsItem =
   | PageSectionFeaturePosts
   | PageSectionGrandPosts
   | PageSectionIconTiles
+  | PageSectionPersonPosts
   | PageSectionSectionPosts
   | PageSectionThumbnailPosts;
 
@@ -2985,6 +3092,129 @@ export enum PageSectionIconTilesOrder {
   TitleDesc = 'title_DESC',
 }
 
+/** Page section with Persons. Displays a limited amount of handpicked person posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionPersonPosts) */
+export interface PageSectionPersonPosts extends Entry {
+  __typename?: 'PageSectionPersonPosts';
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  handpickedPostsCollection?: Maybe<PageSectionPersonPostsHandpickedPostsCollection>;
+  isSwiper?: Maybe<Scalars['Boolean']>;
+  linkedFrom?: Maybe<PageSectionPersonPostsLinkingCollections>;
+  swiperResponsiveOptions?: Maybe<Scalars['JSON']>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** Page section with Persons. Displays a limited amount of handpicked person posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionPersonPosts) */
+export interface PageSectionPersonPostsDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Page section with Persons. Displays a limited amount of handpicked person posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionPersonPosts) */
+export interface PageSectionPersonPostsHandpickedPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Page section with Persons. Displays a limited amount of handpicked person posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionPersonPosts) */
+export interface PageSectionPersonPostsIsSwiperArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Page section with Persons. Displays a limited amount of handpicked person posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionPersonPosts) */
+export interface PageSectionPersonPostsLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Page section with Persons. Displays a limited amount of handpicked person posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionPersonPosts) */
+export interface PageSectionPersonPostsSwiperResponsiveOptionsArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Page section with Persons. Displays a limited amount of handpicked person posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionPersonPosts) */
+export interface PageSectionPersonPostsTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface PageSectionPersonPostsCollection {
+  __typename?: 'PageSectionPersonPostsCollection';
+  items: Array<Maybe<PageSectionPersonPosts>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionPersonPostsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageSectionPersonPostsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageSectionPersonPostsFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  handpickedPostsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_not?: InputMaybe<Scalars['Boolean']>;
+  swiperResponsiveOptions_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface PageSectionPersonPostsHandpickedPostsCollection {
+  __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
+  items: Array<Maybe<PersonPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionPersonPostsLinkingCollections {
+  __typename?: 'PageSectionPersonPostsLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageLearnCollection?: Maybe<PageLearnCollection>;
+}
+
+export interface PageSectionPersonPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionPersonPostsLinkingCollectionsPageLearnCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionPersonPostsOrder {
+  IsSwiperAsc = 'isSwiper_ASC',
+  IsSwiperDesc = 'isSwiper_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 /** Page section with Section Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionSectionPosts) */
 export interface PageSectionSectionPosts extends Entry {
   __typename?: 'PageSectionSectionPosts';
@@ -3374,6 +3604,163 @@ export type PageStreamSectionsItem =
   | PageSectionIconTiles
   | PageSectionSectionPosts
   | PageSectionThumbnailPosts;
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPost extends Entry {
+  __typename?: 'PersonPost';
+  avatar?: Maybe<Asset>;
+  contentfulMetadata: ContentfulMetadata;
+  github?: Maybe<Scalars['String']>;
+  instagram?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<PersonPostLinkingCollections>;
+  linkedin?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+  twitter?: Maybe<Scalars['String']>;
+}
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPostAvatarArgs {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPostGithubArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPostInstagramArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPostLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPostLinkedinArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPostNameArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPostTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPostTwitterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface PersonPostCollection {
+  __typename?: 'PersonPostCollection';
+  items: Array<Maybe<PersonPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PersonPostFilter {
+  AND?: InputMaybe<Array<InputMaybe<PersonPostFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PersonPostFilter>>>;
+  avatar_exists?: InputMaybe<Scalars['Boolean']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  github?: InputMaybe<Scalars['String']>;
+  github_contains?: InputMaybe<Scalars['String']>;
+  github_exists?: InputMaybe<Scalars['Boolean']>;
+  github_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  github_not?: InputMaybe<Scalars['String']>;
+  github_not_contains?: InputMaybe<Scalars['String']>;
+  github_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  instagram?: InputMaybe<Scalars['String']>;
+  instagram_contains?: InputMaybe<Scalars['String']>;
+  instagram_exists?: InputMaybe<Scalars['Boolean']>;
+  instagram_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  instagram_not?: InputMaybe<Scalars['String']>;
+  instagram_not_contains?: InputMaybe<Scalars['String']>;
+  instagram_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linkedin?: InputMaybe<Scalars['String']>;
+  linkedin_contains?: InputMaybe<Scalars['String']>;
+  linkedin_exists?: InputMaybe<Scalars['Boolean']>;
+  linkedin_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linkedin_not?: InputMaybe<Scalars['String']>;
+  linkedin_not_contains?: InputMaybe<Scalars['String']>;
+  linkedin_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  name?: InputMaybe<Scalars['String']>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_exists?: InputMaybe<Scalars['Boolean']>;
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  twitter?: InputMaybe<Scalars['String']>;
+  twitter_contains?: InputMaybe<Scalars['String']>;
+  twitter_exists?: InputMaybe<Scalars['Boolean']>;
+  twitter_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  twitter_not?: InputMaybe<Scalars['String']>;
+  twitter_not_contains?: InputMaybe<Scalars['String']>;
+  twitter_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface PersonPostLinkingCollections {
+  __typename?: 'PersonPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageSectionPersonPostsCollection?: Maybe<PageSectionPersonPostsCollection>;
+}
+
+export interface PersonPostLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PersonPostLinkingCollectionsPageSectionPersonPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PersonPostOrder {
+  GithubAsc = 'github_ASC',
+  GithubDesc = 'github_DESC',
+  InstagramAsc = 'instagram_ASC',
+  InstagramDesc = 'instagram_DESC',
+  LinkedinAsc = 'linkedin_ASC',
+  LinkedinDesc = 'linkedin_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  TwitterAsc = 'twitter_ASC',
+  TwitterDesc = 'twitter_DESC',
+}
 
 /** Pay-Per-View information and meta [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/ppv) */
 export interface Ppv extends Entry {
@@ -3858,6 +4245,8 @@ export interface Query {
   chartPostCollection?: Maybe<ChartPostCollection>;
   dappPost?: Maybe<DappPost>;
   dappPostCollection?: Maybe<DappPostCollection>;
+  embedPost?: Maybe<EmbedPost>;
+  embedPostCollection?: Maybe<EmbedPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
   faqGroup?: Maybe<FaqGroup>;
   faqGroupCollection?: Maybe<FaqGroupCollection>;
@@ -3891,12 +4280,16 @@ export interface Query {
   pageSectionGrandPostsCollection?: Maybe<PageSectionGrandPostsCollection>;
   pageSectionIconTiles?: Maybe<PageSectionIconTiles>;
   pageSectionIconTilesCollection?: Maybe<PageSectionIconTilesCollection>;
+  pageSectionPersonPosts?: Maybe<PageSectionPersonPosts>;
+  pageSectionPersonPostsCollection?: Maybe<PageSectionPersonPostsCollection>;
   pageSectionSectionPosts?: Maybe<PageSectionSectionPosts>;
   pageSectionSectionPostsCollection?: Maybe<PageSectionSectionPostsCollection>;
   pageSectionThumbnailPosts?: Maybe<PageSectionThumbnailPosts>;
   pageSectionThumbnailPostsCollection?: Maybe<PageSectionThumbnailPostsCollection>;
   pageStream?: Maybe<PageStream>;
   pageStreamCollection?: Maybe<PageStreamCollection>;
+  personPost?: Maybe<PersonPost>;
+  personPostCollection?: Maybe<PersonPostCollection>;
   ppv?: Maybe<Ppv>;
   ppvCollection?: Maybe<PpvCollection>;
   ppvNftSliderPost?: Maybe<PpvNftSliderPost>;
@@ -3994,6 +4387,21 @@ export interface QueryDappPostCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<DappPostFilter>;
+}
+
+export interface QueryEmbedPostArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryEmbedPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<EmbedPostOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<EmbedPostFilter>;
 }
 
 export interface QueryEntryCollectionArgs {
@@ -4245,6 +4653,21 @@ export interface QueryPageSectionIconTilesCollectionArgs {
   where?: InputMaybe<PageSectionIconTilesFilter>;
 }
 
+export interface QueryPageSectionPersonPostsArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionPersonPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageSectionPersonPostsOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionPersonPostsFilter>;
+}
+
 export interface QueryPageSectionSectionPostsArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -4288,6 +4711,21 @@ export interface QueryPageStreamCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<PageStreamFilter>;
+}
+
+export interface QueryPersonPostArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryPersonPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PersonPostOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PersonPostFilter>;
 }
 
 export interface QueryPpvArgs {
@@ -4463,6 +4901,7 @@ export interface SectionPost extends Entry {
   columnWidth?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<SectionPostDescription>;
+  embedCollection?: Maybe<SectionPostEmbedCollection>;
   linkedFrom?: Maybe<SectionPostLinkingCollections>;
   showTitle?: Maybe<Scalars['Boolean']>;
   sys: Sys;
@@ -4490,6 +4929,14 @@ export interface SectionPostColumnWidthArgs {
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
 export interface SectionPostDescriptionArgs {
   locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPostEmbedCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
 }
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
@@ -4548,6 +4995,14 @@ export interface SectionPostDescriptionLinks {
   entries: SectionPostDescriptionEntries;
 }
 
+export interface SectionPostEmbedCollection {
+  __typename?: 'SectionPostEmbedCollection';
+  items: Array<Maybe<EmbedPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
 export interface SectionPostFilter {
   AND?: InputMaybe<Array<InputMaybe<SectionPostFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<SectionPostFilter>>>;
@@ -4566,6 +5021,7 @@ export interface SectionPostFilter {
   description_contains?: InputMaybe<Scalars['String']>;
   description_exists?: InputMaybe<Scalars['Boolean']>;
   description_not_contains?: InputMaybe<Scalars['String']>;
+  embedCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showTitle?: InputMaybe<Scalars['Boolean']>;
   showTitle_exists?: InputMaybe<Scalars['Boolean']>;
   showTitle_not?: InputMaybe<Scalars['Boolean']>;
@@ -7079,6 +7535,46 @@ export type PageLearnFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionPersonPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'PersonPost';
+                          name?: string | undefined;
+                          title?: string | undefined;
+                          twitter?: string | undefined;
+                          linkedin?: string | undefined;
+                          instagram?: string | undefined;
+                          github?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          avatar?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
@@ -7396,6 +7892,41 @@ export type PageSectionIconTilesFragment = {
               callToActionUrl?: string | undefined;
               callToActionButtonLabel?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
+export type PageSectionPersonPostsFragment = {
+  __typename: 'PageSectionPersonPosts';
+  title?: string | undefined;
+  description?: string | undefined;
+  isSwiper?: boolean | undefined;
+  swiperResponsiveOptions?: any | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  handpickedPostsCollection?:
+    | {
+        __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
+        items: Array<
+          | {
+              __typename?: 'PersonPost';
+              name?: string | undefined;
+              title?: string | undefined;
+              twitter?: string | undefined;
+              linkedin?: string | undefined;
+              instagram?: string | undefined;
+              github?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              avatar?:
+                | {
+                    __typename?: 'Asset';
+                    title?: string | undefined;
+                    url?: string | undefined;
+                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                  }
+                | undefined;
             }
           | undefined
         >;
@@ -7834,6 +8365,25 @@ export type PageStreamFragment = {
             }
           | undefined
         >;
+      }
+    | undefined;
+};
+
+export type PersonPostFragment = {
+  __typename?: 'PersonPost';
+  name?: string | undefined;
+  title?: string | undefined;
+  twitter?: string | undefined;
+  linkedin?: string | undefined;
+  instagram?: string | undefined;
+  github?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  avatar?:
+    | {
+        __typename?: 'Asset';
+        title?: string | undefined;
+        url?: string | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
       }
     | undefined;
 };
@@ -9562,6 +10112,49 @@ export type PageLearnCollectionQuery = {
                             | undefined;
                         }
                       | {
+                          __typename: 'PageSectionPersonPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'PersonPost';
+                                      name?: string | undefined;
+                                      title?: string | undefined;
+                                      twitter?: string | undefined;
+                                      linkedin?: string | undefined;
+                                      instagram?: string | undefined;
+                                      github?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      avatar?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
                           __typename: 'PageSectionSectionPosts';
                           title?: string | undefined;
                           description?: string | undefined;
@@ -10609,6 +11202,46 @@ export const PageHomeFragmentDoc = gql`
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
 `;
+export const PersonPostFragmentDoc = gql`
+  fragment PersonPost on PersonPost {
+    sys {
+      ...Sys
+    }
+    name
+    title
+    avatar(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    twitter
+    linkedin
+    instagram
+    github
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionPersonPostsFragmentDoc = gql`
+  fragment PageSectionPersonPosts on PageSectionPersonPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 6, preview: $isPreview) {
+      items {
+        ...PersonPost
+      }
+    }
+    isSwiper
+    swiperResponsiveOptions
+  }
+  ${SysFragmentDoc}
+  ${PersonPostFragmentDoc}
+`;
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
     sys {
@@ -10626,6 +11259,7 @@ export const PageLearnFragmentDoc = gql`
         ...PageSectionDappPosts
         ...PageSectionGrandPosts
         ...PageSectionSectionPosts
+        ...PageSectionPersonPosts
       }
     }
   }
@@ -10638,6 +11272,7 @@ export const PageLearnFragmentDoc = gql`
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
+  ${PageSectionPersonPostsFragmentDoc}
 `;
 export const PageStreamFragmentDoc = gql`
   fragment PageStream on PageStream {
