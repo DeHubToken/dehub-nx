@@ -2,23 +2,18 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
 import { SafeHtmlPipeModule } from '../../pipes/safe-html';
-import { ChartPostModule } from '../chart-post/chart-post.component.module';
-import { EmbedPostModule } from '../embed-post/embed-post.component.module';
-import { SectionPostComponent } from './section-post.component';
+import { EmbedPostComponent } from './embed-post.component';
 
 @NgModule({
-  declarations: [SectionPostComponent],
+  declarations: [EmbedPostComponent],
   imports: [
     // Angular
     CommonModule,
-
-    ChartPostModule,
-    EmbedPostModule,
 
     // Libs
     ContentfulDraftDirectiveModule,
     SafeHtmlPipeModule,
   ],
-  exports: [SectionPostComponent],
+  exports: [EmbedPostComponent],
 })
-export class SectionPostModule {}
+export class EmbedPostModule {}

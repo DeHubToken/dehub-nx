@@ -838,6 +838,7 @@ export interface EmbedPost extends Entry {
   embedCode?: Maybe<Scalars['String']>;
   hideTitle?: Maybe<Scalars['Boolean']>;
   linkedFrom?: Maybe<EmbedPostLinkingCollections>;
+  scriptUrl?: Maybe<Scalars['String']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 }
@@ -855,6 +856,11 @@ export interface EmbedPostHideTitleArgs {
 /** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
 export interface EmbedPostLinkedFromArgs {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
+export interface EmbedPostScriptUrlArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
@@ -884,6 +890,13 @@ export interface EmbedPostFilter {
   hideTitle?: InputMaybe<Scalars['Boolean']>;
   hideTitle_exists?: InputMaybe<Scalars['Boolean']>;
   hideTitle_not?: InputMaybe<Scalars['Boolean']>;
+  scriptUrl?: InputMaybe<Scalars['String']>;
+  scriptUrl_contains?: InputMaybe<Scalars['String']>;
+  scriptUrl_exists?: InputMaybe<Scalars['Boolean']>;
+  scriptUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  scriptUrl_not?: InputMaybe<Scalars['String']>;
+  scriptUrl_not_contains?: InputMaybe<Scalars['String']>;
+  scriptUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -917,6 +930,8 @@ export interface EmbedPostLinkingCollectionsSectionPostCollectionArgs {
 export enum EmbedPostOrder {
   HideTitleAsc = 'hideTitle_ASC',
   HideTitleDesc = 'hideTitle_DESC',
+  ScriptUrlAsc = 'scriptUrl_ASC',
+  ScriptUrlDesc = 'scriptUrl_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -6105,6 +6120,15 @@ export type DappPostFragment = {
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
 };
 
+export type EmbedPostFragment = {
+  __typename?: 'EmbedPost';
+  title?: string | undefined;
+  hideTitle?: boolean | undefined;
+  embedCode?: string | undefined;
+  scriptUrl?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+};
+
 export type FaqGroupFragment = {
   __typename?: 'FaqGroup';
   name?: string | undefined;
@@ -6505,6 +6529,25 @@ export type PageEarnFragment = {
                                 >;
                               }
                             | undefined;
+                          embedCollection?:
+                            | {
+                                __typename?: 'SectionPostEmbedCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'EmbedPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      embedCode?: string | undefined;
+                                      scriptUrl?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -6863,6 +6906,25 @@ export type PageGameFragment = {
                                 >;
                               }
                             | undefined;
+                          embedCollection?:
+                            | {
+                                __typename?: 'SectionPostEmbedCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'EmbedPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      embedCode?: string | undefined;
+                                      scriptUrl?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -7212,6 +7274,25 @@ export type PageHomeFragment = {
                                       chartType?: string | undefined;
                                       chartData?: any | undefined;
                                       chartOptions?: any | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                          embedCollection?:
+                            | {
+                                __typename?: 'SectionPostEmbedCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'EmbedPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      embedCode?: string | undefined;
+                                      scriptUrl?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -7618,6 +7699,25 @@ export type PageLearnFragment = {
                                 >;
                               }
                             | undefined;
+                          embedCollection?:
+                            | {
+                                __typename?: 'SectionPostEmbedCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'EmbedPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      embedCode?: string | undefined;
+                                      scriptUrl?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -7962,6 +8062,25 @@ export type PageSectionSectionPostsFragment = {
                           chartType?: string | undefined;
                           chartData?: any | undefined;
                           chartOptions?: any | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+              embedCollection?:
+                | {
+                    __typename?: 'SectionPostEmbedCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'EmbedPost';
+                          title?: string | undefined;
+                          hideTitle?: boolean | undefined;
+                          embedCode?: string | undefined;
+                          scriptUrl?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -8319,6 +8438,25 @@ export type PageStreamFragment = {
                                 >;
                               }
                             | undefined;
+                          embedCollection?:
+                            | {
+                                __typename?: 'SectionPostEmbedCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'EmbedPost';
+                                      title?: string | undefined;
+                                      hideTitle?: boolean | undefined;
+                                      embedCode?: string | undefined;
+                                      scriptUrl?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -8406,6 +8544,22 @@ export type SectionPostFragment = {
               chartType?: string | undefined;
               chartData?: any | undefined;
               chartOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+  embedCollection?:
+    | {
+        __typename?: 'SectionPostEmbedCollection';
+        items: Array<
+          | {
+              __typename?: 'EmbedPost';
+              title?: string | undefined;
+              hideTitle?: boolean | undefined;
+              embedCode?: string | undefined;
+              scriptUrl?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
             }
           | undefined
@@ -8901,6 +9055,33 @@ export type PageEarnCollectionQuery = {
                                             >;
                                           }
                                         | undefined;
+                                      embedCollection?:
+                                        | {
+                                            __typename?: 'SectionPostEmbedCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'EmbedPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  embedCode?:
+                                                    | string
+                                                    | undefined;
+                                                  scriptUrl?:
+                                                    | string
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -9322,6 +9503,33 @@ export type PageGameCollectionQuery = {
                                             >;
                                           }
                                         | undefined;
+                                      embedCollection?:
+                                        | {
+                                            __typename?: 'SectionPostEmbedCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'EmbedPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  embedCode?:
+                                                    | string
+                                                    | undefined;
+                                                  scriptUrl?:
+                                                    | string
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -9731,6 +9939,33 @@ export type PageHomeCollectionQuery = {
                                                   chartData?: any | undefined;
                                                   chartOptions?:
                                                     | any
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
+                                          }
+                                        | undefined;
+                                      embedCollection?:
+                                        | {
+                                            __typename?: 'SectionPostEmbedCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'EmbedPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  embedCode?:
+                                                    | string
+                                                    | undefined;
+                                                  scriptUrl?:
+                                                    | string
                                                     | undefined;
                                                   sys: {
                                                     __typename?: 'Sys';
@@ -10206,6 +10441,33 @@ export type PageLearnCollectionQuery = {
                                             >;
                                           }
                                         | undefined;
+                                      embedCollection?:
+                                        | {
+                                            __typename?: 'SectionPostEmbedCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'EmbedPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  embedCode?:
+                                                    | string
+                                                    | undefined;
+                                                  scriptUrl?:
+                                                    | string
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -10615,6 +10877,33 @@ export type PageStreamCollectionQuery = {
                                                   chartData?: any | undefined;
                                                   chartOptions?:
                                                     | any
+                                                    | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
+                                          }
+                                        | undefined;
+                                      embedCollection?:
+                                        | {
+                                            __typename?: 'SectionPostEmbedCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'EmbedPost';
+                                                  title?: string | undefined;
+                                                  hideTitle?:
+                                                    | boolean
+                                                    | undefined;
+                                                  embedCode?:
+                                                    | string
+                                                    | undefined;
+                                                  scriptUrl?:
+                                                    | string
                                                     | undefined;
                                                   sys: {
                                                     __typename?: 'Sys';
@@ -11070,6 +11359,18 @@ export const ChartPostFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const EmbedPostFragmentDoc = gql`
+  fragment EmbedPost on EmbedPost {
+    sys {
+      ...Sys
+    }
+    title
+    hideTitle
+    embedCode
+    scriptUrl
+  }
+  ${SysFragmentDoc}
+`;
 export const SectionPostFragmentDoc = gql`
   fragment SectionPost on SectionPost {
     sys {
@@ -11085,11 +11386,17 @@ export const SectionPostFragmentDoc = gql`
         ...ChartPost
       }
     }
+    embedCollection(limit: 1, preview: $isPreview) {
+      items {
+        ...EmbedPost
+      }
+    }
     columnWidth
     alignCenter
   }
   ${SysFragmentDoc}
   ${ChartPostFragmentDoc}
+  ${EmbedPostFragmentDoc}
 `;
 export const PageSectionSectionPostsFragmentDoc = gql`
   fragment PageSectionSectionPosts on PageSectionSectionPosts {

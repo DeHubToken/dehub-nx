@@ -1,0 +1,9 @@
+fragment EmbedPost on EmbedPost {
+  sys {
+    ...Sys
+  }
+  title
+  hideTitle
+  embedCode
+  scriptUrl
+}

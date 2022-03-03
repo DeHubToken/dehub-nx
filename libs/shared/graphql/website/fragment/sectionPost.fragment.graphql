@@ -12,6 +12,11 @@ fragment SectionPost on SectionPost {
       ...ChartPost
     }
   }
+  embedCollection(limit: 1, preview: $isPreview) {
+    items {
+      ...EmbedPost
+    }
+  }
   columnWidth
   alignCenter
 }

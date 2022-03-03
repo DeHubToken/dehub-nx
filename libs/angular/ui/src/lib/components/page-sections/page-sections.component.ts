@@ -11,6 +11,7 @@ import {
   PageSectionFeaturePostsFragment,
   PageSectionGrandPostsFragment,
   PageSectionIconTilesFragment,
+  PageSectionPersonPostsFragment,
   PageSectionSectionPostsFragment,
   PageSectionThumbnailPostsFragment,
   SwiperResponsiveOptions,
@@ -25,6 +26,7 @@ type PageSection =
   | PageSectionDappPostsFragment
   | PageSectionGrandPostsFragment
   | PageSectionSectionPostsFragment
+  | PageSectionPersonPostsFragment
   | undefined
   | null;
 
