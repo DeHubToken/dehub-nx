@@ -4,6 +4,7 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { ContentfulRichMarkupPipeModule } from '../../pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '../../pipes/safe-html';
 import { ChartPostModule } from '../chart-post/chart-post.component.module';
+import { EmbedPostModule } from '../embed-post/embed-post.component.module';
 import { SectionPostComponent } from './section-post.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { SectionPostComponent } from './section-post.component';
     CommonModule,
 
     ChartPostModule,
+    EmbedPostModule,
 
     // Libs
     ContentfulDraftDirectiveModule,

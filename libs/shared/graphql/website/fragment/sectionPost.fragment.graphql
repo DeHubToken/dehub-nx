@@ -7,10 +7,11 @@ fragment SectionPost on SectionPost {
   richDescription: description {
     json
   }
-  chartCollection(limit: 1, preview: $isPreview) {
-    items {
-      ...ChartPost
-    }
+  chartPost {
+    ...ChartPost
+  }
+  embedPost {
+    ...EmbedPost
   }
   columnWidth
   alignCenter

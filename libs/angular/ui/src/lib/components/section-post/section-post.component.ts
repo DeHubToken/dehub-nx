@@ -31,9 +31,15 @@ import { SectionPostFragment } from '@dehub/shared/model';
       ></div>
 
       <dhb-chart-post
-        *ngIf="hasChart()"
-        [chartPost]="sectionPost.chartCollection!.items[0]!"
+        *ngIf="sectionPost.chartPost as chartPost"
+        [chartPost]="chartPost"
       ></dhb-chart-post>
+
+      <dhb-embed-post
+        *ngIf="sectionPost.embedPost as embedPost"
+        [embedPost]="embedPost"
+      >
+      </dhb-embed-post>
     </div>
   `,
   styles: [``],
@@ -45,11 +51,4 @@ export class SectionPostComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
-  hasChart() {
-    return (
-      this.sectionPost.chartCollection &&
-      this.sectionPost.chartCollection.items.length > 0
-    );
-  }
 }

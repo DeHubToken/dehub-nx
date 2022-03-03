@@ -318,6 +318,18 @@ export const ChartPostFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const EmbedPostFragmentDoc = gql`
+  fragment EmbedPost on EmbedPost {
+    sys {
+      ...Sys
+    }
+    title
+    hideTitle
+    embedCode
+    scriptUrl
+  }
+  ${SysFragmentDoc}
+`;
 export const SectionPostFragmentDoc = gql`
   fragment SectionPost on SectionPost {
     sys {
@@ -328,16 +340,18 @@ export const SectionPostFragmentDoc = gql`
     richDescription: description {
       json
     }
-    chartCollection(limit: 1, preview: $isPreview) {
-      items {
-        ...ChartPost
-      }
+    chartPost {
+      ...ChartPost
+    }
+    embedPost {
+      ...EmbedPost
     }
     columnWidth
     alignCenter
   }
   ${SysFragmentDoc}
   ${ChartPostFragmentDoc}
+  ${EmbedPostFragmentDoc}
 `;
 export const PageSectionSectionPostsFragmentDoc = gql`
   fragment PageSectionSectionPosts on PageSectionSectionPosts {
