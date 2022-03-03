@@ -128,7 +128,7 @@
       "outputs": [],
       "options": {
         "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking -o",
-        "cwd": "apps/staking"
+        "cwd": "netlify/staking.prod"
       }
     },
     "deploy-prod": {
@@ -136,7 +136,7 @@
       "outputs": [],
       "options": {
         "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking -p -o",
-        "cwd": "apps/staking"
+        "cwd": "netlify/staking.prod"
       }
     }
   },

@@ -27,6 +27,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
               class="fad fa-play-circle"
               (click)="onVideoPlayClicked()"
             ></i>
+
             <!-- Picture -->
             <ng-container *ngIf="grandPost.picture as picture">
               <img
@@ -36,6 +37,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
                 [ngClass]="{ hidden: heavyPictureLoaded }"
               />
             </ng-container>
+
             <!-- Heavy Picture -->
             <ng-container *ngIf="grandPost.heavyPicture as heavyPicture">
               <img
