@@ -5,7 +5,7 @@ fragment PageSectionIconTiles on PageSectionIconTiles {
   }
   title
   description
-  handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
+  handpickedIconTilesCollection(limit: 20, preview: $isPreview) {
     items {
       ...IconTile
     }
