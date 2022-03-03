@@ -475,6 +475,7 @@ export const PersonPostFragmentDoc = gql`
       sys {
         ...Sys
       }
+      title
       url
     }
     twitter

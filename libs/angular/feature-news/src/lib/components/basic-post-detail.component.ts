@@ -4,11 +4,6 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import {
-  documentToHtmlString,
-  Options,
-} from '@contentful/rich-text-html-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
 import { BasicPostDetailFragment } from '@dehub/shared/model';
 
 @Component({
@@ -34,7 +29,11 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
 
           <!-- Description -->
           <div
-            [innerHtml]="getRichMarkup(basicPostDetail) | dhbSafeHtml"
+            [innerHtml]="
+              basicPostDetail.description?.json
+                | dhbContentfulRichMarkup
+                | dhbSafeHtml
+            "
             class="line-height-3"
           ></div>
         </div>
@@ -49,18 +48,4 @@ export class BasicPostDetailComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
-  /** TODO: this can be a util */
-  getRichMarkup({ description }: BasicPostDetailFragment) {
-    const richOptions: Options = {
-      renderNode: {
-        [BLOCKS.HEADING_5]: (node, next) => `<h5>${next(node.content)}</h5>`,
-        [BLOCKS.HEADING_6]: (node, next) => `<h6>${next(node.content)}</h6>`,
-        [BLOCKS.UL_LIST]: (node, next) => `<ul>${next(node.content)}</ul>`,
-        [BLOCKS.OL_LIST]: (node, next) => `<ol>${next(node.content)}</ol>`,
-        [BLOCKS.LIST_ITEM]: (node, next) => `<li>${next(node.content)}</li>`,
-      },
-    };
-    return documentToHtmlString(description?.json, richOptions);
-  }
 }

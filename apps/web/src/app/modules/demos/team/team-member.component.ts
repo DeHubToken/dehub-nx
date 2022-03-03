@@ -20,7 +20,7 @@ interface SocialLink {
         class="card image-card shadow-8"
       >
         <!-- Avatar -->
-        <<ng-container *ngIf="teamMember.avatar as avatar">
+        <ng-container *ngIf="teamMember.avatar as avatar">
           <img
             [dhbContentfulDraft]="avatar.sys"
             [src]="avatar.url"

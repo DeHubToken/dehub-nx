@@ -97,6 +97,12 @@ type PageSection =
         [section]="section"
       ></dhb-page-section-section-posts>
 
+      <!-- Person Posts -->
+      <dhb-page-section-person-posts
+        *ngIf="isPageSectionPersonPosts(section)"
+        [section]="section"
+      ></dhb-page-section-person-posts>
+
       <!-- Pie Chart Posts -->
       <!-- <dhb-page-section-chart-posts> </dhb-page-section-chart-posts> -->
     </ng-container>
@@ -167,5 +173,11 @@ export class PageSectionsComponent implements OnInit {
     return (
       !!pageSection && pageSection.__typename === 'PageSectionSectionPosts'
     );
+  }
+
+  isPageSectionPersonPosts(
+    pageSection: PageSection
+  ): pageSection is PageSectionPersonPostsFragment {
+    return !!pageSection && pageSection.__typename === 'PageSectionPersonPosts';
   }
 }

@@ -145,7 +145,7 @@
       "outputs": [],
       "options": {
         "command": "npx netlify deploy --site=355647c5-6e43-4c94-92bc-eac397ab80a8 -d ../../dist/apps/web -o",
-        "cwd": "apps/web"
+        "cwd": "netlify/web.prod"
       }
     },
     "deploy-prod": {
@@ -153,7 +153,7 @@
       "outputs": [],
       "options": {
         "command": "npx netlify deploy --site=355647c5-6e43-4c94-92bc-eac397ab80a8 -d ../../dist/apps/web -p -o",
-        "cwd": "apps/web"
+        "cwd": "netlify/web.prod"
       }
     }
   },
