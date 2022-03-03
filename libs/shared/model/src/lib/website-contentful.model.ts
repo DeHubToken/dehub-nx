@@ -4912,12 +4912,10 @@ export interface QueryTournamentSeriesRegistrationItemCollectionArgs {
 export interface SectionPost extends Entry {
   __typename?: 'SectionPost';
   alignCenter?: Maybe<Scalars['Boolean']>;
-  chartCollection?: Maybe<SectionPostChartCollection>;
   chartPost?: Maybe<ChartPost>;
   columnWidth?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<SectionPostDescription>;
-  embedCollection?: Maybe<SectionPostEmbedCollection>;
   embedPost?: Maybe<EmbedPost>;
   linkedFrom?: Maybe<SectionPostLinkingCollections>;
   showTitle?: Maybe<Scalars['Boolean']>;
@@ -4928,14 +4926,6 @@ export interface SectionPost extends Entry {
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
 export interface SectionPostAlignCenterArgs {
   locale?: InputMaybe<Scalars['String']>;
-}
-
-/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
-export interface SectionPostChartCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
 }
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
@@ -4952,14 +4942,6 @@ export interface SectionPostColumnWidthArgs {
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
 export interface SectionPostDescriptionArgs {
   locale?: InputMaybe<Scalars['String']>;
-}
-
-/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
-export interface SectionPostEmbedCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
 }
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
@@ -4981,14 +4963,6 @@ export interface SectionPostShowTitleArgs {
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
 export interface SectionPostTitleArgs {
   locale?: InputMaybe<Scalars['String']>;
-}
-
-export interface SectionPostChartCollection {
-  __typename?: 'SectionPostChartCollection';
-  items: Array<Maybe<ChartPost>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
 }
 
 export interface SectionPostCollection {
@@ -5024,21 +4998,12 @@ export interface SectionPostDescriptionLinks {
   entries: SectionPostDescriptionEntries;
 }
 
-export interface SectionPostEmbedCollection {
-  __typename?: 'SectionPostEmbedCollection';
-  items: Array<Maybe<EmbedPost>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
 export interface SectionPostFilter {
   AND?: InputMaybe<Array<InputMaybe<SectionPostFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<SectionPostFilter>>>;
   alignCenter?: InputMaybe<Scalars['Boolean']>;
   alignCenter_exists?: InputMaybe<Scalars['Boolean']>;
   alignCenter_not?: InputMaybe<Scalars['Boolean']>;
-  chartCollection_exists?: InputMaybe<Scalars['Boolean']>;
   chartPost?: InputMaybe<CfChartPostNestedFilter>;
   chartPost_exists?: InputMaybe<Scalars['Boolean']>;
   columnWidth?: InputMaybe<Scalars['String']>;
@@ -5052,7 +5017,6 @@ export interface SectionPostFilter {
   description_contains?: InputMaybe<Scalars['String']>;
   description_exists?: InputMaybe<Scalars['Boolean']>;
   description_not_contains?: InputMaybe<Scalars['String']>;
-  embedCollection_exists?: InputMaybe<Scalars['Boolean']>;
   embedPost?: InputMaybe<CfEmbedPostNestedFilter>;
   embedPost_exists?: InputMaybe<Scalars['Boolean']>;
   showTitle?: InputMaybe<Scalars['Boolean']>;
