@@ -144,7 +144,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=355647c5-6e43-4c94-92bc-eac397ab80a8 -d ../../dist/apps/web -o",
+        "command": "npx netlify deploy --site=a5e07eeb-b383-41df-9bc1-c9dcb4fd93b6 -d ../../dist/apps/web -o",
         "cwd": "netlify/web.prod"
       }
     },
@@ -152,7 +152,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=355647c5-6e43-4c94-92bc-eac397ab80a8 -d ../../dist/apps/web -p -o",
+        "command": "npx netlify deploy --site=a5e07eeb-b383-41df-9bc1-c9dcb4fd93b6 -d ../../dist/apps/web -p -o",
         "cwd": "netlify/web.prod"
       }
     }
