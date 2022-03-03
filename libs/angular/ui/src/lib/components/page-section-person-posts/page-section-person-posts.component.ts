@@ -16,12 +16,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
 @Component({
   selector: 'dhb-page-section-person-posts',
   template: `
-    <div
-      *ngIf="section"
-      [dhbContentfulDraft]="section.sys"
-      [@bounceInRight]
-      class="col-12 mb-8"
-    >
+    <div *ngIf="section" [@bounceInRight] class="col-12 mb-8">
       <h3 *ngIf="section.title as title">{{ title }}</h3>
       <h5
         *ngIf="section.description as description"

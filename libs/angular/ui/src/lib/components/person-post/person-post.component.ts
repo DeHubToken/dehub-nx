@@ -15,11 +15,11 @@ interface SocialLink {
 @Component({
   selector: 'dhb-person-post',
   template: `
-    <div [dhbContentfulDraft]="personPost.sys">
+    <div>
+      <!-- <div [dhbContentfulDraft]="personPost.sys"> -->
       <p-card
         *ngIf="personPost"
-        [header]="personPost.title ?? ''"
-        styleClass="p-card-shadow h-full"
+        styleClass="person h-full text-center mt-2 px-2 pt-6 pb-4 border-neon-1 bg-gradient-2"
       >
         <ng-template pTemplate="header">
           <img
@@ -27,6 +27,7 @@ interface SocialLink {
             [dhbContentfulDraft]="avatar.sys"
             [src]="avatar.url"
             [alt]="avatar.title"
+            class="border-circle border-3 border-cyan-900 shadow-5 w-9"
           />
         </ng-template>
 
@@ -34,21 +35,28 @@ interface SocialLink {
         <h3>{{ personPost.name }}</h3>
 
         <!-- Title -->
-        <p class="text-2xl bold uppercase">{{ personPost.title }}</p>
+        <p-tag
+          *ngIf="personPost.title as title"
+          [value]="title"
+          styleClass="uppercase text-base px-3 py-2 bg-gradient-4 shadow-2"
+        ></p-tag>
+        <!-- <h6 class="uppercase">{{ personPost.title }}</h6> -->
 
         <!-- Social Links -->
-        <ng-container *ngFor="let link of socialLinks">
-          <button
-            *ngIf="link.url"
-            pButton
-            pRipple
-            [icon]="link.icon"
-            [title]="link.name"
-            [disabled]="link.url === '#'"
-            type="button"
-            class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem text-xl"
-          ></button>
-        </ng-container>
+        <div class="mt-4">
+          <ng-container *ngFor="let link of socialLinks">
+            <button
+              *ngIf="link.url"
+              pButton
+              pRipple
+              [icon]="link.icon"
+              [title]="link.name"
+              [disabled]="link.url === '#'"
+              type="button"
+              class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem text-xl"
+            ></button>
+          </ng-container>
+        </div>
       </p-card>
     </div>
   `,
