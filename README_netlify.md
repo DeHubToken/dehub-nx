@@ -4,18 +4,18 @@
 
 1. Creating manual site (without ci) with the netlify cli
 
-   **Dapps Dehub (Angular)**
+   **Web (Angular)**
 
    ```
-   npx netlify sites:create --account-slug=dehub --name=dapps-dehub
+   npx netlify sites:create --account-slug=dehub --name=web-dehub
    ```
 
    Output:
 
    ```
-   Admin URL: https://app.netlify.com/sites/dapps-dehub
-   URL:       https://dapps-dehub.netlify.app
-   Site ID:   355647c5-6e43-4c94-92bc-eac397ab80a8
+   Admin URL: https://app.netlify.com/sites/web-dehub
+   URL:       https://web-dehub.netlify.app
+   Site ID:   a5e07eeb-b383-41df-9bc1-c9dcb4fd93b6
    ```
 
    **Staking (React)**

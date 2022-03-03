@@ -12,7 +12,7 @@ Apps represent standalone sites, which can be written in pure JS, React, Vue.JS 
 
 - Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
 - CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
-- Hosting: **[Netlify](https://dapps.netlify.app/)**
+- Hosting: **[Netlify](https://dehub.net/)**
 
 Dehub Nx Monorepo consists of the following type of applications:
 
@@ -23,11 +23,11 @@ Dehub Nx Monorepo consists of the following type of applications:
 
 ### `web`
 
-DeHub Dapps
+DeHub
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/355647c5-6e43-4c94-92bc-eac397ab80a8/deploy-status)](https://app.netlify.com/sites/dapps-dehub/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a5e07eeb-b383-41df-9bc1-c9dcb4fd93b6/deploy-status)](https://app.netlify.com/sites/web-dehub/deploys)
 
-- Hosting: **[Netlify](https://dapps-dehub.netlify.app/)**
+- Hosting: **[Netlify](https://web-dehub.netlify.app/)**
 
 ## React
 

@@ -51,7 +51,7 @@ export interface SharedEnv {
     /** Official DeHUB landing page */
     landing: string;
     /** Official DeHUB dapp pages */
-    dapps: { landing: string; staking: string };
+    dapps: { staking: string };
   };
 
   contentful: {
@@ -89,8 +89,7 @@ export const defaultSharedEnv: SharedEnv = {
     downloadWalletUrl: 'https://metamask.io/download/',
     landing: 'https://dehub.net',
     dapps: {
-      landing: 'https://dapps.dehub.net',
-      staking: 'https://staking.dehub.net',
+      staking: 'https://dehub.net/staking',
     },
   },
 

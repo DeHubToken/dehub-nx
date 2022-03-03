@@ -11,6 +11,6 @@
 # Web
 [[redirects]]
   from = "/web/*"
-  to = "https://dapps-dehub.netlify.app/web/:splat"
+  to = "https://web-dehub.netlify.app/web/:splat"
   status = 200
   force = true
