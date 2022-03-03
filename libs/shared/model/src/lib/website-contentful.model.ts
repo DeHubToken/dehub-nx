@@ -859,13 +859,11 @@ export interface EmbedPostLinkedFromArgs {
 }
 
 /** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
-
 export interface EmbedPostScriptUrlArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
 /** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
-
 export interface EmbedPostTitleArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
@@ -7994,40 +7992,6 @@ export type PageSectionIconTilesFragment = {
               callToActionUrl?: string | undefined;
               callToActionButtonLabel?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
-            }
-          | undefined
-        >;
-      }
-    | undefined;
-};
-
-export type PageSectionPersonPostsFragment = {
-  __typename: 'PageSectionPersonPosts';
-  title?: string | undefined;
-  description?: string | undefined;
-  isSwiper?: boolean | undefined;
-  swiperResponsiveOptions?: any | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
-  handpickedPostsCollection?:
-    | {
-        __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
-        items: Array<
-          | {
-              __typename?: 'PersonPost';
-              name?: string | undefined;
-              title?: string | undefined;
-              twitter?: string | undefined;
-              linkedin?: string | undefined;
-              instagram?: string | undefined;
-              github?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
-              avatar?:
-                | {
-                    __typename?: 'Asset';
-                    url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
-                  }
-                | undefined;
             }
           | undefined
         >;
