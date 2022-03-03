@@ -13,10 +13,9 @@ import { SectionPostComponent } from './section-post.component';
     // Angular
     CommonModule,
 
+    // Libs
     ChartPostModule,
     EmbedPostModule,
-
-    // Libs
     ContentfulDraftDirectiveModule,
     ContentfulRichMarkupPipeModule,
     SafeHtmlPipeModule,
