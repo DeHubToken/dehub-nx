@@ -97,11 +97,11 @@ type PageSection =
         [section]="section"
       ></dhb-page-section-section-posts>
 
-      <!-- Person Posts -->
-      <dhb-page-section-person-posts
-        *ngIf="isPageSectionPersonPosts(section)"
+      <!-- Person Posts Swiper -->
+      <dhb-page-section-person-posts-swiper
+        *ngIf="isPageSectionPersonPosts(section) && section.isSwiper"
         [section]="section"
-      ></dhb-page-section-person-posts>
+      ></dhb-page-section-person-posts-swiper>
 
       <!-- Pie Chart Posts -->
       <!-- <dhb-page-section-chart-posts> </dhb-page-section-chart-posts> -->

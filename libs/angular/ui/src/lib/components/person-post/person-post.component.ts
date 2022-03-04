@@ -15,24 +15,38 @@ interface SocialLink {
 @Component({
   selector: 'dhb-person-post',
   template: `
-    <div>
+    <div class="w-full">
       <!-- <div [dhbContentfulDraft]="personPost.sys"> -->
       <p-card
         *ngIf="personPost"
-        styleClass="person h-full text-center mt-2 px-2 pt-6 pb-4 border-neon-1 bg-gradient-2"
+        styleClass="person h-full text-center mt-2 px-2 pt-6 pb-4 border-neon-1 bg-gradient-2 anim-hover-1-reverse"
       >
         <ng-template pTemplate="header">
           <img
-            *ngIf="personPost.avatar as avatar"
+            *ngIf="personPost.avatar as avatar; else noAvatar"
             [dhbContentfulDraft]="avatar.sys"
             [src]="avatar.url"
             [alt]="avatar.title"
             class="border-circle border-3 border-cyan-900 shadow-5 w-9"
           />
+          <ng-template #noAvatar>
+            <div
+              class="dummy-avatar border-circle border-3 border-cyan-900 shadow-5 mx-auto w-9 bg-gradient-1"
+            >
+              <i
+                class="fad fa-user-astronaut text-8xl icon-color-duotone-1"
+              ></i>
+            </div>
+          </ng-template>
         </ng-template>
 
         <!-- Name -->
-        <h3>{{ personPost.name }}</h3>
+        <p-tag
+          *ngIf="personPost.name as name"
+          [value]="name"
+          styleClass="block mx-auto mb-3 px-3 py-2 font-normal text-2xl shadow-3 bg-cyan-900"
+          [style]="{ width: 'fit-content', 'margin-top': '-66px' }"
+        ></p-tag>
 
         <!-- Title -->
         <p-tag
@@ -40,7 +54,6 @@ interface SocialLink {
           [value]="title"
           styleClass="uppercase text-base px-3 py-2 bg-gradient-4 shadow-2"
         ></p-tag>
-        <!-- <h6 class="uppercase">{{ personPost.title }}</h6> -->
 
         <!-- Social Links -->
         <div class="mt-4">
@@ -53,7 +66,7 @@ interface SocialLink {
               [title]="link.name"
               [disabled]="link.url === '#'"
               type="button"
-              class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 w-2rem text-xl"
+              class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 text-xl"
             ></button>
           </ng-container>
         </div>
@@ -64,6 +77,14 @@ interface SocialLink {
     `
       :host {
         display: flex;
+        width: 100%;
+      }
+
+      i {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 24%;
       }
     `,
   ],

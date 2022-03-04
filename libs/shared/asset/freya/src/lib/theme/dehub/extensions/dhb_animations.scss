@@ -153,3 +153,37 @@
     transform: translateY(0px) perspective(500px) rotateY(5deg) rotateZ(0);
   }
 }
+
+// Hover animation
+.anim-hover-1 {
+  transform: perspective(1500px) rotateY(15deg);
+  border-radius: 1rem;
+  transition: transform 1s ease 0s;
+
+  &:hover {
+    transform: perspective(3000px) rotateY(5deg);
+  }
+}
+
+.anim-hover-1-reverse {
+  border-radius: 1rem;
+  transition: transform 1s ease 0s;
+  transform: perspective(3000px) rotateY(0deg) rotateX(0deg);
+  &:hover {
+    transform: perspective(1500px) rotateY(15deg) rotateX(10deg);
+  }
+}
+
+.anim-hover-2 {
+  transform: perspective(800px) rotateY(25deg) scale(0.9) rotateX(10deg);
+  filter: blur(2px);
+  opacity: 0.5;
+  transition: 0.6s ease all;
+
+  &:hover {
+    transform: perspective(800px) rotateY(-15deg) translateY(-50px)
+      rotateX(10deg) scale(1);
+    filter: blur(0);
+    opacity: 1;
+  }
+}

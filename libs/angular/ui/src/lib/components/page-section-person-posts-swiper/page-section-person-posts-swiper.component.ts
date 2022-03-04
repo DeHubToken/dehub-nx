@@ -14,7 +14,7 @@ import { isNotNil } from '@dehub/shared/util';
 import { bounceInRightOnEnterAnimation } from 'angular-animations';
 
 @Component({
-  selector: 'dhb-page-section-person-posts',
+  selector: 'dhb-page-section-person-posts-swiper',
   template: `
     <div *ngIf="section" [@bounceInRight] class="col-12 mb-8">
       <h3 *ngIf="section.title as title">{{ title }}</h3>
@@ -31,6 +31,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
         [breakpoints]="
           section.swiperResponsiveOptions || swiperResponsiveOptions
         "
+        class="px-3"
       >
         <ng-container *ngFor="let personPost of personPosts">
           <ng-template swiperSlide>
@@ -50,7 +51,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [bounceInRightOnEnterAnimation({ anchor: 'bounceInRight' })],
 })
-export class PageSectionPersonPostsComponent implements OnInit {
+export class PageSectionPersonPostsSwiperComponent implements OnInit {
   @Input() section!: PageSectionPersonPostsFragment;
   @Input() swiperResponsiveOptions?: SwiperResponsiveOptions;
 

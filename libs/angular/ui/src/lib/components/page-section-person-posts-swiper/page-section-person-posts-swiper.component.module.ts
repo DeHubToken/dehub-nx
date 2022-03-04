@@ -5,13 +5,13 @@ import SwiperCore, { Navigation } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
 import { PersonPostModule } from '../person-post';
-import { PageSectionPersonPostsComponent } from './page-section-person-posts.component';
+import { PageSectionPersonPostsSwiperComponent } from './page-section-person-posts-swiper.component';
 
 // Install Swiper modules
 SwiperCore.use([Navigation]);
 
 @NgModule({
-  declarations: [PageSectionPersonPostsComponent],
+  declarations: [PageSectionPersonPostsSwiperComponent],
   imports: [
     // Angular
     CommonModule,
@@ -23,6 +23,6 @@ SwiperCore.use([Navigation]);
     ContentfulDraftDirectiveModule,
     PersonPostModule,
   ],
-  exports: [PageSectionPersonPostsComponent],
+  exports: [PageSectionPersonPostsSwiperComponent],
 })
-export class PageSectionPersonPostsModule {}
+export class PageSectionPersonPostsSwiperModule {}
