@@ -11030,7 +11030,7 @@ export const PageSectionIconTilesFragmentDoc = gql`
     }
     title
     description
-    handpickedIconTilesCollection(limit: 5, preview: $isPreview) {
+    handpickedIconTilesCollection(limit: 20, preview: $isPreview) {
       items {
         ...IconTile
       }
@@ -11343,7 +11343,7 @@ export const PageSectionPersonPostsFragmentDoc = gql`
     }
     title
     description
-    handpickedPostsCollection(limit: 6, preview: $isPreview) {
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...PersonPost
       }

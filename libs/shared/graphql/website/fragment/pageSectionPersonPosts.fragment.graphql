@@ -5,7 +5,7 @@ fragment PageSectionPersonPosts on PageSectionPersonPosts {
   }
   title
   description
-  handpickedPostsCollection(limit: 6, preview: $isPreview) {
+  handpickedPostsCollection(limit: 20, preview: $isPreview) {
     items {
       ...PersonPost
     }
