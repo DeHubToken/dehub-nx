@@ -15,8 +15,7 @@ interface SocialLink {
 @Component({
   selector: 'dhb-person-post',
   template: `
-    <div class="w-full">
-      <!-- <div [dhbContentfulDraft]="personPost.sys"> -->
+    <div [dhbContentfulDraft]="personPost.sys" class="w-full">
       <p-card
         *ngIf="personPost"
         styleClass="person h-full text-center mt-2 px-2 pt-6 pb-4 border-neon-1 bg-gradient-2 anim-hover-1-reverse"
