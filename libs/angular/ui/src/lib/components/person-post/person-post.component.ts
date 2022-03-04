@@ -76,14 +76,7 @@ interface SocialLink {
     `
       :host {
         display: flex;
-        width: 100%;
-      }
-
-      i {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        top: 24%;
+        flex: 1 1 auto;
       }
     `,
   ],
