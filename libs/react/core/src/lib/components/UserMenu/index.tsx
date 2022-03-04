@@ -1,13 +1,21 @@
+import { BuyDeHubButton, BuyDeHubFloozModal } from '@dehub/react/ui';
 import { moralisProviderLocalStorageKey } from '@dehub/shared/model';
 import { shortenAddress } from '@dehub/shared/util';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import ConnectWalletButton from '../ConnectWalletButton';
 
-const UserMenu = () => {
+const UserMenu = ({
+  cexUrl,
+  downloadWalletUrl,
+}: {
+  cexUrl: string;
+  downloadWalletUrl: string;
+}) => {
   const { isAuthenticating, logout, account, Moralis } = useMoralis();
+  const [buyDeHubFloozModalOpen, setBuyDeHubFloozModal] = useState(false);
 
   const doLogout = useCallback(() => {
     window.localStorage.removeItem(moralisProviderLocalStorageKey);
@@ -39,6 +47,7 @@ const UserMenu = () => {
   }) => {
     doLogout();
   };
+
   const items: MenuItem[] = [
     {
       label: 'Logout',
@@ -46,21 +55,42 @@ const UserMenu = () => {
       command: handleLogout,
     },
   ];
+
+  const handleDexSelected = () => {
+    setBuyDeHubFloozModal(true);
+  };
+
   return (
-    <ul className="layout-topbar-actions">
-      <li>
-        {account ? (
-          <SplitButton
-            label={account ? shortenAddress(account) : 'Connect Wallet'}
-            icon="fas fa-wallet"
-            model={items}
-            className="p-button-primary"
-          ></SplitButton>
-        ) : (
-          <ConnectWalletButton />
-        )}
-      </li>
-    </ul>
+    <>
+      <ul className="layout-topbar-actions">
+        <li className="topbar-item">
+          <BuyDeHubButton
+            cexUrl={cexUrl}
+            downloadWalletUrl={downloadWalletUrl}
+            onBuy={handleDexSelected}
+            onDexSelected={handleDexSelected}
+          />
+        </li>
+        <li className="topbar-item ml-4">
+          {account ? (
+            <SplitButton
+              className="p-button-primary"
+              icon="fas fa-wallet"
+              label={account ? shortenAddress(account) : 'Connect Wallet'}
+              model={items}
+            ></SplitButton>
+          ) : (
+            <ConnectWalletButton />
+          )}
+        </li>
+      </ul>
+      <BuyDeHubFloozModal
+        visible={buyDeHubFloozModalOpen}
+        onDismiss={() => {
+          setBuyDeHubFloozModal(false);
+        }}
+      />
+    </>
   );
 };
 export default UserMenu;
