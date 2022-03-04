@@ -109,7 +109,7 @@ This project was generated using [Nx](https://nx.dev).
 1. Run Commands generation
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run web:deploy:draft' --project=web
+   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run web:deploy:prod-draft' --project=web
    ```
 
    ```
@@ -117,7 +117,7 @@ This project was generated using [Nx](https://nx.dev).
    ```
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run raffle:deploy:draft' --project=raffle
+   nx generate @nrwl/workspace:run-commands --name=deploy-draft --command='npm run raffle:deploy:prod-draft' --project=raffle
    ```
 
    ```

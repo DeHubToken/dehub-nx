@@ -151,7 +151,7 @@ _Common sass styles, assets from the Freya PrimeNG themes_
 1. Run **Dev mode**: `npm run <APP>:start`
 1. Run **Prod mode**: `npm run <APP>:demo` _(serve prod version locally)_
 1. Run **CI**: `npm run ci` _(lint, test, build from affected apps)_
-1. Deploy as **draft**: `npm run deploy:draft`
+1. Deploy as **prod-draft**: `npm run deploy:prod-draft`
 1. Deploy to **prod**: `npm run deploy:prod`
 1. We follow [commitlint](https://github.com/merkle-open/frontend-defaults/blob/master/repo/commitlint-conventional-changelog/index.js) guide, so please use these scopes:
 

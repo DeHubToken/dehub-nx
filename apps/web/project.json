@@ -67,32 +67,40 @@
           "@walletconnect/window-metadata",
           "@walletconnect/environment"
         ],
+        "budgets": [
+          {
+            "type": "initial",
+            "maximumWarning": "2mb",
+            "maximumError": "5mb"
+          },
+          {
+            "type": "anyComponentStyle",
+            "maximumWarning": "2kb",
+            "maximumError": "10kb"
+          }
+        ],
+        "outputHashing": "all",
+        "deployUrl": "/web/",
+        "baseHref": "/web",
         "serviceWorker": true,
         "ngswConfigPath": "apps/web/ngsw-config.json"
       },
       "configurations": {
         "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "2mb",
-              "maximumError": "5mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "10kb"
-            }
-          ],
           "fileReplacements": [
             {
               "replace": "apps/web/src/environments/environment.ts",
               "with": "apps/web/src/environments/environment.prod.ts"
             }
-          ],
-          "outputHashing": "all",
-          "deployUrl": "/web/",
-          "baseHref": "/web"
+          ]
+        },
+        "preview": {
+          "fileReplacements": [
+            {
+              "replace": "apps/web/src/environments/environment.ts",
+              "with": "apps/web/src/environments/environment.preview.ts"
+            }
+          ]
         },
         "development": {
           "buildOptimizer": false,
@@ -100,7 +108,10 @@
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true
+          "namedChunks": true,
+          "outputHashing": "none",
+          "deployUrl": "",
+          "baseHref": ""
         }
       },
       "defaultConfiguration": "production"
@@ -138,6 +149,22 @@
       "options": {
         "jestConfig": "apps/web/jest.config.js",
         "passWithNoTests": true
+      }
+    },
+    "deploy-preview-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web -o",
+        "cwd": "netlify/web.prod"
+      }
+    },
+    "deploy-preview": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web -p -o",
+        "cwd": "netlify/web.prod"
       }
     },
     "deploy-draft": {
