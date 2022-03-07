@@ -50,9 +50,8 @@ interface SocialLink {
           styleClass="uppercase text-sm px-3 py-1 bg-gradient-4 shadow-2"
         ></p-tag>
 
-        <div class="text-sm pt-5">
-          To find out the word and Character Counter is a 100% free online
-          character count calculator that's simple to use.
+        <div *ngIf="personPost.description as desc" class="text-sm pt-5">
+          {{ desc }}
         </div>
 
         <!-- Social Links -->

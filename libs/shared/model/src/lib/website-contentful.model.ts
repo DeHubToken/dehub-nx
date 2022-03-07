@@ -7648,6 +7648,7 @@ export type PageLearnFragment = {
                           __typename?: 'PersonPost';
                           name?: string | undefined;
                           title?: string | undefined;
+                          description?: string | undefined;
                           twitter?: string | undefined;
                           linkedin?: string | undefined;
                           instagram?: string | undefined;
@@ -8020,6 +8021,7 @@ export type PageSectionPersonPostsFragment = {
               __typename?: 'PersonPost';
               name?: string | undefined;
               title?: string | undefined;
+              description?: string | undefined;
               twitter?: string | undefined;
               linkedin?: string | undefined;
               instagram?: string | undefined;
@@ -8487,6 +8489,7 @@ export type PersonPostFragment = {
   __typename?: 'PersonPost';
   name?: string | undefined;
   title?: string | undefined;
+  description?: string | undefined;
   twitter?: string | undefined;
   linkedin?: string | undefined;
   instagram?: string | undefined;
@@ -10244,6 +10247,7 @@ export type PageLearnCollectionQuery = {
                                       __typename?: 'PersonPost';
                                       name?: string | undefined;
                                       title?: string | undefined;
+                                      description?: string | undefined;
                                       twitter?: string | undefined;
                                       linkedin?: string | undefined;
                                       instagram?: string | undefined;
@@ -11334,8 +11338,6 @@ export const PersonPostFragmentDoc = gql`
     sys {
       ...Sys
     }
-    name
-    title
     avatar(preview: $isPreview) {
       sys {
         ...Sys
@@ -11343,6 +11345,9 @@ export const PersonPostFragmentDoc = gql`
       title
       url
     }
+    name
+    title
+    description
     twitter
     linkedin
     instagram
