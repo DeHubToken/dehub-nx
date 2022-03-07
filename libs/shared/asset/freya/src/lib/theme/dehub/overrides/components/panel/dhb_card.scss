@@ -108,21 +108,6 @@
   // Person post style
   &.person {
     border-radius: 20px;
-    .p-card-header {
-      .dummy-avatar {
-        &:after {
-          content: '';
-          display: block;
-          padding-bottom: 100%;
-        }
-        i {
-          position: absolute;
-          width: 100%;
-          left: 0;
-          top: 24%;
-        }
-      }
-    }
   }
 }
 
