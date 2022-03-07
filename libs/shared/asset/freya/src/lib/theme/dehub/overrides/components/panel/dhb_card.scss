@@ -108,6 +108,9 @@
   // Person post style
   &.person {
     border-radius: 20px;
+    .p-card-body {
+      padding: 1rem 1.5rem;
+    }
   }
 }
 

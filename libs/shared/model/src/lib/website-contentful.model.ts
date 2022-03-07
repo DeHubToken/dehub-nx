@@ -3625,6 +3625,7 @@ export interface PersonPost extends Entry {
   __typename?: 'PersonPost';
   avatar?: Maybe<Asset>;
   contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
   github?: Maybe<Scalars['String']>;
   instagram?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PersonPostLinkingCollections>;
@@ -3639,6 +3640,11 @@ export interface PersonPost extends Entry {
 export interface PersonPostAvatarArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+/** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
+export interface PersonPostDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
@@ -3689,6 +3695,13 @@ export interface PersonPostFilter {
   OR?: InputMaybe<Array<InputMaybe<PersonPostFilter>>>;
   avatar_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   github?: InputMaybe<Scalars['String']>;
   github_contains?: InputMaybe<Scalars['String']>;
   github_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3755,6 +3768,8 @@ export interface PersonPostLinkingCollectionsPageSectionPersonPostsCollectionArg
 }
 
 export enum PersonPostOrder {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
   GithubAsc = 'github_ASC',
   GithubDesc = 'github_DESC',
   InstagramAsc = 'instagram_ASC',

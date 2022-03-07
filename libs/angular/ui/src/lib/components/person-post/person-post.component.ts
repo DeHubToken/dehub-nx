@@ -31,7 +31,7 @@ interface SocialLink {
               path + '/assets/dehub/images/avatar-default.svg'
             "
             [alt]="personPost.avatar?.title ?? 'Avatar'"
-            class="border-circle border-3 border-cyan-900 shadow-5 w-9 bg-gradient-1"
+            class="border-circle border-3 border-cyan-900 shadow-5 w-8 bg-gradient-1"
           />
         </ng-template>
 
@@ -39,7 +39,7 @@ interface SocialLink {
         <p-tag
           *ngIf="personPost.name as name"
           [value]="name"
-          styleClass="block mx-auto mb-3 px-3 py-2 font-normal text-2xl shadow-3 bg-cyan-900"
+          styleClass="block mx-auto mb-3 px-3 py-2 font-normal text-xl shadow-3 bg-cyan-900"
           [style]="{ width: 'fit-content', 'margin-top': '-66px' }"
         ></p-tag>
 
@@ -47,8 +47,13 @@ interface SocialLink {
         <p-tag
           *ngIf="personPost.title as title"
           [value]="title"
-          styleClass="uppercase text-base px-3 py-2 bg-gradient-4 shadow-2"
+          styleClass="uppercase text-sm px-3 py-1 bg-gradient-4 shadow-2"
         ></p-tag>
+
+        <div class="text-sm pt-5">
+          To find out the word and Character Counter is a 100% free online
+          character count calculator that's simple to use.
+        </div>
 
         <!-- Social Links -->
         <div class="mt-4">
