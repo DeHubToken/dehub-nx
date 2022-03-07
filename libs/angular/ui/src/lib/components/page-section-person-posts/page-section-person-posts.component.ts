@@ -3,15 +3,13 @@ import {
   Component,
   Input,
   OnInit,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   PageSectionPersonPostsFragment,
   PersonPostFragment,
-  SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
-import { bounceInRightOnEnterAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-page-section-person-posts',
@@ -19,8 +17,8 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
     <div
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
-      [@bounceInRight]
-      class="col-12 mb-8"
+      [@fadeInUp]
+      class="col-12 sm:col-12 md:col-10 xl:col-8 col-offset-0 sm:col-offset-0 md:col-offset-1 xl:col-offset-2 flex flex-column mb-8"
     >
       <h3 *ngIf="section.title as title">{{ title }}</h3>
       <h5
@@ -31,41 +29,28 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
       </h5>
 
       <!-- Person Posts -->
-      <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-      >
-        <ng-container *ngFor="let personPost of personPosts">
-          <ng-template swiperSlide>
-            <dhb-person-post [personPost]="personPost"></dhb-person-post>
-          </ng-template>
-        </ng-container>
-      </swiper>
+      <div class="grid">
+        <dhb-person-post
+          *ngFor="let personPost of personPosts; let i = index"
+          [personPost]="personPost"
+          [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
+          class="col-12 sm:col-12 md:col-6 xl:col-4 flex-grow-0 p-4"
+        ></dhb-person-post>
+      </div>
     </div>
   `,
-  styles: [
-    `
-      @import '~swiper/scss';
-      @import '~@dehub/swiper/dhb_swiper_navigation';
-    `,
-  ],
-  encapsulation: ViewEncapsulation.None,
+  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInRightOnEnterAnimation({ anchor: 'bounceInRight' })],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class PageSectionPersonPostsComponent implements OnInit {
   @Input() section!: PageSectionPersonPostsFragment;
-  @Input() swiperResponsiveOptions?: SwiperResponsiveOptions;
 
   personPosts: PersonPostFragment[] = [];
 
   constructor() {}
 
   ngOnInit() {
-    if (!this.section) return;
-
     this.personPosts = (
       this.section.handpickedPostsCollection?.items ?? []
     ).filter(isNotNil);

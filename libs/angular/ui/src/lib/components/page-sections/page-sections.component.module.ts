@@ -8,6 +8,7 @@ import { PageSectionGrandPostsModule } from '../page-section-grand-posts';
 import { PageSectionIconTilesModule } from '../page-section-icon-tiles';
 import { PageSectionIconTilesSwiperModule } from '../page-section-icon-tiles-swiper';
 import { PageSectionPersonPostsModule } from '../page-section-person-posts';
+import { PageSectionPersonPostsSwiperModule } from '../page-section-person-posts-swiper';
 import { PageSectionSectionPostsModule } from '../page-section-section-posts';
 import { PageSectionThumbnailPostsModule } from '../page-section-thumbnail-posts';
 import { PageSectionsComponent } from './page-sections.component';
@@ -28,6 +29,7 @@ import { PageSectionsComponent } from './page-sections.component';
     PageSectionDappPostsModule,
     PageSectionGrandPostsModule,
     PageSectionSectionPostsModule,
+    PageSectionPersonPostsSwiperModule,
     PageSectionPersonPostsModule,
   ],
   exports: [PageSectionsComponent],

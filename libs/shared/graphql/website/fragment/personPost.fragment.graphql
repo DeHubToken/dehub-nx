@@ -2,8 +2,6 @@ fragment PersonPost on PersonPost {
   sys {
     ...Sys
   }
-  name
-  title
   avatar(preview: $isPreview) {
     sys {
       ...Sys
@@ -11,6 +9,9 @@ fragment PersonPost on PersonPost {
     title
     url
   }
+  name
+  title
+  description
   twitter
   linkedin
   instagram
