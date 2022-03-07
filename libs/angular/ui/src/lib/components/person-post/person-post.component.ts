@@ -1,12 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
   Input,
   OnInit,
 } from '@angular/core';
-import { EnvToken } from '@dehub/angular/core';
-import { SharedEnv } from '@dehub/shared/config';
 import { PersonPostFragment } from '@dehub/shared/model';
 
 interface SocialLink {
@@ -28,7 +25,7 @@ interface SocialLink {
             [dhbContentfulDraft]="personPost.avatar?.sys"
             [src]="
               personPost.avatar?.url ??
-              path + '/assets/dehub/images/avatar-default.svg'
+              '/assets/dehub/images/avatar-default.svg'
             "
             [alt]="personPost.avatar?.title ?? 'Avatar'"
             class="border-circle border-3 border-cyan-900 shadow-5 w-8 bg-gradient-1"
@@ -83,11 +80,10 @@ interface SocialLink {
 })
 export class PersonPostComponent implements OnInit {
   @Input() personPost!: PersonPostFragment;
-  path = this.env.baseUrl;
 
   socialLinks: SocialLink[] = [];
 
-  constructor(@Inject(EnvToken) private env: SharedEnv) {}
+  constructor() {}
 
   ngOnInit() {
     if (!this.personPost) return;
