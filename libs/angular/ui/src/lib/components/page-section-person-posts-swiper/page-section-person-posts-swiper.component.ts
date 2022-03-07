@@ -40,7 +40,10 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
       >
         <ng-container *ngFor="let personPost of personPosts">
           <ng-template swiperSlide>
-            <dhb-person-post [personPost]="personPost"></dhb-person-post>
+            <dhb-person-post
+              [personPost]="personPost"
+              class="flex-grow-1"
+            ></dhb-person-post>
           </ng-template>
         </ng-container>
       </swiper>

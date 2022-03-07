@@ -34,7 +34,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
           *ngFor="let personPost of personPosts; let i = index"
           [personPost]="personPost"
           [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
-          class="col-12 sm:col-12 md:col-6 xl:col-3"
+          class="col-12 sm:col-12 md:col-6 xl:col-4 flex-grow-0 p-4"
         ></dhb-person-post>
       </div>
     </div>
