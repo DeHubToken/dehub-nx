@@ -168,7 +168,7 @@
         "cwd": "netlify/web.prod"
       }
     },
-    "deploy-draft": {
+    "deploy-prod-draft": {
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {

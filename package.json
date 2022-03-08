@@ -25,7 +25,7 @@
     "ci": "npm run lint && npm run test && npm run build",
     "deploy:preview-draft": "nx affected --target=deploy-preview-draft --exclude=raffle,raffle-e2e,prediction,prediction-e2e",
     "deploy:preview": "nx affected --target=deploy-preview --exclude=raffle,raffle-e2e,prediction,prediction-e2e",
-    "deploy:prod-draft": "nx affected --target=deploy-draft --exclude=raffle,raffle-e2e,prediction,prediction-e2e",
+    "deploy:prod-draft": "nx affected --target=deploy-prod-draft --exclude=raffle,raffle-e2e,prediction,prediction-e2e",
     "deploy:prod": "nx affected --target=deploy-prod --exclude=raffle,raffle-e2e,prediction,prediction-e2e",
     "dep-graph": "nx dep-graph --watch=true",
     "dep-graph:a": "nx affected:dep-graph --watch=true",
