@@ -75,7 +75,7 @@
         "development": {
           "buildTarget": "staking:build:development",
           "host": "dev.localhost",
-          "port": 8401
+          "port": 8601
         }
       },
       "defaultConfiguration": "development"
