@@ -20,7 +20,7 @@
     "lint": "nx affected --target=lint --fix --parallel --max-parallel=2 --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit",
     "test": "nx affected --target=test --parallel --max-parallel=3 --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit",
     "tdd": "nx affected --target=test --watchAll --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit",
-    "build": "nx affected --target=build --parallel --max-parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e",
+    "build": "nx affected --target=build --parallel --max-parallel=5 --exclude=raffle,raffle-e2e,prediction,prediction-e2e",
     "build:preview": "nx affected --target=build --configuration=preview --parallel --max-parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e",
     "ci": "npm run lint && npm run test && npm run build",
     "deploy:preview-draft": "nx affected --target=deploy-preview-draft --exclude=raffle,raffle-e2e,prediction,prediction-e2e",
