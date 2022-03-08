@@ -9,7 +9,7 @@
     "postinstall": "ngcc --properties es2015 browser module main",
     "web:start": "npm run website:gql && nx run web:serve",
     "web:demo": "nx run web:build && lite-server -c bs-config-web.js",
-    "web:preview": "nx run web:build:preview && lite-server -c bs-config-web.js",
+    "web:preview": "nx run web:build:preview && lite-server -c bs-config-web.preview.js",
     "raffle:start": "nx run raffle:serve",
     "raffle:demo": "nx run raffle:build && lite-server -c bs-config-raffle.js",
     "prediction:start": "nx run prediction:serve",
