@@ -25,7 +25,7 @@ interface SocialLink {
             [dhbContentfulDraft]="personPost.avatar?.sys"
             [src]="
               personPost.avatar?.url ??
-              '/assets/dehub/images/avatar-default.svg'
+              path + '/assets/dehub/images/avatar-default.svg'
             "
             [alt]="personPost.avatar?.title ?? 'Avatar'"
             class="border-circle border-3 border-cyan-900 shadow-5 w-8 bg-gradient-1"
@@ -80,6 +80,7 @@ interface SocialLink {
 })
 export class PersonPostComponent implements OnInit {
   @Input() personPost!: PersonPostFragment;
+  @Input() path?: string;
 
   socialLinks: SocialLink[] = [];
 

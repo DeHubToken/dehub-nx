@@ -33,6 +33,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
         <dhb-person-post
           *ngFor="let personPost of personPosts; let i = index"
           [personPost]="personPost"
+          [path]="path"
           [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
           class="col-12 sm:col-12 md:col-6 xl:col-4 flex-grow-0 p-4"
         ></dhb-person-post>
@@ -45,6 +46,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 })
 export class PageSectionPersonPostsComponent implements OnInit {
   @Input() section!: PageSectionPersonPostsFragment;
+  @Input() path?: string;
 
   personPosts: PersonPostFragment[] = [];
 

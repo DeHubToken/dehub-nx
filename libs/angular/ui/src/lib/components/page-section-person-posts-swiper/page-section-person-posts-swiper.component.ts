@@ -42,6 +42,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
           <ng-template swiperSlide>
             <dhb-person-post
               [personPost]="personPost"
+              [path]="path"
               class="flex-grow-1"
             ></dhb-person-post>
           </ng-template>
@@ -62,6 +63,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
 export class PageSectionPersonPostsSwiperComponent implements OnInit {
   @Input() section!: PageSectionPersonPostsFragment;
   @Input() swiperResponsiveOptions?: SwiperResponsiveOptions;
+  @Input() path?: string;
 
   personPosts: PersonPostFragment[] = [];
 
