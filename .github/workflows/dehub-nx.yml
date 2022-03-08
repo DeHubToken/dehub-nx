@@ -28,19 +28,15 @@ jobs:
           node-version: '16'
       - run: npm ci
       - run: npx nx-cloud start-ci-run
-
       # Build both preview and prod
-      - run: npm run build:preview
       - run: npm run build
-
+      - run: npm run build:preview
       # Test and Lint only once
       - run: npm run test
       - run: npm run lint
-
       # Deploy both preview and prod
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview
       - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod
-
+      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview
       - run: npx nx-cloud stop-all-agents
 
   pr:
@@ -58,19 +54,15 @@ jobs:
           node-version: '16'
       - run: npm ci
       - run: npx nx-cloud start-ci-run
-
       # Build both preview and prod
-      - run: npm run build:preview
       - run: npm run build
-
+      - run: npm run build:preview
       # Test and Lint only once
       - run: npm run test
       - run: npm run lint
-
       # Deploy both preview and prod
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview-draft
       - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod-draft
-
+      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview-draft
       - run: npx nx-cloud stop-all-agents
 
   agents:
