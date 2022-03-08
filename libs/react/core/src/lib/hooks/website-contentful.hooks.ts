@@ -465,8 +465,6 @@ export const PersonPostFragmentDoc = gql`
     sys {
       ...Sys
     }
-    name
-    title
     avatar(preview: $isPreview) {
       sys {
         ...Sys
@@ -474,6 +472,9 @@ export const PersonPostFragmentDoc = gql`
       title
       url
     }
+    name
+    title
+    description
     twitter
     linkedin
     instagram
