@@ -30,34 +30,7 @@
             "output": "assets"
           }
         ],
-        "styles": [
-          "apps/web/src/styles.scss",
-          {
-            "input": "node_modules/primeng/resources/primeng.min.css",
-            "bundleName": "primeng",
-            "inject": false
-          },
-          {
-            "input": "node_modules/primeflex/primeflex.scss",
-            "bundleName": "primeflex",
-            "inject": false
-          },
-          {
-            "input": "node_modules/primeicons/primeicons.css",
-            "bundleName": "primeicons",
-            "inject": false
-          },
-          {
-            "input": "libs/shared/asset/freya/src/lib/theme/dehub/theme.scss",
-            "bundleName": "theme",
-            "inject": false
-          },
-          {
-            "input": "libs/shared/asset/freya/src/lib/layout/css/layout-dehub.scss",
-            "bundleName": "layout",
-            "inject": false
-          }
-        ],
+        "styles": ["apps/web/src/styles.scss"],
         "scripts": [],
         "allowedCommonJsDependencies": [
           "hash.js",

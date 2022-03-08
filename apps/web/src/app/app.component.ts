@@ -21,8 +21,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.coreService.loadManifest();
     this.coreService.loadIcon();
-    this.coreService.loadTheme();
-    this.coreService.loadPrimeCss();
     this.primengConfig.ripple = true;
   }
 }
