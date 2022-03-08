@@ -8,7 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/raffle/raffle",
+        "outputPath": "dist/apps/raffle.prod/raffle",
         "index": "apps/raffle/src/index.html",
         "baseHref": "/",
         "main": "apps/raffle/src/main.tsx",
@@ -130,7 +130,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/raffle -o",
+        "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/raffle.prod -o",
         "cwd": "netlify/raffle.prod"
       }
     },
@@ -138,7 +138,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/raffle -p -o",
+        "command": "npx netlify deploy --site=d1b6b0af-8fcd-4efa-a0ec-818a84cd9283 -d ../../dist/apps/raffle.prod -p -o",
         "cwd": "netlify/raffle.prod"
       }
     }

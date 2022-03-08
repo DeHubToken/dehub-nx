@@ -8,7 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/prediction/prediction",
+        "outputPath": "dist/apps/prediction.prod/prediction",
         "index": "apps/prediction/src/index.html",
         "baseHref": "/",
         "main": "apps/prediction/src/main.tsx",
@@ -127,7 +127,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/prediction -o",
+        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/prediction.prod -o",
         "cwd": "netlify/prediction.prod"
       }
     },
@@ -135,7 +135,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/prediction -p -o",
+        "command": "npx netlify deploy --site=0343b7e0-60d7-4a95-b04f-6c1431544937 -d ../../dist/apps/prediction.prod -p -o",
         "cwd": "netlify/prediction.prod"
       }
     }

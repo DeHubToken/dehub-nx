@@ -8,7 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/staking/staking",
+        "outputPath": "dist/apps/staking.prod/staking",
         "index": "apps/staking/src/index.html",
         "baseHref": "/",
         "main": "apps/staking/src/main.tsx",
@@ -127,7 +127,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking -o",
+        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking.prod -o",
         "cwd": "netlify/staking.prod"
       }
     },
@@ -135,7 +135,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking -p -o",
+        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking.prod -p -o",
         "cwd": "netlify/staking.prod"
       }
     }
