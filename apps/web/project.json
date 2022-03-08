@@ -100,7 +100,8 @@
               "replace": "apps/web/src/environments/environment.ts",
               "with": "apps/web/src/environments/environment.preview.ts"
             }
-          ]
+          ],
+          "outputPath": "dist/apps/web.preview/web"
         },
         "development": {
           "buildOptimizer": false,
@@ -155,7 +156,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web -o",
+        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web.preview -o",
         "cwd": "netlify/web.prod"
       }
     },
@@ -163,7 +164,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
-        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web -p -o",
+        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web.preview -p -o",
         "cwd": "netlify/web.prod"
       }
     },
