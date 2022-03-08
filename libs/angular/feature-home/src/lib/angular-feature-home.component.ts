@@ -27,6 +27,7 @@ import { map } from 'rxjs/operators';
         [thumbnailPostsResponsiveOptions]="thumbnailPostsResponsiveOptions"
         [basicPostsResponsiveOptions]="basicPostsResponsiveOptions"
         [iconTilesResponsiveOptions]="iconTilesResponsiveOptions"
+        [path]="path"
       ></dhb-page-sections>
     </ng-container>
   `,
@@ -36,6 +37,8 @@ import { map } from 'rxjs/operators';
 })
 export class AngularFeatureHomeComponent implements OnInit {
   pageHome$?: Observable<PageHomeFragment | undefined>;
+
+  path = this.env.baseUrl;
 
   featurePostsResponsiveOptions: SwiperResponsiveOptions = {
     '1800': {

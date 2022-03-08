@@ -104,12 +104,14 @@ type PageSection =
           else personPosts
         "
         [section]="section"
+        [path]="path"
       ></dhb-page-section-person-posts-swiper>
 
       <ng-template #personPosts>
         <dhb-page-section-person-posts
           *ngIf="isPageSectionPersonPosts(section)"
           [section]="section"
+          [path]="path"
         ></dhb-page-section-person-posts>
       </ng-template>
 
@@ -122,6 +124,7 @@ type PageSection =
 })
 export class PageSectionsComponent implements OnInit {
   @Input() sections?: PageSection[];
+  @Input() path?: string;
   @Input() featurePostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() thumbnailPostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() basicPostsResponsiveOptions?: SwiperResponsiveOptions;

@@ -22,6 +22,7 @@ import { map, Observable } from 'rxjs';
       <!-- Page Sections -->
       <dhb-page-sections
         [sections]="pageEarn.sectionsCollection?.items"
+        [path]="path"
       ></dhb-page-sections>
     </ng-container>
   `,
@@ -31,6 +32,8 @@ import { map, Observable } from 'rxjs';
 })
 export class AngularFeatureEarnComponent implements OnInit {
   pageEarn$?: Observable<PageEarnFragment | undefined>;
+
+  path = this.env.baseUrl;
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

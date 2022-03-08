@@ -26,6 +26,7 @@ import { map, Observable } from 'rxjs';
       <dhb-page-sections
         [sections]="pageStream.sectionsCollection?.items"
         [thumbnailPostsResponsiveOptions]="thumbnailPostsResponsiveOptions"
+        [path]="path"
       ></dhb-page-sections>
     </ng-container>
   `,
@@ -35,6 +36,8 @@ import { map, Observable } from 'rxjs';
 })
 export class AngularFeatureStreamComponent implements OnInit {
   pageStream$?: Observable<PageStreamFragment | undefined>;
+
+  path = this.env.baseUrl;
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

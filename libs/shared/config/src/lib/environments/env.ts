@@ -29,7 +29,7 @@ interface Web3Env {
  * Used in Angular or React applications
  */
 export interface SharedEnv {
-  env: 'dev' | 'prod';
+  env: 'dev' | 'preview' | 'prod';
   production: boolean;
 
   /**

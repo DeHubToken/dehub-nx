@@ -27,6 +27,7 @@ import { map } from 'rxjs/operators';
       <dhb-page-sections
         [sections]="pageLearn.sectionsCollection?.items"
         [iconTilesResponsiveOptions]="iconTilesResponsiveOptions"
+        [path]="path"
       ></dhb-page-sections>
     </ng-container>
   `,
@@ -36,6 +37,8 @@ import { map } from 'rxjs/operators';
 })
 export class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;
+
+  path = this.env.baseUrl;
 
   iconTilesResponsiveOptions: SwiperResponsiveOptions = {
     '1800': {
