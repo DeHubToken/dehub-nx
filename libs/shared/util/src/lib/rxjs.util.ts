@@ -1,4 +1,6 @@
+import { isEmpty } from 'lodash';
 import { Observable, ReplaySubject, share } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 /**
  * Docs: https://rxjs.dev/deprecations/multicasting#publishreplay
@@ -14,3 +16,8 @@ export const publishReplayRefCount =
         resetOnRefCountZero: false,
       })
     );
+
+export const filterEmpty =
+  <T>() =>
+  (source: Observable<T | null | undefined>) =>
+    source.pipe(filter((object): object is T => !isEmpty(object)));
