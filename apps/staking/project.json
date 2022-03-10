@@ -110,7 +110,7 @@
     "deploy-preview-draft": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "echo 'Preview mode not supported in Staking.'"
+        "command": "npx nx run staking:deploy-prod-draft"
       }
     },
     "deploy-preview": {
