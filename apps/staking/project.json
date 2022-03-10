@@ -68,6 +68,10 @@
         "hmr": true
       },
       "configurations": {
+        "preview": {
+          "buildTarget": "staking:build:production",
+          "hmr": false
+        },
         "production": {
           "buildTarget": "staking:build:production",
           "hmr": false
@@ -94,6 +98,18 @@
       "options": {
         "jestConfig": "apps/staking/jest.config.js",
         "passWithNoTests": true
+      }
+    },
+    "deploy-preview-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "echo 'Preview mode not supported in Staking.'"
+      }
+    },
+    "deploy-preview": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "echo 'Preview mode not supported in Staking.'"
       }
     },
     "deploy-prod-draft": {
