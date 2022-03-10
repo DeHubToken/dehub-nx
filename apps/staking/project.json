@@ -125,7 +125,6 @@
     },
     "deploy-prod-draft": {
       "executor": "@nrwl/workspace:run-commands",
-      "outputs": [],
       "options": {
         "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking.prod -o",
         "cwd": "netlify/staking.prod"
@@ -133,7 +132,6 @@
     },
     "deploy-prod": {
       "executor": "@nrwl/workspace:run-commands",
-      "outputs": [],
       "options": {
         "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking.prod -p -o",
         "cwd": "netlify/staking.prod"
