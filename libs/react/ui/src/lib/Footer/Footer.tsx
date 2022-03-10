@@ -22,7 +22,10 @@ function Footer({ landing }: FooterProps) {
         &nbsp;|&nbsp;
         <ul>
           <li>
-            <a href={`${landing}/privacy-policy`} className="p-link mb-2 mx-2">
+            <a
+              href={`${landing}/web/legal/privacy`}
+              className="p-link mb-2 mx-2"
+            >
               Privacy Policy
             </a>
           </li>
@@ -30,7 +33,7 @@ function Footer({ landing }: FooterProps) {
         &nbsp;|&nbsp;
         <ul>
           <li>
-            <a href={`${landing}/terms`} className="p-link mb-2 mx-2">
+            <a href={`${landing}/web/legal/terms`} className="p-link mb-2 mx-2">
               Terms & Conditions
             </a>
           </li>
@@ -38,7 +41,10 @@ function Footer({ landing }: FooterProps) {
         &nbsp;|&nbsp;
         <ul>
           <li>
-            <a href={`${landing}/careers`} className="p-link mb-2 mx-2">
+            <a
+              href={`${landing}/web/legal/careers`}
+              className="p-link mb-2 mx-2"
+            >
               Careers
             </a>
           </li>
