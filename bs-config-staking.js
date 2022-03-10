@@ -4,7 +4,7 @@ module.exports = {
   open: 'external',
   host: 'dev.localhost',
   server: {
-    baseDir: './dist/apps/staking',
+    baseDir: './dist/apps/staking.prod',
     middleware: {
       1: require('compression')(),
     },

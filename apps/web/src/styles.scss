@@ -1,2 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-$gutter: 1rem; //for primeflex grid system
+
+@import 'libs/shared/asset/freya/src/lib/theme/dehub/theme.scss';
+@import 'libs/shared/asset/freya/src/lib/layout/css/layout-dehub.scss';
+
+@import '~primeng/resources/primeng.min.css';
+@import '~primeflex/primeflex.scss';
+@import '~primeicons/primeicons.css';

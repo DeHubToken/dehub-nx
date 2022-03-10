@@ -4,7 +4,7 @@ module.exports = {
   open: 'external',
   host: 'dev.localhost',
   server: {
-    baseDir: './dist/apps/prediction',
+    baseDir: './dist/apps/prediction.prod',
     middleware: {
       1: require('compression')(),
     },
