@@ -11,9 +11,10 @@ import {
 } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import { LegalPostFragment } from '@dehub/shared/model';
+import { filterEmpty } from '@dehub/shared/util';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   template: `
@@ -46,18 +47,22 @@ export class AngularFeatureLegalDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const slug = this.route.snapshot.paramMap.get('slug') ?? undefined;
-
-    this.legalPost$ = this.legalPostBySlugService
-      .fetch({
-        slug,
-        isPreview: this.env.contentful.isPreview,
-      })
-      .pipe(
-        map(
-          ({ data: { legalPostCollection } }) =>
-            legalPostCollection?.items[0] ?? undefined
-        )
-      );
+    this.legalPost$ = this.route.paramMap.pipe(
+      map(paramMap => paramMap.get('slug')),
+      filterEmpty(),
+      switchMap(slug =>
+        this.legalPostBySlugService
+          .fetch({
+            slug,
+            isPreview: this.env.contentful.isPreview,
+          })
+          .pipe(
+            map(
+              ({ data: { legalPostCollection } }) =>
+                legalPostCollection?.items[0] ?? undefined
+            )
+          )
+      )
+    );
   }
 }
