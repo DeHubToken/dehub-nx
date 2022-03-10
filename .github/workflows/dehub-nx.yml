@@ -13,8 +13,7 @@ env:
   NX_CLOUD_DISTRIBUTED_EXECUTION: true
 
 jobs:
-  main_preview:
-    name: Main (preview)
+  main:
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' }}
     steps:
@@ -23,41 +22,28 @@ jobs:
         with:
           fetch-depth: 0
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
+        uses: nrwl/nx-set-shas@v2.0.2
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
       - run: npm ci
       - run: npx nx-cloud start-ci-run
-      - run: npm run build:preview
+
+      # Build both preview and prod
+      # - run: npm run build:preview
+      - run: npm run build
+
+      # Test and Lint only once
       - run: npm run test
       - run: npm run lint
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview
-      - run: npx nx-cloud stop-all-agents
 
-  main_prod:
-    name: Main (prod)
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
-    needs: main_preview
-    steps:
-      - uses: actions/checkout@v2
-        name: Checkout [main]
-        with:
-          fetch-depth: 0
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '16'
-      - run: npm ci
-      - run: npx nx-cloud start-ci-run
-      - run: npm run build
+      # Deploy both preview and prod
+      # - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview
       - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod
+
       - run: npx nx-cloud stop-all-agents
 
-  pr_preview:
-    name: PR (preview)
+  pr:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
     steps:
@@ -72,31 +58,19 @@ jobs:
           node-version: '16'
       - run: npm ci
       - run: npx nx-cloud start-ci-run
-      - run: npm run build:preview
+
+      # Build both preview and prod
+      # - run: npm run build:preview
+      - run: npm run build
+
+      # Test and Lint only once
       - run: npm run test
       - run: npm run lint
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview-draft
-      - run: npx nx-cloud stop-all-agents
 
-  pr_prod:
-    name: PR (prod)
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' }}
-    needs: pr_preview
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '16'
-      - run: npm ci
-      - run: npx nx-cloud start-ci-run
-      - run: npm run build
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod
+      # Deploy both preview and prod
+      # - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview-draft
+      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod-draft
+
       - run: npx nx-cloud stop-all-agents
 
   agents:
