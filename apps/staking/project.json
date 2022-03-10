@@ -10,7 +10,6 @@
       "options": {
         "outputPath": "dist/apps/staking.prod/staking",
         "index": "apps/staking/src/index.html",
-        "baseHref": "/",
         "main": "apps/staking/src/main.tsx",
         "polyfills": "apps/staking/src/polyfills.ts",
         "tsConfig": "apps/staking/tsconfig.app.json",
@@ -31,25 +30,33 @@
         ],
         "styles": ["apps/staking/src/styles.scss"],
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "webpackConfig": "@nrwl/react/plugins/webpack",
+        "optimization": true,
+        "outputHashing": "all",
+        "sourceMap": false,
+        "extractCss": true,
+        "namedChunks": false,
+        "extractLicenses": true,
+        "vendorChunk": false,
+        "deployUrl": "/staking/",
+        "baseHref": "/staking"
       },
       "configurations": {
+        "preview": {
+          "fileReplacements": [
+            {
+              "replace": "apps/staking/src/environments/environment.ts",
+              "with": "apps/staking/src/environments/environment.prod.ts"
+            }
+          ]
+        },
         "production": {
           "fileReplacements": [
             {
               "replace": "apps/staking/src/environments/environment.ts",
               "with": "apps/staking/src/environments/environment.prod.ts"
             }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "extractCss": true,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false,
-          "deployUrl": "/staking/",
-          "baseHref": "/staking"
+          ]
         },
         "development": {
           "buildOptimizer": false,
@@ -57,7 +64,11 @@
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true
+          "namedChunks": true,
+          "outputHashing": "none",
+          "extractCss": false,
+          "deployUrl": "",
+          "baseHref": "/"
         }
       }
     },
@@ -68,10 +79,6 @@
         "hmr": true
       },
       "configurations": {
-        "preview": {
-          "buildTarget": "staking:build:production",
-          "hmr": false
-        },
         "production": {
           "buildTarget": "staking:build:production",
           "hmr": false
