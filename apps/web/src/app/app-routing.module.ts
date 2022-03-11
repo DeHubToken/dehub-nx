@@ -7,7 +7,6 @@ import { AppMainComponent } from './app.main.component';
 
 enum NavigationMenu {
   Demos = 'demos',
-  Tournaments = 'tournaments',
   Staking = 'staking',
 }
 
@@ -26,11 +25,6 @@ export const menuItems: MenuItem[] = [
   {
     label: 'Dapps',
     items: [
-      {
-        label: 'DeGame',
-        routerLink: [NavigationMenu.Tournaments],
-        icon: 'fa fa-trophy-alt',
-      },
       {
         label: 'DeStake',
         url: environment.dehub.dapps.staking,
@@ -97,13 +91,6 @@ export const tabMenuItems: MenuItem[] = [
               loadChildren: () =>
                 import('./modules/demos/demos.module').then(
                   module => module.DemosModule
-                ),
-            },
-            {
-              path: NavigationMenu.Tournaments,
-              loadChildren: () =>
-                import('./modules/tournaments/tournaments.module').then(
-                  module => module.TournamentsModule
                 ),
             },
             {
