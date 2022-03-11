@@ -5,10 +5,6 @@ import { MenuItem } from 'primeng/api';
 import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
 
-enum NavigationMenu {
-  Staking = 'staking',
-}
-
 enum NavigationTabMenu {
   Home = 'home',
   Stream = 'stream',
