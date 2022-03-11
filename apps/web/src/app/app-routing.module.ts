@@ -6,7 +6,6 @@ import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
 
 enum NavigationMenu {
-  Demos = 'demos',
   Staking = 'staking',
 }
 
@@ -29,17 +28,6 @@ export const menuItems: MenuItem[] = [
         label: 'DeStake',
         url: environment.dehub.dapps.staking,
         icon: 'far fa-coins',
-      },
-    ],
-  },
-  {
-    label: 'Demo',
-    visible: environment.env === 'dev',
-    items: [
-      {
-        label: 'Contentful Team',
-        routerLink: [NavigationMenu.Demos],
-        icon: 'fa fa-puzzle-piece',
       },
     ],
   },
@@ -86,13 +74,6 @@ export const tabMenuItems: MenuItem[] = [
           component: AppMainComponent,
           children: [
             { path: '', redirectTo: NavigationTabMenu.Home, pathMatch: 'full' },
-            {
-              path: NavigationMenu.Demos,
-              loadChildren: () =>
-                import('./modules/demos/demos.module').then(
-                  module => module.DemosModule
-                ),
-            },
             {
               path: NavigationTabMenu.Home,
               loadChildren: () =>

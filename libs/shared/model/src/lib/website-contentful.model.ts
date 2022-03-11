@@ -183,7 +183,6 @@ export interface AssetLinkingCollections {
   featurePostCollection?: Maybe<FeaturePostCollection>;
   grandPostCollection?: Maybe<GrandPostCollection>;
   personPostCollection?: Maybe<PersonPostCollection>;
-  teamMemberCollection?: Maybe<TeamMemberCollection>;
   thumbnailPostCollection?: Maybe<ThumbnailPostCollection>;
 }
 
@@ -216,13 +215,6 @@ export interface AssetLinkingCollectionsGrandPostCollectionArgs {
 }
 
 export interface AssetLinkingCollectionsPersonPostCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface AssetLinkingCollectionsTeamMemberCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3803,8 +3795,6 @@ export interface Query {
   personPostCollection?: Maybe<PersonPostCollection>;
   sectionPost?: Maybe<SectionPost>;
   sectionPostCollection?: Maybe<SectionPostCollection>;
-  teamMember?: Maybe<TeamMember>;
-  teamMemberCollection?: Maybe<TeamMemberCollection>;
   thumbnailPost?: Maybe<ThumbnailPost>;
   thumbnailPostCollection?: Maybe<ThumbnailPostCollection>;
 }
@@ -4238,21 +4228,6 @@ export interface QuerySectionPostCollectionArgs {
   where?: InputMaybe<SectionPostFilter>;
 }
 
-export interface QueryTeamMemberArgs {
-  id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-}
-
-export interface QueryTeamMemberCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<Array<InputMaybe<TeamMemberOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<TeamMemberFilter>;
-}
-
 export interface QueryThumbnailPostArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -4476,155 +4451,6 @@ export interface SysFilter {
   publishedVersion_lte?: InputMaybe<Scalars['Float']>;
   publishedVersion_not?: InputMaybe<Scalars['Float']>;
   publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
-}
-
-/** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
-export interface TeamMember extends Entry {
-  __typename?: 'TeamMember';
-  avatar?: Maybe<Asset>;
-  contentfulMetadata: ContentfulMetadata;
-  github?: Maybe<Scalars['String']>;
-  instagram?: Maybe<Scalars['String']>;
-  linkedFrom?: Maybe<TeamMemberLinkingCollections>;
-  linkedin?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  sys: Sys;
-  title?: Maybe<Scalars['String']>;
-  twitter?: Maybe<Scalars['String']>;
-}
-
-/** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
-export interface TeamMemberAvatarArgs {
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-}
-
-/** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
-export interface TeamMemberGithubArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
-export interface TeamMemberInstagramArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
-export interface TeamMemberLinkedFromArgs {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-/** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
-export interface TeamMemberLinkedinArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
-export interface TeamMemberNameArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
-export interface TeamMemberTitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** A team member of DeHub Team [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/teamMember) */
-export interface TeamMemberTwitterArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-export interface TeamMemberCollection {
-  __typename?: 'TeamMemberCollection';
-  items: Array<Maybe<TeamMember>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export interface TeamMemberFilter {
-  AND?: InputMaybe<Array<InputMaybe<TeamMemberFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<TeamMemberFilter>>>;
-  avatar_exists?: InputMaybe<Scalars['Boolean']>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  github?: InputMaybe<Scalars['String']>;
-  github_contains?: InputMaybe<Scalars['String']>;
-  github_exists?: InputMaybe<Scalars['Boolean']>;
-  github_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  github_not?: InputMaybe<Scalars['String']>;
-  github_not_contains?: InputMaybe<Scalars['String']>;
-  github_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  instagram?: InputMaybe<Scalars['String']>;
-  instagram_contains?: InputMaybe<Scalars['String']>;
-  instagram_exists?: InputMaybe<Scalars['Boolean']>;
-  instagram_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  instagram_not?: InputMaybe<Scalars['String']>;
-  instagram_not_contains?: InputMaybe<Scalars['String']>;
-  instagram_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  linkedin?: InputMaybe<Scalars['String']>;
-  linkedin_contains?: InputMaybe<Scalars['String']>;
-  linkedin_exists?: InputMaybe<Scalars['Boolean']>;
-  linkedin_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  linkedin_not?: InputMaybe<Scalars['String']>;
-  linkedin_not_contains?: InputMaybe<Scalars['String']>;
-  linkedin_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  name?: InputMaybe<Scalars['String']>;
-  name_contains?: InputMaybe<Scalars['String']>;
-  name_exists?: InputMaybe<Scalars['Boolean']>;
-  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  name_not?: InputMaybe<Scalars['String']>;
-  name_not_contains?: InputMaybe<Scalars['String']>;
-  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']>;
-  title_contains?: InputMaybe<Scalars['String']>;
-  title_exists?: InputMaybe<Scalars['Boolean']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title_not?: InputMaybe<Scalars['String']>;
-  title_not_contains?: InputMaybe<Scalars['String']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  twitter?: InputMaybe<Scalars['String']>;
-  twitter_contains?: InputMaybe<Scalars['String']>;
-  twitter_exists?: InputMaybe<Scalars['Boolean']>;
-  twitter_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  twitter_not?: InputMaybe<Scalars['String']>;
-  twitter_not_contains?: InputMaybe<Scalars['String']>;
-  twitter_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-export interface TeamMemberLinkingCollections {
-  __typename?: 'TeamMemberLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-}
-
-export interface TeamMemberLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export enum TeamMemberOrder {
-  GithubAsc = 'github_ASC',
-  GithubDesc = 'github_DESC',
-  InstagramAsc = 'instagram_ASC',
-  InstagramDesc = 'instagram_DESC',
-  LinkedinAsc = 'linkedin_ASC',
-  LinkedinDesc = 'linkedin_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  TwitterAsc = 'twitter_ASC',
-  TwitterDesc = 'twitter_DESC',
 }
 
 /** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
@@ -9457,39 +9283,6 @@ export type PageStreamCollectionQuery = {
     | undefined;
 };
 
-export type TeamMembersQueryVariables = Exact<{
-  isPreview?: InputMaybe<Scalars['Boolean']>;
-}>;
-
-export type TeamMembersQuery = {
-  __typename?: 'Query';
-  teamMemberCollection?:
-    | {
-        __typename?: 'TeamMemberCollection';
-        items: Array<
-          | {
-              __typename?: 'TeamMember';
-              name?: string | undefined;
-              title?: string | undefined;
-              twitter?: string | undefined;
-              linkedin?: string | undefined;
-              instagram?: string | undefined;
-              github?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
-              avatar?:
-                | {
-                    __typename?: 'Asset';
-                    url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
-                  }
-                | undefined;
-            }
-          | undefined
-        >;
-      }
-    | undefined;
-};
-
 export const SysFragmentDoc = gql`
   fragment Sys on Sys {
     publishedAt
@@ -10120,30 +9913,6 @@ export const PageStreamCollectionDocument = gql`
   }
   ${PageStreamFragmentDoc}
 `;
-export const TeamMembersDocument = gql`
-  query teamMembers($isPreview: Boolean = false) {
-    teamMemberCollection(preview: $isPreview) {
-      items {
-        sys {
-          ...Sys
-        }
-        name
-        title
-        avatar(preview: $isPreview) {
-          sys {
-            ...Sys
-          }
-          url
-        }
-        twitter
-        linkedin
-        instagram
-        github
-      }
-    }
-  }
-  ${SysFragmentDoc}
-`;
 
 export type SdkFunctionWrapper = <T>(
   action: (requestHeaders?: Record<string, string>) => Promise<T>,
@@ -10253,19 +10022,6 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'pageStreamCollection'
-      );
-    },
-    teamMembers(
-      variables?: TeamMembersQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<TeamMembersQuery> {
-      return withWrapper(
-        wrappedRequestHeaders =>
-          client.request<TeamMembersQuery>(TeamMembersDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'teamMembers'
       );
     },
   };
