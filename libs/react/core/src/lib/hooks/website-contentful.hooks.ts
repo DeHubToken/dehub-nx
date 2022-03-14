@@ -327,6 +327,7 @@ export const EmbedPostFragmentDoc = gql`
     hideTitle
     embedCode
     scriptUrl
+    aspectRatio
   }
   ${SysFragmentDoc}
 `;
@@ -348,6 +349,7 @@ export const SectionPostFragmentDoc = gql`
     }
     columnWidth
     alignCenter
+    titleSize
   }
   ${SysFragmentDoc}
   ${ChartPostFragmentDoc}
