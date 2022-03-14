@@ -15,4 +15,5 @@ fragment SectionPost on SectionPost {
   }
   columnWidth
   alignCenter
+  titleSize
 }

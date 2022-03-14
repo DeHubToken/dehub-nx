@@ -4271,6 +4271,7 @@ export interface SectionPost extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+  titleSize?: Maybe<Scalars['String']>;
 }
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
@@ -4312,6 +4313,11 @@ export interface SectionPostShowTitleArgs {
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
 export interface SectionPostTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
+export interface SectionPostTitleSizeArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
@@ -4374,6 +4380,13 @@ export interface SectionPostFilter {
   showTitle_not?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
+  titleSize?: InputMaybe<Scalars['String']>;
+  titleSize_contains?: InputMaybe<Scalars['String']>;
+  titleSize_exists?: InputMaybe<Scalars['Boolean']>;
+  titleSize_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  titleSize_not?: InputMaybe<Scalars['String']>;
+  titleSize_not_contains?: InputMaybe<Scalars['String']>;
+  titleSize_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   title_contains?: InputMaybe<Scalars['String']>;
   title_exists?: InputMaybe<Scalars['Boolean']>;
   title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -4417,6 +4430,8 @@ export enum SectionPostOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleSizeAsc = 'titleSize_ASC',
+  TitleSizeDesc = 'titleSize_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
 }
@@ -5102,6 +5117,7 @@ export type PageEarnFragment = {
                           showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
                           alignCenter?: boolean | undefined;
+                          titleSize?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -5468,6 +5484,7 @@ export type PageGameFragment = {
                           showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
                           alignCenter?: boolean | undefined;
+                          titleSize?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -5834,6 +5851,7 @@ export type PageHomeFragment = {
                           showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
                           alignCenter?: boolean | undefined;
+                          titleSize?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6241,6 +6259,7 @@ export type PageLearnFragment = {
                           showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
                           alignCenter?: boolean | undefined;
+                          titleSize?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -6610,6 +6629,7 @@ export type PageSectionSectionPostsFragment = {
               showTitle?: boolean | undefined;
               columnWidth?: string | undefined;
               alignCenter?: boolean | undefined;
+              titleSize?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               richDescription?:
                 | { __typename?: 'SectionPostDescription'; json: any }
@@ -6954,6 +6974,7 @@ export type PageStreamFragment = {
                           showTitle?: boolean | undefined;
                           columnWidth?: string | undefined;
                           alignCenter?: boolean | undefined;
+                          titleSize?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -7066,6 +7087,7 @@ export type SectionPostFragment = {
   showTitle?: boolean | undefined;
   columnWidth?: string | undefined;
   alignCenter?: boolean | undefined;
+  titleSize?: string | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   richDescription?:
     | { __typename?: 'SectionPostDescription'; json: any }
@@ -7496,6 +7518,7 @@ export type PageEarnCollectionQuery = {
                                       showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
                                       alignCenter?: boolean | undefined;
+                                      titleSize?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -7917,6 +7940,7 @@ export type PageGameCollectionQuery = {
                                       showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
                                       alignCenter?: boolean | undefined;
+                                      titleSize?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -8338,6 +8362,7 @@ export type PageHomeCollectionQuery = {
                                       showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
                                       alignCenter?: boolean | undefined;
+                                      titleSize?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -8803,6 +8828,7 @@ export type PageLearnCollectionQuery = {
                                       showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
                                       alignCenter?: boolean | undefined;
+                                      titleSize?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -9224,6 +9250,7 @@ export type PageStreamCollectionQuery = {
                                       showTitle?: boolean | undefined;
                                       columnWidth?: string | undefined;
                                       alignCenter?: boolean | undefined;
+                                      titleSize?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -9664,6 +9691,7 @@ export const SectionPostFragmentDoc = gql`
     }
     columnWidth
     alignCenter
+    titleSize
   }
   ${SysFragmentDoc}
   ${ChartPostFragmentDoc}

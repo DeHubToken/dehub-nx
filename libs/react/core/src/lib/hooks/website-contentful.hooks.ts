@@ -349,6 +349,7 @@ export const SectionPostFragmentDoc = gql`
     }
     columnWidth
     alignCenter
+    titleSize
   }
   ${SysFragmentDoc}
   ${ChartPostFragmentDoc}
