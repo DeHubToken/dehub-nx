@@ -7,11 +7,62 @@
  *
  ******************************************************/
 
-const chainId = '0x61';
+const chainId = '0x61'; // '0x38
 // testnet DeHub token address
-const DeHubToken = '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477'.toLowerCase();
-const StakingContract =
-  '0x1FB2EdfCFcAF5FDb8cb13B138c653De47F781163'.toLowerCase();
+const DeHubToken = {
+  '0x38': '0xFC206f429d55c71cb7294EfF40c6ADb20dC21508'.toLowerCase(),
+  '0x61': '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477'.toLowerCase(),
+};
+const StakingContract = {
+  '0x38': '0xDAa49168FEC0147c922b7Cf401aBCd5914f7af9c',
+  '0x61': '0x1FB2EdfCFcAF5FDb8cb13B138c653De47F781163',
+};
+const StakingAbi = [
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    name: 'userInfo',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'reflectionDebt',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'reflectionPending',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'harvestDebt',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'harvestPending',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bool',
+        name: 'harvested',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+];
 
 // const DeHubTokenMinAmount = new Moralis.Cloud.BigNumber(10 ** 5 * 100000);
 
@@ -82,22 +133,13 @@ async function isMoralisUserByAddress(address) {
  */
 async function getDeHubBalance(address) {
   const logger = new Moralis.Cloud.getLogger();
-  // const query = Moralis.Query('BscTokenBalance');
-  // query.equalTo('address', address);
-  // const results = await query.find({ useMasterKey: true });
-  // logger.info(`DeHub balance: ${JSON.stringify(results)}`);
-  // if (results.length > 0) {
-  //   return Number(results[0].get('balance'));
-  // }
-  // return null;
-
   try {
     const accountTokens = await Moralis.Web3API.account.getTokenBalances({
       chain: chainId,
       address,
     });
     const deHubBalance = accountTokens.filter(
-      balance => balance.token_address === DeHubToken
+      balance => balance.token_address === DeHubToken[chainId]
     );
     return new Moralis.Cloud.BigNumber(deHubBalance[0].balance);
   } catch (err) {
@@ -111,43 +153,19 @@ async function getDeHubBalance(address) {
  * @param {*} address
  */
 async function getStakedAmount(address) {
-  const logger = new Moralis.Cloud.getLogger();
+  const logger = Moralis.Cloud.getLogger();
   try {
     const web3 = Moralis.web3ByChain(chainId); // BSC
-    logger.info(`web3 is ${web3 ? JSON.stringify(web3) : 'null'}`);
-    const abi = [
-      {
-        inputs: [{ internalType: 'address', name: '', type: 'address' }],
-        name: 'userInfo',
-        outputs: [
-          { internalType: 'uint256', name: 'amount', type: 'uint256' },
-          { internalType: 'uint256', name: 'reflectionDebt', type: 'uint256' },
-          {
-            internalType: 'uint256',
-            name: 'reflectionPending',
-            type: 'uint256',
-          },
-          { internalType: 'uint256', name: 'harvestDebt', type: 'uint256' },
-          { internalType: 'uint256', name: 'harvestPending', type: 'uint256' },
-          { internalType: 'bool', name: 'harvested', type: 'bool' },
-        ],
-        stateMutability: 'view',
-        type: 'function',
-      },
-    ];
-
     // create contract instance
-    const contract = new web3.eth.Contract(abi, StakingContract);
-    logger.info(`contract is ${contract ? 'not null' : 'null'}`);
-
-    // get contract name
-    const userInfo = await contract.methods.userInfo().call(address);
-    logger.info(`userInfo: ${JSON.stringify(userInfo)}`);
-
-    return userInfo.amount;
+    const contract = new web3.eth.Contract(
+      StakingAbi,
+      StakingContract[chainId]
+    );
+    // get user info
+    const userInfo = await contract.methods.userInfo(address).call();
+    return new Moralis.Cloud.BigNumber(userInfo.amount);
   } catch (err) {
     logger.error(JSON.stringify(err));
-    logger.error(err);
     return null;
   }
 }
@@ -187,7 +205,7 @@ Moralis.Cloud.afterSave('BscTokenBalance', async request => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const tokenAddress = request.object.get('token_address');
-    if (tokenAddress === DeHubToken) {
+    if (tokenAddress === DeHubToken[chainId]) {
       const address = request.object.get('address');
 
       const user = await isMoralisUserByAddress(address);
@@ -196,7 +214,11 @@ Moralis.Cloud.afterSave('BscTokenBalance', async request => {
         return;
       }
       const balance = await getDeHubBalance(address);
-      logger.info(`user DeHub balance(${address}): ${balance}`);
+      logger.info(`user DeHub balance(${address}): ${balance.toString()}`);
+      const staked = await getStakedAmount(address);
+      logger.info(`user staked DeHub amount(${address}): ${staked.toString()}`);
+      const total = balance.plus(staked);
+      logger.info(`user total DeHub balance(${address}): ${total.toString()}`);
 
       const minAmount = await getOTTMinTokensToPlay();
       if (!minAmount) {
@@ -204,7 +226,7 @@ Moralis.Cloud.afterSave('BscTokenBalance', async request => {
         return;
       }
 
-      await setCanPlay(user, balance.gte(minAmount) ? true : false);
+      await setCanPlay(user, total.gte(minAmount) ? true : false);
     }
   } catch (err) {
     logger.error(JSON.stringify(err));
@@ -261,13 +283,69 @@ Moralis.Cloud.afterSave('BscTokenBalance', async request => {
 //   }
 // });
 
-Moralis.Cloud.define('stakingAmount', async request => {
-  const logger = Moralis.Cloud.getLogger();
-  try {
-    const amount = await getStakedAmount(request.params.address);
-    return amount;
-  } catch (err) {
-    logger.error(JSON.stringify(err));
-    return;
-  }
-});
+// https://github.com/talgoa/neo-tokyo-market/blob/8792d2a061fa972d2ae5162d702ad5bab7baaced/cloud/bytesContract.js
+
+// Moralis.Cloud.define('balanceOf', async request => {
+//   const logger = Moralis.Cloud.getLogger();
+//   try {
+//     const web3 = Moralis.web3ByChain('0x61');
+//     const BytesABI = [
+//       {
+//         inputs: [
+//           {
+//             internalType: 'address',
+//             name: 'account',
+//             type: 'address',
+//           },
+//         ],
+//         name: 'balanceOf',
+//         outputs: [
+//           {
+//             internalType: 'uint256',
+//             name: '',
+//             type: 'uint256',
+//           },
+//         ],
+//         stateMutability: 'view',
+//         type: 'function',
+//       },
+//     ];
+
+//     const contract = new web3.eth.Contract(
+//       BytesABI,
+//       '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477'
+//     );
+//     logger.info(`contract is ${contract ? 'not null' : 'null'}`);
+
+//     const amount = await contract.methods
+//       .balanceOf('0xD3b5134fef18b69e1ddB986338F2F80CD043a1AF')
+//       .call();
+//     logger.info(`balance = ${amount.toString()}`);
+
+//     // const amount = await getStakedAmount(request.params.address);
+//     return amount;
+//   } catch (err) {
+//     logger.error(`error: ${JSON.stringify(err)}`);
+//     return;
+//   }
+// });
+
+// Moralis.Cloud.define('balanceOf', async request => {
+//   const logger = Moralis.Cloud.getLogger();
+//   try {
+//     const web3 = Moralis.web3ByChain(chainId);
+//     const contract = new web3.eth.Contract(StakingAbi, StakingContract[chainId]);
+//     logger.info(`contract is ${contract ? 'not null' : 'null'}`);
+//     const userInfo = await contract.methods
+//       .userInfo('0x91573f05f34aaF59Ec4849860e61c3762906978E')
+//       .call();
+//     logger.info(`userInfo is ${userInfo ? JSON.stringify(userInfo) : 'null'}`);
+//     const amount = userInfo ? userInfo.amount : 0;
+
+//     // const amount = await getStakedAmount(request.params.address);
+//     return amount;
+//   } catch (err) {
+//     logger.error(`error: ${JSON.stringify(err)}`);
+//     return;
+//   }
+// });
