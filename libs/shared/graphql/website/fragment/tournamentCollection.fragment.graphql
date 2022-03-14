@@ -1,6 +1,0 @@
-fragment TournamentCollection on TournamentCollection {
-  total
-  items {
-    ...Tournament
-  }
-}
