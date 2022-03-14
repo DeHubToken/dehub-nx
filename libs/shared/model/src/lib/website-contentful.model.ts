@@ -778,6 +778,7 @@ export enum DappPostOrder {
 /** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
 export interface EmbedPost extends Entry {
   __typename?: 'EmbedPost';
+  aspectRatio?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   embedCode?: Maybe<Scalars['String']>;
   hideTitle?: Maybe<Scalars['Boolean']>;
@@ -785,6 +786,11 @@ export interface EmbedPost extends Entry {
   scriptUrl?: Maybe<Scalars['String']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+}
+
+/** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
+export interface EmbedPostAspectRatioArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
@@ -823,6 +829,13 @@ export interface EmbedPostCollection {
 export interface EmbedPostFilter {
   AND?: InputMaybe<Array<InputMaybe<EmbedPostFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<EmbedPostFilter>>>;
+  aspectRatio?: InputMaybe<Scalars['String']>;
+  aspectRatio_contains?: InputMaybe<Scalars['String']>;
+  aspectRatio_exists?: InputMaybe<Scalars['Boolean']>;
+  aspectRatio_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  aspectRatio_not?: InputMaybe<Scalars['String']>;
+  aspectRatio_not_contains?: InputMaybe<Scalars['String']>;
+  aspectRatio_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   embedCode?: InputMaybe<Scalars['String']>;
   embedCode_contains?: InputMaybe<Scalars['String']>;
@@ -872,6 +885,8 @@ export interface EmbedPostLinkingCollectionsSectionPostCollectionArgs {
 }
 
 export enum EmbedPostOrder {
+  AspectRatioAsc = 'aspectRatio_ASC',
+  AspectRatioDesc = 'aspectRatio_DESC',
   HideTitleAsc = 'hideTitle_ASC',
   HideTitleDesc = 'hideTitle_DESC',
   ScriptUrlAsc = 'scriptUrl_ASC',
@@ -4604,6 +4619,13 @@ export interface CfChartPostNestedFilter {
 export interface CfEmbedPostNestedFilter {
   AND?: InputMaybe<Array<InputMaybe<CfEmbedPostNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfEmbedPostNestedFilter>>>;
+  aspectRatio?: InputMaybe<Scalars['String']>;
+  aspectRatio_contains?: InputMaybe<Scalars['String']>;
+  aspectRatio_exists?: InputMaybe<Scalars['Boolean']>;
+  aspectRatio_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  aspectRatio_not?: InputMaybe<Scalars['String']>;
+  aspectRatio_not_contains?: InputMaybe<Scalars['String']>;
+  aspectRatio_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   embedCode?: InputMaybe<Scalars['String']>;
   embedCode_contains?: InputMaybe<Scalars['String']>;
@@ -4706,6 +4728,7 @@ export type EmbedPostFragment = {
   hideTitle?: boolean | undefined;
   embedCode?: string | undefined;
   scriptUrl?: string | undefined;
+  aspectRatio?: string | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
 };
 
@@ -5110,6 +5133,7 @@ export type PageEarnFragment = {
                                 hideTitle?: boolean | undefined;
                                 embedCode?: string | undefined;
                                 scriptUrl?: string | undefined;
+                                aspectRatio?: string | undefined;
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
@@ -5475,6 +5499,7 @@ export type PageGameFragment = {
                                 hideTitle?: boolean | undefined;
                                 embedCode?: string | undefined;
                                 scriptUrl?: string | undefined;
+                                aspectRatio?: string | undefined;
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
@@ -5840,6 +5865,7 @@ export type PageHomeFragment = {
                                 hideTitle?: boolean | undefined;
                                 embedCode?: string | undefined;
                                 scriptUrl?: string | undefined;
+                                aspectRatio?: string | undefined;
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
@@ -6246,6 +6272,7 @@ export type PageLearnFragment = {
                                 hideTitle?: boolean | undefined;
                                 embedCode?: string | undefined;
                                 scriptUrl?: string | undefined;
+                                aspectRatio?: string | undefined;
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
@@ -6605,6 +6632,7 @@ export type PageSectionSectionPostsFragment = {
                     hideTitle?: boolean | undefined;
                     embedCode?: string | undefined;
                     scriptUrl?: string | undefined;
+                    aspectRatio?: string | undefined;
                     sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
                   }
                 | undefined;
@@ -6957,6 +6985,7 @@ export type PageStreamFragment = {
                                 hideTitle?: boolean | undefined;
                                 embedCode?: string | undefined;
                                 scriptUrl?: string | undefined;
+                                aspectRatio?: string | undefined;
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
@@ -7059,6 +7088,7 @@ export type SectionPostFragment = {
         hideTitle?: boolean | undefined;
         embedCode?: string | undefined;
         scriptUrl?: string | undefined;
+        aspectRatio?: string | undefined;
         sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
       }
     | undefined;
@@ -7497,6 +7527,7 @@ export type PageEarnCollectionQuery = {
                                             hideTitle?: boolean | undefined;
                                             embedCode?: string | undefined;
                                             scriptUrl?: string | undefined;
+                                            aspectRatio?: string | undefined;
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
@@ -7917,6 +7948,7 @@ export type PageGameCollectionQuery = {
                                             hideTitle?: boolean | undefined;
                                             embedCode?: string | undefined;
                                             scriptUrl?: string | undefined;
+                                            aspectRatio?: string | undefined;
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
@@ -8337,6 +8369,7 @@ export type PageHomeCollectionQuery = {
                                             hideTitle?: boolean | undefined;
                                             embedCode?: string | undefined;
                                             scriptUrl?: string | undefined;
+                                            aspectRatio?: string | undefined;
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
@@ -8801,6 +8834,7 @@ export type PageLearnCollectionQuery = {
                                             hideTitle?: boolean | undefined;
                                             embedCode?: string | undefined;
                                             scriptUrl?: string | undefined;
+                                            aspectRatio?: string | undefined;
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
@@ -9221,6 +9255,7 @@ export type PageStreamCollectionQuery = {
                                             hideTitle?: boolean | undefined;
                                             embedCode?: string | undefined;
                                             scriptUrl?: string | undefined;
+                                            aspectRatio?: string | undefined;
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
@@ -9607,6 +9642,7 @@ export const EmbedPostFragmentDoc = gql`
     hideTitle
     embedCode
     scriptUrl
+    aspectRatio
   }
   ${SysFragmentDoc}
 `;

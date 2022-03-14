@@ -6,4 +6,5 @@ fragment EmbedPost on EmbedPost {
   hideTitle
   embedCode
   scriptUrl
+  aspectRatio
 }

@@ -327,6 +327,7 @@ export const EmbedPostFragmentDoc = gql`
     hideTitle
     embedCode
     scriptUrl
+    aspectRatio
   }
   ${SysFragmentDoc}
 `;
