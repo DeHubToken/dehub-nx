@@ -27,7 +27,7 @@ import { SectionPostFragment } from '@dehub/shared/model';
             | dhbContentfulRichMarkup
             | dhbSafeHtml
         "
-        class="line-height-3"
+        class="line-height-3 pb-5"
       ></div>
 
       <dhb-chart-post
