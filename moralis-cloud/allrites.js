@@ -7,64 +7,29 @@
  *
  ******************************************************/
 
-const chainId = '0x61'; // '0x38
-// testnet DeHub token address
-const DeHubToken = {
-  '0x38': '0xFC206f429d55c71cb7294EfF40c6ADb20dC21508'.toLowerCase(),
-  '0x61': '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477'.toLowerCase(),
-};
-const StakingContract = {
-  '0x38': '0xDAa49168FEC0147c922b7Cf401aBCd5914f7af9c',
-  '0x61': '0x1FB2EdfCFcAF5FDb8cb13B138c653De47F781163',
-};
-const StakingAbi = [
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'userInfo',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'reflectionDebt',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'reflectionPending',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'harvestDebt',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'harvestPending',
-        type: 'uint256',
-      },
-      {
-        internalType: 'bool',
-        name: 'harvested',
-        type: 'bool',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-];
+const BSC_MAINNET = '0x38';
+const BSC_TESTNET = '0x61';
 
-// const DeHubTokenMinAmount = new Moralis.Cloud.BigNumber(10 ** 5 * 100000);
+const chainId = BSC_TESTNET;
+/*******************************************************
+ * Define constants, will depend on `chainId`
+ ******************************************************/
+const ConfigFields = {
+  [BSC_MAINNET]: {
+    StakingAbi: 'DEHUB_STAKING_ABI_MAINNET',
+    StakingAddress: 'DEHUB_STAKING_MAINNET',
+    TokenAbi: 'DEHUB_TOKEN_ABI_MAINNET',
+    TokenAddress: 'DEHUB_TOKEN_MAINNET',
+  },
+  [BSC_TESTNET]: {
+    StakingAbi: 'DEHUB_STAKING_ABI_TESTNET',
+    StakingAddress: 'DEHUB_STAKING_TESTNET',
+    TokenAbi: 'DEHUB_TOKEN_ABI_TESTNET',
+    TokenAddress: 'DEHUB_TOKEN_TESTNET',
+  },
+  OTTMinTokens: 'OTT_MIN_TOKENS_TO_PLAY_NUMBER',
+};
+const DeHubTokenDecimals = new Moralis.Cloud.BigNumber(100000);
 
 /*******************************************************
  * Moralis Configuration
@@ -73,9 +38,39 @@ async function getOTTMinTokensToPlay() {
   const logger = Moralis.Cloud.getLogger();
   try {
     const config = await Moralis.Config.get({ useMasterKey: true });
-    return new Moralis.Cloud.BigNumber(config.get('OTT_MIN_TOKENS_TO_PLAY'));
+    return new Moralis.Cloud.BigNumber(
+      config.get(ConfigFields.OTTMinTokens)
+    ).times(DeHubTokenDecimals);
   } catch (err) {
-    logger.error(JSON.stringify(err));
+    logger.error(`getOTTMinTokensToPlay error: ${JSON.stringify(err)}`);
+  }
+  return null;
+}
+
+async function getDeHubTokenConfig(chainId) {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const config = await Moralis.Config.get({ useMasterKey: true });
+    return {
+      address: config.get(ConfigFields[chainId].TokenAddress),
+      abi: config.get(ConfigFields[chainId].TokenAbi),
+    };
+  } catch (err) {
+    logger.error(`getDeHubTokenConfig error: ${JSON.stringify(err)}`);
+  }
+  return null;
+}
+
+async function getDeHubStakingConfig(chainId) {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const config = await Moralis.Config.get({ useMasterKey: true });
+    return {
+      address: config.get(ConfigFields[chainId].StakingAddress),
+      abi: config.get(ConfigFields[chainId].StakingAbi),
+    };
+  } catch (err) {
+    logger.error(`getDeHubStakingConfig error: ${JSON.stringify(err)}`);
   }
   return null;
 }
@@ -98,7 +93,7 @@ async function isMoralisUser(userObjectId) {
       return users[0];
     }
   } catch (err) {
-    logger.error(JSON.stringify(err));
+    logger.error(`isMoralisUser error: ${JSON.stringify(err)}`);
   }
   return null;
 }
@@ -120,52 +115,67 @@ async function isMoralisUserByAddress(address) {
       return users[0];
     }
   } catch (err) {
-    logger.error(JSON.stringify(err));
+    logger.error(`isMoralisUserByAddress error: ${JSON.stringify(err)}`);
   }
   return null;
 }
 
+/*******************************************************
+ * Contract integration
+ ******************************************************/
 /**
- * Get DeHub token balance of given wallet address,
+ * Get ERC20 token balance of given wallet address,
  * Of course, we can get it from `BscTokenBalance`
- * @param {*} address
+ * @param {*} chainId network
+ * @param {*} address user address
+ * @param {*} tokenAddress ERC20 token address
  * @returns amount in big number if success
  */
-async function getDeHubBalance(address) {
+async function getTokenBalance(chainId, address, tokenAddress) {
   const logger = new Moralis.Cloud.getLogger();
   try {
     const accountTokens = await Moralis.Web3API.account.getTokenBalances({
       chain: chainId,
       address,
     });
-    const deHubBalance = accountTokens.filter(
-      balance => balance.token_address === DeHubToken[chainId]
+    const filtered = accountTokens.filter(
+      balance => balance.token_address === tokenAddress.toLowerCase()
     );
-    return new Moralis.Cloud.BigNumber(deHubBalance[0].balance);
+    return new Moralis.Cloud.BigNumber(filtered[0].balance);
   } catch (err) {
-    logger.error(JSON.stringify(err));
+    logger.error(`getTokenBalance error: ${JSON.stringify(err)}`);
+    return null;
+  }
+}
+
+async function getDeHubTokenBalance(chainId, address) {
+  const logger = new Moralis.Cloud.getLogger();
+  try {
+    const config = await getDeHubTokenConfig(chainId);
+    return getTokenBalance(chainId, address, config.address);
+  } catch (err) {
+    logger.error(`getDeHubTokenBalance error: ${JSON.stringify(err)}`);
     return null;
   }
 }
 
 /**
  * Get staked token amount of given wallet address.
- * @param {*} address
+ * @param {*} chainId network
+ * @param {*} address user address
  */
-async function getStakedAmount(address) {
+async function getStakedAmount(chainId, address) {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const web3 = Moralis.web3ByChain(chainId); // BSC
+    const config = await getDeHubStakingConfig(chainId);
+    const web3 = Moralis.web3ByChain(chainId);
     // create contract instance
-    const contract = new web3.eth.Contract(
-      StakingAbi,
-      StakingContract[chainId]
-    );
+    const contract = new web3.eth.Contract(config.abi, config.address);
     // get user info
     const userInfo = await contract.methods.userInfo(address).call();
     return new Moralis.Cloud.BigNumber(userInfo.amount);
   } catch (err) {
-    logger.error(JSON.stringify(err));
+    logger.error(`getStakedAmount error: ${JSON.stringify(err)}`);
     return null;
   }
 }
@@ -185,10 +195,10 @@ async function setCanPlay(user, value) {
         );
       });
     } else {
-      logger.error('Not found Moralis User');
+      logger.error('Not found Moralis User to set can_play');
     }
   } catch (err) {
-    logger.error(JSON.stringify(err));
+    logger.error(`setCanPlay error: ${JSON.stringify(err)}`);
   }
 }
 
@@ -196,40 +206,90 @@ async function setCanPlay(user, value) {
  * Moralis Triggers
  ******************************************************/
 /**
+ * Update can_play according to the balance of holding and staking
+ * @param {*} address user address
+ */
+async function updateCanPlay(address) {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const user = await isMoralisUserByAddress(address);
+    if (!user) {
+      logger.error(`Not found Moralis User: ${address}`);
+      return;
+    }
+    const balance = await getDeHubTokenBalance(chainId, address);
+    logger.info(`user DeHub balance(${address}): ${balance.toString()}`);
+    const staked = await getStakedAmount(chainId, address);
+    logger.info(`user staked DeHub amount(${address}): ${staked.toString()}`);
+    const total = balance.plus(staked);
+    logger.info(`user total DeHub balance(${address}): ${total.toString()}`);
+
+    const minAmount = await getOTTMinTokensToPlay();
+    await setCanPlay(user, total.gte(minAmount) ? true : false);
+  } catch (err) {
+    logger.error(`updateCanPlay error: ${JSON.stringify(err)}`);
+    return;
+  }
+}
+
+/**
  * Subscribe the balance table, and if DeHub token balance has changed,
  * set `can_play` flag as true/false according to the holding balance.
  * The updates on this variable will automatically trigger calling to Allrites
  * so as to give an access to user
  */
-Moralis.Cloud.afterSave('BscTokenBalance', async request => {
+Moralis.Cloud.afterSave('DeHubTokenTransferEvents', async request => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const tokenAddress = request.object.get('token_address');
-    if (tokenAddress === DeHubToken[chainId]) {
-      const address = request.object.get('address');
+    const fromAddress = request.object.get('from');
+    const toAddress = request.object.get('to');
+    logger.info(
+      `Noticed DeHubTokenTransferEvents, from: ${fromAddress}, to: ${toAddress}`
+    );
 
-      const user = await isMoralisUserByAddress(address);
-      if (!user) {
-        logger.info(`user not found: ${address}`);
-        return;
-      }
-      const balance = await getDeHubBalance(address);
-      logger.info(`user DeHub balance(${address}): ${balance.toString()}`);
-      const staked = await getStakedAmount(address);
-      logger.info(`user staked DeHub amount(${address}): ${staked.toString()}`);
-      const total = balance.plus(staked);
-      logger.info(`user total DeHub balance(${address}): ${total.toString()}`);
-
-      const minAmount = await getOTTMinTokensToPlay();
-      if (!minAmount) {
-        logger.error('Failed to get OTT min tokens to play');
-        return;
-      }
-
-      await setCanPlay(user, total.gte(minAmount) ? true : false);
-    }
+    await updateCanPlay(fromAddress);
+    await updateCanPlay(toAddress);
   } catch (err) {
-    logger.error(JSON.stringify(err));
+    logger.error(`DeHubTokenTransferEvents error: ${JSON.stringify(err)}`);
+    return;
+  }
+});
+
+Moralis.Cloud.afterSave('DeHubStakingDepositEvents', async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const address = request.object.get('user');
+    logger.info(`Noticed DeHubStakingDepositEvents, address: ${address}`);
+
+    await updateCanPlay(address);
+  } catch (err) {
+    logger.error(`DeHubStakingDepositEvents error: ${JSON.stringify(err)}`);
+    return;
+  }
+});
+
+Moralis.Cloud.afterSave('DeHubStakingHarvestedEvents', async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const address = request.object.get('user');
+    logger.info(`Noticed DeHubStakingHarvestedEvents, address: ${address}`);
+
+    await updateCanPlay(address);
+  } catch (err) {
+    logger.error(`DeHubStakingHarvestedEvents error: ${JSON.stringify(err)}`);
+    return;
+  }
+});
+
+Moralis.Cloud.afterSave('DeHubStakingWithdrawEvents', async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const address = request.object.get('user');
+    logger.info(`Noticed DeHubStakingWithdrawEvents, address: ${address}`);
+
+    await updateCanPlay(address);
+  } catch (err) {
+    logger.error(`DeHubStakingWithdrawEvents error: ${JSON.stringify(err)}`);
     return;
   }
 });
@@ -271,12 +331,16 @@ Moralis.Cloud.afterSave('BscTokenBalance', async request => {
 // Moralis.Cloud.define('config', async request => {
 //   const logger = Moralis.Cloud.getLogger();
 //   try {
-//     const config = await Moralis.Config.get({ useMasterKey: true });
-//     logger.info(`config: ${JSON.stringify(config)}`);
-//     logger.info(
-//       `config.OTT_MIN_TOKENS_TO_PLAY: ${config.get('OTT_MIN_TOKENS_TO_PLAY')}`
-//     );
-//     return JSON.stringify(config);
+//     const minTokens = await getOTTMinTokensToPlay();
+//     logger.info(`minTokens: ${minTokens.toString()}`);
+
+//     const tokenConfig = await getDeHubTokenConfig(chainId);
+//     logger.info(`tokenConfig: ${JSON.stringify(tokenConfig)}`);
+
+//     const stakingConfig = await getDeHubStakingConfig(chainId);
+//     logger.info(`stakingConfig: ${JSON.stringify(stakingConfig)}`);
+
+//     return 0;
 //   } catch (err) {
 //     logger.error(JSON.stringify(err));
 //     return;
