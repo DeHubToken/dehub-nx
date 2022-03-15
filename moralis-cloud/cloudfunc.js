@@ -1,5 +1,5 @@
 /*******************************************************
- * Prerequirements
+ * Prerequisites
  *
  * Create tables in Moralis Database
  * 1. `VimeoCustomer`
@@ -85,7 +85,7 @@ async function getCustomerProducts(customerId) {
 
 /**
  * List the products which are on the platform
- * @returns list of detailed product information if succeesful,
+ * @returns list of detailed product information if successful,
  *          null if failed
  */
 async function getListProducts(page, perPage) {

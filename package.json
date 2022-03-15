@@ -31,6 +31,8 @@
     "dep-graph:a": "nx affected:dep-graph --watch=true",
     "affected": "nx print-affected --select=projects",
     "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config",
+    "moralis-cloud": "moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/libs/moralis/cloud/src/lib",
+    "moralis-logs": "moralis-admin-cli get-logs",
     "prepare": "husky install"
   },
   "dependencies": {
