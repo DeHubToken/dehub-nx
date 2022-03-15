@@ -1,16 +1,28 @@
 /*******************************************************
- * Prerequirements
+ * PreRequirements
  *
- * Add new column in _User table of Moralis Database
- * 1. `can_play`
+ *
+ * 1. Add new column `can_play` in _User table of Moralis Database
  * type Boolean
+ * 2. Sync DeHub Token Transfer events and name table as `DeHubTokenTransferEvents`
+ * 3. Sync DeHub Staking events and name table as following
+ * Deposit -> DeHubStakingDepositEvents
+ * Harvested -> DeHubStakingHarvestedEvents
+ * Withdraw -> DeHubStakingWithdrawEvents
+ * 4. Set following variables in Moralis Config
+ * https://docs.moralis.io/moralis-server/cloud-code/config#config
+ * DEHUB_STAKING_ABI_MAINNET   Array   Abi for staking contract, [...]
+ * DEHUB_STAKING_MAINNET   String   Address to staking contract
+ * DEHUB_TOKEN_ABI_MAINNET   Array   Abi for $DeHub contract, [...]
+ * DEHUB_TOKEN_MAINNET   String   Address to $DeHub contract
+ * OTT_MIN_TOKENS_TO_PLAY  Number   Min token amount to set can_play, def:500000
  *
  ******************************************************/
 
 const BSC_MAINNET = '0x38';
 const BSC_TESTNET = '0x61';
 
-const chainId = BSC_TESTNET;
+const chainId = BSC_MAINNET;
 /*******************************************************
  * Define constants, will depend on `chainId`
  ******************************************************/
@@ -27,7 +39,7 @@ const ConfigFields = {
     TokenAbi: 'DEHUB_TOKEN_ABI_TESTNET',
     TokenAddress: 'DEHUB_TOKEN_TESTNET',
   },
-  OTTMinTokens: 'OTT_MIN_TOKENS_TO_PLAY_NUMBER',
+  OTTMinTokens: 'OTT_MIN_TOKENS_TO_PLAY',
 };
 const DeHubTokenDecimals = new Moralis.Cloud.BigNumber(100000);
 
@@ -268,15 +280,15 @@ Moralis.Cloud.afterSave('DeHubStakingDepositEvents', async request => {
   }
 });
 
-Moralis.Cloud.afterSave('DeHubStakingHarvestedEvents', async request => {
+Moralis.Cloud.afterSave('DeHubStakingHarvestEvents', async request => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const address = request.object.get('user');
-    logger.info(`Noticed DeHubStakingHarvestedEvents, address: ${address}`);
+    logger.info(`Noticed DeHubStakingHarvestEvents, address: ${address}`);
 
     await updateCanPlay(address);
   } catch (err) {
-    logger.error(`DeHubStakingHarvestedEvents error: ${JSON.stringify(err)}`);
+    logger.error(`DeHubStakingHarvestEvents error: ${JSON.stringify(err)}`);
     return;
   }
 });
@@ -290,6 +302,20 @@ Moralis.Cloud.afterSave('DeHubStakingWithdrawEvents', async request => {
     await updateCanPlay(address);
   } catch (err) {
     logger.error(`DeHubStakingWithdrawEvents error: ${JSON.stringify(err)}`);
+    return;
+  }
+});
+
+Moralis.Cloud.beforeLogin(async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const { object: user } = request;
+    const address = user.get('ethAddress');
+    logger.info(`Noticed beforeLogin, address: ${address}`);
+
+    await updateCanPlay(address);
+  } catch (err) {
+    logger.error(`beforeLogin error: ${JSON.stringify(err)}`);
     return;
   }
 });
