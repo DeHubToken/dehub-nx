@@ -102,31 +102,3 @@ export class PageStreamCollectionService extends Apollo.Query<
     super(apollo);
   }
 }
-
-@Injectable({
-  providedIn: GraphQLModule,
-})
-export class TeamMembersService extends Apollo.Query<
-  models.TeamMembersQuery,
-  models.TeamMembersQueryVariables
-> {
-  document = models.TeamMembersDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
-}
-
-@Injectable({
-  providedIn: GraphQLModule,
-})
-export class TournamentsService extends Apollo.Query<
-  models.TournamentsQuery,
-  models.TournamentsQueryVariables
-> {
-  document = models.TournamentsDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
-}

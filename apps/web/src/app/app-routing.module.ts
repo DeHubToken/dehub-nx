@@ -5,12 +5,6 @@ import { MenuItem } from 'primeng/api';
 import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
 
-enum NavigationMenu {
-  Demos = 'demos',
-  Tournaments = 'tournaments',
-  Staking = 'staking',
-}
-
 enum NavigationTabMenu {
   Home = 'home',
   Stream = 'stream',
@@ -27,25 +21,9 @@ export const menuItems: MenuItem[] = [
     label: 'Dapps',
     items: [
       {
-        label: 'DeGame',
-        routerLink: [NavigationMenu.Tournaments],
-        icon: 'fa fa-trophy-alt',
-      },
-      {
         label: 'DeStake',
         url: environment.dehub.dapps.staking,
         icon: 'far fa-coins',
-      },
-    ],
-  },
-  {
-    label: 'Demo',
-    visible: environment.env === 'dev',
-    items: [
-      {
-        label: 'Contentful Team',
-        routerLink: [NavigationMenu.Demos],
-        icon: 'fa fa-puzzle-piece',
       },
     ],
   },
@@ -92,20 +70,6 @@ export const tabMenuItems: MenuItem[] = [
           component: AppMainComponent,
           children: [
             { path: '', redirectTo: NavigationTabMenu.Home, pathMatch: 'full' },
-            {
-              path: NavigationMenu.Demos,
-              loadChildren: () =>
-                import('./modules/demos/demos.module').then(
-                  module => module.DemosModule
-                ),
-            },
-            {
-              path: NavigationMenu.Tournaments,
-              loadChildren: () =>
-                import('./modules/tournaments/tournaments.module').then(
-                  module => module.TournamentsModule
-                ),
-            },
             {
               path: NavigationTabMenu.Home,
               loadChildren: () =>

@@ -16,7 +16,15 @@ import { SectionPostFragment } from '@dehub/shared/model';
     >
       <!-- Title -->
       <ng-container *ngIf="sectionPost.showTitle">
-        <h5 class="pt-2 mb-0 uppercase text-sm">{{ sectionPost.title }}</h5>
+        <span
+          *ngIf="sectionPost.titleSize as ts; else defaultTitle"
+          [innerHtml]="resolveTitleSize(ts)"
+        ></span>
+        <ng-template #defaultTitle>
+          <h5 class="pt-2 mb-0 uppercase text-sm">
+            {{ sectionPost.title }}
+          </h5>
+        </ng-template>
         <hr class="mt-2" />
       </ng-container>
 
@@ -27,7 +35,7 @@ import { SectionPostFragment } from '@dehub/shared/model';
             | dhbContentfulRichMarkup
             | dhbSafeHtml
         "
-        class="line-height-3"
+        class="line-height-3 pb-5"
       ></div>
 
       <dhb-chart-post
@@ -51,4 +59,8 @@ export class SectionPostComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  resolveTitleSize(ts: string) {
+    return `<${ts} class="pt-2 mb-0">${this.sectionPost.title}</${ts}>`;
+  }
 }
