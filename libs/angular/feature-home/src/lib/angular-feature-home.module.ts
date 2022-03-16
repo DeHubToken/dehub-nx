@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { YoutubeEmbedModule } from '@dehub/angular/ui/components/youtube-embed';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
@@ -15,6 +16,7 @@ import { AngularFeatureHomeComponent } from './angular-feature-home.component';
     ContentfulDraftDirectiveModule,
     YoutubeVideoIdPipeModule,
     YoutubeEmbedModule,
+    PageHeaderModule,
     PageSectionsModule,
 
     AngularFeatureHomeRoutingModule,

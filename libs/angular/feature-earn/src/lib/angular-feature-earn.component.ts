@@ -14,10 +14,7 @@ import { map, Observable } from 'rxjs';
   template: `
     <ng-container *ngIf="pageEarn$ | async as pageEarn" class="grid">
       <!-- Titles -->
-      <div [@bounceInLeft] class="col-12 mb-8">
-        <h1>{{ pageEarn.mainTitle }}</h1>
-        <h5>{{ pageEarn.subtitle }}</h5>
-      </div>
+      <dhb-page-header [page]="pageEarn"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections

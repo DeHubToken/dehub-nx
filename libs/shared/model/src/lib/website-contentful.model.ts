@@ -1773,6 +1773,8 @@ export interface PageEarn extends Entry {
   linkedFrom?: Maybe<PageEarnLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageEarnSectionsCollection>;
+  showSubtitle?: Maybe<Scalars['Boolean']>;
+  showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
 }
@@ -1793,6 +1795,16 @@ export interface PageEarnSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnShowSubtitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnShowTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
@@ -1820,6 +1832,12 @@ export interface PageEarnFilter {
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_not?: InputMaybe<Scalars['Boolean']>;
+  showTitle?: InputMaybe<Scalars['Boolean']>;
+  showTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showTitle_not?: InputMaybe<Scalars['Boolean']>;
   subtitle?: InputMaybe<Scalars['String']>;
   subtitle_contains?: InputMaybe<Scalars['String']>;
   subtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1845,6 +1863,10 @@ export interface PageEarnLinkingCollectionsEntryCollectionArgs {
 export enum PageEarnOrder {
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
   SubtitleAsc = 'subtitle_ASC',
   SubtitleDesc = 'subtitle_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -1882,6 +1904,8 @@ export interface PageGame extends Entry {
   linkedFrom?: Maybe<PageGameLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageGameSectionsCollection>;
+  showSubtitle?: Maybe<Scalars['Boolean']>;
+  showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
 }
@@ -1902,6 +1926,16 @@ export interface PageGameSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
+export interface PageGameShowSubtitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
+export interface PageGameShowTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
@@ -1929,6 +1963,12 @@ export interface PageGameFilter {
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_not?: InputMaybe<Scalars['Boolean']>;
+  showTitle?: InputMaybe<Scalars['Boolean']>;
+  showTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showTitle_not?: InputMaybe<Scalars['Boolean']>;
   subtitle?: InputMaybe<Scalars['String']>;
   subtitle_contains?: InputMaybe<Scalars['String']>;
   subtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1954,6 +1994,10 @@ export interface PageGameLinkingCollectionsEntryCollectionArgs {
 export enum PageGameOrder {
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
   SubtitleAsc = 'subtitle_ASC',
   SubtitleDesc = 'subtitle_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -1991,6 +2035,8 @@ export interface PageHome extends Entry {
   linkedFrom?: Maybe<PageHomeLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageHomeSectionsCollection>;
+  showSubtitle?: Maybe<Scalars['Boolean']>;
+  showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
 }
@@ -2011,6 +2057,16 @@ export interface PageHomeSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeShowSubtitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeShowTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
@@ -2038,6 +2094,12 @@ export interface PageHomeFilter {
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_not?: InputMaybe<Scalars['Boolean']>;
+  showTitle?: InputMaybe<Scalars['Boolean']>;
+  showTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showTitle_not?: InputMaybe<Scalars['Boolean']>;
   subtitle?: InputMaybe<Scalars['String']>;
   subtitle_contains?: InputMaybe<Scalars['String']>;
   subtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2063,6 +2125,10 @@ export interface PageHomeLinkingCollectionsEntryCollectionArgs {
 export enum PageHomeOrder {
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
   SubtitleAsc = 'subtitle_ASC',
   SubtitleDesc = 'subtitle_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -2100,6 +2166,8 @@ export interface PageLearn extends Entry {
   linkedFrom?: Maybe<PageLearnLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageLearnSectionsCollection>;
+  showSubtitle?: Maybe<Scalars['Boolean']>;
+  showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
 }
@@ -2120,6 +2188,16 @@ export interface PageLearnSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnShowSubtitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnShowTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
@@ -2147,6 +2225,12 @@ export interface PageLearnFilter {
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_not?: InputMaybe<Scalars['Boolean']>;
+  showTitle?: InputMaybe<Scalars['Boolean']>;
+  showTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showTitle_not?: InputMaybe<Scalars['Boolean']>;
   subtitle?: InputMaybe<Scalars['String']>;
   subtitle_contains?: InputMaybe<Scalars['String']>;
   subtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2172,6 +2256,10 @@ export interface PageLearnLinkingCollectionsEntryCollectionArgs {
 export enum PageLearnOrder {
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
   SubtitleAsc = 'subtitle_ASC',
   SubtitleDesc = 'subtitle_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -3477,6 +3565,8 @@ export interface PageStream extends Entry {
   linkedFrom?: Maybe<PageStreamLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageStreamSectionsCollection>;
+  showSubtitle?: Maybe<Scalars['Boolean']>;
+  showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
 }
@@ -3497,6 +3587,16 @@ export interface PageStreamSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
+export interface PageStreamShowSubtitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
+export interface PageStreamShowTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
@@ -3524,6 +3624,12 @@ export interface PageStreamFilter {
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_not?: InputMaybe<Scalars['Boolean']>;
+  showTitle?: InputMaybe<Scalars['Boolean']>;
+  showTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showTitle_not?: InputMaybe<Scalars['Boolean']>;
   subtitle?: InputMaybe<Scalars['String']>;
   subtitle_contains?: InputMaybe<Scalars['String']>;
   subtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3549,6 +3655,10 @@ export interface PageStreamLinkingCollectionsEntryCollectionArgs {
 export enum PageStreamOrder {
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
   SubtitleAsc = 'subtitle_ASC',
   SubtitleDesc = 'subtitle_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -4840,7 +4950,9 @@ export type LegalPostFragment = {
 export type PageEarnFragment = {
   __typename?: 'PageEarn';
   mainTitle?: string | undefined;
+  showTitle?: boolean | undefined;
   subtitle?: string | undefined;
+  showSubtitle?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -5207,7 +5319,9 @@ export type PageEarnFragment = {
 export type PageGameFragment = {
   __typename?: 'PageGame';
   mainTitle?: string | undefined;
+  showTitle?: boolean | undefined;
   subtitle?: string | undefined;
+  showSubtitle?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -5574,7 +5688,9 @@ export type PageGameFragment = {
 export type PageHomeFragment = {
   __typename?: 'PageHome';
   mainTitle?: string | undefined;
+  showTitle?: boolean | undefined;
   subtitle?: string | undefined;
+  showSubtitle?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -5941,7 +6057,9 @@ export type PageHomeFragment = {
 export type PageLearnFragment = {
   __typename?: 'PageLearn';
   mainTitle?: string | undefined;
+  showTitle?: boolean | undefined;
   subtitle?: string | undefined;
+  showSubtitle?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -6697,7 +6815,9 @@ export type PageSectionThumbnailPostsFragment = {
 export type PageStreamFragment = {
   __typename?: 'PageStream';
   mainTitle?: string | undefined;
+  showTitle?: boolean | undefined;
   subtitle?: string | undefined;
+  showSubtitle?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -7204,7 +7324,9 @@ export type PageEarnCollectionQuery = {
           | {
               __typename?: 'PageEarn';
               mainTitle?: string | undefined;
+              showTitle?: boolean | undefined;
               subtitle?: string | undefined;
+              showSubtitle?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -7626,7 +7748,9 @@ export type PageGameCollectionQuery = {
           | {
               __typename?: 'PageGame';
               mainTitle?: string | undefined;
+              showTitle?: boolean | undefined;
               subtitle?: string | undefined;
+              showSubtitle?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -8048,7 +8172,9 @@ export type PageHomeCollectionQuery = {
           | {
               __typename?: 'PageHome';
               mainTitle?: string | undefined;
+              showTitle?: boolean | undefined;
               subtitle?: string | undefined;
+              showSubtitle?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -8470,7 +8596,9 @@ export type PageLearnCollectionQuery = {
           | {
               __typename?: 'PageLearn';
               mainTitle?: string | undefined;
+              showTitle?: boolean | undefined;
               subtitle?: string | undefined;
+              showSubtitle?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -8936,7 +9064,9 @@ export type PageStreamCollectionQuery = {
           | {
               __typename?: 'PageStream';
               mainTitle?: string | undefined;
+              showTitle?: boolean | undefined;
               subtitle?: string | undefined;
+              showSubtitle?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -9720,7 +9850,9 @@ export const PageEarnFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -9750,7 +9882,9 @@ export const PageGameFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -9780,7 +9914,9 @@ export const PageHomeFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -9851,7 +9987,9 @@ export const PageLearnFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -9883,7 +10021,9 @@ export const PageStreamFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts

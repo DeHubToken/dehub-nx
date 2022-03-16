@@ -378,7 +378,9 @@ export const PageEarnFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -408,7 +410,9 @@ export const PageGameFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -438,7 +442,9 @@ export const PageHomeFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -509,7 +515,9 @@ export const PageLearnFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -541,7 +549,9 @@ export const PageStreamFragmentDoc = gql`
       ...Sys
     }
     mainTitle
+    showTitle
     subtitle
+    showSubtitle
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
