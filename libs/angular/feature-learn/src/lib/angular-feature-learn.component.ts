@@ -18,10 +18,7 @@ import { map } from 'rxjs/operators';
   template: `
     <ng-container *ngIf="pageLearn$ | async as pageLearn" class="grid">
       <!-- Titles -->
-      <div [@bounceInLeft] class="col-12">
-        <h3>{{ pageLearn.mainTitle }}</h3>
-        <h4>{{ pageLearn.subtitle }}</h4>
-      </div>
+      <dhb-page-header [page]="pageLearn"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
