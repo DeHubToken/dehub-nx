@@ -10,10 +10,8 @@ import { ThemeContextProvider } from './contexts/ThemeContext';
 import { ToastsProvider } from './contexts/ToastsContext';
 import store from './state';
 
-const { landing } = environment.dehub;
 const { appId, serverUrl } = environment.moralis;
 const { chainId } = environment.web3;
-const { baseUrl } = environment;
 
 const Providers: React.FC = ({ children }) => {
   return (
@@ -28,12 +26,7 @@ const Providers: React.FC = ({ children }) => {
             <ThemeContextProvider>
               <LanguageProvider>
                 <RefreshContextProvider>
-                  <ConnectProvider
-                    defaultChainId={chainId}
-                    baseUrl={baseUrl}
-                    pageTitle={'DeHub Prediction'}
-                    landingUrl={landing}
-                  >
+                  <ConnectProvider defaultChainId={chainId}>
                     <ModalProvider>{children}</ModalProvider>
                   </ConnectProvider>
                 </RefreshContextProvider>

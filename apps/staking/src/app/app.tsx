@@ -1,16 +1,15 @@
+import { useEagerMoralis, withLayout } from '@dehub/react/core';
 import {
-  useConnectContext,
-  useEagerMoralis,
-  withLayout,
-} from '@dehub/react/core';
-import { FullScreenLoader, SuspenseWithChunkError } from '@dehub/react/ui';
+  FullScreenLoader,
+  NavigationTabMenu,
+  SuspenseWithChunkError,
+} from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
-import { lazy } from 'react';
+import { lazy, useMemo } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
+import { environment } from '../environments/environment';
 import history from './routerHistory';
 import { useFetchPoolInfo, usePullBusdPrice } from './state/application/hooks';
-
-const Staking = withLayout(lazy(() => import('./views/Staking')));
 
 // This config is required for number formatting
 BigNumber.config({
@@ -18,12 +17,32 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 });
 
+const { baseUrl } = environment;
+const pageTitle = 'DeHub Staking';
+const { cexUrl, downloadWalletUrl } = environment.dehub;
+const { landing } = environment.dehub;
+const activeTab = NavigationTabMenu.Earn;
+
 export function App() {
   useEagerMoralis();
   useFetchPoolInfo();
   usePullBusdPrice();
 
-  const { baseUrl, pageTitle } = useConnectContext();
+  const Staking = useMemo(
+    () =>
+      withLayout(
+        {
+          baseUrl,
+          pageTitle,
+          cexUrl,
+          downloadWalletUrl,
+          landing,
+          activeTab,
+        },
+        lazy(() => import('./views/Staking'))
+      ),
+    []
+  );
 
   return (
     <Router history={history}>

@@ -7,48 +7,35 @@ export interface FooterProps {
 function Footer({ landing }: FooterProps) {
   return (
     <div className="layout-footer">
-      <div className="flex flex-wrap align-items-center justify-content-center card-container">
-        <div className="text-lg">DeHub&nbsp;</div>
-        <div className="text-lg">&nbsp;© 2022 DeHub.</div>
-      </div>
-      <div className="flex flex-wrap align-items-center justify-content-center card-container">
-        <ul>
-          <li>
-            <a href={landing} className="p-link mb-2 mx-2">
-              Disclaimer
-            </a>
-          </li>
-        </ul>
-        &nbsp;|&nbsp;
-        <ul>
-          <li>
-            <a
-              href={`${landing}/web/legal/privacy`}
-              className="p-link mb-2 mx-2"
-            >
-              Privacy Policy
-            </a>
-          </li>
-        </ul>
-        &nbsp;|&nbsp;
-        <ul>
-          <li>
-            <a href={`${landing}/web/legal/terms`} className="p-link mb-2 mx-2">
-              Terms & Conditions
-            </a>
-          </li>
-        </ul>
-        &nbsp;|&nbsp;
-        <ul>
-          <li>
-            <a
-              href={`${landing}/web/legal/careers`}
-              className="p-link mb-2 mx-2"
-            >
-              Careers
-            </a>
-          </li>
-        </ul>
+      <div className="grid">
+        <div className="col-12 lg-4">
+          <div className="grid">
+            <div className="col-6">
+              <span className="footer-menutitle"></span>
+              <ul>
+                <li>
+                  <a href={`${landing}/web/legal/disclaimer`}>Disclaimer</a>
+                </li>
+                <li>
+                  <a href={`${landing}/web/legal/privacy`}>Privacy Policy</a>
+                </li>
+                <li>
+                  <a href={`${landing}/web/legal/terms`}>Terms & Conditions</a>
+                </li>
+                <li>
+                  <a href={`${landing}/web/legal/careers`}>Careers</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-12">
+          <div className="footer-bottom">
+            <h4>DeHub</h4>
+            <h6>© 2022 DeHub.</h6>
+          </div>
+        </div>
       </div>
     </div>
   );

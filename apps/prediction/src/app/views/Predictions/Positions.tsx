@@ -1,15 +1,15 @@
+import { Box } from '@dehub/react/pcsuikit';
 import React from 'react';
 import styled from 'styled-components';
 import SwiperCore, { Keyboard, Mousewheel } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Box } from '@dehub/react/pcsuikit';
+// import 'swiper/swiper.min.css';
 import { useGetSortedRounds } from '../../state/hooks';
-import 'swiper/swiper.min.css';
-import RoundCard from './components/RoundCard';
-import Menu from './components/Menu';
-import useSwiper from './hooks/useSwiper';
-import useOnNextRound from './hooks/useOnNextRound';
 import { Round } from '../../state/types';
+import Menu from './components/Menu';
+import RoundCard from './components/RoundCard';
+import useOnNextRound from './hooks/useOnNextRound';
+import useSwiper from './hooks/useSwiper';
 
 SwiperCore.use([Keyboard, Mousewheel]);
 
@@ -41,7 +41,6 @@ const Positions: React.FC = () => {
           spaceBetween={16}
           slidesPerView="auto"
           freeMode
-          freeModeSticky
           centeredSlides
           mousewheel
           keyboard
