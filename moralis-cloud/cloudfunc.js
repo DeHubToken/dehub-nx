@@ -1,8 +1,52 @@
+/*******************************************************
+ * Prerequisites
+ *
+ * Create tables in Moralis Database
+ * 1. `VimeoCustomer`
+ * userObjectId     string
+ * customerId       number
+ *
+ * 2. `VimeoCustomerProduct`
+ * type             number
+ * customerId       number
+ * productId        number
+ ******************************************************/
+
 const chainId = '0x61';
 // testnet DeHub token address
 const DeHubToken = '0x5A5e32fE118E7c7b6536d143F446269123c0ba74'.toLowerCase();
 
 const DeHubTokenMinAmount = 10 ** 5 * 100000;
+
+/**
+ * Get all the products granted to existing customer
+ * @param {*} customerId
+ * @returns list of product id
+ */
+async function getCustomerProducts(customerId) {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const res = await Moralis.Cloud.httpRequest({
+      method: 'GET',
+      url: `https://api.vhx.tv/customers/${customerId}`,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${AuthKey}`,
+      },
+    });
+    const data = res.data;
+    if (data._embedded && data._embedded.products) {
+      return data._embedded.products.map(product => {
+        return product.id;
+      });
+    }
+    return [];
+  } catch (err) {
+    logger.error(JSON.stringify(err));
+    return null;
+  }
+}
 
 /**
  * List the products which are on the platform
