@@ -144,7 +144,7 @@ async function isMoralisUserByAddress(address) {
  * @returns amount in big number if success
  */
 async function getTokenBalance(chainId, address, tokenAddress) {
-  const logger = new Moralis.Cloud.getLogger();
+  const logger = Moralis.Cloud.getLogger();
   try {
     const accountTokens = await Moralis.Web3API.account.getTokenBalances({
       chain: chainId,
@@ -161,7 +161,7 @@ async function getTokenBalance(chainId, address, tokenAddress) {
 }
 
 async function getDeHubTokenBalance(chainId, address) {
-  const logger = new Moralis.Cloud.getLogger();
+  const logger = Moralis.Cloud.getLogger();
   try {
     const config = await getDeHubTokenConfig(chainId);
     return getTokenBalance(chainId, address, config.address);
@@ -196,7 +196,7 @@ async function getStakedAmount(chainId, address) {
  * Update on Moralis Database
  ******************************************************/
 async function setCanPlay(user, value) {
-  const logger = new Moralis.Cloud.getLogger();
+  const logger = Moralis.Cloud.getLogger();
   try {
     if (user) {
       logger.info(`setting can_play: ${JSON.stringify(user)}, ${value}`);
