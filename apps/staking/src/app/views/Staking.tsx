@@ -6,11 +6,7 @@ export default function Staking() {
   return (
     <>
       <Container>
-        <h1>
-          <span style={{ fontSize: '42px' }}>DeHub</span>
-          <br />
-          <span style={{ fontSize: '62px' }}>Staking</span>
-        </h1>
+        <h1>Staking</h1>
       </Container>
       <div className="my-8">
         <StakedTopInfoBox />
