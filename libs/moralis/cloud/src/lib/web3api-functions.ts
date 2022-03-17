@@ -32,7 +32,7 @@ export async function getTokenBalance(
 export async function getDeHubTokenBalance(
   chainId: SupportedNetwork,
   address: string
-): Promise<Moralis.Cloud.BigNumber> {
+): Promise<typeof Moralis.Cloud.BigNumber> {
   const logger = Moralis.Cloud.getLogger();
   try {
     const config = await getDeHubTokenConfig(chainId);
