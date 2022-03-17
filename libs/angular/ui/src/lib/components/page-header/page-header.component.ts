@@ -4,13 +4,6 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import {
-  PageEarnFragment,
-  PageGameFragment,
-  PageHomeFragment,
-  PageLearnFragment,
-  PageStreamFragment,
-} from '@dehub/shared/model';
 import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 
 @Component({
@@ -32,13 +25,16 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
 })
-export class PageHeaderComponent implements OnInit {
-  @Input() page?:
-    | PageHomeFragment
-    | PageStreamFragment
-    | PageGameFragment
-    | PageLearnFragment
-    | PageEarnFragment;
+export class PageHeaderComponent<
+  P extends {
+    mainTitle?: string;
+    showTitle?: boolean;
+    subtitle?: string;
+    showSubtitle?: boolean;
+  }
+> implements OnInit
+{
+  @Input() page?: P;
 
   constructor() {}
 

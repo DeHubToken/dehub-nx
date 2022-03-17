@@ -103,9 +103,10 @@ export const defaultSharedEnv: SharedEnv = {
     },
   },
 
+  // DeHub Test
   moralis: {
-    appId: 'QfgYJskOXrYJnSAiB3KZPMMesmlJB6JBqY3GOzHV',
-    serverUrl: 'https://vamoxwojj7ht.moralisweb3.com:2053/server',
+    appId: 'UxvDeanBLvO8ym31e6x6dYdQa2Qlzw2jOSrhm3cE',
+    serverUrl: 'https://nm6dir4me3i0.usemoralis.com:2053/server',
   },
 
   web3: {
