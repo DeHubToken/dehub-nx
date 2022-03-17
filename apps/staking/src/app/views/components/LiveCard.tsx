@@ -85,6 +85,8 @@ const LiveCard = () => {
 
   const projectedRewardsInBUSD = projectedRewards?.times(deHubPriceInBUSD);
 
+  const yourStakeInBUSD = userStakeInfo.amount.times(deHubPriceInBUSD);
+
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
@@ -239,7 +241,15 @@ const LiveCard = () => {
                             DEHUB_DECIMALS
                           )}
                         </Text>
-                        <Text fontWeight={900} className="pb-2">
+                        <Text>
+                          $
+                          {getFullDisplayBalance(
+                            yourStakeInBUSD,
+                            DEHUB_DECIMALS,
+                            BUSD_DISPLAY_DECIMALS
+                          )}
+                        </Text>
+                        <Text fontWeight={900} className="pt-1 pb-2">
                           {poolInfo.totalStaked.gt(BIG_ZERO)
                             ? userStakeInfo.amount
                                 .times(new BigNumber(100))
