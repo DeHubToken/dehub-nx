@@ -17,21 +17,24 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
       modal
       className="p-fluid"
       header="Connect Wallet"
-      footer=" "
       style={{ width: '350px' }}
       onHide={onDismiss}
     >
-      <div className="flex flex-column">
-        <div className="flex flex-column mt-2 mb-3">
-          <Button className="p-shadow-4" onClick={() => doConnect('metamask')}>
+      <div className="mt-2 mb-3">
+        <Button
+          icon={
             <MetaMaskIcon
               style={{ width: '32px', height: '16px', paddingRight: '10px' }}
             />
-            Metamask
-          </Button>
-        </div>
-        <div className="flex flex-column mt-2 mb-3 md:hidden">
-          <Button className="p-shadow-4" onClick={() => doConnect('metamask')}>
+          }
+          iconPos="left"
+          label="Metamask"
+          onClick={() => doConnect('metamask')}
+        ></Button>
+      </div>
+      <div className="mt-2 mb-3 md:hidden">
+        <Button
+          icon={
             <TrustWalletIcon
               style={{
                 width: '32px',
@@ -40,20 +43,23 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
                 marginLeft: '-1px',
               }}
             />
-            Trust Wallet
-          </Button>
-        </div>
-        <div className="flex flex-column mt-2 mb-3">
-          <Button
-            className="p-shadow-4"
-            onClick={() => doConnect('walletconnect')}
-          >
+          }
+          iconPos="left"
+          label="Trust Wallet"
+          onClick={() => doConnect('metamask')}
+        ></Button>
+      </div>
+      <div className="mt-2 mb-3">
+        <Button
+          icon={
             <WalletConnectIcon
               style={{ width: '32px', height: '11px', paddingRight: '10px' }}
             />
-            WalletConnect
-          </Button>
-        </div>
+          }
+          iconPos="left"
+          label="WalletConnect"
+          onClick={() => doConnect('walletconnect')}
+        ></Button>
       </div>
     </Dialog>
   );

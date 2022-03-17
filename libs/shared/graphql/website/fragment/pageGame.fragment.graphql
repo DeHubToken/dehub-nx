@@ -3,7 +3,9 @@ fragment PageGame on PageGame {
     ...Sys
   }
   mainTitle
+  showTitle
   subtitle
+  showSubtitle
   sectionsCollection(limit: 10, preview: $isPreview) {
     items {
       ...PageSectionFeaturePosts

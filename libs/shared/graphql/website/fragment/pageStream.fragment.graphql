@@ -3,7 +3,9 @@ fragment PageStream on PageStream {
     ...Sys
   }
   mainTitle
+  showTitle
   subtitle
+  showSubtitle
   sectionsCollection(limit: 10, preview: $isPreview) {
     items {
       ...PageSectionFeaturePosts

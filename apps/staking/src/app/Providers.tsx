@@ -6,10 +6,8 @@ import { Provider } from 'react-redux';
 import { environment } from '../environments/environment';
 import store from './state';
 
-const { landing } = environment.dehub;
 const { appId, serverUrl } = environment.moralis;
 const { chainId } = environment.web3;
-const { baseUrl } = environment;
 
 const Providers: React.FC = ({ children }) => {
   return (
@@ -20,12 +18,7 @@ const Providers: React.FC = ({ children }) => {
     >
       <Provider store={store}>
         <RefreshContextProvider>
-          <ConnectProvider
-            defaultChainId={chainId}
-            baseUrl={baseUrl}
-            pageTitle={'DeHub Staking'}
-            landingUrl={landing}
-          >
+          <ConnectProvider defaultChainId={chainId}>
             <HelmetProvider>{children}</HelmetProvider>
           </ConnectProvider>
         </RefreshContextProvider>

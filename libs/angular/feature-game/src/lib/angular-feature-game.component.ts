@@ -14,10 +14,7 @@ import { map, Observable } from 'rxjs';
   template: `
     <ng-container *ngIf="pageGame$ | async as pageGame" class="grid">
       <!-- Titles -->
-      <div [@bounceInLeft] class="col-12 mb-8">
-        <h1>{{ pageGame.mainTitle }}</h1>
-        <h5>{{ pageGame.subtitle }}</h5>
-      </div>
+      <dhb-page-header [page]="pageGame"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections

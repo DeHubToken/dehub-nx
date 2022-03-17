@@ -1,9 +1,12 @@
 export { default as BalanceInput } from './lib/BalanceInput';
+export * from './lib/Button';
+export { default as BuyDeHubFloozModal } from './lib/BuyDeHubFloozModal';
 export { default as Footer } from './lib/Footer';
 export { default as Header } from './lib/Header';
 export * from './lib/Layout';
 export { default as Loader } from './lib/Loader';
 export { default as FullScreenLoader } from './lib/Loader/FullScreenLoader';
 export { default as SuspenseWithChunkError } from './lib/SuspenseWithChunkError';
+export * from './lib/TabMenu';
 export * from './lib/Text';
 export { default as WalletModal } from './lib/WalletModal';

@@ -1,4 +1,4 @@
-import { Footer, Header, Loader, PageMeta } from '@dehub/react/ui';
+import { Footer, Header, Loader, PageMeta, TabMenu } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/model';
 import { decimalToHex, iOS } from '@dehub/shared/util';
 import { Moralis } from 'moralis';
@@ -13,7 +13,24 @@ const initMessage = {
 };
 
 const withLayout =
-  <P extends object>(Component: React.ComponentType<P>): React.FC<P> =>
+  <P extends object>(
+    {
+      baseUrl = '/',
+      pageTitle = 'DeHub D’App',
+      cexUrl = 'https://www.gate.io/trade/DEHUB_USDT',
+      downloadWalletUrl = 'https://metamask.io/download/',
+      landing = 'https://dehub.net',
+      activeTab,
+    }: {
+      baseUrl?: string;
+      pageTitle?: string;
+      cexUrl?: string;
+      downloadWalletUrl?: string;
+      landing?: string;
+      activeTab: string;
+    },
+    Component: React.ComponentType<P>
+  ): React.FC<P> =>
   ({ ...props }) => {
     const [showLoader, setShowLoader] = useState(false);
     const [message, setMessage] = useState(initMessage);
@@ -22,9 +39,9 @@ const withLayout =
     const {
       walletConnectingState,
       defaultChainId,
-      baseUrl,
-      pageTitle,
-      landingUrl,
+      // baseUrl,
+      // pageTitle,
+      // landingUrl: landing,
     } = useConnectContext();
 
     /*
@@ -83,22 +100,31 @@ const withLayout =
           <div
             className="layout-wrapper"
             style={{
-              background: `linear-gradient(45deg, rgba(11, 17, 19, 0.95), rgba(5, 17, 24, 0.9) 46%, rgba(6, 12, 29, 0.8) 71%, rgba(50, 19, 56, 0.95)), url("${baseUrl}/assets/img/back.jpg") no-repeat fixed center center /cover`,
+              backgroundImage: `url("${baseUrl}/assets/img/back.jpg") no-repeat fixed center center /cover`,
             }}
           >
             <Header
-              userMenu={<UserMenu />}
+              userMenu={
+                <UserMenu
+                  cexUrl={cexUrl}
+                  downloadWalletUrl={downloadWalletUrl}
+                />
+              }
               logo={{
                 href: 'https://dehub.net',
                 icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,
               }}
             />
+            <div className="layout-content py-0">
+              <TabMenu activeTab={activeTab} />
+            </div>
+
             <div className="layout-main">
               <div className="layout-content">
                 <Component {...(props as P)} />
               </div>
             </div>
-            <Footer landing={landingUrl} />
+            <Footer landing={landing} />
           </div>
         )}
       </div>

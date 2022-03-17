@@ -5,6 +5,12 @@ export const defaultSharedProdEnv: SharedEnv = {
   env: 'prod',
   production: true,
 
+  // DeHub Prod
+  moralis: {
+    appId: 'QfgYJskOXrYJnSAiB3KZPMMesmlJB6JBqY3GOzHV',
+    serverUrl: 'https://vamoxwojj7ht.moralisweb3.com:2053/server',
+  },
+
   web3: {
     ...defaultSharedEnv.web3,
     chainId: 56,

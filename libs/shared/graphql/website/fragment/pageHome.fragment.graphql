@@ -3,7 +3,9 @@ fragment PageHome on PageHome {
     ...Sys
   }
   mainTitle
+  showTitle
   subtitle
+  showSubtitle
   sectionsCollection(limit: 10, preview: $isPreview) {
     items {
       ...PageSectionFeaturePosts

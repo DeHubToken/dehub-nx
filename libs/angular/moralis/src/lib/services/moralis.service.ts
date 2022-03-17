@@ -59,7 +59,7 @@ export class MoralisService implements IMoralis {
 
   login(provider: MoralisWeb3ProviderType, chainId: number) {
     this.setWalletConnectingState(WalletConnectingState.WAITING);
-    const signingMessage = 'DeHub Dapp';
+    const signingMessage = 'DeHub D’App';
 
     (provider === 'metamask'
       ? Moralis.authenticate({ signingMessage }).then(async loggedInUser => {
