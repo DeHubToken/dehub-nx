@@ -1,3 +1,4 @@
+declare const { BigNumber }: typeof import('@ethersproject/bignumber');
 declare namespace MoralisMissingTypes {
   declare namespace Moralis {
     declare namespace Cloud {
@@ -6,6 +7,8 @@ declare namespace MoralisMissingTypes {
         warn: (error: string) => void;
         error: (error: string) => void;
       };
+
+      const BigNumber: BigNumber;
     }
   }
 }
