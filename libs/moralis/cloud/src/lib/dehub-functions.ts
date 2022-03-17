@@ -28,5 +28,3 @@ Moralis.Cloud.define('totalCirculatingSupply', async _request => {
 
   return +data / 1e5;
 });
-
-export default Moralis;

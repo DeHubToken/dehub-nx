@@ -1,87 +1,8 @@
-/*******************************************************
- * Prerequisites
- *
- * Create tables in Moralis Database
- * 1. `VimeoCustomer`
- * userObjectId     string
- * customerId       number
- *
- * 2. `VimeoCustomerProduct`
- * type             number
- * customerId       number
- * productId        number
- ******************************************************/
-
-const AuthKey = 'c0ZRWEJ4dTMzWjF4N1ZCa3lwLXloRG9wVzdMTjlTQ3A=';
 const chainId = '0x61';
 // testnet DeHub token address
 const DeHubToken = '0x5A5e32fE118E7c7b6536d143F446269123c0ba74'.toLowerCase();
 
 const DeHubTokenMinAmount = 10 ** 5 * 100000;
-
-/*******************************************************
- * Vimeo OTT api
- ******************************************************/
-/**
- * Create vimeo customer
- * OTT API always returns detailed customer information
- * when we register more times
- * @param {*} email user's email address, vimeo requires to email at least
- * @returns detailed customer information if successful,
- *          null if failed
- */
-async function createVimeoCustomer(email) {
-  const logger = Moralis.Cloud.getLogger();
-  try {
-    const res = await Moralis.Cloud.httpRequest({
-      method: 'POST',
-      url: 'https://api.vhx.tv/customers',
-      body: {
-        name: email,
-        email: email,
-      },
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${AuthKey}`,
-      },
-    });
-    return res.data;
-  } catch (err) {
-    logger.error(JSON.stringify(err));
-    return null;
-  }
-}
-
-/**
- * Get all the products granted to existing customer
- * @param {*} customerId
- * @returns list of product id
- */
-async function getCustomerProducts(customerId) {
-  const logger = Moralis.Cloud.getLogger();
-  try {
-    const res = await Moralis.Cloud.httpRequest({
-      method: 'GET',
-      url: `https://api.vhx.tv/customers/${customerId}`,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${AuthKey}`,
-      },
-    });
-    const data = res.data;
-    if (data._embedded && data._embedded.products) {
-      return data._embedded.products.map(product => {
-        return product.id;
-      });
-    }
-    return [];
-  } catch (err) {
-    logger.error(JSON.stringify(err));
-    return null;
-  }
-}
 
 /**
  * List the products which are on the platform
