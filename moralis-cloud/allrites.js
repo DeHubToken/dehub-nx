@@ -225,7 +225,9 @@ async function getTokenBalance(chainId, address, tokenAddress) {
     const filtered = accountTokens.filter(
       balance => balance.token_address === tokenAddress.toLowerCase()
     );
-    return new Moralis.Cloud.BigNumber(filtered[0].balance);
+    return filtered.length > 0
+      ? new Moralis.Cloud.BigNumber(filtered[0].balance)
+      : new Moralis.Cloud.BigNumber(0);
   } catch (err) {
     logger.error(`getTokenBalance error: ${JSON.stringify(err)}`);
     return null;
@@ -293,7 +295,7 @@ async function setCanPlay(user, value) {
  * Update can_play according to the balance of holding and staking
  * @param {*} address user address
  */
-async function updateCanPlay(address) {
+async function updateCanPlay(chainId, address) {
   const logger = Moralis.Cloud.getLogger();
   try {
     const user = await isMoralisUserByAddress(address);
@@ -301,9 +303,9 @@ async function updateCanPlay(address) {
       logger.error(`Not found Moralis User: ${address}`);
       return;
     }
-    const balance = await getDeHubTokenBalance(defChainId, address);
+    const balance = await getDeHubTokenBalance(chainId, address);
     logger.info(`user DeHub balance(${address}): ${balance.toString()}`);
-    const staked = await getStakedAmount(defChainId, address);
+    const staked = await getStakedAmount(chainId, address);
     logger.info(`user staked DeHub amount(${address}): ${staked.toString()}`);
     const total = balance.plus(staked);
     logger.info(`user total DeHub balance(${address}): ${total.toString()}`);
@@ -331,8 +333,8 @@ Moralis.Cloud.afterSave('DeHubTokenTransferEvents', async request => {
       `Noticed DeHubTokenTransferEvents, from: ${fromAddress}, to: ${toAddress}`
     );
 
-    await updateCanPlay(fromAddress);
-    await updateCanPlay(toAddress);
+    await updateCanPlay(defChainId, fromAddress);
+    await updateCanPlay(defChainId, toAddress);
   } catch (err) {
     logger.error(`DeHubTokenTransferEvents error: ${JSON.stringify(err)}`);
     return;
@@ -345,7 +347,7 @@ Moralis.Cloud.afterSave('DeHubStakingDepositEvents', async request => {
     const address = request.object.get('user');
     logger.info(`Noticed DeHubStakingDepositEvents, address: ${address}`);
 
-    await updateCanPlay(address);
+    await updateCanPlay(defChainId, address);
   } catch (err) {
     logger.error(`DeHubStakingDepositEvents error: ${JSON.stringify(err)}`);
     return;
@@ -358,7 +360,7 @@ Moralis.Cloud.afterSave('DeHubStakingHarvestEvents', async request => {
     const address = request.object.get('user');
     logger.info(`Noticed DeHubStakingHarvestEvents, address: ${address}`);
 
-    await updateCanPlay(address);
+    await updateCanPlay(defChainId, address);
   } catch (err) {
     logger.error(`DeHubStakingHarvestEvents error: ${JSON.stringify(err)}`);
     return;
@@ -371,7 +373,7 @@ Moralis.Cloud.afterSave('DeHubStakingWithdrawEvents', async request => {
     const address = request.object.get('user');
     logger.info(`Noticed DeHubStakingWithdrawEvents, address: ${address}`);
 
-    await updateCanPlay(address);
+    await updateCanPlay(defChainId, address);
   } catch (err) {
     logger.error(`DeHubStakingWithdrawEvents error: ${JSON.stringify(err)}`);
     return;
@@ -385,7 +387,7 @@ Moralis.Cloud.beforeLogin(async request => {
     const address = user.get('ethAddress');
     logger.info(`Noticed beforeLogin, address: ${address}`);
 
-    await updateCanPlay(address);
+    await updateCanPlay(defChainId, address);
   } catch (err) {
     logger.error(`beforeLogin error: ${JSON.stringify(err)}`);
     return;
