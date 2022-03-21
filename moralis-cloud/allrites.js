@@ -22,9 +22,11 @@
 const BSC_MAINNET = '0x38';
 const BSC_TESTNET = '0x61';
 
-const chainId = BSC_MAINNET;
+const defChainId = BSC_MAINNET;
+const dappName = 'DeHubStakingDapp';
+
 /*******************************************************
- * Define constants, will depend on `chainId`
+ * Define constants, will depend on `defChainId`
  ******************************************************/
 const ConfigFields = {
   [BSC_MAINNET]: {
@@ -99,27 +101,17 @@ async function getDeHubContracts(dappName) {
   const logger = Moralis.Cloud.getLogger();
   try {
     const Contracts = Moralis.Object.extend('Contracts');
-    const ContractABIs = Moralis.Object.extend('ContractABIs');
     const DeHubDapp = Moralis.Object.extend(dappName);
 
     const contractQuery = new Moralis.Query(Contracts);
-    const abisQuery = new Moralis.Query(ContractABIs);
     const dappQuery = new Moralis.Query(DeHubDapp);
 
-    contractQuery.matchesQuery('abi', abisQuery);
-    contractQuery.include('abi');
     dappQuery.matchesQuery('contract', contractQuery);
     dappQuery.include('contract');
 
     const contracts = await dappQuery.find();
     for (let i = 0; i < contracts.length; i++) {
       const contract = contracts[i].get('contract');
-      // Moralis does not support over 2 depths relational queries
-      // so we need to query one by one for abis
-      const abiR = contract.get('abi'); // typeof Table Object
-      abisQuery.equalTo('objectId', abiR.id);
-      const abiQ = await abisQuery.find();
-      contract.set('abi', abiQ[0].get('abi'));
 
       const address = contract.get('address');
       const name = contract.get('name');
@@ -134,6 +126,35 @@ async function getDeHubContracts(dappName) {
     return contracts;
   } catch (err) {
     logger.error(`getDeHubContracts error: ${JSON.stringify(err)}`);
+  }
+  return null;
+}
+
+async function getActiveStakingContracts() {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const date = new Date();
+    const contracts = await getDeHubContracts(dappName);
+    const filters = contracts.filter(contract => {
+      const chainId = contract.get('chainId');
+      if (parseInt(chainId) !== parseInt(defChainId, 16)) {
+        return false;
+      }
+
+      const year = contract.get('year');
+      const quarter = contract.get('quarter');
+      if (
+        date.getFullYear() !== year ||
+        parseInt(date.getUTCMonth() / 4) !== quarter - 1
+      ) {
+        return false;
+      }
+      return true;
+    });
+
+    return filters.length > 0 ? filters[0] : null;
+  } catch (err) {
+    logger.error(`getActiveStakingContracts error: ${JSON.stringify(err)}`);
   }
   return null;
 }
@@ -280,9 +301,9 @@ async function updateCanPlay(address) {
       logger.error(`Not found Moralis User: ${address}`);
       return;
     }
-    const balance = await getDeHubTokenBalance(chainId, address);
+    const balance = await getDeHubTokenBalance(defChainId, address);
     logger.info(`user DeHub balance(${address}): ${balance.toString()}`);
-    const staked = await getStakedAmount(chainId, address);
+    const staked = await getStakedAmount(defChainId, address);
     logger.info(`user staked DeHub amount(${address}): ${staked.toString()}`);
     const total = balance.plus(staked);
     logger.info(`user total DeHub balance(${address}): ${total.toString()}`);
@@ -374,7 +395,7 @@ Moralis.Cloud.beforeLogin(async request => {
 Moralis.Cloud.define('getStakingContracts', async request => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const contracts = await getDeHubContracts('DeHubStakingDapp');
+    const contracts = await getDeHubContracts(dappName);
 
     let collect = [];
     for (let i = 0; i < contracts.length; i++) {
@@ -398,6 +419,38 @@ Moralis.Cloud.define('getStakingContracts', async request => {
       });
     }
     return collect;
+  } catch (err) {
+    logger.error(`getStakingContracts error: ${JSON.stringify(err)}`);
+    return null;
+  }
+});
+
+Moralis.Cloud.define('getActiveStakingContracts', async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const activeContract = await getActiveStakingContracts();
+    if (!activeContract) {
+      return null;
+    }
+
+    const year = activeContract.get('year');
+    const quarter = activeContract.get('quarter');
+
+    const contract = activeContract.get('contract');
+    const address = contract.get('address');
+
+    const name = contract.get('name');
+    const chainId = contract.get('chainId');
+    const abi = contract.get('abi');
+
+    return {
+      year,
+      quarter,
+      address,
+      name,
+      chainId,
+      abi,
+    };
   } catch (err) {
     logger.error(`getStakingContracts error: ${JSON.stringify(err)}`);
     return null;
