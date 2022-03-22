@@ -198,7 +198,8 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Projected Rewards</Heading>
-                    {projectedRewards &&
+                    {account &&
+                    projectedRewards &&
                     projectedRewardsInBUSD &&
                     !projectedRewardsInBUSD.isNaN() ? (
                       <>
@@ -241,7 +242,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Your Stake</Heading>
-                    {fetchStakeStatus === FetchStatus.SUCCESS && poolInfo ? (
+                    {account && fetchStakeStatus === FetchStatus.SUCCESS ? (
                       <>
                         <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
@@ -298,7 +299,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Pending Rewards</Heading>
-                    {pendingHarvest ? (
+                    {account && pendingHarvest ? (
                       <>
                         <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
@@ -329,26 +330,18 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-2">Weekly BNB Rewards</Heading>
+                    {account && fetchRewardStatus === FetchStatus.SUCCESS ? (
+                      !hasAlreadyClaimed && (
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          Your BNB Reward:{' '}
+                          {getFullDisplayBalance(bnbRewards, BNB_DECIMALS, 10)}
+                        </Text>
+                      )
+                    ) : (
+                      <Skeleton width="100%" height="1.5rem" />
+                    )}
                     {account &&
-                      (fetchRewardStatus === FetchStatus.SUCCESS ? (
-                        !hasAlreadyClaimed && (
-                          <Text
-                            fontSize="14px"
-                            fontWeight={900}
-                            className="pb-2"
-                          >
-                            Your BNB Reward:{' '}
-                            {getFullDisplayBalance(
-                              bnbRewards,
-                              BNB_DECIMALS,
-                              10
-                            )}
-                          </Text>
-                        )
-                      ) : (
-                        <Skeleton width="100%" height="1.5rem" />
-                      ))}
-                    {fetchRewardStatus === FetchStatus.SUCCESS &&
+                    fetchRewardStatus === FetchStatus.SUCCESS &&
                     totalBNBRewards ? (
                       !hasAlreadyClaimed && (
                         <Text fontSize="14px" fontWeight={900} className="pb-2">

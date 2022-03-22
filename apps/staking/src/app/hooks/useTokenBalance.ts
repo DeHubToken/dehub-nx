@@ -52,8 +52,13 @@ export const useTokenBalance = (tokenAddress: string) => {
     };
     if (account) {
       fetchBalance();
+    } else {
+      setBalanceState({
+        balance: BIG_ZERO,
+        fetchStatus: NOT_FETCHED,
+      });
     }
-  }, [account, tokenAddress, fastRefresh, SUCCESS, FAILED]);
+  }, [account, tokenAddress, fastRefresh, NOT_FETCHED, SUCCESS, FAILED]);
 
   return balanceState;
 };

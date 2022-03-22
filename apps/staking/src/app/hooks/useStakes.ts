@@ -58,6 +58,16 @@ export const useStakes = (contractIndex: number, staker: string | null) => {
     };
     if (staker) {
       fetch();
+    } else {
+      setFetchStatus(FetchStatus.NOT_FETCHED);
+      setUserInfo({
+        amount: BIG_ZERO,
+        reflectionDebt: BIG_ZERO,
+        reflectionPending: BIG_ZERO,
+        harvestDebt: BIG_ZERO,
+        harvestPending: BIG_ZERO,
+        harvested: false,
+      });
     }
   }, [contractIndex, staker, fastRefresh]);
 
@@ -84,8 +94,10 @@ export const usePendingHarvest = (
     };
     if (staker) {
       fetch();
+    } else {
+      setPendingHarvest(undefined);
     }
-  }, [staker, fastRefresh]);
+  }, [contractIndex, staker, fastRefresh]);
 
   return pendingHarvest;
 };

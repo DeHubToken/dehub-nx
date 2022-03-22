@@ -9,7 +9,11 @@ import { lazy, useMemo } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { environment } from '../environments/environment';
 import history from './routerHistory';
-import { useFetchPools, usePullBusdPrice } from './state/application/hooks';
+import {
+  useFetchPools,
+  usePullBlockNumber,
+  usePullBusdPrice,
+} from './state/application/hooks';
 
 // This config is required for number formatting
 BigNumber.config({
@@ -27,6 +31,7 @@ export function App() {
   useEagerMoralis();
   useFetchPools();
   usePullBusdPrice();
+  usePullBlockNumber();
 
   const Staking = useMemo(
     () =>
