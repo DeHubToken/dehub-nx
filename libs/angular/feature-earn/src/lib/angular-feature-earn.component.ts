@@ -7,7 +7,6 @@ import {
 import { EnvToken, PageEarnCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageEarnFragment } from '@dehub/shared/model';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -25,7 +24,6 @@ import { map, Observable } from 'rxjs';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
 })
 export class AngularFeatureEarnComponent implements OnInit {
   pageEarn$?: Observable<PageEarnFragment | undefined>;

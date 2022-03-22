@@ -7,7 +7,6 @@ import {
 import { EnvToken, PageHomeCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageHomeFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -30,7 +29,6 @@ import { map } from 'rxjs/operators';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
 })
 export class AngularFeatureHomeComponent implements OnInit {
   pageHome$?: Observable<PageHomeFragment | undefined>;
