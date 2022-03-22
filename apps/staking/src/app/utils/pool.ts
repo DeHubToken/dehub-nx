@@ -12,6 +12,10 @@ export const isLivePool = (pool: PoolInfo) => {
   );
 };
 
+export const isPastPool = (pool: PoolInfo) => {
+  return moment().isAfter(moment(new Date(pool.closeTimeStamp * 1000)));
+};
+
 export const quarterNumber = (pool: PoolInfo): number => {
   return moment(new Date(pool.openTimeStamp * 1000)).quarter();
 };

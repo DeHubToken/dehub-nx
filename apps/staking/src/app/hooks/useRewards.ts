@@ -57,7 +57,10 @@ export const useWeeklyRewards = (staker: string | null) => {
 
   const fetchBNBRewards = useCallback(
     async (amount: BigNumber) => {
-      if (!staker || !amount) return;
+      if (!staker || !amount) {
+        setFetchStatus(FetchStatus.NOT_FETCHED);
+        return;
+      }
       const rewardsContract = getRewardsContract();
       const rewards = await rewardsContract.calcCurrentClaimableShare(
         staker,

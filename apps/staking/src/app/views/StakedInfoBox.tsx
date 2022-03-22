@@ -4,11 +4,7 @@ import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/util';
 import BigNumber from 'bignumber.js';
 import { Skeleton } from 'primereact/skeleton';
 import { useEffect, useState } from 'react';
-import {
-  useDehubBusdPrice,
-  usePools,
-  usePullBlockNumber,
-} from '../state/application/hooks';
+import { useDehubBusdPrice, usePools } from '../state/application/hooks';
 import { isLivePool } from '../utils/pool';
 
 interface StakeInfo {
@@ -24,8 +20,6 @@ const StakedInfoBox = () => {
     totalReward: BIG_ZERO,
   });
 
-  usePullBlockNumber();
-
   const dehubPrice = useDehubBusdPrice();
   const pools = usePools();
 
@@ -34,7 +28,9 @@ const StakedInfoBox = () => {
       pools.reduce(
         (prev, current, currentIndex) => ({
           totalStaked: prev.totalStaked.plus(current.totalStaked),
-          currentReward: isLivePool(current) ? current.harvestFund : BIG_ZERO,
+          currentReward: prev.currentReward.plus(
+            isLivePool(current) ? current.harvestFund : BIG_ZERO
+          ),
           totalReward: prev.totalReward.plus(current.harvestFund),
         }),
         {
