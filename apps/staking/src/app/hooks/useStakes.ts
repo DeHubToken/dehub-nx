@@ -35,7 +35,7 @@ const processUserInfo = (userInfo: any): UserInfo => {
   };
 };
 
-export const useStakes = (staker: string | null) => {
+export const useStakes = (contractIndex: number, staker: string | null) => {
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     amount: BIG_ZERO,
@@ -49,7 +49,7 @@ export const useStakes = (staker: string | null) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const stakingContract = getStakingContract();
+      const stakingContract = getStakingContract(contractIndex);
       const ret = await stakingContract?.userInfo(staker);
       if (ret) {
         setUserInfo(processUserInfo(ret));
@@ -59,7 +59,7 @@ export const useStakes = (staker: string | null) => {
     if (staker) {
       fetch();
     }
-  }, [staker, fastRefresh]);
+  }, [contractIndex, staker, fastRefresh]);
 
   return {
     fetchStatus,
@@ -67,7 +67,10 @@ export const useStakes = (staker: string | null) => {
   };
 };
 
-export const usePendingHarvest = (staker: string | null) => {
+export const usePendingHarvest = (
+  contractIndex: number,
+  staker: string | null
+) => {
   const { fastRefresh } = useRefresh();
   const [pendingHarvest, setPendingHarvest] = useState<BigNumber | undefined>(
     undefined
@@ -75,7 +78,7 @@ export const usePendingHarvest = (staker: string | null) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const stakingContract = getStakingContract();
+      const stakingContract = getStakingContract(contractIndex);
       const ret = await stakingContract?.pendingHarvest(staker);
       setPendingHarvest(ethersToBigNumber(ret[0].add(ret[1])));
     };

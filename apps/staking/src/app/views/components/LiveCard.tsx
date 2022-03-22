@@ -28,14 +28,19 @@ import {
 import { useStakePaused } from '../../hooks/usePaused';
 import { useWeeklyRewards } from '../../hooks/useRewards';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
-import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
+import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
+
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
-const LiveCard = () => {
+interface CardProps {
+  poolIndex: number;
+}
+
+const LiveCard = ({ poolIndex }: CardProps) => {
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
 
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
@@ -44,18 +49,21 @@ const LiveCard = () => {
   const [pendingClaimTx, setPendingClaimTx] = useState(false);
 
   const { account } = useMoralis();
-  const stakingContract = useStakingContract();
+  const stakingContract = useStakingContract(poolIndex);
   const rewardsContract = useRewardsContract();
-  const paused = useStakePaused();
+  const paused = useStakePaused(poolIndex);
   const { slowRefresh } = useRefresh();
-  const poolInfo = usePoolInfo();
+  const pools = usePools();
+  const poolInfo = pools[poolIndex];
   const closeTimeStamp = poolInfo
     ? Number(poolInfo.closeTimeStamp) * 1000
     : '0';
 
-  const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
-    useStakes(account);
-  const pendingHarvest = usePendingHarvest(account);
+  const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } = useStakes(
+    poolIndex,
+    account
+  );
+  const pendingHarvest = usePendingHarvest(poolIndex, account);
 
   const period = poolInfo
     ? poolInfo?.closeTimeStamp - poolInfo?.openTimeStamp
@@ -395,12 +403,14 @@ const LiveCard = () => {
         </StyledBox>
       </Card>
       <StakeModal
-        id="stake"
+        poolIndex={poolIndex}
+        type="stake"
         open={openStakeModal}
         onHide={() => handleModal('stake', false)}
       />
       <StakeModal
-        id="unstake"
+        poolIndex={poolIndex}
+        type="unstake"
         open={openUnstakeModal}
         onHide={() => handleModal('unstake', false)}
       />

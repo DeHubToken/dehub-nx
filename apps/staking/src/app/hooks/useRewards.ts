@@ -9,7 +9,10 @@ import {
   getStakingContract,
 } from '../utils/contractHelpers';
 
-export const useProjectRewards = (staker?: string): BigNumber | undefined => {
+export const useProjectRewards = (
+  contractIndex: number,
+  staker?: string
+): BigNumber | undefined => {
   const [projectRewards, setProjectRewards] = useState<
     | {
         claimableReflection: EthersBigNumber;
@@ -21,7 +24,7 @@ export const useProjectRewards = (staker?: string): BigNumber | undefined => {
 
   useEffect(() => {
     const fetch = async () => {
-      const stakingContract = getStakingContract();
+      const stakingContract = getStakingContract(contractIndex);
       const ret = await stakingContract?.projectedRewards(staker);
       setProjectRewards(ret);
     };
@@ -29,7 +32,7 @@ export const useProjectRewards = (staker?: string): BigNumber | undefined => {
     if (staker) {
       fetch();
     }
-  }, [staker, fastRefresh]);
+  }, [contractIndex, staker, fastRefresh]);
 
   return useMemo(() => {
     if (!projectRewards) return undefined;

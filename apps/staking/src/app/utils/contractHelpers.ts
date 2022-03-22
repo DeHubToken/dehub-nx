@@ -33,8 +33,11 @@ export const getBep20Contract = (
   return getContract(address, Bep20Abi, signer);
 };
 
-export const getStakingContract = (signer?: Signer | Provider) => {
-  return getContract(getStakingAddress(), StakingAbi, signer);
+export const getStakingContract = (
+  index: number,
+  signer?: Signer | Provider
+) => {
+  return getContract(getStakingAddress(index), StakingAbi, signer);
 };
 
 export const getRewardsContract = (signer?: Signer | Provider) => {

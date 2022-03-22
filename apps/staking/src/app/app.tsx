@@ -9,7 +9,7 @@ import { lazy, useMemo } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { environment } from '../environments/environment';
 import history from './routerHistory';
-import { useFetchPoolInfo, usePullBusdPrice } from './state/application/hooks';
+import { useFetchPools, usePullBusdPrice } from './state/application/hooks';
 
 // This config is required for number formatting
 BigNumber.config({
@@ -25,7 +25,7 @@ const activeTab = NavigationTabMenu.Earn;
 
 export function App() {
   useEagerMoralis();
-  useFetchPoolInfo();
+  useFetchPools();
   usePullBusdPrice();
 
   const Staking = useMemo(
