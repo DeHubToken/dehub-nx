@@ -5,6 +5,8 @@ import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { AngularFeatureStreamRoutingModule } from './angular-feature-stream-routing.module';
 import { AngularFeatureStreamComponent } from './angular-feature-stream.component';
+import { StreamAccessWallComponent } from './components/stream-access-wall.component';
+import { CanPlayGuard } from './guards';
 
 @NgModule({
   imports: [
@@ -20,6 +22,7 @@ import { AngularFeatureStreamComponent } from './angular-feature-stream.componen
 
     AngularFeatureStreamRoutingModule,
   ],
-  declarations: [AngularFeatureStreamComponent],
+  declarations: [AngularFeatureStreamComponent, StreamAccessWallComponent],
+  providers: [CanPlayGuard],
 })
 export class AngularFeatureStreamModule {}

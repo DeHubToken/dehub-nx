@@ -5,18 +5,23 @@ import {
   WalletConnectingState,
 } from '@dehub/shared/model';
 import {
+  filterEmpty,
   publishReplayRefCount,
   setupMetamaskNetwork,
 } from '@dehub/shared/util';
 import * as events from 'events';
 import { Moralis } from 'moralis';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { User } from '../models/moralis.models';
 
 interface IMoralis {
   user$: Observable<User | undefined>;
   isAuthenticated$: Observable<boolean>;
+
+  username$: Observable<string>;
+  canPlay$: Observable<boolean>;
+
   login: (provider: MoralisWeb3ProviderType, chainId: number) => void;
   logout: () => void;
 
@@ -30,13 +35,29 @@ export class MoralisService implements IMoralis {
   );
 
   user$ = this.userSubject.asObservable().pipe(
-    tap(loggedInUser =>
-      this.logger.info(`Current user: ${loggedInUser?.attributes.username}`)
+    // Need to refetch current user for updated attributes
+    switchMap(() =>
+      from(Moralis.User.current()?.fetch() as Promise<User | undefined>)
     ),
-    publishReplayRefCount()
+    tap(loggedInUser =>
+      this.logger.info(
+        `Current user: ${loggedInUser?.attributes.username}, can_play: ${loggedInUser?.attributes.can_play}`
+      )
+    )
   );
 
+  private userAttributes$ = this.user$.pipe(map(user => user?.attributes));
+
   isAuthenticated$ = this.user$.pipe(map(user => !!user));
+
+  canPlay$ = this.userAttributes$.pipe(
+    map(attributes => attributes?.can_play ?? false)
+  );
+
+  username$ = this.userAttributes$.pipe(
+    filterEmpty(),
+    map(({ username }) => username)
+  );
 
   private walletConnectingStateSubject =
     new BehaviorSubject<WalletConnectingState>(WalletConnectingState.INIT);
@@ -74,13 +95,13 @@ export class MoralisService implements IMoralis {
                 this.setWalletConnectingState(WalletConnectingState.ADD_NETWORK)
             )
           ) {
-            this.userSubject.next(loggedInUser);
+            this.userSubject.next(loggedInUser as User);
           } else {
             this.logout();
           }
         })
       : Moralis.authenticate({ signingMessage, provider }).then(loggedInUser =>
-          this.userSubject.next(loggedInUser)
+          this.userSubject.next(loggedInUser as User)
         )
     )
       .then(() => this.setWalletConnectingState(WalletConnectingState.COMPLETE))
