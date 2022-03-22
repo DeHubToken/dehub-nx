@@ -16,6 +16,7 @@ export interface StartOptions {
 
 export interface Attributes extends Moralis.Attributes {
   username: string;
+  ethAddress: string;
   can_play?: boolean;
 }
 

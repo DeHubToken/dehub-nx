@@ -11,7 +11,7 @@ import {
 } from '@dehub/shared/util';
 import * as events from 'events';
 import { Moralis } from 'moralis';
-import { BehaviorSubject, from, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { User } from '../models/moralis.models';
 
@@ -36,8 +36,8 @@ export class MoralisService implements IMoralis {
 
   user$ = this.userSubject.asObservable().pipe(
     // Need to refetch current user for updated attributes
-    switchMap(() =>
-      from(Moralis.User.current()?.fetch() as Promise<User | undefined>)
+    switchMap(currentUser =>
+      currentUser ? from(currentUser.fetch() as Promise<User>) : of(undefined)
     ),
     tap(loggedInUser =>
       this.logger.info(
