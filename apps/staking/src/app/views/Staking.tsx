@@ -38,7 +38,11 @@ export default function Staking() {
         {pools.map((pool: PoolInfo, poolIndex: number) => {
           if (isComingPool(pool)) {
             return <ComingSoon key={poolIndex} poolIndex={poolIndex} />;
-          } else if (isLivePool(pool)) {
+          }
+          return null;
+        })}
+        {pools.map((pool: PoolInfo, poolIndex: number) => {
+          if (isLivePool(pool)) {
             return <LiveCard key={poolIndex} poolIndex={poolIndex} />;
           }
           return null;
