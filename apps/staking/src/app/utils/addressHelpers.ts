@@ -1,6 +1,6 @@
 import { environment } from '../../environments/environment';
 
-export const getAddress = (label: string): string => {
+export const getAddress = (label: string): string | string[] => {
   const contracts = {
     ...environment.web3.addresses.contracts,
     ...environment.contracts,
@@ -10,21 +10,25 @@ export const getAddress = (label: string): string => {
 };
 
 export const getMultiCallAddress = (): string => {
-  return getAddress('multiCall');
+  return getAddress('multiCall') as string;
 };
 
 export const getDehubAddress = (): string => {
-  return getAddress('dehub');
+  return getAddress('dehub') as string;
 };
 
 export const getBnbAddress = (): string => {
-  return getAddress('bnb');
+  return getAddress('bnb') as string;
 };
 
 export const getRewardsAddress = (): string => {
-  return getAddress('rewards');
+  return getAddress('rewards') as string;
 };
 
-export const getStakingAddress = (): string => {
-  return getAddress('staking');
+export const getStakingAddress = (index: number): string => {
+  return (getAddress('staking') as string[])[index];
+};
+
+export const getStakingAddresses = (): string[] => {
+  return getAddress('staking') as string[];
 };

@@ -2,21 +2,26 @@ import { Box, Heading, Text } from '@dehub/react/ui';
 import moment from 'moment';
 import { Card } from 'primereact/card';
 import styled from 'styled-components';
-import { usePoolInfo } from '../../state/application/hooks';
+import { usePools } from '../../state/application/hooks';
 import { timeFromNow } from '../../utils/timeFromNow';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
-const ComingSoon = () => {
+interface ComingSoonProps {
+  poolIndex: number;
+}
+
+const ComingSoon = ({ poolIndex }: ComingSoonProps) => {
   const nextQ = `Q${moment().add(3, 'months').quarter()} ${moment()
     .add(3, 'months')
     .year()}`;
   const currentQ = `Q${moment().quarter()} ${moment().year()}`;
   const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
 
-  const poolInfo = usePoolInfo();
+  const pools = usePools();
+  const poolInfo = pools[poolIndex];
   const openTimeStamp = poolInfo ? Number(poolInfo.openTimeStamp) * 1000 : '0';
 
   return (

@@ -1,32 +1,25 @@
 import { Container } from '@dehub/react/ui';
-import moment from 'moment';
-import useCurrentTime from '../hooks/useTimer';
-import { usePoolInfo } from '../state/application/hooks';
+import { usePools } from '../state/application/hooks';
+import { PoolInfo } from '../state/application/types';
+import { isComingPool, isLivePool } from '../utils/pool';
 import ComingSoon from './components/ComingSoon';
 import LiveCard from './components/LiveCard';
+import PastCard from './components/PastCard';
 
 const StakedBottomInfoBox = () => {
-  useCurrentTime();
-  const poolInfo = usePoolInfo();
-
-  const openTimeStamp = poolInfo ? Number(poolInfo.openTimeStamp) * 1000 : 0;
-  const closeTimeStamp = poolInfo ? Number(poolInfo.closeTimeStamp) * 1000 : 0;
-
-  const isLiveCard = () => {
-    return (
-      moment().isAfter(moment(new Date(openTimeStamp))) &&
-      moment().isBefore(moment(new Date(closeTimeStamp)))
-    );
-  };
-
-  const isComingSoon = () => {
-    return moment().isBefore(moment(new Date(openTimeStamp)));
-  };
+  const pools = usePools();
 
   return (
     <Container>
-      {isComingSoon() && <ComingSoon />}
-      {isLiveCard() && <LiveCard />}
+      {pools.map((pool: PoolInfo, poolIndex: number) => {
+        if (isComingPool(pool)) {
+          return <ComingSoon key={poolIndex} poolIndex={poolIndex} />;
+        } else if (isLivePool(pool)) {
+          return <LiveCard key={poolIndex} poolIndex={poolIndex} />;
+        } else {
+          return <PastCard key={poolIndex} poolIndex={poolIndex} />;
+        }
+      })}
     </Container>
   );
 };

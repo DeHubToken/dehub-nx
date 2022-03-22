@@ -45,11 +45,11 @@ export const useBnbContract = (): Contract | null => {
   return useMemo(() => getBep20Contract(getBnbAddress()), []);
 };
 
-export const useStakingContract = (): Contract | null => {
+export const useStakingContract = (contractIndex: number): Contract | null => {
   const { web3 } = useMoralis();
   return useMemo(
-    () => (web3 ? getStakingContract(web3.getSigner()) : null),
-    [web3]
+    () => (web3 ? getStakingContract(contractIndex, web3.getSigner()) : null),
+    [web3, contractIndex]
   );
 };
 

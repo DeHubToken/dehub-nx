@@ -12,11 +12,11 @@ import { useAppDispatch } from '..';
 import { AppState } from '../index';
 import {
   fetchDehubPrice,
-  fetchPoolInfo,
+  fetchPools,
   setWalletConnectingState,
   updateBlockNumber,
 } from './';
-import { PoolInfo } from './types';
+import { PoolInfo, SerializedPoolInfo } from './types';
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(
@@ -48,22 +48,24 @@ export const useDehubBusdPrice = (): BigNumber => {
   return dehubPriceBusd;
 };
 
-export const usePoolInfo = (): PoolInfo | undefined => {
-  const poolInfo = useSelector((state: AppState) => state.application.poolInfo);
+export const usePools = (): PoolInfo[] => {
+  const pools = useSelector((state: AppState) => state.application.pools);
 
-  return poolInfo
-    ? {
-        openTimeStamp: poolInfo.openTimeStamp,
-        closeTimeStamp: poolInfo.closeTimeStamp,
-        openBlock: poolInfo.openBlock,
-        closeBlock: poolInfo.closeBlock,
-        emergencyPull: poolInfo.emergencyPull,
-        harvestFund: new BigNumber(poolInfo.harvestFund),
-        lastUpdateBlock: new BigNumber(poolInfo.lastUpdateBlock),
-        valuePerBlock: new BigNumber(poolInfo.valuePerBlock),
-        totalStaked: new BigNumber(poolInfo.totalStaked),
-      }
-    : undefined;
+  return useMemo(
+    () =>
+      pools.map((pool: SerializedPoolInfo) => ({
+        openTimeStamp: pool.openTimeStamp,
+        closeTimeStamp: pool.closeTimeStamp,
+        openBlock: pool.openBlock,
+        closeBlock: pool.closeBlock,
+        emergencyPull: pool.emergencyPull,
+        harvestFund: new BigNumber(pool.harvestFund),
+        lastUpdateBlock: new BigNumber(pool.lastUpdateBlock),
+        valuePerBlock: new BigNumber(pool.valuePerBlock),
+        totalStaked: new BigNumber(pool.totalStaked),
+      })),
+    [pools]
+  );
 };
 
 export const usePullBusdPrice = () => {
@@ -75,12 +77,12 @@ export const usePullBusdPrice = () => {
   }, [dispatch, slowRefresh]);
 };
 
-export const useFetchPoolInfo = () => {
+export const useFetchPools = () => {
   const dispatch = useAppDispatch();
   const { slowRefresh } = useRefresh();
 
   useEffect(() => {
-    dispatch(fetchPoolInfo());
+    dispatch(fetchPools());
   }, [dispatch, slowRefresh]);
 };
 
