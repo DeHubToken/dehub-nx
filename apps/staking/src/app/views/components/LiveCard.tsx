@@ -17,9 +17,10 @@ import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
+import { SimpleCountDown } from '../../components/CountDown';
 import { FetchStatus } from '../../config/constants/types';
 import {
   useRewardsContract,
@@ -29,6 +30,7 @@ import { useStakePaused } from '../../hooks/usePaused';
 import { useWeeklyRewards } from '../../hooks/useRewards';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
+import { quarterMark } from '../../utils/pool';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
 
@@ -41,8 +43,6 @@ interface CardProps {
 }
 
 const LiveCard = ({ poolIndex }: CardProps) => {
-  const currentQ = `Q${moment().quarter()} ${moment().year()}`;
-
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
   const [claimed, setClaimed] = useState(false);
@@ -55,9 +55,11 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   const { slowRefresh } = useRefresh();
   const pools = usePools();
   const poolInfo = pools[poolIndex];
-  const closeTimeStamp = poolInfo
-    ? Number(poolInfo.closeTimeStamp) * 1000
-    : '0';
+  const currentQ = useMemo(() => quarterMark(poolInfo), [poolInfo]);
+  const closeTimeStamp = useMemo(
+    () => (poolInfo ? Number(poolInfo.closeTimeStamp) : 0),
+    [poolInfo]
+  );
 
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } = useStakes(
     poolIndex,
@@ -65,20 +67,27 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   );
   const pendingHarvest = usePendingHarvest(poolIndex, account);
 
-  const period = poolInfo
-    ? poolInfo?.closeTimeStamp - poolInfo?.openTimeStamp
-    : undefined;
-  const remainTimes = poolInfo
-    ? moment(new Date(poolInfo?.closeTimeStamp * 1000)).unix() -
-      new Date().getTime() / 1000
-    : undefined;
-  const elapsedTime = period && remainTimes ? period - remainTimes : undefined;
-  const projectedRewards =
-    poolInfo && pendingHarvest && period && elapsedTime
-      ? pendingHarvest
-          ?.times(new BigNumber(period))
-          .div(new BigNumber(elapsedTime))
-      : undefined;
+  const period = useMemo(
+    () => poolInfo?.closeTimeStamp - poolInfo?.openTimeStamp,
+    [poolInfo]
+  );
+  const remainTimes = useMemo(
+    () =>
+      moment(new Date(poolInfo?.closeTimeStamp * 1000)).unix() -
+      new Date().getTime() / 1000,
+    [poolInfo]
+  );
+  const elapsedTime = useMemo(
+    () => period - remainTimes,
+    [period, remainTimes]
+  );
+  const projectedRewards = useMemo(
+    () =>
+      pendingHarvest
+        ?.times(new BigNumber(period))
+        .div(new BigNumber(elapsedTime)),
+    [pendingHarvest, period, elapsedTime]
+  );
   const {
     fetchBNBRewards,
     fetchStatus: fetchRewardStatus,
@@ -88,12 +97,15 @@ const LiveCard = ({ poolIndex }: CardProps) => {
     hasAlreadyClaimed,
     nextCycleResetTimestamp,
   } = useWeeklyRewards(account);
-
   const deHubPriceInBUSD = useDehubBusdPrice();
-
-  const projectedRewardsInBUSD = projectedRewards?.times(deHubPriceInBUSD);
-
-  const yourStakeInBUSD = userStakeInfo.amount.times(deHubPriceInBUSD);
+  const projectedRewardsInBUSD = useMemo(
+    () => projectedRewards?.times(deHubPriceInBUSD),
+    [projectedRewards, deHubPriceInBUSD]
+  );
+  const yourStakeInBUSD = useMemo(
+    () => userStakeInfo.amount.times(deHubPriceInBUSD),
+    [userStakeInfo.amount, deHubPriceInBUSD]
+  );
 
   const toast = useRef<Toast>(null);
 
@@ -188,9 +200,10 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Harvest In</Heading>
-                    <Text fontSize="24px" fontWeight={900}>
-                      {timeFromNow(moment(new Date(closeTimeStamp)))}
-                    </Text>
+                    <SimpleCountDown
+                      limitTime={closeTimeStamp}
+                      style={{ fontSize: '24px', fontWeight: 900 }}
+                    />
                   </div>
                 </div>
               </div>

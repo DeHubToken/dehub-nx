@@ -5,7 +5,7 @@ import {
   DEHUB_DECIMALS,
   DEHUB_DISPLAY_DECIMALS,
 } from '@dehub/shared/config';
-import { getFullDisplayBalance } from '@dehub/shared/util';
+import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/util';
 import {
   TransactionReceipt,
   TransactionResponse,
@@ -156,7 +156,12 @@ const PastCard = ({ poolIndex }: CardProps) => {
                 <Button
                   className="p-button mt-2 justify-content-center"
                   label="Harvest & Unstake"
-                  disabled={paused || !userStakeInfo || userStakeInfo.harvested}
+                  disabled={
+                    paused ||
+                    !userStakeInfo ||
+                    userStakeInfo.harvested ||
+                    userStakeInfo.amount.eq(BIG_ZERO)
+                  }
                   onClick={handleHarvest}
                   loading={pendingHarvestTx}
                   loadingIcon={'pi pi-spin pi-spinner'}
