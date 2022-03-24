@@ -79,6 +79,7 @@ export class MoralisService implements IMoralis {
   /** Triggered after user closed the session from his wallet (Walletconnect) */
   private unsubscribeFromWeb3Deactivated?: () => events.EventEmitter;
   private unsubscribeFromChainChanged?: () => events.EventEmitter;
+  private unsubscribeFromAccountChanged?: () => events.EventEmitter;
 
   constructor(@Inject(LoggerToken) private logger: LoggerService) {}
 
@@ -150,11 +151,22 @@ export class MoralisService implements IMoralis {
         this.logout();
       }
     });
+
+    this.unsubscribeFromAccountChanged = Moralis.onAccountChanged(account => {
+      if (account) {
+        this.logger.info(`Moralis account has changed: ${account}`);
+        this.logger.info(`TODO: Ask to link the new account.`);
+      } else {
+        this.logger.info(`Moralis account disconnected! Logging out.`);
+        this.logout();
+      }
+    });
   }
 
   private unsubscribeEvents() {
     this.unsubscribeFromWeb3Deactivated?.();
     this.unsubscribeFromChainChanged?.();
+    this.unsubscribeFromAccountChanged?.();
   }
 
   // TODO: set account Moralis.onAccountChanged
