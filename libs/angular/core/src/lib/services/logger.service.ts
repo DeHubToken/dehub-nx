@@ -3,8 +3,8 @@ import { SharedEnv } from '@dehub/shared/config';
 import { EnvToken } from '../models';
 
 export interface LoggerService {
-  info: (message: string) => void;
-  warn: (message: string) => void;
+  info: (message: string, ...optionalParams: unknown[]) => void;
+  warn: (message: string, ...optionalParams: unknown[]) => void;
   error: (message: string, error?: Error) => void;
 }
 
@@ -15,12 +15,12 @@ export interface LoggerService {
 export class ConsoleLoggerService implements LoggerService {
   constructor(@Inject(EnvToken) private env: SharedEnv) {}
 
-  info(message: string) {
-    if (this.env.env === 'dev') console.info(message);
+  info(message: string, ...optionalParams: unknown[]) {
+    if (this.env.env === 'dev') console.info(message, ...optionalParams);
   }
 
-  warn(message: string) {
-    console.warn(message);
+  warn(message: string, ...optionalParams: unknown[]) {
+    console.warn(message, ...optionalParams);
   }
 
   error(message: string, error?: Error) {
