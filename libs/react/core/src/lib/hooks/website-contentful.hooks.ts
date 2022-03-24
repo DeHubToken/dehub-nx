@@ -229,37 +229,6 @@ export const PageSectionFaQsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${FaqGroupFragmentDoc}
 `;
-export const DappPostFragmentDoc = gql`
-  fragment DappPost on DappPost {
-    sys {
-      ...Sys
-    }
-    icon
-    iconTitle
-    title
-    description
-    urlToDapp
-    urlToLearnMore
-  }
-  ${SysFragmentDoc}
-`;
-export const PageSectionDappPostsFragmentDoc = gql`
-  fragment PageSectionDappPosts on PageSectionDappPosts {
-    __typename
-    sys {
-      ...Sys
-    }
-    title
-    description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
-      items {
-        ...DappPost
-      }
-    }
-  }
-  ${SysFragmentDoc}
-  ${DappPostFragmentDoc}
-`;
 export const GrandPostFragmentDoc = gql`
   fragment GrandPost on GrandPost {
     sys {
@@ -371,6 +340,67 @@ export const PageSectionSectionPostsFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${SectionPostFragmentDoc}
+`;
+export const PageAccessWallFragmentDoc = gql`
+  fragment PageAccessWall on PageAccessWall {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+`;
+export const DappPostFragmentDoc = gql`
+  fragment DappPost on DappPost {
+    sys {
+      ...Sys
+    }
+    icon
+    iconTitle
+    title
+    description
+    urlToDapp
+    urlToLearnMore
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionDappPostsFragmentDoc = gql`
+  fragment PageSectionDappPosts on PageSectionDappPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...DappPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${DappPostFragmentDoc}
 `;
 export const PageEarnFragmentDoc = gql`
   fragment PageEarn on PageEarn {
@@ -698,6 +728,67 @@ export type LegalPostCollectionBySlugLazyQueryHookResult = ReturnType<
 export type LegalPostCollectionBySlugQueryResult = Apollo.QueryResult<
   models.LegalPostCollectionBySlugQuery,
   models.LegalPostCollectionBySlugQueryVariables
+>;
+export const PageAccessWallCollectionDocument = gql`
+  query pageAccessWallCollection($isPreview: Boolean = false) {
+    pageAccessWallCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageAccessWall
+      }
+    }
+  }
+  ${PageAccessWallFragmentDoc}
+`;
+
+/**
+ * __usePageAccessWallCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageAccessWallCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageAccessWallCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageAccessWallCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageAccessWallCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageAccessWallCollectionQuery,
+    models.PageAccessWallCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageAccessWallCollectionQuery,
+    models.PageAccessWallCollectionQueryVariables
+  >(PageAccessWallCollectionDocument, options);
+}
+export function usePageAccessWallCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageAccessWallCollectionQuery,
+    models.PageAccessWallCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageAccessWallCollectionQuery,
+    models.PageAccessWallCollectionQueryVariables
+  >(PageAccessWallCollectionDocument, options);
+}
+export type PageAccessWallCollectionQueryHookResult = ReturnType<
+  typeof usePageAccessWallCollectionQuery
+>;
+export type PageAccessWallCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageAccessWallCollectionLazyQuery
+>;
+export type PageAccessWallCollectionQueryResult = Apollo.QueryResult<
+  models.PageAccessWallCollectionQuery,
+  models.PageAccessWallCollectionQueryVariables
 >;
 export const PageEarnCollectionDocument = gql`
   query pageEarnCollection($isPreview: Boolean = false) {

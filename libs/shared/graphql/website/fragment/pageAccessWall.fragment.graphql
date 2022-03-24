@@ -1,0 +1,20 @@
+fragment PageAccessWall on PageAccessWall {
+  sys {
+    ...Sys
+  }
+  mainTitle
+  showTitle
+  subtitle
+  showSubtitle
+  sectionsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...PageSectionFeaturePosts
+      ...PageSectionThumbnailPosts
+      ...PageSectionBasicPosts
+      ...PageSectionIconTiles
+      ...PageSectionFaQs
+      ...PageSectionGrandPosts
+      ...PageSectionSectionPosts
+    }
+  }
+}
