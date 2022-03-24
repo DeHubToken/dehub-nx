@@ -5,6 +5,7 @@ import {
   WalletConnectingState,
 } from '@dehub/shared/model';
 import {
+  decimalToHex,
   filterEmpty,
   publishReplayRefCount,
   setupMetamaskNetwork,
@@ -73,12 +74,16 @@ export class MoralisService implements IMoralis {
       publishReplayRefCount()
     );
 
+  private requiredChainHex?: string;
+
   /** Triggered after user closed the session from his wallet (Walletconnect) */
   private unsubscribeFromWeb3Deactivated?: () => events.EventEmitter;
+  private unsubscribeFromChainChanged?: () => events.EventEmitter;
 
   constructor(@Inject(LoggerToken) private logger: LoggerService) {}
 
   login(provider: MoralisWeb3ProviderType, chainId: number) {
+    this.requiredChainHex = decimalToHex(chainId);
     this.setWalletConnectingState(WalletConnectingState.WAITING);
     const signingMessage = 'DeHub D’App';
 
@@ -135,10 +140,21 @@ export class MoralisService implements IMoralis {
       );
       this.logout();
     });
+
+    this.unsubscribeFromChainChanged = Moralis.onChainChanged(newChainHex => {
+      const requiredChainHex = this.requiredChainHex;
+      if (requiredChainHex !== newChainHex) {
+        this.logger.info(
+          `Moralis chain changed from ${requiredChainHex} to ${newChainHex}! Logging out.`
+        );
+        this.logout();
+      }
+    });
   }
 
   private unsubscribeEvents() {
     this.unsubscribeFromWeb3Deactivated?.();
+    this.unsubscribeFromChainChanged?.();
   }
 
   // TODO: set account Moralis.onAccountChanged
