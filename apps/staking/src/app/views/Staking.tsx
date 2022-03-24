@@ -50,11 +50,15 @@ export default function Staking() {
       </div>
       <div className="my-8">
         {pools.filter((pool: PoolInfo) => isPastPool(pool)).length > 0 && (
-          <h1>Past Vault</h1>
+          <h1>Past Vaults</h1>
         )}
         {pools.map((pool: PoolInfo, poolIndex: number) => {
           if (isPastPool(pool)) {
-            return <PastCard key={poolIndex} poolIndex={poolIndex} />;
+            return (
+              <div className="col-12 md:col-6">
+                <PastCard key={poolIndex} poolIndex={poolIndex} />
+              </div>
+            );
           }
           return null;
         })}
