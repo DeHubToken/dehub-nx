@@ -168,8 +168,4 @@ export class MoralisService implements IMoralis {
     this.unsubscribeFromChainChanged?.();
     this.unsubscribeFromAccountChanged?.();
   }
-
-  // TODO: set account Moralis.onAccountChanged
-  // window.localStorage.removeItem(moralisProviderLocalStorageKey);
-  // EnableWEb3
 }
