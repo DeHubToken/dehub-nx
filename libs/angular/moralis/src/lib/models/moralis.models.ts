@@ -16,7 +16,9 @@ export interface StartOptions {
 
 export interface Attributes extends Moralis.Attributes {
   username: string;
+  accounts: string[];
   ethAddress: string;
+  /** OTT can play flag */
   can_play?: boolean;
 }
 

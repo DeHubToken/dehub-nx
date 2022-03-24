@@ -15,7 +15,6 @@ import {
 import { shortenAddress } from '@dehub/shared/util';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { User } from '../../models/moralis.models';
 import { MoralisService } from '../../services/moralis.service';
 
 @Component({
@@ -52,7 +51,6 @@ export class ConnectWalletComponent implements OnInit {
   @Input() icon = 'fas fa-wallet';
   @Input() chainId!: number;
 
-  user$?: Observable<User | undefined>;
   label$?: Observable<string>;
   isAuthenticated$?: Observable<boolean>;
   loaderVisible$?: Observable<boolean>;
@@ -70,16 +68,13 @@ export class ConnectWalletComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const { user$, isAuthenticated$, walletConnectingState$ } =
+    const { account$, isAuthenticated$, walletConnectingState$ } =
       this.moralisService;
 
-    this.user$ = user$;
     this.isAuthenticated$ = isAuthenticated$;
 
-    this.label$ = user$.pipe(
-      map(user =>
-        user ? shortenAddress(user.attributes.ethAddress) : this.label
-      )
+    this.label$ = account$.pipe(
+      map(account => (account ? shortenAddress(account) : this.label))
     );
 
     this.loaderVisible$ = walletConnectingState$.pipe(
