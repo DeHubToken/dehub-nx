@@ -6,6 +6,8 @@ fragment PageAccessWall on PageAccessWall {
   showTitle
   subtitle
   showSubtitle
+  headerColumnWidth
+  headerAlignCenter
   sectionsCollection(limit: 10, preview: $isPreview) {
     items {
       ...PageSectionFeaturePosts

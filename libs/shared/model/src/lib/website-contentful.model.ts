@@ -1770,6 +1770,8 @@ export enum LegalPostOrder {
 export interface PageAccessWall extends Entry {
   __typename?: 'PageAccessWall';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageAccessWallLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageAccessWallSectionsCollection>;
@@ -1777,6 +1779,16 @@ export interface PageAccessWall extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
@@ -1824,6 +1836,16 @@ export interface PageAccessWallFilter {
   AND?: InputMaybe<Array<InputMaybe<PageAccessWallFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageAccessWallFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1861,6 +1883,10 @@ export interface PageAccessWallLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageAccessWallOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -1900,6 +1926,8 @@ export type PageAccessWallSectionsItem =
 export interface PageEarn extends Entry {
   __typename?: 'PageEarn';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageEarnLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageEarnSectionsCollection>;
@@ -1907,6 +1935,16 @@ export interface PageEarn extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
@@ -1954,6 +1992,16 @@ export interface PageEarnFilter {
   AND?: InputMaybe<Array<InputMaybe<PageEarnFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageEarnFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1991,6 +2039,10 @@ export interface PageEarnLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageEarnOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -2031,6 +2083,8 @@ export type PageEarnSectionsItem =
 export interface PageGame extends Entry {
   __typename?: 'PageGame';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageGameLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageGameSectionsCollection>;
@@ -2038,6 +2092,16 @@ export interface PageGame extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
+export interface PageGameHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
+export interface PageGameHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
@@ -2085,6 +2149,16 @@ export interface PageGameFilter {
   AND?: InputMaybe<Array<InputMaybe<PageGameFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageGameFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2122,6 +2196,10 @@ export interface PageGameLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageGameOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -2162,6 +2240,8 @@ export type PageGameSectionsItem =
 export interface PageHome extends Entry {
   __typename?: 'PageHome';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageHomeLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageHomeSectionsCollection>;
@@ -2169,6 +2249,16 @@ export interface PageHome extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
@@ -2216,6 +2306,16 @@ export interface PageHomeFilter {
   AND?: InputMaybe<Array<InputMaybe<PageHomeFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageHomeFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2253,6 +2353,10 @@ export interface PageHomeLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageHomeOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -2293,6 +2397,8 @@ export type PageHomeSectionsItem =
 export interface PageLearn extends Entry {
   __typename?: 'PageLearn';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageLearnLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageLearnSectionsCollection>;
@@ -2300,6 +2406,16 @@ export interface PageLearn extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
@@ -2347,6 +2463,16 @@ export interface PageLearnFilter {
   AND?: InputMaybe<Array<InputMaybe<PageLearnFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageLearnFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2384,6 +2510,10 @@ export interface PageLearnLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageLearnOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -3748,6 +3878,8 @@ export enum PageSectionThumbnailPostsOrder {
 export interface PageStream extends Entry {
   __typename?: 'PageStream';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageStreamLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageStreamSectionsCollection>;
@@ -3755,6 +3887,16 @@ export interface PageStream extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
+export interface PageStreamHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
+export interface PageStreamHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
@@ -3802,6 +3944,16 @@ export interface PageStreamFilter {
   AND?: InputMaybe<Array<InputMaybe<PageStreamFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageStreamFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3839,6 +3991,10 @@ export interface PageStreamLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageStreamOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -5156,6 +5312,8 @@ export type PageAccessWallFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -5498,6 +5656,8 @@ export type PageEarnFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -5867,6 +6027,8 @@ export type PageGameFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -6236,6 +6398,8 @@ export type PageHomeFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -6605,6 +6769,8 @@ export type PageLearnFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -7363,6 +7529,8 @@ export type PageStreamFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -7872,6 +8040,8 @@ export type PageAccessWallCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -8266,6 +8436,8 @@ export type PageEarnCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -8690,6 +8862,8 @@ export type PageGameCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -9114,6 +9288,8 @@ export type PageHomeCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -9538,6 +9714,8 @@ export type PageLearnCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -10006,6 +10184,8 @@ export type PageStreamCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -10761,6 +10941,8 @@ export const PageAccessWallFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10822,6 +11004,8 @@ export const PageEarnFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10854,6 +11038,8 @@ export const PageGameFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10886,6 +11072,8 @@ export const PageHomeFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10959,6 +11147,8 @@ export const PageLearnFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10993,6 +11183,8 @@ export const PageStreamFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts

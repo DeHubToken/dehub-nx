@@ -350,6 +350,8 @@ export const PageAccessWallFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -411,6 +413,8 @@ export const PageEarnFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -443,6 +447,8 @@ export const PageGameFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -475,6 +481,8 @@ export const PageHomeFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -548,6 +556,8 @@ export const PageLearnFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -582,6 +592,8 @@ export const PageStreamFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
