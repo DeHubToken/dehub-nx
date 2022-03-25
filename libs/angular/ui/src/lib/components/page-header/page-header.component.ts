@@ -12,7 +12,7 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
     <div
       *ngIf="page"
       [@bounceInLeft]
-      [ngClass]="{ 'py-7': !page.showTitle && !page.showSubtitle }"
+      [ngClass]="{ 'py-0': !page.showTitle && !page.showSubtitle }"
       class="col-12"
     >
       <h1 *ngIf="page.showTitle">{{ page.mainTitle }}</h1>
