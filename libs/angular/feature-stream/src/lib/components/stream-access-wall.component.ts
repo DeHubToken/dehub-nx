@@ -1,17 +1,45 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import { EnvToken, PageAccessWallCollectionService } from '@dehub/angular/core';
+import { SharedEnv } from '@dehub/shared/config';
+import { PageAccessWallFragment } from '@dehub/shared/model';
+import { map, Observable } from 'rxjs';
 
 @Component({
-  template: ` <ng-container class="grid">
-    <!-- Titles -->
-    <dhb-page-header
-      [page]="{ subtitle: 'OTT Access Wall', showSubtitle: true }"
-    ></dhb-page-header>
-  </ng-container>`,
+  template: `
+    <ng-container
+      *ngIf="pageStreamAccessWall$ | async as pageStreamAccessWall"
+      class="grid"
+    >
+      <!-- Titles -->
+      <dhb-page-header [page]="pageStreamAccessWall"></dhb-page-header>
+    </ng-container>
+  `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StreamAccessWallComponent implements OnInit {
-  constructor() {}
+  pageStreamAccessWall$?: Observable<PageAccessWallFragment | undefined>;
 
-  ngOnInit() {}
+  constructor(
+    @Inject(EnvToken) private env: SharedEnv,
+    private pageAccessWallCollectionService: PageAccessWallCollectionService
+  ) {}
+
+  ngOnInit() {
+    this.pageStreamAccessWall$ = this.pageAccessWallCollectionService
+      .fetch({
+        isPreview: this.env.contentful.isPreview,
+      })
+      .pipe(
+        map(
+          ({ data: { pageAccessWallCollection } }) =>
+            pageAccessWallCollection?.items[0] ?? undefined
+        )
+      );
+  }
 }
