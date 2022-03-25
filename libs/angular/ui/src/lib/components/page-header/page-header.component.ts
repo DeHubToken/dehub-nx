@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { resolveColumnWidth } from '@dehub/shared/util';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
@@ -13,10 +14,14 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       *ngIf="page"
       [@fadeInUp]
       [ngClass]="{ 'py-0': !page.showTitle && !page.showSubtitle }"
-      class="col-12"
+      [class]="resolveCol(page)"
     >
       <h1 *ngIf="page.showTitle">{{ page.mainTitle }}</h1>
-      <h5 *ngIf="page.showSubtitle" class="mt-1 xl:w-6 mb-7">
+      <h5
+        *ngIf="page.showSubtitle"
+        [ngClass]="{ 'xl:w-6': page.headerColumnWidth === 'full' }"
+        class="mt-1 mb-7"
+      >
         {{ page.subtitle }}
       </h5>
     </div>
@@ -31,6 +36,8 @@ export class PageHeaderComponent<
     showTitle?: boolean;
     subtitle?: string;
     showSubtitle?: boolean;
+    headerColumnWidth?: string;
+    headerAlignCenter?: boolean;
   }
 > implements OnInit
 {
@@ -39,4 +46,8 @@ export class PageHeaderComponent<
   constructor() {}
 
   ngOnInit() {}
+
+  resolveCol(page: P) {
+    return resolveColumnWidth(page.headerColumnWidth, page.headerAlignCenter);
+  }
 }
