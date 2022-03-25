@@ -17,6 +17,12 @@ import { map, Observable } from 'rxjs';
     >
       <!-- Titles -->
       <dhb-page-header [page]="pageStreamAccessWall"></dhb-page-header>
+
+      <!-- Page Sections -->
+      <dhb-page-sections
+        [sections]="pageStreamAccessWall.sectionsCollection?.items"
+        [path]="path"
+      ></dhb-page-sections>
     </ng-container>
   `,
   styles: [``],
@@ -24,6 +30,8 @@ import { map, Observable } from 'rxjs';
 })
 export class StreamAccessWallComponent implements OnInit {
   pageStreamAccessWall$?: Observable<PageAccessWallFragment | undefined>;
+
+  path = this.env.baseUrl;
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
