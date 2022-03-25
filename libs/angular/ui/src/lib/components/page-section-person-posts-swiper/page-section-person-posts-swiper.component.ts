@@ -11,7 +11,7 @@ import {
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
-import { bounceInRightOnEnterAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-page-section-person-posts-swiper',
@@ -19,7 +19,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
     <div
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
-      [@bounceInRight]
+      [@fadeInUp]
       class="col-12 mb-8"
     >
       <h3 *ngIf="section.title as title">{{ title }}</h3>
@@ -58,7 +58,7 @@ import { bounceInRightOnEnterAnimation } from 'angular-animations';
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInRightOnEnterAnimation({ anchor: 'bounceInRight' })],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class PageSectionPersonPostsSwiperComponent implements OnInit {
   @Input() section!: PageSectionPersonPostsFragment;

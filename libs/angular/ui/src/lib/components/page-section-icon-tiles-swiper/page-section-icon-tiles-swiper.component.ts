@@ -11,10 +11,7 @@ import {
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
-import {
-  bounceInRightOnEnterAnimation,
-  fadeInUpOnEnterAnimation,
-} from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-page-section-icon-tiles-swiper',
@@ -22,7 +19,7 @@ import {
     <div
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
-      [@bounceInRight]
+      [@fadeInUp]
       class="col-12 mb-8"
     >
       <h3 *ngIf="section.title as title">{{ title }}</h3>
@@ -56,10 +53,7 @@ import {
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    bounceInRightOnEnterAnimation({ anchor: 'bounceInRight' }),
-    fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' }),
-  ],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class PageSectionIconTilesSwiperComponent implements OnInit {
   @Input() section!: PageSectionIconTilesFragment;

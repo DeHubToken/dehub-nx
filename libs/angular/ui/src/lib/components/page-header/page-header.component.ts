@@ -4,14 +4,14 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-page-header',
   template: `
     <div
       *ngIf="page"
-      [@bounceInLeft]
+      [@fadeInUp]
       [ngClass]="{ 'py-0': !page.showTitle && !page.showSubtitle }"
       class="col-12"
     >
@@ -23,7 +23,7 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class PageHeaderComponent<
   P extends {

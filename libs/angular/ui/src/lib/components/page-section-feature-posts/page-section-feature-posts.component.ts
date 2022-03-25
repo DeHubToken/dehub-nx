@@ -11,7 +11,7 @@ import {
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/util';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-page-section-feature-posts',
@@ -19,7 +19,7 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
     <div
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
-      [@bounceInLeft]
+      [@fadeInUp]
       class="col-12 mb-5"
     >
       <h3 *ngIf="section.title as title">{{ title }}</h3>
@@ -53,7 +53,7 @@ import { bounceInLeftOnEnterAnimation } from 'angular-animations';
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class PageSectionFeaturePostsComponent implements OnInit {
   @Input() section!: PageSectionFeaturePostsFragment;
