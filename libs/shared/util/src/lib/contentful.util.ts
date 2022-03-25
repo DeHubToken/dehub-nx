@@ -18,10 +18,7 @@ export const richMarkupToHtmlString = (richTextDocument: Document) => {
   return documentToHtmlString(richTextDocument, richOptions);
 };
 
-export const resolveColumnWidth = (
-  width?: string,
-  alignCenter: boolean = false
-) => {
+export const resolveColumnWidth = (width?: string, alignCenter = false) => {
   let col = '';
   let common = ' col-12 sm:col-12 md:col-12 ';
   let offsetCommon = ' col-offset-0 ';
