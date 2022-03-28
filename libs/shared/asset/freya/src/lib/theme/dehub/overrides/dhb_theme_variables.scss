@@ -358,8 +358,8 @@ $inputSwitchSliderOnHoverBg: $primaryDarkColor;
 $inputSwitchHandleOnBg: $shade000;
 
 //panel
-$panelHeaderBorderColor: $shade600;
-$panelHeaderBorder: 1px solid $shade600;
+$panelHeaderBorderColor: $dhb_border_translucent_2;
+$panelHeaderBorder: 1px solid $dhb_border_translucent_2;
 $panelHeaderBg: $shade800;
 $panelHeaderTextColor: $shade000;
 $panelHeaderFontWeight: 600;
@@ -367,16 +367,16 @@ $panelHeaderPadding: 1rem;
 $panelToggleableHeaderPadding: 0.5rem 1rem;
 
 $panelHeaderHoverBg: $hoverBg;
-$panelHeaderHoverBorderColor: $shade600;
+$panelHeaderHoverBorderColor: $dhb_border_translucent_2;
 $panelHeaderTextHoverColor: $shade000;
 
-$panelContentBorderColor: $shade600;
-$panelContentBorder: 1px solid $shade600;
+$panelContentBorderColor: $dhb_border_translucent_2;
+$panelContentBorder: 1px solid $dhb_border_translucent_2;
 $panelContentBg: $shade800;
 $panelContentTextColor: $shade000;
 $panelContentPadding: 1rem;
 
-$panelFooterBorder: 1px solid $shade600;
+$panelFooterBorder: 1px solid $dhb_border_translucent_2;
 $panelFooterBg: $shade800;
 $panelFooterTextColor: $shade000;
 $panelFooterPadding: 0.5rem 1rem;
@@ -390,15 +390,15 @@ $accordionHeaderFontWeight: $panelHeaderFontWeight;
 $accordionHeaderPadding: $panelHeaderPadding;
 
 $accordionHeaderHoverBg: $hoverBg;
-$accordionHeaderHoverBorderColor: $shade600;
+$accordionHeaderHoverBorderColor: $dhb_border_translucent_2;
 $accordionHeaderTextHoverColor: $shade000;
 
 $accordionHeaderActiveBg: $dhb_gradient4;
-$accordionHeaderActiveBorderColor: $shade600;
+$accordionHeaderActiveBorderColor: $dhb_border_translucent_2;
 $accordionHeaderTextActiveColor: $shade000;
 
 $accordionHeaderActiveHoverBg: $hoverBg;
-$accordionHeaderActiveHoverBorderColor: $shade600;
+$accordionHeaderActiveHoverBorderColor: $dhb_border_translucent_2;
 $accordionHeaderTextActiveHoverColor: $shade000;
 
 $accordionContentBorder: $panelContentBorder;
