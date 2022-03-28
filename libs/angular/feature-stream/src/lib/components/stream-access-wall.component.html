@@ -1,0 +1,88 @@
+<ng-container
+  *ngIf="pageStreamAccessWall$ | async as pageStreamAccessWall"
+  class="grid"
+>
+  <!-- Titles -->
+  <dhb-page-header [page]="pageStreamAccessWall"></dhb-page-header>
+
+  <!-- Hardcoded Instructions -->
+  <div
+    [@fadeInUp]
+    class="col-12 sm:col-12 md:col-12 xl:col-6 col-offset-0 xl:col-offset-3 mb-8"
+  >
+    <!-- Description -->
+    <!-- Step 1 -->
+    <p-fieldset
+      [classList]="'block bg-gradient-2-propagate border-neon-1-propagate'"
+    >
+      <ng-template pTemplate="header">
+        <i
+          class="fa-duotone fa-square-1 icon-color-duotone-3 text-4xl pr-3"
+        ></i>
+        <h4 class="inline">Buy DeHub</h4>
+      </ng-template>
+      <p class="text-lg">
+        First you need to own DeHub tokens. Don't worry it's very easy to do.
+        Just follow our quidelines
+        <a href="https://discord.gg/86S54RVsYQ" target="_blank">here</a>
+        if you're new to this.
+      </p>
+      <dhb-buy-dehub-button
+        [cexUrl]="cexUrl"
+        [downloadWalletUrl]="downloadWalletUrl"
+        (buy)="onDexSelected()"
+        (dexSelected)="onDexSelected()"
+      ></dhb-buy-dehub-button>
+    </p-fieldset>
+
+    <!-- Step 2 -->
+    <p-fieldset
+      [classList]="'block bg-gradient-2-propagate border-neon-1-propagate mt-7'"
+    >
+      <ng-template pTemplate="header">
+        <i
+          class="fa-duotone fa-square-2 icon-color-duotone-3 text-4xl pr-3"
+        ></i>
+        <h4 class="inline">Stake DeHub</h4>
+      </ng-template>
+      <p class="text-lg">
+        Once you have your DeHub tokens you have to stake at least 10,000 to get
+        the access to DeHub Streaming service. It's very easy and a great part
+        about staking is that you earn even more tokens!
+      </p>
+      <p-button
+        [routerLink]="['/staking']"
+        label="Stake DeHub"
+        styleClass="p-button-lg p-button-raised"
+      ></p-button>
+    </p-fieldset>
+
+    <!-- Step 3 -->
+    <p-fieldset
+      [classList]="'block bg-gradient-2-propagate border-neon-2-propagate mt-7'"
+    >
+      <ng-template pTemplate="header">
+        <i
+          class="fa-duotone fa-square-3 icon-color-duotone-4 text-4xl pr-3"
+        ></i>
+        <h4 class="inline">Watch</h4>
+      </ng-template>
+      <p class="text-lg">
+        You're all set! Now you can watch all the movies and TV shows available
+        on DeHub streaming service. And on top of that you're earning more
+        tokens!
+      </p>
+      <p-button
+        label="Watch"
+        styleClass="p-button-lg p-button-raised"
+        (onClick)="onWatchClicked($event)"
+      ></p-button>
+    </p-fieldset>
+  </div>
+
+  <!-- Page Sections -->
+  <dhb-page-sections
+    [sections]="pageStreamAccessWall.sectionsCollection?.items"
+    [path]="path"
+  ></dhb-page-sections>
+</ng-container>
