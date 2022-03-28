@@ -10,15 +10,15 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
-import StakingAbi from '../../config/abis/Staking.json';
-import { getStakingAddresses } from '../../utils/addressHelpers';
+import { Moralis } from 'moralis';
 import { Call, multicallv2 } from '../../utils/multicall';
 import getDehubPrice from '../../utils/priceDehub';
-import { SerializedPoolInfo } from './types';
+import { SerializedPoolInfo, StakingContract } from './types';
 
 export interface ApplicationState {
   walletConnectingState: WalletConnectingState;
   dehubPrice: SerializedBigNumber;
+  contracts: StakingContract[];
   pools: SerializedPoolInfo[];
   readonly blockNumber: { readonly [chainId: string]: number };
 }
@@ -26,6 +26,7 @@ export interface ApplicationState {
 const initialState: ApplicationState = {
   walletConnectingState: WalletConnectingState.INIT,
   dehubPrice: new BigNumber(NaN).toJSON(),
+  contracts: [],
   pools: [],
   blockNumber: {},
 };
@@ -38,29 +39,47 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
   }
 );
 
-export const fetchPools = createAsyncThunk<SerializedPoolInfo[]>(
-  'application/fetchPools',
+export const fetchContracts = createAsyncThunk<StakingContract[]>(
+  'application/fetchContracts',
   async () => {
-    const calls: Call[] = getStakingAddresses().map(address => ({
-      name: 'pool',
-      address,
-    }));
-
-    const pools = await multicallv2(StakingAbi, calls);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return pools.map((poolInfo: any) => ({
-      openTimeStamp: Number(poolInfo?.openTimeStamp),
-      closeTimeStamp: Number(poolInfo?.closeTimeStamp),
-      openBlock: Number(poolInfo?.openBlock),
-      closeBlock: Number(poolInfo?.closeBlock),
-      emergencyPull: poolInfo?.emergencyPull,
-      harvestFund: ethersToSerializedBigNumber(poolInfo?.harvestFund),
-      lastUpdateBlock: ethersToSerializedBigNumber(poolInfo?.lastUpdateBlock),
-      valuePerBlock: ethersToSerializedBigNumber(poolInfo?.valuePerBlock),
-      totalStaked: ethersToSerializedBigNumber(poolInfo?.totalStaked),
+    const result = await Moralis.Cloud.run('getStakingContracts');
+    return result.map((item: any) => ({
+      year: item.year,
+      month: item.month,
+      address: item.address,
+      name: item.name,
+      chainId: item.chainId,
+      abi: item.abi,
     }));
   }
 );
+
+export const fetchPools = createAsyncThunk<
+  SerializedPoolInfo[],
+  {
+    abi: string[];
+    addresses: string[];
+  }
+>('application/fetchPools', async ({ abi, addresses }) => {
+  const calls: Call[] = addresses.map(address => ({
+    name: 'pool',
+    address,
+  }));
+
+  const pools = await multicallv2(abi, calls);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return pools.map((poolInfo: any) => ({
+    openTimeStamp: Number(poolInfo?.openTimeStamp),
+    closeTimeStamp: Number(poolInfo?.closeTimeStamp),
+    openBlock: Number(poolInfo?.openBlock),
+    closeBlock: Number(poolInfo?.closeBlock),
+    emergencyPull: poolInfo?.emergencyPull,
+    harvestFund: ethersToSerializedBigNumber(poolInfo?.harvestFund),
+    lastUpdateBlock: ethersToSerializedBigNumber(poolInfo?.lastUpdateBlock),
+    valuePerBlock: ethersToSerializedBigNumber(poolInfo?.valuePerBlock),
+    totalStaked: ethersToSerializedBigNumber(poolInfo?.totalStaked),
+  }));
+});
 
 export const updateBlockNumber = createAction<{
   chainId: string;
@@ -96,6 +115,10 @@ export const ApplicationSlice = createSlice({
           state.blockNumber[chainId]
         );
       }
+    });
+
+    builder.addCase(fetchContracts.fulfilled, (state, action) => {
+      state.contracts = action.payload;
     });
 
     builder.addCase(
