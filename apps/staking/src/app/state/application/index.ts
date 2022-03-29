@@ -13,15 +13,17 @@ import getDehubPrice from '../../utils/priceDehub';
 import {
   ApplicationState,
   ApplicationStatus,
+  ContractProperties,
   SerializedPoolInfo,
-  StakingContract,
+  StakingContractProperties,
 } from './types';
 
 const initialState: ApplicationState = {
   applicationStatus: ApplicationStatus.INITIAL,
   walletConnectingState: WalletConnectingState.INIT,
   dehubPrice: new BigNumber(NaN).toJSON(),
-  contracts: [],
+  stakingContracts: null,
+  stakingController: null,
   pools: [],
   blockNumber: {},
 };
@@ -34,30 +36,45 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
   }
 );
 
-export const fetchContracts = createAsyncThunk<StakingContract[]>(
-  'application/fetchContracts',
-  async () => {
-    try {
-      const result = await Moralis.Cloud.run('getStakingContracts', {});
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return orderBy(
-        result.map((item: any) => ({
-          year: item.year,
-          month: item.month,
-          address: item.address,
-          name: item.name,
-          chainId: item.chainId,
-          abi: item.abi,
-        })),
-        ['chainId', 'year', 'month', 'name'],
-        'desc'
-      );
-    } catch (error) {
-      console.error(error);
-    }
-    return [];
+export const fetchContracts = createAsyncThunk<{
+  staking: StakingContractProperties[];
+  controller: ContractProperties;
+} | null>('application/fetchContracts', async () => {
+  try {
+    const result = await Moralis.Cloud.run('getStakingContracts', {});
+    if (!result) return null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const staking = orderBy(
+      result.map((item: any) => ({
+        year: item.year,
+        month: item.month,
+        address: item.address,
+        name: item.name,
+        chainId: item.chainId,
+        abi: item.abi,
+      })),
+      ['chainId', 'year', 'month', 'name'],
+      'desc'
+    );
+    const controller = await Moralis.Cloud.run(
+      'getStakingControllerContract',
+      {}
+    );
+    if (!controller) return null;
+    return {
+      staking: staking,
+      controller: {
+        address: controller.address,
+        name: controller.name,
+        chainId: controller.chainId,
+        abi: controller.abi,
+      },
+    };
+  } catch (error) {
+    console.error(error);
   }
-);
+  return null;
+});
 
 export const updateBlockNumber = createAction<{
   chainId: string;
@@ -105,7 +122,10 @@ export const ApplicationSlice = createSlice({
     });
 
     builder.addCase(fetchContracts.fulfilled, (state, action) => {
-      state.contracts = action.payload;
+      if (action.payload) {
+        state.stakingContracts = action.payload.staking;
+        state.stakingController = action.payload.controller;
+      }
     });
   },
 });

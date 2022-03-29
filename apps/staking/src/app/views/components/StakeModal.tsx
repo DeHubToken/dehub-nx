@@ -4,6 +4,7 @@ import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/util';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
 import { MaxUint256 } from '@ethersproject/constants';
+import { Contract } from '@ethersproject/contracts';
 import BigNumber from 'bignumber.js';
 import { capitalize } from 'lodash';
 import { Button } from 'primereact/button';
@@ -16,6 +17,7 @@ import styled from 'styled-components';
 import {
   useDehubContract,
   usePickStakingContract,
+  usePickStakingControllerContract,
 } from '../../hooks/useContract';
 import { UserInfo, useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
@@ -67,6 +69,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const { userInfo: userStakeInfo } = useStakes(poolIndex, account);
   const dehubBalance = useGetDehubBalance();
   const stakingContract = usePickStakingContract(poolIndex);
+  const stakingController: Contract | null = usePickStakingControllerContract();
 
   const toast = useRef<Toast>(null);
 
@@ -130,10 +133,10 @@ const StakeModal: React.FC<StakeModalProps> = ({
 
       let receipt: TransactionReceipt;
       if (type === 'stake') {
-        const tx = await stakingContract?.deposit(decimalValue.toNumber());
+        const tx = await stakingController?.deposit(decimalValue.toNumber());
         receipt = await tx.wait();
       } else {
-        const tx = await stakingContract?.withdraw(decimalValue.toNumber());
+        const tx = await stakingController?.withdraw(decimalValue.toNumber());
         receipt = await tx.wait();
       }
 
@@ -152,16 +155,16 @@ const StakeModal: React.FC<StakeModalProps> = ({
         });
         onHide();
       }
-    } catch (error) {
-      const errorMsg = 'An error occurred, unable to stake';
-      if (error instanceof Error)
-        toast?.current?.show({
-          severity: 'error',
-          summary: 'Error',
-          detail: errorMsg,
-          life: 4000,
-        });
-      console.error(error);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast?.current?.show({
+        severity: 'error',
+        summary: 'Error',
+        detail: `${type.toUpperCase()} failed - ${
+          error?.data?.message ?? error.message
+        }`,
+        life: 4000,
+      });
     }
     setIsTxPending(false);
   };

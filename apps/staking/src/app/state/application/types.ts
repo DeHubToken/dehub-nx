@@ -9,13 +9,16 @@ export enum ApplicationStatus {
   ERROR = 'error',
 }
 
-export interface StakingContract {
-  year: number;
-  month: number;
+export interface ContractProperties {
   address: string; // contract address
   name: string; // contract name
   chainId: number;
   abi: string[];
+}
+
+export interface StakingContractProperties extends ContractProperties {
+  year: number;
+  month: number;
 }
 
 export interface SerializedPoolInfo {
@@ -46,7 +49,8 @@ export interface ApplicationState {
   applicationStatus: ApplicationStatus;
   walletConnectingState: WalletConnectingState;
   dehubPrice: SerializedBigNumber;
-  contracts: StakingContract[];
+  stakingContracts: StakingContractProperties[] | null;
+  stakingController: ContractProperties | null;
   pools: SerializedPoolInfo[];
   readonly blockNumber: { readonly [chainId: string]: number };
 }

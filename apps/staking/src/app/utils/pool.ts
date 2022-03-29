@@ -17,7 +17,8 @@ export const isPastPool = (pool: PoolInfo) => {
 };
 
 export const quarterNumber = (pool: PoolInfo): number => {
-  return moment(new Date(pool.openTimeStamp * 1000)).quarter();
+  const mnt = moment(new Date(pool.openTimeStamp * 1000));
+  return mnt.year() * 100 + mnt.month();
 };
 
 export const yearNumber = (pool: PoolInfo): number => {
@@ -25,5 +26,6 @@ export const yearNumber = (pool: PoolInfo): number => {
 };
 
 export const quarterMark = (pool: PoolInfo): string => {
-  return `Q${quarterNumber(pool)} ${yearNumber(pool)}`;
+  const quarter = moment(new Date(pool.openTimeStamp * 1000)).quarter();
+  return `Q${quarter} ${yearNumber(pool)}`;
 };

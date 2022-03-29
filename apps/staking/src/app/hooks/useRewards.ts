@@ -2,43 +2,9 @@ import { useRefresh } from '@dehub/react/core';
 import { BIG_ZERO, ethersToBigNumber } from '@dehub/shared/util';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';
 import { getRewardsContract } from '../utils/contractHelpers';
-import { usePickStakingContract } from './useContract';
-
-export const useProjectRewards = (
-  contractIndex: number,
-  staker?: string
-): BigNumber | undefined => {
-  const [projectRewards, setProjectRewards] = useState<
-    | {
-        claimableReflection: EthersBigNumber;
-        claimableHarvest: EthersBigNumber;
-      }
-    | undefined
-  >();
-  const { fastRefresh } = useRefresh();
-  const contract = usePickStakingContract(contractIndex);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const ret = await contract?.projectedRewards(staker);
-      setProjectRewards(ret);
-    };
-
-    if (staker && contract) {
-      fetch();
-    }
-  }, [contract, staker, fastRefresh]);
-
-  return useMemo(() => {
-    if (!projectRewards) return undefined;
-    return ethersToBigNumber(projectRewards.claimableReflection).plus(
-      ethersToBigNumber(projectRewards.claimableHarvest)
-    );
-  }, [projectRewards]);
-};
 
 export const useWeeklyRewards = (staker: string | null) => {
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);

@@ -16,9 +16,10 @@ import {
 import { fetchPools } from './helpers';
 import {
   ApplicationStatus,
+  ContractProperties,
   PoolInfo,
   SerializedPoolInfo,
-  StakingContract,
+  StakingContractProperties,
 } from './types';
 
 export const useApplicationStatus = (): ApplicationStatus => {
@@ -60,7 +61,7 @@ export const useFetchPools = () => {
   const { slowRefresh } = useRefresh();
   const { isInitialized } = useMoralis();
 
-  const contracts: StakingContract[] = useStakingContracts();
+  const contracts: StakingContractProperties[] | null = useStakingContracts();
 
   useEffect(() => {
     if (isInitialized) {
@@ -70,6 +71,7 @@ export const useFetchPools = () => {
 
   useEffect(() => {
     const fetchInitialize = async () => {
+      if (!contracts || contracts.length < 1) return;
       const addresses = contracts.map(contract => contract.address);
       const abi = contracts[0].abi;
 
@@ -89,18 +91,26 @@ export const useFetchPools = () => {
   }, [dispatch, contracts, slowRefresh]);
 };
 
-export const useStakingContracts = (): StakingContract[] => {
+export const useStakingContracts = (): StakingContractProperties[] | null => {
   const chainId = getChainId();
 
   const contracts = useSelector(
-    (state: AppState) => state.application.contracts
+    (state: AppState) => state.application.stakingContracts
   );
 
   return useMemo(() => {
+    if (!contracts) return null;
     return contracts.filter(
-      (contract: StakingContract) => contract.chainId === chainId
+      (contract: StakingContractProperties) => contract.chainId === chainId
     );
   }, [contracts, chainId]);
+};
+
+export const useStakingControllerContract = (): ContractProperties | null => {
+  const controller = useSelector(
+    (state: AppState) => state.application.stakingController
+  );
+  return controller;
 };
 
 export const usePools = (): PoolInfo[] => {

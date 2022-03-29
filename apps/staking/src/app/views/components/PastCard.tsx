@@ -10,19 +10,20 @@ import {
   TransactionReceipt,
   TransactionResponse,
 } from '@ethersproject/abstract-provider';
+import { Contract } from '@ethersproject/contracts';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { FetchStatus } from '../../config/constants/types';
-import { useStakingContract } from '../../hooks/useContract';
+import { usePickStakingControllerContract } from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
-import { quarterMark } from '../../utils/pool';
+import { quarterMark, quarterNumber } from '../../utils/pool';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
@@ -34,9 +35,12 @@ interface CardProps {
 
 const PastCard = ({ poolIndex }: CardProps) => {
   const { account } = useMoralis();
-  const stakingContract = useStakingContract(poolIndex);
+  const stakingController: Contract | null = usePickStakingControllerContract();
+
   const pools = usePools();
   const poolInfo = pools[poolIndex];
+  const quarterNum = useMemo(() => quarterNumber(poolInfo), [poolInfo]);
+
   const paused = useStakePaused(poolIndex);
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } = useStakes(
     poolIndex,
@@ -52,7 +56,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
 
     try {
       const tx: TransactionResponse =
-        await stakingContract?.harvestAndWithdraw();
+        await stakingController?.harvestAndWithdraw(quarterNum);
       const receipt: TransactionReceipt = await tx.wait();
       if (receipt.status) {
         toast?.current?.show({

@@ -11,6 +11,7 @@ import {
   TransactionReceipt,
   TransactionResponse,
 } from '@ethersproject/abstract-provider';
+import { Contract } from '@ethersproject/contracts';
 import BigNumber from 'bignumber.js';
 import moment from 'moment';
 import { Button } from 'primereact/button';
@@ -23,7 +24,7 @@ import styled from 'styled-components';
 import { SimpleCountDown } from '../../components/CountDown';
 import { FetchStatus } from '../../config/constants/types';
 import {
-  usePickStakingContract,
+  usePickStakingControllerContract,
   useRewardsContract,
 } from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
@@ -49,7 +50,8 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   const [pendingClaimTx, setPendingClaimTx] = useState(false);
 
   const { account } = useMoralis();
-  const stakingContract = usePickStakingContract(poolIndex);
+  const stakingController: Contract | null = usePickStakingControllerContract();
+
   const rewardsContract = useRewardsContract();
   const paused = useStakePaused(poolIndex);
   const { slowRefresh } = useRefresh();
@@ -150,9 +152,9 @@ const LiveCard = ({ poolIndex }: CardProps) => {
             setClaimed(true);
           }
         }
-      } else if (stakingContract) {
+      } else if (stakingController) {
         const tx: TransactionResponse =
-          await stakingContract?.claimBNBRewards();
+          await stakingController?.claimBNBRewards();
         const receipt: TransactionReceipt = await tx.wait();
         if (receipt.status) {
           toast?.current?.show({

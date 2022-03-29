@@ -2,8 +2,14 @@ import { getContract } from '@dehub/shared/util';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
 import { useMoralis } from 'react-moralis';
-import { usePickStakingContracts } from '../state/application/hooks';
-import { StakingContract } from '../state/application/types';
+import {
+  useStakingContracts,
+  useStakingControllerContract,
+} from '../state/application/hooks';
+import {
+  ContractProperties,
+  StakingContractProperties,
+} from '../state/application/types';
 import { getBnbAddress, getDehubAddress } from '../utils/addressHelpers';
 import { getBep20Contract, getRewardsContract } from '../utils/contractHelpers';
 
@@ -48,11 +54,11 @@ export const usePickStakingContract = (
 ): Contract | null => {
   const { web3, account } = useMoralis();
 
-  const contracts: StakingContract[] = usePickStakingContracts();
+  const contracts: StakingContractProperties[] | null = useStakingContracts();
 
   return useMemo(
     () =>
-      web3 && account && contracts.length > contractIndex
+      web3 && account && contracts && contracts.length > contractIndex
         ? getContract(
             contracts[contractIndex].address,
             contracts[contractIndex].abi,
@@ -61,6 +67,20 @@ export const usePickStakingContract = (
           )
         : null,
     [web3, account, contracts, contractIndex]
+  );
+};
+
+export const usePickStakingControllerContract = (): Contract | null => {
+  const { web3, account } = useMoralis();
+
+  const controller: ContractProperties | null = useStakingControllerContract();
+
+  return useMemo(
+    () =>
+      web3 && account && controller
+        ? getContract(controller.address, controller.abi, web3, account)
+        : null,
+    [web3, account, controller]
   );
 };
 
