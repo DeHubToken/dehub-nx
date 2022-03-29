@@ -7,8 +7,23 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
 import { getChainId } from '../../config/constants';
 import { AppState } from '../index';
-import { fetchContracts, fetchPools, setWalletConnectingState } from './';
-import { PoolInfo, SerializedPoolInfo, StakingContract } from './types';
+import {
+  fetchContracts,
+  setApplicationStatus,
+  setPools,
+  setWalletConnectingState,
+} from './';
+import { fetchPools } from './helpers';
+import {
+  ApplicationStatus,
+  PoolInfo,
+  SerializedPoolInfo,
+  StakingContract,
+} from './types';
+
+export const useApplicationStatus = (): ApplicationStatus => {
+  return useSelector((state: AppState) => state.application.applicationStatus);
+};
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(
@@ -54,10 +69,22 @@ export const useFetchPools = () => {
   }, [dispatch, isInitialized]);
 
   useEffect(() => {
-    if (contracts && contracts.length > 0) {
+    const fetchInitialize = async () => {
       const addresses = contracts.map(contract => contract.address);
       const abi = contracts[0].abi;
-      dispatch(fetchPools({ abi, addresses }));
+
+      const pools: SerializedPoolInfo[] | undefined = await fetchPools(
+        abi,
+        addresses
+      );
+      if (pools) {
+        dispatch(setPools(pools));
+        dispatch(setApplicationStatus({ appStatus: ApplicationStatus.LIVE }));
+      }
+    };
+
+    if (contracts && contracts.length > 0) {
+      fetchInitialize();
     }
   }, [dispatch, contracts, slowRefresh]);
 };

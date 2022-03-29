@@ -1,5 +1,13 @@
+import { WalletConnectingState } from '@dehub/shared/model';
 import { SerializedBigNumber } from '@dehub/shared/util';
 import BigNumber from 'bignumber.js';
+
+export enum ApplicationStatus {
+  INITIAL = 'initial',
+  LIVE = 'live',
+  PAUSED = 'paused',
+  ERROR = 'error',
+}
 
 export interface StakingContract {
   year: number;
@@ -32,4 +40,13 @@ export interface PoolInfo {
   lastUpdateBlock: BigNumber;
   valuePerBlock: BigNumber;
   totalStaked: BigNumber;
+}
+
+export interface ApplicationState {
+  applicationStatus: ApplicationStatus;
+  walletConnectingState: WalletConnectingState;
+  dehubPrice: SerializedBigNumber;
+  contracts: StakingContract[];
+  pools: SerializedPoolInfo[];
+  readonly blockNumber: { readonly [chainId: string]: number };
 }

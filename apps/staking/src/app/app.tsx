@@ -11,7 +11,8 @@ import { environment } from '../environments/environment';
 import usePullBlockNumber from './hooks/usePullBlockNumber';
 import usePullBusdPrice from './hooks/usePullBusdPrice';
 import history from './routerHistory';
-import { useFetchPools } from './state/application/hooks';
+import { useApplicationStatus, useFetchPools } from './state/application/hooks';
+import { ApplicationStatus } from './state/application/types';
 
 // This config is required for number formatting
 BigNumber.config({
@@ -31,6 +32,8 @@ export function App() {
   usePullBusdPrice();
   usePullBlockNumber();
 
+  const applicationStatus = useApplicationStatus();
+
   const Staking = useMemo(
     () =>
       withLayout(
@@ -46,6 +49,10 @@ export function App() {
       ),
     []
   );
+
+  if (applicationStatus === ApplicationStatus.INITIAL) {
+    return <FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />;
+  }
 
   return (
     <Router history={history}>

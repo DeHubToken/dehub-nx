@@ -1,8 +1,5 @@
 import { WalletConnectingState } from '@dehub/shared/model';
-import {
-  ethersToSerializedBigNumber,
-  SerializedBigNumber,
-} from '@dehub/shared/util';
+import { SerializedBigNumber } from '@dehub/shared/util';
 import {
   createAction,
   createAsyncThunk,
@@ -12,19 +9,16 @@ import {
 import BigNumber from 'bignumber.js';
 import { orderBy } from 'lodash';
 import { Moralis } from 'moralis';
-import { Call, multicallv2 } from '../../utils/multicall';
 import getDehubPrice from '../../utils/priceDehub';
-import { SerializedPoolInfo, StakingContract } from './types';
-
-export interface ApplicationState {
-  walletConnectingState: WalletConnectingState;
-  dehubPrice: SerializedBigNumber;
-  contracts: StakingContract[];
-  pools: SerializedPoolInfo[];
-  readonly blockNumber: { readonly [chainId: string]: number };
-}
+import {
+  ApplicationState,
+  ApplicationStatus,
+  SerializedPoolInfo,
+  StakingContract,
+} from './types';
 
 const initialState: ApplicationState = {
+  applicationStatus: ApplicationStatus.INITIAL,
   walletConnectingState: WalletConnectingState.INIT,
   dehubPrice: new BigNumber(NaN).toJSON(),
   contracts: [],
@@ -65,33 +59,6 @@ export const fetchContracts = createAsyncThunk<StakingContract[]>(
   }
 );
 
-export const fetchPools = createAsyncThunk<
-  SerializedPoolInfo[],
-  {
-    abi: string[];
-    addresses: string[];
-  }
->('application/fetchPools', async ({ abi, addresses }) => {
-  const calls: Call[] = addresses.map(address => ({
-    name: 'pool',
-    address,
-  }));
-
-  const pools = await multicallv2(abi, calls);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return pools.map((poolInfo: any) => ({
-    openTimeStamp: Number(poolInfo?.openTimeStamp),
-    closeTimeStamp: Number(poolInfo?.closeTimeStamp),
-    openBlock: Number(poolInfo?.openBlock),
-    closeBlock: Number(poolInfo?.closeBlock),
-    emergencyPull: poolInfo?.emergencyPull,
-    harvestFund: ethersToSerializedBigNumber(poolInfo?.harvestFund),
-    lastUpdateBlock: ethersToSerializedBigNumber(poolInfo?.lastUpdateBlock),
-    valuePerBlock: ethersToSerializedBigNumber(poolInfo?.valuePerBlock),
-    totalStaked: ethersToSerializedBigNumber(poolInfo?.totalStaked),
-  }));
-});
-
 export const updateBlockNumber = createAction<{
   chainId: string;
   blockNumber: number;
@@ -106,6 +73,15 @@ export const ApplicationSlice = createSlice({
       action: PayloadAction<{ connectingState: WalletConnectingState }>
     ) => {
       state.walletConnectingState = action.payload.connectingState;
+    },
+    setApplicationStatus: (
+      state,
+      action: PayloadAction<{ appStatus: ApplicationStatus }>
+    ) => {
+      state.applicationStatus = action.payload.appStatus;
+    },
+    setPools: (state, action: PayloadAction<SerializedPoolInfo[]>) => {
+      state.pools = action.payload;
     },
   },
   extraReducers: builder => {
@@ -131,16 +107,10 @@ export const ApplicationSlice = createSlice({
     builder.addCase(fetchContracts.fulfilled, (state, action) => {
       state.contracts = action.payload;
     });
-
-    builder.addCase(
-      fetchPools.fulfilled,
-      (state, action: PayloadAction<SerializedPoolInfo[]>) => {
-        state.pools = action.payload;
-      }
-    );
   },
 });
 
-export const { setWalletConnectingState } = ApplicationSlice.actions;
+export const { setWalletConnectingState, setApplicationStatus, setPools } =
+  ApplicationSlice.actions;
 
 export default ApplicationSlice.reducer;
