@@ -55,7 +55,7 @@ export default function Staking() {
         {pools.map((pool: PoolInfo, poolIndex: number) => {
           if (isPastPool(pool)) {
             return (
-              <div className="col-12 md:col-6">
+              <div className="col-12 md:col-6" key={poolIndex}>
                 <PastCard key={poolIndex} poolIndex={poolIndex} />
               </div>
             );
