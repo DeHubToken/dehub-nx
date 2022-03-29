@@ -90,6 +90,36 @@ async function getDeHubTokenContract(targetChainId) {
   return null;
 }
 
+/**
+ * Get staking contract address with chain id, controller contract should be
+ * added into `contracts` table, and its name should be
+ * `DeHub Staking Controller` and `chainId` should be decimal number.
+ * @param {*} targetChainId
+ * @returns object of abi and address
+ */
+async function getStakingControllerContract(targetChainId) {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const decTargetChainId = parseInt(targetChainId, 16);
+
+    const Contracts = Moralis.Object.extend('Contracts');
+    const contractQuery = new Moralis.Query(Contracts);
+
+    contractQuery.equalTo('name', 'DeHub Staking Controller');
+    contractQuery.equalTo('chainId', decTargetChainId);
+    const first = await contractQuery.first();
+    if (first) {
+      return {
+        abi: first.get('abi'),
+        address: first.get('address'),
+      };
+    }
+  } catch (err) {
+    logger.error(`getStakingControllerContract error: ${JSON.stringify(err)}`);
+  }
+  return null;
+}
+
 async function getActiveStakingContracts(targetChainId) {
   const logger = Moralis.Cloud.getLogger();
   try {
@@ -423,4 +453,8 @@ Moralis.Cloud.define('getActiveStakingContracts', async request => {
     logger.error(`getStakingContracts error: ${JSON.stringify(err)}`);
     return null;
   }
+});
+
+Moralis.Cloud.define('getStakingControllerContract', async request => {
+  return await getStakingControllerContract(defChainId);
 });
