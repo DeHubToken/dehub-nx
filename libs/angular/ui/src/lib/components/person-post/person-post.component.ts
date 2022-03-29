@@ -133,8 +133,6 @@ export class PersonPostComponent implements OnInit {
 
   onSocialClicked(event: Event, url: string) {
     event.preventDefault();
-    console.log('!!!!!!!!!!!!');
-    console.log(url);
     this.windowRef.open(url, '_blank', 'noopener,noreferrer');
   }
 }
