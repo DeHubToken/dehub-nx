@@ -6,7 +6,12 @@ const routes: Routes = [
   {
     path: '',
     component: AngularFeatureStreamComponent,
+    // canActivate: [CanPlayGuard],
   },
+  // {
+  //   path: 'access-wall',
+  //   component: StreamAccessWallComponent,
+  // },
 ];
 
 @NgModule({

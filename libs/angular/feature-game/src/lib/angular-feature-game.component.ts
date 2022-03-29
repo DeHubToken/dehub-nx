@@ -7,7 +7,6 @@ import {
 import { EnvToken, PageGameCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageGameFragment } from '@dehub/shared/model';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -25,7 +24,6 @@ import { map, Observable } from 'rxjs';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
 })
 export class AngularFeatureGameComponent implements OnInit {
   pageGame$?: Observable<PageGameFragment | undefined>;
