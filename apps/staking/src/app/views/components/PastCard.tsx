@@ -139,7 +139,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
                     <>
                       <Text fontSize="24px" fontWeight={900}>
                         {getFullDisplayBalance(
-                          pendingHarvest,
+                          !userStakeInfo.harvested ? pendingHarvest : BIG_ZERO,
                           DEHUB_DECIMALS,
                           DEHUB_DISPLAY_DECIMALS
                         )}
