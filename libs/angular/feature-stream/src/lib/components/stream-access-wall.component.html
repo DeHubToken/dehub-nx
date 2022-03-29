@@ -51,7 +51,7 @@
         about staking is that you earn even more tokens!
       </p>
       <p-button
-        [routerLink]="['/staking']"
+        (onClick)="onStakeDeHubClicked($event)"
         label="Stake DeHub"
         styleClass="p-button-lg p-button-raised"
       ></p-button>

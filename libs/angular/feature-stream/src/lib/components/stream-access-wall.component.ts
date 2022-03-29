@@ -72,4 +72,13 @@ export class StreamAccessWallComponent implements OnInit {
       'noopener,noreferrer'
     );
   }
+
+  onStakeDeHubClicked(event: Event) {
+    event.preventDefault();
+    this.windowRef.open(
+      this.env.dehub.dapps.staking,
+      '_blank',
+      'noopener,noreferrer'
+    );
+  }
 }
