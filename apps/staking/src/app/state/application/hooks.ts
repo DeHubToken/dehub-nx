@@ -1,12 +1,13 @@
+import { useRefresh } from '@dehub/react/core';
 import { WalletConnectingState } from '@dehub/shared/model';
-import { hexToDecimal } from '@dehub/shared/util';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo } from 'react';
-import { useChain } from 'react-moralis';
+import { useChain, useMoralis } from 'react-moralis';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
+import { getChainId } from '../../config/constants';
 import { AppState } from '../index';
-import { fetchContracts, setWalletConnectingState } from './';
+import { fetchContracts, fetchPools, setWalletConnectingState } from './';
 import { PoolInfo, SerializedPoolInfo, StakingContract } from './types';
 
 export const useWalletConnectingState = (): WalletConnectingState => {
@@ -39,25 +40,38 @@ export const useDehubBusdPrice = (): BigNumber => {
   return dehubPriceBusd;
 };
 
-export const useFetchContracts = () => {
+export const useFetchPools = () => {
   const dispatch = useAppDispatch();
+  const { slowRefresh } = useRefresh();
+  const { isInitialized } = useMoralis();
+
+  const contracts: StakingContract[] = useStakingContracts();
 
   useEffect(() => {
-    dispatch(fetchContracts());
-  }, [dispatch]);
+    if (isInitialized) {
+      dispatch(fetchContracts());
+    }
+  }, [dispatch, isInitialized]);
+
+  useEffect(() => {
+    if (contracts && contracts.length > 0) {
+      const addresses = contracts.map(contract => contract.address);
+      const abi = contracts[0].abi;
+      dispatch(fetchPools({ abi, addresses }));
+    }
+  }, [dispatch, contracts, slowRefresh]);
 };
 
-export const useStakingContracts = (): StakingContract[] | undefined => {
-  const { chainId } = useChain();
+export const useStakingContracts = (): StakingContract[] => {
+  const chainId = getChainId();
 
   const contracts = useSelector(
     (state: AppState) => state.application.contracts
   );
 
   return useMemo(() => {
-    if (!chainId) return undefined;
     return contracts.filter(
-      (contract: StakingContract) => contract.chainId === hexToDecimal(chainId)
+      (contract: StakingContract) => contract.chainId === chainId
     );
   }, [contracts, chainId]);
 };

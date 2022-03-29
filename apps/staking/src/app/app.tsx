@@ -8,11 +8,10 @@ import BigNumber from 'bignumber.js';
 import { lazy, useMemo } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { environment } from '../environments/environment';
-import { useFetchPools } from './hooks/useFetchPools';
 import usePullBlockNumber from './hooks/usePullBlockNumber';
 import usePullBusdPrice from './hooks/usePullBusdPrice';
 import history from './routerHistory';
-import { useFetchContracts } from './state/application/hooks';
+import { useFetchPools } from './state/application/hooks';
 
 // This config is required for number formatting
 BigNumber.config({
@@ -28,7 +27,6 @@ const activeTab = NavigationTabMenu.Earn;
 
 export function App() {
   useEagerMoralis();
-  useFetchContracts();
   useFetchPools();
   usePullBusdPrice();
   usePullBlockNumber();

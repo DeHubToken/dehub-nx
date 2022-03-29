@@ -10,6 +10,7 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
+import { orderBy } from 'lodash';
 import { Moralis } from 'moralis';
 import { Call, multicallv2 } from '../../utils/multicall';
 import getDehubPrice from '../../utils/priceDehub';
@@ -42,15 +43,25 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
 export const fetchContracts = createAsyncThunk<StakingContract[]>(
   'application/fetchContracts',
   async () => {
-    const result = await Moralis.Cloud.run('getStakingContracts');
-    return result.map((item: any) => ({
-      year: item.year,
-      month: item.month,
-      address: item.address,
-      name: item.name,
-      chainId: item.chainId,
-      abi: item.abi,
-    }));
+    try {
+      const result = await Moralis.Cloud.run('getStakingContracts', {});
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return orderBy(
+        result.map((item: any) => ({
+          year: item.year,
+          month: item.month,
+          address: item.address,
+          name: item.name,
+          chainId: item.chainId,
+          abi: item.abi,
+        })),
+        ['chainId', 'year', 'month', 'name'],
+        'desc'
+      );
+    } catch (error) {
+      console.error(error);
+    }
+    return [];
   }
 );
 
