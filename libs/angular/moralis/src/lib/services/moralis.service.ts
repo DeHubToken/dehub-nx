@@ -11,6 +11,7 @@ import {
   publishReplayRefCount,
   setupMetamaskNetwork,
 } from '@dehub/shared/util';
+import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
@@ -98,10 +99,11 @@ export class MoralisService implements IMoralis {
 
   constructor(
     @Inject(LoggerToken) private logger: LoggerService,
+    @Inject(WINDOW) readonly windowRef: Window,
     private ngZone: NgZone
   ) {
     if (Moralis.User.current()) {
-      const provider = window.localStorage.getItem(
+      const provider = this.windowRef.localStorage.getItem(
         moralisProviderLocalStorageKey
       ) as MoralisWeb3ProviderType;
       if (provider) {
@@ -147,7 +149,10 @@ export class MoralisService implements IMoralis {
     )
       .then(() => {
         this.setWalletConnectingState(WalletConnectingState.COMPLETE);
-        window.localStorage.setItem(moralisProviderLocalStorageKey, provider);
+        this.windowRef.localStorage.setItem(
+          moralisProviderLocalStorageKey,
+          provider
+        );
         this.subscribeEvents();
       })
       .catch(e => {
@@ -163,7 +168,7 @@ export class MoralisService implements IMoralis {
         this.logger.info('Logging out.');
 
         // Cleanup web provider from local storage
-        window.localStorage.removeItem(moralisProviderLocalStorageKey);
+        this.windowRef.localStorage.removeItem(moralisProviderLocalStorageKey);
 
         // Set user and account to undefined
         this.userSubject.next(undefined);
