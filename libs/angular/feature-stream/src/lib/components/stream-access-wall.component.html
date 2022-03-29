@@ -10,7 +10,6 @@
     [@fadeInUp]
     class="col-12 sm:col-12 md:col-12 xl:col-6 col-offset-0 xl:col-offset-3 mb-8"
   >
-    <!-- Description -->
     <!-- Step 1 -->
     <p-fieldset
       [classList]="'block bg-gradient-2-propagate border-neon-1-propagate'"
@@ -73,9 +72,9 @@
         tokens!
       </p>
       <p-button
+        (onClick)="onWatchClicked($event)"
         label="Watch"
         styleClass="p-button-lg p-button-raised"
-        (onClick)="onWatchClicked($event)"
       ></p-button>
     </p-fieldset>
   </div>
