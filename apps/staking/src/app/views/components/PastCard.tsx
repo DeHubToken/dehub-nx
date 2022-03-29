@@ -18,8 +18,12 @@ import { Toast } from 'primereact/toast';
 import { useMemo, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
+import { FIRST_QUARTER_NUMBER } from '../../config/constants';
 import { FetchStatus } from '../../config/constants/types';
-import { usePickStakingControllerContract } from '../../hooks/useContract';
+import {
+  usePickStakingContract,
+  usePickStakingControllerContract,
+} from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
@@ -36,10 +40,15 @@ interface CardProps {
 const PastCard = ({ poolIndex }: CardProps) => {
   const { account } = useMoralis();
   const stakingController: Contract | null = usePickStakingControllerContract();
+  const stakingContract: Contract | null = usePickStakingContract(poolIndex);
 
   const pools = usePools();
   const poolInfo = pools[poolIndex];
   const quarterNum = useMemo(() => quarterNumber(poolInfo), [poolInfo]);
+  const isV1Quarter = useMemo(
+    () => quarterNumber(poolInfo) === FIRST_QUARTER_NUMBER,
+    [poolInfo]
+  );
 
   const paused = useStakePaused(poolIndex);
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } = useStakes(
@@ -55,8 +64,9 @@ const PastCard = ({ poolIndex }: CardProps) => {
     setPendingHarvestTx(true);
 
     try {
-      const tx: TransactionResponse =
-        await stakingController?.harvestAndWithdraw(quarterNum);
+      const tx: TransactionResponse = isV1Quarter
+        ? await stakingContract?.harvestAndWithdraw(quarterNum)
+        : await stakingController?.harvestAndWithdraw(quarterNum);
       const receipt: TransactionReceipt = await tx.wait();
       if (receipt.status) {
         toast?.current?.show({

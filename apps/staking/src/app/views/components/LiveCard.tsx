@@ -22,8 +22,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { SimpleCountDown } from '../../components/CountDown';
+import { FIRST_QUARTER_NUMBER } from '../../config/constants';
 import { FetchStatus } from '../../config/constants/types';
 import {
+  usePickStakingContract,
   usePickStakingControllerContract,
   useRewardsContract,
 } from '../../hooks/useContract';
@@ -31,7 +33,7 @@ import { useStakePaused } from '../../hooks/usePaused';
 import { useWeeklyRewards } from '../../hooks/useRewards';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
-import { quarterMark } from '../../utils/pool';
+import { quarterMark, quarterNumber } from '../../utils/pool';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
 
@@ -51,6 +53,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
 
   const { account } = useMoralis();
   const stakingController: Contract | null = usePickStakingControllerContract();
+  const stakingContract: Contract | null = usePickStakingContract(poolIndex);
 
   const rewardsContract = useRewardsContract();
   const paused = useStakePaused(poolIndex);
@@ -58,6 +61,11 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   const pools = usePools();
   const poolInfo = pools[poolIndex];
   const currentQ = useMemo(() => quarterMark(poolInfo), [poolInfo]);
+  const isV1Quarter = useMemo(
+    () => quarterNumber(poolInfo) === FIRST_QUARTER_NUMBER,
+    [poolInfo]
+  );
+
   const closeTimeStamp = useMemo(
     () => (poolInfo ? Number(poolInfo.closeTimeStamp) : 0),
     [poolInfo]
@@ -152,9 +160,10 @@ const LiveCard = ({ poolIndex }: CardProps) => {
             setClaimed(true);
           }
         }
-      } else if (stakingController) {
-        const tx: TransactionResponse =
-          await stakingController?.claimBNBRewards();
+      } else if (stakingController && stakingContract) {
+        const tx: TransactionResponse = isV1Quarter
+          ? await stakingContract?.claimBNBRewards()
+          : await stakingController?.claimBNBRewards();
         const receipt: TransactionReceipt = await tx.wait();
         if (receipt.status) {
           toast?.current?.show({

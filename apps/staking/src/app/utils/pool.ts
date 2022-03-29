@@ -18,7 +18,7 @@ export const isPastPool = (pool: PoolInfo) => {
 
 export const quarterNumber = (pool: PoolInfo): number => {
   const mnt = moment(new Date(pool.openTimeStamp * 1000));
-  return mnt.year() * 100 + mnt.month();
+  return mnt.year() * 100 + mnt.quarter();
 };
 
 export const yearNumber = (pool: PoolInfo): number => {
