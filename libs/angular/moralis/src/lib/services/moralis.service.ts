@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { LoggerService, LoggerToken } from '@dehub/angular/core';
 import {
+  moralisProviderLocalStorageKey,
   MoralisWeb3ProviderType,
   WalletConnectingState,
 } from '@dehub/shared/model';
@@ -13,7 +14,13 @@ import {
 import * as events from 'events';
 import { Moralis } from 'moralis';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
-import { first, map, switchMap, tap } from 'rxjs/operators';
+import {
+  distinctUntilChanged,
+  first,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { User } from '../models/moralis.models';
 
 interface IMoralis {
@@ -49,9 +56,11 @@ export class MoralisService implements IMoralis {
     )
   );
 
-  account$ = this.accountSubject
-    .asObservable()
-    .pipe(tap(account => this.logger.info(`Current account: ${account}`)));
+  account$ = this.accountSubject.asObservable().pipe(
+    distinctUntilChanged(),
+    tap(account => this.logger.info(`Current account: ${account}`)),
+    publishReplayRefCount()
+  );
 
   private userAttributes$ = this.user$.pipe(map(user => user?.attributes));
 
@@ -87,7 +96,20 @@ export class MoralisService implements IMoralis {
   private unsubscribeFromChainChanged?: () => events.EventEmitter;
   private unsubscribeFromAccountChanged?: () => events.EventEmitter;
 
-  constructor(@Inject(LoggerToken) private logger: LoggerService) {}
+  constructor(@Inject(LoggerToken) private logger: LoggerService) {
+    if (Moralis.User.current()) {
+      const provider = window.localStorage.getItem(
+        moralisProviderLocalStorageKey
+      ) as MoralisWeb3ProviderType;
+      if (provider) {
+        this.logger.info(`Moralis enableWeb3 for '${provider}'`);
+
+        Moralis.enableWeb3({ provider }).then(() => {
+          this.subscribeEvents();
+        });
+      }
+    }
+  }
 
   login(provider: MoralisWeb3ProviderType, chainId: number) {
     this.requiredChainHex = decimalToHex(chainId);
@@ -120,36 +142,51 @@ export class MoralisService implements IMoralis {
           }
         )
     )
-      .then(() => this.setWalletConnectingState(WalletConnectingState.COMPLETE))
+      .then(() => {
+        this.setWalletConnectingState(WalletConnectingState.COMPLETE);
+        window.localStorage.setItem(moralisProviderLocalStorageKey, provider);
+        this.subscribeEvents();
+      })
       .catch(e => {
         this.setWalletConnectingState(WalletConnectingState.INIT);
         this.logger.error(`Moralis '${provider}' login error:`, e);
-      })
-      .finally(() => this.subscribeEvents());
+      });
   }
 
   logout() {
     this.unsubscribeEvents();
     Moralis.User.logOut()
-      .then(() => this.logger.info('Logging out.'))
-      // Set user to undefined
-      .then(() => this.userSubject.next(undefined))
-      // Set account to undefined
-      .then(() => this.accountSubject.next(undefined))
-      // Disconnect Web3 wallet
-      .then(() => Moralis.cleanup())
+      .then(() => {
+        this.logger.info('Logging out.');
+
+        // Cleanup web provider from local storage
+        window.localStorage.removeItem(moralisProviderLocalStorageKey);
+
+        // Set user and account to undefined
+        this.userSubject.next(undefined);
+        this.accountSubject.next(undefined);
+
+        // Disconnect Web3 wallet
+        Moralis.cleanup();
+      })
       .catch(e => this.logger.error('Moralis logout problem:', e))
-      // Update wallet connecting state
       .finally(() => this.setWalletConnectingState(WalletConnectingState.INIT));
   }
 
+  /**
+   * Update Wallet Connect state
+   * @param state the state to set
+   */
   setWalletConnectingState(state: WalletConnectingState) {
     this.walletConnectingStateSubject.next(state);
   }
 
   private subscribeEvents() {
+    this.logger.info(
+      'Subscribe: onWeb3Deactivated, onChainChanged, onAccountChanged'
+    );
     this.unsubscribeFromWeb3Deactivated = Moralis.onWeb3Deactivated(error => {
-      this.logger.info(
+      this.logger.warn(
         `Moralis ${error.connector.type} connector was deactivated!`
       );
       this.logout();
@@ -158,7 +195,7 @@ export class MoralisService implements IMoralis {
     this.unsubscribeFromChainChanged = Moralis.onChainChanged(newChainHex => {
       const requiredChainHex = this.requiredChainHex;
       if (requiredChainHex !== newChainHex) {
-        this.logger.info(
+        this.logger.warn(
           `Moralis chain changed from ${requiredChainHex} to ${newChainHex}!`
         );
         this.logout();
@@ -168,10 +205,16 @@ export class MoralisService implements IMoralis {
     this.unsubscribeFromAccountChanged = Moralis.onAccountChanged(account => {
       if (account) {
         const newAccount = account.toLowerCase();
-        this.logger.info(`Moralis account has changed to ${newAccount}!`);
-        this.handleAccountChanged(newAccount);
+        this.account$.pipe(filterEmpty(), first()).subscribe(currentAccount => {
+          if (newAccount !== currentAccount) {
+            this.logger.warn(`Moralis account has changed to ${newAccount}!`);
+            this.handleAccountChanged(newAccount);
+          } else {
+            this.logger.warn(`Moralis account has not changed!`);
+          }
+        });
       } else {
-        this.logger.info(`Moralis account disconnected!`);
+        this.logger.warn(`Moralis account disconnected!`);
         this.logout();
       }
     });
@@ -208,7 +251,7 @@ export class MoralisService implements IMoralis {
           }
         } else {
           // Account already linked
-          this.logger.info(
+          this.logger.warn(
             `The ${newAccount} is already linked to the users account.`
           );
           this.accountSubject.next(newAccount);
@@ -217,6 +260,7 @@ export class MoralisService implements IMoralis {
   }
 
   private unsubscribeEvents() {
+    this.logger.info('Unsubscribe Moralis events.');
     this.unsubscribeFromWeb3Deactivated?.();
     this.unsubscribeFromChainChanged?.();
     this.unsubscribeFromAccountChanged?.();
