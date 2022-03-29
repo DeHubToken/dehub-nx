@@ -23,8 +23,8 @@ import styled from 'styled-components';
 import { SimpleCountDown } from '../../components/CountDown';
 import { FetchStatus } from '../../config/constants/types';
 import {
+  usePickStakingContract,
   useRewardsContract,
-  useStakingContract,
 } from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
 import { useWeeklyRewards } from '../../hooks/useRewards';
@@ -49,7 +49,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   const [pendingClaimTx, setPendingClaimTx] = useState(false);
 
   const { account } = useMoralis();
-  const stakingContract = useStakingContract(poolIndex);
+  const stakingContract = usePickStakingContract(poolIndex);
   const rewardsContract = useRewardsContract();
   const paused = useStakePaused(poolIndex);
   const { slowRefresh } = useRefresh();
@@ -120,6 +120,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
     pendingHarvest,
     claimed,
     userStakeInfo.amount,
+    poolInfo.totalStaked,
     slowRefresh,
   ]);
 

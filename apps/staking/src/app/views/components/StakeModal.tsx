@@ -13,10 +13,12 @@ import { Toast } from 'primereact/toast';
 import React, { useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
-import { useDehubContract, useStakingContract } from '../../hooks/useContract';
+import {
+  useDehubContract,
+  usePickStakingContract,
+} from '../../hooks/useContract';
 import { UserInfo, useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { getStakingAddress } from '../../utils/addressHelpers';
 
 interface StakeModalProps {
   poolIndex: number;
@@ -64,7 +66,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const { account } = useMoralis();
   const { userInfo: userStakeInfo } = useStakes(poolIndex, account);
   const dehubBalance = useGetDehubBalance();
-  const stakingContract = useStakingContract(poolIndex);
+  const stakingContract = usePickStakingContract(poolIndex);
 
   const toast = useRef<Toast>(null);
 
@@ -74,7 +76,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   ).toNumber();
   const valueAsBn = new BigNumber(value);
 
-  const stakingContractAddress = getStakingAddress(poolIndex);
+  const stakingContractAddress = stakingContract?.address;
   const dehubContract = useDehubContract();
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;

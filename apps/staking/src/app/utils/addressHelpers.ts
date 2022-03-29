@@ -24,11 +24,3 @@ export const getBnbAddress = (): string => {
 export const getRewardsAddress = (): string => {
   return getAddress('rewards') as string;
 };
-
-export const getStakingAddress = (index: number): string => {
-  return (getAddress('staking') as string[])[index];
-};
-
-export const getStakingAddresses = (): string[] => {
-  return getAddress('staking') as string[];
-};

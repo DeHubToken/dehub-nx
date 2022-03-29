@@ -4,10 +4,8 @@ import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';
-import {
-  getRewardsContract,
-  getStakingContract,
-} from '../utils/contractHelpers';
+import { getRewardsContract } from '../utils/contractHelpers';
+import { usePickStakingContract } from './useContract';
 
 export const useProjectRewards = (
   contractIndex: number,
@@ -21,18 +19,18 @@ export const useProjectRewards = (
     | undefined
   >();
   const { fastRefresh } = useRefresh();
+  const contract = usePickStakingContract(contractIndex);
 
   useEffect(() => {
     const fetch = async () => {
-      const stakingContract = getStakingContract(contractIndex);
-      const ret = await stakingContract?.projectedRewards(staker);
+      const ret = await contract?.projectedRewards(staker);
       setProjectRewards(ret);
     };
 
-    if (staker) {
+    if (staker && contract) {
       fetch();
     }
-  }, [contractIndex, staker, fastRefresh]);
+  }, [contract, staker, fastRefresh]);
 
   return useMemo(() => {
     if (!projectRewards) return undefined;

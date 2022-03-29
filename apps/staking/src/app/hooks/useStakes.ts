@@ -3,7 +3,7 @@ import { BIG_ZERO, ethersToBigNumber } from '@dehub/shared/util';
 import BigNumber from 'bignumber.js';
 import { useEffect, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';
-import { getStakingContract } from '../utils/contractHelpers';
+import { usePickStakingContract } from './useContract';
 
 export type UserInfo = {
   amount: BigNumber;
@@ -46,17 +46,17 @@ export const useStakes = (contractIndex: number, staker: string | null) => {
     harvested: false,
   });
   const { fastRefresh } = useRefresh();
+  const contract = usePickStakingContract(contractIndex);
 
   useEffect(() => {
     const fetch = async () => {
-      const stakingContract = getStakingContract(contractIndex);
-      const ret = await stakingContract?.userInfo(staker);
+      const ret = await contract?.userInfo(staker);
       if (ret) {
         setUserInfo(processUserInfo(ret));
       }
       setFetchStatus(ret ? FetchStatus.SUCCESS : FetchStatus.FAILED);
     };
-    if (staker) {
+    if (staker && contract) {
       fetch();
     } else {
       setFetchStatus(FetchStatus.NOT_FETCHED);
@@ -69,7 +69,7 @@ export const useStakes = (contractIndex: number, staker: string | null) => {
         harvested: false,
       });
     }
-  }, [contractIndex, staker, fastRefresh]);
+  }, [contract, staker, fastRefresh]);
 
   return {
     fetchStatus,
@@ -85,19 +85,19 @@ export const usePendingHarvest = (
   const [pendingHarvest, setPendingHarvest] = useState<BigNumber | undefined>(
     undefined
   );
+  const contract = usePickStakingContract(contractIndex);
 
   useEffect(() => {
     const fetch = async () => {
-      const stakingContract = getStakingContract(contractIndex);
-      const ret = await stakingContract?.pendingHarvest(staker);
+      const ret = await contract?.pendingHarvest(staker);
       setPendingHarvest(ethersToBigNumber(ret[0].add(ret[1])));
     };
-    if (staker) {
+    if (staker && contract) {
       fetch();
     } else {
       setPendingHarvest(undefined);
     }
-  }, [contractIndex, staker, fastRefresh]);
+  }, [contract, staker, fastRefresh]);
 
   return pendingHarvest;
 };

@@ -2,12 +2,10 @@ import { getContract } from '@dehub/shared/util';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
 import { useMoralis } from 'react-moralis';
+import { usePickStakingContracts } from '../state/application/hooks';
+import { StakingContract } from '../state/application/types';
 import { getBnbAddress, getDehubAddress } from '../utils/addressHelpers';
-import {
-  getBep20Contract,
-  getRewardsContract,
-  getStakingContract,
-} from '../utils/contractHelpers';
+import { getBep20Contract, getRewardsContract } from '../utils/contractHelpers';
 
 export function useContract(
   address?: string,
@@ -45,11 +43,24 @@ export const useBnbContract = (): Contract | null => {
   return useMemo(() => getBep20Contract(getBnbAddress()), []);
 };
 
-export const useStakingContract = (contractIndex: number): Contract | null => {
-  const { web3 } = useMoralis();
+export const usePickStakingContract = (
+  contractIndex: number
+): Contract | null => {
+  const { web3, account } = useMoralis();
+
+  const contracts: StakingContract[] = usePickStakingContracts();
+
   return useMemo(
-    () => (web3 ? getStakingContract(contractIndex, web3.getSigner()) : null),
-    [web3, contractIndex]
+    () =>
+      web3 && account && contracts.length > contractIndex
+        ? getContract(
+            contracts[contractIndex].address,
+            contracts[contractIndex].abi,
+            web3,
+            account
+          )
+        : null,
+    [web3, account, contracts, contractIndex]
   );
 };
 
