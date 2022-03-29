@@ -183,7 +183,9 @@ export class MoralisService implements IMoralis {
       .subscribe(async ({ attributes: { accounts = [] } }) => {
         // Ask linking new account
         if (!accounts.includes(newAccount)) {
-          const confirmed = confirm('Link this address to your account?');
+          const confirmed = confirm(
+            'Please confirm account linking with your wallet.'
+          );
 
           // Confirmed linking new account
           if (confirmed) {
