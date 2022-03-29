@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Inject,
   Input,
   OnInit,
 } from '@angular/core';
 import { PersonPostFragment } from '@dehub/shared/model';
+import { WINDOW } from '@ng-web-apis/common';
 
 interface SocialLink {
   name: string;
@@ -63,6 +65,7 @@ interface SocialLink {
               [disabled]="link.url === '#'"
               type="button"
               class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 text-xl"
+              (click)="onSocialClicked($event, link.url)"
             ></button>
           </ng-container>
         </div>
@@ -84,7 +87,7 @@ export class PersonPostComponent implements OnInit {
 
   socialLinks: SocialLink[] = [];
 
-  constructor() {}
+  constructor(@Inject(WINDOW) readonly windowRef: Window) {}
 
   ngOnInit() {
     if (!this.personPost) return;
@@ -126,5 +129,10 @@ export class PersonPostComponent implements OnInit {
         url: '#',
         name: '',
       });
+  }
+
+  onSocialClicked(event: Event, url: string) {
+    event.preventDefault();
+    this.windowRef.open(url, '_blank', 'noopener,noreferrer');
   }
 }

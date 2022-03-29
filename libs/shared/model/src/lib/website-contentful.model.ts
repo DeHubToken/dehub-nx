@@ -1766,10 +1766,168 @@ export enum LegalPostOrder {
   TitleDesc = 'title_DESC',
 }
 
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWall extends Entry {
+  __typename?: 'PageAccessWall';
+  contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<PageAccessWallLinkingCollections>;
+  mainTitle?: Maybe<Scalars['String']>;
+  sectionsCollection?: Maybe<PageAccessWallSectionsCollection>;
+  showSubtitle?: Maybe<Scalars['Boolean']>;
+  showTitle?: Maybe<Scalars['Boolean']>;
+  subtitle?: Maybe<Scalars['String']>;
+  sys: Sys;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallMainTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallSectionsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallShowSubtitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallShowTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallSubtitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface PageAccessWallCollection {
+  __typename?: 'PageAccessWallCollection';
+  items: Array<Maybe<PageAccessWall>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageAccessWallFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageAccessWallFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageAccessWallFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  mainTitle?: InputMaybe<Scalars['String']>;
+  mainTitle_contains?: InputMaybe<Scalars['String']>;
+  mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  mainTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  mainTitle_not?: InputMaybe<Scalars['String']>;
+  mainTitle_not_contains?: InputMaybe<Scalars['String']>;
+  mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showSubtitle_not?: InputMaybe<Scalars['Boolean']>;
+  showTitle?: InputMaybe<Scalars['Boolean']>;
+  showTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  showTitle_not?: InputMaybe<Scalars['Boolean']>;
+  subtitle?: InputMaybe<Scalars['String']>;
+  subtitle_contains?: InputMaybe<Scalars['String']>;
+  subtitle_exists?: InputMaybe<Scalars['Boolean']>;
+  subtitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subtitle_not?: InputMaybe<Scalars['String']>;
+  subtitle_not_contains?: InputMaybe<Scalars['String']>;
+  subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+}
+
+export interface PageAccessWallLinkingCollections {
+  __typename?: 'PageAccessWallLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface PageAccessWallLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageAccessWallOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export interface PageAccessWallSectionsCollection {
+  __typename?: 'PageAccessWallSectionsCollection';
+  items: Array<Maybe<PageAccessWallSectionsItem>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export type PageAccessWallSectionsItem =
+  | PageSectionBasicPosts
+  | PageSectionFaQs
+  | PageSectionFeaturePosts
+  | PageSectionGrandPosts
+  | PageSectionIconTiles
+  | PageSectionSectionPosts
+  | PageSectionThumbnailPosts;
+
 /** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
 export interface PageEarn extends Entry {
   __typename?: 'PageEarn';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageEarnLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageEarnSectionsCollection>;
@@ -1777,6 +1935,16 @@ export interface PageEarn extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
+export interface PageEarnHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
@@ -1824,6 +1992,16 @@ export interface PageEarnFilter {
   AND?: InputMaybe<Array<InputMaybe<PageEarnFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageEarnFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1861,6 +2039,10 @@ export interface PageEarnLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageEarnOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -1901,6 +2083,8 @@ export type PageEarnSectionsItem =
 export interface PageGame extends Entry {
   __typename?: 'PageGame';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageGameLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageGameSectionsCollection>;
@@ -1908,6 +2092,16 @@ export interface PageGame extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
+export interface PageGameHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
+export interface PageGameHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
@@ -1955,6 +2149,16 @@ export interface PageGameFilter {
   AND?: InputMaybe<Array<InputMaybe<PageGameFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageGameFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1992,6 +2196,10 @@ export interface PageGameLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageGameOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -2032,6 +2240,8 @@ export type PageGameSectionsItem =
 export interface PageHome extends Entry {
   __typename?: 'PageHome';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageHomeLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageHomeSectionsCollection>;
@@ -2039,6 +2249,16 @@ export interface PageHome extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
+export interface PageHomeHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
@@ -2086,6 +2306,16 @@ export interface PageHomeFilter {
   AND?: InputMaybe<Array<InputMaybe<PageHomeFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageHomeFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2123,6 +2353,10 @@ export interface PageHomeLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageHomeOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -2163,6 +2397,8 @@ export type PageHomeSectionsItem =
 export interface PageLearn extends Entry {
   __typename?: 'PageLearn';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageLearnLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageLearnSectionsCollection>;
@@ -2170,6 +2406,16 @@ export interface PageLearn extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
+export interface PageLearnHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
@@ -2217,6 +2463,16 @@ export interface PageLearnFilter {
   AND?: InputMaybe<Array<InputMaybe<PageLearnFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageLearnFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2254,6 +2510,10 @@ export interface PageLearnLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageLearnOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -2382,6 +2642,7 @@ export interface PageSectionBasicPostsHandpickedPostsCollection {
 export interface PageSectionBasicPostsLinkingCollections {
   __typename?: 'PageSectionBasicPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -2390,6 +2651,13 @@ export interface PageSectionBasicPostsLinkingCollections {
 }
 
 export interface PageSectionBasicPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionBasicPostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -2656,6 +2924,7 @@ export interface PageSectionFaQsHandpickedFaqGroupsCollection {
 export interface PageSectionFaQsLinkingCollections {
   __typename?: 'PageSectionFaQsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -2664,6 +2933,13 @@ export interface PageSectionFaQsLinkingCollections {
 }
 
 export interface PageSectionFaQsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionFaQsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -2800,6 +3076,7 @@ export interface PageSectionFeaturePostsHandpickedPostsCollection {
 export interface PageSectionFeaturePostsLinkingCollections {
   __typename?: 'PageSectionFeaturePostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -2808,6 +3085,13 @@ export interface PageSectionFeaturePostsLinkingCollections {
 }
 
 export interface PageSectionFeaturePostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionFeaturePostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -2937,6 +3221,7 @@ export interface PageSectionGrandPostsHandpickedPostsCollection {
 export interface PageSectionGrandPostsLinkingCollections {
   __typename?: 'PageSectionGrandPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -2945,6 +3230,13 @@ export interface PageSectionGrandPostsLinkingCollections {
 }
 
 export interface PageSectionGrandPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionGrandPostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3090,6 +3382,7 @@ export interface PageSectionIconTilesHandpickedIconTilesCollection {
 export interface PageSectionIconTilesLinkingCollections {
   __typename?: 'PageSectionIconTilesLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -3098,6 +3391,13 @@ export interface PageSectionIconTilesLinkingCollections {
 }
 
 export interface PageSectionIconTilesLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionIconTilesLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3352,6 +3652,7 @@ export interface PageSectionSectionPostsHandpickedPostsCollection {
 export interface PageSectionSectionPostsLinkingCollections {
   __typename?: 'PageSectionSectionPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -3360,6 +3661,13 @@ export interface PageSectionSectionPostsLinkingCollections {
 }
 
 export interface PageSectionSectionPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionSectionPostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3496,6 +3804,7 @@ export interface PageSectionThumbnailPostsHandpickedPostsCollection {
 export interface PageSectionThumbnailPostsLinkingCollections {
   __typename?: 'PageSectionThumbnailPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -3504,6 +3813,13 @@ export interface PageSectionThumbnailPostsLinkingCollections {
 }
 
 export interface PageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionThumbnailPostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3562,6 +3878,8 @@ export enum PageSectionThumbnailPostsOrder {
 export interface PageStream extends Entry {
   __typename?: 'PageStream';
   contentfulMetadata: ContentfulMetadata;
+  headerAlignCenter?: Maybe<Scalars['Boolean']>;
+  headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageStreamLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
   sectionsCollection?: Maybe<PageStreamSectionsCollection>;
@@ -3569,6 +3887,16 @@ export interface PageStream extends Entry {
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
+export interface PageStreamHeaderAlignCenterArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
+export interface PageStreamHeaderColumnWidthArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
@@ -3616,6 +3944,16 @@ export interface PageStreamFilter {
   AND?: InputMaybe<Array<InputMaybe<PageStreamFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageStreamFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
+  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
+  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
+  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   mainTitle?: InputMaybe<Scalars['String']>;
   mainTitle_contains?: InputMaybe<Scalars['String']>;
   mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3653,6 +3991,10 @@ export interface PageStreamLinkingCollectionsEntryCollectionArgs {
 }
 
 export enum PageStreamOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
   MainTitleAsc = 'mainTitle_ASC',
   MainTitleDesc = 'mainTitle_DESC',
   ShowSubtitleAsc = 'showSubtitle_ASC',
@@ -3888,6 +4230,8 @@ export interface Query {
   iconTileCollection?: Maybe<IconTileCollection>;
   legalPost?: Maybe<LegalPost>;
   legalPostCollection?: Maybe<LegalPostCollection>;
+  pageAccessWall?: Maybe<PageAccessWall>;
+  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarn?: Maybe<PageEarn>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGame?: Maybe<PageGame>;
@@ -4111,6 +4455,21 @@ export interface QueryLegalPostCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<LegalPostFilter>;
+}
+
+export interface QueryPageAccessWallArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageAccessWallCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageAccessWallOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageAccessWallFilter>;
 }
 
 export interface QueryPageEarnArgs {
