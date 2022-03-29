@@ -56,34 +56,44 @@ export const useWeeklyRewards = (staker: string | null) => {
   const { fastRefresh } = useRefresh();
 
   const fetchBNBRewards = useCallback(
-    async (amount: BigNumber) => {
-      if (!staker || !amount) {
-        setFetchStatus(FetchStatus.NOT_FETCHED);
+    async (amount: BigNumber, totalStaked: BigNumber) => {
+      try {
+        if (!staker || !amount || !totalStaked) {
+          setFetchStatus(FetchStatus.NOT_FETCHED);
+          return;
+        }
+        const rewardsContract = getRewardsContract();
+        const rewards = await rewardsContract.calcCurrentClaimableShare(
+          EthersBigNumber.from(amount.toString()),
+          EthersBigNumber.from(totalStaked.toString())
+        );
+        if (rewards) setBNBRewards(ethersToBigNumber(rewards));
+        const claimed = await rewardsContract.hasAlreadyClaimed(staker);
+        setHasAlreadyClaimed(claimed);
+        const nextCycle = await rewardsContract.nextCycleResetTimestamp();
+        setNextCycleResetTimestamp(nextCycle.toNumber());
+
+        setFetchStatus(rewards ? FetchStatus.SUCCESS : FetchStatus.FAILED);
+      } catch (error) {
+        console.error(error);
+        setFetchStatus(FetchStatus.FAILED);
         return;
       }
-      const rewardsContract = getRewardsContract();
-      const rewards = await rewardsContract.calcCurrentClaimableShare(
-        staker,
-        EthersBigNumber.from(amount.toString())
-      );
-      if (rewards) setBNBRewards(ethersToBigNumber(rewards));
-      const claimed = await rewardsContract.hasAlreadyClaimed(staker);
-      setHasAlreadyClaimed(claimed);
-      const nextCycle = await rewardsContract.nextCycleResetTimestamp();
-      setNextCycleResetTimestamp(nextCycle.toNumber());
-
-      setFetchStatus(rewards ? FetchStatus.SUCCESS : FetchStatus.FAILED);
     },
     [staker]
   );
 
   useEffect(() => {
     const fetch = async () => {
-      const rewardsContract = getRewardsContract();
-      const ret = await rewardsContract.claimableDistribution();
-      setTotalBNBRewards(ethersToBigNumber(ret));
-      const enabled = await rewardsContract.isDistributionEnabled();
-      setDistributionEnabled(enabled);
+      try {
+        const rewardsContract = getRewardsContract();
+        const ret = await rewardsContract.claimableDistribution();
+        setTotalBNBRewards(ethersToBigNumber(ret));
+        const enabled = await rewardsContract.isDistributionEnabled();
+        setDistributionEnabled(enabled);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetch();
   }, [fastRefresh]);

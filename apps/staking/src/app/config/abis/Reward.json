@@ -36,25 +36,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "bnbClaimed",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "claimant",
-        "type": "address"
-      }
-    ],
-    "name": "ClaimedBNBRewards",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": true,
         "internalType": "address",
         "name": "previousOwner",
@@ -155,13 +136,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_holderAddr", "type": "address" },
       {
         "internalType": "uint256",
-        "name": "_circulatingSupply",
+        "name": "_totalStakePoolAmount",
         "type": "uint256"
       },
-      { "internalType": "uint256", "name": "_lpTokens", "type": "uint256" },
       {
         "internalType": "uint256",
         "name": "_claimableDistribution",
@@ -171,13 +150,17 @@
     ],
     "name": "calcClaimableShare",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
+    "stateMutability": "pure",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "holderAddr", "type": "address" },
-      { "internalType": "uint256", "name": "stakeAmount", "type": "uint256" }
+      { "internalType": "uint256", "name": "_stakeAmount", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_totalStakePoolAmount",
+        "type": "uint256"
+      }
     ],
     "name": "calcCurrentClaimableShare",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
@@ -189,13 +172,6 @@
     "name": "claimCycleHours",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "claimReward",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -309,17 +285,13 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "holderAddr", "type": "address" }
-    ],
-    "name": "sendReward",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
       { "internalType": "address", "name": "_stakerAddr", "type": "address" },
-      { "internalType": "uint256", "name": "_stakeAmount", "type": "uint256" }
+      { "internalType": "uint256", "name": "_stakeAmount", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_totalStakePoolAmount",
+        "type": "uint256"
+      }
     ],
     "name": "sendRewardToStaker",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
@@ -438,6 +410,13 @@
   {
     "inputs": [],
     "name": "upgradeToV4",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "upgradeToV5",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

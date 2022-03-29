@@ -110,7 +110,10 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
-    fetchBNBRewards(userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO));
+    fetchBNBRewards(
+      userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO),
+      poolInfo.totalStaked
+    );
   }, [
     fetchBNBRewards,
     account,
