@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, NgZone } from '@angular/core';
 import { LoggerService, LoggerToken } from '@dehub/angular/core';
 import {
   moralisProviderLocalStorageKey,
@@ -96,7 +96,10 @@ export class MoralisService implements IMoralis {
   private unsubscribeFromChainChanged?: () => events.EventEmitter;
   private unsubscribeFromAccountChanged?: () => events.EventEmitter;
 
-  constructor(@Inject(LoggerToken) private logger: LoggerService) {
+  constructor(
+    @Inject(LoggerToken) private logger: LoggerService,
+    private ngZone: NgZone
+  ) {
     if (Moralis.User.current()) {
       const provider = window.localStorage.getItem(
         moralisProviderLocalStorageKey
@@ -186,37 +189,47 @@ export class MoralisService implements IMoralis {
       'Subscribe: onWeb3Deactivated, onChainChanged, onAccountChanged'
     );
     this.unsubscribeFromWeb3Deactivated = Moralis.onWeb3Deactivated(error => {
-      this.logger.warn(
-        `Moralis ${error.connector.type} connector was deactivated!`
-      );
-      this.logout();
+      this.ngZone.run(() => {
+        this.logger.warn(
+          `Moralis ${error.connector.type} connector was deactivated!`
+        );
+        this.logout();
+      });
     });
 
     this.unsubscribeFromChainChanged = Moralis.onChainChanged(newChainHex => {
-      const requiredChainHex = this.requiredChainHex;
-      if (requiredChainHex !== newChainHex) {
-        this.logger.warn(
-          `Moralis chain changed from ${requiredChainHex} to ${newChainHex}!`
-        );
-        this.logout();
-      }
+      this.ngZone.run(() => {
+        const requiredChainHex = this.requiredChainHex;
+        if (requiredChainHex !== newChainHex) {
+          this.logger.warn(
+            `Moralis chain changed from ${requiredChainHex} to ${newChainHex}!`
+          );
+          this.logout();
+        }
+      });
     });
 
     this.unsubscribeFromAccountChanged = Moralis.onAccountChanged(account => {
-      if (account) {
-        const newAccount = account.toLowerCase();
-        this.account$.pipe(filterEmpty(), first()).subscribe(currentAccount => {
-          if (newAccount !== currentAccount) {
-            this.logger.warn(`Moralis account has changed to ${newAccount}!`);
-            this.handleAccountChanged(newAccount);
-          } else {
-            this.logger.warn(`Moralis account has not changed!`);
-          }
-        });
-      } else {
-        this.logger.warn(`Moralis account disconnected!`);
-        this.logout();
-      }
+      this.ngZone.run(() => {
+        if (account) {
+          const newAccount = account.toLowerCase();
+          this.account$
+            .pipe(filterEmpty(), first())
+            .subscribe(currentAccount => {
+              if (newAccount !== currentAccount) {
+                this.logger.warn(
+                  `Moralis account has changed to ${newAccount}!`
+                );
+                this.handleAccountChanged(newAccount);
+              } else {
+                this.logger.warn(`Moralis account has not changed!`);
+              }
+            });
+        } else {
+          this.logger.warn(`Moralis account disconnected!`);
+          this.logout();
+        }
+      });
     });
   }
 
