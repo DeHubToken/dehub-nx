@@ -4,18 +4,12 @@
  *
  * 1. Add new column `can_play` in _User table of Moralis Database
  * type Boolean
- * 2. Sync DeHub Token Transfer events and name table as `DeHubTokenTransferEvents`
- * 3. Sync DeHub Staking events and name table as following
+ * 2. Sync DeHub Staking Events and name table as followings
  * Deposit -> DeHubStakingDepositEvents
  * Harvested -> DeHubStakingHarvestedEvents
  * Withdraw -> DeHubStakingWithdrawEvents
- * 4. Set following variables in Moralis Config
- * https://docs.moralis.io/moralis-server/cloud-code/config#config
- * DEHUB_STAKING_ABI_MAINNET   Array   Abi for staking contract, [...]
- * DEHUB_STAKING_MAINNET   String   Address to staking contract
- * DEHUB_TOKEN_ABI_MAINNET   Array   Abi for $DeHub contract, [...]
- * DEHUB_TOKEN_MAINNET   String   Address to $DeHub contract
- * OTT_MIN_TOKENS_TO_PLAY  Number   Min token amount to set can_play, def:500000
+ * 3. Configure contracts tables as followings
+ * https://lucid.app/lucidchart/26ac6457-e46e-41c4-962b-9927254a46bb/edit?page=0_0#
  *
  ******************************************************/
 
@@ -112,6 +106,8 @@ async function getStakingControllerContract(targetChainId) {
       return {
         abi: first.get('abi'),
         address: first.get('address'),
+        name: first.get('name'),
+        chainId: first.get('chainId'),
       };
     }
   } catch (err) {
