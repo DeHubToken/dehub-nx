@@ -22,15 +22,15 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
-import { User } from '../models/moralis.models';
+import { Attributes, User } from '../models/moralis.models';
 
 interface IMoralis {
   user$: Observable<User | undefined>;
+  userAttributes$: Observable<Attributes | undefined>;
   account$: Observable<string | undefined>;
   isAuthenticated$: Observable<boolean>;
 
   username$: Observable<string>;
-  canPlay$: Observable<boolean>;
 
   login: (provider: MoralisWeb3ProviderType, chainId: number) => void;
   logout: () => void;
@@ -63,13 +63,9 @@ export class MoralisService implements IMoralis {
     publishReplayRefCount()
   );
 
-  private userAttributes$ = this.user$.pipe(map(user => user?.attributes));
+  userAttributes$ = this.user$.pipe(map(user => user?.attributes));
 
   isAuthenticated$ = this.user$.pipe(map(user => !!user));
-
-  canPlay$ = this.userAttributes$.pipe(
-    map(attributes => attributes?.can_play ?? false)
-  );
 
   username$ = this.userAttributes$.pipe(
     filterEmpty(),
