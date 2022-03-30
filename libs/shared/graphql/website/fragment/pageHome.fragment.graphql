@@ -18,6 +18,7 @@ fragment PageHome on PageHome {
       ...PageSectionDappPosts
       ...PageSectionGrandPosts
       ...PageSectionSectionPosts
+      ...PageSectionPersonPosts
     }
   }
 }
