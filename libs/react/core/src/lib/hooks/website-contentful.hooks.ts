@@ -436,38 +436,6 @@ export const PageGameFragmentDoc = gql`
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
 `;
-export const PageHomeFragmentDoc = gql`
-  fragment PageHome on PageHome {
-    sys {
-      ...Sys
-    }
-    mainTitle
-    showTitle
-    subtitle
-    showSubtitle
-    sectionsCollection(limit: 10, preview: $isPreview) {
-      items {
-        ...PageSectionFeaturePosts
-        ...PageSectionThumbnailPosts
-        ...PageSectionBasicPosts
-        ...PageSectionIconTiles
-        ...PageSectionFaQs
-        ...PageSectionDappPosts
-        ...PageSectionGrandPosts
-        ...PageSectionSectionPosts
-      }
-    }
-  }
-  ${SysFragmentDoc}
-  ${PageSectionFeaturePostsFragmentDoc}
-  ${PageSectionThumbnailPostsFragmentDoc}
-  ${PageSectionBasicPostsFragmentDoc}
-  ${PageSectionIconTilesFragmentDoc}
-  ${PageSectionFaQsFragmentDoc}
-  ${PageSectionDappPostsFragmentDoc}
-  ${PageSectionGrandPostsFragmentDoc}
-  ${PageSectionSectionPostsFragmentDoc}
-`;
 export const PersonPostFragmentDoc = gql`
   fragment PersonPost on PersonPost {
     sys {
@@ -508,6 +476,40 @@ export const PageSectionPersonPostsFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${PersonPostFragmentDoc}
+`;
+export const PageHomeFragmentDoc = gql`
+  fragment PageHome on PageHome {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+        ...PageSectionPersonPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+  ${PageSectionPersonPostsFragmentDoc}
 `;
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {
