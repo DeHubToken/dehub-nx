@@ -1,8 +1,5 @@
 import { WalletConnectingState } from '@dehub/shared/model';
-import {
-  ethersToSerializedBigNumber,
-  SerializedBigNumber,
-} from '@dehub/shared/util';
+import { SerializedBigNumber } from '@dehub/shared/util';
 import {
   createAction,
   createAsyncThunk,
@@ -10,20 +7,24 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
-import { getStakingContract } from '../../utils/contractHelpers';
+import { orderBy } from 'lodash';
+import { Moralis } from 'moralis';
 import getDehubPrice from '../../utils/priceDehub';
-import { SerializedPoolInfo } from './types';
-
-export interface ApplicationState {
-  walletConnectingState: WalletConnectingState;
-  dehubPrice: SerializedBigNumber;
-  poolInfo?: SerializedPoolInfo;
-  readonly blockNumber: { readonly [chainId: string]: number };
-}
+import {
+  ApplicationState,
+  ApplicationStatus,
+  ContractProperties,
+  SerializedPoolInfo,
+  StakingContractProperties,
+} from './types';
 
 const initialState: ApplicationState = {
+  applicationStatus: ApplicationStatus.INITIAL,
   walletConnectingState: WalletConnectingState.INIT,
   dehubPrice: new BigNumber(NaN).toJSON(),
+  stakingContracts: null,
+  stakingController: null,
+  pools: [],
   blockNumber: {},
 };
 
@@ -31,30 +32,49 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
   'application/fetchDehubPrice',
   async () => {
     const dehubPrice = await getDehubPrice();
-
     return dehubPrice;
   }
 );
 
-export const fetchPoolInfo = createAsyncThunk<SerializedPoolInfo>(
-  'application/fetchPoolInfo',
-  async () => {
-    const stakingContract = getStakingContract();
-    const poolInfo = await stakingContract?.pool();
-
+export const fetchContracts = createAsyncThunk<{
+  staking: StakingContractProperties[];
+  controller: ContractProperties;
+} | null>('application/fetchContracts', async () => {
+  try {
+    const result = await Moralis.Cloud.run('getStakingContracts', {});
+    if (!result) return null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const staking = orderBy(
+      result.map((item: any) => ({
+        year: item.year,
+        month: item.month,
+        address: item.address,
+        name: item.name,
+        chainId: item.chainId,
+        abi: item.abi,
+      })),
+      ['chainId', 'year', 'month', 'name'],
+      'desc'
+    );
+    const controller = await Moralis.Cloud.run(
+      'getStakingControllerContract',
+      {}
+    );
+    if (!controller) return null;
     return {
-      openTimeStamp: Number(poolInfo?.openTimeStamp),
-      closeTimeStamp: Number(poolInfo?.closeTimeStamp),
-      openBlock: Number(poolInfo?.openBlock),
-      closeBlock: Number(poolInfo?.closeBlock),
-      emergencyPull: poolInfo?.emergencyPull,
-      harvestFund: ethersToSerializedBigNumber(poolInfo?.harvestFund),
-      lastUpdateBlock: ethersToSerializedBigNumber(poolInfo?.lastUpdateBlock),
-      valuePerBlock: ethersToSerializedBigNumber(poolInfo?.valuePerBlock),
-      totalStaked: ethersToSerializedBigNumber(poolInfo?.totalStaked),
+      staking: staking,
+      controller: {
+        address: controller.address,
+        name: controller.name,
+        chainId: controller.chainId,
+        abi: controller.abi,
+      },
     };
+  } catch (error) {
+    console.error(error);
   }
-);
+  return null;
+});
 
 export const updateBlockNumber = createAction<{
   chainId: string;
@@ -71,19 +91,21 @@ export const ApplicationSlice = createSlice({
     ) => {
       state.walletConnectingState = action.payload.connectingState;
     },
+    setApplicationStatus: (
+      state,
+      action: PayloadAction<{ appStatus: ApplicationStatus }>
+    ) => {
+      state.applicationStatus = action.payload.appStatus;
+    },
+    setPools: (state, action: PayloadAction<SerializedPoolInfo[]>) => {
+      state.pools = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(
       fetchDehubPrice.fulfilled,
       (state, action: PayloadAction<SerializedBigNumber>) => {
         state.dehubPrice = action.payload;
-      }
-    );
-
-    builder.addCase(
-      fetchPoolInfo.fulfilled,
-      (state, action: PayloadAction<SerializedPoolInfo>) => {
-        state.poolInfo = action.payload;
       }
     );
 
@@ -98,9 +120,17 @@ export const ApplicationSlice = createSlice({
         );
       }
     });
+
+    builder.addCase(fetchContracts.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.stakingContracts = action.payload.staking;
+        state.stakingController = action.payload.controller;
+      }
+    });
   },
 });
 
-export const { setWalletConnectingState } = ApplicationSlice.actions;
+export const { setWalletConnectingState, setApplicationStatus, setPools } =
+  ApplicationSlice.actions;
 
 export default ApplicationSlice.reducer;

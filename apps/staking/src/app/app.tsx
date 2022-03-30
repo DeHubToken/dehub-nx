@@ -8,8 +8,11 @@ import BigNumber from 'bignumber.js';
 import { lazy, useMemo } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { environment } from '../environments/environment';
+import usePullBlockNumber from './hooks/usePullBlockNumber';
+import usePullBusdPrice from './hooks/usePullBusdPrice';
 import history from './routerHistory';
-import { useFetchPoolInfo, usePullBusdPrice } from './state/application/hooks';
+import { useApplicationStatus, useFetchPools } from './state/application/hooks';
+import { ApplicationStatus } from './state/application/types';
 
 // This config is required for number formatting
 BigNumber.config({
@@ -25,8 +28,11 @@ const activeTab = NavigationTabMenu.Earn;
 
 export function App() {
   useEagerMoralis();
-  useFetchPoolInfo();
+  useFetchPools();
   usePullBusdPrice();
+  usePullBlockNumber();
+
+  const applicationStatus = useApplicationStatus();
 
   const Staking = useMemo(
     () =>
@@ -43,6 +49,10 @@ export function App() {
       ),
     []
   );
+
+  if (applicationStatus === ApplicationStatus.INITIAL) {
+    return <FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />;
+  }
 
   return (
     <Router history={history}>

@@ -11,66 +11,89 @@ import {
   TransactionReceipt,
   TransactionResponse,
 } from '@ethersproject/abstract-provider';
+import { Contract } from '@ethersproject/contracts';
 import BigNumber from 'bignumber.js';
 import moment from 'moment';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
+import { SimpleCountDown } from '../../components/CountDown';
 import { FetchStatus } from '../../config/constants/types';
 import {
+  usePickStakingContract,
+  usePickStakingControllerContract,
   useRewardsContract,
-  useStakingContract,
 } from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
 import { useWeeklyRewards } from '../../hooks/useRewards';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
-import { useDehubBusdPrice, usePoolInfo } from '../../state/application/hooks';
+import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
+import { getVersion } from '../../utils/contractHelpers';
+import { quarterMark } from '../../utils/pool';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
+
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
-const LiveCard = () => {
-  const currentQ = `Q${moment().quarter()} ${moment().year()}`;
+interface CardProps {
+  poolIndex: number;
+}
 
+const LiveCard = ({ poolIndex }: CardProps) => {
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
   const [claimed, setClaimed] = useState(false);
   const [pendingClaimTx, setPendingClaimTx] = useState(false);
 
   const { account } = useMoralis();
-  const stakingContract = useStakingContract();
+  const stakingController: Contract | null = usePickStakingControllerContract();
+  const stakingContract: Contract | null = usePickStakingContract(poolIndex);
+
   const rewardsContract = useRewardsContract();
-  const paused = useStakePaused();
+  const paused = useStakePaused(poolIndex);
   const { slowRefresh } = useRefresh();
-  const poolInfo = usePoolInfo();
-  const closeTimeStamp = poolInfo
-    ? Number(poolInfo.closeTimeStamp) * 1000
-    : '0';
+  const pools = usePools();
+  const poolInfo = pools[poolIndex];
+  const currentQ = useMemo(() => quarterMark(poolInfo), [poolInfo]);
 
-  const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } =
-    useStakes(account);
-  const pendingHarvest = usePendingHarvest(account);
+  const closeTimeStamp = useMemo(
+    () => (poolInfo ? Number(poolInfo.closeTimeStamp) : 0),
+    [poolInfo]
+  );
 
-  const period = poolInfo
-    ? poolInfo?.closeTimeStamp - poolInfo?.openTimeStamp
-    : undefined;
-  const remainTimes = poolInfo
-    ? moment(new Date(poolInfo?.closeTimeStamp * 1000)).unix() -
-      new Date().getTime() / 1000
-    : undefined;
-  const elapsedTime = period && remainTimes ? period - remainTimes : undefined;
-  const projectedRewards =
-    poolInfo && pendingHarvest && period && elapsedTime
-      ? pendingHarvest
-          ?.times(new BigNumber(period))
-          .div(new BigNumber(elapsedTime))
-      : undefined;
+  const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } = useStakes(
+    poolIndex,
+    account
+  );
+  const pendingHarvest = usePendingHarvest(poolIndex, account);
+
+  const period = useMemo(
+    () => poolInfo?.closeTimeStamp - poolInfo?.openTimeStamp,
+    [poolInfo]
+  );
+  const remainTimes = useMemo(
+    () =>
+      moment(new Date(poolInfo?.closeTimeStamp * 1000)).unix() -
+      new Date().getTime() / 1000,
+    [poolInfo]
+  );
+  const elapsedTime = useMemo(
+    () => period - remainTimes,
+    [period, remainTimes]
+  );
+  const projectedRewards = useMemo(
+    () =>
+      pendingHarvest
+        ?.times(new BigNumber(period))
+        .div(new BigNumber(elapsedTime)),
+    [pendingHarvest, period, elapsedTime]
+  );
   const {
     fetchBNBRewards,
     fetchStatus: fetchRewardStatus,
@@ -80,23 +103,30 @@ const LiveCard = () => {
     hasAlreadyClaimed,
     nextCycleResetTimestamp,
   } = useWeeklyRewards(account);
-
   const deHubPriceInBUSD = useDehubBusdPrice();
-
-  const projectedRewardsInBUSD = projectedRewards?.times(deHubPriceInBUSD);
-
-  const yourStakeInBUSD = userStakeInfo.amount.times(deHubPriceInBUSD);
+  const projectedRewardsInBUSD = useMemo(
+    () => projectedRewards?.times(deHubPriceInBUSD),
+    [projectedRewards, deHubPriceInBUSD]
+  );
+  const yourStakeInBUSD = useMemo(
+    () => userStakeInfo.amount.times(deHubPriceInBUSD),
+    [userStakeInfo.amount, deHubPriceInBUSD]
+  );
 
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
-    fetchBNBRewards(userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO));
+    fetchBNBRewards(
+      userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO),
+      poolInfo.totalStaked
+    );
   }, [
     fetchBNBRewards,
     account,
     pendingHarvest,
     claimed,
     userStakeInfo.amount,
+    poolInfo.totalStaked,
     slowRefresh,
   ]);
 
@@ -126,9 +156,12 @@ const LiveCard = () => {
             setClaimed(true);
           }
         }
-      } else if (stakingContract) {
-        const tx: TransactionResponse =
-          await stakingContract?.claimBNBRewards();
+      } else if (stakingController && stakingContract) {
+        const isV1Quarter = (await getVersion(stakingContract)) === 1;
+
+        const tx: TransactionResponse = isV1Quarter
+          ? await stakingContract?.claimBNBRewards()
+          : await stakingController?.claimBNBRewards();
         const receipt: TransactionReceipt = await tx.wait();
         if (receipt.status) {
           toast?.current?.show({
@@ -180,9 +213,10 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Harvest In</Heading>
-                    <Text fontSize="24px" fontWeight={900}>
-                      {timeFromNow(moment(new Date(closeTimeStamp)))}
-                    </Text>
+                    <SimpleCountDown
+                      limitTime={closeTimeStamp}
+                      style={{ fontSize: '24px', fontWeight: 900 }}
+                    />
                   </div>
                 </div>
               </div>
@@ -190,7 +224,8 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Projected Rewards</Heading>
-                    {projectedRewards &&
+                    {account &&
+                    projectedRewards &&
                     projectedRewardsInBUSD &&
                     !projectedRewardsInBUSD.isNaN() ? (
                       <>
@@ -233,7 +268,7 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Your Stake</Heading>
-                    {fetchStakeStatus === FetchStatus.SUCCESS && poolInfo ? (
+                    {account && fetchStakeStatus === FetchStatus.SUCCESS ? (
                       <>
                         <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
@@ -290,7 +325,7 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Pending Rewards</Heading>
-                    {pendingHarvest ? (
+                    {account && pendingHarvest ? (
                       <>
                         <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
@@ -321,26 +356,18 @@ const LiveCard = () => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-2">Weekly BNB Rewards</Heading>
+                    {account && fetchRewardStatus === FetchStatus.SUCCESS ? (
+                      !hasAlreadyClaimed && (
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          Your BNB Reward:{' '}
+                          {getFullDisplayBalance(bnbRewards, BNB_DECIMALS, 10)}
+                        </Text>
+                      )
+                    ) : (
+                      <Skeleton width="100%" height="1.5rem" />
+                    )}
                     {account &&
-                      (fetchRewardStatus === FetchStatus.SUCCESS ? (
-                        !hasAlreadyClaimed && (
-                          <Text
-                            fontSize="14px"
-                            fontWeight={900}
-                            className="pb-2"
-                          >
-                            Your BNB Reward:{' '}
-                            {getFullDisplayBalance(
-                              bnbRewards,
-                              BNB_DECIMALS,
-                              10
-                            )}
-                          </Text>
-                        )
-                      ) : (
-                        <Skeleton width="100%" height="1.5rem" />
-                      ))}
-                    {fetchRewardStatus === FetchStatus.SUCCESS &&
+                    fetchRewardStatus === FetchStatus.SUCCESS &&
                     totalBNBRewards ? (
                       !hasAlreadyClaimed && (
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
@@ -353,7 +380,7 @@ const LiveCard = () => {
                         </Text>
                       )
                     ) : (
-                      <Skeleton width="100%" height="1.5rem" className="mt-2" />
+                      <Skeleton width="100%" height="1.5rem" className="my-2" />
                     )}
 
                     {fetchRewardStatus === FetchStatus.SUCCESS &&
@@ -395,12 +422,14 @@ const LiveCard = () => {
         </StyledBox>
       </Card>
       <StakeModal
-        id="stake"
+        poolIndex={poolIndex}
+        type="stake"
         open={openStakeModal}
         onHide={() => handleModal('stake', false)}
       />
       <StakeModal
-        id="unstake"
+        poolIndex={poolIndex}
+        type="unstake"
         open={openUnstakeModal}
         onHide={() => handleModal('unstake', false)}
       />

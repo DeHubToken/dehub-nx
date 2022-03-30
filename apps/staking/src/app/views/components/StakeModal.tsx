@@ -4,6 +4,7 @@ import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/util';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
 import { MaxUint256 } from '@ethersproject/constants';
+import { Contract } from '@ethersproject/contracts';
 import BigNumber from 'bignumber.js';
 import { capitalize } from 'lodash';
 import { Button } from 'primereact/button';
@@ -13,13 +14,19 @@ import { Toast } from 'primereact/toast';
 import React, { useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
-import { useDehubContract, useStakingContract } from '../../hooks/useContract';
+import {
+  useDehubContract,
+  usePickStakingContract,
+  usePickStakingControllerContract,
+} from '../../hooks/useContract';
 import { UserInfo, useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { getStakingAddress } from '../../utils/addressHelpers';
+import { usePools } from '../../state/application/hooks';
+import { getVersion } from '../../utils/contractHelpers';
 
 interface StakeModalProps {
-  id: 'stake' | 'unstake';
+  poolIndex: number;
+  type: 'stake' | 'unstake';
   open: boolean;
   onHide: () => void;
 }
@@ -37,11 +44,11 @@ const getButtonProps = (
   value: BigNumber,
   dehubBalance: BigNumber,
   userStakeInfo: UserInfo,
-  id: 'stake' | 'unstake'
+  type: 'stake' | 'unstake'
 ) => {
-  if (id === 'stake' && dehubBalance.isZero()) {
+  if (type === 'stake' && dehubBalance.isZero()) {
     return { key: 'Insufficient DeHub balance', disabled: true };
-  } else if (id === 'unstake' && userStakeInfo.amount.isZero()) {
+  } else if (type === 'unstake' && userStakeInfo.amount.isZero()) {
     return { key: 'No DeHub staked', disabled: true };
   }
 
@@ -51,24 +58,33 @@ const getButtonProps = (
   return { key: 'Confirm', disabled: value.lt(0) };
 };
 
-const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
+const StakeModal: React.FC<StakeModalProps> = ({
+  poolIndex,
+  type,
+  open,
+  onHide,
+}) => {
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { account } = useMoralis();
-  const { userInfo: userStakeInfo } = useStakes(account);
+  const { userInfo: userStakeInfo } = useStakes(poolIndex, account);
   const dehubBalance = useGetDehubBalance();
-  const stakingContract = useStakingContract();
+  const stakingController: Contract | null = usePickStakingControllerContract();
+  const stakingContract: Contract | null = usePickStakingContract(poolIndex);
+
+  const pools = usePools();
+  const poolInfo = pools[poolIndex];
 
   const toast = useRef<Toast>(null);
 
   const maxBalance = getBalanceAmount(
-    id === 'stake' ? dehubBalance : userStakeInfo.amount,
+    type === 'stake' ? dehubBalance : userStakeInfo.amount,
     5
   ).toNumber();
   const valueAsBn = new BigNumber(value);
 
-  const stakingContractAddress = getStakingAddress();
+  const stakingContractAddress = stakingContract?.address;
   const dehubContract = useDehubContract();
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;
@@ -86,7 +102,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
     valueAsBn,
     dehubBalance,
     userStakeInfo,
-    id
+    type
   );
 
   const handleEnterPosition = async () => {
@@ -120,40 +136,50 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
         }
       }
 
-      let receipt: TransactionReceipt;
-      if (id === 'stake') {
-        const tx = await stakingContract?.deposit(decimalValue.toNumber());
-        receipt = await tx.wait();
-      } else {
-        const tx = await stakingContract?.withdraw(decimalValue.toNumber());
-        receipt = await tx.wait();
-      }
+      if (stakingContract && stakingController) {
+        const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
-      if (receipt.status) {
-        toast?.current?.show({
-          severity: 'success',
-          summary: `Success`,
-          detail: (
-            <Box>
-              <Text style={{ marginBottom: '8px' }}>
-                {`${valueAsBn.toString()} $DeHub has been successfully ${id}d!`}
-              </Text>
-            </Box>
-          ),
-          life: 4000,
-        });
+        console.log('isV1Quarter', isV1Quarter);
+
+        let receipt: TransactionReceipt;
+        if (type === 'stake') {
+          const tx = isV1Quarter
+            ? await stakingContract.deposit(decimalValue.toNumber())
+            : await stakingController.deposit(decimalValue.toNumber());
+          receipt = await tx.wait();
+        } else {
+          const tx = isV1Quarter
+            ? await stakingContract.withdraw(decimalValue.toNumber())
+            : await stakingController.withdraw(decimalValue.toNumber());
+          receipt = await tx.wait();
+        }
+
+        if (receipt.status) {
+          toast?.current?.show({
+            severity: 'success',
+            summary: `Success`,
+            detail: (
+              <Box>
+                <Text style={{ marginBottom: '8px' }}>
+                  {`${valueAsBn.toString()} $DeHub has been successfully ${type}d!`}
+                </Text>
+              </Box>
+            ),
+            life: 4000,
+          });
+        }
         onHide();
       }
-    } catch (error) {
-      const errorMsg = 'An error occurred, unable to stake';
-      if (error instanceof Error)
-        toast?.current?.show({
-          severity: 'error',
-          summary: 'Error',
-          detail: errorMsg,
-          life: 4000,
-        });
-      console.error(error);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast?.current?.show({
+        severity: 'error',
+        summary: 'Error',
+        detail: `${type.toUpperCase()} failed - ${
+          error?.data?.message ?? error.message
+        }`,
+        life: 4000,
+      });
     }
     setIsTxPending(false);
   };
@@ -179,7 +205,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
         visible={open}
         modal
         className="border-neon-1"
-        header={`${capitalize(id)} In Pool`}
+        header={`${capitalize(type)} In Pool`}
         onHide={onHide}
         style={{ minWidth: '288px', marginTop: '124px', position: 'relative' }}
       >
@@ -189,7 +215,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
             style={{ marginBottom: '8px' }}
           >
             <div className="flex align-items-center">
-              <Text fontWeight={600}>{`${capitalize(id)}:`}</Text>
+              <Text fontWeight={600}>{`${capitalize(type)}:`}</Text>
             </div>
             <div className="flex align-items-center">
               <Text fontWeight={600} textTransform="uppercase">
@@ -255,7 +281,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ id, open, onHide }) => {
                 className="p-button w-full"
                 disabled={!account || disabled}
                 onClick={handleEnterPosition}
-                label={capitalize(id)}
+                label={capitalize(type)}
                 loading={isTxPending}
                 loadingIcon={'pi pi-spin pi-spinner'}
               />
