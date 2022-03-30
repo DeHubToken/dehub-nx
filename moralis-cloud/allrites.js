@@ -372,6 +372,51 @@ Moralis.Cloud.afterSave('DeHubStakingWithdrawEvents', async request => {
   }
 });
 
+Moralis.Cloud.afterSave('DeprecatedStakingDepositEvents', async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const address = request.object.get('user');
+    logger.info(`Noticed DeHubStakingDepositEvents, address: ${address}`);
+
+    await updateCanPlay(defChainId, address);
+  } catch (err) {
+    logger.error(
+      `DeprecatedStakingDepositEvents error: ${JSON.stringify(err)}`
+    );
+    return;
+  }
+});
+
+Moralis.Cloud.afterSave('DeprecatedStakingHarvestEvents', async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const address = request.object.get('user');
+    logger.info(`Noticed DeHubStakingHarvestEvents, address: ${address}`);
+
+    await updateCanPlay(defChainId, address);
+  } catch (err) {
+    logger.error(
+      `DeprecatedStakingHarvestEvents error: ${JSON.stringify(err)}`
+    );
+    return;
+  }
+});
+
+Moralis.Cloud.afterSave('DeprecatedStakingWithdrawEvents', async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const address = request.object.get('user');
+    logger.info(`Noticed DeHubStakingWithdrawEvents, address: ${address}`);
+
+    await updateCanPlay(defChainId, address);
+  } catch (err) {
+    logger.error(
+      `DeprecatedStakingWithdrawEvents error: ${JSON.stringify(err)}`
+    );
+    return;
+  }
+});
+
 Moralis.Cloud.beforeLogin(async request => {
   const logger = Moralis.Cloud.getLogger();
   try {
