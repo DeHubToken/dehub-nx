@@ -52,16 +52,18 @@ export default function Staking() {
         {pools.filter((pool: PoolInfo) => isPastPool(pool)).length > 0 && (
           <h1>Past Vaults</h1>
         )}
-        {pools.map((pool: PoolInfo, poolIndex: number) => {
-          if (isPastPool(pool)) {
-            return (
-              <div className="col-12 md:col-6" key={poolIndex}>
-                <PastCard key={poolIndex} poolIndex={poolIndex} />
-              </div>
-            );
-          }
-          return null;
-        })}
+        <div className="grid">
+          {pools.map((pool: PoolInfo, poolIndex: number) => {
+            if (isPastPool(pool)) {
+              return (
+                <div className="col-12 md:col-6" key={poolIndex}>
+                  <PastCard key={poolIndex} poolIndex={poolIndex} />
+                </div>
+              );
+            }
+            return null;
+          })}
+        </div>
       </div>
     </Container>
   );
