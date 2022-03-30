@@ -27,10 +27,12 @@ export const useWeeklyRewards = (staker: string | null) => {
           return;
         }
         const rewardsContract = getRewardsContract();
-        const rewards = await rewardsContract.calcCurrentClaimableShare(
-          EthersBigNumber.from(amount.toString()),
-          EthersBigNumber.from(totalStaked.toString())
-        );
+        const rewards = totalStaked.eq(BIG_ZERO)
+          ? BIG_ZERO
+          : await rewardsContract.calcCurrentClaimableShare(
+              EthersBigNumber.from(amount.toString()),
+              EthersBigNumber.from(totalStaked.toString())
+            );
         if (rewards) setBNBRewards(ethersToBigNumber(rewards));
         const claimed = await rewardsContract.hasAlreadyClaimed(staker);
         setHasAlreadyClaimed(claimed);
