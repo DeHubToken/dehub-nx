@@ -10,7 +10,6 @@ import {
   PageStreamFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -29,7 +28,6 @@ import { map, Observable } from 'rxjs';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
 })
 export class AngularFeatureStreamComponent implements OnInit {
   pageStream$?: Observable<PageStreamFragment | undefined>;

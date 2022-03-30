@@ -10,7 +10,6 @@ import {
   PageLearnFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -30,7 +29,6 @@ import { map } from 'rxjs/operators';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
 })
 export class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;

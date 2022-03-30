@@ -7,6 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: AngularFeatureLegalComponent,
+    redirectTo: 'terms',
   },
   {
     path: ':slug',

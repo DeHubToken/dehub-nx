@@ -13,7 +13,7 @@ import {
   WalletConnectingState,
 } from '@dehub/shared/model';
 import { shortenAddress } from '@dehub/shared/util';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { MoralisService } from '../../services/moralis.service';
 
@@ -38,7 +38,7 @@ import { MoralisService } from '../../services/moralis.service';
 
     <!-- Loader -->
     <dhb-loader
-      *ngIf="(visible$ | async)!"
+      *ngIf="(loaderVisible$ | async)!"
       [subtitle]="(subtitle$ | async)!"
       [lottieJson]="lottieJson"
     ></dhb-loader>
@@ -51,41 +51,14 @@ export class ConnectWalletComponent implements OnInit {
   @Input() icon = 'fas fa-wallet';
   @Input() chainId!: number;
 
-  showDialog = false;
+  label$?: Observable<string>;
+  isAuthenticated$?: Observable<boolean>;
+  loaderVisible$?: Observable<boolean>;
 
-  user$ = this.moralisService.user$;
-  label$ = this.moralisService.user$.pipe(
-    map(user =>
-      user ? shortenAddress(user.attributes.ethAddress) : this.label
-    )
-  );
-  isAuthenticated$ = this.moralisService.isAuthenticated$;
+  showDialog = false;
 
   private subtitleSubject = new BehaviorSubject<string>('');
   subtitle$ = this.subtitleSubject.asObservable();
-
-  visible$ = this.moralisService.walletConnectingState$.pipe(
-    tap(walletConnectingState => {
-      let subtitle = '';
-      switch (walletConnectingState) {
-        case WalletConnectingState.SWITCH_NETWORK:
-          subtitle = WalletConnectingMessages.SWITCH_NETWORK;
-          break;
-        case WalletConnectingState.ADD_NETWORK:
-          subtitle = WalletConnectingMessages.ADD_NETWORK;
-          break;
-        default:
-          subtitle = WalletConnectingMessages.WAITING;
-      }
-      this.subtitleSubject.next(subtitle);
-    }),
-    map(
-      walletConnectingState =>
-        ![WalletConnectingState.INIT, WalletConnectingState.COMPLETE].includes(
-          walletConnectingState
-        )
-    )
-  );
 
   lottieJson = `${this.env.baseUrl}/assets/dehub/dehub-loader-light-blue.json`;
 
@@ -94,7 +67,40 @@ export class ConnectWalletComponent implements OnInit {
     private moralisService: MoralisService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const { account$, isAuthenticated$, walletConnectingState$ } =
+      this.moralisService;
+
+    this.isAuthenticated$ = isAuthenticated$;
+
+    this.label$ = account$.pipe(
+      map(account => (account ? shortenAddress(account) : this.label))
+    );
+
+    this.loaderVisible$ = walletConnectingState$.pipe(
+      tap(walletConnectingState => {
+        let subtitle = '';
+        switch (walletConnectingState) {
+          case WalletConnectingState.SWITCH_NETWORK:
+            subtitle = WalletConnectingMessages.SWITCH_NETWORK;
+            break;
+          case WalletConnectingState.ADD_NETWORK:
+            subtitle = WalletConnectingMessages.ADD_NETWORK;
+            break;
+          default:
+            subtitle = WalletConnectingMessages.WAITING;
+        }
+        this.subtitleSubject.next(subtitle);
+      }),
+      map(
+        walletConnectingState =>
+          ![
+            WalletConnectingState.INIT,
+            WalletConnectingState.COMPLETE,
+          ].includes(walletConnectingState)
+      )
+    );
+  }
 
   onLogin(provider: MoralisWeb3ProviderType) {
     this.moralisService.login(provider, this.chainId);

@@ -1,23 +1,26 @@
 import { Box, Heading, Text } from '@dehub/react/ui';
-import moment from 'moment';
 import { Card } from 'primereact/card';
+import { useMemo } from 'react';
 import styled from 'styled-components';
-import { usePoolInfo } from '../../state/application/hooks';
-import { timeFromNow } from '../../utils/timeFromNow';
+import { SimpleCountDown } from '../../components/CountDown';
+import { usePools } from '../../state/application/hooks';
+import { quarterMark } from '../../utils/pool';
 
 const StyledBox = styled(Box)`
   padding: 1rem;
 `;
 
-const ComingSoon = () => {
-  const nextQ = `Q${moment().add(3, 'months').quarter()} ${moment()
-    .add(3, 'months')
-    .year()}`;
-  const currentQ = `Q${moment().quarter()} ${moment().year()}`;
-  const isIn2022Q1 = moment().quarter() === 1 && moment().year() === 2022;
+interface ComingSoonProps {
+  poolIndex: number;
+}
 
-  const poolInfo = usePoolInfo();
-  const openTimeStamp = poolInfo ? Number(poolInfo.openTimeStamp) * 1000 : '0';
+const ComingSoon = ({ poolIndex }: ComingSoonProps) => {
+  const pools = usePools();
+  const poolInfo = pools[poolIndex];
+  const openTimeStamp = useMemo(
+    () => (poolInfo ? Number(poolInfo.openTimeStamp) : 0),
+    [poolInfo]
+  );
 
   return (
     <Card className="border-neon-2 overflow-hidden mt-5">
@@ -31,7 +34,7 @@ const ComingSoon = () => {
           }}
         >
           <span style={{ fontWeight: 900 }}>
-            Coming Soon: {isIn2022Q1 ? currentQ : nextQ}
+            Coming Soon: {quarterMark(poolInfo)}
           </span>
         </Heading>
 
@@ -40,9 +43,11 @@ const ComingSoon = () => {
             <div className="card overview-box gray shadow-2">
               <div className="overview-info text-left w-full">
                 <Heading className="pb-2">Opening in </Heading>
-                <Text fontSize="14px" fontWeight={900} className="pb-2">
-                  {timeFromNow(moment(new Date(openTimeStamp)))}
-                </Text>
+                <SimpleCountDown
+                  limitTime={openTimeStamp}
+                  className="pb-2"
+                  style={{ fontSize: '24px', fontWeight: 900 }}
+                />
               </div>
             </div>
           </div>

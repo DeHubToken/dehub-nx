@@ -2,12 +2,7 @@
  * ApplicationState
  */
 
-import { WalletConnectingState } from '@dehub/shared/model';
-
-export interface ApplicationState {
-  walletModalOpen: boolean;
-  walletConnectingState: WalletConnectingState;
-}
+import { ApplicationState } from './application/types';
 
 /**
  * StateCollections

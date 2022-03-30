@@ -14,4 +14,12 @@ export interface StartOptions {
   masterKey?: string;
 }
 
-export type User = Moralis.User<Moralis.Attributes>;
+export interface Attributes extends Moralis.Attributes {
+  username: string;
+  accounts: string[];
+  ethAddress: string;
+  /** OTT can play flag */
+  can_play?: boolean;
+}
+
+export type User = Moralis.User<Attributes>;

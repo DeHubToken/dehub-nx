@@ -1,22 +1,30 @@
-import {
-  useDebounce,
-  useIsBrowserTabActive,
-  useRefresh,
-} from '@dehub/react/core';
+import { useRefresh } from '@dehub/react/core';
 import { WalletConnectingState } from '@dehub/shared/model';
 import BigNumber from 'bignumber.js';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useChain, useMoralis } from 'react-moralis';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
+import { getChainId } from '../../config/constants';
 import { AppState } from '../index';
 import {
-  fetchDehubPrice,
-  fetchPoolInfo,
+  fetchContracts,
+  setApplicationStatus,
+  setPools,
   setWalletConnectingState,
-  updateBlockNumber,
 } from './';
-import { PoolInfo } from './types';
+import { fetchPools } from './helpers';
+import {
+  ApplicationStatus,
+  ContractProperties,
+  PoolInfo,
+  SerializedPoolInfo,
+  StakingContractProperties,
+} from './types';
+
+export const useApplicationStatus = (): ApplicationStatus => {
+  return useSelector((state: AppState) => state.application.applicationStatus);
+};
 
 export const useWalletConnectingState = (): WalletConnectingState => {
   return useSelector(
@@ -48,106 +56,81 @@ export const useDehubBusdPrice = (): BigNumber => {
   return dehubPriceBusd;
 };
 
-export const usePoolInfo = (): PoolInfo | undefined => {
-  const poolInfo = useSelector((state: AppState) => state.application.poolInfo);
+export const useFetchPools = () => {
+  const dispatch = useAppDispatch();
+  const { slowRefresh } = useRefresh();
+  const { isInitialized } = useMoralis();
 
-  return poolInfo
-    ? {
-        openTimeStamp: poolInfo.openTimeStamp,
-        closeTimeStamp: poolInfo.closeTimeStamp,
-        openBlock: poolInfo.openBlock,
-        closeBlock: poolInfo.closeBlock,
-        emergencyPull: poolInfo.emergencyPull,
-        harvestFund: new BigNumber(poolInfo.harvestFund),
-        lastUpdateBlock: new BigNumber(poolInfo.lastUpdateBlock),
-        valuePerBlock: new BigNumber(poolInfo.valuePerBlock),
-        totalStaked: new BigNumber(poolInfo.totalStaked),
+  const contracts: StakingContractProperties[] | null = useStakingContracts();
+
+  useEffect(() => {
+    if (isInitialized) {
+      dispatch(fetchContracts());
+    }
+  }, [dispatch, isInitialized]);
+
+  useEffect(() => {
+    const fetchInitialize = async () => {
+      if (!contracts || contracts.length < 1) return;
+      const addresses = contracts.map(contract => contract.address);
+      const abi = contracts[0].abi;
+
+      const pools: SerializedPoolInfo[] | undefined = await fetchPools(
+        abi,
+        addresses
+      );
+      if (pools) {
+        dispatch(setPools(pools));
+        dispatch(setApplicationStatus({ appStatus: ApplicationStatus.LIVE }));
       }
-    : undefined;
+    };
+
+    if (contracts && contracts.length > 0) {
+      fetchInitialize();
+    }
+  }, [dispatch, contracts, slowRefresh]);
 };
 
-export const usePullBusdPrice = () => {
-  const dispatch = useAppDispatch();
-  const { slowRefresh } = useRefresh();
+export const useStakingContracts = (): StakingContractProperties[] | null => {
+  const chainId = getChainId();
 
-  useEffect(() => {
-    dispatch(fetchDehubPrice());
-  }, [dispatch, slowRefresh]);
-};
-
-export const useFetchPoolInfo = () => {
-  const dispatch = useAppDispatch();
-  const { slowRefresh } = useRefresh();
-
-  useEffect(() => {
-    dispatch(fetchPoolInfo());
-  }, [dispatch, slowRefresh]);
-};
-
-export const usePullBlockNumber = () => {
-  const dispatch = useAppDispatch();
-  const { chainId, web3 } = useMoralis();
-
-  const isTabActive = useIsBrowserTabActive();
-
-  const [state, setState] = useState<{
-    chainId: string | null;
-    blockNumber: number | null;
-  }>({
-    chainId,
-    blockNumber: null,
-  });
-
-  const blockNumberCallback = useCallback(
-    (blockNumber: number) => {
-      setState(prev => {
-        if (chainId === prev.chainId) {
-          if (typeof prev.blockNumber !== 'number')
-            return {
-              chainId,
-              blockNumber,
-            };
-          return {
-            chainId,
-            blockNumber: Math.max(blockNumber, prev.blockNumber),
-          };
-        }
-        return prev;
-      });
-    },
-    [chainId, setState]
+  const contracts = useSelector(
+    (state: AppState) => state.application.stakingContracts
   );
 
-  useEffect(() => {
-    if (!web3 || !chainId || !isTabActive) return undefined;
-
-    setState({ chainId, blockNumber: null });
-
-    web3.getBlockNumber().then(blockNumberCallback);
-    web3.on('block', blockNumberCallback);
-
-    return () => {
-      web3.removeListener('block', blockNumberCallback);
-    };
-  }, [web3, chainId, isTabActive, blockNumberCallback]);
-
-  const debouncedState = useDebounce(state, 100);
-
-  useEffect(() => {
-    if (!debouncedState.chainId || !debouncedState.blockNumber || !isTabActive)
-      return;
-    dispatch(
-      updateBlockNumber({
-        chainId: debouncedState.chainId,
-        blockNumber: debouncedState.blockNumber,
-      })
+  return useMemo(() => {
+    if (!contracts) return null;
+    return contracts.filter(
+      (contract: StakingContractProperties) => contract.chainId === chainId
     );
-  }, [
-    dispatch,
-    isTabActive,
-    debouncedState.chainId,
-    debouncedState.blockNumber,
-  ]);
+  }, [contracts, chainId]);
+};
+
+export const useStakingControllerContract = (): ContractProperties | null => {
+  const controller = useSelector(
+    (state: AppState) => state.application.stakingController
+  );
+  return controller;
+};
+
+export const usePools = (): PoolInfo[] => {
+  const pools = useSelector((state: AppState) => state.application.pools);
+
+  return useMemo(
+    () =>
+      pools.map((pool: SerializedPoolInfo) => ({
+        openTimeStamp: pool.openTimeStamp,
+        closeTimeStamp: pool.closeTimeStamp,
+        openBlock: pool.openBlock,
+        closeBlock: pool.closeBlock,
+        emergencyPull: pool.emergencyPull,
+        harvestFund: new BigNumber(pool.harvestFund),
+        lastUpdateBlock: new BigNumber(pool.lastUpdateBlock),
+        valuePerBlock: new BigNumber(pool.valuePerBlock),
+        totalStaked: new BigNumber(pool.totalStaked),
+      })),
+    [pools]
+  );
 };
 
 export function useBlockNumber(): number | undefined {

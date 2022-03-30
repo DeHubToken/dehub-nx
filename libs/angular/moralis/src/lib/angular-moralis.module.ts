@@ -12,7 +12,7 @@ import {
   ConnectWalletDialogComponent,
 } from './components/connect-wallet';
 import { StartOptions } from './models/moralis.models';
-import { MoralisService } from './services/moralis.service';
+import { DehubMoralisService, MoralisService } from './services';
 
 const primeNgModules = [
   ButtonModule,
@@ -54,6 +54,7 @@ export class AngularMoralisModule {
           multi: true,
         },
         MoralisService,
+        DehubMoralisService,
       ],
     };
   }

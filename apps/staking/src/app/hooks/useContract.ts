@@ -2,12 +2,16 @@ import { getContract } from '@dehub/shared/util';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
 import { useMoralis } from 'react-moralis';
-import { getBnbAddress, getDehubAddress } from '../utils/addressHelpers';
 import {
-  getBep20Contract,
-  getRewardsContract,
-  getStakingContract,
-} from '../utils/contractHelpers';
+  useStakingContracts,
+  useStakingControllerContract,
+} from '../state/application/hooks';
+import {
+  ContractProperties,
+  StakingContractProperties,
+} from '../state/application/types';
+import { getBnbAddress, getDehubAddress } from '../utils/addressHelpers';
+import { getBep20Contract, getRewardsContract } from '../utils/contractHelpers';
 
 export function useContract(
   address?: string,
@@ -45,11 +49,38 @@ export const useBnbContract = (): Contract | null => {
   return useMemo(() => getBep20Contract(getBnbAddress()), []);
 };
 
-export const useStakingContract = (): Contract | null => {
-  const { web3 } = useMoralis();
+export const usePickStakingContract = (
+  contractIndex: number
+): Contract | null => {
+  const { web3, account } = useMoralis();
+
+  const contracts: StakingContractProperties[] | null = useStakingContracts();
+
   return useMemo(
-    () => (web3 ? getStakingContract(web3.getSigner()) : null),
-    [web3]
+    () =>
+      web3 && account && contracts && contracts.length > contractIndex
+        ? getContract(
+            contracts[contractIndex].address,
+            contracts[contractIndex].abi,
+            web3,
+            account
+          )
+        : null,
+    [web3, account, contracts, contractIndex]
+  );
+};
+
+export const usePickStakingControllerContract = (): Contract | null => {
+  const { web3, account } = useMoralis();
+
+  const controller: ContractProperties | null = useStakingControllerContract();
+
+  return useMemo(
+    () =>
+      web3 && account && controller
+        ? getContract(controller.address, controller.abi, web3, account)
+        : null,
+    [web3, account, controller]
   );
 };
 
