@@ -16,7 +16,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       [ngClass]="{ 'py-0': !page.showTitle && !page.showSubtitle }"
       [class]="resolveCol(page)"
     >
-      <h1 *ngIf="page.showTitle" class="line-height-2">{{ page.mainTitle }}</h1>
+      <h1 *ngIf="page.showTitle" class="line-height-3">{{ page.mainTitle }}</h1>
       <h5
         *ngIf="page.showSubtitle"
         [ngClass]="{ 'xl:w-6': page.headerColumnWidth === 'full' }"
