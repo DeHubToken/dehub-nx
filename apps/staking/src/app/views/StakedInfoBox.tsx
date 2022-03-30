@@ -1,18 +1,46 @@
 import { Heading, Text } from '@dehub/react/ui';
 import { BUSD_DISPLAY_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getFullDisplayBalance } from '@dehub/shared/util';
+import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/util';
+import BigNumber from 'bignumber.js';
 import { Skeleton } from 'primereact/skeleton';
-import {
-  useDehubBusdPrice,
-  usePoolInfo,
-  usePullBlockNumber,
-} from '../state/application/hooks';
+import { useEffect, useState } from 'react';
+import { useDehubBusdPrice, usePools } from '../state/application/hooks';
+import { isLivePool } from '../utils/pool';
+
+interface StakeInfo {
+  totalStaked: BigNumber;
+  currentReward: BigNumber;
+  totalReward: BigNumber;
+}
 
 const StakedInfoBox = () => {
-  usePullBlockNumber();
+  const [info, setInfo] = useState<StakeInfo>({
+    totalStaked: BIG_ZERO,
+    currentReward: BIG_ZERO,
+    totalReward: BIG_ZERO,
+  });
 
   const dehubPrice = useDehubBusdPrice();
-  const poolInfo = usePoolInfo();
+  const pools = usePools();
+
+  useEffect(() => {
+    setInfo(
+      pools.reduce(
+        (prev, current, currentIndex) => ({
+          totalStaked: prev.totalStaked.plus(current.totalStaked),
+          currentReward: prev.currentReward.plus(
+            isLivePool(current) ? current.harvestFund : BIG_ZERO
+          ),
+          totalReward: prev.totalReward.plus(current.harvestFund),
+        }),
+        {
+          totalStaked: BIG_ZERO,
+          currentReward: BIG_ZERO,
+          totalReward: BIG_ZERO,
+        }
+      )
+    );
+  }, [pools]);
 
   return (
     <>
@@ -22,13 +50,10 @@ const StakedInfoBox = () => {
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Heading className="pb-1">Total Staked</Heading>
-              {poolInfo ? (
+              {pools ? (
                 <>
                   <Text fontSize="24px" fontWeight={900}>
-                    {getFullDisplayBalance(
-                      poolInfo?.totalStaked,
-                      DEHUB_DECIMALS
-                    )}
+                    {getFullDisplayBalance(info.totalStaked, DEHUB_DECIMALS)}
                   </Text>
                   <Text>$DeHub</Text>
                 </>
@@ -47,13 +72,10 @@ const StakedInfoBox = () => {
             <div className="overview-info text-left w-full">
               {/* TODO: pull the current live vault data here. */}
               <Heading className="pb-1">Rewards Q1 2022</Heading>
-              {poolInfo ? (
+              {pools ? (
                 <>
                   <Text fontSize="24px" fontWeight={900}>
-                    {getFullDisplayBalance(
-                      poolInfo?.harvestFund,
-                      DEHUB_DECIMALS
-                    )}
+                    {getFullDisplayBalance(info.currentReward, DEHUB_DECIMALS)}
                   </Text>
                   <Text>$DeHub</Text>
                 </>
@@ -72,11 +94,11 @@ const StakedInfoBox = () => {
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full flex flex-column align-items-start">
               <Heading className="pb-1">TVL</Heading>
-              {poolInfo ? (
+              {pools ? (
                 <Text fontSize="24px" fontWeight={900}>
                   $
                   {getFullDisplayBalance(
-                    dehubPrice.times(poolInfo?.totalStaked),
+                    dehubPrice.times(info.totalStaked),
                     DEHUB_DECIMALS,
                     BUSD_DISPLAY_DECIMALS
                   )}
@@ -95,13 +117,10 @@ const StakedInfoBox = () => {
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               <Heading className="pb-1">Total Rewards</Heading>
-              {poolInfo ? (
+              {pools ? (
                 <>
                   <Text fontSize="24px" fontWeight={900}>
-                    {getFullDisplayBalance(
-                      poolInfo?.harvestFund,
-                      DEHUB_DECIMALS
-                    )}
+                    {getFullDisplayBalance(info.totalReward, DEHUB_DECIMALS)}
                   </Text>
                   <Text>$DeHub</Text>
                 </>

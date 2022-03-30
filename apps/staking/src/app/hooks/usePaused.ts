@@ -1,18 +1,20 @@
 import { useRefresh } from '@dehub/react/core';
 import { useEffect, useState } from 'react';
-import { getStakingContract } from '../utils/contractHelpers';
+import { usePickStakingContract } from './useContract';
 
-export const useStakePaused = () => {
+export const useStakePaused = (contractIndex: number) => {
   const [paused, setPaused] = useState(false);
   const { slowRefresh } = useRefresh();
+  const contract = usePickStakingContract(contractIndex);
 
   useEffect(() => {
     const fetch = async () => {
-      const stakeContract = getStakingContract();
-      setPaused(await stakeContract.paused());
+      setPaused(await contract?.paused());
     };
-    fetch();
-  }, [slowRefresh]);
+    if (contract) {
+      fetch();
+    }
+  }, [contract, slowRefresh]);
 
   return paused;
 };

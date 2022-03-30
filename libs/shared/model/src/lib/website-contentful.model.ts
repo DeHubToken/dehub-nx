@@ -6300,6 +6300,47 @@ export type PageGameFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionPersonPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'PersonPost';
+                          name?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          twitter?: string | undefined;
+                          linkedin?: string | undefined;
+                          instagram?: string | undefined;
+                          github?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          avatar?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;

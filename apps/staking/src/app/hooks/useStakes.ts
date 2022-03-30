@@ -3,7 +3,7 @@ import { BIG_ZERO, ethersToBigNumber } from '@dehub/shared/util';
 import BigNumber from 'bignumber.js';
 import { useEffect, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';
-import { getStakingContract } from '../utils/contractHelpers';
+import { usePickStakingContract } from './useContract';
 
 export type UserInfo = {
   amount: BigNumber;
@@ -35,7 +35,7 @@ const processUserInfo = (userInfo: any): UserInfo => {
   };
 };
 
-export const useStakes = (staker: string | null) => {
+export const useStakes = (contractIndex: number, staker: string | null) => {
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     amount: BIG_ZERO,
@@ -46,20 +46,30 @@ export const useStakes = (staker: string | null) => {
     harvested: false,
   });
   const { fastRefresh } = useRefresh();
+  const contract = usePickStakingContract(contractIndex);
 
   useEffect(() => {
     const fetch = async () => {
-      const stakingContract = getStakingContract();
-      const ret = await stakingContract?.userInfo(staker);
+      const ret = await contract?.userInfo(staker);
       if (ret) {
         setUserInfo(processUserInfo(ret));
       }
       setFetchStatus(ret ? FetchStatus.SUCCESS : FetchStatus.FAILED);
     };
-    if (staker) {
+    if (staker && contract) {
       fetch();
+    } else {
+      setFetchStatus(FetchStatus.NOT_FETCHED);
+      setUserInfo({
+        amount: BIG_ZERO,
+        reflectionDebt: BIG_ZERO,
+        reflectionPending: BIG_ZERO,
+        harvestDebt: BIG_ZERO,
+        harvestPending: BIG_ZERO,
+        harvested: false,
+      });
     }
-  }, [staker, fastRefresh]);
+  }, [contract, staker, fastRefresh]);
 
   return {
     fetchStatus,
@@ -67,22 +77,27 @@ export const useStakes = (staker: string | null) => {
   };
 };
 
-export const usePendingHarvest = (staker: string | null) => {
+export const usePendingHarvest = (
+  contractIndex: number,
+  staker: string | null
+) => {
   const { fastRefresh } = useRefresh();
   const [pendingHarvest, setPendingHarvest] = useState<BigNumber | undefined>(
     undefined
   );
+  const contract = usePickStakingContract(contractIndex);
 
   useEffect(() => {
     const fetch = async () => {
-      const stakingContract = getStakingContract();
-      const ret = await stakingContract?.pendingHarvest(staker);
+      const ret = await contract?.pendingHarvest(staker);
       setPendingHarvest(ethersToBigNumber(ret[0].add(ret[1])));
     };
-    if (staker) {
+    if (staker && contract) {
       fetch();
+    } else {
+      setPendingHarvest(undefined);
     }
-  }, [staker, fastRefresh]);
+  }, [contract, staker, fastRefresh]);
 
   return pendingHarvest;
 };
