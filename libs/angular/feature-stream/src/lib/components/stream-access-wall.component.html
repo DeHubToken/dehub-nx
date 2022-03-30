@@ -10,7 +10,6 @@
     [@fadeInUp]
     class="col-12 sm:col-12 md:col-12 xl:col-6 col-offset-0 xl:col-offset-3 mb-8"
   >
-    <!-- Description -->
     <!-- Step 1 -->
     <p-fieldset
       [classList]="'block bg-gradient-2-propagate border-neon-1-propagate'"
@@ -50,7 +49,7 @@
         clicks.
       </p>
       <p-button
-        [routerLink]="['/staking']"
+        (onClick)="onStakeDeHubClicked($event)"
         label="Stake DeHub"
         styleClass="p-button-lg p-button-raised"
       ></p-button>
@@ -71,9 +70,9 @@
         productions. Plus, you'll be earning while you stake. Ka-ching.
       </p>
       <p-button
+        (onClick)="onWatchClicked($event)"
         label="Watch"
         styleClass="p-button-lg p-button-raised"
-        (onClick)="onWatchClicked($event)"
       ></p-button>
     </p-fieldset>
   </div>

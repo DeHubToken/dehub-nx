@@ -66,8 +66,13 @@ export class StreamAccessWallComponent implements OnInit {
 
   onWatchClicked(event: Event) {
     event.preventDefault();
+    this.windowRef.open(this.env.dehub.stream, '_blank', 'noopener,noreferrer');
+  }
+
+  onStakeDeHubClicked(event: Event) {
+    event.preventDefault();
     this.windowRef.open(
-      'https://beta-stream.dehub.net/',
+      this.env.dehub.dapps.staking,
       '_blank',
       'noopener,noreferrer'
     );
