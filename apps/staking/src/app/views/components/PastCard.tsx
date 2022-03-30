@@ -18,7 +18,6 @@ import { Toast } from 'primereact/toast';
 import { useMemo, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
-import { FIRST_QUARTER_NUMBER } from '../../config/constants';
 import { FetchStatus } from '../../config/constants/types';
 import {
   usePickStakingContract,
@@ -27,6 +26,7 @@ import {
 import { useStakePaused } from '../../hooks/usePaused';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
+import { getVersion } from '../../utils/contractHelpers';
 import { quarterMark, quarterNumber } from '../../utils/pool';
 
 const StyledBox = styled(Box)`
@@ -45,10 +45,6 @@ const PastCard = ({ poolIndex }: CardProps) => {
   const pools = usePools();
   const poolInfo = pools[poolIndex];
   const quarterNum = useMemo(() => quarterNumber(poolInfo), [poolInfo]);
-  const isV1Quarter = useMemo(
-    () => quarterNumber(poolInfo) === FIRST_QUARTER_NUMBER,
-    [poolInfo]
-  );
 
   const paused = useStakePaused(poolIndex);
   const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } = useStakes(
@@ -64,17 +60,21 @@ const PastCard = ({ poolIndex }: CardProps) => {
     setPendingHarvestTx(true);
 
     try {
-      const tx: TransactionResponse = isV1Quarter
-        ? await stakingContract?.harvestAndWithdraw(quarterNum)
-        : await stakingController?.harvestAndWithdraw(quarterNum);
-      const receipt: TransactionReceipt = await tx.wait();
-      if (receipt.status) {
-        toast?.current?.show({
-          severity: 'info',
-          summary: 'Harvest & unstake',
-          detail: 'Harvest & unstake successfully. Please check your wallet.',
-          life: 4000,
-        });
+      if (stakingContract && stakingController) {
+        const isV1Quarter = (await getVersion(stakingContract)) === 1;
+
+        const tx: TransactionResponse = isV1Quarter
+          ? await stakingContract.harvestAndWithdraw(quarterNum)
+          : await stakingController.harvestAndWithdraw(quarterNum);
+        const receipt: TransactionReceipt = await tx.wait();
+        if (receipt.status) {
+          toast?.current?.show({
+            severity: 'info',
+            summary: 'Harvest & unstake',
+            detail: 'Harvest & unstake successfully. Please check your wallet.',
+            life: 4000,
+          });
+        }
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

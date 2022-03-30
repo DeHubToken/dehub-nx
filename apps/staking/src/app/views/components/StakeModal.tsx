@@ -11,10 +11,9 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Slider, SliderChangeParams } from 'primereact/slider';
 import { Toast } from 'primereact/toast';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
-import { FIRST_QUARTER_NUMBER } from '../../config/constants';
 import {
   useDehubContract,
   usePickStakingContract,
@@ -23,7 +22,7 @@ import {
 import { UserInfo, useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
 import { usePools } from '../../state/application/hooks';
-import { quarterNumber } from '../../utils/pool';
+import { getVersion } from '../../utils/contractHelpers';
 
 interface StakeModalProps {
   poolIndex: number;
@@ -76,10 +75,6 @@ const StakeModal: React.FC<StakeModalProps> = ({
 
   const pools = usePools();
   const poolInfo = pools[poolIndex];
-  const isV1Quarter = useMemo(
-    () => quarterNumber(poolInfo) === FIRST_QUARTER_NUMBER,
-    [poolInfo]
-  );
 
   const toast = useRef<Toast>(null);
 
@@ -141,32 +136,38 @@ const StakeModal: React.FC<StakeModalProps> = ({
         }
       }
 
-      let receipt: TransactionReceipt;
-      if (type === 'stake') {
-        const tx = isV1Quarter
-          ? await stakingContract?.deposit(decimalValue.toNumber())
-          : await stakingController?.deposit(decimalValue.toNumber());
-        receipt = await tx.wait();
-      } else {
-        const tx = isV1Quarter
-          ? await stakingContract?.withdraw(decimalValue.toNumber())
-          : await stakingController?.withdraw(decimalValue.toNumber());
-        receipt = await tx.wait();
-      }
+      if (stakingContract && stakingController) {
+        const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
-      if (receipt.status) {
-        toast?.current?.show({
-          severity: 'success',
-          summary: `Success`,
-          detail: (
-            <Box>
-              <Text style={{ marginBottom: '8px' }}>
-                {`${valueAsBn.toString()} $DeHub has been successfully ${type}d!`}
-              </Text>
-            </Box>
-          ),
-          life: 4000,
-        });
+        console.log('isV1Quarter', isV1Quarter);
+
+        let receipt: TransactionReceipt;
+        if (type === 'stake') {
+          const tx = isV1Quarter
+            ? await stakingContract.deposit(decimalValue.toNumber())
+            : await stakingController.deposit(decimalValue.toNumber());
+          receipt = await tx.wait();
+        } else {
+          const tx = isV1Quarter
+            ? await stakingContract.withdraw(decimalValue.toNumber())
+            : await stakingController.withdraw(decimalValue.toNumber());
+          receipt = await tx.wait();
+        }
+
+        if (receipt.status) {
+          toast?.current?.show({
+            severity: 'success',
+            summary: `Success`,
+            detail: (
+              <Box>
+                <Text style={{ marginBottom: '8px' }}>
+                  {`${valueAsBn.toString()} $DeHub has been successfully ${type}d!`}
+                </Text>
+              </Box>
+            ),
+            life: 4000,
+          });
+        }
         onHide();
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

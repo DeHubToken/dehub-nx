@@ -31,3 +31,11 @@ export const getBep20Contract = (
 export const getRewardsContract = (signer?: Signer | Provider) => {
   return getContract(getRewardsAddress(), RewardsAbi, signer);
 };
+
+export const getVersion = async (contract: Contract) => {
+  try {
+    return await contract.version();
+  } catch (error) {
+    return 1;
+  }
+};

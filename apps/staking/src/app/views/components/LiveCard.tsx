@@ -22,7 +22,6 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { SimpleCountDown } from '../../components/CountDown';
-import { FIRST_QUARTER_NUMBER } from '../../config/constants';
 import { FetchStatus } from '../../config/constants/types';
 import {
   usePickStakingContract,
@@ -33,7 +32,8 @@ import { useStakePaused } from '../../hooks/usePaused';
 import { useWeeklyRewards } from '../../hooks/useRewards';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
-import { quarterMark, quarterNumber } from '../../utils/pool';
+import { getVersion } from '../../utils/contractHelpers';
+import { quarterMark } from '../../utils/pool';
 import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
 
@@ -61,10 +61,6 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   const pools = usePools();
   const poolInfo = pools[poolIndex];
   const currentQ = useMemo(() => quarterMark(poolInfo), [poolInfo]);
-  const isV1Quarter = useMemo(
-    () => quarterNumber(poolInfo) === FIRST_QUARTER_NUMBER,
-    [poolInfo]
-  );
 
   const closeTimeStamp = useMemo(
     () => (poolInfo ? Number(poolInfo.closeTimeStamp) : 0),
@@ -161,6 +157,8 @@ const LiveCard = ({ poolIndex }: CardProps) => {
           }
         }
       } else if (stakingController && stakingContract) {
+        const isV1Quarter = (await getVersion(stakingContract)) === 1;
+
         const tx: TransactionResponse = isV1Quarter
           ? await stakingContract?.claimBNBRewards()
           : await stakingController?.claimBNBRewards();
