@@ -261,43 +261,6 @@ export class MoralisService implements IMoralis {
       .subscribe(async ({ attributes: { accounts = [] } }) => {
         // Ask linking new account
         if (!accounts.includes(newAccount)) {
-          const confirmed = confirm('Link this address to your account?');
-
-          // Confirmed linking new account
-          if (confirmed) {
-            this.logger.info(`Linking ${newAccount} to the users account.`);
-
-            await Moralis.link(newAccount)
-              // Emit new user with updated accounts
-              .then(user => this.userSubject.next(user as User))
-              // Emit new linked account
-              .then(() => this.accountSubject.next(newAccount))
-              .catch(e =>
-                this.logger.error(
-                  `Moralis linking ${newAccount} account problem:`,
-                  e
-                )
-              );
-          } else {
-            // Rejected linking new account
-            this.logout();
-          }
-        } else {
-          // Account already linked
-          this.logger.info(
-            `The ${newAccount} is already linked to the users account.`
-          );
-          this.accountSubject.next(newAccount);
-        }
-      });
-  }
-
-  private handleAccountChanged(newAccount: string) {
-    this.user$
-      .pipe(filterEmpty(), first())
-      .subscribe(async ({ attributes: { accounts = [] } }) => {
-        // Ask linking new account
-        if (!accounts.includes(newAccount)) {
           const confirmed = confirm(
             'Please confirm account linking with your wallet.'
           );
