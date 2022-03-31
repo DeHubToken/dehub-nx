@@ -87,7 +87,7 @@ export class PersonPostComponent implements OnInit {
 
   socialLinks: SocialLink[] = [];
 
-  constructor(@Inject(WINDOW) readonly windowRef: Window) {}
+  constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
 
   ngOnInit() {
     if (!this.personPost) return;

@@ -81,7 +81,7 @@ export class GrandPostComponent implements OnInit {
   heavyPictureLoaded = false;
 
   constructor(
-    @Inject(WINDOW) readonly windowRef: Window,
+    @Inject(WINDOW) private readonly windowRef: Window,
     private dialogService: DialogService
   ) {}
 

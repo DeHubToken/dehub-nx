@@ -35,7 +35,7 @@ export class StreamAccessWallComponent implements OnInit {
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
-    @Inject(WINDOW) readonly windowRef: Window,
+    @Inject(WINDOW) private readonly windowRef: Window,
     private pageAccessWallCollectionService: PageAccessWallCollectionService,
     private dialogService: DialogService
   ) {}

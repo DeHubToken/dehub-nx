@@ -95,7 +95,7 @@ export class MoralisService implements IMoralis {
 
   constructor(
     @Inject(LoggerToken) private logger: LoggerService,
-    @Inject(WINDOW) readonly windowRef: Window,
+    @Inject(WINDOW) private readonly windowRef: Window,
     private ngZone: NgZone
   ) {
     if (Moralis.User.current()) {
