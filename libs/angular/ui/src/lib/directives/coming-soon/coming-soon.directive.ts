@@ -21,7 +21,7 @@ export class ComingSoonDirective implements OnInit {
     this.renderer.appendChild(span, text);
     this.renderer.appendChild(this.div, span);
     this.renderer.appendChild(this.el.nativeElement, this.div);
-    this.renderer.addClass(this.div, 'coming-soon');
+    this.renderer.addClass(this.div, 'access-cover');
     this.renderer.addClass(this.div, 'opacity-0');
   }
 
