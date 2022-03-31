@@ -2,43 +2,31 @@ import {
   Directive,
   ElementRef,
   HostListener,
-  OnDestroy,
+  Inject,
+  Input,
   OnInit,
   Renderer2,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { DehubMoralisService } from '@dehub/angular/moralis';
-import { Subject, Subscription, tap, withLatestFrom } from 'rxjs';
+import { WINDOW } from '@ng-web-apis/common';
+import { first } from 'rxjs/operators';
 
 @Directive({
   selector: '[dhbCanPlay]',
 })
-export class CanPlayDirective implements OnInit, OnDestroy {
+export class CanPlayDirective implements OnInit {
+  @Input() dhbCanPlay?: string;
+
   div = this.renderer.createElement('div');
-  private readonly clicks$ = new Subject<Event>();
-  private canPlay$ = this.clicks$.pipe(
-    withLatestFrom(this.dehubMoralis.canPlay$),
-    tap(([event, canPlay]) => {
-      if (!canPlay) {
-        event.preventDefault();
-        this.renderer.removeClass(this.div, 'opacity-0');
-        this.router.navigate(['/stream/access-wall']);
-        setTimeout(() => {
-          this.renderer.addClass(this.div, 'opacity-0');
-        }, 3000);
-      }
-    })
-  );
-  private sub: Subscription;
 
   constructor(
+    @Inject(WINDOW) private readonly windowRef: Window,
     private renderer: Renderer2,
     private el: ElementRef,
     private dehubMoralis: DehubMoralisService,
     private router: Router
-  ) {
-    this.sub = this.canPlay$.subscribe();
-  }
+  ) {}
 
   ngOnInit() {
     const span = this.renderer.createElement('span');
@@ -52,10 +40,17 @@ export class CanPlayDirective implements OnInit, OnDestroy {
   }
 
   @HostListener('click', ['$event']) onClick(event: Event) {
-    this.clicks$.next(event);
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    event.preventDefault();
+    this.dehubMoralis.canPlay$.pipe(first()).subscribe(canPlay => {
+      if (canPlay) {
+        this.windowRef.open(this.dhbCanPlay, '_blank', 'noopener,noreferrer');
+      } else {
+        this.renderer.removeClass(this.div, 'opacity-0');
+        this.router.navigate(['/stream/access-wall']);
+        setTimeout(() => {
+          this.renderer.addClass(this.div, 'opacity-0');
+        }, 3000);
+      }
+    });
   }
 }
