@@ -2390,6 +2390,7 @@ export type PageHomeSectionsItem =
   | PageSectionFeaturePosts
   | PageSectionGrandPosts
   | PageSectionIconTiles
+  | PageSectionPersonPosts
   | PageSectionSectionPosts
   | PageSectionThumbnailPosts;
 
@@ -3545,10 +3546,18 @@ export interface PageSectionPersonPostsHandpickedPostsCollection {
 export interface PageSectionPersonPostsLinkingCollections {
   __typename?: 'PageSectionPersonPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
 }
 
 export interface PageSectionPersonPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface PageSectionPersonPostsLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -6312,6 +6321,47 @@ export type PageHomeFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionPersonPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'PersonPost';
+                          name?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          twitter?: string | undefined;
+                          linkedin?: string | undefined;
+                          instagram?: string | undefined;
+                          github?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          avatar?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
@@ -8830,6 +8880,50 @@ export type PageHomeCollectionQuery = {
                             | undefined;
                         }
                       | {
+                          __typename: 'PageSectionPersonPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'PersonPost';
+                                      name?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      twitter?: string | undefined;
+                                      linkedin?: string | undefined;
+                                      instagram?: string | undefined;
+                                      github?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      avatar?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
                           __typename: 'PageSectionSectionPosts';
                           title?: string | undefined;
                           description?: string | undefined;
@@ -10267,38 +10361,6 @@ export const PageGameFragmentDoc = gql`
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
 `;
-export const PageHomeFragmentDoc = gql`
-  fragment PageHome on PageHome {
-    sys {
-      ...Sys
-    }
-    mainTitle
-    showTitle
-    subtitle
-    showSubtitle
-    sectionsCollection(limit: 10, preview: $isPreview) {
-      items {
-        ...PageSectionFeaturePosts
-        ...PageSectionThumbnailPosts
-        ...PageSectionBasicPosts
-        ...PageSectionIconTiles
-        ...PageSectionFaQs
-        ...PageSectionDappPosts
-        ...PageSectionGrandPosts
-        ...PageSectionSectionPosts
-      }
-    }
-  }
-  ${SysFragmentDoc}
-  ${PageSectionFeaturePostsFragmentDoc}
-  ${PageSectionThumbnailPostsFragmentDoc}
-  ${PageSectionBasicPostsFragmentDoc}
-  ${PageSectionIconTilesFragmentDoc}
-  ${PageSectionFaQsFragmentDoc}
-  ${PageSectionDappPostsFragmentDoc}
-  ${PageSectionGrandPostsFragmentDoc}
-  ${PageSectionSectionPostsFragmentDoc}
-`;
 export const PersonPostFragmentDoc = gql`
   fragment PersonPost on PersonPost {
     sys {
@@ -10339,6 +10401,40 @@ export const PageSectionPersonPostsFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${PersonPostFragmentDoc}
+`;
+export const PageHomeFragmentDoc = gql`
+  fragment PageHome on PageHome {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+        ...PageSectionPersonPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+  ${PageSectionPersonPostsFragmentDoc}
 `;
 export const PageLearnFragmentDoc = gql`
   fragment PageLearn on PageLearn {

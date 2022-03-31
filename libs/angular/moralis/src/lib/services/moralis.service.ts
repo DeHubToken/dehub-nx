@@ -115,10 +115,14 @@ export class MoralisService implements IMoralis {
   login(provider: MoralisWeb3ProviderType, chainId: number) {
     this.requiredChainHex = decimalToHex(chainId);
     this.setWalletConnectingState(WalletConnectingState.WAITING);
-    const signingMessage = 'DeHub D’App';
+
+    const commonAuthOptions: Moralis.AuthenticationOptions = {
+      chainId,
+      signingMessage: 'DeHub D’App',
+    };
 
     (provider === 'metamask'
-      ? Moralis.authenticate({ signingMessage }).then(async loggedInUser => {
+      ? Moralis.authenticate(commonAuthOptions).then(async loggedInUser => {
           if (
             await setupMetamaskNetwork(
               chainId,
@@ -136,7 +140,7 @@ export class MoralisService implements IMoralis {
             this.logout();
           }
         })
-      : Moralis.authenticate({ signingMessage, provider }).then(
+      : Moralis.authenticate({ ...commonAuthOptions, provider }).then(
           loggedInUser => {
             this.userSubject.next(loggedInUser as User);
             this.accountSubject.next(loggedInUser.attributes.ethAddress);

@@ -24,6 +24,21 @@ import { MenuItem } from 'primeng/api';
           }"
           class="p-button-text p-button-plain p-button-lg mt-3 mr-3"
         ></button>
+        <div
+          class="md:hidden flex absolute right-0 mr-3 fadeinleft animation-duration-1000 animation-ease-in-out"
+          [ngStyle]="{
+            'margin-top': '65px'
+          }"
+        >
+          <span
+            class="flex align-items-center uppercase font-bold text-xs pr-1"
+          >
+            swipe menu&nbsp;
+          </span>
+          <i
+            class="flex align-items-center fal fa-long-arrow-right text-3xl"
+          ></i>
+        </div>
       </div>
     </div>
   `,
