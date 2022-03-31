@@ -14,13 +14,14 @@ declare namespace MoralisMissingTypes {
     }
 
     /** @deprecated use ethersByChain instead */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function web3ByChain(chainId: string): any;
 
     function ethersByChain(chainId: string): {
       /** A provider with the supplied chainId */
       provider: Web3Provider;
       /** ethers.js library */
-      ethers: any;
+      ethers: unknown;
     };
   }
 }
@@ -28,3 +29,4 @@ declare namespace MoralisMissingTypes {
 declare const {
   Moralis,
 }: typeof import('moralis') & typeof MoralisMissingTypes;
+// declare const { Moralis }: typeof import('moralis');

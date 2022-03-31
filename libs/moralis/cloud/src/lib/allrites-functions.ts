@@ -2,7 +2,8 @@ import { getOTTMinTokensToPlay, SupportedNetwork } from './configuration';
 import { isMoralisUserByAddress } from './queries-functions';
 import { getDeHubTokenBalance, getStakedAmount } from './web3api-functions';
 
-export async function setCanPlay(user: Moralis.User, value: boolean) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function setCanPlay(user: any /* Moralis.User */, value: boolean) {
   const logger = Moralis.Cloud.getLogger();
   try {
     if (user) {
@@ -10,7 +11,8 @@ export async function setCanPlay(user: Moralis.User, value: boolean) {
       user.set('can_play', value);
       await user
         .save(null, { useMasterKey: true })
-        .then((user: Moralis.User) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .then((user: any /* Moralis.User */) => {
           logger.info(
             `setCanPlay(${user.get('ethAddress')}, ${user.get('can_play')})`
           );
