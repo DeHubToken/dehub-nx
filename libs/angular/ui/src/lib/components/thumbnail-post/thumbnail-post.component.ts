@@ -14,7 +14,7 @@ import { ThumbnailPostFragment } from '@dehub/shared/model';
         <ng-template pTemplate="header">
           <a
             *ngIf="thumbnailPost.link as link"
-            dhbComingSoon
+            dhbCanPlay
             [href]="link"
             target="_blank"
           >
