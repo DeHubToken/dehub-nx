@@ -50,6 +50,8 @@ export interface SharedEnv {
     downloadWalletUrl: string;
     /** Official DeHUB landing page */
     landing: string;
+    /** Official Alrites stream page */
+    stream: string;
     /** Official DeHUB dapp pages */
     dapps: { staking: string };
   };
@@ -88,6 +90,7 @@ export const defaultSharedEnv: SharedEnv = {
     cexUrl: 'https://www.gate.io/trade/DEHUB_USDT',
     downloadWalletUrl: 'https://metamask.io/download/',
     landing: 'https://dehub.net',
+    stream: 'https://beta-stream.dehub.net',
     dapps: {
       staking: 'https://dehub.net/staking',
     },

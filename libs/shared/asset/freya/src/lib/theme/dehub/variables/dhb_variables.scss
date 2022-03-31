@@ -42,4 +42,11 @@ $dhb_gradient4: linear-gradient(
   rgba(25, 120, 173, 0.5) 45%,
   rgba(162, 75, 180, 0.5) 100%
 );
+
+$dhb_gradients: (
+  1: $dhb_gradient1,
+  2: $dhb_gradient2,
+  3: $dhb_gradient3,
+  4: $dhb_gradient4,
+);
 /* ------------------------------- Custom End ------------------------------- */

@@ -1,4 +1,4 @@
-fragment PageGame on PageGame {
+fragment PageAccessWall on PageAccessWall {
   sys {
     ...Sys
   }
@@ -15,7 +15,6 @@ fragment PageGame on PageGame {
       ...PageSectionBasicPosts
       ...PageSectionIconTiles
       ...PageSectionFaQs
-      ...PageSectionDappPosts
       ...PageSectionGrandPosts
       ...PageSectionSectionPosts
     }

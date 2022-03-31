@@ -95,7 +95,7 @@ export class MoralisService implements IMoralis {
 
   constructor(
     @Inject(LoggerToken) private logger: LoggerService,
-    @Inject(WINDOW) readonly windowRef: Window,
+    @Inject(WINDOW) private readonly windowRef: Window,
     private ngZone: NgZone
   ) {
     if (Moralis.User.current()) {
@@ -235,6 +235,27 @@ export class MoralisService implements IMoralis {
           this.logout();
         }
       });
+    });
+
+    this.unsubscribeFromChainChanged = Moralis.onChainChanged(newChainHex => {
+      const requiredChainHex = this.requiredChainHex;
+      if (requiredChainHex !== newChainHex) {
+        this.logger.info(
+          `Moralis chain changed from ${requiredChainHex} to ${newChainHex}!`
+        );
+        this.logout();
+      }
+    });
+
+    this.unsubscribeFromAccountChanged = Moralis.onAccountChanged(account => {
+      if (account) {
+        const newAccount = account.toLowerCase();
+        this.logger.info(`Moralis account has changed to ${newAccount}!`);
+        this.handleAccountChanged(newAccount);
+      } else {
+        this.logger.info(`Moralis account disconnected!`);
+        this.logout();
+      }
     });
   }
 

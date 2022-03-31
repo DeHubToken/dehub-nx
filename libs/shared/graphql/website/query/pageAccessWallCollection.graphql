@@ -1,0 +1,7 @@
+query pageAccessWallCollection($isPreview: Boolean = false) {
+  pageAccessWallCollection(limit: 2, preview: $isPreview) {
+    items {
+      ...PageAccessWall
+    }
+  }
+}

@@ -69,7 +69,7 @@ export class FeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
 
   constructor(
-    @Inject(WINDOW) readonly windowRef: Window,
+    @Inject(WINDOW) private readonly windowRef: Window,
     private dialogService: DialogService
   ) {}
 

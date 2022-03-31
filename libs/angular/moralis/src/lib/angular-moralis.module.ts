@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { Moralis } from 'moralis';
 import { ButtonModule } from 'primeng/button';

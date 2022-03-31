@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CardModule } from 'primeng/card';
-import { ComingSoonDirectiveModule } from '../../directives/coming-soon';
+import { CanPlayDirectiveModule } from '../../directives/can-play';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
 import { ThumbnailPostComponent } from '../thumbnail-post/thumbnail-post.component';
 
@@ -16,7 +16,7 @@ import { ThumbnailPostComponent } from '../thumbnail-post/thumbnail-post.compone
 
     // Libs
     ContentfulDraftDirectiveModule,
-    ComingSoonDirectiveModule,
+    CanPlayDirectiveModule,
   ],
   exports: [ThumbnailPostComponent],
 })

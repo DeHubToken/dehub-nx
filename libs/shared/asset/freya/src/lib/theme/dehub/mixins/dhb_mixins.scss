@@ -376,6 +376,42 @@
   }
 }
 
+@mixin gradient-background($bg, $propagate: false) {
+  @if $propagate {
+    @include propagate(
+      (
+        background: $bg,
+      )
+    );
+  } @else {
+    background: $bg !important;
+  }
+}
+
+@mixin neon-border($props, $propagate: false) {
+  @if $propagate {
+    @include propagate($props);
+  } @else {
+    @each $prop, $value in $props {
+      #{$prop}: $value !important;
+    }
+  }
+}
+
+// Allows style propagation to nested elements
+@mixin propagate($props) {
+  & > * {
+    @each $prop, $value in $props {
+      #{$prop}: $value !important;
+    }
+    & > legend {
+      @each $prop, $value in $props {
+        #{$prop}: $value !important;
+      }
+    }
+  }
+}
+
 @mixin gpu-acceleration() {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);

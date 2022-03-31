@@ -4,26 +4,31 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { bounceInLeftOnEnterAnimation } from 'angular-animations';
+import { resolveColumnWidth } from '@dehub/shared/util';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-page-header',
   template: `
     <div
       *ngIf="page"
-      [@bounceInLeft]
-      [ngClass]="{ 'py-7': !page.showTitle && !page.showSubtitle }"
-      class="col-12"
+      [@fadeInUp]
+      [ngClass]="{ 'py-0': !page.showTitle && !page.showSubtitle }"
+      [class]="resolveCol(page)"
     >
-      <h1 *ngIf="page.showTitle">{{ page.mainTitle }}</h1>
-      <h5 *ngIf="page.showSubtitle" class="mt-1 xl:w-6 mb-7">
+      <h1 *ngIf="page.showTitle" class="line-height-3">{{ page.mainTitle }}</h1>
+      <h5
+        *ngIf="page.showSubtitle"
+        [ngClass]="{ 'xl:w-6': page.headerColumnWidth === 'full' }"
+        class="mt-1 mb-7 line-height-4 font-light opacity-80"
+      >
         {{ page.subtitle }}
       </h5>
     </div>
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bounceInLeftOnEnterAnimation({ anchor: 'bounceInLeft' })],
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class PageHeaderComponent<
   P extends {
@@ -31,6 +36,8 @@ export class PageHeaderComponent<
     showTitle?: boolean;
     subtitle?: string;
     showSubtitle?: boolean;
+    headerColumnWidth?: string;
+    headerAlignCenter?: boolean;
   }
 > implements OnInit
 {
@@ -39,4 +46,8 @@ export class PageHeaderComponent<
   constructor() {}
 
   ngOnInit() {}
+
+  resolveCol(page: P) {
+    return resolveColumnWidth(page.headerColumnWidth, page.headerAlignCenter);
+  }
 }

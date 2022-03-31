@@ -38,7 +38,7 @@ export class YoutubeEmbedComponent implements OnInit, AfterViewInit, OnDestroy {
   resizeSub?: Subscription;
 
   constructor(
-    @Inject(WINDOW) readonly windowRef: Window,
+    @Inject(WINDOW) private readonly windowRef: Window,
     @Inject(DOCUMENT) readonly documentRef: Document,
     public config: DynamicDialogConfig,
     private cdRef: ChangeDetectorRef

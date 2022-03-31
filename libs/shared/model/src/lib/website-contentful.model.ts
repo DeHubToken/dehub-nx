@@ -5315,12 +5315,358 @@ export type LegalPostFragment = {
   description?: { __typename?: 'LegalPostDescription'; json: any } | undefined;
 };
 
+export type PageAccessWallFragment = {
+  __typename?: 'PageAccessWall';
+  mainTitle?: string | undefined;
+  showTitle?: boolean | undefined;
+  subtitle?: string | undefined;
+  showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sectionsCollection?:
+    | {
+        __typename?: 'PageAccessWallSectionsCollection';
+        items: Array<
+          | {
+              __typename: 'PageSectionBasicPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'BasicPost';
+                          summary?: string | undefined;
+                          slug?: string | undefined;
+                          title?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          mainPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+              postsByCategory?:
+                | {
+                    __typename?: 'BasicPostCategory';
+                    linkedFrom?:
+                      | {
+                          __typename?: 'BasicPostCategoryLinkingCollections';
+                          basicPostCollection?:
+                            | {
+                                __typename?: 'BasicPostCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'BasicPost';
+                                      summary?: string | undefined;
+                                      slug?: string | undefined;
+                                      title?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      mainPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | undefined;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionFaQs';
+              title?: string | undefined;
+              description?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedFaqGroupsCollection?:
+                | {
+                    __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FaqGroup';
+                          name?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          faqItemCollection?:
+                            | {
+                                __typename?: 'FaqGroupFaqItemCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FaqItem';
+                                      question?: string | undefined;
+                                      answer?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionFeaturePosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'FeaturePost';
+                          videoUrl?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionGrandPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'GrandPost';
+                          videoUrl?: string | undefined;
+                          title?: string | undefined;
+                          subtitle?: string | undefined;
+                          description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionIconTiles';
+              title?: string | undefined;
+              description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedIconTilesCollection?:
+                | {
+                    __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'IconTile';
+                          icon?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          callToActionUrl?: string | undefined;
+                          callToActionButtonLabel?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionSectionPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'SectionPost';
+                          title?: string | undefined;
+                          showTitle?: boolean | undefined;
+                          columnWidth?: string | undefined;
+                          alignCenter?: boolean | undefined;
+                          titleSize?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          richDescription?:
+                            | {
+                                __typename?: 'SectionPostDescription';
+                                json: any;
+                              }
+                            | undefined;
+                          chartPost?:
+                            | {
+                                __typename?: 'ChartPost';
+                                title?: string | undefined;
+                                hideTitle?: boolean | undefined;
+                                chartType?: string | undefined;
+                                chartData?: any | undefined;
+                                chartOptions?: any | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          embedPost?:
+                            | {
+                                __typename?: 'EmbedPost';
+                                title?: string | undefined;
+                                hideTitle?: boolean | undefined;
+                                embedCode?: string | undefined;
+                                scriptUrl?: string | undefined;
+                                aspectRatio?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
+              __typename: 'PageSectionThumbnailPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              swiperResponsiveOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'ThumbnailPost';
+                          title?: string | undefined;
+                          link?: string | undefined;
+                          isVideo?: boolean | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
 export type PageEarnFragment = {
   __typename?: 'PageEarn';
   mainTitle?: string | undefined;
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -5690,6 +6036,8 @@ export type PageGameFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -5952,6 +6300,47 @@ export type PageGameFragment = {
                 | undefined;
             }
           | {
+              __typename: 'PageSectionPersonPosts';
+              title?: string | undefined;
+              description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              handpickedPostsCollection?:
+                | {
+                    __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'PersonPost';
+                          name?: string | undefined;
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          twitter?: string | undefined;
+                          linkedin?: string | undefined;
+                          instagram?: string | undefined;
+                          github?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          avatar?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
@@ -6059,6 +6448,8 @@ export type PageHomeFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -6469,6 +6860,8 @@ export type PageLearnFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -7227,6 +7620,8 @@ export type PageStreamFragment = {
   showTitle?: boolean | undefined;
   subtitle?: string | undefined;
   showSubtitle?: boolean | undefined;
+  headerColumnWidth?: string | undefined;
+  headerAlignCenter?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   sectionsCollection?:
     | {
@@ -7720,6 +8115,402 @@ export type LegalPostCollectionBySlugQuery = {
     | undefined;
 };
 
+export type PageAccessWallCollectionQueryVariables = Exact<{
+  isPreview?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+export type PageAccessWallCollectionQuery = {
+  __typename?: 'Query';
+  pageAccessWallCollection?:
+    | {
+        __typename?: 'PageAccessWallCollection';
+        items: Array<
+          | {
+              __typename?: 'PageAccessWall';
+              mainTitle?: string | undefined;
+              showTitle?: boolean | undefined;
+              subtitle?: string | undefined;
+              showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sectionsCollection?:
+                | {
+                    __typename?: 'PageAccessWallSectionsCollection';
+                    items: Array<
+                      | {
+                          __typename: 'PageSectionBasicPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'BasicPost';
+                                      summary?: string | undefined;
+                                      slug?: string | undefined;
+                                      title?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      mainPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                          postsByCategory?:
+                            | {
+                                __typename?: 'BasicPostCategory';
+                                linkedFrom?:
+                                  | {
+                                      __typename?: 'BasicPostCategoryLinkingCollections';
+                                      basicPostCollection?:
+                                        | {
+                                            __typename?: 'BasicPostCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'BasicPost';
+                                                  summary?: string | undefined;
+                                                  slug?: string | undefined;
+                                                  title?: string | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                  mainPicture?:
+                                                    | {
+                                                        __typename?: 'Asset';
+                                                        title?:
+                                                          | string
+                                                          | undefined;
+                                                        url?:
+                                                          | string
+                                                          | undefined;
+                                                        sys: {
+                                                          __typename?: 'Sys';
+                                                          publishedAt?:
+                                                            | any
+                                                            | undefined;
+                                                        };
+                                                      }
+                                                    | undefined;
+                                                }
+                                              | undefined
+                                            >;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionFaQs';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedFaqGroupsCollection?:
+                            | {
+                                __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FaqGroup';
+                                      name?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      faqItemCollection?:
+                                        | {
+                                            __typename?: 'FaqGroupFaqItemCollection';
+                                            items: Array<
+                                              | {
+                                                  __typename?: 'FaqItem';
+                                                  question?: string | undefined;
+                                                  answer?: string | undefined;
+                                                  sys: {
+                                                    __typename?: 'Sys';
+                                                    publishedAt?:
+                                                      | any
+                                                      | undefined;
+                                                  };
+                                                }
+                                              | undefined
+                                            >;
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionFeaturePosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'FeaturePost';
+                                      videoUrl?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionGrandPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'GrandPost';
+                                      videoUrl?: string | undefined;
+                                      title?: string | undefined;
+                                      subtitle?: string | undefined;
+                                      description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionIconTiles';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedIconTilesCollection?:
+                            | {
+                                __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'IconTile';
+                                      icon?: string | undefined;
+                                      title?: string | undefined;
+                                      description?: string | undefined;
+                                      callToActionUrl?: string | undefined;
+                                      callToActionButtonLabel?:
+                                        | string
+                                        | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionSectionPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'SectionPost';
+                                      title?: string | undefined;
+                                      showTitle?: boolean | undefined;
+                                      columnWidth?: string | undefined;
+                                      alignCenter?: boolean | undefined;
+                                      titleSize?: string | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      richDescription?:
+                                        | {
+                                            __typename?: 'SectionPostDescription';
+                                            json: any;
+                                          }
+                                        | undefined;
+                                      chartPost?:
+                                        | {
+                                            __typename?: 'ChartPost';
+                                            title?: string | undefined;
+                                            hideTitle?: boolean | undefined;
+                                            chartType?: string | undefined;
+                                            chartData?: any | undefined;
+                                            chartOptions?: any | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                      embedPost?:
+                                        | {
+                                            __typename?: 'EmbedPost';
+                                            title?: string | undefined;
+                                            hideTitle?: boolean | undefined;
+                                            embedCode?: string | undefined;
+                                            scriptUrl?: string | undefined;
+                                            aspectRatio?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | {
+                          __typename: 'PageSectionThumbnailPosts';
+                          title?: string | undefined;
+                          description?: string | undefined;
+                          swiperResponsiveOptions?: any | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                          handpickedPostsCollection?:
+                            | {
+                                __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
+                                items: Array<
+                                  | {
+                                      __typename?: 'ThumbnailPost';
+                                      title?: string | undefined;
+                                      link?: string | undefined;
+                                      isVideo?: boolean | undefined;
+                                      sys: {
+                                        __typename?: 'Sys';
+                                        publishedAt?: any | undefined;
+                                      };
+                                      picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                    }
+                                  | undefined
+                                >;
+                              }
+                            | undefined;
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
 export type PageEarnCollectionQueryVariables = Exact<{
   isPreview?: InputMaybe<Scalars['Boolean']>;
 }>;
@@ -7736,6 +8527,8 @@ export type PageEarnCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -8160,6 +8953,8 @@ export type PageGameCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -8584,6 +9379,8 @@ export type PageHomeCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -9052,6 +9849,8 @@ export type PageLearnCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -9520,6 +10319,8 @@ export type PageStreamCollectionQuery = {
               showTitle?: boolean | undefined;
               subtitle?: string | undefined;
               showSubtitle?: boolean | undefined;
+              headerColumnWidth?: string | undefined;
+              headerAlignCenter?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               sectionsCollection?:
                 | {
@@ -10154,37 +10955,6 @@ export const PageSectionFaQsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${FaqGroupFragmentDoc}
 `;
-export const DappPostFragmentDoc = gql`
-  fragment DappPost on DappPost {
-    sys {
-      ...Sys
-    }
-    icon
-    iconTitle
-    title
-    description
-    urlToDapp
-    urlToLearnMore
-  }
-  ${SysFragmentDoc}
-`;
-export const PageSectionDappPostsFragmentDoc = gql`
-  fragment PageSectionDappPosts on PageSectionDappPosts {
-    __typename
-    sys {
-      ...Sys
-    }
-    title
-    description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
-      items {
-        ...DappPost
-      }
-    }
-  }
-  ${SysFragmentDoc}
-  ${DappPostFragmentDoc}
-`;
 export const GrandPostFragmentDoc = gql`
   fragment GrandPost on GrandPost {
     sys {
@@ -10297,6 +11067,69 @@ export const PageSectionSectionPostsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${SectionPostFragmentDoc}
 `;
+export const PageAccessWallFragmentDoc = gql`
+  fragment PageAccessWall on PageAccessWall {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    headerColumnWidth
+    headerAlignCenter
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+`;
+export const DappPostFragmentDoc = gql`
+  fragment DappPost on DappPost {
+    sys {
+      ...Sys
+    }
+    icon
+    iconTitle
+    title
+    description
+    urlToDapp
+    urlToLearnMore
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionDappPostsFragmentDoc = gql`
+  fragment PageSectionDappPosts on PageSectionDappPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...DappPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${DappPostFragmentDoc}
+`;
 export const PageEarnFragmentDoc = gql`
   fragment PageEarn on PageEarn {
     sys {
@@ -10306,6 +11139,8 @@ export const PageEarnFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10338,6 +11173,8 @@ export const PageGameFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10411,6 +11248,8 @@ export const PageHomeFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10445,6 +11284,8 @@ export const PageLearnFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10479,6 +11320,8 @@ export const PageStreamFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    headerColumnWidth
+    headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -10521,6 +11364,16 @@ export const LegalPostCollectionBySlugDocument = gql`
     }
   }
   ${LegalPostFragmentDoc}
+`;
+export const PageAccessWallCollectionDocument = gql`
+  query pageAccessWallCollection($isPreview: Boolean = false) {
+    pageAccessWallCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageAccessWall
+      }
+    }
+  }
+  ${PageAccessWallFragmentDoc}
 `;
 export const PageEarnCollectionDocument = gql`
   query pageEarnCollection($isPreview: Boolean = false) {
@@ -10611,6 +11464,20 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'legalPostCollectionBySlug'
+      );
+    },
+    pageAccessWallCollection(
+      variables?: PageAccessWallCollectionQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<PageAccessWallCollectionQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<PageAccessWallCollectionQuery>(
+            PageAccessWallCollectionDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'pageAccessWallCollection'
       );
     },
     pageEarnCollection(

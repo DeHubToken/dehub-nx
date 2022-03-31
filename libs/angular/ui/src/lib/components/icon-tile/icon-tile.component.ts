@@ -39,7 +39,7 @@ import { WINDOW } from '@ng-web-apis/common';
 export class IconTileComponent implements OnInit {
   @Input() iconTile!: IconTileFragment;
 
-  constructor(@Inject(WINDOW) readonly windowRef: Window) {}
+  constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
 
   ngOnInit() {}
 
