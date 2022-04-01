@@ -1,5 +1,10 @@
 import { WalletConnectingState } from '@dehub/shared/model';
-import { SerializedBigNumber } from '@dehub/shared/util';
+import {
+  BIG_ZERO,
+  ethersToSerializedBigNumber,
+  SerializedBigNumber,
+} from '@dehub/shared/util';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import {
   createAction,
   createAsyncThunk,
@@ -9,12 +14,14 @@ import {
 import BigNumber from 'bignumber.js';
 import { orderBy } from 'lodash';
 import { Moralis } from 'moralis';
+import { Call, multicallv2 } from '../../utils/multicall';
 import getDehubPrice from '../../utils/priceDehub';
 import {
   ApplicationState,
   ApplicationStatus,
   ContractProperties,
-  SerializedPoolInfo,
+  SerializedPoolInfoPaused,
+  SerializedUserInfo,
   StakingContractProperties,
 } from './types';
 
@@ -25,6 +32,10 @@ const initialState: ApplicationState = {
   stakingContracts: null,
   stakingController: null,
   pools: [],
+  poolsLoading: true,
+  userInfos: [],
+  userInfosLoading: true,
+  pendingHarvestLoading: true,
   blockNumber: {},
 };
 
@@ -35,6 +46,54 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
     return dehubPrice;
   }
 );
+
+export const fetchUserInfos = createAsyncThunk<
+  SerializedUserInfo[],
+  {
+    contracts: StakingContractProperties[];
+    staker: string;
+  }
+>('application/fetchUserInfos', async ({ contracts, staker }) => {
+  const calls: Call[] = contracts.map(contract => ({
+    name: 'userInfo',
+    address: contract.address,
+    params: [staker],
+  }));
+
+  const abi = contracts[0].abi;
+  const userInfos = await multicallv2(abi, calls);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return userInfos.map((userInfo: any) => ({
+    amount: ethersToSerializedBigNumber(userInfo.amount),
+    reflectionDebt: ethersToSerializedBigNumber(userInfo.reflectionDebt),
+    reflectionPending: ethersToSerializedBigNumber(userInfo.reflectionPending),
+    harvestDebt: ethersToSerializedBigNumber(userInfo.harvestDebt),
+    harvestPending: ethersToSerializedBigNumber(userInfo.harvestPending),
+    harvested: userInfo.harvested,
+  }));
+});
+
+export const fetchPendingHarvest = createAsyncThunk<
+  SerializedBigNumber[],
+  {
+    contracts: StakingContractProperties[];
+    staker: string;
+  }
+>('application/fetchPendingHarvest', async ({ contracts, staker }) => {
+  const calls: Call[] = contracts.map(contract => ({
+    name: 'pendingHarvest',
+    address: contract.address,
+    params: [staker],
+  }));
+
+  const abi = contracts[0].abi;
+  const pendingHarvests = await multicallv2(abi, calls);
+
+  return pendingHarvests.map((pendings: EthersBigNumber[]) =>
+    ethersToSerializedBigNumber(pendings[0].add(pendings[1]))
+  );
+});
 
 export const fetchContracts = createAsyncThunk<{
   staking: StakingContractProperties[];
@@ -97,7 +156,10 @@ export const ApplicationSlice = createSlice({
     ) => {
       state.applicationStatus = action.payload.appStatus;
     },
-    setPools: (state, action: PayloadAction<SerializedPoolInfo[]>) => {
+    setPoolsLoading: (state, action: PayloadAction<boolean>) => {
+      state.poolsLoading = action.payload;
+    },
+    setPools: (state, action: PayloadAction<SerializedPoolInfoPaused[]>) => {
       state.pools = action.payload;
     },
   },
@@ -126,6 +188,51 @@ export const ApplicationSlice = createSlice({
         state.stakingContracts = action.payload.staking;
         state.stakingController = action.payload.controller;
       }
+    });
+
+    // builder.addCase(fetchUserInfos.pending, (state, _) => {
+    //   state.userInfosLoading = true;
+    // });
+
+    builder.addCase(fetchUserInfos.fulfilled, (state, action) => {
+      state.userInfos = action.payload.map(
+        (userInfo: SerializedUserInfo, index: number) => ({
+          ...userInfo,
+          pendingHarvest:
+            state.userInfos.length > index
+              ? state.userInfos[index].pendingHarvest
+              : BIG_ZERO.toString(),
+        })
+      );
+      state.userInfosLoading = false;
+    });
+
+    // builder.addCase(fetchPendingHarvest.pending, (state, _) => {
+    //   state.pendingHarvestLoading = true;
+    // });
+
+    builder.addCase(fetchPendingHarvest.fulfilled, (state, action) => {
+      const init: SerializedUserInfo = {
+        amount: BIG_ZERO.toString(),
+        reflectionDebt: BIG_ZERO.toString(),
+        reflectionPending: BIG_ZERO.toString(),
+        harvestDebt: BIG_ZERO.toString(),
+        harvestPending: BIG_ZERO.toString(),
+        harvested: false,
+      };
+      state.userInfos = action.payload.map(
+        (pendingHarvest: SerializedBigNumber, index: number) =>
+          state.userInfos.length > index
+            ? {
+                ...state.userInfos[index],
+                pendingHarvest,
+              }
+            : {
+                ...init,
+                pendingHarvest,
+              }
+      );
+      state.pendingHarvestLoading = false;
     });
   },
 });

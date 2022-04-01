@@ -19,8 +19,9 @@ import {
   usePickStakingContract,
   usePickStakingControllerContract,
 } from '../../hooks/useContract';
-import { UserInfo, useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
+import { useStakes } from '../../state/application/hooks';
+import { PoolUserInfo } from '../../state/application/types';
 import { getVersion } from '../../utils/contractHelpers';
 
 interface StakeModalProps {
@@ -42,7 +43,7 @@ const percentShortcuts = [10, 25, 50, 75, 100];
 const getButtonProps = (
   value: BigNumber,
   dehubBalance: BigNumber,
-  userStakeInfo: UserInfo,
+  userStakeInfo: PoolUserInfo,
   type: 'stake' | 'unstake'
 ) => {
   if (type === 'stake' && dehubBalance.isZero()) {
@@ -63,14 +64,18 @@ const StakeModal: React.FC<StakeModalProps> = ({
   open,
   onHide,
 }) => {
+  const { account } = useMoralis();
+  const stakingController: Contract | null = usePickStakingControllerContract();
+  const stakingContract: Contract | null = usePickStakingContract(poolIndex);
+  const dehubContract = useDehubContract();
+
+  const { userInfos } = useStakes();
+  const userStakeInfo = userInfos[poolIndex];
+  const dehubBalance = useGetDehubBalance();
+
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { account } = useMoralis();
-  const { userInfo: userStakeInfo } = useStakes(poolIndex, account);
-  const dehubBalance = useGetDehubBalance();
-  const stakingController: Contract | null = usePickStakingControllerContract();
-  const stakingContract: Contract | null = usePickStakingContract(poolIndex);
 
   const toast = useRef<Toast>(null);
 
@@ -81,7 +86,6 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const valueAsBn = new BigNumber(value);
 
   const stakingContractAddress = stakingContract?.address;
-  const dehubContract = useDehubContract();
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;
   const minBetAmountBalance = 0;

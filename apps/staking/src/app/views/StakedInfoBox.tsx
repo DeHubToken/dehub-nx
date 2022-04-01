@@ -22,7 +22,7 @@ const StakedInfoBox = () => {
   });
 
   const dehubPrice = useDehubBusdPrice();
-  const pools = usePools();
+  const { pools } = usePools();
 
   useEffect(() => {
     setInfo(

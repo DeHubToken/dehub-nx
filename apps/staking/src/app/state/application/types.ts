@@ -45,12 +45,53 @@ export interface PoolInfo {
   totalStaked: BigNumber;
 }
 
+export interface PoolPaused {
+  paused: boolean;
+}
+
+export type SerializedPoolInfoPaused = SerializedPoolInfo & PoolPaused;
+
+export type PoolInfoAndPaused = PoolInfo & PoolPaused;
+
+export interface SerializedUserInfo {
+  amount: SerializedBigNumber;
+  reflectionDebt: SerializedBigNumber;
+  reflectionPending: SerializedBigNumber;
+  harvestDebt: SerializedBigNumber;
+  harvestPending: SerializedBigNumber;
+  harvested: boolean;
+}
+
+export interface SerializedUserPendingHarvest {
+  pendingHarvest: SerializedBigNumber;
+}
+
+export type SerializedPoolUserInfo = SerializedUserInfo &
+  SerializedUserPendingHarvest;
+
+export interface UserInfo {
+  amount: BigNumber;
+  reflectionDebt: BigNumber;
+  reflectionPending: BigNumber;
+  harvestDebt: BigNumber;
+  harvestPending: BigNumber;
+  harvested: boolean;
+}
+
+export type PoolUserInfo = UserInfo & {
+  pendingHarvest: BigNumber;
+};
+
 export interface ApplicationState {
   applicationStatus: ApplicationStatus;
   walletConnectingState: WalletConnectingState;
   dehubPrice: SerializedBigNumber;
   stakingContracts: StakingContractProperties[] | null;
   stakingController: ContractProperties | null;
-  pools: SerializedPoolInfo[];
+  pools: SerializedPoolInfoPaused[];
+  poolsLoading: boolean;
+  userInfos: SerializedPoolUserInfo[];
+  userInfosLoading: boolean;
+  pendingHarvestLoading: boolean;
   readonly blockNumber: { readonly [chainId: string]: number };
 }

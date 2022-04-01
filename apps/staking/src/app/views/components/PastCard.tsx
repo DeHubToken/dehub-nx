@@ -31,18 +31,16 @@ import { Toast } from 'primereact/toast';
 import { useMemo, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
-import { FetchStatus } from '../../config/constants/types';
 import {
   useDehubContract,
   usePickStakingContract,
   usePickStakingControllerContract,
 } from '../../hooks/useContract';
-import { useStakePaused } from '../../hooks/usePaused';
-import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
 import {
   useBlockNumber,
   useDehubBusdPrice,
   usePools,
+  useStakes,
 } from '../../state/application/hooks';
 import { getVersion } from '../../utils/contractHelpers';
 import { quarterMark, quarterNumber } from '../../utils/pool';
@@ -83,24 +81,18 @@ const PastCard = ({ poolIndex }: CardProps) => {
   const dehubContract = useDehubContract();
 
   const blockNumber = useBlockNumber();
-
-  const pools = usePools();
+  const { pools } = usePools();
   const poolInfo = pools[poolIndex];
-  const quarterNum = useMemo(() => quarterNumber(poolInfo), [poolInfo]);
-
-  const paused = useStakePaused(poolIndex);
-  const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } = useStakes(
-    poolIndex,
-    account
-  );
-  const pendingHarvest = usePendingHarvest(poolIndex, account);
+  const { userInfos, userInfosLoading, pendingHarvestLoading } = useStakes();
+  const userStakeInfo = userInfos[poolIndex];
   const deHubPriceInBUSD = useDehubBusdPrice();
-  const [pendingHarvestTx, setPendingHarvestTx] = useState(false);
 
+  const [pendingHarvestTx, setPendingHarvestTx] = useState(false);
   const [multiStepWizard, setMultiStepWizard] = useState<boolean>(false);
   const [restakeSteps, setRestakeSteps] =
     useState<SingleStepType[]>(initialSteps);
 
+  const quarterNum = useMemo(() => quarterNumber(poolInfo), [poolInfo]);
   const toast = useRef<Toast>(null);
 
   const handleHarvest = async () => {
@@ -155,12 +147,15 @@ const PastCard = ({ poolIndex }: CardProps) => {
   };
 
   const handleRestake = async () => {
-    if (!stakingContract || !stakingController || !pendingHarvest) return;
+    if (!stakingContract || !stakingController || !pendingHarvestLoading)
+      return;
 
     const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
     // Get pending harvest amount and staked amount to restake
-    const restakeAmount = pendingHarvest.plus(userStakeInfo.amount);
+    const restakeAmount = userStakeInfo.pendingHarvest.plus(
+      userStakeInfo.amount
+    );
 
     let steps = cloneDeep(restakeSteps);
 
@@ -340,7 +335,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
                   <Heading className="pb-1">Your Stake</Heading>
-                  {account && fetchStakeStatus === FetchStatus.SUCCESS ? (
+                  {account && !userInfosLoading ? (
                     <>
                       <Text fontSize="24px" fontWeight={900}>
                         {getFullDisplayBalance(
@@ -370,11 +365,13 @@ const PastCard = ({ poolIndex }: CardProps) => {
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
                   <Heading className="pb-1">Withdrawable Rewards</Heading>
-                  {account && pendingHarvest ? (
+                  {account && !pendingHarvestLoading ? (
                     <>
                       <Text fontSize="24px" fontWeight={900}>
                         {getFullDisplayBalance(
-                          !userStakeInfo.harvested ? pendingHarvest : BIG_ZERO,
+                          !userStakeInfo.harvested
+                            ? userStakeInfo.pendingHarvest
+                            : BIG_ZERO,
                           DEHUB_DECIMALS,
                           DEHUB_DISPLAY_DECIMALS
                         )}
@@ -402,7 +399,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
                     className="p-button mt-2 justify-content-center mr-3"
                     label="Harvest & Unstake"
                     disabled={
-                      paused ||
+                      poolInfo.paused ||
                       !userStakeInfo ||
                       userStakeInfo.harvested ||
                       userStakeInfo.amount.eq(BIG_ZERO) ||
@@ -417,7 +414,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
                     className="p-button-outlined mt-2 justify-content-center text-white border-primary"
                     label="Restake"
                     disabled={
-                      paused ||
+                      poolInfo.paused ||
                       !userStakeInfo ||
                       userStakeInfo.harvested ||
                       userStakeInfo.amount.eq(BIG_ZERO) ||

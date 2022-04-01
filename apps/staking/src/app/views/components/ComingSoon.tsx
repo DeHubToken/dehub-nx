@@ -15,7 +15,7 @@ interface ComingSoonProps {
 }
 
 const ComingSoon = ({ poolIndex }: ComingSoonProps) => {
-  const pools = usePools();
+  const { pools } = usePools();
   const poolInfo = pools[poolIndex];
   const openTimeStamp = useMemo(
     () => (poolInfo ? Number(poolInfo.openTimeStamp) : 0),

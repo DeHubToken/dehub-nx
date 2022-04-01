@@ -9,16 +9,21 @@ import { getChainId } from '../../config/constants';
 import { AppState } from '../index';
 import {
   fetchContracts,
+  fetchPendingHarvest,
+  fetchUserInfos,
   setApplicationStatus,
   setPools,
   setWalletConnectingState,
 } from './';
-import { fetchPools } from './helpers';
+import { fetchPools, fetchPoolsPaused } from './helpers';
 import {
   ApplicationStatus,
   ContractProperties,
-  PoolInfo,
+  PoolInfoAndPaused,
+  PoolUserInfo,
   SerializedPoolInfo,
+  SerializedPoolInfoPaused,
+  SerializedPoolUserInfo,
   StakingContractProperties,
 } from './types';
 
@@ -58,8 +63,8 @@ export const useDehubBusdPrice = (): BigNumber => {
 
 export const useFetchPools = () => {
   const dispatch = useAppDispatch();
-  const { slowRefresh } = useRefresh();
-  const { isInitialized } = useMoralis();
+  const { slowRefresh, fastRefresh } = useRefresh();
+  const { isInitialized, account } = useMoralis();
 
   const contracts: StakingContractProperties[] | null = useStakingContracts();
 
@@ -79,8 +84,19 @@ export const useFetchPools = () => {
         abi,
         addresses
       );
-      if (pools) {
-        dispatch(setPools(pools));
+      const pauses: boolean[] | undefined = await fetchPoolsPaused(
+        abi,
+        addresses
+      );
+      if (pools && pauses) {
+        dispatch(
+          setPools(
+            pools.map((pool: SerializedPoolInfo, index: number) => ({
+              ...pool,
+              paused: pauses[index],
+            }))
+          )
+        );
         dispatch(setApplicationStatus({ appStatus: ApplicationStatus.LIVE }));
       }
     };
@@ -89,6 +105,13 @@ export const useFetchPools = () => {
       fetchInitialize();
     }
   }, [dispatch, contracts, slowRefresh]);
+
+  useEffect(() => {
+    if (account && contracts) {
+      dispatch(fetchUserInfos({ contracts, staker: account }));
+      dispatch(fetchPendingHarvest({ contracts, staker: account }));
+    }
+  }, [dispatch, account, contracts, fastRefresh]);
 };
 
 export const useStakingContracts = (): StakingContractProperties[] | null => {
@@ -113,24 +136,68 @@ export const useStakingControllerContract = (): ContractProperties | null => {
   return controller;
 };
 
-export const usePools = (): PoolInfo[] => {
+export const usePools = (): {
+  pools: PoolInfoAndPaused[];
+  poolsLoading: boolean;
+} => {
   const pools = useSelector((state: AppState) => state.application.pools);
-
-  return useMemo(
-    () =>
-      pools.map((pool: SerializedPoolInfo) => ({
-        openTimeStamp: pool.openTimeStamp,
-        closeTimeStamp: pool.closeTimeStamp,
-        openBlock: pool.openBlock,
-        closeBlock: pool.closeBlock,
-        emergencyPull: pool.emergencyPull,
-        harvestFund: new BigNumber(pool.harvestFund),
-        lastUpdateBlock: new BigNumber(pool.lastUpdateBlock),
-        valuePerBlock: new BigNumber(pool.valuePerBlock),
-        totalStaked: new BigNumber(pool.totalStaked),
-      })),
-    [pools]
+  const poolsLoading = useSelector(
+    (state: AppState) => state.application.poolsLoading
   );
+
+  return {
+    pools: useMemo(
+      () =>
+        pools.map((pool: SerializedPoolInfoPaused) => ({
+          openTimeStamp: pool.openTimeStamp,
+          closeTimeStamp: pool.closeTimeStamp,
+          openBlock: pool.openBlock,
+          closeBlock: pool.closeBlock,
+          emergencyPull: pool.emergencyPull,
+          harvestFund: new BigNumber(pool.harvestFund),
+          lastUpdateBlock: new BigNumber(pool.lastUpdateBlock),
+          valuePerBlock: new BigNumber(pool.valuePerBlock),
+          totalStaked: new BigNumber(pool.totalStaked),
+          paused: pool.paused,
+        })),
+      [pools]
+    ),
+    poolsLoading,
+  };
+};
+
+export const useStakes = (): {
+  userInfos: PoolUserInfo[];
+  userInfosLoading: boolean;
+  pendingHarvestLoading: boolean;
+} => {
+  const userInfos = useSelector(
+    (state: AppState) => state.application.userInfos
+  );
+  const userInfosLoading = useSelector(
+    (state: AppState) => state.application.userInfosLoading
+  );
+  const pendingHarvestLoading = useSelector(
+    (state: AppState) => state.application.pendingHarvestLoading
+  );
+
+  return {
+    userInfos: useMemo(
+      () =>
+        userInfos.map((userInfo: SerializedPoolUserInfo) => ({
+          amount: new BigNumber(userInfo.amount),
+          reflectionDebt: new BigNumber(userInfo.reflectionDebt),
+          reflectionPending: new BigNumber(userInfo.reflectionPending),
+          harvestDebt: new BigNumber(userInfo.harvestDebt),
+          harvestPending: new BigNumber(userInfo.harvestPending),
+          harvested: userInfo.harvested,
+          pendingHarvest: new BigNumber(userInfo.pendingHarvest),
+        })),
+      [userInfos]
+    ),
+    userInfosLoading,
+    pendingHarvestLoading,
+  };
 };
 
 export function useBlockNumber(): number | undefined {
