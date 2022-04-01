@@ -260,19 +260,33 @@ async function getDeHubTokenBalance(chainId, address) {
  * @param {*} chainId network id in hex
  * @param {*} address user address
  */
-async function getStakedAmount(chainId, address) {
+async function getStakedAmount(targetChainId, address) {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const contractInfo = await getActiveStakingContracts(chainId);
-    const web3 = Moralis.web3ByChain(chainId);
-    // create contract instance
-    const contract = new web3.eth.Contract(
-      contractInfo.get('abi'),
-      contractInfo.get('address')
-    );
-    // get user info
-    const userInfo = await contract.methods.userInfo(address).call();
-    return new Moralis.Cloud.BigNumber(userInfo.amount);
+    const decTargetChainId = parseInt(targetChainId, 16);
+
+    const web3 = Moralis.web3ByChain(targetChainId);
+    let amount = new Moralis.Cloud.BigNumber(0);
+
+    const contractInfos = await getDeHubContracts(stakingDappName);
+    for (let i = 0; i < contractInfos.length; i++) {
+      const chainIdc = contractInfos[i].get('chainId');
+      if (parseInt(chainIdc) !== decTargetChainId) {
+        continue;
+      }
+
+      // create contract instance
+      const contract = new web3.eth.Contract(
+        contractInfos[i].get('abi'),
+        contractInfos[i].get('address')
+      );
+
+      // get user info
+      const userInfo = await contract.methods.userInfo(address).call();
+      amount = amount.plus(new Moralis.Cloud.BigNumber(userInfo.amount));
+    }
+
+    return amount;
   } catch (err) {
     logger.error(`getStakedAmount error: ${JSON.stringify(err)}`);
     return null;
@@ -286,7 +300,7 @@ async function setCanPlay(user, value) {
   const logger = Moralis.Cloud.getLogger();
   try {
     if (user) {
-      logger.info(`setting can_play: ${JSON.stringify(user)}, ${value}`);
+      // logger.info(`setting can_play: ${JSON.stringify(user)}, ${value}`);
       user.set('can_play', value);
       await user.save(null, { useMasterKey: true }).then(user => {
         logger.info(
