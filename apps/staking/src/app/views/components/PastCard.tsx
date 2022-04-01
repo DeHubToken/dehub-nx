@@ -64,7 +64,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
         const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
         const tx: TransactionResponse = isV1Quarter
-          ? await stakingContract.harvestAndWithdraw(quarterNum)
+          ? await stakingContract.harvestAndWithdraw()
           : await stakingController.harvestAndWithdraw(quarterNum);
         const receipt: TransactionReceipt = await tx.wait();
         if (receipt.status) {
