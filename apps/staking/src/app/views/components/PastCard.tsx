@@ -1,16 +1,29 @@
 import { ConnectWalletButton } from '@dehub/react/core';
-import { Box, Heading, Text } from '@dehub/react/ui';
+import {
+  Box,
+  Heading,
+  MultiStepWizard,
+  SingleStepType,
+  StepStatus,
+  Text,
+} from '@dehub/react/ui';
 import {
   BUSD_DISPLAY_DECIMALS,
   DEHUB_DECIMALS,
   DEHUB_DISPLAY_DECIMALS,
 } from '@dehub/shared/config';
-import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/util';
+import {
+  BIG_ZERO,
+  ethersToBigNumber,
+  getFullDisplayBalance,
+} from '@dehub/shared/util';
 import {
   TransactionReceipt,
   TransactionResponse,
 } from '@ethersproject/abstract-provider';
+import { MaxUint256 } from '@ethersproject/constants';
 import { Contract } from '@ethersproject/contracts';
+import { cloneDeep } from 'lodash';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
@@ -20,6 +33,7 @@ import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { FetchStatus } from '../../config/constants/types';
 import {
+  useDehubContract,
   usePickStakingContract,
   usePickStakingControllerContract,
 } from '../../hooks/useContract';
@@ -41,17 +55,32 @@ interface CardProps {
   poolIndex: number;
 }
 
-type RestakeTitles =
-  | 'Restake'
-  | 'Restaking'
-  | 'Harvesting'
-  | 'Deposit'
-  | 'Depositing';
+const initialSteps: SingleStepType[] = [
+  {
+    status: StepStatus.PENDING,
+    title: 'Harvest & Withdraw',
+    description: 'Claim harvest and withdraw staked amount',
+    loading: false,
+  },
+  {
+    status: StepStatus.PENDING,
+    title: 'Approve',
+    description: 'Approve exceed amount to transfer',
+    loading: false,
+  },
+  {
+    status: StepStatus.PENDING,
+    title: 'Deposit',
+    description: 'Deposit last claimed amount',
+    loading: false,
+  },
+];
 
 const PastCard = ({ poolIndex }: CardProps) => {
   const { account } = useMoralis();
   const stakingController: Contract | null = usePickStakingControllerContract();
   const stakingContract: Contract | null = usePickStakingContract(poolIndex);
+  const dehubContract = useDehubContract();
 
   const blockNumber = useBlockNumber();
 
@@ -67,8 +96,11 @@ const PastCard = ({ poolIndex }: CardProps) => {
   const pendingHarvest = usePendingHarvest(poolIndex, account);
   const deHubPriceInBUSD = useDehubBusdPrice();
   const [pendingHarvestTx, setPendingHarvestTx] = useState(false);
-  const [pendingRestakeTx, setPendingRestakeTx] = useState(false);
-  const [restakeTitle, setRestakeTitle] = useState<RestakeTitles>('Restake');
+
+  const [multiStepWizard, setMultiStepWizard] = useState<boolean>(false);
+  const [restakeSteps, setRestakeSteps] =
+    useState<SingleStepType[]>(initialSteps);
+
   const toast = useRef<Toast>(null);
 
   const handleHarvest = async () => {
@@ -108,71 +140,178 @@ const PastCard = ({ poolIndex }: CardProps) => {
     }
   };
 
+  const updateRestakeStep = (
+    steps: SingleStepType[],
+    index: number,
+    status: StepStatus,
+    errorMsg?: string
+  ) => {
+    if (index >= restakeSteps.length) return steps;
+    steps[index].status = status;
+    steps[index].errorMsg = errorMsg;
+
+    setRestakeSteps(steps);
+    return steps;
+  };
+
   const handleRestake = async () => {
-    setPendingRestakeTx(true);
+    if (!stakingContract || !stakingController || !pendingHarvest) return;
 
+    const isV1Quarter = (await getVersion(stakingContract)) === 1;
+
+    // Get pending harvest amount and staked amount to restake
+    const restakeAmount = pendingHarvest.plus(userStakeInfo.amount);
+
+    let steps = cloneDeep(restakeSteps);
+
+    // First step
     try {
-      setRestakeTitle('Restaking');
-      if (stakingContract && stakingController) {
-        const isV1Quarter = (await getVersion(stakingContract)) === 1;
-
-        // Get pending harvest amount and staked amount to restake
-        const restakeAmount = pendingHarvest?.plus(userStakeInfo.amount);
-
-        setRestakeTitle('Harvesting');
-        const txHarvest: TransactionResponse = isV1Quarter
-          ? await stakingContract.harvestAndWithdraw()
-          : await stakingController.harvestAndWithdraw(quarterNum);
-        const receiptHarvest: TransactionReceipt = await txHarvest.wait();
-        if (!receiptHarvest.status) {
-          toast?.current?.show({
-            severity: 'error',
-            summary: 'Restake',
-            detail: 'Restake failed. Please check your wallet.',
-            life: 4000,
-          });
-          setRestakeTitle('Restake');
-          return;
-        }
-
+      steps = updateRestakeStep(steps, 0, StepStatus.DOING);
+      const txHarvest: TransactionResponse = isV1Quarter
+        ? await stakingContract.harvestAndWithdraw()
+        : await stakingController.harvestAndWithdraw(quarterNum);
+      const receiptHarvest: TransactionReceipt = await txHarvest.wait();
+      if (!receiptHarvest.status) {
+        steps = updateRestakeStep(
+          steps,
+          0,
+          StepStatus.FAILED,
+          'Harvest & Withdraw failed. Please check your wallet.'
+        );
         toast?.current?.show({
-          severity: 'info',
+          severity: 'error',
           summary: 'Restake',
-          detail:
-            'Harvest successfully. Now is depositing again. Please check your wallet.',
+          detail: 'Harvest & Withdraw failed. Please check your wallet.',
           life: 4000,
         });
-
-        setRestakeTitle('Depositing');
-        const txDeposit: TransactionResponse = await stakingController.deposit(
-          restakeAmount?.toString()
-        );
-        const receiptDeposit: TransactionReceipt = await txDeposit.wait();
-        if (receiptDeposit.status) {
-          toast?.current?.show({
-            severity: 'info',
-            summary: 'Restake',
-            detail: 'Deposit successfully. Please check your wallet.',
-            life: 4000,
-          });
-          setRestakeTitle('Restake');
-        } else {
-          setRestakeTitle('Deposit');
-        }
+        return;
       }
 
+      steps = updateRestakeStep(steps, 0, StepStatus.DONE);
+      toast?.current?.show({
+        severity: 'info',
+        summary: 'Restake',
+        detail: 'Harvest & Withdraw successfully. Please check your wallet.',
+        life: 4000,
+      });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error);
+
+      steps = updateRestakeStep(
+        steps,
+        0,
+        StepStatus.FAILED,
+        error?.data?.message ?? error.message
+      );
       toast?.current?.show({
         severity: 'error',
         summary: 'Restake',
-        detail: `Restake failed - ${error?.data?.message ?? error.message}`,
+        detail: `Harvest & Withdraw failed - ${
+          error?.data?.message ?? error.message
+        }`,
         life: 4000,
       });
-      setRestakeTitle(restakeTitle === 'Depositing' ? 'Deposit' : 'Restake');
-    } finally {
-      setPendingRestakeTx(false);
+      return;
+    }
+
+    steps = updateRestakeStep(steps, 0, StepStatus.DONE);
+
+    // Second step
+    try {
+      steps = updateRestakeStep(steps, 1, StepStatus.DOING);
+      const allowance = ethersToBigNumber(
+        await dehubContract?.allowance(account, stakingContract.address)
+      );
+
+      if (allowance.lt(restakeAmount)) {
+        const txApprove = await dehubContract?.approve(
+          stakingContract.address,
+          MaxUint256
+        );
+        const receipt = await txApprove.wait();
+
+        if (!receipt.status) {
+          const errorMsg =
+            'Please try again. Confirm the transaction and make sure you are paying enough gas!';
+          steps = updateRestakeStep(steps, 1, StepStatus.FAILED, errorMsg);
+
+          toast?.current?.show({
+            severity: 'error',
+            summary: 'Restake',
+            detail: errorMsg,
+            life: 4000,
+          });
+          return;
+        }
+      }
+      steps = updateRestakeStep(steps, 1, StepStatus.DONE);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error(error);
+
+      steps = updateRestakeStep(
+        steps,
+        1,
+        StepStatus.FAILED,
+        error?.data?.message ?? error.message
+      );
+      toast?.current?.show({
+        severity: 'error',
+        summary: 'Restake',
+        detail: `Approve failed - ${error?.data?.message ?? error.message}`,
+        life: 4000,
+      });
+      return;
+    }
+
+    // Final step
+    try {
+      steps = updateRestakeStep(steps, 2, StepStatus.DOING);
+      const txDeposit: TransactionResponse = await stakingController.deposit(
+        restakeAmount?.toString()
+      );
+      const receiptDeposit: TransactionReceipt = await txDeposit.wait();
+      if (!receiptDeposit.status) {
+        steps = updateRestakeStep(
+          steps,
+          2,
+          StepStatus.FAILED,
+          'Deposit failed. Please check your wallet.'
+        );
+        toast?.current?.show({
+          severity: 'error',
+          summary: 'Restake',
+          detail: 'Deposit failed. Please check your wallet.',
+          life: 4000,
+        });
+        return;
+      }
+
+      steps = updateRestakeStep(steps, 2, StepStatus.DONE);
+      toast?.current?.show({
+        severity: 'info',
+        summary: 'Restake',
+        detail: 'Deposit successfully. Please check your wallet.',
+        life: 4000,
+      });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error(error);
+
+      updateRestakeStep(
+        steps,
+        2,
+        StepStatus.FAILED,
+        error?.data?.message ?? error.message
+      );
+      toast?.current?.show({
+        severity: 'error',
+        summary: 'Restake',
+        detail: `Deposit failed - ${error?.data?.message ?? error.message}`,
+        life: 4000,
+      });
+      return;
     }
   };
 
@@ -273,7 +412,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
                   />
                   <Button
                     className="p-button-outlined mt-2 justify-content-center text-white border-primary"
-                    label={restakeTitle}
+                    label="Restake"
                     disabled={
                       paused ||
                       !userStakeInfo ||
@@ -282,9 +421,10 @@ const PastCard = ({ poolIndex }: CardProps) => {
                       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                       poolInfo.closeBlock > blockNumber!
                     }
-                    onClick={handleRestake}
-                    loading={pendingRestakeTx}
-                    loadingIcon={'pi pi-spin pi-spinner'}
+                    onClick={() => {
+                      setRestakeSteps(initialSteps);
+                      setMultiStepWizard(true);
+                    }}
                   />
                 </>
               ) : (
@@ -294,6 +434,29 @@ const PastCard = ({ poolIndex }: CardProps) => {
           </div>
         </StyledBox>
       </Card>
+
+      <MultiStepWizard
+        visible={multiStepWizard}
+        onDismiss={() => setMultiStepWizard(false)}
+        title="Restake"
+        steps={restakeSteps}
+        execute={handleRestake}
+        isAvailable={() => {
+          const failed = restakeSteps.filter(
+            (step: SingleStepType) => step.status === StepStatus.FAILED
+          );
+          const done = restakeSteps.filter(
+            (step: SingleStepType) => step.status === StepStatus.DONE
+          );
+          return failed.length > 0 || done.length === restakeSteps.length;
+        }}
+        isExecuting={() => {
+          const doing = restakeSteps.filter(
+            (step: SingleStepType) => step.status === StepStatus.DOING
+          );
+          return doing.length > 0;
+        }}
+      />
     </>
   );
 };
