@@ -6,6 +6,7 @@ export { default as Header } from './lib/Header';
 export * from './lib/Layout';
 export { default as Loader } from './lib/Loader';
 export { default as FullScreenLoader } from './lib/Loader/FullScreenLoader';
+export * from './lib/MultiStepWizard';
 export { default as SuspenseWithChunkError } from './lib/SuspenseWithChunkError';
 export * from './lib/TabMenu';
 export * from './lib/Text';
