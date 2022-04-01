@@ -59,19 +59,19 @@ const initialSteps: SingleStepType[] = [
   {
     status: StepStatus.PENDING,
     title: 'Harvest & Withdraw',
-    description: 'Claim harvest and withdraw staked amount',
+    description: 'Harvest rewards and withdraw staked amount.',
     loading: false,
   },
   {
     status: StepStatus.PENDING,
     title: 'Approve',
-    description: 'Approve exceed amount to transfer',
+    description: 'Allow to transfer your stake.',
     loading: false,
   },
   {
     status: StepStatus.PENDING,
     title: 'Deposit',
-    description: 'Deposit last claimed amount',
+    description: 'Transfer your stake to the new quarter vault.',
     loading: false,
   },
 ];
