@@ -25,7 +25,11 @@ import {
 } from '../../hooks/useContract';
 import { useStakePaused } from '../../hooks/usePaused';
 import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
-import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
+import {
+  useBlockNumber,
+  useDehubBusdPrice,
+  usePools,
+} from '../../state/application/hooks';
 import { getVersion } from '../../utils/contractHelpers';
 import { quarterMark, quarterNumber } from '../../utils/pool';
 
@@ -41,6 +45,8 @@ const PastCard = ({ poolIndex }: CardProps) => {
   const { account } = useMoralis();
   const stakingController: Contract | null = usePickStakingControllerContract();
   const stakingContract: Contract | null = usePickStakingContract(poolIndex);
+
+  const blockNumber = useBlockNumber();
 
   const pools = usePools();
   const poolInfo = pools[poolIndex];
@@ -166,6 +172,11 @@ const PastCard = ({ poolIndex }: CardProps) => {
               </div>
             </div>
             <div className="col-12 align-self-start">
+              {blockNumber && poolInfo.closeBlock > blockNumber && (
+                <Text>
+                  Blocks left until harvest: {poolInfo.closeBlock - blockNumber}
+                </Text>
+              )}
               {account ? (
                 <Button
                   className="p-button mt-2 justify-content-center"
@@ -174,7 +185,8 @@ const PastCard = ({ poolIndex }: CardProps) => {
                     paused ||
                     !userStakeInfo ||
                     userStakeInfo.harvested ||
-                    userStakeInfo.amount.eq(BIG_ZERO)
+                    userStakeInfo.amount.eq(BIG_ZERO) ||
+                    poolInfo.closeBlock > blockNumber!
                   }
                   onClick={handleHarvest}
                   loading={pendingHarvestTx}
