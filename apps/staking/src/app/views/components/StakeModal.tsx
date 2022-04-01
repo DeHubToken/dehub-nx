@@ -21,7 +21,6 @@ import {
 } from '../../hooks/useContract';
 import { UserInfo, useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { usePools } from '../../state/application/hooks';
 import { getVersion } from '../../utils/contractHelpers';
 
 interface StakeModalProps {
@@ -72,9 +71,6 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const dehubBalance = useGetDehubBalance();
   const stakingController: Contract | null = usePickStakingControllerContract();
   const stakingContract: Contract | null = usePickStakingContract(poolIndex);
-
-  const pools = usePools();
-  const poolInfo = pools[poolIndex];
 
   const toast = useRef<Toast>(null);
 

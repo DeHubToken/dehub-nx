@@ -43,8 +43,8 @@ export const fetchContracts = createAsyncThunk<{
   try {
     const result = await Moralis.Cloud.run('getStakingContracts', {});
     if (!result) return null;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const staking = orderBy(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       result.map((item: any) => ({
         year: item.year,
         month: item.month,
