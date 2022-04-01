@@ -186,6 +186,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
                     !userStakeInfo ||
                     userStakeInfo.harvested ||
                     userStakeInfo.amount.eq(BIG_ZERO) ||
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                     poolInfo.closeBlock > blockNumber!
                   }
                   onClick={handleHarvest}
