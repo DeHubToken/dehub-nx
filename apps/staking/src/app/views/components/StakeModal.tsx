@@ -135,8 +135,6 @@ const StakeModal: React.FC<StakeModalProps> = ({
       if (stakingContract && stakingController) {
         const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
-        console.log('isV1Quarter', isV1Quarter);
-
         let receipt: TransactionReceipt;
         if (type === 'stake') {
           const tx = isV1Quarter

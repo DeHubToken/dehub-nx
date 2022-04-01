@@ -41,6 +41,13 @@ interface CardProps {
   poolIndex: number;
 }
 
+type RestakeTitles =
+  | 'Restake'
+  | 'Restaking'
+  | 'Harvesting'
+  | 'Deposit'
+  | 'Depositing';
+
 const PastCard = ({ poolIndex }: CardProps) => {
   const { account } = useMoralis();
   const stakingController: Contract | null = usePickStakingControllerContract();
@@ -60,6 +67,8 @@ const PastCard = ({ poolIndex }: CardProps) => {
   const pendingHarvest = usePendingHarvest(poolIndex, account);
   const deHubPriceInBUSD = useDehubBusdPrice();
   const [pendingHarvestTx, setPendingHarvestTx] = useState(false);
+  const [pendingRestakeTx, setPendingRestakeTx] = useState(false);
+  const [restakeTitle, setRestakeTitle] = useState<RestakeTitles>('Restake');
   const toast = useRef<Toast>(null);
 
   const handleHarvest = async () => {
@@ -96,6 +105,74 @@ const PastCard = ({ poolIndex }: CardProps) => {
       });
     } finally {
       setPendingHarvestTx(false);
+    }
+  };
+
+  const handleRestake = async () => {
+    setPendingRestakeTx(true);
+
+    try {
+      setRestakeTitle('Restaking');
+      if (stakingContract && stakingController) {
+        const isV1Quarter = (await getVersion(stakingContract)) === 1;
+
+        // Get pending harvest amount and staked amount to restake
+        const restakeAmount = pendingHarvest?.plus(userStakeInfo.amount);
+
+        setRestakeTitle('Harvesting');
+        const txHarvest: TransactionResponse = isV1Quarter
+          ? await stakingContract.harvestAndWithdraw()
+          : await stakingController.harvestAndWithdraw(quarterNum);
+        const receiptHarvest: TransactionReceipt = await txHarvest.wait();
+        if (!receiptHarvest.status) {
+          toast?.current?.show({
+            severity: 'error',
+            summary: 'Restake',
+            detail: 'Restake failed. Please check your wallet.',
+            life: 4000,
+          });
+          setRestakeTitle('Restake');
+          return;
+        }
+
+        toast?.current?.show({
+          severity: 'info',
+          summary: 'Restake',
+          detail:
+            'Harvest successfully. Now is depositing again. Please check your wallet.',
+          life: 4000,
+        });
+
+        setRestakeTitle('Depositing');
+        const txDeposit: TransactionResponse = await stakingController.deposit(
+          restakeAmount?.toString()
+        );
+        const receiptDeposit: TransactionReceipt = await txDeposit.wait();
+        if (receiptDeposit.status) {
+          toast?.current?.show({
+            severity: 'info',
+            summary: 'Restake',
+            detail: 'Deposit successfully. Please check your wallet.',
+            life: 4000,
+          });
+          setRestakeTitle('Restake');
+        } else {
+          setRestakeTitle('Deposit');
+        }
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error(error);
+      toast?.current?.show({
+        severity: 'error',
+        summary: 'Restake',
+        detail: `Restake failed - ${error?.data?.message ?? error.message}`,
+        life: 4000,
+      });
+      setRestakeTitle(restakeTitle === 'Depositing' ? 'Deposit' : 'Restake');
+    } finally {
+      setPendingRestakeTx(false);
     }
   };
 
@@ -178,21 +255,38 @@ const PastCard = ({ poolIndex }: CardProps) => {
                 </Text>
               )}
               {account ? (
-                <Button
-                  className="p-button mt-2 justify-content-center"
-                  label="Harvest & Unstake"
-                  disabled={
-                    paused ||
-                    !userStakeInfo ||
-                    userStakeInfo.harvested ||
-                    userStakeInfo.amount.eq(BIG_ZERO) ||
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    poolInfo.closeBlock > blockNumber!
-                  }
-                  onClick={handleHarvest}
-                  loading={pendingHarvestTx}
-                  loadingIcon={'pi pi-spin pi-spinner'}
-                />
+                <>
+                  <Button
+                    className="p-button mt-2 justify-content-center mr-3"
+                    label="Harvest & Unstake"
+                    disabled={
+                      paused ||
+                      !userStakeInfo ||
+                      userStakeInfo.harvested ||
+                      userStakeInfo.amount.eq(BIG_ZERO) ||
+                      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                      poolInfo.closeBlock > blockNumber!
+                    }
+                    onClick={handleHarvest}
+                    loading={pendingHarvestTx}
+                    loadingIcon={'pi pi-spin pi-spinner'}
+                  />
+                  <Button
+                    className="p-button-outlined mt-2 justify-content-center text-white border-primary"
+                    label={restakeTitle}
+                    disabled={
+                      paused ||
+                      !userStakeInfo ||
+                      userStakeInfo.harvested ||
+                      userStakeInfo.amount.eq(BIG_ZERO) ||
+                      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                      poolInfo.closeBlock > blockNumber!
+                    }
+                    onClick={handleRestake}
+                    loading={pendingRestakeTx}
+                    loadingIcon={'pi pi-spin pi-spinner'}
+                  />
+                </>
               ) : (
                 <ConnectWalletButton />
               )}
