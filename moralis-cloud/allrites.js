@@ -133,7 +133,7 @@ async function getActiveStakingContracts(targetChainId) {
       const quarter = contract.get('quarter');
       if (
         date.getFullYear() !== year ||
-        parseInt(date.getUTCMonth() / 4) !== quarter - 1
+        parseInt((date.getUTCMonth() + 1) / 4) !== quarter - 1
       ) {
         return false;
       }
