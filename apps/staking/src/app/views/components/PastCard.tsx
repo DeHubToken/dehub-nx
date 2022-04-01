@@ -220,13 +220,16 @@ const PastCard = ({ poolIndex }: CardProps) => {
     // Second step
     try {
       steps = updateRestakeStep(steps, 1, StepStatus.DOING);
+
+      const activeStakingAddress: string =
+        await stakingController.getActiveStaking();
       const allowance = ethersToBigNumber(
-        await dehubContract?.allowance(account, stakingContract.address)
+        await dehubContract?.allowance(account, activeStakingAddress)
       );
 
       if (allowance.lt(restakeAmount)) {
         const txApprove = await dehubContract?.approve(
-          stakingContract.address,
+          activeStakingAddress,
           MaxUint256
         );
         const receipt = await txApprove.wait();
