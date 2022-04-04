@@ -147,8 +147,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
   };
 
   const handleRestake = async () => {
-    if (!stakingContract || !stakingController || !pendingHarvestLoading)
-      return;
+    if (!stakingContract || !stakingController || pendingHarvestLoading) return;
 
     const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
