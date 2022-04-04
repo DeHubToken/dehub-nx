@@ -136,6 +136,13 @@ export const useStakingControllerContract = (): ContractProperties | null => {
   return controller;
 };
 
+export const useBNBRewardContract = (): ContractProperties | null => {
+  const bnbRewardContract = useSelector(
+    (state: AppState) => state.application.bnbRewardContract
+  );
+  return bnbRewardContract;
+};
+
 export const usePools = (): {
   pools: PoolInfoAndPaused[];
   poolsLoading: boolean;

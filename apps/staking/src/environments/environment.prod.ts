@@ -6,8 +6,4 @@ export const environment: Env = {
   ...defaultSharedProdEnv,
 
   baseUrl: '/staking',
-
-  contracts: {
-    rewards: '0x30E2181EDb3F38Fe00Cf242561875Df1ab617E6c',
-  },
 };

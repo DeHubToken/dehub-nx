@@ -31,6 +31,7 @@ const initialState: ApplicationState = {
   dehubPrice: new BigNumber(NaN).toJSON(),
   stakingContracts: null,
   stakingController: null,
+  bnbRewardContract: null,
   pools: [],
   poolsLoading: true,
   userInfos: [],
@@ -98,6 +99,7 @@ export const fetchPendingHarvest = createAsyncThunk<
 export const fetchContracts = createAsyncThunk<{
   staking: StakingContractProperties[];
   controller: ContractProperties;
+  bnbReward: ContractProperties;
 } | null>('application/fetchContracts', async () => {
   try {
     const result = await Moralis.Cloud.run('getStakingContracts', {});
@@ -119,7 +121,9 @@ export const fetchContracts = createAsyncThunk<{
       'getStakingControllerContract',
       {}
     );
+    const bnbReward = await Moralis.Cloud.run('getRewardContract', {});
     if (!controller) return null;
+    if (!bnbReward) return null;
     return {
       staking: staking,
       controller: {
@@ -127,6 +131,12 @@ export const fetchContracts = createAsyncThunk<{
         name: controller.name,
         chainId: controller.chainId,
         abi: controller.abi,
+      },
+      bnbReward: {
+        address: bnbReward.address,
+        name: bnbReward.name,
+        chainId: bnbReward.chainId,
+        abi: bnbReward.abi,
       },
     };
   } catch (error) {
@@ -187,6 +197,7 @@ export const ApplicationSlice = createSlice({
       if (action.payload) {
         state.stakingContracts = action.payload.staking;
         state.stakingController = action.payload.controller;
+        state.bnbRewardContract = action.payload.bnbReward;
       }
     });
 

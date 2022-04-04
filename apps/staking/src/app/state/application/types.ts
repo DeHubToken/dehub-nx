@@ -88,6 +88,7 @@ export interface ApplicationState {
   dehubPrice: SerializedBigNumber;
   stakingContracts: StakingContractProperties[] | null;
   stakingController: ContractProperties | null;
+  bnbRewardContract: ContractProperties | null;
   pools: SerializedPoolInfoPaused[];
   poolsLoading: boolean;
   userInfos: SerializedPoolUserInfo[];

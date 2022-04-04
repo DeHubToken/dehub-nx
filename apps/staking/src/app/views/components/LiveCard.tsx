@@ -24,9 +24,9 @@ import styled from 'styled-components';
 import { SimpleCountDown } from '../../components/CountDown';
 import { FetchStatus } from '../../config/constants/types';
 import {
+  usePickBNBRewardsContract,
   usePickStakingContract,
   usePickStakingControllerContract,
-  useRewardsContract,
 } from '../../hooks/useContract';
 import { useWeeklyRewards } from '../../hooks/useRewards';
 import {
@@ -56,7 +56,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   const { account } = useMoralis();
   const stakingController: Contract | null = usePickStakingControllerContract();
   const stakingContract: Contract | null = usePickStakingContract(poolIndex);
-  const rewardsContract = useRewardsContract();
+  const rewardsContract: Contract | null = usePickBNBRewardsContract();
 
   const { pools } = usePools();
   const poolInfo = pools[poolIndex];
