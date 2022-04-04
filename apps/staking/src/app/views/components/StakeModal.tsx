@@ -1,7 +1,11 @@
 import { ConnectWalletButton } from '@dehub/react/core';
 import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/util';
+import {
+  BIG_ZERO,
+  getBalanceAmount,
+  getDecimalAmount,
+} from '@dehub/shared/util';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
 import { MaxUint256 } from '@ethersproject/constants';
 import { Contract } from '@ethersproject/contracts';
@@ -41,11 +45,14 @@ const SimpleGrid = styled.div<{ columns: number }>`
 const percentShortcuts = [10, 25, 50, 75, 100];
 
 const getButtonProps = (
+  type: 'stake' | 'unstake',
   value: BigNumber,
   dehubBalance: BigNumber,
-  userStakeInfo: PoolUserInfo,
-  type: 'stake' | 'unstake'
+  userStakeInfo?: PoolUserInfo
 ) => {
+  if (!userStakeInfo) {
+    return { key: 'None', disabled: true };
+  }
   if (type === 'stake' && dehubBalance.isZero()) {
     return { key: 'Insufficient DeHub balance', disabled: true };
   } else if (type === 'unstake' && userStakeInfo.amount.isZero()) {
@@ -69,8 +76,11 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const stakingContract: Contract | null = usePickStakingContract(poolIndex);
   const dehubContract = useDehubContract();
 
-  const { userInfos } = useStakes();
-  const userStakeInfo = userInfos[poolIndex];
+  const { userInfos, userInfosLoading, pendingHarvestLoading } = useStakes();
+  const userStakeInfo =
+    userInfosLoading || pendingHarvestLoading
+      ? undefined
+      : userInfos[poolIndex];
   const dehubBalance = useGetDehubBalance();
 
   const [value, setValue] = useState<string>('');
@@ -79,10 +89,12 @@ const StakeModal: React.FC<StakeModalProps> = ({
 
   const toast = useRef<Toast>(null);
 
-  const maxBalance = getBalanceAmount(
-    type === 'stake' ? dehubBalance : userStakeInfo.amount,
-    5
-  ).toNumber();
+  const maxBalance = !userStakeInfo
+    ? BIG_ZERO.toNumber()
+    : getBalanceAmount(
+        type === 'stake' ? dehubBalance : userStakeInfo.amount,
+        5
+      ).toNumber();
   const valueAsBn = new BigNumber(value);
 
   const stakingContractAddress = stakingContract?.address;
@@ -99,10 +111,10 @@ const StakeModal: React.FC<StakeModalProps> = ({
   };
 
   const { disabled } = getButtonProps(
+    type,
     valueAsBn,
     dehubBalance,
-    userStakeInfo,
-    type
+    userStakeInfo
   );
 
   const handleEnterPosition = async () => {

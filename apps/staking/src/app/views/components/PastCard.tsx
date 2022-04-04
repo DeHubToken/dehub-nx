@@ -84,7 +84,10 @@ const PastCard = ({ poolIndex }: CardProps) => {
   const { pools } = usePools();
   const poolInfo = pools[poolIndex];
   const { userInfos, userInfosLoading, pendingHarvestLoading } = useStakes();
-  const userStakeInfo = userInfos[poolIndex];
+  const userStakeInfo =
+    userInfosLoading || pendingHarvestLoading
+      ? undefined
+      : userInfos[poolIndex];
   const deHubPriceInBUSD = useDehubBusdPrice();
 
   const [pendingHarvestTx, setPendingHarvestTx] = useState(false);
@@ -147,7 +150,13 @@ const PastCard = ({ poolIndex }: CardProps) => {
   };
 
   const handleRestake = async () => {
-    if (!stakingContract || !stakingController || pendingHarvestLoading) return;
+    if (
+      !stakingContract ||
+      !stakingController ||
+      pendingHarvestLoading ||
+      !userStakeInfo
+    )
+      return;
 
     const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
@@ -334,7 +343,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
                   <Heading className="pb-1">Your Stake</Heading>
-                  {account && !userInfosLoading ? (
+                  {account && userStakeInfo ? (
                     <>
                       <Text fontSize="24px" fontWeight={900}>
                         {getFullDisplayBalance(
@@ -364,7 +373,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
               <div className="card overview-box gray shadow-2">
                 <div className="overview-info text-left w-full">
                   <Heading className="pb-1">Withdrawable Rewards</Heading>
-                  {account && !pendingHarvestLoading ? (
+                  {account && userStakeInfo ? (
                     <>
                       <Text fontSize="24px" fontWeight={900}>
                         {getFullDisplayBalance(
