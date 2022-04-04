@@ -3,6 +3,7 @@ import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
 import { useMoralis } from 'react-moralis';
 import {
+  useBNBRewardContract,
   useStakingContracts,
   useStakingControllerContract,
 } from '../state/application/hooks';
@@ -11,7 +12,7 @@ import {
   StakingContractProperties,
 } from '../state/application/types';
 import { getBnbAddress, getDehubAddress } from '../utils/addressHelpers';
-import { getBep20Contract, getRewardsContract } from '../utils/contractHelpers';
+import { getBep20Contract } from '../utils/contractHelpers';
 
 export function useContract(
   address?: string,
@@ -84,10 +85,16 @@ export const usePickStakingControllerContract = (): Contract | null => {
   );
 };
 
-export const useRewardsContract = (): Contract | null => {
-  const { web3 } = useMoralis();
+export const usePickBNBRewardsContract = (): Contract | null => {
+  const { web3, account } = useMoralis();
+
+  const contract: ContractProperties | null = useBNBRewardContract();
+
   return useMemo(
-    () => (web3 ? getRewardsContract(web3.getSigner()) : null),
-    [web3]
+    () =>
+      web3 && account && contract
+        ? getContract(contract.address, contract.abi, web3, account)
+        : null,
+    [web3, account, contract]
   );
 };

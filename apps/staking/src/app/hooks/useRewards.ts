@@ -1,12 +1,15 @@
 import { useRefresh } from '@dehub/react/core';
 import { BIG_ZERO, ethersToBigNumber } from '@dehub/shared/util';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import { Contract } from '@ethersproject/contracts';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';
-import { getRewardsContract } from '../utils/contractHelpers';
+import { usePickBNBRewardsContract } from './useContract';
 
 export const useWeeklyRewards = (staker: string | null) => {
+  const rewardsContract: Contract | null = usePickBNBRewardsContract();
+
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [bnbRewards, setBNBRewards] = useState(BIG_ZERO);
   const [totalBNBRewards, setTotalBNBRewards] = useState<BigNumber | undefined>(
@@ -22,11 +25,10 @@ export const useWeeklyRewards = (staker: string | null) => {
   const fetchBNBRewards = useCallback(
     async (amount: BigNumber, totalStaked: BigNumber) => {
       try {
-        if (!staker || !amount || !totalStaked) {
+        if (!rewardsContract || !staker || !amount || !totalStaked) {
           setFetchStatus(FetchStatus.NOT_FETCHED);
           return;
         }
-        const rewardsContract = getRewardsContract();
         const rewards = totalStaked.eq(BIG_ZERO)
           ? BIG_ZERO
           : await rewardsContract.calcCurrentClaimableShare(
@@ -46,13 +48,13 @@ export const useWeeklyRewards = (staker: string | null) => {
         return;
       }
     },
-    [staker]
+    [rewardsContract, staker]
   );
 
   useEffect(() => {
     const fetch = async () => {
       try {
-        const rewardsContract = getRewardsContract();
+        if (!rewardsContract) return;
         const ret = await rewardsContract.claimableDistribution();
         setTotalBNBRewards(ethersToBigNumber(ret));
         const enabled = await rewardsContract.isDistributionEnabled();
@@ -62,7 +64,7 @@ export const useWeeklyRewards = (staker: string | null) => {
       }
     };
     fetch();
-  }, [fastRefresh]);
+  }, [rewardsContract, fastRefresh]);
 
   return {
     fetchBNBRewards,

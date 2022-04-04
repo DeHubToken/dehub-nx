@@ -1,7 +1,11 @@
 import { ConnectWalletButton } from '@dehub/react/core';
 import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/util';
+import {
+  BIG_ZERO,
+  getBalanceAmount,
+  getDecimalAmount,
+} from '@dehub/shared/util';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
 import { MaxUint256 } from '@ethersproject/constants';
 import { Contract } from '@ethersproject/contracts';
@@ -19,8 +23,9 @@ import {
   usePickStakingContract,
   usePickStakingControllerContract,
 } from '../../hooks/useContract';
-import { UserInfo, useStakes } from '../../hooks/useStakes';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
+import { useStakes } from '../../state/application/hooks';
+import { PoolUserInfo } from '../../state/application/types';
 import { getVersion } from '../../utils/contractHelpers';
 
 interface StakeModalProps {
@@ -40,11 +45,14 @@ const SimpleGrid = styled.div<{ columns: number }>`
 const percentShortcuts = [10, 25, 50, 75, 100];
 
 const getButtonProps = (
+  type: 'stake' | 'unstake',
   value: BigNumber,
   dehubBalance: BigNumber,
-  userStakeInfo: UserInfo,
-  type: 'stake' | 'unstake'
+  userStakeInfo?: PoolUserInfo
 ) => {
+  if (!userStakeInfo) {
+    return { key: 'None', disabled: true };
+  }
   if (type === 'stake' && dehubBalance.isZero()) {
     return { key: 'Insufficient DeHub balance', disabled: true };
   } else if (type === 'unstake' && userStakeInfo.amount.isZero()) {
@@ -63,25 +71,33 @@ const StakeModal: React.FC<StakeModalProps> = ({
   open,
   onHide,
 }) => {
+  const { account } = useMoralis();
+  const stakingController: Contract | null = usePickStakingControllerContract();
+  const stakingContract: Contract | null = usePickStakingContract(poolIndex);
+  const dehubContract = useDehubContract();
+
+  const { userInfos, userInfosLoading, pendingHarvestLoading } = useStakes();
+  const userStakeInfo =
+    userInfosLoading || pendingHarvestLoading
+      ? undefined
+      : userInfos[poolIndex];
+  const dehubBalance = useGetDehubBalance();
+
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { account } = useMoralis();
-  const { userInfo: userStakeInfo } = useStakes(poolIndex, account);
-  const dehubBalance = useGetDehubBalance();
-  const stakingController: Contract | null = usePickStakingControllerContract();
-  const stakingContract: Contract | null = usePickStakingContract(poolIndex);
 
   const toast = useRef<Toast>(null);
 
-  const maxBalance = getBalanceAmount(
-    type === 'stake' ? dehubBalance : userStakeInfo.amount,
-    5
-  ).toNumber();
+  const maxBalance = !userStakeInfo
+    ? BIG_ZERO.toNumber()
+    : getBalanceAmount(
+        type === 'stake' ? dehubBalance : userStakeInfo.amount,
+        5
+      ).toNumber();
   const valueAsBn = new BigNumber(value);
 
   const stakingContractAddress = stakingContract?.address;
-  const dehubContract = useDehubContract();
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;
   const minBetAmountBalance = 0;
@@ -95,10 +111,10 @@ const StakeModal: React.FC<StakeModalProps> = ({
   };
 
   const { disabled } = getButtonProps(
+    type,
     valueAsBn,
     dehubBalance,
-    userStakeInfo,
-    type
+    userStakeInfo
   );
 
   const handleEnterPosition = async () => {

@@ -30,3 +30,21 @@ export const fetchPools = async (
   }
   return undefined;
 };
+
+export const fetchPoolsPaused = async (
+  abi: string[],
+  addresses: string[]
+): Promise<boolean[] | undefined> => {
+  try {
+    const calls: Call[] = addresses.map(address => ({
+      name: 'paused',
+      address,
+    }));
+
+    const pauseds = await multicallv2(abi, calls);
+    return pauseds.map((paused: boolean[]) => paused[0]);
+  } catch (error) {
+    console.error(error);
+  }
+  return undefined;
+};

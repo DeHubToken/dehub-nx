@@ -24,14 +24,16 @@ import styled from 'styled-components';
 import { SimpleCountDown } from '../../components/CountDown';
 import { FetchStatus } from '../../config/constants/types';
 import {
+  usePickBNBRewardsContract,
   usePickStakingContract,
   usePickStakingControllerContract,
-  useRewardsContract,
 } from '../../hooks/useContract';
-import { useStakePaused } from '../../hooks/usePaused';
 import { useWeeklyRewards } from '../../hooks/useRewards';
-import { usePendingHarvest, useStakes } from '../../hooks/useStakes';
-import { useDehubBusdPrice, usePools } from '../../state/application/hooks';
+import {
+  useDehubBusdPrice,
+  usePools,
+  useStakes,
+} from '../../state/application/hooks';
 import { getVersion } from '../../utils/contractHelpers';
 import { quarterMark } from '../../utils/pool';
 import { timeFromNow } from '../../utils/timeFromNow';
@@ -54,12 +56,17 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   const { account } = useMoralis();
   const stakingController: Contract | null = usePickStakingControllerContract();
   const stakingContract: Contract | null = usePickStakingContract(poolIndex);
+  const rewardsContract: Contract | null = usePickBNBRewardsContract();
 
-  const rewardsContract = useRewardsContract();
-  const paused = useStakePaused(poolIndex);
-  const { slowRefresh } = useRefresh();
-  const pools = usePools();
+  const { pools } = usePools();
   const poolInfo = pools[poolIndex];
+  const { userInfos, userInfosLoading, pendingHarvestLoading } = useStakes();
+  const userStakeInfo =
+    userInfosLoading || pendingHarvestLoading
+      ? undefined
+      : userInfos[poolIndex];
+
+  const { slowRefresh } = useRefresh();
   const currentQ = useMemo(() => quarterMark(poolInfo), [poolInfo]);
 
   const closeTimeStamp = useMemo(
@@ -67,19 +74,13 @@ const LiveCard = ({ poolIndex }: CardProps) => {
     [poolInfo]
   );
 
-  const { fetchStatus: fetchStakeStatus, userInfo: userStakeInfo } = useStakes(
-    poolIndex,
-    account
-  );
-  const pendingHarvest = usePendingHarvest(poolIndex, account);
-
   const period = useMemo(
-    () => poolInfo?.closeTimeStamp - poolInfo?.openTimeStamp,
+    () => poolInfo.closeTimeStamp - poolInfo.openTimeStamp,
     [poolInfo]
   );
   const remainTimes = useMemo(
     () =>
-      moment(new Date(poolInfo?.closeTimeStamp * 1000)).unix() -
+      moment(new Date(poolInfo.closeTimeStamp * 1000)).unix() -
       new Date().getTime() / 1000,
     [poolInfo]
   );
@@ -89,11 +90,12 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   );
   const projectedRewards = useMemo(
     () =>
-      pendingHarvest
-        ?.times(new BigNumber(period))
+      userStakeInfo?.pendingHarvest
+        .times(new BigNumber(period))
         .div(new BigNumber(elapsedTime)),
-    [pendingHarvest, period, elapsedTime]
+    [userStakeInfo, period, elapsedTime]
   );
+
   const {
     fetchBNBRewards,
     fetchStatus: fetchRewardStatus,
@@ -109,26 +111,20 @@ const LiveCard = ({ poolIndex }: CardProps) => {
     [projectedRewards, deHubPriceInBUSD]
   );
   const yourStakeInBUSD = useMemo(
-    () => userStakeInfo.amount.times(deHubPriceInBUSD),
-    [userStakeInfo.amount, deHubPriceInBUSD]
+    () => userStakeInfo?.amount.times(deHubPriceInBUSD),
+    [userStakeInfo, deHubPriceInBUSD]
   );
 
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
-    fetchBNBRewards(
-      userStakeInfo.amount.plus(pendingHarvest || BIG_ZERO),
-      poolInfo.totalStaked
-    );
-  }, [
-    fetchBNBRewards,
-    account,
-    pendingHarvest,
-    claimed,
-    userStakeInfo.amount,
-    poolInfo.totalStaked,
-    slowRefresh,
-  ]);
+    if (userStakeInfo) {
+      fetchBNBRewards(
+        userStakeInfo.amount.plus(userStakeInfo.pendingHarvest),
+        poolInfo.totalStaked
+      );
+    }
+  }, [fetchBNBRewards, account, userStakeInfo, poolInfo, claimed, slowRefresh]);
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {
@@ -139,9 +135,14 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   };
 
   const handleClaimBNB = async () => {
+    if (!userStakeInfo) return;
+
     setPendingClaimTx(true);
     try {
-      if (userStakeInfo.amount.eq(BIG_ZERO) && pendingHarvest?.eq(BIG_ZERO)) {
+      if (
+        userStakeInfo.amount.eq(BIG_ZERO) &&
+        userStakeInfo.pendingHarvest.eq(BIG_ZERO)
+      ) {
         if (rewardsContract) {
           const tx: TransactionResponse = await rewardsContract?.claimReward();
           const receipt: TransactionReceipt = await tx.wait();
@@ -204,7 +205,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
               }}
             >
               <span style={{ fontWeight: 900 }}>
-                {paused ? `Paused: ${currentQ}` : `Live: ${currentQ}`}
+                {poolInfo.paused ? `Paused: ${currentQ}` : `Live: ${currentQ}`}
               </span>
             </Heading>
 
@@ -268,7 +269,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Your Stake</Heading>
-                    {account && fetchStakeStatus === FetchStatus.SUCCESS ? (
+                    {account && userStakeInfo && yourStakeInBUSD ? (
                       <>
                         <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
@@ -297,13 +298,13 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                         <Button
                           className="p-button mt-2 justify-content-center w-4 mr-3"
                           onClick={() => handleModal('stake', true)}
-                          disabled={paused}
+                          disabled={poolInfo.paused}
                           label="Stake"
                         />
                         <Button
                           className="p-button-outlined mt-2 justify-content-center w-4 text-white border-primary"
                           onClick={() => handleModal('unstake', true)}
-                          disabled={paused}
+                          disabled={poolInfo.paused}
                           label="Unstake"
                         />
                       </>
@@ -325,11 +326,11 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                 <div className="card overview-box gray shadow-2">
                   <div className="overview-info text-left w-full">
                     <Heading className="pb-1">Pending Rewards</Heading>
-                    {account && pendingHarvest ? (
+                    {account && userStakeInfo ? (
                       <>
                         <Text fontSize="24px" fontWeight={900}>
                           {getFullDisplayBalance(
-                            pendingHarvest,
+                            userStakeInfo.pendingHarvest,
                             DEHUB_DECIMALS,
                             DEHUB_DISPLAY_DECIMALS
                           )}
@@ -405,7 +406,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                     {account ? (
                       <Button
                         className="p-button mt-2 justify-content-center w-5"
-                        disabled={paused || !isClaimable}
+                        disabled={poolInfo.paused || !isClaimable}
                         onClick={handleClaimBNB}
                         label="Claim BNB"
                         loading={pendingClaimTx}

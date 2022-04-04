@@ -3,8 +3,7 @@ import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { Provider } from '@ethersproject/providers';
 import Bep20Abi from '../config/abis/erc20.json';
 import MulticallAbi from '../config/abis/Multicall.json';
-import RewardsAbi from '../config/abis/Reward.json';
-import { getMultiCallAddress, getRewardsAddress } from './addressHelpers';
+import { getMultiCallAddress } from './addressHelpers';
 import { simpleRpcProvider } from './providers';
 
 /** TODO: use or move to shared/util/contract.utils.ts  */
@@ -26,10 +25,6 @@ export const getBep20Contract = (
   signer?: Signer | Provider
 ) => {
   return getContract(address, Bep20Abi, signer);
-};
-
-export const getRewardsContract = (signer?: Signer | Provider) => {
-  return getContract(getRewardsAddress(), RewardsAbi, signer);
 };
 
 export const getVersion = async (contract: Contract) => {
