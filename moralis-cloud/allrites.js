@@ -17,6 +17,7 @@ const BSC_MAINNET = '0x38';
 const BSC_TESTNET = '0x61';
 
 const defChainId = BSC_MAINNET;
+const bnbRewardDappName = 'DeHubBNBRewardsDapp';
 const stakingDappName = 'DeHubStakingDapp';
 const tokenDappName = 'DeHubTokenDapp';
 const ottDappName = 'DeHubOTTDapp';
@@ -143,6 +144,27 @@ async function getActiveStakingContracts(targetChainId) {
     return filters.length > 0 ? filters[0] : null;
   } catch (err) {
     logger.error(`getActiveStakingContracts error: ${JSON.stringify(err)}`);
+  }
+  return null;
+}
+
+async function getRewardContract(targetChainId) {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const decTargetChainId = parseInt(targetChainId, 16);
+
+    const contracts = await getDeHubContracts(bnbRewardDappName);
+    const filters = contracts.filter(contract => {
+      const chainId = contract.get('chainId');
+      if (parseInt(chainId) !== decTargetChainId) {
+        return false;
+      }
+      return true;
+    });
+
+    return filters.length > 0 ? filters[0] : null;
+  } catch (err) {
+    logger.error(`getRewardContract error: ${JSON.stringify(err)}`);
   }
   return null;
 }
@@ -512,4 +534,21 @@ Moralis.Cloud.define('getActiveStakingContracts', async request => {
 
 Moralis.Cloud.define('getStakingControllerContract', async request => {
   return await getStakingControllerContract(defChainId);
+});
+
+Moralis.Cloud.define('getRewardContract', async request => {
+  const contract = await getRewardContract(defChainId);
+
+  const address = contract.get('address');
+
+  const name = contract.get('name');
+  const chainId = contract.get('chainId');
+  const abi = contract.get('abi');
+
+  return {
+    address,
+    name,
+    chainId,
+    abi,
+  };
 });
