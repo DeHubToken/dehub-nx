@@ -565,7 +565,7 @@ class RedisClient {
       });
       client.on('connect', function () {
         _this._client = client;
-        logger.info('REDIS CONNECTED WITH SUCCESS');
+        // logger.info('REDIS CONNECTED WITH SUCCESS');
         resolve(client);
       });
     });
@@ -619,17 +619,42 @@ function sleep(seconds) {
   return new Promise(resolve => setTimeout(resolve, seconds));
 }
 
+// compare delay time between redis and mongodb
 Moralis.Cloud.define('redisTest', async request => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const redisClient = new RedisClient();
-    await redisClient.connect();
-    await redisClient.set('test', 'true', 2);
-    const value = await redisClient.get('test');
-    await sleep(4000);
-    const value2 = await redisClient.get('test');
-    await redisClient.remove('test');
-    return { value, value2 };
+    // query 500 times by using redis starting from connect, set, get
+    const startRedis = new Date();
+    const count = 500;
+    let latestRedis;
+    for (let repeat = 0; repeat < count; repeat++) {
+      const redisClient = new RedisClient();
+      await redisClient.connect();
+      latestRedis = JSON.parse(await redisClient.get('stakings'));
+      if (!latestRedis) {
+        latestRedis = await getStakingContracts();
+        // store data by 30 min
+        await redisClient.set('stakings', JSON.stringify(latestRedis), 1800);
+      }
+    }
+    const endRedis = new Date();
+
+    // query same n times by using mongodb
+    let latestMongodb;
+    const startMongodb = new Date();
+    for (let repeat = 0; repeat < count; repeat++) {
+      latestMongodb = await getStakingContracts();
+    }
+    const endMongodb = new Date();
+
+    const result = {
+      latestRedis,
+      redis: endRedis - startRedis,
+      latestMongodb,
+      mongodb: endMongodb - startMongodb,
+    };
+    logger.info(`result: ${result.redis}, ${result.mongodb}`);
+    return result;
   } catch (err) {
     logger.error(`redisTest error: ${JSON.stringify(err)}`);
     return null;
