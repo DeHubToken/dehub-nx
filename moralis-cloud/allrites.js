@@ -77,8 +77,14 @@ async function getDeHubTokenContract(targetChainId) {
       }
       return true;
     });
+    if (filters.length < 1) return null;
 
-    return filters.length > 0 ? filters[0] : null;
+    return {
+      abi: filters[0].get('abi'),
+      address: filters[0].get('address'),
+      name: filters[0].get('name'),
+      chainId: filters[0].get('chainId'),
+    };
   } catch (err) {
     logger.error(`getDeHubTokenContract error: ${JSON.stringify(err)}`);
   }
@@ -117,6 +123,39 @@ async function getStakingControllerContract(targetChainId) {
   return null;
 }
 
+async function getStakingContracts() {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const contracts = await getDeHubContracts(stakingDappName);
+
+    let collect = [];
+    for (let i = 0; i < contracts.length; i++) {
+      const year = contracts[i].get('year');
+      const quarter = contracts[i].get('quarter');
+
+      const contract = contracts[i].get('contract');
+      const address = contract.get('address');
+
+      const name = contract.get('name');
+      const chainId = contract.get('chainId');
+      const abi = contract.get('abi');
+
+      collect.push({
+        year,
+        quarter,
+        address,
+        name,
+        chainId,
+        abi,
+      });
+    }
+    return collect;
+  } catch (err) {
+    logger.error(`getStakingContracts error: ${JSON.stringify(err)}`);
+  }
+  return null;
+}
+
 async function getActiveStakingContracts(targetChainId) {
   const logger = Moralis.Cloud.getLogger();
   try {
@@ -141,7 +180,26 @@ async function getActiveStakingContracts(targetChainId) {
       return true;
     });
 
-    return filters.length > 0 ? filters[0] : null;
+    if (filters.length < 1) return null;
+
+    const year = filters[0].get('year');
+    const quarter = filters[0].get('quarter');
+
+    const contract = filters[0].get('contract');
+    const address = contract.get('address');
+
+    const name = contract.get('name');
+    const chainId = contract.get('chainId');
+    const abi = contract.get('abi');
+
+    return {
+      year,
+      quarter,
+      address,
+      name,
+      chainId,
+      abi,
+    };
   } catch (err) {
     logger.error(`getActiveStakingContracts error: ${JSON.stringify(err)}`);
   }
@@ -162,7 +220,20 @@ async function getRewardContract(targetChainId) {
       return true;
     });
 
-    return filters.length > 0 ? filters[0] : null;
+    if (filters.length < 1) return null;
+
+    const address = filters[0].get('address');
+
+    const name = filters[0].get('name');
+    const chainId = filters[0].get('chainId');
+    const abi = filters[0].get('abi');
+
+    return {
+      address,
+      name,
+      chainId,
+      abi,
+    };
   } catch (err) {
     logger.error(`getRewardContract error: ${JSON.stringify(err)}`);
   }
@@ -270,7 +341,7 @@ async function getDeHubTokenBalance(chainId, address) {
   const logger = Moralis.Cloud.getLogger();
   try {
     const contract = await getDeHubTokenContract(chainId);
-    return getTokenBalance(chainId, address, contract.get('address'));
+    return getTokenBalance(chainId, address, contract.address);
   } catch (err) {
     logger.error(`getDeHubTokenBalance error: ${JSON.stringify(err)}`);
     return null;
@@ -468,68 +539,11 @@ Moralis.Cloud.beforeLogin(async request => {
 });
 
 Moralis.Cloud.define('getStakingContracts', async request => {
-  const logger = Moralis.Cloud.getLogger();
-  try {
-    const contracts = await getDeHubContracts(stakingDappName);
-
-    let collect = [];
-    for (let i = 0; i < contracts.length; i++) {
-      const year = contracts[i].get('year');
-      const quarter = contracts[i].get('quarter');
-
-      const contract = contracts[i].get('contract');
-      const address = contract.get('address');
-
-      const name = contract.get('name');
-      const chainId = contract.get('chainId');
-      const abi = contract.get('abi');
-
-      collect.push({
-        year,
-        quarter,
-        address,
-        name,
-        chainId,
-        abi,
-      });
-    }
-    return collect;
-  } catch (err) {
-    logger.error(`getStakingContracts error: ${JSON.stringify(err)}`);
-    return null;
-  }
+  return await getStakingContracts();
 });
 
 Moralis.Cloud.define('getActiveStakingContracts', async request => {
-  const logger = Moralis.Cloud.getLogger();
-  try {
-    const activeContract = await getActiveStakingContracts(defChainId);
-    if (!activeContract) {
-      return null;
-    }
-
-    const year = activeContract.get('year');
-    const quarter = activeContract.get('quarter');
-
-    const contract = activeContract.get('contract');
-    const address = contract.get('address');
-
-    const name = contract.get('name');
-    const chainId = contract.get('chainId');
-    const abi = contract.get('abi');
-
-    return {
-      year,
-      quarter,
-      address,
-      name,
-      chainId,
-      abi,
-    };
-  } catch (err) {
-    logger.error(`getStakingContracts error: ${JSON.stringify(err)}`);
-    return null;
-  }
+  return await getActiveStakingContracts(defChainId);
 });
 
 Moralis.Cloud.define('getStakingControllerContract', async request => {
@@ -537,20 +551,7 @@ Moralis.Cloud.define('getStakingControllerContract', async request => {
 });
 
 Moralis.Cloud.define('getRewardContract', async request => {
-  const contract = await getRewardContract(defChainId);
-
-  const address = contract.get('address');
-
-  const name = contract.get('name');
-  const chainId = contract.get('chainId');
-  const abi = contract.get('abi');
-
-  return {
-    address,
-    name,
-    chainId,
-    abi,
-  };
+  return await getRewardContract(defChainId);
 });
 
 class RedisClient {
@@ -572,6 +573,7 @@ class RedisClient {
   }
 
   set(key, value, expire) {
+    // expire in second if requires
     if (!this._client) throw Error('Redis not ready');
 
     return new Promise((resolve, reject) => {
@@ -622,7 +624,7 @@ Moralis.Cloud.define('redisTest', async request => {
   try {
     const redisClient = new RedisClient();
     await redisClient.connect();
-    await redisClient.set('test', 'true', 2000);
+    await redisClient.set('test', 'true', 2);
     const value = await redisClient.get('test');
     await sleep(4000);
     const value2 = await redisClient.get('test');
