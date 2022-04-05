@@ -409,6 +409,82 @@ async function setCanPlay(user, value) {
 }
 
 /*******************************************************
+ * Redis Client
+ ******************************************************/
+class RedisClient {
+  async connect() {
+    const _this = this;
+    const promise = new Promise((resolve, reject) => {
+      const client = redis.createClient({ host: 'moralis-redis', port: 6379 });
+      client.on('error', err => {
+        logger.error(`REDIS CONNECTION ERROR, ${err}`);
+        reject(err);
+      });
+      client.on('connect', function () {
+        _this._client = client;
+        // logger.info('REDIS CONNECTED WITH SUCCESS');
+        resolve(client);
+      });
+    });
+    return await promise;
+  }
+
+  set(key, value, expire) {
+    // expire in second if requires
+    if (!this._client) throw Error('Redis not ready');
+
+    return new Promise((resolve, reject) => {
+      const _this = this;
+      this._client.set(key, value, (error, result) => {
+        if (error) reject(error);
+        else {
+          if (expire) {
+            _this._client.expire(key, expire, (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            });
+          } else resolve(result);
+        }
+      });
+    });
+  }
+
+  get(key) {
+    if (!this._client) throw Error('Redis not ready');
+
+    return new Promise((resolve, reject) => {
+      this._client.get(key, (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      });
+    });
+  }
+
+  remove(key) {
+    if (!this._client) throw Error('Redis not ready');
+
+    return new Promise((resolve, reject) => {
+      this._client.del(key, (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      });
+    });
+  }
+
+  async getExpired(key, callbackIfExpire, options) {
+    if (!this._client) throw Error('Redis not ready');
+
+    const value = await this.get(key);
+    if (!value) {
+      const latest = await callbackIfExpire(options.args);
+      this.set(key, latest, options.expire);
+      return latest;
+    }
+    return value;
+  }
+}
+
+/*******************************************************
  * Moralis Triggers
  ******************************************************/
 /**
@@ -433,6 +509,53 @@ async function updateCanPlay(chainId, address) {
     return;
   }
 }
+
+/**
+ * Listen contracts table changes, if changes, clean redis data
+ */
+Moralis.Cloud.afterSave('Contracts', async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+
+    await redisClient.remove('getStakingContracts');
+    await redisClient.remove('getActiveStakingContracts');
+    await redisClient.remove('getStakingControllerContract');
+    await redisClient.remove('getRewardContract');
+  } catch (err) {
+    logger.error(`Contracts error: ${JSON.stringify(err)}`);
+    return;
+  }
+});
+
+Moralis.Cloud.afterSave(stakingDappName, async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+
+    await redisClient.remove('getStakingContracts');
+    await redisClient.remove('getActiveStakingContracts');
+    await redisClient.remove('getStakingControllerContract');
+  } catch (err) {
+    logger.error(`${stakingDappName} error: ${JSON.stringify(err)}`);
+    return;
+  }
+});
+
+Moralis.Cloud.afterSave(bnbRewardDappName, async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+
+    await redisClient.remove('getRewardContract');
+  } catch (err) {
+    logger.error(`${bnbRewardDappName} error: ${JSON.stringify(err)}`);
+    return;
+  }
+});
 
 /**
  * Subscribe the balance table, and if DeHub token balance has changed,
@@ -539,124 +662,92 @@ Moralis.Cloud.beforeLogin(async request => {
 });
 
 Moralis.Cloud.define('getStakingContracts', async request => {
-  return await getStakingContracts();
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+    return JSON.parse(
+      await redisClient.getExpired(
+        'getStakingContracts',
+        async function () {
+          return JSON.stringify(await getStakingContracts());
+        },
+        {
+          expire: 1800,
+        }
+      )
+    );
+  } catch (err) {
+    logger.error(`getStakingContracts error: ${JSON.stringify(err)}`);
+    return null;
+  }
 });
 
 Moralis.Cloud.define('getActiveStakingContracts', async request => {
-  return await getActiveStakingContracts(defChainId);
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+    return JSON.parse(
+      await redisClient.getExpired(
+        'getActiveStakingContracts',
+        async function (args) {
+          return JSON.stringify(await getActiveStakingContracts(args));
+        },
+        {
+          args: defChainId,
+          expire: 1800,
+        }
+      )
+    );
+  } catch (err) {
+    logger.error(`getActiveStakingContracts error: ${JSON.stringify(err)}`);
+    return null;
+  }
 });
 
 Moralis.Cloud.define('getStakingControllerContract', async request => {
-  return await getStakingControllerContract(defChainId);
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+    return JSON.parse(
+      await redisClient.getExpired(
+        'getStakingControllerContract',
+        async function (args) {
+          return JSON.stringify(await getStakingControllerContract(args));
+        },
+        {
+          args: defChainId,
+          expire: 1800,
+        }
+      )
+    );
+  } catch (err) {
+    logger.error(`getStakingControllerContract error: ${JSON.stringify(err)}`);
+    return null;
+  }
 });
 
 Moralis.Cloud.define('getRewardContract', async request => {
-  return await getRewardContract(defChainId);
-});
-
-class RedisClient {
-  async connect() {
-    const _this = this;
-    const promise = new Promise((resolve, reject) => {
-      const client = redis.createClient({ host: 'moralis-redis', port: 6379 });
-      client.on('error', err => {
-        logger.error(`REDIS CONNECTION ERROR, ${err}`);
-        reject(err);
-      });
-      client.on('connect', function () {
-        _this._client = client;
-        // logger.info('REDIS CONNECTED WITH SUCCESS');
-        resolve(client);
-      });
-    });
-    return await promise;
-  }
-
-  set(key, value, expire) {
-    // expire in second if requires
-    if (!this._client) throw Error('Redis not ready');
-
-    return new Promise((resolve, reject) => {
-      const _this = this;
-      this._client.set(key, value, (error, result) => {
-        if (error) reject(error);
-        else {
-          if (expire) {
-            _this._client.expire(key, expire, (error, result) => {
-              if (error) reject(error);
-              else resolve(result);
-            });
-          } else resolve(result);
-        }
-      });
-    });
-  }
-
-  get(key) {
-    if (!this._client) throw Error('Redis not ready');
-
-    return new Promise((resolve, reject) => {
-      this._client.get(key, (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
-      });
-    });
-  }
-
-  remove(key) {
-    if (!this._client) throw Error('Redis not ready');
-
-    return new Promise((resolve, reject) => {
-      this._client.del(key, (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
-      });
-    });
-  }
-}
-
-function sleep(seconds) {
-  return new Promise(resolve => setTimeout(resolve, seconds));
-}
-
-// compare delay time between redis and mongodb
-Moralis.Cloud.define('redisTest', async request => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    // query 500 times by using redis starting from connect, set, get
-    const startRedis = new Date();
-    const count = 500;
-    let latestRedis;
-    for (let repeat = 0; repeat < count; repeat++) {
-      const redisClient = new RedisClient();
-      await redisClient.connect();
-      latestRedis = JSON.parse(await redisClient.get('stakings'));
-      if (!latestRedis) {
-        latestRedis = await getStakingContracts();
-        // store data by 30 min
-        await redisClient.set('stakings', JSON.stringify(latestRedis), 1800);
-      }
-    }
-    const endRedis = new Date();
-
-    // query same n times by using mongodb
-    let latestMongodb;
-    const startMongodb = new Date();
-    for (let repeat = 0; repeat < count; repeat++) {
-      latestMongodb = await getStakingContracts();
-    }
-    const endMongodb = new Date();
-
-    const result = {
-      latestRedis,
-      redis: endRedis - startRedis,
-      latestMongodb,
-      mongodb: endMongodb - startMongodb,
-    };
-    logger.info(`result: ${result.redis}, ${result.mongodb}`);
-    return result;
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+    return JSON.parse(
+      await redisClient.getExpired(
+        'getRewardContract',
+        async function (args) {
+          return JSON.stringify(await getRewardContract(args));
+        },
+        {
+          args: defChainId,
+          expire: 1800,
+        }
+      )
+    );
   } catch (err) {
-    logger.error(`redisTest error: ${JSON.stringify(err)}`);
+    logger.error(`getRewardContract error: ${JSON.stringify(err)}`);
     return null;
   }
 });
