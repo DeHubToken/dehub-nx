@@ -571,41 +571,50 @@ class RedisClient {
     return await promise;
   }
 
-  async set(key, value) {
+  set(key, value, expire) {
     if (!this._client) throw Error('Redis not ready');
 
-    const promise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      const _this = this;
       this._client.set(key, value, (error, result) => {
         if (error) reject(error);
-        else resolve(result);
+        else {
+          if (expire) {
+            _this._client.expire(key, expire, (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            });
+          } else resolve(result);
+        }
       });
     });
-    return await promise;
   }
 
-  async get(key) {
+  get(key) {
     if (!this._client) throw Error('Redis not ready');
 
-    const promise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this._client.get(key, (error, result) => {
         if (error) reject(error);
         else resolve(result);
       });
     });
-    return await promise;
   }
 
-  async remove(key) {
+  remove(key) {
     if (!this._client) throw Error('Redis not ready');
 
-    const promise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this._client.del(key, (error, result) => {
         if (error) reject(error);
         else resolve(result);
       });
     });
-    return await promise;
   }
+}
+
+function sleep(seconds) {
+  return new Promise(resolve => setTimeout(resolve, seconds));
 }
 
 Moralis.Cloud.define('redisTest', async request => {
@@ -613,10 +622,12 @@ Moralis.Cloud.define('redisTest', async request => {
   try {
     const redisClient = new RedisClient();
     await redisClient.connect();
-    await redisClient.set('test', 'true');
+    await redisClient.set('test', 'true', 2000);
     const value = await redisClient.get('test');
+    await sleep(4000);
+    const value2 = await redisClient.get('test');
     await redisClient.remove('test');
-    return value;
+    return { value, value2 };
   } catch (err) {
     logger.error(`redisTest error: ${JSON.stringify(err)}`);
     return null;
