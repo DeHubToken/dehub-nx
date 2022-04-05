@@ -25,6 +25,11 @@ export const menuItems: MenuItem[] = [
         url: environment.dehub.dapps.staking,
         icon: 'far fa-coins',
       },
+      {
+        label: 'Test Mailing Modal',
+        routerLink: ['/', { outlets: { modal: ['mailing', 'subscribe'] } }],
+        icon: 'far fa-link',
+      },
     ],
   },
 ];
@@ -125,6 +130,14 @@ export const tabMenuItems: MenuItem[] = [
                 import('@dehub/angular/feature-legal').then(
                   module => module.AngularFeatureLegalModule
                 ),
+            },
+            {
+              path: 'mailing',
+              loadChildren: () =>
+                import('@dehub/angular/feature-mailing').then(
+                  module => module.AngularFeatureMailingModule
+                ),
+              outlet: 'modal',
             },
           ],
         },
