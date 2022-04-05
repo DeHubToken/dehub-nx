@@ -552,3 +552,73 @@ Moralis.Cloud.define('getRewardContract', async request => {
     abi,
   };
 });
+
+class RedisClient {
+  async connect() {
+    const _this = this;
+    const promise = new Promise((resolve, reject) => {
+      const client = redis.createClient({ host: 'moralis-redis', port: 6379 });
+      client.on('error', err => {
+        logger.error(`REDIS CONNECTION ERROR, ${err}`);
+        reject(err);
+      });
+      client.on('connect', function () {
+        _this._client = client;
+        logger.info('REDIS CONNECTED WITH SUCCESS');
+        resolve(client);
+      });
+    });
+    return await promise;
+  }
+
+  async set(key, value) {
+    if (!this._client) throw Error('Redis not ready');
+
+    const promise = new Promise((resolve, reject) => {
+      this._client.set(key, value, (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      });
+    });
+    return await promise;
+  }
+
+  async get(key) {
+    if (!this._client) throw Error('Redis not ready');
+
+    const promise = new Promise((resolve, reject) => {
+      this._client.get(key, (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      });
+    });
+    return await promise;
+  }
+
+  async remove(key) {
+    if (!this._client) throw Error('Redis not ready');
+
+    const promise = new Promise((resolve, reject) => {
+      this._client.del(key, (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      });
+    });
+    return await promise;
+  }
+}
+
+Moralis.Cloud.define('redisTest', async request => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+    await redisClient.set('test', 'true');
+    const value = await redisClient.get('test');
+    await redisClient.remove('test');
+    return value;
+  } catch (err) {
+    logger.error(`redisTest error: ${JSON.stringify(err)}`);
+    return null;
+  }
+});
