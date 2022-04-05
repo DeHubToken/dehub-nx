@@ -1,5 +1,5 @@
 // https://vamoxwojj7ht.moralisweb3.com:2053/server/functions/totalCirculatingSupply?_AplicationId=QfgYJskOXrYJnSAiB3KZPMMesmlJB6JBqY3GOzHV
-Moralis.Cloud.define('totalCirculatingSupply', async _request => {
+Moralis.Cloud.define('totalCirculatingSupply', async () => {
   const ABI = [
     {
       inputs: [],
@@ -28,3 +28,5 @@ Moralis.Cloud.define('totalCirculatingSupply', async _request => {
 
   return +data / 1e5;
 });
+
+export default Moralis;

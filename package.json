@@ -31,7 +31,9 @@
     "dep-graph:a": "nx affected:dep-graph --watch=true",
     "affected": "nx print-affected --select=projects",
     "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config",
-    "moralis-cloud": "moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/libs/moralis/cloud/src/lib",
+    "moralis-build:dev": "nx run moralis-cloud:build --watch",
+    "moralis-build": "nx run moralis-cloud:build --configuration=production",
+    "moralis-sync": "moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud",
     "moralis-logs": "moralis-admin-cli get-logs",
     "prepare": "husky install"
   },
@@ -50,6 +52,7 @@
     "@binance-chain/bsc-connector": "1.0.0",
     "@contentful/rich-text-html-renderer": "15.8.0",
     "@contentful/rich-text-types": "15.7.0",
+    "@dehub/swiper": "file:libs/shared/asset/dehub/src/lib/swiper",
     "@ethersproject/abi": "5.5.0",
     "@ethersproject/abstract-provider": "5.5.1",
     "@ethersproject/abstract-signer": "5.5.0",
@@ -109,8 +112,7 @@
     "stream-browserify": "3.0.0",
     "stream-http": "3.2.0",
     "tslib": "2.0.0",
-    "zone.js": "0.11.4",
-    "@dehub/swiper": "file:libs/shared/asset/dehub/src/lib/swiper"
+    "zone.js": "0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "13.2.2",
@@ -136,7 +138,9 @@
     "@nrwl/cypress": "13.9.5",
     "@nrwl/eslint-plugin-nx": "13.9.5",
     "@nrwl/jest": "13.9.5",
+    "@nrwl/js": "13.9.5",
     "@nrwl/linter": "13.9.5",
+    "@nrwl/node": "^13.9.5",
     "@nrwl/nx-cloud": "13.2.1",
     "@nrwl/react": "13.9.5",
     "@nrwl/web": "13.9.5",

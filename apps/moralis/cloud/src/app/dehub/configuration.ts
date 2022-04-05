@@ -1,8 +1,12 @@
+/** @deprecated please use from env */
 export enum SupportedNetwork {
   BSC_MAINNET = '0x38',
   BSC_TESTNET = '0x61',
 }
 
+export const stakingDappName = 'DeHubStakingDapp';
+
+/** @deprecated please use from env */
 export const ConfigFields = {
   [SupportedNetwork.BSC_MAINNET]: {
     StakingAbi: 'DEHUB_STAKING_ABI_MAINNET',
@@ -21,6 +25,7 @@ export const ConfigFields = {
 
 export const DeHubTokenDecimals = new Moralis.Cloud.BigNumber(100000);
 
+/** @deprecated please use from env */
 export const chainId = SupportedNetwork.BSC_MAINNET;
 
 export async function getOTTMinTokensToPlay() {

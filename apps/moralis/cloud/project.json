@@ -1,0 +1,56 @@
+{
+  "root": "apps/moralis/cloud",
+  "sourceRoot": "apps/moralis/cloud/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/moralis/cloud",
+        "main": "apps/moralis/cloud/src/main.ts",
+        "tsConfig": "apps/moralis/cloud/tsconfig.app.json",
+        "assets": [],
+        "sourceMap": false,
+        "extractLicenses": false
+      },
+      "configurations": {
+        "development": {
+          "optimization": false
+        },
+        "production": {
+          "optimization": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/raffle/src/environments/environment.ts",
+              "with": "apps/raffle/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "moralis-cloud:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/moralis/cloud/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/moralis/cloud"],
+      "options": {
+        "jestConfig": "apps/moralis/cloud/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:util"]
+}

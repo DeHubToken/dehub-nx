@@ -21,7 +21,8 @@ declare namespace MoralisMissingTypes {
       /** A provider with the supplied chainId */
       provider: Web3Provider;
       /** ethers.js library */
-      ethers: unknown;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ethers: any;
     };
   }
 }
@@ -29,4 +30,3 @@ declare namespace MoralisMissingTypes {
 declare const {
   Moralis,
 }: typeof import('moralis') & typeof MoralisMissingTypes;
-// declare const { Moralis }: typeof import('moralis');
