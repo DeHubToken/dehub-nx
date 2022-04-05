@@ -23,8 +23,8 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/raffle/src/environments/environment.ts",
-              "with": "apps/raffle/src/environments/environment.prod.ts"
+              "replace": "apps/moralis/cloud/src/environments/environment.ts",
+              "with": "apps/moralis/cloud/src/environments/environment.prod.ts"
             }
           ]
         }

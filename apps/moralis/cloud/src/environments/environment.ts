@@ -1,3 +1,5 @@
-export const environment = {
-  production: false,
+import { defaultEnv, Env } from './env';
+
+export const environment: Env = {
+  ...defaultEnv,
 };
