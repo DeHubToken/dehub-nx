@@ -162,11 +162,12 @@ export class MoralisService implements IMoralis {
   }
 
   logout() {
+    this.logger.info('Logging out.');
+
     this.unsubscribeEvents();
     Moralis.User.logOut()
-      .then(() => {
-        this.logger.info('Logging out.');
-
+      .catch(e => this.logger.error('Moralis logout problem:', e))
+      .finally(() => {
         // Cleanup web provider from local storage
         this.windowRef.localStorage.removeItem(moralisProviderLocalStorageKey);
 
@@ -176,9 +177,10 @@ export class MoralisService implements IMoralis {
 
         // Disconnect Web3 wallet
         Moralis.cleanup();
-      })
-      .catch(e => this.logger.error('Moralis logout problem:', e))
-      .finally(() => this.setWalletConnectingState(WalletConnectingState.INIT));
+
+        // Reset Wallet connecting state
+        this.setWalletConnectingState(WalletConnectingState.INIT);
+      });
   }
 
   /**
@@ -231,7 +233,7 @@ export class MoralisService implements IMoralis {
               }
             });
         } else {
-          this.logger.warn(`Moralis account disconnected!`);
+          this.logger.warn(`Moralis all accounts are disconnected!`);
           this.logout();
         }
       });
