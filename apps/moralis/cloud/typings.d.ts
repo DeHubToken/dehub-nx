@@ -30,3 +30,5 @@ declare namespace MoralisMissingTypes {
 declare const {
   Moralis,
 }: typeof import('moralis') & typeof MoralisMissingTypes;
+
+declare type MoralisUser = ReturnType<typeof Moralis.User.current>;

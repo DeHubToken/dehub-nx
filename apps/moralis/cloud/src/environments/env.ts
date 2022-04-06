@@ -1,10 +1,20 @@
 import { defaultSharedDevEnv, SharedEnv } from '@dehub/shared/config';
 
 export interface Env extends SharedEnv {
-  foo: string;
+  dappName: {
+    bnbReward: string;
+    token: string;
+    staking: string;
+    ott: string;
+  };
 }
 
 export const defaultEnv: Env = {
   ...defaultSharedDevEnv,
-  foo: 'bar',
+  dappName: {
+    bnbReward: 'DeHubBNBRewardsDapp',
+    token: 'DeHubTokenDapp',
+    staking: 'DeHubStakingDapp',
+    ott: 'DeHubOTTDapp',
+  },
 };

@@ -3,7 +3,10 @@
  * @param {*} userObjectId
  * @returns user object if success, null if failed
  */
-export async function isMoralisUser(userObjectId: string) {
+/** @deprecated not used */
+export async function isMoralisUser(
+  userObjectId: string
+): Promise<MoralisUser | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
     const query = new Moralis.Query(Moralis.User);
@@ -25,12 +28,17 @@ export async function isMoralisUser(userObjectId: string) {
  * @param {*} address
  * @returns user object if success, null if failed
  */
-export async function isMoralisUserByAddress(address: string) {
+
+export async function isMoralisUserByAddress(
+  address: string
+): Promise<MoralisUser | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
     const query = new Moralis.Query(Moralis.User);
     query.contains('accounts', address);
-    const users = await query.find({ useMasterKey: true });
+    const users: MoralisUser[] = await query.find({
+      useMasterKey: true,
+    });
     if (users && users.length > 0) {
       return users[0];
     }

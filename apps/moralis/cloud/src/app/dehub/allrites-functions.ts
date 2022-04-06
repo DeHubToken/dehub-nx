@@ -1,8 +1,9 @@
-import { getOTTMinTokensToPlay, SupportedNetwork } from './configuration';
+import { getOTTMinTokensToPlay } from './dapp-configurations';
 import { isMoralisUserByAddress } from './queries-functions';
-import { getDeHubTokenBalance, getStakedAmount } from './web3api-functions';
+import { SupportedNetwork } from './types';
+import { getStakedAmount } from './web3api-functions';
 
-export async function setCanPlay(user: any /* Moralis.User */, value: boolean) {
+async function setCanPlay(user: MoralisUser, value: boolean) {
   const logger = Moralis.Cloud.getLogger();
   try {
     if (user) {
@@ -10,7 +11,7 @@ export async function setCanPlay(user: any /* Moralis.User */, value: boolean) {
       user.set('can_play', value);
       await user
         .save(null, { useMasterKey: true })
-        .then((user: any /* : Moralis.User */) => {
+        .then((user: MoralisUser) => {
           logger.info(
             `setCanPlay(${user.get('ethAddress')}, ${user.get('can_play')})`
           );
@@ -38,15 +39,11 @@ export async function updateCanPlay(
       logger.error(`Not found Moralis User: ${address}`);
       return;
     }
-    const balance = await getDeHubTokenBalance(chainId, address);
-    logger.info(`user DeHub balance(${address}): ${balance.toString()}`);
     const staked = await getStakedAmount(chainId, address);
     logger.info(`user staked DeHub amount(${address}): ${staked.toString()}`);
-    const total = balance.plus(staked);
-    logger.info(`user total DeHub balance(${address}): ${total.toString()}`);
 
     const minAmount = await getOTTMinTokensToPlay();
-    await setCanPlay(user, total.gte(minAmount) ? true : false);
+    await setCanPlay(user, staked.gte(minAmount) ? true : false);
   } catch (err) {
     logger.error(`updateCanPlay error: ${JSON.stringify(err)}`);
     return;
