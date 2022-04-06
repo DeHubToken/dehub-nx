@@ -14,8 +14,9 @@ export class AngularFeatureMailingComponent implements OnInit {
 
   ngOnInit(): void {
     const ref = this.dialogService.open(MailingListFormComponent, {
-      showHeader: false,
+      showHeader: true,
       width: '620px',
+      height: '100%',
       styleClass: 'bg-gradient-3 border-neon-1',
       closeOnEscape: true,
       dismissableMask: true,
