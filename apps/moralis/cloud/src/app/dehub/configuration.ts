@@ -1,6 +1,6 @@
+import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { environment } from '../../environments/environment';
 import { SupportedNetwork } from './types';
-import { decimalToHex } from './utils';
 
 export const bnbRewardDappName = environment.dappName.bnbReward;
 export const tokenDappName = environment.dappName.token;
