@@ -16,7 +16,7 @@ async function getTokenBalance(
   chainId: SupportedNetwork,
   address: string,
   tokenAddress: string
-) {
+): Promise<typeof Moralis.Cloud.BigNumber | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
     const accountTokens = await Moralis.Web3API.account.getTokenBalances({
@@ -39,7 +39,7 @@ async function getTokenBalance(
 export async function getDeHubTokenBalance(
   chainId: SupportedNetwork,
   address: string
-): Promise<typeof Moralis.Cloud.BigNumber> {
+): Promise<typeof Moralis.Cloud.BigNumber | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
     const contract = await getDeHubTokenContract(chainId);
@@ -58,7 +58,7 @@ export async function getDeHubTokenBalance(
 export async function getStakedAmount(
   targetChainId: SupportedNetwork,
   address: string
-) {
+): Promise<typeof Moralis.Cloud.BigNumber | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
     const decTargetChainId = parseInt(targetChainId, 16);
