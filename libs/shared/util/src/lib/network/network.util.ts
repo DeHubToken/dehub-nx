@@ -1,6 +1,7 @@
 import { Networks } from '@dehub/shared/config';
 import { random } from 'lodash';
 import { Moralis } from 'moralis';
+import { decimalToHex, hexToDecimal } from '.';
 
 /**
  * Setup network for Metamask which involves adding or switching network as requested.
@@ -63,22 +64,6 @@ export const addNetwork = async (
       return false;
     });
 };
-
-/**
- * Convert decimal number to hex.
- *
- * @param decimal the decimal number
- * @returns the hex number
- */
-export const decimalToHex = (decimal: number) => `0x${decimal.toString(16)}`;
-
-/**
- * Convert hex number to decimal.
- *
- * @param decimal the hex number
- * @returns the decimal number
- */
-export const hexToDecimal = (hex: string) => parseInt(hex, 16);
 
 /**
  * Pick random RPC url from nodes.
