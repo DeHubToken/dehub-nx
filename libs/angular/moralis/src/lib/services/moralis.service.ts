@@ -6,11 +6,11 @@ import {
   WalletConnectingState,
 } from '@dehub/shared/model';
 import {
-  decimalToHex,
   filterEmpty,
   publishReplayRefCount,
   setupMetamaskNetwork,
 } from '@dehub/shared/util';
+import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';

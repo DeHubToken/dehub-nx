@@ -1,7 +1,8 @@
 import { Networks } from '@dehub/shared/config';
 import { random } from 'lodash';
 import { Moralis } from 'moralis';
-import { decimalToHex, hexToDecimal } from '.';
+import { decimalToHex } from './decimal-to-hex';
+import { hexToDecimal } from './hex-to-decimal';
 
 /**
  * Setup network for Metamask which involves adding or switching network as requested.
