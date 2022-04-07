@@ -51,17 +51,28 @@ export const TabMenu = ({ activeTab }: { activeTab: string }) => {
     <div className="dhb-tab-menu">
       <div className="dhb-tab-menu-wrapper">
         {tabMenuItems.map((menuItem: MenuItem, index) => (
-          <a key={index} href={menuItem.routerLink} rel="noopener noreferrer">
-            <Button
-              className={classNames(
-                'p-button-text p-button-plain p-button-lg mt-3 mr-3',
-                menuItem.label === activeTab ? 'active' : ''
-              )}
-              icon={menuItem.icon}
-              label={menuItem.label}
-            />
-          </a>
+          <Button
+            className={classNames(
+              'p-button-text p-button-plain p-button-lg mt-3 mr-3',
+              menuItem.label === activeTab ? 'active' : ''
+            )}
+            icon={menuItem.icon}
+            label={menuItem.label}
+            onClick={() => (window.location.href = menuItem.routerLink)}
+          />
         ))}
+
+        <div
+          className="md:hidden flex absolute right-0 mr-3 fadeinleft animation-duration-1000 animation-ease-in-out"
+          style={{
+            marginTop: '65px',
+          }}
+        >
+          <span className="flex align-items-center uppercase font-bold text-xs pr-1">
+            swipe menu&nbsp;
+          </span>
+          <i className="flex align-items-center fal fa-long-arrow-right text-3xl"></i>
+        </div>
       </div>
     </div>
   );
