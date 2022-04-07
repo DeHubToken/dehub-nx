@@ -1,7 +1,7 @@
-import { getOTTMinTokensToPlay } from './dapp-configurations';
-import { isMoralisUserByAddress } from './queries-functions';
-import { SupportedNetwork } from './types';
-import { getStakedAmount } from './web3api-functions';
+import { getOTTMinTokensToPlay } from '../allrites/dapp.util';
+import { ChainIdAsNumber } from '../shared/types';
+import { isMoralisUserByAddress } from '../shared/user.util';
+import { getStakedAmount } from '../staking/staking.util';
 
 async function setCanPlay(user: MoralisUser, value: boolean) {
   const logger = Moralis.Cloud.getLogger();
@@ -28,10 +28,7 @@ async function setCanPlay(user: MoralisUser, value: boolean) {
  * Update can_play according to the balance of holding and staking
  * @param {*} address user address
  */
-export async function updateCanPlay(
-  chainId: SupportedNetwork,
-  address: string
-) {
+export async function updateCanPlay(chainId: ChainIdAsNumber, address: string) {
   const logger = Moralis.Cloud.getLogger();
   try {
     const user = await isMoralisUserByAddress(address);

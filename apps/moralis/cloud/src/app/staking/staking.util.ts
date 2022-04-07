@@ -1,8 +1,7 @@
-import {
-  getDeHubTokenContract,
-  getStakingContracts,
-} from './dapp-configurations';
-import { SupportedNetwork } from './types';
+import { decimalToHex } from '@dehub/shared/util';
+import { getDeHubTokenContract } from '../shared/dapp.util';
+import { ChainId, ChainIdAsNumber } from '../shared/types';
+import { getStakingContracts } from './dapp.util';
 
 /**
  * Get ERC20 token balance of given wallet address,
@@ -13,14 +12,14 @@ import { SupportedNetwork } from './types';
  * @returns amount in big number if success
  */
 async function getTokenBalance(
-  chainId: SupportedNetwork,
+  chainId: ChainIdAsNumber,
   address: string,
   tokenAddress: string
 ): Promise<typeof Moralis.Cloud.BigNumber | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
     const accountTokens = await Moralis.Web3API.account.getTokenBalances({
-      chain: chainId,
+      chain: decimalToHex(chainId) as ChainId,
       address,
     });
     const filtered = accountTokens.filter(
@@ -37,7 +36,7 @@ async function getTokenBalance(
 
 /** @deprecated not used */
 export async function getDeHubTokenBalance(
-  chainId: SupportedNetwork,
+  chainId: ChainIdAsNumber,
   address: string
 ): Promise<typeof Moralis.Cloud.BigNumber | null> {
   const logger = Moralis.Cloud.getLogger();
@@ -56,14 +55,14 @@ export async function getDeHubTokenBalance(
  * @param {*} address user address
  */
 export async function getStakedAmount(
-  targetChainId: SupportedNetwork,
+  targetChainId: ChainIdAsNumber,
   address: string
 ): Promise<typeof Moralis.Cloud.BigNumber | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const decTargetChainId = parseInt(targetChainId, 16);
+    const decTargetChainId = targetChainId;
 
-    const web3 = Moralis.web3ByChain(targetChainId);
+    const web3 = Moralis.web3ByChain(decimalToHex(targetChainId));
     let amount = new Moralis.Cloud.BigNumber(0);
 
     const stakingContracts = (await getStakingContracts()) ?? [];
