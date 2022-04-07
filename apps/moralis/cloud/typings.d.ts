@@ -32,3 +32,13 @@ declare const {
 }: typeof import('moralis') & typeof MoralisMissingTypes;
 
 declare type MoralisUser = ReturnType<typeof Moralis.User.current>;
+
+declare namespace redis {
+  export interface RedisOptions {
+    host: string;
+    port: number;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function createClient(options: RedisOptions): any;
+}

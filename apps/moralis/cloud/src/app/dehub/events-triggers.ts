@@ -1,6 +1,58 @@
 import { environment } from '../../environments/environment';
 import { updateCanPlay } from '../allrites/allrites.util';
+import RedisClient from '../shared/redis';
 import { ChainIdAsNumber } from '../shared/types';
+
+/**
+ * Listen contracts table changes, if changes, clean redis data
+ */
+Moralis.Cloud.afterSave('Contracts', async () => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+
+    await redisClient.remove('getStakingContracts');
+    await redisClient.remove('getActiveStakingContracts');
+    await redisClient.remove('getStakingControllerContract');
+    await redisClient.remove('getRewardContract');
+  } catch (err) {
+    logger.error(`Contracts error: ${JSON.stringify(err)}`);
+    return;
+  }
+});
+
+Moralis.Cloud.afterSave(environment.dappName.staking, async () => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+
+    await redisClient.remove('getStakingContracts');
+    await redisClient.remove('getActiveStakingContracts');
+    await redisClient.remove('getStakingControllerContract');
+  } catch (err) {
+    logger.error(
+      `${environment.dappName.staking} error: ${JSON.stringify(err)}`
+    );
+    return;
+  }
+});
+
+Moralis.Cloud.afterSave(environment.dappName.bnbReward, async () => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const redisClient = new RedisClient();
+    await redisClient.connect();
+
+    await redisClient.remove('getRewardContract');
+  } catch (err) {
+    logger.error(
+      `${environment.dappName.bnbReward} error: ${JSON.stringify(err)}`
+    );
+    return;
+  }
+});
 
 Moralis.Cloud.afterSave('DeHubStakingDepositEvents', async request => {
   const logger = Moralis.Cloud.getLogger();

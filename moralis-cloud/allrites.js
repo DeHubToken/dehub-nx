@@ -433,9 +433,9 @@ class RedisClient {
     // expire in second if requires
     if (!this._client) throw Error('Redis not ready');
 
+    const _this = this;
     return new Promise((resolve, reject) => {
-      const _this = this;
-      this._client.set(key, value, (error, result) => {
+      _this._client.set(key, value, (error, result) => {
         if (error) reject(error);
         else {
           if (expire) {
@@ -452,8 +452,9 @@ class RedisClient {
   get(key) {
     if (!this._client) throw Error('Redis not ready');
 
+    const _this = this;
     return new Promise((resolve, reject) => {
-      this._client.get(key, (error, result) => {
+      _this._client.get(key, (error, result) => {
         if (error) reject(error);
         else resolve(result);
       });
