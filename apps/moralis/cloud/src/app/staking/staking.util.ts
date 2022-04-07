@@ -1,4 +1,4 @@
-import { decimalToHex } from '@dehub/shared/util';
+import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { getDeHubTokenContract } from '../shared/dapp.util';
 import { ChainId, ChainIdAsNumber } from '../shared/types';
 import { getStakingContracts } from './dapp.util';
