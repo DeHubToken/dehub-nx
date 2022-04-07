@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { AsPipeModule } from '@dehub/angular/ui/pipes/as-pipe';
 import { AngularFeatureGameRoutingModule } from './angular-feature-game-routing.module';
 import { AngularFeatureGameComponent } from './angular-feature-game.component';
 
@@ -15,6 +16,7 @@ import { AngularFeatureGameComponent } from './angular-feature-game.component';
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
     PageSectionsModule,
+    AsPipeModule,
 
     // PrimeNg Modules
 

@@ -4,6 +4,7 @@ import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-but
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { AsPipeModule } from '@dehub/angular/ui/pipes/as-pipe';
 import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { AngularFeatureStreamRoutingModule } from './angular-feature-stream-routing.module';
@@ -21,6 +22,7 @@ import { CanPlayGuard } from './guards';
     PageHeaderModule,
     PageSectionsModule,
     BuyDehubButtonModule,
+    AsPipeModule,
 
     // PrimeNg Modules
     ButtonModule,
