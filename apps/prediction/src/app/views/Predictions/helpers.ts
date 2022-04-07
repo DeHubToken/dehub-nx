@@ -1,4 +1,4 @@
-import { formatNumber, getBalanceAmount } from '@dehub/shared/util';
+import { formatNumber, getBalanceAmount } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { DefaultTheme } from 'styled-components';
 import { Bet, BetPosition } from '../../state/types';

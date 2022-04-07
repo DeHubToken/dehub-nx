@@ -1,5 +1,5 @@
 import { useRefresh } from '@dehub/react/core';
-import { BIG_ZERO, ethersToBigNumber } from '@dehub/shared/util';
+import { BIG_ZERO, ethersToBigNumber } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { useEffect, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';

@@ -11,7 +11,7 @@ import {
   BUSD_DISPLAY_DECIMALS,
   DEHUB_DECIMALS,
 } from '@dehub/shared/config';
-import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/util';
+import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import React from 'react';
 import { useMoralis } from 'react-moralis';

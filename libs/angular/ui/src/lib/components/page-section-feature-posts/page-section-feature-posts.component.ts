@@ -10,7 +10,7 @@ import {
   PageSectionFeaturePostsFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
-import { isNotNil } from '@dehub/shared/util';
+import { isNotNil } from '@dehub/shared/utils';
 import { bounceInLeftOnEnterAnimation } from 'angular-animations';
 
 @Component({

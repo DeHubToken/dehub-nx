@@ -1,6 +1,6 @@
 import { BuyDeHubButton, BuyDeHubFloozModal } from '@dehub/react/ui';
 import { moralisProviderLocalStorageKey } from '@dehub/shared/model';
-import { shortenAddress } from '@dehub/shared/util';
+import { shortenAddress } from '@dehub/shared/utils';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
 import { useCallback, useEffect, useState } from 'react';

@@ -40,7 +40,7 @@
       "@dehub/shared/asset/freya/*": ["libs/shared/asset/freya/src/lib/*"],
       "@dehub/shared/config": ["libs/shared/config/src/index.ts"],
       "@dehub/shared/model": ["libs/shared/model/src/index.ts"],
-      "@dehub/shared/util": ["libs/shared/util/src/index.ts"],
+      "@dehub/shared/utils": ["libs/shared/util/src/index.ts"],
       "@dehub/shared/util/*": ["libs/shared/util/src/lib/*"],
       "assert": ["./node_modules/assert"],
       "crypto": ["./node_modules/crypto-browserify"],

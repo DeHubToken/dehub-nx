@@ -1,4 +1,4 @@
-import { ethersToSerializedBigNumber } from '@dehub/shared/util';
+import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
 import SpecialLotteryAbi from '../../config/abis/SpecialLottery.json';
 import {
   LotteryStatus,

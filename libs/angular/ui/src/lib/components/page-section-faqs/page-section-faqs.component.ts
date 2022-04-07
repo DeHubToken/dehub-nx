@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FaqGroupFragment, PageSectionFaQsFragment } from '@dehub/shared/model';
-import { isNotNil } from '@dehub/shared/util';
+import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({

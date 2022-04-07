@@ -1,4 +1,4 @@
-import { getContract } from '@dehub/shared/util';
+import { getContract } from '@dehub/shared/utils';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
 import { useMoralis } from 'react-moralis';

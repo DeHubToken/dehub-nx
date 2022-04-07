@@ -1,7 +1,7 @@
 import { ConnectWalletButton } from '@dehub/react/core';
 import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/util';
+import { getBalanceAmount, getDecimalAmount } from '@dehub/shared/utils';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
 import { MaxUint256 } from '@ethersproject/constants';
 import { Contract } from '@ethersproject/contracts';

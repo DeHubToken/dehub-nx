@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FaqGroupFragment, FaqItemFragment } from '@dehub/shared/model';
-import { isNotNil } from '@dehub/shared/util';
+import { isNotNil } from '@dehub/shared/utils';
 
 @Component({
   selector: 'dhb-faq-group',

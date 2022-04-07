@@ -3,7 +3,7 @@ import {
   moralisProviderLocalStorageKey,
   WalletConnectingState,
 } from '@dehub/shared/model';
-import { setupMetamaskNetwork } from '@dehub/shared/util';
+import { setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';
