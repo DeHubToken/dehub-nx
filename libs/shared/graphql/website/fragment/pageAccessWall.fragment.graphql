@@ -6,6 +6,11 @@ fragment PageAccessWall on PageAccessWall {
   showTitle
   subtitle
   showSubtitle
+  ctasCollection(limit: 3, preview: $isPreview) {
+    items {
+      ...CallToAction
+    }
+  }
   headerColumnWidth
   headerAlignCenter
   sectionsCollection(limit: 10, preview: $isPreview) {

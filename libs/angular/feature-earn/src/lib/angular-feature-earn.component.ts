@@ -6,14 +6,17 @@ import {
 } from '@angular/core';
 import { EnvToken, PageEarnCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
-import { PageEarnFragment } from '@dehub/shared/model';
+import { CallToAction, PageEarnFragment } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';
 
 @Component({
   template: `
     <ng-container *ngIf="pageEarn$ | async as pageEarn" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageEarn"></dhb-page-header>
+      <dhb-page-header
+        [page]="pageEarn"
+        [ctas]="pageEarn.ctasCollection?.items | as: CTAs"
+      ></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
@@ -26,6 +29,8 @@ import { map, Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureEarnComponent implements OnInit {
+  // TODO: refactor this to use a more elegant solution (e.g. custom fragment)
+  CTAs!: CallToAction[];
   pageEarn$?: Observable<PageEarnFragment | undefined>;
 
   path = this.env.baseUrl;

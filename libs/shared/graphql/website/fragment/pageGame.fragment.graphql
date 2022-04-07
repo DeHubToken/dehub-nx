@@ -6,6 +6,11 @@ fragment PageGame on PageGame {
   showTitle
   subtitle
   showSubtitle
+  ctasCollection(limit: 3, preview: $isPreview) {
+    items {
+      ...CallToAction
+    }
+  }
   headerColumnWidth
   headerAlignCenter
   sectionsCollection(limit: 10, preview: $isPreview) {

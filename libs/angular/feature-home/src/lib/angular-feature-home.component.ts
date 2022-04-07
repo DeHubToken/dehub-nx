@@ -6,7 +6,12 @@ import {
 } from '@angular/core';
 import { EnvToken, PageHomeCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
-import { PageHomeFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
+import {
+  CallToAction,
+  PageHomeFragment,
+  SwiperResponsiveOptions,
+} from '@dehub/shared/model';
+import { resolveButtonStyle } from '@dehub/shared/util';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -14,7 +19,10 @@ import { map } from 'rxjs/operators';
   template: `
     <ng-container *ngIf="pageHome$ | async as pageHome" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageHome"></dhb-page-header>
+      <dhb-page-header
+        [page]="pageHome"
+        [ctas]="pageHome.ctasCollection?.items | as: CTAs"
+      ></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
@@ -31,6 +39,8 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureHomeComponent implements OnInit {
+  // TODO: refactor this to use a more elegant solution (e.g. custom fragment)
+  CTAs!: CallToAction[];
   pageHome$?: Observable<PageHomeFragment | undefined>;
 
   path = this.env.baseUrl;
@@ -131,5 +141,9 @@ export class AngularFeatureHomeComponent implements OnInit {
             pageHomeCollection?.items[0] ?? undefined
         )
       );
+  }
+
+  resolveButton(type?: string, style?: string, size?: string) {
+    return resolveButtonStyle(type, style, size);
   }
 }
