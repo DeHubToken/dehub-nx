@@ -46,6 +46,21 @@ export const LegalPostFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const CallToActionFragmentDoc = gql`
+  fragment CallToAction on CallToAction {
+    sys {
+      ...Sys
+    }
+    label
+    externalLink
+    routerLink
+    type
+    style
+    size
+    icon
+  }
+  ${SysFragmentDoc}
+`;
 export const FeaturePostFragmentDoc = gql`
   fragment FeaturePost on FeaturePost {
     sys {
@@ -350,6 +365,11 @@ export const PageAccessWallFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
     headerColumnWidth
     headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
@@ -365,6 +385,7 @@ export const PageAccessWallFragmentDoc = gql`
     }
   }
   ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
@@ -413,6 +434,11 @@ export const PageEarnFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
     headerColumnWidth
     headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
@@ -429,6 +455,7 @@ export const PageEarnFragmentDoc = gql`
     }
   }
   ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
@@ -447,6 +474,11 @@ export const PageGameFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
     headerColumnWidth
     headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
@@ -463,6 +495,7 @@ export const PageGameFragmentDoc = gql`
     }
   }
   ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
@@ -522,6 +555,11 @@ export const PageHomeFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
     headerColumnWidth
     headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
@@ -539,6 +577,7 @@ export const PageHomeFragmentDoc = gql`
     }
   }
   ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
@@ -558,6 +597,11 @@ export const PageLearnFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
     headerColumnWidth
     headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
@@ -575,6 +619,7 @@ export const PageLearnFragmentDoc = gql`
     }
   }
   ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
@@ -594,6 +639,11 @@ export const PageStreamFragmentDoc = gql`
     showTitle
     subtitle
     showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
     headerColumnWidth
     headerAlignCenter
     sectionsCollection(limit: 10, preview: $isPreview) {
@@ -610,6 +660,7 @@ export const PageStreamFragmentDoc = gql`
     }
   }
   ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
