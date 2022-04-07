@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { CallToAction } from '@dehub/shared/model';
-import { resolveButtonStyle, resolveColumnWidth } from '@dehub/shared/util';
+import { resolveButtonStyle, resolveColumnWidth } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
