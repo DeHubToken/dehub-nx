@@ -1,0 +1,12 @@
+fragment CallToAction on CallToAction {
+  sys {
+    ...Sys
+  }
+  label
+  externalLink
+  routerLink
+  type
+  style
+  size
+  icon
+}

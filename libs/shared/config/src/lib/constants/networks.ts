@@ -23,7 +23,7 @@ export const Networks: { [key: number]: NetworkInfo } = {
     },
     blockExplorerUrl: 'https://bscscan.com',
     nodes: [
-      'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/mainnet',
+      'https://speedy-nodes-nyc.moralis.io/67d501c9b939411392ca9321/bsc/mainnet',
       'https://bsc-dataseed1.defibit.io/',
       'https://bsc-dataseed1.ninicoin.io/',
     ],
@@ -38,7 +38,7 @@ export const Networks: { [key: number]: NetworkInfo } = {
     },
     blockExplorerUrl: 'https://testnet.bscscan.com',
     nodes: [
-      'https://speedy-nodes-nyc.moralis.io/6b2569937eb2e5cb5996d2dc/bsc/testnet',
+      'https://speedy-nodes-nyc.moralis.io/67d501c9b939411392ca9321/bsc/testnet',
     ],
   },
 };

@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 import { PageHeaderComponent } from './page-header.component';
 
 @NgModule({
@@ -7,6 +9,10 @@ import { PageHeaderComponent } from './page-header.component';
   imports: [
     // Angular
     CommonModule,
+    RouterModule,
+
+    // PrimeNg Modules
+    ButtonModule,
   ],
   exports: [PageHeaderComponent],
 })

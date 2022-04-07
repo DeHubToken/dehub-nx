@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { AsPipeModule } from '@dehub/angular/ui/pipes/as-pipe';
+import { ButtonModule } from 'primeng/button';
+import { FieldsetModule } from 'primeng/fieldset';
 import { AngularFeatureStreamRoutingModule } from './angular-feature-stream-routing.module';
 import { AngularFeatureStreamComponent } from './angular-feature-stream.component';
 import { StreamAccessWallComponent } from './components/stream-access-wall.component';
@@ -17,8 +21,12 @@ import { CanPlayGuard } from './guards';
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
     PageSectionsModule,
+    BuyDehubButtonModule,
+    AsPipeModule,
 
     // PrimeNg Modules
+    ButtonModule,
+    FieldsetModule,
 
     AngularFeatureStreamRoutingModule,
   ],

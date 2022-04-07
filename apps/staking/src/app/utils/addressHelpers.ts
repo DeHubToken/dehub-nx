@@ -3,7 +3,6 @@ import { environment } from '../../environments/environment';
 export const getAddress = (label: string): string | string[] => {
   const contracts = {
     ...environment.web3.addresses.contracts,
-    ...environment.contracts,
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (contracts as any)[label];
@@ -19,8 +18,4 @@ export const getDehubAddress = (): string => {
 
 export const getBnbAddress = (): string => {
   return getAddress('bnb') as string;
-};
-
-export const getRewardsAddress = (): string => {
-  return getAddress('rewards') as string;
 };

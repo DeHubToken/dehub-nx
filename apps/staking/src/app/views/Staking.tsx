@@ -14,7 +14,7 @@ const StyledBox = styled(Box)`
 `;
 
 export default function Staking() {
-  const pools = usePools();
+  const { pools } = usePools();
 
   return (
     <Container>

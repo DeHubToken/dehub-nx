@@ -3,9 +3,10 @@ import { BUSD_DISPLAY_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { Skeleton } from 'primereact/skeleton';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDehubBusdPrice, usePools } from '../state/application/hooks';
-import { isLivePool } from '../utils/pool';
+import { PoolInfo } from '../state/application/types';
+import { isLivePool, quarterMark } from '../utils/pool';
 
 interface StakeInfo {
   totalStaked: BigNumber;
@@ -21,7 +22,7 @@ const StakedInfoBox = () => {
   });
 
   const dehubPrice = useDehubBusdPrice();
-  const pools = usePools();
+  const { pools } = usePools();
 
   useEffect(() => {
     setInfo(
@@ -40,6 +41,11 @@ const StakedInfoBox = () => {
         }
       )
     );
+  }, [pools]);
+
+  const activePool = useMemo(() => {
+    const livePools = pools.filter((pool: PoolInfo) => isLivePool(pool));
+    return livePools.length > 0 ? livePools[0] : undefined;
   }, [pools]);
 
   return (
@@ -71,7 +77,9 @@ const StakedInfoBox = () => {
           <div className="card overview-box gray shadow-2">
             <div className="overview-info text-left w-full">
               {/* TODO: pull the current live vault data here. */}
-              <Heading className="pb-1">Rewards Q1 2022</Heading>
+              <Heading className="pb-1">
+                Rewards {activePool && quarterMark(activePool)}
+              </Heading>
               {pools ? (
                 <>
                   <Text fontSize="24px" fontWeight={900}>

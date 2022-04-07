@@ -8,7 +8,7 @@ import {
   PageSectionSectionPostsFragment,
   SectionPostFragment,
 } from '@dehub/shared/model';
-import { isNotNil } from '@dehub/shared/utils';
+import { isNotNil, resolveColumnWidth } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
@@ -60,38 +60,7 @@ export class PageSectionSectionPostsComponent implements OnInit {
     ).filter(isNotNil);
   }
 
-  // TODO: this could be a util ;)
   resolveCol(sectionPost: SectionPostFragment) {
-    let col = '';
-    let common = ' col-12 sm:col-12 md:col-12 ';
-    let offsetCommon = ' col-offset-0 ';
-
-    switch (sectionPost.columnWidth) {
-      case 'narrow':
-        col += common += 'xl:col-4';
-        if (sectionPost.alignCenter) {
-          col += offsetCommon += 'xl:col-offset-4';
-        }
-        break;
-      case 'wide':
-        col += common += 'xl:col-6';
-        if (sectionPost.alignCenter) {
-          col += offsetCommon += 'xl:col-offset-3';
-        }
-        break;
-      case 'wider':
-        col += common += 'xl:col-8';
-        if (sectionPost.alignCenter) {
-          col += offsetCommon += 'xl:col-offset-2';
-        }
-        break;
-      case 'full':
-        col += 'col-12';
-        break;
-      default:
-        col += 'col-12';
-    }
-
-    return col;
+    return resolveColumnWidth(sectionPost.columnWidth, sectionPost.alignCenter);
   }
 }

@@ -95,7 +95,7 @@ export class MoralisService implements IMoralis {
 
   constructor(
     @Inject(LoggerToken) private logger: LoggerService,
-    @Inject(WINDOW) readonly windowRef: Window,
+    @Inject(WINDOW) private readonly windowRef: Window,
     private ngZone: NgZone
   ) {
     if (Moralis.User.current()) {
@@ -162,11 +162,12 @@ export class MoralisService implements IMoralis {
   }
 
   logout() {
+    this.logger.info('Logging out.');
+
     this.unsubscribeEvents();
     Moralis.User.logOut()
-      .then(() => {
-        this.logger.info('Logging out.');
-
+      .catch(e => this.logger.error('Moralis logout problem:', e))
+      .finally(() => {
         // Cleanup web provider from local storage
         this.windowRef.localStorage.removeItem(moralisProviderLocalStorageKey);
 
@@ -176,9 +177,10 @@ export class MoralisService implements IMoralis {
 
         // Disconnect Web3 wallet
         Moralis.cleanup();
-      })
-      .catch(e => this.logger.error('Moralis logout problem:', e))
-      .finally(() => this.setWalletConnectingState(WalletConnectingState.INIT));
+
+        // Reset Wallet connecting state
+        this.setWalletConnectingState(WalletConnectingState.INIT);
+      });
   }
 
   /**
@@ -231,10 +233,31 @@ export class MoralisService implements IMoralis {
               }
             });
         } else {
-          this.logger.warn(`Moralis account disconnected!`);
+          this.logger.warn(`Moralis all accounts are disconnected!`);
           this.logout();
         }
       });
+    });
+
+    this.unsubscribeFromChainChanged = Moralis.onChainChanged(newChainHex => {
+      const requiredChainHex = this.requiredChainHex;
+      if (requiredChainHex !== newChainHex) {
+        this.logger.info(
+          `Moralis chain changed from ${requiredChainHex} to ${newChainHex}!`
+        );
+        this.logout();
+      }
+    });
+
+    this.unsubscribeFromAccountChanged = Moralis.onAccountChanged(account => {
+      if (account) {
+        const newAccount = account.toLowerCase();
+        this.logger.info(`Moralis account has changed to ${newAccount}!`);
+        this.handleAccountChanged(newAccount);
+      } else {
+        this.logger.info(`Moralis account disconnected!`);
+        this.logout();
+      }
     });
   }
 

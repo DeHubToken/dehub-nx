@@ -64,7 +64,7 @@ import { WINDOW } from '@ng-web-apis/common';
 export class DappPostComponent implements OnInit {
   @Input() dappPost!: DappPostFragment;
 
-  constructor(@Inject(WINDOW) readonly windowRef: Window) {}
+  constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
 
   ngOnInit(): void {}
 

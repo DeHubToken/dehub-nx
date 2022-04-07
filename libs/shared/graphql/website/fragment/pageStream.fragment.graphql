@@ -6,6 +6,13 @@ fragment PageStream on PageStream {
   showTitle
   subtitle
   showSubtitle
+  ctasCollection(limit: 3, preview: $isPreview) {
+    items {
+      ...CallToAction
+    }
+  }
+  headerColumnWidth
+  headerAlignCenter
   sectionsCollection(limit: 10, preview: $isPreview) {
     items {
       ...PageSectionFeaturePosts

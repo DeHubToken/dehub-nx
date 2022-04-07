@@ -17,3 +17,63 @@ export const richMarkupToHtmlString = (richTextDocument: Document) => {
   };
   return documentToHtmlString(richTextDocument, richOptions);
 };
+
+export const resolveColumnWidth = (width?: string, alignCenter = false) => {
+  let col = '';
+  let common = ' col-12 sm:col-12 md:col-12 ';
+  let offsetCommon = ' col-offset-0 ';
+
+  switch (width) {
+    case 'narrow':
+      col += common += 'xl:col-4';
+      if (alignCenter) {
+        col += offsetCommon += 'xl:col-offset-4';
+      }
+      break;
+    case 'wide':
+      col += common += 'xl:col-6';
+      if (alignCenter) {
+        col += offsetCommon += 'xl:col-offset-3';
+      }
+      break;
+    case 'wider':
+      col += common += 'xl:col-8';
+      if (alignCenter) {
+        col += offsetCommon += 'xl:col-offset-2';
+      }
+      break;
+    case 'full':
+      col += 'col-12';
+      break;
+    default:
+      col += 'col-12';
+  }
+
+  return col;
+};
+
+export const resolveButtonStyle = (
+  type?: string,
+  style?: string,
+  size?: string
+) => {
+  let classes = `mr-3`;
+  if (type) {
+    classes += ` p-button-${type}`;
+  }
+  if (style) {
+    classes += ` p-button-${style}`;
+  }
+  switch (size) {
+    case 'small':
+      classes += ' p-button-sm';
+      break;
+    case 'large':
+      classes += ' p-button-lg';
+      break;
+    default:
+      break;
+  }
+
+  return classes;
+};
