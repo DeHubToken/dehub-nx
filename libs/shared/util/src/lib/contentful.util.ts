@@ -51,3 +51,29 @@ export const resolveColumnWidth = (width?: string, alignCenter = false) => {
 
   return col;
 };
+
+export const resolveButtonStyle = (
+  type?: string,
+  style?: string,
+  size?: string
+) => {
+  let classes = `mr-3`;
+  if (type) {
+    classes += ` p-button-${type}`;
+  }
+  if (style) {
+    classes += ` p-button-${style}`;
+  }
+  switch (size) {
+    case 'small':
+      classes += ' p-button-sm';
+      break;
+    case 'large':
+      classes += ' p-button-lg';
+      break;
+    default:
+      break;
+  }
+
+  return classes;
+};
