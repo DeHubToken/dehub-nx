@@ -11,6 +11,17 @@
             "allowDestructuring": false,
             "allowedNames": ["that"]
           }
+        ],
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@dehub/shared/utils"],
+                "message": "Please import only tree-shakable util, one function in one file, example: 'decimalToHex'"
+              }
+            ]
+          }
         ]
       }
     },
