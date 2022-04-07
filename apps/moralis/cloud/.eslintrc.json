@@ -18,7 +18,7 @@
             "patterns": [
               {
                 "group": ["@dehub/shared/utils"],
-                "message": "Please import only tree-shakable util, one function in one file, example: 'decimalToHex'"
+                "message": "Please import only from tree-shakable util, one function in one file, example: 'decimalToHex'"
               }
             ]
           }
