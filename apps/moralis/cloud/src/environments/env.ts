@@ -7,6 +7,18 @@ export interface Env extends SharedEnv {
     staking: string;
     ott: string;
   };
+  staking: {
+    eventTables: {
+      deposit: string;
+      harvest: string;
+      withdraw: string;
+    };
+    deprecatedEventTables?: {
+      deposit: string;
+      harvest: string;
+      withdraw: string;
+    };
+  };
 }
 
 export const defaultEnv: Env = {
@@ -16,5 +28,12 @@ export const defaultEnv: Env = {
     token: 'DeHubTokenDapp',
     staking: 'DeHubStakingDapp',
     ott: 'DeHubOTTDapp',
+  },
+  staking: {
+    eventTables: {
+      deposit: 'DeHubStakingDepositEvents',
+      harvest: 'DeHubStakingHarvestEvents',
+      withdraw: 'DeHubStakingWithdrawEvents',
+    },
   },
 };
