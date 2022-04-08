@@ -75,7 +75,7 @@ export async function getStakingContracts(): Promise<
   return null;
 }
 
-export async function getActiveStakingContracts(
+export async function getActiveStakingContract(
   targetChainId: ChainIdAsNumber
 ): Promise<StakingContractPropsType | null> {
   const logger = Moralis.Cloud.getLogger();
@@ -122,7 +122,7 @@ export async function getActiveStakingContracts(
       abi,
     };
   } catch (err) {
-    logger.error(`getActiveStakingContracts error: ${JSON.stringify(err)}`);
+    logger.error(`getActiveStakingContract error: ${JSON.stringify(err)}`);
   }
   return null;
 }

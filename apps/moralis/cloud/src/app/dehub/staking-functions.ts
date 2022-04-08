@@ -3,7 +3,7 @@ import { getRewardContract } from '../shared/dapp.util';
 import RedisClient from '../shared/redis';
 import { ChainIdAsNumber } from '../shared/types';
 import {
-  getActiveStakingContracts,
+  getActiveStakingContract,
   getStakingContracts,
   getStakingControllerContract,
 } from '../staking/dapp.util';
@@ -30,17 +30,17 @@ Moralis.Cloud.define('getStakingContracts', async () => {
   }
 });
 
-Moralis.Cloud.define('getActiveStakingContracts', async () => {
+Moralis.Cloud.define('getActiveStakingContract', async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const redisClient = new RedisClient();
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        'getActiveStakingContracts',
+        'getActiveStakingContract',
         async function (args) {
           return JSON.stringify(
-            await getActiveStakingContracts(args as ChainIdAsNumber)
+            await getActiveStakingContract(args as ChainIdAsNumber)
           );
         },
         {
@@ -50,7 +50,7 @@ Moralis.Cloud.define('getActiveStakingContracts', async () => {
       )
     );
   } catch (err) {
-    logger.error(`getActiveStakingContracts error: ${JSON.stringify(err)}`);
+    logger.error(`getActiveStakingContract error: ${JSON.stringify(err)}`);
     return null;
   }
 });

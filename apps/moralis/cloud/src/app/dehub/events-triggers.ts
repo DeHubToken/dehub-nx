@@ -13,7 +13,7 @@ Moralis.Cloud.afterSave('Contracts', async () => {
     await redisClient.connect();
 
     await redisClient.remove('getStakingContracts');
-    await redisClient.remove('getActiveStakingContracts');
+    await redisClient.remove('getActiveStakingContract');
     await redisClient.remove('getStakingControllerContract');
     await redisClient.remove('getRewardContract');
   } catch (err) {
@@ -29,7 +29,7 @@ Moralis.Cloud.afterSave(environment.dappName.staking, async () => {
     await redisClient.connect();
 
     await redisClient.remove('getStakingContracts');
-    await redisClient.remove('getActiveStakingContracts');
+    await redisClient.remove('getActiveStakingContract');
     await redisClient.remove('getStakingControllerContract');
   } catch (err) {
     logger.error(
