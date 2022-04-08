@@ -86,6 +86,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [withdrawFee, setWithdrawFee] = useState<number>(1200);
 
   const toast = useRef<Toast>(null);
 
@@ -194,6 +195,16 @@ const StakeModal: React.FC<StakeModalProps> = ({
     setIsTxPending(false);
   };
 
+  useEffect(() => {
+    const fetchFee = async () => {
+      if (!stakingContract) return;
+
+      const fee = await stakingContract.EARLY_WITHDRAW_FEE();
+      setWithdrawFee(Number(fee));
+    };
+    fetchFee();
+  }, [stakingContract]);
+
   // Warnings
   useEffect(() => {
     const bnValue = new BigNumber(value);
@@ -215,10 +226,23 @@ const StakeModal: React.FC<StakeModalProps> = ({
         visible={open}
         modal
         className="border-neon-1"
-        header={`${capitalize(type)} In Pool`}
+        header={`${capitalize(type)} Your Tokens`}
         onHide={onHide}
-        style={{ minWidth: '288px', marginTop: '124px', position: 'relative' }}
+        style={{
+          minWidth: '288px',
+          maxWidth: '400px',
+          marginTop: '124px',
+          position: 'relative',
+        }}
       >
+        {type === 'unstake' && (
+          <Text className="pb-4 text-pink-500 text-sm">
+            Withdrawing your stake before the end of the staking period will
+            incur <b>{withdrawFee / 100}%</b> fee. Are you sure you want to
+            proceed?
+          </Text>
+        )}
+
         <div className="flex flex-column">
           <div
             className="flex align-items-center justify-content-between"
