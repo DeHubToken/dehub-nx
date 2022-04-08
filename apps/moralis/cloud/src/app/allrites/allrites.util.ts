@@ -1,4 +1,4 @@
-import { getOTTMinTokensToPlay } from '../allrites/dapp.util';
+import { getOTTMinTokensToPlay, getWhitelisted } from '../allrites/dapp.util';
 import { ChainIdAsNumber } from '../shared/types';
 import { isMoralisUserByAddress } from '../shared/user.util';
 import { getStakedAmount } from '../staking/staking.util';
@@ -34,6 +34,12 @@ export async function updateCanPlay(chainId: ChainIdAsNumber, address: string) {
     const user = await isMoralisUserByAddress(address);
     if (!user) {
       logger.error(`Not found Moralis User: ${address}`);
+      return;
+    }
+    // check if user is already whitelisted
+    const whitelisted = await getWhitelisted();
+    if (whitelisted && whitelisted.indexOf(address) >= 0) {
+      logger.error(`Whitelisted user: ${address}`);
       return;
     }
     const staked = await getStakedAmount(chainId, address);

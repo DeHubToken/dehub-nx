@@ -18,3 +18,20 @@ export async function getOTTMinTokensToPlay(): Promise<
   }
   return null;
 }
+
+export async function getWhitelisted(): Promise<string[] | null> {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const DeHubOTTDapp = Moralis.Object.extend(environment.dappName.ott);
+    const query = new Moralis.Query(DeHubOTTDapp);
+    const records = await query.first({ useMasterKey: true });
+    if (!records) return null;
+
+    const relation = records.relation('whitelisted');
+    const users = await relation.query().find({ useMasterKey: true });
+    return users.map(user => user.get('ethAddress'));
+  } catch (err) {
+    logger.error(`getWhitelisted error: ${JSON.stringify(err)}`);
+  }
+  return null;
+}
