@@ -65,7 +65,7 @@ export const TabMenu = ({ activeTab }: { activeTab: string }) => {
         <div
           className="md:hidden flex absolute right-0 mr-3 fadeinleft animation-duration-1000 animation-ease-in-out"
           style={{
-            marginTop: '65px',
+            marginTop: '63px',
           }}
         >
           <span className="flex align-items-center uppercase font-bold text-xs pr-1">
