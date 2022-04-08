@@ -226,7 +226,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         visible={open}
         modal
         className="border-neon-1"
-        header={`${capitalize(type)} In Pool`}
+        header={`${capitalize(type)} Your Tokens`}
         onHide={onHide}
         style={{
           minWidth: '288px',
@@ -236,10 +236,10 @@ const StakeModal: React.FC<StakeModalProps> = ({
         }}
       >
         {type === 'unstake' && (
-          <Text className="pb-4 text-pink-500">
+          <Text className="pb-4 text-pink-500 text-sm">
             Withdrawing your stake before the end of the staking period will
-            incur <b>{withdrawFee / 100}%</b> fee. <br />
-            Are you sure you want to proceed?
+            incur <b>{withdrawFee / 100}%</b> fee. Are you sure you want to
+            proceed?
           </Text>
         )}
 
