@@ -187,3 +187,7 @@ Moralis.Cloud.beforeLogin(async request => {
     return;
   }
 });
+
+Moralis.Cloud.beforeSaveFile(() => {
+  throw 'Not Allowed';
+});
