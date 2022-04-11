@@ -5,8 +5,8 @@
   "theme_color": "#060d1b",
   "background_color": "#622f88",
   "display": "fullscreen",
-  "scope": "/web/",
-  "start_url": "/web/",
+  "scope": "/staking/",
+  "start_url": "/staking/",
   "icons": [
     {
       "src": "assets/dehub/manifest/icon-192x192.png",
