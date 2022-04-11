@@ -113,6 +113,7 @@ const withLayout =
               logo={{
                 href: 'https://dehub.net',
                 icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,
+                alt: 'DeHub logo',
               }}
             />
             <div className="layout-content py-0">
