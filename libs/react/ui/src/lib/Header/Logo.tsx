@@ -13,7 +13,7 @@ const Logo = ({ logo }: LogoProps) => {
       aria-label="DeHub"
     >
       {logo.icon ? (
-        <img src={logo.icon} style={{ height: '25px' }} alt={logo.alt} />
+        <img src={logo.icon} height="25px" alt={logo.alt} />
       ) : logo.label ? (
         <h1>{logo.label}</h1>
       ) : (
