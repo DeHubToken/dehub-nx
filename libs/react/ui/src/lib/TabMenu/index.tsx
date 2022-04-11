@@ -52,6 +52,7 @@ export const TabMenu = ({ activeTab }: { activeTab: string }) => {
       <div className="dhb-tab-menu-wrapper">
         {tabMenuItems.map((menuItem: MenuItem, index) => (
           <Button
+            key={index}
             className={classNames(
               'p-button-text p-button-plain p-button-lg mt-3 mr-3',
               menuItem.label === activeTab ? 'active' : ''
