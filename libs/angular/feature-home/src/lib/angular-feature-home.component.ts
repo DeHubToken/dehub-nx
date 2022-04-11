@@ -11,7 +11,7 @@ import {
   PageHomeFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
-import { resolveButtonStyle } from '@dehub/shared/util';
+import { resolveButtonStyle } from '@dehub/shared/utils';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

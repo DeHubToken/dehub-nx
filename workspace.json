@@ -13,6 +13,7 @@
     "angular-feature-stream": "libs/angular/feature-stream",
     "angular-moralis": "libs/angular/moralis",
     "angular-ui": "libs/angular/ui",
+    "moralis-cloud": "apps/moralis/cloud",
     "prediction": "apps/prediction",
     "prediction-e2e": "apps/prediction-e2e",
     "raffle": "apps/raffle",

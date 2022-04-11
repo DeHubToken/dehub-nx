@@ -1,0 +1,37 @@
+{
+  "extends": ["../../../.eslintrc.json", "../../../.eslintrc-overrides.json"],
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@typescript-eslint/no-this-alias": [
+          "error",
+          {
+            "allowDestructuring": false,
+            "allowedNames": ["that"]
+          }
+        ],
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@dehub/shared/utils"],
+                "message": "Please import only from tree-shakable util, one function in one file, example: 'decimalToHex'"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    }
+  ]
+}

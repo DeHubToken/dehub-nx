@@ -2,7 +2,7 @@ import {
   BIG_ZERO,
   ethersToBigNumber,
   getBalanceNumber,
-} from '@dehub/shared/util';
+} from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
 import PredictionsAbi from '../../config/abi/predictions.json';

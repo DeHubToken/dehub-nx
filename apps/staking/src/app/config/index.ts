@@ -1,4 +1,4 @@
-import { BIG_TEN } from '@dehub/shared/util';
+import { BIG_TEN } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js/bignumber';
 
 BigNumber.config({

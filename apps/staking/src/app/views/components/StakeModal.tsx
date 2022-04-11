@@ -5,7 +5,7 @@ import {
   BIG_ZERO,
   getBalanceAmount,
   getDecimalAmount,
-} from '@dehub/shared/util';
+} from '@dehub/shared/utils';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
 import { MaxUint256 } from '@ethersproject/constants';
 import { Contract } from '@ethersproject/contracts';

@@ -12,7 +12,7 @@ import {
   WalletConnectingMessages,
   WalletConnectingState,
 } from '@dehub/shared/model';
-import { shortenAddress } from '@dehub/shared/util';
+import { shortenAddress } from '@dehub/shared/utils';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { MoralisService } from '../../services/moralis.service';

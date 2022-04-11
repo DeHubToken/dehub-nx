@@ -1,0 +1,93 @@
+{
+  "root": "apps/moralis/cloud",
+  "sourceRoot": "apps/moralis/cloud/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/moralis/cloud",
+        "main": "apps/moralis/cloud/src/main.ts",
+        "tsConfig": "apps/moralis/cloud/tsconfig.app.json",
+        "assets": [],
+        "sourceMap": false,
+        "extractLicenses": false
+      },
+      "configurations": {
+        "preview": {
+          "optimization": true,
+          "inspect": false
+        },
+        "development": {
+          "optimization": false
+        },
+        "production": {
+          "optimization": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/moralis/cloud/src/environments/environment.ts",
+              "with": "apps/moralis/cloud/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "moralis-cloud:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/moralis/cloud/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/moralis/cloud"],
+      "options": {
+        "jestConfig": "apps/moralis/cloud/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "deploy-preview-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com npm run moralis-sync"
+        ],
+        "readyWhen": "Changes Uploaded Correctly",
+        "parallel": true
+      }
+    },
+    "deploy-preview": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "echo 'Preview mode not supported in Moralis Cloud.'"
+      }
+    },
+    "deploy-prod-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "echo 'Prod Draft mode not supported in Moralis Cloud.'"
+      }
+    },
+    "deploy-prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com npm run moralis-sync"
+        ],
+        "readyWhen": "Changes Uploaded Correctly",
+        "parallel": true
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:util"]
+}

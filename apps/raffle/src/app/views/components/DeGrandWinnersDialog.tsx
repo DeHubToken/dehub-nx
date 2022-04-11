@@ -1,5 +1,5 @@
 import { Heading } from '@dehub/react/ui';
-import { shortenAddress } from '@dehub/shared/util';
+import { shortenAddress } from '@dehub/shared/utils';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import { useRef } from 'react';

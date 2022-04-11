@@ -106,6 +106,12 @@ This project was generated using [Nx](https://nx.dev).
    nx generate @nrwl/react:lib --name=pcsuikit --directory=react --standaloneConfig --strict
    ```
 
+1. Generate Moralis Cloud lib:
+
+   ```
+   nx generate @nrwl/js:library --name=cloud --directory=moralis --importPath=@dehub/moralis/cloud --publishable --tags='scope:shared, type:util'
+   ```
+
 1. Run Commands generation
 
    ```

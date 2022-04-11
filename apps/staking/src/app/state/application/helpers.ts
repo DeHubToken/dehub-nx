@@ -1,4 +1,4 @@
-import { ethersToSerializedBigNumber } from '@dehub/shared/util';
+import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
 import { Call, multicallv2 } from '../../utils/multicall';
 import { SerializedPoolInfo } from './types';
 

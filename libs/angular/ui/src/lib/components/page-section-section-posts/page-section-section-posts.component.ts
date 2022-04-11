@@ -8,7 +8,7 @@ import {
   PageSectionSectionPostsFragment,
   SectionPostFragment,
 } from '@dehub/shared/model';
-import { isNotNil, resolveColumnWidth } from '@dehub/shared/util';
+import { isNotNil, resolveColumnWidth } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({

@@ -1,5 +1,5 @@
 import { useRefresh } from '@dehub/react/core';
-import { BIG_ZERO } from '@dehub/shared/util';
+import { BIG_ZERO } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { useEffect, useRef, useState } from 'react';
 import { useMoralis } from 'react-moralis';

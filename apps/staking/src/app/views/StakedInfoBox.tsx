@@ -1,6 +1,6 @@
 import { Heading, Text } from '@dehub/react/ui';
 import { BUSD_DISPLAY_DECIMALS, DEHUB_DECIMALS } from '@dehub/shared/config';
-import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/util';
+import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { Skeleton } from 'primereact/skeleton';
 import { useEffect, useMemo, useState } from 'react';

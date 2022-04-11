@@ -3,7 +3,7 @@ import {
   BIG_ZERO,
   ethersToSerializedBigNumber,
   SerializedBigNumber,
-} from '@dehub/shared/util';
+} from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import {
   createAction,

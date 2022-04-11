@@ -5,7 +5,7 @@ import {
   ethersToBigNumber,
   getContract,
   getFullDisplayBalance,
-} from '@dehub/shared/util';
+} from '@dehub/shared/utils';
 import { MaxUint256 } from '@ethersproject/constants';
 import { Web3Provider } from '@ethersproject/providers';
 import BigNumber from 'bignumber.js';

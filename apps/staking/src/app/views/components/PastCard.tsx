@@ -16,7 +16,7 @@ import {
   BIG_ZERO,
   ethersToBigNumber,
   getFullDisplayBalance,
-} from '@dehub/shared/util';
+} from '@dehub/shared/utils';
 import {
   TransactionReceipt,
   TransactionResponse,

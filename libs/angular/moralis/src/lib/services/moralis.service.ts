@@ -5,12 +5,12 @@ import {
   MoralisWeb3ProviderType,
   WalletConnectingState,
 } from '@dehub/shared/model';
+import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
-  decimalToHex,
   filterEmpty,
   publishReplayRefCount,
   setupMetamaskNetwork,
-} from '@dehub/shared/util';
+} from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';

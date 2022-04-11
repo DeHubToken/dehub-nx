@@ -1,4 +1,4 @@
-import { BIG_ZERO, ethersToSerializedBigNumber } from '@dehub/shared/util';
+import { BIG_ZERO, ethersToSerializedBigNumber } from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
 import { useMemo } from 'react';

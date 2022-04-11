@@ -1,4 +1,4 @@
-import { BIG_ZERO } from '@dehub/shared/util';
+import { BIG_ZERO } from '@dehub/shared/utils';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
 import { MAX_DELOTTO_REQUEST_SIZE } from '../../config/constants';

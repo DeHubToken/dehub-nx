@@ -11,7 +11,7 @@ import {
 } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import { LegalPostFragment } from '@dehub/shared/model';
-import { filterEmpty } from '@dehub/shared/util';
+import { filterEmpty } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
