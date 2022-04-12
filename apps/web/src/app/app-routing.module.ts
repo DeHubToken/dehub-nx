@@ -32,8 +32,14 @@ export const getMenuItems = (pwaService: PwaService): MenuItem[] => [
         icon: 'far fa-link',
       },
       {
-        label: 'Test PWA Toast',
+        label: 'Test PWA Info Toast',
         command: () => pwaService.triggerSwUpdateAvailable(),
+        icon: 'far fa-info',
+      },
+      {
+        label: 'Test PWA Warn Toast',
+        command: () =>
+          pwaService.triggerSwUpdateAvailable('Update is required.', 'warn'),
         icon: 'far fa-warning',
       },
     ],

@@ -22,6 +22,7 @@ export class PwaService {
     if (this.swUpdate === null || !this.swUpdate.isEnabled) return;
 
     // Service Worker check for update
+    // docs: https://angular.io/guide/service-worker-communications#checking-for-updates
     this.coreService
       .appStableAwareInterval$(swCheckForUpdateInterval)
       .subscribe(() => this.swUpdate.checkForUpdate());
@@ -33,16 +34,27 @@ export class PwaService {
         filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY')
       )
       .subscribe(() => this.triggerSwUpdateAvailable());
+
+    // Service Worker unrecoverable state
+    // docs: https://angular.io/guide/service-worker-communications#handling-an-unrecoverable-state
+    this.swUpdate.unrecoverable
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe(() =>
+        this.triggerSwUpdateAvailable('Update is required.', 'warn')
+      );
   }
 
-  triggerSwUpdateAvailable() {
+  triggerSwUpdateAvailable(
+    detail = 'Please update.',
+    severity: 'info' | 'warn' | 'error' | 'success' = 'info'
+  ) {
     this.messageService.add({
       key: swUpdateAvailableComponentKey,
       sticky: true,
       closable: false,
-      severity: 'info',
+      severity,
       summary: 'A new version of the website is available.',
-      detail: 'Please update.',
+      detail,
     });
   }
 
