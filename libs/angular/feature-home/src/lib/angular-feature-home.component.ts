@@ -11,7 +11,6 @@ import {
   PageHomeFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
-import { resolveButtonStyle } from '@dehub/shared/utils';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -141,9 +140,5 @@ export class AngularFeatureHomeComponent implements OnInit {
             pageHomeCollection?.items[0] ?? undefined
         )
       );
-  }
-
-  resolveButton(type?: string, style?: string, size?: string) {
-    return resolveButtonStyle(type, style, size);
   }
 }
