@@ -5,7 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { CallToAction } from '@dehub/shared/model';
+import { CallToActionFragment } from '@dehub/shared/model';
 import { resolveButtonStyle, resolveColumnWidth } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
@@ -24,25 +24,27 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
         *ngIf="page.showSubtitle"
         [ngClass]="{
           'xl:w-6': page.headerColumnWidth === 'full',
-          'mb-7': !ctas
+          'mb-7': !page.ctasCollection?.items
         }"
         class="mt-1 line-height-4 font-light opacity-80"
       >
         {{ page.subtitle }}
       </h5>
 
-      <div *ngIf="ctas" class="mb-7">
-        <p-button
-          *ngFor="let cta of ctas"
-          pRipple
-          [dhbContentfulDraft]="cta.sys"
-          [label]="cta?.label || ''"
-          [icon]="cta?.icon || ''"
-          [routerLink]="cta?.routerLink || undefined"
-          [styleClass]="resolveButton(cta?.type, cta?.style, cta?.size)"
-          (onClick)="onButtonClicked($event, cta.externalLink)"
-        >
-        </p-button>
+      <div *ngIf="page.ctasCollection?.items as ctas" class="mb-7">
+        <ng-container *ngFor="let cta of ctas">
+          <p-button
+            *ngIf="cta"
+            pRipple
+            [dhbContentfulDraft]="cta.sys"
+            [label]="cta?.label || ''"
+            [icon]="cta?.icon || ''"
+            [routerLink]="cta?.routerLink || undefined"
+            [styleClass]="resolveButton(cta?.type, cta?.style, cta?.size)"
+            (onClick)="onButtonClicked($event, cta.externalLink)"
+          >
+          </p-button>
+        </ng-container>
       </div>
     </div>
   `,
@@ -58,11 +60,14 @@ export class PageHeaderComponent<
     showSubtitle?: boolean;
     headerColumnWidth?: string;
     headerAlignCenter?: boolean;
+    ctasCollection?: {
+      __typename?: string;
+      items: Array<CallToActionFragment | undefined>;
+    };
   }
 > implements OnInit
 {
   @Input() page?: P;
-  @Input() ctas?: CallToAction[];
 
   constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
 

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
-import { AsPipeModule } from '@dehub/angular/ui/pipes/as-pipe';
 import { AngularFeatureLearnRoutingModule } from './angular-feature-learn-routing.module';
 import { AngularFeatureLearnComponent } from './angular-feature-learn.component';
 
@@ -16,7 +15,6 @@ import { AngularFeatureLearnComponent } from './angular-feature-learn.component'
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
     PageSectionsModule,
-    AsPipeModule,
 
     AngularFeatureLearnRoutingModule,
   ],

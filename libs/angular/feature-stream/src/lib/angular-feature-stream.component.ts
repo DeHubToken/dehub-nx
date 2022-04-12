@@ -7,7 +7,6 @@ import {
 import { EnvToken, PageStreamCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import {
-  CallToAction,
   PageStreamFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
@@ -17,10 +16,7 @@ import { map, Observable } from 'rxjs';
   template: `
     <ng-container *ngIf="pageStream$ | async as pageStream" class="grid">
       <!-- Titles -->
-      <dhb-page-header
-        [page]="pageStream"
-        [ctas]="pageStream.ctasCollection?.items | as: CTAs"
-      ></dhb-page-header>
+      <dhb-page-header [page]="pageStream"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
@@ -34,8 +30,6 @@ import { map, Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureStreamComponent implements OnInit {
-  // TODO: refactor this to use a more elegant solution (e.g. custom fragment)
-  CTAs!: CallToAction[];
   pageStream$?: Observable<PageStreamFragment | undefined>;
 
   path = this.env.baseUrl;
