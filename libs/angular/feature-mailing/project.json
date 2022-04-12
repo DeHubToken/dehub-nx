@@ -18,7 +18,8 @@
         "lintFilePatterns": [
           "libs/angular/feature-mailing/src/**/*.ts",
           "libs/angular/feature-mailing/src/**/*.html"
-        ]
+        ],
+        "maxWarnings": 0
       }
     }
   },
