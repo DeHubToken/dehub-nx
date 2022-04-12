@@ -34,9 +34,9 @@ export class CoreService {
   /**
    * Loads the manifest for PWA.
    *
-   * <link rel="manifest" href="path/manifest.webmanifest" />
+   * <link rel="manifest" href="path/dehub.webmanifest" />
    */
-  loadManifest(manifestFile = 'manifest.webmanifest') {
+  loadManifest(manifestFile = 'dehub.webmanifest') {
     if (!this.env.production) return;
 
     const headEl = this.document.getElementsByTagName('head')[0];
