@@ -1,2 +1,2 @@
-export * from './deprecated';
+export * from './constants';
 export * from './networks';

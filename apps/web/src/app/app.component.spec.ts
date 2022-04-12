@@ -2,7 +2,9 @@ import { APP_BASE_HREF } from '@angular/common';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CoreService, EnvToken, GraphQLModule } from '@dehub/angular/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { EnvToken, GraphQLModule } from '@dehub/angular/core';
+import { MessageService } from 'primeng/api';
 import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -15,7 +17,15 @@ describe('AppComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [NoopAnimationsModule, RouterTestingModule, GraphQLModule],
+        imports: [
+          // Angular
+          NoopAnimationsModule,
+          RouterTestingModule,
+          ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+
+          // GraphQL
+          GraphQLModule,
+        ],
         declarations: [
           AppComponent,
           AppMainComponent,
@@ -24,7 +34,7 @@ describe('AppComponent', () => {
           AppFooterComponent,
         ],
         providers: [
-          CoreService,
+          MessageService,
           { provide: EnvToken, useValue: environment },
           {
             provide: APP_BASE_HREF,
