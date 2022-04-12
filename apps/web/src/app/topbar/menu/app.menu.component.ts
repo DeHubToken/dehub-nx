@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { menuItems } from '../../app-routing.module';
+import { PwaService } from '@dehub/angular/core';
+import { getMenuItems } from '../../app-routing.module';
 import { AppMainComponent } from '../../app.main.component';
 
 @Component({
@@ -25,7 +26,10 @@ import { AppMainComponent } from '../../app.main.component';
   `,
 })
 export class AppMenuComponent {
-  model = menuItems;
+  model = getMenuItems(this.pwaService);
 
-  constructor(public appMain: AppMainComponent) {}
+  constructor(
+    public appMain: AppMainComponent,
+    private pwaService: PwaService
+  ) {}
 }

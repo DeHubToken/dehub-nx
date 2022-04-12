@@ -32,16 +32,18 @@ export class PwaService {
         takeWhile(() => this.isAlive),
         filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY')
       )
-      .subscribe(() =>
-        this.messageService.add({
-          key: swUpdateAvailableComponentKey,
-          sticky: true,
-          closable: false,
-          severity: 'info',
-          summary: 'A new version of the website is available.',
-          detail: 'Please update.',
-        })
-      );
+      .subscribe(() => this.triggerSwUpdateAvailable());
+  }
+
+  triggerSwUpdateAvailable() {
+    this.messageService.add({
+      key: swUpdateAvailableComponentKey,
+      sticky: true,
+      closable: false,
+      severity: 'info',
+      summary: 'A new version of the website is available.',
+      detail: 'Please update.',
+    });
   }
 
   activateUpdate() {
