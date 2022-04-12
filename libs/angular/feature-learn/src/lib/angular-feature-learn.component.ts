@@ -7,7 +7,6 @@ import {
 import { EnvToken, PageLearnCollectionService } from '@dehub/angular/core';
 import { SharedEnv } from '@dehub/shared/config';
 import {
-  CallToAction,
   PageLearnFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
@@ -18,10 +17,7 @@ import { map } from 'rxjs/operators';
   template: `
     <ng-container *ngIf="pageLearn$ | async as pageLearn" class="grid">
       <!-- Titles -->
-      <dhb-page-header
-        [page]="pageLearn"
-        [ctas]="pageLearn.ctasCollection?.items | as: CTAs"
-      ></dhb-page-header>
+      <dhb-page-header [page]="pageLearn"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
@@ -35,8 +31,6 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureLearnComponent implements OnInit {
-  // TODO: refactor this to use a more elegant solution (e.g. custom fragment)
-  CTAs!: CallToAction[];
   pageLearn$?: Observable<PageLearnFragment | undefined>;
 
   path = this.env.baseUrl;

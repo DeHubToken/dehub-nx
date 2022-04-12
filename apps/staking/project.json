@@ -15,7 +15,7 @@
         "tsConfig": "apps/staking/tsconfig.app.json",
         "assets": [
           "apps/staking/src/assets",
-          "apps/staking/src/dehub.manifest",
+          "apps/staking/src/dehub.webmanifest",
           {
             "input": "libs/shared/asset/dehub/src/lib",
             "glob": "**/*",

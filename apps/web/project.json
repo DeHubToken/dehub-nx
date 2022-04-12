@@ -16,7 +16,7 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/web/src/assets",
-          "apps/web/src/manifest.webmanifest",
+          "apps/web/src/dehub.webmanifest",
           {
             "input": "libs/shared/asset/dehub/src/lib",
             "glob": "**/*",

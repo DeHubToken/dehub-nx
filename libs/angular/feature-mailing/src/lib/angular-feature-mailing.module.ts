@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Route } from '@angular/router';
-import { AngularFeatureLearnRoutingModule } from './angular-feature-mailing-routing.module';
+import { AngularFeatureMailingRoutingModule } from './angular-feature-mailing-routing.module';
 import { AngularFeatureMailingComponent } from './angular-feature-mailing.component';
 
 export const angularFeatureMailingRoutes: Route[] = [];
@@ -10,7 +10,8 @@ export const angularFeatureMailingRoutes: Route[] = [];
   imports: [
     // Angular Modules
     CommonModule,
-    AngularFeatureLearnRoutingModule,
+
+    AngularFeatureMailingRoutingModule,
   ],
   declarations: [AngularFeatureMailingComponent],
 })
