@@ -4,62 +4,60 @@ import { ReactComponent as WalletConnectIcon } from '@dehub/shared/asset/dehub/i
 import { MoralisWeb3ProviderType } from '@dehub/shared/model';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+import styled from 'styled-components';
+
 interface WalletModalProps {
   visible: boolean;
   onDismiss: () => void;
   doConnect: (provider: MoralisWeb3ProviderType) => void;
 }
 
+const WalletButton = styled(Button)`
+  color: var(--surface-500) !important;
+  &:hover {
+    color: white !important;
+    transform: scale(103%);
+  }
+`;
+
 const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
   return (
     <Dialog
       visible={visible}
       modal
-      className="p-fluid"
+      className="p-fluid border-neon-1"
       header="Connect Wallet"
       style={{ width: '350px' }}
       onHide={onDismiss}
     >
       <div className="mt-2 mb-3">
-        <Button
-          icon={
-            <MetaMaskIcon
-              style={{ width: '32px', height: '16px', paddingRight: '10px' }}
-            />
-          }
-          iconPos="left"
-          label="Metamask"
+        <WalletButton
+          className="flex justify-content-between text-500"
           onClick={() => doConnect('metamask')}
-        ></Button>
-      </div>
-      <div className="mt-2 mb-3 md:hidden">
-        <Button
-          icon={
+        >
+          <div>Browser Wallet</div>
+          <div className="flex flex-row align-items-center">
+            <MetaMaskIcon style={{ width: '32px', height: '16px' }} />
             <TrustWalletIcon
               style={{
                 width: '32px',
                 height: '20px',
-                paddingRight: '10px',
-                marginLeft: '-1px',
               }}
             />
-          }
-          iconPos="left"
-          label="Trust Wallet"
-          onClick={() => doConnect('metamask')}
-        ></Button>
+          </div>
+        </WalletButton>
       </div>
+
       <div className="mt-2 mb-3">
-        <Button
-          icon={
-            <WalletConnectIcon
-              style={{ width: '32px', height: '11px', paddingRight: '10px' }}
-            />
-          }
-          iconPos="left"
-          label="WalletConnect"
+        <WalletButton
+          className="flex justify-content-between text-500"
           onClick={() => doConnect('walletconnect')}
-        ></Button>
+        >
+          <div>WalletConnect</div>
+          <div className="flex flex-row align-items-center">
+            <WalletConnectIcon style={{ width: '32px', height: '11px' }} />
+          </div>
+        </WalletButton>
       </div>
     </Dialog>
   );
