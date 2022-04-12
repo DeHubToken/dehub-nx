@@ -33,13 +33,14 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
       <div *ngIf="ctas" class="mb-7">
         <p-button
-          *ngFor="let item of ctas"
+          *ngFor="let cta of ctas"
           pRipple
-          [label]="item?.label || ''"
-          [icon]="item?.icon || ''"
-          [routerLink]="item?.routerLink || undefined"
-          [styleClass]="resolveButton(item?.type, item?.style, item?.size)"
-          (onClick)="onButtonClicked($event, item.externalLink)"
+          [dhbContentfulDraft]="cta.sys"
+          [label]="cta?.label || ''"
+          [icon]="cta?.icon || ''"
+          [routerLink]="cta?.routerLink || undefined"
+          [styleClass]="resolveButton(cta?.type, cta?.style, cta?.size)"
+          (onClick)="onButtonClicked($event, cta.externalLink)"
         >
         </p-button>
       </div>
