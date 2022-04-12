@@ -46,7 +46,7 @@ const PageMeta = ({ baseUrl, title }: { baseUrl: string; title: string }) => {
         type="text/css"
         href={`${baseUrl}/primeicons.css`}
       />
-      <link rel="manifest" href={`${baseUrl}/dehub.manifest`} />
+      <link rel="manifest" href={`${baseUrl}/dehub.webmanifest`} />
     </Helmet>
   );
 };
