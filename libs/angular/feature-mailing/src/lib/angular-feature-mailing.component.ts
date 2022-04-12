@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MailingListFormComponent } from '@dehub/angular/ui/components/mailing-list-form';
 import { DialogService } from 'primeng/dynamicdialog';
+import { MailingListFormComponent } from './components/mailing-list-form.component';
 
 @Component({
   selector: 'dhb-mailing-modal',
   template: ``,
-  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureMailingComponent implements OnInit {
