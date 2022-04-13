@@ -8,12 +8,14 @@ import { swUpdateAvailableComponentKey } from '@dehub/shared/config';
       [key]="key"
       (onClose)="onCancel()"
       [baseZIndex]="5000"
-      position="bottom-left"
+      [breakpoints]="{ '600px': { width: '100%', left: '0', right: '0' } }"
+      [styleClass]="'opacity-100'"
+      position="bottom-right"
     >
       <ng-template let-message pTemplate="message">
         <div class="flex flex-column" style="flex: 1">
-          <div class="text-center">
-            <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+          <div class="text-center pt-2 pb-4">
+            <i class="fa-duotone fa-circle-exclamation text-6xl"></i>
             <h4>{{ message.summary }}</h4>
             <p>{{ message.detail }}</p>
           </div>
@@ -25,7 +27,7 @@ import { swUpdateAvailableComponentKey } from '@dehub/shared/config';
                 pRipple
                 (click)="onUpdate()"
                 label="Update"
-                class="p-button-primary"
+                [class]="resolveButtonClass(message.severity)"
               ></button>
             </div>
             <div class="col-6">
@@ -35,7 +37,9 @@ import { swUpdateAvailableComponentKey } from '@dehub/shared/config';
                 pRipple
                 (click)="onCancel()"
                 label="Not now"
-                class="p-button-primary"
+                [class]="
+                  'p-button-outlined ' + resolveButtonClass(message.severity)
+                "
               ></button>
             </div>
           </div>
@@ -60,5 +64,18 @@ export class SwUpdateAvailableComponent implements OnInit {
 
   onCancel() {
     this.cancel.next();
+  }
+
+  resolveButtonClass(severity: 'info' | 'warn' | 'error' | 'success') {
+    switch (severity) {
+      case 'info':
+        return 'p-button-info';
+      case 'warn':
+        return 'p-button-warning';
+      case 'error':
+        return 'p-button-danger';
+      case 'success':
+        return 'p-button-success';
+    }
   }
 }
