@@ -1,15 +1,26 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { ApplicationRef, Inject, Injectable } from '@angular/core';
 import { SharedEnv } from '@dehub/shared/config';
+import { interval, SchedulerLike } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
 import { EnvToken } from '../models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CoreService {
   public path = `${this.env.baseUrl}`;
 
+  /**
+   * All RxJS timers should start after this stable state
+   * Source: https://angular.io/api/core/ApplicationRef#isstable-examples-and-caveats
+   */
+  private appIsStable$ = this.appRef.isStable.pipe(
+    first(isStable => isStable === true)
+  );
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    @Inject(EnvToken) private env: SharedEnv
+    @Inject(EnvToken) private env: SharedEnv,
+    private appRef: ApplicationRef
   ) {}
 
   /**
@@ -45,5 +56,9 @@ export class CoreService {
     manifestLinkEl.rel = 'manifest';
     manifestLinkEl.href = `${this.path}/${manifestFile}`;
     headEl.appendChild(manifestLinkEl);
+  }
+
+  appStableAwareInterval$(period?: number, scheduler?: SchedulerLike) {
+    return this.appIsStable$.pipe(switchMap(() => interval(period, scheduler)));
   }
 }

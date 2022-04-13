@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
+import { PwaService } from '@dehub/angular/core';
 import { MenuItem } from 'primeng/api';
 // import { MenuItem } from '@dehub/shared/model';
 import { environment } from '../environments/environment';
@@ -16,7 +17,7 @@ enum NavigationTabMenu {
   Legal = 'legal',
 }
 
-export const menuItems: MenuItem[] = [
+export const getMenuItems = (pwaService: PwaService): MenuItem[] => [
   {
     label: 'Dapps',
     items: [
@@ -29,6 +30,17 @@ export const menuItems: MenuItem[] = [
         label: 'Test Mailing Modal',
         routerLink: ['/', { outlets: { modal: ['mailing', 'subscribe'] } }],
         icon: 'far fa-link',
+      },
+      {
+        label: 'Test PWA Info Toast',
+        command: () => pwaService.triggerSwUpdateAvailable(),
+        icon: 'fa-regular fa-circle-exclamation',
+      },
+      {
+        label: 'Test PWA Warn Toast',
+        command: () =>
+          pwaService.triggerSwUpdateAvailable('Update is required.', 'warn'),
+        icon: 'fa-regular fa-triangle-exclamation',
       },
     ],
   },
