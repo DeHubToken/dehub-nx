@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
-import {
-  swCheckForUpdateInterval,
-  swUpdateAvailableComponentKey,
-} from '@dehub/shared/config';
+import { SwUpdateConfig } from '@dehub/shared/config';
 import { MessageService } from 'primeng/api';
 import { filter, takeWhile } from 'rxjs/operators';
 import { CoreService } from '.';
@@ -24,47 +21,52 @@ export class PwaService {
     // Service Worker check for update
     // docs: https://angular.io/guide/service-worker-communications#checking-for-updates
     this.coreService
-      .appStableAwareInterval$(swCheckForUpdateInterval)
+      .appStableAwareInterval$(SwUpdateConfig.checkForUpdateInterval)
       .subscribe(() => this.swUpdate.checkForUpdate());
 
-    // Service Worker update available
+    // Service Worker Version Ready
     this.swUpdate.versionUpdates
       .pipe(
         takeWhile(() => this.isAlive),
         filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY')
       )
-      .subscribe(() => this.triggerSwUpdateAvailable());
+      .subscribe(({ latestVersion: { hash } }) =>
+        this.triggerSwUpdateAvailable('info', hash)
+      );
 
     // Service Worker unrecoverable state
     // docs: https://angular.io/guide/service-worker-communications#handling-an-unrecoverable-state
     this.swUpdate.unrecoverable
       .pipe(takeWhile(() => this.isAlive))
-      .subscribe(() =>
-        this.triggerSwUpdateAvailable('Update is required.', 'warn')
-      );
+      .subscribe(() => this.triggerSwUpdateAvailable('warn'));
   }
 
   triggerSwUpdateAvailable(
-    detail = 'Please update.',
-    severity: 'info' | 'warn' | 'error' | 'success' = 'info'
+    severity: 'info' | 'warn' | 'error' | 'success',
+    hash?: string
   ) {
+    const detail =
+      severity === 'warn'
+        ? SwUpdateConfig.msgAvailableDetailWarn
+        : SwUpdateConfig.msgAvailableDetailInfo;
+
     this.messageService.add({
-      key: swUpdateAvailableComponentKey,
+      key: SwUpdateConfig.componentKey,
       sticky: true,
       closable: false,
       severity,
-      summary: 'A new version of the website is available.',
+      summary: SwUpdateConfig.msgAvailableSummary,
       detail,
+      data: { hash: hash?.slice(-4) },
     });
   }
 
   activateUpdate() {
-    this.messageService.clear();
-    this.swUpdate.activateUpdate().then(() => window.location.reload());
+    this.swUpdate.activateUpdate().finally(() => window.location.reload());
   }
 
   cancelUpdate() {
-    this.messageService.clear(swUpdateAvailableComponentKey);
+    this.messageService.clear(SwUpdateConfig.componentKey);
   }
 
   unsubscribeNotifications() {
