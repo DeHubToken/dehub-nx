@@ -33,13 +33,12 @@ export const getMenuItems = (pwaService: PwaService): MenuItem[] => [
       },
       {
         label: 'Test PWA Info Toast',
-        command: () => pwaService.triggerSwUpdateAvailable(),
+        command: () => pwaService.triggerSwUpdateAvailable('info', 'xxxx'),
         icon: 'fa-regular fa-circle-exclamation',
       },
       {
         label: 'Test PWA Warn Toast',
-        command: () =>
-          pwaService.triggerSwUpdateAvailable('Update is required.', 'warn'),
+        command: () => pwaService.triggerSwUpdateAvailable('warn', 'xxxx'),
         icon: 'fa-regular fa-triangle-exclamation',
       },
     ],

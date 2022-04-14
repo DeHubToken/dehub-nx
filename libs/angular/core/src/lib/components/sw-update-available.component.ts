@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { swUpdateAvailableComponentKey } from '@dehub/shared/config';
+import { SwUpdateConfig } from '@dehub/shared/config';
 
 @Component({
   selector: 'dhb-sw-update-available',
@@ -8,6 +8,7 @@ import { swUpdateAvailableComponentKey } from '@dehub/shared/config';
       [key]="key"
       (onClose)="onCancel()"
       [baseZIndex]="5000"
+      [preventOpenDuplicates]="true"
       [breakpoints]="{ '600px': { width: '100%', left: '0', right: '0' } }"
       [styleClass]="'opacity-100'"
       position="bottom-right"
@@ -17,7 +18,7 @@ import { swUpdateAvailableComponentKey } from '@dehub/shared/config';
           <div class="text-center pt-2 pb-4">
             <i class="fa-duotone fa-circle-exclamation text-6xl"></i>
             <h4>{{ message.summary }}</h4>
-            <p>{{ message.detail }}</p>
+            <p>{{ message.detail }} {{ message.data.hash }}</p>
           </div>
           <div class="grid p-fluid">
             <div class="col-6">
@@ -52,7 +53,7 @@ export class SwUpdateAvailableComponent implements OnInit {
   @Output() update = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
-  key = swUpdateAvailableComponentKey;
+  key = SwUpdateConfig.componentKey;
 
   constructor() {}
 
