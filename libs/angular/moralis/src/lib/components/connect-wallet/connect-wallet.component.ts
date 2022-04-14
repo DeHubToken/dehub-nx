@@ -5,7 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { EnvToken } from '@dehub/angular/core';
+import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import {
   MoralisWeb3ProviderType,
@@ -15,7 +15,6 @@ import {
 import { shortenAddress } from '@dehub/shared/utils';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { MoralisService } from '../../services/moralis.service';
 
 @Component({
   selector: 'dhb-connect-wallet',
@@ -64,7 +63,7 @@ export class ConnectWalletComponent implements OnInit {
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
-    private moralisService: MoralisService
+    @Inject(MoralisToken) private moralisService: IMoralisService
   ) {}
 
   ngOnInit() {

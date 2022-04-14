@@ -8,7 +8,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { DehubMoralisService } from '@dehub/angular/moralis';
+import { DehubMoralisToken, IDehubMoralisService } from '@dehub/angular/model';
 import { WINDOW } from '@ng-web-apis/common';
 import { first } from 'rxjs/operators';
 
@@ -22,9 +22,9 @@ export class CanPlayDirective implements OnInit {
 
   constructor(
     @Inject(WINDOW) private readonly windowRef: Window,
+    @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
     private renderer: Renderer2,
     private el: ElementRef,
-    private dehubMoralis: DehubMoralisService,
     private router: Router
   ) {}
 

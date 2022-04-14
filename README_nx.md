@@ -14,11 +14,11 @@ This project was generated using [Nx](https://nx.dev).
    ```
 1. Generate Angular app:
    ```
-   nx generate @nrwl/angular:application --name=web --style=scss --prefix=dhb --routing --standaloneConfig
+   npx nx generate @nrwl/angular:application --name=web --style=scss --prefix=dhb --routing --standaloneConfig
    ```
 1. Generate Angular app feature:
    ```
-   nx generate @nrwl/angular:library --name=feature-home --directory=angular --importPath=@dehub/angular/feature-home --prefix=dhb --routing --standaloneConfig --tags='scope:angular, type:feature'
+   npx nx generate @nrwl/angular:library --name=feature-home --directory=angular --importPath=@dehub/angular/feature-home --prefix=dhb --routing --standaloneConfig --tags='scope:angular, type:feature'
    ```
 1. Local website serving with [lite-server](https://github.com/johnpapa/lite-server)
    ```
@@ -49,7 +49,7 @@ This project was generated using [Nx](https://nx.dev).
    ```
 
    ```
-   nx generate @nrwl/react:application --name=raffle --style=scss --standaloneConfig --strict
+   npx nx generate @nrwl/react:application --name=raffle --style=scss --standaloneConfig --strict
    ```
 
    upgrade to [webpack 5](https://nx.dev/l/r/guides/webpack-5#webpack-5-for-react-apps)
@@ -62,97 +62,103 @@ This project was generated using [Nx](https://nx.dev).
    **Freya** _Used to store Primefaces template assets_
 
    ```
-   nx generate @nrwl/workspace:library --name=freya --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
+   npx nx generate @nrwl/workspace:library --name=freya --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
 
    **DeHUB** _Used to store common assets like logo, etc._
 
    ```
-   nx generate @nrwl/workspace:library --name=dehub --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
+   npx nx generate @nrwl/workspace:library --name=dehub --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
 
 1. Generate Shared Models _used for types, states, custom models_
 
    ```
-   nx generate @nrwl/workspace:library --name=models --directory=shared --standaloneConfig --strict
+   npx nx generate @nrwl/workspace:library --name=models --directory=shared --standaloneConfig --strict
 
    ```
 
 1. Generate Shared Utils _used for utilities, and common functions_
 
    ```
-   nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
+   npx nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
    ```
 
 1. Generate Config lib:
 
    ```
-   nx generate @nrwl/workspace:library --name=config --directory=shared --standaloneConfig --strict
+   npx nx generate @nrwl/workspace:library --name=config --directory=shared --standaloneConfig --strict
    ```
 
 1. Generate Utils lib:
 
    ```
-   nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
+   npx nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
    ```
 
 1. Generate React lib:
 
    ```
-   nx generate @nrwl/react:lib --name=ui --directory=react --standaloneConfig --strict
+   npx nx generate @nrwl/react:lib --name=ui --directory=react --standaloneConfig --strict
 
-   nx generate @nrwl/react:lib --name=core --directory=react --standaloneConfig --strict
+   npx nx generate @nrwl/react:lib --name=core --directory=react --standaloneConfig --strict
 
-   nx generate @nrwl/react:lib --name=pcsuikit --directory=react --standaloneConfig --strict
+   npx nx generate @nrwl/react:lib --name=pcsuikit --directory=react --standaloneConfig --strict
    ```
 
 1. Generate Moralis Cloud lib:
 
    ```
-   nx generate @nrwl/js:library --name=cloud --directory=moralis --importPath=@dehub/moralis/cloud --publishable --tags='scope:shared, type:util'
+   npx nx generate @nrwl/js:library --name=cloud --directory=moralis --importPath=@dehub/moralis/cloud --publishable --tags='scope:shared, type:util'
    ```
 
 1. Run Commands generation
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='npm run web:deploy:prod-draft' --project=web
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='npm run web:deploy:prod-draft' --project=web
    ```
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run web:deploy:prod' --project=web
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run web:deploy:prod' --project=web
    ```
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='npm run raffle:deploy:prod-draft' --project=raffle
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='npm run raffle:deploy:prod-draft' --project=raffle
    ```
 
    ```
-   nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run raffle:deploy:prod' --project=raffle
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run raffle:deploy:prod' --project=raffle
    ```
 
 1. Generate Angular lazy module under web:
 
    ```
-   nx generate @schematics/angular:module --name=team --project=web --path=apps/web/src/app/modules --routing
+   npx nx generate @schematics/angular:module --name=team --project=web --path=apps/web/src/app/modules --routing
 
    ```
 
 1. Generate Angular component for landing page:
 
    ```
-   nx generate @schematics/angular:component --name=landing-slogen --project=web --style=scss --changeDetection=OnPush --inlineStyle --inlineTemplate --path=apps/web/src/app/view/landing --skipTests
+   npx nx generate @schematics/angular:component --name=landing-slogen --project=web --style=scss --changeDetection=OnPush --inlineStyle --inlineTemplate --path=apps/web/src/app/view/landing --skipTests
    ```
 
 1. Generate Angular Core lib:
 
    ```
-   nx generate @nrwl/angular:library --name=core --directory=angular --standaloneConfig --strict
+   npx nx generate @nrwl/angular:library --name=core --directory=angular --standaloneConfig --strict
    ```
 
 1. Generate Angular Moralis lib:
 
    ```
-   nx generate @nrwl/angular:library --name=moralis --directory=angular --standaloneConfig
+   npx nx generate @nrwl/angular:library --name=moralis --directory=angular --standaloneConfig
+   ```
+
+1. Generate Angular Model lib:
+
+   ```
+   npx nx generate @nrwl/angular:library --name=model --directory=angular --importPath=@dehub/angular/model --prefix=dhb --simpleModuleName --skipModule --standaloneConfig --tags='scope:angular, type:model'
    ```
 
 # Monorepo Tagging

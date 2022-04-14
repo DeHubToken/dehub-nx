@@ -8,11 +8,8 @@ import {
   ServiceWorkerModule,
   SwRegistrationOptions,
 } from '@angular/service-worker';
-import {
-  AngularCoreModule,
-  EnvToken,
-  GraphQLModule,
-} from '@dehub/angular/core';
+import { AngularCoreModule, GraphQLModule } from '@dehub/angular/core';
+import { EnvToken } from '@dehub/angular/model';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button';
 import { BuyDehubFloozModule } from '@dehub/angular/ui/components/buy-dehub-flooz';

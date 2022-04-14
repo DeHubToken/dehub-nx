@@ -1,18 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
+import { EnvToken, ILoggerService } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
-import { EnvToken } from '../models';
-
-export interface LoggerService {
-  info: (message: string, ...optionalParams: unknown[]) => void;
-  warn: (message: string, ...optionalParams: unknown[]) => void;
-  error: (message: string, error?: Error) => void;
-}
 
 /**
  * Simple Console Logger Service
  */
 @Injectable()
-export class ConsoleLoggerService implements LoggerService {
+export class ConsoleLoggerService implements ILoggerService {
   constructor(@Inject(EnvToken) private env: SharedEnv) {}
 
   info(message: string, ...optionalParams: unknown[]) {
