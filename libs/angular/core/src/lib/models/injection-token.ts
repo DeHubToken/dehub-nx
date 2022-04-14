@@ -5,5 +5,5 @@ import { LoggerService } from '../services';
 /** Token for providing shared environment */
 export const EnvToken = new InjectionToken<SharedEnv>('Environment');
 
-/** Token for provideing Logger Service */
+/** Token for providing Logger Service */
 export const LoggerToken = new InjectionToken<LoggerService>('Logger Service');

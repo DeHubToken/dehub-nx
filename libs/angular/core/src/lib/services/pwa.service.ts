@@ -3,7 +3,7 @@ import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import { SwUpdateConfig } from '@dehub/shared/config';
 import { MessageService } from 'primeng/api';
 import { filter, takeWhile } from 'rxjs/operators';
-import { CoreService } from '.';
+import { CoreService } from './core.service';
 
 @Injectable({ providedIn: 'root' })
 export class PwaService {
