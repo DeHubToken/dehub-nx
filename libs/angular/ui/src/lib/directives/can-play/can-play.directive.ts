@@ -8,7 +8,6 @@ import {
   Renderer2,
 } from '@angular/core';
 import { Router } from '@angular/router';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { DehubMoralisService } from '@dehub/angular/moralis';
 import { WINDOW } from '@ng-web-apis/common';
 import { first } from 'rxjs/operators';
