@@ -3,7 +3,6 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { GraphQLModule } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { MessageService } from 'primeng/api';
 import { Env } from '../environments/env';

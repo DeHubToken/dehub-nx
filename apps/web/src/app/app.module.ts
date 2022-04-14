@@ -9,7 +9,6 @@ import {
   SwRegistrationOptions,
 } from '@angular/service-worker';
 import { AngularCoreModule } from '@dehub/angular/core';
-import { GraphQLModule } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button';
@@ -47,8 +46,7 @@ const { appId, serverUrl } = environment.moralis;
     MenuModule,
     DynamicDialogModule,
 
-    // Core
-    GraphQLModule,
+    // Optional feature modules
     AngularCoreModule.forRoot(),
     AngularMoralisModule.forRoot({ appId, serverUrl }),
 

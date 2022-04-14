@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { GraphQLModule } from '@dehub/angular/graphql';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { YoutubeEmbedModule } from '@dehub/angular/ui/components/youtube-embed';
@@ -9,17 +10,18 @@ import { AngularFeatureHomeRoutingModule } from './angular-feature-home-routing.
 import { AngularFeatureHomeComponent } from './angular-feature-home.component';
 @NgModule({
   imports: [
-    // Angular Modules
+    // Angular
     CommonModule,
 
-    // Lib Modules
+    // Libs
+    GraphQLModule,
     ContentfulDraftDirectiveModule,
     YoutubeVideoIdPipeModule,
     YoutubeEmbedModule,
     PageHeaderModule,
     PageSectionsModule,
 
-    // PrimeNg Modules
+    // PrimeNg
 
     AngularFeatureHomeRoutingModule,
   ],
