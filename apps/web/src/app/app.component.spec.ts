@@ -22,9 +22,6 @@ describe('AppComponent', () => {
           NoopAnimationsModule,
           RouterTestingModule,
           ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
-
-          // GraphQL
-          GraphQLModule,
         ],
         declarations: [
           AppComponent,
