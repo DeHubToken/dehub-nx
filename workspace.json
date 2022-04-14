@@ -11,6 +11,7 @@
     "angular-feature-news": "libs/angular/feature-news",
     "angular-feature-shop": "libs/angular/feature-shop",
     "angular-feature-stream": "libs/angular/feature-stream",
+    "angular-graphql": "libs/angular/graphql",
     "angular-model": "libs/angular/model",
     "angular-moralis": "libs/angular/moralis",
     "angular-ui": "libs/angular/ui",

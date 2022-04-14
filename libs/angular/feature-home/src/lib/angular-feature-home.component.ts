@@ -4,7 +4,7 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { PageHomeCollectionService } from '@dehub/angular/core';
+import { PageHomeCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageHomeFragment, SwiperResponsiveOptions } from '@dehub/shared/model';

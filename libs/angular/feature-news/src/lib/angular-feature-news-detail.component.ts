@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BasicPostCollectionBySlugService } from '@dehub/angular/core';
+import { BasicPostCollectionBySlugService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { BasicPostDetailFragment } from '@dehub/shared/model';
