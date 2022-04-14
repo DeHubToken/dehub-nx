@@ -5,10 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  EnvToken,
-  LegalPostCollectionBySlugService,
-} from '@dehub/angular/core';
+import { LegalPostCollectionBySlugService } from '@dehub/angular/graphql';
+import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { LegalPostFragment } from '@dehub/shared/model';
 import { filterEmpty } from '@dehub/shared/utils';

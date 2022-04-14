@@ -75,7 +75,7 @@
               },
               {
                 "sourceTag": "type:model",
-                "onlyDependOnLibsWithTags": ["type:model"]
+                "onlyDependOnLibsWithTags": ["type:model", "type:config"]
               },
               {
                 "sourceTag": "type:config",

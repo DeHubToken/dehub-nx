@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { ApplicationRef, Inject, Injectable } from '@angular/core';
+import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { interval, SchedulerLike } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';
-import { EnvToken } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class CoreService {

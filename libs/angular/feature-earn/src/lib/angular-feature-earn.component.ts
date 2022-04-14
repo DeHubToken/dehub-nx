@@ -4,7 +4,8 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { EnvToken, PageEarnCollectionService } from '@dehub/angular/core';
+import { PageEarnCollectionService } from '@dehub/angular/graphql';
+import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageEarnFragment } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';

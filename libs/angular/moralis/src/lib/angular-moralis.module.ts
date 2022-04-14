@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { DehubMoralisToken, MoralisToken } from '@dehub/angular/model';
 import { LoaderModule } from '@dehub/angular/ui/components/loader';
+import { StartOptions } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -12,7 +13,6 @@ import {
   ConnectWalletComponent,
   ConnectWalletDialogComponent,
 } from './components/connect-wallet';
-import { StartOptions } from './models/moralis.models';
 import { DehubMoralisService, MoralisService } from './services';
 
 const primeNgModules = [
@@ -54,8 +54,8 @@ export class AngularMoralisModule {
           useFactory: () => initializeMoralis,
           multi: true,
         },
-        MoralisService,
-        DehubMoralisService,
+        { provide: MoralisToken, useClass: MoralisService },
+        { provide: DehubMoralisToken, useClass: DehubMoralisService },
       ],
     };
   }

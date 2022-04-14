@@ -4,7 +4,7 @@ import {
   Inject,
   OnDestroy,
 } from '@angular/core';
-import { EnvToken } from '@dehub/angular/core';
+import { EnvToken } from '@dehub/angular/model';
 import { BuyDehubFloozComponent } from '@dehub/angular/ui/components/buy-dehub-flooz';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';

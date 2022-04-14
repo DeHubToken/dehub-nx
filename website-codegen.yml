@@ -37,9 +37,9 @@ generates:
       - typescript-graphql-request
 
   ##############################################################################################
-  # Angular Core GraphQL Services
+  # Angular GraphQL Services
   ##############################################################################################
-  libs/angular/core/src/lib/services/website-contentful.service.ts:
+  libs/angular/graphql/src/lib/services/website-contentful.service.ts:
     plugins:
       - add:
           content:

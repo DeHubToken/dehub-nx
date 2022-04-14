@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { GraphQLModule } from '@dehub/angular/graphql';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
@@ -8,18 +9,18 @@ import { AngularFeatureNewsDetailComponent } from './angular-feature-news-detail
 import { AngularFeatureNewsRoutingModule } from './angular-feature-news-routing.module';
 import { AngularFeatureNewsComponent } from './angular-feature-news.component';
 import { BasicPostDetailComponent } from './components/basic-post-detail.component';
-
 @NgModule({
   imports: [
-    // Angular Modules
+    // Angular
     CommonModule,
 
-    // Lib Modules
+    // Libs
+    GraphQLModule,
     ContentfulDraftDirectiveModule,
     ContentfulRichMarkupPipeModule,
     SafeHtmlPipeModule,
 
-    // PrimeNg Modules
+    // PrimeNg
     ButtonModule,
 
     AngularFeatureNewsRoutingModule,

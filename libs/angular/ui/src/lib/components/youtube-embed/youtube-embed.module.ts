@@ -11,7 +11,7 @@ import { YoutubeEmbedComponent } from './youtube-embed.component';
     CommonModule,
     YouTubePlayerModule,
 
-    // Lib Modules
+    // Libs
     YoutubeVideoIdPipeModule,
   ],
   exports: [YoutubeEmbedComponent],
