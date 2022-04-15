@@ -37,8 +37,6 @@ export const Networks: { [key: number]: NetworkInfo } = {
       decimals: 18,
     },
     blockExplorerUrl: 'https://testnet.bscscan.com',
-    nodes: [
-      'https://speedy-nodes-nyc.moralis.io/67d501c9b939411392ca9321/bsc/testnet',
-    ],
+    nodes: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
   },
 };

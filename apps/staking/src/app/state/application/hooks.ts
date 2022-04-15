@@ -1,8 +1,6 @@
-import { useRefresh } from '@dehub/react/core';
-import { WalletConnectingState } from '@dehub/shared/model';
+import { useRefresh, useWeb3Context } from '@dehub/react/core';
 import BigNumber from 'bignumber.js';
-import { useCallback, useEffect, useMemo } from 'react';
-import { useChain, useMoralis } from 'react-moralis';
+import { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
 import { getChainId } from '../../config/constants';
@@ -13,7 +11,6 @@ import {
   fetchUserInfos,
   setApplicationStatus,
   setPools,
-  setWalletConnectingState,
 } from './';
 import { fetchPools, fetchPoolsPaused } from './helpers';
 import {
@@ -31,24 +28,6 @@ export const useApplicationStatus = (): ApplicationStatus => {
   return useSelector((state: AppState) => state.application.applicationStatus);
 };
 
-export const useWalletConnectingState = (): WalletConnectingState => {
-  return useSelector(
-    (state: AppState) => state.application.walletConnectingState
-  );
-};
-
-export const useSetWalletConnectingState = (): ((
-  connectingState: WalletConnectingState
-) => void) => {
-  const dispatch = useAppDispatch();
-  return useCallback(
-    (connectingState: WalletConnectingState) => {
-      dispatch(setWalletConnectingState({ connectingState }));
-    },
-    [dispatch]
-  );
-};
-
 export const useDehubBusdPrice = (): BigNumber => {
   const dehubPriceAsString = useSelector(
     (state: AppState) => state.application.dehubPrice
@@ -64,7 +43,7 @@ export const useDehubBusdPrice = (): BigNumber => {
 export const useFetchPools = () => {
   const dispatch = useAppDispatch();
   const { slowRefresh, fastRefresh } = useRefresh();
-  const { isInitialized, account } = useMoralis();
+  const { isInitialized, account } = useWeb3Context();
 
   const contracts: StakingContractProperties[] | null = useStakingContracts();
 
@@ -208,7 +187,7 @@ export const useStakes = (): {
 };
 
 export function useBlockNumber(): number | undefined {
-  const { chainId } = useChain();
+  const { chainId } = useWeb3Context();
 
   return useSelector(
     (state: AppState) => state.application.blockNumber[chainId ?? -1]

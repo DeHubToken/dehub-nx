@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ConnectContext } from '../contexts/ConnectContext';
 
-export const useConnectContext = () => {
+export const useWeb3Context = () => {
   const context = useContext(ConnectContext);
   if (!context) {
     throw new Error(

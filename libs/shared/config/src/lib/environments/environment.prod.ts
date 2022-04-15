@@ -24,5 +24,6 @@ export const defaultSharedProdEnv: SharedEnv = {
         multiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
       },
     },
+    fortmatic: 'pk_live_3A6FAF91DA1D46C5',
   },
 };

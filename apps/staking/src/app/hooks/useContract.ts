@@ -1,7 +1,8 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { getContract } from '@dehub/shared/utils';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
-import { useMoralis } from 'react-moralis';
+import { getChainId } from '../config/constants';
 import {
   useBNBRewardContract,
   useStakingContracts,
@@ -20,7 +21,7 @@ export function useContract(
   ABI?: any,
   withSignerIfPossible = true
 ): Contract | null {
-  const { account, web3 } = useMoralis();
+  const { account, web3 } = useWeb3Context();
 
   return useMemo(() => {
     if (!address || !ABI || !web3) return null;
@@ -39,10 +40,14 @@ export function useContract(
 }
 
 export const useDehubContract = (): Contract | null => {
-  const { web3 } = useMoralis();
+  const { web3, chainId } = useWeb3Context();
+
   return useMemo(
-    () => (web3 ? getBep20Contract(getDehubAddress(), web3.getSigner()) : null),
-    [web3]
+    () =>
+      web3 && chainId === getChainId()
+        ? getBep20Contract(getDehubAddress(), web3.getSigner())
+        : null,
+    [web3, chainId]
   );
 };
 
@@ -53,13 +58,17 @@ export const useBnbContract = (): Contract | null => {
 export const usePickStakingContract = (
   contractIndex: number
 ): Contract | null => {
-  const { web3, account } = useMoralis();
+  const { web3, account, chainId } = useWeb3Context();
 
   const contracts: StakingContractProperties[] | null = useStakingContracts();
 
   return useMemo(
     () =>
-      web3 && account && contracts && contracts.length > contractIndex
+      web3 &&
+      account &&
+      contracts &&
+      contracts.length > contractIndex &&
+      chainId === contracts[contractIndex].chainId
         ? getContract(
             contracts[contractIndex].address,
             contracts[contractIndex].abi,
@@ -67,34 +76,34 @@ export const usePickStakingContract = (
             account
           )
         : null,
-    [web3, account, contracts, contractIndex]
+    [web3, account, chainId, contracts, contractIndex]
   );
 };
 
 export const usePickStakingControllerContract = (): Contract | null => {
-  const { web3, account } = useMoralis();
+  const { web3, account, chainId } = useWeb3Context();
 
   const controller: ContractProperties | null = useStakingControllerContract();
 
   return useMemo(
     () =>
-      web3 && account && controller
+      web3 && account && controller && chainId === controller.chainId
         ? getContract(controller.address, controller.abi, web3, account)
         : null,
-    [web3, account, controller]
+    [web3, account, chainId, controller]
   );
 };
 
 export const usePickBNBRewardsContract = (): Contract | null => {
-  const { web3, account } = useMoralis();
+  const { web3, account, chainId } = useWeb3Context();
 
   const contract: ContractProperties | null = useBNBRewardContract();
 
   return useMemo(
     () =>
-      web3 && account && contract
+      web3 && account && contract && chainId === contract.chainId
         ? getContract(contract.address, contract.abi, web3, account)
         : null,
-    [web3, account, contract]
+    [web3, account, chainId, contract]
   );
 };

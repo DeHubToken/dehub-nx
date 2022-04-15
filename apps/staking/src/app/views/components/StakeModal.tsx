@@ -1,4 +1,4 @@
-import { ConnectWalletButton } from '@dehub/react/core';
+import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
 import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
@@ -16,7 +16,6 @@ import { Dialog } from 'primereact/dialog';
 import { Slider, SliderChangeParams } from 'primereact/slider';
 import { Toast } from 'primereact/toast';
 import React, { useEffect, useRef, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import {
   useDehubContract,
@@ -71,7 +70,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   open,
   onHide,
 }) => {
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const stakingController: Contract | null = usePickStakingControllerContract();
   const stakingContract: Contract | null = usePickStakingContract(poolIndex);
   const dehubContract = useDehubContract();

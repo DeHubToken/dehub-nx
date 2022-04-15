@@ -4,8 +4,7 @@ import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import React, { useEffect, useState } from 'react';
-import { useMoralis } from 'react-moralis';
-import { useConnectContext } from '../../hooks';
+import { useWeb3Context } from '../../hooks';
 import UserMenu from '../UserMenu';
 
 const initMessage = {
@@ -36,14 +35,15 @@ const withLayout =
     const [showLoader, setShowLoader] = useState(false);
     const [message, setMessage] = useState(initMessage);
 
-    const { logout } = useMoralis();
+    // const { logout } = useMoralis();
     const {
       walletConnectingState,
       defaultChainId,
       // baseUrl,
       // pageTitle,
       // landingUrl: landing,
-    } = useConnectContext();
+      logout,
+    } = useWeb3Context();
 
     /*
      * Hack to avoid trustwallet redirecting to a open in app website on iOS...

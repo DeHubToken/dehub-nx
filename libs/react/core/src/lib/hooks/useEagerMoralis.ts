@@ -1,6 +1,6 @@
 import {
-  moralisProviderLocalStorageKey,
   MoralisWeb3ProviderType,
+  providerLocalStorageKey,
 } from '@dehub/shared/model';
 import { useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
@@ -23,7 +23,7 @@ export function useEagerMoralis() {
         !isWeb3EnableLoading
       ) {
         const provider = window.localStorage.getItem(
-          moralisProviderLocalStorageKey
+          providerLocalStorageKey
         ) as MoralisWeb3ProviderType;
         if (provider) enableWeb3({ provider });
       }

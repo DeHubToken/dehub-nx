@@ -22,6 +22,7 @@ interface Web3Env {
   /** Default Network ChainId */
   chainId: number;
   addresses: { contracts: ContractsEnv };
+  fortmatic: string;
 }
 
 /**
@@ -124,5 +125,6 @@ export const defaultSharedEnv: SharedEnv = {
         multiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
       },
     },
+    fortmatic: 'pk_test_97BE541455B7A919',
   },
 };

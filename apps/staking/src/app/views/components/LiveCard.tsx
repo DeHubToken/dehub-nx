@@ -1,4 +1,8 @@
-import { ConnectWalletButton, useRefresh } from '@dehub/react/core';
+import {
+  ConnectWalletButton,
+  useRefresh,
+  useWeb3Context,
+} from '@dehub/react/core';
 import { Box, Heading, Text } from '@dehub/react/ui';
 import {
   BNB_DECIMALS,
@@ -19,7 +23,6 @@ import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { SimpleCountDown } from '../../components/CountDown';
 import { FetchStatus } from '../../config/constants/types';
@@ -53,7 +56,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   const [claimed, setClaimed] = useState(false);
   const [pendingClaimTx, setPendingClaimTx] = useState(false);
 
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const stakingController: Contract | null = usePickStakingControllerContract();
   const stakingContract: Contract | null = usePickStakingContract(poolIndex);
   const rewardsContract: Contract | null = usePickBNBRewardsContract();

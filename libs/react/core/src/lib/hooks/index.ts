@@ -1,5 +1,4 @@
 export * from './useApproveConfirmTransaction';
-export * from './useConnectContext';
 export * from './useDebounce';
 export * from './useEagerMoralis';
 export * from './useIsBrowserTabActive';
@@ -7,4 +6,5 @@ export * from './useLastUpdated';
 export * from './usePersistState';
 export * from './usePreviousValue';
 export * from './useRefresh';
+export * from './useWeb3Context';
 export * from './website-contentful.hooks';

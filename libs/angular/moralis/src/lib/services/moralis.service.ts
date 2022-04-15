@@ -5,8 +5,8 @@ import {
   LoggerToken,
 } from '@dehub/angular/model';
 import {
-  moralisProviderLocalStorageKey,
   MoralisWeb3ProviderType,
+  providerLocalStorageKey,
   User,
   WalletConnectingState,
 } from '@dehub/shared/model';
@@ -90,7 +90,7 @@ export class MoralisService implements IMoralisService {
   ) {
     if (Moralis.User.current()) {
       const provider = this.windowRef.localStorage.getItem(
-        moralisProviderLocalStorageKey
+        providerLocalStorageKey
       ) as MoralisWeb3ProviderType;
       if (provider) {
         this.logger.info(`Moralis enableWeb3 for '${provider}'`);
@@ -139,10 +139,7 @@ export class MoralisService implements IMoralisService {
     )
       .then(() => {
         this.setWalletConnectingState(WalletConnectingState.COMPLETE);
-        this.windowRef.localStorage.setItem(
-          moralisProviderLocalStorageKey,
-          provider
-        );
+        this.windowRef.localStorage.setItem(providerLocalStorageKey, provider);
         this.subscribeEvents();
       })
       .catch(e => {
@@ -159,7 +156,7 @@ export class MoralisService implements IMoralisService {
       .catch(e => this.logger.error('Moralis logout problem:', e))
       .finally(() => {
         // Cleanup web provider from local storage
-        this.windowRef.localStorage.removeItem(moralisProviderLocalStorageKey);
+        this.windowRef.localStorage.removeItem(providerLocalStorageKey);
 
         // Set user and account to undefined
         this.userSubject.next(undefined);

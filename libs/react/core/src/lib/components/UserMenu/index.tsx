@@ -1,10 +1,10 @@
 import { BuyDeHubButton, BuyDeHubFloozModal } from '@dehub/react/ui';
-import { moralisProviderLocalStorageKey } from '@dehub/shared/model';
 import { shortenAddress } from '@dehub/shared/utils';
+import Moralis from 'moralis';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
 import { useCallback, useEffect, useState } from 'react';
-import { useMoralis } from 'react-moralis';
+import { useWeb3Context } from '../../hooks';
 import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = ({
@@ -14,11 +14,10 @@ const UserMenu = ({
   cexUrl: string;
   downloadWalletUrl: string;
 }) => {
-  const { isAuthenticating, logout, account, Moralis } = useMoralis();
   const [buyDeHubFloozModalOpen, setBuyDeHubFloozModal] = useState(false);
+  const { isAuthenticating, account, logout } = useWeb3Context();
 
   const doLogout = useCallback(() => {
-    window.localStorage.removeItem(moralisProviderLocalStorageKey);
     logout();
   }, [logout]);
 
@@ -36,7 +35,7 @@ const UserMenu = ({
     return () => {
       unsubscribeFromWeb3Deactivated();
     };
-  }, [Moralis, isAuthenticating, doLogout]);
+  }, [isAuthenticating, doLogout]);
 
   const handleLogout = ({
     originalEvent,

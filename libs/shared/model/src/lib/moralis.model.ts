@@ -32,11 +32,25 @@ export type MoralisWeb3ProviderType =
   | 'wc'
   | 'magicLink';
 
-export const moralisProviderLocalStorageKey = 'provider';
+export const providerLocalStorageKey = 'provider';
+
+export enum MoralisConnectorNames {
+  Injected = 'metamask',
+  WalletConnect = 'walletconnect',
+}
+
+export enum Web3ConnectorNames {
+  WalletLink = 'walletlink',
+  Fortmatic = 'fortmatic',
+  Torus = 'torus',
+}
+
+export type DeHubConnectorNames = MoralisConnectorNames | Web3ConnectorNames;
 
 export type MoralisConnectorId = 'injected' | 'walletconnect';
 
 export enum WalletConnectingState {
+  NO_PROVIDER,
   INIT,
   WAITING,
   SWITCH_NETWORK,
