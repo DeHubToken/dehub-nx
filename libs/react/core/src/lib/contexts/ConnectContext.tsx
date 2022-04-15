@@ -110,6 +110,22 @@ const ConnectProvider = ({
     setWalletConnectingState(WalletConnectingState.ADD_NETWORK);
   }, []);
 
+  const logout = useCallback(async () => {
+    const connectorId = window.localStorage.getItem(providerLocalStorageKey);
+
+    if (
+      connectorId === MoralisConnectorNames.Injected ||
+      connectorId === MoralisConnectorNames.WalletConnect
+    ) {
+      await moralisLogout();
+    } else {
+      web3Logout();
+      setAccount(null);
+      setChainId(null);
+    }
+    cleanConnectorStorage(connectorId as DeHubConnectorNames);
+  }, [moralisLogout, web3Logout, cleanConnectorStorage]);
+
   const login = useCallback(
     async (connectorId: DeHubConnectorNames) => {
       cleanConnectorStorage(connectorId);
@@ -153,7 +169,7 @@ const ConnectProvider = ({
             ) {
               setWalletConnectingState(WalletConnectingState.COMPLETE);
             } else {
-              moralisLogout();
+              logout();
               setWalletConnectingState(WalletConnectingState.INIT);
             }
           },
@@ -177,7 +193,8 @@ const ConnectProvider = ({
               );
               setWalletConnectingState(WalletConnectingState.COMPLETE);
             })
-            .catch(async error => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .catch(async (error: any) => {
               if (error instanceof UnsupportedChainIdError) {
                 if (
                   await setupMetamaskNetwork(
@@ -192,11 +209,11 @@ const ConnectProvider = ({
                 ) {
                   setWalletConnectingState(WalletConnectingState.COMPLETE);
                 } else {
-                  web3Logout();
+                  logout();
                   setWalletConnectingState(WalletConnectingState.INIT);
                 }
               } else {
-                web3Logout();
+                logout();
                 setWalletConnectingState(WalletConnectingState.INIT);
               }
             });
@@ -204,9 +221,8 @@ const ConnectProvider = ({
     },
     [
       web3Login,
-      web3Logout,
       moralisLogin,
-      moralisLogout,
+      logout,
       onAddNetwork,
       onSwitchNetwork,
       cleanConnectorStorage,
@@ -214,20 +230,6 @@ const ConnectProvider = ({
       fortmatic,
     ]
   );
-
-  const logout = useCallback(async () => {
-    const connectorId = window.localStorage.getItem(providerLocalStorageKey);
-
-    if (
-      connectorId === MoralisConnectorNames.Injected ||
-      connectorId === MoralisConnectorNames.WalletConnect
-    ) {
-      await moralisLogout();
-    } else {
-      web3Logout();
-    }
-    cleanConnectorStorage(connectorId as DeHubConnectorNames);
-  }, [moralisLogout, web3Logout, cleanConnectorStorage]);
 
   useEffect(() => {
     const connectorId = window.localStorage.getItem(providerLocalStorageKey);
