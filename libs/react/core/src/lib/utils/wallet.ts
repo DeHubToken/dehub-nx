@@ -1,8 +1,8 @@
+import { BscConnector } from '@binance-chain/bsc-connector';
 import { Networks } from '@dehub/shared/config';
 import { Web3ConnectorNames } from '@dehub/shared/model';
 import { getRandomRpcUrl } from '@dehub/shared/utils';
 import { AbstractConnector } from '@web3-react/abstract-connector';
-import { TorusConnector } from '@web3-react/torus-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { FortmaticConnector } from '../connectors/Fortmatic';
 
@@ -16,6 +16,7 @@ export const getWalletConnector = (
       return new WalletLinkConnector({
         appName: 'DeHub',
         url: getRandomRpcUrl(Networks[chainId].nodes),
+        supportedChainIds: [56, 97],
       });
     }
     case Web3ConnectorNames.Fortmatic: {
@@ -24,18 +25,9 @@ export const getWalletConnector = (
         chainId,
       });
     }
-    case Web3ConnectorNames.Torus: {
-      return new TorusConnector({
-        chainId,
-        initOptions: {
-          network: {
-            host: getRandomRpcUrl(Networks[chainId].nodes),
-            chainId,
-          },
-          showTorusButton: false,
-          enableLogging: false,
-          enabledVerifiers: false,
-        },
+    case Web3ConnectorNames.BSC: {
+      return new BscConnector({
+        supportedChainIds: [56, 97],
       });
     }
   }

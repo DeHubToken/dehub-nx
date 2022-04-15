@@ -42,7 +42,7 @@ export enum MoralisConnectorNames {
 export enum Web3ConnectorNames {
   WalletLink = 'walletlink',
   Fortmatic = 'fortmatic',
-  Torus = 'torus',
+  BSC = 'binance',
 }
 
 export type DeHubConnectorNames = MoralisConnectorNames | Web3ConnectorNames;

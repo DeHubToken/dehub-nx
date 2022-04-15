@@ -6,5 +6,6 @@ export * from './useLastUpdated';
 export * from './usePersistState';
 export * from './usePreviousValue';
 export * from './useRefresh';
+export * from './useToast';
 export * from './useWeb3Context';
 export * from './website-contentful.hooks';

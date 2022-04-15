@@ -1,3 +1,4 @@
+import { NoBscProviderError } from '@binance-chain/bsc-connector';
 import {
   DeHubConnectorNames,
   MoralisConnectorNames,
@@ -18,6 +19,7 @@ import {
   useState,
 } from 'react';
 import { useMoralis } from 'react-moralis';
+import { useToast } from '../hooks';
 import { getWalletConnector } from '../utils/wallet';
 
 interface ConnectContextValue {
@@ -67,6 +69,8 @@ const ConnectProvider = ({
     isInitialized: moralisInitialized,
   } = useMoralis();
 
+  const { toastError } = useToast();
+
   const cleanConnectorStorage = useCallback(
     (connectorId: DeHubConnectorNames): void => {
       if (connectorId === MoralisConnectorNames.WalletConnect) {
@@ -93,10 +97,6 @@ const ConnectProvider = ({
         window.localStorage.removeItem(
           '-walletlink:https://www.walletlink.org:walletUsername'
         );
-      } else if (connectorId === Web3ConnectorNames.Torus) {
-        window.localStorage.removeItem('loglevel:torus.js');
-        window.localStorage.removeItem('loglevel:torus-embed');
-        window.localStorage.removeItem('loglevel:http-helpers');
       }
       window.localStorage.removeItem(providerLocalStorageKey);
     },
@@ -130,14 +130,6 @@ const ConnectProvider = ({
     async (connectorId: DeHubConnectorNames) => {
       cleanConnectorStorage(connectorId);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const ethereum = (window as any).ethereum;
-      if (!ethereum) {
-        console.error('Provider not supported');
-        setWalletConnectingState(WalletConnectingState.NO_PROVIDER);
-        return;
-      }
-
       setWalletConnectingState(WalletConnectingState.WAITING);
       window.localStorage.setItem(providerLocalStorageKey, connectorId);
 
@@ -145,6 +137,18 @@ const ConnectProvider = ({
         connectorId === MoralisConnectorNames.Injected ||
         connectorId === MoralisConnectorNames.WalletConnect
       ) {
+        if (connectorId === MoralisConnectorNames.Injected) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const ethereum = (window as any).ethereum;
+          if (!ethereum) {
+            console.error('Provider not supported');
+            setWalletConnectingState(WalletConnectingState.NO_PROVIDER);
+
+            toastError('Wallet Connect', 'Provider not supported');
+            return;
+          }
+        }
+
         // if moralis connector
         moralisLogin({
           chainId: _defaultChainId,
@@ -212,6 +216,13 @@ const ConnectProvider = ({
                   logout();
                   setWalletConnectingState(WalletConnectingState.INIT);
                 }
+              } else if (
+                connectorId === Web3ConnectorNames.BSC &&
+                error instanceof NoBscProviderError
+              ) {
+                console.error('Provider not supported');
+                toastError('Wallet Connect', 'Provider not supported');
+                setWalletConnectingState(WalletConnectingState.NO_PROVIDER);
               } else {
                 logout();
                 setWalletConnectingState(WalletConnectingState.INIT);
@@ -223,6 +234,7 @@ const ConnectProvider = ({
       web3Login,
       moralisLogin,
       logout,
+      toastError,
       onAddNetwork,
       onSwitchNetwork,
       cleanConnectorStorage,

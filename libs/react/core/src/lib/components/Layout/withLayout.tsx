@@ -5,6 +5,7 @@ import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import React, { useEffect, useState } from 'react';
 import { useWeb3Context } from '../../hooks';
+import ToastListener from '../Toast/ToastListener';
 import UserMenu from '../UserMenu';
 
 const initMessage = {
@@ -95,6 +96,7 @@ const withLayout =
     return (
       <div>
         <PageMeta baseUrl={baseUrl} title={pageTitle} />
+        <ToastListener />
         {showLoader ? (
           <Loader {...message} />
         ) : (

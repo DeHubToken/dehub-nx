@@ -1,4 +1,5 @@
 import { RefreshContextProvider, Web3Providers } from '@dehub/react/core';
+import { ToastProvider } from 'libs/react/core/src/lib/contexts/ToastsProvider';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
@@ -7,13 +8,15 @@ import store from './state';
 
 const Providers: React.FC = ({ children }) => {
   return (
-    <Web3Providers moralis={environment.moralis} web3={environment.web3}>
-      <Provider store={store}>
-        <RefreshContextProvider>
-          <HelmetProvider>{children}</HelmetProvider>
-        </RefreshContextProvider>
-      </Provider>
-    </Web3Providers>
+    <ToastProvider>
+      <Web3Providers moralis={environment.moralis} web3={environment.web3}>
+        <Provider store={store}>
+          <RefreshContextProvider>
+            <HelmetProvider>{children}</HelmetProvider>
+          </RefreshContextProvider>
+        </Provider>
+      </Web3Providers>
+    </ToastProvider>
   );
 };
 

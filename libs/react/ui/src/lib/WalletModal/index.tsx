@@ -1,3 +1,7 @@
+import { useToast } from '@dehub/react/core';
+import { ReactComponent as BscIcon } from '@dehub/shared/asset/dehub/icons/bsc.svg';
+import { ReactComponent as CoinbaseIcon } from '@dehub/shared/asset/dehub/icons/coinbase.svg';
+import Fortmatic from '@dehub/shared/asset/dehub/icons/fortmatic.png';
 import { ReactComponent as MetaMaskIcon } from '@dehub/shared/asset/dehub/icons/metamask.svg';
 import { ReactComponent as TrustWalletIcon } from '@dehub/shared/asset/dehub/icons/trustwallet.svg';
 import { ReactComponent as WalletConnectIcon } from '@dehub/shared/asset/dehub/icons/walletconnect.svg';
@@ -25,6 +29,8 @@ const WalletButton = styled(Button)`
 `;
 
 const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
+  const { toastInfo } = useToast();
+
   return (
     <Dialog
       visible={visible}
@@ -67,11 +73,11 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
       <div className="mt-2 mb-3">
         <WalletButton
           className="flex justify-content-between text-500"
-          onClick={() => doConnect(Web3ConnectorNames.Fortmatic)}
+          onClick={() => doConnect(Web3ConnectorNames.WalletLink)}
         >
-          <div>Fortmatic</div>
+          <div>Coinbase</div>
           <div className="flex flex-row align-items-center">
-            <WalletConnectIcon style={{ width: '32px', height: '11px' }} />
+            <CoinbaseIcon style={{ width: '32px', height: '20px' }} />
           </div>
         </WalletButton>
       </div>
@@ -79,11 +85,27 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
       <div className="mt-2 mb-3">
         <WalletButton
           className="flex justify-content-between text-500"
-          onClick={() => doConnect(Web3ConnectorNames.Torus)}
+          onClick={() => doConnect(Web3ConnectorNames.Fortmatic)}
         >
-          <div>Torus</div>
+          <div>Fortmatic</div>
           <div className="flex flex-row align-items-center">
-            <WalletConnectIcon style={{ width: '32px', height: '11px' }} />
+            <img
+              src={Fortmatic}
+              alt="Fortmatic"
+              style={{ width: '20px', height: '20px', marginRight: '6px' }}
+            />
+          </div>
+        </WalletButton>
+      </div>
+
+      <div className="mt-2 mb-3">
+        <WalletButton
+          className="flex justify-content-between text-500"
+          onClick={() => doConnect(Web3ConnectorNames.BSC)}
+        >
+          <div>Binance</div>
+          <div className="flex flex-row align-items-center">
+            <BscIcon style={{ width: '32px', height: '20px' }} />
           </div>
         </WalletButton>
       </div>
