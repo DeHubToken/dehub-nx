@@ -1,6 +1,6 @@
 export * from './useApproveConfirmTransaction';
 export * from './useDebounce';
-export * from './useEagerMoralis';
+export * from './useEagerWeb3';
 export * from './useIsBrowserTabActive';
 export * from './useLastUpdated';
 export * from './usePersistState';

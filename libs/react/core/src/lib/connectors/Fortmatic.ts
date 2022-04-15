@@ -64,25 +64,29 @@ export class FortmaticConnector extends AbstractConnector {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async getProvider(): Promise<any> {
+  async getProvider(): Promise<any> {
     return this.fortmatic.getProvider();
   }
 
-  public async getChainId(): Promise<number | string> {
+  async getChainId(): Promise<number | string> {
     return this.chainId;
   }
 
-  public async getAccount(): Promise<null | string> {
+  async getAccount(): Promise<null | string> {
     return this.fortmatic
       .getProvider()
       .send('eth_accounts')
       .then((accounts: string[]): string => accounts[0]);
   }
 
-  public deactivate() {}
-
-  async close() {
+  async deactivate() {
     await this.fortmatic.user.logout();
     this.emitDeactivate();
+  }
+
+  async close() {
+    if (this.fortmatic && this.fortmatic.user) {
+      this.deactivate();
+    }
   }
 }
