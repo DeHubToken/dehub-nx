@@ -1,5 +1,8 @@
-import { RefreshContextProvider, Web3Providers } from '@dehub/react/core';
-import { ToastProvider } from 'libs/react/core/src/lib/contexts/ToastsProvider';
+import {
+  RefreshContextProvider,
+  ToastProvider,
+  Web3Providers,
+} from '@dehub/react/core';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';

@@ -1,4 +1,3 @@
-import { useToast } from '@dehub/react/core';
 import { ReactComponent as BscIcon } from '@dehub/shared/asset/dehub/icons/bsc.svg';
 import { ReactComponent as CoinbaseIcon } from '@dehub/shared/asset/dehub/icons/coinbase.svg';
 import Fortmatic from '@dehub/shared/asset/dehub/icons/fortmatic.png';
@@ -29,8 +28,6 @@ const WalletButton = styled(Button)`
 `;
 
 const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
-  const { toastInfo } = useToast();
-
   return (
     <Dialog
       visible={visible}
