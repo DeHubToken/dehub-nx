@@ -28,7 +28,6 @@ interface ConnectContextValue {
   isInitialized: boolean;
   isAuthenticating: boolean;
   walletConnectingState: WalletConnectingState;
-  // setWalletConnectingState: (connectingState: WalletConnectingState) => void;
   login: (connectorId: DeHubConnectorNames) => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -53,7 +52,6 @@ const ConnectProvider = ({
   const [account, setAccount] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
   const [web3Provider, setWeb3Provider] = useState<Web3Provider | null>(null);
-  const [isInitialized, setInitialized] = useState<boolean>(false);
 
   const {
     activate: web3Login,
@@ -249,16 +247,6 @@ const ConnectProvider = ({
       connectorId === MoralisConnectorNames.Injected ||
       connectorId === MoralisConnectorNames.WalletConnect
     ) {
-      setInitialized(moralisInitialized);
-    }
-  }, [moralisInitialized]);
-
-  useEffect(() => {
-    const connectorId = window.localStorage.getItem(providerLocalStorageKey);
-    if (
-      connectorId === MoralisConnectorNames.Injected ||
-      connectorId === MoralisConnectorNames.WalletConnect
-    ) {
       setWeb3Provider(moralisLibrary);
     } else {
       setWeb3Provider(web3Library);
@@ -277,7 +265,7 @@ const ConnectProvider = ({
             ? true
             : false,
         walletConnectingState,
-        isInitialized,
+        isInitialized: moralisInitialized,
         login,
         logout,
       }}
