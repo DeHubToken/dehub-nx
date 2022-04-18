@@ -1,5 +1,5 @@
+import { useWeb3Context } from '@dehub/react/core';
 import React from 'react';
-import { useMoralis } from 'react-moralis';
 import {
   useGetBetByRoundId,
   useGetCurrentEpoch,
@@ -26,7 +26,7 @@ const RoundCard: React.FC<RoundCardProps> = ({ round }) => {
     bearAmount,
   } = round;
   const currentEpoch = useGetCurrentEpoch();
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const bet = useGetBetByRoundId(account, id);
   const hasEntered = bet !== null;
   const hasEnteredUp = hasEntered && bet?.position === BetPosition.BULL;

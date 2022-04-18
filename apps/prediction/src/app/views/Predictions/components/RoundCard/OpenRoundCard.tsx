@@ -1,3 +1,4 @@
+import { useWeb3Context } from '@dehub/react/core';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -8,7 +9,6 @@ import {
 } from '@dehub/react/pcsuikit';
 import BigNumber from 'bignumber.js';
 import React, { useEffect, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { useTranslation } from '../../../../contexts/Localization';
 import useToast from '../../../../hooks/useToast';
 import { useAppDispatch } from '../../../../state';
@@ -52,7 +52,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
   const { t } = useTranslation();
   const interval = useGetIntervalBlocks();
   const { toastSuccess } = useToast();
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const dispatch = useAppDispatch();
   const { currentBlock } = useBlock();
   const { isSettingPosition, position } = state;

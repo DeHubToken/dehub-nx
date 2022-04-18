@@ -1,5 +1,5 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { MAX_DEGRAND_REQUEST_SIZE } from '../../config/constants';
 import { LotteryTicketOwner } from '../../config/constants/types';
 import { fetchHistoricalDeGrands } from '../../states/special-raffle/fetchHistoricalDeGrands';
@@ -14,7 +14,7 @@ export enum FetchStatus {
 }
 
 const useGetDeGrandWinners = () => {
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const { isTransitioning } = useLottery();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [winners, setWinners] = useState<LotteryTicketOwner[]>([]);
@@ -46,7 +46,7 @@ const useGetDeGrandWinners = () => {
 };
 
 export const useGetHistoricalDeGrands = () => {
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const { isTransitioning } = useLottery();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [historicalDeGrands, setHistoricalDeGrands] = useState<

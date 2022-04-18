@@ -1,3 +1,4 @@
+import { useWeb3Context } from '@dehub/react/core';
 import {
   ArrowForwardIcon,
   Box,
@@ -10,7 +11,6 @@ import {
   Text,
 } from '@dehub/react/pcsuikit';
 import React from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { useTranslation } from '../../../../contexts/Localization';
 import { useAppDispatch } from '../../../../state';
@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
   const isFetchingHistory = useGetIsFetchingHistory();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(false));

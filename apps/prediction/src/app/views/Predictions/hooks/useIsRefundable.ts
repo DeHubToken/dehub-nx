@@ -1,11 +1,11 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { useEffect, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { usePredictionsContract } from '../../../hooks/useContract';
 
 const useIsRefundable = (epoch: number) => {
   const [isRefundable, setIsRefundable] = useState(false);
   const predictionsContract = usePredictionsContract();
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
 
   useEffect(() => {
     const fetchRefundableStatus = async () => {

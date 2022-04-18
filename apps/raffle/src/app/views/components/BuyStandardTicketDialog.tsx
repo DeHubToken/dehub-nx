@@ -1,4 +1,7 @@
-import { useApproveConfirmTransaction } from '@dehub/react/core';
+import {
+  useApproveConfirmTransaction,
+  useWeb3Context,
+} from '@dehub/react/core';
 import { Heading, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
@@ -12,7 +15,6 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import { useRef, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import Bep20Abi from '../../config/abis/erc20.json';
 import { LotteryTicket } from '../../config/constants/types';
 import {
@@ -64,7 +66,7 @@ const BuyStandardTicketDialog = ({
   const dehubContract = useDehubContract();
   const standardLotteryContract = useStandardLotteryContract();
 
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const [pendingTx, setPendingTx] = useState(-1);
 
   const { isApproved, handleApprove, handleConfirm } =

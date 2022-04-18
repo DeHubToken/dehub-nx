@@ -1,10 +1,9 @@
-import { ConnectWalletButton } from '@dehub/react/core';
+import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
 import { Heading, Text } from '@dehub/react/ui';
 import { format } from 'date-fns';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 import { useMemo, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { LotteryStatus } from '../config/constants/types';
 import useGetNextLotteryEvent from '../hooks/useGetNextLotteryEvent';
 import {
@@ -50,7 +49,7 @@ const DeLottoStage1 = () => {
     ? parseInt(previousRound.endTime, 10)
     : 0;
 
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
 
   const [listTicketDialog, setListTicketDialog] = useState(false);
   const [buyStandardTicketDialog, setBuyStandardTicketDialog] = useState(false);

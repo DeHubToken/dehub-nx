@@ -1,5 +1,5 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { useEffect } from 'react';
-import { useMoralis } from 'react-moralis';
 import { useAppDispatch } from '../../../state';
 import { updateMarketData } from '../../../state/predictions';
 import { fetchMarketData } from '../../../state/predictions/helpers2';
@@ -8,7 +8,7 @@ const POLL_TIME_IN_SECONDS = 10;
 
 const usePollRoundData = () => {
   const dispatch = useAppDispatch();
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
 
   useEffect(() => {
     const timer = setInterval(async () => {

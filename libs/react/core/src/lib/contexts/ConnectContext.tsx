@@ -29,6 +29,7 @@ interface ConnectContextValue {
   web3: Web3Provider | null;
   isInitialized: boolean;
   isAuthenticating: boolean;
+  isAuthenticated: boolean;
   walletConnectingState: WalletConnectingState;
   login: (connectorId: DeHubConnectorNames) => Promise<void>;
   logout: () => Promise<void>;
@@ -275,9 +276,9 @@ const ConnectProvider = ({
         account,
         web3: web3Provider,
         isAuthenticating:
-          walletConnectingState === WalletConnectingState.WAITING
-            ? true
-            : false,
+          walletConnectingState === WalletConnectingState.WAITING,
+        isAuthenticated:
+          walletConnectingState === WalletConnectingState.COMPLETE,
         walletConnectingState,
         isInitialized: moralisInitialized,
         login,

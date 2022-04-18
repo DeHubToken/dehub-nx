@@ -1,3 +1,4 @@
+import { useWeb3Context } from '@dehub/react/core';
 import {
   AutoRenewIcon,
   Box,
@@ -22,7 +23,6 @@ import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
 import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
 import BigNumber from 'bignumber.js';
 import React, { useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { useTranslation } from '../../../contexts/Localization';
 import { usePredictionsContract } from '../../../hooks/useContract';
@@ -54,7 +54,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   onSuccess,
 }) => {
   const [isPendingTx, setIsPendingTx] = useState(false);
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const { t } = useTranslation();
   const { toastSuccess, toastError } = useToast();
   const predictionsContract = usePredictionsContract();

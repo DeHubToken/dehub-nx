@@ -1,3 +1,4 @@
+import { useWeb3Context } from '@dehub/react/core';
 import {
   BlockIcon,
   Box,
@@ -14,7 +15,6 @@ import {
 import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import React from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { useTranslation } from '../../../../contexts/Localization';
 import { useAppDispatch } from '../../../../state';
@@ -48,7 +48,7 @@ const StyledBetResult = styled(Box)`
 const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const { isRefundable } = useIsRefundable(bet.round.epoch);
   const dehubPrice = useDehubBusdPrice();
   const canClaim = useBetCanClaim(account, bet.round.id);

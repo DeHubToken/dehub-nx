@@ -1,8 +1,7 @@
-import { ConnectWalletButton } from '@dehub/react/core';
+import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
 import { Flex, Text } from '@dehub/react/pcsuikit';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import React, { useEffect, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { useTranslation } from '../../contexts/Localization';
 import { useAppDispatch } from '../../state';
@@ -47,7 +46,7 @@ const SpinnerWrapper = styled.div`
 `;
 
 const History = () => {
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const dispatch = useAppDispatch();
   const isHistoryPaneOpen = useIsHistoryPaneOpen();
   const isFetchingHistory = useGetIsFetchingHistory();

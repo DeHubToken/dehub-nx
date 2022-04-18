@@ -1,8 +1,7 @@
-import { usePersistState } from '@dehub/react/core';
+import { usePersistState, useWeb3Context } from '@dehub/react/core';
 import { useMatchBreakpoints, useModal } from '@dehub/react/pcsuikit';
 import { Loader } from '@dehub/react/ui';
 import React, { useEffect } from 'react';
-import { useMoralis } from 'react-moralis';
 import { useAppDispatch } from '../../state';
 import { useGetPredictionsStatus, useInitialBlock } from '../../state/hooks';
 import {
@@ -43,7 +42,7 @@ export default function Predictions({ baseUrl }: { baseUrl: string }) {
     false,
     'dehub_predictions_chart'
   );
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const status = useGetPredictionsStatus();
   const dispatch = useAppDispatch();
   const initialBlock = useInitialBlock();

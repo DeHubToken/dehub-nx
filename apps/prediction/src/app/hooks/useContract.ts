@@ -1,6 +1,6 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
-import { useMoralis } from 'react-moralis';
 import { getDehubAddress } from '../utils/addressHelpers';
 import {
   getBep20Contract,
@@ -13,10 +13,13 @@ import {
  */
 
 export const useDehubContract = (): Contract | null => {
-  const { web3 } = useMoralis();
+  const { web3, chainId, defaultChainId } = useWeb3Context();
   return useMemo(
-    () => (web3 ? getBep20Contract(getDehubAddress(), web3.getSigner()) : null),
-    [web3]
+    () =>
+      web3 && chainId === defaultChainId
+        ? getBep20Contract(getDehubAddress(), web3.getSigner())
+        : null,
+    [web3, defaultChainId, chainId]
   );
 };
 
@@ -25,10 +28,13 @@ export const useDehubContract = (): Contract | null => {
  */
 
 export const usePredictionsContract = (): Contract | null => {
-  const { web3 } = useMoralis();
+  const { web3, chainId, defaultChainId } = useWeb3Context();
   return useMemo(
-    () => (web3 ? getPredictionsContract(web3.getSigner()) : null),
-    [web3]
+    () =>
+      web3 && chainId === defaultChainId
+        ? getPredictionsContract(web3.getSigner())
+        : null,
+    [web3, defaultChainId, chainId]
   );
 };
 

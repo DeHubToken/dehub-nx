@@ -1,4 +1,4 @@
-import { useEagerMoralis, withLayout } from '@dehub/react/core';
+import { useEagerWeb3, withLayout } from '@dehub/react/core';
 import {
   FullScreenLoader,
   NavigationTabMenu,
@@ -23,7 +23,7 @@ const { landing } = environment.dehub;
 const activeTab = NavigationTabMenu.Earn;
 
 export function App() {
-  useEagerMoralis();
+  useEagerWeb3();
 
   const Lottery = useMemo(
     () =>

@@ -1,4 +1,4 @@
-import { ConnectWalletButton } from '@dehub/react/core';
+import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
 import {
   ArrowBackIcon,
   AutoRenewIcon,
@@ -17,7 +17,6 @@ import { MaxUint256 } from '@ethersproject/constants';
 import BigNumber from 'bignumber.js';
 import { Slider, SliderChangeParams } from 'primereact/slider';
 import React, { useEffect, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { DEFAULT_TOKEN_DECIMAL } from '../../../../config';
 import { useTranslation } from '../../../../contexts/Localization';
 import { ContextData } from '../../../../contexts/Localization/types';
@@ -75,7 +74,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({
     key?: string;
     data?: ContextData;
   } | null>(null);
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const { swiper } = useSwiper();
   const dehubBalance = useGetDehubBalance();
   const minBetAmount = useGetMinBetAmount();

@@ -1,4 +1,4 @@
-import { useEagerMoralis, withLayout } from '@dehub/react/core';
+import { useEagerWeb3, withLayout } from '@dehub/react/core';
 import { ResetCSS } from '@dehub/react/pcsuikit';
 import {
   FullScreenLoader,
@@ -28,7 +28,7 @@ const { landing } = environment.dehub;
 const activeTab = NavigationTabMenu.Earn;
 
 export function App() {
-  useEagerMoralis();
+  useEagerWeb3();
   usePollBlockNumber();
 
   const Predictions = useMemo(
