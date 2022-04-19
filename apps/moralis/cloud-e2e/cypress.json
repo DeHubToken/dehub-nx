@@ -1,0 +1,21 @@
+{
+  "fileServerFolder": ".",
+  "fixturesFolder": "./src/fixtures",
+  "integrationFolder": "./src/integration",
+  "modifyObstructiveCode": false,
+  "supportFile": "./src/support/index.ts",
+  "pluginsFile": false,
+  "video": true,
+  "videosFolder": "../../../dist/cypress/apps/moralis/cloud-e2e/videos",
+  "screenshotsFolder": "../../../dist/cypress/apps/moralis/cloud-e2e/screenshots",
+  "chromeWebSecurity": false,
+  "env": {
+    "moralis": {
+      "appId": "UxvDeanBLvO8ym31e6x6dYdQa2Qlzw2jOSrhm3cE",
+      "serverUrl": "https://nm6dir4me3i0.usemoralis.com:2053/server"
+    },
+    "web3": {
+      "chainId": 97
+    }
+  }
+}
