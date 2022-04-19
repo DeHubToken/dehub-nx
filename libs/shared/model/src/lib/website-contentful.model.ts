@@ -604,6 +604,7 @@ export interface CallToActionFilter {
 export interface CallToActionLinkingCollections {
   __typename?: 'CallToActionLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  footerCollection?: Maybe<FooterCollection>;
   pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
@@ -613,6 +614,13 @@ export interface CallToActionLinkingCollections {
 }
 
 export interface CallToActionLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface CallToActionLinkingCollectionsFooterCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1449,6 +1457,108 @@ export enum FeaturePostOrder {
   TitleDesc = 'title_DESC',
   VideoUrlAsc = 'videoUrl_ASC',
   VideoUrlDesc = 'videoUrl_DESC',
+}
+
+/** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
+export interface Footer extends Entry {
+  __typename?: 'Footer';
+  contentfulMetadata: ContentfulMetadata;
+  copyright?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<FooterLinkingCollections>;
+  linksCollection?: Maybe<FooterLinksCollection>;
+  socialIconsCollection?: Maybe<FooterSocialIconsCollection>;
+  sys: Sys;
+}
+
+/** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
+export interface FooterCopyrightArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
+export interface FooterLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
+export interface FooterLinksCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
+export interface FooterSocialIconsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface FooterCollection {
+  __typename?: 'FooterCollection';
+  items: Array<Maybe<Footer>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface FooterFilter {
+  AND?: InputMaybe<Array<InputMaybe<FooterFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<FooterFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  copyright?: InputMaybe<Scalars['String']>;
+  copyright_contains?: InputMaybe<Scalars['String']>;
+  copyright_exists?: InputMaybe<Scalars['Boolean']>;
+  copyright_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  copyright_not?: InputMaybe<Scalars['String']>;
+  copyright_not_contains?: InputMaybe<Scalars['String']>;
+  copyright_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linksCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  socialIconsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+}
+
+export interface FooterLinkingCollections {
+  __typename?: 'FooterLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface FooterLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface FooterLinksCollection {
+  __typename?: 'FooterLinksCollection';
+  items: Array<Maybe<CallToAction>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export enum FooterOrder {
+  CopyrightAsc = 'copyright_ASC',
+  CopyrightDesc = 'copyright_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export interface FooterSocialIconsCollection {
+  __typename?: 'FooterSocialIconsCollection';
+  items: Array<Maybe<CallToAction>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
 }
 
 /** A post with the biggest surface area on the screen. Best displayed in pairs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/grandPost) */
@@ -4539,6 +4649,8 @@ export interface Query {
   faqItemCollection?: Maybe<FaqItemCollection>;
   featurePost?: Maybe<FeaturePost>;
   featurePostCollection?: Maybe<FeaturePostCollection>;
+  footer?: Maybe<Footer>;
+  footerCollection?: Maybe<FooterCollection>;
   grandPost?: Maybe<GrandPost>;
   grandPostCollection?: Maybe<GrandPostCollection>;
   iconTile?: Maybe<IconTile>;
@@ -4740,6 +4852,21 @@ export interface QueryFeaturePostCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<FeaturePostFilter>;
+}
+
+export interface QueryFooterArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryFooterCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<FooterOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<FooterFilter>;
 }
 
 export interface QueryGrandPostArgs {
