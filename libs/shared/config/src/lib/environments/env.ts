@@ -51,7 +51,7 @@ export interface SharedEnv {
     downloadWalletUrl: string;
     /** Official DeHUB landing page */
     landing: string;
-    /** Official Alrites stream page */
+    /** Official Allrites stream page */
     stream: string;
     /** Official DeHUB dapp pages */
     dapps: { staking: string };
