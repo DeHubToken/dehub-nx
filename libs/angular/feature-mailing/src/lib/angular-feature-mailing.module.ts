@@ -8,7 +8,7 @@ export const angularFeatureMailingRoutes: Route[] = [];
 
 @NgModule({
   imports: [
-    // Angular Modules
+    // Angular
     CommonModule,
 
     AngularFeatureMailingRoutingModule,

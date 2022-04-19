@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { EnvToken } from '@dehub/angular/core';
+import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { MoralisWeb3ProviderType } from '@dehub/shared/model';
 

@@ -13,7 +13,7 @@ import { PageHeaderComponent } from './page-header.component';
     RouterModule,
     ContentfulDraftDirectiveModule,
 
-    // PrimeNg Modules
+    // PrimeNg
     ButtonModule,
   ],
   exports: [PageHeaderComponent],

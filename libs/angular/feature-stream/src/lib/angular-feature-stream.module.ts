@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { GraphQLModule } from '@dehub/angular/graphql';
 import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
@@ -13,16 +14,18 @@ import { CanPlayGuard } from './guards';
 
 @NgModule({
   imports: [
-    // Angular Modules
+    // Angular
     CommonModule,
+    GraphQLModule,
 
-    // Lib Modules
+    // Libs
+    GraphQLModule,
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
     PageSectionsModule,
     BuyDehubButtonModule,
 
-    // PrimeNg Modules
+    // PrimeNg
     ButtonModule,
     FieldsetModule,
 

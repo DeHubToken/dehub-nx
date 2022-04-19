@@ -1,8 +1,13 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
-import { LoggerService, LoggerToken } from '@dehub/angular/core';
+import {
+  ILoggerService,
+  IMoralisService,
+  LoggerToken,
+} from '@dehub/angular/model';
 import {
   moralisProviderLocalStorageKey,
   MoralisWeb3ProviderType,
+  User,
   WalletConnectingState,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
@@ -14,7 +19,7 @@ import {
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { BehaviorSubject, from, of } from 'rxjs';
 import {
   distinctUntilChanged,
   first,
@@ -22,24 +27,9 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
-import { Attributes, User } from '../models/moralis.models';
 
-interface IMoralis {
-  user$: Observable<User | undefined>;
-  userAttributes$: Observable<Attributes | undefined>;
-  account$: Observable<string | undefined>;
-  isAuthenticated$: Observable<boolean>;
-
-  username$: Observable<string>;
-
-  login: (provider: MoralisWeb3ProviderType, chainId: number) => void;
-  logout: () => void;
-
-  walletConnectingState$: Observable<WalletConnectingState>;
-  setWalletConnectingState: (state: WalletConnectingState) => void;
-}
 @Injectable()
-export class MoralisService implements IMoralis {
+export class MoralisService implements IMoralisService {
   private userSubject = new BehaviorSubject<User | undefined>(
     Moralis.User.current()
   );
@@ -94,7 +84,7 @@ export class MoralisService implements IMoralis {
   private unsubscribeFromAccountChanged?: () => events.EventEmitter;
 
   constructor(
-    @Inject(LoggerToken) private logger: LoggerService,
+    @Inject(LoggerToken) private logger: ILoggerService,
     @Inject(WINDOW) private readonly windowRef: Window,
     private ngZone: NgZone
   ) {

@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { InMemoryCache } from '@apollo/client/cache';
 import { from } from '@apollo/client/core';
 import { onError } from '@apollo/client/link/error';
+import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { ApolloModule, APOLLO_FLAGS, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { GraphQLErrorExtensions } from 'graphql';
-import { EnvToken } from './models/injection-token';
 
 /**
  * Creating Apollo Client

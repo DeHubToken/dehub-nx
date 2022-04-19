@@ -33,6 +33,8 @@
       "@dehub/angular/feature-stream": [
         "libs/angular/feature-stream/src/index.ts"
       ],
+      "@dehub/angular/graphql": ["libs/angular/graphql/src/index.ts"],
+      "@dehub/angular/model": ["libs/angular/model/src/index.ts"],
       "@dehub/angular/moralis": ["libs/angular/moralis/src/index.ts"],
       "@dehub/angular/ui/*": ["libs/angular/ui/src/lib/*"],
       "@dehub/moralis/cloud": ["libs/moralis/cloud/src/index.ts"],
@@ -43,8 +45,8 @@
       "@dehub/shared/asset/freya/*": ["libs/shared/asset/freya/src/lib/*"],
       "@dehub/shared/config": ["libs/shared/config/src/index.ts"],
       "@dehub/shared/model": ["libs/shared/model/src/index.ts"],
-      "@dehub/shared/utils": ["libs/shared/util/src/index.ts"],
       "@dehub/shared/util/*": ["libs/shared/util/src/lib/*"],
+      "@dehub/shared/utils": ["libs/shared/util/src/index.ts"],
       "assert": ["./node_modules/assert"],
       "crypto": ["./node_modules/crypto-browserify"],
       "http": ["./node_modules/stream-http"],

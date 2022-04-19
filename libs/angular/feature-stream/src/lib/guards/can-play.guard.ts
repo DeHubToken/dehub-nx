@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { DehubMoralisService } from '@dehub/angular/moralis';
+import { DehubMoralisToken, IDehubMoralisService } from '@dehub/angular/model';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class CanPlayGuard implements CanActivate {
   constructor(
-    private dehubMoralis: DehubMoralisService,
+    @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
     private router: Router
   ) {}
 

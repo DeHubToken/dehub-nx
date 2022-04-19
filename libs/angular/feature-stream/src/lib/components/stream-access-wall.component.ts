@@ -4,7 +4,8 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { EnvToken, PageAccessWallCollectionService } from '@dehub/angular/core';
+import { PageAccessWallCollectionService } from '@dehub/angular/graphql';
+import { EnvToken } from '@dehub/angular/model';
 import { BuyDehubFloozComponent } from '@dehub/angular/ui/components/buy-dehub-flooz';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageAccessWallFragment } from '@dehub/shared/model';

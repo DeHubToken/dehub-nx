@@ -4,7 +4,8 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { EnvToken, PageLearnCollectionService } from '@dehub/angular/core';
+import { PageLearnCollectionService } from '@dehub/angular/graphql';
+import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import {
   PageLearnFragment,

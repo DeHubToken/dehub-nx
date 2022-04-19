@@ -4,11 +4,11 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { EnvToken, PageGameCollectionService } from '@dehub/angular/core';
+import { PageGameCollectionService } from '@dehub/angular/graphql';
+import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageGameFragment } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';
-
 @Component({
   template: `
     <ng-container *ngIf="pageGame$ | async as pageGame" class="grid">

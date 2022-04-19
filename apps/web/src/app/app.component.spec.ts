@@ -3,7 +3,7 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { EnvToken, GraphQLModule } from '@dehub/angular/core';
+import { EnvToken } from '@dehub/angular/model';
 import { MessageService } from 'primeng/api';
 import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
@@ -22,9 +22,6 @@ describe('AppComponent', () => {
           NoopAnimationsModule,
           RouterTestingModule,
           ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
-
-          // GraphQL
-          GraphQLModule,
         ],
         declarations: [
           AppComponent,

@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/model",
+  "sourceRoot": "libs/angular/model/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/model"],
+      "options": {
+        "jestConfig": "libs/angular/model/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/model/src/**/*.ts",
+          "libs/angular/model/src/**/*.html"
+        ],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:model"]
+}

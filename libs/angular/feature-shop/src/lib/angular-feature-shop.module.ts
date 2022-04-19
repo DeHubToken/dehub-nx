@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { GraphQLModule } from '@dehub/angular/graphql';
 import { AngularFeatureShopRoutingModule } from './angular-feature-shop-routing.module';
-
 @NgModule({
   imports: [
-    // Angular Modules
+    // Angular
     CommonModule,
 
-    // Lib Modules
+    // Libs
+    GraphQLModule,
 
-    // PrimeNg Modules
+    // PrimeNg
 
     AngularFeatureShopRoutingModule,
   ],
