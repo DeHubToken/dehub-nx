@@ -22,7 +22,11 @@ interface Web3Env {
   /** Default Network ChainId */
   chainId: number;
   addresses: { contracts: ContractsEnv };
+  /** deprecated, use Magic instead */
   fortmatic: string;
+  auth: {
+    magicApiKey: string;
+  };
 }
 
 /**
@@ -126,5 +130,8 @@ export const defaultSharedEnv: SharedEnv = {
       },
     },
     fortmatic: 'pk_test_97BE541455B7A919',
+    auth: {
+      magicApiKey: 'pk_live_C0A54DDAA8C06FFC',
+    },
   },
 };
