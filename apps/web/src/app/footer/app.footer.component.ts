@@ -4,7 +4,8 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { EnvToken, FooterCollectionService } from '@dehub/angular/core';
+import { FooterCollectionService } from '@dehub/angular/graphql';
+import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { CallToActionFragment, FooterFragment } from '@dehub/shared/model';
 import { resolveButtonStyle } from '@dehub/shared/utils';
