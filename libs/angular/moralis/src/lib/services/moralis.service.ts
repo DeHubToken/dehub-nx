@@ -4,15 +4,17 @@ import {
   IMoralisService,
   LoggerToken,
 } from '@dehub/angular/model';
+import { Networks } from '@dehub/shared/config';
 import {
+  enableOptionsLocalStorageKey,
   MoralisWeb3ProviderType,
-  providerLocalStorageKey,
   User,
   WalletConnectingState,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
   filterEmpty,
+  getRandomRpcUrl,
   publishReplayRefCount,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
@@ -89,58 +91,112 @@ export class MoralisService implements IMoralisService {
     private ngZone: NgZone
   ) {
     if (Moralis.User.current()) {
-      const provider = this.windowRef.localStorage.getItem(
-        providerLocalStorageKey
-      ) as MoralisWeb3ProviderType;
-      if (provider) {
-        this.logger.info(`Moralis enableWeb3 for '${provider}'`);
+      const enableOptionsStr = this.windowRef.localStorage.getItem(
+        enableOptionsLocalStorageKey
+      );
 
-        Moralis.enableWeb3({ provider }).then(() => {
-          this.subscribeEvents();
-        });
+      if (enableOptionsStr) {
+        const enableOptions = JSON.parse(
+          enableOptionsStr
+        ) as Moralis.EnableOptions;
+
+        this.logger.info(
+          `Moralis enableWeb3 for '${enableOptions.provider}'`,
+          enableOptions
+        );
+
+        Moralis.enableWeb3(enableOptions).then(() => this.subscribeEvents());
+      } else {
+        this.logger.warn('Local Storage login options was deleted!');
+        this.logout();
       }
     }
   }
 
-  login(provider: MoralisWeb3ProviderType, chainId: number) {
+  login(
+    provider: MoralisWeb3ProviderType,
+    chainId: number,
+    magicLinkEmail: string,
+    magicLinkApiKey: string
+  ) {
+    let enableOptions: Moralis.EnableOptions;
+
     this.requiredChainHex = decimalToHex(chainId);
     this.setWalletConnectingState(WalletConnectingState.WAITING);
+    const signingMessage = 'DeHub D’App';
 
-    const commonAuthOptions: Moralis.AuthenticationOptions = {
-      chainId,
-      signingMessage: 'DeHub D’App',
-    };
+    let userPromise: Promise<Moralis.User<Moralis.Attributes> | undefined> =
+      Promise.resolve(undefined);
 
-    (provider === 'metamask'
-      ? Moralis.authenticate(commonAuthOptions).then(async loggedInUser => {
-          if (
-            await setupMetamaskNetwork(
-              chainId,
-              () =>
-                this.setWalletConnectingState(
-                  WalletConnectingState.SWITCH_NETWORK
-                ),
-              () =>
-                this.setWalletConnectingState(WalletConnectingState.ADD_NETWORK)
-            )
-          ) {
-            this.userSubject.next(loggedInUser as User);
-            this.accountSubject.next(loggedInUser.attributes.ethAddress);
-          } else {
-            this.logout();
-          }
-        })
-      : Moralis.authenticate({ ...commonAuthOptions, provider }).then(
-          loggedInUser => {
-            this.userSubject.next(loggedInUser as User);
-            this.accountSubject.next(loggedInUser.attributes.ethAddress);
-          }
-        )
-    )
-      .then(() => {
-        this.setWalletConnectingState(WalletConnectingState.COMPLETE);
-        this.windowRef.localStorage.setItem(providerLocalStorageKey, provider);
-        this.subscribeEvents();
+    switch (provider) {
+      case 'metamask':
+        enableOptions = { chainId };
+
+        userPromise = Moralis.authenticate({
+          ...enableOptions,
+          signingMessage,
+        }).then(loggedInUser =>
+          setupMetamaskNetwork(
+            chainId,
+            () =>
+              this.setWalletConnectingState(
+                WalletConnectingState.SWITCH_NETWORK
+              ),
+            () =>
+              this.setWalletConnectingState(WalletConnectingState.ADD_NETWORK)
+          ).then(success => (success ? loggedInUser : undefined))
+        );
+        break;
+
+      case 'walletconnect':
+        enableOptions = { chainId, provider };
+        userPromise = Moralis.authenticate({
+          ...enableOptions,
+          provider,
+          signingMessage,
+        });
+        break;
+
+      case 'magicLink':
+        enableOptions = {
+          network: {
+            rpcUrl: getRandomRpcUrl(Networks[chainId].nodes),
+            chainId,
+          } as unknown as string,
+          provider,
+          email: magicLinkEmail,
+          apiKey: magicLinkApiKey,
+        };
+
+        userPromise = Moralis.authenticate({
+          ...enableOptions,
+          provider,
+          signingMessage,
+        }).then(loggedInUser => {
+          // Save the email as Moralis not store MagicLink email after login
+          loggedInUser.set('email', magicLinkEmail);
+
+          return loggedInUser.save();
+        });
+        break;
+
+      default:
+        this.logger.warn(`Not supported provider: ${provider}!`);
+    }
+
+    userPromise
+      .then(loggedInUser => {
+        if (loggedInUser) {
+          this.updateUserAndAccount(loggedInUser);
+          this.setWalletConnectingState(WalletConnectingState.COMPLETE);
+          this.windowRef.localStorage.setItem(
+            enableOptionsLocalStorageKey,
+            JSON.stringify(enableOptions)
+          );
+          this.subscribeEvents();
+        } else {
+          this.logout();
+        }
       })
       .catch(e => {
         this.setWalletConnectingState(WalletConnectingState.INIT);
@@ -155,12 +211,11 @@ export class MoralisService implements IMoralisService {
     Moralis.User.logOut()
       .catch(e => this.logger.error('Moralis logout problem:', e))
       .finally(() => {
-        // Cleanup web provider from local storage
-        this.windowRef.localStorage.removeItem(providerLocalStorageKey);
+        // Cleanup local storage
+        this.windowRef.localStorage.removeItem(enableOptionsLocalStorageKey);
 
         // Set user and account to undefined
-        this.userSubject.next(undefined);
-        this.accountSubject.next(undefined);
+        this.updateUserAndAccount(undefined);
 
         // Disconnect Web3 wallet
         Moralis.cleanup();
@@ -225,27 +280,6 @@ export class MoralisService implements IMoralisService {
         }
       });
     });
-
-    this.unsubscribeFromChainChanged = Moralis.onChainChanged(newChainHex => {
-      const requiredChainHex = this.requiredChainHex;
-      if (requiredChainHex !== newChainHex) {
-        this.logger.info(
-          `Moralis chain changed from ${requiredChainHex} to ${newChainHex}!`
-        );
-        this.logout();
-      }
-    });
-
-    this.unsubscribeFromAccountChanged = Moralis.onAccountChanged(account => {
-      if (account) {
-        const newAccount = account.toLowerCase();
-        this.logger.info(`Moralis account has changed to ${newAccount}!`);
-        this.handleAccountChanged(newAccount);
-      } else {
-        this.logger.info(`Moralis account disconnected!`);
-        this.logout();
-      }
-    });
   }
 
   private handleAccountChanged(newAccount: string) {
@@ -263,10 +297,8 @@ export class MoralisService implements IMoralisService {
             this.logger.info(`Linking ${newAccount} to the users account.`);
 
             await Moralis.link(newAccount)
-              // Emit new user with updated accounts
-              .then(user => this.userSubject.next(user as User))
-              // Emit new linked account
-              .then(() => this.accountSubject.next(newAccount))
+              // Emit new user with updated accounts and new linked account
+              .then(user => this.updateUserAndAccount(user, newAccount))
               .catch(e =>
                 this.logger.error(
                   `Moralis linking ${newAccount} account problem:`,
@@ -292,5 +324,13 @@ export class MoralisService implements IMoralisService {
     this.unsubscribeFromWeb3Deactivated?.();
     this.unsubscribeFromChainChanged?.();
     this.unsubscribeFromAccountChanged?.();
+  }
+
+  private updateUserAndAccount(
+    loggedInUser?: Moralis.User<Moralis.Attributes>,
+    account?: string
+  ) {
+    this.userSubject.next(loggedInUser as User);
+    this.accountSubject.next(account ?? loggedInUser?.attributes.ethAddress);
   }
 }

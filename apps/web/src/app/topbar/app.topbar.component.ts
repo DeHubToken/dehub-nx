@@ -25,6 +25,7 @@ export class AppTopBarComponent implements OnDestroy {
 
   path = this.env.baseUrl;
   chainId = this.env.web3.chainId;
+  magicLinkApiKey = this.env.web3.auth.magicLinkApiKey;
   cexUrl = this.env.dehub.cexUrl;
   downloadWalletUrl = this.env.dehub.downloadWalletUrl;
   isDev = this.env.env === 'dev';

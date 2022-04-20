@@ -25,7 +25,7 @@ interface Web3Env {
   /** deprecated, use Magic instead */
   fortmatic: string;
   auth: {
-    magicApiKey: string;
+    magicLinkApiKey: string;
   };
 }
 
@@ -131,7 +131,7 @@ export const defaultSharedEnv: SharedEnv = {
     },
     fortmatic: 'pk_test_97BE541455B7A919',
     auth: {
-      magicApiKey: 'pk_live_C0A54DDAA8C06FFC',
+      magicLinkApiKey: 'pk_live_559E42CB7F45E462',
     },
   },
 };

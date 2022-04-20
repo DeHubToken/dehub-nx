@@ -20,7 +20,12 @@ export interface IMoralisService {
 
   username$: Observable<string>;
 
-  login: (provider: MoralisWeb3ProviderType, chainId: number) => void;
+  login: (
+    provider: MoralisWeb3ProviderType,
+    chainId: number,
+    magicLinkEmail: string,
+    magicLinkApiKey: string
+  ) => void;
   logout: () => void;
 
   walletConnectingState$: Observable<WalletConnectingState>;

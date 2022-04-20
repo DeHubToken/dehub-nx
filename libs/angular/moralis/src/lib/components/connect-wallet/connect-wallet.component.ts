@@ -49,6 +49,7 @@ export class ConnectWalletComponent implements OnInit {
   @Input() label = 'Connect Wallet';
   @Input() icon = 'fas fa-wallet';
   @Input() chainId!: number;
+  @Input() magicLinkApiKey!: string;
 
   label$?: Observable<string>;
   isAuthenticated$?: Observable<boolean>;
@@ -101,8 +102,19 @@ export class ConnectWalletComponent implements OnInit {
     );
   }
 
-  onLogin(provider: MoralisWeb3ProviderType) {
-    this.moralisService.login(provider, this.chainId);
+  onLogin({
+    provider,
+    email = '',
+  }: {
+    provider: MoralisWeb3ProviderType;
+    email?: string;
+  }) {
+    this.moralisService.login(
+      provider,
+      this.chainId,
+      email,
+      this.magicLinkApiKey
+    );
     this.showDialog = false;
   }
 

@@ -7,9 +7,11 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { MoralisWeb3ProviderType } from '@dehub/shared/model';
+import { fadeInRightOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'dhb-connect-wallet-dialog',
@@ -22,9 +24,12 @@ import { MoralisWeb3ProviderType } from '@dehub/shared/model';
       [style]="{ width: '350px' }"
       class="p-fluid"
     >
+      <!-- Metamask -->
       <div class="mt-2 mb-3">
-        <!-- Metamask -->
-        <p-button label="Metamask" (onClick)="login.emit('metamask')">
+        <p-button
+          label="Metamask"
+          (onClick)="login.emit({ provider: 'metamask' })"
+        >
           <img
             [src]="path + '/assets/dehub/icons/metamask.svg'"
             [ngStyle]="{
@@ -35,9 +40,74 @@ import { MoralisWeb3ProviderType } from '@dehub/shared/model';
           />
         </p-button>
       </div>
+
+      <!-- Magic Link -->
+      <div [formGroup]="magicLinkForm" class="mt-2 mb-3">
+        <p-inplace #inplaceMagic [preventClick]="true">
+          <!-- Display Template -->
+          <ng-template pTemplate="display">
+            <p-button label="Magic" (click)="inplaceMagic.activate()">
+              <img
+                [src]="path + '/assets/dehub/icons/magic.svg'"
+                alt="Magic"
+                [ngStyle]="{
+                  width: '32px',
+                  height: '16px',
+                  paddingRight: '10px'
+                }"
+              />
+            </p-button>
+          </ng-template>
+
+          <!-- Content -->
+          <ng-template pTemplate="content">
+            <div [@fadeInRight] class="grid">
+              <!-- Magic Email -->
+              <div class="col-8">
+                <input
+                  type="email"
+                  pInputText
+                  formControlName="email"
+                  placeholder="Magic email"
+                  required
+                />
+              </div>
+
+              <!-- Magic Login -->
+              <div class="col-4">
+                <p-button
+                  (click)="
+                    inplaceMagic.deactivate();
+                    login.emit({
+                      provider: 'magicLink',
+                      email: magicLinkForm.get('email')?.value
+                    })
+                  "
+                  [disabled]="magicLinkForm.invalid"
+                >
+                  <img
+                    alt="Magic"
+                    [src]="path + '/assets/dehub/icons/magic.svg'"
+                    [ngStyle]="{
+                      width: '32px',
+                      height: '16px',
+                      paddingRight: '10px'
+                    }"
+                  />
+                  Login
+                </p-button>
+              </div>
+            </div>
+          </ng-template>
+        </p-inplace>
+      </div>
+
+      <!-- Trust Wallet (visible on Mobile only) -->
       <div class="mt-2 mb-3 md:hidden">
-        <!-- Trust Wallet (visible on Mobile only) -->
-        <p-button label="Trust Wallet" (onClick)="login.emit('metamask')">
+        <p-button
+          label="Trust Wallet"
+          (onClick)="login.emit({ provider: 'metamask' })"
+        >
           <img
             [src]="path + '/assets/dehub/icons/trustwallet.svg'"
             [ngStyle]="{
@@ -49,9 +119,13 @@ import { MoralisWeb3ProviderType } from '@dehub/shared/model';
           />
         </p-button>
       </div>
+
+      <!-- Walletconnect -->
       <div class="mt-2 mb-3">
-        <!-- Walletconnect -->
-        <p-button label="WalletConnect" (onClick)="login.emit('walletconnect')">
+        <p-button
+          label="WalletConnect"
+          (onClick)="login.emit({ provider: 'walletconnect' })"
+        >
           <img
             [src]="path + '/assets/dehub/icons/walletconnect.svg'"
             [ngStyle]="{
@@ -65,17 +139,32 @@ import { MoralisWeb3ProviderType } from '@dehub/shared/model';
     </p-dialog>
   `,
   styles: [],
+  animations: [
+    fadeInRightOnEnterAnimation({ anchor: 'fadeInRight', duration: 500 }),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectWalletDialogComponent implements OnInit {
   @Input() header = 'Connect Wallet';
   @Input() visible = false;
 
+  magicLinkForm!: FormGroup;
+
   path = this.env.baseUrl;
 
-  @Output() login = new EventEmitter<MoralisWeb3ProviderType>();
+  @Output() login = new EventEmitter<{
+    provider: MoralisWeb3ProviderType;
+    email?: string;
+  }>();
 
-  constructor(@Inject(EnvToken) private env: SharedEnv) {}
+  constructor(
+    @Inject(EnvToken) private env: SharedEnv,
+    private fb: FormBuilder
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.magicLinkForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
+  }
 }

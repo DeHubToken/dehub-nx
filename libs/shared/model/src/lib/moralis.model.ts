@@ -32,7 +32,9 @@ export type MoralisWeb3ProviderType =
   | 'wc'
   | 'magicLink';
 
+/**@deprecated use 'enableOptionsLocalStorageKey' instead  */
 export const providerLocalStorageKey = 'provider';
+export const enableOptionsLocalStorageKey = 'enableOptions';
 
 export enum MoralisConnectorNames {
   Injected = 'metamask',

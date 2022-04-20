@@ -25,5 +25,8 @@ export const defaultSharedProdEnv: SharedEnv = {
       },
     },
     fortmatic: 'pk_live_3A6FAF91DA1D46C5',
+    auth: {
+      magicLinkApiKey: 'pk_live_A3DB34BA3F84FB3B',
+    },
   },
 };
