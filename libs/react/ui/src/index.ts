@@ -10,4 +10,3 @@ export * from './lib/MultiStepWizard';
 export { default as SuspenseWithChunkError } from './lib/SuspenseWithChunkError';
 export * from './lib/TabMenu';
 export * from './lib/Text';
-export { default as WalletModal } from './lib/WalletModal';

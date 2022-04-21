@@ -118,8 +118,9 @@ const ConnectProvider = ({
 
   const logout = useCallback(async () => {
     const enableOptions = JSON.parse(
-      window.localStorage.getItem(enableOptionsLocalStorageKey) ?? ''
+      window.localStorage.getItem(enableOptionsLocalStorageKey) ?? '{}'
     ) as Web3EnableOptions;
+    if (!enableOptions.provider) return;
 
     if (
       enableOptions.provider === MoralisConnectorNames.Injected ||
@@ -157,6 +158,7 @@ const ConnectProvider = ({
           const ethereum = (window as any).ethereum;
           if (!ethereum) {
             console.error('Provider not supported');
+            logout();
             setWalletConnectingState(WalletConnectingState.NO_PROVIDER);
 
             if (isToastEnabled && toastError)
@@ -198,6 +200,7 @@ const ConnectProvider = ({
           ...enableOptions,
           signingMessage: 'DeHub D’App',
           onError: (error: Error) => {
+            logout();
             setWalletConnectingState(WalletConnectingState.INIT);
           },
           onSuccess: async (loggedInUser: Moralis.User) => {
@@ -270,6 +273,7 @@ const ConnectProvider = ({
                 console.error('Provider not supported');
                 if (isToastEnabled && toastError)
                   toastError('Wallet Connect', 'Provider not supported');
+                logout();
                 setWalletConnectingState(WalletConnectingState.NO_PROVIDER);
               } else {
                 logout();
@@ -296,6 +300,7 @@ const ConnectProvider = ({
     const enableOptions = JSON.parse(
       window.localStorage.getItem(enableOptionsLocalStorageKey) ?? '{}'
     ) as unknown as Web3EnableOptions;
+    if (!enableOptions.provider) return;
 
     if (
       enableOptions.provider === MoralisConnectorNames.Injected ||
@@ -311,6 +316,7 @@ const ConnectProvider = ({
     const enableOptions = JSON.parse(
       window.localStorage.getItem(enableOptionsLocalStorageKey) ?? '{}'
     ) as unknown as Web3EnableOptions;
+    if (!enableOptions.provider) return;
 
     if (
       enableOptions.provider === MoralisConnectorNames.Injected ||

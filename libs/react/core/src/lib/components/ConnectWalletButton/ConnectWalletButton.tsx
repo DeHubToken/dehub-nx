@@ -1,8 +1,8 @@
-import { WalletModal } from '@dehub/react/ui';
 import { DeHubConnectorNames } from '@dehub/shared/model';
 import { Button } from 'primereact/button';
 import { useState } from 'react';
 import { useWeb3Context } from '../../hooks';
+import WalletModal from '../WalletModal';
 
 const ConnectWalletButton = () => {
   const { login: web3Login } = useWeb3Context();

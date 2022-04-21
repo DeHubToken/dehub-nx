@@ -97,40 +97,34 @@ const withLayout =
       <div>
         <PageMeta baseUrl={baseUrl} title={pageTitle} />
         <ToastListener />
-        {showLoader ? (
-          <Loader {...message} />
-        ) : (
-          <div
-            className="layout-wrapper"
-            style={{
-              backgroundImage: `url("${baseUrl}/assets/img/back.jpg") no-repeat fixed center center /cover`,
+        {showLoader && <Loader {...message} />}
+        <div
+          className="layout-wrapper"
+          style={{
+            backgroundImage: `url("${baseUrl}/assets/img/back.jpg") no-repeat fixed center center /cover`,
+          }}
+        >
+          <Header
+            userMenu={
+              <UserMenu cexUrl={cexUrl} downloadWalletUrl={downloadWalletUrl} />
+            }
+            logo={{
+              href: 'https://dehub.net',
+              icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,
+              alt: 'DeHub logo',
             }}
-          >
-            <Header
-              userMenu={
-                <UserMenu
-                  cexUrl={cexUrl}
-                  downloadWalletUrl={downloadWalletUrl}
-                />
-              }
-              logo={{
-                href: 'https://dehub.net',
-                icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,
-                alt: 'DeHub logo',
-              }}
-            />
-            <div className="layout-content py-0">
-              <TabMenu activeTab={activeTab} />
-            </div>
-
-            <div className="layout-main">
-              <div className="layout-content">
-                <Component {...(props as P)} />
-              </div>
-            </div>
-            <Footer landing={landing} />
+          />
+          <div className="layout-content py-0">
+            <TabMenu activeTab={activeTab} />
           </div>
-        )}
+
+          <div className="layout-main">
+            <div className="layout-content">
+              <Component {...(props as P)} />
+            </div>
+          </div>
+          <Footer landing={landing} />
+        </div>
       </div>
     );
   };

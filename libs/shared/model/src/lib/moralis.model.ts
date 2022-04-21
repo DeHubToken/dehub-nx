@@ -54,8 +54,8 @@ export type DeHubConnectorNames = MoralisConnectorNames | Web3ConnectorNames;
 export type MoralisConnectorId = 'injected' | 'walletconnect' | 'magicLink';
 
 export enum WalletConnectingState {
-  NO_PROVIDER,
   INIT,
+  NO_PROVIDER,
   WAITING,
   SWITCH_NETWORK,
   ADD_NETWORK,
