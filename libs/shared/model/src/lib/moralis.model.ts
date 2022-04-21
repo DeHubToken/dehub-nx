@@ -45,7 +45,6 @@ export enum MoralisConnectorNames {
 
 export enum Web3ConnectorNames {
   WalletLink = 'walletlink',
-  Fortmatic = 'fortmatic',
   BSC = 'binance',
 }
 

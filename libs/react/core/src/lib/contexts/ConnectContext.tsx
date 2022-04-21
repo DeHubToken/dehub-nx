@@ -47,14 +47,12 @@ const ConnectContext = createContext<undefined | ConnectContextValue>(
 interface ConnectProviderProps {
   children?: ReactNode;
   defaultChainId: number;
-  fortmatic: string;
   magicLinkApiKey: string;
 }
 
 const ConnectProvider = ({
   children,
   defaultChainId: _defaultChainId = 1,
-  fortmatic,
   magicLinkApiKey,
 }: ConnectProviderProps) => {
   const [walletConnectingState, setWalletConnectingState] =
@@ -232,8 +230,7 @@ const ConnectProvider = ({
         // if web3 react connector
         const connector = getWalletConnector(
           connectorId as Web3ConnectorNames,
-          _defaultChainId,
-          fortmatic
+          _defaultChainId
         );
 
         connector &&
@@ -291,7 +288,6 @@ const ConnectProvider = ({
       onSwitchNetwork,
       cleanConnectorStorage,
       _defaultChainId,
-      fortmatic,
       magicLinkApiKey,
     ]
   );

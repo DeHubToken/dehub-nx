@@ -1,6 +1,5 @@
 import { ReactComponent as BscIcon } from '@dehub/shared/asset/dehub/icons/bsc.svg';
 import { ReactComponent as CoinbaseIcon } from '@dehub/shared/asset/dehub/icons/coinbase.svg';
-import Fortmatic from '@dehub/shared/asset/dehub/icons/fortmatic.png';
 import { ReactComponent as MagicLinkIcon } from '@dehub/shared/asset/dehub/icons/magic.svg';
 import { ReactComponent as MetaMaskIcon } from '@dehub/shared/asset/dehub/icons/metamask.svg';
 import { ReactComponent as TrustWalletIcon } from '@dehub/shared/asset/dehub/icons/trustwallet.svg';
@@ -150,22 +149,6 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
           <div>Coinbase</div>
           <div className="flex flex-row align-items-center">
             <CoinbaseIcon style={{ width: '32px', height: '20px' }} />
-          </div>
-        </WalletButton>
-      </div>
-
-      <div className="mt-2 mb-3">
-        <WalletButton
-          className="flex justify-content-between text-500"
-          onClick={() => doConnect(Web3ConnectorNames.Fortmatic)}
-        >
-          <div>Fortmatic</div>
-          <div className="flex flex-row align-items-center">
-            <img
-              src={Fortmatic}
-              alt="Fortmatic"
-              style={{ width: '20px', height: '20px', marginRight: '6px' }}
-            />
           </div>
         </WalletButton>
       </div>

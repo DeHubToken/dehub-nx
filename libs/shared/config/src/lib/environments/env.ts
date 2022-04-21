@@ -22,8 +22,6 @@ interface Web3Env {
   /** Default Network ChainId */
   chainId: number;
   addresses: { contracts: ContractsEnv };
-  /** deprecated, use Magic instead */
-  fortmatic: string;
   auth: {
     magicLinkApiKey: string;
   };
@@ -129,7 +127,6 @@ export const defaultSharedEnv: SharedEnv = {
         multiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
       },
     },
-    fortmatic: 'pk_test_97BE541455B7A919',
     auth: {
       magicLinkApiKey: 'pk_live_559E42CB7F45E462',
     },
