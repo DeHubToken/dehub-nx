@@ -202,7 +202,7 @@ const ConnectProvider = ({
           onError: (error: Error) => {
             setWalletConnectingState(WalletConnectingState.INIT);
           },
-          onSuccess: async () => {
+          onSuccess: async (loggedInUser: Moralis.User) => {
             if (
               await setupMetamaskNetwork(
                 _defaultChainId,
@@ -216,6 +216,11 @@ const ConnectProvider = ({
                 }
               )
             ) {
+              if (connectorId === MoralisConnectorNames.MagicLink) {
+                // Save the email as Moralis not store MagicLink email after login
+                loggedInUser.set('email', magicLinkEmail);
+              }
+
               setWalletConnectingState(WalletConnectingState.COMPLETE);
             } else {
               logout();
