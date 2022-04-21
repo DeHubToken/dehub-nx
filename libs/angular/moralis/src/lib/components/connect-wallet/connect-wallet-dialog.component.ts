@@ -27,17 +27,23 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
       <!-- Metamask -->
       <div class="mt-2 mb-3">
         <p-button
-          label="Metamask"
           (onClick)="login.emit({ provider: 'metamask' })"
+          styleClass="flex justify-content-between text-500"
         >
-          <img
-            [src]="path + '/assets/dehub/icons/metamask.svg'"
-            [ngStyle]="{
-              width: '32px',
-              height: '16px',
-              paddingRight: '10px'
-            }"
-          />
+          <ng-template pTemplate="content">
+            <div>Metamask</div>
+            <div class="flex flex-row align-items-center">
+              <img
+                alt="metamask"
+                [src]="path + '/assets/dehub/icons/metamask.svg'"
+                [ngStyle]="{
+                  width: '32px',
+                  height: '16px',
+                  paddingRight: '10px'
+                }"
+              />
+            </div>
+          </ng-template>
         </p-button>
       </div>
 
@@ -46,16 +52,24 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
         <p-inplace #inplaceMagic [preventClick]="true">
           <!-- Display Template -->
           <ng-template pTemplate="display">
-            <p-button label="Magic" (click)="inplaceMagic.activate()">
-              <img
-                [src]="path + '/assets/dehub/icons/magic.svg'"
-                alt="Magic"
-                [ngStyle]="{
-                  width: '32px',
-                  height: '16px',
-                  paddingRight: '10px'
-                }"
-              />
+            <p-button
+              (onClick)="inplaceMagic.activate()"
+              styleClass="flex justify-content-between text-500"
+            >
+              <ng-template pTemplate="content">
+                <div>Magic</div>
+                <div class="flex flex-row align-items-center">
+                  <img
+                    alt="magic"
+                    [src]="path + '/assets/dehub/icons/magic.svg'"
+                    [ngStyle]="{
+                      width: '32px',
+                      height: '16px',
+                      paddingRight: '10px'
+                    }"
+                  />
+                </div>
+              </ng-template>
             </p-button>
           </ng-template>
 
@@ -123,17 +137,23 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
       <!-- Walletconnect -->
       <div class="mt-2 mb-3">
         <p-button
-          label="WalletConnect"
           (onClick)="login.emit({ provider: 'walletconnect' })"
+          styleClass="flex justify-content-between text-500"
         >
-          <img
-            [src]="path + '/assets/dehub/icons/walletconnect.svg'"
-            [ngStyle]="{
-              width: '32px',
-              height: '11px',
-              paddingRight: '10px'
-            }"
-          />
+          <ng-template pTemplate="content">
+            <div>WalletConnect</div>
+            <div class="flex flex-row align-items-center">
+              <img
+                alt="walletconnect"
+                [src]="path + '/assets/dehub/icons/walletconnect.svg'"
+                [ngStyle]="{
+                  width: '32px',
+                  height: '16px',
+                  paddingRight: '10px'
+                }"
+              />
+            </div>
+          </ng-template>
         </p-button>
       </div>
     </p-dialog>
