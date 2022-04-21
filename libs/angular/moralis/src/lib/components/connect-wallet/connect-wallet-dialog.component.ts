@@ -26,25 +26,14 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
     >
       <!-- Metamask -->
       <div class="mt-2 mb-3">
-        <p-button
-          (onClick)="login.emit({ provider: 'metamask' })"
-          styleClass="flex justify-content-between text-500"
-        >
-          <ng-template pTemplate="content">
-            <div>Metamask</div>
-            <div class="flex flex-row align-items-center">
-              <img
-                alt="metamask"
-                [src]="path + '/assets/dehub/icons/metamask.svg'"
-                [ngStyle]="{
-                  width: '32px',
-                  height: '16px',
-                  paddingRight: '10px'
-                }"
-              />
-            </div>
-          </ng-template>
-        </p-button>
+        <dhb-wallet-button
+          label="Browser Wallet"
+          [imageSources]="[
+            path + '/assets/dehub/icons/metamask.svg',
+            path + '/assets/dehub/icons/trustwallet.svg'
+          ]"
+          (click)="login.emit({ provider: 'metamask' })"
+        ></dhb-wallet-button>
       </div>
 
       <!-- Magic Link -->
@@ -52,25 +41,11 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
         <p-inplace #inplaceMagic [preventClick]="true">
           <!-- Display Template -->
           <ng-template pTemplate="display">
-            <p-button
-              (onClick)="inplaceMagic.activate()"
-              styleClass="flex justify-content-between text-500"
-            >
-              <ng-template pTemplate="content">
-                <div>Magic</div>
-                <div class="flex flex-row align-items-center">
-                  <img
-                    alt="magic"
-                    [src]="path + '/assets/dehub/icons/magic.svg'"
-                    [ngStyle]="{
-                      width: '32px',
-                      height: '16px',
-                      paddingRight: '10px'
-                    }"
-                  />
-                </div>
-              </ng-template>
-            </p-button>
+            <dhb-wallet-button
+              label="Magic"
+              [imageSources]="[path + '/assets/dehub/icons/magic.svg']"
+              (click)="inplaceMagic.activate()"
+            ></dhb-wallet-button>
           </ng-template>
 
           <!-- Content -->
@@ -118,43 +93,20 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
 
       <!-- Trust Wallet (visible on Mobile only) -->
       <div class="mt-2 mb-3 md:hidden">
-        <p-button
+        <dhb-wallet-button
           label="Trust Wallet"
-          (onClick)="login.emit({ provider: 'metamask' })"
-        >
-          <img
-            [src]="path + '/assets/dehub/icons/trustwallet.svg'"
-            [ngStyle]="{
-              width: '32px',
-              height: '20px',
-              paddingRight: '10px',
-              marginLeft: '-1px'
-            }"
-          />
-        </p-button>
+          [imageSources]="[path + '/assets/dehub/icons/trustwallet.svg']"
+          (click)="login.emit({ provider: 'metamask' })"
+        ></dhb-wallet-button>
       </div>
 
       <!-- Walletconnect -->
       <div class="mt-2 mb-3">
-        <p-button
-          (onClick)="login.emit({ provider: 'walletconnect' })"
-          styleClass="flex justify-content-between text-500"
-        >
-          <ng-template pTemplate="content">
-            <div>WalletConnect</div>
-            <div class="flex flex-row align-items-center">
-              <img
-                alt="walletconnect"
-                [src]="path + '/assets/dehub/icons/walletconnect.svg'"
-                [ngStyle]="{
-                  width: '32px',
-                  height: '16px',
-                  paddingRight: '10px'
-                }"
-              />
-            </div>
-          </ng-template>
-        </p-button>
+        <dhb-wallet-button
+          label="WalletConnect"
+          [imageSources]="[path + '/assets/dehub/icons/walletconnect.svg']"
+          (click)="login.emit({ provider: 'walletconnect' })"
+        ></dhb-wallet-button>
       </div>
     </p-dialog>
   `,

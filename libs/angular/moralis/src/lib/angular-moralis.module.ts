@@ -15,6 +15,7 @@ import {
   ConnectWalletButtonComponent,
   ConnectWalletComponent,
   ConnectWalletDialogComponent,
+  WalletButtonComponent,
 } from './components/connect-wallet';
 import { DehubMoralisService, MoralisService } from './services';
 @NgModule({
@@ -38,6 +39,7 @@ import { DehubMoralisService, MoralisService } from './services';
     ConnectWalletComponent,
     ConnectWalletButtonComponent,
     ConnectWalletDialogComponent,
+    WalletButtonComponent,
   ],
   exports: [ConnectWalletComponent],
 })
