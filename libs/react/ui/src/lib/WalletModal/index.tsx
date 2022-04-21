@@ -13,6 +13,7 @@ import { isEmailValid } from '@dehub/shared/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+import { Inplace, InplaceContent, InplaceDisplay } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -32,13 +33,12 @@ const WalletButton = styled(Button)`
 `;
 
 const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
-  const [showMagicLink, setShowMagicLink] = useState<boolean>(false);
   const [magicLinkEmail, setMagicLinkEmail] = useState('');
   const [invalidMagicLinkEmail, setInvalidMagicLinkEmail] = useState(false);
 
   const initialize = () => {
-    setShowMagicLink(false);
     setMagicLinkEmail('');
+    setInvalidMagicLinkEmail(false);
   };
 
   return (
@@ -71,63 +71,61 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
         </WalletButton>
       </div>
 
-      {!showMagicLink && (
-        <div className="mt-2 mb-3">
-          <WalletButton
-            className="flex justify-content-between text-500"
-            onClick={() => setShowMagicLink(true)}
-          >
-            <div>MagicLink</div>
-            <div className="flex flex-row align-items-center">
-              <MagicLinkIcon style={{ width: '32px', height: '16px' }} />
-            </div>
-          </WalletButton>
-        </div>
-      )}
+      <Inplace>
+        <InplaceDisplay>
+          <div className="mt-2 mb-3">
+            <WalletButton className="flex justify-content-between text-500">
+              <div>MagicLink</div>
+              <div className="flex flex-row align-items-center">
+                <MagicLinkIcon style={{ width: '32px', height: '16px' }} />
+              </div>
+            </WalletButton>
+          </div>
+        </InplaceDisplay>
+        <InplaceContent>
+          <AnimatePresence>
+            <motion.div
+              className="grid"
+              initial={{ opacity: 0, x: '100%' }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, type: 'tween', ease: 'easeOut' }}
+            >
+              <div className="col-8">
+                <InputText
+                  className={invalidMagicLinkEmail ? 'ng-dirty ng-invalid' : ''}
+                  type="text"
+                  placeholder="Magic email"
+                  value={magicLinkEmail}
+                  onChange={e => {
+                    setMagicLinkEmail(e.target.value);
+                    setInvalidMagicLinkEmail(!isEmailValid(e.target.value));
+                  }}
+                  required
+                />
+              </div>
 
-      <AnimatePresence>
-        {showMagicLink && (
-          <motion.div
-            className="grid"
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, type: 'tween', ease: 'easeOut' }}
-          >
-            <div className="col-8">
-              <InputText
-                className={invalidMagicLinkEmail ? 'ng-dirty ng-invalid' : ''}
-                type="text"
-                placeholder="Magic email"
-                value={magicLinkEmail}
-                onChange={e => {
-                  setMagicLinkEmail(e.target.value);
-                  setInvalidMagicLinkEmail(!isEmailValid(e.target.value));
-                }}
-                required
-              />
-            </div>
-
-            <div className="col-4">
-              <Button
-                disabled={invalidMagicLinkEmail}
-                icon={
-                  <MagicLinkIcon
-                    style={{
-                      width: '32px',
-                      height: '16px',
-                      paddingRight: '10px',
-                    }}
-                  />
-                }
-                label={'Login'}
-                onClick={() =>
-                  doConnect(MoralisConnectorNames.MagicLink, magicLinkEmail)
-                }
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <div className="col-4">
+                <Button
+                  disabled={invalidMagicLinkEmail}
+                  icon={
+                    <MagicLinkIcon
+                      style={{
+                        width: '32px',
+                        height: '16px',
+                        paddingRight: '10px',
+                      }}
+                    />
+                  }
+                  label={'Login'}
+                  onClick={() =>
+                    doConnect(MoralisConnectorNames.MagicLink, magicLinkEmail)
+                  }
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </InplaceContent>
+      </Inplace>
 
       <div className="mt-2 mb-3">
         <WalletButton
