@@ -33,7 +33,10 @@ interface ConnectContextValue {
   isAuthenticating: boolean;
   isAuthenticated: boolean;
   walletConnectingState: WalletConnectingState;
-  login: (connectorId: DeHubConnectorNames) => Promise<void>;
+  login: (
+    connectorId: DeHubConnectorNames,
+    magicLinkEmail?: string
+  ) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -122,7 +125,8 @@ const ConnectProvider = ({
 
     if (
       enableOptions.provider === MoralisConnectorNames.Injected ||
-      enableOptions.provider === MoralisConnectorNames.WalletConnect
+      enableOptions.provider === MoralisConnectorNames.WalletConnect ||
+      enableOptions.provider === MoralisConnectorNames.MagicLink
     ) {
       await moralisLogout();
     } else {
@@ -294,7 +298,8 @@ const ConnectProvider = ({
 
     if (
       enableOptions.provider === MoralisConnectorNames.Injected ||
-      enableOptions.provider === MoralisConnectorNames.WalletConnect
+      enableOptions.provider === MoralisConnectorNames.WalletConnect ||
+      enableOptions.provider === MoralisConnectorNames.MagicLink
     ) {
       setAccount(moralisAccount);
       setChainId(moralisChainId ? hexToDecimal(moralisChainId) : null);
@@ -308,7 +313,8 @@ const ConnectProvider = ({
 
     if (
       enableOptions.provider === MoralisConnectorNames.Injected ||
-      enableOptions.provider === MoralisConnectorNames.WalletConnect
+      enableOptions.provider === MoralisConnectorNames.WalletConnect ||
+      enableOptions.provider === MoralisConnectorNames.MagicLink
     ) {
       setWeb3Provider(moralisLibrary);
     } else {

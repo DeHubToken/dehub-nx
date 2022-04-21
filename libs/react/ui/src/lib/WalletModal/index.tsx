@@ -121,6 +121,9 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
                   />
                 }
                 label={'Login'}
+                onClick={() =>
+                  doConnect(MoralisConnectorNames.MagicLink, magicLinkEmail)
+                }
               />
             </div>
           </motion.div>

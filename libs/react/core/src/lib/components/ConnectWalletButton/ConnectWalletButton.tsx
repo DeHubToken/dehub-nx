@@ -24,7 +24,9 @@ const ConnectWalletButton = () => {
         onDismiss={() => {
           setWalletModalOpen(false);
         }}
-        doConnect={(provider: DeHubConnectorNames) => web3Login(provider)}
+        doConnect={(provider: DeHubConnectorNames, magicLinkEmail?: string) =>
+          web3Login(provider, magicLinkEmail)
+        }
       />
     </>
   );
