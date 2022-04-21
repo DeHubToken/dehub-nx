@@ -14,6 +14,7 @@ import { EnvToken } from '@dehub/angular/model';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button';
 import { BuyDehubFloozModule } from '@dehub/angular/ui/components/buy-dehub-flooz';
+import { FooterModule } from '@dehub/angular/ui/components/footer';
 import { TabMenuModule } from '@dehub/angular/ui/components/tab-menu';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ButtonModule } from 'primeng/button';
@@ -25,7 +26,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
-import { AppFooterComponent } from './footer/app.footer.component';
 import { AppTopBarComponent } from './topbar/app.topbar.component';
 import { AppMenuComponent } from './topbar/menu/app.menu.component';
 import { MenuService } from './topbar/menu/app.menu.service';
@@ -52,12 +52,13 @@ const { appId, serverUrl } = environment.moralis;
     // Optional feature modules
     AngularCoreModule.forRoot(),
     AngularMoralisModule.forRoot({ appId, serverUrl }),
+    GraphQLModule,
 
     // Libs
     TabMenuModule,
     BuyDehubButtonModule,
     BuyDehubFloozModule,
-    GraphQLModule,
+    FooterModule,
 
     AppRoutingModule,
   ],
@@ -69,7 +70,6 @@ const { appId, serverUrl } = environment.moralis;
     AppMenuComponent,
     AppMenuitemComponent,
     AppTopBarComponent,
-    AppFooterComponent,
   ],
   providers: [
     MenuService,

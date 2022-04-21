@@ -2,25 +2,23 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
-  OnInit,
+  Input,
 } from '@angular/core';
-import { FooterCollectionService } from '@dehub/angular/graphql';
-import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
-import { CallToActionFragment, FooterFragment } from '@dehub/shared/model';
+import { FooterFragment } from '@dehub/shared/model';
 import { resolveButtonStyle } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
-import { map, Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'dhb-footer',
   template: `
-    <div *ngIf="footer$ | async as footer" class="layout-footer">
+    <div *ngIf="footer" class="layout-footer">
       <div class="grid">
         <div class="col-12 lg-4">
           <div class="grid">
             <div
-              *ngFor="let group of linkGroups"
+              *ngFor="
+                let group of footer?.linksCollection?.items | dhbCTAGroup: 5
+              "
               class="col-12 md:col-4 lg:col-2"
             >
               <ul>
@@ -76,40 +74,10 @@ import { map, Observable, tap } from 'rxjs';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppFooterComponent implements OnInit {
-  footer$?: Observable<FooterFragment | undefined>;
-  // Will group links by 5 per column
-  linkGroups: (CallToActionFragment | undefined)[][] = [];
+export class FooterComponent {
+  @Input() footer?: FooterFragment | undefined;
 
-  constructor(
-    @Inject(EnvToken) private env: SharedEnv,
-    @Inject(WINDOW) private readonly windowRef: Window,
-    private footerCollectionService: FooterCollectionService
-  ) {}
-
-  ngOnInit() {
-    this.footer$ = this.footerCollectionService
-      .fetch({
-        isPreview: this.env.contentful.isPreview,
-      })
-      .pipe(
-        map(
-          ({ data: { footerCollection } }) =>
-            footerCollection?.items[0] ?? undefined
-        ),
-        // Group links by 5 per column
-        tap(footer => {
-          if (footer?.linksCollection) {
-            const items = footer.linksCollection.items;
-            const groupSize = 5;
-            for (let i = 0; i < items.length; i += groupSize) {
-              const group = items.slice(i, i + groupSize);
-              this.linkGroups.push(group);
-            }
-          }
-        })
-      );
-  }
+  constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
 
   resolveButton(type?: string, style?: string, size?: string) {
     return resolveButtonStyle(type, style, size);

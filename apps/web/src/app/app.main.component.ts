@@ -1,8 +1,12 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { FooterCollectionService } from '@dehub/angular/graphql';
+import { EnvToken } from '@dehub/angular/model';
+import { SharedEnv } from '@dehub/shared/config';
+import { FooterFragment } from '@dehub/shared/model';
 import { MenuItem } from 'primeng/api';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { tabMenuItems } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuService } from './topbar/menu/app.menu.service';
@@ -10,7 +14,7 @@ import { MenuService } from './topbar/menu/app.menu.service';
 @Component({
   templateUrl: './app.main.component.html',
 })
-export class AppMainComponent implements OnDestroy {
+export class AppMainComponent implements OnInit, OnDestroy {
   sidebarStatic?: boolean;
 
   sidebarActive = false;
@@ -30,10 +34,14 @@ export class AppMainComponent implements OnDestroy {
   tabMenuItems = tabMenuItems;
   private sub: Subscription;
 
+  footer$?: Observable<FooterFragment | undefined>;
+
   constructor(
-    private menuService: MenuService,
     public app: AppComponent,
-    private router: Router
+    @Inject(EnvToken) private env: SharedEnv,
+    private menuService: MenuService,
+    private router: Router,
+    private footerCollectionService: FooterCollectionService
   ) {
     const isNavigationEnd = (event: unknown): event is NavigationEnd =>
       event instanceof NavigationEnd;
@@ -47,6 +55,19 @@ export class AppMainComponent implements OnDestroy {
           (this.activeMenuItem = tabMenuItems.find(
             ({ routerLink }) => routerLink && url.includes(routerLink[0])
           ))
+      );
+  }
+
+  ngOnInit() {
+    this.footer$ = this.footerCollectionService
+      .fetch({
+        isPreview: this.env.contentful.isPreview,
+      })
+      .pipe(
+        map(
+          ({ data: { footerCollection } }) =>
+            footerCollection?.items[0] ?? undefined
+        )
       );
   }
 
