@@ -35,7 +35,6 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
         <ng-container *ngFor="let cta of ctas">
           <p-button
             *ngIf="cta"
-            pRipple
             [dhbContentfulDraft]="cta.sys"
             [label]="cta?.label || ''"
             [icon]="cta?.icon || ''"
