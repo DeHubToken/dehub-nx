@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { ToastContext } from '../contexts/ToastsProvider';
+import { ToastContext, ToastContextValue } from '../contexts/ToastsProvider';
 
-export const useToast = () => {
+export const useToast = (): ToastContextValue & { isToastEnabled: boolean } => {
   const context = useContext(ToastContext);
   if (!context) {
-    throw new Error('Toasts context undefined');
+    return { isToastEnabled: false };
   }
 
-  return context;
+  return { ...context, isToastEnabled: true };
 };

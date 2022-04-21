@@ -1,8 +1,8 @@
 import {
-  DeHubConnectorNames,
+  enableOptionsLocalStorageKey,
   MoralisConnectorNames,
-  providerLocalStorageKey,
 } from '@dehub/shared/model';
+import { Moralis } from 'moralis';
 import { useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
 
@@ -17,21 +17,28 @@ export function useEagerWeb3() {
 
   useEffect(() => {
     const enable = async () => {
-      const connectorId = window.localStorage.getItem(
-        providerLocalStorageKey
-      ) as DeHubConnectorNames;
+      const enableOptionsStr = window.localStorage.getItem(
+        enableOptionsLocalStorageKey
+      );
 
-      if (
-        connectorId === MoralisConnectorNames.Injected ||
-        connectorId === MoralisConnectorNames.WalletConnect
-      ) {
+      if (enableOptionsStr) {
+        const enableOptions = JSON.parse(
+          enableOptionsStr
+        ) as Moralis.EnableOptions;
+
         if (
-          isAuthenticated &&
-          !isAuthenticating &&
-          !isWeb3Enabled &&
-          !isWeb3EnableLoading
+          enableOptions.provider === MoralisConnectorNames.Injected ||
+          enableOptions.provider === MoralisConnectorNames.WalletConnect ||
+          enableOptions.provider === MoralisConnectorNames.MagicLink
         ) {
-          enableWeb3({ provider: connectorId });
+          if (
+            isAuthenticated &&
+            !isAuthenticating &&
+            !isWeb3Enabled &&
+            !isWeb3EnableLoading
+          ) {
+            enableWeb3(enableOptions);
+          }
         }
       }
     };

@@ -32,13 +32,15 @@ export type MoralisWeb3ProviderType =
   | 'wc'
   | 'magicLink';
 
-/**@deprecated use 'enableOptionsLocalStorageKey' instead  */
-export const providerLocalStorageKey = 'provider';
 export const enableOptionsLocalStorageKey = 'enableOptions';
+export type Web3EnableOptions =
+  | { provider: DeHubConnectorNames }
+  | Moralis.EnableOptions;
 
 export enum MoralisConnectorNames {
   Injected = 'metamask',
   WalletConnect = 'walletconnect',
+  MagicLink = 'magicLink',
 }
 
 export enum Web3ConnectorNames {
@@ -49,7 +51,8 @@ export enum Web3ConnectorNames {
 
 export type DeHubConnectorNames = MoralisConnectorNames | Web3ConnectorNames;
 
-export type MoralisConnectorId = 'injected' | 'walletconnect';
+/* @deprecated */
+export type MoralisConnectorId = 'injected' | 'walletconnect' | 'magicLink';
 
 export enum WalletConnectingState {
   NO_PROVIDER,

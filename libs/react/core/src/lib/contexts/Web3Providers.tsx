@@ -14,6 +14,9 @@ interface MoralisProps {
 interface Web3Props {
   chainId: number;
   fortmatic: string;
+  auth: {
+    magicLinkApiKey: string;
+  };
 }
 
 interface Web3ProviderProps {
@@ -44,6 +47,7 @@ export const Web3Providers = ({
         <ConnectProvider
           defaultChainId={web3.chainId}
           fortmatic={web3.fortmatic}
+          magicLinkApiKey={web3.auth.magicLinkApiKey}
         >
           {children}
         </ConnectProvider>

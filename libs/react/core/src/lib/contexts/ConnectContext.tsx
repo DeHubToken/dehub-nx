@@ -1,16 +1,18 @@
 import { NoBscProviderError } from '@binance-chain/bsc-connector';
+import { Networks } from '@dehub/shared/config';
 import {
   DeHubConnectorNames,
+  enableOptionsLocalStorageKey,
   MoralisConnectorNames,
-  MoralisWeb3ProviderType,
-  providerLocalStorageKey,
   WalletConnectingState,
   Web3ConnectorNames,
+  Web3EnableOptions,
 } from '@dehub/shared/model';
 import { hexToDecimal } from '@dehub/shared/util/network/hex-to-decimal';
-import { setupMetamaskNetwork } from '@dehub/shared/utils';
+import { getRandomRpcUrl, setupMetamaskNetwork } from '@dehub/shared/utils';
 import { Web3Provider } from '@ethersproject/providers';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
+import { Moralis } from 'moralis';
 import {
   createContext,
   ReactNode,
@@ -43,12 +45,14 @@ interface ConnectProviderProps {
   children?: ReactNode;
   defaultChainId: number;
   fortmatic: string;
+  magicLinkApiKey: string;
 }
 
 const ConnectProvider = ({
   children,
   defaultChainId: _defaultChainId = 1,
   fortmatic,
+  magicLinkApiKey,
 }: ConnectProviderProps) => {
   const [walletConnectingState, setWalletConnectingState] =
     useState<WalletConnectingState>(WalletConnectingState.INIT);
@@ -70,7 +74,7 @@ const ConnectProvider = ({
     isInitialized: moralisInitialized,
   } = useMoralis();
 
-  const { toastError } = useToast();
+  const { isToastEnabled, toastError } = useToast();
 
   const cleanConnectorStorage = useCallback(
     (connectorId: DeHubConnectorNames): void => {
@@ -99,7 +103,7 @@ const ConnectProvider = ({
           '-walletlink:https://www.walletlink.org:walletUsername'
         );
       }
-      window.localStorage.removeItem(providerLocalStorageKey);
+      window.localStorage.removeItem(enableOptionsLocalStorageKey);
     },
     []
   );
@@ -112,11 +116,13 @@ const ConnectProvider = ({
   }, []);
 
   const logout = useCallback(async () => {
-    const connectorId = window.localStorage.getItem(providerLocalStorageKey);
+    const enableOptions = JSON.parse(
+      window.localStorage.getItem(enableOptionsLocalStorageKey) ?? ''
+    ) as Web3EnableOptions;
 
     if (
-      connectorId === MoralisConnectorNames.Injected ||
-      connectorId === MoralisConnectorNames.WalletConnect
+      enableOptions.provider === MoralisConnectorNames.Injected ||
+      enableOptions.provider === MoralisConnectorNames.WalletConnect
     ) {
       await moralisLogout();
     } else {
@@ -124,19 +130,25 @@ const ConnectProvider = ({
       setAccount(null);
       setChainId(null);
     }
-    cleanConnectorStorage(connectorId as DeHubConnectorNames);
+    cleanConnectorStorage(enableOptions.provider as DeHubConnectorNames);
   }, [moralisLogout, web3Logout, cleanConnectorStorage]);
 
   const login = useCallback(
-    async (connectorId: DeHubConnectorNames) => {
+    async (connectorId: DeHubConnectorNames, magicLinkEmail?: string) => {
       cleanConnectorStorage(connectorId);
 
       setWalletConnectingState(WalletConnectingState.WAITING);
-      window.localStorage.setItem(providerLocalStorageKey, connectorId);
+      window.localStorage.setItem(
+        enableOptionsLocalStorageKey,
+        JSON.stringify({
+          provider: connectorId,
+        })
+      );
 
       if (
         connectorId === MoralisConnectorNames.Injected ||
-        connectorId === MoralisConnectorNames.WalletConnect
+        connectorId === MoralisConnectorNames.WalletConnect ||
+        connectorId === MoralisConnectorNames.MagicLink
       ) {
         if (connectorId === MoralisConnectorNames.Injected) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -145,15 +157,43 @@ const ConnectProvider = ({
             console.error('Provider not supported');
             setWalletConnectingState(WalletConnectingState.NO_PROVIDER);
 
-            toastError('Wallet Connect', 'Provider not supported');
+            if (isToastEnabled && toastError)
+              toastError('Wallet Connect', 'Provider not supported');
             return;
           }
         }
 
+        let enableOptions: Moralis.EnableOptions;
+        if (
+          connectorId === MoralisConnectorNames.Injected ||
+          connectorId === MoralisConnectorNames.WalletConnect
+        ) {
+          enableOptions = {
+            provider: connectorId,
+            chainId: _defaultChainId,
+          };
+        } else if (connectorId === MoralisConnectorNames.MagicLink) {
+          enableOptions = {
+            provider: connectorId,
+            network: {
+              rpcUrl: getRandomRpcUrl(Networks[_defaultChainId].nodes),
+              chainId: _defaultChainId,
+            } as unknown as string,
+            email: magicLinkEmail,
+            apiKey: magicLinkApiKey,
+          };
+        } else {
+          throw new Error(`Not supported provider: ${connectorId}!`);
+        }
+
+        window.localStorage.setItem(
+          enableOptionsLocalStorageKey,
+          JSON.stringify(enableOptions)
+        );
+
         // if moralis connector
         moralisLogin({
-          chainId: _defaultChainId,
-          provider: connectorId as MoralisWeb3ProviderType,
+          ...enableOptions,
           signingMessage: 'DeHub D’App',
           onError: (error: Error) => {
             setWalletConnectingState(WalletConnectingState.INIT);
@@ -165,10 +205,10 @@ const ConnectProvider = ({
                 onSwitchNetwork,
                 onAddNetwork,
                 (success: boolean) => {
-                  if (success) login(connectorId);
+                  if (success) login(connectorId, magicLinkEmail);
                 },
                 (success: boolean) => {
-                  if (success) login(connectorId);
+                  if (success) login(connectorId, magicLinkEmail);
                 }
               )
             ) {
@@ -222,7 +262,8 @@ const ConnectProvider = ({
                 error instanceof NoBscProviderError
               ) {
                 console.error('Provider not supported');
-                toastError('Wallet Connect', 'Provider not supported');
+                if (isToastEnabled && toastError)
+                  toastError('Wallet Connect', 'Provider not supported');
                 setWalletConnectingState(WalletConnectingState.NO_PROVIDER);
               } else {
                 logout();
@@ -235,21 +276,25 @@ const ConnectProvider = ({
       web3Login,
       moralisLogin,
       logout,
+      isToastEnabled,
       toastError,
       onAddNetwork,
       onSwitchNetwork,
       cleanConnectorStorage,
       _defaultChainId,
       fortmatic,
+      magicLinkApiKey,
     ]
   );
 
   useEffect(() => {
-    const connectorId = window.localStorage.getItem(providerLocalStorageKey);
+    const enableOptions = JSON.parse(
+      window.localStorage.getItem(enableOptionsLocalStorageKey) ?? '{}'
+    ) as unknown as Web3EnableOptions;
 
     if (
-      connectorId === MoralisConnectorNames.Injected ||
-      connectorId === MoralisConnectorNames.WalletConnect
+      enableOptions.provider === MoralisConnectorNames.Injected ||
+      enableOptions.provider === MoralisConnectorNames.WalletConnect
     ) {
       setAccount(moralisAccount);
       setChainId(moralisChainId ? hexToDecimal(moralisChainId) : null);
@@ -257,10 +302,13 @@ const ConnectProvider = ({
   }, [moralisAccount, moralisChainId]);
 
   useEffect(() => {
-    const connectorId = window.localStorage.getItem(providerLocalStorageKey);
+    const enableOptions = JSON.parse(
+      window.localStorage.getItem(enableOptionsLocalStorageKey) ?? '{}'
+    ) as unknown as Web3EnableOptions;
+
     if (
-      connectorId === MoralisConnectorNames.Injected ||
-      connectorId === MoralisConnectorNames.WalletConnect
+      enableOptions.provider === MoralisConnectorNames.Injected ||
+      enableOptions.provider === MoralisConnectorNames.WalletConnect
     ) {
       setWeb3Provider(moralisLibrary);
     } else {

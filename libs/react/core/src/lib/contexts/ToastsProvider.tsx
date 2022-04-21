@@ -8,17 +8,17 @@ export interface ToastMetaMessage {
   severity?: ToastSeverityType;
 }
 
-interface ToastContextValue {
-  toasts: ToastMetaMessage[];
-  clear: () => void;
-  remove: (title: string) => void;
-  toastError: toastSignature;
-  toastInfo: toastSignature;
-  toastWarning: toastSignature;
-  toastSuccess: toastSignature;
+export interface ToastContextValue {
+  toasts?: ToastMetaMessage[];
+  clear?: () => void;
+  remove?: (title: string) => void;
+  toastError?: toastSignature;
+  toastInfo?: toastSignature;
+  toastWarning?: toastSignature;
+  toastSuccess?: toastSignature;
 }
 
-const ToastContext = createContext<undefined | ToastContextValue>(undefined);
+const ToastContext = createContext<ToastContextValue>({});
 
 interface ToastProviderProps {
   children?: ReactNode;

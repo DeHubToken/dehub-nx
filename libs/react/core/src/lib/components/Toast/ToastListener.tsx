@@ -4,20 +4,20 @@ import { ToastMetaMessage } from '../../contexts/ToastsProvider';
 import { useToast } from '../../hooks/useToast';
 
 const ToastListener = () => {
-  const { toasts, remove } = useToast();
+  const { isToastEnabled, toasts, remove } = useToast();
   const [prevToasts, setPrevToasts] = useState<ToastMetaMessage[]>([]);
 
   const toast = useRef<Toast>(null);
 
   const onRemove = useCallback(
     (message: ToastMessage) => {
-      remove(message.summary as string);
+      if (isToastEnabled && remove) remove(message.summary as string);
     },
-    [remove]
+    [isToastEnabled, remove]
   );
 
   useEffect(() => {
-    if (toast) {
+    if (toast && toasts) {
       const diff = toasts.filter(
         toast => !prevToasts.find(prevToast => prevToast.title === toast.title)
       );
