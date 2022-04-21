@@ -33,19 +33,6 @@ export const BasicPostDetailFragmentDoc = gql`
   }
   ${BasicPostCommonFragmentDoc}
 `;
-export const LegalPostFragmentDoc = gql`
-  fragment LegalPost on LegalPost {
-    sys {
-      ...Sys
-    }
-    title
-    description {
-      json
-    }
-    slug
-  }
-  ${SysFragmentDoc}
-`;
 export const CallToActionFragmentDoc = gql`
   fragment CallToAction on CallToAction {
     sys {
@@ -58,6 +45,39 @@ export const CallToActionFragmentDoc = gql`
     style
     size
     icon
+  }
+  ${SysFragmentDoc}
+`;
+export const FooterFragmentDoc = gql`
+  fragment Footer on Footer {
+    sys {
+      ...Sys
+    }
+    copyright
+    linksCollection(limit: 20, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    socialIconsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
+`;
+export const LegalPostFragmentDoc = gql`
+  fragment LegalPost on LegalPost {
+    sys {
+      ...Sys
+    }
+    title
+    description {
+      json
+    }
+    slug
   }
   ${SysFragmentDoc}
 `;
@@ -731,6 +751,67 @@ export type BasicPostCollectionBySlugLazyQueryHookResult = ReturnType<
 export type BasicPostCollectionBySlugQueryResult = Apollo.QueryResult<
   models.BasicPostCollectionBySlugQuery,
   models.BasicPostCollectionBySlugQueryVariables
+>;
+export const FooterCollectionDocument = gql`
+  query footerCollection($isPreview: Boolean = false) {
+    footerCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...Footer
+      }
+    }
+  }
+  ${FooterFragmentDoc}
+`;
+
+/**
+ * __useFooterCollectionQuery__
+ *
+ * To run a query within a React component, call `useFooterCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFooterCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFooterCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useFooterCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.FooterCollectionQuery,
+    models.FooterCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.FooterCollectionQuery,
+    models.FooterCollectionQueryVariables
+  >(FooterCollectionDocument, options);
+}
+export function useFooterCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.FooterCollectionQuery,
+    models.FooterCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.FooterCollectionQuery,
+    models.FooterCollectionQueryVariables
+  >(FooterCollectionDocument, options);
+}
+export type FooterCollectionQueryHookResult = ReturnType<
+  typeof useFooterCollectionQuery
+>;
+export type FooterCollectionLazyQueryHookResult = ReturnType<
+  typeof useFooterCollectionLazyQuery
+>;
+export type FooterCollectionQueryResult = Apollo.QueryResult<
+  models.FooterCollectionQuery,
+  models.FooterCollectionQueryVariables
 >;
 export const LegalPostCollectionBySlugDocument = gql`
   query legalPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {

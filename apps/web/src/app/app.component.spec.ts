@@ -9,7 +9,6 @@ import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
-import { AppFooterComponent } from './footer/app.footer.component';
 import { AppTopBarComponent } from './topbar/app.topbar.component';
 import { AppMenuComponent } from './topbar/menu/app.menu.component';
 
@@ -28,7 +27,6 @@ describe('AppComponent', () => {
           AppMainComponent,
           AppTopBarComponent,
           AppMenuComponent,
-          AppFooterComponent,
         ],
         providers: [
           MessageService,
