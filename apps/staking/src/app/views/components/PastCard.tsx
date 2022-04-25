@@ -410,7 +410,6 @@ const PastCard = ({ poolIndex }: CardProps) => {
                       poolInfo.paused ||
                       !userStakeInfo ||
                       userStakeInfo.harvested ||
-                      userStakeInfo.amount.eq(BIG_ZERO) ||
                       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                       poolInfo.closeBlock > blockNumber!
                     }
@@ -425,7 +424,6 @@ const PastCard = ({ poolIndex }: CardProps) => {
                       poolInfo.paused ||
                       !userStakeInfo ||
                       userStakeInfo.harvested ||
-                      userStakeInfo.amount.eq(BIG_ZERO) ||
                       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                       poolInfo.closeBlock > blockNumber!
                     }
