@@ -42,3 +42,5 @@ declare namespace redis {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function createClient(options: RedisOptions): any;
 }
+
+declare module 'xhr2';

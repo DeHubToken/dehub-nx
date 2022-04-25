@@ -1,41 +1,39 @@
-import Moralis from 'moralis';
+require('../shared/mock.include');
+import { Moralis } from 'moralis';
+import { environment } from '../../environments/environment';
 
-console.log(Cypress.env());
+const moralis = environment.moralis;
+const web3 = environment.web3;
 
-const moralis = Cypress.env('moralis');
-console.log('moralis', moralis);
-const web3 = Cypress.env('web3');
-console.log('web3', web3);
-
-describe('moralis-cloud', () => {
-  before(async () => {
+describe('DeHub functions', function () {
+  beforeAll(async function () {
     await Moralis.start(moralis);
   });
 
-  it('Should return circulating supply', async () => {
+  it('Should return circulating supply', async function () {
     const supply = await Moralis.Cloud.run('totalCirculatingSupply', {});
-    expect(Number(supply)).to.be.greaterThan(0);
+    expect(Number(supply)).toBeGreaterThan(0);
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isValidContract = (contract: any) => {
     // should contains address, name, chainId, abi
-    expect(!contract.address).to.be.false;
-    expect(!contract.name).to.be.false;
-    expect(!contract.chainId).to.be.false;
-    expect(!contract.abi).to.be.false;
+    expect(!contract.address).toBeFalsy();
+    expect(!contract.name).toBeFalsy();
+    expect(!contract.chainId).toBeFalsy();
+    expect(!contract.abi).toBeFalsy();
 
     // check type of members
-    expect(typeof contract.address).to.be.equal('string');
-    expect(typeof contract.name).to.be.equal('string');
-    expect(typeof contract.chainId).to.be.equal('number');
-    expect(typeof contract.abi).to.be.equal('object');
+    expect(typeof contract.address).toEqual('string');
+    expect(typeof contract.name).toEqual('string');
+    expect(typeof contract.chainId).toEqual('number');
+    expect(typeof contract.abi).toEqual('object');
 
     // check validation
-    expect(contract.address.length > 0).to.be.true;
-    expect(contract.name.length > 0).to.be.true;
-    expect(contract.chainId).to.be.equal(web3.chainId);
-    expect(contract.abi.length > 0).to.be.true;
+    expect(contract.address.length > 0).toBeTruthy();
+    expect(contract.name.length > 0).toBeTruthy();
+    expect(contract.chainId).toEqual(web3.chainId);
+    expect(contract.abi.length > 0).toBeTruthy();
   };
 
   it('Should return staking controller contract', async () => {
@@ -43,14 +41,14 @@ describe('moralis-cloud', () => {
       'getStakingControllerContract',
       {}
     );
-    expect(!contract).to.be.false;
+    expect(!contract).toBeFalsy();
 
     isValidContract(contract);
   });
 
   it('Should return reward contract', async () => {
     const contract = await Moralis.Cloud.run('getRewardContract', {});
-    expect(!contract).to.be.false;
+    expect(!contract).toBeFalsy();
 
     isValidContract(contract);
   });
@@ -63,13 +61,13 @@ describe('moralis-cloud', () => {
 
     const now = new Date();
     const quarter = Math.floor((now.getUTCMonth() + 1) / 4) + 1;
-    expect(contract.year).to.be.equal(now.getUTCFullYear());
-    expect(contract.quarter).to.be.equal(quarter);
+    expect(contract.year).toEqual(now.getUTCFullYear());
+    expect(contract.quarter).toEqual(quarter);
   });
 
   it('Should return staking contract', async () => {
     const contracts = await Moralis.Cloud.run('getStakingContracts', {});
-    expect(contracts && contracts.length > 0).to.be.true;
+    expect(contracts && contracts.length > 0).toBeTruthy();
 
     contracts.forEach(contract => isValidContract(contract));
   });
