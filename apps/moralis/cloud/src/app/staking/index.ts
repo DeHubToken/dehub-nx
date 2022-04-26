@@ -1,2 +1,2 @@
 export * from './staking-events';
-export * from './staking-functions';
+export * from './staking-functions-api';

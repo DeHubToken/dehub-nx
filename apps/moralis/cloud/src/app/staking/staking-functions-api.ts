@@ -1,6 +1,6 @@
-import { getRewardContractFn } from '.';
 import {
   getActiveStakingContractFn,
+  getRewardContractFn,
   getStakingContractsFn,
   getStakingControllerContractFn,
 } from './staking-functions';
