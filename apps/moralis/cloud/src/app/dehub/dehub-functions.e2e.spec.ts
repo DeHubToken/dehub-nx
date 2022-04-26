@@ -5,10 +5,10 @@ import { DehubFunctions } from './dehub.model';
 
 const { moralis } = environment;
 
-describe('E2E DeHub functions', function () {
+describe('E2E DeHub functions', () => {
   beforeAll(async () => await Moralis.start(moralis));
 
-  it('Should return circulating supply', async function () {
+  it('Should return circulating supply', async () => {
     const supply = await Moralis.Cloud.run(
       DehubFunctions.TotalCirculatingSupply
     );
