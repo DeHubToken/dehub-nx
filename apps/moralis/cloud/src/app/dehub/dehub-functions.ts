@@ -1,4 +1,3 @@
-import { Moralis } from 'moralis';
 import { DehubFunctions } from './dehub.model';
 
 export const totalCirculatingSupplyFn = async () => {
