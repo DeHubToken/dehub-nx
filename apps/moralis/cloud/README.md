@@ -20,7 +20,7 @@ These functions can be callable outside by the following link format:
 https://docs.moralis.io/moralis-dapp/cloud-code/cloud-functions
 
 ```js
-const contracts = await Moralis.Cloud.run('getStakingContracts', {});
+const contracts = await Moralis.Cloud.run('getStakingContracts');
 ```
 
 ### totalCirculatingSupply
@@ -28,7 +28,7 @@ const contracts = await Moralis.Cloud.run('getStakingContracts', {});
 Returns the total circulating supply of $DeHub token.
 
 ```js
-const supply = await Moralis.Cloud.run('totalCirculatingSupply', {});
+const supply = await Moralis.Cloud.run('totalCirculatingSupply');
 console.log('total circulating supply', supply.toString());
 ```
 

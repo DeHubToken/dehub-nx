@@ -1,4 +1,2 @@
-export * from './allrites-functions';
-export * from './dehub-functions';
-export * from './events-triggers';
-export * from './staking-functions';
+export * from './dehub-events';
+export * from './dehub-functions-api';

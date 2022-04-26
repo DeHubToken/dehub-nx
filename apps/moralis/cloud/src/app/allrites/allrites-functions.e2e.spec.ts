@@ -1,19 +1,16 @@
 require('../shared/mock.include');
 import { Moralis } from 'moralis';
 import { environment } from '../../environments/environment';
-import { AuthAllritesReturns } from './allrites-functions';
+import { AllritesFunctions, AuthAllritesReturns } from './allrites.model';
 
-const moralis = environment.moralis;
+const { moralis } = environment;
 
-describe('Allrites', function () {
-  beforeAll(async function () {
-    await Moralis.start(moralis);
-  });
+describe('E2E Allrites functions', () => {
+  beforeAll(async () => await Moralis.start(moralis));
 
-  it('Should return valid access token every time', async function () {
+  it('Should return valid access token every time', async () => {
     const ret: AuthAllritesReturns = await Moralis.Cloud.run(
-      'authAllrites',
-      {}
+      AllritesFunctions.AuthAllrites
     );
     expect(ret).not.toBeNull;
     expect(ret.accessToken).toBeDefined;
