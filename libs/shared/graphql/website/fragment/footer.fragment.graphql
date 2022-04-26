@@ -1,0 +1,16 @@
+fragment Footer on Footer {
+  sys {
+    ...Sys
+  }
+  copyright
+  linksCollection(limit: 20, preview: $isPreview) {
+    items {
+      ...CallToAction
+    }
+  }
+  socialIconsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...CallToAction
+    }
+  }
+}

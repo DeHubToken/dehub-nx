@@ -77,7 +77,7 @@ export class PageHeaderComponent<
   }
 
   resolveButton(type?: string, style?: string, size?: string) {
-    return resolveButtonStyle(type, style, size) + ' mb-3';
+    return resolveButtonStyle(type, style, size) + ' mb-3 mr-3';
   }
 
   onButtonClicked(event: Event, link?: string) {

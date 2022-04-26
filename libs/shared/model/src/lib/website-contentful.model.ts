@@ -5730,6 +5730,50 @@ export type FeaturePostFragment = {
     | undefined;
 };
 
+export type FooterFragment = {
+  __typename?: 'Footer';
+  copyright?: string | undefined;
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  linksCollection?:
+    | {
+        __typename?: 'FooterLinksCollection';
+        items: Array<
+          | {
+              __typename?: 'CallToAction';
+              label?: string | undefined;
+              externalLink?: string | undefined;
+              routerLink?: any | undefined;
+              type?: string | undefined;
+              style?: string | undefined;
+              size?: string | undefined;
+              icon?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+  socialIconsCollection?:
+    | {
+        __typename?: 'FooterSocialIconsCollection';
+        items: Array<
+          | {
+              __typename?: 'CallToAction';
+              label?: string | undefined;
+              externalLink?: string | undefined;
+              routerLink?: any | undefined;
+              type?: string | undefined;
+              style?: string | undefined;
+              size?: string | undefined;
+              icon?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
 export type GrandPostFragment = {
   __typename?: 'GrandPost';
   videoUrl?: string | undefined;
@@ -8622,6 +8666,71 @@ export type BasicPostCollectionBySlugQuery = {
     | undefined;
 };
 
+export type FooterCollectionQueryVariables = Exact<{
+  isPreview?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+export type FooterCollectionQuery = {
+  __typename?: 'Query';
+  footerCollection?:
+    | {
+        __typename?: 'FooterCollection';
+        items: Array<
+          | {
+              __typename?: 'Footer';
+              copyright?: string | undefined;
+              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              linksCollection?:
+                | {
+                    __typename?: 'FooterLinksCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'CallToAction';
+                          label?: string | undefined;
+                          externalLink?: string | undefined;
+                          routerLink?: any | undefined;
+                          type?: string | undefined;
+                          style?: string | undefined;
+                          size?: string | undefined;
+                          icon?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+              socialIconsCollection?:
+                | {
+                    __typename?: 'FooterSocialIconsCollection';
+                    items: Array<
+                      | {
+                          __typename?: 'CallToAction';
+                          label?: string | undefined;
+                          externalLink?: string | undefined;
+                          routerLink?: any | undefined;
+                          type?: string | undefined;
+                          style?: string | undefined;
+                          size?: string | undefined;
+                          icon?: string | undefined;
+                          sys: {
+                            __typename?: 'Sys';
+                            publishedAt?: any | undefined;
+                          };
+                        }
+                      | undefined
+                    >;
+                  }
+                | undefined;
+            }
+          | undefined
+        >;
+      }
+    | undefined;
+};
+
 export type LegalPostCollectionBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
   isPreview?: InputMaybe<Scalars['Boolean']>;
@@ -11424,19 +11533,6 @@ export const BasicPostDetailFragmentDoc = gql`
   }
   ${BasicPostCommonFragmentDoc}
 `;
-export const LegalPostFragmentDoc = gql`
-  fragment LegalPost on LegalPost {
-    sys {
-      ...Sys
-    }
-    title
-    description {
-      json
-    }
-    slug
-  }
-  ${SysFragmentDoc}
-`;
 export const CallToActionFragmentDoc = gql`
   fragment CallToAction on CallToAction {
     sys {
@@ -11449,6 +11545,39 @@ export const CallToActionFragmentDoc = gql`
     style
     size
     icon
+  }
+  ${SysFragmentDoc}
+`;
+export const FooterFragmentDoc = gql`
+  fragment Footer on Footer {
+    sys {
+      ...Sys
+    }
+    copyright
+    linksCollection(limit: 20, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    socialIconsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
+`;
+export const LegalPostFragmentDoc = gql`
+  fragment LegalPost on LegalPost {
+    sys {
+      ...Sys
+    }
+    title
+    description {
+      json
+    }
+    slug
   }
   ${SysFragmentDoc}
 `;
@@ -12071,6 +12200,16 @@ export const BasicPostCollectionBySlugDocument = gql`
   }
   ${BasicPostDetailFragmentDoc}
 `;
+export const FooterCollectionDocument = gql`
+  query footerCollection($isPreview: Boolean = false) {
+    footerCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...Footer
+      }
+    }
+  }
+  ${FooterFragmentDoc}
+`;
 export const LegalPostCollectionBySlugDocument = gql`
   query legalPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
     legalPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
@@ -12166,6 +12305,20 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'basicPostCollectionBySlug'
+      );
+    },
+    footerCollection(
+      variables?: FooterCollectionQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<FooterCollectionQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<FooterCollectionQuery>(
+            FooterCollectionDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'footerCollection'
       );
     },
     legalPostCollectionBySlug(

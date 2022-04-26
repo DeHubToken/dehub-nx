@@ -57,7 +57,7 @@ export const resolveButtonStyle = (
   style?: string,
   size?: string
 ) => {
-  let classes = `mr-3`;
+  let classes = ``;
   if (type) {
     classes += ` p-button-${type}`;
   }

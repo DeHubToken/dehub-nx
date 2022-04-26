@@ -1,0 +1,7 @@
+query footerCollection($isPreview: Boolean = false) {
+  footerCollection(limit: 2, preview: $isPreview) {
+    items {
+      ...Footer
+    }
+  }
+}
