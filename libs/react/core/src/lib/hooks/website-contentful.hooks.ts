@@ -94,6 +94,13 @@ export const FeaturePostFragmentDoc = gql`
       title
       url
     }
+    heavyPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
     title
     description
     callToActionUrl
@@ -109,7 +116,7 @@ export const PageSectionFeaturePostsFragmentDoc = gql`
     }
     title
     description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...FeaturePost
       }
