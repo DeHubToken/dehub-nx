@@ -11,7 +11,7 @@ import {
   Web3ConnectorNames,
 } from '@dehub/shared/model';
 import { isEmailValid } from '@dehub/shared/utils';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Inplace, InplaceContent, InplaceDisplay } from 'primereact/inplace';
@@ -33,27 +33,6 @@ const WalletButton = styled(Button)`
     transform: scale(103%);
   }
 `;
-
-const duration = 2;
-
-const variants: Variants = {
-  initial: {
-    y: '-100%',
-  },
-  open: {
-    y: 0,
-    transition: {
-      ease: 'easeInOut',
-      duration: 0.5,
-      y: {
-        duration: 2,
-      },
-    },
-    transitionEnd: {
-      display: 'none',
-    },
-  },
-};
 
 const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
   const [magicLinkEmail, setMagicLinkEmail] = useState('');
