@@ -94,6 +94,13 @@ export const FeaturePostFragmentDoc = gql`
       title
       url
     }
+    heavyPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
     title
     description
     callToActionUrl
