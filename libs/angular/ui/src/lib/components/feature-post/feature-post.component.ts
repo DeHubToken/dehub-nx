@@ -33,6 +33,18 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
                 [dhbContentfulDraft]="picture.sys"
                 [src]="picture.url"
                 [alt]="picture.title"
+                [ngClass]="{ hidden: heavyPictureLoaded }"
+              />
+            </ng-container>
+
+            <!-- Heavy Picture -->
+            <ng-container *ngIf="featurePost.heavyPicture as heavyPicture">
+              <img
+                [dhbContentfulDraft]="heavyPicture.sys"
+                [src]="heavyPicture.url"
+                [alt]="heavyPicture.title"
+                [ngClass]="{ hidden: !heavyPictureLoaded }"
+                (load)="heavyPictureLoaded = true"
               />
             </ng-container>
           </div>
@@ -67,6 +79,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
 })
 export class FeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
+  heavyPictureLoaded = false;
 
   constructor(
     @Inject(WINDOW) private readonly windowRef: Window,

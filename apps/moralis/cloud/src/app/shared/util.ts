@@ -49,6 +49,10 @@ export async function updateCanPlay(chainId: ChainIdAsNumber, address: string) {
     const whitelisted = await getWhitelisted();
     if (whitelisted && whitelisted.indexOf(address) >= 0) {
       logger.error(`Whitelisted user: ${address}`);
+      const canPlay = user.get('can_play');
+      if (!canPlay) {
+        await setCanPlay(user, true);
+      }
       return;
     }
     const staked = await getStakedAmount(chainId, address);
