@@ -21,7 +21,7 @@ export interface IMoralisService {
   username$: Observable<string>;
 
   login: (
-    provider: DeHubConnectorNames,
+    connectorId: DeHubConnectorNames,
     chainId: number,
     magicLinkEmail: string,
     magicLinkApiKey: string

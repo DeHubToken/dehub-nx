@@ -103,14 +103,14 @@ export class ConnectWalletComponent implements OnInit {
   }
 
   onLogin({
-    provider,
+    connectorId,
     email = '',
   }: {
-    provider: DeHubConnectorNames;
+    connectorId: DeHubConnectorNames;
     email?: string;
   }) {
     this.moralisService.login(
-      provider,
+      connectorId,
       this.chainId,
       email,
       this.magicLinkApiKey

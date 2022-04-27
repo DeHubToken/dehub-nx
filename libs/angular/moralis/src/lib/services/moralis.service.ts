@@ -114,7 +114,7 @@ export class MoralisService implements IMoralisService {
   }
 
   login(
-    provider: DeHubConnectorNames,
+    connectorId: DeHubConnectorNames,
     chainId: number,
     magicLinkEmail: string,
     magicLinkApiKey: string
@@ -128,7 +128,7 @@ export class MoralisService implements IMoralisService {
     let userPromise: Promise<Moralis.User<Moralis.Attributes> | undefined> =
       Promise.resolve(undefined);
 
-    switch (provider) {
+    switch (connectorId) {
       case 'metamask':
         enableOptions = { chainId };
 
@@ -149,10 +149,9 @@ export class MoralisService implements IMoralisService {
         break;
 
       case 'walletconnect':
-        enableOptions = { chainId, provider };
+        enableOptions = { chainId, provider: connectorId };
         userPromise = Moralis.authenticate({
           ...enableOptions,
-          provider,
           signingMessage,
         });
         break;
@@ -163,14 +162,14 @@ export class MoralisService implements IMoralisService {
             rpcUrl: getRandomRpcUrl(Networks[chainId].nodes),
             chainId,
           } as unknown as string,
-          provider,
+          provider: connectorId,
           email: magicLinkEmail,
           apiKey: magicLinkApiKey,
         };
 
         userPromise = Moralis.authenticate({
           ...enableOptions,
-          provider,
+          provider: connectorId,
           signingMessage,
         }).then(loggedInUser => {
           // Save the email as Moralis not store MagicLink email after login
@@ -181,7 +180,7 @@ export class MoralisService implements IMoralisService {
         break;
 
       default:
-        this.logger.warn(`Not supported provider: ${provider}!`);
+        this.logger.warn(`Not supported provider: ${connectorId}!`);
     }
 
     userPromise
@@ -200,7 +199,7 @@ export class MoralisService implements IMoralisService {
       })
       .catch(e => {
         this.setWalletConnectingState(WalletConnectingState.INIT);
-        this.logger.error(`Moralis '${provider}' login error:`, e);
+        this.logger.error(`Moralis '${connectorId}' login error:`, e);
       });
   }
 

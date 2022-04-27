@@ -32,7 +32,7 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
             path + '/assets/dehub/icons/metamask.svg',
             path + '/assets/dehub/icons/trustwallet.svg'
           ]"
-          (click)="login.emit({ provider: 'metamask' })"
+          (click)="login.emit({ connectorId: 'metamask' })"
         ></dhb-wallet-button>
       </div>
 
@@ -68,7 +68,7 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
                   (click)="
                     inplaceMagic.deactivate();
                     login.emit({
-                      provider: 'magicLink',
+                      connectorId: 'magicLink',
                       email: magicLinkForm.get('email')?.value
                     })
                   "
@@ -96,7 +96,7 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
         <dhb-wallet-button
           label="Trust Wallet"
           [imageSources]="[path + '/assets/dehub/icons/trustwallet.svg']"
-          (click)="login.emit({ provider: 'metamask' })"
+          (click)="login.emit({ connectorId: 'metamask' })"
         ></dhb-wallet-button>
       </div>
 
@@ -105,7 +105,7 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
         <dhb-wallet-button
           label="WalletConnect"
           [imageSources]="[path + '/assets/dehub/icons/walletconnect.svg']"
-          (click)="login.emit({ provider: 'walletconnect' })"
+          (click)="login.emit({ connectorId: 'walletconnect' })"
         ></dhb-wallet-button>
       </div>
     </p-dialog>
@@ -125,7 +125,7 @@ export class ConnectWalletDialogComponent implements OnInit {
   path = this.env.baseUrl;
 
   @Output() login = new EventEmitter<{
-    provider: DeHubConnectorNames;
+    connectorId: DeHubConnectorNames;
     email?: string;
   }>();
 
