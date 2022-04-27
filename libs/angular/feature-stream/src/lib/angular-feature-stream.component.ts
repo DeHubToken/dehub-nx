@@ -17,7 +17,8 @@ import { map, Observable } from 'rxjs';
   template: `
     <ng-container *ngIf="pageStream$ | async as pageStream" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageStream"></dhb-page-header>
+      <!-- <dhb-page-header [page]="pageStream"></dhb-page-header> -->
+      <dhb-page-header-grand></dhb-page-header-grand>
 
       <!-- Page Sections -->
       <dhb-page-sections

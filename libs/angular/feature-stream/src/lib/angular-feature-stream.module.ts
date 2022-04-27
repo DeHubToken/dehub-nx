@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { GraphQLModule } from '@dehub/angular/graphql';
 import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
+import { PageHeaderGrandModule } from '@dehub/angular/ui/components/page-header-grand';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ButtonModule } from 'primeng/button';
@@ -22,6 +23,7 @@ import { CanPlayGuard } from './guards';
     GraphQLModule,
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
+    PageHeaderGrandModule,
     PageSectionsModule,
     BuyDehubButtonModule,
 
