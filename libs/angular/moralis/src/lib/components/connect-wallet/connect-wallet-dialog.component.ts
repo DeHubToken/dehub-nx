@@ -10,7 +10,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
-import { MoralisWeb3ProviderType } from '@dehub/shared/model';
+import { DeHubConnectorNames } from '@dehub/shared/model';
 import { fadeInRightOnEnterAnimation } from 'angular-animations';
 
 @Component({
@@ -125,7 +125,7 @@ export class ConnectWalletDialogComponent implements OnInit {
   path = this.env.baseUrl;
 
   @Output() login = new EventEmitter<{
-    provider: MoralisWeb3ProviderType;
+    provider: DeHubConnectorNames;
     email?: string;
   }>();
 

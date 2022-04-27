@@ -1,6 +1,6 @@
 import {
   Attributes,
-  MoralisWeb3ProviderType,
+  DeHubConnectorNames,
   User,
   WalletConnectingState,
 } from '@dehub/shared/model';
@@ -21,7 +21,7 @@ export interface IMoralisService {
   username$: Observable<string>;
 
   login: (
-    provider: MoralisWeb3ProviderType,
+    provider: DeHubConnectorNames,
     chainId: number,
     magicLinkEmail: string,
     magicLinkApiKey: string

@@ -6,8 +6,8 @@ import {
 } from '@dehub/angular/model';
 import { Networks } from '@dehub/shared/config';
 import {
+  DeHubConnectorNames,
   enableOptionsLocalStorageKey,
-  MoralisWeb3ProviderType,
   User,
   WalletConnectingState,
 } from '@dehub/shared/model';
@@ -114,7 +114,7 @@ export class MoralisService implements IMoralisService {
   }
 
   login(
-    provider: MoralisWeb3ProviderType,
+    provider: DeHubConnectorNames,
     chainId: number,
     magicLinkEmail: string,
     magicLinkApiKey: string

@@ -24,14 +24,6 @@ export interface Attributes extends Moralis.Attributes {
 
 export type User = Moralis.User<Attributes>;
 
-/** Same type as MoralisType.Web3ProviderType */
-export type MoralisWeb3ProviderType =
-  | 'metamask'
-  | 'walletconnect'
-  | 'walletConnect'
-  | 'wc'
-  | 'magicLink';
-
 export const enableOptionsLocalStorageKey = 'enableOptions';
 export type Web3EnableOptions =
   | { provider: DeHubConnectorNames }
@@ -48,10 +40,9 @@ export enum Web3ConnectorNames {
   BSC = 'binance',
 }
 
-export type DeHubConnectorNames = MoralisConnectorNames | Web3ConnectorNames;
-
-/* @deprecated */
-export type MoralisConnectorId = 'injected' | 'walletconnect' | 'magicLink';
+export type DeHubConnectorNames =
+  | `${MoralisConnectorNames}`
+  | `${Web3ConnectorNames}`;
 
 export enum WalletConnectingState {
   INIT,

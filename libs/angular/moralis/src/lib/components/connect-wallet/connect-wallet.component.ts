@@ -8,7 +8,7 @@ import {
 import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import {
-  MoralisWeb3ProviderType,
+  DeHubConnectorNames,
   WalletConnectingMessages,
   WalletConnectingState,
 } from '@dehub/shared/model';
@@ -106,7 +106,7 @@ export class ConnectWalletComponent implements OnInit {
     provider,
     email = '',
   }: {
-    provider: MoralisWeb3ProviderType;
+    provider: DeHubConnectorNames;
     email?: string;
   }) {
     this.moralisService.login(
