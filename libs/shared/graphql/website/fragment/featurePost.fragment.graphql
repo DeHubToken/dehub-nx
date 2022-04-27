@@ -10,6 +10,13 @@ fragment FeaturePost on FeaturePost {
     title
     url
   }
+  heavyPicture(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
+    title
+    url
+  }
   title
   description
   callToActionUrl
