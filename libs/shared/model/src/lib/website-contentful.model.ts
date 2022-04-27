@@ -11609,7 +11609,7 @@ export const PageSectionFeaturePostsFragmentDoc = gql`
     }
     title
     description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...FeaturePost
       }
