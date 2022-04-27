@@ -8,3 +8,4 @@ export * from './lib/number.util';
 export * from './lib/rxjs.util';
 export * from './lib/type-guard.util';
 export * from './lib/validation.util';
+export * from './lib/web3.util';

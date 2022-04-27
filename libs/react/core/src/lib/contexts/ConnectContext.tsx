@@ -4,12 +4,18 @@ import {
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   MoralisConnectorNames,
+  WalletConnectingMessages,
   WalletConnectingState,
   Web3ConnectorNames,
   Web3EnableOptions,
 } from '@dehub/shared/model';
 import { hexToDecimal } from '@dehub/shared/util/network/hex-to-decimal';
-import { getRandomRpcUrl, setupMetamaskNetwork } from '@dehub/shared/utils';
+import {
+  ethereumDisabled,
+  getRandomRpcUrl,
+  isMoralisConnector,
+  setupMetamaskNetwork,
+} from '@dehub/shared/utils';
 import { Web3Provider } from '@ethersproject/providers';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { Moralis } from 'moralis';
@@ -148,23 +154,21 @@ const ConnectProvider = ({
         })
       );
 
-      if (
-        connectorId === MoralisConnectorNames.Injected ||
-        connectorId === MoralisConnectorNames.WalletConnect ||
-        connectorId === MoralisConnectorNames.MagicLink
-      ) {
-        if (connectorId === MoralisConnectorNames.Injected) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const ethereum = (window as any).ethereum;
-          if (!ethereum) {
-            console.error('Provider not supported');
-            logout();
-            setWalletConnectingState(WalletConnectingState.NO_PROVIDER);
+      if (isMoralisConnector(connectorId)) {
+        if (
+          connectorId === MoralisConnectorNames.Injected &&
+          ethereumDisabled()
+        ) {
+          console.error(WalletConnectingMessages.UnsupportedProvider);
+          if (isToastEnabled && toastError)
+            toastError(
+              WalletConnectingMessages.WalletConnect,
+              WalletConnectingMessages.UnsupportedProvider
+            );
 
-            if (isToastEnabled && toastError)
-              toastError('Wallet Connect', 'Provider not supported');
-            return;
-          }
+          logout();
+          setWalletConnectingState(WalletConnectingState.NO_PROVIDER);
+          return;
         }
 
         let enableOptions: Moralis.EnableOptions;
