@@ -85,3 +85,33 @@ interface ContractProperties {
 ### getRewardContract
 
 Return the reward contract information, returning type is same with `ContractProperties`.
+
+### authAllrites
+
+In order to use OTT API from Vdyo, it requires to get access token prior to calling API. Return type is like as following:
+
+Reference Link: https://api.vdyo.co/docs/#header-authentication
+
+```typescript
+interface AuthAllritesReturns {
+  accessToken: string;
+  tokenType: string;
+  expires: number;
+}
+```
+
+```typescript
+const authKey = await Moralis.Cloud.run('authAllrites', {});
+console.log('authKey', authKey);
+
+fetch('https://api.vdyo.co/contents', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `${authKey.tokenType} ${authKey.accessToken}`,
+  },
+})
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+```
