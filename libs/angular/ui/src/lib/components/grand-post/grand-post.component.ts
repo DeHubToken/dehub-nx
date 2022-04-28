@@ -27,27 +27,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
               class="fad fa-play-circle"
               (click)="onVideoPlayClicked()"
             ></i>
-
-            <!-- Picture -->
-            <ng-container *ngIf="grandPost.picture as picture">
-              <img
-                [dhbContentfulDraft]="picture.sys"
-                [src]="picture.url"
-                [alt]="picture.title"
-                [ngClass]="{ hidden: heavyPictureLoaded }"
-              />
-            </ng-container>
-
-            <!-- Heavy Picture -->
-            <ng-container *ngIf="grandPost.heavyPicture as heavyPicture">
-              <img
-                [dhbContentfulDraft]="heavyPicture.sys"
-                [src]="heavyPicture.url"
-                [alt]="heavyPicture.title"
-                [ngClass]="{ hidden: !heavyPictureLoaded }"
-                (load)="heavyPictureLoaded = true"
-              />
-            </ng-container>
+            <dhb-heavy-picture [container]="grandPost"></dhb-heavy-picture>
           </div>
         </ng-template>
 
@@ -78,7 +58,6 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
 })
 export class GrandPostComponent implements OnInit {
   @Input() grandPost!: GrandPostFragment;
-  heavyPictureLoaded = false;
 
   constructor(
     @Inject(WINDOW) private readonly windowRef: Window,
