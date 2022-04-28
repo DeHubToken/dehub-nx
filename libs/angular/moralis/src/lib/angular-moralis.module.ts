@@ -5,12 +5,14 @@ import { DehubMoralisToken, MoralisToken } from '@dehub/angular/model';
 import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { StartOptions } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InplaceModule } from 'primeng/inplace';
 import { InputTextModule } from 'primeng/inputtext';
 import { RippleModule } from 'primeng/ripple';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { ToastModule } from 'primeng/toast';
 import {
   ConnectWalletButtonComponent,
   ConnectWalletComponent,
@@ -31,6 +33,7 @@ import { DehubMoralisService, MoralisService } from './services';
     DialogModule,
     InplaceModule,
     InputTextModule,
+    ToastModule,
 
     // Libs
     LoaderModule,
@@ -64,6 +67,7 @@ export class AngularMoralisModule {
           useFactory: () => initializeMoralis,
           multi: true,
         },
+        MessageService,
         { provide: MoralisToken, useClass: MoralisService },
         { provide: DehubMoralisToken, useClass: DehubMoralisService },
       ],

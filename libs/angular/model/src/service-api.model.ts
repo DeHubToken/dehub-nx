@@ -2,7 +2,7 @@ import {
   Attributes,
   DeHubConnectorNames,
   User,
-  WalletConnectingState,
+  WalletConnectState,
 } from '@dehub/shared/model';
 import { Observable } from 'rxjs';
 
@@ -25,11 +25,10 @@ export interface IMoralisService {
     chainId: number,
     magicLinkEmail: string,
     magicLinkApiKey: string
-  ) => void;
-  logout: () => void;
+  ) => Promise<void | User>;
+  logout: () => Promise<void | User>;
 
-  walletConnectingState$: Observable<WalletConnectingState>;
-  setWalletConnectingState: (state: WalletConnectingState) => void;
+  walletConnectState$: Observable<WalletConnectState>;
 }
 
 export interface IDehubMoralisService {

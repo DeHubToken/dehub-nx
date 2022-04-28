@@ -162,7 +162,7 @@ const ConnectProvider = ({
           console.error(WalletConnectingMessages.UnsupportedProvider);
           if (isToastEnabled && toastError)
             toastError(
-              WalletConnectingMessages.WalletConnect,
+              WalletConnectingMessages.ConnectWallet,
               WalletConnectingMessages.UnsupportedProvider
             );
 

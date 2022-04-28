@@ -83,7 +83,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
           connectorId === MoralisConnectorNames.Injected && (
             <AnimatePresence>
               <motion.div
-                className="mt-2"
+                className="m-2"
                 initial={{ opacity: 0, y: '-100%' }}
                 animate={{
                   opacity: 1,
@@ -94,7 +94,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
                 }}
                 transition={{ duration: 0.5, type: 'tween', ease: 'easeOut' }}
               >
-                Please install{' '}
+                Please install or reload{' '}
                 <a href="https://metamask.io/" target="_blank" rel="noreferrer">
                   MetaMask
                 </a>{' '}

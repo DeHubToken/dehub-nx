@@ -10,8 +10,15 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
-import { DeHubConnectorNames } from '@dehub/shared/model';
-import { fadeInRightOnEnterAnimation } from 'angular-animations';
+import {
+  DeHubConnectorNames,
+  WalletConnectingState,
+  WalletConnectState,
+} from '@dehub/shared/model';
+import {
+  fadeInRightOnEnterAnimation,
+  fadeInUpOnEnterAnimation,
+} from 'angular-animations';
 
 @Component({
   selector: 'dhb-connect-wallet-dialog',
@@ -34,6 +41,20 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
           ]"
           (click)="login.emit({ connectorId: 'metamask' })"
         ></dhb-wallet-button>
+        <div
+          *ngIf="
+            walletConnectState &&
+            walletConnectState.connectorId === 'metamask' &&
+            walletConnectState.state === walletConnectingState.NO_PROVIDER
+          "
+          [@fadeInUp]
+          class="m-2"
+        >
+          Please install or reload&nbsp;
+          <a href="https://metamask.io/" target="_blank" rel="noreferrer">
+            MetaMask </a
+          >&nbsp;extension on your browser.
+        </div>
       </div>
 
       <!-- Magic Link -->
@@ -113,16 +134,20 @@ import { fadeInRightOnEnterAnimation } from 'angular-animations';
   styles: [],
   animations: [
     fadeInRightOnEnterAnimation({ anchor: 'fadeInRight', duration: 500 }),
+    fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 500 }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectWalletDialogComponent implements OnInit {
   @Input() header = 'Connect Wallet';
   @Input() visible = false;
+  @Input() walletConnectState?: WalletConnectState;
 
   magicLinkForm!: FormGroup;
 
   path = this.env.baseUrl;
+
+  walletConnectingState = WalletConnectingState;
 
   @Output() login = new EventEmitter<{
     connectorId: DeHubConnectorNames;

@@ -53,10 +53,16 @@ export enum WalletConnectingState {
   COMPLETE,
 }
 
+export type WalletConnectState = {
+  connectorId?: DeHubConnectorNames;
+  state: WalletConnectingState;
+};
+
 export enum WalletConnectingMessages {
   WAITING = 'Please confirm with your wallet.',
   SWITCH_NETWORK = 'Please confirm network switch with your wallet.',
   ADD_NETWORK = 'Please confirm network add with your wallet.',
-  WalletConnect = 'Wallet Connect',
+  ConnectWallet = 'Connect Wallet',
   UnsupportedProvider = 'Provider not supported.',
+  MetamaskSignatureDenied = 'Metamask signature was denied.',
 }

@@ -1324,6 +1324,7 @@ export interface FeaturePost extends Entry {
   callToActionUrl?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
+  heavyPicture?: Maybe<Asset>;
   linkedFrom?: Maybe<FeaturePostLinkingCollections>;
   picture?: Maybe<Asset>;
   sys: Sys;
@@ -1344,6 +1345,12 @@ export interface FeaturePostCallToActionUrlArgs {
 /** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
 export interface FeaturePostDescriptionArgs {
   locale?: InputMaybe<Scalars['String']>;
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePostHeavyPictureArgs {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
 }
 
 /** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
@@ -1402,6 +1409,7 @@ export interface FeaturePostFilter {
   description_not?: InputMaybe<Scalars['String']>;
   description_not_contains?: InputMaybe<Scalars['String']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  heavyPicture_exists?: InputMaybe<Scalars['Boolean']>;
   picture_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
@@ -3549,7 +3557,9 @@ export interface PageSectionGrandPosts extends Entry {
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedPostsCollection?: Maybe<PageSectionGrandPostsHandpickedPostsCollection>;
+  isSwiper?: Maybe<Scalars['Boolean']>;
   linkedFrom?: Maybe<PageSectionGrandPostsLinkingCollections>;
+  swiperResponsiveOptions?: Maybe<Scalars['JSON']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 }
@@ -3568,8 +3578,18 @@ export interface PageSectionGrandPostsHandpickedPostsCollectionArgs {
 }
 
 /** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
+export interface PageSectionGrandPostsIsSwiperArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
 export interface PageSectionGrandPostsLinkedFromArgs {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
+export interface PageSectionGrandPostsSwiperResponsiveOptionsArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
@@ -3597,6 +3617,10 @@ export interface PageSectionGrandPostsFilter {
   description_not_contains?: InputMaybe<Scalars['String']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   handpickedPostsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_not?: InputMaybe<Scalars['Boolean']>;
+  swiperResponsiveOptions_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -3676,6 +3700,8 @@ export interface PageSectionGrandPostsLinkingCollectionsPageStreamCollectionArgs
 }
 
 export enum PageSectionGrandPostsOrder {
+  IsSwiperAsc = 'isSwiper_ASC',
+  IsSwiperDesc = 'isSwiper_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',

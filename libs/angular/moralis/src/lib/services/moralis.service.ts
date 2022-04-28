@@ -8,11 +8,15 @@ import { Networks } from '@dehub/shared/config';
 import {
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
+  MoralisConnectorNames,
   User,
+  WalletConnectingMessages,
   WalletConnectingState,
+  WalletConnectState,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
+  ethereumDisabled,
   filterEmpty,
   getRandomRpcUrl,
   publishReplayRefCount,
@@ -21,6 +25,7 @@ import {
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
+import { MessageService } from 'primeng/api';
 import { BehaviorSubject, from, of } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -64,19 +69,20 @@ export class MoralisService implements IMoralisService {
     map(({ username }) => username)
   );
 
-  private walletConnectingStateSubject =
-    new BehaviorSubject<WalletConnectingState>(WalletConnectingState.INIT);
+  private walletConnectStateSubject = new BehaviorSubject<WalletConnectState>({
+    state: WalletConnectingState.INIT,
+  });
 
-  walletConnectingState$ = this.walletConnectingStateSubject
-    .asObservable()
-    .pipe(
-      tap(walletConnectingState =>
-        this.logger.info(
-          `Wallet Connecting State: ${WalletConnectingState[walletConnectingState]}`
-        )
-      ),
-      publishReplayRefCount()
-    );
+  walletConnectState$ = this.walletConnectStateSubject.asObservable().pipe(
+    tap(({ connectorId, state }) =>
+      this.logger.info(
+        `Wallet Connect State: ${WalletConnectingState[state]} ${
+          connectorId ? `(${connectorId})` : ''
+        }`
+      )
+    ),
+    publishReplayRefCount()
+  );
 
   private requiredChainHex?: string;
 
@@ -88,7 +94,8 @@ export class MoralisService implements IMoralisService {
   constructor(
     @Inject(LoggerToken) private logger: ILoggerService,
     @Inject(WINDOW) private readonly windowRef: Window,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private messageService: MessageService
   ) {
     if (Moralis.User.current()) {
       const enableOptionsStr = this.windowRef.localStorage.getItem(
@@ -113,16 +120,17 @@ export class MoralisService implements IMoralisService {
     }
   }
 
-  login(
+  async login(
     connectorId: DeHubConnectorNames,
     chainId: number,
     magicLinkEmail: string,
     magicLinkApiKey: string
   ) {
+    // await this.validateLogin(connectorId);
     let enableOptions: Moralis.EnableOptions;
 
     this.requiredChainHex = decimalToHex(chainId);
-    this.setWalletConnectingState(WalletConnectingState.WAITING);
+    this.setWalletConnectState(WalletConnectingState.WAITING);
     const signingMessage = 'DeHub D’App';
 
     let userPromise: Promise<Moralis.User<Moralis.Attributes> | undefined> =
@@ -139,11 +147,8 @@ export class MoralisService implements IMoralisService {
           setupMetamaskNetwork(
             chainId,
             () =>
-              this.setWalletConnectingState(
-                WalletConnectingState.SWITCH_NETWORK
-              ),
-            () =>
-              this.setWalletConnectingState(WalletConnectingState.ADD_NETWORK)
+              this.setWalletConnectState(WalletConnectingState.SWITCH_NETWORK),
+            () => this.setWalletConnectState(WalletConnectingState.ADD_NETWORK)
           ).then(success => (success ? loggedInUser : undefined))
         );
         break;
@@ -183,11 +188,11 @@ export class MoralisService implements IMoralisService {
         this.logger.warn(`Not supported provider: ${connectorId}!`);
     }
 
-    userPromise
+    return userPromise
       .then(loggedInUser => {
         if (loggedInUser) {
           this.updateUserAndAccount(loggedInUser);
-          this.setWalletConnectingState(WalletConnectingState.COMPLETE);
+          this.setWalletConnectState(WalletConnectingState.COMPLETE);
           this.windowRef.localStorage.setItem(
             enableOptionsLocalStorageKey,
             JSON.stringify(enableOptions)
@@ -198,16 +203,38 @@ export class MoralisService implements IMoralisService {
         }
       })
       .catch(e => {
-        this.setWalletConnectingState(WalletConnectingState.INIT);
-        this.logger.error(`Moralis '${connectorId}' login error:`, e);
+        // Moralis Error
+        if (e instanceof Error) {
+          this.messageService.add({
+            severity: 'error',
+            summary: WalletConnectingMessages.ConnectWallet,
+            detail: WalletConnectingMessages.UnsupportedProvider,
+          });
+
+          this.setWalletConnectState(
+            WalletConnectingState.NO_PROVIDER,
+            connectorId
+          );
+          // Metamask Error
+        } else if (e.code && e.message) {
+          if (e.code === 4001) {
+            this.messageService.add({
+              severity: 'warn',
+              summary: WalletConnectingMessages.ConnectWallet,
+              detail: WalletConnectingMessages.MetamaskSignatureDenied,
+            });
+            this.setWalletConnectState(WalletConnectingState.INIT, connectorId);
+          }
+        }
+        throw e;
       });
   }
 
-  logout() {
+  async logout() {
     this.logger.info('Logging out.');
 
     this.unsubscribeEvents();
-    Moralis.User.logOut()
+    return Moralis.User.logOut<User>()
       .catch(e => this.logger.error('Moralis logout problem:', e))
       .finally(() => {
         // Cleanup local storage
@@ -220,16 +247,25 @@ export class MoralisService implements IMoralisService {
         Moralis.cleanup();
 
         // Reset Wallet connecting state
-        this.setWalletConnectingState(WalletConnectingState.INIT);
+        this.setWalletConnectState(WalletConnectingState.INIT);
       });
   }
 
-  /**
-   * Update Wallet Connect state
-   * @param state the state to set
-   */
-  setWalletConnectingState(state: WalletConnectingState) {
-    this.walletConnectingStateSubject.next(state);
+  private async validateLogin(connectorId: string) {
+    if (connectorId === MoralisConnectorNames.Injected && ethereumDisabled()) {
+      this.messageService.add({
+        severity: 'error',
+        summary: WalletConnectingMessages.ConnectWallet,
+        detail: WalletConnectingMessages.UnsupportedProvider,
+      });
+
+      await this.logout();
+      this.setWalletConnectState(
+        WalletConnectingState.NO_PROVIDER,
+        connectorId
+      );
+      throw new Error(WalletConnectingMessages.UnsupportedProvider);
+    }
   }
 
   private subscribeEvents() {
@@ -331,5 +367,16 @@ export class MoralisService implements IMoralisService {
   ) {
     this.userSubject.next(loggedInUser as User);
     this.accountSubject.next(account ?? loggedInUser?.attributes.ethAddress);
+  }
+
+  /**
+   * Update Wallet Connect state
+   * @param state the state to set
+   */
+  private setWalletConnectState(
+    state: WalletConnectingState,
+    connectorId?: DeHubConnectorNames
+  ) {
+    this.walletConnectStateSubject.next({ connectorId, state });
   }
 }
