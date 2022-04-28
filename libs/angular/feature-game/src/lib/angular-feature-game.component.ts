@@ -33,18 +33,14 @@ export class AngularFeatureGameComponent implements OnInit {
 
   grandPostsResponsiveOptions: SwiperResponsiveOptions = {
     '1800': {
-      slidesPerView: 2,
+      slidesPerView: 3,
       spaceBetween: 10,
     },
     '1440': {
       slidesPerView: 2,
       spaceBetween: 10,
     },
-    '860': {
-      slidesPerView: 2,
-      spaceBetween: 10,
-    },
-    '320': {
+    '1250': {
       slidesPerView: 1,
       spaceBetween: 10,
     },
