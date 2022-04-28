@@ -138,6 +138,13 @@ export const ThumbnailPostFragmentDoc = gql`
       title
       url
     }
+    heavyPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
     title
     link
     isVideo
@@ -307,11 +314,13 @@ export const PageSectionGrandPostsFragmentDoc = gql`
     }
     title
     description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...GrandPost
       }
     }
+    isSwiper
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${GrandPostFragmentDoc}

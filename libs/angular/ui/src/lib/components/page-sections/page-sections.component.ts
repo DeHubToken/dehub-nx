@@ -86,10 +86,21 @@ type PageSection =
       ></dhb-page-section-dapp-posts>
 
       <!-- Grand Posts -->
-      <dhb-page-section-grand-posts
-        *ngIf="isPageSectionGrandPosts(section)"
+      <dhb-page-section-grand-posts-swiper
+        *ngIf="
+          isPageSectionGrandPosts(section) && section.isSwiper;
+          else grandPosts
+        "
         [section]="section"
-      ></dhb-page-section-grand-posts>
+        [swiperResponsiveOptions]="grandPostsResponsiveOptions"
+      ></dhb-page-section-grand-posts-swiper>
+
+      <ng-template #grandPosts>
+        <dhb-page-section-grand-posts
+          *ngIf="isPageSectionGrandPosts(section)"
+          [section]="section"
+        ></dhb-page-section-grand-posts>
+      </ng-template>
 
       <!-- Section Posts -->
       <dhb-page-section-section-posts
@@ -129,6 +140,7 @@ export class PageSectionsComponent implements OnInit {
   @Input() thumbnailPostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() basicPostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() iconTilesResponsiveOptions?: SwiperResponsiveOptions;
+  @Input() grandPostsResponsiveOptions?: SwiperResponsiveOptions;
 
   constructor() {}
 
