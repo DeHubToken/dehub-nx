@@ -9,6 +9,13 @@ fragment ThumbnailPost on ThumbnailPost {
     title
     url
   }
+  heavyPicture(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
+    title
+    url
+  }
   title
   link
   isVideo

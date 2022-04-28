@@ -5439,12 +5439,19 @@ export interface SysFilter {
 export interface ThumbnailPost extends Entry {
   __typename?: 'ThumbnailPost';
   contentfulMetadata: ContentfulMetadata;
+  heavyPicture?: Maybe<Asset>;
   isVideo?: Maybe<Scalars['Boolean']>;
   link?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<ThumbnailPostLinkingCollections>;
   picture?: Maybe<Asset>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+}
+
+/** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
+export interface ThumbnailPostHeavyPictureArgs {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
 }
 
 /** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
@@ -5485,6 +5492,7 @@ export interface ThumbnailPostFilter {
   AND?: InputMaybe<Array<InputMaybe<ThumbnailPostFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ThumbnailPostFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  heavyPicture_exists?: InputMaybe<Scalars['Boolean']>;
   isVideo?: InputMaybe<Scalars['Boolean']>;
   isVideo_exists?: InputMaybe<Scalars['Boolean']>;
   isVideo_not?: InputMaybe<Scalars['Boolean']>;
@@ -6217,6 +6225,17 @@ export type PageAccessWallFragment = {
                                 };
                               }
                             | undefined;
+                          heavyPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -6620,6 +6639,17 @@ export type PageEarnFragment = {
                                 };
                               }
                             | undefined;
+                          heavyPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -7013,6 +7043,17 @@ export type PageGameFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -7467,6 +7508,17 @@ export type PageHomeFragment = {
                                 };
                               }
                             | undefined;
+                          heavyPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -7911,6 +7963,17 @@ export type PageLearnFragment = {
                                 };
                               }
                             | undefined;
+                          heavyPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -8267,6 +8330,14 @@ export type PageSectionThumbnailPostsFragment = {
               isVideo?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               picture?:
+                | {
+                    __typename?: 'Asset';
+                    title?: string | undefined;
+                    url?: string | undefined;
+                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                  }
+                | undefined;
+              heavyPicture?:
                 | {
                     __typename?: 'Asset';
                     title?: string | undefined;
@@ -8672,6 +8743,17 @@ export type PageStreamFragment = {
                                 };
                               }
                             | undefined;
+                          heavyPicture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
                         }
                       | undefined
                     >;
@@ -8746,6 +8828,14 @@ export type ThumbnailPostFragment = {
   isVideo?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   picture?:
+    | {
+        __typename?: 'Asset';
+        title?: string | undefined;
+        url?: string | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+      }
+    | undefined;
+  heavyPicture?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
@@ -9293,6 +9383,17 @@ export type PageAccessWallCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -9754,6 +9855,17 @@ export type PageEarnCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -10205,6 +10317,17 @@ export type PageGameCollectionQuery = {
                                         publishedAt?: any | undefined;
                                       };
                                       picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                      heavyPicture?:
                                         | {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
@@ -10720,6 +10843,17 @@ export type PageHomeCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -11225,6 +11359,17 @@ export type PageLearnCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -11686,6 +11831,17 @@ export type PageStreamCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -11832,6 +11988,13 @@ export const ThumbnailPostFragmentDoc = gql`
       ...Sys
     }
     picture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    heavyPicture(preview: $isPreview) {
       sys {
         ...Sys
       }

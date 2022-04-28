@@ -138,6 +138,13 @@ export const ThumbnailPostFragmentDoc = gql`
       title
       url
     }
+    heavyPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
     title
     link
     isVideo
