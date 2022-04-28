@@ -5,6 +5,7 @@ import { PageSectionDappPostsModule } from '../page-section-dapp-posts';
 import { PageSectionFaQsModule } from '../page-section-faqs';
 import { PageSectionFeaturePostsModule } from '../page-section-feature-posts';
 import { PageSectionGrandPostsModule } from '../page-section-grand-posts';
+import { PageSectionGrandPostsSwiperModule } from '../page-section-grand-posts-swiper';
 import { PageSectionIconTilesModule } from '../page-section-icon-tiles';
 import { PageSectionIconTilesSwiperModule } from '../page-section-icon-tiles-swiper';
 import { PageSectionPersonPostsModule } from '../page-section-person-posts';
@@ -27,6 +28,7 @@ import { PageSectionsComponent } from './page-sections.component';
     PageSectionIconTilesSwiperModule,
     PageSectionFaQsModule,
     PageSectionDappPostsModule,
+    PageSectionGrandPostsSwiperModule,
     PageSectionGrandPostsModule,
     PageSectionSectionPostsModule,
     PageSectionPersonPostsSwiperModule,

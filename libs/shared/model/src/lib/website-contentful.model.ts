@@ -3557,7 +3557,9 @@ export interface PageSectionGrandPosts extends Entry {
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedPostsCollection?: Maybe<PageSectionGrandPostsHandpickedPostsCollection>;
+  isSwiper?: Maybe<Scalars['Boolean']>;
   linkedFrom?: Maybe<PageSectionGrandPostsLinkingCollections>;
+  swiperResponsiveOptions?: Maybe<Scalars['JSON']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 }
@@ -3576,8 +3578,18 @@ export interface PageSectionGrandPostsHandpickedPostsCollectionArgs {
 }
 
 /** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
+export interface PageSectionGrandPostsIsSwiperArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
 export interface PageSectionGrandPostsLinkedFromArgs {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
+export interface PageSectionGrandPostsSwiperResponsiveOptionsArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
@@ -3605,6 +3617,10 @@ export interface PageSectionGrandPostsFilter {
   description_not_contains?: InputMaybe<Scalars['String']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   handpickedPostsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_exists?: InputMaybe<Scalars['Boolean']>;
+  isSwiper_not?: InputMaybe<Scalars['Boolean']>;
+  swiperResponsiveOptions_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -3684,6 +3700,8 @@ export interface PageSectionGrandPostsLinkingCollectionsPageStreamCollectionArgs
 }
 
 export enum PageSectionGrandPostsOrder {
+  IsSwiperAsc = 'isSwiper_ASC',
+  IsSwiperDesc = 'isSwiper_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -6034,6 +6052,8 @@ export type PageAccessWallFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -6435,6 +6455,8 @@ export type PageEarnFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -6836,6 +6858,8 @@ export type PageGameFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -7237,6 +7261,8 @@ export type PageHomeFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -7679,6 +7705,8 @@ export type PageLearnFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -8072,6 +8100,8 @@ export type PageSectionGrandPostsFragment = {
   __typename: 'PageSectionGrandPosts';
   title?: string | undefined;
   description?: string | undefined;
+  isSwiper?: boolean | undefined;
+  swiperResponsiveOptions?: any | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   handpickedPostsCollection?:
     | {
@@ -8477,6 +8507,8 @@ export type PageStreamFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -9080,6 +9112,8 @@ export type PageAccessWallCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -9539,6 +9573,8 @@ export type PageEarnCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -9998,6 +10034,8 @@ export type PageGameCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -10457,6 +10495,8 @@ export type PageHomeCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -10960,6 +11000,8 @@ export type PageLearnCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -11463,6 +11505,8 @@ export type PageStreamCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -11963,11 +12007,13 @@ export const PageSectionGrandPostsFragmentDoc = gql`
     }
     title
     description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...GrandPost
       }
     }
+    isSwiper
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${GrandPostFragmentDoc}
