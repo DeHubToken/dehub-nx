@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PageSectionGrandPostsSwiperModule } from '@dehub/angular/ui/components/page-section-grand-posts-swiper';
 import { PageSectionBasicPostsModule } from '../page-section-basic-posts';
 import { PageSectionDappPostsModule } from '../page-section-dapp-posts';
 import { PageSectionFaQsModule } from '../page-section-faqs';
@@ -27,6 +28,7 @@ import { PageSectionsComponent } from './page-sections.component';
     PageSectionIconTilesSwiperModule,
     PageSectionFaQsModule,
     PageSectionDappPostsModule,
+    PageSectionGrandPostsSwiperModule,
     PageSectionGrandPostsModule,
     PageSectionSectionPostsModule,
     PageSectionPersonPostsSwiperModule,
