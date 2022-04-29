@@ -1,4 +1,5 @@
 export * from './useApproveConfirmTransaction';
+export * from './useContentful';
 export * from './useDebounce';
 export * from './useEagerWeb3';
 export * from './useIsBrowserTabActive';
