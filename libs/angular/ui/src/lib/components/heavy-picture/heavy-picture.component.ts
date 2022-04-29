@@ -15,26 +15,28 @@ interface ContentfulPicture {
 @Component({
   selector: 'dhb-heavy-picture',
   template: `
-    <img
-      *ngIf="container.picture as picture"
-      [dhbContentfulDraft]="picture.sys"
-      [src]="picture.url"
-      [alt]="picture.title"
-      [ngClass]="{
-        hidden: heavyPictureLoaded
-      }"
-    />
-    <ng-container *ngIf="container.heavyPicture as heavyPicture">
+    <span (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
       <img
-        [dhbContentfulDraft]="heavyPicture.sys"
-        [src]="heavyPicture.url"
-        [alt]="heavyPicture.title"
+        *ngIf="container.picture as picture"
+        [dhbContentfulDraft]="picture.sys"
+        [src]="picture.url"
+        [alt]="picture.title"
         [ngClass]="{
-          hidden: !heavyPictureLoaded
+          hidden: showHeavyPic
         }"
-        (load)="heavyPictureLoaded = true"
       />
-    </ng-container>
+      <ng-container *ngIf="container.heavyPicture as heavyPicture">
+        <img
+          [dhbContentfulDraft]="heavyPicture.sys"
+          [src]="heavyPicture.url"
+          [alt]="heavyPicture.title"
+          [ngClass]="{
+            hidden: !showHeavyPic
+          }"
+          (load)="onLoad()"
+        />
+      </ng-container>
+    </span>
   `,
   styles: [
     `
@@ -49,13 +51,33 @@ export class HeavyPictureComponent<
   C extends {
     picture?: ContentfulPicture;
     heavyPicture?: ContentfulPicture;
+    showHeavyPictureOnHover?: boolean;
   }
 > implements OnInit
 {
   @Input() container!: C;
-  heavyPictureLoaded = false;
+  @Input() showOnHover = false;
+  showHeavyPic = false;
 
   constructor() {}
 
   ngOnInit() {}
+
+  onMouseOver() {
+    if (this.container.showHeavyPictureOnHover) {
+      this.showHeavyPic = true;
+    }
+  }
+
+  onMouseOut() {
+    if (this.container.showHeavyPictureOnHover) {
+      this.showHeavyPic = false;
+    }
+  }
+
+  onLoad() {
+    if (!this.container.showHeavyPictureOnHover) {
+      this.showHeavyPic = true;
+    }
+  }
 }

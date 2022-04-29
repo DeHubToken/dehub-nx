@@ -17,6 +17,7 @@ fragment FeaturePost on FeaturePost {
     title
     url
   }
+  showHeavyPictureOnHover
   title
   description
   callToActionUrl
