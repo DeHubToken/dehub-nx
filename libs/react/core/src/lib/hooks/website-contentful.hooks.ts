@@ -101,6 +101,7 @@ export const FeaturePostFragmentDoc = gql`
       title
       url
     }
+    showHeavyPictureOnHover
     title
     description
     callToActionUrl
@@ -145,6 +146,7 @@ export const ThumbnailPostFragmentDoc = gql`
       title
       url
     }
+    showHeavyPictureOnHover
     title
     link
     isVideo
@@ -298,6 +300,7 @@ export const GrandPostFragmentDoc = gql`
       title
       url
     }
+    showHeavyPictureOnHover
     title
     subtitle
     description
