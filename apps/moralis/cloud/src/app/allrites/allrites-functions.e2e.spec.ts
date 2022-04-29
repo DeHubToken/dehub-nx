@@ -5,7 +5,7 @@ import { AllritesFunctions, AuthAllritesReturns } from './allrites.model';
 
 const { moralis } = environment;
 
-describe('E2E Allrites functions', () => {
+xdescribe('E2E Allrites functions', () => {
   beforeAll(async () => await Moralis.start(moralis));
 
   it('Should return valid access token every time', async () => {
