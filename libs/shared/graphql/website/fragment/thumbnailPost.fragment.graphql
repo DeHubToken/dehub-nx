@@ -16,6 +16,7 @@ fragment ThumbnailPost on ThumbnailPost {
     title
     url
   }
+  showHeavyPictureOnHover
   title
   link
   isVideo
