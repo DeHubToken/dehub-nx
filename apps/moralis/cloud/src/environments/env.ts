@@ -19,6 +19,10 @@ export interface Env extends SharedEnv {
       withdraw: string;
     };
   };
+  allrites: {
+    clientId: string;
+    clientSecret: string;
+  };
 }
 
 export const defaultEnv: Env = {
@@ -35,5 +39,9 @@ export const defaultEnv: Env = {
       harvest: 'DeHubStakingHarvestEvents',
       withdraw: 'DeHubStakingWithdrawEvents',
     },
+  },
+  allrites: {
+    clientId: '637f7235fdc05497aeba37ccffeed2b1',
+    clientSecret: 'badac733900a8685d83954892b22c0cc',
   },
 };

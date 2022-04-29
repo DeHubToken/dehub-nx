@@ -1,44 +1,135 @@
-import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
-import { ChainIdAsNumber } from '../shared/types';
-import { getStakingContracts } from './dapp.util';
+import { environment } from '../../environments/environment';
+import {
+  ChainIdAsNumber,
+  getDeHubContracts,
+  RewardContractPropsType,
+  StakingContractPropsType,
+  StakingControllerContractPropsType,
+} from '../shared';
 
 /**
- * Get staked token amount of given wallet address.
- * @param {*} targetChainId network
- * @param {*} address user address
+ * Return the reward contract information, returning type is same with `ContractProperties`.
+ * @param targetChainId
+ * @returns
  */
-export async function getStakedAmount(
-  targetChainId: ChainIdAsNumber,
-  address: string
-): Promise<typeof Moralis.Cloud.BigNumber | null> {
+export async function getRewardContract(
+  targetChainId: ChainIdAsNumber
+): Promise<RewardContractPropsType | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
     const decTargetChainId = targetChainId;
 
-    const web3 = Moralis.web3ByChain(decimalToHex(targetChainId));
-    let amount = new Moralis.Cloud.BigNumber(0);
+    const contracts = await getDeHubContracts(environment.dappName.bnbReward);
+    const filters = contracts.filter(contract => {
+      const chainId = contract.get('chainId');
+      if (parseInt(chainId) !== decTargetChainId) {
+        return false;
+      }
+      return true;
+    });
 
-    const stakingContracts = (await getStakingContracts()) ?? [];
+    if (filters.length < 1) return null;
 
-    for (let i = 0; i < stakingContracts.length; i++) {
-      if (stakingContracts[i].chainId !== decTargetChainId) {
-        continue;
+    const address = filters[0].get('address');
+
+    const name = filters[0].get('name');
+    const chainId = filters[0].get('chainId');
+    const abi = filters[0].get('abi');
+
+    return {
+      address,
+      name,
+      chainId,
+      abi,
+    };
+  } catch (err) {
+    logger.error(`getRewardContract error: ${JSON.stringify(err)}`);
+  }
+  return null;
+}
+
+/**
+ * Get staking contract address with chain id, controller contract should be
+ * added into `contracts` table, and its name should be
+ * `DeHub Staking Controller` and `chainId` should be decimal number.
+ * @param {*} targetChainId
+ * @returns object of abi and address
+ */
+export async function getStakingControllerContract(
+  targetChainId: ChainIdAsNumber
+): Promise<StakingControllerContractPropsType | null> {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const decTargetChainId = targetChainId;
+
+    const Contracts = Moralis.Object.extend('Contracts');
+    const contractQuery = new Moralis.Query(Contracts);
+
+    contractQuery.equalTo('name', 'DeHub Staking Controller');
+    contractQuery.equalTo('chainId', decTargetChainId);
+    const first = await contractQuery.first();
+    if (first) {
+      return {
+        abi: first.get('abi'),
+        address: first.get('address'),
+        name: first.get('name'),
+        chainId: first.get('chainId'),
+      };
+    }
+  } catch (err) {
+    logger.error(`getStakingControllerContract error: ${JSON.stringify(err)}`);
+  }
+  return null;
+}
+
+export async function getActiveStakingContract(
+  targetChainId: ChainIdAsNumber
+): Promise<StakingContractPropsType | null> {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const decTargetChainId = targetChainId;
+
+    const date = new Date();
+    const contracts = await getDeHubContracts(environment.dappName.staking);
+    const filters = contracts.filter(contract => {
+      const chainId = contract.get('chainId');
+      if (parseInt(chainId) !== decTargetChainId) {
+        return false;
       }
 
-      // create contract instance
-      const contract = new web3.eth.Contract(
-        stakingContracts[i].abi,
-        stakingContracts[i].address
-      );
+      const year = contract.get('year');
+      const quarter = contract.get('quarter');
+      if (
+        date.getFullYear() !== year ||
+        Math.floor((date.getUTCMonth() + 1) / 4) !== quarter - 1
+      ) {
+        return false;
+      }
+      return true;
+    });
 
-      // get user info
-      const userInfo = await contract.methods.userInfo(address).call();
-      amount = amount.plus(new Moralis.Cloud.BigNumber(userInfo.amount));
-    }
+    if (filters.length < 1) return null;
 
-    return amount;
+    const year = filters[0].get('year');
+    const quarter = filters[0].get('quarter');
+
+    const contract = filters[0].get('contract');
+    const address = contract.get('address');
+
+    const name = contract.get('name');
+    const chainId = contract.get('chainId');
+    const abi = contract.get('abi');
+
+    return {
+      year,
+      quarter,
+      address,
+      name,
+      chainId,
+      abi,
+    };
   } catch (err) {
-    logger.error(`getStakedAmount error: ${JSON.stringify(err)}`);
-    return null;
+    logger.error(`getActiveStakingContract error: ${JSON.stringify(err)}`);
   }
+  return null;
 }
