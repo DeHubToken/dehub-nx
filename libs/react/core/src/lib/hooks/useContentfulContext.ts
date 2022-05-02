@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ContentfulConext } from '../contexts';
 
-export const useContentful = () => {
+export const useContentfulContext = () => {
   const context = useContext(ContentfulConext);
   if (!context) {
     throw new Error(

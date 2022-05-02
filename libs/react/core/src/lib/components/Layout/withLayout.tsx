@@ -5,7 +5,7 @@ import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import React, { useEffect, useState } from 'react';
 import { useWeb3Context } from '../../hooks';
-import { useContentful } from '../../hooks/useContentful';
+import { useContentfulContext } from '../../hooks/useContentfulContext';
 import ToastListener from '../Toast/ToastListener';
 import UserMenu from '../UserMenu';
 
@@ -46,7 +46,7 @@ const withLayout =
       logout,
     } = useWeb3Context();
 
-    const { footer } = useContentful();
+    const { footer } = useContentfulContext();
 
     /*
      * Hack to avoid trustwallet redirecting to a open in app website on iOS...
