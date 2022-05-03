@@ -1,43 +1,42 @@
 import { environment } from '../../environments/environment';
-import { getRewardContract } from '../shared/dapp.util';
+import { getStakingContracts } from '../shared';
+import { ChainIdAsNumber } from '../shared/model';
 import RedisClient from '../shared/redis';
-import { ChainIdAsNumber } from '../shared/types';
+import { StakingFunctions } from './staking.model';
 import {
   getActiveStakingContract,
-  getStakingContracts,
+  getRewardContract,
   getStakingControllerContract,
-} from '../staking/dapp.util';
+} from './staking.util';
 
-Moralis.Cloud.define('getStakingContracts', async () => {
+export const getStakingContractsFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const redisClient = new RedisClient();
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        'getStakingContracts',
-        async function () {
-          return JSON.stringify(await getStakingContracts());
-        },
-        {
-          expire: 1800,
-        }
+        StakingFunctions.GetStakingContracts,
+        async () => JSON.stringify(await getStakingContracts()),
+        { expire: 1800 }
       )
     );
   } catch (err) {
-    logger.error(`getStakingContracts error: ${JSON.stringify(err)}`);
+    logger.error(
+      `${StakingFunctions.GetStakingContracts} error: ${JSON.stringify(err)}`
+    );
     return null;
   }
-});
+};
 
-Moralis.Cloud.define('getActiveStakingContract', async () => {
+export const getActiveStakingContractFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const redisClient = new RedisClient();
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        'getActiveStakingContract',
+        StakingFunctions.GetActiveStakingContract,
         async function (args) {
           return JSON.stringify(
             await getActiveStakingContract(args as ChainIdAsNumber)
@@ -50,19 +49,23 @@ Moralis.Cloud.define('getActiveStakingContract', async () => {
       )
     );
   } catch (err) {
-    logger.error(`getActiveStakingContract error: ${JSON.stringify(err)}`);
+    logger.error(
+      `${StakingFunctions.GetActiveStakingContract} error: ${JSON.stringify(
+        err
+      )}`
+    );
     return null;
   }
-});
+};
 
-Moralis.Cloud.define('getStakingControllerContract', async () => {
+export const getStakingControllerContractFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const redisClient = new RedisClient();
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        'getStakingControllerContract',
+        StakingFunctions.GetStakingControllerContract,
         async function (args) {
           return JSON.stringify(
             await getStakingControllerContract(args as ChainIdAsNumber)
@@ -75,19 +78,23 @@ Moralis.Cloud.define('getStakingControllerContract', async () => {
       )
     );
   } catch (err) {
-    logger.error(`getStakingControllerContract error: ${JSON.stringify(err)}`);
+    logger.error(
+      `${StakingFunctions.GetStakingControllerContract} error: ${JSON.stringify(
+        err
+      )}`
+    );
     return null;
   }
-});
+};
 
-Moralis.Cloud.define('getRewardContract', async () => {
+export const getRewardContractFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const redisClient = new RedisClient();
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        'getRewardContract',
+        StakingFunctions.GetRewardContract,
         async function (args) {
           return JSON.stringify(
             await getRewardContract(args as ChainIdAsNumber)
@@ -100,9 +107,9 @@ Moralis.Cloud.define('getRewardContract', async () => {
       )
     );
   } catch (err) {
-    logger.error(`getRewardContract error: ${JSON.stringify(err)}`);
+    logger.error(
+      `${StakingFunctions.GetRewardContract} error: ${JSON.stringify(err)}`
+    );
     return null;
   }
-});
-
-export default Moralis;
+};

@@ -100,7 +100,7 @@ export const fetchContracts = createAsyncThunk<{
   bnbReward: ContractProperties;
 } | null>('application/fetchContracts', async () => {
   try {
-    const result = await Moralis.Cloud.run('getStakingContracts', {});
+    const result = await Moralis.Cloud.run('getStakingContracts');
     if (!result) return null;
     const staking = orderBy(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

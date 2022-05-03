@@ -9,6 +9,14 @@ fragment ThumbnailPost on ThumbnailPost {
     title
     url
   }
+  heavyPicture(preview: $isPreview) {
+    sys {
+      ...Sys
+    }
+    title
+    url
+  }
+  showHeavyPictureOnHover
   title
   link
   isVideo
