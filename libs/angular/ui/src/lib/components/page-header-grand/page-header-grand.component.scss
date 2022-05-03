@@ -1,0 +1,55 @@
+@import '../../../../../../shared/asset/freya/src/lib/sass/variables/layout/_layout_common.scss';
+
+.content {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: #{'calc(90vw * 0.4)'};
+  z-index: 2;
+}
+
+.billboard {
+  position: absolute;
+  height: 56.25vw;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  .overlay {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: linear-gradient(
+      to bottom,
+      #061118 4%,
+      #3d284e3d 29%,
+      #061117 85%
+    );
+  }
+
+  .static-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: $tabletBreakpoint) {
+  .content {
+    height: 57vw;
+  }
+  .billboard {
+    top: 215px;
+  }
+}
+
+@media (max-width: $phoneBreakpoint) {
+  .content {
+    margin-top: 200px;
+  }
+}
