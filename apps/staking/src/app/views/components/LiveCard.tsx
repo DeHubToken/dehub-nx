@@ -36,7 +36,6 @@ import {
 } from '../../state/application/hooks';
 import { getVersion } from '../../utils/contractHelpers';
 import { quarterMark } from '../../utils/pool';
-import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
 
 const StyledBox = styled(Box)`
@@ -370,7 +369,12 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                     {account &&
                     fetchRewardStatus === FetchStatus.SUCCESS &&
                     totalBNBRewards ? (
-                      !hasAlreadyClaimed && (
+                      hasAlreadyClaimed ? (
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          You already claimed this week. Please come back next
+                          week.
+                        </Text>
+                      ) : (
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
                           Total BNB Reward Pool:{' '}
                           {getFullDisplayBalance(
@@ -384,24 +388,12 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                       <Skeleton width="100%" height="1.5rem" className="my-2" />
                     )}
 
-                    {fetchRewardStatus === FetchStatus.SUCCESS &&
-                      hasAlreadyClaimed && (
-                        <>
-                          <Text
-                            fontSize="14px"
-                            fontWeight={900}
-                            className="pb-2"
-                          >
-                            You already claimed this week. Please come back next
-                            week.
-                          </Text>
-                          <Text fontSize="14px" fontWeight={900}>
-                            {timeFromNow(
-                              dayjs(new Date(nextCycleResetTimestamp * 1000))
-                            )}
-                          </Text>
-                        </>
-                      )}
+                    {account && fetchRewardStatus === FetchStatus.SUCCESS && (
+                      <SimpleCountDown
+                        limitTime={nextCycleResetTimestamp}
+                        style={{ fontSize: '14px', fontWeight: 900 }}
+                      />
+                    )}
 
                     {account ? (
                       <Button
