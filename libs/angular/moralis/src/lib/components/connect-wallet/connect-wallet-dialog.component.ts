@@ -129,6 +129,33 @@ import {
           (click)="login.emit({ connectorId: 'walletconnect' })"
         ></dhb-wallet-button>
       </div>
+
+      <!-- Binance -->
+      <div class="mt-2 mb-3">
+        <dhb-wallet-button
+          label="Binance"
+          [imageSources]="[path + '/assets/dehub/icons/bsc.svg']"
+          (click)="login.emit({ connectorId: 'binance' })"
+        ></dhb-wallet-button>
+        <div
+          *ngIf="
+            walletConnectState &&
+            walletConnectState.connectorId === 'binance' &&
+            walletConnectState.state === walletConnectingState.NO_PROVIDER
+          "
+          [@fadeInUp]
+          class="m-2"
+        >
+          Please install&nbsp;
+          <a
+            href="https://docs.binance.org/smart-chain/wallet/binance.html"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Binance Wallet </a
+          >&nbsp;extension on your browser.
+        </div>
+      </div>
     </p-dialog>
   `,
   styles: [],

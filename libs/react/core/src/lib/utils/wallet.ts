@@ -22,6 +22,7 @@ export const getWalletConnector = (
         supportedChainIds: [56, 97],
       });
     }
+    default:
+      throw new Error('Unknown Connector');
   }
-  throw new Error('Unknown Connector');
 };

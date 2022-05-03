@@ -27,14 +27,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
               class="fad fa-play-circle"
               (click)="onVideoPlayClicked()"
             ></i>
-            <!-- Picture -->
-            <ng-container *ngIf="featurePost.picture as picture">
-              <img
-                [dhbContentfulDraft]="picture.sys"
-                [src]="picture.url"
-                [alt]="picture.title"
-              />
-            </ng-container>
+            <dhb-heavy-picture [container]="featurePost"></dhb-heavy-picture>
           </div>
         </ng-template>
 

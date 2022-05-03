@@ -84,6 +84,8 @@
     "core-js": "3.6.5",
     "crypto-browserify": "3.12.0",
     "date-fns": "2.25.0",
+    "dayjs": "1.11.1",
+    "eip1193-provider": "1.0.1",
     "framer-motion": "6.3.0",
     "graphql-request": "4.0.0",
     "history": "4.10.1",
@@ -194,6 +196,7 @@
     "styled-system": "5.1.5",
     "swiper": "8.0.6",
     "ts-jest": "27.0.5",
-    "typescript": "4.5.5"
+    "typescript": "4.5.5",
+    "xhr2": "0.2.1"
   }
 }

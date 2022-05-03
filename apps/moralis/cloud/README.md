@@ -20,7 +20,7 @@ These functions can be callable outside by the following link format:
 https://docs.moralis.io/moralis-dapp/cloud-code/cloud-functions
 
 ```js
-const contracts = await Moralis.Cloud.run('getStakingContracts', {});
+const contracts = await Moralis.Cloud.run('getStakingContracts');
 ```
 
 ### totalCirculatingSupply
@@ -28,7 +28,7 @@ const contracts = await Moralis.Cloud.run('getStakingContracts', {});
 Returns the total circulating supply of $DeHub token.
 
 ```js
-const supply = await Moralis.Cloud.run('totalCirculatingSupply', {});
+const supply = await Moralis.Cloud.run('totalCirculatingSupply');
 console.log('total circulating supply', supply.toString());
 ```
 
@@ -85,3 +85,44 @@ interface ContractProperties {
 ### getRewardContract
 
 Return the reward contract information, returning type is same with `ContractProperties`.
+
+### authAllrites
+
+In order to use OTT API from Vdyo, we need to get access token prior to calling the API. 
+Reference Link: https://api.vdyo.co/docs/#header-authentication
+
+#### Endpoint
+
+Client apps can request this access token via exposed endpoint:
+
+`{serverUrl}/functions/authAllrites?_AplicationId={applicationId}`
+
+Example: 
+
+`https://nm6dir4me3i0.usemoralis.com:2053/server/functions/authAllrites?_AplicationId=UxvDeanBLvO8ym31e6x6dYdQa2Qlzw2jOSrhm3cE`
+
+#### Cloud Function Usage Example:
+
+```typescript
+interface AuthAllritesReturns {
+  accessToken: string;
+  tokenType: string;
+  expires: number;
+}
+```
+
+```typescript
+const authKey = await Moralis.Cloud.run('authAllrites', {});
+console.log('authKey', authKey);
+
+fetch('https://api.vdyo.co/contents', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `${authKey.tokenType} ${authKey.accessToken}`,
+  },
+})
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+```

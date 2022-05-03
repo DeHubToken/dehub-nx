@@ -7,7 +7,7 @@ import {
 import { PageGameCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
-import { PageGameFragment } from '@dehub/shared/model';
+import { PageGameFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';
 @Component({
   template: `
@@ -18,6 +18,7 @@ import { map, Observable } from 'rxjs';
       <!-- Page Sections -->
       <dhb-page-sections
         [sections]="pageGame.sectionsCollection?.items"
+        [grandPostsResponsiveOptions]="grandPostsResponsiveOptions"
         [path]="path"
       ></dhb-page-sections>
     </ng-container>
@@ -29,6 +30,21 @@ export class AngularFeatureGameComponent implements OnInit {
   pageGame$?: Observable<PageGameFragment | undefined>;
 
   path = this.env.baseUrl;
+
+  grandPostsResponsiveOptions: SwiperResponsiveOptions = {
+    '1800': {
+      slidesPerView: 3,
+      spaceBetween: 10,
+    },
+    '1440': {
+      slidesPerView: 2,
+      spaceBetween: 10,
+    },
+    '1250': {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+  };
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

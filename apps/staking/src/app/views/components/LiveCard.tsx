@@ -17,7 +17,7 @@ import {
 } from '@ethersproject/abstract-provider';
 import { Contract } from '@ethersproject/contracts';
 import BigNumber from 'bignumber.js';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
@@ -39,7 +39,6 @@ import {
 } from '../../state/application/hooks';
 import { getVersion } from '../../utils/contractHelpers';
 import { quarterMark } from '../../utils/pool';
-import { timeFromNow } from '../../utils/timeFromNow';
 import StakeModal from './StakeModal';
 
 const StyledBox = styled(Box)`
@@ -83,7 +82,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   );
   const remainTimes = useMemo(
     () =>
-      moment(new Date(poolInfo.closeTimeStamp * 1000)).unix() -
+      dayjs(new Date(poolInfo.closeTimeStamp * 1000)).unix() -
       new Date().getTime() / 1000,
     [poolInfo]
   );
@@ -373,7 +372,12 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                     {account &&
                     fetchRewardStatus === FetchStatus.SUCCESS &&
                     totalBNBRewards ? (
-                      !hasAlreadyClaimed && (
+                      hasAlreadyClaimed ? (
+                        <Text fontSize="14px" fontWeight={900} className="pb-2">
+                          You already claimed this week. Please come back next
+                          week.
+                        </Text>
+                      ) : (
                         <Text fontSize="14px" fontWeight={900} className="pb-2">
                           Total BNB Reward Pool:{' '}
                           {getFullDisplayBalance(
@@ -387,24 +391,12 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                       <Skeleton width="100%" height="1.5rem" className="my-2" />
                     )}
 
-                    {fetchRewardStatus === FetchStatus.SUCCESS &&
-                      hasAlreadyClaimed && (
-                        <>
-                          <Text
-                            fontSize="14px"
-                            fontWeight={900}
-                            className="pb-2"
-                          >
-                            You already claimed this week. Please come back next
-                            week.
-                          </Text>
-                          <Text fontSize="14px" fontWeight={900}>
-                            {timeFromNow(
-                              moment(new Date(nextCycleResetTimestamp * 1000))
-                            )}
-                          </Text>
-                        </>
-                      )}
+                    {account && fetchRewardStatus === FetchStatus.SUCCESS && (
+                      <SimpleCountDown
+                        limitTime={nextCycleResetTimestamp}
+                        style={{ fontSize: '14px', fontWeight: 900 }}
+                      />
+                    )}
 
                     {account ? (
                       <Button

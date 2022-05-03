@@ -1327,6 +1327,7 @@ export interface FeaturePost extends Entry {
   heavyPicture?: Maybe<Asset>;
   linkedFrom?: Maybe<FeaturePostLinkingCollections>;
   picture?: Maybe<Asset>;
+  showHeavyPictureOnHover?: Maybe<Scalars['Boolean']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
   videoUrl?: Maybe<Scalars['String']>;
@@ -1362,6 +1363,11 @@ export interface FeaturePostLinkedFromArgs {
 export interface FeaturePostPictureArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+/** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
+export interface FeaturePostShowHeavyPictureOnHoverArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
@@ -1411,6 +1417,9 @@ export interface FeaturePostFilter {
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   heavyPicture_exists?: InputMaybe<Scalars['Boolean']>;
   picture_exists?: InputMaybe<Scalars['Boolean']>;
+  showHeavyPictureOnHover?: InputMaybe<Scalars['Boolean']>;
+  showHeavyPictureOnHover_exists?: InputMaybe<Scalars['Boolean']>;
+  showHeavyPictureOnHover_not?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -1453,6 +1462,8 @@ export enum FeaturePostOrder {
   CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
   CallToActionUrlAsc = 'callToActionUrl_ASC',
   CallToActionUrlDesc = 'callToActionUrl_DESC',
+  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
+  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1579,6 +1590,7 @@ export interface GrandPost extends Entry {
   heavyPicture?: Maybe<Asset>;
   linkedFrom?: Maybe<GrandPostLinkingCollections>;
   picture?: Maybe<Asset>;
+  showHeavyPictureOnHover?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
@@ -1615,6 +1627,11 @@ export interface GrandPostLinkedFromArgs {
 export interface GrandPostPictureArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+/** A post with the biggest surface area on the screen. Best displayed in pairs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/grandPost) */
+export interface GrandPostShowHeavyPictureOnHoverArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** A post with the biggest surface area on the screen. Best displayed in pairs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/grandPost) */
@@ -1669,6 +1686,9 @@ export interface GrandPostFilter {
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   heavyPicture_exists?: InputMaybe<Scalars['Boolean']>;
   picture_exists?: InputMaybe<Scalars['Boolean']>;
+  showHeavyPictureOnHover?: InputMaybe<Scalars['Boolean']>;
+  showHeavyPictureOnHover_exists?: InputMaybe<Scalars['Boolean']>;
+  showHeavyPictureOnHover_not?: InputMaybe<Scalars['Boolean']>;
   subtitle?: InputMaybe<Scalars['String']>;
   subtitle_contains?: InputMaybe<Scalars['String']>;
   subtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1718,6 +1738,8 @@ export enum GrandPostOrder {
   CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
   CallToActionUrlAsc = 'callToActionUrl_ASC',
   CallToActionUrlDesc = 'callToActionUrl_DESC',
+  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
+  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
   SubtitleAsc = 'subtitle_ASC',
   SubtitleDesc = 'subtitle_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -5439,12 +5461,20 @@ export interface SysFilter {
 export interface ThumbnailPost extends Entry {
   __typename?: 'ThumbnailPost';
   contentfulMetadata: ContentfulMetadata;
+  heavyPicture?: Maybe<Asset>;
   isVideo?: Maybe<Scalars['Boolean']>;
   link?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<ThumbnailPostLinkingCollections>;
   picture?: Maybe<Asset>;
+  showHeavyPictureOnHover?: Maybe<Scalars['Boolean']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+}
+
+/** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
+export interface ThumbnailPostHeavyPictureArgs {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
 }
 
 /** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
@@ -5469,6 +5499,11 @@ export interface ThumbnailPostPictureArgs {
 }
 
 /** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
+export interface ThumbnailPostShowHeavyPictureOnHoverArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
 export interface ThumbnailPostTitleArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
@@ -5485,6 +5520,7 @@ export interface ThumbnailPostFilter {
   AND?: InputMaybe<Array<InputMaybe<ThumbnailPostFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ThumbnailPostFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  heavyPicture_exists?: InputMaybe<Scalars['Boolean']>;
   isVideo?: InputMaybe<Scalars['Boolean']>;
   isVideo_exists?: InputMaybe<Scalars['Boolean']>;
   isVideo_not?: InputMaybe<Scalars['Boolean']>;
@@ -5496,6 +5532,9 @@ export interface ThumbnailPostFilter {
   link_not_contains?: InputMaybe<Scalars['String']>;
   link_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   picture_exists?: InputMaybe<Scalars['Boolean']>;
+  showHeavyPictureOnHover?: InputMaybe<Scalars['Boolean']>;
+  showHeavyPictureOnHover_exists?: InputMaybe<Scalars['Boolean']>;
+  showHeavyPictureOnHover_not?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -5531,6 +5570,8 @@ export enum ThumbnailPostOrder {
   IsVideoDesc = 'isVideo_DESC',
   LinkAsc = 'link_ASC',
   LinkDesc = 'link_DESC',
+  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
+  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -5741,12 +5782,21 @@ export type FaqItemFragment = {
 export type FeaturePostFragment = {
   __typename?: 'FeaturePost';
   videoUrl?: string | undefined;
+  showHeavyPictureOnHover?: boolean | undefined;
   title?: string | undefined;
   description?: string | undefined;
   callToActionUrl?: string | undefined;
   callToActionButtonLabel?: string | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   picture?:
+    | {
+        __typename?: 'Asset';
+        title?: string | undefined;
+        url?: string | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+      }
+    | undefined;
+  heavyPicture?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
@@ -5803,6 +5853,7 @@ export type FooterFragment = {
 export type GrandPostFragment = {
   __typename?: 'GrandPost';
   videoUrl?: string | undefined;
+  showHeavyPictureOnHover?: boolean | undefined;
   title?: string | undefined;
   subtitle?: string | undefined;
   description?: string | undefined;
@@ -6004,6 +6055,7 @@ export type PageAccessWallFragment = {
                       | {
                           __typename?: 'FeaturePost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
                           callToActionUrl?: string | undefined;
@@ -6013,6 +6065,17 @@ export type PageAccessWallFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -6033,6 +6096,8 @@ export type PageAccessWallFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -6041,6 +6106,7 @@ export type PageAccessWallFragment = {
                       | {
                           __typename?: 'GrandPost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           subtitle?: string | undefined;
                           description?: string | undefined;
@@ -6178,6 +6244,7 @@ export type PageAccessWallFragment = {
                     items: Array<
                       | {
                           __typename?: 'ThumbnailPost';
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           link?: string | undefined;
                           isVideo?: boolean | undefined;
@@ -6186,6 +6253,17 @@ export type PageAccessWallFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -6394,6 +6472,7 @@ export type PageEarnFragment = {
                       | {
                           __typename?: 'FeaturePost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
                           callToActionUrl?: string | undefined;
@@ -6403,6 +6482,17 @@ export type PageEarnFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -6423,6 +6513,8 @@ export type PageEarnFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -6431,6 +6523,7 @@ export type PageEarnFragment = {
                       | {
                           __typename?: 'GrandPost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           subtitle?: string | undefined;
                           description?: string | undefined;
@@ -6568,6 +6661,7 @@ export type PageEarnFragment = {
                     items: Array<
                       | {
                           __typename?: 'ThumbnailPost';
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           link?: string | undefined;
                           isVideo?: boolean | undefined;
@@ -6576,6 +6670,17 @@ export type PageEarnFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -6784,6 +6889,7 @@ export type PageGameFragment = {
                       | {
                           __typename?: 'FeaturePost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
                           callToActionUrl?: string | undefined;
@@ -6793,6 +6899,17 @@ export type PageGameFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -6813,6 +6930,8 @@ export type PageGameFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -6821,6 +6940,7 @@ export type PageGameFragment = {
                       | {
                           __typename?: 'GrandPost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           subtitle?: string | undefined;
                           description?: string | undefined;
@@ -6958,6 +7078,7 @@ export type PageGameFragment = {
                     items: Array<
                       | {
                           __typename?: 'ThumbnailPost';
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           link?: string | undefined;
                           isVideo?: boolean | undefined;
@@ -6966,6 +7087,17 @@ export type PageGameFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -7174,6 +7306,7 @@ export type PageHomeFragment = {
                       | {
                           __typename?: 'FeaturePost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
                           callToActionUrl?: string | undefined;
@@ -7183,6 +7316,17 @@ export type PageHomeFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -7203,6 +7347,8 @@ export type PageHomeFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -7211,6 +7357,7 @@ export type PageHomeFragment = {
                       | {
                           __typename?: 'GrandPost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           subtitle?: string | undefined;
                           description?: string | undefined;
@@ -7389,6 +7536,7 @@ export type PageHomeFragment = {
                     items: Array<
                       | {
                           __typename?: 'ThumbnailPost';
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           link?: string | undefined;
                           isVideo?: boolean | undefined;
@@ -7397,6 +7545,17 @@ export type PageHomeFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -7605,6 +7764,7 @@ export type PageLearnFragment = {
                       | {
                           __typename?: 'FeaturePost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
                           callToActionUrl?: string | undefined;
@@ -7614,6 +7774,17 @@ export type PageLearnFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -7634,6 +7805,8 @@ export type PageLearnFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -7642,6 +7815,7 @@ export type PageLearnFragment = {
                       | {
                           __typename?: 'GrandPost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           subtitle?: string | undefined;
                           description?: string | undefined;
@@ -7820,6 +7994,7 @@ export type PageLearnFragment = {
                     items: Array<
                       | {
                           __typename?: 'ThumbnailPost';
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           link?: string | undefined;
                           isVideo?: boolean | undefined;
@@ -7828,6 +8003,17 @@ export type PageLearnFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -7995,12 +8181,21 @@ export type PageSectionFeaturePostsFragment = {
           | {
               __typename?: 'FeaturePost';
               videoUrl?: string | undefined;
+              showHeavyPictureOnHover?: boolean | undefined;
               title?: string | undefined;
               description?: string | undefined;
               callToActionUrl?: string | undefined;
               callToActionButtonLabel?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               picture?:
+                | {
+                    __typename?: 'Asset';
+                    title?: string | undefined;
+                    url?: string | undefined;
+                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                  }
+                | undefined;
+              heavyPicture?:
                 | {
                     __typename?: 'Asset';
                     title?: string | undefined;
@@ -8019,6 +8214,8 @@ export type PageSectionGrandPostsFragment = {
   __typename: 'PageSectionGrandPosts';
   title?: string | undefined;
   description?: string | undefined;
+  isSwiper?: boolean | undefined;
+  swiperResponsiveOptions?: any | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   handpickedPostsCollection?:
     | {
@@ -8027,6 +8224,7 @@ export type PageSectionGrandPostsFragment = {
           | {
               __typename?: 'GrandPost';
               videoUrl?: string | undefined;
+              showHeavyPictureOnHover?: boolean | undefined;
               title?: string | undefined;
               subtitle?: string | undefined;
               description?: string | undefined;
@@ -8179,11 +8377,20 @@ export type PageSectionThumbnailPostsFragment = {
         items: Array<
           | {
               __typename?: 'ThumbnailPost';
+              showHeavyPictureOnHover?: boolean | undefined;
               title?: string | undefined;
               link?: string | undefined;
               isVideo?: boolean | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               picture?:
+                | {
+                    __typename?: 'Asset';
+                    title?: string | undefined;
+                    url?: string | undefined;
+                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                  }
+                | undefined;
+              heavyPicture?:
                 | {
                     __typename?: 'Asset';
                     title?: string | undefined;
@@ -8384,6 +8591,7 @@ export type PageStreamFragment = {
                       | {
                           __typename?: 'FeaturePost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           description?: string | undefined;
                           callToActionUrl?: string | undefined;
@@ -8393,6 +8601,17 @@ export type PageStreamFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -8413,6 +8632,8 @@ export type PageStreamFragment = {
               __typename: 'PageSectionGrandPosts';
               title?: string | undefined;
               description?: string | undefined;
+              isSwiper?: boolean | undefined;
+              swiperResponsiveOptions?: any | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               handpickedPostsCollection?:
                 | {
@@ -8421,6 +8642,7 @@ export type PageStreamFragment = {
                       | {
                           __typename?: 'GrandPost';
                           videoUrl?: string | undefined;
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           subtitle?: string | undefined;
                           description?: string | undefined;
@@ -8558,6 +8780,7 @@ export type PageStreamFragment = {
                     items: Array<
                       | {
                           __typename?: 'ThumbnailPost';
+                          showHeavyPictureOnHover?: boolean | undefined;
                           title?: string | undefined;
                           link?: string | undefined;
                           isVideo?: boolean | undefined;
@@ -8566,6 +8789,17 @@ export type PageStreamFragment = {
                             publishedAt?: any | undefined;
                           };
                           picture?:
+                            | {
+                                __typename?: 'Asset';
+                                title?: string | undefined;
+                                url?: string | undefined;
+                                sys: {
+                                  __typename?: 'Sys';
+                                  publishedAt?: any | undefined;
+                                };
+                              }
+                            | undefined;
+                          heavyPicture?:
                             | {
                                 __typename?: 'Asset';
                                 title?: string | undefined;
@@ -8645,11 +8879,20 @@ export type SectionPostFragment = {
 
 export type ThumbnailPostFragment = {
   __typename?: 'ThumbnailPost';
+  showHeavyPictureOnHover?: boolean | undefined;
   title?: string | undefined;
   link?: string | undefined;
   isVideo?: boolean | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   picture?:
+    | {
+        __typename?: 'Asset';
+        title?: string | undefined;
+        url?: string | undefined;
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+      }
+    | undefined;
+  heavyPicture?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
@@ -8974,6 +9217,9 @@ export type PageAccessWallCollectionQuery = {
                                   | {
                                       __typename?: 'FeaturePost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
                                       callToActionUrl?: string | undefined;
@@ -8995,6 +9241,17 @@ export type PageAccessWallCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -9005,6 +9262,8 @@ export type PageAccessWallCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -9016,6 +9275,9 @@ export type PageAccessWallCollectionQuery = {
                                   | {
                                       __typename?: 'GrandPost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       subtitle?: string | undefined;
                                       description?: string | undefined;
@@ -9166,6 +9428,9 @@ export type PageAccessWallCollectionQuery = {
                                 items: Array<
                                   | {
                                       __typename?: 'ThumbnailPost';
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       link?: string | undefined;
                                       isVideo?: boolean | undefined;
@@ -9174,6 +9439,17 @@ export type PageAccessWallCollectionQuery = {
                                         publishedAt?: any | undefined;
                                       };
                                       picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                      heavyPicture?:
                                         | {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
@@ -9422,6 +9698,9 @@ export type PageEarnCollectionQuery = {
                                   | {
                                       __typename?: 'FeaturePost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
                                       callToActionUrl?: string | undefined;
@@ -9443,6 +9722,17 @@ export type PageEarnCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -9453,6 +9743,8 @@ export type PageEarnCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -9464,6 +9756,9 @@ export type PageEarnCollectionQuery = {
                                   | {
                                       __typename?: 'GrandPost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       subtitle?: string | undefined;
                                       description?: string | undefined;
@@ -9614,6 +9909,9 @@ export type PageEarnCollectionQuery = {
                                 items: Array<
                                   | {
                                       __typename?: 'ThumbnailPost';
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       link?: string | undefined;
                                       isVideo?: boolean | undefined;
@@ -9622,6 +9920,17 @@ export type PageEarnCollectionQuery = {
                                         publishedAt?: any | undefined;
                                       };
                                       picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                      heavyPicture?:
                                         | {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
@@ -9870,6 +10179,9 @@ export type PageGameCollectionQuery = {
                                   | {
                                       __typename?: 'FeaturePost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
                                       callToActionUrl?: string | undefined;
@@ -9891,6 +10203,17 @@ export type PageGameCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -9901,6 +10224,8 @@ export type PageGameCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -9912,6 +10237,9 @@ export type PageGameCollectionQuery = {
                                   | {
                                       __typename?: 'GrandPost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       subtitle?: string | undefined;
                                       description?: string | undefined;
@@ -10062,6 +10390,9 @@ export type PageGameCollectionQuery = {
                                 items: Array<
                                   | {
                                       __typename?: 'ThumbnailPost';
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       link?: string | undefined;
                                       isVideo?: boolean | undefined;
@@ -10070,6 +10401,17 @@ export type PageGameCollectionQuery = {
                                         publishedAt?: any | undefined;
                                       };
                                       picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                      heavyPicture?:
                                         | {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
@@ -10318,6 +10660,9 @@ export type PageHomeCollectionQuery = {
                                   | {
                                       __typename?: 'FeaturePost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
                                       callToActionUrl?: string | undefined;
@@ -10339,6 +10684,17 @@ export type PageHomeCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -10349,6 +10705,8 @@ export type PageHomeCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -10360,6 +10718,9 @@ export type PageHomeCollectionQuery = {
                                   | {
                                       __typename?: 'GrandPost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       subtitle?: string | undefined;
                                       description?: string | undefined;
@@ -10554,6 +10915,9 @@ export type PageHomeCollectionQuery = {
                                 items: Array<
                                   | {
                                       __typename?: 'ThumbnailPost';
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       link?: string | undefined;
                                       isVideo?: boolean | undefined;
@@ -10562,6 +10926,17 @@ export type PageHomeCollectionQuery = {
                                         publishedAt?: any | undefined;
                                       };
                                       picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                      heavyPicture?:
                                         | {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
@@ -10810,6 +11185,9 @@ export type PageLearnCollectionQuery = {
                                   | {
                                       __typename?: 'FeaturePost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
                                       callToActionUrl?: string | undefined;
@@ -10831,6 +11209,17 @@ export type PageLearnCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -10841,6 +11230,8 @@ export type PageLearnCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -10852,6 +11243,9 @@ export type PageLearnCollectionQuery = {
                                   | {
                                       __typename?: 'GrandPost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       subtitle?: string | undefined;
                                       description?: string | undefined;
@@ -11046,6 +11440,9 @@ export type PageLearnCollectionQuery = {
                                 items: Array<
                                   | {
                                       __typename?: 'ThumbnailPost';
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       link?: string | undefined;
                                       isVideo?: boolean | undefined;
@@ -11054,6 +11451,17 @@ export type PageLearnCollectionQuery = {
                                         publishedAt?: any | undefined;
                                       };
                                       picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                      heavyPicture?:
                                         | {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
@@ -11302,6 +11710,9 @@ export type PageStreamCollectionQuery = {
                                   | {
                                       __typename?: 'FeaturePost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       description?: string | undefined;
                                       callToActionUrl?: string | undefined;
@@ -11323,6 +11734,17 @@ export type PageStreamCollectionQuery = {
                                             };
                                           }
                                         | undefined;
+                                      heavyPicture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
                                     }
                                   | undefined
                                 >;
@@ -11333,6 +11755,8 @@ export type PageStreamCollectionQuery = {
                           __typename: 'PageSectionGrandPosts';
                           title?: string | undefined;
                           description?: string | undefined;
+                          isSwiper?: boolean | undefined;
+                          swiperResponsiveOptions?: any | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -11344,6 +11768,9 @@ export type PageStreamCollectionQuery = {
                                   | {
                                       __typename?: 'GrandPost';
                                       videoUrl?: string | undefined;
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       subtitle?: string | undefined;
                                       description?: string | undefined;
@@ -11494,6 +11921,9 @@ export type PageStreamCollectionQuery = {
                                 items: Array<
                                   | {
                                       __typename?: 'ThumbnailPost';
+                                      showHeavyPictureOnHover?:
+                                        | boolean
+                                        | undefined;
                                       title?: string | undefined;
                                       link?: string | undefined;
                                       isVideo?: boolean | undefined;
@@ -11502,6 +11932,17 @@ export type PageStreamCollectionQuery = {
                                         publishedAt?: any | undefined;
                                       };
                                       picture?:
+                                        | {
+                                            __typename?: 'Asset';
+                                            title?: string | undefined;
+                                            url?: string | undefined;
+                                            sys: {
+                                              __typename?: 'Sys';
+                                              publishedAt?: any | undefined;
+                                            };
+                                          }
+                                        | undefined;
+                                      heavyPicture?:
                                         | {
                                             __typename?: 'Asset';
                                             title?: string | undefined;
@@ -11620,6 +12061,14 @@ export const FeaturePostFragmentDoc = gql`
       title
       url
     }
+    heavyPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    showHeavyPictureOnHover
     title
     description
     callToActionUrl
@@ -11635,7 +12084,7 @@ export const PageSectionFeaturePostsFragmentDoc = gql`
     }
     title
     description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...FeaturePost
       }
@@ -11657,6 +12106,14 @@ export const ThumbnailPostFragmentDoc = gql`
       title
       url
     }
+    heavyPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    showHeavyPictureOnHover
     title
     link
     isVideo
@@ -11810,6 +12267,7 @@ export const GrandPostFragmentDoc = gql`
       title
       url
     }
+    showHeavyPictureOnHover
     title
     subtitle
     description
@@ -11826,11 +12284,13 @@ export const PageSectionGrandPostsFragmentDoc = gql`
     }
     title
     description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...GrandPost
       }
     }
+    isSwiper
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${GrandPostFragmentDoc}

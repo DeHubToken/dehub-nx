@@ -17,6 +17,7 @@ fragment GrandPost on GrandPost {
     title
     url
   }
+  showHeavyPictureOnHover
   title
   subtitle
   description

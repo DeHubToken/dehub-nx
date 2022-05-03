@@ -8,11 +8,13 @@ import { Networks } from '@dehub/shared/config';
 import {
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
+  EnableOptionsPersisted,
   MoralisConnectorNames,
   User,
   WalletConnectingMessages,
   WalletConnectingState,
   WalletConnectState,
+  Web3ConnectorNames,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
@@ -34,6 +36,15 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
+import {
+  BinanceConnector,
+  BinanceNetworkSwitchRejected,
+} from '../connector/binance-connector';
+
+const web3Connectors: { [key: string]: Moralis.Connector } = {
+  [Web3ConnectorNames.BSC]: Object(new BinanceConnector())
+    .constructor as BinanceConnector,
+};
 
 @Injectable()
 export class MoralisService implements IMoralisService {
@@ -105,14 +116,30 @@ export class MoralisService implements IMoralisService {
       if (enableOptionsStr) {
         const enableOptions = JSON.parse(
           enableOptionsStr
-        ) as Moralis.EnableOptions;
+        ) as EnableOptionsPersisted;
 
-        this.logger.info(
-          `Moralis enableWeb3 for '${enableOptions.provider}'`,
-          enableOptions
-        );
-
-        Moralis.enableWeb3(enableOptions).then(() => this.subscribeEvents());
+        // Web3 Connector
+        const connectorConstructor = enableOptions.connector;
+        if (connectorConstructor) {
+          this.logger.info(
+            `Moralis enableWeb3 for '${connectorConstructor}'`,
+            enableOptions
+          );
+          // Binance
+          if (connectorConstructor === Web3ConnectorNames.BSC) {
+            Moralis.enableWeb3({
+              ...enableOptions,
+              connector: web3Connectors[Web3ConnectorNames.BSC],
+            }).then(() => this.subscribeEvents());
+          }
+        } else {
+          // Moralis Connector
+          this.logger.info(
+            `Moralis enableWeb3 for '${enableOptions.provider}'`,
+            enableOptions
+          );
+          Moralis.enableWeb3(enableOptions).then(() => this.subscribeEvents());
+        }
       } else {
         this.logger.warn('Local Storage login options was deleted!');
         this.logout();
@@ -126,7 +153,6 @@ export class MoralisService implements IMoralisService {
     magicLinkEmail: string,
     magicLinkApiKey: string
   ) {
-    // await this.validateLogin(connectorId);
     let enableOptions: Moralis.EnableOptions;
 
     this.requiredChainHex = decimalToHex(chainId);
@@ -137,7 +163,7 @@ export class MoralisService implements IMoralisService {
       Promise.resolve(undefined);
 
     switch (connectorId) {
-      case 'metamask':
+      case MoralisConnectorNames.Injected:
         enableOptions = { chainId };
 
         userPromise = Moralis.authenticate({
@@ -153,7 +179,7 @@ export class MoralisService implements IMoralisService {
         );
         break;
 
-      case 'walletconnect':
+      case MoralisConnectorNames.WalletConnect:
         enableOptions = { chainId, provider: connectorId };
         userPromise = Moralis.authenticate({
           ...enableOptions,
@@ -161,7 +187,7 @@ export class MoralisService implements IMoralisService {
         });
         break;
 
-      case 'magicLink':
+      case MoralisConnectorNames.MagicLink:
         enableOptions = {
           network: {
             rpcUrl: getRandomRpcUrl(Networks[chainId].nodes),
@@ -184,6 +210,18 @@ export class MoralisService implements IMoralisService {
         });
         break;
 
+      case Web3ConnectorNames.BSC:
+        enableOptions = {
+          chainId,
+          // To get type safety instead of: ({connector: BinanceConnector})
+          connector: web3Connectors[Web3ConnectorNames.BSC],
+        };
+        userPromise = Moralis.authenticate({
+          ...enableOptions,
+          signingMessage,
+        });
+        break;
+
       default:
         this.logger.warn(`Not supported provider: ${connectorId}!`);
     }
@@ -193,18 +231,47 @@ export class MoralisService implements IMoralisService {
         if (loggedInUser) {
           this.updateUserAndAccount(loggedInUser);
           this.setWalletConnectState(WalletConnectingState.COMPLETE);
+
+          // Store enableOptions
           this.windowRef.localStorage.setItem(
             enableOptionsLocalStorageKey,
-            JSON.stringify(enableOptions)
+            JSON.stringify(enableOptions, (key, value) => {
+              // Store Connector Id web3 connectors
+              if (key === 'connector') return connectorId;
+              return value;
+            })
           );
+
           this.subscribeEvents();
         } else {
           this.logout();
         }
       })
       .catch(e => {
-        // Moralis Error
-        if (e instanceof Error) {
+        // Metamask, Binance Error
+        if (e.code && e.message) {
+          // Signature refused
+          if (e.code === 4001 || e.code === -32603) {
+            this.messageService.add({
+              severity: 'warn',
+              summary: WalletConnectingMessages.ConnectWallet,
+              detail:
+                e.code === 4001
+                  ? WalletConnectingMessages.MetamaskSignatureDenied
+                  : WalletConnectingMessages.BinanceSignatureRejected,
+            });
+            this.setWalletConnectState(WalletConnectingState.INIT, connectorId);
+          }
+
+          // Binance Error (e.g. Binance cancel connect request)
+        } else if (
+          e instanceof BinanceNetworkSwitchRejected ||
+          (e.message && e.message.includes('An unexpected error occurred'))
+        ) {
+          this.setWalletConnectState(WalletConnectingState.INIT, connectorId);
+
+          // Moralis Error
+        } else if (e instanceof Error) {
           this.messageService.add({
             severity: 'error',
             summary: WalletConnectingMessages.ConnectWallet,
@@ -215,16 +282,6 @@ export class MoralisService implements IMoralisService {
             WalletConnectingState.NO_PROVIDER,
             connectorId
           );
-          // Metamask Error
-        } else if (e.code && e.message) {
-          if (e.code === 4001) {
-            this.messageService.add({
-              severity: 'warn',
-              summary: WalletConnectingMessages.ConnectWallet,
-              detail: WalletConnectingMessages.MetamaskSignatureDenied,
-            });
-            this.setWalletConnectState(WalletConnectingState.INIT, connectorId);
-          }
         }
         throw e;
       });
@@ -249,23 +306,6 @@ export class MoralisService implements IMoralisService {
         // Reset Wallet connecting state
         this.setWalletConnectState(WalletConnectingState.INIT);
       });
-  }
-
-  private async validateLogin(connectorId: string) {
-    if (connectorId === MoralisConnectorNames.Injected && ethereumDisabled()) {
-      this.messageService.add({
-        severity: 'error',
-        summary: WalletConnectingMessages.ConnectWallet,
-        detail: WalletConnectingMessages.UnsupportedProvider,
-      });
-
-      await this.logout();
-      this.setWalletConnectState(
-        WalletConnectingState.NO_PROVIDER,
-        connectorId
-      );
-      throw new Error(WalletConnectingMessages.UnsupportedProvider);
-    }
   }
 
   private subscribeEvents() {

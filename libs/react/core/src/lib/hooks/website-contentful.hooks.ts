@@ -94,6 +94,14 @@ export const FeaturePostFragmentDoc = gql`
       title
       url
     }
+    heavyPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    showHeavyPictureOnHover
     title
     description
     callToActionUrl
@@ -109,7 +117,7 @@ export const PageSectionFeaturePostsFragmentDoc = gql`
     }
     title
     description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...FeaturePost
       }
@@ -131,6 +139,14 @@ export const ThumbnailPostFragmentDoc = gql`
       title
       url
     }
+    heavyPicture(preview: $isPreview) {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+    showHeavyPictureOnHover
     title
     link
     isVideo
@@ -284,6 +300,7 @@ export const GrandPostFragmentDoc = gql`
       title
       url
     }
+    showHeavyPictureOnHover
     title
     subtitle
     description
@@ -300,11 +317,13 @@ export const PageSectionGrandPostsFragmentDoc = gql`
     }
     title
     description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
       items {
         ...GrandPost
       }
     }
+    isSwiper
+    swiperResponsiveOptions
   }
   ${SysFragmentDoc}
   ${GrandPostFragmentDoc}

@@ -23,6 +23,9 @@ export interface Attributes extends Moralis.Attributes {
 }
 
 export type User = Moralis.User<Attributes>;
+export type EnableOptionsPersisted = Moralis.EnableOptions & {
+  connector?: Web3ConnectorNames;
+};
 
 export const enableOptionsLocalStorageKey = 'enableOptions';
 export type Web3EnableOptions =
@@ -65,4 +68,5 @@ export enum WalletConnectingMessages {
   ConnectWallet = 'Connect Wallet',
   UnsupportedProvider = 'Provider not supported.',
   MetamaskSignatureDenied = 'Metamask signature was denied.',
+  BinanceSignatureRejected = 'Binance signature was rejected.',
 }
