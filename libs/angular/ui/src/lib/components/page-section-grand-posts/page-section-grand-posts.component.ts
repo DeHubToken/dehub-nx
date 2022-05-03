@@ -18,7 +18,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
       [@fadeInUp]
-      class="col-12 md:col-12 lg:col-12 xl:col-10 col-offset-0 md:col-offset-0 lg:col-offset-0 xl:col-offset-1 mb-5"
+      class="z-2 relative col-12 md:col-12 lg:col-12 xl:col-10 col-offset-0 md:col-offset-0 lg:col-offset-0 xl:col-offset-1 mb-5"
     >
       <h3 *ngIf="section.title as title">{{ title }}</h3>
       <h5
