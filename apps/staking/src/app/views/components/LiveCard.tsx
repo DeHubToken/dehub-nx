@@ -13,7 +13,7 @@ import {
 } from '@ethersproject/abstract-provider';
 import { Contract } from '@ethersproject/contracts';
 import BigNumber from 'bignumber.js';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
@@ -80,7 +80,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   );
   const remainTimes = useMemo(
     () =>
-      moment(new Date(poolInfo.closeTimeStamp * 1000)).unix() -
+      dayjs(new Date(poolInfo.closeTimeStamp * 1000)).unix() -
       new Date().getTime() / 1000,
     [poolInfo]
   );
@@ -397,7 +397,7 @@ const LiveCard = ({ poolIndex }: CardProps) => {
                           </Text>
                           <Text fontSize="14px" fontWeight={900}>
                             {timeFromNow(
-                              moment(new Date(nextCycleResetTimestamp * 1000))
+                              dayjs(new Date(nextCycleResetTimestamp * 1000))
                             )}
                           </Text>
                         </>

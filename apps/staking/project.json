@@ -69,7 +69,13 @@
           "outputHashing": "none",
           "extractCss": false,
           "deployUrl": "",
-          "baseHref": "/"
+          "baseHref": "/",
+          "fileReplacements": [
+            {
+              "replace": "apps/staking/src/environments/environment.ts",
+              "with": "apps/staking/src/environments/environment.prod.ts"
+            }
+          ]
         }
       }
     },

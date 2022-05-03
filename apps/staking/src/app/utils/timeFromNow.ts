@@ -1,6 +1,6 @@
-import { Moment } from 'moment';
+import dayjs from 'dayjs';
 
-export const timeFromNow = (time: Moment) => {
+export const timeFromNow = (time: dayjs.Dayjs) => {
   const unixTime = time.unix();
   if (!unixTime) return;
   const now = new Date().getTime();
