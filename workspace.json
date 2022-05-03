@@ -16,7 +16,6 @@
     "angular-moralis": "libs/angular/moralis",
     "angular-ui": "libs/angular/ui",
     "moralis-cloud": "apps/moralis/cloud",
-    "moralis-cloud-e2e": "apps/moralis/cloud-e2e",
     "prediction": "apps/prediction",
     "prediction-e2e": "apps/prediction-e2e",
     "raffle": "apps/raffle",
