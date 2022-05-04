@@ -13,9 +13,11 @@ import {
   WalletConnectingMessages,
   WalletConnectingState,
   WalletConnectState,
+  Web3ConnectorNames,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
+  bscDisabled,
   ethereumDisabled,
   filterEmpty,
   getRandomRpcUrl,
@@ -34,6 +36,7 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
+import { BinanceConnector } from '../connector/binance-connector';
 
 @Injectable()
 export class MoralisService implements IMoralisService {
@@ -184,6 +187,15 @@ export class MoralisService implements IMoralisService {
         });
         break;
 
+      case 'binance':
+        userPromise = Moralis.authenticate({
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-ignore
+          connector: BinanceConnector,
+          signingMessage,
+        });
+        break;
+
       default:
         this.logger.warn(`Not supported provider: ${connectorId}!`);
     }
@@ -215,16 +227,26 @@ export class MoralisService implements IMoralisService {
             WalletConnectingState.NO_PROVIDER,
             connectorId
           );
-          // Metamask Error
+          // Metamask, Binance Error
         } else if (e.code && e.message) {
-          if (e.code === 4001) {
+          // Signature refused
+          if (e.code === 4001 || e.code === -32603) {
             this.messageService.add({
               severity: 'warn',
               summary: WalletConnectingMessages.ConnectWallet,
-              detail: WalletConnectingMessages.MetamaskSignatureDenied,
+              detail:
+                e.code === 4001
+                  ? WalletConnectingMessages.MetamaskSignatureDenied
+                  : WalletConnectingMessages.BinanceSignatureRejected,
             });
             this.setWalletConnectState(WalletConnectingState.INIT, connectorId);
           }
+          // Other Error (e.g. Binance cancel connect request)
+        } else if (
+          e.message &&
+          e.message.includes('An unexpected error occurred')
+        ) {
+          this.setWalletConnectState(WalletConnectingState.INIT, connectorId);
         }
         throw e;
       });
@@ -252,7 +274,10 @@ export class MoralisService implements IMoralisService {
   }
 
   private async validateLogin(connectorId: string) {
-    if (connectorId === MoralisConnectorNames.Injected && ethereumDisabled()) {
+    if (
+      (connectorId === MoralisConnectorNames.Injected && ethereumDisabled()) ||
+      (connectorId === Web3ConnectorNames.BSC && bscDisabled())
+    ) {
       this.messageService.add({
         severity: 'error',
         summary: WalletConnectingMessages.ConnectWallet,
@@ -260,10 +285,12 @@ export class MoralisService implements IMoralisService {
       });
 
       await this.logout();
+
       this.setWalletConnectState(
         WalletConnectingState.NO_PROVIDER,
         connectorId
       );
+
       throw new Error(WalletConnectingMessages.UnsupportedProvider);
     }
   }

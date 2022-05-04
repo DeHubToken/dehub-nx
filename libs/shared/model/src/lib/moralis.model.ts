@@ -65,4 +65,5 @@ export enum WalletConnectingMessages {
   ConnectWallet = 'Connect Wallet',
   UnsupportedProvider = 'Provider not supported.',
   MetamaskSignatureDenied = 'Metamask signature was denied.',
+  BinanceSignatureRejected = 'Binance signature was rejected.',
 }
