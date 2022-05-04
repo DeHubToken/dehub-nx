@@ -16,6 +16,8 @@
     "prediction:demo": "nx run prediction:build && lite-server -c bs-config-prediction.js",
     "staking:start": "nx run staking:serve",
     "staking:demo": "nx run staking:build && lite-server -c bs-config-staking.js",
+    "buy:start": "nx run buy:serve",
+    "buy:demo": "nx run buy:build && lite-server -c bs-config-buy.js",
     "format": "nx format:write --all",
     "lint": "nx affected --target=lint --fix --parallel --max-parallel=2 --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit",
     "test": "nx affected --target=test --parallel --max-parallel=3 --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit",

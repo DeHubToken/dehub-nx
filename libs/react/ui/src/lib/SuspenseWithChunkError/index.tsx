@@ -15,7 +15,10 @@ class SuspenseWithChunkError extends React.Component<SuspenseProps, State> {
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error & { code?: string }, errorInfo: ErrorInfo) {
+  override componentDidCatch(
+    error: Error & { code?: string },
+    errorInfo: ErrorInfo
+  ) {
     const isJsChunkLoadError = error.name === 'ChunkLoadError';
     const isCssChunkLoadError =
       error.code && error.code === 'CSS_CHUNK_LOAD_FAILED';
@@ -42,7 +45,7 @@ class SuspenseWithChunkError extends React.Component<SuspenseProps, State> {
     throw error;
   }
 
-  render() {
+  override render() {
     const { hasError } = this.state;
     const { fallback } = this.props;
 

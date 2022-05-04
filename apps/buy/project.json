@@ -1,0 +1,119 @@
+{
+  "root": "apps/buy",
+  "sourceRoot": "apps/buy/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/buy.prod/buy",
+        "index": "apps/buy/src/index.html",
+        "deployUrl": "/buy/",
+        "baseHref": "/buy",
+        "main": "apps/buy/src/main.tsx",
+        "polyfills": "apps/buy/src/polyfills.ts",
+        "tsConfig": "apps/buy/tsconfig.app.json",
+        "assets": [
+          "apps/buy/src/assets",
+          "apps/buy/src/dehub.webmanifest",
+          {
+            "input": "libs/shared/asset/dehub/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts"],
+            "output": "assets/dehub"
+          },
+          {
+            "input": "libs/shared/asset/freya/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts", "**/*.scss"],
+            "output": "assets"
+          }
+        ],
+        "styles": ["apps/buy/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "preview": {
+          "fileReplacements": [
+            {
+              "replace": "apps/buy/src/environments/environment.ts",
+              "with": "apps/buy/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/buy/src/environments/environment.ts",
+              "with": "apps/buy/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "outputHashing": "none",
+          "extractCss": false,
+          "deployUrl": "",
+          "baseHref": "/"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "buy:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "buy:build:production",
+          "hmr": false
+        },
+        "development": {
+          "buildTarget": "buy:build:development",
+          "host": "dev.localhost",
+          "port": 8701
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/buy/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/buy"],
+      "options": {
+        "jestConfig": "apps/buy/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:react", "type:app"],
+  "implicitDependencies": ["shared-asset-dehub", "shared-asset-freya"]
+}
