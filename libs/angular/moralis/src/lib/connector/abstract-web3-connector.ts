@@ -68,26 +68,30 @@ export type ActivateResponse = {
  * - type: a name to identify
  * - network: the network type that is used (eg. 'evm')
  */
-abstract class AbstractWeb3Connector extends EventEmitter {
+export abstract class AbstractWeb3Connector<
+  PROVIDER extends EIP1193Provider = EIP1193Provider
+> extends EventEmitter {
   type = 'abstract';
   network = 'evm';
 
-  account?: string;
-  chainId?: string;
-  provider?: EIP1193Provider;
+  account: string | null = null;
+  chainId: string | null = null;
+  provider?: PROVIDER;
+
+  private debugEnabled = false;
 
   constructor() {
     super();
-    console.info('abstract constructor');
+    this.debug('constructor');
     this.handleAccountsChanged = this.handleAccountsChanged.bind(this);
     this.handleChainChanged = this.handleChainChanged.bind(this);
     this.handleConnect = this.handleConnect.bind(this);
     this.handleDisconnect = this.handleDisconnect.bind(this);
   }
 
-  subscribeToEvents(provider: EIP1193Provider) {
+  subscribeToEvents(provider: PROVIDER) {
     if (provider && provider.on) {
-      console.info('abstract subscribeToEvents', provider);
+      this.debug('subscribeToEvents', provider);
       provider.on(EthereumEvents.CHAIN_CHANGED, this.handleChainChanged);
       provider.on(EthereumEvents.ACCOUNTS_CHANGED, this.handleAccountsChanged);
       provider.on(EthereumEvents.CONNECT, this.handleConnect);
@@ -95,9 +99,9 @@ abstract class AbstractWeb3Connector extends EventEmitter {
     }
   }
 
-  unsubscribeToEvents(provider: EIP1193Provider) {
+  unsubscribeToEvents(provider: PROVIDER) {
     if (provider && provider.removeListener) {
-      console.info('abstract unsubscribeToEvents', provider);
+      this.debug('unsubscribeToEvents', provider);
       provider.removeListener(
         EthereumEvents.CHAIN_CHANGED,
         this.handleChainChanged
@@ -124,9 +128,8 @@ abstract class AbstractWeb3Connector extends EventEmitter {
    * Updates account and emit event, on EIP-1193 accountsChanged events
    */
   handleAccountsChanged(accounts: string[]) {
-    console.info('abstract handleAccountsChanged', accounts);
-    const account =
-      accounts && accounts[0] ? accounts[0].toLowerCase() : undefined;
+    this.debug('handleAccountsChanged', accounts);
+    const account = accounts && accounts[0] ? accounts[0].toLowerCase() : null;
     this.account = account;
     this.emit(ConnectorEvents.ACCOUNT_CHANGED, account);
   }
@@ -135,19 +138,19 @@ abstract class AbstractWeb3Connector extends EventEmitter {
    * Updates chainId and emit event, on EIP-1193 accountsChanged events
    */
   handleChainChanged(chainId: string | number) {
-    console.info('abstract handleChainChanged', chainId);
+    this.debug('handleChainChanged', chainId);
     const newChainId = verifyChainId(chainId);
     this.chainId = newChainId;
     this.emit(ConnectorEvents.CHAIN_CHANGED, newChainId);
   }
 
   handleConnect(connectInfo: ProviderInfo) {
-    console.info('abstract handleConnect', connectInfo);
+    this.debug('handleConnect', connectInfo);
     this.emit(ConnectorEvents.CONNECT, connectInfo);
   }
 
   handleDisconnect(error: ProviderRpcError) {
-    console.info('abstract handleDisconnect', error);
+    this.debug('handleDisconnect', error);
     this.emit(ConnectorEvents.DISCONNECT, error);
   }
 
@@ -155,16 +158,21 @@ abstract class AbstractWeb3Connector extends EventEmitter {
    * Cleans all active listeners, connections and stale references
    */
   async deactivate() {
-    console.info('abstract deactivate', this.provider);
+    this.debug('deactivate', this.provider);
     if (!this.provider) {
       return;
     }
 
     this.unsubscribeToEvents(this.provider);
 
-    this.account = undefined;
-    this.chainId = undefined;
+    this.account = null;
+    this.chainId = null;
+  }
+
+  private debug(...args: unknown[]) {
+    if (this.debugEnabled) {
+      const [firstArg, ...rest] = args;
+      console.info.apply(this, [`[DEBUG] ${firstArg}`, ...rest]);
+    }
   }
 }
-
-export default AbstractWeb3Connector;
