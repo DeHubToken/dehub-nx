@@ -18,8 +18,6 @@ import {
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
-  bscDisabled,
-  ethereumDisabled,
   filterEmpty,
   getRandomRpcUrl,
   publishReplayRefCount,
@@ -154,7 +152,6 @@ export class MoralisService implements IMoralisService {
     magicLinkEmail: string,
     magicLinkApiKey: string
   ) {
-    // await this.validateLogin(connectorId);
     let enableOptions: Moralis.EnableOptions;
 
     this.requiredChainHex = decimalToHex(chainId);
@@ -308,28 +305,6 @@ export class MoralisService implements IMoralisService {
         // Reset Wallet connecting state
         this.setWalletConnectState(WalletConnectingState.INIT);
       });
-  }
-
-  private async validateLogin(connectorId: string) {
-    if (
-      (connectorId === MoralisConnectorNames.Injected && ethereumDisabled()) ||
-      (connectorId === Web3ConnectorNames.BSC && bscDisabled())
-    ) {
-      this.messageService.add({
-        severity: 'error',
-        summary: WalletConnectingMessages.ConnectWallet,
-        detail: WalletConnectingMessages.UnsupportedProvider,
-      });
-
-      await this.logout();
-
-      this.setWalletConnectState(
-        WalletConnectingState.NO_PROVIDER,
-        connectorId
-      );
-
-      throw new Error(WalletConnectingMessages.UnsupportedProvider);
-    }
   }
 
   private subscribeEvents() {
