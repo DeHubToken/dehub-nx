@@ -1,31 +1,33 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { PoolInfo } from '../state/application/types';
 
 export const isComingPool = (pool: PoolInfo) => {
-  return moment().isBefore(moment(new Date(pool.openTimeStamp * 1000)));
+  return dayjs().isBefore(dayjs(new Date(pool.openTimeStamp * 1000)));
 };
 
 export const isLivePool = (pool: PoolInfo) => {
   return (
-    moment().isAfter(moment(new Date(pool.openTimeStamp * 1000))) &&
-    moment().isBefore(moment(new Date(pool.closeTimeStamp * 1000)))
+    dayjs().isAfter(dayjs(new Date(pool.openTimeStamp * 1000))) &&
+    dayjs().isBefore(dayjs(new Date(pool.closeTimeStamp * 1000)))
   );
 };
 
 export const isPastPool = (pool: PoolInfo) => {
-  return moment().isAfter(moment(new Date(pool.closeTimeStamp * 1000)));
+  return dayjs().isAfter(dayjs(new Date(pool.closeTimeStamp * 1000)));
 };
 
 export const quarterNumber = (pool: PoolInfo): number => {
-  const mnt = moment(new Date(pool.openTimeStamp * 1000));
-  return mnt.year() * 100 + mnt.quarter();
+  const mnt = dayjs(new Date(pool.openTimeStamp * 1000));
+  const quarter = Math.floor(mnt.month() / 3) + 1;
+  return mnt.year() * 100 + quarter;
 };
 
 export const yearNumber = (pool: PoolInfo): number => {
-  return moment(new Date(pool.openTimeStamp * 1000)).year();
+  return dayjs(new Date(pool.openTimeStamp * 1000)).year();
 };
 
 export const quarterMark = (pool: PoolInfo): string => {
-  const quarter = moment(new Date(pool.openTimeStamp * 1000)).quarter();
+  const opening = dayjs(new Date(pool.openTimeStamp * 1000));
+  const quarter = Math.floor(opening.month() / 3) + 1;
   return `Q${quarter} ${yearNumber(pool)}`;
 };
