@@ -7,5 +7,6 @@ export * from './usePersistState';
 export * from './usePreviousValue';
 export * from './useRefresh';
 export * from './useToast';
+export * from './useUpdateEffect';
 export * from './useWeb3Context';
 export * from './website-contentful.hooks';

@@ -1,4 +1,4 @@
-import { withLayout } from '@dehub/react/core';
+import { useEagerWeb3, withLayout } from '@dehub/react/core';
 import {
   FullScreenLoader,
   NavigationTabMenu,
@@ -8,6 +8,7 @@ import BigNumber from 'bignumber.js';
 import { lazy, useMemo } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { environment } from '../environments/environment';
+import useInitialize from './hooks/useInitialize';
 import usePullBusdPrice from './hooks/usePullBusdPrice';
 import history from './routerHistory';
 
@@ -24,7 +25,9 @@ const { landing } = environment.dehub;
 const activeTab = NavigationTabMenu.Earn;
 
 export function App() {
+  useEagerWeb3();
   usePullBusdPrice();
+  useInitialize();
 
   const BuyDeHub = useMemo(
     () =>
