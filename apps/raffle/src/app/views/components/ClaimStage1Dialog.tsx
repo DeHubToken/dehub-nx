@@ -1,3 +1,4 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getBalanceNumber } from '@dehub/shared/utils';
@@ -12,7 +13,6 @@ import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useRef, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { TicketNumberLabel } from '../../components/TicketLabel';
 import { LotteryTicket } from '../../config/constants/types';
 import { useStandardLotteryContract } from '../../hooks/useContract';
@@ -40,7 +40,7 @@ const ClaimStage1Dialog = ({ open, onHide }: ClaimStage1DialogProps) => {
   const endOfMonthAsInt = utcToLocal(
     endOfMonth(new Date()).getTime()
   ).getTime(); // end of month with 23:59:59
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const [pendingTx, setPendingTx] = useState(-1);
   const lotteryContract = useStandardLotteryContract();
   const toast = useRef<Toast>(null);

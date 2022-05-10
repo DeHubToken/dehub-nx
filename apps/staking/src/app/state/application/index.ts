@@ -1,4 +1,3 @@
-import { WalletConnectingState } from '@dehub/shared/model';
 import {
   BIG_ZERO,
   ethersToSerializedBigNumber,
@@ -27,7 +26,6 @@ import {
 
 const initialState: ApplicationState = {
   applicationStatus: ApplicationStatus.INITIAL,
-  walletConnectingState: WalletConnectingState.INIT,
   dehubPrice: new BigNumber(NaN).toJSON(),
   stakingContracts: null,
   stakingController: null,
@@ -146,7 +144,7 @@ export const fetchContracts = createAsyncThunk<{
 });
 
 export const updateBlockNumber = createAction<{
-  chainId: string;
+  chainId: number;
   blockNumber: number;
 }>('application/updateBlockNumber');
 
@@ -154,12 +152,6 @@ export const ApplicationSlice = createSlice({
   name: 'Application',
   initialState,
   reducers: {
-    setWalletConnectingState: (
-      state,
-      action: PayloadAction<{ connectingState: WalletConnectingState }>
-    ) => {
-      state.walletConnectingState = action.payload.connectingState;
-    },
     setApplicationStatus: (
       state,
       action: PayloadAction<{ appStatus: ApplicationStatus }>
@@ -248,7 +240,6 @@ export const ApplicationSlice = createSlice({
   },
 });
 
-export const { setWalletConnectingState, setApplicationStatus, setPools } =
-  ApplicationSlice.actions;
+export const { setApplicationStatus, setPools } = ApplicationSlice.actions;
 
 export default ApplicationSlice.reducer;

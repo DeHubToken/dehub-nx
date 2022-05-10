@@ -1,5 +1,5 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { LotteryTicketClaimData } from '../../config/constants/types';
 import { fetchUserDeLottoWinningRewards } from '../../states/special-raffle/helpers';
 import { useLottery } from '../../states/special-raffle/hooks';
@@ -11,7 +11,7 @@ export enum FetchStatus {
 }
 
 const useGetDeLottoWinningRewards = () => {
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const { currentLotteryId, isTransitioning } = useLottery();
   const [fetchStatus, setFetchStatus] = useState(FetchStatus.NOT_FETCHED);
   const [winningRewards, setWinningRewards] =

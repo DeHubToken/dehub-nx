@@ -1,17 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { save, load } from 'redux-localstorage-simple';
-
-import applicationReducer from './application';
+import { load, save } from 'redux-localstorage-simple';
 import pauseReducer from './pause';
-import standardLotteryReducer from './standard-raffle';
 import specialLotteryReducer from './special-raffle';
+import standardLotteryReducer from './standard-raffle';
 
 const PERSISTED_KEYS: string[] = ['standardLottery', 'specialLottery'];
 
 export const store = configureStore({
   reducer: {
-    application: applicationReducer,
     paused: pauseReducer,
     standardLottery: standardLotteryReducer,
     specialLottery: specialLotteryReducer,

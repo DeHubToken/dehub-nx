@@ -1,4 +1,3 @@
-import { WalletConnectingState } from '@dehub/shared/model';
 import { SerializedBigNumber } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 
@@ -84,7 +83,6 @@ export type PoolUserInfo = UserInfo & {
 
 export interface ApplicationState {
   applicationStatus: ApplicationStatus;
-  walletConnectingState: WalletConnectingState;
   dehubPrice: SerializedBigNumber;
   stakingContracts: StakingContractProperties[] | null;
   stakingController: ContractProperties | null;
@@ -94,5 +92,5 @@ export interface ApplicationState {
   userInfos: SerializedPoolUserInfo[];
   userInfosLoading: boolean;
   pendingHarvestLoading: boolean;
-  readonly blockNumber: { readonly [chainId: string]: number };
+  readonly blockNumber: { readonly [chainId: number]: number };
 }

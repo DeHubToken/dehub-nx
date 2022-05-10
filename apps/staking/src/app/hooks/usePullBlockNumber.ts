@@ -1,17 +1,20 @@
-import { useDebounce, useIsBrowserTabActive } from '@dehub/react/core';
+import {
+  useDebounce,
+  useIsBrowserTabActive,
+  useWeb3Context,
+} from '@dehub/react/core';
 import { useCallback, useEffect, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { useAppDispatch } from '../state';
 import { updateBlockNumber } from '../state/application';
 
 const usePullBlockNumber = () => {
   const dispatch = useAppDispatch();
-  const { chainId, web3 } = useMoralis();
+  const { defaultChainId, chainId, web3 } = useWeb3Context();
 
   const isTabActive = useIsBrowserTabActive();
 
   const [state, setState] = useState<{
-    chainId: string | null;
+    chainId: number | null;
     blockNumber: number | null;
   }>({
     chainId,
@@ -40,6 +43,7 @@ const usePullBlockNumber = () => {
 
   useEffect(() => {
     if (!web3 || !chainId || !isTabActive) return undefined;
+    if (chainId !== defaultChainId) return undefined;
 
     setState({ chainId, blockNumber: null });
 
@@ -49,7 +53,7 @@ const usePullBlockNumber = () => {
     return () => {
       web3.removeListener('block', blockNumberCallback);
     };
-  }, [web3, chainId, isTabActive, blockNumberCallback]);
+  }, [web3, defaultChainId, chainId, isTabActive, blockNumberCallback]);
 
   const debouncedState = useDebounce(state, 100);
 

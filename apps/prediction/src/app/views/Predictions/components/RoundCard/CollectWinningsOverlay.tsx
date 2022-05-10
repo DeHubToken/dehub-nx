@@ -1,6 +1,6 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { Flex } from '@dehub/react/pcsuikit';
 import React from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import Icon from '../../../../components/Icon/Icon';
 import { useTranslation } from '../../../../contexts/Localization';
@@ -42,7 +42,7 @@ const CollectWinningsOverlay: React.FC<CollectWinningsOverlayProps> = ({
   isBottom = false,
   ...props
 }) => {
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const { t } = useTranslation();
   const canClaim = useBetCanClaim(account, roundId);
 

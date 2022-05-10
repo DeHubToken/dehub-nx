@@ -1,3 +1,4 @@
+import { useWeb3Context } from '@dehub/react/core';
 import {
   ArrowBackIcon,
   ArrowForwardIcon,
@@ -9,7 +10,6 @@ import {
   IconButton,
 } from '@dehub/react/pcsuikit';
 import React from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../../state';
 import {
@@ -64,7 +64,7 @@ const MobileMenu = () => {
   const status = useGetPredictionsStatus();
   const activeIndex = getActiveIndex(isHistoryOpen, isChartOpen);
   const dispatch = useAppDispatch();
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
 
   const handleItemClick = (index: number) => {
     switch (index) {

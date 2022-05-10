@@ -22,6 +22,9 @@ interface Web3Env {
   /** Default Network ChainId */
   chainId: number;
   addresses: { contracts: ContractsEnv };
+  auth: {
+    magicLinkApiKey: string;
+  };
 }
 
 /**
@@ -50,7 +53,7 @@ export interface SharedEnv {
     downloadWalletUrl: string;
     /** Official DeHUB landing page */
     landing: string;
-    /** Official Alrites stream page */
+    /** Official Allrites stream page */
     stream: string;
     /** Official DeHUB dapp pages */
     dapps: { staking: string };
@@ -123,6 +126,9 @@ export const defaultSharedEnv: SharedEnv = {
         busd: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
         multiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
       },
+    },
+    auth: {
+      magicLinkApiKey: 'pk_live_559E42CB7F45E462',
     },
   },
 };

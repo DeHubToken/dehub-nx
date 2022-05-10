@@ -1,3 +1,4 @@
+import { useWeb3Context } from '@dehub/react/core';
 import {
   Box,
   ChevronDownIcon,
@@ -9,7 +10,6 @@ import {
   WaitIcon,
 } from '@dehub/react/pcsuikit';
 import React, { useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { useTranslation } from '../../../../contexts/Localization';
 import {
@@ -45,7 +45,7 @@ const HistoricalBet: React.FC<BetProps> = ({ bet }) => {
   const { amount, round } = bet;
 
   const { t } = useTranslation();
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const currentEpoch = useGetCurrentEpoch();
   const status = useGetPredictionsStatus();
 

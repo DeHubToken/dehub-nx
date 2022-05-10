@@ -4,8 +4,8 @@ import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import React, { useEffect, useState } from 'react';
-import { useMoralis } from 'react-moralis';
-import { useConnectContext } from '../../hooks';
+import { useWeb3Context } from '../../hooks';
+import ToastListener from '../Toast/ToastListener';
 import UserMenu from '../UserMenu';
 
 const initMessage = {
@@ -36,14 +36,15 @@ const withLayout =
     const [showLoader, setShowLoader] = useState(false);
     const [message, setMessage] = useState(initMessage);
 
-    const { logout } = useMoralis();
+    // const { logout } = useMoralis();
     const {
       walletConnectingState,
       defaultChainId,
       // baseUrl,
       // pageTitle,
       // landingUrl: landing,
-    } = useConnectContext();
+      logout,
+    } = useWeb3Context();
 
     /*
      * Hack to avoid trustwallet redirecting to a open in app website on iOS...
@@ -95,40 +96,35 @@ const withLayout =
     return (
       <div>
         <PageMeta baseUrl={baseUrl} title={pageTitle} />
-        {showLoader ? (
-          <Loader {...message} />
-        ) : (
-          <div
-            className="layout-wrapper"
-            style={{
-              backgroundImage: `url("${baseUrl}/assets/img/back.jpg") no-repeat fixed center center /cover`,
+        <ToastListener />
+        {showLoader && <Loader {...message} />}
+        <div
+          className="layout-wrapper"
+          style={{
+            backgroundImage: `url("${baseUrl}/assets/img/back.jpg") no-repeat fixed center center /cover`,
+          }}
+        >
+          <Header
+            userMenu={
+              <UserMenu cexUrl={cexUrl} downloadWalletUrl={downloadWalletUrl} />
+            }
+            logo={{
+              href: 'https://dehub.net',
+              icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,
+              alt: 'DeHub logo',
             }}
-          >
-            <Header
-              userMenu={
-                <UserMenu
-                  cexUrl={cexUrl}
-                  downloadWalletUrl={downloadWalletUrl}
-                />
-              }
-              logo={{
-                href: 'https://dehub.net',
-                icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,
-                alt: 'DeHub logo',
-              }}
-            />
-            <div className="layout-content py-0">
-              <TabMenu activeTab={activeTab} />
-            </div>
-
-            <div className="layout-main">
-              <div className="layout-content">
-                <Component {...(props as P)} />
-              </div>
-            </div>
-            <Footer landing={landing} />
+          />
+          <div className="layout-content py-0">
+            <TabMenu activeTab={activeTab} />
           </div>
-        )}
+
+          <div className="layout-main">
+            <div className="layout-content">
+              <Component {...(props as P)} />
+            </div>
+          </div>
+          <Footer landing={landing} />
+        </div>
       </div>
     );
   };

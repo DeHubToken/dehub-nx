@@ -4,21 +4,29 @@ import {
   IMoralisService,
   LoggerToken,
 } from '@dehub/angular/model';
+import { Networks } from '@dehub/shared/config';
 import {
-  moralisProviderLocalStorageKey,
-  MoralisWeb3ProviderType,
+  DeHubConnectorNames,
+  enableOptionsLocalStorageKey,
+  EnableOptionsPersisted,
+  MoralisConnectorNames,
   User,
+  WalletConnectingMessages,
   WalletConnectingState,
+  WalletConnectState,
+  Web3ConnectorNames,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
   filterEmpty,
+  getRandomRpcUrl,
   publishReplayRefCount,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
+import { MessageService } from 'primeng/api';
 import { BehaviorSubject, from, of } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -27,6 +35,15 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
+import {
+  BinanceConnector,
+  BinanceNetworkSwitchRejected,
+} from '../connector/binance-connector';
+
+const web3Connectors: { [key: string]: Moralis.Connector } = {
+  [Web3ConnectorNames.BSC]: Object(new BinanceConnector())
+    .constructor as BinanceConnector,
+};
 
 @Injectable()
 export class MoralisService implements IMoralisService {
@@ -62,19 +79,20 @@ export class MoralisService implements IMoralisService {
     map(({ username }) => username)
   );
 
-  private walletConnectingStateSubject =
-    new BehaviorSubject<WalletConnectingState>(WalletConnectingState.INIT);
+  private walletConnectStateSubject = new BehaviorSubject<WalletConnectState>({
+    state: WalletConnectingState.INIT,
+  });
 
-  walletConnectingState$ = this.walletConnectingStateSubject
-    .asObservable()
-    .pipe(
-      tap(walletConnectingState =>
-        this.logger.info(
-          `Wallet Connecting State: ${WalletConnectingState[walletConnectingState]}`
-        )
-      ),
-      publishReplayRefCount()
-    );
+  walletConnectState$ = this.walletConnectStateSubject.asObservable().pipe(
+    tap(({ connectorId, state }) =>
+      this.logger.info(
+        `Wallet Connect State: ${WalletConnectingState[state]} ${
+          connectorId ? `(${connectorId})` : ''
+        }`
+      )
+    ),
+    publishReplayRefCount()
+  );
 
   private requiredChainHex?: string;
 
@@ -86,99 +104,207 @@ export class MoralisService implements IMoralisService {
   constructor(
     @Inject(LoggerToken) private logger: ILoggerService,
     @Inject(WINDOW) private readonly windowRef: Window,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private messageService: MessageService
   ) {
     if (Moralis.User.current()) {
-      const provider = this.windowRef.localStorage.getItem(
-        moralisProviderLocalStorageKey
-      ) as MoralisWeb3ProviderType;
-      if (provider) {
-        this.logger.info(`Moralis enableWeb3 for '${provider}'`);
+      const enableOptionsStr = this.windowRef.localStorage.getItem(
+        enableOptionsLocalStorageKey
+      );
 
-        Moralis.enableWeb3({ provider }).then(() => {
-          this.subscribeEvents();
-        });
+      if (enableOptionsStr) {
+        const enableOptions = JSON.parse(
+          enableOptionsStr
+        ) as EnableOptionsPersisted;
+
+        // Web3 Connector
+        const connectorConstructor = enableOptions.connector;
+        if (connectorConstructor) {
+          this.logger.info(
+            `Moralis enableWeb3 for '${connectorConstructor}'`,
+            enableOptions
+          );
+          // Binance
+          if (connectorConstructor === Web3ConnectorNames.BSC) {
+            Moralis.enableWeb3({
+              ...enableOptions,
+              connector: web3Connectors[Web3ConnectorNames.BSC],
+            }).then(() => this.subscribeEvents());
+          }
+        } else {
+          // Moralis Connector
+          this.logger.info(
+            `Moralis enableWeb3 for '${enableOptions.provider}'`,
+            enableOptions
+          );
+          Moralis.enableWeb3(enableOptions).then(() => this.subscribeEvents());
+        }
+      } else {
+        this.logger.warn('Local Storage login options was deleted!');
+        this.logout();
       }
     }
   }
 
-  login(provider: MoralisWeb3ProviderType, chainId: number) {
+  async login(
+    connectorId: DeHubConnectorNames,
+    chainId: number,
+    magicLinkEmail: string,
+    magicLinkApiKey: string
+  ) {
+    let enableOptions: Moralis.EnableOptions;
+
     this.requiredChainHex = decimalToHex(chainId);
-    this.setWalletConnectingState(WalletConnectingState.WAITING);
+    this.setWalletConnectState(WalletConnectingState.WAITING);
+    const signingMessage = 'DeHub D’App';
 
-    const commonAuthOptions: Moralis.AuthenticationOptions = {
-      chainId,
-      signingMessage: 'DeHub D’App',
-    };
+    let userPromise: Promise<Moralis.User<Moralis.Attributes> | undefined> =
+      Promise.resolve(undefined);
 
-    (provider === 'metamask'
-      ? Moralis.authenticate(commonAuthOptions).then(async loggedInUser => {
-          if (
-            await setupMetamaskNetwork(
-              chainId,
-              () =>
-                this.setWalletConnectingState(
-                  WalletConnectingState.SWITCH_NETWORK
-                ),
-              () =>
-                this.setWalletConnectingState(WalletConnectingState.ADD_NETWORK)
-            )
-          ) {
-            this.userSubject.next(loggedInUser as User);
-            this.accountSubject.next(loggedInUser.attributes.ethAddress);
-          } else {
-            this.logout();
-          }
-        })
-      : Moralis.authenticate({ ...commonAuthOptions, provider }).then(
-          loggedInUser => {
-            this.userSubject.next(loggedInUser as User);
-            this.accountSubject.next(loggedInUser.attributes.ethAddress);
-          }
-        )
-    )
-      .then(() => {
-        this.setWalletConnectingState(WalletConnectingState.COMPLETE);
-        this.windowRef.localStorage.setItem(
-          moralisProviderLocalStorageKey,
-          provider
+    switch (connectorId) {
+      case MoralisConnectorNames.Injected:
+        enableOptions = { chainId };
+
+        userPromise = Moralis.authenticate({
+          ...enableOptions,
+          signingMessage,
+        }).then(loggedInUser =>
+          setupMetamaskNetwork(
+            chainId,
+            () =>
+              this.setWalletConnectState(WalletConnectingState.SWITCH_NETWORK),
+            () => this.setWalletConnectState(WalletConnectingState.ADD_NETWORK)
+          ).then(success => (success ? loggedInUser : undefined))
         );
-        this.subscribeEvents();
+        break;
+
+      case MoralisConnectorNames.WalletConnect:
+        enableOptions = { chainId, provider: connectorId };
+        userPromise = Moralis.authenticate({
+          ...enableOptions,
+          signingMessage,
+        });
+        break;
+
+      case MoralisConnectorNames.MagicLink:
+        enableOptions = {
+          network: {
+            rpcUrl: getRandomRpcUrl(Networks[chainId].nodes),
+            chainId,
+          } as unknown as string,
+          provider: connectorId,
+          email: magicLinkEmail,
+          apiKey: magicLinkApiKey,
+        };
+
+        userPromise = Moralis.authenticate({
+          ...enableOptions,
+          provider: connectorId,
+          signingMessage,
+        }).then(loggedInUser => {
+          // Save the email as Moralis not store MagicLink email after login
+          loggedInUser.set('email', magicLinkEmail);
+
+          return loggedInUser.save();
+        });
+        break;
+
+      case Web3ConnectorNames.BSC:
+        enableOptions = {
+          chainId,
+          // To get type safety instead of: ({connector: BinanceConnector})
+          connector: web3Connectors[Web3ConnectorNames.BSC],
+        };
+        userPromise = Moralis.authenticate({
+          ...enableOptions,
+          signingMessage,
+        });
+        break;
+
+      default:
+        this.logger.warn(`Not supported provider: ${connectorId}!`);
+    }
+
+    return userPromise
+      .then(loggedInUser => {
+        if (loggedInUser) {
+          this.updateUserAndAccount(loggedInUser);
+          this.setWalletConnectState(WalletConnectingState.COMPLETE);
+
+          // Store enableOptions
+          this.windowRef.localStorage.setItem(
+            enableOptionsLocalStorageKey,
+            JSON.stringify(enableOptions, (key, value) => {
+              // Store Connector Id web3 connectors
+              if (key === 'connector') return connectorId;
+              return value;
+            })
+          );
+
+          this.subscribeEvents();
+        } else {
+          this.logout();
+        }
       })
       .catch(e => {
-        this.setWalletConnectingState(WalletConnectingState.INIT);
-        this.logger.error(`Moralis '${provider}' login error:`, e);
+        // Metamask, Binance Error
+        if (e.code && e.message) {
+          // Signature refused
+          if (e.code === 4001 || e.code === -32603) {
+            this.messageService.add({
+              severity: 'warn',
+              summary: WalletConnectingMessages.ConnectWallet,
+              detail:
+                e.code === 4001
+                  ? WalletConnectingMessages.MetamaskSignatureDenied
+                  : WalletConnectingMessages.BinanceSignatureRejected,
+            });
+            this.setWalletConnectState(WalletConnectingState.INIT, connectorId);
+          }
+
+          // Binance Error (e.g. Binance cancel connect request)
+        } else if (
+          e instanceof BinanceNetworkSwitchRejected ||
+          (e.message && e.message.includes('An unexpected error occurred'))
+        ) {
+          this.setWalletConnectState(WalletConnectingState.INIT, connectorId);
+
+          // Moralis Error
+        } else if (e instanceof Error) {
+          this.messageService.add({
+            severity: 'error',
+            summary: WalletConnectingMessages.ConnectWallet,
+            detail: WalletConnectingMessages.UnsupportedProvider,
+          });
+
+          this.setWalletConnectState(
+            WalletConnectingState.NO_PROVIDER,
+            connectorId
+          );
+        }
+        throw e;
       });
   }
 
-  logout() {
+  async logout() {
     this.logger.info('Logging out.');
 
     this.unsubscribeEvents();
-    Moralis.User.logOut()
+    return Moralis.User.logOut<User>()
       .catch(e => this.logger.error('Moralis logout problem:', e))
       .finally(() => {
-        // Cleanup web provider from local storage
-        this.windowRef.localStorage.removeItem(moralisProviderLocalStorageKey);
+        // Cleanup local storage
+        this.windowRef.localStorage.removeItem(enableOptionsLocalStorageKey);
 
         // Set user and account to undefined
-        this.userSubject.next(undefined);
-        this.accountSubject.next(undefined);
+        this.updateUserAndAccount(undefined);
 
         // Disconnect Web3 wallet
         Moralis.cleanup();
 
         // Reset Wallet connecting state
-        this.setWalletConnectingState(WalletConnectingState.INIT);
+        this.setWalletConnectState(WalletConnectingState.INIT);
       });
-  }
-
-  /**
-   * Update Wallet Connect state
-   * @param state the state to set
-   */
-  setWalletConnectingState(state: WalletConnectingState) {
-    this.walletConnectingStateSubject.next(state);
   }
 
   private subscribeEvents() {
@@ -228,27 +354,6 @@ export class MoralisService implements IMoralisService {
         }
       });
     });
-
-    this.unsubscribeFromChainChanged = Moralis.onChainChanged(newChainHex => {
-      const requiredChainHex = this.requiredChainHex;
-      if (requiredChainHex !== newChainHex) {
-        this.logger.info(
-          `Moralis chain changed from ${requiredChainHex} to ${newChainHex}!`
-        );
-        this.logout();
-      }
-    });
-
-    this.unsubscribeFromAccountChanged = Moralis.onAccountChanged(account => {
-      if (account) {
-        const newAccount = account.toLowerCase();
-        this.logger.info(`Moralis account has changed to ${newAccount}!`);
-        this.handleAccountChanged(newAccount);
-      } else {
-        this.logger.info(`Moralis account disconnected!`);
-        this.logout();
-      }
-    });
   }
 
   private handleAccountChanged(newAccount: string) {
@@ -266,10 +371,8 @@ export class MoralisService implements IMoralisService {
             this.logger.info(`Linking ${newAccount} to the users account.`);
 
             await Moralis.link(newAccount)
-              // Emit new user with updated accounts
-              .then(user => this.userSubject.next(user as User))
-              // Emit new linked account
-              .then(() => this.accountSubject.next(newAccount))
+              // Emit new user with updated accounts and new linked account
+              .then(user => this.updateUserAndAccount(user, newAccount))
               .catch(e =>
                 this.logger.error(
                   `Moralis linking ${newAccount} account problem:`,
@@ -295,5 +398,24 @@ export class MoralisService implements IMoralisService {
     this.unsubscribeFromWeb3Deactivated?.();
     this.unsubscribeFromChainChanged?.();
     this.unsubscribeFromAccountChanged?.();
+  }
+
+  private updateUserAndAccount(
+    loggedInUser?: Moralis.User<Moralis.Attributes>,
+    account?: string
+  ) {
+    this.userSubject.next(loggedInUser as User);
+    this.accountSubject.next(account ?? loggedInUser?.attributes.ethAddress);
+  }
+
+  /**
+   * Update Wallet Connect state
+   * @param state the state to set
+   */
+  private setWalletConnectState(
+    state: WalletConnectingState,
+    connectorId?: DeHubConnectorNames
+  ) {
+    this.walletConnectStateSubject.next({ connectorId, state });
   }
 }

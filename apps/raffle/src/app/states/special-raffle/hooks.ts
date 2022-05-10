@@ -1,7 +1,6 @@
-import { useRefresh } from '@dehub/react/core';
+import { useRefresh, useWeb3Context } from '@dehub/react/core';
 import BigNumber from 'bignumber.js';
 import { useEffect, useMemo, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { useSelector } from 'react-redux';
 import {
   fetchCurrentLottery,
@@ -23,7 +22,7 @@ export const useGetCurrentLotteryId = (): string => {
 };
 
 export const useFetchLottery = () => {
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const { fastRefresh, slowRefresh } = useRefresh();
 
   const dispatch = useAppDispatch();

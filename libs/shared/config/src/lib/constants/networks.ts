@@ -9,6 +9,7 @@ interface NetworkInfo {
   chainName: string;
   nativeCurrency: NativeCurrencyInfo;
   blockExplorerUrl: string;
+  moralisNodes: string[];
   nodes: string[];
 }
 
@@ -22,8 +23,10 @@ export const Networks: { [key: number]: NetworkInfo } = {
       decimals: 18,
     },
     blockExplorerUrl: 'https://bscscan.com',
-    nodes: [
+    moralisNodes: [
       'https://speedy-nodes-nyc.moralis.io/67d501c9b939411392ca9321/bsc/mainnet',
+    ],
+    nodes: [
       'https://bsc-dataseed1.defibit.io/',
       'https://bsc-dataseed1.ninicoin.io/',
     ],
@@ -37,8 +40,16 @@ export const Networks: { [key: number]: NetworkInfo } = {
       decimals: 18,
     },
     blockExplorerUrl: 'https://testnet.bscscan.com',
-    nodes: [
+    moralisNodes: [
       'https://speedy-nodes-nyc.moralis.io/67d501c9b939411392ca9321/bsc/testnet',
+    ],
+    nodes: [
+      'https://data-seed-prebsc-1-s1.binance.org:8545/',
+      // 'https://data-seed-prebsc-2-s1.binance.org:8545/',
+      'https://data-seed-prebsc-1-s2.binance.org:8545/',
+      // 'https://data-seed-prebsc-2-s2.binance.org:8545/',
+      // 'https://data-seed-prebsc-1-s3.binance.org:8545/',
+      'https://data-seed-prebsc-2-s3.binance.org:8545/',
     ],
   },
 };

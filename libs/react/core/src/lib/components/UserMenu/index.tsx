@@ -1,10 +1,11 @@
 import { BuyDeHubButton, BuyDeHubFloozModal } from '@dehub/react/ui';
-import { moralisProviderLocalStorageKey } from '@dehub/shared/model';
 import { shortenAddress } from '@dehub/shared/utils';
+import Moralis from 'moralis';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMoralis } from 'react-moralis';
+import { useWeb3Context } from '../../hooks';
 import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = ({
@@ -14,29 +15,24 @@ const UserMenu = ({
   cexUrl: string;
   downloadWalletUrl: string;
 }) => {
-  const { isAuthenticating, logout, account, Moralis } = useMoralis();
   const [buyDeHubFloozModalOpen, setBuyDeHubFloozModal] = useState(false);
+  const { account, logout } = useWeb3Context();
 
-  const doLogout = useCallback(() => {
-    window.localStorage.removeItem(moralisProviderLocalStorageKey);
-    logout();
-  }, [logout]);
+  const { isAuthenticating } = useMoralis();
 
   useEffect(() => {
-    const unsubscribeFromWeb3Deactivated = Moralis.onWeb3Deactivated(error => {
-      if (!isAuthenticating) {
-        console.info(
-          `Moralis ${error.connector.type} connector was deactivated! Logging out.`
-        );
+    const unsubscribeFromWeb3Deactivated = Moralis.onAccountChanged(account => {
+      if (!account) {
+        console.info(`Moralis all accounts are disconnected! Logging out.`);
         unsubscribeFromWeb3Deactivated();
-        doLogout();
+        logout();
       }
     });
 
     return () => {
       unsubscribeFromWeb3Deactivated();
     };
-  }, [Moralis, isAuthenticating, doLogout]);
+  }, [isAuthenticating, logout]);
 
   const handleLogout = ({
     originalEvent,
@@ -45,7 +41,7 @@ const UserMenu = ({
     originalEvent: React.SyntheticEvent;
     item: MenuItem;
   }) => {
-    doLogout();
+    logout();
   };
 
   const items: MenuItem[] = [

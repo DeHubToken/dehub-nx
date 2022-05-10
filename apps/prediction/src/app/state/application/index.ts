@@ -1,15 +1,12 @@
-import { WalletConnectingState } from '@dehub/shared/model';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
 import { getDehubPrice } from '../../utils/priceDehub';
 
 export interface ApplicationState {
-  walletConnectingState: WalletConnectingState;
   dehubPrice: string;
 }
 
 const initialState: ApplicationState = {
-  walletConnectingState: WalletConnectingState.INIT,
   dehubPrice: new BigNumber(NaN).toJSON(),
 };
 
@@ -24,14 +21,7 @@ export const fetchDehubPrice = createAsyncThunk<string>(
 export const ApplicationSlice = createSlice({
   name: 'Application',
   initialState,
-  reducers: {
-    setWalletConnectingState: (
-      state,
-      action: PayloadAction<{ connectingState: WalletConnectingState }>
-    ) => {
-      state.walletConnectingState = action.payload.connectingState;
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder.addCase(
       fetchDehubPrice.fulfilled,
@@ -41,7 +31,5 @@ export const ApplicationSlice = createSlice({
     );
   },
 });
-
-export const { setWalletConnectingState } = ApplicationSlice.actions;
 
 export default ApplicationSlice.reducer;

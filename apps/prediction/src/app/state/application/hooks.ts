@@ -1,29 +1,10 @@
 import { useRefresh } from '@dehub/react/core';
-import { WalletConnectingState } from '@dehub/shared/model';
 import BigNumber from 'bignumber.js';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
 import { AppState } from '../';
-import { fetchDehubPrice, setWalletConnectingState } from './';
-
-export const useWalletConnectingState = (): WalletConnectingState => {
-  return useSelector(
-    (state: AppState) => state.application.walletConnectingState
-  );
-};
-
-export const useSetWalletConnectingState = (): ((
-  connectingState: WalletConnectingState
-) => void) => {
-  const dispatch = useAppDispatch();
-  return useCallback(
-    (connectingState: WalletConnectingState) => {
-      dispatch(setWalletConnectingState({ connectingState }));
-    },
-    [dispatch]
-  );
-};
+import { fetchDehubPrice } from './';
 
 export const useDehubBusdPrice = (): BigNumber => {
   const dehubPriceAsString = useSelector(

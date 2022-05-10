@@ -1,7 +1,7 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { Button, CloseIcon, IconButton } from '@dehub/react/pcsuikit';
 import { faTrophyAlt } from '@fortawesome/pro-duotone-svg-icons';
-import React, { useEffect, useRef, useState } from 'react';
-import { useMoralis } from 'react-moralis';
+import { useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import styled, { css, keyframes } from 'styled-components';
 import { useTranslation } from '../../../contexts/Localization';
@@ -129,7 +129,7 @@ const CollectWinningsPopup = () => {
   const { t } = useTranslation();
   const ref = useRef(null);
   const timer = useRef<NodeJS.Timeout | undefined>(undefined);
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const predictionStatus = useGetPredictionsStatus();
   const isHistoryPaneOpen = useIsHistoryPaneOpen();
   const dispatch = useAppDispatch();

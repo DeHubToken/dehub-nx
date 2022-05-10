@@ -12,7 +12,9 @@ import { hexToDecimal } from './hex-to-decimal';
 export const setupMetamaskNetwork = async (
   requestedChainId: number,
   onSwitchNetwork?: (currentChainId: number, requestedChainId: number) => void,
-  onAddNetwork?: (currentChainId: number, requestedChainId: number) => void
+  onAddNetwork?: (currentChainId: number, requestedChainId: number) => void,
+  afterSwitchNetwork?: (success: boolean) => void,
+  afterAddNetwork?: (success: boolean) => void
 ): Promise<boolean> => {
   const currentChainIdHex = Moralis.chainId;
   const requestedChainIdHex = decimalToHex(requestedChainId);
@@ -23,17 +25,21 @@ export const setupMetamaskNetwork = async (
     console.warn('Please switch network!');
 
     if (onSwitchNetwork) onSwitchNetwork(currentChainId, requestedChainId);
-    await Moralis.switchNetwork(requestedChainIdHex)
+    const switchResult = await Moralis.switchNetwork(requestedChainIdHex)
       .then(() => true)
       .catch(async switchError => {
         // The chain has not been added to MetaMask
         if ((<{ code: number }>switchError).code === 4902) {
           if (onAddNetwork) onAddNetwork(currentChainId, requestedChainId);
 
-          return await addNetwork(requestedChainId);
+          const addResult = await addNetwork(requestedChainId);
+          if (afterAddNetwork) afterAddNetwork(addResult);
+          return addResult;
         }
         return false;
       });
+    if (afterSwitchNetwork) afterSwitchNetwork(switchResult);
+    return switchResult;
   }
   return true;
 };

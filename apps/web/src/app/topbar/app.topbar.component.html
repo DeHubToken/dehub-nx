@@ -35,7 +35,10 @@
           ></dhb-buy-dehub-button>
         </li>
         <li class="topbar-item ml-4">
-          <dhb-connect-wallet [chainId]="chainId"></dhb-connect-wallet>
+          <dhb-connect-wallet
+            [chainId]="chainId"
+            [magicLinkApiKey]="magicLinkApiKey"
+          ></dhb-connect-wallet>
         </li>
       </ul>
     </div>

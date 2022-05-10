@@ -1,29 +1,25 @@
-import { ConnectProvider, RefreshContextProvider } from '@dehub/react/core';
+import {
+  RefreshContextProvider,
+  ToastProvider,
+  Web3Providers,
+} from '@dehub/react/core';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
-import { MoralisProvider } from 'react-moralis';
 import { Provider } from 'react-redux';
 import { environment } from '../environments/environment';
 import store from './state';
 
-const { appId, serverUrl } = environment.moralis;
-const { chainId } = environment.web3;
-
 const Providers: React.FC = ({ children }) => {
   return (
-    <MoralisProvider
-      appId={appId}
-      serverUrl={serverUrl}
-      initializeOnMount={true}
-    >
-      <Provider store={store}>
-        <RefreshContextProvider>
-          <ConnectProvider defaultChainId={chainId}>
+    <ToastProvider>
+      <Web3Providers moralis={environment.moralis} web3={environment.web3}>
+        <Provider store={store}>
+          <RefreshContextProvider>
             <HelmetProvider>{children}</HelmetProvider>
-          </ConnectProvider>
-        </RefreshContextProvider>
-      </Provider>
-    </MoralisProvider>
+          </RefreshContextProvider>
+        </Provider>
+      </Web3Providers>
+    </ToastProvider>
   );
 };
 

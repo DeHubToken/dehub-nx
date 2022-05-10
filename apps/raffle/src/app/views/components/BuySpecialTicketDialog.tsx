@@ -1,4 +1,7 @@
-import { useApproveConfirmTransaction } from '@dehub/react/core';
+import {
+  useApproveConfirmTransaction,
+  useWeb3Context,
+} from '@dehub/react/core';
 import { BalanceInput, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
@@ -13,7 +16,6 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import { useCallback, useRef, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import Bep20Abi from '../../config/abis/erc20.json';
 import {
   useDehubContract,
@@ -53,7 +55,7 @@ const BuySpecialTicketDialog = ({
   const dehubContract = useDehubContract();
   const specialLotteryContract = useSpecialLotteryContract();
 
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
 
   const limitNumberByMaxTicketsPerBuy = useCallback(
     (number: BigNumber) => {

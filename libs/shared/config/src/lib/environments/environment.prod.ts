@@ -24,5 +24,8 @@ export const defaultSharedProdEnv: SharedEnv = {
         multiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
       },
     },
+    auth: {
+      magicLinkApiKey: 'pk_live_A3DB34BA3F84FB3B',
+    },
   },
 };

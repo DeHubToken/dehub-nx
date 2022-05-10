@@ -1,6 +1,5 @@
-import { usePreviousValue } from '@dehub/react/core';
+import { usePreviousValue, useWeb3Context } from '@dehub/react/core';
 import { useEffect } from 'react';
-import { useMoralis } from 'react-moralis';
 import { useAppDispatch } from '../../../state';
 import { useGetCurrentEpoch, useGetSortedRounds } from '../../../state/hooks';
 import { fetchCurrentBets } from '../../../state/predictions';
@@ -12,7 +11,7 @@ import useSwiper from './useSwiper';
 const useOnNextRound = () => {
   const currentEpoch = useGetCurrentEpoch();
   const rounds = useGetSortedRounds();
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const previousEpoch = usePreviousValue(currentEpoch);
   const { swiper } = useSwiper();
   const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { getContract } from '@dehub/shared/utils';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
-import { useMoralis } from 'react-moralis';
 import SpecialLotteryAbi from '../config/abis/SpecialLottery.json';
 import StandardLotteryAbi from '../config/abis/StandardLottery.json';
 import {
@@ -19,7 +19,7 @@ function useContract(
   ABI?: any,
   withSignerIfPossible = true
 ): Contract | null {
-  const { account, web3 } = useMoralis();
+  const { account, web3 } = useWeb3Context();
 
   return useMemo(() => {
     if (!address || !ABI || !web3) return null;
@@ -46,10 +46,13 @@ export const useSpecialLotteryContract = (): Contract | null => {
 };
 
 export const useDehubContract = (): Contract | null => {
-  const { web3 } = useMoralis();
+  const { web3, chainId, defaultChainId } = useWeb3Context();
   return useMemo(
-    () => (web3 ? getBep20Contract(getDehubAddress(), web3.getSigner()) : null),
-    [web3]
+    () =>
+      web3 && chainId === defaultChainId
+        ? getBep20Contract(getDehubAddress(), web3.getSigner())
+        : null,
+    [web3, chainId, defaultChainId]
   );
 };
 

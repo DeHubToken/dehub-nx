@@ -1,3 +1,4 @@
+import { useWeb3Context } from '@dehub/react/core';
 import { Heading, Text } from '@dehub/react/ui';
 import { shortenAddress } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
@@ -5,7 +6,6 @@ import { Dialog } from 'primereact/dialog';
 import { Skeleton } from 'primereact/skeleton';
 import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import { TicketIdLabel } from '../../components/TicketLabel';
 import { LotteryTicketOwner } from '../../config/constants/types';
 import useGetDeGrandWinners, {
@@ -31,7 +31,7 @@ const ClaimDeGrandDialog = ({ open, onHide }: ClaimDeGrandDialogProps) => {
   const isFetchingWinners =
     // fetchStatus === FetchStatus.NOT_FETCHED ||
     fetchStatus === FetchStatus.IN_PROGRESS;
-  const { account } = useMoralis();
+  const { account } = useWeb3Context();
   const deGrandPrize = useThisMonthDeGrandPrize();
   const [myWinningTicketIds, setMyWinningTicketIds] = useState<string[]>([]);
   const [filteredWinners, setFilteredWiners] = useState<string[]>([]);

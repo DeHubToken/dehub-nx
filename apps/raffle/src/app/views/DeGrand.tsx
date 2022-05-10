@@ -1,9 +1,8 @@
-import { ConnectWalletButton } from '@dehub/react/core';
+import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
 import { Box, Container, Heading, Text, Title } from '@dehub/react/ui';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import React, { useState } from 'react';
-import { useMoralis } from 'react-moralis';
 import styled from 'styled-components';
 import { environment } from '../../environments/environment';
 import Icon from '../components/Icon/Icon';
@@ -38,7 +37,7 @@ const DeGrand = () => {
       ? new Date(deGrandPrize.drawTime * 1000).getUTCMonth()
       : -1;
 
-  const { isAuthenticated } = useMoralis();
+  const { isAuthenticated } = useWeb3Context();
   const [checkDeGrandDialog, setCheckDeGrandDialog] = useState(false);
   const [checkDeGrandHistoryDialog, setCheckDeGrandHistoryDialog] =
     useState(false);
