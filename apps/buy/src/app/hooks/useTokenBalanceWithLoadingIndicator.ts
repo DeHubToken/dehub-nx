@@ -30,7 +30,18 @@ export const useTokenBalanceWithLoadingIndicator = (
   const { fastRefresh } = useRefresh();
 
   useEffect(() => {
-    const fetchBalance = async (token: Token) => {
+    const fetchBalance = async (
+      account: string | null,
+      token?: Token | null
+    ) => {
+      if (!account || !token) {
+        setBalanceState({
+          balance: BIG_ZERO,
+          fetchStatus: NOT_FETCHED,
+        });
+        return;
+      }
+
       try {
         if (token === ETHERToken) {
           const contract = getMultiCallContract();
@@ -55,9 +66,8 @@ export const useTokenBalanceWithLoadingIndicator = (
         }));
       }
     };
-    if (account && token) {
-      fetchBalance(token);
-    }
+
+    fetchBalance(account, token);
   }, [account, fastRefresh, token, SUCCESS, FAILED]);
 
   return balanceState;
