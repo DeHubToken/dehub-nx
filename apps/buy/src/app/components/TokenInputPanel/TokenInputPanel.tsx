@@ -2,7 +2,8 @@ import { useWeb3Context } from '@dehub/react/core';
 import { BalanceInput, Text } from '@dehub/react/ui';
 import { ReactComponent as BscIcon } from '@dehub/shared/asset/dehub/icons/bsc.svg';
 import { DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
-import { getFullDisplayBalance } from '@dehub/shared/utils';
+import { getDecimalAmount, getFullDisplayBalance } from '@dehub/shared/utils';
+import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 import React, { useCallback, useMemo } from 'react';
@@ -53,6 +54,8 @@ interface TokenInputPanelProps {
   showMaxButton: boolean;
   token?: Token | null;
   disableTokenSelect?: boolean;
+  disableWarning?: boolean;
+  disableInput?: boolean;
 }
 
 const TokenInputPanel = ({
@@ -62,6 +65,8 @@ const TokenInputPanel = ({
   showMaxButton,
   token,
   disableTokenSelect,
+  disableWarning = true,
+  disableInput = false,
 }: TokenInputPanelProps) => {
   const { account } = useWeb3Context();
 
@@ -73,6 +78,14 @@ const TokenInputPanel = ({
     account,
     token
   );
+
+  const valueAsBigNumber =
+    token && getDecimalAmount(new BigNumber(value), token.decimals);
+  const isWarning =
+    !disableWarning &&
+    fetchStatus === 'success' &&
+    valueAsBigNumber &&
+    balance.isLessThan(valueAsBigNumber);
 
   return (
     <div className="flex flex-column">
@@ -110,13 +123,19 @@ const TokenInputPanel = ({
         ) : null}
       </div>
 
-      <BalanceInput value={value} onUserInput={onUserInput} />
+      <BalanceInput
+        value={value}
+        onUserInput={onUserInput}
+        isWarning={!!isWarning}
+        isDisabled={disableInput || fetchStatus !== 'success'}
+      />
 
       <div className="flex justify-content-end mt-2">
         {showMaxButton && (
           <Button
             className="p-button-outlined text-500 border-primary"
             label="Max"
+            disabled={disableInput || fetchStatus !== 'success'}
             onClick={() => onMax && onMax()}
           />
         )}

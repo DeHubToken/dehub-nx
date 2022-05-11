@@ -6,12 +6,12 @@ import { environment } from '../../environments/environment';
 import PancakePairAbi from '../config/abis/PancakePair.json';
 import { FEES_DENOMINATOR, FEES_NUMERATOR } from '../config/types';
 import { Call, multicallv2 } from '../utils/multicall';
+import { getBnbAddress } from './addresses';
 
 export const getPairAddress = (token0: string, token1: string): string => {
-  const addr0 =
-      token0 === 'BNB' ? environment.web3.addresses.contracts.wbnb : token0,
-    addr1 =
-      token1 === 'BNB' ? environment.web3.addresses.contracts.wbnb : token1;
+  const wbnb = getBnbAddress();
+  const addr0 = token0 === 'BNB' ? wbnb : token0,
+    addr1 = token1 === 'BNB' ? wbnb : token1;
 
   return getCreate2Address(
     environment.swap.factory,

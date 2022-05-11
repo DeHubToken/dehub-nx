@@ -15,5 +15,9 @@ export const getDehubAddress = (): string => {
 };
 
 export const getBnbAddress = (): string => {
-  return getAddress('bnb');
+  return getAddress('wbnb');
+};
+
+export const getRouterAddress = (): string => {
+  return environment.swap.router;
 };

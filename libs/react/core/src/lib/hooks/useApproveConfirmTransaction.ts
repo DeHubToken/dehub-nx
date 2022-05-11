@@ -4,7 +4,7 @@ import {
   Web3Provider,
 } from '@ethersproject/providers';
 import { useEffect, useReducer, useRef } from 'react';
-import { useMoralis } from 'react-moralis';
+import { useWeb3Context } from '.';
 
 type LoadingState = 'idle' | 'loading' | 'success' | 'fail';
 
@@ -89,6 +89,7 @@ interface ApproveConfirmTransaction {
   ) => Promise<boolean>;
   onSuccess: ({ state, receipt }: OnSuccessProps) => void;
   onApproveSuccess?: ({ state, receipt }: OnSuccessProps) => void;
+  onFail: () => void;
   onToast?: (severity: string, detail: string) => void;
 }
 
@@ -98,9 +99,10 @@ export const useApproveConfirmTransaction = ({
   onRequiresApproval,
   onSuccess, // = noop,
   onApproveSuccess, // = noop,
+  onFail,
   onToast,
 }: ApproveConfirmTransaction) => {
-  const { account, web3 } = useMoralis();
+  const { account, web3 } = useWeb3Context();
 
   const [state, dispatch] = useReducer(reducer, initialState);
   // https://stackoverflow.com/questions/56450975/to-fix-cancel-all-subscriptions-and-asynchronous-tasks-in-a-useeffect-cleanup-f
@@ -146,9 +148,10 @@ export const useApproveConfirmTransaction = ({
         }
       } catch (error) {
         dispatch({ type: 'approve_error' });
+        onFail();
         onToast &&
           onToast(
-            'error',
+            'Error',
             'Please try again. Confirm the transaction and make sure you are paying enough gas!'
           );
       }
@@ -164,9 +167,10 @@ export const useApproveConfirmTransaction = ({
         }
       } catch (error) {
         dispatch({ type: 'confirm_error' });
+        onFail();
         onToast &&
           onToast(
-            'error',
+            'Error',
             'Please try again. Confirm the transaction and make sure you are paying enough gas!'
           );
       }

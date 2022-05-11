@@ -33,3 +33,23 @@ export const ETHERToken: Token = {
   chainId: environment.web3.chainId,
   address: GELATO_ADDRESS,
 };
+
+export enum TradeType {
+  EXACT_INPUT,
+  EXACT_OUTPUT,
+}
+
+export interface Pair {
+  currencyId: string;
+  reserve0: BigNumber;
+  reserve1: BigNumber;
+}
+
+export interface Trade {
+  pair: Pair;
+  tokenIn: Token;
+  tokenOut: Token;
+  tradeType: TradeType;
+  amountIn: BigNumber | null;
+  amountOut: BigNumber | null;
+}

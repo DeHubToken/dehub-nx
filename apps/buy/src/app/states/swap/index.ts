@@ -10,7 +10,7 @@ const initialState: SwapState = {
   },
   pair: undefined,
   independentField: Field.Input,
-  typedValue: '0',
+  typedValue: '',
 };
 
 export const SwapSlice = createSlice({

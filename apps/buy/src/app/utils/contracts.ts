@@ -1,9 +1,10 @@
 import { Signer } from '@ethersproject/abstract-signer';
 import { Contract, ContractInterface } from '@ethersproject/contracts';
-import { Provider } from '@ethersproject/providers';
+import { Provider, Web3Provider } from '@ethersproject/providers';
 import Bep20Abi from '../config/abis/erc20.json';
 import MulticallAbi from '../config/abis/Multicall.json';
-import { getMultiCallAddress } from './addresses';
+import PancakeRouter02 from '../config/abis/PancakeRouter02.json';
+import { getMultiCallAddress, getRouterAddress } from './addresses';
 import { simpleRpcProvider } from './providers';
 
 /** TODO: use or move to shared/util/contract.utils.ts  */
@@ -25,4 +26,12 @@ export const getBep20Contract = (
   signer?: Signer | Provider
 ) => {
   return getContract(address, Bep20Abi, signer);
+};
+
+export const getRouterContract = (library: Web3Provider, account: string) => {
+  return getContract(
+    getRouterAddress(),
+    PancakeRouter02,
+    library.getSigner(account).connectUnchecked()
+  );
 };

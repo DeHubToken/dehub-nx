@@ -26,5 +26,5 @@ export const getDehubAddress = (): string => {
 };
 
 export const getBnbAddress = (): string => {
-  return getAddress('bnb');
+  return getAddress('wbnb');
 };

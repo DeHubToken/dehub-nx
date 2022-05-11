@@ -11,6 +11,7 @@ const BalanceInput = ({
   innerRef,
   inputProps,
   isWarning = false,
+  isDisabled = false,
   decimals = 18,
   unit,
   ...props
@@ -34,6 +35,7 @@ const BalanceInput = ({
           onChange={handleOnChange}
           placeholder={placeholder}
           ref={innerRef}
+          disabled={isDisabled}
           {...inputProps}
         />
         {unit && <UnitContainer>{unit}</UnitContainer>}

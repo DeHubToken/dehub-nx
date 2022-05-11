@@ -2,13 +2,6 @@ export enum Field {
   Input = 'input',
   Output = 'output',
 }
-
-export interface Pair {
-  currencyId: string;
-  reserve0: string;
-  reserve1: string;
-}
-
 export interface SwapState {
   readonly [Field.Input]: {
     readonly currencyId: string | undefined;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { environment } from '../../environments/environment';
 import { useAppDispatch } from '../states';
 import { setApplicationStatus } from '../states/application';
@@ -30,28 +30,34 @@ const useInitialize = () => {
     }
   }, [dispatch, inputCurrencyId, outputCurrencyId]);
 
+  const fetchPairReserves = useCallback(async () => {
+    if (!inputCurrencyId || !outputCurrencyId) return;
+
+    const pair = getPairAddress(inputCurrencyId, outputCurrencyId);
+    const reserves = await getReserves(pair);
+    if (!reserves) return;
+
+    dispatch(
+      replaceState({
+        pair: {
+          currencyId: pair,
+          reserve0: reserves[0].toString(),
+          reserve1: reserves[1].toString(),
+        },
+      })
+    );
+  }, [dispatch, inputCurrencyId, outputCurrencyId]);
+
   useEffect(() => {
     const fetchInitialize = async () => {
-      if (!inputCurrencyId || !outputCurrencyId) return;
-
-      const pair = getPairAddress(inputCurrencyId, outputCurrencyId);
-      const reserves = await getReserves(pair);
-      if (!reserves) return;
-
-      dispatch(
-        replaceState({
-          pair: {
-            currencyId: pair,
-            reserve0: reserves[0].toString(),
-            reserve1: reserves[1].toString(),
-          },
-        })
-      );
+      await fetchPairReserves();
       dispatch(setApplicationStatus({ appStatus: ApplicationStatus.LIVE }));
     };
 
     fetchInitialize();
-  }, [dispatch, inputCurrencyId, outputCurrencyId]);
+  }, [dispatch, fetchPairReserves]);
+
+  return { fetchPairReserves };
 };
 
 export default useInitialize;

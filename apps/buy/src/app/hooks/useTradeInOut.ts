@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { useMemo } from 'react';
-import { Token } from '../config/types';
+import { Token, Trade, TradeType } from '../config/types';
 import { useSwapState } from '../states/swap/hooks';
 import { getTradeExactInOut } from '../utils/pairs';
 
@@ -8,16 +8,29 @@ export const useTradeExactInOut = (
   tokenIn?: Token | null,
   amountIn?: BigNumber,
   tokenOut?: Token | null
-): BigNumber | null => {
+): Trade | null => {
   const { pair } = useSwapState();
 
   return useMemo(() => {
     if (pair && tokenIn && amountIn && tokenOut) {
-      return getTradeExactInOut(
+      const amountOut = getTradeExactInOut(
         amountIn,
         new BigNumber(pair.reserve0),
         new BigNumber(pair.reserve1)
       );
+
+      return {
+        pair: {
+          currencyId: pair.currencyId,
+          reserve0: new BigNumber(pair.reserve0),
+          reserve1: new BigNumber(pair.reserve1),
+        },
+        tokenIn,
+        tokenOut,
+        tradeType: TradeType.EXACT_INPUT,
+        amountIn,
+        amountOut,
+      };
     }
 
     return null;
@@ -33,11 +46,24 @@ export const useTradeInExactOut = (
 
   return useMemo(() => {
     if (pair && tokenOut && amountOut && tokenIn) {
-      return getTradeExactInOut(
+      const amountIn = getTradeExactInOut(
         amountOut,
         new BigNumber(pair.reserve0),
         new BigNumber(pair.reserve1)
       );
+
+      return {
+        pair: {
+          currencyId: pair.currencyId,
+          reserve0: new BigNumber(pair.reserve0),
+          reserve1: new BigNumber(pair.reserve1),
+        },
+        tokenIn,
+        tokenOut,
+        tradeType: TradeType.EXACT_OUTPUT,
+        amountIn,
+        amountOut,
+      };
     }
 
     return null;
