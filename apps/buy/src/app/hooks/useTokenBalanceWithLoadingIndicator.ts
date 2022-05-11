@@ -68,7 +68,7 @@ export const useTokenBalanceWithLoadingIndicator = (
     };
 
     fetchBalance(account, token);
-  }, [account, fastRefresh, token, SUCCESS, FAILED]);
+  }, [account, fastRefresh, token, NOT_FETCHED, SUCCESS, FAILED]);
 
   return balanceState;
 };

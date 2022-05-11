@@ -40,7 +40,7 @@ const BuyDeHub: React.FC = () => {
     [Field.Input]: { currencyId: inputCurrencyId },
     [Field.Output]: { currencyId: outputCurrencyId },
   } = useSwapState();
-  const { onUserInput, onSwitchTokens } = useSwapActions();
+  const { onUserInput } = useSwapActions();
   const { fetchPairReserves } = useInitialize();
 
   const [executing, setExecuting] = useState<boolean>(false);
