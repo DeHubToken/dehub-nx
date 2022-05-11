@@ -193,7 +193,7 @@ const BuyDeHub: React.FC = () => {
       <div className="flex-grow-1 flex align-items-center text-white">
         <p className="p-card-title">Buy DeHub</p>
       </div>
-      <i className="fa-regular fa-gear"></i>
+      {/* <i className="fa-regular fa-gear"></i> */}
     </div>
   );
 
