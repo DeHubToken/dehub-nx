@@ -1,5 +1,5 @@
 /**
- * Default Primeflex breakpoints
+ * Default PrimeFlex breakpoints
  * Source: https://github.com/primefaces/primeflex/blob/4906c3d69d1366f5f1f7bbebc6cbad53753434ea/_sass/lib/src/_variables.scss#L3
  * */
 export enum BreakPoint {
