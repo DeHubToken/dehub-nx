@@ -11,8 +11,6 @@
         "compiler": "babel",
         "outputPath": "dist/apps/buy.prod/buy",
         "index": "apps/buy/src/index.html",
-        "deployUrl": "/buy/",
-        "baseHref": "/buy",
         "main": "apps/buy/src/main.tsx",
         "polyfills": "apps/buy/src/polyfills.ts",
         "tsConfig": "apps/buy/tsconfig.app.json",
@@ -34,7 +32,16 @@
         ],
         "styles": ["apps/buy/src/styles.scss"],
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "webpackConfig": "@nrwl/react/plugins/webpack",
+        "optimization": true,
+        "outputHashing": "all",
+        "sourceMap": false,
+        "extractCss": true,
+        "namedChunks": false,
+        "extractLicenses": true,
+        "vendorChunk": false,
+        "deployUrl": "/buy/",
+        "baseHref": "/buy"
       },
       "configurations": {
         "preview": {
@@ -43,13 +50,7 @@
               "replace": "apps/buy/src/environments/environment.ts",
               "with": "apps/buy/src/environments/environment.prod.ts"
             }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
+          ]
         },
         "production": {
           "fileReplacements": [
@@ -57,13 +58,7 @@
               "replace": "apps/buy/src/environments/environment.ts",
               "with": "apps/buy/src/environments/environment.prod.ts"
             }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
+          ]
         },
         "development": {
           "buildOptimizer": false,
@@ -102,7 +97,8 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/buy/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/buy/**/*.{ts,tsx,js,jsx}"],
+        "maxWarnings": 2
       }
     },
     "test": {
@@ -111,6 +107,32 @@
       "options": {
         "jestConfig": "apps/buy/jest.config.js",
         "passWithNoTests": true
+      }
+    },
+    "deploy-preview-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "npx nx run buy:deploy-prod-draft"
+      }
+    },
+    "deploy-preview": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "echo 'Preview mode not supported in Buy.'"
+      }
+    },
+    "deploy-prod-draft": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=11bd4ce0-3bf2-4642-8879-f541c6fed3fe -d ../../dist/apps/buy.prod -o",
+        "cwd": "netlify/buy.prod"
+      }
+    },
+    "deploy-prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=11bd4ce0-3bf2-4642-8879-f541c6fed3fe -d ../../dist/apps/buy.prod -p -o",
+        "cwd": "netlify/buy.prod"
       }
     }
   },
