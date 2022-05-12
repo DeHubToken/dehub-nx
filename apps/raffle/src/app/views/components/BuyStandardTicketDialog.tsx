@@ -95,7 +95,8 @@ const BuyStandardTicketDialog = ({
       },
       onApprove: async () => {
         try {
-          return await dehubContract?.approve(
+          if (!dehubContract) return false;
+          return await dehubContract.approve(
             getStandardLotteryAddress(),
             MaxUint256
           );
@@ -116,7 +117,8 @@ const BuyStandardTicketDialog = ({
       },
       onConfirm: async () => {
         try {
-          return await standardLotteryContract?.buyTickets(
+          if (!standardLotteryContract) return false;
+          return await standardLotteryContract.buyTickets(
             currentLotteryId,
             newTickets.purchased,
             newTickets.tickets
@@ -135,6 +137,9 @@ const BuyStandardTicketDialog = ({
           setPendingTx(-1);
           return false;
         }
+      },
+      onFail: () => {
+        setPendingTx(-1);
       },
       onSuccess: () => {
         toast?.current?.show({
