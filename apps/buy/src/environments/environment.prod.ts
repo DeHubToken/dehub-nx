@@ -14,5 +14,6 @@ export const environment: Env = {
     initCodeHash:
       '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5',
     router: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
+    slippage: 1400,
   },
 };

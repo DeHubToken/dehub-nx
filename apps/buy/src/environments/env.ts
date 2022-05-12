@@ -7,6 +7,7 @@ export interface Env extends SharedEnv {
     factory: string;
     initCodeHash: string;
     router: string;
+    slippage: number; // 100% in 10000
   };
 }
 
@@ -20,5 +21,6 @@ export const defaultEnv: Env = {
     initCodeHash:
       '0xecba335299a6693cb2ebc4782e74669b84290b6378ea3a3873c7231a8d7d1074',
     router: '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3',
+    slippage: 1400,
   },
 };

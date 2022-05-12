@@ -9,6 +9,7 @@ import {
   BIG_ZERO,
   ethersToBigNumber,
   getBalanceAmount,
+  getContract,
   getDecimalAmount,
 } from '@dehub/shared/utils';
 import { MaxUint256 } from '@ethersproject/constants';
@@ -17,8 +18,10 @@ import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { useCallback, useMemo, useState } from 'react';
+import { environment } from '../../environments/environment';
 import { SwitchIconButton } from '../components/SwitchIconButton';
 import { TokenInputPanel } from '../components/TokenInputPanel';
+import Bep20Abi from '../config/abis/erc20.json';
 import { MAX_DECIMAL_DIGITS } from '../config/types';
 import { useDehubContract } from '../hooks/useContract';
 import useInitialize from '../hooks/useInitialize';
@@ -28,10 +31,10 @@ import { useToken } from '../hooks/useTokenList';
 import { useTradeExactInOut, useTradeInExactOut } from '../hooks/useTradeInOut';
 import { useSwapActions, useSwapState } from '../states/swap/hooks';
 import { Field } from '../states/swap/types';
-import { getRouterAddress } from '../utils/addresses';
+import { getDehubAddress, getRouterAddress } from '../utils/addresses';
 
 const BuyDeHub: React.FC = () => {
-  const { account } = useWeb3Context();
+  const { account, web3 } = useWeb3Context();
   const dehubContract = useDehubContract();
 
   const {
@@ -48,7 +51,7 @@ const BuyDeHub: React.FC = () => {
   const inputToken = useToken(inputCurrencyId);
   const outputToken = useToken(outputCurrencyId);
 
-  const { isToastEnabled, toastInfo, toastError } = useToast();
+  const { isToastEnabled, toastInfo, toastError, toastSuccess } = useToast();
 
   const tokens = useMemo(
     () => ({
@@ -61,17 +64,28 @@ const BuyDeHub: React.FC = () => {
     account,
     tokens[Field.Input]
   );
+  const allowedSlippage = environment.swap.slippage;
   const amountIn = useMemo(
     () =>
-      inputToken && typedValue
+      independentField === Field.Input && inputToken && typedValue
         ? getDecimalAmount(new BigNumber(typedValue), inputToken.decimals)
         : undefined,
-    [typedValue, inputToken]
+    [independentField, typedValue, inputToken]
+  );
+  const amountOut = useMemo(
+    () =>
+      independentField === Field.Output && outputToken && typedValue
+        ? getDecimalAmount(new BigNumber(typedValue), outputToken.decimals)
+        : undefined,
+    [independentField, typedValue, outputToken]
   );
   const atMaxAmountInput = amountIn && balance.isEqualTo(amountIn);
   const isSwapDisabled = useMemo(
-    () => executing || !amountIn || amountIn.eq(BIG_ZERO),
-    [executing, amountIn]
+    () =>
+      executing ||
+      ((!amountIn || amountIn.eq(BIG_ZERO)) &&
+        (!amountOut || amountOut.eq(BIG_ZERO))),
+    [executing, amountIn, amountOut]
   );
 
   const isExactIn = independentField === Field.Input;
@@ -82,7 +96,7 @@ const BuyDeHub: React.FC = () => {
   );
   const tradeOnInExactOut = useTradeInExactOut(
     !isExactIn ? inputToken : undefined,
-    !isExactIn ? amountIn : undefined,
+    !isExactIn ? amountOut : undefined,
     !isExactIn ? outputToken : undefined
   );
   const bestTrade = isExactIn ? tradeOnExactInOut : tradeOnInExactOut;
@@ -91,15 +105,15 @@ const BuyDeHub: React.FC = () => {
     () => ({
       [Field.Input]: isExactIn
         ? typedValue
-        : bestTrade && bestTrade.amountOut && inputToken
-        ? getBalanceAmount(bestTrade.amountOut, inputToken.decimals)
-            .decimalPlaces(MAX_DECIMAL_DIGITS)
+        : bestTrade && bestTrade.amountIn && inputToken
+        ? getBalanceAmount(bestTrade.amountIn, inputToken.decimals)
+            .decimalPlaces(Math.min(inputToken.decimals, MAX_DECIMAL_DIGITS))
             .toString()
         : '',
       [Field.Output]: isExactIn
         ? bestTrade && bestTrade.amountOut && outputToken
           ? getBalanceAmount(bestTrade.amountOut, outputToken.decimals)
-              .decimalPlaces(MAX_DECIMAL_DIGITS)
+              .decimalPlaces(Math.min(outputToken.decimals, MAX_DECIMAL_DIGITS))
               .toString()
           : ''
         : typedValue,
@@ -107,14 +121,22 @@ const BuyDeHub: React.FC = () => {
     [typedValue, isExactIn, inputToken, outputToken, bestTrade]
   );
 
-  const { onSwap } = useSwap(bestTrade);
+  const { onSwap } = useSwap(bestTrade, allowedSlippage);
   const { isApproved, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
-      onRequiresApproval: async (_: Web3Provider, approvalAccount: string) => {
+      onRequiresApproval: async (
+        provider: Web3Provider,
+        approvalAccount: string
+      ) => {
         try {
-          if (!dehubContract) return false;
+          const tokenContract = getContract(
+            getDehubAddress(),
+            Bep20Abi,
+            provider,
+            approvalAccount
+          );
 
-          const response = await dehubContract['allowance'](
+          const response = await tokenContract['allowance'](
             approvalAccount,
             getRouterAddress()
           );
@@ -152,8 +174,8 @@ const BuyDeHub: React.FC = () => {
         setExecuting(false);
       },
       onSuccess: async () => {
-        if (isToastEnabled && toastInfo) {
-          toastInfo('Buy DeHub', `You've successfully purchased DeHub`);
+        if (isToastEnabled && toastSuccess) {
+          toastSuccess('Buy DeHub', `You've successfully purchased DeHub`);
         }
         setExecuting(false);
         fetchPairReserves();
@@ -191,7 +213,7 @@ const BuyDeHub: React.FC = () => {
   const header = (
     <div className="px-4 pt-4 pb-3 flex justify-content-between align-items-center">
       <div className="flex-grow-1 flex align-items-center text-white">
-        <p className="p-card-title">Buy DeHub</p>
+        <p className="p-card-title">Swap</p>
       </div>
       {/* <i className="fa-regular fa-gear"></i> */}
     </div>
@@ -220,7 +242,7 @@ const BuyDeHub: React.FC = () => {
         <Card
           className="border-neon-1 overflow-hidden mt-5"
           header={header}
-          footer={footer}
+          footer={<div className="text-center mb-3">{footer}</div>}
         >
           <TokenInputPanel
             value={formattedAmount[Field.Input]}
