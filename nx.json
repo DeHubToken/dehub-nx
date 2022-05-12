@@ -10,7 +10,8 @@
       "devDependencies": "*"
     },
     ".eslintrc.json": "*",
-    ".github/workflows/dehub-nx.yml": "*"
+    ".github/workflows/dehub-nx.yml": "*",
+    "netlify/web*/*.toml": ["web"]
   },
   "tasksRunnerOptions": {
     "default": {
