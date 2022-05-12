@@ -63,15 +63,25 @@ const BuyDeHub: React.FC = () => {
   );
   const amountIn = useMemo(
     () =>
-      inputToken && typedValue
+      independentField === Field.Input && inputToken && typedValue
         ? getDecimalAmount(new BigNumber(typedValue), inputToken.decimals)
         : undefined,
-    [typedValue, inputToken]
+    [independentField, typedValue, inputToken]
+  );
+  const amountOut = useMemo(
+    () =>
+      independentField === Field.Output && outputToken && typedValue
+        ? getDecimalAmount(new BigNumber(typedValue), outputToken.decimals)
+        : undefined,
+    [independentField, typedValue, outputToken]
   );
   const atMaxAmountInput = amountIn && balance.isEqualTo(amountIn);
   const isSwapDisabled = useMemo(
-    () => executing || !amountIn || amountIn.eq(BIG_ZERO),
-    [executing, amountIn]
+    () =>
+      executing ||
+      ((!amountIn || amountIn.eq(BIG_ZERO)) &&
+        (!amountOut || amountOut.eq(BIG_ZERO))),
+    [executing, amountIn, amountOut]
   );
 
   const isExactIn = independentField === Field.Input;
@@ -82,7 +92,7 @@ const BuyDeHub: React.FC = () => {
   );
   const tradeOnInExactOut = useTradeInExactOut(
     !isExactIn ? inputToken : undefined,
-    !isExactIn ? amountIn : undefined,
+    !isExactIn ? amountOut : undefined,
     !isExactIn ? outputToken : undefined
   );
   const bestTrade = isExactIn ? tradeOnExactInOut : tradeOnInExactOut;
@@ -91,8 +101,8 @@ const BuyDeHub: React.FC = () => {
     () => ({
       [Field.Input]: isExactIn
         ? typedValue
-        : bestTrade && bestTrade.amountOut && inputToken
-        ? getBalanceAmount(bestTrade.amountOut, inputToken.decimals)
+        : bestTrade && bestTrade.amountIn && inputToken
+        ? getBalanceAmount(bestTrade.amountIn, inputToken.decimals)
             .decimalPlaces(MAX_DECIMAL_DIGITS)
             .toString()
         : '',

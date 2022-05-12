@@ -1,4 +1,4 @@
-import { BIG_ONE } from '@dehub/shared/utils';
+import { BIG_ONE, BIG_ZERO } from '@dehub/shared/utils';
 import { getCreate2Address } from '@ethersproject/address';
 import { keccak256, pack } from '@ethersproject/solidity';
 import BigNumber from 'bignumber.js';
@@ -42,6 +42,7 @@ export const getTradeExactInOut = (
   reserve1: BigNumber
 ): BigNumber | null => {
   if (amountIn.isNaN()) return null;
+  if (reserve0.eq(BIG_ZERO) || reserve1.eq(BIG_ZERO)) return null;
 
   const inputAmountWithFee = amountIn.multipliedBy(FEES_NUMERATOR);
   const numerator = inputAmountWithFee.multipliedBy(reserve1);
@@ -52,12 +53,13 @@ export const getTradeExactInOut = (
   return outputAmount;
 };
 
-export const getTradeInExactout = (
+export const getTradeInExactOut = (
   amountOut: BigNumber,
   reserve0: BigNumber,
   reserve1: BigNumber
 ): BigNumber | null => {
   if (amountOut.isNaN()) return null;
+  if (amountOut.gte(reserve1)) return null;
 
   const numerator = reserve0
     .multipliedBy(amountOut)
