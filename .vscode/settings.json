@@ -11,6 +11,7 @@
   "search.exclude": {
     ".vscode": true,
     ".history": true,
+    ".angular": true,
     "dist": true,
     "build": true,
     "**/node_modules": true,
