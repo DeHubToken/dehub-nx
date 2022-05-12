@@ -34,7 +34,7 @@ import { Field } from '../states/swap/types';
 import { getDehubAddress, getRouterAddress } from '../utils/addresses';
 
 const BuyDeHub: React.FC = () => {
-  const { account, web3 } = useWeb3Context();
+  const { account } = useWeb3Context();
   const dehubContract = useDehubContract();
 
   const {
