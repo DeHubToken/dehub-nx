@@ -48,7 +48,7 @@ const BuyDeHub: React.FC = () => {
   const inputToken = useToken(inputCurrencyId);
   const outputToken = useToken(outputCurrencyId);
 
-  const { isToastEnabled, toastInfo, toastError } = useToast();
+  const { isToastEnabled, toastInfo, toastError, toastSuccess } = useToast();
 
   const tokens = useMemo(
     () => ({
@@ -162,8 +162,8 @@ const BuyDeHub: React.FC = () => {
         setExecuting(false);
       },
       onSuccess: async () => {
-        if (isToastEnabled && toastInfo) {
-          toastInfo('Buy DeHub', `You've successfully purchased DeHub`);
+        if (isToastEnabled && toastSuccess) {
+          toastSuccess('Buy DeHub', `You've successfully purchased DeHub`);
         }
         setExecuting(false);
         fetchPairReserves();
@@ -201,7 +201,7 @@ const BuyDeHub: React.FC = () => {
   const header = (
     <div className="px-4 pt-4 pb-3 flex justify-content-between align-items-center">
       <div className="flex-grow-1 flex align-items-center text-white">
-        <p className="p-card-title">Buy DeHub</p>
+        <p className="p-card-title">Swap</p>
       </div>
       {/* <i className="fa-regular fa-gear"></i> */}
     </div>
@@ -230,7 +230,7 @@ const BuyDeHub: React.FC = () => {
         <Card
           className="border-neon-1 overflow-hidden mt-5"
           header={header}
-          footer={footer}
+          footer={<div className="text-center mb-3">{footer}</div>}
         >
           <TokenInputPanel
             value={formattedAmount[Field.Input]}
