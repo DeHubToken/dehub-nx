@@ -107,13 +107,13 @@ const BuyDeHub: React.FC = () => {
         ? typedValue
         : bestTrade && bestTrade.amountIn && inputToken
         ? getBalanceAmount(bestTrade.amountIn, inputToken.decimals)
-            .decimalPlaces(MAX_DECIMAL_DIGITS)
+            .decimalPlaces(Math.min(inputToken.decimals, MAX_DECIMAL_DIGITS))
             .toString()
         : '',
       [Field.Output]: isExactIn
         ? bestTrade && bestTrade.amountOut && outputToken
           ? getBalanceAmount(bestTrade.amountOut, outputToken.decimals)
-              .decimalPlaces(MAX_DECIMAL_DIGITS)
+              .decimalPlaces(Math.min(outputToken.decimals, MAX_DECIMAL_DIGITS))
               .toString()
           : ''
         : typedValue,

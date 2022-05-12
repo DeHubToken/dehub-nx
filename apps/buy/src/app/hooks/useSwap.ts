@@ -48,12 +48,12 @@ const useSwapArguments = (
     const amountIn = trade.amountIn
       ? `0x${maximumAmountIn(trade.tradeType, trade.amountIn, allowedSlippage)
           .integerValue()
-          .toString()}`
+          .toString(16)}`
       : '0x0';
     const amountOut = trade.amountOut
       ? `0x${maximumAmountIn(trade.tradeType, trade.amountOut, allowedSlippage)
           .integerValue()
-          .toString()}`
+          .toString(16)}`
       : '0x0';
 
     const deadline = `0x${(
