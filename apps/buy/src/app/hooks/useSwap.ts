@@ -6,6 +6,7 @@ import { useCallback, useMemo } from 'react';
 import { ETHERToken, Trade, TradeType } from '../config/types';
 import { getBnbAddress } from '../utils/addresses';
 import { getRouterContract } from '../utils/contracts';
+import { maximumAmountIn } from '../utils/pairs';
 import isZero, { calculateGasMargin } from '../utils/tx';
 
 interface SwapParameters {
@@ -24,7 +25,10 @@ interface SuccessfulSwapCall {
   gasEstimate: BigNumber;
 }
 
-const useSwapArguments = (trade: Trade | null): SwapCall[] => {
+const useSwapArguments = (
+  trade: Trade | null,
+  allowedSlippage: number
+): SwapCall[] => {
   const { web3, account } = useWeb3Context();
 
   return useMemo(() => {
@@ -41,10 +45,16 @@ const useSwapArguments = (trade: Trade | null): SwapCall[] => {
       etherIn ? wbnb : trade.tokenIn.address,
       etherOut ? wbnb : trade.tokenOut.address,
     ];
-    const amountIn =
-      `0x${trade.amountIn?.integerValue().toString(16)}` ?? '0x0';
-    const amountOut =
-      `0x${trade.amountOut?.integerValue().toString(16)}` ?? '0x0';
+    const amountIn = trade.amountIn
+      ? `0x${maximumAmountIn(trade.tradeType, trade.amountIn, allowedSlippage)
+          .integerValue()
+          .toString()}`
+      : '0x0';
+    const amountOut = trade.amountOut
+      ? `0x${maximumAmountIn(trade.tradeType, trade.amountOut, allowedSlippage)
+          .integerValue()
+          .toString()}`
+      : '0x0';
 
     const deadline = `0x${(
       Math.floor(new Date().getTime() / 1000) + 300
@@ -98,16 +108,17 @@ const useSwapArguments = (trade: Trade | null): SwapCall[] => {
         },
       },
     ];
-  }, [trade, web3, account]);
+  }, [trade, allowedSlippage, web3, account]);
 };
 
 const useSwap = (
-  trade: Trade | null
+  trade: Trade | null,
+  allowedSlippage: number
 ): {
   onSwap: () => Promise<TransactionResponse>;
 } => {
   const { account } = useWeb3Context();
-  const swapCalls = useSwapArguments(trade);
+  const swapCalls = useSwapArguments(trade, allowedSlippage);
 
   const onSwap = useCallback(async () => {
     const estimateCalls = await Promise.all(

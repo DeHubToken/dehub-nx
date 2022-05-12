@@ -4,7 +4,7 @@ import { keccak256, pack } from '@ethersproject/solidity';
 import BigNumber from 'bignumber.js';
 import { environment } from '../../environments/environment';
 import PancakePairAbi from '../config/abis/PancakePair.json';
-import { FEES_DENOMINATOR, FEES_NUMERATOR } from '../config/types';
+import { FEES_DENOMINATOR, FEES_NUMERATOR, TradeType } from '../config/types';
 import { Call, multicallv2 } from '../utils/multicall';
 import { getBnbAddress } from './addresses';
 
@@ -67,4 +67,34 @@ export const getTradeInExactOut = (
   const denominator = reserve1.minus(amountOut).multipliedBy(FEES_NUMERATOR);
   const outputAmount = numerator.div(denominator).dividedBy(BIG_ONE);
   return outputAmount;
+};
+
+export const maximumAmountIn = (
+  tradeType: TradeType,
+  amountIn: BigNumber,
+  allowedSlippage: number
+): BigNumber => {
+  if (allowedSlippage <= 0) return BIG_ZERO;
+  if (tradeType === TradeType.EXACT_INPUT) {
+    return amountIn;
+  }
+  const hundred = new BigNumber(10000);
+  return amountIn
+    .multipliedBy(hundred.plus(allowedSlippage))
+    .dividedBy(hundred);
+};
+
+export const minimumAmountOut = (
+  tradeType: TradeType,
+  amountOut: BigNumber,
+  allowedSlippage: number
+): BigNumber => {
+  if (allowedSlippage <= 0) return BIG_ZERO;
+  if (tradeType === TradeType.EXACT_OUTPUT) {
+    return amountOut;
+  }
+  const hundred = new BigNumber(10000);
+  return amountOut
+    .multipliedBy(hundred)
+    .dividedBy(hundred.plus(allowedSlippage));
 };

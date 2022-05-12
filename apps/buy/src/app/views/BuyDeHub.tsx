@@ -9,6 +9,7 @@ import {
   BIG_ZERO,
   ethersToBigNumber,
   getBalanceAmount,
+  getContract,
   getDecimalAmount,
 } from '@dehub/shared/utils';
 import { MaxUint256 } from '@ethersproject/constants';
@@ -17,8 +18,10 @@ import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { useCallback, useMemo, useState } from 'react';
+import { environment } from '../../environments/environment';
 import { SwitchIconButton } from '../components/SwitchIconButton';
 import { TokenInputPanel } from '../components/TokenInputPanel';
+import Bep20Abi from '../config/abis/erc20.json';
 import { MAX_DECIMAL_DIGITS } from '../config/types';
 import { useDehubContract } from '../hooks/useContract';
 import useInitialize from '../hooks/useInitialize';
@@ -28,10 +31,10 @@ import { useToken } from '../hooks/useTokenList';
 import { useTradeExactInOut, useTradeInExactOut } from '../hooks/useTradeInOut';
 import { useSwapActions, useSwapState } from '../states/swap/hooks';
 import { Field } from '../states/swap/types';
-import { getRouterAddress } from '../utils/addresses';
+import { getDehubAddress, getRouterAddress } from '../utils/addresses';
 
 const BuyDeHub: React.FC = () => {
-  const { account } = useWeb3Context();
+  const { account, web3 } = useWeb3Context();
   const dehubContract = useDehubContract();
 
   const {
@@ -61,6 +64,7 @@ const BuyDeHub: React.FC = () => {
     account,
     tokens[Field.Input]
   );
+  const allowedSlippage = environment.swap.slippage;
   const amountIn = useMemo(
     () =>
       independentField === Field.Input && inputToken && typedValue
@@ -117,14 +121,22 @@ const BuyDeHub: React.FC = () => {
     [typedValue, isExactIn, inputToken, outputToken, bestTrade]
   );
 
-  const { onSwap } = useSwap(bestTrade);
+  const { onSwap } = useSwap(bestTrade, allowedSlippage);
   const { isApproved, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
-      onRequiresApproval: async (_: Web3Provider, approvalAccount: string) => {
+      onRequiresApproval: async (
+        provider: Web3Provider,
+        approvalAccount: string
+      ) => {
         try {
-          if (!dehubContract) return false;
+          const tokenContract = getContract(
+            getDehubAddress(),
+            Bep20Abi,
+            provider,
+            approvalAccount
+          );
 
-          const response = await dehubContract['allowance'](
+          const response = await tokenContract['allowance'](
             approvalAccount,
             getRouterAddress()
           );
