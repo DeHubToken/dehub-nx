@@ -18,7 +18,6 @@ import {
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
-  ethereumDisabled,
   filterEmpty,
   getRandomRpcUrl,
   publishReplayRefCount,
