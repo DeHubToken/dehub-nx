@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
 } from '@angular/core';
+import { WINDOW } from '@ng-web-apis/common';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -13,7 +15,7 @@ import { MenuItem } from 'primeng/api';
   template: `<p-splitButton
     [label]="label"
     [model]="items"
-    (onClick)="buy.emit()"
+    (onClick)="onBuyClicked($event)"
   ></p-splitButton>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -21,19 +23,19 @@ export class BuyDehubButtonComponent implements OnInit {
   @Input() label = 'Buy DeHub';
   @Input() cexUrl?: string;
   @Input() downloadWalletUrl?: string;
+  @Input() buyDappUrl?: string;
 
-  @Output() buy = new EventEmitter<void>();
-  @Output() dexSelected = new EventEmitter<void>();
+  @Output() buyWithCard = new EventEmitter<void>();
 
   items: MenuItem[] = [];
 
-  constructor() {}
+  constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
 
   ngOnInit() {
     this.items = [
       {
-        label: 'DEX',
-        command: () => this.dexSelected.emit(),
+        label: 'Buy With Card',
+        command: () => this.buyWithCard.emit(),
       },
       {
         label: 'CEX',
@@ -46,5 +48,10 @@ export class BuyDehubButtonComponent implements OnInit {
         target: '_blank',
       },
     ];
+  }
+
+  onBuyClicked(event: Event) {
+    event.preventDefault();
+    this.windowRef.open(this.buyDappUrl, '_self', 'noopener,noreferrer');
   }
 }

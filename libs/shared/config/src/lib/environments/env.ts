@@ -56,7 +56,7 @@ export interface SharedEnv {
     /** Official Allrites stream page */
     stream: string;
     /** Official DeHUB dapp pages */
-    dapps: { staking: string };
+    dapps: { staking: string; buy: string };
   };
 
   contentful: {
@@ -96,6 +96,7 @@ export const defaultSharedEnv: SharedEnv = {
     stream: 'https://beta-stream.dehub.net',
     dapps: {
       staking: 'https://dehub.net/staking',
+      buy: 'https://dehub.net/buy',
     },
   },
 
