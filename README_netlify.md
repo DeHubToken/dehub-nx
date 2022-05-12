@@ -46,6 +46,20 @@
    Site ID:   09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3
    ```
 
+   **Buy (React)**
+
+   ```
+   npx netlify sites:create --account-slug=dehub --name=buy-dehub
+   ```
+
+   Output:
+
+   ```
+   Admin URL: https://app.netlify.com/sites/buy-dehub
+   URL:       https://buy-dehub.netlify.app
+   Site ID:   11bd4ce0-3bf2-4642-8879-f541c6fed3fe
+   ```
+
    **Raffle (React) - inactive**
 
    ```
