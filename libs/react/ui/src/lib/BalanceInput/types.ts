@@ -11,6 +11,7 @@ export interface BalanceInputProps {
     'value' | 'placeholder' | 'onChange'
   >;
   isWarning?: boolean;
+  isDisabled?: boolean;
   decimals?: number;
   unit?: string;
   switchEditingUnits?: () => void;

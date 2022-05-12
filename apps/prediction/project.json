@@ -8,6 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
+        "compiler": "babel",
         "outputPath": "dist/apps/prediction.prod/prediction",
         "index": "apps/prediction/src/index.html",
         "baseHref": "/",

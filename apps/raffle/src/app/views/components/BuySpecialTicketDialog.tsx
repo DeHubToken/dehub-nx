@@ -130,7 +130,8 @@ const BuySpecialTicketDialog = ({
       },
       onApprove: async () => {
         try {
-          return await dehubContract?.approve(
+          if (!dehubContract) return false;
+          return await dehubContract.approve(
             getSpecialLotteryAddress(),
             MaxUint256
           );
@@ -151,7 +152,8 @@ const BuySpecialTicketDialog = ({
       },
       onConfirm: async () => {
         try {
-          return await specialLotteryContract?.buyTickets(
+          if (!specialLotteryContract) return false;
+          return await specialLotteryContract.buyTickets(
             currentLotteryId,
             ticketsToBuy
           );
@@ -185,6 +187,9 @@ const BuySpecialTicketDialog = ({
         );
         setPendingTx(false);
         // onHide();
+      },
+      onFail: () => {
+        setPendingTx(false);
       },
     });
 

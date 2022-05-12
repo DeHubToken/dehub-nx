@@ -30,8 +30,8 @@
           <dhb-buy-dehub-button
             [cexUrl]="cexUrl"
             [downloadWalletUrl]="downloadWalletUrl"
-            (buy)="onDexSelected()"
-            (dexSelected)="onDexSelected()"
+            [buyDappUrl]="buyDappUrl"
+            (buyWithCard)="onBuyWithCard()"
           ></dhb-buy-dehub-button>
         </li>
         <li class="topbar-item ml-4">

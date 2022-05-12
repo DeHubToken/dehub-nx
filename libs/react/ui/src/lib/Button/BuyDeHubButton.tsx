@@ -5,19 +5,17 @@ import { useMemo } from 'react';
 const BuyDeHubButton = ({
   cexUrl,
   downloadWalletUrl,
-  onBuy,
-  onDexSelected,
+  onBuyWithCard,
 }: {
   cexUrl: string;
   downloadWalletUrl: string;
-  onBuy: () => void;
-  onDexSelected: () => void;
+  onBuyWithCard: () => void;
 }) => {
   const items: MenuItem[] = useMemo(
     () => [
       {
-        label: 'DEX',
-        command: onDexSelected,
+        label: 'Buy With Card',
+        command: onBuyWithCard,
       },
       {
         label: 'CEX',
@@ -28,7 +26,7 @@ const BuyDeHubButton = ({
         command: () => window.open(downloadWalletUrl, '_blank'),
       },
     ],
-    [cexUrl, downloadWalletUrl, onDexSelected]
+    [cexUrl, downloadWalletUrl, onBuyWithCard]
   );
 
   return (

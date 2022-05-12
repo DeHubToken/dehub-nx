@@ -8,6 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
+        "compiler": "babel",
         "outputPath": "dist/apps/raffle.prod/raffle",
         "index": "apps/raffle/src/index.html",
         "baseHref": "/",

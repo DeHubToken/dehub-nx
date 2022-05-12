@@ -1,0 +1,28 @@
+{
+  "root": "apps/buy-e2e",
+  "sourceRoot": "apps/buy-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/buy-e2e/cypress.json",
+        "devServerTarget": "buy:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "buy:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/buy-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["buy"]
+}

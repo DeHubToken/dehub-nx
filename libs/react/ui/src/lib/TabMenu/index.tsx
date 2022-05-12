@@ -59,7 +59,7 @@ export const TabMenu = ({ activeTab }: { activeTab: string }) => {
             )}
             icon={menuItem.icon}
             label={menuItem.label}
-            onClick={() => (window.location.href = menuItem.routerLink)}
+            onClick={() => (window.location.href = menuItem['routerLink'])}
           />
         ))}
 

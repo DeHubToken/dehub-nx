@@ -52,7 +52,7 @@ const UserMenu = ({
     },
   ];
 
-  const handleDexSelected = () => {
+  const handleBuyWithCard = () => {
     setBuyDeHubFloozModal(true);
   };
 
@@ -63,8 +63,7 @@ const UserMenu = ({
           <BuyDeHubButton
             cexUrl={cexUrl}
             downloadWalletUrl={downloadWalletUrl}
-            onBuy={handleDexSelected}
-            onDexSelected={handleDexSelected}
+            onBuyWithCard={handleBuyWithCard}
           />
         </li>
         <li className="topbar-item ml-4">

@@ -12,7 +12,7 @@ interface ContentfulEnv {
 interface ContractsEnv {
   dehub: string;
   dehubBnb: string;
-  bnb: string;
+  wbnb: string;
   bnbBusd: string;
   busd: string;
   multiCall: string;
@@ -56,7 +56,7 @@ export interface SharedEnv {
     /** Official Allrites stream page */
     stream: string;
     /** Official DeHUB dapp pages */
-    dapps: { staking: string };
+    dapps: { staking: string; buy: string };
   };
 
   contentful: {
@@ -96,6 +96,7 @@ export const defaultSharedEnv: SharedEnv = {
     stream: 'https://beta-stream.dehub.net',
     dapps: {
       staking: 'https://dehub.net/staking',
+      buy: 'https://dehub.net/buy',
     },
   },
 
@@ -121,7 +122,7 @@ export const defaultSharedEnv: SharedEnv = {
       contracts: {
         dehub: '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477',
         dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
-        bnb: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
+        wbnb: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
         bnbBusd: '0xe0e92035077c39594793e61802a350347c320cf2',
         busd: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
         multiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',

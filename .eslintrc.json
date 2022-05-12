@@ -18,19 +18,24 @@
                 "sourceTag": "scope:angular",
                 "onlyDependOnLibsWithTags": ["scope:angular", "scope:shared"],
                 // projects tagged with "scope:angular" can't import from "react" or related projects
-                "bannedExternalImports": ["*react*"]
+                "bannedExternalImports": ["*react*", "*primereact*"]
               },
               {
                 "sourceTag": "scope:react",
                 "onlyDependOnLibsWithTags": ["scope:react", "scope:shared"],
                 // projects tagged with "scope:react" can't import from "angular" or related projects
-                "bannedExternalImports": ["*angular*"]
+                "bannedExternalImports": ["*angular*", "*primeng*"]
               },
               {
                 "sourceTag": "scope:shared",
                 "onlyDependOnLibsWithTags": ["scope:shared"],
-                // projects tagged with "scope:angular" can't import from "react" or related projects
-                "bannedExternalImports": ["*angular*", "*react*"]
+                // projects tagged with "scope:shared" can't import from "react" or "angular" related projects
+                "bannedExternalImports": [
+                  "*angular*",
+                  "*primeng*",
+                  "*react*",
+                  "*primereact*"
+                ]
               },
               // Type boundaries
               {

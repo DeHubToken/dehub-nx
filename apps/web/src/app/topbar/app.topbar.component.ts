@@ -28,6 +28,7 @@ export class AppTopBarComponent implements OnDestroy {
   magicLinkApiKey = this.env.web3.auth.magicLinkApiKey;
   cexUrl = this.env.dehub.cexUrl;
   downloadWalletUrl = this.env.dehub.downloadWalletUrl;
+  buyDappUrl = this.env.dehub.dapps.buy;
   isDev = this.env.env === 'dev';
 
   constructor(
@@ -37,7 +38,7 @@ export class AppTopBarComponent implements OnDestroy {
     private dialogService: DialogService
   ) {}
 
-  onDexSelected() {
+  onBuyWithCard() {
     this.dialogService.open(BuyDehubFloozComponent, {
       showHeader: true,
       header: 'Decentralised Exchange',

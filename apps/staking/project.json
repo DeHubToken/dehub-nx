@@ -8,6 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
+        "compiler": "babel",
         "outputPath": "dist/apps/staking.prod/staking",
         "index": "apps/staking/src/index.html",
         "main": "apps/staking/src/main.tsx",
