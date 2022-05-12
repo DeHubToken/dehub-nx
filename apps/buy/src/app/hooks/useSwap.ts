@@ -131,7 +131,7 @@ const useSwap = (
     );
 
     const successfulEstimation = estimateCalls.find(
-      (el, ix, list): el is SuccessfulSwapCall => 'gasEstimate' in el
+      (el): el is SuccessfulSwapCall => 'gasEstimate' in el
     );
     if (!successfulEstimation) {
       throw new Error('Unexpected error. Could not estimate gas for the swap');
