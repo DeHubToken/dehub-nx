@@ -1,4 +1,5 @@
 import {
+  ContentfulProvider,
   RefreshContextProvider,
   ToastProvider,
   Web3Providers,
@@ -13,9 +14,11 @@ const Providers: React.FC = ({ children }) => {
     <ToastProvider>
       <Web3Providers moralis={environment.moralis} web3={environment.web3}>
         <Provider store={store}>
-          <RefreshContextProvider>
-            <HelmetProvider>{children}</HelmetProvider>
-          </RefreshContextProvider>
+          <ContentfulProvider contentful={environment.contentful}>
+            <RefreshContextProvider>
+              <HelmetProvider>{children}</HelmetProvider>
+            </RefreshContextProvider>
+          </ContentfulProvider>
         </Provider>
       </Web3Providers>
     </ToastProvider>
