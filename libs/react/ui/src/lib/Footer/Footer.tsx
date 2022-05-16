@@ -1,36 +1,50 @@
-import { FooterFragment } from '@dehub/shared/model';
+import { CallToActionFragment, FooterFragment } from '@dehub/shared/model';
 import { resolveButtonStyle } from '@dehub/shared/utils';
 import classNames from 'classnames';
 import { Button } from 'primereact/button';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 export interface FooterProps {
   footer?: FooterFragment;
+  ctaGroup?: number;
 }
 
-function Footer({ footer }: FooterProps) {
+function Footer({ footer, ctaGroup = 5 }: FooterProps) {
+  const groups = useMemo(() => {
+    if (!footer?.linksCollection) return undefined;
+
+    const linkGroups: (CallToActionFragment | undefined)[][] = [];
+    for (let i = 0; i < footer.linksCollection.items.length; i += ctaGroup) {
+      const group = footer.linksCollection.items.slice(i, i + ctaGroup);
+      linkGroups.push(group);
+    }
+    return linkGroups;
+  }, [footer?.linksCollection, ctaGroup]);
+
   return (
     <div className="layout-footer">
       <div className="grid">
         <div className="col-12 lg-4">
           <div className="grid">
             <div className="col-12 md:col-4 lg:col-2">
-              {footer &&
-                footer.linksCollection?.items.map((item, index) => (
+              {groups &&
+                groups.map((group, index) => (
                   <ul key={index}>
-                    <li>
-                      <a
-                        className={resolveButtonStyle(
-                          item?.type,
-                          item?.style,
-                          item?.size
-                        )}
-                        href={item?.routerLink}
-                      >
-                        <i className={item?.icon}></i>
-                        {item && item.label}
-                      </a>
-                    </li>
+                    {group.map((link, index2) => (
+                      <li key={index2}>
+                        <a
+                          className={resolveButtonStyle(
+                            link?.type,
+                            link?.style,
+                            link?.size
+                          )}
+                          href={link?.routerLink}
+                        >
+                          <i className={link?.icon}></i>
+                          {link && link.label}
+                        </a>
+                      </li>
+                    ))}
                   </ul>
                 ))}
             </div>
