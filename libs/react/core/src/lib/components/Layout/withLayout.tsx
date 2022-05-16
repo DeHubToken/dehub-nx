@@ -5,6 +5,7 @@ import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis';
 import React, { useEffect, useState } from 'react';
 import { useWeb3Context } from '../../hooks';
+import { useContentfulContext } from '../../hooks/useContentfulContext';
 import ToastListener from '../Toast/ToastListener';
 import UserMenu from '../UserMenu';
 
@@ -36,7 +37,6 @@ const withLayout =
     const [showLoader, setShowLoader] = useState(false);
     const [message, setMessage] = useState(initMessage);
 
-    // const { logout } = useMoralis();
     const {
       walletConnectingState,
       defaultChainId,
@@ -45,6 +45,8 @@ const withLayout =
       // landingUrl: landing,
       logout,
     } = useWeb3Context();
+
+    const { footer } = useContentfulContext();
 
     /*
      * Hack to avoid trustwallet redirecting to a open in app website on iOS...
@@ -123,7 +125,7 @@ const withLayout =
               <Component {...(props as P)} />
             </div>
           </div>
-          <Footer landing={landing} />
+          <Footer footer={footer} />
         </div>
       </div>
     );
