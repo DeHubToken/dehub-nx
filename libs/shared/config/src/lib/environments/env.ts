@@ -9,6 +9,17 @@ interface ContentfulEnv {
   cpaToken: string;
 }
 
+export interface Contentful {
+  /** Contentful GraphQL URI without Space ID */
+  graphqlUri: string;
+  /**
+   * Unpublished content will be included
+   * Docs: https://www.contentful.com/developers/docs/concepts/apis/
+   */
+  isPreview: boolean;
+  website: ContentfulEnv;
+}
+
 interface ContractsEnv {
   dehub: string;
   dehubBnb: string;
@@ -59,16 +70,7 @@ export interface SharedEnv {
     dapps: { staking: string; buy: string };
   };
 
-  contentful: {
-    /** Contentful GraphQL URI without Space ID */
-    graphqlUri: string;
-    /**
-     * Unpublished content will be included
-     * Docs: https://www.contentful.com/developers/docs/concepts/apis/
-     */
-    isPreview: boolean;
-    website: ContentfulEnv;
-  };
+  contentful: Contentful;
 
   /** Moralis configuration */
   moralis: {

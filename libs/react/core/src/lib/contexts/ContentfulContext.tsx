@@ -4,6 +4,7 @@ import {
   createHttpLink,
   InMemoryCache,
 } from '@apollo/client';
+import { Contentful } from '@dehub/shared/config';
 import { FooterFragment } from '@dehub/shared/model';
 import { createContext, ReactNode, useMemo } from 'react';
 import { useFooterCollectionQuery } from '../hooks';
@@ -19,25 +20,7 @@ const ContentfulConext = createContext<undefined | ContentfulContextProps>(
 
 interface ContentfulProviderProps {
   children?: ReactNode;
-  contentful: {
-    /** Contentful GraphQL URI without Space ID */
-    graphqlUri: string;
-    /**
-     * Unpublished content will be included
-     * Docs: https://www.contentful.com/developers/docs/concepts/apis/
-     */
-    isPreview: boolean;
-    website: {
-      /** Contentful Space ID */
-      spaceId: string;
-
-      /** Content Delivery API - access token */
-      cdaToken: string;
-
-      /** Content Preview API - access token */
-      cpaToken: string;
-    };
-  };
+  contentful: Contentful;
 }
 
 const ContentfulApollo = ({
