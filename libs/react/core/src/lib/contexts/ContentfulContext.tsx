@@ -14,7 +14,7 @@ interface ContentfulContextProps {
   footer?: FooterFragment;
 }
 
-const ContentfulConext = createContext<undefined | ContentfulContextProps>(
+const ContentfulContext = createContext<undefined | ContentfulContextProps>(
   undefined
 );
 
@@ -69,15 +69,15 @@ const ContentfulProvider = ({ children }: { children: ReactNode }) => {
   }, [data, loading, error]);
 
   return (
-    <ContentfulConext.Provider
+    <ContentfulContext.Provider
       value={{
         loading,
         footer,
       }}
     >
       {children}
-    </ContentfulConext.Provider>
+    </ContentfulContext.Provider>
   );
 };
 
-export { ContentfulConext, ContentfulApollo as ContentfulProvider };
+export { ContentfulContext, ContentfulApollo as ContentfulProvider };

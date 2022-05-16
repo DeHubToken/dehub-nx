@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { ContentfulConext } from '../contexts';
+import { ContentfulContext } from '../contexts';
 
 export const useContentfulContext = () => {
-  const context = useContext(ContentfulConext);
+  const context = useContext(ContentfulContext);
   if (!context) {
     throw new Error(
       'Make sure to only call useContentful within <ContentfulProvider>'
