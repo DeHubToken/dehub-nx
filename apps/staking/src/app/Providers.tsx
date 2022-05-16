@@ -1,16 +1,14 @@
 import {
-  ToastProvider,
-  Web3Providers,
-  ConnectProvider,
   ContentfulProvider,
   RefreshContextProvider,
+  ToastProvider,
+  Web3Providers,
 } from '@dehub/react/core';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { environment } from '../environments/environment';
 import store from './state';
-
 
 const Providers: React.FC = ({ children }) => {
   return (
