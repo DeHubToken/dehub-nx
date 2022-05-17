@@ -4,7 +4,7 @@ import {
   createHttpLink,
   InMemoryCache,
 } from '@apollo/client';
-import { Contentful } from '@dehub/shared/config';
+import { ContentfulEnv } from '@dehub/shared/config';
 import { FooterFragment } from '@dehub/shared/model';
 import { createContext, ReactNode, useMemo } from 'react';
 import { useFooterCollectionQuery } from '../hooks';
@@ -20,7 +20,7 @@ const ContentfulContext = createContext<undefined | ContentfulContextProps>(
 
 interface ContentfulProviderProps {
   children?: ReactNode;
-  contentful: Contentful;
+  contentful: ContentfulEnv;
 }
 
 const ContentfulApollo = ({
