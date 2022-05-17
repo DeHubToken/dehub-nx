@@ -99,7 +99,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/staking/**/*.{ts,tsx,js,jsx}"],
-        "maxWarnings": 2
+        "maxWarnings": 0
       }
     },
     "test": {
