@@ -118,22 +118,14 @@ export class AngularFeatureShopComponent implements OnInit {
 
   productsResponsiveOptions: SwiperResponsiveOptions = {
     '1900': {
-      slidesPerView: 6,
-      spaceBetween: 20,
-    },
-    '1700': {
-      slidesPerView: 5,
-      spaceBetween: 20,
-    },
-    '1350': {
       slidesPerView: 4,
       spaceBetween: 20,
     },
-    '960': {
+    '1350': {
       slidesPerView: 3,
       spaceBetween: 20,
     },
-    '750': {
+    '960': {
       slidesPerView: 2,
       spaceBetween: 20,
     },

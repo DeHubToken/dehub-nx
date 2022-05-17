@@ -3,6 +3,7 @@ import {
   Component,
   Input,
   OnInit,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ProductFragment } from '@dehub/shared/model';
 
@@ -16,15 +17,25 @@ import { ProductFragment } from '@dehub/shared/model';
         styleClass="p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
-          <img
+          <swiper
             *ngIf="
               product.picturesCollection &&
-              product.picturesCollection.items[0] as firstPicture
+              product.picturesCollection.items as pictures
             "
-            [dhbContentfulDraft]="firstPicture.sys"
-            [src]="firstPicture.url"
-            [alt]="firstPicture.title"
-          />
+            class="gallery"
+            [pagination]="true"
+          >
+            <ng-container *ngFor="let picture of pictures">
+              <ng-template swiperSlide>
+                <img
+                  *ngIf="picture"
+                  [dhbContentfulDraft]="picture.sys"
+                  [src]="picture.url"
+                  [alt]="picture.title"
+                />
+              </ng-template>
+            </ng-container>
+          </swiper>
         </ng-template>
         <p>
           {{ product.shortDescription }}
@@ -41,11 +52,24 @@ import { ProductFragment } from '@dehub/shared/model';
   `,
   styles: [
     `
-      :host {
-        display: flex;
+      @import '~swiper/scss';
+      @import '~swiper/scss/pagination';
+      /* Important for keeping all items stretched to same height */
+      /*:host when ViewEncapsulation.None*/
+      dhb-product {
+        height: 100%;
+        & > div {
+          height: 100%;
+        }
+        .swiper {
+          &.gallery {
+            padding-bottom: 0 !important;
+          }
+        }
       }
     `,
   ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductComponent implements OnInit {
