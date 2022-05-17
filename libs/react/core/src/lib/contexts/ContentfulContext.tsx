@@ -49,13 +49,21 @@ const ContentfulApollo = ({
 
   return (
     <ApolloProvider client={client}>
-      <ContentfulProvider>{children}</ContentfulProvider>
+      <ContentfulProvider isPreview={isPreview}>{children}</ContentfulProvider>
     </ApolloProvider>
   );
 };
 
-const ContentfulProvider = ({ children }: { children: ReactNode }) => {
-  const { data, loading, error } = useFooterCollectionQuery();
+const ContentfulProvider = ({
+  children,
+  isPreview,
+}: {
+  children: ReactNode;
+  isPreview: boolean;
+}) => {
+  const { data, loading, error } = useFooterCollectionQuery({
+    variables: { isPreview },
+  });
 
   const footer = useMemo(() => {
     if (loading || error) {

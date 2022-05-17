@@ -44,14 +44,6 @@
         "baseHref": "/staking"
       },
       "configurations": {
-        "preview": {
-          "fileReplacements": [
-            {
-              "replace": "apps/staking/src/environments/environment.ts",
-              "with": "apps/staking/src/environments/environment.preview.ts"
-            }
-          ]
-        },
         "production": {
           "fileReplacements": [
             {
@@ -59,6 +51,15 @@
               "with": "apps/staking/src/environments/environment.prod.ts"
             }
           ]
+        },
+        "preview": {
+          "fileReplacements": [
+            {
+              "replace": "apps/staking/src/environments/environment.ts",
+              "with": "apps/staking/src/environments/environment.preview.ts"
+            }
+          ],
+          "outputPath": "dist/apps/staking.preview/staking"
         },
         "development": {
           "buildOptimizer": false,
@@ -112,13 +113,15 @@
     "deploy-preview-draft": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "npx nx run staking:deploy-prod-draft"
+        "command": "npx netlify deploy --site=6861568a-86ef-4c9f-9673-b2dc8b9df18f -d ../../dist/apps/staking.preview -o",
+        "cwd": "netlify/staking.prod"
       }
     },
     "deploy-preview": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "echo 'Preview mode not supported in Staking.'"
+        "command": "npx netlify deploy --site=6861568a-86ef-4c9f-9673-b2dc8b9df18f -d ../../dist/apps/staking.preview -p -o",
+        "cwd": "netlify/staking.prod"
       }
     },
     "deploy-prod-draft": {
