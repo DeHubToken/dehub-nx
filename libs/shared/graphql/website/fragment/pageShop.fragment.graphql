@@ -19,7 +19,6 @@ fragment PageShop on PageShop {
       ...PageSectionThumbnailPosts
       ...PageSectionBasicPosts
       ...PageSectionIconTiles
-      ...PageSectionFaQs
       ...PageSectionGrandPosts
       ...PageSectionSectionPosts
       ...PageSectionPersonPosts

@@ -754,7 +754,6 @@ export const PageShopFragmentDoc = gql`
         ...PageSectionThumbnailPosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
-        ...PageSectionFaQs
         ...PageSectionGrandPosts
         ...PageSectionSectionPosts
         ...PageSectionPersonPosts
@@ -768,7 +767,6 @@ export const PageShopFragmentDoc = gql`
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
-  ${PageSectionFaQsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
   ${PageSectionPersonPostsFragmentDoc}

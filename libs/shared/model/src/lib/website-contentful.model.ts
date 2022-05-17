@@ -3380,7 +3380,6 @@ export interface PageSectionFaQsLinkingCollections {
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
-  pageShopCollection?: Maybe<PageShopCollection>;
   pageStreamCollection?: Maybe<PageStreamCollection>;
 }
 
@@ -3420,13 +3419,6 @@ export interface PageSectionFaQsLinkingCollectionsPageHomeCollectionArgs {
 }
 
 export interface PageSectionFaQsLinkingCollectionsPageLearnCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionFaQsLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -4695,7 +4687,6 @@ export interface PageShopSectionsCollection {
 
 export type PageShopSectionsItem =
   | PageSectionBasicPosts
-  | PageSectionFaQs
   | PageSectionFeaturePosts
   | PageSectionGrandPosts
   | PageSectionIconTiles
@@ -9362,45 +9353,6 @@ export type PageShopFragment = {
                 | undefined;
             }
           | {
-              __typename: 'PageSectionFaQs';
-              title?: string | undefined;
-              description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
-              handpickedFaqGroupsCollection?:
-                | {
-                    __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
-                    items: Array<
-                      | {
-                          __typename?: 'FaqGroup';
-                          name?: string | undefined;
-                          sys: {
-                            __typename?: 'Sys';
-                            publishedAt?: any | undefined;
-                          };
-                          faqItemCollection?:
-                            | {
-                                __typename?: 'FaqGroupFaqItemCollection';
-                                items: Array<
-                                  | {
-                                      __typename?: 'FaqItem';
-                                      question?: string | undefined;
-                                      answer?: string | undefined;
-                                      sys: {
-                                        __typename?: 'Sys';
-                                        publishedAt?: any | undefined;
-                                      };
-                                    }
-                                  | undefined
-                                >;
-                              }
-                            | undefined;
-                        }
-                      | undefined
-                    >;
-                  }
-                | undefined;
-            }
-          | {
               __typename: 'PageSectionFeaturePosts';
               title?: string | undefined;
               description?: string | undefined;
@@ -13114,50 +13066,6 @@ export type PageShopCollectionQuery = {
                             | undefined;
                         }
                       | {
-                          __typename: 'PageSectionFaQs';
-                          title?: string | undefined;
-                          description?: string | undefined;
-                          sys: {
-                            __typename?: 'Sys';
-                            publishedAt?: any | undefined;
-                          };
-                          handpickedFaqGroupsCollection?:
-                            | {
-                                __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
-                                items: Array<
-                                  | {
-                                      __typename?: 'FaqGroup';
-                                      name?: string | undefined;
-                                      sys: {
-                                        __typename?: 'Sys';
-                                        publishedAt?: any | undefined;
-                                      };
-                                      faqItemCollection?:
-                                        | {
-                                            __typename?: 'FaqGroupFaqItemCollection';
-                                            items: Array<
-                                              | {
-                                                  __typename?: 'FaqItem';
-                                                  question?: string | undefined;
-                                                  answer?: string | undefined;
-                                                  sys: {
-                                                    __typename?: 'Sys';
-                                                    publishedAt?:
-                                                      | any
-                                                      | undefined;
-                                                  };
-                                                }
-                                              | undefined
-                                            >;
-                                          }
-                                        | undefined;
-                                    }
-                                  | undefined
-                                >;
-                              }
-                            | undefined;
-                        }
-                      | {
                           __typename: 'PageSectionFeaturePosts';
                           title?: string | undefined;
                           description?: string | undefined;
@@ -14896,7 +14804,6 @@ export const PageShopFragmentDoc = gql`
         ...PageSectionThumbnailPosts
         ...PageSectionBasicPosts
         ...PageSectionIconTiles
-        ...PageSectionFaQs
         ...PageSectionGrandPosts
         ...PageSectionSectionPosts
         ...PageSectionPersonPosts
@@ -14910,7 +14817,6 @@ export const PageShopFragmentDoc = gql`
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
   ${PageSectionIconTilesFragmentDoc}
-  ${PageSectionFaQsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
   ${PageSectionPersonPostsFragmentDoc}
