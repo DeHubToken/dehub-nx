@@ -1,0 +1,36 @@
+fragment ProductCommon on Product {
+  sys {
+    ...Sys
+  }
+  picturesCollection(limit: 10, preview: $isPreview) {
+    items {
+      sys {
+        ...Sys
+      }
+      title
+      url
+    }
+  }
+  name
+  price
+  currency
+  sku
+  availableQuantity
+  category {
+    sys {
+      ...Sys
+    }
+    name
+  }
+}
+
+fragment Product on Product {
+  ...ProductCommon
+  shortDescription
+  slug
+}
+
+fragment ProductDetail on Product {
+  ...ProductCommon
+  fullDescription
+}
