@@ -127,6 +127,13 @@ type PageSection =
           [path]="path"
         ></dhb-page-section-person-posts>
       </ng-template>
+
+      <!-- Products -->
+      <dhb-page-section-products
+        *ngIf="isPageSectionProducts(section)"
+        [section]="section"
+        [swiperResponsiveOptions]="productsResponsiveOptions"
+      ></dhb-page-section-products>
     </ng-container>
   `,
   styles: [``],
