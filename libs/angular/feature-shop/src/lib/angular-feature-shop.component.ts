@@ -23,6 +23,7 @@ import { map, Observable } from 'rxjs';
         [thumbnailPostsResponsiveOptions]="thumbnailPostsResponsiveOptions"
         [basicPostsResponsiveOptions]="basicPostsResponsiveOptions"
         [iconTilesResponsiveOptions]="iconTilesResponsiveOptions"
+        [productsResponsiveOptions]="productsResponsiveOptions"
         [path]="path"
       ></dhb-page-sections>
     </ng-container>
@@ -106,6 +107,33 @@ export class AngularFeatureShopComponent implements OnInit {
       spaceBetween: 20,
     },
     '860': {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    '320': {
+      slidesPerView: 1,
+      spaceBetween: 20,
+    },
+  };
+
+  productsResponsiveOptions: SwiperResponsiveOptions = {
+    '1900': {
+      slidesPerView: 6,
+      spaceBetween: 20,
+    },
+    '1700': {
+      slidesPerView: 5,
+      spaceBetween: 20,
+    },
+    '1350': {
+      slidesPerView: 4,
+      spaceBetween: 20,
+    },
+    '960': {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    '750': {
       slidesPerView: 2,
       spaceBetween: 20,
     },
