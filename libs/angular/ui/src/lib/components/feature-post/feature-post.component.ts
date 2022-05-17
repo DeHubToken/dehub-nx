@@ -51,8 +51,12 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
   `,
   styles: [
     `
+      /* Important for keeping all items stretched to same height */
       :host {
-        display: flex;
+        height: 100%;
+        & > div {
+          height: 100%;
+        }
       }
     `,
   ],
