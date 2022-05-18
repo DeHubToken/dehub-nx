@@ -4,7 +4,7 @@ import {
   createHttpLink,
   InMemoryCache,
 } from '@apollo/client';
-import { Contentful } from '@dehub/shared/config';
+import { ContentfulEnv } from '@dehub/shared/config';
 import { FooterFragment } from '@dehub/shared/model';
 import { createContext, ReactNode, useMemo } from 'react';
 import { useFooterCollectionQuery } from '../hooks';
@@ -20,7 +20,7 @@ const ContentfulContext = createContext<undefined | ContentfulContextProps>(
 
 interface ContentfulProviderProps {
   children?: ReactNode;
-  contentful: Contentful;
+  contentful: ContentfulEnv;
 }
 
 const ContentfulApollo = ({
@@ -49,13 +49,21 @@ const ContentfulApollo = ({
 
   return (
     <ApolloProvider client={client}>
-      <ContentfulProvider>{children}</ContentfulProvider>
+      <ContentfulProvider isPreview={isPreview}>{children}</ContentfulProvider>
     </ApolloProvider>
   );
 };
 
-const ContentfulProvider = ({ children }: { children: ReactNode }) => {
-  const { data, loading, error } = useFooterCollectionQuery();
+const ContentfulProvider = ({
+  children,
+  isPreview,
+}: {
+  children: ReactNode;
+  isPreview: boolean;
+}) => {
+  const { data, loading, error } = useFooterCollectionQuery({
+    variables: { isPreview },
+  });
 
   const footer = useMemo(() => {
     if (loading || error) {
