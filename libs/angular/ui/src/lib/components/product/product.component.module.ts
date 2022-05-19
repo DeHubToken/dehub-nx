@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import SwiperCore, { Pagination } from 'swiper';
+import SwiperCore, { Lazy, Pagination } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
 import { ProductComponent } from './product.component';
 
 // Install Swiper modules
-SwiperCore.use([Pagination]);
+SwiperCore.use([Pagination, Lazy]);
 
 @NgModule({
   declarations: [ProductComponent],
