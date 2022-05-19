@@ -815,7 +815,9 @@ export const PageStreamFragmentDoc = gql`
 export const ProductDetailFragmentDoc = gql`
   fragment ProductDetail on Product {
     ...ProductCommon
-    fullDescription
+    fullDescription {
+      json
+    }
   }
   ${ProductCommonFragmentDoc}
 `;

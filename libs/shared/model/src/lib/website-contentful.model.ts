@@ -5049,7 +5049,7 @@ export interface Product extends Entry {
   category?: Maybe<ProductCategory>;
   contentfulMetadata: ContentfulMetadata;
   currency?: Maybe<Scalars['String']>;
-  fullDescription?: Maybe<Scalars['String']>;
+  fullDescription?: Maybe<ProductFullDescription>;
   linkedFrom?: Maybe<ProductLinkingCollections>;
   name?: Maybe<Scalars['String']>;
   picturesCollection?: Maybe<AssetCollection>;
@@ -5231,13 +5231,9 @@ export interface ProductFilter {
   currency_not?: InputMaybe<Scalars['String']>;
   currency_not_contains?: InputMaybe<Scalars['String']>;
   currency_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  fullDescription?: InputMaybe<Scalars['String']>;
   fullDescription_contains?: InputMaybe<Scalars['String']>;
   fullDescription_exists?: InputMaybe<Scalars['Boolean']>;
-  fullDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  fullDescription_not?: InputMaybe<Scalars['String']>;
   fullDescription_not_contains?: InputMaybe<Scalars['String']>;
-  fullDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5277,6 +5273,31 @@ export interface ProductFilter {
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
+}
+
+export interface ProductFullDescription {
+  __typename?: 'ProductFullDescription';
+  json: Scalars['JSON'];
+  links: ProductFullDescriptionLinks;
+}
+
+export interface ProductFullDescriptionAssets {
+  __typename?: 'ProductFullDescriptionAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+}
+
+export interface ProductFullDescriptionEntries {
+  __typename?: 'ProductFullDescriptionEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+}
+
+export interface ProductFullDescriptionLinks {
+  __typename?: 'ProductFullDescriptionLinks';
+  assets: ProductFullDescriptionAssets;
+  entries: ProductFullDescriptionEntries;
 }
 
 export interface ProductLinkingCollections {
@@ -10257,12 +10278,14 @@ export type ProductFragment = {
 
 export type ProductDetailFragment = {
   __typename?: 'Product';
-  fullDescription?: string | undefined;
   name?: string | undefined;
   price?: number | undefined;
   currency?: string | undefined;
   sku?: string | undefined;
   availableQuantity?: number | undefined;
+  fullDescription?:
+    | { __typename?: 'ProductFullDescription'; json: any }
+    | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   picturesCollection?:
     | {
@@ -14015,12 +14038,14 @@ export type ProductCollectionBySlugQuery = {
         items: Array<
           | {
               __typename?: 'Product';
-              fullDescription?: string | undefined;
               name?: string | undefined;
               price?: number | undefined;
               currency?: string | undefined;
               sku?: string | undefined;
               availableQuantity?: number | undefined;
+              fullDescription?:
+                | { __typename?: 'ProductFullDescription'; json: any }
+                | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               picturesCollection?:
                 | {
@@ -14865,7 +14890,9 @@ export const PageStreamFragmentDoc = gql`
 export const ProductDetailFragmentDoc = gql`
   fragment ProductDetail on Product {
     ...ProductCommon
-    fullDescription
+    fullDescription {
+      json
+    }
   }
   ${ProductCommonFragmentDoc}
 `;
