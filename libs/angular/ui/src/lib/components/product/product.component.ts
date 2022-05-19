@@ -54,15 +54,31 @@ import { ProductFragment } from '@dehub/shared/model';
             class="card overview-box gray shadow-2 flex-none pt-1 pb-3 min-w-full sm:min-w-max"
           >
             <div class="overview-info text-right w-full">
-              <h3 class="mt-1 mb-0 pr-0">10,000</h3>
-              <h6 class="text-sm mb-2 opacity-80">DeHub</h6>
+              <h3 class="mt-1 mb-0 pr-0">{{ product.price | number }}</h3>
+              <h6 class="text-sm mb-2 opacity-80">
+                {{ product.currency }}
+              </h6>
 
               <h6 class="my-0 text-sm inline-block w-full">
                 <hr class="my-0 pb-1 border-dashed" />
-                <span class="opacity-80 uppercase text-xs text-bold pr-1"
-                  >Quantity:</span
+
+                <ng-container
+                  *ngIf="
+                    product.availableQuantity && product.availableQuantity > 0;
+                    else soldout
+                  "
                 >
-                <span class="text-bold opacity-80">123</span>
+                  <span class="opacity-80 uppercase text-xs text-bold pr-1"
+                    >Quantity:</span
+                  >
+                  <span class="text-bold opacity-80">{{
+                    product.availableQuantity
+                  }}</span>
+                </ng-container>
+
+                <ng-template #soldout>
+                  <span class="text-bold"> Sold Out </span>
+                </ng-template>
               </h6>
             </div>
           </div>
