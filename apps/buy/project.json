@@ -44,14 +44,6 @@
         "baseHref": "/buy"
       },
       "configurations": {
-        "preview": {
-          "fileReplacements": [
-            {
-              "replace": "apps/buy/src/environments/environment.ts",
-              "with": "apps/buy/src/environments/environment.prod.ts"
-            }
-          ]
-        },
         "production": {
           "fileReplacements": [
             {
@@ -59,6 +51,15 @@
               "with": "apps/buy/src/environments/environment.prod.ts"
             }
           ]
+        },
+        "preview": {
+          "fileReplacements": [
+            {
+              "replace": "apps/buy/src/environments/environment.ts",
+              "with": "apps/buy/src/environments/environment.preview.ts"
+            }
+          ],
+          "outputPath": "dist/apps/buy.preview/buy"
         },
         "development": {
           "buildOptimizer": false,
@@ -98,7 +99,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/buy/**/*.{ts,tsx,js,jsx}"],
-        "maxWarnings": 2
+        "maxWarnings": 0
       }
     },
     "test": {
@@ -112,13 +113,15 @@
     "deploy-preview-draft": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "npx nx run buy:deploy-prod-draft"
+        "command": "npx netlify deploy --site=aadde395-d33b-4cba-8a96-c6952ae48876 -d ../../dist/apps/buy.preview -o",
+        "cwd": "netlify/buy.prod"
       }
     },
     "deploy-preview": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "echo 'Preview mode not supported in Buy.'"
+        "command": "npx netlify deploy --site=aadde395-d33b-4cba-8a96-c6952ae48876 -d ../../dist/apps/buy.preview -p -o",
+        "cwd": "netlify/buy.prod"
       }
     },
     "deploy-prod-draft": {

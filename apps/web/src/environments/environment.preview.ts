@@ -1,9 +1,8 @@
-import { defaultSharedPreviewEnv } from '@dehub/shared/config';
+import { inheritPreviewEnvFrom } from '@dehub/shared/config';
 import { defaultEnv, Env } from './env';
+import { environment as prodEnv } from './environment.prod';
 
 export const environment: Env = {
   ...defaultEnv,
-  ...defaultSharedPreviewEnv,
-
-  baseUrl: '/web',
+  ...inheritPreviewEnvFrom(prodEnv),
 };

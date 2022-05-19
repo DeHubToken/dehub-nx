@@ -32,7 +32,7 @@
    Site ID:   cd6cae81-a327-47d3-8d95-3efefc0f46e2
    ```
 
-   **Staking (React)**
+   **Prod Staking (React)**
 
    ```
    npx netlify sites:create --account-slug=dehub --name=staking-dehub
@@ -46,7 +46,21 @@
    Site ID:   09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3
    ```
 
-   **Buy (React)**
+   **Preview Staking (React)**
+
+   ```
+   npx netlify sites:create --account-slug=dehub --name=staking-dehub-preview
+   ```
+
+   Output:
+
+   ```
+   Admin URL: https://app.netlify.com/sites/staking-dehub-preview
+   URL:       https://staking-dehub-preview.netlify.app
+   Site ID:   6861568a-86ef-4c9f-9673-b2dc8b9df18f
+   ```
+
+   **Prod Buy (React)**
 
    ```
    npx netlify sites:create --account-slug=dehub --name=buy-dehub
@@ -58,6 +72,20 @@
    Admin URL: https://app.netlify.com/sites/buy-dehub
    URL:       https://buy-dehub.netlify.app
    Site ID:   11bd4ce0-3bf2-4642-8879-f541c6fed3fe
+   ```
+
+   **Preview Buy (React)**
+
+   ```
+   npx netlify sites:create --account-slug=dehub --name=buy-dehub-preview
+   ```
+
+   Output:
+
+   ```
+   Admin URL: https://app.netlify.com/sites/buy-dehub-preview
+   URL:       https://buy-dehub-preview.netlify.app
+   Site ID:   aadde395-d33b-4cba-8a96-c6952ae48876
    ```
 
    **Raffle (React) - inactive**

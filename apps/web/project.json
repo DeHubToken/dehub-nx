@@ -129,14 +129,14 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web.preview -o",
-        "cwd": "netlify/web.prod"
+        "cwd": "netlify/web.preview"
       }
     },
     "deploy-preview": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web.preview -p -o",
-        "cwd": "netlify/web.prod"
+        "cwd": "netlify/web.preview"
       }
     },
     "deploy-prod-draft": {
