@@ -24,7 +24,9 @@ import { ProductFragment } from '@dehub/shared/model';
               product.picturesCollection.items as pictures
             "
             class="gallery"
-            [pagination]="true"
+            [pagination]="{
+              clickable: true
+            }"
           >
             <ng-container *ngFor="let picture of pictures">
               <ng-template swiperSlide>
@@ -52,12 +54,10 @@ import { ProductFragment } from '@dehub/shared/model';
             class="card overview-box gray shadow-2 flex-none pt-1 pb-3 min-w-full sm:min-w-max"
           >
             <div class="overview-info text-right w-full">
-              <!-- <h5 class="pr-0 mb-0">Price</h5>
-              <hr class="my-0 border-dashed" /> -->
               <h3 class="mt-1 mb-0 pr-0">10,000</h3>
               <h6 class="text-sm mb-2 opacity-80">DeHub</h6>
 
-              <h6 class="my-0 text-sm inline-block">
+              <h6 class="my-0 text-sm inline-block w-full">
                 <hr class="my-0 pb-1 border-dashed" />
                 <span class="opacity-80 uppercase text-xs text-bold pr-1"
                   >Quantity:</span
@@ -73,13 +73,14 @@ import { ProductFragment } from '@dehub/shared/model';
             <p-button
               [routerLink]="['/shop/' + product.slug]"
               label="Details"
-              styleClass="p-button-secondary p-button-lg"
+              class="w-6 md:w-auto"
+              styleClass="p-button-secondary p-button-lg w-full"
             ></p-button>
             <p-button
               [routerLink]="['/shop/' + product.slug]"
               label="Buy"
-              icon="fa-solid fa-check"
-              styleClass="p-button-primary p-button-lg ml-2"
+              class="w-6 md:w-auto"
+              styleClass="p-button-primary p-button-lg ml-2 w-full"
             ></p-button>
           </div>
         </ng-template>
