@@ -5045,7 +5045,9 @@ export enum PersonPostOrder {
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface Product extends Entry {
   __typename?: 'Product';
+  availableColors?: Maybe<Array<Maybe<Scalars['String']>>>;
   availableQuantity?: Maybe<Scalars['Int']>;
+  availableSizes?: Maybe<Array<Maybe<Scalars['String']>>>;
   category?: Maybe<ProductCategory>;
   contentfulMetadata: ContentfulMetadata;
   currency?: Maybe<Scalars['String']>;
@@ -5061,7 +5063,17 @@ export interface Product extends Entry {
 }
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductAvailableColorsArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface ProductAvailableQuantityArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductAvailableSizesArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
@@ -5227,6 +5239,16 @@ export interface ProductCollection {
 export interface ProductFilter {
   AND?: InputMaybe<Array<InputMaybe<ProductFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ProductFilter>>>;
+  availableColors_contains_all?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableColors_contains_none?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableColors_contains_some?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableColors_exists?: InputMaybe<Scalars['Boolean']>;
   availableQuantity?: InputMaybe<Scalars['Int']>;
   availableQuantity_exists?: InputMaybe<Scalars['Boolean']>;
   availableQuantity_gt?: InputMaybe<Scalars['Int']>;
@@ -5236,6 +5258,16 @@ export interface ProductFilter {
   availableQuantity_lte?: InputMaybe<Scalars['Int']>;
   availableQuantity_not?: InputMaybe<Scalars['Int']>;
   availableQuantity_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  availableSizes_contains_all?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableSizes_contains_none?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableSizes_contains_some?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableSizes_exists?: InputMaybe<Scalars['Boolean']>;
   category?: InputMaybe<CfProductCategoryNestedFilter>;
   category_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
@@ -10306,6 +10338,8 @@ export type ProductFragment = {
 
 export type ProductDetailFragment = {
   __typename?: 'Product';
+  availableColors?: Array<string | undefined> | undefined;
+  availableSizes?: Array<string | undefined> | undefined;
   name?: string | undefined;
   price?: number | undefined;
   currency?: string | undefined;
@@ -14071,6 +14105,8 @@ export type ProductCollectionBySlugQuery = {
         items: Array<
           | {
               __typename?: 'Product';
+              availableColors?: Array<string | undefined> | undefined;
+              availableSizes?: Array<string | undefined> | undefined;
               name?: string | undefined;
               price?: number | undefined;
               currency?: string | undefined;
@@ -14928,6 +14964,8 @@ export const ProductDetailFragmentDoc = gql`
     fullDescription {
       json
     }
+    availableColors
+    availableSizes
   }
   ${ProductCommonFragmentDoc}
 `;

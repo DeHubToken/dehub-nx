@@ -819,6 +819,8 @@ export const ProductDetailFragmentDoc = gql`
     fullDescription {
       json
     }
+    availableColors
+    availableSizes
   }
   ${ProductCommonFragmentDoc}
 `;
