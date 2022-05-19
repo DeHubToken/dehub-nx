@@ -7,10 +7,15 @@ import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/con
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { ButtonModule } from 'primeng/button';
+import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
+import { SwiperModule } from 'swiper/angular';
 import { AngularFeatureShopProductDetailComponent } from './angular-feature-shop-product-detail.component';
 import { AngularFeatureShopRoutingModule } from './angular-feature-shop-routing.module';
 import { AngularFeatureShopComponent } from './angular-feature-shop.component';
 import { ProductDetailComponent } from './components/product-detail.component';
+
+// Install Swiper modules
+SwiperCore.use([Pagination, Navigation, Autoplay]);
 @NgModule({
   imports: [
     // Angular
@@ -26,6 +31,9 @@ import { ProductDetailComponent } from './components/product-detail.component';
 
     // PrimeNg
     ButtonModule,
+
+    // Swiper
+    SwiperModule,
 
     AngularFeatureShopRoutingModule,
   ],

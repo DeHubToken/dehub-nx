@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators';
   template: `
     <div [@fadeInUp] class="grid">
       <div
-        class="col-12 lg:col-12 xl:col-6 col-offset-0 lg:col-offset-0 xl:col-offset-3"
+        class="col-12 lg:col-12 xl:col-8 col-offset-0 lg:col-offset-0 xl:col-offset-2"
       >
         <!-- Back -->
         <p-button
