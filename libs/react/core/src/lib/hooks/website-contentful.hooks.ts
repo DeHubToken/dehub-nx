@@ -688,6 +688,7 @@ export const ProductCommonFragmentDoc = gql`
     currency
     sku
     availableQuantity
+    slug
     category {
       sys {
         ...Sys
@@ -702,7 +703,6 @@ export const ProductFragmentDoc = gql`
   fragment Product on Product {
     ...ProductCommon
     shortDescription
-    slug
   }
   ${ProductCommonFragmentDoc}
 `;

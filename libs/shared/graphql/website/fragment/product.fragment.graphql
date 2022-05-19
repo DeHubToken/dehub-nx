@@ -16,6 +16,7 @@ fragment ProductCommon on Product {
   currency
   sku
   availableQuantity
+  slug
   category {
     sys {
       ...Sys
@@ -28,7 +29,6 @@ fragment ProductCommon on Product {
 fragment Product on Product {
   ...ProductCommon
   shortDescription
-  slug
 }
 
 fragment ProductDetail on Product {

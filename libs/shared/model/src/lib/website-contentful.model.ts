@@ -9134,12 +9134,12 @@ export type PageSectionProductsFragment = {
           | {
               __typename?: 'Product';
               shortDescription?: string | undefined;
-              slug?: string | undefined;
               name?: string | undefined;
               price?: number | undefined;
               currency?: string | undefined;
               sku?: string | undefined;
               availableQuantity?: number | undefined;
+              slug?: string | undefined;
               sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
               picturesCollection?:
                 | {
@@ -9184,12 +9184,12 @@ export type PageSectionProductsFragment = {
                       | {
                           __typename?: 'Product';
                           shortDescription?: string | undefined;
-                          slug?: string | undefined;
                           name?: string | undefined;
                           price?: number | undefined;
                           currency?: string | undefined;
                           sku?: string | undefined;
                           availableQuantity?: number | undefined;
+                          slug?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -9613,12 +9613,12 @@ export type PageShopFragment = {
                       | {
                           __typename?: 'Product';
                           shortDescription?: string | undefined;
-                          slug?: string | undefined;
                           name?: string | undefined;
                           price?: number | undefined;
                           currency?: string | undefined;
                           sku?: string | undefined;
                           availableQuantity?: number | undefined;
+                          slug?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
@@ -9669,12 +9669,12 @@ export type PageShopFragment = {
                                   | {
                                       __typename?: 'Product';
                                       shortDescription?: string | undefined;
-                                      slug?: string | undefined;
                                       name?: string | undefined;
                                       price?: number | undefined;
                                       currency?: string | undefined;
                                       sku?: string | undefined;
                                       availableQuantity?: number | undefined;
+                                      slug?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -10277,6 +10277,7 @@ export type ProductCommonFragment = {
   currency?: string | undefined;
   sku?: string | undefined;
   availableQuantity?: number | undefined;
+  slug?: string | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   picturesCollection?:
     | {
@@ -10305,12 +10306,12 @@ export type ProductCommonFragment = {
 export type ProductFragment = {
   __typename?: 'Product';
   shortDescription?: string | undefined;
-  slug?: string | undefined;
   name?: string | undefined;
   price?: number | undefined;
   currency?: string | undefined;
   sku?: string | undefined;
   availableQuantity?: number | undefined;
+  slug?: string | undefined;
   sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
   picturesCollection?:
     | {
@@ -10345,6 +10346,7 @@ export type ProductDetailFragment = {
   currency?: string | undefined;
   sku?: string | undefined;
   availableQuantity?: number | undefined;
+  slug?: string | undefined;
   fullDescription?:
     | { __typename?: 'ProductFullDescription'; json: any }
     | undefined;
@@ -13360,12 +13362,12 @@ export type PageShopCollectionQuery = {
                                   | {
                                       __typename?: 'Product';
                                       shortDescription?: string | undefined;
-                                      slug?: string | undefined;
                                       name?: string | undefined;
                                       price?: number | undefined;
                                       currency?: string | undefined;
                                       sku?: string | undefined;
                                       availableQuantity?: number | undefined;
+                                      slug?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
@@ -13420,7 +13422,6 @@ export type PageShopCollectionQuery = {
                                                   shortDescription?:
                                                     | string
                                                     | undefined;
-                                                  slug?: string | undefined;
                                                   name?: string | undefined;
                                                   price?: number | undefined;
                                                   currency?: string | undefined;
@@ -13428,6 +13429,7 @@ export type PageShopCollectionQuery = {
                                                   availableQuantity?:
                                                     | number
                                                     | undefined;
+                                                  slug?: string | undefined;
                                                   sys: {
                                                     __typename?: 'Sys';
                                                     publishedAt?:
@@ -14112,6 +14114,7 @@ export type ProductCollectionBySlugQuery = {
               currency?: string | undefined;
               sku?: string | undefined;
               availableQuantity?: number | undefined;
+              slug?: string | undefined;
               fullDescription?:
                 | { __typename?: 'ProductFullDescription'; json: any }
                 | undefined;
@@ -14833,6 +14836,7 @@ export const ProductCommonFragmentDoc = gql`
     currency
     sku
     availableQuantity
+    slug
     category {
       sys {
         ...Sys
@@ -14847,7 +14851,6 @@ export const ProductFragmentDoc = gql`
   fragment Product on Product {
     ...ProductCommon
     shortDescription
-    slug
   }
   ${ProductCommonFragmentDoc}
 `;
