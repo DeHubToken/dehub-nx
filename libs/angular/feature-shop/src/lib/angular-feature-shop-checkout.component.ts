@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CheckoutFormComponent } from './components/checkout-form.component';
 
@@ -9,18 +9,29 @@ import { CheckoutFormComponent } from './components/checkout-form.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureShopCheckoutComponent implements OnInit {
-  constructor(private dialogService: DialogService, private router: Router) {}
+  constructor(
+    private dialogService: DialogService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    const productDetails = this.route.snapshot.data['productDetails'];
+
     const ref = this.dialogService.open(CheckoutFormComponent, {
       showHeader: true,
       header: 'Checkout',
       width: '620px',
-      // height: '100%',
       styleClass: 'bg-gradient-3 border-neon-1',
       closeOnEscape: true,
       dismissableMask: true,
       closable: true,
+      data: {
+        picture: productDetails.picturesCollection?.items[0],
+        name: productDetails.name,
+        availableQuantity: productDetails.availableQuantity,
+        category: productDetails.category,
+      },
     });
 
     ref.onClose.subscribe(() => {

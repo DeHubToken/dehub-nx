@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularFeatureShopCheckoutComponent } from './angular-feature-shop-checkout.component';
 import { AngularFeatureShopProductDetailComponent } from './angular-feature-shop-product-detail.component';
 import { AngularFeatureShopComponent } from './angular-feature-shop.component';
+import { ProductDetailsResolver } from './services/product-details-resolver.service';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       {
         path: ':slug',
         component: AngularFeatureShopCheckoutComponent,
+        resolve: { productDetails: ProductDetailsResolver },
       },
     ],
   },

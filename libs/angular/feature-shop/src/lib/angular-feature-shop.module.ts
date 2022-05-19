@@ -6,6 +6,7 @@ import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
+import { CheckoutFormComponent } from 'libs/angular/feature-shop/src/lib/components/checkout-form.component';
 import { ButtonModule } from 'primeng/button';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
@@ -41,6 +42,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     AngularFeatureShopComponent,
     AngularFeatureShopProductDetailComponent,
     ProductDetailComponent,
+    CheckoutFormComponent,
   ],
 })
 export class AngularFeatureShopModule {}
