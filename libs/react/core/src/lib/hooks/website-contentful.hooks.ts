@@ -693,6 +693,7 @@ export const ProductCommonFragmentDoc = gql`
         ...Sys
       }
       name
+      icon
     }
   }
   ${SysFragmentDoc}

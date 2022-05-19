@@ -21,6 +21,7 @@ fragment ProductCommon on Product {
       ...Sys
     }
     name
+    icon
   }
 }
 

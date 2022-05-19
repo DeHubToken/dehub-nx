@@ -5123,9 +5123,15 @@ export interface ProductSlugArgs {
 export interface ProductCategory extends Entry {
   __typename?: 'ProductCategory';
   contentfulMetadata: ContentfulMetadata;
+  icon?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<ProductCategoryLinkingCollections>;
   name?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/productCategory) */
+export interface ProductCategoryIconArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/productCategory) */
@@ -5150,6 +5156,13 @@ export interface ProductCategoryFilter {
   AND?: InputMaybe<Array<InputMaybe<ProductCategoryFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ProductCategoryFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  icon?: InputMaybe<Scalars['String']>;
+  icon_contains?: InputMaybe<Scalars['String']>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_not?: InputMaybe<Scalars['String']>;
+  icon_not_contains?: InputMaybe<Scalars['String']>;
+  icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5189,6 +5202,8 @@ export interface ProductCategoryLinkingCollectionsProductCollectionArgs {
 }
 
 export enum ProductCategoryOrder {
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -6403,6 +6418,13 @@ export interface CfProductCategoryNestedFilter {
   AND?: InputMaybe<Array<InputMaybe<CfProductCategoryNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfProductCategoryNestedFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  icon?: InputMaybe<Scalars['String']>;
+  icon_contains?: InputMaybe<Scalars['String']>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_not?: InputMaybe<Scalars['String']>;
+  icon_not_contains?: InputMaybe<Scalars['String']>;
+  icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -9108,6 +9130,7 @@ export type PageSectionProductsFragment = {
                 | {
                     __typename?: 'ProductCategory';
                     name?: string | undefined;
+                    icon?: string | undefined;
                     sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
                   }
                 | undefined;
@@ -9160,6 +9183,7 @@ export type PageSectionProductsFragment = {
                             | {
                                 __typename?: 'ProductCategory';
                                 name?: string | undefined;
+                                icon?: string | undefined;
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
@@ -9588,6 +9612,7 @@ export type PageShopFragment = {
                             | {
                                 __typename?: 'ProductCategory';
                                 name?: string | undefined;
+                                icon?: string | undefined;
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
@@ -9645,6 +9670,7 @@ export type PageShopFragment = {
                                         | {
                                             __typename?: 'ProductCategory';
                                             name?: string | undefined;
+                                            icon?: string | undefined;
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
@@ -10238,6 +10264,7 @@ export type ProductCommonFragment = {
     | {
         __typename?: 'ProductCategory';
         name?: string | undefined;
+        icon?: string | undefined;
         sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
       }
     | undefined;
@@ -10271,6 +10298,7 @@ export type ProductFragment = {
     | {
         __typename?: 'ProductCategory';
         name?: string | undefined;
+        icon?: string | undefined;
         sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
       }
     | undefined;
@@ -10305,6 +10333,7 @@ export type ProductDetailFragment = {
     | {
         __typename?: 'ProductCategory';
         name?: string | undefined;
+        icon?: string | undefined;
         sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
       }
     | undefined;
@@ -13330,6 +13359,7 @@ export type PageShopCollectionQuery = {
                                         | {
                                             __typename?: 'ProductCategory';
                                             name?: string | undefined;
+                                            icon?: string | undefined;
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
@@ -13397,6 +13427,9 @@ export type PageShopCollectionQuery = {
                                                     | {
                                                         __typename?: 'ProductCategory';
                                                         name?:
+                                                          | string
+                                                          | undefined;
+                                                        icon?:
                                                           | string
                                                           | undefined;
                                                         sys: {
@@ -14068,6 +14101,7 @@ export type ProductCollectionBySlugQuery = {
                 | {
                     __typename?: 'ProductCategory';
                     name?: string | undefined;
+                    icon?: string | undefined;
                     sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
                   }
                 | undefined;
@@ -14768,6 +14802,7 @@ export const ProductCommonFragmentDoc = gql`
         ...Sys
       }
       name
+      icon
     }
   }
   ${SysFragmentDoc}
