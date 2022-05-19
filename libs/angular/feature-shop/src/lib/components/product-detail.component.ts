@@ -62,15 +62,13 @@ import { ProductDetailFragment } from '@dehub/shared/model';
             <div class="flex-none min-w-full sm:min-w-max xl:w-15rem">
               <!-- Metainfo -->
               <div
-                *ngIf="productDetail.category"
+                *ngIf="productDetail.category as category"
                 class="card overview-box gray shadow-2 pt-1 pb-3 mb-3"
               >
                 <div class="overview-info text-center w-full">
                   <h6 class="pt-3 pb-2 pr-0 mb-0">
-                    <i
-                      [class]="productDetail.category.icon + ' text-xl pr-2'"
-                    ></i>
-                    {{ productDetail.category.name || '' }}
+                    <i [class]="category.icon + ' text-xl pr-2'"></i>
+                    {{ category.name || '' }}
                   </h6>
                 </div>
               </div>
