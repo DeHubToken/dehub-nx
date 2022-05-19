@@ -14,8 +14,9 @@ import { ProductFragment } from '@dehub/shared/model';
       <p-card
         *ngIf="product"
         [header]="product.name ?? ''"
-        styleClass="p-card-shadow h-full"
+        styleClass="product p-card-shadow h-full"
       >
+        <!-- Header -->
         <ng-template pTemplate="header">
           <swiper
             *ngIf="
@@ -37,15 +38,50 @@ import { ProductFragment } from '@dehub/shared/model';
             </ng-container>
           </swiper>
         </ng-template>
-        <p>
-          {{ product.shortDescription }}
-        </p>
+        <!-- Body -->
+        <div
+          class="flex flex-wrap sm:flex-nowrap justify-content-end align-items-start"
+        >
+          <div class="flex-grow pr-3 mb-4">
+            <p>
+              {{ product.shortDescription }}
+            </p>
+          </div>
+
+          <div
+            class="card overview-box gray shadow-2 flex-none pt-1 pb-3 min-w-full sm:min-w-max"
+          >
+            <div class="overview-info text-right w-full">
+              <!-- <h5 class="pr-0 mb-0">Price</h5>
+              <hr class="my-0 border-dashed" /> -->
+              <h3 class="mt-1 mb-0 pr-0">10,000</h3>
+              <h6 class="text-sm mb-2 opacity-80">DeHub</h6>
+
+              <h6 class="my-0 text-sm inline-block">
+                <hr class="my-0 pb-1 border-dashed" />
+                <span class="opacity-80 uppercase text-xs text-bold pr-1"
+                  >Quantity:</span
+                >
+                <span class="text-bold opacity-80">123</span>
+              </h6>
+            </div>
+          </div>
+        </div>
+        <!-- Footer -->
         <ng-template pTemplate="footer">
-          <p-button
-            [routerLink]="['/shop/' + product.slug]"
-            label="Details"
-            styleClass="p-button-secondary"
-          ></p-button>
+          <div class="flex justify-content-end">
+            <p-button
+              [routerLink]="['/shop/' + product.slug]"
+              label="Details"
+              styleClass="p-button-secondary p-button-lg"
+            ></p-button>
+            <p-button
+              [routerLink]="['/shop/' + product.slug]"
+              label="Buy"
+              icon="fa-solid fa-check"
+              styleClass="p-button-primary p-button-lg ml-2"
+            ></p-button>
+          </div>
         </ng-template>
       </p-card>
     </div>
