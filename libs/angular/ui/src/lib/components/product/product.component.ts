@@ -93,11 +93,26 @@ import { ProductFragment } from '@dehub/shared/model';
               styleClass="p-button-secondary p-button-lg w-full"
             ></p-button>
             <p-button
-              [routerLink]="['/shop/' + product.slug]"
+              *ngIf="
+                product.availableQuantity && product.availableQuantity > 0;
+                else buyDisabled
+              "
+              [routerLink]="[
+                './',
+                { outlets: { modal: ['checkout', product.slug] } }
+              ]"
               label="Buy"
               class="w-6 md:w-auto"
               styleClass="p-button-primary p-button-lg ml-2 w-full"
             ></p-button>
+            <ng-template #buyDisabled>
+              <p-button
+                label="Sold Out"
+                class="w-6 md:w-auto"
+                styleClass="p-button-primary p-button-lg ml-2 w-full"
+                [disabled]="true"
+              ></p-button>
+            </ng-template>
           </div>
         </ng-template>
       </p-card>

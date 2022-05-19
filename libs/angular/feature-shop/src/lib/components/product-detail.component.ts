@@ -102,6 +102,12 @@ import { ProductDetailFragment } from '@dehub/shared/model';
                       }}</span>
 
                       <p-button
+                        [routerLink]="[
+                          '/shop',
+                          {
+                            outlets: { modal: ['checkout', productDetail.slug] }
+                          }
+                        ]"
                         label="Buy"
                         icon="fa-solid fa-check"
                         styleClass="p-button-primary p-button-lg mt-3 block w-full"

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularFeatureShopComponent } from '././angular-feature-shop.component';
+import { AngularFeatureShopCheckoutComponent } from './angular-feature-shop-checkout.component';
 import { AngularFeatureShopProductDetailComponent } from './angular-feature-shop-product-detail.component';
+import { AngularFeatureShopComponent } from './angular-feature-shop.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,16 @@ const routes: Routes = [
   {
     path: ':slug',
     component: AngularFeatureShopProductDetailComponent,
+  },
+  {
+    path: 'checkout',
+    outlet: 'modal',
+    children: [
+      {
+        path: ':slug',
+        component: AngularFeatureShopCheckoutComponent,
+      },
+    ],
   },
 ];
 
