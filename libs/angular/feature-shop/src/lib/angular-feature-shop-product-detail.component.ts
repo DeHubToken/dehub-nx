@@ -1,17 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductCollectionBySlugService } from '@dehub/angular/graphql';
-import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
 import { ProductDetailFragment } from '@dehub/shared/model';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 @Component({
   template: `
     <div [@fadeInUp] class="grid">
@@ -29,7 +19,7 @@ import { map } from 'rxjs/operators';
 
         <!-- Basic Post Detail -->
         <dhb-product-detail
-          [productDetail]="(productDetail$ | async)!"
+          [productDetail]="productDetails"
         ></dhb-product-detail>
       </div>
     </div>
@@ -38,27 +28,11 @@ import { map } from 'rxjs/operators';
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
 })
 export class AngularFeatureShopProductDetailComponent implements OnInit {
-  productDetail$!: Observable<ProductDetailFragment | undefined>;
+  productDetails?: ProductDetailFragment;
 
-  constructor(
-    @Inject(EnvToken) private env: SharedEnv,
-    private route: ActivatedRoute,
-    private productDetailsBySlugService: ProductCollectionBySlugService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const slug = this.route.snapshot.paramMap.get('slug') ?? undefined;
-
-    this.productDetail$ = this.productDetailsBySlugService
-      .fetch({
-        slug,
-        isPreview: this.env.contentful.isPreview,
-      })
-      .pipe(
-        map(
-          ({ data: { productCollection } }) =>
-            productCollection?.items[0] ?? undefined
-        )
-      );
+    this.productDetails = this.route.snapshot.data['productDetails'];
   }
 }

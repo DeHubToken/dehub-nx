@@ -13,6 +13,7 @@ const routes: Routes = [
   {
     path: ':slug',
     component: AngularFeatureShopProductDetailComponent,
+    resolve: { productDetails: ProductDetailsResolver },
   },
   {
     path: 'checkout',
