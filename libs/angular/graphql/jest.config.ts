@@ -1,6 +1,7 @@
-module.exports = {
-  displayName: 'web',
-  preset: '../../jest.preset.js',
+/* eslint-disable */
+export default {
+  displayName: 'angular-graphql',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,8 +9,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
-  coverageDirectory: '../../coverage/apps/web',
+  coverageDirectory: '../../../coverage/libs/angular/graphql',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

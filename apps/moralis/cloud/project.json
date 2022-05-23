@@ -1,5 +1,4 @@
 {
-  "root": "apps/moralis/cloud",
   "sourceRoot": "apps/moralis/cloud/src",
   "projectType": "application",
   "targets": {
@@ -52,7 +51,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/moralis/cloud"],
       "options": {
-        "jestConfig": "apps/moralis/cloud/jest.config.js",
+        "jestConfig": "apps/moralis/cloud/jest.config.ts",
         "passWithNoTests": true
       }
     },

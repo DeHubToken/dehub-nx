@@ -1,9 +1,10 @@
-module.exports = {
-  displayName: 'react-pcsuikit',
+/* eslint-disable */
+export default {
+  displayName: 'react-core',
   preset: '../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/react/pcsuikit',
+  coverageDirectory: '../../../coverage/libs/react/core',
 };

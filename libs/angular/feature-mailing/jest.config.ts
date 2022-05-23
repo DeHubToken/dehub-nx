@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'angular-feature-news',
+/* eslint-disable */
+export default {
+  displayName: 'angular-feature-mailing',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +9,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/angular/feature-news',
+  coverageDirectory: '../../../coverage/libs/angular/feature-mailing',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

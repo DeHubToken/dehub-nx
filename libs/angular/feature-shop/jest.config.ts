@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'angular-feature-legal',
+/* eslint-disable */
+export default {
+  displayName: 'angular-feature-shop',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +9,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/angular/feature-legal',
+  coverageDirectory: '../../../coverage/libs/angular/feature-shop',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

@@ -1,13 +1,15 @@
 import { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 import App from './app/app';
 import Providers from './app/Providers';
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+root.render(
   <StrictMode>
     <Providers>
       <App />
     </Providers>
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 );
