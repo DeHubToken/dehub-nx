@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GraphQLModule } from '@dehub/angular/graphql';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
@@ -7,6 +8,7 @@ import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/con
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { ButtonModule } from 'primeng/button';
+import { InputNumberModule } from 'primeng/inputnumber';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
 import { AngularFeatureShopProductDetailComponent } from './angular-feature-shop-product-detail.component';
@@ -21,6 +23,8 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
   imports: [
     // Angular
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     // Libs
     GraphQLModule,
@@ -32,6 +36,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 
     // PrimeNg
     ButtonModule,
+    InputNumberModule,
 
     // Swiper
     SwiperModule,
