@@ -1,11 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { Asset, ProductCategory } from '@dehub/shared/model';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Asset, PhysicalAddress, ProductCategory } from '@dehub/shared/model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
@@ -56,17 +51,13 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
       </div>
 
       <!-- Quantity selection -->
-      <form
-        [formGroup]="availabilityForm"
-        #f="ngForm"
-        class="p-fluid grid mt-5"
-      >
+      <form [formGroup]="availabilityForm" class="p-fluid grid mt-5">
         <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
           <span class="p-float-label">
             <p-inputNumber
               inputId="selectedquantity"
               formControlName="quantity"
-              [(ngModel)]="selectedQuantity"
+              [(ngModel)]="availabilityForm.value.quantity"
               [ariaLabel]="'Quantity'"
               [ariaRequired]="true"
               [min]="1"
@@ -74,18 +65,25 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
               [allowEmpty]="false"
               [showButtons]="true"
             ></p-inputNumber>
-            <label for="inputnumber">Quantity</label>
+            <label for="selectedquantity">Quantity</label>
           </span>
         </div>
       </form>
+
+      <!-- Shipping Address -->
+      <h5>Shipping Address</h5>
+      <dhb-address-form
+        (valuesChanged)="shippingAddress = $event"
+        (isValid)="isShippingAddressFormValid = $event"
+      ></dhb-address-form>
 
       <!-- Total -->
       <div class="grid">
         <div class="col-12">
           <div class="flex flex-column justify-content-end text-right">
             <h5 class="align-self-end mb-1">Total</h5>
-            <h3 class="align-self-end border-top-1 text-bold mt-0 pl-8">
-              {{ product.price * selectedQuantity | number }}
+            <h3 class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1">
+              {{ product.price * availabilityForm.value.quantity | number }}
               <span class="text-sm">{{ product.currency }}</span>
             </h3>
           </div>
@@ -142,13 +140,15 @@ export class CheckoutFormComponent<
 > implements OnInit
 {
   product?: P;
-  // Form
-  isAllValid = false;
-  selectedQuantity = 1;
-  @ViewChild('f', { static: true }) f?: NgForm;
+
+  // Availability form
   availabilityForm = new FormGroup({
-    quantity: new FormControl(undefined),
+    quantity: new FormControl(1),
   });
+
+  // Shipping address form
+  isShippingAddressFormValid = false;
+  shippingAddress?: PhysicalAddress;
 
   constructor(
     public config: DynamicDialogConfig,
@@ -160,7 +160,9 @@ export class CheckoutFormComponent<
   }
 
   isAllFormsValid() {
-    return [this.availabilityForm.valid].every(Boolean);
+    return [this.availabilityForm.valid, this.isShippingAddressFormValid].every(
+      Boolean
+    );
   }
 
   onConfirm() {}
