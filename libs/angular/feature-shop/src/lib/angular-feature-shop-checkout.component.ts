@@ -31,6 +31,8 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
         name: productDetails.name,
         availableQuantity: productDetails.availableQuantity,
         category: productDetails.category,
+        price: productDetails.price,
+        currency: productDetails.currency,
       },
     });
 

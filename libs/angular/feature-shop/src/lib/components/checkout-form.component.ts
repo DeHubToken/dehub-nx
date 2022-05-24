@@ -79,6 +79,19 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
         </div>
       </form>
 
+      <!-- Total -->
+      <div class="grid">
+        <div class="col-12">
+          <div class="flex flex-column justify-content-end text-right">
+            <h5 class="align-self-end mb-1">Total</h5>
+            <h3 class="align-self-end border-top-1 text-bold mt-0 pl-8">
+              {{ product.price * selectedQuantity | number }}
+              <span class="text-sm">{{ product.currency }}</span>
+            </h3>
+          </div>
+        </div>
+      </div>
+
       <!-- Footer -->
       <div class="grid">
         <div
@@ -95,7 +108,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
             icon="fa-regular fa-check"
             class="w-5"
             styleClass="p-button-primary p-button-lg w-full"
-            [disabled]="!isAllValid"
+            [disabled]="!isAllFormsValid()"
+            (click)="onConfirm()"
           ></p-button>
         </div>
       </div>
@@ -122,6 +136,8 @@ export class CheckoutFormComponent<
     name: string;
     availableQuantity: number;
     category: ProductCategory;
+    price: number;
+    currency: string;
   }
 > implements OnInit
 {
@@ -141,10 +157,11 @@ export class CheckoutFormComponent<
 
   ngOnInit() {
     this.product = this.config.data;
-
-    // Check if all forms validity changed on each keystroke.
-    this.availabilityForm.valueChanges.subscribe(
-      () => (this.isAllValid = this.availabilityForm.valid)
-    );
   }
+
+  isAllFormsValid() {
+    return [this.availabilityForm.valid].every(Boolean);
+  }
+
+  onConfirm() {}
 }
