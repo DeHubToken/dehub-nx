@@ -10,7 +10,9 @@ import { Provider } from 'react-redux';
 import { environment } from '../environments/environment';
 import store from './state';
 
-const Providers: React.FC = ({ children }) => {
+const Providers: React.FC<{
+  children?: React.ReactNode;
+}> = ({ children }) => {
   return (
     <ToastProvider>
       <Web3Providers moralis={environment.moralis} web3={environment.web3}>
