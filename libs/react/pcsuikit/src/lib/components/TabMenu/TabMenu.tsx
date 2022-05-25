@@ -1,4 +1,4 @@
-import React, { cloneElement, Children, ReactElement } from 'react';
+import React, { Children, cloneElement, ReactElement } from 'react';
 import styled from 'styled-components';
 import Flex from '../Box/Flex';
 import { TabMenuProps } from './types';

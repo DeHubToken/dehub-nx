@@ -1,6 +1,6 @@
-import React, { cloneElement, Children, ReactElement } from 'react';
-import StyledButtonMenu from './StyledButtonMenu';
+import React, { cloneElement, ReactElement } from 'react';
 import { scales, variants } from '../Button/types';
+import StyledButtonMenu from './StyledButtonMenu';
 import { ButtonMenuProps } from './types';
 
 const ButtonMenu: React.FC<ButtonMenuProps> = ({
@@ -12,14 +12,17 @@ const ButtonMenu: React.FC<ButtonMenuProps> = ({
 }) => {
   return (
     <StyledButtonMenu variant={variant}>
-      {Children.map(children, (child: ReactElement, index) => {
-        return cloneElement(child, {
-          isActive: activeIndex === index,
-          onClick: onItemClick ? () => onItemClick(index) : undefined,
-          scale,
-          variant,
-        });
-      })}
+      {React.Children.map(
+        children as ReactElement | ReactElement[],
+        (child: ReactElement, index) => {
+          return cloneElement(child, {
+            isActive: activeIndex === index,
+            onClick: onItemClick ? () => onItemClick(index) : undefined,
+            scale,
+            variant,
+          });
+        }
+      )}
     </StyledButtonMenu>
   );
 };

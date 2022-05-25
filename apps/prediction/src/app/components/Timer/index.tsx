@@ -1,6 +1,6 @@
-import React from 'react';
+import { Flex, Heading, Link, Text, useTooltip } from '@dehub/react/pcsuikit';
+import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
-import { Flex, Heading, Text, Link, useTooltip } from '@dehub/react/pcsuikit';
 import { useTranslation } from '../../contexts/Localization';
 import { ContextApi } from '../../contexts/Localization/types';
 
@@ -47,12 +47,18 @@ const Timer = ({
   );
 };
 
-const DefaultHeadingTextComponent: React.FC = ({ children, ...props }) => (
+const DefaultHeadingTextComponent: React.FC<PropsWithChildren<unknown>> = ({
+  children,
+  ...props
+}) => (
   <Heading scale="lg" {...props}>
     {children}
   </Heading>
 );
-const DefaultBodyTextComponent: React.FC = ({ children, ...props }) => (
+const DefaultBodyTextComponent: React.FC<PropsWithChildren<unknown>> = ({
+  children,
+  ...props
+}) => (
   <Text fontSize="16px" fontWeight="600" {...props}>
     {children}
   </Text>
