@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Asset, PhysicalAddress, ProductCategory } from '@dehub/shared/model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
@@ -70,6 +75,36 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
         </div>
       </form>
 
+      <!-- Contact -->
+      <h5>Contact Details</h5>
+      <form [formGroup]="contactForm" class="p-fluid grid pt-2">
+        <!-- Email -->
+        <div class="field col-12 sm:col-5">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+              <i class="fa-duotone fa-envelope"></i>
+            </span>
+            <span class="p-float-label">
+              <input
+                formControlName="email"
+                type="text"
+                id="email"
+                autocomplete="email"
+                pInputText
+              />
+              <label for="email" class="pr-5">Email Address</label>
+            </span>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="field col-12 sm:col-7 p-fluid">
+          <dhb-phone-input
+            [formControl]="contactForm.controls['phone'] | as: FormControl"
+          ></dhb-phone-input>
+        </div>
+      </form>
+
       <!-- Shipping Address -->
       <h5>Shipping Address</h5>
       <dhb-address-form
@@ -124,8 +159,18 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
         white-space: nowrap;
         overflow: hidden;
       }
+      /* Can't use latest primeflex due to:
+      https://github.com/primefaces/primeflex/issues/91#issuecomment-1129216617
+      Once fixed, add styleClass="border-noround-left" to p-inputMask and remove 
+      this together with ViewEncapsulation.None.
+      */
+      .p-inputgroup input:first-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     `,
   ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutFormComponent<
@@ -140,6 +185,14 @@ export class CheckoutFormComponent<
 > implements OnInit
 {
   product?: P;
+  FormControl = FormControl;
+
+  // Contact Form
+  selectedCountry?: string;
+  contactForm = new FormGroup({
+    email: new FormControl(undefined, [Validators.required, Validators.email]),
+    phone: new FormControl(undefined, [Validators.required]),
+  });
 
   // Availability form
   availabilityForm = new FormGroup({
@@ -160,9 +213,11 @@ export class CheckoutFormComponent<
   }
 
   isAllFormsValid() {
-    return [this.availabilityForm.valid, this.isShippingAddressFormValid].every(
-      Boolean
-    );
+    return [
+      this.availabilityForm.valid,
+      this.contactForm.valid,
+      this.isShippingAddressFormValid,
+    ].every(Boolean);
   }
 
   onConfirm() {}

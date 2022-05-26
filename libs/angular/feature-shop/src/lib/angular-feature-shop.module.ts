@@ -5,11 +5,14 @@ import { GraphQLModule } from '@dehub/angular/graphql';
 import { AddressFormModule } from '@dehub/angular/ui/components/address-form';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
+import { PhoneInputModule } from '@dehub/angular/ui/components/phone-input';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { AsPipeModule } from '@dehub/angular/ui/pipes/as';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
 import { AngularFeatureShopProductDetailComponent } from './angular-feature-shop-product-detail.component';
@@ -35,11 +38,13 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     PageHeaderModule,
     PageSectionsModule,
     AddressFormModule,
+    PhoneInputModule,
+    AsPipeModule,
 
     // PrimeNg
     ButtonModule,
     InputNumberModule,
-
+    InputTextModule,
     // Swiper
     SwiperModule,
 
