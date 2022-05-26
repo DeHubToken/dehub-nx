@@ -1,0 +1,208 @@
+import { HttpClient } from '@angular/common/http';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Self,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  ControlContainer,
+  ControlValueAccessor,
+  FormControl,
+  FormControlStatus,
+  FormGroup,
+  FormGroupDirective,
+  NgControl,
+  Validators,
+} from '@angular/forms';
+import { EnvToken } from '@dehub/angular/model';
+import { SharedEnv } from '@dehub/shared/config';
+import { Country } from '@dehub/shared/model';
+import {
+  PhoneNumber,
+  PhoneNumberFormat,
+  PhoneNumberUtil,
+} from 'google-libphonenumber';
+import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
+import { PhoneNumberValidator } from '../../validators/phone-number.validator';
+
+export const NOOP_VALUE_ACCESSOR: ControlValueAccessor = {
+  writeValue(): void {},
+  registerOnChange(): void {},
+  registerOnTouched(): void {},
+};
+
+@Component({
+  selector: 'dhb-phone-input',
+  template: `
+    <div
+      *ngIf="countries$ | async as countries"
+      [formGroup]="phoneForm"
+      class="grid grid-nogutter"
+    >
+      <!-- Country -->
+      <div id="phone-code" class="col-fixed" style="width:80px">
+        <span class="p-float-label">
+          <p-dropdown
+            [formControlName]="'code'"
+            [inputId]="'code'"
+            [options]="countries"
+            [filter]="true"
+            [filterBy]="'name'"
+            [(ngModel)]="selectedCountryCode"
+            [optionLabel]="'name'"
+            [optionValue]="'code'"
+            [required]="true"
+            [autoDisplayFirst]="false"
+            (ngModelChange)="onCountryChange($event, countries)"
+          >
+            <ng-template pTemplate="selectedItem">
+              <div class="country-item country-item-value">
+                <div *ngIf="selectedCountry">
+                  {{ selectedCountry.phoneCode }}
+                </div>
+              </div>
+            </ng-template>
+            <ng-template let-country pTemplate="item">
+              <div class="country-item">
+                <div>{{ country.name }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <label for="code" class="pr-5">Code</label>
+        </span>
+      </div>
+      <!-- Number -->
+      <div id="phone-number" class="field col">
+        <span class="p-float-label">
+          <input
+            id="number"
+            type="number"
+            autocomplete="phone"
+            pInputText
+            [formControlName]="'number'"
+            [required]="true"
+          />
+          <label for="number" class="pr-5">Phone Number</label>
+        </span>
+      </div>
+    </div>
+  `,
+  styles: [
+    `
+      #phone-code .p-dropdown {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      #phone-code .country-item {
+        min-width: 250px;
+      }
+      #phone-number {
+        margin-left: -1px;
+      }
+      #phone-number input {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        -moz-appearance: textfield;
+      }
+      #phone-number input::-webkit-outer-spin-button,
+      #phone-number input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    `,
+  ],
+  // Issue ref: https://github.com/primefaces/primeng/issues/9741
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useExisting: FormGroupDirective,
+    },
+  ],
+})
+export class PhoneInputComponent implements OnInit, OnDestroy {
+  private subs = new Subscription();
+  path = this.env.baseUrl;
+
+  phoneNumberUtil = PhoneNumberUtil.getInstance();
+
+  countries$: Observable<Country[]> = this.httpClient.get<Country[]>(
+    `${this.path}/assets/dehub/data/countries.json`
+  );
+
+  // Form
+  selectedCountry?: Country;
+  selectedCountryCode = '';
+  phoneForm = new FormGroup({
+    code: new FormControl(undefined),
+    number: new FormControl({ value: '', disabled: true }, [
+      PhoneNumberValidator(() => this.selectedCountry?.code),
+    ]),
+  });
+
+  constructor(
+    @Self() @Optional() public ngControl: NgControl,
+    @Inject(EnvToken) private env: SharedEnv,
+    private httpClient: HttpClient
+  ) {
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = NOOP_VALUE_ACCESSOR;
+    }
+  }
+
+  ngOnInit() {
+    // Ref: https://stackoverflow.com/a/67096422/1617590
+    this.phoneForm.setValidators(() =>
+      Validators.required(this.phoneForm.controls['number'])
+    );
+
+    this.subs.add(
+      this.phoneForm.statusChanges
+        .pipe(distinctUntilChanged())
+        .subscribe((status: FormControlStatus) => {
+          const country = this.selectedCountry;
+          if (country) {
+            const phoneNumber = new PhoneNumber();
+            const numberControl = this.phoneForm.controls['number'];
+            phoneNumber.setCountryCode(parseInt(country.phoneCode));
+            phoneNumber.setNationalNumber(parseInt(numberControl.value));
+            this.ngControl.control?.setValue(
+              this.phoneNumberUtil.format(
+                phoneNumber,
+                PhoneNumberFormat.INTERNATIONAL
+              )
+            );
+            if (status === 'INVALID') {
+              this.ngControl.control?.setErrors({ phoneInvalid: true });
+            }
+          }
+        })
+    );
+  }
+
+  getCountry(countries: Country[], countryCode: string) {
+    return countries.find(country => country.code === countryCode);
+  }
+
+  onCountryChange(countryCode: string, countries: Country[]) {
+    const country = this.getCountry(countries, countryCode);
+    const numberControl = this.phoneForm.controls['number'];
+    if (country) {
+      this.selectedCountry = country;
+      numberControl.enable();
+    } else {
+      numberControl.disable();
+    }
+    this.phoneForm.updateValueAndValidity();
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+}
