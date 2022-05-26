@@ -3380,7 +3380,6 @@ export interface PageSectionFaQsLinkingCollections {
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
-  pageShopCollection?: Maybe<PageShopCollection>;
   pageStreamCollection?: Maybe<PageStreamCollection>;
 }
 
@@ -3420,13 +3419,6 @@ export interface PageSectionFaQsLinkingCollectionsPageHomeCollectionArgs {
 }
 
 export interface PageSectionFaQsLinkingCollectionsPageLearnCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionFaQsLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -4695,7 +4687,6 @@ export interface PageShopSectionsCollection {
 
 export type PageShopSectionsItem =
   | PageSectionBasicPosts
-  | PageSectionFaQs
   | PageSectionFeaturePosts
   | PageSectionGrandPosts
   | PageSectionIconTiles
@@ -5054,11 +5045,13 @@ export enum PersonPostOrder {
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface Product extends Entry {
   __typename?: 'Product';
+  availableColors?: Maybe<Array<Maybe<Scalars['String']>>>;
   availableQuantity?: Maybe<Scalars['Int']>;
+  availableSizes?: Maybe<Array<Maybe<Scalars['String']>>>;
   category?: Maybe<ProductCategory>;
   contentfulMetadata: ContentfulMetadata;
   currency?: Maybe<Scalars['String']>;
-  fullDescription?: Maybe<Scalars['String']>;
+  fullDescription?: Maybe<ProductFullDescription>;
   linkedFrom?: Maybe<ProductLinkingCollections>;
   name?: Maybe<Scalars['String']>;
   picturesCollection?: Maybe<AssetCollection>;
@@ -5070,7 +5063,17 @@ export interface Product extends Entry {
 }
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductAvailableColorsArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface ProductAvailableQuantityArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductAvailableSizesArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
@@ -5132,9 +5135,15 @@ export interface ProductSlugArgs {
 export interface ProductCategory extends Entry {
   __typename?: 'ProductCategory';
   contentfulMetadata: ContentfulMetadata;
+  icon?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<ProductCategoryLinkingCollections>;
   name?: Maybe<Scalars['String']>;
   sys: Sys;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/productCategory) */
+export interface ProductCategoryIconArgs {
+  locale?: InputMaybe<Scalars['String']>;
 }
 
 /** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/productCategory) */
@@ -5159,6 +5168,13 @@ export interface ProductCategoryFilter {
   AND?: InputMaybe<Array<InputMaybe<ProductCategoryFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ProductCategoryFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  icon?: InputMaybe<Scalars['String']>;
+  icon_contains?: InputMaybe<Scalars['String']>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_not?: InputMaybe<Scalars['String']>;
+  icon_not_contains?: InputMaybe<Scalars['String']>;
+  icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5198,6 +5214,8 @@ export interface ProductCategoryLinkingCollectionsProductCollectionArgs {
 }
 
 export enum ProductCategoryOrder {
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -5221,6 +5239,16 @@ export interface ProductCollection {
 export interface ProductFilter {
   AND?: InputMaybe<Array<InputMaybe<ProductFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ProductFilter>>>;
+  availableColors_contains_all?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableColors_contains_none?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableColors_contains_some?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableColors_exists?: InputMaybe<Scalars['Boolean']>;
   availableQuantity?: InputMaybe<Scalars['Int']>;
   availableQuantity_exists?: InputMaybe<Scalars['Boolean']>;
   availableQuantity_gt?: InputMaybe<Scalars['Int']>;
@@ -5230,6 +5258,16 @@ export interface ProductFilter {
   availableQuantity_lte?: InputMaybe<Scalars['Int']>;
   availableQuantity_not?: InputMaybe<Scalars['Int']>;
   availableQuantity_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  availableSizes_contains_all?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableSizes_contains_none?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableSizes_contains_some?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>>
+  >;
+  availableSizes_exists?: InputMaybe<Scalars['Boolean']>;
   category?: InputMaybe<CfProductCategoryNestedFilter>;
   category_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
@@ -5240,13 +5278,9 @@ export interface ProductFilter {
   currency_not?: InputMaybe<Scalars['String']>;
   currency_not_contains?: InputMaybe<Scalars['String']>;
   currency_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  fullDescription?: InputMaybe<Scalars['String']>;
   fullDescription_contains?: InputMaybe<Scalars['String']>;
   fullDescription_exists?: InputMaybe<Scalars['Boolean']>;
-  fullDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  fullDescription_not?: InputMaybe<Scalars['String']>;
   fullDescription_not_contains?: InputMaybe<Scalars['String']>;
-  fullDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5286,6 +5320,31 @@ export interface ProductFilter {
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
+}
+
+export interface ProductFullDescription {
+  __typename?: 'ProductFullDescription';
+  json: Scalars['JSON'];
+  links: ProductFullDescriptionLinks;
+}
+
+export interface ProductFullDescriptionAssets {
+  __typename?: 'ProductFullDescriptionAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+}
+
+export interface ProductFullDescriptionEntries {
+  __typename?: 'ProductFullDescriptionEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+}
+
+export interface ProductFullDescriptionLinks {
+  __typename?: 'ProductFullDescriptionLinks';
+  assets: ProductFullDescriptionAssets;
+  entries: ProductFullDescriptionEntries;
 }
 
 export interface ProductLinkingCollections {
@@ -6391,6 +6450,13 @@ export interface CfProductCategoryNestedFilter {
   AND?: InputMaybe<Array<InputMaybe<CfProductCategoryNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfProductCategoryNestedFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  icon?: InputMaybe<Scalars['String']>;
+  icon_contains?: InputMaybe<Scalars['String']>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_not?: InputMaybe<Scalars['String']>;
+  icon_not_contains?: InputMaybe<Scalars['String']>;
+  icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
