@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import {
   ControlContainer,
-  ControlValueAccessor,
   FormControl,
   FormControlStatus,
   FormGroup,
@@ -19,7 +18,7 @@ import {
   NgControl,
   Validators,
 } from '@angular/forms';
-import { EnvToken } from '@dehub/angular/model';
+import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { Country } from '@dehub/shared/model';
 import {
@@ -29,12 +28,6 @@ import {
 } from 'google-libphonenumber';
 import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
 import { PhoneNumberValidator } from '../../validators/phone-number.validator';
-
-export const NOOP_VALUE_ACCESSOR: ControlValueAccessor = {
-  writeValue(): void {},
-  registerOnChange(): void {},
-  registerOnTouched(): void {},
-};
 
 @Component({
   selector: 'dhb-phone-input',
@@ -152,6 +145,9 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
     private httpClient: HttpClient
   ) {
     if (this.ngControl) {
+      // Note: we provide the value accessor through here, instead of
+      // the `providers` to avoid running into a circular import.
+      // And we use NOOP_VALUE_ACCESSOR so WrappedInput don't do anything with NgControl
       this.ngControl.valueAccessor = NOOP_VALUE_ACCESSOR;
     }
   }
