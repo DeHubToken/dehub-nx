@@ -7,7 +7,6 @@ import {
   OnInit,
   Optional,
   Self,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   ControlContainer,
@@ -51,6 +50,7 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
             [optionValue]="'code'"
             [required]="true"
             [autoDisplayFirst]="false"
+            [styleClass]="'border-noround-right'"
             (ngModelChange)="onCountryChange($event, countries)"
           >
             <ng-template pTemplate="selectedItem">
@@ -79,6 +79,7 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
             pInputText
             [formControlName]="'number'"
             [required]="true"
+            class="border-noround-left"
           />
           <label for="number" class="pr-5">Phone Number</label>
         </span>
@@ -87,10 +88,6 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
   `,
   styles: [
     `
-      #phone-code .p-dropdown {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
       #phone-code .country-item {
         min-width: 250px;
       }
@@ -98,8 +95,6 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
         margin-left: -1px;
       }
       #phone-number input {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
         -moz-appearance: textfield;
       }
       #phone-number input::-webkit-outer-spin-button,
@@ -109,8 +104,6 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
       }
     `,
   ],
-  // Issue ref: https://github.com/primefaces/primeng/issues/9741
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   viewProviders: [
     {

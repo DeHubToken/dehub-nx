@@ -159,18 +159,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
         white-space: nowrap;
         overflow: hidden;
       }
-      /* Can't use latest primeflex due to:
-      https://github.com/primefaces/primeflex/issues/91#issuecomment-1129216617
-      Once fixed, add styleClass="border-noround-left" to p-inputMask and remove 
-      this together with ViewEncapsulation.None.
-      */
-      .p-inputgroup input:first-child {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
     `,
   ],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutFormComponent<

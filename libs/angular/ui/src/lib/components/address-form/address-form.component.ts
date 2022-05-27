@@ -115,6 +115,7 @@ import { Observable } from 'rxjs';
               optionValue="code"
               [required]="true"
               [autoDisplayFirst]="false"
+              [styleClass]="'flex w-full border-noround-left'"
             >
               <ng-template pTemplate="selectedItem">
                 <div
@@ -181,11 +182,7 @@ import { Observable } from 'rxjs';
   styles: [
     `
       /* Issue ref: https://github.com/primefaces/primeng/issues/9741 */
-      .p-inputgroup .p-inputwrapper > .p-component {
-        flex: 1 1 auto;
-        width: 100%;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+      #country-select {
         .p-dropdown-filter {
           width: 100%;
         }
