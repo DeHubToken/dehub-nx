@@ -2,17 +2,25 @@ import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Inject,
+  OnDestroy,
   OnInit,
-  Output,
+  Optional,
+  Self,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EnvToken } from '@dehub/angular/model';
+import {
+  ControlContainer,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgControl,
+  Validators,
+} from '@angular/forms';
+import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { Country, PhysicalAddress } from '@dehub/shared/model';
-import { Observable } from 'rxjs';
+import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'dhb-address-form',
@@ -193,8 +201,15 @@ import { Observable } from 'rxjs';
   // Issue ref: https://github.com/primefaces/primeng/issues/9741
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useExisting: FormGroupDirective,
+    },
+  ],
 })
-export class AddressFormComponent implements OnInit {
+export class AddressFormComponent implements OnInit, OnDestroy {
+  private sub?: Subscription;
   path = this.env.baseUrl;
 
   countries$: Observable<Country[]> = this.httpClient.get<Country[]>(
@@ -213,23 +228,38 @@ export class AddressFormComponent implements OnInit {
     state: new FormControl(undefined, Validators.required),
   });
 
-  @Output() readonly valuesChanged = new EventEmitter<PhysicalAddress>();
-  @Output() readonly isValid = new EventEmitter<boolean>();
-
   constructor(
+    @Self() @Optional() public ngControl: NgControl,
     @Inject(EnvToken) private env: SharedEnv,
     private httpClient: HttpClient
-  ) {}
+  ) {
+    if (this.ngControl) {
+      // Note: we provide the value accessor through here, instead of
+      // the `providers` to avoid running into a circular import.
+      // And we use NOOP_VALUE_ACCESSOR so WrappedInput don't do anything with NgControl
+      this.ngControl.valueAccessor = NOOP_VALUE_ACCESSOR;
+    }
+  }
 
   ngOnInit() {
     // Subscribe to form changes and emit on each change to the parent component.
-    this.shippingAddressForm.valueChanges.subscribe((v: PhysicalAddress) => {
-      this.valuesChanged.emit(v);
-      this.isValid.emit(this.shippingAddressForm.valid);
-    });
+    this.sub = this.shippingAddressForm.valueChanges
+      .pipe(distinctUntilChanged())
+      .subscribe((v: PhysicalAddress) => {
+        this.ngControl.control?.setValue(v);
+        if (!this.shippingAddressForm.valid) {
+          this.ngControl.control?.setErrors({ addressInvalid: true });
+        }
+      });
   }
 
   findCountry(countries: Country[], code: string) {
     return countries.find(country => country.code === code);
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

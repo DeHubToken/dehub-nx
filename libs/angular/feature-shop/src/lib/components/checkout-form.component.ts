@@ -1,11 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Asset, PhysicalAddress, ProductCategory } from '@dehub/shared/model';
+import { Asset, ProductCategory } from '@dehub/shared/model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
@@ -108,8 +103,9 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
       <!-- Shipping Address -->
       <h5>Shipping Address</h5>
       <dhb-address-form
-        (valuesChanged)="shippingAddress = $event"
-        (isValid)="isShippingAddressFormValid = $event"
+        [formControl]="
+          shippingAddressForm.controls['address'] | as: FormControl
+        "
       ></dhb-address-form>
 
       <!-- Total -->
@@ -175,23 +171,23 @@ export class CheckoutFormComponent<
 > implements OnInit
 {
   product?: P;
-  FormControl = FormControl;
-
-  // Contact Form
-  selectedCountry?: string;
-  contactForm = new FormGroup({
-    email: new FormControl(undefined, [Validators.required, Validators.email]),
-    phone: new FormControl(undefined, [Validators.required]),
-  });
+  FormControl = FormControl; // for in-template casting
 
   // Availability form
   availabilityForm = new FormGroup({
     quantity: new FormControl(1),
   });
 
-  // Shipping address form
-  isShippingAddressFormValid = false;
-  shippingAddress?: PhysicalAddress;
+  // Contact Form
+  contactForm = new FormGroup({
+    email: new FormControl(undefined, [Validators.required, Validators.email]),
+    phone: new FormControl(undefined, [Validators.required]),
+  });
+
+  // Shipping Address Form
+  shippingAddressForm = new FormGroup({
+    address: new FormControl(undefined, [Validators.required]),
+  });
 
   constructor(
     public config: DynamicDialogConfig,
@@ -206,7 +202,7 @@ export class CheckoutFormComponent<
     return [
       this.availabilityForm.valid,
       this.contactForm.valid,
-      this.isShippingAddressFormValid,
+      this.shippingAddressForm.valid,
     ].every(Boolean);
   }
 
