@@ -6,6 +6,7 @@ import { AddressFormModule } from '@dehub/angular/ui/components/address-form';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { PhoneInputModule } from '@dehub/angular/ui/components/phone-input';
+import { ProductMiniModule } from '@dehub/angular/ui/components/product-mini';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { AsPipeModule } from '@dehub/angular/ui/pipes/as';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
@@ -37,6 +38,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     SafeHtmlPipeModule,
     PageHeaderModule,
     PageSectionsModule,
+    ProductMiniModule,
     AddressFormModule,
     PhoneInputModule,
     AsPipeModule,
