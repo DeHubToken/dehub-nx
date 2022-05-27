@@ -108,7 +108,7 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
       <div class="field col-12 sm:col-6">
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon">
-            <i class="fa-duotone fa-mailbox"></i>
+            <i class="fa-duotone fa-earth-europe"></i>
           </span>
           <span class="p-float-label">
             <p-dropdown
