@@ -124,7 +124,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
 
   // Form
   selectedCountry?: Country;
-  selectedCountryCode = '';
+  selectedCountryCode?: string;
   phoneForm = new FormGroup({
     code: new FormControl(undefined),
     number: new FormControl({ value: '', disabled: true }, [
