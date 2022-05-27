@@ -60,8 +60,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
         <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
           <span class="p-float-label">
             <p-inputNumber
-              inputId="selectedquantity"
-              formControlName="quantity"
+              [formControlName]="'quantity'"
+              [inputId]="'selectedquantity'"
               [(ngModel)]="availabilityForm.value.quantity"
               [ariaLabel]="'Quantity'"
               [ariaRequired]="true"
@@ -86,7 +86,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
             </span>
             <span class="p-float-label">
               <input
-                formControlName="email"
+                [formControlName]="'email'"
                 type="text"
                 id="email"
                 autocomplete="email"

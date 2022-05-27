@@ -26,7 +26,7 @@ import { Observable } from 'rxjs';
           </span>
           <span class="p-float-label">
             <input
-              formControlName="name"
+              [formControlName]="'name'"
               type="text"
               id="name"
               autocomplete="name"
@@ -45,7 +45,7 @@ import { Observable } from 'rxjs';
           </span>
           <span class="p-float-label">
             <input
-              formControlName="addressLine1"
+              [formControlName]="'addressLine1'"
               type="text"
               id="address-line1"
               autocomplete="address-line1"
@@ -64,7 +64,7 @@ import { Observable } from 'rxjs';
           </span>
           <span class="p-float-label">
             <input
-              formControlName="addressLine2"
+              [formControlName]="'addressLine2'"
               type="text"
               id="address-line2"
               autocomplete="address-line2"
@@ -85,7 +85,7 @@ import { Observable } from 'rxjs';
           </span>
           <span class="p-float-label">
             <input
-              formControlName="city"
+              [formControlName]="'city'"
               type="text"
               id="city"
               autocomplete="address-level2"
@@ -105,14 +105,15 @@ import { Observable } from 'rxjs';
           <span class="p-float-label">
             <p-dropdown
               *ngIf="countries$ | async as countries"
-              formControlName="country"
-              inputId="country"
+              id="country-select"
+              [formControlName]="'country'"
+              [inputId]="'country'"
               [options]="countries"
               [filter]="true"
-              filterBy="name"
+              [filterBy]="'name'"
               [(ngModel)]="selectedCountryCode"
-              optionLabel="name"
-              optionValue="code"
+              [optionLabel]="'name'"
+              [optionValue]="'code'"
               [required]="true"
               [autoDisplayFirst]="false"
               [styleClass]="'flex w-full border-noround-left'"
@@ -146,7 +147,7 @@ import { Observable } from 'rxjs';
           </span>
           <span class="p-float-label">
             <input
-              formControlName="zip"
+              [formControlName]="'zip'"
               type="text"
               id="zip"
               autocomplete="postal-code"
@@ -165,7 +166,7 @@ import { Observable } from 'rxjs';
           </span>
           <span class="p-float-label">
             <input
-              formControlName="state"
+              [formControlName]="'state'"
               type="text"
               id="state"
               autocomplete="address-level1"
