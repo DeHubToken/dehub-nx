@@ -23,6 +23,11 @@ export interface Env extends SharedEnv {
     clientId: string;
     clientSecret: string;
   };
+  shop: {
+    eventTables: {
+      purchase: string;
+    };
+  };
 }
 
 export const defaultEnv: Env = {
@@ -43,5 +48,10 @@ export const defaultEnv: Env = {
   allrites: {
     clientId: '637f7235fdc05497aeba37ccffeed2b1',
     clientSecret: 'badac733900a8685d83954892b22c0cc',
+  },
+  shop: {
+    eventTables: {
+      purchase: 'ShopPurchaseEvents',
+    },
   },
 };
