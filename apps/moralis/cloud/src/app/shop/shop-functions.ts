@@ -67,9 +67,9 @@ export const initOrder = async (
     dehubShopOrders.set('productName', productData.name);
     dehubShopOrders.set('receiptAddress', productData.deliveryCountry);
     dehubShopOrders.set('sku', productData.sku);
-    dehubShopOrders.set('picture', productData.picture);
-    dehubShopOrders.set('shortDescription', productData.shortDescription);
-    dehubShopOrders.set('fullDescription', productData.fullDescription);
+    // dehubShopOrders.set('picture', productData.picture);
+    // dehubShopOrders.set('shortDescription', productData.shortDescription);
+    // dehubShopOrders.set('fullDescription', productData.fullDescription);
     // todo, set more fields, check ProductData interface
     dehubShopOrders.set('contentfulId', contentfulId);
     await dehubShopOrders.save();
