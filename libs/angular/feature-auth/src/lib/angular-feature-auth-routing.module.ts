@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticatedGuard, DeAuthenticatedGuard } from '@dehub/angular/core';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { AngularFeatureAuthComponent } from './angular-feature-auth.component';
-import { AuthBaseComponent } from './components/auth-base/auth-base.component';
-import { ConnectWalletComponent } from './components/connect-wallet';
-import { ConnectedWalletComponent } from './components/connected-wallet';
-import { DisconnectWalletComponent } from './components/disconnect-wallet';
+import {
+  ConnectedWalletComponent,
+  ConnectWalletComponent,
+  DisconnectedWalletComponent,
+} from './components/connect-wallet';
+import { ConnectWalletRequestComponent } from './components/connect-wallet/connect-wallet-request.component';
 
 const routes: Routes = [
   {
@@ -14,13 +16,13 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'base',
+        redirectTo: 'request',
         pathMatch: 'full',
       },
       {
-        path: 'base',
+        path: 'request',
         component: AngularFeatureAuthComponent,
-        data: { insertComponent: AuthBaseComponent },
+        data: { insertComponent: ConnectWalletRequestComponent },
         canActivate: [DeAuthenticatedGuard],
       },
       {
@@ -39,7 +41,7 @@ const routes: Routes = [
         path: 'disconnect',
         component: AngularFeatureAuthComponent,
         data: {
-          insertComponent: DisconnectWalletComponent,
+          insertComponent: DisconnectedWalletComponent,
           dialogConfig: {
             header: 'Disconnected',
             width: '350px',

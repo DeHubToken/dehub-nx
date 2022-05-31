@@ -46,8 +46,8 @@ export class AngularFeatureAuthComponent implements OnInit {
 		Can just close the modal, or close the modal and go to address specified v
 		ia 'nextUrl' query param.
 
-		(Use 'honorNext' if you want to follow 'nextUrl'. By default this will be 
-    ignored, for cases when user just click on "X" or escape or clicks outside 
+		(Use 'honorNext' if you want to follow 'nextUrl'. By default this will be
+    ignored, for cases when user just click on "X" or escape or clicks outside
     the modal)
 	*/
   closeModal(honorNext: boolean = false, replaceNext?: string) {

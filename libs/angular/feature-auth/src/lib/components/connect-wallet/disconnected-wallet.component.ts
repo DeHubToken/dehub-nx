@@ -4,13 +4,13 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IMoralisService, MoralisToken } from '@dehub/angular/model';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { filter, first } from 'rxjs/operators';
+import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({
-  selector: 'dhb-disconnect-wallet',
+  selector: 'dhb-disconnected-wallet',
   template: `
     <div class="text-center">
       <i class="fa-duotone fa-hand-wave icon-color-duotone-1 text-6xl mt-4"></i>
@@ -31,29 +31,26 @@ import { filter, first } from 'rxjs/operators';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DisconnectWalletComponent implements OnInit {
+export class DisconnectedWalletComponent
+  extends AbstractConnectWalletComponent
+  implements OnInit
+{
   constructor(
     @Inject(MoralisToken) private moralisService: IMoralisService,
-    private router: Router,
-    private ref: DynamicDialogRef
-  ) {}
+    protected override router: Router,
+    protected override dialogRef: DynamicDialogRef
+  ) {
+    super(router, dialogRef);
+  }
 
   ngOnInit() {
     this.moralisService.logout();
 
-    this.router.events
-      .pipe(
-        filter(
-          e =>
-            e instanceof NavigationStart && e.navigationTrigger === 'popstate'
-        ),
-        first()
-      )
-      .subscribe(() => this.ref.close(true));
+    this.closeDialogOnBackNavigation();
   }
 
   onReconnectClick() {
-    this.ref.close(true);
+    this.closeDialog(true);
     this.router.navigate(['/', { outlets: { modal: ['auth', 'connect'] } }], {
       queryParamsHandling: 'preserve',
     });

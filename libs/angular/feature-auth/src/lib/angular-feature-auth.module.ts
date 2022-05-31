@@ -8,11 +8,13 @@ import { InplaceModule } from 'primeng/inplace';
 import { InputTextModule } from 'primeng/inputtext';
 import { AngularFeatureAuthRoutingModule } from './angular-feature-auth-routing.module';
 import { AngularFeatureAuthComponent } from './angular-feature-auth.component';
-import { AuthBaseComponent } from './components/auth-base';
-import { ConnectWalletComponent } from './components/connect-wallet';
-import { ConnectWalletOptionsComponent } from './components/connect-wallet-options';
-import { ConnectedWalletComponent } from './components/connected-wallet';
-import { DisconnectWalletComponent } from './components/disconnect-wallet';
+import {
+  ConnectedWalletComponent,
+  ConnectWalletComponent,
+  ConnectWalletOptionsComponent,
+  ConnectWalletRequestComponent,
+  DisconnectedWalletComponent,
+} from './components/connect-wallet';
 
 export const angularFeatureAuthRoutes: Route[] = [];
 
@@ -35,10 +37,10 @@ export const angularFeatureAuthRoutes: Route[] = [];
   ],
   declarations: [
     AngularFeatureAuthComponent,
-    AuthBaseComponent,
+    ConnectWalletRequestComponent,
     ConnectWalletComponent,
     ConnectWalletOptionsComponent,
-    DisconnectWalletComponent,
+    DisconnectedWalletComponent,
     ConnectedWalletComponent,
   ],
 })
