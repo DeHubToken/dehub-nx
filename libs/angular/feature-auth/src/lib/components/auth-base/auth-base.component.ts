@@ -39,7 +39,7 @@ export class AuthBaseComponent implements OnInit {
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
     private router: Router,
-    public ref: DynamicDialogRef
+    private ref: DynamicDialogRef
   ) {}
 
   ngOnInit(): void {

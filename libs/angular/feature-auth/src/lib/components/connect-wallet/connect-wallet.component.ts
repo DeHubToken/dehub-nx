@@ -44,7 +44,7 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
     @Inject(LoggerToken) private logger: ILoggerService,
     @Inject(EnvToken) private env: SharedEnv,
     @Inject(MoralisToken) private moralisService: IMoralisService,
-    public ref: DynamicDialogRef,
+    private ref: DynamicDialogRef,
     private loaderService: LoaderService,
     private router: Router
   ) {}

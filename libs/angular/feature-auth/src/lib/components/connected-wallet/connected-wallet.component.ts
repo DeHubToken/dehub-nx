@@ -19,7 +19,7 @@ import { filter, first } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectedWalletComponent implements OnInit {
-  constructor(private router: Router, public ref: DynamicDialogRef) {}
+  constructor(private router: Router, private ref: DynamicDialogRef) {}
 
   ngOnInit() {
     this.router.events

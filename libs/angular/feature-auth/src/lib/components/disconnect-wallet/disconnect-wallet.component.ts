@@ -35,7 +35,7 @@ export class DisconnectWalletComponent implements OnInit {
   constructor(
     @Inject(MoralisToken) private moralisService: IMoralisService,
     private router: Router,
-    public ref: DynamicDialogRef
+    private ref: DynamicDialogRef
   ) {}
 
   ngOnInit() {
