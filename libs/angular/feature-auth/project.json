@@ -18,7 +18,8 @@
         "lintFilePatterns": [
           "libs/angular/feature-auth/src/**/*.ts",
           "libs/angular/feature-auth/src/**/*.html"
-        ]
+        ],
+        "maxWarnings": 0
       }
     }
   },
