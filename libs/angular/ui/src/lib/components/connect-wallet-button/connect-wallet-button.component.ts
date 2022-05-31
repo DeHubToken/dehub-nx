@@ -1,11 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
+  Inject,
   Input,
   OnInit,
-  Output,
 } from '@angular/core';
+import { Router } from '@angular/router';
+import { IMoralisService, MoralisToken } from '@dehub/angular/model';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -23,7 +24,7 @@ import { MenuItem } from 'primeng/api';
       <p-button
         [label]="label"
         [icon]="icon"
-        (onClick)="showDialog.emit()"
+        (onClick)="onLoginClick()"
       ></p-button>
     </ng-template>
   `,
@@ -35,18 +36,33 @@ export class ConnectWalletButtonComponent implements OnInit {
   @Input() icon = 'fas fa-wallet';
   @Input() isAuthenticated = false;
 
-  @Output() showDialog = new EventEmitter<void>();
-  @Output() logout = new EventEmitter<void>();
-
   items: MenuItem[] = [
     {
       label: 'Logout',
       icon: 'pi pi-sign-out',
-      command: () => this.logout.emit(),
+      command: () => this.onLogOutClick(),
     },
   ];
 
-  constructor() {}
+  constructor(
+    @Inject(MoralisToken) private moralisService: IMoralisService,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
+
+  onLoginClick() {
+    this.router.navigate(['/', { outlets: { modal: ['auth', 'connect'] } }], {
+      queryParamsHandling: 'preserve',
+    });
+  }
+
+  onLogOutClick() {
+    this.router.navigate(
+      ['/', { outlets: { modal: ['auth', 'disconnect'] } }],
+      {
+        queryParamsHandling: 'preserve',
+      }
+    );
+  }
 }

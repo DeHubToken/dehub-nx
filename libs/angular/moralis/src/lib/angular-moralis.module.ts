@@ -1,50 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DehubMoralisToken, MoralisToken } from '@dehub/angular/model';
-import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { StartOptions } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
 import { MessageService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
-import { InplaceModule } from 'primeng/inplace';
-import { InputTextModule } from 'primeng/inputtext';
-import { RippleModule } from 'primeng/ripple';
-import { SplitButtonModule } from 'primeng/splitbutton';
-import { ToastModule } from 'primeng/toast';
-import {
-  ConnectWalletButtonComponent,
-  ConnectWalletComponent,
-  ConnectWalletDialogComponent,
-  WalletButtonComponent,
-} from './components/connect-wallet';
 import { DehubMoralisService, MoralisService } from './services';
+
 @NgModule({
-  imports: [
-    // Angular
-    CommonModule,
-    ReactiveFormsModule,
-
-    // PrimeNg
-    ButtonModule,
-    SplitButtonModule,
-    RippleModule,
-    DialogModule,
-    InplaceModule,
-    InputTextModule,
-    ToastModule,
-
-    // Libs
-    LoaderModule,
-  ],
-  declarations: [
-    ConnectWalletComponent,
-    ConnectWalletButtonComponent,
-    ConnectWalletDialogComponent,
-    WalletButtonComponent,
-  ],
-  exports: [ConnectWalletComponent],
+  imports: [ReactiveFormsModule],
+  declarations: [],
+  exports: [],
 })
 export class AngularMoralisModule {
   static forRoot(

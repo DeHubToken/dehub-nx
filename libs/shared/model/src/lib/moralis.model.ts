@@ -70,3 +70,8 @@ export enum WalletConnectingMessages {
   MetamaskSignatureDenied = 'Metamask signature was denied.',
   BinanceSignatureRejected = 'Binance signature was rejected.',
 }
+
+export type DeHubConnector = {
+  connectorId: DeHubConnectorNames;
+  email?: string;
+};

@@ -14,7 +14,9 @@ import { EnvToken } from '@dehub/angular/model';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button';
 import { BuyDehubFloozModule } from '@dehub/angular/ui/components/buy-dehub-flooz';
+import { ConnectWalletButtonModule } from '@dehub/angular/ui/components/connect-wallet-button';
 import { FooterModule } from '@dehub/angular/ui/components/footer';
+import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { TabMenuModule } from '@dehub/angular/ui/components/tab-menu';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ButtonModule } from 'primeng/button';
@@ -59,6 +61,8 @@ const { appId, serverUrl } = environment.moralis;
     BuyDehubButtonModule,
     BuyDehubFloozModule,
     FooterModule,
+    LoaderModule,
+    ConnectWalletButtonModule,
 
     AppRoutingModule,
   ],
