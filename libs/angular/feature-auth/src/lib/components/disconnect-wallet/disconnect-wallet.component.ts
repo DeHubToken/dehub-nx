@@ -10,7 +10,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter, first } from 'rxjs/operators';
 
 @Component({
-  selector: 'dhb-connect-wallet',
+  selector: 'dhb-disconnect-wallet',
   template: `
     <div class="text-center">
       <i class="fa-duotone fa-hand-wave icon-color-duotone-1 text-6xl mt-4"></i>
