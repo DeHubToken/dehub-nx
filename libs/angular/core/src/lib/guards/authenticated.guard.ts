@@ -15,7 +15,7 @@ export class AuthenticatedGuard implements CanActivate {
     private router: Router
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.moralisService.isAuthenticated$.pipe(
       map(isAuthenticated => (isAuthenticated ? true : this.redirect(state)))
     );
