@@ -1,12 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter, first } from 'rxjs/operators';
 
@@ -33,14 +26,7 @@ import { filter, first } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthBaseComponent implements OnInit {
-  chainId = this.env.web3.chainId;
-  magicLinkApiKey = this.env.web3.auth.magicLinkApiKey;
-
-  constructor(
-    @Inject(EnvToken) private env: SharedEnv,
-    private router: Router,
-    private ref: DynamicDialogRef
-  ) {}
+  constructor(private router: Router, private ref: DynamicDialogRef) {}
 
   ngOnInit(): void {
     this.router.events
