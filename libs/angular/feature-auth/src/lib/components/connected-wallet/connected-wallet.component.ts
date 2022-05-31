@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { filter, take } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
 
 @Component({
   selector: 'dhb-connected-wallet',
@@ -28,7 +28,7 @@ export class ConnectedWalletComponent implements OnInit {
           e =>
             e instanceof NavigationStart && e.navigationTrigger === 'popstate'
         ),
-        take(1)
+        first()
       )
       .subscribe(() => this.ref.close(true));
   }

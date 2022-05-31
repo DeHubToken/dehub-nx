@@ -7,7 +7,7 @@ import {
 import { NavigationStart, Router } from '@angular/router';
 import { IMoralisService, MoralisToken } from '@dehub/angular/model';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { filter, take } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
 
 @Component({
   selector: 'dhb-connect-wallet',
@@ -47,7 +47,7 @@ export class DisconnectWalletComponent implements OnInit {
           e =>
             e instanceof NavigationStart && e.navigationTrigger === 'popstate'
         ),
-        take(1)
+        first()
       )
       .subscribe(() => this.ref.close(true));
   }

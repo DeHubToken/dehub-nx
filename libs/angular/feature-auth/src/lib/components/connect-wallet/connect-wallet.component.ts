@@ -23,7 +23,7 @@ import {
 import { resolveMessage } from '@dehub/shared/utils';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, of, Subscription, zip } from 'rxjs';
-import { exhaustMap, filter, map, take, tap } from 'rxjs/operators';
+import { exhaustMap, filter, first, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'dhb-connect-wallet',
@@ -82,7 +82,7 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
           e =>
             e instanceof NavigationStart && e.navigationTrigger === 'popstate'
         ),
-        take(1)
+        first()
       )
       .subscribe(() => this.ref.close(true));
   }

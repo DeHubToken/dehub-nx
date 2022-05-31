@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, PRIMARY_OUTLET, Router } from '@angular/router';
 import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { take } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Component({
   template: ``,
@@ -24,7 +24,7 @@ export class AngularFeatureAuthComponent implements OnInit {
     };
     // Child component is passed in as a data property via the routing module
     this.route.data
-      .pipe(take(1))
+      .pipe(first())
       .subscribe(({ insertComponent, dialogConfig }) => {
         const ref = this.dialogService.open(insertComponent, {
           ...defaultDialogConfig,

@@ -8,7 +8,7 @@ import { NavigationStart, Router } from '@angular/router';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { filter, take } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
 
 @Component({
   selector: 'dhb-auth-base',
@@ -49,7 +49,7 @@ export class AuthBaseComponent implements OnInit {
           e =>
             e instanceof NavigationStart && e.navigationTrigger === 'popstate'
         ),
-        take(1)
+        first()
       )
       // Ignore "nextUrl" as it is a base component and going back should just close the modal
       .subscribe(() => this.ref.close());
