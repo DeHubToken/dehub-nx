@@ -23,6 +23,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
+import { ToastModule } from 'primeng/toast';
 import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -49,6 +50,7 @@ const { appId, serverUrl } = environment.moralis;
     ButtonModule,
     RippleModule,
     MenuModule,
+    ToastModule,
     DynamicDialogModule,
 
     // Optional feature modules

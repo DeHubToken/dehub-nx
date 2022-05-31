@@ -4,10 +4,7 @@ import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { take } from 'rxjs';
 
 @Component({
-  template: `
-    <!-- Wallet Connect Toast -->
-    <p-toast></p-toast>
-  `,
+  template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureAuthComponent implements OnInit {

@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
   template: `
     <router-outlet></router-outlet>
 
+    <!-- Toast Messages -->
+    <p-toast></p-toast>
+
     <!-- PWA update available popup -->
     <dhb-sw-update-available
       (update)="onSwUpdate()"
