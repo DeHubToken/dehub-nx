@@ -53,7 +53,7 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
           </span>
           <span class="p-float-label">
             <input
-              [formControlName]="'addressLine1'"
+              [formControlName]="'line1'"
               type="text"
               id="address-line1"
               autocomplete="address-line1"
@@ -72,7 +72,7 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
           </span>
           <span class="p-float-label">
             <input
-              [formControlName]="'addressLine2'"
+              [formControlName]="'line2'"
               type="text"
               id="address-line2"
               autocomplete="address-line2"
@@ -155,13 +155,13 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
           </span>
           <span class="p-float-label">
             <input
-              [formControlName]="'zip'"
+              [formControlName]="'postalCode'"
               type="text"
-              id="zip"
+              id="postalCode"
               autocomplete="postal-code"
               pInputText
             />
-            <label for="zip" class="pr-5">ZIP Code</label>
+            <label for="postalCode" class="pr-5">ZIP Code</label>
           </span>
         </div>
       </div>
@@ -220,11 +220,11 @@ export class AddressFormComponent implements OnInit, OnDestroy {
   selectedCountryCode?: string;
   shippingAddressForm = new FormGroup({
     name: new FormControl(undefined, Validators.required),
-    addressLine1: new FormControl(undefined, Validators.required),
-    addressLine2: new FormControl(undefined),
+    line1: new FormControl(undefined, Validators.required),
+    line2: new FormControl(undefined),
     city: new FormControl(undefined, Validators.required),
     country: new FormControl(undefined, Validators.required),
-    zip: new FormControl(undefined, Validators.required),
+    postalCode: new FormControl(undefined, Validators.required),
     state: new FormControl(undefined, Validators.required),
   });
 

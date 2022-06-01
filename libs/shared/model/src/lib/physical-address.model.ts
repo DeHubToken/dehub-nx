@@ -3,10 +3,10 @@
  */
 export interface PhysicalAddress {
   name: string;
-  addressLine1: string;
-  addressLine2: string;
+  line1: string;
+  line2: string;
   city: string;
   country: string;
-  zip: string;
+  postalCode: string;
   state: string;
 }
