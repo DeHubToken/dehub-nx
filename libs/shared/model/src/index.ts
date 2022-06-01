@@ -1,3 +1,4 @@
+export * from './lib/contacts.model';
 export * from './lib/country.model';
 export * from './lib/dehub-moralis.model';
 export * from './lib/freya.model';

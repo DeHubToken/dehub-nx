@@ -1,5 +1,6 @@
 import {
   Attributes,
+  Contacts,
   DeHubConnectorNames,
   DeHubShopShippingAddresses,
   User,
@@ -20,6 +21,7 @@ export interface IMoralisService {
   isAuthenticated$: Observable<boolean>;
 
   username$: Observable<string>;
+  userContacts$: Observable<Contacts>;
 
   login: (
     connectorId: DeHubConnectorNames,
