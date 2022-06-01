@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
+  Input,
   OnDestroy,
   OnInit,
   Optional,
@@ -209,6 +210,7 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
   ],
 })
 export class AddressFormComponent implements OnInit, OnDestroy {
+  @Input() prefillData?: PhysicalAddress;
   private sub?: Subscription;
   path = this.env.baseUrl;
 
@@ -242,6 +244,11 @@ export class AddressFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // Prefill form if provided
+    if (this.prefillData) {
+      this.selectedCountryCode = this.prefillData.country;
+      this.shippingAddressForm.patchValue(this.prefillData);
+    }
     // Subscribe to form changes and emit on each change to the parent component.
     this.sub = this.shippingAddressForm.valueChanges
       .pipe(distinctUntilChanged())

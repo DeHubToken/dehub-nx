@@ -1,7 +1,24 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Asset, ProductCategory } from '@dehub/shared/model';
+import {
+  DehubMoralisToken,
+  IDehubMoralisService,
+  IMoralisService,
+  MoralisToken,
+} from '@dehub/angular/model';
+import {
+  Asset,
+  Contacts,
+  DeHubShopShippingAddresses,
+  ProductCategory,
+} from '@dehub/shared/model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   template: `
@@ -31,7 +48,11 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
       <!-- Contact -->
       <h5>Contact Details</h5>
-      <form [formGroup]="contactForm" class="p-fluid grid pt-2">
+      <form
+        *ngIf="userContacts$ | async as contacts"
+        [formGroup]="contactForm"
+        class="p-fluid grid pt-2"
+      >
         <!-- Email -->
         <div class="field col-12 sm:col-5">
           <div class="p-inputgroup">
@@ -55,6 +76,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
         <div class="field col-12 sm:col-7 p-fluid">
           <dhb-phone-input
             [formControl]="contactForm.controls['phone'] | as: FormControl"
+            [prefillData]="contacts.phone"
           ></dhb-phone-input>
         </div>
       </form>
@@ -62,10 +84,15 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
       <!-- Shipping Address -->
       <h5>Shipping Address</h5>
       <dhb-address-form
+        *ngIf="userShippingAddress$ | async as resp; else addressLoading"
         [formControl]="
           shippingAddressForm.controls['address'] | as: FormControl
         "
+        [prefillData]="resp.attributes"
       ></dhb-address-form>
+      <ng-template #addressLoading>
+        <p><i class="fa-solid fa-circle-notch fa-spin"></i>&nbsp;Loading...</p>
+      </ng-template>
 
       <!-- Total -->
       <div class="grid">
@@ -126,23 +153,33 @@ export class CheckoutFormComponent<
   });
 
   // Contact Form
+  userContacts$?: Observable<Contacts>;
   contactForm = new FormGroup({
     email: new FormControl(undefined, [Validators.required, Validators.email]),
     phone: new FormControl(undefined, [Validators.required]),
   });
 
   // Shipping Address Form
+  userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
   shippingAddressForm = new FormGroup({
     address: new FormControl(undefined, [Validators.required]),
   });
 
   constructor(
+    @Inject(MoralisToken) private moralisService: IMoralisService,
+    @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef
   ) {}
 
   ngOnInit() {
     this.product = this.config.data;
+    const { userContacts$ } = this.moralisService;
+    const { userShippingAddress$ } = this.dehubMoralis;
+    this.userContacts$ = userContacts$.pipe(
+      tap(v => this.contactForm.patchValue(v))
+    );
+    this.userShippingAddress$ = userShippingAddress$;
   }
 
   isAllFormsValid() {

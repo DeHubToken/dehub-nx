@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
+  Input,
   OnDestroy,
   OnInit,
   Optional,
@@ -25,7 +26,7 @@ import {
   PhoneNumberFormat,
   PhoneNumberUtil,
 } from 'google-libphonenumber';
-import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
+import { distinctUntilChanged, Observable, Subscription, tap } from 'rxjs';
 import { PhoneNumberValidator } from '../../validators/phone-number.validator';
 
 @Component({
@@ -113,14 +114,15 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
   ],
 })
 export class PhoneInputComponent implements OnInit, OnDestroy {
+  @Input() prefillData?: string;
   private subs = new Subscription();
   path = this.env.baseUrl;
 
   phoneNumberUtil = PhoneNumberUtil.getInstance();
 
-  countries$: Observable<Country[]> = this.httpClient.get<Country[]>(
-    `${this.path}/assets/dehub/data/countries.json`
-  );
+  countries$: Observable<Country[]> = this.httpClient
+    .get<Country[]>(`${this.path}/assets/dehub/data/countries.json`)
+    .pipe(tap(countries => this.prefillPhone(countries)));
 
   // Form
   selectedCountry?: Country;
@@ -175,12 +177,31 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
     );
   }
 
-  getCountry(countries: Country[], countryCode: string) {
+  prefillPhone(countries: Country[]) {
+    if (this.prefillData) {
+      const phoneNumber = this.phoneNumberUtil.parse(this.prefillData);
+      const phoneCode = `+${phoneNumber.getCountryCode()}`;
+      this.selectedCountry = this.getCountryByPhoneCode(countries, phoneCode);
+      if (this.selectedCountry) {
+        this.selectedCountryCode = this.selectedCountry.code;
+        this.phoneForm.patchValue({
+          code: this.selectedCountry.code,
+          number: phoneNumber.getNationalNumber(),
+        });
+      }
+    }
+  }
+
+  getCountryByCountryCode(countries: Country[], countryCode: string) {
     return countries.find(country => country.code === countryCode);
   }
 
+  getCountryByPhoneCode(countries: Country[], phoneCode: string) {
+    return countries.find(country => country.phoneCode === phoneCode);
+  }
+
   onCountryChange(countryCode: string, countries: Country[]) {
-    const country = this.getCountry(countries, countryCode);
+    const country = this.getCountryByCountryCode(countries, countryCode);
     const numberControl = this.phoneForm.controls['number'];
     if (country) {
       this.selectedCountry = country;
