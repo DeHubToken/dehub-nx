@@ -22,14 +22,14 @@ const routes: Routes = [
       {
         path: 'request',
         component: AngularFeatureAuthComponent,
-        data: { insertComponent: ConnectWalletRequestComponent },
+        data: { dialogComponent: ConnectWalletRequestComponent },
         canActivate: [DeAuthenticatedGuard],
       },
       {
         path: 'connect',
         component: AngularFeatureAuthComponent,
         data: {
-          insertComponent: ConnectWalletComponent,
+          dialogComponent: ConnectWalletComponent,
           dialogConfig: {
             header: 'Connect Wallet',
             width: '350px',
@@ -41,7 +41,7 @@ const routes: Routes = [
         path: 'disconnect',
         component: AngularFeatureAuthComponent,
         data: {
-          insertComponent: DisconnectedWalletComponent,
+          dialogComponent: DisconnectedWalletComponent,
           dialogConfig: {
             header: 'Disconnected',
             width: '350px',
@@ -53,7 +53,7 @@ const routes: Routes = [
         path: 'connected',
         component: AngularFeatureAuthComponent,
         data: {
-          insertComponent: ConnectedWalletComponent,
+          dialogComponent: ConnectedWalletComponent,
           dialogConfig: {
             header: 'Already Connected',
             width: '350px',

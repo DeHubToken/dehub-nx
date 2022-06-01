@@ -22,11 +22,12 @@ export class AngularFeatureAuthComponent implements OnInit {
       dismissableMask: true,
       closable: true,
     };
+
     // Child component is passed in as a data property via the routing module
     this.route.data
       .pipe(first())
-      .subscribe(({ insertComponent, dialogConfig }) => {
-        const ref = this.dialogService.open(insertComponent, {
+      .subscribe(({ dialogComponent, dialogConfig }) => {
+        const ref = this.dialogService.open(dialogComponent, {
           ...defaultDialogConfig,
           ...dialogConfig,
         });
