@@ -1,4 +1,5 @@
 export * from './lib/country.model';
+export * from './lib/dehub-moralis.model';
 export * from './lib/freya.model';
 export * from './lib/moralis.model';
 export * from './lib/physical-address.model';

@@ -1,6 +1,7 @@
 import {
   Attributes,
   DeHubConnectorNames,
+  DeHubShopShippingAddresses,
   User,
   WalletConnectState,
 } from '@dehub/shared/model';
@@ -33,4 +34,6 @@ export interface IMoralisService {
 
 export interface IDehubMoralisService {
   canPlay$: Observable<boolean>;
+  myShippingAddress$: Observable<DeHubShopShippingAddresses>;
+  getDeHubShopShippingAddresses: () => Observable<DeHubShopShippingAddresses[]>;
 }
