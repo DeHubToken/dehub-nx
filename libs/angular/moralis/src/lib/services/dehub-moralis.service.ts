@@ -18,7 +18,7 @@ export class DehubMoralisService implements IDehubMoralisService {
   );
 
   // For now, we're just going to use the first address.
-  myShippingAddress$ = this.getDeHubShopShippingAddresses().pipe(
+  userShippingAddress$ = this.getDeHubShopShippingAddresses().pipe(
     map(resp => resp[0])
   );
 

@@ -34,6 +34,6 @@ export interface IMoralisService {
 
 export interface IDehubMoralisService {
   canPlay$: Observable<boolean>;
-  myShippingAddress$: Observable<DeHubShopShippingAddresses>;
+  userShippingAddress$: Observable<DeHubShopShippingAddresses>;
   getDeHubShopShippingAddresses: () => Observable<DeHubShopShippingAddresses[]>;
 }
