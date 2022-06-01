@@ -12,9 +12,9 @@ export class AbstractConnectWalletComponent {
 
   /**
    * Ignore or honor "nextUrl"
-   * @param honorNextUrl if false then going back should just close the modal
+   * @param honorNext if false then going back should just close the modal
    */
-  closeDialogOnBackNavigation(honorNextUrl = true) {
+  closeDialogOnBackNavigation(honorNext = true) {
     this.router.events
       .pipe(
         filter(
@@ -25,7 +25,7 @@ export class AbstractConnectWalletComponent {
       )
       //
       .subscribe(() =>
-        honorNextUrl ? this.dialogRef.close(true) : this.dialogRef.close()
+        honorNext ? this.dialogRef.close(true) : this.dialogRef.close()
       );
   }
 
