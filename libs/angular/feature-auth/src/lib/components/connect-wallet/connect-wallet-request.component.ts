@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { filter, first } from 'rxjs/operators';
+import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({
-  selector: 'dhb-auth-base',
+  selector: 'dhb-connect-wallet-base',
   template: `
     <div class="text-center">
       <i
@@ -25,25 +23,16 @@ import { filter, first } from 'rxjs/operators';
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthBaseComponent implements OnInit {
-  constructor(private router: Router, private ref: DynamicDialogRef) {}
-
+export class ConnectWalletRequestComponent
+  extends AbstractConnectWalletComponent
+  implements OnInit
+{
   ngOnInit(): void {
-    this.router.events
-      .pipe(
-        filter(
-          e =>
-            e instanceof NavigationStart && e.navigationTrigger === 'popstate'
-        ),
-        first()
-      )
-      // Ignore "nextUrl" as it is a base component and going back should just close the modal
-      .subscribe(() => this.ref.close());
+    this.closeDialogOnBackNavigation(false);
   }
 
   onConnectClick() {
-    // Pass "true", to honor "nextUrl"
-    this.ref.close(true);
+    this.closeDialog(true);
     this.router.navigate(['/', { outlets: { modal: ['auth', 'connect'] } }], {
       queryParamsHandling: 'preserve',
     });

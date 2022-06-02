@@ -36,7 +36,7 @@ export const getMenuItems = (pwaService: PwaService): MenuItem[] => [
         icon: 'far fa-key',
         items: [
           {
-            label: 'Auth Base',
+            label: 'Auth Request',
             routerLink: ['/', { outlets: { modal: ['auth'] } }],
           },
           {

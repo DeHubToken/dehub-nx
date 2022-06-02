@@ -114,7 +114,7 @@ import {
         ></dhb-wallet-button>
       </div>
 
-      <!-- Walletconnect -->
+      <!-- Wallet Connect -->
       <div class="mt-2 mb-3">
         <dhb-wallet-button
           label="WalletConnect"

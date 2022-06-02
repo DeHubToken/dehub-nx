@@ -22,34 +22,34 @@ export class AngularFeatureAuthComponent implements OnInit {
       dismissableMask: true,
       closable: true,
     };
+
     // Child component is passed in as a data property via the routing module
     this.route.data
       .pipe(first())
-      .subscribe(({ insertComponent, dialogConfig }) => {
-        const ref = this.dialogService.open(insertComponent, {
+      .subscribe(({ dialogComponent, dialogConfig }) => {
+        const ref = this.dialogService.open(dialogComponent, {
           ...defaultDialogConfig,
           ...dialogConfig,
         });
 
-        // Trick to close the modal outlet, but only if not specified otherwise.
-        // E.x. If user click on "X", escape, or outside the modal we should not
-        // only close the modal, but also empty the outlet.
-        // But in case you want to preserve the navigation history, you should
-        // pass "true" with your this.ref.close() call.
+        /**
+         * Trick to close the modal outlet, but only if not specified otherwise.
+         * E.x. If user click on "X", escape, or outside the modal we should not
+         * only close the modal, but also empty the outlet.
+         * But in case you want to preserve the navigation history, you should
+         * pass "true" with your this.ref.close() call.
+         */
         ref.onClose.subscribe((honorNext: boolean) =>
           this.closeModal(honorNext)
         );
       });
   }
 
-  /*
-		Can just close the modal, or close the modal and go to address specified v
-		ia 'nextUrl' query param.
-
-		(Use 'honorNext' if you want to follow 'nextUrl'. By default this will be 
-    ignored, for cases when user just click on "X" or escape or clicks outside 
-    the modal)
-	*/
+  /**
+   * Can just close the modal, or close the modal and go to address specified via 'nextUrl' query param.
+   * (Use 'honorNext' if you want to follow 'nextUrl'. By default this will be
+   * ignored, for cases when user just click on "X" or escape or clicks outside the modal)
+   */
   closeModal(honorNext: boolean = false, replaceNext?: string) {
     this.getRelativeTo(this.route, lastFirstChild => {
       const closeProps = ['./', { outlets: { modal: null } }];
@@ -73,12 +73,12 @@ export class AngularFeatureAuthComponent implements OnInit {
     });
   }
 
-  /*
-	To close the model from any depth component we need to provide "relativeTo"
-	property to router.navigate. This method helps finding out which
-	ActivatedRoute to provide.
-	RE: https://stackoverflow.com/questions/47270033/navigate-to-parent-path-from-router-outlet-ng5
-	*/
+  /**
+   * To close the model from any depth component we need to provide "relativeTo"
+   * property to router.navigate. This method helps finding out which ActivatedRoute to provide.
+   *
+   * RE: https://stackoverflow.com/questions/47270033/navigate-to-parent-path-from-router-outlet-ng5
+   */
   private getRelativeTo(
     obj: ActivatedRoute,
     callback: (lastFirstChild: ActivatedRoute | null) => void
