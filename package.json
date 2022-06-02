@@ -144,7 +144,7 @@
     "@namics/commitlint-conventional-changelog": "1.2.2",
     "@ng-web-apis/common": "1.12.1",
     "@nrwl/angular": "14.1.7",
-    "@nrwl/cli": "13.8.5",
+    "@nrwl/cli": "14.1.9",
     "@nrwl/cypress": "14.1.7",
     "@nrwl/eslint-plugin-nx": "14.1.7",
     "@nrwl/jest": "14.1.7",
