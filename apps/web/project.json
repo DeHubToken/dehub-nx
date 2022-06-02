@@ -85,7 +85,7 @@
           "namedChunks": true,
           "outputHashing": "none",
           "deployUrl": "",
-          "baseHref": ""
+          "baseHref": "/"
         }
       },
       "defaultConfiguration": "production"

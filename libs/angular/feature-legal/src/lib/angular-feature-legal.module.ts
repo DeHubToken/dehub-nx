@@ -5,7 +5,6 @@ import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/con
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { ButtonModule } from 'primeng/button';
-import { AngularFeatureLegalDetailComponent } from './angular-feature-legal-detail.component';
 import { AngularFeatureLegalRoutingModule } from './angular-feature-legal-routing.module';
 import { AngularFeatureLegalComponent } from './angular-feature-legal.component';
 import { LegalPostComponent } from './components/legal-post.component';
@@ -25,10 +24,6 @@ import { LegalPostComponent } from './components/legal-post.component';
 
     AngularFeatureLegalRoutingModule,
   ],
-  declarations: [
-    AngularFeatureLegalComponent,
-    AngularFeatureLegalDetailComponent,
-    LegalPostComponent,
-  ],
+  declarations: [AngularFeatureLegalComponent, LegalPostComponent],
 })
 export class AngularFeatureLegalModule {}
