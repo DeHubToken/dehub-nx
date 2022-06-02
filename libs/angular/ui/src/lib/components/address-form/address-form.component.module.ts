@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { FieldsetModule } from 'primeng/fieldset';
 import { InputTextModule } from 'primeng/inputtext';
 import { AddressFormComponent } from './address-form.component';
 
@@ -16,6 +17,7 @@ import { AddressFormComponent } from './address-form.component';
     // PrimeNg
     InputTextModule,
     DropdownModule,
+    FieldsetModule,
   ],
   exports: [AddressFormComponent],
 })
