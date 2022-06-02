@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoaderService } from '@dehub/angular/core';
 import {
   EnvToken,
@@ -23,7 +23,8 @@ import {
 import { resolveMessage } from '@dehub/shared/utils';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, of, Subscription, zip } from 'rxjs';
-import { exhaustMap, filter, map, take, tap } from 'rxjs/operators';
+import { exhaustMap, map, tap } from 'rxjs/operators';
+import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({
   selector: 'dhb-connect-wallet',
@@ -36,7 +37,10 @@ import { exhaustMap, filter, map, take, tap } from 'rxjs/operators';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConnectWalletComponent implements OnInit, OnDestroy {
+export class ConnectWalletComponent
+  extends AbstractConnectWalletComponent
+  implements OnInit, OnDestroy
+{
   private sub?: Subscription;
   walletConnectState$?: Observable<WalletConnectState>;
 
@@ -44,12 +48,16 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
     @Inject(LoggerToken) private logger: ILoggerService,
     @Inject(EnvToken) private env: SharedEnv,
     @Inject(MoralisToken) private moralisService: IMoralisService,
-    public ref: DynamicDialogRef,
     private loaderService: LoaderService,
-    private router: Router
-  ) {}
+    protected override dialogRef: DynamicDialogRef,
+    protected override router: Router
+  ) {
+    super(router, dialogRef);
+  }
 
   ngOnInit() {
+    this.closeDialogOnBackNavigation();
+
     const { walletConnectState$ } = this.moralisService;
 
     this.walletConnectState$ = walletConnectState$;
@@ -74,17 +82,6 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
-
-    // Close dialog on back navigation
-    this.router.events
-      .pipe(
-        filter(
-          e =>
-            e instanceof NavigationStart && e.navigationTrigger === 'popstate'
-        ),
-        take(1)
-      )
-      .subscribe(() => this.ref.close(true));
   }
 
   onLogin({ connectorId, email = '' }: DeHubConnector) {
@@ -95,7 +92,7 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
         email,
         this.env.web3.auth.magicLinkApiKey
       )
-      .then(() => this.ref.close(true))
+      .then(() => this.closeDialog(true))
       .catch(e =>
         this.logger.error(`Moralis '${connectorId}' login problem:`, e)
       );
