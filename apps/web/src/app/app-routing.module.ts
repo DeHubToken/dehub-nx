@@ -32,6 +32,28 @@ export const getMenuItems = (pwaService: PwaService): MenuItem[] => [
         icon: 'far fa-link',
       },
       {
+        label: 'Test Auth Modals',
+        icon: 'far fa-key',
+        items: [
+          {
+            label: 'Auth Request',
+            routerLink: ['/', { outlets: { modal: ['auth'] } }],
+          },
+          {
+            label: 'Auth Connect',
+            routerLink: ['/', { outlets: { modal: ['auth', 'connect'] } }],
+          },
+          {
+            label: 'Auth Disconnect',
+            routerLink: ['/', { outlets: { modal: ['auth', 'disconnect'] } }],
+          },
+          {
+            label: 'Auth Connected',
+            routerLink: ['/', { outlets: { modal: ['auth', 'connected'] } }],
+          },
+        ],
+      },
+      {
         label: 'Test PWA Info Toast',
         command: () => pwaService.triggerSwUpdateAvailable('info', 'xxxx'),
         icon: 'fa-regular fa-circle-exclamation',
@@ -147,6 +169,14 @@ export const tabMenuItems: MenuItem[] = [
               loadChildren: () =>
                 import('@dehub/angular/feature-mailing').then(
                   module => module.AngularFeatureMailingModule
+                ),
+              outlet: 'modal',
+            },
+            {
+              path: 'auth',
+              loadChildren: () =>
+                import('@dehub/angular/feature-auth').then(
+                  module => module.AngularFeatureAuthModule
                 ),
               outlet: 'modal',
             },

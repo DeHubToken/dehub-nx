@@ -1,15 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import player from 'lottie-web';
 import { LottieModule } from 'ngx-lottie';
 import { LoaderComponent } from './loader.component';
 
-/**
- * The lottie-web library.
- * Loaded on demand using dynamic import.
- * Webpack will load this library only when your animation gets rendered for the first time.
- */
+// Note we need a separate function as it's required
+// by the AOT compiler.
 export function playerFactory() {
-  return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
+  return player;
 }
 
 @NgModule({

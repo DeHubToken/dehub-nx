@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import {
-  DeHubConnectorNames,
+  DeHubConnector,
   WalletConnectingState,
   WalletConnectState,
 } from '@dehub/shared/model';
@@ -21,16 +21,9 @@ import {
 } from 'angular-animations';
 
 @Component({
-  selector: 'dhb-connect-wallet-dialog',
+  selector: 'dhb-connect-wallet-options',
   template: `
-    <p-dialog
-      [modal]="true"
-      [draggable]="false"
-      [header]="header"
-      [(visible)]="visible"
-      [style]="{ width: '350px' }"
-      class="p-fluid"
-    >
+    <div *ngIf="walletConnectState" class="p-fluid">
       <!-- Metamask -->
       <div class="mt-2 mb-3">
         <dhb-wallet-button
@@ -121,7 +114,7 @@ import {
         ></dhb-wallet-button>
       </div>
 
-      <!-- Walletconnect -->
+      <!-- Wallet Connect -->
       <div class="mt-2 mb-3">
         <dhb-wallet-button
           label="WalletConnect"
@@ -156,7 +149,7 @@ import {
           >&nbsp;extension on your browser.
         </div>
       </div>
-    </p-dialog>
+    </div>
   `,
   styles: [],
   animations: [
@@ -165,9 +158,7 @@ import {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConnectWalletDialogComponent implements OnInit {
-  @Input() header = 'Connect Wallet';
-  @Input() visible = false;
+export class ConnectWalletOptionsComponent implements OnInit {
   @Input() walletConnectState?: WalletConnectState;
 
   magicLinkForm!: FormGroup;
@@ -176,10 +167,7 @@ export class ConnectWalletDialogComponent implements OnInit {
 
   walletConnectingState = WalletConnectingState;
 
-  @Output() login = new EventEmitter<{
-    connectorId: DeHubConnectorNames;
-    email?: string;
-  }>();
+  @Output() login = new EventEmitter<DeHubConnector>();
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

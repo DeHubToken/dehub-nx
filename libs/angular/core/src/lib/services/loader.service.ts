@@ -1,0 +1,27 @@
+import { Inject, Injectable } from '@angular/core';
+import { EnvToken } from '@dehub/angular/model';
+import { SharedEnv } from '@dehub/shared/config';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({ providedIn: 'root' })
+export class LoaderService {
+  private loaderVisibleSubject = new BehaviorSubject<boolean>(false);
+  loaderVisible$ = this.loaderVisibleSubject.asObservable();
+
+  private subtitleSubject = new BehaviorSubject<string>('');
+  subtitle$ = this.subtitleSubject.asObservable();
+
+  lottieJson = `${this.env.baseUrl}/assets/dehub/dehub-loader-light-blue.json`;
+
+  constructor(@Inject(EnvToken) private env: SharedEnv) {}
+
+  show(subtitle: string = '') {
+    this.subtitleSubject.next(subtitle);
+    this.loaderVisibleSubject.next(true);
+  }
+
+  hide() {
+    this.loaderVisibleSubject.next(false);
+    this.subtitleSubject.next('');
+  }
+}

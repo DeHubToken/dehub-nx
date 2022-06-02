@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/angular/feature-auth",
+  "sourceRoot": "libs/angular/feature-auth/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/angular/feature-auth"],
+      "options": {
+        "jestConfig": "libs/angular/feature-auth/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/feature-auth/src/**/*.ts",
+          "libs/angular/feature-auth/src/**/*.html"
+        ],
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}
