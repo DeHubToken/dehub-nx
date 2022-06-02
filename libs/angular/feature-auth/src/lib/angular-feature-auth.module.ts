@@ -14,7 +14,7 @@ import {
   ConnectWalletComponent,
   ConnectWalletOptionsComponent,
   ConnectWalletRequestComponent,
-  DisconnectedWalletComponent,
+  DisconnectWalletComponent,
 } from './components/connect-wallet';
 
 export const angularFeatureAuthRoutes: Route[] = [];
@@ -42,7 +42,7 @@ export const angularFeatureAuthRoutes: Route[] = [];
     ConnectWalletRequestComponent,
     ConnectWalletComponent,
     ConnectWalletOptionsComponent,
-    DisconnectedWalletComponent,
+    DisconnectWalletComponent,
     ConnectedWalletComponent,
   ],
 })

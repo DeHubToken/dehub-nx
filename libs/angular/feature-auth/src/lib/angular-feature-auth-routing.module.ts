@@ -6,7 +6,7 @@ import { AngularFeatureAuthComponent } from './angular-feature-auth.component';
 import {
   ConnectedWalletComponent,
   ConnectWalletComponent,
-  DisconnectedWalletComponent,
+  DisconnectWalletComponent,
 } from './components/connect-wallet';
 import { ConnectWalletRequestComponent } from './components/connect-wallet/connect-wallet-request.component';
 
@@ -41,7 +41,7 @@ const routes: Routes = [
         path: 'disconnect',
         component: AngularFeatureAuthComponent,
         data: {
-          dialogComponent: DisconnectedWalletComponent,
+          dialogComponent: DisconnectWalletComponent,
           dialogConfig: {
             header: 'Disconnected',
             width: '350px',

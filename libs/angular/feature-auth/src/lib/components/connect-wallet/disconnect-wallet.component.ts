@@ -10,7 +10,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({
-  selector: 'dhb-disconnected-wallet',
+  selector: 'dhb-disconnect-wallet',
   template: `
     <div class="text-center">
       <i class="fa-duotone fa-hand-wave icon-color-duotone-1 text-6xl mt-4"></i>
@@ -31,7 +31,7 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DisconnectedWalletComponent
+export class DisconnectWalletComponent
   extends AbstractConnectWalletComponent
   implements OnInit
 {
