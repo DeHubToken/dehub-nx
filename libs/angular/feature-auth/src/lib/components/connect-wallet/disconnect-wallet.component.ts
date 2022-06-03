@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { IMoralisService, MoralisToken } from '@dehub/angular/model';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { first, tap } from 'rxjs';
 import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({
@@ -44,7 +45,12 @@ export class DisconnectWalletComponent
   }
 
   ngOnInit() {
-    this.moralisService.logout();
+    this.moralisService.user$
+      .pipe(
+        first(),
+        tap(() => this.moralisService.logout())
+      )
+      .subscribe();
 
     this.closeDialogOnBackNavigation();
   }
