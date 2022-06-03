@@ -11,7 +11,7 @@ import { Asset, ProductCategory } from '@dehub/shared/model';
   template: `
     <div
       *ngIf="product"
-      class="card overview-box gray shadow-2 p-0 mb-3 overflow-hidden"
+      class="card overview-box border-round-lg gray shadow-2 p-0 mb-3 overflow-hidden"
     >
       <div class="overview-info w-full">
         <div class="flex align-items-stretch pr-0">
