@@ -30,9 +30,11 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
       *ngIf="prefillData"
       else
       formFields
-      [legend]="prefillData.name"
+      [legend]="shippingAddressLabel()"
       [toggleable]="true"
       [collapsed]="true"
+      [styleClass]="'text-sm mb-4'"
+      [classList]="'bg-gradient-3-propagate'"
     >
       <ng-container *ngTemplateOutlet="formFields"></ng-container>
     </p-fieldset>
@@ -275,6 +277,11 @@ export class AddressFormComponent implements OnInit, OnDestroy {
 
   findCountry(countries: Country[], code: string) {
     return countries.find(country => country.code === code);
+  }
+
+  shippingAddressLabel() {
+    const controls = this.shippingAddressForm.controls;
+    return `${controls['name'].value} | ${controls['line1'].value} | ${controls['city'].value}...`;
   }
 
   ngOnDestroy(): void {
