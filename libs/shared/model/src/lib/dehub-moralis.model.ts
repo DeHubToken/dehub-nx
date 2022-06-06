@@ -1,5 +1,5 @@
 import Moralis from 'moralis/types';
-import { PhysicalAddress } from './physical-address.model';
+import { PhysicalAddress } from './location.model';
 
 // All Moralis DB class "attribute" fields include these default fields
 export interface MoralisCommonAttributes {

@@ -10,3 +10,9 @@ export interface PhysicalAddress {
   postalCode: string;
   state: string;
 }
+
+export interface Country {
+  name: string;
+  code: string;
+  phoneCode: string;
+}
