@@ -120,11 +120,39 @@ export class PageLearnCollectionService extends Apollo.Query<
 @Injectable({
   providedIn: GraphQLModule,
 })
+export class PageShopCollectionService extends Apollo.Query<
+  models.PageShopCollectionQuery,
+  models.PageShopCollectionQueryVariables
+> {
+  document = models.PageShopCollectionDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
 export class PageStreamCollectionService extends Apollo.Query<
   models.PageStreamCollectionQuery,
   models.PageStreamCollectionQueryVariables
 > {
   document = models.PageStreamCollectionDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class ProductCollectionBySlugService extends Apollo.Query<
+  models.ProductCollectionBySlugQuery,
+  models.ProductCollectionBySlugQueryVariables
+> {
+  document = models.ProductCollectionBySlugDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

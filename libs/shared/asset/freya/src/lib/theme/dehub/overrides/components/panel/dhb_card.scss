@@ -112,6 +112,17 @@
       padding: 1rem 1.5rem;
     }
   }
+
+  // Product post style
+  &.product {
+    .p-card-body {
+      .p-card-title {
+        margin-bottom: 0;
+        border-bottom: 1px solid;
+        padding-bottom: 5px;
+      }
+    }
+  }
 }
 
 /* ------------------------------ Media Queries ----------------------------- */

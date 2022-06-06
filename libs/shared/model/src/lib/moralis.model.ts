@@ -20,6 +20,8 @@ export interface Attributes extends Moralis.Attributes {
   ethAddress: string;
   /** OTT can play flag */
   can_play?: boolean;
+  phone?: string;
+  email?: string;
 }
 
 export type User = Moralis.User<Attributes>;

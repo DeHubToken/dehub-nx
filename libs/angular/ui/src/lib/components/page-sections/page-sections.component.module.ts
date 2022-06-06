@@ -10,6 +10,7 @@ import { PageSectionIconTilesModule } from '../page-section-icon-tiles';
 import { PageSectionIconTilesSwiperModule } from '../page-section-icon-tiles-swiper';
 import { PageSectionPersonPostsModule } from '../page-section-person-posts';
 import { PageSectionPersonPostsSwiperModule } from '../page-section-person-posts-swiper';
+import { PageSectionProductsModule } from '../page-section-products';
 import { PageSectionSectionPostsModule } from '../page-section-section-posts';
 import { PageSectionThumbnailPostsModule } from '../page-section-thumbnail-posts';
 import { PageSectionsComponent } from './page-sections.component';
@@ -33,6 +34,7 @@ import { PageSectionsComponent } from './page-sections.component';
     PageSectionSectionPostsModule,
     PageSectionPersonPostsSwiperModule,
     PageSectionPersonPostsModule,
+    PageSectionProductsModule,
   ],
   exports: [PageSectionsComponent],
 })
