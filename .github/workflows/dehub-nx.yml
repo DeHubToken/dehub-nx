@@ -1,5 +1,8 @@
 # Documentation
 # https://nx.app/docs/configuring-ci
+
+# Curtesy for Jo Hanna Pearce
+# https://github.com/jdpearce/nx-large-repo/actions/runs/2229075101/workflow
 name: DeHUB Nx
 on:
   push:
@@ -7,73 +10,41 @@ on:
       - main
   pull_request:
 
-env:
-  # Nx Cloud
-  # Requires Github Agents, see more: https://youtu.be/GT7XIwG1i5A?t=222
-  NX_CLOUD_DISTRIBUTED_EXECUTION: true
+# Each push should cancel workflows in progress and start a new one
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   main:
-    runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' }}
-    steps:
-      - uses: actions/checkout@v2
-        name: Checkout [main]
-        with:
-          fetch-depth: 0
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2.0.2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '16'
-      - run: npm ci
-      - run: npx nx-cloud start-ci-run
-      # Build both preview and prod
-      - run: npm run build:preview
-      - run: npm run build
-      # Test and Lint only once
-      - run: npm run test
-      - run: npm run lint
-      # Deploy both preview and prod
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod
-      - run: npx nx-cloud stop-all-agents
+    name: Main - Orchestrator
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.4
+    with:
+      node-version: '16'
+      parallel-commands-on-agents: |
+        npm run lint
+        npm run test
+        npm run build
+        npm run build:preview
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod
 
+jobs:
   pr:
-    runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '16'
-      - run: npm ci
-      - run: npx nx-cloud start-ci-run
-      # Build only preview
-      - run: npm run build:preview
-      - run: npm run test
-      - run: npm run lint
-      # Deploy only preview draft
-      - run: NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview-draft
-      - run: npx nx-cloud stop-all-agents
+    name: Pr - Orchestrator
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.4
+    with:
+      node-version: '16'
+      parallel-commands-on-agents: |
+        npm run lint
+        npm run test
+        npm run build:preview
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview-draft
 
   agents:
-    runs-on: ubuntu-latest
-    name: Nx Agent
-    timeout-minutes: 15
-    strategy:
-      matrix:
-        agent: [1, 2, 3, 4]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '16'
-      - run: npm ci
-      - name: Start Nx Agent ${{ matrix.agent }}
-        run: npx nx-cloud start-agent
+    name: Agents
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.4
+    with:
+      number-of-agents: 3
