@@ -16,10 +16,6 @@ export const initOrder = async ({
 }: InitOrderParams): Promise<InitOrderReturns | null> => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    logger.info(
-      `${address}, ${productData}, ${shippingAddress}, ${contentfulId}`
-    );
-
     const user = await isMoralisUserByAddress(address);
 
     const ipfs = await Moralis.Cloud.toIpfs({

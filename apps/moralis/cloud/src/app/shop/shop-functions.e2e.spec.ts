@@ -5,12 +5,26 @@ import { OrderStatus, ShopFunctions } from './shop.model';
 
 const { moralis } = environment;
 
-xdescribe('E2E Shop functions', () => {
-  beforeAll(async () => await Moralis.start(moralis));
+describe('E2E Shop functions', () => {
+  const config = {
+    // wallet address and auth information should be matched in `_User` table
+    address: '0x91573f05f34aaf59ec4849860e61c3762906978e',
+    login: {
+      username: 'ben_test1',
+      password: 'ben_test1',
+    },
+  };
+
+  beforeAll(async () => {
+    await Moralis.start(moralis);
+
+    // User should login to find shipping address which has permission by user
+    await Moralis.User.logIn(config.login.username, config.login.password);
+  });
 
   it('Should add new order', async () => {
     const res = await Moralis.Cloud.run(ShopFunctions.InitOrder, {
-      address: '0x91573f05f34aaf59ec4849860e61c3762906978e',
+      address: config.address,
       productData: {
         picture: 'picture',
         name: 'name',
@@ -59,7 +73,7 @@ xdescribe('E2E Shop functions', () => {
 
   it('Should check order status', async () => {
     const resOrder = await Moralis.Cloud.run(ShopFunctions.InitOrder, {
-      address: '0x91573f05f34aaf59ec4849860e61c3762906978e',
+      address: config.address,
       productData: {
         picture: 'picture',
         name: 'name',
