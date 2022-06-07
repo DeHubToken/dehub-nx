@@ -1,5 +1,4 @@
 {
-  "root": "libs/react/pcsuikit",
   "sourceRoot": "libs/react/pcsuikit/src",
   "projectType": "library",
   "targets": {
@@ -15,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/react/pcsuikit"],
       "options": {
-        "jestConfig": "libs/react/pcsuikit/jest.config.js",
+        "jestConfig": "libs/react/pcsuikit/jest.config.ts",
         "passWithNoTests": true
       }
     }

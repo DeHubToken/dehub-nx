@@ -1,9 +1,9 @@
-import React from 'react';
-import styled, { DefaultTheme } from 'styled-components';
 import { Box, Flex, FlexProps, Text } from '@dehub/react/pcsuikit';
-import { formatDehub, formatUsd } from '../../helpers';
+import React, { PropsWithChildren } from 'react';
+import styled, { DefaultTheme } from 'styled-components';
 import { useTranslation } from '../../../../contexts/Localization';
 import { BetPosition, Round } from '../../../../state/types';
+import { formatDehub, formatUsd } from '../../helpers';
 
 // PrizePoolRow
 interface PrizePoolRowProps extends FlexProps {
@@ -18,7 +18,7 @@ const getPrizePoolAmount = (totalAmount: PrizePoolRowProps['totalAmount']) => {
   return formatDehub(totalAmount);
 };
 
-const Row: React.FC = ({ children, ...props }) => {
+const Row: React.FC<PropsWithChildren<unknown>> = ({ children, ...props }) => {
   return (
     <Flex alignItems="center" justifyContent="space-between" {...props}>
       {children}
@@ -96,7 +96,7 @@ export const LockPriceRow: React.FC<LockPriceRowProps> = ({
 };
 
 // RoundResultBox
-interface RoundResultBoxProps {
+interface RoundResultBoxProps extends PropsWithChildren<unknown> {
   betPosition?: BetPosition;
   isNext?: boolean;
   isLive?: boolean;

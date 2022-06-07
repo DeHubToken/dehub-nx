@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/angular/feature-shop",
   "sourceRoot": "libs/angular/feature-shop/src",
   "prefix": "dhb",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/feature-shop"],
       "options": {
-        "jestConfig": "libs/angular/feature-shop/jest.config.js",
+        "jestConfig": "libs/angular/feature-shop/jest.config.ts",
         "passWithNoTests": true
       }
     },

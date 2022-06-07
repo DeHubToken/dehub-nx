@@ -1,6 +1,6 @@
 export interface NotificationDotProps {
   show?: boolean;
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactElement[];
 }
 
 export interface DotProps {

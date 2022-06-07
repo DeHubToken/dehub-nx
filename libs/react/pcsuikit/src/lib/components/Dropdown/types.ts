@@ -1,6 +1,8 @@
+import { PropsWithChildren } from 'react';
+
 export type Position = 'top' | 'top-right' | 'bottom';
 
-export interface PositionProps {
+export interface PositionProps extends PropsWithChildren<unknown> {
   position?: Position;
 }
 

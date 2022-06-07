@@ -1,5 +1,4 @@
 {
-  "root": "libs/shared/config",
   "sourceRoot": "libs/shared/config/src",
   "projectType": "library",
   "targets": {
@@ -15,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/shared/config"],
       "options": {
-        "jestConfig": "libs/shared/config/jest.config.js",
+        "jestConfig": "libs/shared/config/jest.config.ts",
         "passWithNoTests": true
       }
     }

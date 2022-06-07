@@ -1,5 +1,4 @@
 {
-  "root": "libs/shared/asset/freya",
   "sourceRoot": "libs/shared/asset/freya/src",
   "projectType": "library",
   "targets": {
