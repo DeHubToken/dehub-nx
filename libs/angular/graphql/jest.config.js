@@ -1,6 +1,5 @@
-/* eslint-disable */
-export default {
-  displayName: 'angular-feature-game',
+module.exports = {
+  displayName: 'angular-graphql',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +8,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/angular/feature-game',
+  coverageDirectory: '../../../coverage/libs/angular/graphql',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

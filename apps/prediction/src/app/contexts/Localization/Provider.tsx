@@ -1,15 +1,9 @@
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { Language } from '@dehub/react/pcsuikit';
-import React, {
-  createContext,
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
 import { EN, languages } from '../../config/localization/languages';
 import translations from '../../config/localization/translations.json';
-import { fetchLocale, getLanguageCodeFromLS, LS_KEY } from './helpers';
 import { ContextApi, ContextData, ProviderState } from './types';
+import { LS_KEY, fetchLocale, getLanguageCodeFromLS } from './helpers';
 
 const initialState: ProviderState = {
   isFetching: true,
@@ -25,9 +19,7 @@ languageMap.set(EN.locale, translations);
 
 export const LanguageContext = createContext<ContextApi | undefined>(undefined);
 
-export const LanguageProvider: React.FC<PropsWithChildren<unknown>> = ({
-  children,
-}) => {
+export const LanguageProvider: React.FC = ({ children }) => {
   const [state, setState] = useState<ProviderState>(() => {
     const codeFromStorage = getLanguageCodeFromLS() as string;
 

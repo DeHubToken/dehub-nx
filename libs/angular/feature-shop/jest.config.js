@@ -1,6 +1,5 @@
-/* eslint-disable */
-export default {
-  displayName: 'angular-core',
+module.exports = {
+  displayName: 'angular-feature-shop',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,10 +8,11 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/angular/core',
+  coverageDirectory: '../../../coverage/libs/angular/feature-shop',
   transform: {
-    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
+    '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

@@ -1,4 +1,5 @@
 {
+  "root": "apps/prediction",
   "sourceRoot": "apps/prediction/src",
   "projectType": "application",
   "targets": {
@@ -92,7 +93,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/prediction"],
       "options": {
-        "jestConfig": "apps/prediction/jest.config.ts",
+        "jestConfig": "apps/prediction/jest.config.js",
         "passWithNoTests": true
       }
     },

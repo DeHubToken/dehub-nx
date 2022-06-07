@@ -1,5 +1,4 @@
-/* eslint-disable */
-export default {
+module.exports = {
   displayName: 'raffle',
   preset: '../../jest.preset.js',
   transform: {

@@ -1,21 +1,13 @@
 import { Toast, toastTypes } from '@dehub/react/pcsuikit';
 import { kebabCase } from 'lodash';
-import React, {
-  createContext,
-  PropsWithChildren,
-  ReactNode,
-  useCallback,
-  useState,
-} from 'react';
+import React, { createContext, ReactNode, useCallback, useState } from 'react';
 import { ToastContextApi } from './types';
 
 export const ToastsContext = createContext<ToastContextApi | undefined>(
   undefined
 );
 
-export const ToastsProvider: React.FC<PropsWithChildren<unknown>> = ({
-  children,
-}) => {
+export const ToastsProvider: React.FC = ({ children }) => {
   const [toasts, setToasts] = useState<ToastContextApi['toasts']>([]);
 
   const toast = useCallback(

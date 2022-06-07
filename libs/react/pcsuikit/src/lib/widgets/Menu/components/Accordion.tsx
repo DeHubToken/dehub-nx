@@ -1,13 +1,13 @@
 import React, { ReactNode, useState } from 'react';
 import styled from 'styled-components';
-import { ArrowDropDownIcon, ArrowDropUpIcon } from '../../../components/Svg';
 import { MENU_ENTRY_HEIGHT } from '../config';
-import { LinkStatus, PushedProps } from '../types';
 import {
   LinkLabel,
   LinkStatus as LinkStatusComponent,
   MenuEntry,
 } from './MenuEntry';
+import { LinkStatus, PushedProps } from '../types';
+import { ArrowDropDownIcon, ArrowDropUpIcon } from '../../../components/Svg';
 
 interface Props extends PushedProps {
   label: string;
@@ -15,7 +15,7 @@ interface Props extends PushedProps {
   icon: React.ReactElement;
   initialOpenState?: boolean;
   className?: string;
-  children?: ReactNode;
+  children: ReactNode;
   isActive?: boolean;
 }
 

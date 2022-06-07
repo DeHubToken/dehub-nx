@@ -6,7 +6,7 @@ import {
 } from '@apollo/client';
 import { ContentfulEnv } from '@dehub/shared/config';
 import { FooterFragment } from '@dehub/shared/model';
-import React, { createContext, PropsWithChildren, useMemo } from 'react';
+import { createContext, ReactNode, useMemo } from 'react';
 import { useFooterCollectionQuery } from '../hooks';
 
 interface ContentfulContextProps {
@@ -18,18 +18,19 @@ const ContentfulContext = createContext<undefined | ContentfulContextProps>(
   undefined
 );
 
-interface ContentfulApolloProps extends PropsWithChildren<unknown> {
+interface ContentfulProviderProps {
+  children?: ReactNode;
   contentful: ContentfulEnv;
 }
 
-const ContentfulApollo: React.FC<ContentfulApolloProps> = ({
+const ContentfulApollo = ({
   children,
   contentful: {
     graphqlUri,
     isPreview,
     website: { spaceId, cpaToken, cdaToken },
   },
-}) => {
+}: ContentfulProviderProps) => {
   const client = useMemo(() => {
     const httpLink = createHttpLink({
       uri: `${graphqlUri}/${spaceId}`,
@@ -53,13 +54,12 @@ const ContentfulApollo: React.FC<ContentfulApolloProps> = ({
   );
 };
 
-interface ContentfulProviderProps extends PropsWithChildren<unknown> {
-  isPreview: boolean;
-}
-
-const ContentfulProvider: React.FC<ContentfulProviderProps> = ({
+const ContentfulProvider = ({
   children,
   isPreview,
+}: {
+  children: ReactNode;
+  isPreview: boolean;
 }) => {
   const { data, loading, error } = useFooterCollectionQuery({
     variables: { isPreview },

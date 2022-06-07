@@ -1,6 +1,5 @@
-/* eslint-disable */
-export default {
-  displayName: 'angular-feature-earn',
+module.exports = {
+  displayName: 'angular-ui',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +8,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/angular/feature-earn',
+  coverageDirectory: '../../../coverage/libs/angular/ui',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

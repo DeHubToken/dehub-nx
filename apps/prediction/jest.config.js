@@ -1,5 +1,4 @@
-/* eslint-disable */
-export default {
+module.exports = {
   displayName: 'prediction',
   preset: '../../jest.preset.js',
   transform: {

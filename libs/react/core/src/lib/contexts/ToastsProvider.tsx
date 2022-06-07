@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useCallback, useState } from 'react';
+import { createContext, ReactNode, useCallback, useState } from 'react';
 
 export type ToastSeverityType = 'success' | 'info' | 'warn' | 'error';
 type toastSignature = (title: string, description?: string) => void;
@@ -20,7 +20,11 @@ export interface ToastContextValue {
 
 const ToastContext = createContext<ToastContextValue>({});
 
-const ToastProvider: React.FC<PropsWithChildren<unknown>> = ({ children }) => {
+interface ToastProviderProps {
+  children?: ReactNode;
+}
+
+const ToastProvider = ({ children }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<ToastMetaMessage[]>([]);
 
   const toast = useCallback(

@@ -1,4 +1,3 @@
-import { PropsWithChildren } from 'react';
 import { Colors } from '../../theme/types';
 import { Login } from '../WalletModal/types';
 
@@ -47,7 +46,7 @@ export interface MenuEntry {
   status?: LinkStatus;
 }
 
-export interface PanelProps extends PropsWithChildren<unknown> {
+export interface PanelProps {
   isDark: boolean;
   toggleTheme: (isDark: boolean) => void;
   cakePriceUsd?: number;

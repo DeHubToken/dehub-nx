@@ -1,5 +1,5 @@
 import { dark } from '@dehub/react/pcsuikit';
-import React, { PropsWithChildren, useState } from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider as SCThemeProvider } from 'styled-components';
 
 const CACHE_KEY = 'IS_DARK';
@@ -9,9 +9,7 @@ const ThemeContext = React.createContext({
   toggleTheme: () => null,
 });
 
-const ThemeContextProvider: React.FC<PropsWithChildren<unknown>> = ({
-  children,
-}) => {
+const ThemeContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(() => {
     const isDarkUserSetting = localStorage.getItem(CACHE_KEY);
     return isDarkUserSetting ? JSON.parse(isDarkUserSetting) : false;
