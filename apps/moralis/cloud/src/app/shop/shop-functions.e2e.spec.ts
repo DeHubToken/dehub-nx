@@ -5,25 +5,18 @@ import { OrderStatus, ShopFunctions } from './shop.model';
 
 const { moralis } = environment;
 
-describe('E2E Shop functions', () => {
+xdescribe('E2E Shop functions', () => {
   beforeAll(async () => await Moralis.start(moralis));
 
   it('Should add new order', async () => {
     const res = await Moralis.Cloud.run(ShopFunctions.InitOrder, {
       address: '0x91573f05f34aaf59ec4849860e61c3762906978e',
-      productData: JSON.stringify({
+      productData: {
         picture: 'picture',
         name: 'name',
-        shortDescription: 'shortDescription',
-        fullDescription: 'fullDescription',
-        category: 1,
-        deliveryCountry: 'deliveryCountry',
-        price: '100000',
-        currency: 'DeHub',
         sku: 'sku',
-        availableQuantity: 1,
-      }),
-      shippingAddress: JSON.stringify({
+      },
+      shippingAddress: {
         city: 'city',
         state: 'state',
         country: 'country',
@@ -31,7 +24,7 @@ describe('E2E Shop functions', () => {
         line1: 'line1',
         line2: 'line2',
         name: 'productName',
-      }),
+      },
       contentfulId: 'contentfulId',
     });
     expect(res).not.toBeNull;
@@ -67,19 +60,12 @@ describe('E2E Shop functions', () => {
   it('Should check order status', async () => {
     const resOrder = await Moralis.Cloud.run(ShopFunctions.InitOrder, {
       address: '0x91573f05f34aaf59ec4849860e61c3762906978e',
-      productData: JSON.stringify({
+      productData: {
         picture: 'picture',
         name: 'name',
-        shortDescription: 'shortDescription',
-        fullDescription: 'fullDescription',
-        category: 1,
-        deliveryCountry: 'deliveryCountry',
-        price: '100000',
-        currency: 'DeHub',
         sku: 'sku',
-        availableQuantity: 1,
-      }),
-      shippingAddress: JSON.stringify({
+      },
+      shippingAddress: {
         city: 'city',
         state: 'state',
         country: 'country',
@@ -87,7 +73,7 @@ describe('E2E Shop functions', () => {
         line1: 'line1',
         line2: 'line2',
         name: 'productName',
-      }),
+      },
       contentfulId: 'contentfulId',
     });
     expect(resOrder).not.toBeNull;
