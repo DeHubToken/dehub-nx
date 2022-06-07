@@ -1,30 +1,26 @@
+import { InitOrderParams } from '@dehub/shared/model';
 import { isMoralisUserByAddress } from '../shared';
 import {
   Currency,
   CurrencyString,
   InitOrderReturns,
   OrderStatus,
-  ProductData,
-  ShippingAddress,
   ShopFunctions,
 } from './shop.model';
 
-export const initOrder = async (
-  ethAddress: string,
-  productDataJson: string,
-  shippingAddressJson: string,
-  contentfulId: string
-): Promise<InitOrderReturns | null> => {
+export const initOrder = async ({
+  address,
+  productData,
+  shippingAddress,
+  contentfulId,
+}: InitOrderParams): Promise<InitOrderReturns | null> => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const user = await isMoralisUserByAddress(ethAddress);
+    logger.info(
+      `${address}, ${productData}, ${shippingAddress}, ${contentfulId}`
+    );
 
-    const productData: ProductData = JSON.parse(
-      productDataJson
-    ) as unknown as ProductData;
-    const shippingAddress: ShippingAddress = JSON.parse(
-      shippingAddressJson
-    ) as unknown as ShippingAddress;
+    const user = await isMoralisUserByAddress(address);
 
     const ipfs = await Moralis.Cloud.toIpfs({
       sourceType: 'object',
@@ -59,18 +55,12 @@ export const initOrder = async (
     const dehubShopOrders = new DeHubShopOrders();
     dehubShopOrders.set('ipfsHash', ipfsHash);
     dehubShopOrders.set('shippingAddress', deHubShopShippingAddresses);
-    dehubShopOrders.set('quantity', productData.availableQuantity);
     dehubShopOrders.set('user', user);
     dehubShopOrders.set('status', OrderStatus.verifying);
     // tokenId should be updated after minting NFT
     dehubShopOrders.set('tokenId', 0);
     dehubShopOrders.set('productName', productData.name);
-    dehubShopOrders.set('receiptAddress', productData.deliveryCountry);
     dehubShopOrders.set('sku', productData.sku);
-    // dehubShopOrders.set('picture', productData.picture);
-    // dehubShopOrders.set('shortDescription', productData.shortDescription);
-    // dehubShopOrders.set('fullDescription', productData.fullDescription);
-    // todo, set more fields, check ProductData interface
     dehubShopOrders.set('contentfulId', contentfulId);
     await dehubShopOrders.save();
 

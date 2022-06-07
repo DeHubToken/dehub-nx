@@ -1,5 +1,5 @@
 import { environment } from '../../environments/environment';
-import { compareCurrency, findOrder } from './shop-functions';
+import { findOrder } from './shop-functions';
 import { OrderStatus } from './shop.model';
 
 Moralis.Cloud.afterSave(
@@ -9,7 +9,7 @@ Moralis.Cloud.afterSave(
     try {
       const { object: purchase } = request;
       const orderId = purchase.get('orderId');
-      const currencyIn = Number(purchase.get('currency'));
+      const metadataURI = Number(purchase.get('metadataURI'));
 
       // Find order by orderId
       const order = await findOrder(orderId);
@@ -17,12 +17,9 @@ Moralis.Cloud.afterSave(
 
       // Compare order and request
       const status = order.get('status');
-      const currency = order.get('currency');
+      const contentfulId = order.get('contentfulId');
 
-      if (
-        status === OrderStatus.verifying &&
-        compareCurrency(currencyIn, currency)
-      ) {
+      if (status === OrderStatus.verifying && metadataURI === contentfulId) {
         order.set('status', OrderStatus.verified);
         order.save();
 

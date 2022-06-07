@@ -1,3 +1,4 @@
+import { InitOrderParams } from '@dehub/shared/model';
 import { checkOrder, initOrder } from './shop-functions';
 import { ShopFunctions } from './shop.model';
 
@@ -6,12 +7,7 @@ import { ShopFunctions } from './shop.model';
  * Prod: https://vamoxwojj7ht.moralisweb3.com:2053/server/functions/initOrder
  */
 Moralis.Cloud.define(ShopFunctions.InitOrder, async request => {
-  return initOrder(
-    request.params.address,
-    request.params.productData,
-    request.params.shippingAddress,
-    request.params.contentfulId
-  );
+  return initOrder(request.params as unknown as InitOrderParams);
 });
 
 /**

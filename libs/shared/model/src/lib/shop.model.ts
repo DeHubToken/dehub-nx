@@ -16,8 +16,8 @@ export interface ProductData {
  */
 export interface InitOrderParams {
   address: string;
-  productData: ProductData | string;
-  shippingAddress: PhysicalAddress | string;
+  productData: ProductData;
+  shippingAddress: PhysicalAddress;
   contentfulId: string;
 }
 
