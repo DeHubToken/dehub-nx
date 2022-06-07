@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/angular/feature-earn",
   "sourceRoot": "libs/angular/feature-earn/src",
   "prefix": "dhb",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/feature-earn"],
       "options": {
-        "jestConfig": "libs/angular/feature-earn/jest.config.js",
+        "jestConfig": "libs/angular/feature-earn/jest.config.ts",
         "passWithNoTests": true
       }
     },

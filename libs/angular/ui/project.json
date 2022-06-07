@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/angular/ui",
   "sourceRoot": "libs/angular/ui/src",
   "prefix": "dhb",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/ui"],
       "options": {
-        "jestConfig": "libs/angular/ui/jest.config.js",
+        "jestConfig": "libs/angular/ui/jest.config.ts",
         "passWithNoTests": true
       }
     },

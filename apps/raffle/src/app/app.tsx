@@ -6,9 +6,8 @@ import {
 } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
 import { lazy, useMemo } from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { environment } from '../environments/environment';
-import history from './routerHistory';
 
 // This config is required for number formatting
 BigNumber.config({
@@ -42,17 +41,15 @@ export function App() {
   );
 
   return (
-    <Router history={history}>
+    <BrowserRouter>
       <SuspenseWithChunkError
         fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
       >
-        <Switch>
-          <Route path="/">
-            <Lottery baseUrl={baseUrl} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Lottery baseUrl={baseUrl} />}></Route>
+        </Routes>
       </SuspenseWithChunkError>
-    </Router>
+    </BrowserRouter>
   );
 }
 

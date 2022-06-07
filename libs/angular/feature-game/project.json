@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/angular/feature-game",
   "sourceRoot": "libs/angular/feature-game/src",
   "prefix": "dhb",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/feature-game"],
       "options": {
-        "jestConfig": "libs/angular/feature-game/jest.config.js",
+        "jestConfig": "libs/angular/feature-game/jest.config.ts",
         "passWithNoTests": true
       }
     },

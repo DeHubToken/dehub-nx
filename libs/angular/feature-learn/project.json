@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/angular/feature-learn",
   "sourceRoot": "libs/angular/feature-learn/src",
   "prefix": "dhb",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/feature-learn"],
       "options": {
-        "jestConfig": "libs/angular/feature-learn/jest.config.js",
+        "jestConfig": "libs/angular/feature-learn/jest.config.ts",
         "passWithNoTests": true
       }
     },

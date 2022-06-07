@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/angular/feature-news",
   "sourceRoot": "libs/angular/feature-news/src",
   "prefix": "dhb",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/feature-news"],
       "options": {
-        "jestConfig": "libs/angular/feature-news/jest.config.js",
+        "jestConfig": "libs/angular/feature-news/jest.config.ts",
         "passWithNoTests": true
       }
     },

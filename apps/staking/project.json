@@ -1,5 +1,4 @@
 {
-  "root": "apps/staking",
   "sourceRoot": "apps/staking/src",
   "projectType": "application",
   "targets": {
@@ -106,7 +105,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/staking"],
       "options": {
-        "jestConfig": "apps/staking/jest.config.js",
+        "jestConfig": "apps/staking/jest.config.ts",
         "passWithNoTests": true
       }
     },

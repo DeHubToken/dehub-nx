@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
 import { Card, CardBody, Heading } from '@dehub/react/pcsuikit';
+import React, { PropsWithChildren } from 'react';
+import styled from 'styled-components';
 
-interface NotificationProps {
+interface NotificationProps extends PropsWithChildren<unknown> {
   title: string;
 }
 

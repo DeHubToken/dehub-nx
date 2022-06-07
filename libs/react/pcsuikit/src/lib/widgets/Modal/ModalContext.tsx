@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, PropsWithChildren, useState } from 'react';
 import styled from 'styled-components';
 import Overlay from '../../components/Overlay/Overlay';
 import { Handler } from './types';
@@ -30,7 +30,7 @@ export const Context = createContext<ModalsContext>({
   setCloseOnOverlayClick: () => true,
 });
 
-const ModalProvider: React.FC = ({ children }) => {
+const ModalProvider: React.FC<PropsWithChildren<unknown>> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalNode, setModalNode] = useState<React.ReactNode>();
   const [closeOnOverlayClick, setCloseOnOverlayClick] = useState(true);

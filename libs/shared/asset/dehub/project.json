@@ -1,5 +1,4 @@
 {
-  "root": "libs/shared/asset/dehub",
   "sourceRoot": "libs/shared/asset/dehub/src",
   "projectType": "library",
   "targets": {

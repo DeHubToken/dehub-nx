@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import styled from 'styled-components';
-import Text from '../../components/Text/Text';
 import { CopyIcon } from '../../components/Svg';
+import Text from '../../components/Text/Text';
 
-interface Props {
+interface Props extends PropsWithChildren<unknown> {
   toCopy: string;
 }
 

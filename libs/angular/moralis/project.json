@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/angular/moralis",
   "sourceRoot": "libs/angular/moralis/src",
   "prefix": "dhb",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/moralis"],
       "options": {
-        "jestConfig": "libs/angular/moralis/jest.config.js",
+        "jestConfig": "libs/angular/moralis/jest.config.ts",
         "passWithNoTests": true
       }
     },

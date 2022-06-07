@@ -1,5 +1,4 @@
 {
-  "root": "libs/react/ui",
   "sourceRoot": "libs/react/ui/src",
   "projectType": "library",
   "targets": {
@@ -15,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/react/ui"],
       "options": {
-        "jestConfig": "libs/react/ui/jest.config.js",
+        "jestConfig": "libs/react/ui/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/angular/graphql",
   "sourceRoot": "libs/angular/graphql/src",
   "prefix": "dehub",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/graphql"],
       "options": {
-        "jestConfig": "libs/angular/graphql/jest.config.js",
+        "jestConfig": "libs/angular/graphql/jest.config.ts",
         "passWithNoTests": true
       }
     },

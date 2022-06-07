@@ -17,32 +17,32 @@ export const tabMenuItems: MenuItem[] = [
   {
     label: NavigationTabMenu.Home,
     icon: 'fad fa-home',
-    routerLink: 'https://dehub.net/web/home',
+    url: 'https://dehub.net/web/home',
   },
   {
     label: NavigationTabMenu.Stream,
     icon: 'fad fa-tv',
-    routerLink: 'https://dehub.net/web/stream',
+    url: 'https://dehub.net/web/stream',
   },
   {
     label: NavigationTabMenu.Game,
     icon: 'fad fa-gamepad-alt',
-    routerLink: 'https://dehub.net/web/game',
+    url: 'https://dehub.net/web/game',
   },
   {
     label: NavigationTabMenu.Shop,
     icon: 'fad fa-shopping-bag',
-    routerLink: 'https://dehub.net/web/shop',
+    url: 'https://dehub.net/web/shop',
   },
   {
     label: NavigationTabMenu.Learn,
     icon: 'fad fa-lightbulb-on',
-    routerLink: 'https://dehub.net/web/learn',
+    url: 'https://dehub.net/web/learn',
   },
   {
     label: NavigationTabMenu.Earn,
     icon: 'fad fa-coins',
-    routerLink: 'https://dehub.net/web/earn',
+    url: 'https://dehub.net/web/earn',
   },
 ];
 
@@ -59,7 +59,7 @@ export const TabMenu = ({ activeTab }: { activeTab: string }) => {
             )}
             icon={menuItem.icon}
             label={menuItem.label}
-            onClick={() => (window.location.href = menuItem['routerLink'])}
+            onClick={() => (window.location.href = menuItem['url'] || '')}
           />
         ))}
 
