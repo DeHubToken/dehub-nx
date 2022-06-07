@@ -70,7 +70,7 @@ $actionIconBorderRadius: 50%;
 //input field (e.g. inputtext, spinner, inputmask)
 $inputPadding: 0.5rem 0.5rem;
 $inputTextFontSize: 1rem;
-$inputBg: $shade900;
+$inputBg: transparent;
 $inputTextColor: $shade000;
 $inputIconColor: $shade100;
 $inputBorder: 1px solid $shade600;
@@ -83,7 +83,7 @@ $inputFilledHoverBg: $inputFilledBg;
 $inputFilledFocusBg: $inputFilledBg;
 
 //input groups
-$inputGroupBg: $shade800;
+$inputGroupBg: transparent;
 $inputGroupTextColor: $shade100;
 $inputGroupAddOnMinWidth: 2.357rem;
 

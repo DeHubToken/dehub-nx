@@ -1,1 +1,1 @@
-export * from './lib/angular-ui.module';
+export * from './lib/validators/phone-number.validator';

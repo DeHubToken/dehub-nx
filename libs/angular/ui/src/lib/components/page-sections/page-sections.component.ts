@@ -12,6 +12,7 @@ import {
   PageSectionGrandPostsFragment,
   PageSectionIconTilesFragment,
   PageSectionPersonPostsFragment,
+  PageSectionProductsFragment,
   PageSectionSectionPostsFragment,
   PageSectionThumbnailPostsFragment,
   SwiperResponsiveOptions,
@@ -27,6 +28,7 @@ type PageSection =
   | PageSectionGrandPostsFragment
   | PageSectionSectionPostsFragment
   | PageSectionPersonPostsFragment
+  | PageSectionProductsFragment
   | undefined
   | null;
 
@@ -126,8 +128,12 @@ type PageSection =
         ></dhb-page-section-person-posts>
       </ng-template>
 
-      <!-- Pie Chart Posts -->
-      <!-- <dhb-page-section-chart-posts> </dhb-page-section-chart-posts> -->
+      <!-- Products -->
+      <dhb-page-section-products
+        *ngIf="isPageSectionProducts(section)"
+        [section]="section"
+        [swiperResponsiveOptions]="productsResponsiveOptions"
+      ></dhb-page-section-products>
     </ng-container>
   `,
   styles: [``],
@@ -141,6 +147,7 @@ export class PageSectionsComponent implements OnInit {
   @Input() basicPostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() iconTilesResponsiveOptions?: SwiperResponsiveOptions;
   @Input() grandPostsResponsiveOptions?: SwiperResponsiveOptions;
+  @Input() productsResponsiveOptions?: SwiperResponsiveOptions;
 
   constructor() {}
 
@@ -204,5 +211,11 @@ export class PageSectionsComponent implements OnInit {
     pageSection: PageSection
   ): pageSection is PageSectionPersonPostsFragment {
     return !!pageSection && pageSection.__typename === 'PageSectionPersonPosts';
+  }
+
+  isPageSectionProducts(
+    pageSection: PageSection
+  ): pageSection is PageSectionProductsFragment {
+    return !!pageSection && pageSection.__typename === 'PageSectionProducts';
   }
 }

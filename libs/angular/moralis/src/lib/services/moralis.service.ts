@@ -79,6 +79,11 @@ export class MoralisService implements IMoralisService {
     map(({ username }) => username)
   );
 
+  userContacts$ = this.userAttributes$.pipe(
+    filterEmpty(),
+    map(({ email, phone }) => ({ email, phone }))
+  );
+
   private walletConnectStateSubject = new BehaviorSubject<WalletConnectState>({
     state: WalletConnectingState.INIT,
   });

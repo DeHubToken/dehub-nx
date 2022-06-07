@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import 'libs/shared/asset/freya/src/lib/theme/dehub/theme.scss';
+@forward 'libs/shared/asset/freya/src/lib/theme/dehub/theme.scss' hide $colors;
 @import 'libs/shared/asset/freya/src/lib/layout/css/layout-dehub.scss';
 
 @import '~primereact/resources/primereact.min.css';

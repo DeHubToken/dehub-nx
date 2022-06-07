@@ -1,0 +1,28 @@
+fragment PageShop on PageShop {
+  sys {
+    ...Sys
+  }
+  mainTitle
+  showTitle
+  subtitle
+  showSubtitle
+  ctasCollection(limit: 3, preview: $isPreview) {
+    items {
+      ...CallToAction
+    }
+  }
+  headerColumnWidth
+  headerAlignCenter
+  sectionsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...PageSectionFeaturePosts
+      ...PageSectionThumbnailPosts
+      ...PageSectionBasicPosts
+      ...PageSectionIconTiles
+      ...PageSectionGrandPosts
+      ...PageSectionSectionPosts
+      ...PageSectionPersonPosts
+      ...PageSectionProducts
+    }
+  }
+}

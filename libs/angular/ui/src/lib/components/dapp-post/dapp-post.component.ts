@@ -54,8 +54,12 @@ import { WINDOW } from '@ng-web-apis/common';
   `,
   styles: [
     `
+      /* Important for keeping all items stretched to same height */
       :host {
-        display: flex;
+        height: 100%;
+        & > div {
+          height: 100%;
+        }
       }
     `,
   ],

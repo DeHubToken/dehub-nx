@@ -1,0 +1,7 @@
+query productCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+  productCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+    items {
+      ...ProductDetail
+    }
+  }
+}
