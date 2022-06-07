@@ -1,6 +1,6 @@
 import { Web3Provider } from '@ethersproject/providers';
 import { Web3ReactProvider } from '@web3-react/core';
-import { PropsWithChildren, useCallback } from 'react';
+import { useCallback } from 'react';
 import { MoralisProvider } from 'react-moralis';
 import { ConnectProvider } from './ConnectContext';
 
@@ -18,16 +18,17 @@ interface Web3Props {
   };
 }
 
-interface Web3ProviderProps extends PropsWithChildren<unknown> {
+interface Web3ProviderProps {
+  children?: React.ReactNode;
   moralis: MoralisProps;
   web3: Web3Props;
 }
 
-export const Web3Providers: React.FC<Web3ProviderProps> = ({
+export const Web3Providers = ({
   children,
   moralis,
   web3,
-}) => {
+}: Web3ProviderProps) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getLibrary = useCallback((provider: any) => {
     const library = new Web3Provider(provider);

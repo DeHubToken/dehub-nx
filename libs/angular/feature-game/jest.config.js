@@ -1,6 +1,5 @@
-/* eslint-disable */
-export default {
-  displayName: 'angular-model',
+module.exports = {
+  displayName: 'angular-feature-game',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +8,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/angular/model',
+  coverageDirectory: '../../../coverage/libs/angular/feature-game',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

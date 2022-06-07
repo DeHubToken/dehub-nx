@@ -1,6 +1,5 @@
-/* eslint-disable */
-export default {
-  displayName: 'shared-config',
+module.exports = {
+  displayName: 'shared-util',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +10,5 @@ export default {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/shared/config',
+  coverageDirectory: '../../../coverage/libs/shared/util',
 };

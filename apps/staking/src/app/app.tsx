@@ -6,10 +6,11 @@ import {
 } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
 import { lazy, useMemo } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
 import { environment } from '../environments/environment';
 import usePullBlockNumber from './hooks/usePullBlockNumber';
 import usePullBusdPrice from './hooks/usePullBusdPrice';
+import history from './routerHistory';
 import { useApplicationStatus, useFetchPools } from './state/application/hooks';
 import { ApplicationStatus } from './state/application/types';
 
@@ -54,15 +55,17 @@ export function App() {
   }
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <SuspenseWithChunkError
         fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
       >
-        <Routes>
-          <Route path="/" element={<Staking />}></Route>
-        </Routes>
+        <Switch>
+          <Route path="/">
+            <Staking />
+          </Route>
+        </Switch>
       </SuspenseWithChunkError>
-    </BrowserRouter>
+    </Router>
   );
 }
 

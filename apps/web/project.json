@@ -1,5 +1,6 @@
 {
   "projectType": "application",
+  "root": "apps/web",
   "sourceRoot": "apps/web/src",
   "prefix": "dhb",
   "targets": {
@@ -120,7 +121,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/web"],
       "options": {
-        "jestConfig": "apps/web/jest.config.ts",
+        "jestConfig": "apps/web/jest.config.js",
         "passWithNoTests": true
       }
     },

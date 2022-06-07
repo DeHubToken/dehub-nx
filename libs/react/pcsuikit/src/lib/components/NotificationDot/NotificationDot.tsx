@@ -1,6 +1,6 @@
-import React, { Children, cloneElement, ReactElement } from 'react';
+import React, { cloneElement, Children, ReactElement } from 'react';
 import styled from 'styled-components';
-import { DotProps, NotificationDotProps } from './types';
+import { NotificationDotProps, DotProps } from './types';
 
 const NotificationDotRoot = styled.span`
   display: inline-flex;

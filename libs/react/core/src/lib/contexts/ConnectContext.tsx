@@ -19,9 +19,9 @@ import {
 import { Web3Provider } from '@ethersproject/providers';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { Moralis } from 'moralis';
-import React, {
+import {
   createContext,
-  PropsWithChildren,
+  ReactNode,
   useCallback,
   useEffect,
   useState,
@@ -50,16 +50,17 @@ const ConnectContext = createContext<undefined | ConnectContextValue>(
   undefined
 );
 
-interface ConnectProviderProps extends PropsWithChildren<unknown> {
+interface ConnectProviderProps {
+  children?: ReactNode;
   defaultChainId: number;
   magicLinkApiKey: string;
 }
 
-const ConnectProvider: React.FC<ConnectProviderProps> = ({
+const ConnectProvider = ({
   children,
   defaultChainId: _defaultChainId = 1,
   magicLinkApiKey,
-}) => {
+}: ConnectProviderProps) => {
   const [walletConnectingState, setWalletConnectingState] =
     useState<WalletConnectingState>(WalletConnectingState.INIT);
   const [account, setAccount] = useState<string | null>(null);

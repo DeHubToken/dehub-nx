@@ -1,4 +1,5 @@
 {
+  "root": "apps/raffle",
   "sourceRoot": "apps/raffle/src",
   "projectType": "application",
   "targets": {
@@ -95,7 +96,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/raffle"],
       "options": {
-        "jestConfig": "apps/raffle/jest.config.ts",
+        "jestConfig": "apps/raffle/jest.config.js",
         "passWithNoTests": true
       }
     },

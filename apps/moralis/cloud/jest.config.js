@@ -1,5 +1,4 @@
-/* eslint-disable */
-export default {
+module.exports = {
   displayName: 'moralis-cloud',
   preset: '../../../jest.preset.js',
   globals: {

@@ -1,6 +1,5 @@
-/* eslint-disable */
-export default {
-  displayName: 'angular-feature-news',
+module.exports = {
+  displayName: 'angular-feature-learn',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +8,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/angular/feature-news',
+  coverageDirectory: '../../../coverage/libs/angular/feature-learn',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

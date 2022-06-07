@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { SpaceProps } from 'styled-system';
 
 export const variants = {
@@ -26,5 +26,4 @@ export interface TagProps extends SpaceProps {
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   outline?: boolean;
-  children?: React.ReactNode;
 }

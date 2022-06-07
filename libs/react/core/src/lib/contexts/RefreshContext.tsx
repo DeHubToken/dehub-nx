@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const FAST_INTERVAL = 10000;
 const SLOW_INTERVAL = 60000;
@@ -24,10 +24,12 @@ const useIsBrowserTabActive = () => {
   return isBrowserTabActiveRef;
 };
 
+interface RefreshContextProviderProps {
+  children?: React.ReactNode;
+}
+
 // This context maintain 2 counters that can be used as a dependencies on other hooks to force a periodic refresh
-const RefreshContextProvider: React.FC<PropsWithChildren<unknown>> = ({
-  children,
-}) => {
+const RefreshContextProvider = ({ children }: RefreshContextProviderProps) => {
   const [slow, setSlow] = useState(0);
   const [fast, setFast] = useState(0);
   const isBrowserTabActiveRef = useIsBrowserTabActive();

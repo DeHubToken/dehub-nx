@@ -1,5 +1,6 @@
 {
   "projectType": "library",
+  "root": "libs/angular/core",
   "sourceRoot": "libs/angular/core/src",
   "prefix": "dhb",
   "targets": {
@@ -7,7 +8,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/core"],
       "options": {
-        "jestConfig": "libs/angular/core/jest.config.ts",
+        "jestConfig": "libs/angular/core/jest.config.js",
         "passWithNoTests": true
       }
     },
