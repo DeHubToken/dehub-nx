@@ -7,11 +7,10 @@ import {
 } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
 import { lazy, useMemo } from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { environment } from '../environments/environment';
 import EasterEgg from './components/EasterEgg';
 import ToastListener from './components/ToastListener';
-import history from './routerHistory';
 import { usePollBlockNumber } from './state/hooks';
 import GlobalStyle from './style/Global';
 
@@ -48,21 +47,19 @@ export function App() {
   );
 
   return (
-    <Router history={history}>
+    <BrowserRouter>
       <ResetCSS />
       <GlobalStyle />
       <SuspenseWithChunkError
         fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
       >
-        <Switch>
-          <Route path="/">
-            <Predictions baseUrl={baseUrl} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Predictions baseUrl={baseUrl} />}></Route>
+        </Routes>
       </SuspenseWithChunkError>
       <EasterEgg iterations={2} />
       <ToastListener />
-    </Router>
+    </BrowserRouter>
   );
 }
 

@@ -1,5 +1,5 @@
 import DehubLoaderJson from '@dehub/shared/asset/dehub/dehub-loader-light-blue.json';
-import { Player } from '@lottiefiles/react-lottie-player';
+import Lottie from 'react-lottie-player';
 
 const Loader = ({
   title = 'Loading...',
@@ -14,15 +14,17 @@ const Loader = ({
         <tbody>
           <tr>
             <td>
-              <div className="pt-2 mx-auto" style={{ height: 'fit-content' }}>
-                <Player
-                  src={DehubLoaderJson}
-                  background="transparent"
+              <div
+                className="pt-2 flex justify-content-center"
+                style={{ height: 'fit-content' }}
+              >
+                <Lottie
+                  loop
+                  animationData={DehubLoaderJson}
+                  play
                   speed={1}
                   style={{ width: '180px' }}
-                  loop
-                  autoplay
-                />
+                ></Lottie>
               </div>
               <h4 className="dhb-loader-title">{title}</h4>
               <div className="dhb-loader-subtitle">{subtitle}</div>

@@ -13,11 +13,10 @@ const StyledContainer = styled.div`
   }
 `;
 
-interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
-
-const Container = ({ children, ...props }: ContainerProps) => {
+const Container: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  children,
+  ...props
+}) => {
   return <StyledContainer {...props}>{children}</StyledContainer>;
 };
 

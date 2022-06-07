@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/angular/feature-legal",
   "sourceRoot": "libs/angular/feature-legal/src",
   "prefix": "dhb",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/angular/feature-legal"],
       "options": {
-        "jestConfig": "libs/angular/feature-legal/jest.config.js",
+        "jestConfig": "libs/angular/feature-legal/jest.config.ts",
         "passWithNoTests": true
       }
     },

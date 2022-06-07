@@ -1,5 +1,4 @@
 {
-  "root": "apps/buy",
   "sourceRoot": "apps/buy/src",
   "projectType": "application",
   "targets": {
@@ -106,7 +105,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/buy"],
       "options": {
-        "jestConfig": "apps/buy/jest.config.js",
+        "jestConfig": "apps/buy/jest.config.ts",
         "passWithNoTests": true
       }
     },

@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react';
 import { DefaultTheme } from 'styled-components';
 
 export interface ThemedProps {
@@ -11,7 +12,7 @@ export interface StatusProps extends ThemedProps {
   status: Status;
 }
 
-export interface StepProps {
+export interface StepProps extends PropsWithChildren<unknown> {
   index: number;
   status: Status;
   numberOfSteps?: number;

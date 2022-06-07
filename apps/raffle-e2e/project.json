@@ -1,5 +1,4 @@
 {
-  "root": "apps/raffle-e2e",
   "sourceRoot": "apps/raffle-e2e/src",
   "projectType": "application",
   "targets": {

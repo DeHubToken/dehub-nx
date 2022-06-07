@@ -9,5 +9,5 @@ export interface ButtonMenuProps {
   activeIndex?: number;
   onItemClick?: (index: number) => void;
   scale?: Scale;
-  children: React.ReactElement[];
+  children?: React.ReactElement[];
 }
