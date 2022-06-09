@@ -27,10 +27,12 @@ jobs:
       node-version: '16'
       install-command: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
-        npm run lint
-        npm run test
-        npm run build
         npm run build:preview
+        npm run build
+        npm run test
+        npm run lint
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod
 
   pr:
     if: ${{ github.event_name == 'pull_request' }}
@@ -40,9 +42,10 @@ jobs:
       node-version: '16'
       install-command: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
-        npm run lint
-        npm run test
         npm run build:preview
+        npm run test
+        npm run lint
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview-draft
 
   agents:
     name: Agents
