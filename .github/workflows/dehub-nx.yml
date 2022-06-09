@@ -31,8 +31,8 @@ jobs:
         npm run build
         npm run test
         npm run lint
-        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview
-        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod
+        npm run deploy:preview
+        npm run deploy:prod
 
   pr:
     if: ${{ github.event_name == 'pull_request' }}
@@ -45,7 +45,7 @@ jobs:
         npm run build:preview
         npm run test
         npm run lint
-        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview-draft
+        npm run deploy:preview-draft
 
   agents:
     name: Agents
