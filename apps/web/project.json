@@ -6,9 +6,7 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/web.prod/web",
         "index": "apps/web/src/index.html",
@@ -22,24 +20,17 @@
           {
             "input": "libs/shared/asset/dehub/src/lib",
             "glob": "**/*",
-            "ignore": [
-              "**/*.ts"
-            ],
+            "ignore": ["**/*.ts"],
             "output": "assets/dehub"
           },
           {
             "input": "libs/shared/asset/freya/src/lib",
             "glob": "**/*",
-            "ignore": [
-              "**/*.ts",
-              "**/*.scss"
-            ],
+            "ignore": ["**/*.ts", "**/*.scss"],
             "output": "assets"
           }
         ],
-        "styles": [
-          "apps/web/src/styles.scss"
-        ],
+        "styles": ["apps/web/src/styles.scss"],
         "scripts": [],
         "allowedCommonJsDependencies": [
           "hash.js",
@@ -122,18 +113,13 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/web/src/**/*.ts",
-          "apps/web/src/**/*.html"
-        ],
+        "lintFilePatterns": ["apps/web/src/**/*.ts", "apps/web/src/**/*.html"],
         "maxWarnings": 0
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/web"
-      ],
+      "outputs": ["coverage/apps/web"],
       "options": {
         "jestConfig": "apps/web/jest.config.ts",
         "passWithNoTests": true
@@ -168,12 +154,6 @@
       }
     }
   },
-  "tags": [
-    "scope:angular",
-    "type:app"
-  ],
-  "implicitDependencies": [
-    "shared-asset-dehub",
-    "shared-asset-freya"
-  ]
+  "tags": ["scope:angular", "type:app"],
+  "implicitDependencies": ["shared-asset-dehub", "shared-asset-freya"]
 }

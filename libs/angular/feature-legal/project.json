@@ -6,9 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/angular/feature-legal"
-      ],
+      "outputs": ["coverage/libs/angular/feature-legal"],
       "options": {
         "jestConfig": "libs/angular/feature-legal/jest.config.ts",
         "passWithNoTests": true
@@ -25,8 +23,5 @@
       }
     }
   },
-  "tags": [
-    "scope:angular",
-    "type:feature"
-  ]
+  "tags": ["scope:angular", "type:feature"]
 }

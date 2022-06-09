@@ -5,19 +5,12 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/shared/asset/dehub/**/*.ts"
-        ],
+        "lintFilePatterns": ["libs/shared/asset/dehub/**/*.ts"],
         "maxWarnings": 0
       }
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:asset"
-  ]
+  "tags": ["scope:shared", "type:asset"]
 }

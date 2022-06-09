@@ -4,7 +4,11 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   DehubMoralisToken,
   EnvToken,
@@ -170,7 +174,10 @@ export class CheckoutFormComponent<
   // Contact Form
   userContacts$?: Observable<Contacts>;
   contactForm = new UntypedFormGroup({
-    email: new UntypedFormControl(undefined, [Validators.required, Validators.email]),
+    email: new UntypedFormControl(undefined, [
+      Validators.required,
+      Validators.email,
+    ]),
     phone: new UntypedFormControl(undefined, [Validators.required]),
   });
 

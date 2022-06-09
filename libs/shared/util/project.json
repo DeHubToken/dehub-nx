@@ -5,29 +5,20 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/shared/util/**/*.ts"
-        ],
+        "lintFilePatterns": ["libs/shared/util/**/*.ts"],
         "maxWarnings": 0
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/shared/util"
-      ],
+      "outputs": ["coverage/libs/shared/util"],
       "options": {
         "jestConfig": "libs/shared/util/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:util"
-  ]
+  "tags": ["scope:shared", "type:util"]
 }

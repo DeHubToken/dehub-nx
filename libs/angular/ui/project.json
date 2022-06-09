@@ -6,9 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/angular/ui"
-      ],
+      "outputs": ["coverage/libs/angular/ui"],
       "options": {
         "jestConfig": "libs/angular/ui/jest.config.ts",
         "passWithNoTests": true
@@ -25,8 +23,5 @@
       }
     }
   },
-  "tags": [
-    "scope:angular",
-    "type:ui"
-  ]
+  "tags": ["scope:angular", "type:ui"]
 }
