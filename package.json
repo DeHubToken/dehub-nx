@@ -52,7 +52,7 @@
     "@angular/router": "14.0.1",
     "@angular/service-worker": "14.0.1",
     "@angular/youtube-player": "13.2.3",
-    "@apollo/client": "3.5.9",
+    "@apollo/client": "3.6.6",
     "@binance-chain/bsc-connector": "1.0.0",
     "@contentful/rich-text-html-renderer": "15.8.0",
     "@contentful/rich-text-types": "15.7.0",
