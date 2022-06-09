@@ -8,7 +8,6 @@ import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { PhoneInputModule } from '@dehub/angular/ui/components/phone-input';
 import { ProductMiniModule } from '@dehub/angular/ui/components/product-mini';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
-import { AsPipeModule } from '@dehub/angular/ui/pipes/as';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { ButtonModule } from 'primeng/button';
@@ -41,7 +40,6 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     ProductMiniModule,
     AddressFormModule,
     PhoneInputModule,
-    AsPipeModule,
 
     // PrimeNg
     ButtonModule,
