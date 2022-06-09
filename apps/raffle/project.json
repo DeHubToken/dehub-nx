@@ -1,10 +1,13 @@
 {
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "apps/raffle/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nrwl/web:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
@@ -19,17 +22,24 @@
           {
             "input": "libs/shared/asset/dehub/src/lib",
             "glob": "**/*",
-            "ignore": ["**/*.ts"],
+            "ignore": [
+              "**/*.ts"
+            ],
             "output": "assets/dehub"
           },
           {
             "input": "libs/shared/asset/freya/src/lib",
             "glob": "**/*",
-            "ignore": ["**/*.ts", "**/*.scss"],
+            "ignore": [
+              "**/*.ts",
+              "**/*.scss"
+            ],
             "output": "assets"
           }
         ],
-        "styles": ["apps/raffle/src/styles.scss"],
+        "styles": [
+          "apps/raffle/src/styles.scss"
+        ],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
@@ -85,15 +95,21 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/raffle/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "apps/raffle/**/*.{ts,tsx,js,jsx}"
+        ],
         "maxWarnings": 0
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/raffle"],
+      "outputs": [
+        "coverage/apps/raffle"
+      ],
       "options": {
         "jestConfig": "apps/raffle/jest.config.ts",
         "passWithNoTests": true
@@ -114,6 +130,12 @@
       }
     }
   },
-  "tags": ["scope:react", "type:app"],
-  "implicitDependencies": ["shared-asset-dehub", "shared-asset-freya"]
+  "tags": [
+    "scope:react",
+    "type:app"
+  ],
+  "implicitDependencies": [
+    "shared-asset-dehub",
+    "shared-asset-freya"
+  ]
 }

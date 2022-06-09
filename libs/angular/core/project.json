@@ -1,11 +1,14 @@
 {
+  "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/angular/core/src",
   "prefix": "dhb",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/angular/core"],
+      "outputs": [
+        "coverage/libs/angular/core"
+      ],
       "options": {
         "jestConfig": "libs/angular/core/jest.config.ts",
         "passWithNoTests": true
@@ -22,5 +25,8 @@
       }
     }
   },
-  "tags": ["scope:angular", "type:feature"]
+  "tags": [
+    "scope:angular",
+    "type:feature"
+  ]
 }

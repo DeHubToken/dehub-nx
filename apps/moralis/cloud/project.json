@@ -1,10 +1,13 @@
 {
+  "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "apps/moralis/cloud/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/moralis/cloud",
         "main": "apps/moralis/cloud/src/main.ts",
@@ -42,14 +45,20 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/moralis/cloud/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/moralis/cloud/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/moralis/cloud"],
+      "outputs": [
+        "coverage/apps/moralis/cloud"
+      ],
       "options": {
         "jestConfig": "apps/moralis/cloud/jest.config.ts",
         "passWithNoTests": true
@@ -88,5 +97,8 @@
       }
     }
   },
-  "tags": ["scope:shared", "type:util"]
+  "tags": [
+    "scope:shared",
+    "type:util"
+  ]
 }

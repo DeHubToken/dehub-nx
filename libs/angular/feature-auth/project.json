@@ -1,12 +1,14 @@
 {
+  "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "library",
-  "root": "libs/angular/feature-auth",
   "sourceRoot": "libs/angular/feature-auth/src",
   "prefix": "dhb",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/angular/feature-auth"],
+      "outputs": [
+        "coverage/libs/angular/feature-auth"
+      ],
       "options": {
         "jestConfig": "libs/angular/feature-auth/jest.config.js",
         "passWithNoTests": true
@@ -23,5 +25,8 @@
       }
     }
   },
-  "tags": ["scope:angular", "type:feature"]
+  "tags": [
+    "scope:angular",
+    "type:feature"
+  ]
 }

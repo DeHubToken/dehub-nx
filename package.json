@@ -6,7 +6,7 @@
   "scripts": {
     "migrate": "nx migrate latest",
     "migrate:run": "nx migrate --run-migrations",
-    "postinstall": "ngcc --properties es2015 browser module main",
+    "postinstall": "ngcc --properties es2020 browser module main",
     "web:start": "npm run website:gql && nx run web:serve",
     "web:demo": "nx run web:build && lite-server -c bs-config-web.js",
     "web:preview": "nx run web:build:preview && lite-server -c bs-config-web.preview.js",
@@ -131,7 +131,7 @@
     "@angular-eslint/eslint-plugin": "13.2.1",
     "@angular-eslint/eslint-plugin-template": "13.2.1",
     "@angular-eslint/template-parser": "13.2.1",
-    "@angular/cli": "13.3.6",
+    "@angular/cli": "~14.0.0",
     "@angular/compiler-cli": "14.0.1",
     "@angular/language-service": "14.0.1",
     "@commitlint/cli": "16.1.0",

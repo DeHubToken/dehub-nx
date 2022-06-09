@@ -12,8 +12,8 @@ import {
 } from '@angular/core';
 import {
   ControlContainer,
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   FormGroupDirective,
   NgControl,
   Validators,
@@ -235,14 +235,14 @@ export class AddressFormComponent implements OnInit, OnDestroy {
 
   // Form
   selectedCountryCode?: string;
-  shippingAddressForm = new FormGroup({
-    name: new FormControl(undefined, Validators.required),
-    line1: new FormControl(undefined, Validators.required),
-    line2: new FormControl(undefined),
-    city: new FormControl(undefined, Validators.required),
-    country: new FormControl(undefined, Validators.required),
-    postalCode: new FormControl(undefined, Validators.required),
-    state: new FormControl(undefined, Validators.required),
+  shippingAddressForm = new UntypedFormGroup({
+    name: new UntypedFormControl(undefined, Validators.required),
+    line1: new UntypedFormControl(undefined, Validators.required),
+    line2: new UntypedFormControl(undefined),
+    city: new UntypedFormControl(undefined, Validators.required),
+    country: new UntypedFormControl(undefined, Validators.required),
+    postalCode: new UntypedFormControl(undefined, Validators.required),
+    state: new UntypedFormControl(undefined, Validators.required),
   });
 
   constructor(

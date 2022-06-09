@@ -1,23 +1,33 @@
 {
+  "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "libs/react/pcsuikit/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/react/pcsuikit/**/*.{ts,tsx,js,jsx}"],
+        "lintFilePatterns": [
+          "libs/react/pcsuikit/**/*.{ts,tsx,js,jsx}"
+        ],
         "maxWarnings": 0
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/react/pcsuikit"],
+      "outputs": [
+        "coverage/libs/react/pcsuikit"
+      ],
       "options": {
         "jestConfig": "libs/react/pcsuikit/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:react", "type:ui"]
+  "tags": [
+    "scope:react",
+    "type:ui"
+  ]
 }

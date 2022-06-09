@@ -4,7 +4,7 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import {
   DehubMoralisToken,
   EnvToken,
@@ -160,24 +160,24 @@ export class CheckoutFormComponent<
 > implements OnInit
 {
   product?: P;
-  FormControl = FormControl; // for in-template casting
+  FormControl = UntypedFormControl; // for in-template casting
 
   // Availability form
-  availabilityForm = new FormGroup({
-    quantity: new FormControl(1),
+  availabilityForm = new UntypedFormGroup({
+    quantity: new UntypedFormControl(1),
   });
 
   // Contact Form
   userContacts$?: Observable<Contacts>;
-  contactForm = new FormGroup({
-    email: new FormControl(undefined, [Validators.required, Validators.email]),
-    phone: new FormControl(undefined, [Validators.required]),
+  contactForm = new UntypedFormGroup({
+    email: new UntypedFormControl(undefined, [Validators.required, Validators.email]),
+    phone: new UntypedFormControl(undefined, [Validators.required]),
   });
 
   // Shipping Address Form
   userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
-  shippingAddressForm = new FormGroup({
-    address: new FormControl(undefined, [Validators.required]),
+  shippingAddressForm = new UntypedFormGroup({
+    address: new UntypedFormControl(undefined, [Validators.required]),
   });
 
   constructor(

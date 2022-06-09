@@ -1,15 +1,23 @@
 {
+  "$schema": "..\\..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "libs/shared/asset/freya/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/shared/asset/freya/**/*.ts"],
+        "lintFilePatterns": [
+          "libs/shared/asset/freya/**/*.ts"
+        ],
         "maxWarnings": 0
       }
     }
   },
-  "tags": ["scope:shared", "type:asset"]
+  "tags": [
+    "scope:shared",
+    "type:asset"
+  ]
 }

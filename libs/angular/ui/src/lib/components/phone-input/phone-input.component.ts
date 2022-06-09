@@ -11,9 +11,9 @@ import {
 } from '@angular/core';
 import {
   ControlContainer,
-  FormControl,
+  UntypedFormControl,
   FormControlStatus,
-  FormGroup,
+  UntypedFormGroup,
   FormGroupDirective,
   NgControl,
   Validators,
@@ -127,9 +127,9 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   // Form
   selectedCountry?: Country;
   selectedCountryCode?: string;
-  phoneForm = new FormGroup({
-    code: new FormControl(undefined),
-    number: new FormControl({ value: '', disabled: true }, [
+  phoneForm = new UntypedFormGroup({
+    code: new UntypedFormControl(undefined),
+    number: new UntypedFormControl({ value: '', disabled: true }, [
       PhoneNumberValidator(() => this.selectedCountry?.code),
     ]),
   });

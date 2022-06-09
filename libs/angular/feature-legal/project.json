@@ -1,11 +1,14 @@
 {
+  "$schema": "..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-legal/src",
   "prefix": "dhb",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/angular/feature-legal"],
+      "outputs": [
+        "coverage/libs/angular/feature-legal"
+      ],
       "options": {
         "jestConfig": "libs/angular/feature-legal/jest.config.ts",
         "passWithNoTests": true
@@ -22,5 +25,8 @@
       }
     }
   },
-  "tags": ["scope:angular", "type:feature"]
+  "tags": [
+    "scope:angular",
+    "type:feature"
+  ]
 }
