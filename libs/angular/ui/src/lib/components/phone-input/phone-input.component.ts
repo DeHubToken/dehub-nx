@@ -11,9 +11,9 @@ import {
 } from '@angular/core';
 import {
   ControlContainer,
-  UntypedFormControl,
+  FormControl,
   FormControlStatus,
-  UntypedFormGroup,
+  FormGroup,
   FormGroupDirective,
   NgControl,
   Validators,
@@ -127,9 +127,9 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   // Form
   selectedCountry?: Country;
   selectedCountryCode?: string;
-  phoneForm = new UntypedFormGroup({
-    code: new UntypedFormControl(undefined),
-    number: new UntypedFormControl({ value: '', disabled: true }, [
+  phoneForm = new FormGroup({
+    code: new FormControl(''),
+    number: new FormControl({ value: '', disabled: true }, [
       PhoneNumberValidator(() => this.selectedCountry?.code),
     ]),
   });
@@ -150,7 +150,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Ref: https://stackoverflow.com/a/67096422/1617590
     this.phoneForm.setValidators(() =>
-      Validators.required(this.phoneForm.controls['number'])
+      Validators.required(this.phoneForm.controls.number)
     );
 
     this.subs.add(
@@ -160,9 +160,10 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
           const country = this.selectedCountry;
           if (country) {
             const phoneNumber = new PhoneNumber();
-            const numberControl = this.phoneForm.controls['number'];
+            const numberControl = this.phoneForm.controls.number;
             phoneNumber.setCountryCode(parseInt(country.phoneCode));
-            phoneNumber.setNationalNumber(parseInt(numberControl.value));
+            if (numberControl.value)
+              phoneNumber.setNationalNumber(parseInt(numberControl.value));
             this.ngControl.control?.setValue(
               this.phoneNumberUtil.format(
                 phoneNumber,
@@ -186,7 +187,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
         this.selectedCountryCode = this.selectedCountry.code;
         this.phoneForm.patchValue({
           code: this.selectedCountry.code,
-          number: phoneNumber.getNationalNumber(),
+          number: phoneNumber.getNationalNumber()?.toLocaleString(),
         });
       }
     }
@@ -202,7 +203,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
 
   onCountryChange(countryCode: string, countries: Country[]) {
     const country = this.getCountryByCountryCode(countries, countryCode);
-    const numberControl = this.phoneForm.controls['number'];
+    const numberControl = this.phoneForm.controls.number;
     if (country) {
       this.selectedCountry = country;
       numberControl.enable();

@@ -4,11 +4,7 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import {
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   DehubMoralisToken,
   EnvToken,
@@ -40,7 +36,7 @@ import { Observable, tap } from 'rxjs';
             <span class="p-float-label">
               <p-inputNumber
                 [formControlName]="'quantity'"
-                [inputId]="'selectedquantity'"
+                [inputId]="'selectedQuantity'"
                 [(ngModel)]="availabilityForm.value.quantity"
                 [ariaLabel]="'Quantity'"
                 [ariaRequired]="true"
@@ -49,7 +45,7 @@ import { Observable, tap } from 'rxjs';
                 [allowEmpty]="false"
                 [showButtons]="true"
               ></p-inputNumber>
-              <label for="selectedquantity">Quantity</label>
+              <label for="selectedQuantity">Quantity</label>
             </span>
           </div>
         </form>
@@ -83,7 +79,7 @@ import { Observable, tap } from 'rxjs';
           <!-- Phone -->
           <div class="field col-12 sm:col-7 p-fluid">
             <dhb-phone-input
-              [formControl]="contactForm.controls['phone'] | as: FormControl"
+              [formControl]="contactForm.controls.phone"
               [prefillData]="contacts.phone"
             ></dhb-phone-input>
           </div>
@@ -93,9 +89,7 @@ import { Observable, tap } from 'rxjs';
         <h5>Shipping Address</h5>
         <dhb-address-form
           *ngIf="userShippingAddress$ | async as resp; else addressLoading"
-          [formControl]="
-            shippingAddressForm.controls['address'] | as: FormControl
-          "
+          [formControl]="shippingAddressForm.controls.address"
           [prefillData]="resp.attributes"
         ></dhb-address-form>
         <ng-template #addressLoading>
@@ -105,12 +99,12 @@ import { Observable, tap } from 'rxjs';
         </ng-template>
 
         <!-- Total -->
-        <div class="grid">
+        <div *ngIf="availabilityForm.value.quantity as quantity" class="grid">
           <div class="col-12">
             <div class="flex flex-column justify-content-end text-right">
               <h5 class="align-self-end mb-1">Total</h5>
               <h3 class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1">
-                {{ product.price * availabilityForm.value.quantity | number }}
+                {{ product.price * quantity }}
                 <span class="text-sm">{{ product.currency }}</span>
               </h3>
             </div>
@@ -164,27 +158,24 @@ export class CheckoutFormComponent<
 > implements OnInit
 {
   product?: P;
-  FormControl = UntypedFormControl; // for in-template casting
+  FormControl = FormControl; // for in-template casting
 
   // Availability form
-  availabilityForm = new UntypedFormGroup({
-    quantity: new UntypedFormControl(1),
+  availabilityForm = new FormGroup({
+    quantity: new FormControl(1),
   });
 
   // Contact Form
   userContacts$?: Observable<Contacts>;
-  contactForm = new UntypedFormGroup({
-    email: new UntypedFormControl(undefined, [
-      Validators.required,
-      Validators.email,
-    ]),
-    phone: new UntypedFormControl(undefined, [Validators.required]),
+  contactForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required]),
   });
 
   // Shipping Address Form
   userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
-  shippingAddressForm = new UntypedFormGroup({
-    address: new UntypedFormControl(undefined, [Validators.required]),
+  shippingAddressForm = new FormGroup({
+    address: new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -200,7 +191,7 @@ export class CheckoutFormComponent<
     const { userContacts$ } = this.moralisService;
     const { userShippingAddress$ } = this.dehubMoralis;
     this.userContacts$ = userContacts$.pipe(
-      tap(v => this.contactForm.patchValue(v))
+      tap(contacts => this.contactForm.patchValue(contacts))
     );
     this.userShippingAddress$ = userShippingAddress$;
   }
