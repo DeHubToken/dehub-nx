@@ -27,12 +27,12 @@ jobs:
       node-version: '16'
       install-command: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
-        nx affected --target=lint --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit
-        nx affected --target=test --parallel=4 --ci --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit
-        nx affected --target=build --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e
-        nx affected --target=build --configuration=preview --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e
-        NX_CLOUD_DISTRIBUTED_EXECUTION=false nx affected --target=deploy-preview --exclude=raffle,raffle-e2e,prediction,prediction-e2e
-        NX_CLOUD_DISTRIBUTED_EXECUTION=false nx affected --target=deploy-prod --exclude=raffle,raffle-e2e,prediction,prediction-e2e
+        npx nx affected --target=lint --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit
+        npx nx affected --target=test --parallel=4 --ci --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit
+        npx nx affected --target=build --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e
+        npx nx affected --target=build --configuration=preview --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx affected --target=deploy-preview --exclude=raffle,raffle-e2e,prediction,prediction-e2e
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx affected --target=deploy-prod --exclude=raffle,raffle-e2e,prediction,prediction-e2e
 
   pr:
     if: ${{ github.event_name == 'pull_request' }}
@@ -42,10 +42,10 @@ jobs:
       node-version: '16'
       install-command: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
-        nx affected --target=lint --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit
-        nx affected --target=test --parallel=4 --ci --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit
-        nx affected --target=build --configuration=preview --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e
-        NX_CLOUD_DISTRIBUTED_EXECUTION=false nx affected --target=deploy-prod-draft --exclude=raffle,raffle-e2e,prediction,prediction-e2e
+        npx nx affected --target=lint --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit
+        npx nx affected --target=test --parallel=4 --ci --exclude=raffle,raffle-e2e,prediction,prediction-e2e,react-pcsuikit
+        npx nx affected --target=build --configuration=preview --parallel=4 --exclude=raffle,raffle-e2e,prediction,prediction-e2e
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx affected --target=deploy-prod-draft --exclude=raffle,raffle-e2e,prediction,prediction-e2e
 
   agents:
     name: Agents
