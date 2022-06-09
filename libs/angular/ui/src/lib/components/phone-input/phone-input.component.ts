@@ -115,6 +115,7 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
 })
 export class PhoneInputComponent implements OnInit, OnDestroy {
   @Input() prefillData?: string;
+
   private subs = new Subscription();
   path = this.env.baseUrl;
 
@@ -182,7 +183,9 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
     if (this.prefillData) {
       const phoneNumber = this.phoneNumberUtil.parse(this.prefillData);
       const phoneCode = `+${phoneNumber.getCountryCode()}`;
+
       this.selectedCountry = this.getCountryByPhoneCode(countries, phoneCode);
+
       if (this.selectedCountry) {
         this.selectedCountryCode = this.selectedCountry.code;
         this.phoneForm.patchValue({

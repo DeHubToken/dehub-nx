@@ -13,14 +13,10 @@ import {
   MoralisToken,
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
-import {
-  Asset,
-  Contacts,
-  DeHubShopShippingAddresses,
-  ProductCategory,
-} from '@dehub/shared/model';
+import { Contacts, DeHubShopShippingAddresses } from '@dehub/shared/model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, tap } from 'rxjs';
+import { CheckoutFormDialogData } from './checkout-form.model';
 
 @Component({
   template: `
@@ -158,22 +154,19 @@ export class CheckoutFormComponent<
 > implements OnInit
 {
   product?: P;
-  FormControl = FormControl; // for in-template casting
 
-  // Availability form
+  userContacts$?: Observable<Contacts>;
+  userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
+
   availabilityForm = new FormGroup({
     quantity: new FormControl(1),
   });
 
-  // Contact Form
-  userContacts$?: Observable<Contacts>;
   contactForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required]),
   });
 
-  // Shipping Address Form
-  userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
   shippingAddressForm = new FormGroup({
     address: new FormControl('', [Validators.required]),
   });
@@ -190,9 +183,11 @@ export class CheckoutFormComponent<
     this.product = this.config.data;
     const { userContacts$ } = this.moralisService;
     const { userShippingAddress$ } = this.dehubMoralis;
+
     this.userContacts$ = userContacts$.pipe(
       tap(contacts => this.contactForm.patchValue(contacts))
     );
+
     this.userShippingAddress$ = userShippingAddress$;
   }
 
