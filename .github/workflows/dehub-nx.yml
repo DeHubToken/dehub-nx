@@ -50,4 +50,4 @@ jobs:
     with:
       node-version: '16'
       install-command: npm ci --legacy-peer-deps
-      number-of-agents: 3
+      number-of-agents: 4
