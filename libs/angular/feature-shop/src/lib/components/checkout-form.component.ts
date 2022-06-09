@@ -13,10 +13,13 @@ import {
   MoralisToken,
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
-import { Contacts, DeHubShopShippingAddresses } from '@dehub/shared/model';
+import {
+  Contacts,
+  DeHubShopShippingAddresses,
+  ProductCheckoutDetail,
+} from '@dehub/shared/model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, tap } from 'rxjs';
-import { CheckoutFormDialogData } from './checkout-form.model';
 
 @Component({
   template: `
@@ -142,16 +145,8 @@ import { CheckoutFormDialogData } from './checkout-form.model';
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckoutFormComponent<
-  P extends {
-    picture: Asset;
-    name: string;
-    availableQuantity: number;
-    category: ProductCategory;
-    price: number;
-    currency: string;
-  }
-> implements OnInit
+export class CheckoutFormComponent<P extends ProductCheckoutDetail>
+  implements OnInit
 {
   product?: P;
 
