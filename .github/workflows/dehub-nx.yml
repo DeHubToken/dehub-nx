@@ -13,7 +13,6 @@ on:
 env:
   NODE_VERSION: '16'
   INSTALL_CMD: 'npm ci --legacy-peer-deps'
-  NUM_OF_AGENTS: 3
 
 # Each push should cancel workflows in progress and start a new one
 concurrency:
@@ -58,4 +57,4 @@ jobs:
       node-version: ${{ github.env.NODE_VERSION }}
       install-commands: |
         ${{ github.env.INSTALL_CMD }}
-      number-of-agents: ${{ github.env.NUM_OF_AGENTS }}
+      number-of-agents: 3
