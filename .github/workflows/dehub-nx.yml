@@ -10,10 +10,6 @@ on:
       - main
   pull_request:
 
-env:
-  NODE_VERSION: '16'
-  INSTALL_CMD: 'npm ci --legacy-peer-deps'
-
 # Each push should cancel workflows in progress and start a new one
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -25,8 +21,8 @@ jobs:
     name: Main
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.2
     with:
-      node-version: $NODE_VERSION
-      install-command: $INSTALL_CMD
+      node-version: '16'
+      install-command: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
         npm run lint
         npm run test
@@ -40,8 +36,8 @@ jobs:
     name: Pull Request
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.2
     with:
-      node-version: $NODE_VERSION
-      install-command: $INSTALL_CMD
+      node-version: '16'
+      install-command: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
         npm run lint
         npm run test
@@ -52,6 +48,6 @@ jobs:
     name: Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.2
     with:
-      node-version: $NODE_VERSION
-      install-command: $INSTALL_CMD
+      node-version: '16'
+      install-command: npm ci --legacy-peer-deps
       number-of-agents: 3
