@@ -7,7 +7,11 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import {
@@ -161,7 +165,7 @@ import {
 export class ConnectWalletOptionsComponent implements OnInit {
   @Input() walletConnectState?: WalletConnectState;
 
-  magicLinkForm!: FormGroup;
+  magicLinkForm!: UntypedFormGroup;
 
   path = this.env.baseUrl;
 
@@ -171,7 +175,7 @@ export class ConnectWalletOptionsComponent implements OnInit {
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit() {
