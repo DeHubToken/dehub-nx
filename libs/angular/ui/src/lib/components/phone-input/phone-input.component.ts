@@ -190,7 +190,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
         this.selectedCountryCode = this.selectedCountry.code;
         this.phoneForm.patchValue({
           code: this.selectedCountry.code,
-          number: phoneNumber.getNationalNumber()?.toLocaleString(),
+          number: phoneNumber.getNationalNumber()?.toString(),
         });
       }
     }
