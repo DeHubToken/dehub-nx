@@ -12,10 +12,9 @@ import {
 } from '@angular/core';
 import {
   ControlContainer,
-  FormControl,
-  FormGroup,
   FormGroupDirective,
   NgControl,
+  NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
@@ -235,19 +234,20 @@ export class AddressFormComponent implements OnInit, OnDestroy {
 
   // Form
   selectedCountryCode?: string;
-  shippingAddressForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    line1: new FormControl('', Validators.required),
-    line2: new FormControl(''),
-    city: new FormControl('', Validators.required),
-    country: new FormControl('', Validators.required),
-    postalCode: new FormControl('', Validators.required),
-    state: new FormControl('', Validators.required),
+  shippingAddressForm = this.fb.group({
+    name: ['', Validators.required],
+    line1: ['', Validators.required],
+    line2: [''],
+    city: ['', Validators.required],
+    country: ['', Validators.required],
+    postalCode: ['', Validators.required],
+    state: ['', Validators.required],
   });
 
   constructor(
     @Self() @Optional() public ngControl: NgControl,
     @Inject(EnvToken) private env: SharedEnv,
+    private fb: NonNullableFormBuilder,
     private httpClient: HttpClient
   ) {
     if (this.ngControl) {

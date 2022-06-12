@@ -11,11 +11,10 @@ import {
 } from '@angular/core';
 import {
   ControlContainer,
-  FormControl,
   FormControlStatus,
-  FormGroup,
   FormGroupDirective,
   NgControl,
+  NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
@@ -128,9 +127,9 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   // Form
   selectedCountry?: Country;
   selectedCountryCode?: string;
-  phoneForm = new FormGroup({
-    code: new FormControl(''),
-    number: new FormControl({ value: '', disabled: true }, [
+  phoneForm = this.fb.group({
+    code: [''],
+    number: this.fb.control({ value: '', disabled: true }, [
       PhoneNumberValidator(() => this.selectedCountry?.code),
     ]),
   });
@@ -138,6 +137,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   constructor(
     @Self() @Optional() public ngControl: NgControl,
     @Inject(EnvToken) private env: SharedEnv,
+    private fb: NonNullableFormBuilder,
     private httpClient: HttpClient
   ) {
     if (this.ngControl) {

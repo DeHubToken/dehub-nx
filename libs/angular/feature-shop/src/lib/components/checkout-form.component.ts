@@ -4,7 +4,11 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
 import {
   DehubMoralisToken,
   EnvToken,
@@ -16,6 +20,7 @@ import { SharedEnv } from '@dehub/shared/config';
 import {
   Contacts,
   DeHubShopShippingAddresses,
+  PhysicalAddress,
   ProductCheckoutDetail,
 } from '@dehub/shared/model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -30,13 +35,13 @@ import { Observable, tap } from 'rxjs';
       <!-- Hidden in production until finished -->
       <ng-container *ngIf="!env.production; else comingSoon">
         <!-- Quantity selection -->
-        <form [formGroup]="availabilityForm" class="p-fluid grid mt-5">
+        <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
           <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
             <span class="p-float-label">
               <p-inputNumber
                 [formControlName]="'quantity'"
                 [inputId]="'selectedQuantity'"
-                [(ngModel)]="availabilityForm.value.quantity"
+                [(ngModel)]="checkoutForm.value.quantity"
                 [ariaLabel]="'Quantity'"
                 [ariaRequired]="true"
                 [min]="1"
@@ -53,7 +58,7 @@ import { Observable, tap } from 'rxjs';
         <h5>Contact Details</h5>
         <form
           *ngIf="userContacts$ | async as contacts"
-          [formGroup]="contactForm"
+          [formGroup]="checkoutForm.controls.contacts"
           class="p-fluid grid pt-2"
         >
           <!-- Email -->
@@ -78,7 +83,7 @@ import { Observable, tap } from 'rxjs';
           <!-- Phone -->
           <div class="field col-12 sm:col-7 p-fluid">
             <dhb-phone-input
-              [formControl]="contactForm.controls.phone"
+              [formControl]="checkoutForm.controls.contacts.controls.phone"
               [prefillData]="contacts.phone"
             ></dhb-phone-input>
           </div>
@@ -88,7 +93,7 @@ import { Observable, tap } from 'rxjs';
         <h5>Shipping Address</h5>
         <dhb-address-form
           *ngIf="userShippingAddress$ | async as resp; else addressLoading"
-          [formControl]="shippingAddressForm.controls.address"
+          [formControl]="checkoutForm.controls.shippingAddress.controls.address"
           [prefillData]="resp.attributes"
         ></dhb-address-form>
         <ng-template #addressLoading>
@@ -98,7 +103,10 @@ import { Observable, tap } from 'rxjs';
         </ng-template>
 
         <!-- Total -->
-        <div *ngIf="availabilityForm.value.quantity as quantity" class="grid">
+        <div
+          *ngIf="checkoutForm.controls.quantity.value as quantity"
+          class="grid"
+        >
           <div class="col-12">
             <div class="flex flex-column justify-content-end text-right">
               <h5 class="align-self-end mb-1">Total</h5>
@@ -126,7 +134,7 @@ import { Observable, tap } from 'rxjs';
               icon="fa-regular fa-check"
               class="w-5"
               styleClass="p-button-primary p-button-lg w-full"
-              [disabled]="!isAllFormsValid()"
+              [disabled]="!checkoutForm.valid"
               (click)="onConfirm()"
             ></p-button>
           </div>
@@ -153,17 +161,17 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   userContacts$?: Observable<Contacts>;
   userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
 
-  availabilityForm = new FormGroup({
-    quantity: new FormControl(1),
-  });
-
-  contactForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.required]),
-  });
-
-  shippingAddressForm = new FormGroup({
-    address: new FormControl('', [Validators.required]),
+  checkoutForm = this.fb.group({
+    quantity: [1],
+    contacts: this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required]],
+    }),
+    shippingAddress: this.fb.group({
+      address: new FormControl<PhysicalAddress | null>(null, [
+        Validators.required,
+      ]),
+    }),
   });
 
   constructor(
@@ -171,7 +179,8 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
     @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
     @Inject(EnvToken) public env: SharedEnv,
     public config: DynamicDialogConfig,
-    public ref: DynamicDialogRef
+    public ref: DynamicDialogRef,
+    private fb: NonNullableFormBuilder
   ) {}
 
   ngOnInit() {
@@ -180,18 +189,10 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
     const { userShippingAddress$ } = this.dehubMoralis;
 
     this.userContacts$ = userContacts$.pipe(
-      tap(contacts => this.contactForm.patchValue(contacts))
+      tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
     );
 
     this.userShippingAddress$ = userShippingAddress$;
-  }
-
-  isAllFormsValid() {
-    return [
-      this.availabilityForm.valid,
-      this.contactForm.valid,
-      this.shippingAddressForm.valid,
-    ].every(Boolean);
   }
 
   onConfirm() {}
