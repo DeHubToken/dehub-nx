@@ -11,11 +11,10 @@ import {
 } from '@angular/core';
 import {
   ControlContainer,
-  FormControl,
   FormControlStatus,
-  FormGroup,
   FormGroupDirective,
   NgControl,
+  NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
@@ -115,6 +114,7 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
 })
 export class PhoneInputComponent implements OnInit, OnDestroy {
   @Input() prefillData?: string;
+
   private subs = new Subscription();
   path = this.env.baseUrl;
 
@@ -127,9 +127,9 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   // Form
   selectedCountry?: Country;
   selectedCountryCode?: string;
-  phoneForm = new FormGroup({
-    code: new FormControl(undefined),
-    number: new FormControl({ value: '', disabled: true }, [
+  phoneForm = this.fb.group({
+    code: [''],
+    number: this.fb.control({ value: '', disabled: true }, [
       PhoneNumberValidator(() => this.selectedCountry?.code),
     ]),
   });
@@ -137,6 +137,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   constructor(
     @Self() @Optional() public ngControl: NgControl,
     @Inject(EnvToken) private env: SharedEnv,
+    private fb: NonNullableFormBuilder,
     private httpClient: HttpClient
   ) {
     if (this.ngControl) {
@@ -150,7 +151,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Ref: https://stackoverflow.com/a/67096422/1617590
     this.phoneForm.setValidators(() =>
-      Validators.required(this.phoneForm.controls['number'])
+      Validators.required(this.phoneForm.controls.number)
     );
 
     this.subs.add(
@@ -160,9 +161,10 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
           const country = this.selectedCountry;
           if (country) {
             const phoneNumber = new PhoneNumber();
-            const numberControl = this.phoneForm.controls['number'];
+            const numberControl = this.phoneForm.controls.number;
             phoneNumber.setCountryCode(parseInt(country.phoneCode));
-            phoneNumber.setNationalNumber(parseInt(numberControl.value));
+            if (numberControl.value)
+              phoneNumber.setNationalNumber(parseInt(numberControl.value));
             this.ngControl.control?.setValue(
               this.phoneNumberUtil.format(
                 phoneNumber,
@@ -181,12 +183,14 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
     if (this.prefillData) {
       const phoneNumber = this.phoneNumberUtil.parse(this.prefillData);
       const phoneCode = `+${phoneNumber.getCountryCode()}`;
+
       this.selectedCountry = this.getCountryByPhoneCode(countries, phoneCode);
+
       if (this.selectedCountry) {
         this.selectedCountryCode = this.selectedCountry.code;
         this.phoneForm.patchValue({
           code: this.selectedCountry.code,
-          number: phoneNumber.getNationalNumber(),
+          number: phoneNumber.getNationalNumber()?.toString(),
         });
       }
     }
@@ -202,7 +206,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
 
   onCountryChange(countryCode: string, countries: Country[]) {
     const country = this.getCountryByCountryCode(countries, countryCode);
-    const numberControl = this.phoneForm.controls['number'];
+    const numberControl = this.phoneForm.controls.number;
     if (country) {
       this.selectedCountry = country;
       numberControl.enable();

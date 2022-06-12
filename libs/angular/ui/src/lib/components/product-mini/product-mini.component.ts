@@ -4,7 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { Asset, ProductCategory } from '@dehub/shared/model';
+import { ProductCheckoutDetail } from '@dehub/shared/model';
 
 @Component({
   selector: 'dhb-product-mini',
@@ -70,14 +70,8 @@ import { Asset, ProductCategory } from '@dehub/shared/model';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductMiniComponent<
-  P extends {
-    picture: Asset;
-    name: string;
-    availableQuantity: number;
-    category: ProductCategory;
-  }
-> implements OnInit
+export class ProductMiniComponent<P extends ProductCheckoutDetail>
+  implements OnInit
 {
   @Input() product?: P;
 

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductCheckoutDetail } from '@dehub/shared/model';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CheckoutFormComponent } from './components/checkout-form.component';
 
@@ -33,7 +34,7 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
         category: productDetails.category,
         price: productDetails.price,
         currency: productDetails.currency,
-      },
+      } as ProductCheckoutDetail,
     });
 
     ref.onClose.subscribe(() => {

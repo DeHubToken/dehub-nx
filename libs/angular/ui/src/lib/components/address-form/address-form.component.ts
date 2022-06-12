@@ -12,10 +12,9 @@ import {
 } from '@angular/core';
 import {
   ControlContainer,
-  FormControl,
-  FormGroup,
   FormGroupDirective,
   NgControl,
+  NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
@@ -235,19 +234,20 @@ export class AddressFormComponent implements OnInit, OnDestroy {
 
   // Form
   selectedCountryCode?: string;
-  shippingAddressForm = new FormGroup({
-    name: new FormControl(undefined, Validators.required),
-    line1: new FormControl(undefined, Validators.required),
-    line2: new FormControl(undefined),
-    city: new FormControl(undefined, Validators.required),
-    country: new FormControl(undefined, Validators.required),
-    postalCode: new FormControl(undefined, Validators.required),
-    state: new FormControl(undefined, Validators.required),
+  shippingAddressForm = this.fb.group({
+    name: ['', Validators.required],
+    line1: ['', Validators.required],
+    line2: [''],
+    city: ['', Validators.required],
+    country: ['', Validators.required],
+    postalCode: ['', Validators.required],
+    state: ['', Validators.required],
   });
 
   constructor(
     @Self() @Optional() public ngControl: NgControl,
     @Inject(EnvToken) private env: SharedEnv,
+    private fb: NonNullableFormBuilder,
     private httpClient: HttpClient
   ) {
     if (this.ngControl) {
@@ -267,8 +267,8 @@ export class AddressFormComponent implements OnInit, OnDestroy {
     // Subscribe to form changes and emit on each change to the parent component.
     this.sub = this.shippingAddressForm.valueChanges
       .pipe(distinctUntilChanged())
-      .subscribe((v: PhysicalAddress) => {
-        this.ngControl.control?.setValue(v);
+      .subscribe(shippingAddress => {
+        this.ngControl.control?.setValue(shippingAddress);
         if (!this.shippingAddressForm.valid) {
           this.ngControl.control?.setErrors({ addressInvalid: true });
         }
@@ -280,8 +280,8 @@ export class AddressFormComponent implements OnInit, OnDestroy {
   }
 
   shippingAddressLabel() {
-    const controls = this.shippingAddressForm.controls;
-    return `${controls['name'].value} | ${controls['line1'].value} | ${controls['city'].value}...`;
+    const { name, line1, city } = this.shippingAddressForm.controls;
+    return `${name.value} | ${line1.value} | ${city.value}...`;
   }
 
   ngOnDestroy(): void {

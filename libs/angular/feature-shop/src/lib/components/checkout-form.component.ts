@@ -4,7 +4,11 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
 import {
   DehubMoralisToken,
   EnvToken,
@@ -14,10 +18,10 @@ import {
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import {
-  Asset,
   Contacts,
   DeHubShopShippingAddresses,
-  ProductCategory,
+  PhysicalAddress,
+  ProductCheckoutDetail,
 } from '@dehub/shared/model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, tap } from 'rxjs';
@@ -31,13 +35,13 @@ import { Observable, tap } from 'rxjs';
       <!-- Hidden in production until finished -->
       <ng-container *ngIf="!env.production; else comingSoon">
         <!-- Quantity selection -->
-        <form [formGroup]="availabilityForm" class="p-fluid grid mt-5">
+        <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
           <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
             <span class="p-float-label">
               <p-inputNumber
                 [formControlName]="'quantity'"
-                [inputId]="'selectedquantity'"
-                [(ngModel)]="availabilityForm.value.quantity"
+                [inputId]="'selectedQuantity'"
+                [(ngModel)]="checkoutForm.value.quantity"
                 [ariaLabel]="'Quantity'"
                 [ariaRequired]="true"
                 [min]="1"
@@ -45,7 +49,7 @@ import { Observable, tap } from 'rxjs';
                 [allowEmpty]="false"
                 [showButtons]="true"
               ></p-inputNumber>
-              <label for="selectedquantity">Quantity</label>
+              <label for="selectedQuantity">Quantity</label>
             </span>
           </div>
         </form>
@@ -54,7 +58,7 @@ import { Observable, tap } from 'rxjs';
         <h5>Contact Details</h5>
         <form
           *ngIf="userContacts$ | async as contacts"
-          [formGroup]="contactForm"
+          [formGroup]="checkoutForm.controls.contacts"
           class="p-fluid grid pt-2"
         >
           <!-- Email -->
@@ -79,7 +83,7 @@ import { Observable, tap } from 'rxjs';
           <!-- Phone -->
           <div class="field col-12 sm:col-7 p-fluid">
             <dhb-phone-input
-              [formControl]="contactForm.controls['phone'] | as: FormControl"
+              [formControl]="checkoutForm.controls.contacts.controls.phone"
               [prefillData]="contacts.phone"
             ></dhb-phone-input>
           </div>
@@ -89,9 +93,7 @@ import { Observable, tap } from 'rxjs';
         <h5>Shipping Address</h5>
         <dhb-address-form
           *ngIf="userShippingAddress$ | async as resp; else addressLoading"
-          [formControl]="
-            shippingAddressForm.controls['address'] | as: FormControl
-          "
+          [formControl]="checkoutForm.controls.shippingAddress.controls.address"
           [prefillData]="resp.attributes"
         ></dhb-address-form>
         <ng-template #addressLoading>
@@ -101,12 +103,15 @@ import { Observable, tap } from 'rxjs';
         </ng-template>
 
         <!-- Total -->
-        <div class="grid">
+        <div
+          *ngIf="checkoutForm.controls.quantity.value as quantity"
+          class="grid"
+        >
           <div class="col-12">
             <div class="flex flex-column justify-content-end text-right">
               <h5 class="align-self-end mb-1">Total</h5>
               <h3 class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1">
-                {{ product.price * availabilityForm.value.quantity | number }}
+                {{ product.price * quantity }}
                 <span class="text-sm">{{ product.currency }}</span>
               </h3>
             </div>
@@ -129,7 +134,7 @@ import { Observable, tap } from 'rxjs';
               icon="fa-regular fa-check"
               class="w-5"
               styleClass="p-button-primary p-button-lg w-full"
-              [disabled]="!isAllFormsValid()"
+              [disabled]="!checkoutForm.valid"
               (click)="onConfirm()"
             ></p-button>
           </div>
@@ -148,36 +153,25 @@ import { Observable, tap } from 'rxjs';
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckoutFormComponent<
-  P extends {
-    picture: Asset;
-    name: string;
-    availableQuantity: number;
-    category: ProductCategory;
-    price: number;
-    currency: string;
-  }
-> implements OnInit
+export class CheckoutFormComponent<P extends ProductCheckoutDetail>
+  implements OnInit
 {
   product?: P;
-  FormControl = FormControl; // for in-template casting
 
-  // Availability form
-  availabilityForm = new FormGroup({
-    quantity: new FormControl(1),
-  });
-
-  // Contact Form
   userContacts$?: Observable<Contacts>;
-  contactForm = new FormGroup({
-    email: new FormControl(undefined, [Validators.required, Validators.email]),
-    phone: new FormControl(undefined, [Validators.required]),
-  });
-
-  // Shipping Address Form
   userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
-  shippingAddressForm = new FormGroup({
-    address: new FormControl(undefined, [Validators.required]),
+
+  checkoutForm = this.fb.group({
+    quantity: [1],
+    contacts: this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required]],
+    }),
+    shippingAddress: this.fb.group({
+      address: new FormControl<PhysicalAddress | null>(null, [
+        Validators.required,
+      ]),
+    }),
   });
 
   constructor(
@@ -185,25 +179,20 @@ export class CheckoutFormComponent<
     @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
     @Inject(EnvToken) public env: SharedEnv,
     public config: DynamicDialogConfig,
-    public ref: DynamicDialogRef
+    public ref: DynamicDialogRef,
+    private fb: NonNullableFormBuilder
   ) {}
 
   ngOnInit() {
     this.product = this.config.data;
     const { userContacts$ } = this.moralisService;
     const { userShippingAddress$ } = this.dehubMoralis;
-    this.userContacts$ = userContacts$.pipe(
-      tap(v => this.contactForm.patchValue(v))
-    );
-    this.userShippingAddress$ = userShippingAddress$;
-  }
 
-  isAllFormsValid() {
-    return [
-      this.availabilityForm.valid,
-      this.contactForm.valid,
-      this.shippingAddressForm.valid,
-    ].every(Boolean);
+    this.userContacts$ = userContacts$.pipe(
+      tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
+    );
+
+    this.userShippingAddress$ = userShippingAddress$;
   }
 
   onConfirm() {}

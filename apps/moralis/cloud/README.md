@@ -88,7 +88,7 @@ Return the reward contract information, returning type is same with `ContractPro
 
 ### authAllrites
 
-In order to use OTT API from Vdyo, we need to get access token prior to calling the API. 
+In order to use OTT API from Vdyo, we need to get access token prior to calling the API.
 Reference Link: https://api.vdyo.co/docs/#header-authentication
 
 #### Endpoint
@@ -97,7 +97,7 @@ Client apps can request this access token via exposed endpoint:
 
 `{serverUrl}/functions/authAllrites?_AplicationId={applicationId}`
 
-Example: 
+Example:
 
 `https://nm6dir4me3i0.usemoralis.com:2053/server/functions/authAllrites?_AplicationId=UxvDeanBLvO8ym31e6x6dYdQa2Qlzw2jOSrhm3cE`
 
