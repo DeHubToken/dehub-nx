@@ -6,7 +6,7 @@ import {
 } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
 import { lazy, useMemo } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { environment } from '../environments/environment';
 import useInitialize from './hooks/useInitialize';
 import usePullBusdPrice from './hooks/usePullBusdPrice';
@@ -45,13 +45,14 @@ export function App() {
   );
 
   return (
-    <BrowserRouter basename={baseUrl}>
+    <BrowserRouter>
       <SuspenseWithChunkError
         fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
       >
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<BuyDeHub />}></Route>
-        </Routes>
+        </Routes> */}
+        <BuyDeHub />
       </SuspenseWithChunkError>
     </BrowserRouter>
   );

@@ -41,7 +41,7 @@ export function App() {
   );
 
   return (
-    <BrowserRouter basename={baseUrl}>
+    <BrowserRouter>
       <SuspenseWithChunkError
         fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
       >

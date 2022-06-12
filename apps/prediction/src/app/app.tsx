@@ -47,7 +47,7 @@ export function App() {
   );
 
   return (
-    <BrowserRouter basename={baseUrl}>
+    <BrowserRouter>
       <ResetCSS />
       <GlobalStyle />
       <SuspenseWithChunkError
