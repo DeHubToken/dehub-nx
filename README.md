@@ -55,14 +55,6 @@ DeHub Raffle Dapp (Inactive)
 
 - Hosting: **[Netlify](https://inactive-raffle-dehub.netlify.app)**
 
-### `prediction`
-
-DeHub Prediction Dapp (Inactive)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0343b7e0-60d7-4a95-b04f-6c1431544937/deploy-status)](https://app.netlify.com/sites/inactive-prediction-dehub/deploys)
-
-- Hosting: **[Netlify](https://inactive-prediction-dehub.netlify.app)**
-
 # Libraries
 
 Libraries in Nx are self-contained isolated group of logics. Can represent reusable functionalities or core logic shared across multiple framework (in)dependent apps.
@@ -104,10 +96,6 @@ _React core functionalities_
 ### `ui`
 
 _Reusable react ui components like header, footer, etc._
-
-### `pcsuikit`
-
-_Reusable Pancakeswap ui components_
 
 ## Shared
 
