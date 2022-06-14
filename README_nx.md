@@ -102,8 +102,6 @@ This project was generated using [Nx](https://nx.dev).
    npx nx generate @nrwl/react:lib --name=ui --directory=react --standaloneConfig --strict
 
    npx nx generate @nrwl/react:lib --name=core --directory=react --standaloneConfig --strict
-
-   npx nx generate @nrwl/react:lib --name=pcsuikit --directory=react --standaloneConfig --strict
    ```
 
 1. Generate Moralis Cloud lib:
