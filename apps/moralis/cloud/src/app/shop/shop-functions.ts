@@ -5,8 +5,11 @@ import {
   InitOrderResult,
   OrderStatus,
 } from '@dehub/shared/model';
-import { isMoralisUserByAddress } from '../shared';
+import { environment } from '../../environments/environment';
+import { ChainIdAsNumber, isMoralisUserByAddress } from '../shared';
+import RedisClient from '../shared/redis';
 import { ShopFunctions } from './shop.model';
+import { getCheckoutContract } from './shop.util';
 
 export const initOrder = async ({
   address,
