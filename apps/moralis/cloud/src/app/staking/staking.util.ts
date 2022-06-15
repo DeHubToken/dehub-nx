@@ -1,11 +1,10 @@
-import { environment } from '../../environments/environment';
 import {
-  ChainIdAsNumber,
-  getDeHubContracts,
   RewardContractPropsType,
   StakingContractPropsType,
   StakingControllerContractPropsType,
-} from '../shared';
+} from '@dehub/shared/model';
+import { environment } from '../../environments/environment';
+import { ChainIdAsNumber, getDeHubContracts } from '../shared';
 
 /**
  * Return the reward contract information, returning type is same with `ContractProperties`.

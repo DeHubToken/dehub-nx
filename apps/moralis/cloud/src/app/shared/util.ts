@@ -6,13 +6,13 @@
  * @returns user object if success, null if failed
  */
 
-import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
-import { environment } from '../../environments/environment';
 import {
-  ChainIdAsNumber,
   DeHubTokenContractPropsType,
   StakingContractPropsType,
-} from './model';
+} from '@dehub/shared/model';
+import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
+import { environment } from '../../environments/environment';
+import { ChainIdAsNumber } from './model';
 
 export async function isMoralisUserByAddress(
   address: string

@@ -1,9 +1,6 @@
+import { ShopContractPropsType } from '@dehub/shared/model';
 import { environment } from '../../environments/environment';
-import {
-  ChainIdAsNumber,
-  getDeHubContracts,
-  ShopContractPropsType,
-} from '../shared';
+import { ChainIdAsNumber, getDeHubContracts } from '../shared';
 
 /**
  * Return the reward contract information, returning type is same with `ContractProperties`.
