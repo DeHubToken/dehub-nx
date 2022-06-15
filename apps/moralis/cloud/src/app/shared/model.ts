@@ -55,3 +55,5 @@ export interface StakingContractPropsType extends ContractPropsType {
 export type StakingControllerContractPropsType = ContractPropsType;
 
 export type RewardContractPropsType = ContractPropsType;
+
+export type ShopContractPropsType = ContractPropsType;

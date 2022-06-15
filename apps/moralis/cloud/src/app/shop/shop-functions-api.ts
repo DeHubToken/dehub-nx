@@ -1,5 +1,5 @@
 import { InitOrderParams } from '@dehub/shared/model';
-import { checkOrder, initOrder } from './shop-functions';
+import { checkOrder, getCheckoutContractFn, initOrder } from './shop-functions';
 import { ShopFunctions } from './shop.model';
 
 /**
@@ -17,3 +17,9 @@ Moralis.Cloud.define(ShopFunctions.InitOrder, async request => {
 Moralis.Cloud.define(ShopFunctions.CheckOrder, async request => {
   return checkOrder(request.params.orderId);
 });
+
+/**
+ * Dev: https://nm6dir4me3i0.usemoralis.com:2053/server/functions/getCheckoutContract
+ * Prod: https://vamoxwojj7ht.moralisweb3.com:2053/server/functions/getCheckoutContract
+ */
+Moralis.Cloud.define(ShopFunctions.GetCheckoutContract, getCheckoutContractFn);

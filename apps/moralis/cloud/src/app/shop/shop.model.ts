@@ -1,6 +1,7 @@
 export enum ShopFunctions {
   InitOrder = 'initOrder',
   CheckOrder = 'checkOrder',
+  GetCheckoutContract = 'getCheckoutContract',
 }
 
 export enum OrderStatus {
