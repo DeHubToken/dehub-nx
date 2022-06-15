@@ -32,7 +32,7 @@ export enum CurrencyString {
  */
 export interface ProductData {
   name: string;
-  picture: string;
+  image: string;
   sku: string;
 }
 
