@@ -1,5 +1,32 @@
 import { PhysicalAddress } from './location.model';
 
+export enum OrderStatus {
+  ipfsUploading = 'ipfsUploading',
+  verifying = 'verifying',
+  ipfsFailed = 'ipfsFailed',
+  verified = 'verified',
+}
+
+export enum ReceiptStatus {
+  'pending',
+  'invalid',
+  'shipped',
+  'not-delivered',
+  'delivered',
+}
+
+export enum Currency {
+  BNB,
+  DeHub,
+  BUSD,
+}
+
+export enum CurrencyString {
+  BNB = 'BNB',
+  DeHub = 'DeHub',
+  BUSD = 'BUSD',
+}
+
 /**
  * A set of product values required for Order initialization on Moralis.
  */
@@ -22,11 +49,16 @@ export interface InitOrderParams {
 }
 
 /**
+ * Moralis Order initialization response result data.
+ */
+export interface InitOrderResult {
+  orderId: string;
+  ipfsHash: string;
+}
+
+/**
  * Moralis Order initialization response.
  */
 export interface InitOrderResponse {
-  result: {
-    ipfsHash: string;
-    orderId: string;
-  };
+  result: InitOrderResult;
 }

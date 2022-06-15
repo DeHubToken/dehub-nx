@@ -1,19 +1,19 @@
-import { InitOrderParams } from '@dehub/shared/model';
-import { isMoralisUserByAddress } from '../shared';
 import {
   Currency,
   CurrencyString,
-  InitOrderReturns,
+  InitOrderParams,
+  InitOrderResult,
   OrderStatus,
-  ShopFunctions,
-} from './shop.model';
+} from '@dehub/shared/model';
+import { isMoralisUserByAddress } from '../shared';
+import { ShopFunctions } from './shop.model';
 
 export const initOrder = async ({
   address,
   productData,
   shippingAddress,
   contentfulId,
-}: InitOrderParams): Promise<InitOrderReturns | null> => {
+}: InitOrderParams): Promise<InitOrderResult | null> => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const user = await isMoralisUserByAddress(address);
