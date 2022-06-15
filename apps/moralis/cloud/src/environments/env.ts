@@ -6,6 +6,7 @@ export interface Env extends SharedEnv {
     token: string;
     staking: string;
     ott: string;
+    shop: string;
   };
   staking: {
     eventTables: {
@@ -37,6 +38,7 @@ export const defaultEnv: Env = {
     token: 'DeHubTokenDapp',
     staking: 'DeHubStakingDapp',
     ott: 'DeHubOTTDapp',
+    shop: 'DeHubShopDapp',
   },
   staking: {
     eventTables: {
