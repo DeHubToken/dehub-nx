@@ -53,7 +53,6 @@ export class DehubMoralisService implements IDehubMoralisService {
     // Request
     this._logger.info('Sending initOrder request to Moralis...');
     this._logger.info(`  params: `, params);
-    // return of({ ipfsHash: 'asdasd', orderId: 'asdasd' });
     return this.httpClient
       .post<InitOrderResponse>(url, params)
       .pipe(tap(resp => this._logger.info(JSON.stringify(resp))));
