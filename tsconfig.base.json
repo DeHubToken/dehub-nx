@@ -40,7 +40,6 @@
       "@dehub/angular/ui/*": ["libs/angular/ui/src/lib/*"],
       "@dehub/moralis/cloud": ["libs/moralis/cloud/src/index.ts"],
       "@dehub/react/core": ["libs/react/core/src/index.ts"],
-      "@dehub/react/pcsuikit": ["libs/react/pcsuikit/src/index.ts"],
       "@dehub/react/ui": ["libs/react/ui/src/index.ts"],
       "@dehub/shared/asset/dehub/*": ["libs/shared/asset/dehub/src/lib/*"],
       "@dehub/shared/asset/freya/*": ["libs/shared/asset/freya/src/lib/*"],

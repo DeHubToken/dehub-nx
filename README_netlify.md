@@ -99,17 +99,3 @@
    URL:       https://inactive-raffle-dehub.netlify.app
    Site ID:   d1b6b0af-8fcd-4efa-a0ec-818a84cd9283
    ```
-
-   **Prediction (React) - inactive**
-
-   ```
-   npx netlify sites:create --account-slug=dehub --name=inactive-prediction-dehub
-   ```
-
-   Output:
-
-   ```
-   Admin URL: https://app.netlify.com/sites/inactive-prediction-dehub
-   URL:       https://inactive-prediction-dehub.netlify.app
-   Site ID:   0343b7e0-60d7-4a95-b04f-6c1431544937
-   ```
