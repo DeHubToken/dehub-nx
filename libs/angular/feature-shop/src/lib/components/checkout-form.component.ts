@@ -20,11 +20,13 @@ import { SharedEnv } from '@dehub/shared/config';
 import {
   Contacts,
   DeHubShopShippingAddresses,
+  InitOrderParams,
   PhysicalAddress,
   ProductCheckoutDetail,
+  ProductData,
 } from '@dehub/shared/model';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Observable, tap } from 'rxjs';
+import { first, Observable, tap } from 'rxjs';
 
 @Component({
   template: `
@@ -130,12 +132,13 @@ import { Observable, tap } from 'rxjs';
               (click)="ref.close()"
             ></p-button>
             <p-button
+              *ngIf="account$ | async as account"
               label="Confirm"
               icon="fa-regular fa-check"
               class="w-5"
               styleClass="p-button-primary p-button-lg w-full"
               [disabled]="!checkoutForm.valid"
-              (click)="onConfirm()"
+              (click)="onConfirm(account)"
             ></p-button>
           </div>
         </div>
@@ -158,6 +161,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 {
   product?: P;
 
+  account$?: Observable<string | undefined>;
   userContacts$?: Observable<Contacts>;
   userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
 
@@ -185,9 +189,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   ngOnInit() {
     this.product = this.config.data;
-    const { userContacts$ } = this.moralisService;
+    const { account$, userContacts$ } = this.moralisService;
     const { userShippingAddress$ } = this.dehubMoralis;
-
+    this.account$ = account$;
     this.userContacts$ = userContacts$.pipe(
       tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
     );
@@ -195,5 +199,21 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
     this.userShippingAddress$ = userShippingAddress$;
   }
 
-  onConfirm() {}
+  onConfirm(account: string) {
+    const address =
+      this.checkoutForm.controls.shippingAddress.controls.address.value;
+    if (this.product && address) {
+      const params: InitOrderParams = {
+        address: account,
+        contentfulId: this.product.contentfulId,
+        productData: {
+          name: this.product.name,
+          picture: this.product.picture.url,
+          sku: this.product.sku,
+        } as ProductData,
+        shippingAddress: address,
+      };
+      this.dehubMoralis.initOrder(params).pipe(first()).subscribe();
+    }
+  }
 }

@@ -25,6 +25,8 @@ export interface InitOrderParams {
  * Moralis Order initialization response.
  */
 export interface InitOrderResponse {
-  ipfsHash: string;
-  orderId: string;
+  result: {
+    ipfsHash: string;
+    orderId: string;
+  };
 }

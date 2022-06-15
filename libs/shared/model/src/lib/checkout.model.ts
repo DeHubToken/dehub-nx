@@ -7,4 +7,6 @@ export interface ProductCheckoutDetail {
   category: ProductCategory;
   price: number;
   currency: string;
+  contentfulId: string;
+  sku: string;
 }

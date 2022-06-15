@@ -672,6 +672,7 @@ export const PageLearnFragmentDoc = gql`
 export const ProductCommonFragmentDoc = gql`
   fragment ProductCommon on Product {
     sys {
+      id
       ...Sys
     }
     picturesCollection(limit: 10, preview: $isPreview) {

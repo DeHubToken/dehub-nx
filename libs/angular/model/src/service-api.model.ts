@@ -3,6 +3,8 @@ import {
   Contacts,
   DeHubConnectorNames,
   DeHubShopShippingAddresses,
+  InitOrderParams,
+  InitOrderResponse,
   User,
   WalletConnectState,
 } from '@dehub/shared/model';
@@ -38,4 +40,5 @@ export interface IDehubMoralisService {
   canPlay$: Observable<boolean>;
   userShippingAddress$: Observable<DeHubShopShippingAddresses>;
   getDeHubShopShippingAddresses: () => Observable<DeHubShopShippingAddresses[]>;
+  initOrder: (params: InitOrderParams) => Observable<InitOrderResponse>;
 }

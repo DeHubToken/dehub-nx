@@ -9140,7 +9140,11 @@ export type PageSectionProductsFragment = {
               sku?: string | undefined;
               availableQuantity?: number | undefined;
               slug?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                id: string;
+                publishedAt?: any | undefined;
+              };
               picturesCollection?:
                 | {
                     __typename?: 'AssetCollection';
@@ -9192,6 +9196,7 @@ export type PageSectionProductsFragment = {
                           slug?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
+                            id: string;
                             publishedAt?: any | undefined;
                           };
                           picturesCollection?:
@@ -9621,6 +9626,7 @@ export type PageShopFragment = {
                           slug?: string | undefined;
                           sys: {
                             __typename?: 'Sys';
+                            id: string;
                             publishedAt?: any | undefined;
                           };
                           picturesCollection?:
@@ -9677,6 +9683,7 @@ export type PageShopFragment = {
                                       slug?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
+                                        id: string;
                                         publishedAt?: any | undefined;
                                       };
                                       picturesCollection?:
@@ -10278,7 +10285,7 @@ export type ProductCommonFragment = {
   sku?: string | undefined;
   availableQuantity?: number | undefined;
   slug?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; id: string; publishedAt?: any | undefined };
   picturesCollection?:
     | {
         __typename?: 'AssetCollection';
@@ -10312,7 +10319,7 @@ export type ProductFragment = {
   sku?: string | undefined;
   availableQuantity?: number | undefined;
   slug?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; id: string; publishedAt?: any | undefined };
   picturesCollection?:
     | {
         __typename?: 'AssetCollection';
@@ -10350,7 +10357,7 @@ export type ProductDetailFragment = {
   fullDescription?:
     | { __typename?: 'ProductFullDescription'; json: any }
     | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; id: string; publishedAt?: any | undefined };
   picturesCollection?:
     | {
         __typename?: 'AssetCollection';
@@ -13370,6 +13377,7 @@ export type PageShopCollectionQuery = {
                                       slug?: string | undefined;
                                       sys: {
                                         __typename?: 'Sys';
+                                        id: string;
                                         publishedAt?: any | undefined;
                                       };
                                       picturesCollection?:
@@ -13432,6 +13440,7 @@ export type PageShopCollectionQuery = {
                                                   slug?: string | undefined;
                                                   sys: {
                                                     __typename?: 'Sys';
+                                                    id: string;
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
@@ -14118,7 +14127,11 @@ export type ProductCollectionBySlugQuery = {
               fullDescription?:
                 | { __typename?: 'ProductFullDescription'; json: any }
                 | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                id: string;
+                publishedAt?: any | undefined;
+              };
               picturesCollection?:
                 | {
                     __typename?: 'AssetCollection';
@@ -14820,6 +14833,7 @@ export const PageLearnFragmentDoc = gql`
 export const ProductCommonFragmentDoc = gql`
   fragment ProductCommon on Product {
     sys {
+      id
       ...Sys
     }
     picturesCollection(limit: 10, preview: $isPreview) {
