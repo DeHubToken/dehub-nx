@@ -1,6 +1,6 @@
+import { OrderStatus } from '@dehub/shared/model';
 import { environment } from '../../environments/environment';
 import { findOrder } from './shop-functions';
-import { OrderStatus } from './shop.model';
 
 Moralis.Cloud.afterSave(
   environment.shop.eventTables.purchase,

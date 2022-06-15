@@ -1,7 +1,8 @@
 require('../shared/mock.include');
+import { OrderStatus } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
 import { environment } from '../../environments/environment';
-import { OrderStatus, ShopFunctions } from './shop.model';
+import { ShopFunctions } from './shop.model';
 
 const { moralis } = environment;
 
