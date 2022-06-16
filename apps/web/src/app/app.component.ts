@@ -11,6 +11,9 @@ import { Observable } from 'rxjs';
     <!-- Toast Messages -->
     <p-toast></p-toast>
 
+    <!-- Confirmations -->
+    <p-confirmDialog></p-confirmDialog>
+
     <!-- PWA update available popup -->
     <dhb-sw-update-available
       (update)="onSwUpdate()"

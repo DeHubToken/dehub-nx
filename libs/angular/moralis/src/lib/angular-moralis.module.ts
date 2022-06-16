@@ -3,11 +3,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DehubMoralisToken, MoralisToken } from '@dehub/angular/model';
 import { StartOptions } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DehubMoralisService, MoralisService } from './services';
-
 @NgModule({
-  imports: [ReactiveFormsModule],
+  imports: [
+    // Angular
+    ReactiveFormsModule,
+  ],
   declarations: [],
   exports: [],
 })
@@ -33,6 +35,7 @@ export class AngularMoralisModule {
           multi: true,
         },
         MessageService,
+        ConfirmationService,
         { provide: MoralisToken, useClass: MoralisService },
         { provide: DehubMoralisToken, useClass: DehubMoralisService },
       ],
