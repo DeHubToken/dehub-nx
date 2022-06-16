@@ -208,7 +208,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
         contentfulId: this.product.contentfulId,
         productData: {
           name: this.product.name,
-          picture: this.product.picture.url,
+          image: this.product.picture.url,
           sku: this.product.sku,
         } as ProductData,
         shippingAddress: address,
