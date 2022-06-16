@@ -21,19 +21,28 @@ export const initOrder = async ({
   try {
     const user = await isMoralisUserByAddress(address);
 
+    const ipfsImage = await Moralis.Cloud.toIpfs({
+      sourceType: 'url',
+      source: productData.image,
+    });
+    const { path: imageIpfsPath } = ipfsImage;
+
     const ipfs = await Moralis.Cloud.toIpfs({
       sourceType: 'object',
-      source: productData,
+      source: {
+        ...productData,
+        image: ipfsImage.path,
+      },
     });
     const { path } = ipfs;
 
-    const match = path.match(
+    const regSchema =
       // eslint-disable-next-line no-useless-escape
-      /^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/
-    );
-    const ipfsHash = match[5].replace('/ipfs/', '');
-
-    logger.info(`Uploaded IPFS Hash: ${ipfsHash}`);
+      /^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/;
+    const ipfsHash = path.match(regSchema)[5].replace('/ipfs/', '');
+    const imageIpfsHash = imageIpfsPath
+      .match(regSchema)[5]
+      .replace('/ipfs/', '');
 
     const DeHubShopShippingAddresses = Moralis.Object.extend(
       'DeHubShopShippingAddresses'
@@ -61,6 +70,7 @@ export const initOrder = async ({
     dehubShopOrders.set('productName', productData.name);
     dehubShopOrders.set('sku', productData.sku);
     dehubShopOrders.set('contentfulId', contentfulId);
+    dehubShopOrders.set('imageIpfsHash', imageIpfsHash);
     await dehubShopOrders.save();
 
     return {

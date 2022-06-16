@@ -27,7 +27,8 @@ describe('E2E Shop functions', () => {
     const res = await Moralis.Cloud.run(ShopFunctions.InitOrder, {
       address: config.address,
       productData: {
-        picture: 'picture',
+        image:
+          'https://moralis.io/wp-content/uploads/2021/06/Moralis-Glass-Favicon.svg',
         name: 'name',
         sku: 'sku',
       },
@@ -76,7 +77,8 @@ describe('E2E Shop functions', () => {
     const resOrder = await Moralis.Cloud.run(ShopFunctions.InitOrder, {
       address: config.address,
       productData: {
-        picture: 'picture',
+        image:
+          'https://moralis.io/wp-content/uploads/2021/06/Moralis-Glass-Favicon.svg',
         name: 'name',
         sku: 'sku',
       },
