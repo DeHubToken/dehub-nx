@@ -27,22 +27,23 @@ export const initOrder = async ({
     });
     const { path: imageIpfsPath } = ipfsImage;
 
+    const regSchema =
+      // eslint-disable-next-line no-useless-escape
+      /^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/;
+    const imageIpfsHash = imageIpfsPath
+      .match(regSchema)[5]
+      .replace('/ipfs/', '');
+
     const ipfs = await Moralis.Cloud.toIpfs({
       sourceType: 'object',
       source: {
         ...productData,
-        image: ipfsImage.path,
+        image: `ipfs://${imageIpfsHash}`,
       },
     });
     const { path } = ipfs;
-
-    const regSchema =
-      // eslint-disable-next-line no-useless-escape
-      /^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/;
     const ipfsHash = path.match(regSchema)[5].replace('/ipfs/', '');
-    const imageIpfsHash = imageIpfsPath
-      .match(regSchema)[5]
-      .replace('/ipfs/', '');
+    logger.info(`ipfs: ${path}`);
 
     const DeHubShopShippingAddresses = Moralis.Object.extend(
       'DeHubShopShippingAddresses'
