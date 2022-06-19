@@ -1,12 +1,16 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
 import {
+  EnvToken,
   ILoggerService,
   IMoralisService,
   LoggerToken,
 } from '@dehub/angular/model';
-import { Networks } from '@dehub/shared/config';
+import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
+import { Networks, SharedEnv } from '@dehub/shared/config';
 import {
   ChainId,
+  CurrencyContractString,
+  CurrencyString,
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   EnableOptionsPersisted,
@@ -24,12 +28,15 @@ import {
   publishReplayRefCount,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
+import { TransactionResponse } from '@ethersproject/abstract-provider';
+import { BigNumber } from '@ethersproject/bignumber';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
 import { MessageService } from 'primeng/api';
-import { BehaviorSubject, from, of } from 'rxjs';
+import { BehaviorSubject, from, Observable, of, throwError, zip } from 'rxjs';
 import {
+  concatMap,
   distinctUntilChanged,
   first,
   map,
@@ -110,6 +117,7 @@ export class MoralisService implements IMoralisService {
   constructor(
     @Inject(LoggerToken) private logger: ILoggerService,
     @Inject(WINDOW) private readonly windowRef: Window,
+    @Inject(EnvToken) private env: SharedEnv,
     private ngZone: NgZone,
     private messageService: MessageService
   ) {
@@ -423,5 +431,83 @@ export class MoralisService implements IMoralisService {
     connectorId?: DeHubConnectorNames
   ) {
     this.walletConnectStateSubject.next({ connectorId, state });
+  }
+
+  getTokenAllowance(
+    contractAddress: string,
+    spender: string,
+    decimals: string
+  ): Observable<BigNumber> {
+    this.logger.info(`Getting ${contractAddress} allowance for ${spender}.`);
+    return this.account$.pipe(
+      switchMap(account => {
+        if (account) {
+          return zip(
+            Moralis.Web3API.token.getTokenAllowance({
+              chain: decimalToHex(this.env.web3.chainId),
+              owner_address: account,
+              spender_address: spender,
+              address: contractAddress,
+            }),
+            decimals
+          );
+        } else {
+          return throwError(() => new Error('No account/metadata available'));
+        }
+      }),
+      tap(([{ allowance }]) => this.logger.info(`Allowance: ${allowance}`)),
+      map(([{ allowance }, decimals]) =>
+        Moralis.web3Library.utils.parseUnits(allowance, decimals)
+      )
+    );
+  }
+
+  setTokenAllowance(
+    contractAddress: string,
+    spender: string,
+    amount: string = Moralis.web3Library.constants.MaxUint256.toString()
+  ) {
+    this.logger.info(
+      `Setting ${contractAddress} ${amount} allowance for ${spender}.`
+    );
+    return this.account$.pipe(
+      concatMap(account => {
+        if (account) {
+          const options: Moralis.ExecuteFunctionOptions = {
+            contractAddress,
+            abi: Bep20Abi,
+            functionName: 'approve',
+            params: {
+              _spender: spender,
+              _value: amount,
+            },
+          };
+          return from(
+            // Had to force cast to TransactionResponse because Moralis typings are not correct...
+            // they are using ethers Transaction type insted of TransactionResponse which doesn't
+            // include wait() function. TransactionResponse extends Transaction type on ethers.js
+            Moralis.executeFunction(
+              options
+            ) as unknown as Observable<TransactionResponse>
+          ).pipe(concatMap((tx: TransactionResponse) => tx.wait()));
+        } else {
+          return throwError(() => new Error('No account available'));
+        }
+      })
+    );
+  }
+
+  getTokenMetadata(symbol: CurrencyString) {
+    return from(
+      Moralis.Web3API.token.getTokenMetadata({
+        chain: decimalToHex(this.env.web3.chainId),
+        addresses: [
+          this.env.web3.addresses.contracts[CurrencyContractString[symbol]],
+        ],
+      })
+    ).pipe(
+      tap(resp => this.logger.info(`Get ${symbol} metadata.`, resp)),
+      map(resp => resp[0])
+    );
   }
 }

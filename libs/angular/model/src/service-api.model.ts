@@ -1,13 +1,18 @@
 import {
   Attributes,
   Contacts,
+  CurrencyString,
   DeHubConnectorNames,
   DeHubShopShippingAddresses,
+  Erc20Metadata,
   InitOrderParams,
   InitOrderResponse,
   User,
   WalletConnectState,
 } from '@dehub/shared/model';
+import { TransactionReceipt } from '@ethersproject/abstract-provider';
+import { BigNumber } from '@ethersproject/bignumber';
+import Moralis from 'moralis';
 import { Observable } from 'rxjs';
 
 export interface ILoggerService {
@@ -34,6 +39,18 @@ export interface IMoralisService {
   logout: () => Promise<void | User>;
 
   walletConnectState$: Observable<WalletConnectState>;
+
+  getTokenAllowance: (
+    contractAddress: string,
+    spender: string,
+    decimals: string
+  ) => Observable<BigNumber>;
+  setTokenAllowance: (
+    contractAddress: string,
+    spender: string,
+    amount?: string
+  ) => Observable<TransactionReceipt>;
+  getTokenMetadata(label: CurrencyString): Observable<Erc20Metadata>;
 }
 
 export interface IDehubMoralisService {
