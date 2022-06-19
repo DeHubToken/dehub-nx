@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCheckoutDetail } from '@dehub/shared/model';
+import { richMarkupToPlainString } from '@dehub/shared/utils';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CheckoutFormComponent } from './components/checkout-form.component';
 
@@ -18,7 +19,17 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     const productDetails = this.route.snapshot.data['productDetails'];
-
+    const data: ProductCheckoutDetail = {
+      picture: productDetails.picturesCollection?.items[0],
+      name: productDetails.name,
+      description: richMarkupToPlainString(productDetails.fullDescription.json),
+      availableQuantity: productDetails.availableQuantity,
+      category: productDetails.category,
+      price: productDetails.price,
+      currency: productDetails.currency,
+      contentfulId: productDetails.sys.id,
+      sku: productDetails.sku,
+    };
     const ref = this.dialogService.open(CheckoutFormComponent, {
       showHeader: true,
       header: 'Checkout',
@@ -27,16 +38,7 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
       closeOnEscape: true,
       dismissableMask: true,
       closable: true,
-      data: {
-        picture: productDetails.picturesCollection?.items[0],
-        name: productDetails.name,
-        availableQuantity: productDetails.availableQuantity,
-        category: productDetails.category,
-        price: productDetails.price,
-        currency: productDetails.currency,
-        contentfulId: productDetails.sys.id,
-        sku: productDetails.sku,
-      } as ProductCheckoutDetail,
+      data,
     });
 
     ref.onClose.subscribe(() => {

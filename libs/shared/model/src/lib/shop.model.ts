@@ -1,3 +1,4 @@
+import { ShopContractPropsType } from './contract.model';
 import { PhysicalAddress } from './location.model';
 
 export enum OrderStatus {
@@ -27,11 +28,20 @@ export enum CurrencyString {
   BUSD = 'BUSD',
 }
 
+// For accessing env.web3.addresses.contracts
+export enum CurrencyContractString {
+  BNB = 'wbnb',
+  DeHub = 'dehub',
+  BUSD = 'busd',
+}
+
 /**
  * A set of product values required for Order initialization on Moralis.
  */
 export interface ProductData {
   name: string;
+  description: string;
+  category: string;
   image: string;
   sku: string;
 }
@@ -61,4 +71,8 @@ export interface InitOrderResult {
  */
 export interface InitOrderResponse {
   result: InitOrderResult;
+}
+
+export interface ShopContractResponse {
+  result: ShopContractPropsType;
 }
