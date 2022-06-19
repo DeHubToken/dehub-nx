@@ -6,13 +6,13 @@ import {
   DeHubShopShippingAddresses,
   Erc20Metadata,
   InitOrderParams,
-  InitOrderResponse,
+  InitOrderResult,
+  ShopContractPropsType,
   User,
   WalletConnectState,
 } from '@dehub/shared/model';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
 import { BigNumber } from '@ethersproject/bignumber';
-import Moralis from 'moralis';
 import { Observable } from 'rxjs';
 
 export interface ILoggerService {
@@ -56,6 +56,15 @@ export interface IMoralisService {
 export interface IDehubMoralisService {
   canPlay$: Observable<boolean>;
   userShippingAddress$: Observable<DeHubShopShippingAddresses>;
+  checkoutContract$: Observable<ShopContractPropsType>;
   getDeHubShopShippingAddresses: () => Observable<DeHubShopShippingAddresses[]>;
-  initOrder: (params: InitOrderParams) => Observable<InitOrderResponse>;
+  initOrder: (params: InitOrderParams) => Observable<InitOrderResult>;
+  getCheckoutContract: () => Observable<ShopContractPropsType>;
+  mintReceipt: (
+    orderId: string,
+    ipfsHash: string,
+    checkoutContract: ShopContractPropsType,
+    currency: CurrencyString,
+    price: BigNumber
+  ) => Observable<TransactionReceipt>;
 }

@@ -13,20 +13,33 @@ import {
   DehubMoralisToken,
   EnvToken,
   IDehubMoralisService,
+  ILoggerService,
   IMoralisService,
+  LoggerToken,
   MoralisToken,
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import {
   Contacts,
+  ContractPropsType,
   DeHubShopShippingAddresses,
   InitOrderParams,
   PhysicalAddress,
   ProductCheckoutDetail,
   ProductData,
 } from '@dehub/shared/model';
+import { BigNumber } from '@ethersproject/bignumber';
+import Moralis from 'moralis';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { first, Observable, tap } from 'rxjs';
+import {
+  combineLatest,
+  concatMap,
+  first,
+  map,
+  Observable,
+  of,
+  tap,
+} from 'rxjs';
 
 @Component({
   template: `
@@ -164,6 +177,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   account$?: Observable<string | undefined>;
   userContacts$?: Observable<Contacts>;
   userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
+  checkoutContract$?: Observable<ContractPropsType>;
 
   checkoutForm = this.fb.group({
     quantity: [1],
@@ -182,6 +196,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
     @Inject(MoralisToken) private moralisService: IMoralisService,
     @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
     @Inject(EnvToken) public env: SharedEnv,
+    @Inject(LoggerToken) private logger: ILoggerService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
     private fb: NonNullableFormBuilder
@@ -190,30 +205,92 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   ngOnInit() {
     this.product = this.config.data;
     const { account$, userContacts$ } = this.moralisService;
-    const { userShippingAddress$ } = this.dehubMoralis;
+    const { userShippingAddress$, checkoutContract$ } = this.dehubMoralis;
     this.account$ = account$;
     this.userContacts$ = userContacts$.pipe(
       tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
     );
 
     this.userShippingAddress$ = userShippingAddress$;
+    this.checkoutContract$ = checkoutContract$;
   }
 
   onConfirm(account: string) {
-    const address =
+    const ethers = Moralis.web3Library;
+    const shippingAddress =
       this.checkoutForm.controls.shippingAddress.controls.address.value;
-    if (this.product && address) {
+    if (this.product && shippingAddress && this.checkoutContract$) {
+      const price = this.product.price.toString();
+      const currency = this.product.currency;
+      const productData: ProductData = {
+        name: this.product.name,
+        description: this.product.description,
+        image: this.product.picture.url || '',
+        sku: this.product.sku,
+        category: this.product.category.name || '',
+      };
       const params: InitOrderParams = {
         address: account,
         contentfulId: this.product.contentfulId,
-        productData: {
-          name: this.product.name,
-          image: this.product.picture.url,
-          sku: this.product.sku,
-        } as ProductData,
-        shippingAddress: address,
+        productData,
+        shippingAddress,
       };
-      this.dehubMoralis.initOrder(params).pipe(first()).subscribe();
+      // Use checkout contract data from the API and token metadata from the blockchain
+      combineLatest([
+        this.checkoutContract$,
+        this.moralisService.getTokenMetadata(currency),
+      ])
+        .pipe(
+          first(),
+          concatMap(([checkoutContract, metadata]) =>
+            this.moralisService
+              .getTokenAllowance(
+                metadata.address,
+                checkoutContract.address,
+                metadata.decimals
+              )
+              .pipe(
+                map(
+                  allowance =>
+                    [
+                      allowance,
+                      ethers.utils.parseUnits(price, metadata.decimals),
+                    ] as [BigNumber, BigNumber]
+                ),
+                concatMap(([allowance, parsedPrice]) => {
+                  // Check if we have enough allowance
+                  if (allowance.gte(parsedPrice)) {
+                    return of(undefined);
+                  } else {
+                    // Increase allowance to max and wait for confirmation
+                    return this.moralisService.setTokenAllowance(
+                      metadata.address,
+                      checkoutContract.address
+                    );
+                  }
+                }),
+                concatMap(() => this.dehubMoralis.initOrder(params)),
+                concatMap(({ orderId, ipfsHash }) =>
+                  this.dehubMoralis.mintReceipt(
+                    orderId,
+                    ipfsHash,
+                    checkoutContract,
+                    currency,
+                    ethers.utils.parseUnits(price, metadata.decimals)
+                  )
+                ),
+                map(txReceipt => {
+                  this.logger.info(`Initialized order and minted receipt!`);
+                  // console.log(txReceipt);
+                })
+              )
+          )
+        )
+        .subscribe();
+    } else {
+      throw new Error(
+        'Product, shipping address or checkout contract is missing!'
+      );
     }
   }
 }
