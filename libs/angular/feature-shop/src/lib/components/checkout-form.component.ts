@@ -279,7 +279,8 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                     ethers.utils.parseUnits(price, metadata.decimals)
                   )
                 ),
-                map(txReceipt => {
+                map(() => {
+                  // TODO: present a dialog with status and start polling: https://nm6dir4me3i0.usemoralis.com:2053/server/functions/checkOrder
                   this.logger.info(`Initialized order and minted receipt!`);
                   // console.log(txReceipt);
                 })
