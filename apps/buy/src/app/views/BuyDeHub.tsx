@@ -5,6 +5,7 @@ import {
   useWeb3Context,
 } from '@dehub/react/core';
 import { Container } from '@dehub/react/ui';
+import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
 import {
   BIG_ZERO,
   ethersToBigNumber,
@@ -21,7 +22,6 @@ import { useCallback, useMemo, useState } from 'react';
 import { environment } from '../../environments/environment';
 import { SwitchIconButton } from '../components/SwitchIconButton';
 import { TokenInputPanel } from '../components/TokenInputPanel';
-import Bep20Abi from '../config/abis/erc20.json';
 import { MAX_DECIMAL_DIGITS } from '../config/types';
 import { useDehubContract } from '../hooks/useContract';
 import useInitialize from '../hooks/useInitialize';
