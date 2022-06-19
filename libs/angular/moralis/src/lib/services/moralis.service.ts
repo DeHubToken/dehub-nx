@@ -6,6 +6,7 @@ import {
 } from '@dehub/angular/model';
 import { Networks } from '@dehub/shared/config';
 import {
+  ChainId,
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   EnableOptionsPersisted,
@@ -99,7 +100,7 @@ export class MoralisService implements IMoralisService {
     publishReplayRefCount()
   );
 
-  private requiredChainHex?: string;
+  private requiredChainHex?: ChainId;
 
   /** Triggered after user closed the session from his wallet (Walletconnect) */
   private unsubscribeFromWeb3Deactivated?: () => events.EventEmitter;
