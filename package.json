@@ -64,6 +64,7 @@
     "@ethersproject/constants": "5.5.0",
     "@ethersproject/contracts": "5.5.0",
     "@ethersproject/providers": "5.5.3",
+    "@ethersproject/solidity": "5.6.1",
     "@fortawesome/fontawesome-pro": "6.1.1",
     "@fortawesome/fontawesome-svg-core": "6.1.1",
     "@fortawesome/pro-duotone-svg-icons": "6.1.1",
