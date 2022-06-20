@@ -1,5 +1,7 @@
 import {
   Attributes,
+  CheckOrderParams,
+  CheckOrderResult,
   Contacts,
   CurrencyString,
   DeHubConnectorNames,
@@ -59,6 +61,7 @@ export interface IDehubMoralisService {
   checkoutContract$: Observable<ShopContractPropsType>;
   getDeHubShopShippingAddresses: () => Observable<DeHubShopShippingAddresses[]>;
   initOrder: (params: InitOrderParams) => Observable<InitOrderResult>;
+  checkOrder: (params: CheckOrderParams) => Observable<CheckOrderResult>;
   getCheckoutContract: () => Observable<ShopContractPropsType>;
   mintReceipt: (
     orderId: string,

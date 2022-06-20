@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import {
   EnvToken,
@@ -10,6 +10,8 @@ import {
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import {
+  CheckOrderParams,
+  CheckOrderResponse,
   CurrencyString,
   DeHubShopShippingAddresses,
   InitOrderParams,
@@ -61,6 +63,17 @@ export class DehubMoralisService implements IDehubMoralisService {
     this._logger.info('Sending initOrder request to Moralis...');
     this._logger.info(`  params: `, params);
     return this.httpClient.post<InitOrderResponse>(url, params).pipe(
+      tap(resp => this._logger.info(JSON.stringify(resp))),
+      map(resp => resp.result)
+    );
+  }
+
+  checkOrder(params: CheckOrderParams) {
+    const url = this.env.moralis.serverUrl + '/functions/checkOrder';
+    this._logger.info(`Checking order ${params.orderId} status...`);
+    let data = new HttpParams();
+    data = params.orderId ? data.set('orderId', params.orderId) : data;
+    return this.httpClient.get<CheckOrderResponse>(url, { params: data }).pipe(
       tap(resp => this._logger.info(JSON.stringify(resp))),
       map(resp => resp.result)
     );

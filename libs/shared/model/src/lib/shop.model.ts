@@ -58,6 +58,10 @@ export interface InitOrderParams {
   contentfulId: string;
 }
 
+export interface CheckOrderParams {
+  orderId: string;
+}
+
 /**
  * Moralis Order initialization response result data.
  */
@@ -66,11 +70,19 @@ export interface InitOrderResult {
   ipfsHash: string;
 }
 
+export interface CheckOrderResult {
+  status: OrderStatus;
+}
+
 /**
  * Moralis Order initialization response.
  */
 export interface InitOrderResponse {
   result: InitOrderResult;
+}
+
+export interface CheckOrderResponse {
+  result: CheckOrderResult;
 }
 
 export interface ShopContractResponse {
