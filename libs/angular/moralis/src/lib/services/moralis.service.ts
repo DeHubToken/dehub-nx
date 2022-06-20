@@ -38,7 +38,7 @@ import {
   ConfirmEventType,
   MessageService,
 } from 'primeng/api';
-import { BehaviorSubject, from, Observable, of, throwError, zip } from 'rxjs';
+import { BehaviorSubject, from, Observable, of, throwError } from 'rxjs';
 import {
   concatMap,
   distinctUntilChanged,
@@ -451,21 +451,18 @@ export class MoralisService implements IMoralisService {
     return this.account$.pipe(
       switchMap(account => {
         if (account) {
-          return zip(
-            Moralis.Web3API.token.getTokenAllowance({
-              chain: decimalToHex(this.env.web3.chainId),
-              owner_address: account,
-              spender_address: spender,
-              address: contractAddress,
-            }),
-            decimals
-          );
+          return Moralis.Web3API.token.getTokenAllowance({
+            chain: decimalToHex(this.env.web3.chainId),
+            owner_address: account,
+            spender_address: spender,
+            address: contractAddress,
+          });
         } else {
           return throwError(() => new Error('No account/metadata available'));
         }
       }),
-      tap(([{ allowance }]) => this.logger.info(`Allowance: ${allowance}`)),
-      map(([{ allowance }, decimals]) =>
+      tap(({ allowance }) => this.logger.info(`Allowance: ${allowance}`)),
+      map(({ allowance }) =>
         Moralis.web3Library.utils.parseUnits(allowance, decimals)
       )
     );
