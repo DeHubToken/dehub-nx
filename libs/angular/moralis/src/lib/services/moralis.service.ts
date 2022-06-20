@@ -38,7 +38,7 @@ import {
   ConfirmEventType,
   MessageService,
 } from 'primeng/api';
-import { BehaviorSubject, from, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, from, iif, Observable, of, throwError } from 'rxjs';
 import {
   concatMap,
   distinctUntilChanged,
@@ -449,18 +449,19 @@ export class MoralisService implements IMoralisService {
   ): Observable<BigNumber> {
     this.logger.info(`Getting ${contractAddress} allowance for ${spender}.`);
     return this.account$.pipe(
-      switchMap(account => {
-        if (account) {
-          return Moralis.Web3API.token.getTokenAllowance({
+      switchMap(account =>
+        iif(
+          () => !!account,
+          Moralis.Web3API.token.getTokenAllowance({
             chain: decimalToHex(this.env.web3.chainId),
-            owner_address: account,
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            owner_address: account!,
             spender_address: spender,
             address: contractAddress,
-          });
-        } else {
-          return throwError(() => new Error('No account/metadata available'));
-        }
-      }),
+          }),
+          throwError(() => new Error('No account/metadata available'))
+        )
+      ),
       tap(({ allowance }) => this.logger.info(`Allowance: ${allowance}`)),
       map(({ allowance }) =>
         Moralis.web3Library.utils.parseUnits(allowance, decimals)
