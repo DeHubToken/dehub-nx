@@ -33,7 +33,11 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
-import { MessageService } from 'primeng/api';
+import {
+  ConfirmationService,
+  ConfirmEventType,
+  MessageService,
+} from 'primeng/api';
 import { BehaviorSubject, from, Observable, of, throwError, zip } from 'rxjs';
 import {
   concatMap,
@@ -119,7 +123,8 @@ export class MoralisService implements IMoralisService {
     @Inject(WINDOW) private readonly windowRef: Window,
     @Inject(EnvToken) private env: SharedEnv,
     private ngZone: NgZone,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {
     if (Moralis.User.current()) {
       const enableOptionsStr = this.windowRef.localStorage.getItem(
@@ -373,30 +378,34 @@ export class MoralisService implements IMoralisService {
   private handleAccountChanged(newAccount: string) {
     this.user$
       .pipe(filterEmpty(), first())
-      .subscribe(async ({ attributes: { accounts = [] } }) => {
+      .subscribe(({ attributes: { accounts = [] } }) => {
         // Ask linking new account
         if (!accounts.includes(newAccount)) {
-          const confirmed = confirm(
-            'Please confirm account linking with your wallet.'
-          );
+          this.confirmationService.confirm({
+            message: 'Please confirm account linking with your wallet.',
+            header: 'Account Linking',
+            icon: 'fa fa-link',
+            acceptIcon: 'fa fa-link',
+            acceptLabel: 'Link',
+            rejectLabel: 'Cancel',
+            rejectButtonStyleClass: 'p-button-outlined',
+            // Confirmed linking
+            accept: async () => {
+              this.logger.info(`Linking ${newAccount} to the users account.`);
 
-          // Confirmed linking new account
-          if (confirmed) {
-            this.logger.info(`Linking ${newAccount} to the users account.`);
-
-            await Moralis.link(newAccount)
-              // Emit new user with updated accounts and new linked account
-              .then(user => this.updateUserAndAccount(user, newAccount))
-              .catch(e =>
-                this.logger.error(
-                  `Moralis linking ${newAccount} account problem:`,
-                  e
-                )
-              );
-          } else {
-            // Rejected linking new account
-            this.logout();
-          }
+              await Moralis.link(newAccount)
+                // Emit new user with updated accounts and new linked account
+                .then(user => this.updateUserAndAccount(user, newAccount))
+                .catch(e =>
+                  this.logger.error(
+                    `Moralis linking ${newAccount} account problem:`,
+                    e
+                  )
+                );
+            },
+            // Canceled linking
+            reject: (_type: ConfirmEventType) => this.logout(),
+          });
         } else {
           // Account already linked
           this.logger.warn(

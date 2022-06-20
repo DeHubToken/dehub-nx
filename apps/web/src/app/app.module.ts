@@ -20,6 +20,7 @@ import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { TabMenuModule } from '@dehub/angular/ui/components/tab-menu';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
@@ -52,6 +53,7 @@ const { appId, serverUrl } = environment.moralis;
     MenuModule,
     ToastModule,
     DynamicDialogModule,
+    ConfirmDialogModule,
 
     // Optional feature modules
     AngularCoreModule.forRoot(),
