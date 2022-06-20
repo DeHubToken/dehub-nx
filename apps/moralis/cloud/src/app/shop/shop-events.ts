@@ -8,22 +8,33 @@ Moralis.Cloud.afterSave(
     const logger = Moralis.Cloud.getLogger();
     try {
       const { object: purchase } = request;
+
       const orderId = purchase.get('orderId');
-      const metadataURI = Number(purchase.get('metadataURI'));
+      const metadataURI = purchase.get('metadataURI');
+      logger.info(
+        `PurchaseEvent request.orderId,metadataURI: ${orderId}, ${metadataURI}`
+      );
 
       // Find order by orderId
       const order = await findOrder(orderId);
-      if (!order) return;
+      if (!order) {
+        logger.error(`Not found order by id: ${orderId}`);
+        return;
+      }
 
       // Compare order and request
       const status = order.get('status');
-      const contentfulId = order.get('contentfulId');
+      const ipfsHash = order.get('ipfsHash');
 
-      if (status === OrderStatus.verifying && metadataURI === contentfulId) {
+      if (status === OrderStatus.verifying && metadataURI === ipfsHash) {
         order.set('status', OrderStatus.verified);
         order.save();
 
         logger.info(`setOrderStatus(${orderId}, ${status}})`);
+      } else {
+        logger.error(
+          `Not found order matched with ipfsHash: ${orderId}, ${ipfsHash}`
+        );
       }
     } catch (err) {
       logger.error(`ShopPurchaseEvents error: ${JSON.stringify(err)}`);
