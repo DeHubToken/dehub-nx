@@ -24,6 +24,7 @@ import {
   ContractPropsType,
   DeHubShopShippingAddresses,
   InitOrderParams,
+  OrderStatus,
   PhysicalAddress,
   ProductCheckoutDetail,
   ProductData,
@@ -34,11 +35,15 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {
   combineLatest,
   concatMap,
+  delay,
+  filter,
   first,
   map,
   Observable,
   of,
+  repeatWhen,
   tap,
+  zip,
 } from 'rxjs';
 
 @Component({
@@ -269,20 +274,31 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                     );
                   }
                 }),
+                // Init order will upload data to IPFS and store a record with status 'verifying' on Moralis.
                 concatMap(() => this.dehubMoralis.initOrder(params)),
+                // Mint the actual NFT with order ID and IPFS URI
                 concatMap(({ orderId, ipfsHash }) =>
-                  this.dehubMoralis.mintReceipt(
-                    orderId,
-                    ipfsHash,
-                    checkoutContract,
-                    currency,
-                    ethers.utils.parseUnits(price, metadata.decimals)
+                  zip(
+                    of(orderId),
+                    this.dehubMoralis.mintReceipt(
+                      orderId,
+                      ipfsHash,
+                      checkoutContract,
+                      currency,
+                      ethers.utils.parseUnits(price, metadata.decimals)
+                    )
+                  )
+                ),
+                // Keep checking the order status until it's verified.
+                concatMap(([orderId]) =>
+                  this.dehubMoralis.checkOrder({ orderId: orderId }).pipe(
+                    repeatWhen(obs => obs.pipe(delay(1000))),
+                    filter(data => data.status !== OrderStatus.verified),
+                    first()
                   )
                 ),
                 map(() => {
-                  // TODO: present a dialog with status and start polling: https://nm6dir4me3i0.usemoralis.com:2053/server/functions/checkOrder
-                  this.logger.info(`Initialized order and minted receipt!`);
-                  // console.log(txReceipt);
+                  this.logger.info('Order completed!');
                 })
               )
           )
