@@ -20,7 +20,7 @@ export interface ContentfulEnv {
   website: ContentfulSpaceEnv;
 }
 
-interface ContractsEnv {
+export interface ContractsEnv {
   dehub: string;
   dehubBnb: string;
   wbnb: string;

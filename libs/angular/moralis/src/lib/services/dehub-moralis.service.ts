@@ -12,7 +12,7 @@ import { SharedEnv } from '@dehub/shared/config';
 import {
   CheckOrderParams,
   CheckOrderResponse,
-  CurrencyString,
+  Currency,
   DeHubShopShippingAddresses,
   InitOrderParams,
   InitOrderResponse,
@@ -96,7 +96,7 @@ export class DehubMoralisService implements IDehubMoralisService {
     orderId: string,
     ipfsHash: string,
     checkoutContract: ShopContractPropsType,
-    currency: CurrencyString,
+    currency: Currency,
     price: BigNumber
   ) {
     const options: Moralis.ExecuteFunctionOptions = {

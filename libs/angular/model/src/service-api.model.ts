@@ -3,7 +3,7 @@ import {
   CheckOrderParams,
   CheckOrderResult,
   Contacts,
-  CurrencyString,
+  Currency,
   DeHubConnectorNames,
   DeHubShopShippingAddresses,
   Erc20Metadata,
@@ -52,7 +52,7 @@ export interface IMoralisService {
     spender: string,
     amount?: string
   ) => Observable<TransactionReceipt>;
-  getTokenMetadata(label: CurrencyString): Observable<Erc20Metadata>;
+  getTokenMetadata(label: Currency): Observable<Erc20Metadata>;
 }
 
 export interface IDehubMoralisService {
@@ -67,7 +67,7 @@ export interface IDehubMoralisService {
     orderId: string,
     ipfsHash: string,
     checkoutContract: ShopContractPropsType,
-    currency: CurrencyString,
+    currency: Currency,
     price: BigNumber
   ) => Observable<TransactionReceipt>;
 }

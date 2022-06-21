@@ -9,8 +9,7 @@ import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
 import { Networks, SharedEnv } from '@dehub/shared/config';
 import {
   ChainId,
-  CurrencyContractString,
-  CurrencyString,
+  Currency,
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   EnableOptionsPersisted,
@@ -24,6 +23,7 @@ import {
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
   filterEmpty,
+  getContractByCurrency,
   getRandomRpcUrl,
   publishReplayRefCount,
   setupMetamaskNetwork,
@@ -491,7 +491,7 @@ export class MoralisService implements IMoralisService {
           };
           return from(
             // Had to force cast to TransactionResponse because Moralis typings are not correct...
-            // they are using ethers Transaction type insted of TransactionResponse which doesn't
+            // they are using ethers Transaction type instead of TransactionResponse which doesn't
             // include wait() function. TransactionResponse extends Transaction type on ethers.js
             Moralis.executeFunction(
               options
@@ -504,16 +504,16 @@ export class MoralisService implements IMoralisService {
     );
   }
 
-  getTokenMetadata(symbol: CurrencyString) {
+  getTokenMetadata(currency: Currency) {
     return from(
       Moralis.Web3API.token.getTokenMetadata({
         chain: decimalToHex(this.env.web3.chainId),
         addresses: [
-          this.env.web3.addresses.contracts[CurrencyContractString[symbol]],
+          getContractByCurrency(currency, this.env.web3.addresses.contracts),
         ],
       })
     ).pipe(
-      tap(resp => this.logger.info(`Get ${symbol} metadata.`, resp)),
+      tap(resp => this.logger.info(`Get ${currency} metadata.`, resp)),
       map(resp => resp[0])
     );
   }

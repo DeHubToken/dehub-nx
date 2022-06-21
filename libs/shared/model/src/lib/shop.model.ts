@@ -16,24 +16,7 @@ export enum ReceiptStatus {
   'delivered',
 }
 
-export enum Currency {
-  BNB,
-  DeHub,
-  BUSD,
-}
-
-export enum CurrencyString {
-  BNB = 'BNB',
-  DeHub = 'DeHub',
-  BUSD = 'BUSD',
-}
-
-// For accessing env.web3.addresses.contracts
-export enum CurrencyContractString {
-  BNB = 'wbnb',
-  DeHub = 'dehub',
-  BUSD = 'busd',
-}
+export type Currency = 'BNB' | 'DeHub' | 'BUSD';
 
 /**
  * A set of product values required for Order initialization on Moralis.

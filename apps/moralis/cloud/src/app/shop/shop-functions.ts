@@ -1,6 +1,4 @@
 import {
-  Currency,
-  CurrencyString,
   InitOrderParams,
   InitOrderResult,
   OrderStatus,
@@ -66,7 +64,7 @@ export const initOrder = async ({
         })
         .reduce((prev: boolean, current: boolean) => prev && current, true);
       if (contains) {
-        logger.info(`found addres- s`);
+        logger.info(`Address found.`);
         deHubShopShippingAddresses = addresses[0];
         break;
       }
@@ -136,19 +134,6 @@ export const checkOrder = async (orderId: string): Promise<string | null> => {
     logger.error(`${ShopFunctions.InitOrder} error: ${JSON.stringify(err)}`);
     return null;
   }
-};
-
-export const compareCurrency = (
-  currency: Currency,
-  currencyString: CurrencyString
-) => {
-  if (currency === Currency.BNB && currencyString === CurrencyString.BNB)
-    return true;
-  if (currency === Currency.DeHub && currencyString === CurrencyString.DeHub)
-    return true;
-  if (currency === Currency.BUSD && currencyString === CurrencyString.BUSD)
-    return true;
-  return false;
 };
 
 export const getCheckoutContractFn = async () => {

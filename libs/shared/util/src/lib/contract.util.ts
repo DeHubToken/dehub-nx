@@ -1,7 +1,10 @@
+import { ContractsEnv } from '@dehub/shared/config';
+import { Currency } from '@dehub/shared/model';
 import { AddressZero } from '@ethersproject/constants';
 import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
 import { isAddress } from './address.util';
+import { assertUnreachable } from './type-guard.util';
 
 const getSigner = (library: Web3Provider, account: string): JsonRpcSigner =>
   library.getSigner(account).connectUnchecked();
@@ -23,4 +26,24 @@ export const getContract = (
   }
 
   return new Contract(address, abi, getProviderOrSigner(library, account));
+};
+
+/**
+ * Get the right contract address by currency
+ */
+export const getContractByCurrency = (
+  currency: Currency,
+  contracts: ContractsEnv
+) => {
+  switch (currency) {
+    case 'DeHub':
+      return contracts['dehub'];
+    case 'BNB':
+      return contracts['wbnb'];
+    case 'BUSD':
+      return contracts['busd'];
+
+    default:
+      assertUnreachable(currency);
+  }
 };

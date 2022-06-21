@@ -41,3 +41,11 @@ export function isUndefined(obj: unknown): obj is undefined {
 export function isNotUndefined<T>(obj: T): obj is T {
   return typeof obj !== 'undefined';
 }
+
+/**
+ * Ensures that all cases are handled in switch statement.
+ * @param value the uncovered case in the switch statement
+ */
+export function assertUnreachable(value: never): never {
+  throw new Error(`Statement should be unreachable! Uncovered case ${value}`);
+}

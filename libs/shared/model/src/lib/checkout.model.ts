@@ -1,4 +1,4 @@
-import { CurrencyString } from './shop.model';
+import { Currency } from './shop.model';
 import { Asset, ProductCategory } from './website-contentful.model';
 
 export interface ProductCheckoutDetail {
@@ -8,7 +8,7 @@ export interface ProductCheckoutDetail {
   availableQuantity: number;
   category: ProductCategory;
   price: number;
-  currency: CurrencyString;
+  currency: Currency;
   contentfulId: string;
   sku: string;
 }
