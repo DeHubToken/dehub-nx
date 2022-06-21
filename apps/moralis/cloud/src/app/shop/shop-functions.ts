@@ -48,16 +48,42 @@ export const initOrder = async ({
     const DeHubShopShippingAddresses = Moralis.Object.extend(
       'DeHubShopShippingAddresses'
     );
-    const deHubShopShippingAddresses = new DeHubShopShippingAddresses();
-    deHubShopShippingAddresses.set('user', user);
-    deHubShopShippingAddresses.set('city', shippingAddress.city);
-    deHubShopShippingAddresses.set('state', shippingAddress.state);
-    deHubShopShippingAddresses.set('country', shippingAddress.country);
-    deHubShopShippingAddresses.set('postalCode', shippingAddress.postalCode);
-    deHubShopShippingAddresses.set('line1', shippingAddress.line1);
-    deHubShopShippingAddresses.set('line2', shippingAddress.line2);
-    deHubShopShippingAddresses.set('name', shippingAddress.name);
-    await deHubShopShippingAddresses.save(null, { useMasterKey: true });
+    // Query if certain address is already registered
+    const queryShippingAddress = new Moralis.Query(DeHubShopShippingAddresses);
+    const queryUser = new Moralis.Query(Moralis.User);
+    queryUser.equalTo('objectId', user.id);
+    queryShippingAddress.matchesQuery('user', queryUser);
+    const addresses = await queryShippingAddress.find({ useMasterKey: true });
+
+    // If found already registered, then use it
+    let deHubShopShippingAddresses = null;
+    for (const address of addresses) {
+      const contains = Object.keys(shippingAddress)
+        .map((key: string) => {
+          const value = shippingAddress[key] ?? '';
+          const valueInDB = address.get(key) ?? '';
+          return value.trim() === valueInDB.trim();
+        })
+        .reduce((prev: boolean, current: boolean) => prev && current, true);
+      if (contains) {
+        logger.info(`found addres- s`);
+        deHubShopShippingAddresses = addresses[0];
+        break;
+      }
+    }
+
+    if (deHubShopShippingAddresses === null) {
+      deHubShopShippingAddresses = new DeHubShopShippingAddresses();
+      deHubShopShippingAddresses.set('user', user);
+      deHubShopShippingAddresses.set('city', shippingAddress.city);
+      deHubShopShippingAddresses.set('state', shippingAddress.state);
+      deHubShopShippingAddresses.set('country', shippingAddress.country);
+      deHubShopShippingAddresses.set('postalCode', shippingAddress.postalCode);
+      deHubShopShippingAddresses.set('line1', shippingAddress.line1);
+      deHubShopShippingAddresses.set('line2', shippingAddress.line2);
+      deHubShopShippingAddresses.set('name', shippingAddress.name);
+      await deHubShopShippingAddresses.save(null, { useMasterKey: true });
+    }
 
     // Creates a new DeHubShopOrders item with status IPFSUploading and contentfulId
     const DeHubShopOrders = Moralis.Object.extend('DeHubShopOrders');
