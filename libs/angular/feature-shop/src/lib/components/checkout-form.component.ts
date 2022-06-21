@@ -52,7 +52,7 @@ import { CheckoutProcessMessage as ProcMsg } from '../model/checkout-form.model'
 @Component({
   template: `
     <ng-container *ngIf="product">
-      <ng-container *ngIf="(isConfirming$ | async) === false; else confirming">
+      <ng-container *ngIf="(isConfirming$ | async) === false; else message">
         <!-- Product Item -->
         <dhb-product-mini [product]="product"></dhb-product-mini>
 
@@ -179,13 +179,29 @@ import { CheckoutProcessMessage as ProcMsg } from '../model/checkout-form.model'
         </ng-template>
       </ng-container>
 
-      <ng-template #confirming>
+      <ng-template #message>
         <div class="text-center py-5 mb-4">
-          <i class="fa-solid fa-circle-notch fa-spin text-4xl"></i>
+          <ng-container *ngIf="(isComplete$ | async) === false; else complete">
+            <i class="fa-solid fa-circle-notch fa-spin text-4xl"></i>
+            <br />
+            <div class="mt-3 font-bold">{{ processMessage$ | async }}</div>
+            <div class="mt-3 text-sm">Please do not close this window.</div>
+          </ng-container>
+        </div>
+
+        <ng-template #complete>
+          <i class="fa-duotone fa-circle-check text-4xl"></i>
           <br />
           <div class="mt-3 font-bold">{{ processMessage$ | async }}</div>
-          <div class="mt-3 text-sm">Please do not close this window.</div>
-        </div>
+          <div class="mt-3 mb-4 text-sm">
+            Please get in touch via [add email] if you have any questions.
+          </div>
+          <p-button
+            label="Close"
+            styleClass="p-button-secondary p-button-lg"
+            (click)="ref.close()"
+          ></p-button>
+        </ng-template>
       </ng-template>
     </ng-container>
   `,
@@ -204,6 +220,11 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   private isConfirmingSubject = new BehaviorSubject<boolean>(false);
   isConfirming$ = this.isConfirmingSubject.asObservable();
+
+  private isCompleteSubject = new BehaviorSubject<boolean>(false);
+  isComplete$ = this.isCompleteSubject
+    .asObservable()
+    .pipe(tap(() => this.procMsgSubject.next(ProcMsg.OrderSuccess)));
 
   private procMsgSubject = new BehaviorSubject<ProcMsg>(ProcMsg.Confirm);
   processMessage$ = this.procMsgSubject.asObservable();
@@ -325,7 +346,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
               )
           ),
           first(),
-          finalize(() => this.isConfirmingSubject.next(false))
+          finalize(() => this.isCompleteSubject.next(true))
         )
         .subscribe();
     } else {
