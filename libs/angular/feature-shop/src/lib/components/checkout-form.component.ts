@@ -29,7 +29,6 @@ import {
   ProductCheckoutDetail,
   ProductData,
 } from '@dehub/shared/model';
-import { BigNumber } from '@ethersproject/bignumber';
 import Moralis from 'moralis';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {
@@ -221,7 +220,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   }
 
   onConfirm(account: string) {
-    const ethers = Moralis.web3Library;
+    const parseUnits = Moralis.web3Library.utils.parseUnits;
     const shippingAddress =
       this.checkoutForm.controls.shippingAddress.controls.address.value;
     if (this.product && shippingAddress && this.checkoutContract$) {
@@ -255,16 +254,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                 metadata.decimals
               )
               .pipe(
-                map(
-                  allowance =>
-                    [
-                      allowance,
-                      ethers.utils.parseUnits(price, metadata.decimals),
-                    ] as [BigNumber, BigNumber]
-                ),
-                concatMap(([allowance, parsedPrice]) => {
+                concatMap(allowance => {
                   // Check if we have enough allowance
-                  if (allowance.gte(parsedPrice)) {
+                  if (allowance.gte(parseUnits(price, metadata.decimals))) {
                     return of(undefined);
                   } else {
                     // Increase allowance to max and wait for confirmation
@@ -285,7 +277,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                       ipfsHash,
                       checkoutContract,
                       currency,
-                      ethers.utils.parseUnits(price, metadata.decimals)
+                      parseUnits(price, metadata.decimals)
                     )
                   )
                 ),
