@@ -1,19 +1,11 @@
 import Moralis from 'moralis/types';
 import { PhysicalAddress } from './location.model';
 
-// All Moralis DB class "attribute" fields include these default fields
-export interface MoralisCommonAttributes {
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 /**
- * Moralis Class response interface.
- * Naming matches exactly the name of the Class on Moralis.
- * "attributes" is where the class-specific fields are stored.
+ * Moralis Class for DeHub Shop Shipping Addresses.
  */
 export interface DeHubShopShippingAddresses extends Moralis.Object {
-  attributes: PhysicalAddress & MoralisCommonAttributes;
+  attributes: PhysicalAddress;
 }
 
 /**
