@@ -42,28 +42,30 @@ export interface IMoralisService {
 
   walletConnectState$: Observable<WalletConnectState>;
 
-  getTokenAllowance: (
+  getTokenAllowance$: (
     contractAddress: string,
     spender: string,
     decimals: string
   ) => Observable<BigNumber>;
-  setTokenAllowance: (
+  setTokenAllowance$: (
     contractAddress: string,
     spender: string,
     amount?: string
   ) => Observable<TransactionReceipt>;
-  getTokenMetadata(label: Currency): Observable<Erc20Metadata>;
+  getTokenMetadata$(label: Currency): Observable<Erc20Metadata>;
 }
 
 export interface IDehubMoralisService {
   canPlay$: Observable<boolean>;
   userShippingAddress$: Observable<DeHubShopShippingAddresses>;
   checkoutContract$: Observable<ShopContractPropsType>;
-  getDeHubShopShippingAddresses: () => Observable<DeHubShopShippingAddresses[]>;
-  initOrder: (params: InitOrderParams) => Observable<InitOrderResult>;
-  checkOrder: (params: CheckOrderParams) => Observable<CheckOrderResult>;
-  getCheckoutContract: () => Observable<ShopContractPropsType>;
-  mintReceipt: (
+  getDeHubShopShippingAddresses$: () => Observable<
+    DeHubShopShippingAddresses[]
+  >;
+  initOrder$: (params: InitOrderParams) => Observable<InitOrderResult>;
+  checkOrder$: (params: CheckOrderParams) => Observable<CheckOrderResult>;
+  getCheckoutContract$: () => Observable<ShopContractPropsType>;
+  mintReceipt$: (
     orderId: string,
     ipfsHash: string,
     checkoutContract: ShopContractPropsType,

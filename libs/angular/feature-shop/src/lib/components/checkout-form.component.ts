@@ -288,14 +288,14 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
       // Use checkout contract data from the API and token metadata from the blockchain
       combineLatest([
         this.checkoutContract$,
-        this.moralisService.getTokenMetadata(currency),
+        this.moralisService.getTokenMetadata$(currency),
       ])
         .pipe(
           tap(() => this.isConfirmingSubject.next(true)),
           tap(() => this.setProcMsg(ProcMsg.AllowanceCheck)),
           exhaustMap(([checkoutContract, metadata]) =>
             this.moralisService
-              .getTokenAllowance(
+              .getTokenAllowance$(
                 metadata.address,
                 checkoutContract.address,
                 metadata.decimals
@@ -308,7 +308,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                   } else {
                     this.setProcMsg(ProcMsg.AllowanceSet);
                     // Increase allowance to max and wait for confirmation
-                    return this.moralisService.setTokenAllowance(
+                    return this.moralisService.setTokenAllowance$(
                       metadata.address,
                       checkoutContract.address
                     );
@@ -316,13 +316,13 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                 }),
                 // Init order will upload data to IPFS and store a record with status 'verifying' on Moralis.
                 tap(() => this.setProcMsg(ProcMsg.OrderInit)),
-                concatMap(() => this.dehubMoralis.initOrder(params)),
+                concatMap(() => this.dehubMoralis.initOrder$(params)),
                 // Mint the actual NFT with order ID and IPFS URI
                 tap(() => this.setProcMsg(ProcMsg.ReceiptMint)),
                 concatMap(({ orderId, ipfsHash }) =>
                   zip(
                     of(orderId),
-                    this.dehubMoralis.mintReceipt(
+                    this.dehubMoralis.mintReceipt$(
                       orderId,
                       ipfsHash,
                       checkoutContract,
@@ -334,7 +334,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                 // Keep checking the order status until it's verified.
                 tap(() => this.setProcMsg(ProcMsg.VerifyReceipt)),
                 concatMap(([orderId]) =>
-                  this.dehubMoralis.checkOrder({ orderId: orderId }).pipe(
+                  this.dehubMoralis.checkOrder$({ orderId: orderId }).pipe(
                     repeatWhen(obs => obs.pipe(delay(1000))),
                     filter(data => data.status !== OrderStatus.verified),
                     first()

@@ -442,7 +442,7 @@ export class MoralisService implements IMoralisService {
     this.walletConnectStateSubject.next({ connectorId, state });
   }
 
-  getTokenAllowance(
+  getTokenAllowance$(
     contractAddress: string,
     spender: string,
     decimals: string
@@ -469,7 +469,7 @@ export class MoralisService implements IMoralisService {
     );
   }
 
-  setTokenAllowance(
+  setTokenAllowance$(
     contractAddress: string,
     spender: string,
     amount: string = Moralis.web3Library.constants.MaxUint256.toString()
@@ -504,7 +504,7 @@ export class MoralisService implements IMoralisService {
     );
   }
 
-  getTokenMetadata(currency: Currency) {
+  getTokenMetadata$(currency: Currency) {
     return from(
       Moralis.Web3API.token.getTokenMetadata({
         chain: decimalToHex(this.env.web3.chainId),

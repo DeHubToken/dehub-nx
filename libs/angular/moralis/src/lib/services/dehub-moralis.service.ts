@@ -36,11 +36,11 @@ export class DehubMoralisService implements IDehubMoralisService {
   userShippingAddress$ = this.moralisService.isAuthenticated$.pipe(
     filter(isAuthenticated => isAuthenticated),
     switchMap(() =>
-      this.getDeHubShopShippingAddresses().pipe(map(resp => resp[0]))
+      this.getDeHubShopShippingAddresses$().pipe(map(resp => resp[0]))
     )
   );
 
-  checkoutContract$ = this.getCheckoutContract().pipe(publishReplayRefCount());
+  checkoutContract$ = this.getCheckoutContract$().pipe(publishReplayRefCount());
 
   constructor(
     @Inject(LoggerToken) private _logger: ILoggerService,
@@ -49,7 +49,7 @@ export class DehubMoralisService implements IDehubMoralisService {
     private httpClient: HttpClient
   ) {}
 
-  getDeHubShopShippingAddresses() {
+  getDeHubShopShippingAddresses$() {
     const ShippingAddress = Moralis.Object.extend('DeHubShopShippingAddresses');
     const query = new Moralis.Query(ShippingAddress);
     const result = query.find();
@@ -61,7 +61,7 @@ export class DehubMoralisService implements IDehubMoralisService {
    * file to IPFS and creates a new order object on Moralis DB.
    * @returns ipfsHash, orderId
    */
-  initOrder(params: InitOrderParams) {
+  initOrder$(params: InitOrderParams) {
     const url = this.env.moralis.serverUrl + '/functions/initOrder';
     this._logger.info('Sending initOrder request to Moralis...');
     this._logger.info(`  params: `, params);
@@ -71,7 +71,7 @@ export class DehubMoralisService implements IDehubMoralisService {
     );
   }
 
-  checkOrder(params: CheckOrderParams) {
+  checkOrder$(params: CheckOrderParams) {
     const url = this.env.moralis.serverUrl + '/functions/checkOrder';
     this._logger.info(`Checking order ${params.orderId} status...`);
     let data = new HttpParams();
@@ -85,14 +85,14 @@ export class DehubMoralisService implements IDehubMoralisService {
   /**
    * Get Checkout contract data from Moralis DB via API.
    */
-  getCheckoutContract() {
+  getCheckoutContract$() {
     const url = this.env.moralis.serverUrl + '/functions/getCheckoutContract';
     return this.httpClient
       .get<ShopContractResponse>(url)
       .pipe(map(resp => resp.result));
   }
 
-  mintReceipt(
+  mintReceipt$(
     orderId: string,
     ipfsHash: string,
     checkoutContract: ShopContractPropsType,
