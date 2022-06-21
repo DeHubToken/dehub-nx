@@ -288,7 +288,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
       // Use checkout contract data from the API and token metadata from the blockchain
       combineLatest([
         this.checkoutContract$,
-        this.moralisService.getTokenMetadata$(currency),
+        this.moralisService
+          .getTokenMetadata$(currency)
+          .pipe(map(resp => resp[0])),
       ])
         .pipe(
           tap(() => this.isConfirmingSubject.next(true)),

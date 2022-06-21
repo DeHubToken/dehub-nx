@@ -512,9 +512,6 @@ export class MoralisService implements IMoralisService {
           getContractByCurrency(currency, this.env.web3.addresses.contracts),
         ],
       })
-    ).pipe(
-      tap(resp => this.logger.info(`Get ${currency} metadata.`, resp)),
-      map(resp => resp[0])
-    );
+    ).pipe(tap(resp => this.logger.info(`Get ${currency} metadata.`, resp)));
   }
 }
