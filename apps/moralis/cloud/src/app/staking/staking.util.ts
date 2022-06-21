@@ -1,4 +1,5 @@
 import {
+  MoralisClass,
   RewardContractPropsType,
   StakingContractPropsType,
   StakingControllerContractPropsType,
@@ -61,7 +62,7 @@ export async function getStakingControllerContract(
   try {
     const decTargetChainId = targetChainId;
 
-    const Contracts = Moralis.Object.extend('Contracts');
+    const Contracts = Moralis.Object.extend(MoralisClass.Contracts);
     const contractQuery = new Moralis.Query(Contracts);
 
     contractQuery.equalTo('name', 'DeHub Staking Controller');

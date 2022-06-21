@@ -16,6 +16,7 @@ import {
   DeHubShopShippingAddresses,
   InitOrderParams,
   InitOrderResponse,
+  MoralisClass,
   ShopContractPropsType,
   ShopContractResponse,
 } from '@dehub/shared/model';
@@ -50,7 +51,9 @@ export class DehubMoralisService implements IDehubMoralisService {
   ) {}
 
   getDeHubShopShippingAddresses$() {
-    const ShippingAddress = Moralis.Object.extend('DeHubShopShippingAddresses');
+    const ShippingAddress = Moralis.Object.extend(
+      MoralisClass.DeHubShopShippingAddresses
+    );
     const query = new Moralis.Query(ShippingAddress);
     const result = query.find();
     return from(result) as unknown as Observable<DeHubShopShippingAddresses[]>;

@@ -15,3 +15,14 @@ export interface MoralisCommonAttributes {
 export interface DeHubShopShippingAddresses extends Moralis.Object {
   attributes: PhysicalAddress & MoralisCommonAttributes;
 }
+
+/**
+ * Moralis MongoDB Class Names for DeHub
+ */
+export enum MoralisClass {
+  Contracts = 'Contracts',
+
+  // Shop
+  DeHubShopOrders = 'DeHubShopOrders',
+  DeHubShopShippingAddresses = 'DeHubShopShippingAddresses',
+}

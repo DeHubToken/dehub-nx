@@ -1,5 +1,5 @@
 require('../shared/mock.include');
-import { OrderStatus } from '@dehub/shared/model';
+import { MoralisClass, OrderStatus } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
 import { environment } from '../../environments/environment';
 import { ShopFunctions } from './shop.model';
@@ -48,7 +48,7 @@ describe('E2E Shop functions', () => {
     expect(res.orderId).toBeDefined;
 
     // Check if Order is added successfully
-    const DeHubShopOrders = Moralis.Object.extend('DeHubShopOrders');
+    const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
     const queryOrders = new Moralis.Query(DeHubShopOrders);
     queryOrders.equalTo('objectId', res.orderId);
     const order = await queryOrders.first();
@@ -59,7 +59,7 @@ describe('E2E Shop functions', () => {
     const shippingAddressId = shippingAddressAbstract.id;
 
     const DeHubShopShippingAddresses = Moralis.Object.extend(
-      'DeHubShopShippingAddresses'
+      MoralisClass.DeHubShopShippingAddresses
     );
     const queryAddress = new Moralis.Query(DeHubShopShippingAddresses);
     queryAddress.equalTo('objectId', shippingAddressId);
@@ -103,7 +103,7 @@ describe('E2E Shop functions', () => {
     expect(resStatus).toEqual(OrderStatus.verifying);
 
     // Check if Order is added successfully
-    const DeHubShopOrders = Moralis.Object.extend('DeHubShopOrders');
+    const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
     const queryOrders = new Moralis.Query(DeHubShopOrders);
     queryOrders.equalTo('objectId', resOrder.orderId);
     const order = await queryOrders.first();
@@ -114,7 +114,7 @@ describe('E2E Shop functions', () => {
     const shippingAddressId = shippingAddressAbstract.id;
 
     const DeHubShopShippingAddresses = Moralis.Object.extend(
-      'DeHubShopShippingAddresses'
+      MoralisClass.DeHubShopShippingAddresses
     );
     const queryAddress = new Moralis.Query(DeHubShopShippingAddresses);
     queryAddress.equalTo('objectId', shippingAddressId);

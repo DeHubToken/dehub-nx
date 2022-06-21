@@ -1,6 +1,7 @@
 import {
   InitOrderParams,
   InitOrderResult,
+  MoralisClass,
   OrderStatus,
 } from '@dehub/shared/model';
 import { environment } from '../../environments/environment';
@@ -44,7 +45,7 @@ export const initOrder = async ({
     logger.info(`ipfs: ${path}`);
 
     const DeHubShopShippingAddresses = Moralis.Object.extend(
-      'DeHubShopShippingAddresses'
+      MoralisClass.DeHubShopShippingAddresses
     );
     // Query if certain address is already registered
     const queryShippingAddress = new Moralis.Query(DeHubShopShippingAddresses);
@@ -84,7 +85,7 @@ export const initOrder = async ({
     }
 
     // Creates a new DeHubShopOrders item with status IPFSUploading and contentfulId
-    const DeHubShopOrders = Moralis.Object.extend('DeHubShopOrders');
+    const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
     const dehubShopOrders = new DeHubShopOrders();
     dehubShopOrders.set('ipfsHash', ipfsHash);
     dehubShopOrders.set('shippingAddress', deHubShopShippingAddresses);
@@ -112,7 +113,7 @@ export const initOrder = async ({
 export const findOrder = async (orderId: string): Promise<any | null> => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const DeHubShopOrders = Moralis.Object.extend('DeHubShopOrders');
+    const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
     const query = new Moralis.Query(DeHubShopOrders);
     query.equalTo('objectId', orderId);
     const result = await query.first();
