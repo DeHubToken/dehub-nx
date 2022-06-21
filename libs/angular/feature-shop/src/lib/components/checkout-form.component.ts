@@ -32,10 +32,13 @@ import {
 import Moralis from 'moralis';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {
+  BehaviorSubject,
   combineLatest,
   concatMap,
   delay,
+  exhaustMap,
   filter,
+  finalize,
   first,
   map,
   Observable,
@@ -44,128 +47,144 @@ import {
   tap,
   zip,
 } from 'rxjs';
+import { CheckoutProcessMessage as ProcMsg } from '../model/checkout-form.model';
 
 @Component({
   template: `
     <ng-container *ngIf="product">
-      <!-- Product Item -->
-      <dhb-product-mini [product]="product"></dhb-product-mini>
+      <ng-container *ngIf="(isConfirming$ | async) === false; else confirming">
+        <!-- Product Item -->
+        <dhb-product-mini [product]="product"></dhb-product-mini>
 
-      <!-- Hidden in production until finished -->
-      <ng-container *ngIf="!env.production; else comingSoon">
-        <!-- Quantity selection -->
-        <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
-          <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
-            <span class="p-float-label">
-              <p-inputNumber
-                [formControlName]="'quantity'"
-                [inputId]="'selectedQuantity'"
-                [(ngModel)]="checkoutForm.value.quantity"
-                [ariaLabel]="'Quantity'"
-                [ariaRequired]="true"
-                [min]="1"
-                [max]="product.availableQuantity"
-                [allowEmpty]="false"
-                [showButtons]="true"
-              ></p-inputNumber>
-              <label for="selectedQuantity">Quantity</label>
-            </span>
-          </div>
-        </form>
-
-        <!-- Contact -->
-        <h5>Contact Details</h5>
-        <form
-          *ngIf="userContacts$ | async as contacts"
-          [formGroup]="checkoutForm.controls.contacts"
-          class="p-fluid grid pt-2"
-        >
-          <!-- Email -->
-          <div class="field col-12 sm:col-5">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-duotone fa-envelope"></i>
-              </span>
+        <!-- Hidden in production until finished -->
+        <ng-container *ngIf="!env.production; else comingSoon">
+          <!-- Quantity selection -->
+          <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
+            <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
               <span class="p-float-label">
-                <input
-                  [formControlName]="'email'"
-                  type="text"
-                  id="email"
-                  autocomplete="email"
-                  pInputText
-                />
-                <label for="email" class="pr-5">Email Address</label>
+                <p-inputNumber
+                  [formControlName]="'quantity'"
+                  [inputId]="'selectedQuantity'"
+                  [(ngModel)]="checkoutForm.value.quantity"
+                  [ariaLabel]="'Quantity'"
+                  [ariaRequired]="true"
+                  [min]="1"
+                  [max]="product.availableQuantity"
+                  [allowEmpty]="false"
+                  [showButtons]="true"
+                ></p-inputNumber>
+                <label for="selectedQuantity">Quantity</label>
               </span>
             </div>
-          </div>
+          </form>
 
-          <!-- Phone -->
-          <div class="field col-12 sm:col-7 p-fluid">
-            <dhb-phone-input
-              [formControl]="checkoutForm.controls.contacts.controls.phone"
-              [prefillData]="contacts.phone"
-            ></dhb-phone-input>
-          </div>
-        </form>
+          <!-- Contact -->
+          <h5>Contact Details</h5>
+          <form
+            *ngIf="userContacts$ | async as contacts"
+            [formGroup]="checkoutForm.controls.contacts"
+            class="p-fluid grid pt-2"
+          >
+            <!-- Email -->
+            <div class="field col-12 sm:col-5">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">
+                  <i class="fa-duotone fa-envelope"></i>
+                </span>
+                <span class="p-float-label">
+                  <input
+                    [formControlName]="'email'"
+                    type="text"
+                    id="email"
+                    autocomplete="email"
+                    pInputText
+                  />
+                  <label for="email" class="pr-5">Email Address</label>
+                </span>
+              </div>
+            </div>
 
-        <!-- Shipping Address -->
-        <h5>Shipping Address</h5>
-        <dhb-address-form
-          *ngIf="userShippingAddress$ | async as resp; else addressLoading"
-          [formControl]="checkoutForm.controls.shippingAddress.controls.address"
-          [prefillData]="resp.attributes"
-        ></dhb-address-form>
-        <ng-template #addressLoading>
-          <p>
-            <i class="fa-solid fa-circle-notch fa-spin"></i>&nbsp;Loading...
-          </p>
-        </ng-template>
+            <!-- Phone -->
+            <div class="field col-12 sm:col-7 p-fluid">
+              <dhb-phone-input
+                [formControl]="checkoutForm.controls.contacts.controls.phone"
+                [prefillData]="contacts.phone"
+              ></dhb-phone-input>
+            </div>
+          </form>
 
-        <!-- Total -->
-        <div
-          *ngIf="checkoutForm.controls.quantity.value as quantity"
-          class="grid"
-        >
-          <div class="col-12">
-            <div class="flex flex-column justify-content-end text-right">
-              <h5 class="align-self-end mb-1">Total</h5>
-              <h3 class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1">
-                {{ product.price * quantity }}
-                <span class="text-sm">{{ product.currency }}</span>
-              </h3>
+          <!-- Shipping Address -->
+          <h5>Shipping Address</h5>
+          <dhb-address-form
+            *ngIf="userShippingAddress$ | async as resp; else addressLoading"
+            [formControl]="
+              checkoutForm.controls.shippingAddress.controls.address
+            "
+            [prefillData]="resp.attributes"
+          ></dhb-address-form>
+          <ng-template #addressLoading>
+            <p>
+              <i class="fa-solid fa-circle-notch fa-spin"></i>&nbsp;Loading...
+            </p>
+          </ng-template>
+
+          <!-- Total -->
+          <div
+            *ngIf="checkoutForm.controls.quantity.value as quantity"
+            class="grid"
+          >
+            <div class="col-12">
+              <div class="flex flex-column justify-content-end text-right">
+                <h5 class="align-self-end mb-1">Total</h5>
+                <h3
+                  class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1"
+                >
+                  {{ product.price * quantity }}
+                  <span class="text-sm">{{ product.currency }}</span>
+                </h3>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Footer -->
-        <div class="grid">
-          <div
-            class="flex justify-content-end col-12 sm:col-8 col-offset-0 sm:col-offset-4 text-right"
-          >
-            <p-button
-              label="Cancel"
-              class="w-5"
-              styleClass="p-button-secondary p-button-lg mr-2"
-              (click)="ref.close()"
-            ></p-button>
-            <p-button
-              *ngIf="account$ | async as account"
-              label="Confirm"
-              icon="fa-regular fa-check"
-              class="w-5"
-              styleClass="p-button-primary p-button-lg w-full"
-              [disabled]="!checkoutForm.valid"
-              (click)="onConfirm(account)"
-            ></p-button>
+          <!-- Footer -->
+          <div class="grid">
+            <div
+              class="flex justify-content-end col-12 sm:col-8 col-offset-0 sm:col-offset-4 text-right"
+            >
+              <p-button
+                label="Cancel"
+                class="w-5"
+                styleClass="p-button-secondary p-button-lg mr-2"
+                (click)="ref.close()"
+              ></p-button>
+              <p-button
+                *ngIf="account$ | async as account"
+                label="Confirm"
+                icon="fa-regular fa-check"
+                class="w-5"
+                styleClass="p-button-primary p-button-lg w-full"
+                [disabled]="!checkoutForm.valid"
+                (click)="onConfirm(account)"
+              ></p-button>
+            </div>
           </div>
-        </div>
+        </ng-container>
+
+        <ng-template #comingSoon>
+          <div class="text-center py-5">
+            <i class="fa-duotone fa-user-helmet-safety text-4xl pb-3"></i>
+            <br />
+            Coming soon...
+          </div>
+        </ng-template>
       </ng-container>
 
-      <ng-template #comingSoon>
-        <div class="text-center py-5">
-          <i class="fa-duotone fa-user-helmet-safety text-4xl pb-3"></i>
+      <ng-template #confirming>
+        <div class="text-center py-5 mb-4">
+          <i class="fa-solid fa-circle-notch fa-spin text-4xl"></i>
           <br />
-          Coming soon...
+          <div class="mt-3 font-bold">{{ processMessage$ | async }}</div>
+          <div class="mt-3 text-sm">Please do not close this window.</div>
         </div>
       </ng-template>
     </ng-container>
@@ -182,6 +201,12 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   userContacts$?: Observable<Contacts>;
   userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
   checkoutContract$?: Observable<ContractPropsType>;
+
+  private isConfirmingSubject = new BehaviorSubject<boolean>(false);
+  isConfirming$ = this.isConfirmingSubject.asObservable();
+
+  private procMsgSubject = new BehaviorSubject<ProcMsg>(ProcMsg.Confirm);
+  processMessage$ = this.procMsgSubject.asObservable();
 
   checkoutForm = this.fb.group({
     quantity: [1],
@@ -245,8 +270,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
         this.moralisService.getTokenMetadata(currency),
       ])
         .pipe(
-          first(),
-          concatMap(([checkoutContract, metadata]) =>
+          tap(() => this.isConfirmingSubject.next(true)),
+          tap(() => this.setProcMsg(ProcMsg.AllowanceCheck)),
+          exhaustMap(([checkoutContract, metadata]) =>
             this.moralisService
               .getTokenAllowance(
                 metadata.address,
@@ -259,6 +285,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                   if (allowance.gte(parseUnits(price, metadata.decimals))) {
                     return of(undefined);
                   } else {
+                    this.setProcMsg(ProcMsg.AllowanceSet);
                     // Increase allowance to max and wait for confirmation
                     return this.moralisService.setTokenAllowance(
                       metadata.address,
@@ -267,8 +294,10 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                   }
                 }),
                 // Init order will upload data to IPFS and store a record with status 'verifying' on Moralis.
+                tap(() => this.setProcMsg(ProcMsg.OrderInit)),
                 concatMap(() => this.dehubMoralis.initOrder(params)),
                 // Mint the actual NFT with order ID and IPFS URI
+                tap(() => this.setProcMsg(ProcMsg.ReceiptMint)),
                 concatMap(({ orderId, ipfsHash }) =>
                   zip(
                     of(orderId),
@@ -282,6 +311,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                   )
                 ),
                 // Keep checking the order status until it's verified.
+                tap(() => this.setProcMsg(ProcMsg.VerifyReceipt)),
                 concatMap(([orderId]) =>
                   this.dehubMoralis.checkOrder({ orderId: orderId }).pipe(
                     repeatWhen(obs => obs.pipe(delay(1000))),
@@ -293,7 +323,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                   this.logger.info('Order completed!');
                 })
               )
-          )
+          ),
+          first(),
+          finalize(() => this.isConfirmingSubject.next(false))
         )
         .subscribe();
     } else {
@@ -301,5 +333,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
         'Product, shipping address or checkout contract is missing!'
       );
     }
+  }
+
+  setProcMsg(msg: ProcMsg) {
+    this.procMsgSubject.next(msg);
   }
 }
