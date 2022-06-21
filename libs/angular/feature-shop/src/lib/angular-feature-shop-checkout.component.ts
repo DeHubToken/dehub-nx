@@ -35,9 +35,9 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
       header: 'Checkout',
       width: '620px',
       styleClass: 'bg-gradient-3 border-neon-1',
-      closeOnEscape: true,
-      dismissableMask: true,
-      closable: true,
+      closeOnEscape: false,
+      dismissableMask: false,
+      closable: false,
       data,
     });
 
