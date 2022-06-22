@@ -79,7 +79,7 @@ import {
               <!-- Magic Login -->
               <div class="col-4">
                 <p-button
-                  (click)="
+                  (onClick)="
                     inplaceMagic.deactivate();
                     login.emit({
                       connectorId: 'magicLink',

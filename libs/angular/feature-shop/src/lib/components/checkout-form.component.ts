@@ -168,7 +168,7 @@ import { CheckoutProcessMessage as ProcMsg } from '../model/checkout-form.model'
                 class="w-5"
                 styleClass="p-button-primary p-button-lg w-full"
                 [disabled]="!checkoutForm.valid"
-                (click)="onConfirm(account)"
+                (onClick)="onConfirm(account)"
               ></p-button>
             </div>
           </div>
