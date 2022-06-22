@@ -120,7 +120,11 @@ import { CheckoutProcessMessage as ProcMsg } from '../model/checkout-form.model'
             [formControl]="
               checkoutForm.controls.shippingAddress.controls.address
             "
-            [prefillData]="resp.attributes"
+            [prefillData]="
+              !isShippingAddressResponseEmpty(resp)
+                ? resp.attributes
+                : undefined
+            "
           ></dhb-address-form>
           <ng-template #addressLoading>
             <p>
@@ -215,7 +219,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   account$?: Observable<string | undefined>;
   userContacts$?: Observable<Contacts>;
-  userShippingAddress$?: Observable<DeHubShopShippingAddresses>;
+  userShippingAddress$?: Observable<DeHubShopShippingAddresses | undefined>;
   checkoutContract$?: Observable<ContractPropsType>;
 
   private isConfirmingSubject = new BehaviorSubject<boolean>(false);
@@ -360,5 +364,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   setProcMsg(msg: ProcMsg) {
     this.procMsgSubject.next(msg);
+  }
+
+  isShippingAddressResponseEmpty(resp: DeHubShopShippingAddresses) {
+    return Object.keys(resp.attributes).length === 0;
   }
 }

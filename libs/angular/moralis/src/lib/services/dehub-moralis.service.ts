@@ -37,7 +37,9 @@ export class DehubMoralisService implements IDehubMoralisService {
   userShippingAddress$ = this.moralisService.isAuthenticated$.pipe(
     filter(isAuthenticated => isAuthenticated),
     switchMap(() =>
-      this.getDeHubShopShippingAddresses$().pipe(map(resp => resp[0]))
+      this.getDeHubShopShippingAddresses$().pipe(
+        map(resp => resp[0] || { attributes: {} })
+      )
     )
   );
 

@@ -26,12 +26,9 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
   selector: 'dhb-address-form',
   template: `
     <p-fieldset
-      *ngIf="prefillData"
-      else
-      formFields
       [legend]="shippingAddressLabel()"
       [toggleable]="true"
-      [collapsed]="true"
+      [collapsed]="!!prefillData"
       [styleClass]="'text-sm mb-4'"
       [classList]="'bg-gradient-3-propagate'"
     >
@@ -281,7 +278,10 @@ export class AddressFormComponent implements OnInit, OnDestroy {
 
   shippingAddressLabel() {
     const { name, line1, city } = this.shippingAddressForm.controls;
-    return `${name.value} | ${line1.value} | ${city.value}...`;
+    if (name.value.concat(line1.value, city.value).length > 0) {
+      return `${name.value} | ${line1.value} | ${city.value}...`;
+    }
+    return 'Please fill in your shipping address';
   }
 
   ngOnDestroy(): void {
