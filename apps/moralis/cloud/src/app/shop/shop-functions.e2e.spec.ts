@@ -36,13 +36,13 @@ describe('E2E Shop functions', () => {
         sku: 'sku',
       },
       shippingAddress: {
-        city: 'city',
-        state: 'state',
-        country: 'country',
-        postalCode: 'postalCode',
-        line1: 'line1',
+        city: 'San Francisco',
+        state: 'California',
+        country: 'US',
+        postalCode: '94116',
+        line1: '2079 46th ave',
         line2: 'line2',
-        name: 'productName',
+        name: 'Ben Weider',
       },
       contentfulId: 'contentfulId',
       quantity: 1,
@@ -72,9 +72,6 @@ describe('E2E Shop functions', () => {
     const shippingAddress = await queryAddress.first();
     expect(shippingAddress).toBeDefined;
 
-    // Destroy ShippingAddress object
-    await shippingAddress.destroy();
-
     // Destroy Order object
     await order.destroy();
   });
@@ -89,13 +86,13 @@ describe('E2E Shop functions', () => {
         sku: 'sku',
       },
       shippingAddress: {
-        city: 'city',
-        state: 'state',
-        country: 'country',
-        postalCode: 'postalCode',
-        line1: 'line1',
+        city: 'San Francisco',
+        state: 'California',
+        country: 'US',
+        postalCode: '94116',
+        line1: '2079 46th ave',
         line2: 'line2',
-        name: 'productName',
+        name: 'Ben Weider',
       },
       contentfulId: 'contentfulId',
     });
@@ -129,9 +126,6 @@ describe('E2E Shop functions', () => {
     queryAddress.equalTo('objectId', shippingAddressId);
     const shippingAddress = await queryAddress.first();
     expect(shippingAddress).toBeDefined;
-
-    // Destroy ShippingAddress object
-    await shippingAddress.destroy();
 
     // Destroy Order object
     await order.destroy();

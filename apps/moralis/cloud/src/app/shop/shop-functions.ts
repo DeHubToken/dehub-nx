@@ -57,35 +57,17 @@ export const initOrder = async ({
     queryShippingAddress.matchesQuery('user', queryUser);
     const addresses = await queryShippingAddress.find({ useMasterKey: true });
 
-    // If found already registered, then use it
-    let deHubShopShippingAddresses = null;
-    for (const address of addresses) {
-      const contains = Object.keys(shippingAddress)
-        .map((key: string) => {
-          const value = shippingAddress[key] ?? '';
-          const valueInDB = address.get(key) ?? '';
-          return value.trim() === valueInDB.trim();
-        })
-        .reduce((prev: boolean, current: boolean) => prev && current, true);
-      if (contains) {
-        logger.info(`Address found.`);
-        deHubShopShippingAddresses = addresses[0];
-        break;
-      }
-    }
-
-    if (deHubShopShippingAddresses === null) {
-      deHubShopShippingAddresses = new DeHubShopShippingAddresses();
-      deHubShopShippingAddresses.set('user', user);
-      deHubShopShippingAddresses.set('city', shippingAddress.city);
-      deHubShopShippingAddresses.set('state', shippingAddress.state);
-      deHubShopShippingAddresses.set('country', shippingAddress.country);
-      deHubShopShippingAddresses.set('postalCode', shippingAddress.postalCode);
-      deHubShopShippingAddresses.set('line1', shippingAddress.line1);
-      deHubShopShippingAddresses.set('line2', shippingAddress.line2);
-      deHubShopShippingAddresses.set('name', shippingAddress.name);
-      await deHubShopShippingAddresses.save(null, { useMasterKey: true });
-    }
+    const deHubShopShippingAddresses =
+      addresses.length > 0 ? addresses[0] : new DeHubShopShippingAddresses();
+    deHubShopShippingAddresses.set('user', user);
+    deHubShopShippingAddresses.set('city', shippingAddress.city);
+    deHubShopShippingAddresses.set('state', shippingAddress.state);
+    deHubShopShippingAddresses.set('country', shippingAddress.country);
+    deHubShopShippingAddresses.set('postalCode', shippingAddress.postalCode);
+    deHubShopShippingAddresses.set('line1', shippingAddress.line1);
+    deHubShopShippingAddresses.set('line2', shippingAddress.line2);
+    deHubShopShippingAddresses.set('name', shippingAddress.name);
+    await deHubShopShippingAddresses.save(null, { useMasterKey: true });
 
     // Creates a new DeHubShopOrders item with status IPFSUploading and contentfulId
     const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
@@ -148,6 +130,19 @@ export const checkOrder = async (orderId: string): Promise<string | null> => {
     );
     return null;
   }
+};
+
+export const compareCurrency = (
+  currency: Currency,
+  currencyString: CurrencyString
+) => {
+  if (currency === Currency.BNB && currencyString === CurrencyString.BNB)
+    return true;
+  if (currency === Currency.DeHub && currencyString === CurrencyString.DeHub)
+    return true;
+  if (currency === Currency.BUSD && currencyString === CurrencyString.BUSD)
+    return true;
+  return false;
 };
 
 export const getCheckoutContractFn = async () => {
