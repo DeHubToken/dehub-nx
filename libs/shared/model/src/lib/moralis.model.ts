@@ -1,4 +1,5 @@
 import { Moralis } from 'moralis';
+import { Contacts } from './contacts.model';
 
 export type ChainId =
   | 'eth'
@@ -49,15 +50,14 @@ export type Erc20Metadata = Awaited<
   ReturnType<typeof Moralis.Web3API.token.getTokenMetadata>
 >;
 
-export interface Attributes extends Moralis.Attributes {
-  username: string;
-  accounts: string[];
-  ethAddress: string;
-  /** OTT can play flag */
-  can_play?: boolean;
-  phone?: string;
-  email?: string;
-}
+export type Attributes = Moralis.Attributes &
+  Contacts & {
+    username: string;
+    accounts: string[];
+    ethAddress: string;
+    /** OTT can play flag */
+    can_play?: boolean;
+  };
 
 export type User = Moralis.User<Attributes>;
 export type EnableOptionsPersisted = Moralis.EnableOptions & {

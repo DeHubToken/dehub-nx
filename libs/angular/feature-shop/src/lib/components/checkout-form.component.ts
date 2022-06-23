@@ -155,12 +155,15 @@ import { CheckoutProcessMessage as ProcMsg } from '../model/checkout-form.model'
             <div
               class="flex justify-content-end col-12 sm:col-8 col-offset-0 sm:col-offset-4 text-right"
             >
+              <!-- Cancel -->
               <p-button
                 label="Cancel"
                 class="w-5"
                 styleClass="p-button-secondary p-button-lg mr-2"
                 (click)="ref.close()"
               ></p-button>
+
+              <!-- Checkout -->
               <p-button
                 *ngIf="account$ | async as account"
                 label="Confirm"
