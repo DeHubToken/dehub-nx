@@ -8,12 +8,14 @@ import {
 import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
 import { Networks, SharedEnv } from '@dehub/shared/config';
 import {
+  Attributes,
   ChainId,
   Currency,
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   EnableOptionsPersisted,
   MoralisConnectorNames,
+  MoralisMessages,
   User,
   WalletConnectingMessages,
   WalletConnectingState,
@@ -40,6 +42,7 @@ import {
 } from 'primeng/api';
 import { BehaviorSubject, from, iif, Observable, of, throwError } from 'rxjs';
 import {
+  catchError,
   concatMap,
   distinctUntilChanged,
   first,
@@ -158,6 +161,28 @@ export class MoralisService implements IMoralisService {
         this.logout();
       }
     }
+  }
+
+  updateUser$(attributes: Partial<Attributes>): Observable<User> {
+    return this.user$.pipe(
+      filterEmpty(),
+      first(),
+      switchMap(user =>
+        from(user.save(attributes)).pipe(
+          catchError(e => {
+            if (e instanceof Error && e.message.includes('email')) {
+              this.messageService.add({
+                severity: 'error',
+                summary: MoralisMessages.Update,
+                detail: MoralisMessages.EmailAlreadyExist,
+              });
+            }
+            throw new Error(e);
+          })
+        )
+      ),
+      tap(({ attributes }) => this.logger.info('Updated user:', attributes))
+    );
   }
 
   async login(

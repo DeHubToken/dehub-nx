@@ -108,6 +108,11 @@ export enum WalletConnectingMessages {
   BinanceSignatureRejected = 'Binance signature was rejected.',
 }
 
+export enum MoralisMessages {
+  Update = 'Update Profile',
+  EmailAlreadyExist = 'Please use a different email address or switch account!',
+}
+
 export type DeHubConnector = {
   connectorId: DeHubConnectorNames;
   email?: string;

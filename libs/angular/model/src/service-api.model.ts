@@ -32,6 +32,7 @@ export interface IMoralisService {
   username$: Observable<string>;
   walletConnectState$: Observable<WalletConnectState>;
 
+  updateUser$: (attributes: Partial<Attributes>) => Observable<User>;
 
   // Authentication
   login: (
