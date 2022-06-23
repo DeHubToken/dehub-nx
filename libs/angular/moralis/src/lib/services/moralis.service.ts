@@ -170,13 +170,16 @@ export class MoralisService implements IMoralisService {
       switchMap(user =>
         from(user.save(attributes)).pipe(
           catchError(e => {
+            let detail = MoralisMessages.UpdateUserProblem;
             if (e instanceof Error && e.message.includes('email')) {
-              this.messageService.add({
-                severity: 'error',
-                summary: MoralisMessages.UpdateUser,
-                detail: MoralisMessages.ExistingEmail,
-              });
+              detail = MoralisMessages.ExistingEmail;
             }
+            this.messageService.add({
+              severity: 'error',
+              summary: MoralisMessages.UpdateUser,
+              detail,
+            });
+
             throw new Error(e);
           })
         )

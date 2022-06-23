@@ -110,6 +110,7 @@ export enum WalletConnectingMessages {
 
 export enum MoralisMessages {
   UpdateUser = 'Update Profile',
+  UpdateUserProblem = 'There was some problem updating your profile, please get in touch.',
   ExistingEmail = 'This email is already in use by another user. If you think it’s a mistake, please get in touch.',
 }
 
