@@ -261,8 +261,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   ngOnInit() {
     this.product = this.config.data;
-    const { account$, userContacts$ } = this.moralisService;
-    const { userShippingAddress$, checkoutContract$ } = this.dehubMoralis;
+    const { account$ } = this.moralisService;
+    const { userContacts$, userShippingAddress$, checkoutContract$ } =
+      this.dehubMoralis;
     this.account$ = account$;
     this.userContacts$ = userContacts$.pipe(
       tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))

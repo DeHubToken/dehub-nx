@@ -17,10 +17,11 @@ import {
   InitOrderParams,
   InitOrderResponse,
   MoralisClass,
+  MoralisFunctions,
   ShopContractPropsType,
   ShopContractResponse,
 } from '@dehub/shared/model';
-import { publishReplayRefCount } from '@dehub/shared/utils';
+import { filterEmpty, publishReplayRefCount } from '@dehub/shared/utils';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Moralis } from 'moralis';
@@ -31,6 +32,11 @@ import { filter, map } from 'rxjs/operators';
 export class DehubMoralisService implements IDehubMoralisService {
   canPlay$ = this.moralisService.userAttributes$.pipe(
     map(attributes => attributes?.can_play ?? false)
+  );
+
+  userContacts$ = this.moralisService.userAttributes$.pipe(
+    filterEmpty(),
+    map(({ email, phone }) => ({ email, phone }))
   );
 
   // For now, we're just going to use the first address.

@@ -23,15 +23,17 @@ export interface ILoggerService {
   error: (message: string, error?: Error) => void;
 }
 
+/** Generic Moralis API service */
 export interface IMoralisService {
   user$: Observable<User | undefined>;
   userAttributes$: Observable<Attributes | undefined>;
   account$: Observable<string | undefined>;
   isAuthenticated$: Observable<boolean>;
-
   username$: Observable<string>;
-  userContacts$: Observable<Contacts>;
+  walletConnectState$: Observable<WalletConnectState>;
 
+
+  // Authentication
   login: (
     connectorId: DeHubConnectorNames,
     chainId: number,
@@ -40,8 +42,7 @@ export interface IMoralisService {
   ) => Promise<void | User>;
   logout: () => Promise<void | User>;
 
-  walletConnectState$: Observable<WalletConnectState>;
-
+  // Token APIs
   getTokenAllowance$: (
     contractAddress: string,
     spender: string,
@@ -52,13 +53,18 @@ export interface IMoralisService {
     spender: string,
     amount?: string
   ) => Observable<TransactionReceipt>;
-  getTokenMetadata$(label: Currency): Observable<Erc20Metadata>;
+  getTokenMetadata$: (label: Currency) => Observable<Erc20Metadata>;
 }
 
+/** Dehub specific moralis business logic */
 export interface IDehubMoralisService {
   canPlay$: Observable<boolean>;
+
+  /** User contact information */
+  userContacts$: Observable<Contacts>;
   userShippingAddress$: Observable<DeHubShopShippingAddresses>;
   checkoutContract$: Observable<ShopContractPropsType>;
+
   getDeHubShopShippingAddresses$: () => Observable<
     DeHubShopShippingAddresses[]
   >;
