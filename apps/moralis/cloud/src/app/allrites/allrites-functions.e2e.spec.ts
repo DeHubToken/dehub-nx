@@ -1,7 +1,8 @@
 require('../shared/mock.include');
+import { MoralisFunctions } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
 import { environment } from '../../environments/environment';
-import { AllritesFunctions, AuthAllritesReturns } from './allrites.model';
+import { AuthAllritesReturns } from './allrites.model';
 
 const { moralis } = environment;
 
@@ -10,7 +11,7 @@ describe('E2E Allrites functions', () => {
 
   it('Should return valid access token every time', async () => {
     const ret: AuthAllritesReturns = await Moralis.Cloud.run(
-      AllritesFunctions.AuthAllrites
+      MoralisFunctions.Allrites.Auth
     );
     expect(ret).not.toBeNull;
     expect(ret.accessToken).toBeDefined;

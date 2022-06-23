@@ -91,7 +91,7 @@ export class DehubMoralisService implements IDehubMoralisService {
    * Get Checkout contract data from Moralis DB via API.
    */
   getCheckoutContract$() {
-    const url = this.env.moralis.serverUrl + '/functions/getCheckoutContract';
+    const url = `${this.env.moralis.serverUrl}/functions/${MoralisFunctions.Shop.GetCheckoutContract}`;
     return this.httpClient
       .get<ShopContractResponse>(url)
       .pipe(map(resp => resp.result));

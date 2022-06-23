@@ -1,8 +1,8 @@
+import { MoralisFunctions } from '@dehub/shared/model';
 import { environment } from '../../environments/environment';
 import { getStakingContracts } from '../shared';
 import { ChainIdAsNumber } from '../shared/model';
 import RedisClient from '../shared/redis';
-import { StakingFunctions } from './staking.model';
 import {
   getActiveStakingContract,
   getRewardContract,
@@ -16,14 +16,16 @@ export const getStakingContractsFn = async () => {
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        StakingFunctions.GetStakingContracts,
+        MoralisFunctions.Staking.GetStakingContracts,
         async () => JSON.stringify(await getStakingContracts()),
         { expire: 1800 }
       )
     );
   } catch (err) {
     logger.error(
-      `${StakingFunctions.GetStakingContracts} error: ${JSON.stringify(err)}`
+      `${MoralisFunctions.Staking.GetStakingContracts} error: ${JSON.stringify(
+        err
+      )}`
     );
     return null;
   }
@@ -36,7 +38,7 @@ export const getActiveStakingContractFn = async () => {
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        StakingFunctions.GetActiveStakingContract,
+        MoralisFunctions.Staking.GetActiveStakingContract,
         async function (args) {
           return JSON.stringify(
             await getActiveStakingContract(args as ChainIdAsNumber)
@@ -50,9 +52,9 @@ export const getActiveStakingContractFn = async () => {
     );
   } catch (err) {
     logger.error(
-      `${StakingFunctions.GetActiveStakingContract} error: ${JSON.stringify(
-        err
-      )}`
+      `${
+        MoralisFunctions.Staking.GetActiveStakingContract
+      } error: ${JSON.stringify(err)}`
     );
     return null;
   }
@@ -65,7 +67,7 @@ export const getStakingControllerContractFn = async () => {
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        StakingFunctions.GetStakingControllerContract,
+        MoralisFunctions.Staking.GetStakingControllerContract,
         async function (args) {
           return JSON.stringify(
             await getStakingControllerContract(args as ChainIdAsNumber)
@@ -79,9 +81,9 @@ export const getStakingControllerContractFn = async () => {
     );
   } catch (err) {
     logger.error(
-      `${StakingFunctions.GetStakingControllerContract} error: ${JSON.stringify(
-        err
-      )}`
+      `${
+        MoralisFunctions.Staking.GetStakingControllerContract
+      } error: ${JSON.stringify(err)}`
     );
     return null;
   }
@@ -94,7 +96,7 @@ export const getRewardContractFn = async () => {
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        StakingFunctions.GetRewardContract,
+        MoralisFunctions.Staking.GetRewardContract,
         async function (args) {
           return JSON.stringify(
             await getRewardContract(args as ChainIdAsNumber)
@@ -108,7 +110,9 @@ export const getRewardContractFn = async () => {
     );
   } catch (err) {
     logger.error(
-      `${StakingFunctions.GetRewardContract} error: ${JSON.stringify(err)}`
+      `${MoralisFunctions.Staking.GetRewardContract} error: ${JSON.stringify(
+        err
+      )}`
     );
     return null;
   }

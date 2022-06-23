@@ -2,12 +2,12 @@ import {
   InitOrderParams,
   InitOrderResult,
   MoralisClass,
+  MoralisFunctions,
   OrderStatus,
 } from '@dehub/shared/model';
 import { environment } from '../../environments/environment';
 import { ChainIdAsNumber, isMoralisUserByAddress } from '../shared';
 import RedisClient from '../shared/redis';
-import { ShopFunctions } from './shop.model';
 import { getCheckoutContract } from './shop.util';
 
 export const initOrder = async ({
@@ -104,7 +104,9 @@ export const initOrder = async ({
       orderId: dehubShopOrders.id,
     };
   } catch (err) {
-    logger.error(`${ShopFunctions.InitOrder} error: ${JSON.stringify(err)}`);
+    logger.error(
+      `${MoralisFunctions.Shop.InitOrder} error: ${JSON.stringify(err)}`
+    );
     return null;
   }
 };
@@ -120,7 +122,9 @@ export const findOrder = async (orderId: string): Promise<any | null> => {
     if (!result) return null;
     return result;
   } catch (err) {
-    logger.error(`${ShopFunctions.InitOrder} error: ${JSON.stringify(err)}`);
+    logger.error(
+      `${MoralisFunctions.Shop.InitOrder} error: ${JSON.stringify(err)}`
+    );
     return null;
   }
 };
@@ -132,7 +136,9 @@ export const checkOrder = async (orderId: string): Promise<string | null> => {
     if (!order) return null;
     return order.get('status');
   } catch (err) {
-    logger.error(`${ShopFunctions.InitOrder} error: ${JSON.stringify(err)}`);
+    logger.error(
+      `${MoralisFunctions.Shop.InitOrder} error: ${JSON.stringify(err)}`
+    );
     return null;
   }
 };
@@ -144,7 +150,7 @@ export const getCheckoutContractFn = async () => {
     await redisClient.connect();
     return JSON.parse(
       await redisClient.getExpired(
-        ShopFunctions.GetCheckoutContract,
+        MoralisFunctions.Shop.GetCheckoutContract,
         async function (args) {
           return JSON.stringify(
             await getCheckoutContract(args as ChainIdAsNumber)
@@ -158,7 +164,9 @@ export const getCheckoutContractFn = async () => {
     );
   } catch (err) {
     logger.error(
-      `${ShopFunctions.GetCheckoutContract} error: ${JSON.stringify(err)}`
+      `${MoralisFunctions.Shop.GetCheckoutContract} error: ${JSON.stringify(
+        err
+      )}`
     );
     return null;
   }

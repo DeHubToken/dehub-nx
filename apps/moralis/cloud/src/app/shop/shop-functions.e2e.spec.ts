@@ -1,8 +1,11 @@
 require('../shared/mock.include');
-import { MoralisClass, OrderStatus } from '@dehub/shared/model';
+import {
+  MoralisClass,
+  MoralisFunctions,
+  OrderStatus,
+} from '@dehub/shared/model';
 import { Moralis } from 'moralis';
 import { environment } from '../../environments/environment';
-import { ShopFunctions } from './shop.model';
 
 const { moralis } = environment;
 
@@ -24,7 +27,7 @@ describe('E2E Shop functions', () => {
   });
 
   it('Should add new order', async () => {
-    const res = await Moralis.Cloud.run(ShopFunctions.InitOrder, {
+    const res = await Moralis.Cloud.run(MoralisFunctions.Shop.InitOrder, {
       address: config.address,
       productData: {
         image:
@@ -74,7 +77,7 @@ describe('E2E Shop functions', () => {
   });
 
   it('Should check order status', async () => {
-    const resOrder = await Moralis.Cloud.run(ShopFunctions.InitOrder, {
+    const resOrder = await Moralis.Cloud.run(MoralisFunctions.Shop.InitOrder, {
       address: config.address,
       productData: {
         image:
@@ -97,9 +100,12 @@ describe('E2E Shop functions', () => {
     expect(resOrder.ipfsHash).toBeDefined;
     expect(resOrder.orderId).toBeDefined;
 
-    const resStatus = await Moralis.Cloud.run(ShopFunctions.CheckOrder, {
-      orderId: resOrder.orderId,
-    });
+    const resStatus = await Moralis.Cloud.run(
+      MoralisFunctions.Shop.CheckOrder,
+      {
+        orderId: resOrder.orderId,
+      }
+    );
     expect(resStatus).toEqual(OrderStatus.verifying);
 
     // Check if Order is added successfully
