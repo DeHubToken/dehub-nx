@@ -109,8 +109,8 @@ export enum WalletConnectingMessages {
 }
 
 export enum MoralisMessages {
-  Update = 'Update Profile',
-  EmailAlreadyExist = 'Please use a different email address or switch account!',
+  UpdateUser = 'Update Profile',
+  ExistingEmail = 'This email is already in use by another user. If you think it’s a mistake, please get in touch.',
 }
 
 export type DeHubConnector = {

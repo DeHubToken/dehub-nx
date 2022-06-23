@@ -173,8 +173,8 @@ export class MoralisService implements IMoralisService {
             if (e instanceof Error && e.message.includes('email')) {
               this.messageService.add({
                 severity: 'error',
-                summary: MoralisMessages.Update,
-                detail: MoralisMessages.EmailAlreadyExist,
+                summary: MoralisMessages.UpdateUser,
+                detail: MoralisMessages.ExistingEmail,
               });
             }
             throw new Error(e);
