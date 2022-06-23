@@ -69,7 +69,7 @@ export class MoralisService implements IMoralisService {
   user$ = this.userSubject.asObservable().pipe(
     // Need to refetch current user for updated attributes
     switchMap(currentUser =>
-      currentUser ? from(currentUser.fetch() as Promise<User>) : of(undefined)
+      currentUser ? from(currentUser.fetch()) : of(undefined)
     ),
     tap(loggedInUser =>
       this.logger.info(`Current user:`, loggedInUser?.attributes)
