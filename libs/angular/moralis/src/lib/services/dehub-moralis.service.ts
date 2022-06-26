@@ -58,6 +58,9 @@ export class DehubMoralisService implements IDehubMoralisService {
     private httpClient: HttpClient
   ) {}
 
+  /**
+   * Gets a list of all shipping addresses associated with the current user.
+   */
   getDeHubShopShippingAddresses$() {
     const ShippingAddress = Moralis.Object.extend(
       MoralisClass.DeHubShopShippingAddresses
@@ -103,6 +106,16 @@ export class DehubMoralisService implements IDehubMoralisService {
       .pipe(map(resp => resp.result));
   }
 
+  /**
+   * Attempt to execute Receipt NGT minting function directly on the blockchain.
+   * Use "currency" string to interpolate the correct function.
+   * @param orderId id of the order initialized and monitored on Moralis DB.
+   * @param ipfsHash hash of the data related to this order which will be used in minting.
+   * @param checkoutContract minting contract data from Moralis DB.
+   * @param currency DeHub, BNB, BUSD, etc.
+   * @param price non-decimal number
+   * @returns awaits until the transaction is mined and returns tx receipt object.
+   */
   mintReceipt$(
     orderId: string,
     ipfsHash: string,
