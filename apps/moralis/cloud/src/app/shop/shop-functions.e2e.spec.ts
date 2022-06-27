@@ -45,6 +45,9 @@ describe('E2E Shop functions', () => {
         name: 'productName',
       },
       contentfulId: 'contentfulId',
+      quantity: 1,
+      totalAmount: 100,
+      currency: 'BUSD',
     });
     expect(res).not.toBeNull;
     expect(res.ipfsHash).toBeDefined;
@@ -57,7 +60,7 @@ describe('E2E Shop functions', () => {
     const order = await queryOrders.first();
     expect(order).toBeDefined;
 
-    // Check if ShippingAddresss is added successfully
+    // Check if ShippingAddress is added successfully
     const shippingAddressAbstract = order.get('shippingAddress');
     const shippingAddressId = shippingAddressAbstract.id;
 
@@ -115,7 +118,7 @@ describe('E2E Shop functions', () => {
     const order = await queryOrders.first();
     expect(order).toBeDefined;
 
-    // Check if ShippingAddresss is added successfully
+    // Check if ShippingAddress is added successfully
     const shippingAddressAbstract = order.get('shippingAddress');
     const shippingAddressId = shippingAddressAbstract.id;
 
