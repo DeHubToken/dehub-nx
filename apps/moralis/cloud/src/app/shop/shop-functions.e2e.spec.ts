@@ -95,6 +95,9 @@ describe('E2E Shop functions', () => {
         name: 'Ben Weider',
       },
       contentfulId: 'contentfulId',
+      quantity: 1,
+      totalAmount: 100,
+      currency: 'BUSD',
     });
     expect(resOrder).not.toBeNull;
     expect(resOrder.ipfsHash).toBeDefined;

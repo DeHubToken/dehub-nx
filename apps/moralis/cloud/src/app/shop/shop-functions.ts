@@ -132,19 +132,6 @@ export const checkOrder = async (orderId: string): Promise<string | null> => {
   }
 };
 
-export const compareCurrency = (
-  currency: Currency,
-  currencyString: CurrencyString
-) => {
-  if (currency === Currency.BNB && currencyString === CurrencyString.BNB)
-    return true;
-  if (currency === Currency.DeHub && currencyString === CurrencyString.DeHub)
-    return true;
-  if (currency === Currency.BUSD && currencyString === CurrencyString.BUSD)
-    return true;
-  return false;
-};
-
 export const getCheckoutContractFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
