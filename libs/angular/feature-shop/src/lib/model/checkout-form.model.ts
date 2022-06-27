@@ -1,5 +1,6 @@
 export enum CheckoutProcessMessage {
   Confirm = 'Confirming',
+  BalanceCheck = 'Checking balance',
   AllowanceCheck = 'Checking allowance',
   AllowanceSet = 'Approving allowance',
   OrderInit = 'Initializing order',
@@ -7,4 +8,9 @@ export enum CheckoutProcessMessage {
   VerifyReceipt = 'Verifying NFT Receipt',
   OrderSuccess = 'Thank you for your purchase!',
   OrderError = 'Something went wrong. Please try again.',
+}
+
+export interface CheckoutProcess {
+  icon: string;
+  text: CheckoutProcessMessage;
 }

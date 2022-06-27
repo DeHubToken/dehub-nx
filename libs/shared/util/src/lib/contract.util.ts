@@ -1,5 +1,6 @@
 import { ContractsEnv } from '@dehub/shared/config';
 import { Currency } from '@dehub/shared/model';
+import { getAddress } from '@ethersproject/address';
 import { AddressZero } from '@ethersproject/constants';
 import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
@@ -37,11 +38,11 @@ export const getContractByCurrency = (
 ) => {
   switch (currency) {
     case 'DeHub':
-      return contracts['dehub'];
+      return getAddress(contracts['dehub']);
     case 'BNB':
-      return contracts['wbnb'];
+      return getAddress(contracts['wbnb']);
     case 'BUSD':
-      return contracts['busd'];
+      return getAddress(contracts['busd']);
 
     default:
       assertUnreachable(currency);

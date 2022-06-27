@@ -69,6 +69,15 @@ export interface IDehubMoralisService {
   getDeHubShopShippingAddresses$: () => Observable<
     DeHubShopShippingAddresses[]
   >;
+  getWalletBalance$: (
+    currency: Currency,
+    address: string
+  ) => Observable<BigNumber>;
+  hasEnoughBalance$: (
+    currency: Currency,
+    address: string,
+    amount: BigNumber
+  ) => Observable<boolean>;
   initOrder$: (params: InitOrderParams) => Observable<InitOrderResult>;
   checkOrder$: (params: CheckOrderParams) => Observable<CheckOrderResult>;
   getCheckoutContract$: () => Observable<ShopContractPropsType>;

@@ -8,7 +8,7 @@ import {
   LoggerToken,
   MoralisToken,
 } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
+import { Networks, SharedEnv } from '@dehub/shared/config';
 import {
   CheckOrderParams,
   CheckOrderResponse,
@@ -21,10 +21,17 @@ import {
   ShopContractPropsType,
   ShopContractResponse,
 } from '@dehub/shared/model';
-import { filterEmpty, publishReplayRefCount } from '@dehub/shared/utils';
+import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
+import {
+  filterEmpty,
+  getContractByCurrency,
+  publishReplayRefCount,
+} from '@dehub/shared/utils';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
+import { getAddress } from '@ethersproject/address';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Moralis } from 'moralis';
+import { MessageService } from 'primeng/api';
 import { concatMap, from, Observable, switchMap, tap } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -55,6 +62,7 @@ export class DehubMoralisService implements IDehubMoralisService {
     @Inject(LoggerToken) private _logger: ILoggerService,
     @Inject(MoralisToken) private moralisService: IMoralisService,
     @Inject(EnvToken) private env: SharedEnv,
+    private messageService: MessageService,
     private httpClient: HttpClient
   ) {}
 
@@ -68,6 +76,75 @@ export class DehubMoralisService implements IDehubMoralisService {
     const query = new Moralis.Query(ShippingAddress);
     const result = query.find();
     return from(result) as unknown as Observable<DeHubShopShippingAddresses[]>;
+  }
+
+  /**
+   * Gets a balance of the wallet based on the currency passed. If currency is
+   * native to the current network, then getNativeBalance is used.
+   * And if currency is ERC20 token getTokenBalances is used and filtered.
+   * @param currency BNB, DeHub etc.
+   * @param address Target wallet
+   * @returns Balance and decimals
+   */
+  getWalletBalance$(
+    currency: Currency,
+    address: string
+  ): Observable<BigNumber> {
+    const chain = decimalToHex(this.env.web3.chainId);
+    const { nativeCurrency } = Networks[this.env.web3.chainId];
+    if (currency === nativeCurrency.name) {
+      return from(
+        Moralis.Web3API.account.getNativeBalance({
+          chain,
+          address,
+        })
+      ).pipe(map(({ balance }) => BigNumber.from(balance)));
+    } else {
+      return from(
+        Moralis.Web3API.account.getTokenBalances({
+          chain,
+          address,
+        })
+      ).pipe(
+        tap(v => this._logger.info(`  getTokenBalances: `, v)),
+        map(
+          balances =>
+            balances.find(
+              resp =>
+                getAddress(resp.token_address) ===
+                getContractByCurrency(
+                  currency,
+                  this.env.web3.addresses.contracts
+                )
+            ) || { balance: '0' }
+        ),
+        map(({ balance }) => BigNumber.from(balance)),
+        tap(v => this._logger.info(`  getWalletBalance: `, v.toString()))
+      );
+    }
+  }
+
+  /**
+   * Gets balance of the wallet for a specific token(native or ERC20) and checks
+   * if it has enough.
+   */
+  hasEnoughBalance$(currency: Currency, address: string, amount: BigNumber) {
+    return this.getWalletBalance$(currency, address).pipe(
+      map(balance => {
+        if (balance.gte(amount)) {
+          return true;
+        } else {
+          const summary = `You don't have enough ${currency} balance.`;
+          this.messageService.add({
+            severity: 'error',
+            summary,
+            detail: 'Please, top up your wallet.',
+            closable: true,
+          });
+          return false;
+        }
+      })
+    );
   }
 
   /**
@@ -107,7 +184,7 @@ export class DehubMoralisService implements IDehubMoralisService {
   }
 
   /**
-   * Attempt to execute Receipt NGT minting function directly on the blockchain.
+   * Attempt to execute Receipt NFT minting function directly on the blockchain.
    * Use "currency" string to interpolate the correct function.
    * @param orderId id of the order initialized and monitored on Moralis DB.
    * @param ipfsHash hash of the data related to this order which will be used in minting.
