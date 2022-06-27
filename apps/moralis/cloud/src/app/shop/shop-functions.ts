@@ -15,6 +15,9 @@ export const initOrder = async ({
   productData,
   shippingAddress,
   contentfulId,
+  quantity,
+  totalAmount,
+  currency,
 }: InitOrderParams): Promise<InitOrderResult | null> => {
   const logger = Moralis.Cloud.getLogger();
   try {
@@ -97,6 +100,10 @@ export const initOrder = async ({
     dehubShopOrders.set('sku', productData.sku);
     dehubShopOrders.set('contentfulId', contentfulId);
     dehubShopOrders.set('imageIpfsHash', imageIpfsHash);
+    dehubShopOrders.set('quantity', quantity);
+    dehubShopOrders.set('totalAmount', totalAmount);
+    dehubShopOrders.set('currency', currency);
+
     await dehubShopOrders.save();
 
     return {

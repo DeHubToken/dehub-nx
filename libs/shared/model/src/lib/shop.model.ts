@@ -39,6 +39,9 @@ export interface InitOrderParams {
   productData: ProductData;
   shippingAddress: PhysicalAddress;
   contentfulId: string;
+  quantity: number;
+  totalAmount: number;
+  currency: Currency;
 }
 
 export interface CheckOrderParams {
