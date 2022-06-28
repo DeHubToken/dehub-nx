@@ -53,7 +53,7 @@ export const defaultEnv: Env = {
   },
   shop: {
     eventTables: {
-      purchase: 'ShopPurchaseEvents',
+      purchase: 'ShopPurchaseEventsA',
     },
   },
 };
