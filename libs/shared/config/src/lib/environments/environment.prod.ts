@@ -28,4 +28,9 @@ export const defaultSharedProdEnv: SharedEnv = {
       magicLinkApiKey: 'pk_live_A3DB34BA3F84FB3B',
     },
   },
+
+  emails: {
+    ...defaultSharedEnv.emails,
+    shopSupport: 'add email',
+  },
 };

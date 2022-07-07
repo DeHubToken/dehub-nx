@@ -202,7 +202,9 @@ import {
           <div class="mt-3 text-sm">
             {{
               (isComplete$ | async)
-                ? 'Please get in touch via [add email] if you have any questions.'
+                ? 'Please get in touch via ' +
+                  env.emails.shopSupport +
+                  ' if you have any questions.'
                 : 'Please do not close this window.'
             }}
           </div>

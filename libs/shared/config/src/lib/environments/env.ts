@@ -81,6 +81,10 @@ export interface SharedEnv {
   };
 
   web3: Web3Env;
+
+  emails: {
+    shopSupport: string;
+  };
 }
 
 /**
@@ -133,5 +137,9 @@ export const defaultSharedEnv: SharedEnv = {
     auth: {
       magicLinkApiKey: 'pk_live_559E42CB7F45E462',
     },
+  },
+
+  emails: {
+    shopSupport: 'tech@dehub.net',
   },
 };
