@@ -117,9 +117,7 @@ export class DehubMoralisService implements IDehubMoralisService {
               ) || { balance: '0', symbol: '-' }
           ),
           tap(({ balance, symbol }) =>
-            this.logger.info(
-              `  founded ${symbol} balance: ${balance.toString()}`
-            )
+            this.logger.info(`${symbol} balance found: ${balance.toString()}`)
           )
         )
     ).pipe(map(({ balance }) => BigNumber.from(balance)));
@@ -155,8 +153,7 @@ export class DehubMoralisService implements IDehubMoralisService {
    */
   initOrder$(params: InitOrderParams) {
     const url = this.env.moralis.serverUrl + '/functions/initOrder';
-    this.logger.info('Sending initOrder request to Moralis...');
-    this.logger.info(`  params: `, params);
+    this.logger.info('Sending initOrder request to Moralis...', params);
     return this.httpClient.post<InitOrderResponse>(url, params).pipe(
       tap(resp => this.logger.info(JSON.stringify(resp))),
       map(resp => resp.result)
