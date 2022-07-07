@@ -59,7 +59,7 @@ export class DehubMoralisService implements IDehubMoralisService {
   checkoutContract$ = this.getCheckoutContract$().pipe(publishReplayRefCount());
 
   constructor(
-    @Inject(LoggerToken) private _logger: ILoggerService,
+    @Inject(LoggerToken) private logger: ILoggerService,
     @Inject(MoralisToken) private moralisService: IMoralisService,
     @Inject(EnvToken) private env: SharedEnv,
     private messageService: MessageService,
@@ -106,7 +106,7 @@ export class DehubMoralisService implements IDehubMoralisService {
           address,
         })
       ).pipe(
-        tap(v => this._logger.info(`  getTokenBalances: `, v)),
+        tap(v => this.logger.info(`  getTokenBalances: `, v)),
         map(
           balances =>
             balances.find(
@@ -119,7 +119,7 @@ export class DehubMoralisService implements IDehubMoralisService {
             ) || { balance: '0' }
         ),
         map(({ balance }) => BigNumber.from(balance)),
-        tap(v => this._logger.info(`  getWalletBalance: `, v.toString()))
+        tap(v => this.logger.info(`  getWalletBalance: `, v.toString()))
       );
     }
   }
@@ -154,21 +154,21 @@ export class DehubMoralisService implements IDehubMoralisService {
    */
   initOrder$(params: InitOrderParams) {
     const url = this.env.moralis.serverUrl + '/functions/initOrder';
-    this._logger.info('Sending initOrder request to Moralis...');
-    this._logger.info(`  params: `, params);
+    this.logger.info('Sending initOrder request to Moralis...');
+    this.logger.info(`  params: `, params);
     return this.httpClient.post<InitOrderResponse>(url, params).pipe(
-      tap(resp => this._logger.info(JSON.stringify(resp))),
+      tap(resp => this.logger.info(JSON.stringify(resp))),
       map(resp => resp.result)
     );
   }
 
   checkOrder$(params: CheckOrderParams) {
     const url = this.env.moralis.serverUrl + '/functions/checkOrder';
-    this._logger.info(`Checking order ${params.orderId} status...`);
+    this.logger.info(`Checking order ${params.orderId} status...`);
     let data = new HttpParams();
     data = params.orderId ? data.set('orderId', params.orderId) : data;
     return this.httpClient.get<CheckOrderResponse>(url, { params: data }).pipe(
-      tap(resp => this._logger.info(JSON.stringify(resp))),
+      tap(resp => this.logger.info(JSON.stringify(resp))),
       map(resp => resp.result)
     );
   }
