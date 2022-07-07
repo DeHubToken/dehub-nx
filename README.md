@@ -6,6 +6,29 @@ This is the **monorepo of DeHub**. Created based on the awesome [Nx.dev](https:/
 
 _More libraries or apps are supported and will be added as we go under `apps` or `libs` folders_
 
+# Dev Setup
+
+`<APP>` can be `web` or `raffle`
+
+1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
+1. Open **VSCode** _(pre-configured editor settings involved)_
+1. Be sure to use `node >= 16.13.0`
+1. Add `~/.huskyrc` with content [here](https://typicode.github.io/husky/#/?id=command-not-found)
+1. **Install** dependencies: `npm ci`
+1. While installing:
+   Add the following line to `/etc/hosts` _(`c:/windows/system32/drivers/hosts`)_:
+   ```
+   127.0.0.1 dev.localhost
+   ```
+1. Run **Dev mode**: `npm run <APP>:start`
+1. Run **Prod mode**: `npm run <APP>:demo` _(serve prod version locally)_
+1. Run **CI**: `npm run ci` _(lint, test, build from affected apps)_
+1. Deploy as **prod-draft**: `npm run deploy:prod-draft`
+1. Deploy to **prod**: `npm run deploy:prod`
+1. We follow [commitlint](https://github.com/merkle-open/frontend-defaults/blob/master/repo/commitlint-conventional-changelog/index.js) guide, so please use these scopes:
+
+   `'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'`
+
 # Applications
 
 Apps represent standalone sites, which can be written in pure JS, React, Vue.JS or Angular and can consume common libraries (`libs`)
@@ -130,28 +153,6 @@ _Common sass styles, variables, mixins, etc. of DeHUB_
 ### `assets/freya`
 
 _Common sass styles, assets from the Freya PrimeNG themes_
-
-# Dev Setup
-
-`<APP>` can be `web` or `raffle`
-
-1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
-1. Open **VSCode** _(pre-configured editor settings involved)_
-1. Be sure to use `node >= 16.13.0`
-1. **Install** dependencies: `npm ci`
-1. While installing:
-   Add the following line to `/etc/hosts` _(`c:/windows/system32/drivers/hosts`)_:
-   ```
-   127.0.0.1 dev.localhost
-   ```
-1. Run **Dev mode**: `npm run <APP>:start`
-1. Run **Prod mode**: `npm run <APP>:demo` _(serve prod version locally)_
-1. Run **CI**: `npm run ci` _(lint, test, build from affected apps)_
-1. Deploy as **prod-draft**: `npm run deploy:prod-draft`
-1. Deploy to **prod**: `npm run deploy:prod`
-1. We follow [commitlint](https://github.com/merkle-open/frontend-defaults/blob/master/repo/commitlint-conventional-changelog/index.js) guide, so please use these scopes:
-
-   `'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'`
 
 # PWA Manifest
 
