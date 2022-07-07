@@ -32,7 +32,7 @@ import { getAddress } from '@ethersproject/address';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Moralis } from 'moralis';
 import { MessageService } from 'primeng/api';
-import { concatMap, from, Observable, switchMap, tap } from 'rxjs';
+import { concatMap, from, iif, Observable, switchMap, tap } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 @Injectable()
@@ -92,21 +92,22 @@ export class DehubMoralisService implements IDehubMoralisService {
   ): Observable<BigNumber> {
     const chain = decimalToHex(this.env.web3.chainId);
     const { nativeCurrency } = Networks[this.env.web3.chainId];
-    if (currency === nativeCurrency.name) {
-      return from(
+
+    return iif(
+      () => currency === nativeCurrency.name,
+      from(
         Moralis.Web3API.account.getNativeBalance({
           chain,
           address,
         })
-      ).pipe(map(({ balance }) => BigNumber.from(balance)));
-    } else {
-      return from(
+      ).pipe(tap(balance => this.logger.info(`  getNativeBalance: `, balance))),
+      from(
         Moralis.Web3API.account.getTokenBalances({
           chain,
           address,
         })
       ).pipe(
-        tap(v => this.logger.info(`  getTokenBalances: `, v)),
+        tap(balances => this.logger.info(`  getTokenBalances: `, balances)),
         map(
           balances =>
             balances.find(
@@ -118,10 +119,11 @@ export class DehubMoralisService implements IDehubMoralisService {
                 )
             ) || { balance: '0' }
         ),
-        map(({ balance }) => BigNumber.from(balance)),
-        tap(v => this.logger.info(`  getWalletBalance: `, v.toString()))
-      );
-    }
+        tap(({ balance }) =>
+          this.logger.info(`  founded balance: `, balance.toString())
+        )
+      )
+    ).pipe(map(({ balance }) => BigNumber.from(balance)));
   }
 
   /**
