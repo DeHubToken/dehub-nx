@@ -186,11 +186,13 @@ export class DehubMoralisService implements IDehubMoralisService {
   /**
    * Attempt to execute Receipt NFT minting function directly on the blockchain.
    * Use "currency" string to interpolate the correct function.
+   * Handles Native and ERC20 types of purchase.
    * @param orderId id of the order initialized and monitored on Moralis DB.
    * @param ipfsHash hash of the data related to this order which will be used in minting.
    * @param checkoutContract minting contract data from Moralis DB.
    * @param currency DeHub, BNB, BUSD, etc.
    * @param price non-decimal number
+   * @param quantity non-decimal number
    * @returns awaits until the transaction is mined and returns tx receipt object.
    */
   mintReceipt$(
@@ -198,18 +200,32 @@ export class DehubMoralisService implements IDehubMoralisService {
     ipfsHash: string,
     checkoutContract: ShopContractPropsType,
     currency: Currency,
-    price: BigNumber
+    price: BigNumber,
+    quantity: BigNumber
   ) {
-    const options: Moralis.ExecuteFunctionOptions = {
+    const { nativeCurrency } = Networks[this.env.web3.chainId];
+    let params: Moralis.ExecuteFunctionParams = {
+      _quantity: quantity.toString(),
+      _totalAmount: price.toString(),
+      _orderId: orderId,
+      _metadataURI: ipfsHash,
+    };
+    let options: Moralis.ExecuteFunctionOptions = {
       contractAddress: checkoutContract.address,
       abi: checkoutContract.abi,
       functionName: `purchaseBy${currency}`,
-      params: {
-        [`_priceIn${currency}`]: price.toString(),
-        _orderId: orderId,
-        _metadataURI: ipfsHash,
-      },
+      params,
     };
+    // If native send native tokens with msgValue...
+    // TODO: need to test this!
+    if (currency === nativeCurrency.name) {
+      options = { ...options, msgValue: price.toString() };
+    } else {
+      // ...otherwise pass _priceIn[currency] and the contract will transfer the tokens
+      params = { ...params, [`_priceIn${currency}`]: price.toString() };
+      options = { ...options, params };
+    }
+
     return from(
       Moralis.executeFunction(
         options

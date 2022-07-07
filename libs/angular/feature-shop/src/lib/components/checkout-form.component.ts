@@ -30,6 +30,7 @@ import {
   ProductCheckoutDetail,
   ProductData,
 } from '@dehub/shared/model';
+import { BigNumber } from '@ethersproject/bignumber';
 import Moralis from 'moralis';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {
@@ -299,6 +300,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
           const priceStr = this.product.price.toString();
           const totalAmountStr = this.totalAmount.toString();
           const currency = this.product.currency;
+          const quantity = this.checkoutForm.controls.quantity.value;
           const productData: ProductData = {
             name: this.product.name,
             description: this.product.description,
@@ -311,7 +313,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
             contentfulId: this.product.contentfulId,
             productData,
             shippingAddress,
-            quantity: this.checkoutForm.controls.quantity.value,
+            quantity,
             totalAmount: this.totalAmount,
             currency,
           };
@@ -369,7 +371,8 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                         ipfsHash,
                         checkoutContract,
                         currency,
-                        parseUnits(totalAmountStr, metadata.decimals)
+                        parseUnits(totalAmountStr, metadata.decimals),
+                        BigNumber.from(quantity)
                       )
                     )
                   )

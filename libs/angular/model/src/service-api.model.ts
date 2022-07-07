@@ -86,6 +86,7 @@ export interface IDehubMoralisService {
     ipfsHash: string,
     checkoutContract: ShopContractPropsType,
     currency: Currency,
-    price: BigNumber
+    price: BigNumber,
+    quantity: BigNumber
   ) => Observable<TransactionReceipt>;
 }
