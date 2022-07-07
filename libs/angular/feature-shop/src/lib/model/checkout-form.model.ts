@@ -6,7 +6,7 @@ export enum CheckoutProcessMessage {
   OrderInit = 'Initializing order',
   ReceiptMint = 'Minting NFT receipt',
   VerifyReceipt = 'Verifying NFT Receipt',
-  OrderSuccess = 'Thank you for your purchase!',
+  OrderSuccess = 'Thank you for your purchase! We will start working on your order immediately.',
   OrderError = 'Something went wrong. Please try again.',
 }
 
