@@ -31,6 +31,6 @@ export const defaultSharedProdEnv: SharedEnv = {
 
   emails: {
     ...defaultSharedEnv.emails,
-    shopSupport: 'add email',
+    shopSupport: 'tech@dehub.net', // TODO: change to prod email
   },
 };
