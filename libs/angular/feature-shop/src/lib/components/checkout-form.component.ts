@@ -55,7 +55,6 @@ import {
 import {
   CheckoutProcess,
   CheckoutProcessMessage,
-  CheckoutProcessMessage as ProcMsg,
 } from '../model/checkout-form.model';
 
 @Component({
@@ -325,7 +324,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
               .pipe(map(resp => resp[0])),
           ])
             .pipe(
-              tap(() => this.setProcMsg(ProcMsg.AllowanceCheck)),
+              tap(() => this.setProcMsg(CheckoutProcessMessage.AllowanceCheck)),
               exhaustMap(([checkoutContract, metadata]) =>
                 combineLatest([
                   this.dehubMoralis.hasEnoughBalance$(
@@ -350,7 +349,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                     ) {
                       return of(undefined);
                     } else {
-                      this.setProcMsg(ProcMsg.AllowanceSet);
+                      this.setProcMsg(CheckoutProcessMessage.AllowanceSet);
                       // Increase allowance to max and wait for confirmation
                       return this.moralisService.setTokenAllowance$(
                         metadata.address,
@@ -359,10 +358,12 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                     }
                   }),
                   // Init order will upload data to IPFS and store a record with status 'verifying' on Moralis.
-                  tap(() => this.setProcMsg(ProcMsg.OrderInit)),
+                  tap(() => this.setProcMsg(CheckoutProcessMessage.OrderInit)),
                   concatMap(() => this.dehubMoralis.initOrder$(params)),
                   // Mint the actual NFT with order ID and IPFS URI
-                  tap(() => this.setProcMsg(ProcMsg.ReceiptMint)),
+                  tap(() =>
+                    this.setProcMsg(CheckoutProcessMessage.ReceiptMint)
+                  ),
                   concatMap(({ orderId, ipfsHash }) =>
                     zip(
                       of(orderId),
@@ -379,7 +380,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                 )
               ),
               // Keep checking the order status until it's verified.
-              tap(() => this.setProcMsg(ProcMsg.VerifyReceipt)),
+              tap(() => this.setProcMsg(CheckoutProcessMessage.VerifyReceipt)),
               concatMap(([orderId]) =>
                 this.dehubMoralis.checkOrder$({ orderId: orderId }).pipe(
                   repeatWhen(obs => obs.pipe(delay(1000))),
@@ -388,14 +389,14 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                 )
               ),
               map(() => {
-                this.setProcMsg(ProcMsg.OrderSuccess);
+                this.setProcMsg(CheckoutProcessMessage.OrderSuccess);
                 this.logger.info('Order completed!');
               }),
               first(),
               finalize(() => this.isCompleteSubject.next(true)),
               catchError(() => {
                 this.logger.error('Order failed!');
-                this.setProcMsg(ProcMsg.OrderError);
+                this.setProcMsg(CheckoutProcessMessage.OrderError);
                 return of(undefined);
               })
             )
@@ -408,19 +409,19 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
       });
   }
 
-  setProcMsg(msg: ProcMsg) {
+  setProcMsg(msg: CheckoutProcessMessage) {
     const prc: CheckoutProcess = {
       icon: 'fa-solid fa-circle-notch fa-spin',
       text: msg,
     };
     switch (msg) {
-      case ProcMsg.OrderSuccess:
+      case CheckoutProcessMessage.OrderSuccess:
         this.processSubject.next({
           ...prc,
           icon: 'fa-duotone fa-circle-check',
         });
         break;
-      case ProcMsg.OrderError:
+      case CheckoutProcessMessage.OrderError:
         this.processSubject.next({
           ...prc,
           icon: 'fa-duotone fa-circle-x',
