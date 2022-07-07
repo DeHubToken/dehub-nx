@@ -30,6 +30,8 @@ import {
   ProductCheckoutDetail,
   ProductData,
 } from '@dehub/shared/model';
+import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
+import { getContractByCurrency } from '@dehub/shared/utils';
 import { BigNumber } from '@ethersproject/bignumber';
 import Moralis from 'moralis';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -320,7 +322,15 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
           combineLatest([
             this.checkoutContract$,
             this.moralisService
-              .getTokenMetadata$(currency)
+              .getTokenMetadata$({
+                chain: decimalToHex(this.env.web3.chainId),
+                addresses: [
+                  getContractByCurrency(
+                    currency,
+                    this.env.web3.addresses.contracts
+                  ),
+                ],
+              })
               .pipe(map(resp => resp[0])),
           ])
             .pipe(

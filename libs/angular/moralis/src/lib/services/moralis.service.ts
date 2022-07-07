@@ -10,10 +10,12 @@ import { Networks, SharedEnv } from '@dehub/shared/config';
 import {
   Attributes,
   ChainId,
-  Currency,
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   EnableOptionsPersisted,
+  GetNativeBalanceParameters,
+  GetTokenBalancesParameters,
+  GetTokenMetadataParameters,
   MoralisConnectorNames,
   MoralisMessages,
   User,
@@ -25,7 +27,6 @@ import {
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
   filterEmpty,
-  getContractByCurrency,
   getRandomRpcUrl,
   publishReplayRefCount,
   setupMetamaskNetwork,
@@ -465,6 +466,8 @@ export class MoralisService implements IMoralisService {
     this.walletConnectStateSubject.next({ connectorId, state });
   }
 
+  // Token APIs
+
   getTokenAllowance$(
     contractAddress: string,
     spender: string,
@@ -527,14 +530,27 @@ export class MoralisService implements IMoralisService {
     );
   }
 
-  getTokenMetadata$(currency: Currency) {
-    return from(
-      Moralis.Web3API.token.getTokenMetadata({
-        chain: decimalToHex(this.env.web3.chainId),
-        addresses: [
-          getContractByCurrency(currency, this.env.web3.addresses.contracts),
-        ],
-      })
-    ).pipe(tap(resp => this.logger.info(`Get ${currency} metadata.`, resp)));
+  getTokenMetadata$(parameters: GetTokenMetadataParameters) {
+    return from(Moralis.Web3API.token.getTokenMetadata(parameters)).pipe(
+      tap(resp =>
+        this.logger.info(`Moralis.Web3API.token.getTokenMetadata:`, resp)
+      )
+    );
+  }
+
+  // Account APIs
+
+  getNativeBalance$(parameters: GetNativeBalanceParameters) {
+    return from(Moralis.Web3API.account.getNativeBalance(parameters)).pipe(
+      tap(resp => this.logger.info(`Web3API.account.getNativeBalance:`, resp))
+    );
+  }
+
+  getTokenBalances$(parameters: GetTokenBalancesParameters) {
+    return from(Moralis.Web3API.account.getTokenBalances(parameters)).pipe(
+      tap(resp =>
+        this.logger.info(`Moralis.Web3API.account.getTokenBalances:`, resp)
+      )
+    );
   }
 }

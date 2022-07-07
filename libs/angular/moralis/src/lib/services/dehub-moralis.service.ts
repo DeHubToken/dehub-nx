@@ -95,34 +95,33 @@ export class DehubMoralisService implements IDehubMoralisService {
 
     return iif(
       () => currency === nativeCurrency.name,
-      from(
-        Moralis.Web3API.account.getNativeBalance({
+      this.moralisService.getNativeBalance$({
+        chain,
+        address,
+      }),
+      this.moralisService
+        .getTokenBalances$({
           chain,
           address,
         })
-      ).pipe(tap(balance => this.logger.info(`  getNativeBalance: `, balance))),
-      from(
-        Moralis.Web3API.account.getTokenBalances({
-          chain,
-          address,
-        })
-      ).pipe(
-        tap(balances => this.logger.info(`  getTokenBalances: `, balances)),
-        map(
-          balances =>
-            balances.find(
-              resp =>
-                getAddress(resp.token_address) ===
-                getContractByCurrency(
-                  currency,
-                  this.env.web3.addresses.contracts
-                )
-            ) || { balance: '0' }
-        ),
-        tap(({ balance }) =>
-          this.logger.info(`  founded balance: `, balance.toString())
+        .pipe(
+          map(
+            balances =>
+              balances.find(
+                resp =>
+                  getAddress(resp.token_address) ===
+                  getContractByCurrency(
+                    currency,
+                    this.env.web3.addresses.contracts
+                  )
+              ) || { balance: '0', symbol: '-' }
+          ),
+          tap(({ balance, symbol }) =>
+            this.logger.info(
+              `  founded ${symbol} balance: ${balance.toString()}`
+            )
+          )
         )
-      )
     ).pipe(map(({ balance }) => BigNumber.from(balance)));
   }
 

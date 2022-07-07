@@ -7,8 +7,13 @@ import {
   DeHubConnectorNames,
   DeHubShopShippingAddresses,
   Erc20Metadata,
+  Erc20TokenBalance,
+  GetNativeBalanceParameters,
+  GetTokenBalancesParameters,
+  GetTokenMetadataParameters,
   InitOrderParams,
   InitOrderResult,
+  NativeBalance,
   ShopContractPropsType,
   User,
   WalletConnectState,
@@ -54,7 +59,17 @@ export interface IMoralisService {
     spender: string,
     amount?: string
   ) => Observable<TransactionReceipt>;
-  getTokenMetadata$: (label: Currency) => Observable<Erc20Metadata>;
+  getTokenMetadata$: (
+    parameters: GetTokenMetadataParameters
+  ) => Observable<Erc20Metadata>;
+
+  // Account APIs
+  getNativeBalance$: (
+    parameters: GetNativeBalanceParameters
+  ) => Observable<NativeBalance>;
+  getTokenBalances$: (
+    parameters: GetTokenBalancesParameters
+  ) => Observable<Erc20TokenBalance>;
 }
 
 /** Dehub specific moralis business logic */
