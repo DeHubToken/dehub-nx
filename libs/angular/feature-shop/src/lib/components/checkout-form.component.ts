@@ -67,7 +67,8 @@ import {
         <dhb-product-mini [product]="product"></dhb-product-mini>
 
         <!-- Hidden in production until finished -->
-        <ng-container *ngIf="!env.production; else comingSoon">
+        <!-- <ng-container *ngIf="!env.production; else comingSoon"> -->
+        <ng-container>
           <!-- Quantity selection -->
           <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
             <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
@@ -187,13 +188,13 @@ import {
           </div>
         </ng-container>
 
-        <ng-template #comingSoon>
+        <!-- <ng-template #comingSoon>
           <div class="text-center py-5">
             <i class="fa-duotone fa-user-helmet-safety text-4xl pb-3"></i>
             <br />
             Coming soon...
           </div>
-        </ng-template>
+        </ng-template> -->
       </ng-container>
 
       <ng-template #message>
