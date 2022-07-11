@@ -17,7 +17,6 @@ import {
 } from '@ethersproject/abstract-provider';
 import { Contract } from '@ethersproject/contracts';
 import BigNumber from 'bignumber.js';
-import dayjs from 'dayjs';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
@@ -38,7 +37,7 @@ import {
   useStakes,
 } from '../../state/application/hooks';
 import { getVersion } from '../../utils/contractHelpers';
-import { quarterMark } from '../../utils/pool';
+import { localToUTC, quarterMark } from '../../utils/pool';
 import StakeModal from './StakeModal';
 
 const StyledBox = styled(Box)`
@@ -82,8 +81,8 @@ const LiveCard = ({ poolIndex }: CardProps) => {
   );
   const remainTimes = useMemo(
     () =>
-      dayjs(new Date(poolInfo.closeTimeStamp * 1000)).unix() -
-      new Date().getTime() / 1000,
+      poolInfo.closeTimeStamp -
+      localToUTC(new Date().getTime()).getTime() / 1000,
     [poolInfo]
   );
   const elapsedTime = useMemo(
