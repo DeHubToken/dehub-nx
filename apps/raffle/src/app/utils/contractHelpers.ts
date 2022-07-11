@@ -1,7 +1,7 @@
+import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
 import { Signer } from '@ethersproject/abstract-signer';
 import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { Provider } from '@ethersproject/providers';
-import Bep20Abi from '../config/abis/erc20.json';
 import MulticallAbi from '../config/abis/Multicall.json';
 import SpecialLotteryAbi from '../config/abis/SpecialLottery.json';
 import StandardLotteryAbi from '../config/abis/StandardLottery.json';

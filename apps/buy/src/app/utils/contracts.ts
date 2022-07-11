@@ -1,7 +1,7 @@
+import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
 import { Signer } from '@ethersproject/abstract-signer';
 import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { Provider, Web3Provider } from '@ethersproject/providers';
-import Bep20Abi from '../config/abis/erc20.json';
 import MulticallAbi from '../config/abis/Multicall.json';
 import PancakeRouter02 from '../config/abis/PancakeRouter02.json';
 import { getMultiCallAddress, getRouterAddress } from './addresses';

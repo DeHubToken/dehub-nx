@@ -1,10 +1,15 @@
 import { Moralis } from 'moralis';
+import { components, operations } from 'moralis/types/generated/web3Api';
+import { Contacts } from './contacts.model';
+
+export type ChainId = components['schemas']['chainList'];
+
 interface PluginSpecs {
   name: string;
   functions: string[];
 }
 
-/** Moralis Todo: this can be exported */
+/** Moralis TODO: replace with Moralis version, when it gets properly publicly exposed. */
 export interface StartOptions {
   serverUrl?: string;
   appId?: string;
@@ -14,15 +19,58 @@ export interface StartOptions {
   masterKey?: string;
 }
 
-export interface Attributes extends Moralis.Attributes {
-  username: string;
-  accounts: string[];
-  ethAddress: string;
-  /** OTT can play flag */
-  can_play?: boolean;
-  phone?: string;
-  email?: string;
-}
+/**
+ * Clone of Moralis non exported 'erc20Metadata' interface.
+ * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
+ */
+export type Erc20Metadata = Awaited<
+  ReturnType<typeof Moralis.Web3API.token.getTokenMetadata>
+>;
+/**
+ * Clone of Moralis non exported 'getTokenMetadata.parameters' interface.
+ * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
+ */
+export type GetTokenMetadataParameters =
+  operations['getTokenMetadata']['parameters']['query'];
+
+/**
+ * Clone of Moralis non exported 'nativeBalance' interface.
+ * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
+ */
+export type NativeBalance = Awaited<
+  ReturnType<typeof Moralis.Web3API.account.getNativeBalance>
+>;
+/**
+ * Clone of Moralis non exported 'getNativeBalance.parameters' interface.
+ * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
+ */
+export type GetNativeBalanceParameters =
+  operations['getNativeBalance']['parameters']['query'] &
+    operations['getNativeBalance']['parameters']['path'];
+
+/**
+ * Clone of Moralis non exported 'erc20TokenBalance' interface.
+ * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
+ */
+export type Erc20TokenBalance = Awaited<
+  ReturnType<typeof Moralis.Web3API.account.getTokenBalances>
+>;
+/**
+ * Clone of Moralis non exported 'getTokenBalances.parameters' interface.
+ * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
+ */
+export type GetTokenBalancesParameters =
+  operations['getTokenBalances']['parameters']['query'] &
+    operations['getTokenBalances']['parameters']['path'];
+
+export type Attributes = Moralis.Attributes &
+  Contacts & {
+    username: string;
+    accounts: string[];
+    ethAddress: string;
+    /** OTT can play flag */
+    can_play?: boolean;
+  };
 
 export type User = Moralis.User<Attributes>;
 export type EnableOptionsPersisted = Moralis.EnableOptions & {
@@ -71,6 +119,12 @@ export enum WalletConnectingMessages {
   UnsupportedProvider = 'Provider not supported.',
   MetamaskSignatureDenied = 'Metamask signature was denied.',
   BinanceSignatureRejected = 'Binance signature was rejected.',
+}
+
+export enum MoralisMessages {
+  UpdateUser = 'Update Profile',
+  UpdateUserProblem = 'There was some problem updating your profile, please get in touch.',
+  ExistingEmail = 'This email is already in use by another user. If you think it’s a mistake, please get in touch.',
 }
 
 export type DeHubConnector = {

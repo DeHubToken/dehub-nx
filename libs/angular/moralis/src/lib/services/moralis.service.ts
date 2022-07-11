@@ -1,15 +1,23 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
 import {
+  EnvToken,
   ILoggerService,
   IMoralisService,
   LoggerToken,
 } from '@dehub/angular/model';
-import { Networks } from '@dehub/shared/config';
+import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
+import { Networks, SharedEnv } from '@dehub/shared/config';
 import {
+  Attributes,
+  ChainId,
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   EnableOptionsPersisted,
+  GetNativeBalanceParameters,
+  GetTokenBalancesParameters,
+  GetTokenMetadataParameters,
   MoralisConnectorNames,
+  MoralisMessages,
   User,
   WalletConnectingMessages,
   WalletConnectingState,
@@ -23,6 +31,8 @@ import {
   publishReplayRefCount,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
+import { TransactionResponse } from '@ethersproject/abstract-provider';
+import { BigNumber } from '@ethersproject/bignumber';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
@@ -31,8 +41,10 @@ import {
   ConfirmEventType,
   MessageService,
 } from 'primeng/api';
-import { BehaviorSubject, from, of } from 'rxjs';
+import { BehaviorSubject, from, iif, Observable, of, throwError } from 'rxjs';
 import {
+  catchError,
+  concatMap,
   distinctUntilChanged,
   first,
   map,
@@ -61,7 +73,7 @@ export class MoralisService implements IMoralisService {
   user$ = this.userSubject.asObservable().pipe(
     // Need to refetch current user for updated attributes
     switchMap(currentUser =>
-      currentUser ? from(currentUser.fetch() as Promise<User>) : of(undefined)
+      currentUser ? from(currentUser.fetch()) : of(undefined)
     ),
     tap(loggedInUser =>
       this.logger.info(`Current user:`, loggedInUser?.attributes)
@@ -83,11 +95,6 @@ export class MoralisService implements IMoralisService {
     map(({ username }) => username)
   );
 
-  userContacts$ = this.userAttributes$.pipe(
-    filterEmpty(),
-    map(({ email, phone }) => ({ email, phone }))
-  );
-
   private walletConnectStateSubject = new BehaviorSubject<WalletConnectState>({
     state: WalletConnectingState.INIT,
   });
@@ -103,7 +110,7 @@ export class MoralisService implements IMoralisService {
     publishReplayRefCount()
   );
 
-  private requiredChainHex?: string;
+  private requiredChainHex?: ChainId;
 
   /** Triggered after user closed the session from his wallet (Walletconnect) */
   private unsubscribeFromWeb3Deactivated?: () => events.EventEmitter;
@@ -113,6 +120,7 @@ export class MoralisService implements IMoralisService {
   constructor(
     @Inject(LoggerToken) private logger: ILoggerService,
     @Inject(WINDOW) private readonly windowRef: Window,
+    @Inject(EnvToken) private env: SharedEnv,
     private ngZone: NgZone,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
@@ -154,6 +162,31 @@ export class MoralisService implements IMoralisService {
         this.logout();
       }
     }
+  }
+
+  updateUser$(attributes: Partial<Attributes>): Observable<User> {
+    return this.user$.pipe(
+      filterEmpty(),
+      first(),
+      switchMap(user =>
+        from(user.save(attributes)).pipe(
+          catchError(e => {
+            let detail = MoralisMessages.UpdateUserProblem;
+            if (e instanceof Error && e.message.includes('email')) {
+              detail = MoralisMessages.ExistingEmail;
+            }
+            this.messageService.add({
+              severity: 'error',
+              summary: MoralisMessages.UpdateUser,
+              detail,
+            });
+
+            throw new Error(e);
+          })
+        )
+      ),
+      tap(({ attributes }) => this.logger.info('Updated user:', attributes))
+    );
   }
 
   async login(
@@ -431,5 +464,93 @@ export class MoralisService implements IMoralisService {
     connectorId?: DeHubConnectorNames
   ) {
     this.walletConnectStateSubject.next({ connectorId, state });
+  }
+
+  // Token APIs
+
+  getTokenAllowance$(
+    contractAddress: string,
+    spender: string,
+    decimals: string
+  ): Observable<BigNumber> {
+    this.logger.info(`Getting ${contractAddress} allowance for ${spender}.`);
+    return this.account$.pipe(
+      switchMap(account =>
+        iif(
+          () => !!account,
+          Moralis.Web3API.token.getTokenAllowance({
+            chain: decimalToHex(this.env.web3.chainId),
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            owner_address: account!,
+            spender_address: spender,
+            address: contractAddress,
+          }),
+          throwError(() => new Error('No account/metadata available'))
+        )
+      ),
+      tap(({ allowance }) => this.logger.info(`Allowance: ${allowance}`)),
+      map(({ allowance }) =>
+        Moralis.web3Library.utils.parseUnits(allowance, decimals)
+      )
+    );
+  }
+
+  setTokenAllowance$(
+    contractAddress: string,
+    spender: string,
+    amount: string = Moralis.web3Library.constants.MaxUint256.toString()
+  ) {
+    this.logger.info(
+      `Setting ${contractAddress} ${amount} allowance for ${spender}.`
+    );
+    return this.account$.pipe(
+      concatMap(account => {
+        if (account) {
+          const options: Moralis.ExecuteFunctionOptions = {
+            contractAddress,
+            abi: Bep20Abi,
+            functionName: 'approve',
+            params: {
+              _spender: spender,
+              _value: amount,
+            },
+          };
+          return from(
+            // Had to force cast to TransactionResponse because Moralis typings are not correct...
+            // they are using ethers Transaction type instead of TransactionResponse which doesn't
+            // include wait() function. TransactionResponse extends Transaction type on ethers.js
+            Moralis.executeFunction(
+              options
+            ) as unknown as Observable<TransactionResponse>
+          ).pipe(concatMap((tx: TransactionResponse) => tx.wait()));
+        } else {
+          return throwError(() => new Error('No account available'));
+        }
+      })
+    );
+  }
+
+  getTokenMetadata$(parameters: GetTokenMetadataParameters) {
+    return from(Moralis.Web3API.token.getTokenMetadata(parameters)).pipe(
+      tap(resp =>
+        this.logger.info(`Moralis.Web3API.token.getTokenMetadata:`, resp)
+      )
+    );
+  }
+
+  // Account APIs
+
+  getNativeBalance$(parameters: GetNativeBalanceParameters) {
+    return from(Moralis.Web3API.account.getNativeBalance(parameters)).pipe(
+      tap(resp => this.logger.info(`Web3API.account.getNativeBalance:`, resp))
+    );
+  }
+
+  getTokenBalances$(parameters: GetTokenBalancesParameters) {
+    return from(Moralis.Web3API.account.getTokenBalances(parameters)).pipe(
+      tap(resp =>
+        this.logger.info(`Moralis.Web3API.account.getTokenBalances:`, resp)
+      )
+    );
   }
 }

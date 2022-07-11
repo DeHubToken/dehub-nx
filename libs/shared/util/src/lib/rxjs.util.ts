@@ -7,8 +7,8 @@ import { filter } from 'rxjs/operators';
  */
 export const publishReplayRefCount =
   <R>() =>
-  (source: Observable<R>) =>
-    source.pipe(
+  (source$: Observable<R>) =>
+    source$.pipe(
       share({
         connector: () => new ReplaySubject(1),
         resetOnError: false,
@@ -19,5 +19,5 @@ export const publishReplayRefCount =
 
 export const filterEmpty =
   <T>() =>
-  (source: Observable<T | null | undefined>) =>
-    source.pipe(filter((object): object is T => !isEmpty(object)));
+  (source$: Observable<T | null | undefined>) =>
+    source$.pipe(filter((object): object is T => !isEmpty(object)));

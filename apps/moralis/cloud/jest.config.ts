@@ -13,4 +13,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../coverage/apps/moralis/cloud',
+  testTimeout: 20000,
 };

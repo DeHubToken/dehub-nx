@@ -1,3 +1,4 @@
+import { MoralisClass } from '@dehub/shared/model';
 import { environment } from '../../environments/environment';
 import { updateCanPlay } from '../shared';
 import { ChainIdAsNumber } from '../shared/model';
@@ -6,7 +7,7 @@ import RedisClient from '../shared/redis';
 /**
  * Listen contracts table changes, if changes, clean redis data
  */
-Moralis.Cloud.afterSave('Contracts', async () => {
+Moralis.Cloud.afterSave(MoralisClass.Contracts, async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const redisClient = new RedisClient();

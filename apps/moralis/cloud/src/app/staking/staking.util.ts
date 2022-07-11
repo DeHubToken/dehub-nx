@@ -1,11 +1,11 @@
-import { environment } from '../../environments/environment';
 import {
-  ChainIdAsNumber,
-  getDeHubContracts,
+  MoralisClass,
   RewardContractPropsType,
   StakingContractPropsType,
   StakingControllerContractPropsType,
-} from '../shared';
+} from '@dehub/shared/model';
+import { environment } from '../../environments/environment';
+import { ChainIdAsNumber, getDeHubContracts } from '../shared';
 
 /**
  * Return the reward contract information, returning type is same with `ContractProperties`.
@@ -62,7 +62,7 @@ export async function getStakingControllerContract(
   try {
     const decTargetChainId = targetChainId;
 
-    const Contracts = Moralis.Object.extend('Contracts');
+    const Contracts = Moralis.Object.extend(MoralisClass.Contracts);
     const contractQuery = new Moralis.Query(Contracts);
 
     contractQuery.equalTo('name', 'DeHub Staking Controller');

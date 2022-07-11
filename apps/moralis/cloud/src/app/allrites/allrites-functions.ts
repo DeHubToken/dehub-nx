@@ -1,5 +1,6 @@
+import { MoralisFunctions } from '@dehub/shared/model';
 import { environment } from '../../environments/environment';
-import { AllritesFunctions, AuthAllritesReturns } from './allrites.model';
+import { AuthAllritesReturns } from './allrites.model';
 
 export const authAllritesFn = async (): Promise<AuthAllritesReturns | null> => {
   const logger = Moralis.Cloud.getLogger();
@@ -25,7 +26,7 @@ export const authAllritesFn = async (): Promise<AuthAllritesReturns | null> => {
     };
   } catch (err) {
     logger.error(
-      `${AllritesFunctions.AuthAllrites} error: ${JSON.stringify(err)}`
+      `${MoralisFunctions.Allrites.Auth} error: ${JSON.stringify(err)}`
     );
     return null;
   }

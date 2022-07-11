@@ -3,6 +3,7 @@ import {
   useWeb3Context,
 } from '@dehub/react/core';
 import { Heading, Text } from '@dehub/react/ui';
+import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import {
   ethersToBigNumber,
@@ -15,7 +16,6 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import { useRef, useState } from 'react';
-import Bep20Abi from '../../config/abis/erc20.json';
 import { LotteryTicket } from '../../config/constants/types';
 import {
   useDehubContract,

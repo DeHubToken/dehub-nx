@@ -6,13 +6,14 @@
  * @returns user object if success, null if failed
  */
 
+import {
+  DeHubTokenContractPropsType,
+  MoralisClass,
+  StakingContractPropsType,
+} from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { environment } from '../../environments/environment';
-import {
-  ChainIdAsNumber,
-  DeHubTokenContractPropsType,
-  StakingContractPropsType,
-} from './model';
+import { ChainIdAsNumber } from './model';
 
 export async function isMoralisUserByAddress(
   address: string
@@ -74,7 +75,7 @@ export async function updateCanPlay(chainId: ChainIdAsNumber, address: string) {
 export async function getDeHubContracts(dappName: string) {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const Contracts = Moralis.Object.extend('Contracts');
+    const Contracts = Moralis.Object.extend(MoralisClass.Contracts);
     const DeHubDapp = Moralis.Object.extend(dappName);
 
     const contractQuery = new Moralis.Query(Contracts);

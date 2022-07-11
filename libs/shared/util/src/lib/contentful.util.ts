@@ -2,6 +2,7 @@ import {
   documentToHtmlString,
   Options,
 } from '@contentful/rich-text-html-renderer';
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { BLOCKS, Document } from '@contentful/rich-text-types';
 
 export const richMarkupToHtmlString = (richTextDocument: Document) => {
@@ -16,6 +17,10 @@ export const richMarkupToHtmlString = (richTextDocument: Document) => {
     },
   };
   return documentToHtmlString(richTextDocument, richOptions);
+};
+
+export const richMarkupToPlainString = (richTextDocument: Document) => {
+  return documentToPlainTextString(richTextDocument, '\n');
 };
 
 export const resolveColumnWidth = (width?: string, alignCenter = false) => {

@@ -1,7 +1,7 @@
 require('../shared/mock.include');
+import { MoralisFunctions } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
 import { environment } from '../../environments/environment';
-import { StakingFunctions } from './staking.model';
 
 const { moralis, web3 } = environment;
 
@@ -31,7 +31,7 @@ describe('E2E Staking functions', () => {
 
   it('Should return staking controller contract', async () => {
     const contract = await Moralis.Cloud.run(
-      StakingFunctions.GetStakingControllerContract,
+      MoralisFunctions.Staking.GetStakingControllerContract,
       {}
     );
     expect(!contract).toBeFalsy();
@@ -41,7 +41,7 @@ describe('E2E Staking functions', () => {
 
   it('Should return reward contract', async () => {
     const contract = await Moralis.Cloud.run(
-      StakingFunctions.GetRewardContract
+      MoralisFunctions.Staking.GetRewardContract
     );
     expect(!contract).toBeFalsy();
 
@@ -50,7 +50,7 @@ describe('E2E Staking functions', () => {
 
   it('Should return active staking contract', async () => {
     const contract = await Moralis.Cloud.run(
-      StakingFunctions.GetActiveStakingContract
+      MoralisFunctions.Staking.GetActiveStakingContract
     );
     if (!contract) return;
 
@@ -64,7 +64,7 @@ describe('E2E Staking functions', () => {
 
   it('Should return staking contract', async () => {
     const contracts = await Moralis.Cloud.run(
-      StakingFunctions.GetStakingContracts
+      MoralisFunctions.Staking.GetStakingContracts
     );
     expect(contracts && contracts.length > 0).toBeTruthy();
 

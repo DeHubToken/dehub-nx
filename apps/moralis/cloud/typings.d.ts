@@ -11,6 +11,14 @@ declare namespace MoralisMissingTypes {
       };
 
       const BigNumber: BigNumber;
+
+      function toIpfs({
+        sourceType,
+        source,
+      }: {
+        sourceType: string;
+        source: string | object;
+      });
     }
 
     /** @deprecated use ethersByChain instead */

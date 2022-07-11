@@ -1,17 +1,43 @@
 import Moralis from 'moralis/types';
-import { PhysicalAddress } from './physical-address.model';
+import { PhysicalAddress } from './location.model';
 
-// All Moralis DB class "attribute" fields include these default fields
-export interface MoralisCommonAttributes {
-  createdAt: Date;
-  updatedAt: Date;
+/**
+ * Moralis Class for DeHub Shop Shipping Addresses.
+ */
+export interface DeHubShopShippingAddresses extends Moralis.Object {
+  attributes: PhysicalAddress;
 }
 
 /**
- * Moralis Class response interface.
- * Naming matches exactly the name of the Class on Moralis.
- * "attributes" is where the class-specific fields are stored.
+ * Moralis MongoDB Class Names for DeHub
  */
-export interface DeHubShopShippingAddresses extends Moralis.Object {
-  attributes: PhysicalAddress & MoralisCommonAttributes;
+export enum MoralisClass {
+  Contracts = 'Contracts',
+
+  // Shop
+  DeHubShopOrders = 'DeHubShopOrders',
+  DeHubShopShippingAddresses = 'DeHubShopShippingAddresses',
 }
+
+/**
+ * Moralis Functions for DeHub
+ */
+export const MoralisFunctions = {
+  Allrites: {
+    Auth: 'authAllrites',
+  },
+  Dehub: {
+    TotalCirculatingSupply: 'totalCirculatingSupply',
+  },
+  Shop: {
+    InitOrder: 'initOrder',
+    CheckOrder: 'checkOrder',
+    GetCheckoutContract: 'getCheckoutContract',
+  },
+  Staking: {
+    GetStakingContracts: 'getStakingContracts',
+    GetActiveStakingContract: 'getActiveStakingContract',
+    GetStakingControllerContract: 'getStakingControllerContract',
+    GetRewardContract: 'getRewardContract',
+  },
+};
