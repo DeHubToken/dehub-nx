@@ -1,43 +1,46 @@
-import dayjs from 'dayjs';
+import { getMonth, getYear, isAfter, isBefore } from 'date-fns';
 import { PoolInfo } from '../state/application/types';
 
+// timestamp in milliseconds
 export const localToUTC = (date: number): Date => {
   const now = new Date();
   return new Date(date + now.getTimezoneOffset() * 60000);
 };
 
+// timestamp in milliseconds
 export const utcToLocal = (date: number): Date => {
   const now = new Date();
   return new Date(date - now.getTimezoneOffset() * 60000);
 };
 
 export const isComingPool = (pool: PoolInfo) => {
-  return dayjs().isBefore(dayjs(new Date(pool.openTimeStamp * 1000)));
+  return isBefore(new Date(), new Date(pool.openTimeStamp * 1000));
 };
 
 export const isLivePool = (pool: PoolInfo) => {
   return (
-    dayjs().isAfter(dayjs(new Date(pool.openTimeStamp * 1000))) &&
-    dayjs().isBefore(dayjs(new Date(pool.closeTimeStamp * 1000)))
+    isAfter(new Date(), new Date(pool.openTimeStamp * 1000)) &&
+    isBefore(new Date(), new Date(pool.closeTimeStamp * 1000))
   );
 };
 
 export const isPastPool = (pool: PoolInfo) => {
-  return dayjs().isAfter(dayjs(new Date(pool.closeTimeStamp * 1000)));
+  return isAfter(new Date(), new Date(pool.closeTimeStamp * 1000));
 };
 
 export const quarterNumber = (pool: PoolInfo): number => {
-  const mnt = dayjs(localToUTC(pool.openTimeStamp * 1000));
-  const quarter = Math.floor(mnt.month() / 3) + 1;
-  return mnt.year() * 100 + quarter;
-};
+  const open = localToUTC(pool.openTimeStamp * 1000);
+  const year = getYear(open);
+  const month = getMonth(open);
 
-export const yearNumber = (pool: PoolInfo): number => {
-  return dayjs(new Date(pool.openTimeStamp * 1000)).year();
+  const quarter = Math.floor(month / 3) + 1;
+  return year * 100 + quarter;
 };
 
 export const quarterMark = (pool: PoolInfo): string => {
-  const opening = dayjs(localToUTC(pool.openTimeStamp * 1000));
-  const quarter = Math.floor(opening.month() / 3) + 1;
-  return `Q${quarter} ${yearNumber(pool)}`;
+  const open = localToUTC(pool.openTimeStamp * 1000);
+  const year = getYear(open);
+  const month = getMonth(open);
+  const quarter = Math.floor(month / 3) + 1;
+  return `Q${quarter} ${year}`;
 };
