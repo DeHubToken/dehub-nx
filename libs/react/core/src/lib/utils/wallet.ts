@@ -1,7 +1,6 @@
 import { BscConnector } from '@binance-chain/bsc-connector';
-import { Networks } from '@dehub/shared/config';
 import { Web3ConnectorNames } from '@dehub/shared/model';
-import { getRandomRpcUrl } from '@dehub/shared/utils';
+import { getRandomRpcUrlByChainId } from '@dehub/shared/utils';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 
@@ -13,7 +12,7 @@ export const getWalletConnector = (
     case Web3ConnectorNames.WalletLink: {
       return new WalletLinkConnector({
         appName: 'DeHub',
-        url: getRandomRpcUrl(Networks[chainId].nodes),
+        url: getRandomRpcUrlByChainId(chainId),
         supportedChainIds: [56, 97],
       });
     }

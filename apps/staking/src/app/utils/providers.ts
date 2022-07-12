@@ -1,6 +1,7 @@
+import { getRandomRpcUrlByChainId } from '@dehub/shared/utils';
 import { JsonRpcProvider } from '@ethersproject/providers';
-import getRpcUrl from '../utils/getRpcUrl';
+import { environment } from '../../environments/environment';
 
-const RPC_URL = getRpcUrl();
-
-export const simpleRpcProvider = new JsonRpcProvider(RPC_URL);
+export const simpleRpcProvider = new JsonRpcProvider(
+  getRandomRpcUrlByChainId(environment.web3.chainId)
+);

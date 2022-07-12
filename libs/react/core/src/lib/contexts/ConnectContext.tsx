@@ -1,5 +1,4 @@
 import { NoBscProviderError } from '@binance-chain/bsc-connector';
-import { Networks } from '@dehub/shared/config';
 import {
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
@@ -12,7 +11,7 @@ import {
 import { hexToDecimal } from '@dehub/shared/util/network/hex-to-decimal';
 import {
   ethereumDisabled,
-  getRandomRpcUrl,
+  getRandomRpcUrlByChainId,
   isMoralisConnector,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
@@ -57,7 +56,7 @@ interface ConnectProviderProps extends PropsWithChildren<unknown> {
 
 const ConnectProvider: React.FC<ConnectProviderProps> = ({
   children,
-  defaultChainId: _defaultChainId = 1,
+  defaultChainId = 1,
   magicLinkApiKey,
 }) => {
   const [walletConnectingState, setWalletConnectingState] =
@@ -177,14 +176,14 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
         ) {
           enableOptions = {
             provider: connectorId,
-            chainId: _defaultChainId,
+            chainId: defaultChainId,
           };
         } else if (connectorId === MoralisConnectorNames.MagicLink) {
           enableOptions = {
             provider: connectorId,
             network: {
-              rpcUrl: getRandomRpcUrl(Networks[_defaultChainId].nodes),
-              chainId: _defaultChainId,
+              rpcUrl: getRandomRpcUrlByChainId(defaultChainId),
+              chainId: defaultChainId,
             } as unknown as string,
             email: magicLinkEmail,
             apiKey: magicLinkApiKey,
@@ -209,7 +208,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
           onSuccess: async (loggedInUser: Moralis.User) => {
             if (
               await setupMetamaskNetwork(
-                _defaultChainId,
+                defaultChainId,
                 onSwitchNetwork,
                 onAddNetwork,
                 (success: boolean) => {
@@ -236,7 +235,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
         // if web3 react connector
         const connector = getWalletConnector(
           connectorId as Web3ConnectorNames,
-          _defaultChainId
+          defaultChainId
         );
 
         connector &&
@@ -255,7 +254,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
               if (error instanceof UnsupportedChainIdError) {
                 if (
                   await setupMetamaskNetwork(
-                    _defaultChainId,
+                    defaultChainId,
                     onSwitchNetwork,
                     onAddNetwork,
                     () => null,
@@ -294,7 +293,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
       onAddNetwork,
       onSwitchNetwork,
       cleanConnectorStorage,
-      _defaultChainId,
+      defaultChainId,
       magicLinkApiKey,
     ]
   );
@@ -335,7 +334,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
   return (
     <ConnectContext.Provider
       value={{
-        defaultChainId: _defaultChainId,
+        defaultChainId,
         chainId,
         account,
         web3: web3Provider,
