@@ -51,11 +51,10 @@ export const addNetwork = async (
     chainId,
     chainName,
     blockExplorerUrl,
-    nodes,
     nativeCurrency: { name: currencyName, symbol: currencySymbol },
   } = Networks[requestedChainId];
 
-  const rpcUrl = getRandomRpcUrl(nodes);
+  const rpcUrl = getRandomRpcUrlByChainId(requestedChainId);
 
   return await Moralis.addNetwork(
     chainId,
@@ -73,10 +72,12 @@ export const addNetwork = async (
 };
 
 /**
- * Pick random RPC url from nodes.
+ * Pick random RPC url from nodes by Chain Id .
  *
- * @param nodes the network nodes
+ * @param chainId the decimal chain id
  * @returns random node url as rpc
  */
-export const getRandomRpcUrl = (nodes: string[]) =>
-  nodes[random(0, nodes.length - 1)];
+export const getRandomRpcUrlByChainId = (chainId: number) => {
+  const rpcNodesByChainId = Networks[chainId].nodes;
+  return rpcNodesByChainId[random(0, rpcNodesByChainId.length - 1)];
+};

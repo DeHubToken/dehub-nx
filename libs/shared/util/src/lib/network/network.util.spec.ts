@@ -1,12 +1,18 @@
-import { getRandomRpcUrl } from './network.util';
+import { Networks } from '@dehub/shared/config';
+import { getRandomRpcUrlByChainId } from './network.util';
 
 describe('Network Util', () => {
-  describe('getRandomRpcUrl', () => {
-    it('should pick random node', () => {
-      const nodes = ['node1', 'node2', 'node3'];
-      const randomNode = getRandomRpcUrl(nodes);
+  describe('getRandomRpcUrlByChainId', () => {
+    it('should return random rpc for Chain Id 56', () => {
+      const randomNode = getRandomRpcUrlByChainId(56);
 
-      expect(nodes.includes(randomNode)).toBe(true);
+      expect(Networks[56].nodes.includes(randomNode)).toBe(true);
+    });
+
+    it('should return random rpc for Chain Id 97', () => {
+      const randomNode = getRandomRpcUrlByChainId(97);
+
+      expect(Networks[97].nodes.includes(randomNode)).toBe(true);
     });
   });
 });

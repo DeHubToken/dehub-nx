@@ -6,7 +6,7 @@ import {
   LoggerToken,
 } from '@dehub/angular/model';
 import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
-import { Networks, SharedEnv } from '@dehub/shared/config';
+import { SharedEnv } from '@dehub/shared/config';
 import {
   Attributes,
   ChainId,
@@ -27,7 +27,7 @@ import {
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
   filterEmpty,
-  getRandomRpcUrl,
+  getRandomRpcUrlByChainId,
   publishReplayRefCount,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
@@ -232,7 +232,7 @@ export class MoralisService implements IMoralisService {
       case MoralisConnectorNames.MagicLink:
         enableOptions = {
           network: {
-            rpcUrl: getRandomRpcUrl(Networks[chainId].nodes),
+            rpcUrl: getRandomRpcUrlByChainId(chainId),
             chainId,
           } as unknown as string,
           provider: connectorId,
