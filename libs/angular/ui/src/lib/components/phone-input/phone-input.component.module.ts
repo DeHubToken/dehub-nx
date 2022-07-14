@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { LoadingModule } from '../loading';
 import { PhoneInputComponent } from './phone-input.component';
 
 @NgModule({
@@ -16,6 +17,9 @@ import { PhoneInputComponent } from './phone-input.component';
     // PrimeNg
     InputTextModule,
     DropdownModule,
+
+    // Lib
+    LoadingModule,
   ],
   exports: [PhoneInputComponent],
 })
