@@ -90,7 +90,7 @@ import {
           <!-- Contact -->
           <h5>Contact Details</h5>
           <form
-            *ngIf="userContacts$ | async as contacts; else contactsLoading"
+            *ngIf="userContacts$ | async as contacts; else loading"
             [formGroup]="checkoutForm.controls.contacts"
             class="p-fluid grid pt-2"
           >
@@ -122,16 +122,10 @@ import {
             </div>
           </form>
 
-          <ng-template #contactsLoading>
-            <p>
-              <i class="fa-solid fa-circle-notch fa-spin"></i>&nbsp;Loading...
-            </p>
-          </ng-template>
-
           <!-- Shipping Address -->
           <h5>Shipping Address</h5>
           <dhb-address-form
-            *ngIf="userShippingAddress$ | async as resp; else addressLoading"
+            *ngIf="userShippingAddress$ | async as resp; else loading"
             [formControl]="
               checkoutForm.controls.shippingAddress.controls.address
             "
@@ -141,10 +135,10 @@ import {
                 : undefined
             "
           ></dhb-address-form>
-          <ng-template #addressLoading>
-            <p>
-              <i class="fa-solid fa-circle-notch fa-spin"></i>&nbsp;Loading...
-            </p>
+
+          <!-- Loading Template -->
+          <ng-template #loading>
+            <dhb-loading></dhb-loading>
           </ng-template>
 
           <!-- Total -->
