@@ -90,7 +90,7 @@ import {
           <!-- Contact -->
           <h5>Contact Details</h5>
           <form
-            *ngIf="userContacts$ | async as contacts"
+            *ngIf="userContacts$ | async as contacts; else contactsLoading"
             [formGroup]="checkoutForm.controls.contacts"
             class="p-fluid grid pt-2"
           >
@@ -121,6 +121,12 @@ import {
               ></dhb-phone-input>
             </div>
           </form>
+
+          <ng-template #contactsLoading>
+            <p>
+              <i class="fa-solid fa-circle-notch fa-spin"></i>&nbsp;Loading...
+            </p>
+          </ng-template>
 
           <!-- Shipping Address -->
           <h5>Shipping Address</h5>
