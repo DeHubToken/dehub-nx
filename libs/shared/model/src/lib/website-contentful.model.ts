@@ -9166,6 +9166,8 @@ export type PageSectionProductsFragment = {
               sku?: string | undefined;
               availableQuantity?: number | undefined;
               slug?: string | undefined;
+              soldOutLabel?: string | undefined;
+              pause?: boolean | undefined;
               sys: {
                 __typename?: 'Sys';
                 id: string;
@@ -9220,6 +9222,8 @@ export type PageSectionProductsFragment = {
                           sku?: string | undefined;
                           availableQuantity?: number | undefined;
                           slug?: string | undefined;
+                          soldOutLabel?: string | undefined;
+                          pause?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             id: string;
@@ -9650,6 +9654,8 @@ export type PageShopFragment = {
                           sku?: string | undefined;
                           availableQuantity?: number | undefined;
                           slug?: string | undefined;
+                          soldOutLabel?: string | undefined;
+                          pause?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             id: string;
@@ -9707,6 +9713,8 @@ export type PageShopFragment = {
                                       sku?: string | undefined;
                                       availableQuantity?: number | undefined;
                                       slug?: string | undefined;
+                                      soldOutLabel?: string | undefined;
+                                      pause?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         id: string;
@@ -10311,6 +10319,8 @@ export type ProductCommonFragment = {
   sku?: string | undefined;
   availableQuantity?: number | undefined;
   slug?: string | undefined;
+  soldOutLabel?: string | undefined;
+  pause?: boolean | undefined;
   sys: { __typename?: 'Sys'; id: string; publishedAt?: any | undefined };
   picturesCollection?:
     | {
@@ -10345,6 +10355,8 @@ export type ProductFragment = {
   sku?: string | undefined;
   availableQuantity?: number | undefined;
   slug?: string | undefined;
+  soldOutLabel?: string | undefined;
+  pause?: boolean | undefined;
   sys: { __typename?: 'Sys'; id: string; publishedAt?: any | undefined };
   picturesCollection?:
     | {
@@ -10380,6 +10392,8 @@ export type ProductDetailFragment = {
   sku?: string | undefined;
   availableQuantity?: number | undefined;
   slug?: string | undefined;
+  soldOutLabel?: string | undefined;
+  pause?: boolean | undefined;
   fullDescription?:
     | { __typename?: 'ProductFullDescription'; json: any }
     | undefined;
@@ -13401,6 +13415,8 @@ export type PageShopCollectionQuery = {
                                       sku?: string | undefined;
                                       availableQuantity?: number | undefined;
                                       slug?: string | undefined;
+                                      soldOutLabel?: string | undefined;
+                                      pause?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         id: string;
@@ -13464,6 +13480,10 @@ export type PageShopCollectionQuery = {
                                                     | number
                                                     | undefined;
                                                   slug?: string | undefined;
+                                                  soldOutLabel?:
+                                                    | string
+                                                    | undefined;
+                                                  pause?: boolean | undefined;
                                                   sys: {
                                                     __typename?: 'Sys';
                                                     id: string;
@@ -14150,6 +14170,8 @@ export type ProductCollectionBySlugQuery = {
               sku?: string | undefined;
               availableQuantity?: number | undefined;
               slug?: string | undefined;
+              soldOutLabel?: string | undefined;
+              pause?: boolean | undefined;
               fullDescription?:
                 | { __typename?: 'ProductFullDescription'; json: any }
                 | undefined;
@@ -14884,6 +14906,8 @@ export const ProductCommonFragmentDoc = gql`
       name
       icon
     }
+    soldOutLabel
+    pause
   }
   ${SysFragmentDoc}
 `;

@@ -88,8 +88,9 @@ import { ProductDetailFragment } from '@dehub/shared/model';
                     <ng-container
                       *ngIf="
                         productDetail.availableQuantity &&
-                          productDetail.availableQuantity > 0;
-                        else soldout
+                          productDetail.availableQuantity > 0 &&
+                          !productDetail.pause;
+                        else unavailable
                       "
                     >
                       <span class="opacity-80 uppercase text-xs text-bold pr-1"
@@ -112,8 +113,18 @@ import { ProductDetailFragment } from '@dehub/shared/model';
                       ></p-button>
                     </ng-container>
 
-                    <ng-template #soldout>
-                      <span class="text-bold"> Sold Out </span>
+                    <ng-template #unavailable>
+                      <span
+                        *ngIf="productDetail.pause; else soldout"
+                        class="text-bold"
+                      >
+                        Coming Soon
+                      </span>
+                      <ng-template #soldout>
+                        <span class="text-bold">
+                          {{ productDetail.soldOutLabel || 'Soldout' }}
+                        </span>
+                      </ng-template>
                     </ng-template>
                   </h5>
                 </div>
