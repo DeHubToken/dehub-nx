@@ -5054,11 +5054,13 @@ export interface Product extends Entry {
   fullDescription?: Maybe<ProductFullDescription>;
   linkedFrom?: Maybe<ProductLinkingCollections>;
   name?: Maybe<Scalars['String']>;
+  pause?: Maybe<Scalars['Boolean']>;
   picturesCollection?: Maybe<AssetCollection>;
   price?: Maybe<Scalars['Float']>;
   shortDescription?: Maybe<Scalars['String']>;
   sku?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  soldOutLabel?: Maybe<Scalars['String']>;
   sys: Sys;
 }
 
@@ -5104,6 +5106,11 @@ export interface ProductNameArgs {
 }
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductPauseArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface ProductPicturesCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
@@ -5128,6 +5135,11 @@ export interface ProductSkuArgs {
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface ProductSlugArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductSoldOutLabelArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
@@ -5288,6 +5300,9 @@ export interface ProductFilter {
   name_not?: InputMaybe<Scalars['String']>;
   name_not_contains?: InputMaybe<Scalars['String']>;
   name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  pause?: InputMaybe<Scalars['Boolean']>;
+  pause_exists?: InputMaybe<Scalars['Boolean']>;
+  pause_not?: InputMaybe<Scalars['Boolean']>;
   picturesCollection_exists?: InputMaybe<Scalars['Boolean']>;
   price?: InputMaybe<Scalars['Float']>;
   price_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5319,6 +5334,13 @@ export interface ProductFilter {
   slug_not?: InputMaybe<Scalars['String']>;
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  soldOutLabel?: InputMaybe<Scalars['String']>;
+  soldOutLabel_contains?: InputMaybe<Scalars['String']>;
+  soldOutLabel_exists?: InputMaybe<Scalars['Boolean']>;
+  soldOutLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  soldOutLabel_not?: InputMaybe<Scalars['String']>;
+  soldOutLabel_not_contains?: InputMaybe<Scalars['String']>;
+  soldOutLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
 }
 
@@ -5374,12 +5396,16 @@ export enum ProductOrder {
   CurrencyDesc = 'currency_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
+  PauseAsc = 'pause_ASC',
+  PauseDesc = 'pause_DESC',
   PriceAsc = 'price_ASC',
   PriceDesc = 'price_DESC',
   SkuAsc = 'sku_ASC',
   SkuDesc = 'sku_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
+  SoldOutLabelAsc = 'soldOutLabel_ASC',
+  SoldOutLabelDesc = 'soldOutLabel_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -9140,6 +9166,8 @@ export type PageSectionProductsFragment = {
               sku?: string | undefined;
               availableQuantity?: number | undefined;
               slug?: string | undefined;
+              soldOutLabel?: string | undefined;
+              pause?: boolean | undefined;
               sys: {
                 __typename?: 'Sys';
                 id: string;
@@ -9194,6 +9222,8 @@ export type PageSectionProductsFragment = {
                           sku?: string | undefined;
                           availableQuantity?: number | undefined;
                           slug?: string | undefined;
+                          soldOutLabel?: string | undefined;
+                          pause?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             id: string;
@@ -9624,6 +9654,8 @@ export type PageShopFragment = {
                           sku?: string | undefined;
                           availableQuantity?: number | undefined;
                           slug?: string | undefined;
+                          soldOutLabel?: string | undefined;
+                          pause?: boolean | undefined;
                           sys: {
                             __typename?: 'Sys';
                             id: string;
@@ -9681,6 +9713,8 @@ export type PageShopFragment = {
                                       sku?: string | undefined;
                                       availableQuantity?: number | undefined;
                                       slug?: string | undefined;
+                                      soldOutLabel?: string | undefined;
+                                      pause?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         id: string;
@@ -10285,6 +10319,8 @@ export type ProductCommonFragment = {
   sku?: string | undefined;
   availableQuantity?: number | undefined;
   slug?: string | undefined;
+  soldOutLabel?: string | undefined;
+  pause?: boolean | undefined;
   sys: { __typename?: 'Sys'; id: string; publishedAt?: any | undefined };
   picturesCollection?:
     | {
@@ -10319,6 +10355,8 @@ export type ProductFragment = {
   sku?: string | undefined;
   availableQuantity?: number | undefined;
   slug?: string | undefined;
+  soldOutLabel?: string | undefined;
+  pause?: boolean | undefined;
   sys: { __typename?: 'Sys'; id: string; publishedAt?: any | undefined };
   picturesCollection?:
     | {
@@ -10354,6 +10392,8 @@ export type ProductDetailFragment = {
   sku?: string | undefined;
   availableQuantity?: number | undefined;
   slug?: string | undefined;
+  soldOutLabel?: string | undefined;
+  pause?: boolean | undefined;
   fullDescription?:
     | { __typename?: 'ProductFullDescription'; json: any }
     | undefined;
@@ -13375,6 +13415,8 @@ export type PageShopCollectionQuery = {
                                       sku?: string | undefined;
                                       availableQuantity?: number | undefined;
                                       slug?: string | undefined;
+                                      soldOutLabel?: string | undefined;
+                                      pause?: boolean | undefined;
                                       sys: {
                                         __typename?: 'Sys';
                                         id: string;
@@ -13438,6 +13480,10 @@ export type PageShopCollectionQuery = {
                                                     | number
                                                     | undefined;
                                                   slug?: string | undefined;
+                                                  soldOutLabel?:
+                                                    | string
+                                                    | undefined;
+                                                  pause?: boolean | undefined;
                                                   sys: {
                                                     __typename?: 'Sys';
                                                     id: string;
@@ -14124,6 +14170,8 @@ export type ProductCollectionBySlugQuery = {
               sku?: string | undefined;
               availableQuantity?: number | undefined;
               slug?: string | undefined;
+              soldOutLabel?: string | undefined;
+              pause?: boolean | undefined;
               fullDescription?:
                 | { __typename?: 'ProductFullDescription'; json: any }
                 | undefined;
@@ -14858,6 +14906,8 @@ export const ProductCommonFragmentDoc = gql`
       name
       icon
     }
+    soldOutLabel
+    pause
   }
   ${SysFragmentDoc}
 `;

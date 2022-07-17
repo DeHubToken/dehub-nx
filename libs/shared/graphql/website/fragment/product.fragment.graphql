@@ -25,6 +25,8 @@ fragment ProductCommon on Product {
     name
     icon
   }
+  soldOutLabel
+  pause
 }
 
 fragment Product on Product {

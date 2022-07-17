@@ -697,6 +697,8 @@ export const ProductCommonFragmentDoc = gql`
       name
       icon
     }
+    soldOutLabel
+    pause
   }
   ${SysFragmentDoc}
 `;
