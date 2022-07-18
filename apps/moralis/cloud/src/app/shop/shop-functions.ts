@@ -9,7 +9,6 @@ import {
 import { emptyPhysicalAddress } from '@dehub/shared/utils';
 import { environment } from '../../environments/environment';
 import { ChainIdAsNumber, isMoralisUserByAddress } from '../shared';
-import RedisClient from '../shared/redis';
 import { getCheckoutContract } from './shop.util';
 
 export const initOrder = async ({
@@ -164,21 +163,8 @@ export const checkOrder = async (orderId: string): Promise<string | null> => {
 export const getCheckoutContractFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const redisClient = new RedisClient();
-    await redisClient.connect();
-    return JSON.parse(
-      await redisClient.getExpired(
-        MoralisFunctions.Shop.GetCheckoutContract,
-        async function (args) {
-          return JSON.stringify(
-            await getCheckoutContract(args as ChainIdAsNumber)
-          );
-        },
-        {
-          args: environment.web3.chainId as ChainIdAsNumber,
-          expire: 1800,
-        }
-      )
+    return await getCheckoutContract(
+      environment.web3.chainId as ChainIdAsNumber
     );
   } catch (err) {
     logger.error(

@@ -2,7 +2,6 @@ import { MoralisFunctions } from '@dehub/shared/model';
 import { environment } from '../../environments/environment';
 import { getStakingContracts } from '../shared';
 import { ChainIdAsNumber } from '../shared/model';
-import RedisClient from '../shared/redis';
 import {
   getActiveStakingContract,
   getRewardContract,
@@ -12,15 +11,7 @@ import {
 export const getStakingContractsFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const redisClient = new RedisClient();
-    await redisClient.connect();
-    return JSON.parse(
-      await redisClient.getExpired(
-        MoralisFunctions.Staking.GetStakingContracts,
-        async () => JSON.stringify(await getStakingContracts()),
-        { expire: 1800 }
-      )
-    );
+    return await getStakingContracts();
   } catch (err) {
     logger.error(
       `${MoralisFunctions.Staking.GetStakingContracts} error: ${JSON.stringify(
@@ -34,21 +25,8 @@ export const getStakingContractsFn = async () => {
 export const getActiveStakingContractFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const redisClient = new RedisClient();
-    await redisClient.connect();
-    return JSON.parse(
-      await redisClient.getExpired(
-        MoralisFunctions.Staking.GetActiveStakingContract,
-        async function (args) {
-          return JSON.stringify(
-            await getActiveStakingContract(args as ChainIdAsNumber)
-          );
-        },
-        {
-          args: environment.web3.chainId as ChainIdAsNumber,
-          expire: 1800,
-        }
-      )
+    return await getActiveStakingContract(
+      environment.web3.chainId as ChainIdAsNumber
     );
   } catch (err) {
     logger.error(
@@ -63,21 +41,8 @@ export const getActiveStakingContractFn = async () => {
 export const getStakingControllerContractFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const redisClient = new RedisClient();
-    await redisClient.connect();
-    return JSON.parse(
-      await redisClient.getExpired(
-        MoralisFunctions.Staking.GetStakingControllerContract,
-        async function (args) {
-          return JSON.stringify(
-            await getStakingControllerContract(args as ChainIdAsNumber)
-          );
-        },
-        {
-          args: environment.web3.chainId as ChainIdAsNumber,
-          expire: 1800,
-        }
-      )
+    return await getStakingControllerContract(
+      environment.web3.chainId as ChainIdAsNumber
     );
   } catch (err) {
     logger.error(
@@ -92,22 +57,7 @@ export const getStakingControllerContractFn = async () => {
 export const getRewardContractFn = async () => {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const redisClient = new RedisClient();
-    await redisClient.connect();
-    return JSON.parse(
-      await redisClient.getExpired(
-        MoralisFunctions.Staking.GetRewardContract,
-        async function (args) {
-          return JSON.stringify(
-            await getRewardContract(args as ChainIdAsNumber)
-          );
-        },
-        {
-          args: environment.web3.chainId as ChainIdAsNumber,
-          expire: 1800,
-        }
-      )
-    );
+    return await getRewardContract(environment.web3.chainId as ChainIdAsNumber);
   } catch (err) {
     logger.error(
       `${MoralisFunctions.Staking.GetRewardContract} error: ${JSON.stringify(
