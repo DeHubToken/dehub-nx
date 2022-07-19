@@ -3,7 +3,7 @@ import {
   EnvToken,
   ILoggerService,
   IMoralisService,
-  LoggerToken,
+  LoggerMoralisToken,
 } from '@dehub/angular/model';
 import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
 import { SharedEnv } from '@dehub/shared/config';
@@ -118,7 +118,7 @@ export class MoralisService implements IMoralisService {
   private unsubscribeFromAccountChanged?: () => events.EventEmitter;
 
   constructor(
-    @Inject(LoggerToken) private logger: ILoggerService,
+    @Inject(LoggerMoralisToken) private logger: ILoggerService,
     @Inject(WINDOW) private readonly windowRef: Window,
     @Inject(EnvToken) private env: SharedEnv,
     private ngZone: NgZone,
@@ -542,7 +542,9 @@ export class MoralisService implements IMoralisService {
 
   getNativeBalance$(parameters: GetNativeBalanceParameters) {
     return from(Moralis.Web3API.account.getNativeBalance(parameters)).pipe(
-      tap(resp => this.logger.info(`Web3API.account.getNativeBalance:`, resp))
+      tap(resp =>
+        this.logger.info(`Moralis.Web3API.account.getNativeBalance:`, resp)
+      )
     );
   }
 

@@ -22,7 +22,8 @@ export class CanPlayDirective implements OnInit {
 
   constructor(
     @Inject(WINDOW) private readonly windowRef: Window,
-    @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
+    @Inject(DehubMoralisToken)
+    private dehubMoralis: IDehubMoralisService,
     private renderer: Renderer2,
     private el: ElementRef,
     private router: Router

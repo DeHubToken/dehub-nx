@@ -6,12 +6,15 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoaderService } from '@dehub/angular/core';
+import {
+  LoaderService,
+  provideDehubLoggerWithScope,
+} from '@dehub/angular/core';
 import {
   EnvToken,
   ILoggerService,
   IMoralisService,
-  LoggerToken,
+  LoggerDehubToken,
   MoralisToken,
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
@@ -35,6 +38,7 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
     ></dhb-connect-wallet-options>
   `,
   styles: [],
+  providers: [...provideDehubLoggerWithScope('Connect Wallet')],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectWalletComponent
@@ -45,7 +49,7 @@ export class ConnectWalletComponent
   walletConnectState$?: Observable<WalletConnectState>;
 
   constructor(
-    @Inject(LoggerToken) private logger: ILoggerService,
+    @Inject(LoggerDehubToken) private logger: ILoggerService,
     @Inject(EnvToken) private env: SharedEnv,
     @Inject(MoralisToken) private moralisService: IMoralisService,
     private loaderService: LoaderService,
