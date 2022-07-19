@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { GraphQLModule } from '@dehub/angular/graphql';
+import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { YoutubeEmbedModule } from '@dehub/angular/ui/components/youtube-embed';
@@ -14,7 +14,7 @@ import { AngularFeatureHomeComponent } from './angular-feature-home.component';
     CommonModule,
 
     // Libs
-    GraphQLModule,
+    AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     YoutubeVideoIdPipeModule,
     YoutubeEmbedModule,

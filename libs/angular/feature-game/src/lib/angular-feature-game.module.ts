@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { GraphQLModule } from '@dehub/angular/graphql';
+import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
@@ -12,7 +12,7 @@ import { AngularFeatureGameComponent } from './angular-feature-game.component';
     CommonModule,
 
     // Libs
-    GraphQLModule,
+    AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
     PageSectionsModule,

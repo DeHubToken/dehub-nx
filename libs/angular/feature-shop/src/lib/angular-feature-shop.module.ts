@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GraphQLModule } from '@dehub/angular/graphql';
+import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { AddressFormModule } from '@dehub/angular/ui/components/address-form';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
@@ -31,7 +31,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     ReactiveFormsModule,
 
     // Libs
-    GraphQLModule,
+    AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     ContentfulRichMarkupPipeModule,
     SafeHtmlPipeModule,
