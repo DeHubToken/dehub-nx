@@ -45,6 +45,7 @@ export class AngularCoreModule {
         MessageService,
         // Default Dehub Logger
         ...provideDehubLoggerWithScope(''),
+        // Moralis Logger
         {
           provide: LoggerMoralisToken,
           useFactory: (env: SharedEnv) =>
