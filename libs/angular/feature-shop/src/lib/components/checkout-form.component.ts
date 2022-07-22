@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { provideDehubLoggerWithScope } from '@dehub/angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import {
   DehubMoralisToken,
@@ -12,7 +13,7 @@ import {
   IDehubMoralisService,
   ILoggerService,
   IMoralisService,
-  LoggerToken,
+  LoggerDehubToken,
   MoralisToken,
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
@@ -180,6 +181,7 @@ import {
     </ng-container>
   `,
   styles: [``],
+  providers: [...provideDehubLoggerWithScope('Checkout Form')],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutFormComponent<P extends ProductCheckoutDetail>
@@ -218,9 +220,10 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   constructor(
     @Inject(MoralisToken) private moralisService: IMoralisService,
-    @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
+    @Inject(DehubMoralisToken)
+    private dehubMoralis: IDehubMoralisService,
     @Inject(EnvToken) public env: SharedEnv,
-    @Inject(LoggerToken) private logger: ILoggerService,
+    @Inject(LoggerDehubToken) private logger: ILoggerService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
     private fb: NonNullableFormBuilder

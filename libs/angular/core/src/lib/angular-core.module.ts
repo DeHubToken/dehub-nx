@@ -1,11 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { LoggerToken } from '@dehub/angular/model';
+import {
+  EnvToken,
+  LoggerContentfulToken,
+  LoggerDehubMoralisToken,
+  LoggerDehubToken,
+  LoggerMoralisToken,
+  ScopeToken,
+} from '@dehub/angular/model';
+import { SharedEnv } from '@dehub/shared/config';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { SwUpdateAvailableComponent } from './components/sw-update-available/sw-update-available.component';
 import { ConsoleLoggerService } from './services/logger.service';
+
+export const provideDehubLoggerWithScope = (scope: string) => [
+  { provide: ScopeToken, useValue: scope },
+  {
+    provide: LoggerDehubToken,
+    useFactory: (scope: string, env: SharedEnv) =>
+      new ConsoleLoggerService(scope, env),
+    deps: [ScopeToken, EnvToken],
+  },
+];
 
 @NgModule({
   imports: [
@@ -25,7 +43,29 @@ export class AngularCoreModule {
       ngModule: AngularCoreModule,
       providers: [
         MessageService,
-        { provide: LoggerToken, useClass: ConsoleLoggerService },
+        // Default Dehub Logger
+        ...provideDehubLoggerWithScope(''),
+        // Moralis Logger
+        {
+          provide: LoggerMoralisToken,
+          useFactory: (env: SharedEnv) =>
+            new ConsoleLoggerService('Moralis', env),
+          deps: [EnvToken],
+        },
+        // Dehub Moralis Logger
+        {
+          provide: LoggerDehubMoralisToken,
+          useFactory: (env: SharedEnv) =>
+            new ConsoleLoggerService('Dehub Moralis', env),
+          deps: [EnvToken],
+        },
+        // Contentful Logger
+        {
+          provide: LoggerContentfulToken,
+          useFactory: (env: SharedEnv) =>
+            new ConsoleLoggerService('Contentful', env),
+          deps: [EnvToken],
+        },
       ],
     };
   }

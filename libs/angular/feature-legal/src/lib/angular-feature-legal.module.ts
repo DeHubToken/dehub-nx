@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { GraphQLModule } from '@dehub/angular/graphql';
+import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
@@ -14,7 +14,7 @@ import { LegalPostComponent } from './components/legal-post.component';
     CommonModule,
 
     // Libs
-    GraphQLModule,
+    AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     ContentfulRichMarkupPipeModule,
     SafeHtmlPipeModule,

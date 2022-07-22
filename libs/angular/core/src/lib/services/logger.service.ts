@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { EnvToken, ILoggerService } from '@dehub/angular/model';
+import { EnvToken, ILoggerService, ScopeToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 
 /**
@@ -7,17 +7,35 @@ import { SharedEnv } from '@dehub/shared/config';
  */
 @Injectable()
 export class ConsoleLoggerService implements ILoggerService {
-  constructor(@Inject(EnvToken) private env: SharedEnv) {}
+  constructor(
+    @Inject(ScopeToken) private scope: string,
+    @Inject(EnvToken) private env: SharedEnv
+  ) {}
 
   info(message: string, ...optionalParams: unknown[]) {
-    if (this.env.env === 'dev') console.info(message, ...optionalParams);
+    if (this.env.env === 'dev')
+      console.info(
+        this.messageWithScope(message),
+        'color:grey',
+        '',
+        ...optionalParams
+      );
   }
 
   warn(message: string, ...optionalParams: unknown[]) {
-    console.warn(message, ...optionalParams);
+    console.warn(
+      this.messageWithScope(message),
+      'color:orange',
+      '',
+      ...optionalParams
+    );
   }
 
   error(message: string, error?: Error) {
-    console.error(message, error);
+    console.error(this.messageWithScope(message), 'color:red', '', error);
+  }
+
+  private messageWithScope(message: string) {
+    return `%c[DeHub]${this.scope ? `(${this.scope})` : ''} %c${message}`;
   }
 }

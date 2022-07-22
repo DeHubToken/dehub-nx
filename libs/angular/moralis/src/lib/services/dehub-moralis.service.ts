@@ -5,7 +5,7 @@ import {
   IDehubMoralisService,
   ILoggerService,
   IMoralisService,
-  LoggerToken,
+  LoggerDehubMoralisToken,
   MoralisToken,
 } from '@dehub/angular/model';
 import { Networks, SharedEnv } from '@dehub/shared/config';
@@ -59,7 +59,7 @@ export class DehubMoralisService implements IDehubMoralisService {
   checkoutContract$ = this.getCheckoutContract$().pipe(publishReplayRefCount());
 
   constructor(
-    @Inject(LoggerToken) private logger: ILoggerService,
+    @Inject(LoggerDehubMoralisToken) private logger: ILoggerService,
     @Inject(MoralisToken) private moralisService: IMoralisService,
     @Inject(EnvToken) private env: SharedEnv,
     private messageService: MessageService,

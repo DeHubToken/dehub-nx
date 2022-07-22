@@ -3,10 +3,10 @@ import * as models from '@dehub/shared/model';
 import * as Operations from '@dehub/shared/model';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import { GraphQLModule } from '../graphql.module';
+import { AngularGraphQLModule } from '../angular-graphql.module';
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class BasicPostCollectionBySlugService extends Apollo.Query<
   models.BasicPostCollectionBySlugQuery,
@@ -20,7 +20,7 @@ export class BasicPostCollectionBySlugService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class FooterCollectionService extends Apollo.Query<
   models.FooterCollectionQuery,
@@ -34,7 +34,7 @@ export class FooterCollectionService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class LegalPostCollectionBySlugService extends Apollo.Query<
   models.LegalPostCollectionBySlugQuery,
@@ -48,7 +48,7 @@ export class LegalPostCollectionBySlugService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class PageAccessWallCollectionService extends Apollo.Query<
   models.PageAccessWallCollectionQuery,
@@ -62,7 +62,7 @@ export class PageAccessWallCollectionService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class PageEarnCollectionService extends Apollo.Query<
   models.PageEarnCollectionQuery,
@@ -76,7 +76,7 @@ export class PageEarnCollectionService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class PageGameCollectionService extends Apollo.Query<
   models.PageGameCollectionQuery,
@@ -90,7 +90,7 @@ export class PageGameCollectionService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class PageHomeCollectionService extends Apollo.Query<
   models.PageHomeCollectionQuery,
@@ -104,7 +104,7 @@ export class PageHomeCollectionService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class PageLearnCollectionService extends Apollo.Query<
   models.PageLearnCollectionQuery,
@@ -118,7 +118,7 @@ export class PageLearnCollectionService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class PageShopCollectionService extends Apollo.Query<
   models.PageShopCollectionQuery,
@@ -132,7 +132,7 @@ export class PageShopCollectionService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class PageStreamCollectionService extends Apollo.Query<
   models.PageStreamCollectionQuery,
@@ -146,7 +146,7 @@ export class PageStreamCollectionService extends Apollo.Query<
 }
 
 @Injectable({
-  providedIn: GraphQLModule,
+  providedIn: AngularGraphQLModule,
 })
 export class ProductCollectionBySlugService extends Apollo.Query<
   models.ProductCollectionBySlugQuery,

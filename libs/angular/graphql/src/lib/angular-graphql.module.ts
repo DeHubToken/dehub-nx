@@ -3,7 +3,11 @@ import { NgModule } from '@angular/core';
 import { InMemoryCache } from '@apollo/client/cache';
 import { from } from '@apollo/client/core';
 import { onError } from '@apollo/client/link/error';
-import { EnvToken } from '@dehub/angular/model';
+import {
+  EnvToken,
+  ILoggerService,
+  LoggerContentfulToken,
+} from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { ApolloModule, APOLLO_FLAGS, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
@@ -24,7 +28,8 @@ export function createApollo(
       isPreview,
       website: { spaceId, cpaToken, cdaToken },
     },
-  }: SharedEnv
+  }: SharedEnv,
+  logger: ILoggerService
 ) {
   return {
     link: from([
@@ -62,7 +67,7 @@ export function createApollo(
             )}, Location: ${locations}, Path: ${path}`;
 
             // Only show warnings in production for unresolved links
-            isUnresolvedLinkError ? console.warn(msg) : console.error(msg);
+            isUnresolvedLinkError ? logger.warn(msg) : logger.error(msg);
           });
 
           // Ignore errors which are just contentful unresolved link related
@@ -74,7 +79,7 @@ export function createApollo(
           }
         }
         if (networkError)
-          console.error(
+          logger.error(
             `[Network error]: ${JSON.stringify(networkError, undefined, 1)}`
           );
       }),
@@ -104,8 +109,8 @@ export function createApollo(
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpLink, EnvToken],
+      deps: [HttpLink, EnvToken, LoggerContentfulToken],
     },
   ],
 })
-export class GraphQLModule {}
+export class AngularGraphQLModule {}

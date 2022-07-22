@@ -11,7 +11,8 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class CanPlayGuard implements CanActivate {
   constructor(
-    @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
+    @Inject(DehubMoralisToken)
+    private dehubMoralis: IDehubMoralisService,
     private router: Router
   ) {}
 

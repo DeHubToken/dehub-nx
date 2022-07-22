@@ -1,10 +1,16 @@
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DehubMoralisToken, MoralisToken } from '@dehub/angular/model';
+import {
+  DehubMoralisToken,
+  ILoggerService,
+  LoggerMoralisToken,
+  MoralisToken,
+} from '@dehub/angular/model';
 import { StartOptions } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DehubMoralisService, MoralisService } from './services';
+
 @NgModule({
   imports: [
     // Angular
@@ -17,22 +23,21 @@ export class AngularMoralisModule {
   static forRoot(
     options: StartOptions
   ): ModuleWithProviders<AngularMoralisModule> {
-    /**
-     * Initialize the SDK
-     * Docs: https://docs.moralis.io/moralis-server/getting-started/connect-the-sdk#initialize-the-sdk
-     **/
-    const initializeMoralis = () =>
-      Moralis.start(options).then(() =>
-        console.info('Moralis has been initialized.')
-      );
-
     return {
       ngModule: AngularMoralisModule,
       providers: [
         {
           provide: APP_INITIALIZER,
-          useFactory: () => initializeMoralis,
+          useFactory: (logger: ILoggerService) => () =>
+            /**
+             * Initialize the SDK
+             * Docs: https://docs.moralis.io/moralis-server/getting-started/connect-the-sdk#initialize-the-sdk
+             **/
+            Moralis.start(options).then(() =>
+              logger.info('Moralis has been initialized.')
+            ),
           multi: true,
+          deps: [LoggerMoralisToken],
         },
         MessageService,
         ConfirmationService,
