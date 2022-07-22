@@ -32,7 +32,7 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
   selector: 'dhb-phone-input',
   template: `
     <div
-      *ngIf="countries$ | async as countries"
+      *ngIf="countries$ | async as countries; else loading"
       [formGroup]="phoneForm"
       class="grid grid-nogutter"
     >
@@ -69,6 +69,7 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
           <label for="code" class="pr-5">Code</label>
         </span>
       </div>
+
       <!-- Number -->
       <div id="phone-number" class="field col">
         <span class="p-float-label">
@@ -85,6 +86,11 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
         </span>
       </div>
     </div>
+
+    <!-- Loading -->
+    <ng-template #loading>
+      <dhb-loading></dhb-loading>
+    </ng-template>
   `,
   styles: [
     `
