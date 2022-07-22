@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GraphQLModule } from '@dehub/angular/graphql';
 import { AddressFormModule } from '@dehub/angular/ui/components/address-form';
+import { ContactsFormModule } from '@dehub/angular/ui/components/contacts-form';
+import { LoadingModule } from '@dehub/angular/ui/components/loading';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
-import { PhoneInputModule } from '@dehub/angular/ui/components/phone-input';
 import { ProductMiniModule } from '@dehub/angular/ui/components/product-mini';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
@@ -39,12 +40,14 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     PageSectionsModule,
     ProductMiniModule,
     AddressFormModule,
-    PhoneInputModule,
+    ContactsFormModule,
+    LoadingModule,
 
     // PrimeNg
     ButtonModule,
     InputNumberModule,
     InputTextModule,
+
     // Swiper
     SwiperModule,
 

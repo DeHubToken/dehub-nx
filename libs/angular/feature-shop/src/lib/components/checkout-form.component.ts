@@ -5,11 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {
-  FormControl,
-  NonNullableFormBuilder,
-  Validators,
-} from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import {
   DehubMoralisToken,
   EnvToken,
@@ -89,56 +85,28 @@ import {
 
           <!-- Contact -->
           <h5>Contact Details</h5>
-          <form
-            *ngIf="userContacts$ | async as contacts"
-            [formGroup]="checkoutForm.controls.contacts"
-            class="p-fluid grid pt-2"
+          <dhb-contacts-form
+            *ngIf="userContacts$ | async as contacts; else loading"
+            [formControl]="checkoutForm.controls.contacts"
+            [prefillData]="contacts"
           >
-            <!-- Email -->
-            <div class="field col-12 sm:col-5">
-              <div class="p-inputgroup">
-                <span class="p-inputgroup-addon">
-                  <i class="fa-duotone fa-envelope"></i>
-                </span>
-                <span class="p-float-label">
-                  <input
-                    [formControlName]="'email'"
-                    type="text"
-                    id="email"
-                    autocomplete="email"
-                    pInputText
-                  />
-                  <label for="email" class="pr-5">Email Address</label>
-                </span>
-              </div>
-            </div>
-
-            <!-- Phone -->
-            <div class="field col-12 sm:col-7 p-fluid">
-              <dhb-phone-input
-                [formControl]="checkoutForm.controls.contacts.controls.phone"
-                [prefillData]="contacts.phone"
-              ></dhb-phone-input>
-            </div>
-          </form>
+          </dhb-contacts-form>
 
           <!-- Shipping Address -->
           <h5>Shipping Address</h5>
           <dhb-address-form
-            *ngIf="userShippingAddress$ | async as resp; else addressLoading"
-            [formControl]="
-              checkoutForm.controls.shippingAddress.controls.address
-            "
+            *ngIf="userShippingAddress$ | async as resp; else loading"
+            [formControl]="checkoutForm.controls.shippingAddress"
             [prefillData]="
               !isShippingAddressResponseEmpty(resp)
                 ? resp.attributes
                 : undefined
             "
           ></dhb-address-form>
-          <ng-template #addressLoading>
-            <p>
-              <i class="fa-solid fa-circle-notch fa-spin"></i>&nbsp;Loading...
-            </p>
+
+          <!-- Loading Template -->
+          <ng-template #loading>
+            <dhb-loading></dhb-loading>
           </ng-template>
 
           <!-- Total -->
@@ -238,15 +206,10 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   checkoutForm = this.fb.group({
     quantity: [1],
-    contacts: this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
-    }),
-    shippingAddress: this.fb.group({
-      address: new FormControl<PhysicalAddress | null>(null, [
-        Validators.required,
-      ]),
-    }),
+    contacts: this.fb.control<Contacts | null>(null, [Validators.required]),
+    shippingAddress: this.fb.control<PhysicalAddress | null>(null, [
+      Validators.required,
+    ]),
   });
 
   totalAmount = 0;
@@ -278,16 +241,22 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   }
 
   onConfirm(account: string) {
-    // Update user contacts
-    const { email, phone } = this.checkoutForm.controls.contacts.value;
+    const contacts = this.checkoutForm.controls.contacts.value;
 
+    if (!contacts) {
+      throw new Error('User contacts are missing!');
+    }
+
+    const { email, phone } = contacts;
+
+    // Update user contacts
     this.sub = this.moralisService
       .updateUser$({ email, phone })
       .pipe(tap(() => this.isConfirmingSubject.next(true)))
       .subscribe(_user => {
         const parseUnits = Moralis.web3Library.utils.parseUnits;
         const shippingAddress =
-          this.checkoutForm.controls.shippingAddress.controls.address.value;
+          this.checkoutForm.controls.shippingAddress.value;
         if (this.product && shippingAddress && this.checkoutContract$) {
           const priceStr = this.product.price.toString();
           const totalAmountStr = this.totalAmount.toString();
