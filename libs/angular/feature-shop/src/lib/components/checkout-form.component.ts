@@ -395,9 +395,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                     .hasEnoughBalance$(
                       currency,
                       account,
-                      parseUnits(priceStr, metadata.decimals).mul(
-                        totalAmountStr
-                      )
+                      parseUnits(totalAmountStr, metadata.decimals)
                     )
                     .pipe(
                       concatMap(hasEnough => {
