@@ -366,7 +366,6 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
           const shippingAddress =
             this.checkoutForm.controls.shippingAddress.value;
           if (this.product && shippingAddress && this.checkoutContract$) {
-            const priceStr = this.product.price.toString();
             const totalAmountStr = this.totalAmount.toString();
             const currency = this.product.currency;
             const quantity = this.checkoutForm.controls.quantity.value;
