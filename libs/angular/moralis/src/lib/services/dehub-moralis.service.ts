@@ -130,7 +130,6 @@ export class DehubMoralisService implements IDehubMoralisService {
   hasEnoughBalance$(currency: Currency, address: string, amount: BigNumber) {
     return this.getWalletBalance$(currency, address).pipe(
       map(balance => {
-        console.log(balance.toString(), amount.toString());
         if (balance.gte(amount)) {
           return true;
         } else {
