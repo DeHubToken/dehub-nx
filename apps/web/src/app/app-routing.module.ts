@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule } from '@angular/router';
+import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
 import { PwaService } from '@dehub/angular/core';
 import { MenuItem } from 'primeng/api';
 // import { MenuItem } from '@dehub/shared/model';
@@ -99,6 +99,30 @@ export const tabMenuItems: MenuItem[] = [
     routerLink: [NavigationTabMenu.Earn],
   },
 ];
+
+/**
+ * Router extra options
+ * Docs: https://angular.io/api/router/ExtraOptions
+ */
+const routerExtraOptions: ExtraOptions = {
+  /**
+   * Preload all Lazy modules while the user start navigating the app
+   * Docs :https://angular.io/api/router/ExtraOptions#preloadingStrategy
+   */
+  preloadingStrategy: PreloadAllModules,
+
+  /**
+   * The scroll position needs to be restored when navigating back
+   * Docs: https://angular.io/api/router/ExtraOptions#scrollPositionRestoration
+   */
+  scrollPositionRestoration: 'enabled',
+
+  /** https://angular.io/api/router/ExtraOptions#initialNavigation */
+  initialNavigation: 'enabledBlocking',
+
+  /** https://angular.io/api/router/ExtraOptions#onSameUrlNavigation */
+  // onSameUrlNavigation: 'reload',
+};
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -185,11 +209,7 @@ export const tabMenuItems: MenuItem[] = [
         { path: '**', redirectTo: '' },
       ],
       {
-        // Preload all Lazy modules while the user start navigating the app
-        preloadingStrategy: PreloadAllModules,
-        // The scroll position needs to be restored when navigating back
-        scrollPositionRestoration: 'enabled',
-        initialNavigation: 'enabledBlocking',
+        ...routerExtraOptions,
       }
     ),
   ],
