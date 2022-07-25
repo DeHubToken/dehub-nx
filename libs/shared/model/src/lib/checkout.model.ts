@@ -1,7 +1,12 @@
 import { Currency } from './shop.model';
-import { Asset, ProductCategory } from './website-contentful.model';
+import {
+  Asset,
+  ProductCategory,
+  SysFragment,
+} from './website-contentful.model';
 
 export interface ProductCheckoutDetail {
+  sys: SysFragment;
   picture: Asset;
   name: string;
   description: string;

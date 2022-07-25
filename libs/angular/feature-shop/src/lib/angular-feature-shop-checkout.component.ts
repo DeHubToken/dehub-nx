@@ -20,6 +20,7 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
   ngOnInit(): void {
     const productDetail = this.route.snapshot.data['productDetail'];
     const data: ProductCheckoutDetail = {
+      sys: productDetail.sys,
       picture: productDetail.picturesCollection?.items[0],
       name: productDetail.name,
       description: richMarkupToPlainString(productDetail.fullDescription.json),
