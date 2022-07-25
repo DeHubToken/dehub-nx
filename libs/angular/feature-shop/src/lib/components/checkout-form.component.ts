@@ -5,8 +5,8 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { provideDehubLoggerWithScope } from '@dehub/angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { provideDehubLoggerWithScope } from '@dehub/angular/core';
 import {
   DehubMoralisToken,
   EnvToken,
@@ -20,6 +20,7 @@ import { SharedEnv } from '@dehub/shared/config';
 import {
   Contacts,
   ContractPropsType,
+  Currency,
   DeHubShopShippingAddresses,
   InitOrderParams,
   OrderStatus,
@@ -28,7 +29,10 @@ import {
   ProductData,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
-import { getContractByCurrency } from '@dehub/shared/utils';
+import {
+  getContractByCurrency,
+  publishReplayRefCount,
+} from '@dehub/shared/utils';
 import { BigNumber } from '@ethersproject/bignumber';
 import Moralis from 'moralis';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -59,7 +63,7 @@ import {
 @Component({
   template: `
     <ng-container *ngIf="product">
-      <ng-container *ngIf="(isConfirming$ | async) === false; else message">
+      <ng-container *ngIf="(isProcessing$ | async) === false; else message">
         <!-- Product Item -->
         <dhb-product-mini [product]="product"></dhb-product-mini>
 
@@ -141,16 +145,34 @@ import {
                 (click)="ref.close()"
               ></p-button>
 
-              <!-- Checkout -->
-              <p-button
-                *ngIf="account$ | async as account"
-                label="Confirm"
-                icon="fa-regular fa-check"
-                class="w-5"
-                styleClass="p-button-primary p-button-lg w-full"
-                [disabled]="!checkoutForm.valid"
-                (onClick)="onConfirm(account)"
-              ></p-button>
+              <ng-container *ngIf="hasAllowance$">
+                <!-- Approve -->
+                <p-button
+                  *ngIf="(hasAllowance$ | async) === false; else confirm"
+                  label="Approve"
+                  icon="fa-regular fa-check"
+                  class="w-5"
+                  styleClass="p-button-primary p-button-lg w-full"
+                  (onClick)="onApprove()"
+                ></p-button>
+
+                <!-- Checkout -->
+                <ng-template #confirm>
+                  <p-button
+                    *ngIf="
+                      (hasAllowance$ | async) === true &&
+                        (account$ | async) as account;
+                      else loading
+                    "
+                    label="Confirm"
+                    icon="fa-regular fa-check"
+                    class="w-5"
+                    styleClass="p-button-primary p-button-lg w-full"
+                    [disabled]="!checkoutForm.valid"
+                    (onClick)="onConfirm(account)"
+                  ></p-button>
+                </ng-template>
+              </ng-container>
             </div>
           </div>
         </ng-container>
@@ -189,13 +211,18 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 {
   product?: P;
 
-  account$?: Observable<string | undefined>;
-  userContacts$?: Observable<Contacts>;
-  userShippingAddress$?: Observable<DeHubShopShippingAddresses | undefined>;
-  checkoutContract$?: Observable<ContractPropsType>;
+  account$: Observable<string | undefined> = this.moralisService.account$;
+  userContacts$: Observable<Contacts> = this.dehubMoralis.userContacts$.pipe(
+    tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
+  );
+  userShippingAddress$: Observable<DeHubShopShippingAddresses | undefined> =
+    this.dehubMoralis.userShippingAddress$;
+  checkoutContract$: Observable<ContractPropsType> =
+    this.dehubMoralis.checkoutContract$;
+  hasAllowance$?: Observable<boolean>;
 
-  private isConfirmingSubject = new BehaviorSubject<boolean>(false);
-  isConfirming$ = this.isConfirmingSubject.asObservable();
+  private isProcessingSubject = new BehaviorSubject<boolean>(false);
+  isProcessing$ = this.isProcessingSubject.asObservable();
 
   private isCompleteSubject = new BehaviorSubject<boolean>(false);
   isComplete$ = this.isCompleteSubject.asObservable();
@@ -216,7 +243,24 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   totalAmount = 0;
 
-  private sub?: Subscription;
+  private parseUnits = Moralis.web3Library.utils.parseUnits;
+  private subs = new Subscription();
+
+  tokenMetadata$ = (currency: Currency) =>
+    this.moralisService
+      .getTokenMetadata$({
+        chain: decimalToHex(this.env.web3.chainId),
+        addresses: [
+          getContractByCurrency(currency, this.env.web3.addresses.contracts),
+        ],
+      })
+      .pipe(
+        map(resp => resp[0]),
+        publishReplayRefCount()
+      );
+
+  checkoutContractWithTokenMetadata$ = (currency: Currency) =>
+    combineLatest([this.checkoutContract$, this.tokenMetadata$(currency)]);
 
   constructor(
     @Inject(MoralisToken) private moralisService: IMoralisService,
@@ -231,16 +275,57 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   ngOnInit() {
     this.product = this.config.data;
-    const { account$ } = this.moralisService;
-    const { userContacts$, userShippingAddress$, checkoutContract$ } =
-      this.dehubMoralis;
-    this.account$ = account$;
-    this.userContacts$ = userContacts$.pipe(
-      tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
-    );
 
-    this.userShippingAddress$ = userShippingAddress$;
-    this.checkoutContract$ = checkoutContract$;
+    // Check token allowance
+    if (this.product) {
+      const currency = this.product.currency;
+      const price = this.product.price;
+      this.hasAllowance$ = this.checkoutContractWithTokenMetadata$(
+        currency
+      ).pipe(
+        tap(() => this.setProcMsg(CheckoutProcessMessage.AllowanceCheck)),
+        exhaustMap(([checkoutContract, metadata]) =>
+          this.moralisService
+            .getTokenAllowance$(
+              metadata.address,
+              checkoutContract.address,
+              metadata.decimals
+            )
+            .pipe(
+              // We check allowance for at least one item. If we have no allowance, we have to force infinite allowance approval.
+              map(allowance =>
+                allowance.gte(
+                  this.parseUnits(price.toString(), metadata.decimals)
+                )
+              )
+            )
+        ),
+        tap(v => this.logger.info('Has allowance?', v))
+      );
+    }
+  }
+
+  onApprove() {
+    if (this.product) {
+      const currency = this.product.currency;
+      this.subs.add(
+        this.checkoutContractWithTokenMetadata$(currency)
+          .pipe(
+            tap(() => {
+              this.setProcMsg(CheckoutProcessMessage.AllowanceSet);
+              this.isProcessingSubject.next(true);
+            }),
+            exhaustMap(([checkoutContract, metadata]) =>
+              this.moralisService.setTokenAllowance$(
+                metadata.address,
+                checkoutContract.address
+              )
+            ),
+            tap(() => this.isProcessingSubject.next(false))
+          )
+          .subscribe()
+      );
+    }
   }
 
   onConfirm(account: string) {
@@ -253,133 +338,143 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
     const { email, phone } = contacts;
 
     // Update user contacts
-    this.sub = this.moralisService
-      .updateUser$({ email, phone })
-      .pipe(tap(() => this.isConfirmingSubject.next(true)))
-      .subscribe(_user => {
-        const parseUnits = Moralis.web3Library.utils.parseUnits;
-        const shippingAddress =
-          this.checkoutForm.controls.shippingAddress.value;
-        if (this.product && shippingAddress && this.checkoutContract$) {
-          const priceStr = this.product.price.toString();
-          const totalAmountStr = this.totalAmount.toString();
-          const currency = this.product.currency;
-          const quantity = this.checkoutForm.controls.quantity.value;
-          const productData: ProductData = {
-            name: this.product.name,
-            description: this.product.description,
-            image: this.product.picture.url || '',
-            sku: this.product.sku,
-            category: this.product.category.name || '',
-          };
-          const params: InitOrderParams = {
-            address: account,
-            contentfulId: this.product.contentfulId,
-            productData,
-            shippingAddress,
-            quantity,
-            totalAmount: this.totalAmount,
-            currency,
-          };
+    this.subs.add(
+      this.moralisService
+        .updateUser$({ email, phone })
+        .pipe(tap(() => this.isProcessingSubject.next(true)))
+        .subscribe(_user => {
+          const parseUnits = Moralis.web3Library.utils.parseUnits;
+          const shippingAddress =
+            this.checkoutForm.controls.shippingAddress.value;
+          if (this.product && shippingAddress && this.checkoutContract$) {
+            const priceStr = this.product.price.toString();
+            const totalAmountStr = this.totalAmount.toString();
+            const currency = this.product.currency;
+            const quantity = this.checkoutForm.controls.quantity.value;
+            const productData: ProductData = {
+              name: this.product.name,
+              description: this.product.description,
+              image: this.product.picture.url || '',
+              sku: this.product.sku,
+              category: this.product.category.name || '',
+            };
+            const params: InitOrderParams = {
+              address: account,
+              contentfulId: this.product.contentfulId,
+              productData,
+              shippingAddress,
+              quantity,
+              totalAmount: this.totalAmount,
+              currency,
+            };
 
-          combineLatest([
-            this.checkoutContract$,
-            this.moralisService
-              .getTokenMetadata$({
-                chain: decimalToHex(this.env.web3.chainId),
-                addresses: [
-                  getContractByCurrency(
-                    currency,
-                    this.env.web3.addresses.contracts
-                  ),
-                ],
-              })
-              .pipe(map(resp => resp[0])),
-          ])
-            .pipe(
-              tap(() => this.setProcMsg(CheckoutProcessMessage.AllowanceCheck)),
-              exhaustMap(([checkoutContract, metadata]) =>
-                combineLatest([
-                  this.dehubMoralis.hasEnoughBalance$(
-                    currency,
-                    account,
-                    parseUnits(priceStr, metadata.decimals).mul(totalAmountStr)
-                  ),
-                  this.moralisService.getTokenAllowance$(
-                    metadata.address,
-                    checkoutContract.address,
-                    metadata.decimals
-                  ),
-                ]).pipe(
-                  concatMap(([hasEnough, allowance]) => {
-                    // Check if we have enough balance and allowance
-                    if (!hasEnough) {
-                      return throwError(() => new Error());
-                    } else if (
-                      allowance.gte(
-                        parseUnits(totalAmountStr, metadata.decimals)
+            combineLatest([
+              this.checkoutContract$,
+              this.moralisService
+                .getTokenMetadata$({
+                  chain: decimalToHex(this.env.web3.chainId),
+                  addresses: [
+                    getContractByCurrency(
+                      currency,
+                      this.env.web3.addresses.contracts
+                    ),
+                  ],
+                })
+                .pipe(map(resp => resp[0])),
+            ])
+              .pipe(
+                tap(() =>
+                  this.setProcMsg(CheckoutProcessMessage.AllowanceCheck)
+                ),
+                exhaustMap(([checkoutContract, metadata]) =>
+                  combineLatest([
+                    this.dehubMoralis.hasEnoughBalance$(
+                      currency,
+                      account,
+                      parseUnits(priceStr, metadata.decimals).mul(
+                        totalAmountStr
                       )
-                    ) {
-                      return of(undefined);
-                    } else {
-                      this.setProcMsg(CheckoutProcessMessage.AllowanceSet);
-                      // Increase allowance to max and wait for confirmation
-                      return this.moralisService.setTokenAllowance$(
-                        metadata.address,
-                        checkoutContract.address
-                      );
-                    }
-                  }),
-                  // Init order will upload data to IPFS and store a record with status 'verifying' on Moralis.
-                  tap(() => this.setProcMsg(CheckoutProcessMessage.OrderInit)),
-                  concatMap(() => this.dehubMoralis.initOrder$(params)),
-                  // Mint the actual NFT with order ID and IPFS URI
-                  tap(() =>
-                    this.setProcMsg(CheckoutProcessMessage.ReceiptMint)
-                  ),
-                  concatMap(({ orderId, ipfsHash }) =>
-                    zip(
-                      of(orderId),
-                      this.dehubMoralis.mintReceipt$(
-                        orderId,
-                        ipfsHash,
-                        checkoutContract,
-                        currency,
-                        parseUnits(totalAmountStr, metadata.decimals),
-                        BigNumber.from(quantity)
+                    ),
+                    this.moralisService.getTokenAllowance$(
+                      metadata.address,
+                      checkoutContract.address,
+                      metadata.decimals
+                    ),
+                  ]).pipe(
+                    concatMap(([hasEnough, allowance]) => {
+                      // Check if we have enough balance and allowance
+                      if (!hasEnough) {
+                        return throwError(() => new Error());
+                      } else if (
+                        allowance.gte(
+                          parseUnits(totalAmountStr, metadata.decimals)
+                        )
+                      ) {
+                        return of(undefined);
+                      } else {
+                        this.setProcMsg(CheckoutProcessMessage.AllowanceSet);
+                        // Increase allowance to max and wait for confirmation
+                        return this.moralisService.setTokenAllowance$(
+                          metadata.address,
+                          checkoutContract.address
+                        );
+                      }
+                    }),
+                    // Init order will upload data to IPFS and store a record with status 'verifying' on Moralis.
+                    tap(() =>
+                      this.setProcMsg(CheckoutProcessMessage.OrderInit)
+                    ),
+                    concatMap(() => this.dehubMoralis.initOrder$(params)),
+                    // Mint the actual NFT with order ID and IPFS URI
+                    tap(() =>
+                      this.setProcMsg(CheckoutProcessMessage.ReceiptMint)
+                    ),
+                    concatMap(({ orderId, ipfsHash }) =>
+                      zip(
+                        of(orderId),
+                        this.dehubMoralis.mintReceipt$(
+                          orderId,
+                          ipfsHash,
+                          checkoutContract,
+                          currency,
+                          parseUnits(totalAmountStr, metadata.decimals),
+                          BigNumber.from(quantity)
+                        )
                       )
                     )
                   )
-                )
-              ),
-              // Keep checking the order status until it's verified.
-              tap(() => this.setProcMsg(CheckoutProcessMessage.VerifyReceipt)),
-              concatMap(([orderId]) =>
-                this.dehubMoralis.checkOrder$({ orderId: orderId }).pipe(
-                  repeatWhen(obs => obs.pipe(delay(1000))),
-                  filter(data => data.status !== OrderStatus.verified),
-                  first()
-                )
-              ),
-              map(() => {
-                this.setProcMsg(CheckoutProcessMessage.OrderSuccess);
-                this.logger.info('Order completed!');
-              }),
-              first(),
-              finalize(() => this.isCompleteSubject.next(true)),
-              catchError(() => {
-                this.logger.error('Order failed!');
-                this.setProcMsg(CheckoutProcessMessage.OrderError);
-                return of(undefined);
-              })
-            )
-            .subscribe();
-        } else {
-          throw new Error(
-            'Product, shipping address or checkout contract is missing!'
-          );
-        }
-      });
+                ),
+                // Keep checking the order status until it's verified.
+                tap(() =>
+                  this.setProcMsg(CheckoutProcessMessage.VerifyReceipt)
+                ),
+                concatMap(([orderId]) =>
+                  this.dehubMoralis.checkOrder$({ orderId: orderId }).pipe(
+                    repeatWhen(obs => obs.pipe(delay(1000))),
+                    filter(data => data.status !== OrderStatus.verified),
+                    first()
+                  )
+                ),
+                map(() => {
+                  this.setProcMsg(CheckoutProcessMessage.OrderSuccess);
+                  this.logger.info('Order completed!');
+                }),
+                first(),
+                finalize(() => this.isCompleteSubject.next(true)),
+                catchError(() => {
+                  this.logger.error('Order failed!');
+                  this.setProcMsg(CheckoutProcessMessage.OrderError);
+                  return of(undefined);
+                })
+              )
+              .subscribe();
+          } else {
+            throw new Error(
+              'Product, shipping address or checkout contract is missing!'
+            );
+          }
+        })
+    );
   }
 
   setProcMsg(msg: CheckoutProcessMessage) {
@@ -416,8 +511,6 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   }
 
   ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
+    this.subs.unsubscribe();
   }
 }
