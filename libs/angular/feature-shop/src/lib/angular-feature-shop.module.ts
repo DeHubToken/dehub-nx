@@ -20,6 +20,7 @@ import { AngularFeatureShopRoutingModule } from './angular-feature-shop-routing.
 import { AngularFeatureShopComponent } from './angular-feature-shop.component';
 import { CheckoutFormComponent } from './components/checkout-form.component';
 import { ProductDetailComponent } from './components/product-detail.component';
+import { ProductDetailResolver } from './services';
 
 // Install Swiper modules
 SwiperCore.use([Pagination, Navigation, Autoplay]);
@@ -56,5 +57,6 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     ProductDetailComponent,
     CheckoutFormComponent,
   ],
+  providers: [ProductDetailResolver],
 })
 export class AngularFeatureShopModule {}

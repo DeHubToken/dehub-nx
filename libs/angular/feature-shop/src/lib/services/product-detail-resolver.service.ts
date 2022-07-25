@@ -6,23 +6,21 @@ import { SharedEnv } from '@dehub/shared/config';
 import { ProductDetailFragment } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ProductDetailsResolver
+@Injectable()
+export class ProductDetailResolver
   implements Resolve<ProductDetailFragment | undefined>
 {
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
-    private productDetailsBySlugService: ProductCollectionBySlugService
+    private productDetailBySlugService: ProductCollectionBySlugService
   ) {}
 
   resolve(
     route: ActivatedRouteSnapshot
   ): Observable<ProductDetailFragment | undefined> {
-    const slug = route.params['slug'];
+    const slug = route.paramMap.get('slug') ?? undefined;
 
-    const productDetail$ = this.productDetailsBySlugService
+    return this.productDetailBySlugService
       .fetch({
         slug,
         isPreview: this.env.contentful.isPreview,
@@ -33,6 +31,5 @@ export class ProductDetailsResolver
             productCollection?.items[0] ?? undefined
         )
       );
-    return productDetail$;
   }
 }

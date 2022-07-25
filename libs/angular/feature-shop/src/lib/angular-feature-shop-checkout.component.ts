@@ -18,17 +18,17 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const productDetails = this.route.snapshot.data['productDetails'];
+    const productDetail = this.route.snapshot.data['productDetail'];
     const data: ProductCheckoutDetail = {
-      picture: productDetails.picturesCollection?.items[0],
-      name: productDetails.name,
-      description: richMarkupToPlainString(productDetails.fullDescription.json),
-      availableQuantity: productDetails.availableQuantity,
-      category: productDetails.category,
-      price: productDetails.price,
-      currency: productDetails.currency,
-      contentfulId: productDetails.sys.id,
-      sku: productDetails.sku,
+      picture: productDetail.picturesCollection?.items[0],
+      name: productDetail.name,
+      description: richMarkupToPlainString(productDetail.fullDescription.json),
+      availableQuantity: productDetail.availableQuantity,
+      category: productDetail.category,
+      price: productDetail.price,
+      currency: productDetail.currency,
+      contentfulId: productDetail.sys.id,
+      sku: productDetail.sku,
     };
     const ref = this.dialogService.open(CheckoutFormComponent, {
       showHeader: true,

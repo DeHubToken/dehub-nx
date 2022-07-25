@@ -19,7 +19,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
         <!-- Basic Post Detail -->
         <dhb-product-detail
-          [productDetail]="productDetails"
+          [productDetail]="productDetail"
         ></dhb-product-detail>
       </div>
     </div>
@@ -28,11 +28,11 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
 })
 export class AngularFeatureShopProductDetailComponent implements OnInit {
-  productDetails?: ProductDetailFragment;
+  productDetail?: ProductDetailFragment;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.productDetails = this.route.snapshot.data['productDetails'];
+    this.productDetail = this.route.snapshot.data['productDetail'];
   }
 }
