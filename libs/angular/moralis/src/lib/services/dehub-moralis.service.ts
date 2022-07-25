@@ -32,7 +32,7 @@ import { getAddress } from '@ethersproject/address';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Moralis } from 'moralis';
 import { MessageService } from 'primeng/api';
-import { concatMap, from, Observable, switchMap, tap } from 'rxjs';
+import { concatMap, from, iif, Observable, switchMap, tap } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 @Injectable()
@@ -91,59 +91,36 @@ export class DehubMoralisService implements IDehubMoralisService {
     address: string
   ): Observable<BigNumber> {
     const chain = decimalToHex(this.env.web3.chainId);
-    // const { nativeCurrency } = Networks[this.env.web3.chainId];
+    const { nativeCurrency } = Networks[this.env.web3.chainId];
 
-    // return iif(
-    //   () => currency === nativeCurrency.name,
-    //   this.moralisService.getNativeBalance$({
-    //     chain,
-    //     address,
-    //   }),
-    //   this.moralisService
-    //     .getTokenBalances$({
-    //       chain,
-    //       address,
-    //     })
-    //     .pipe(
-    //       map(
-    //         balances =>
-    //           balances.find(
-    //             resp =>
-    //               getAddress(resp.token_address) ===
-    //               getContractByCurrency(
-    //                 currency,
-    //                 this.env.web3.addresses.contracts
-    //               )
-    //           ) || { balance: '0', symbol: '-' }
-    //       ),
-    //       tap(({ balance, symbol }) =>
-    //         this.logger.info(`${symbol} balance found: ${balance.toString()}`)
-    //       )
-    //     )
-    // ).pipe(map(({ balance }) => BigNumber.from(balance)));
-
-    return this.moralisService
-      .getTokenBalances$({
+    return iif(
+      () => currency === nativeCurrency.name,
+      this.moralisService.getNativeBalance$({
         chain,
         address,
-      })
-      .pipe(
-        map(
-          balances =>
-            balances.find(
-              resp =>
-                getAddress(resp.token_address) ===
-                getContractByCurrency(
-                  currency,
-                  this.env.web3.addresses.contracts
-                )
-            ) || { balance: '0', symbol: '-' }
-        ),
-        tap(({ balance, symbol }) =>
-          this.logger.info(`${symbol} balance found: ${balance.toString()}`)
-        ),
-        map(({ balance }) => BigNumber.from(balance))
-      );
+      }),
+      this.moralisService
+        .getTokenBalances$({
+          chain,
+          address,
+        })
+        .pipe(
+          map(
+            balances =>
+              balances.find(
+                resp =>
+                  getAddress(resp.token_address) ===
+                  getContractByCurrency(
+                    currency,
+                    this.env.web3.addresses.contracts
+                  )
+              ) || { balance: '0', symbol: '-' }
+          ),
+          tap(({ balance, symbol }) =>
+            this.logger.info(`${symbol} balance found: ${balance.toString()}`)
+          )
+        )
+    ).pipe(map(({ balance }) => BigNumber.from(balance)));
   }
 
   /**
@@ -153,6 +130,7 @@ export class DehubMoralisService implements IDehubMoralisService {
   hasEnoughBalance$(currency: Currency, address: string, amount: BigNumber) {
     return this.getWalletBalance$(currency, address).pipe(
       map(balance => {
+        console.log(balance.toString(), amount.toString());
         if (balance.gte(amount)) {
           return true;
         } else {
