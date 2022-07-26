@@ -70,6 +70,9 @@ export interface IMoralisService {
   getTokenBalances$: (
     parameters: GetTokenBalancesParameters
   ) => Observable<Erc20TokenBalance>;
+
+  // Misc
+  getCloudFunctionUrl: (functionName: string) => string;
 }
 
 /** Dehub specific moralis business logic */
