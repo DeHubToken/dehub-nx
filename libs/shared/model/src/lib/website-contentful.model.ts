@@ -6496,13 +6496,13 @@ export interface CfProductCategoryNestedFilter {
 export type BasicPostCommonFragment = {
   __typename?: 'BasicPost';
   title?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   mainPicture?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -6512,13 +6512,13 @@ export type BasicPostFragment = {
   summary?: string | undefined;
   slug?: string | undefined;
   title?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   mainPicture?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -6527,13 +6527,13 @@ export type BasicPostDetailFragment = {
   __typename?: 'BasicPost';
   title?: string | undefined;
   description?: { __typename?: 'BasicPostDescription'; json: any } | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   mainPicture?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -6547,7 +6547,7 @@ export type CallToActionFragment = {
   style?: string | undefined;
   size?: string | undefined;
   icon?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
 };
 
 export type ChartPostFragment = {
@@ -6557,10 +6557,14 @@ export type ChartPostFragment = {
   chartType?: string | undefined;
   chartData?: any | undefined;
   chartOptions?: any | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
 };
 
-export type SysFragment = { __typename?: 'Sys'; publishedAt?: any | undefined };
+export type SysFragment = {
+  __typename?: 'Sys';
+  publishedAt?: any | undefined;
+  id: string;
+};
 
 export type DappPostFragment = {
   __typename?: 'DappPost';
@@ -6570,7 +6574,7 @@ export type DappPostFragment = {
   description?: string | undefined;
   urlToDapp?: string | undefined;
   urlToLearnMore?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
 };
 
 export type EmbedPostFragment = {
@@ -6580,13 +6584,13 @@ export type EmbedPostFragment = {
   embedCode?: string | undefined;
   scriptUrl?: string | undefined;
   aspectRatio?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
 };
 
 export type FaqGroupFragment = {
   __typename?: 'FaqGroup';
   name?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   faqItemCollection?:
     | {
         __typename?: 'FaqGroupFaqItemCollection';
@@ -6595,7 +6599,11 @@ export type FaqGroupFragment = {
               __typename?: 'FaqItem';
               question?: string | undefined;
               answer?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -6607,7 +6615,7 @@ export type FaqItemFragment = {
   __typename?: 'FaqItem';
   question?: string | undefined;
   answer?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
 };
 
 export type FeaturePostFragment = {
@@ -6618,13 +6626,13 @@ export type FeaturePostFragment = {
   description?: string | undefined;
   callToActionUrl?: string | undefined;
   callToActionButtonLabel?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   picture?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
   heavyPicture?:
@@ -6632,7 +6640,7 @@ export type FeaturePostFragment = {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -6640,7 +6648,7 @@ export type FeaturePostFragment = {
 export type FooterFragment = {
   __typename?: 'Footer';
   copyright?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   linksCollection?:
     | {
         __typename?: 'FooterLinksCollection';
@@ -6654,7 +6662,11 @@ export type FooterFragment = {
               style?: string | undefined;
               size?: string | undefined;
               icon?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -6673,7 +6685,11 @@ export type FooterFragment = {
               style?: string | undefined;
               size?: string | undefined;
               icon?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -6690,13 +6706,13 @@ export type GrandPostFragment = {
   description?: string | undefined;
   callToActionUrl?: string | undefined;
   callToActionButtonLabel?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   picture?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
   heavyPicture?:
@@ -6704,7 +6720,7 @@ export type GrandPostFragment = {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -6716,14 +6732,14 @@ export type IconTileFragment = {
   description?: string | undefined;
   callToActionUrl?: string | undefined;
   callToActionButtonLabel?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
 };
 
 export type LegalPostFragment = {
   __typename?: 'LegalPost';
   title?: string | undefined;
   slug?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   description?: { __typename?: 'LegalPostDescription'; json: any } | undefined;
 };
 
@@ -6735,7 +6751,7 @@ export type PageAccessWallFragment = {
   showSubtitle?: boolean | undefined;
   headerColumnWidth?: string | undefined;
   headerAlignCenter?: boolean | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   ctasCollection?:
     | {
         __typename?: 'PageAccessWallCtasCollection';
@@ -6749,7 +6765,11 @@ export type PageAccessWallFragment = {
               style?: string | undefined;
               size?: string | undefined;
               icon?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -6764,7 +6784,11 @@ export type PageAccessWallFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
@@ -6777,6 +6801,7 @@ export type PageAccessWallFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           mainPicture?:
                             | {
@@ -6786,6 +6811,7 @@ export type PageAccessWallFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -6812,6 +6838,7 @@ export type PageAccessWallFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -6821,6 +6848,7 @@ export type PageAccessWallFragment = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -6838,7 +6866,11 @@ export type PageAccessWallFragment = {
               __typename: 'PageSectionFaQs';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedFaqGroupsCollection?:
                 | {
                     __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
@@ -6849,6 +6881,7 @@ export type PageAccessWallFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           faqItemCollection?:
                             | {
@@ -6861,6 +6894,7 @@ export type PageAccessWallFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -6878,7 +6912,11 @@ export type PageAccessWallFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
@@ -6894,6 +6932,7 @@ export type PageAccessWallFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -6903,6 +6942,7 @@ export type PageAccessWallFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -6914,6 +6954,7 @@ export type PageAccessWallFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -6929,7 +6970,11 @@ export type PageAccessWallFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
@@ -6946,6 +6991,7 @@ export type PageAccessWallFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -6955,6 +7001,7 @@ export type PageAccessWallFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -6966,6 +7013,7 @@ export type PageAccessWallFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -6981,7 +7029,11 @@ export type PageAccessWallFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedIconTilesCollection?:
                 | {
                     __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
@@ -6996,6 +7048,7 @@ export type PageAccessWallFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -7007,7 +7060,11 @@ export type PageAccessWallFragment = {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
@@ -7022,6 +7079,7 @@ export type PageAccessWallFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           richDescription?:
                             | {
@@ -7040,6 +7098,7 @@ export type PageAccessWallFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7054,6 +7113,7 @@ export type PageAccessWallFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7068,7 +7128,11 @@ export type PageAccessWallFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
@@ -7082,6 +7146,7 @@ export type PageAccessWallFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -7091,6 +7156,7 @@ export type PageAccessWallFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7102,6 +7168,7 @@ export type PageAccessWallFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7125,7 +7192,7 @@ export type PageEarnFragment = {
   showSubtitle?: boolean | undefined;
   headerColumnWidth?: string | undefined;
   headerAlignCenter?: boolean | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   ctasCollection?:
     | {
         __typename?: 'PageEarnCtasCollection';
@@ -7139,7 +7206,11 @@ export type PageEarnFragment = {
               style?: string | undefined;
               size?: string | undefined;
               icon?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -7154,7 +7225,11 @@ export type PageEarnFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
@@ -7167,6 +7242,7 @@ export type PageEarnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           mainPicture?:
                             | {
@@ -7176,6 +7252,7 @@ export type PageEarnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7202,6 +7279,7 @@ export type PageEarnFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -7211,6 +7289,7 @@ export type PageEarnFragment = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -7228,7 +7307,11 @@ export type PageEarnFragment = {
               __typename: 'PageSectionDappPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
@@ -7244,6 +7327,7 @@ export type PageEarnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -7255,7 +7339,11 @@ export type PageEarnFragment = {
               __typename: 'PageSectionFaQs';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedFaqGroupsCollection?:
                 | {
                     __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
@@ -7266,6 +7354,7 @@ export type PageEarnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           faqItemCollection?:
                             | {
@@ -7278,6 +7367,7 @@ export type PageEarnFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -7295,7 +7385,11 @@ export type PageEarnFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
@@ -7311,6 +7405,7 @@ export type PageEarnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -7320,6 +7415,7 @@ export type PageEarnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7331,6 +7427,7 @@ export type PageEarnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7346,7 +7443,11 @@ export type PageEarnFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
@@ -7363,6 +7464,7 @@ export type PageEarnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -7372,6 +7474,7 @@ export type PageEarnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7383,6 +7486,7 @@ export type PageEarnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7398,7 +7502,11 @@ export type PageEarnFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedIconTilesCollection?:
                 | {
                     __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
@@ -7413,6 +7521,7 @@ export type PageEarnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -7424,7 +7533,11 @@ export type PageEarnFragment = {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
@@ -7439,6 +7552,7 @@ export type PageEarnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           richDescription?:
                             | {
@@ -7457,6 +7571,7 @@ export type PageEarnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7471,6 +7586,7 @@ export type PageEarnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7485,7 +7601,11 @@ export type PageEarnFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
@@ -7499,6 +7619,7 @@ export type PageEarnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -7508,6 +7629,7 @@ export type PageEarnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7519,6 +7641,7 @@ export type PageEarnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7542,7 +7665,7 @@ export type PageGameFragment = {
   showSubtitle?: boolean | undefined;
   headerColumnWidth?: string | undefined;
   headerAlignCenter?: boolean | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   ctasCollection?:
     | {
         __typename?: 'PageGameCtasCollection';
@@ -7556,7 +7679,11 @@ export type PageGameFragment = {
               style?: string | undefined;
               size?: string | undefined;
               icon?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -7571,7 +7698,11 @@ export type PageGameFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
@@ -7584,6 +7715,7 @@ export type PageGameFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           mainPicture?:
                             | {
@@ -7593,6 +7725,7 @@ export type PageGameFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7619,6 +7752,7 @@ export type PageGameFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -7628,6 +7762,7 @@ export type PageGameFragment = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -7645,7 +7780,11 @@ export type PageGameFragment = {
               __typename: 'PageSectionDappPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
@@ -7661,6 +7800,7 @@ export type PageGameFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -7672,7 +7812,11 @@ export type PageGameFragment = {
               __typename: 'PageSectionFaQs';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedFaqGroupsCollection?:
                 | {
                     __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
@@ -7683,6 +7827,7 @@ export type PageGameFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           faqItemCollection?:
                             | {
@@ -7695,6 +7840,7 @@ export type PageGameFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -7712,7 +7858,11 @@ export type PageGameFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
@@ -7728,6 +7878,7 @@ export type PageGameFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -7737,6 +7888,7 @@ export type PageGameFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7748,6 +7900,7 @@ export type PageGameFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7763,7 +7916,11 @@ export type PageGameFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
@@ -7780,6 +7937,7 @@ export type PageGameFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -7789,6 +7947,7 @@ export type PageGameFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7800,6 +7959,7 @@ export type PageGameFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7815,7 +7975,11 @@ export type PageGameFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedIconTilesCollection?:
                 | {
                     __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
@@ -7830,6 +7994,7 @@ export type PageGameFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -7841,7 +8006,11 @@ export type PageGameFragment = {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
@@ -7856,6 +8025,7 @@ export type PageGameFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           richDescription?:
                             | {
@@ -7874,6 +8044,7 @@ export type PageGameFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7888,6 +8059,7 @@ export type PageGameFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7902,7 +8074,11 @@ export type PageGameFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
@@ -7916,6 +8092,7 @@ export type PageGameFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -7925,6 +8102,7 @@ export type PageGameFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7936,6 +8114,7 @@ export type PageGameFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -7959,7 +8138,7 @@ export type PageHomeFragment = {
   showSubtitle?: boolean | undefined;
   headerColumnWidth?: string | undefined;
   headerAlignCenter?: boolean | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   ctasCollection?:
     | {
         __typename?: 'PageHomeCtasCollection';
@@ -7973,7 +8152,11 @@ export type PageHomeFragment = {
               style?: string | undefined;
               size?: string | undefined;
               icon?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -7988,7 +8171,11 @@ export type PageHomeFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
@@ -8001,6 +8188,7 @@ export type PageHomeFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           mainPicture?:
                             | {
@@ -8010,6 +8198,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8036,6 +8225,7 @@ export type PageHomeFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -8045,6 +8235,7 @@ export type PageHomeFragment = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -8062,7 +8253,11 @@ export type PageHomeFragment = {
               __typename: 'PageSectionDappPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
@@ -8078,6 +8273,7 @@ export type PageHomeFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -8089,7 +8285,11 @@ export type PageHomeFragment = {
               __typename: 'PageSectionFaQs';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedFaqGroupsCollection?:
                 | {
                     __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
@@ -8100,6 +8300,7 @@ export type PageHomeFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           faqItemCollection?:
                             | {
@@ -8112,6 +8313,7 @@ export type PageHomeFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -8129,7 +8331,11 @@ export type PageHomeFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
@@ -8145,6 +8351,7 @@ export type PageHomeFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -8154,6 +8361,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8165,6 +8373,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8180,7 +8389,11 @@ export type PageHomeFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
@@ -8197,6 +8410,7 @@ export type PageHomeFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -8206,6 +8420,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8217,6 +8432,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8232,7 +8448,11 @@ export type PageHomeFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedIconTilesCollection?:
                 | {
                     __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
@@ -8247,6 +8467,7 @@ export type PageHomeFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -8260,7 +8481,11 @@ export type PageHomeFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
@@ -8277,6 +8502,7 @@ export type PageHomeFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           avatar?:
                             | {
@@ -8286,6 +8512,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8299,7 +8526,11 @@ export type PageHomeFragment = {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
@@ -8314,6 +8545,7 @@ export type PageHomeFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           richDescription?:
                             | {
@@ -8332,6 +8564,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8346,6 +8579,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8360,7 +8594,11 @@ export type PageHomeFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
@@ -8374,6 +8612,7 @@ export type PageHomeFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -8383,6 +8622,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8394,6 +8634,7 @@ export type PageHomeFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8417,7 +8658,7 @@ export type PageLearnFragment = {
   showSubtitle?: boolean | undefined;
   headerColumnWidth?: string | undefined;
   headerAlignCenter?: boolean | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   ctasCollection?:
     | {
         __typename?: 'PageLearnCtasCollection';
@@ -8431,7 +8672,11 @@ export type PageLearnFragment = {
               style?: string | undefined;
               size?: string | undefined;
               icon?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -8446,7 +8691,11 @@ export type PageLearnFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
@@ -8459,6 +8708,7 @@ export type PageLearnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           mainPicture?:
                             | {
@@ -8468,6 +8718,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8494,6 +8745,7 @@ export type PageLearnFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -8503,6 +8755,7 @@ export type PageLearnFragment = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -8520,7 +8773,11 @@ export type PageLearnFragment = {
               __typename: 'PageSectionDappPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
@@ -8536,6 +8793,7 @@ export type PageLearnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -8547,7 +8805,11 @@ export type PageLearnFragment = {
               __typename: 'PageSectionFaQs';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedFaqGroupsCollection?:
                 | {
                     __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
@@ -8558,6 +8820,7 @@ export type PageLearnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           faqItemCollection?:
                             | {
@@ -8570,6 +8833,7 @@ export type PageLearnFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -8587,7 +8851,11 @@ export type PageLearnFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
@@ -8603,6 +8871,7 @@ export type PageLearnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -8612,6 +8881,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8623,6 +8893,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8638,7 +8909,11 @@ export type PageLearnFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
@@ -8655,6 +8930,7 @@ export type PageLearnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -8664,6 +8940,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8675,6 +8952,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8690,7 +8968,11 @@ export type PageLearnFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedIconTilesCollection?:
                 | {
                     __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
@@ -8705,6 +8987,7 @@ export type PageLearnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -8718,7 +9001,11 @@ export type PageLearnFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
@@ -8735,6 +9022,7 @@ export type PageLearnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           avatar?:
                             | {
@@ -8744,6 +9032,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8757,7 +9046,11 @@ export type PageLearnFragment = {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
@@ -8772,6 +9065,7 @@ export type PageLearnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           richDescription?:
                             | {
@@ -8790,6 +9084,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8804,6 +9099,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8818,7 +9114,11 @@ export type PageLearnFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
@@ -8832,6 +9132,7 @@ export type PageLearnFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -8841,6 +9142,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8852,6 +9154,7 @@ export type PageLearnFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8872,7 +9175,7 @@ export type PageSectionBasicPostsFragment = {
   title?: string | undefined;
   description?: string | undefined;
   swiperResponsiveOptions?: any | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedPostsCollection?:
     | {
         __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
@@ -8882,13 +9185,21 @@ export type PageSectionBasicPostsFragment = {
               summary?: string | undefined;
               slug?: string | undefined;
               title?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               mainPicture?:
                 | {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
             }
@@ -8914,6 +9225,7 @@ export type PageSectionBasicPostsFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           mainPicture?:
                             | {
@@ -8923,6 +9235,7 @@ export type PageSectionBasicPostsFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -8941,7 +9254,7 @@ export type PageSectionDappPostsFragment = {
   __typename: 'PageSectionDappPosts';
   title?: string | undefined;
   description?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedPostsCollection?:
     | {
         __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
@@ -8954,7 +9267,11 @@ export type PageSectionDappPostsFragment = {
               description?: string | undefined;
               urlToDapp?: string | undefined;
               urlToLearnMore?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -8966,7 +9283,7 @@ export type PageSectionFaQsFragment = {
   __typename: 'PageSectionFaQs';
   title?: string | undefined;
   description?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedFaqGroupsCollection?:
     | {
         __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
@@ -8974,7 +9291,11 @@ export type PageSectionFaQsFragment = {
           | {
               __typename?: 'FaqGroup';
               name?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               faqItemCollection?:
                 | {
                     __typename?: 'FaqGroupFaqItemCollection';
@@ -8986,6 +9307,7 @@ export type PageSectionFaQsFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -9004,7 +9326,7 @@ export type PageSectionFeaturePostsFragment = {
   title?: string | undefined;
   description?: string | undefined;
   swiperResponsiveOptions?: any | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedPostsCollection?:
     | {
         __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
@@ -9017,13 +9339,21 @@ export type PageSectionFeaturePostsFragment = {
               description?: string | undefined;
               callToActionUrl?: string | undefined;
               callToActionButtonLabel?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               picture?:
                 | {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
               heavyPicture?:
@@ -9031,7 +9361,11 @@ export type PageSectionFeaturePostsFragment = {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
             }
@@ -9047,7 +9381,7 @@ export type PageSectionGrandPostsFragment = {
   description?: string | undefined;
   isSwiper?: boolean | undefined;
   swiperResponsiveOptions?: any | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedPostsCollection?:
     | {
         __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
@@ -9061,13 +9395,21 @@ export type PageSectionGrandPostsFragment = {
               description?: string | undefined;
               callToActionUrl?: string | undefined;
               callToActionButtonLabel?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               picture?:
                 | {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
               heavyPicture?:
@@ -9075,7 +9417,11 @@ export type PageSectionGrandPostsFragment = {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
             }
@@ -9091,7 +9437,7 @@ export type PageSectionIconTilesFragment = {
   description?: string | undefined;
   isSwiper?: boolean | undefined;
   swiperResponsiveOptions?: any | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedIconTilesCollection?:
     | {
         __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
@@ -9103,7 +9449,11 @@ export type PageSectionIconTilesFragment = {
               description?: string | undefined;
               callToActionUrl?: string | undefined;
               callToActionButtonLabel?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -9117,7 +9467,7 @@ export type PageSectionPersonPostsFragment = {
   description?: string | undefined;
   isSwiper?: boolean | undefined;
   swiperResponsiveOptions?: any | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedPostsCollection?:
     | {
         __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
@@ -9131,13 +9481,21 @@ export type PageSectionPersonPostsFragment = {
               linkedin?: string | undefined;
               instagram?: string | undefined;
               github?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               avatar?:
                 | {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
             }
@@ -9152,7 +9510,7 @@ export type PageSectionProductsFragment = {
   title?: string | undefined;
   description?: string | undefined;
   swiperResponsiveOptions?: any | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedProductsCollection?:
     | {
         __typename?: 'PageSectionProductsHandpickedProductsCollection';
@@ -9184,6 +9542,7 @@ export type PageSectionProductsFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -9195,7 +9554,11 @@ export type PageSectionProductsFragment = {
                     __typename?: 'ProductCategory';
                     name?: string | undefined;
                     icon?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
             }
@@ -9240,6 +9603,7 @@ export type PageSectionProductsFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -9254,6 +9618,7 @@ export type PageSectionProductsFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9272,7 +9637,7 @@ export type PageSectionSectionPostsFragment = {
   __typename: 'PageSectionSectionPosts';
   title?: string | undefined;
   description?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedPostsCollection?:
     | {
         __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
@@ -9284,7 +9649,11 @@ export type PageSectionSectionPostsFragment = {
               columnWidth?: string | undefined;
               alignCenter?: boolean | undefined;
               titleSize?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               richDescription?:
                 | { __typename?: 'SectionPostDescription'; json: any }
                 | undefined;
@@ -9296,7 +9665,11 @@ export type PageSectionSectionPostsFragment = {
                     chartType?: string | undefined;
                     chartData?: any | undefined;
                     chartOptions?: any | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
               embedPost?:
@@ -9307,7 +9680,11 @@ export type PageSectionSectionPostsFragment = {
                     embedCode?: string | undefined;
                     scriptUrl?: string | undefined;
                     aspectRatio?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
             }
@@ -9322,7 +9699,7 @@ export type PageSectionThumbnailPostsFragment = {
   title?: string | undefined;
   description?: string | undefined;
   swiperResponsiveOptions?: any | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   handpickedPostsCollection?:
     | {
         __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
@@ -9333,13 +9710,21 @@ export type PageSectionThumbnailPostsFragment = {
               title?: string | undefined;
               link?: string | undefined;
               isVideo?: boolean | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               picture?:
                 | {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
               heavyPicture?:
@@ -9347,7 +9732,11 @@ export type PageSectionThumbnailPostsFragment = {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
             }
@@ -9365,7 +9754,7 @@ export type PageShopFragment = {
   showSubtitle?: boolean | undefined;
   headerColumnWidth?: string | undefined;
   headerAlignCenter?: boolean | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   ctasCollection?:
     | {
         __typename?: 'PageShopCtasCollection';
@@ -9379,7 +9768,11 @@ export type PageShopFragment = {
               style?: string | undefined;
               size?: string | undefined;
               icon?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -9394,7 +9787,11 @@ export type PageShopFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
@@ -9407,6 +9804,7 @@ export type PageShopFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           mainPicture?:
                             | {
@@ -9416,6 +9814,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9442,6 +9841,7 @@ export type PageShopFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -9451,6 +9851,7 @@ export type PageShopFragment = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -9469,7 +9870,11 @@ export type PageShopFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
@@ -9485,6 +9890,7 @@ export type PageShopFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -9494,6 +9900,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9505,6 +9912,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9520,7 +9928,11 @@ export type PageShopFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
@@ -9537,6 +9949,7 @@ export type PageShopFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -9546,6 +9959,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9557,6 +9971,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9572,7 +9987,11 @@ export type PageShopFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedIconTilesCollection?:
                 | {
                     __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
@@ -9587,6 +10006,7 @@ export type PageShopFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -9600,7 +10020,11 @@ export type PageShopFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
@@ -9617,6 +10041,7 @@ export type PageShopFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           avatar?:
                             | {
@@ -9626,6 +10051,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9640,7 +10066,11 @@ export type PageShopFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedProductsCollection?:
                 | {
                     __typename?: 'PageSectionProductsHandpickedProductsCollection';
@@ -9672,6 +10102,7 @@ export type PageShopFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -9686,6 +10117,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9733,6 +10165,7 @@ export type PageShopFragment = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                 }
                                               | undefined
@@ -9747,6 +10180,7 @@ export type PageShopFragment = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -9764,7 +10198,11 @@ export type PageShopFragment = {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
@@ -9779,6 +10217,7 @@ export type PageShopFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           richDescription?:
                             | {
@@ -9797,6 +10236,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9811,6 +10251,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9825,7 +10266,11 @@ export type PageShopFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
@@ -9839,6 +10284,7 @@ export type PageShopFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -9848,6 +10294,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9859,6 +10306,7 @@ export type PageShopFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9882,7 +10330,7 @@ export type PageStreamFragment = {
   showSubtitle?: boolean | undefined;
   headerColumnWidth?: string | undefined;
   headerAlignCenter?: boolean | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   ctasCollection?:
     | {
         __typename?: 'PageStreamCtasCollection';
@@ -9896,7 +10344,11 @@ export type PageStreamFragment = {
               style?: string | undefined;
               size?: string | undefined;
               icon?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -9911,7 +10363,11 @@ export type PageStreamFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
@@ -9924,6 +10380,7 @@ export type PageStreamFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           mainPicture?:
                             | {
@@ -9933,6 +10390,7 @@ export type PageStreamFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -9959,6 +10417,7 @@ export type PageStreamFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -9968,6 +10427,7 @@ export type PageStreamFragment = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -9985,7 +10445,11 @@ export type PageStreamFragment = {
               __typename: 'PageSectionDappPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
@@ -10001,6 +10465,7 @@ export type PageStreamFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -10012,7 +10477,11 @@ export type PageStreamFragment = {
               __typename: 'PageSectionFaQs';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedFaqGroupsCollection?:
                 | {
                     __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
@@ -10023,6 +10492,7 @@ export type PageStreamFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           faqItemCollection?:
                             | {
@@ -10035,6 +10505,7 @@ export type PageStreamFragment = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -10052,7 +10523,11 @@ export type PageStreamFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
@@ -10068,6 +10543,7 @@ export type PageStreamFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -10077,6 +10553,7 @@ export type PageStreamFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -10088,6 +10565,7 @@ export type PageStreamFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -10103,7 +10581,11 @@ export type PageStreamFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
@@ -10120,6 +10602,7 @@ export type PageStreamFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -10129,6 +10612,7 @@ export type PageStreamFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -10140,6 +10624,7 @@ export type PageStreamFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -10155,7 +10640,11 @@ export type PageStreamFragment = {
               description?: string | undefined;
               isSwiper?: boolean | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedIconTilesCollection?:
                 | {
                     __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
@@ -10170,6 +10659,7 @@ export type PageStreamFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -10181,7 +10671,11 @@ export type PageStreamFragment = {
               __typename: 'PageSectionSectionPosts';
               title?: string | undefined;
               description?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
@@ -10196,6 +10690,7 @@ export type PageStreamFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           richDescription?:
                             | {
@@ -10214,6 +10709,7 @@ export type PageStreamFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -10228,6 +10724,7 @@ export type PageStreamFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -10242,7 +10739,11 @@ export type PageStreamFragment = {
               title?: string | undefined;
               description?: string | undefined;
               swiperResponsiveOptions?: any | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               handpickedPostsCollection?:
                 | {
                     __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
@@ -10256,6 +10757,7 @@ export type PageStreamFragment = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           picture?:
                             | {
@@ -10265,6 +10767,7 @@ export type PageStreamFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -10276,6 +10779,7 @@ export type PageStreamFragment = {
                                 sys: {
                                   __typename?: 'Sys';
                                   publishedAt?: any | undefined;
+                                  id: string;
                                 };
                               }
                             | undefined;
@@ -10300,15 +10804,20 @@ export type PersonPostFragment = {
   linkedin?: string | undefined;
   instagram?: string | undefined;
   github?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   avatar?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
+};
+
+export type ProductAvailableQuantityFragment = {
+  __typename?: 'Product';
+  availableQuantity?: number | undefined;
 };
 
 export type ProductCommonFragment = {
@@ -10330,7 +10839,11 @@ export type ProductCommonFragment = {
               __typename?: 'Asset';
               title?: string | undefined;
               url?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -10341,7 +10854,7 @@ export type ProductCommonFragment = {
         __typename?: 'ProductCategory';
         name?: string | undefined;
         icon?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -10366,7 +10879,11 @@ export type ProductFragment = {
               __typename?: 'Asset';
               title?: string | undefined;
               url?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -10377,7 +10894,7 @@ export type ProductFragment = {
         __typename?: 'ProductCategory';
         name?: string | undefined;
         icon?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -10406,7 +10923,11 @@ export type ProductDetailFragment = {
               __typename?: 'Asset';
               title?: string | undefined;
               url?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
             }
           | undefined
         >;
@@ -10417,7 +10938,7 @@ export type ProductDetailFragment = {
         __typename?: 'ProductCategory';
         name?: string | undefined;
         icon?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -10429,7 +10950,7 @@ export type SectionPostFragment = {
   columnWidth?: string | undefined;
   alignCenter?: boolean | undefined;
   titleSize?: string | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   richDescription?:
     | { __typename?: 'SectionPostDescription'; json: any }
     | undefined;
@@ -10441,7 +10962,7 @@ export type SectionPostFragment = {
         chartType?: string | undefined;
         chartData?: any | undefined;
         chartOptions?: any | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
   embedPost?:
@@ -10452,7 +10973,7 @@ export type SectionPostFragment = {
         embedCode?: string | undefined;
         scriptUrl?: string | undefined;
         aspectRatio?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -10463,13 +10984,13 @@ export type ThumbnailPostFragment = {
   title?: string | undefined;
   link?: string | undefined;
   isVideo?: boolean | undefined;
-  sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+  sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
   picture?:
     | {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
   heavyPicture?:
@@ -10477,7 +10998,7 @@ export type ThumbnailPostFragment = {
         __typename?: 'Asset';
         title?: string | undefined;
         url?: string | undefined;
-        sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+        sys: { __typename?: 'Sys'; publishedAt?: any | undefined; id: string };
       }
     | undefined;
 };
@@ -10499,13 +11020,21 @@ export type BasicPostCollectionBySlugQuery = {
               description?:
                 | { __typename?: 'BasicPostDescription'; json: any }
                 | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               mainPicture?:
                 | {
                     __typename?: 'Asset';
                     title?: string | undefined;
                     url?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
             }
@@ -10528,7 +11057,11 @@ export type FooterCollectionQuery = {
           | {
               __typename?: 'Footer';
               copyright?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               linksCollection?:
                 | {
                     __typename?: 'FooterLinksCollection';
@@ -10545,6 +11078,7 @@ export type FooterCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -10567,6 +11101,7 @@ export type FooterCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -10595,7 +11130,11 @@ export type LegalPostCollectionBySlugQuery = {
               __typename?: 'LegalPost';
               title?: string | undefined;
               slug?: string | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               description?:
                 | { __typename?: 'LegalPostDescription'; json: any }
                 | undefined;
@@ -10624,7 +11163,11 @@ export type PageAccessWallCollectionQuery = {
               showSubtitle?: boolean | undefined;
               headerColumnWidth?: string | undefined;
               headerAlignCenter?: boolean | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               ctasCollection?:
                 | {
                     __typename?: 'PageAccessWallCtasCollection';
@@ -10641,6 +11184,7 @@ export type PageAccessWallCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -10659,6 +11203,7 @@ export type PageAccessWallCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -10672,6 +11217,7 @@ export type PageAccessWallCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -10681,6 +11227,7 @@ export type PageAccessWallCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -10709,6 +11256,7 @@ export type PageAccessWallCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                   mainPicture?:
                                                     | {
@@ -10724,6 +11272,7 @@ export type PageAccessWallCollectionQuery = {
                                                           publishedAt?:
                                                             | any
                                                             | undefined;
+                                                          id: string;
                                                         };
                                                       }
                                                     | undefined;
@@ -10744,6 +11293,7 @@ export type PageAccessWallCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedFaqGroupsCollection?:
                             | {
@@ -10755,6 +11305,7 @@ export type PageAccessWallCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       faqItemCollection?:
                                         | {
@@ -10769,6 +11320,7 @@ export type PageAccessWallCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                 }
                                               | undefined
@@ -10789,6 +11341,7 @@ export type PageAccessWallCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -10809,6 +11362,7 @@ export type PageAccessWallCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -10818,6 +11372,7 @@ export type PageAccessWallCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -10829,6 +11384,7 @@ export type PageAccessWallCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -10847,6 +11403,7 @@ export type PageAccessWallCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -10868,6 +11425,7 @@ export type PageAccessWallCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -10877,6 +11435,7 @@ export type PageAccessWallCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -10888,6 +11447,7 @@ export type PageAccessWallCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -10906,6 +11466,7 @@ export type PageAccessWallCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedIconTilesCollection?:
                             | {
@@ -10923,6 +11484,7 @@ export type PageAccessWallCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -10937,6 +11499,7 @@ export type PageAccessWallCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -10952,6 +11515,7 @@ export type PageAccessWallCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       richDescription?:
                                         | {
@@ -10970,6 +11534,7 @@ export type PageAccessWallCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -10984,6 +11549,7 @@ export type PageAccessWallCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11001,6 +11567,7 @@ export type PageAccessWallCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11017,6 +11584,7 @@ export type PageAccessWallCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -11026,6 +11594,7 @@ export type PageAccessWallCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11037,6 +11606,7 @@ export type PageAccessWallCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11075,7 +11645,11 @@ export type PageEarnCollectionQuery = {
               showSubtitle?: boolean | undefined;
               headerColumnWidth?: string | undefined;
               headerAlignCenter?: boolean | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               ctasCollection?:
                 | {
                     __typename?: 'PageEarnCtasCollection';
@@ -11092,6 +11666,7 @@ export type PageEarnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -11110,6 +11685,7 @@ export type PageEarnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11123,6 +11699,7 @@ export type PageEarnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -11132,6 +11709,7 @@ export type PageEarnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11160,6 +11738,7 @@ export type PageEarnCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                   mainPicture?:
                                                     | {
@@ -11175,6 +11754,7 @@ export type PageEarnCollectionQuery = {
                                                           publishedAt?:
                                                             | any
                                                             | undefined;
+                                                          id: string;
                                                         };
                                                       }
                                                     | undefined;
@@ -11195,6 +11775,7 @@ export type PageEarnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11211,6 +11792,7 @@ export type PageEarnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -11225,6 +11807,7 @@ export type PageEarnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedFaqGroupsCollection?:
                             | {
@@ -11236,6 +11819,7 @@ export type PageEarnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       faqItemCollection?:
                                         | {
@@ -11250,6 +11834,7 @@ export type PageEarnCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                 }
                                               | undefined
@@ -11270,6 +11855,7 @@ export type PageEarnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11290,6 +11876,7 @@ export type PageEarnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -11299,6 +11886,7 @@ export type PageEarnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11310,6 +11898,7 @@ export type PageEarnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11328,6 +11917,7 @@ export type PageEarnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11349,6 +11939,7 @@ export type PageEarnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -11358,6 +11949,7 @@ export type PageEarnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11369,6 +11961,7 @@ export type PageEarnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11387,6 +11980,7 @@ export type PageEarnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedIconTilesCollection?:
                             | {
@@ -11404,6 +11998,7 @@ export type PageEarnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -11418,6 +12013,7 @@ export type PageEarnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11433,6 +12029,7 @@ export type PageEarnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       richDescription?:
                                         | {
@@ -11451,6 +12048,7 @@ export type PageEarnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11465,6 +12063,7 @@ export type PageEarnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11482,6 +12081,7 @@ export type PageEarnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11498,6 +12098,7 @@ export type PageEarnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -11507,6 +12108,7 @@ export type PageEarnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11518,6 +12120,7 @@ export type PageEarnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11556,7 +12159,11 @@ export type PageGameCollectionQuery = {
               showSubtitle?: boolean | undefined;
               headerColumnWidth?: string | undefined;
               headerAlignCenter?: boolean | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               ctasCollection?:
                 | {
                     __typename?: 'PageGameCtasCollection';
@@ -11573,6 +12180,7 @@ export type PageGameCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -11591,6 +12199,7 @@ export type PageGameCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11604,6 +12213,7 @@ export type PageGameCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -11613,6 +12223,7 @@ export type PageGameCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11641,6 +12252,7 @@ export type PageGameCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                   mainPicture?:
                                                     | {
@@ -11656,6 +12268,7 @@ export type PageGameCollectionQuery = {
                                                           publishedAt?:
                                                             | any
                                                             | undefined;
+                                                          id: string;
                                                         };
                                                       }
                                                     | undefined;
@@ -11676,6 +12289,7 @@ export type PageGameCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11692,6 +12306,7 @@ export type PageGameCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -11706,6 +12321,7 @@ export type PageGameCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedFaqGroupsCollection?:
                             | {
@@ -11717,6 +12333,7 @@ export type PageGameCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       faqItemCollection?:
                                         | {
@@ -11731,6 +12348,7 @@ export type PageGameCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                 }
                                               | undefined
@@ -11751,6 +12369,7 @@ export type PageGameCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11771,6 +12390,7 @@ export type PageGameCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -11780,6 +12400,7 @@ export type PageGameCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11791,6 +12412,7 @@ export type PageGameCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11809,6 +12431,7 @@ export type PageGameCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11830,6 +12453,7 @@ export type PageGameCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -11839,6 +12463,7 @@ export type PageGameCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11850,6 +12475,7 @@ export type PageGameCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11868,6 +12494,7 @@ export type PageGameCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedIconTilesCollection?:
                             | {
@@ -11885,6 +12512,7 @@ export type PageGameCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -11899,6 +12527,7 @@ export type PageGameCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11914,6 +12543,7 @@ export type PageGameCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       richDescription?:
                                         | {
@@ -11932,6 +12562,7 @@ export type PageGameCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11946,6 +12577,7 @@ export type PageGameCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11963,6 +12595,7 @@ export type PageGameCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -11979,6 +12612,7 @@ export type PageGameCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -11988,6 +12622,7 @@ export type PageGameCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -11999,6 +12634,7 @@ export type PageGameCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12037,7 +12673,11 @@ export type PageHomeCollectionQuery = {
               showSubtitle?: boolean | undefined;
               headerColumnWidth?: string | undefined;
               headerAlignCenter?: boolean | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               ctasCollection?:
                 | {
                     __typename?: 'PageHomeCtasCollection';
@@ -12054,6 +12694,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -12072,6 +12713,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12085,6 +12727,7 @@ export type PageHomeCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -12094,6 +12737,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12122,6 +12766,7 @@ export type PageHomeCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                   mainPicture?:
                                                     | {
@@ -12137,6 +12782,7 @@ export type PageHomeCollectionQuery = {
                                                           publishedAt?:
                                                             | any
                                                             | undefined;
+                                                          id: string;
                                                         };
                                                       }
                                                     | undefined;
@@ -12157,6 +12803,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12173,6 +12820,7 @@ export type PageHomeCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -12187,6 +12835,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedFaqGroupsCollection?:
                             | {
@@ -12198,6 +12847,7 @@ export type PageHomeCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       faqItemCollection?:
                                         | {
@@ -12212,6 +12862,7 @@ export type PageHomeCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                 }
                                               | undefined
@@ -12232,6 +12883,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12252,6 +12904,7 @@ export type PageHomeCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -12261,6 +12914,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12272,6 +12926,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12290,6 +12945,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12311,6 +12967,7 @@ export type PageHomeCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -12320,6 +12977,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12331,6 +12989,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12349,6 +13008,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedIconTilesCollection?:
                             | {
@@ -12366,6 +13026,7 @@ export type PageHomeCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -12382,6 +13043,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12399,6 +13061,7 @@ export type PageHomeCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       avatar?:
                                         | {
@@ -12408,6 +13071,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12424,6 +13088,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12439,6 +13104,7 @@ export type PageHomeCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       richDescription?:
                                         | {
@@ -12457,6 +13123,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12471,6 +13138,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12488,6 +13156,7 @@ export type PageHomeCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12504,6 +13173,7 @@ export type PageHomeCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -12513,6 +13183,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12524,6 +13195,7 @@ export type PageHomeCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12562,7 +13234,11 @@ export type PageLearnCollectionQuery = {
               showSubtitle?: boolean | undefined;
               headerColumnWidth?: string | undefined;
               headerAlignCenter?: boolean | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               ctasCollection?:
                 | {
                     __typename?: 'PageLearnCtasCollection';
@@ -12579,6 +13255,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -12597,6 +13274,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12610,6 +13288,7 @@ export type PageLearnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -12619,6 +13298,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12647,6 +13327,7 @@ export type PageLearnCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                   mainPicture?:
                                                     | {
@@ -12662,6 +13343,7 @@ export type PageLearnCollectionQuery = {
                                                           publishedAt?:
                                                             | any
                                                             | undefined;
+                                                          id: string;
                                                         };
                                                       }
                                                     | undefined;
@@ -12682,6 +13364,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12698,6 +13381,7 @@ export type PageLearnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -12712,6 +13396,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedFaqGroupsCollection?:
                             | {
@@ -12723,6 +13408,7 @@ export type PageLearnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       faqItemCollection?:
                                         | {
@@ -12737,6 +13423,7 @@ export type PageLearnCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                 }
                                               | undefined
@@ -12757,6 +13444,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12777,6 +13465,7 @@ export type PageLearnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -12786,6 +13475,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12797,6 +13487,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12815,6 +13506,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12836,6 +13528,7 @@ export type PageLearnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -12845,6 +13538,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12856,6 +13550,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12874,6 +13569,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedIconTilesCollection?:
                             | {
@@ -12891,6 +13587,7 @@ export type PageLearnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -12907,6 +13604,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12924,6 +13622,7 @@ export type PageLearnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       avatar?:
                                         | {
@@ -12933,6 +13632,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12949,6 +13649,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -12964,6 +13665,7 @@ export type PageLearnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       richDescription?:
                                         | {
@@ -12982,6 +13684,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -12996,6 +13699,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13013,6 +13717,7 @@ export type PageLearnCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13029,6 +13734,7 @@ export type PageLearnCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -13038,6 +13744,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13049,6 +13756,7 @@ export type PageLearnCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13087,7 +13795,11 @@ export type PageShopCollectionQuery = {
               showSubtitle?: boolean | undefined;
               headerColumnWidth?: string | undefined;
               headerAlignCenter?: boolean | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               ctasCollection?:
                 | {
                     __typename?: 'PageShopCtasCollection';
@@ -13104,6 +13816,7 @@ export type PageShopCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -13122,6 +13835,7 @@ export type PageShopCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13135,6 +13849,7 @@ export type PageShopCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -13144,6 +13859,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13172,6 +13888,7 @@ export type PageShopCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                   mainPicture?:
                                                     | {
@@ -13187,6 +13904,7 @@ export type PageShopCollectionQuery = {
                                                           publishedAt?:
                                                             | any
                                                             | undefined;
+                                                          id: string;
                                                         };
                                                       }
                                                     | undefined;
@@ -13208,6 +13926,7 @@ export type PageShopCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13228,6 +13947,7 @@ export type PageShopCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -13237,6 +13957,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13248,6 +13969,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13266,6 +13988,7 @@ export type PageShopCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13287,6 +14010,7 @@ export type PageShopCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -13296,6 +14020,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13307,6 +14032,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13325,6 +14051,7 @@ export type PageShopCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedIconTilesCollection?:
                             | {
@@ -13342,6 +14069,7 @@ export type PageShopCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -13358,6 +14086,7 @@ export type PageShopCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13375,6 +14104,7 @@ export type PageShopCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       avatar?:
                                         | {
@@ -13384,6 +14114,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13401,6 +14132,7 @@ export type PageShopCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedProductsCollection?:
                             | {
@@ -13435,6 +14167,7 @@ export type PageShopCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                 }
                                               | undefined
@@ -13449,6 +14182,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13508,6 +14242,7 @@ export type PageShopCollectionQuery = {
                                                                 publishedAt?:
                                                                   | any
                                                                   | undefined;
+                                                                id: string;
                                                               };
                                                             }
                                                           | undefined
@@ -13528,6 +14263,7 @@ export type PageShopCollectionQuery = {
                                                           publishedAt?:
                                                             | any
                                                             | undefined;
+                                                          id: string;
                                                         };
                                                       }
                                                     | undefined;
@@ -13548,6 +14284,7 @@ export type PageShopCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13563,6 +14300,7 @@ export type PageShopCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       richDescription?:
                                         | {
@@ -13581,6 +14319,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13595,6 +14334,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13612,6 +14352,7 @@ export type PageShopCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13628,6 +14369,7 @@ export type PageShopCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -13637,6 +14379,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13648,6 +14391,7 @@ export type PageShopCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13686,7 +14430,11 @@ export type PageStreamCollectionQuery = {
               showSubtitle?: boolean | undefined;
               headerColumnWidth?: string | undefined;
               headerAlignCenter?: boolean | undefined;
-              sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+              sys: {
+                __typename?: 'Sys';
+                publishedAt?: any | undefined;
+                id: string;
+              };
               ctasCollection?:
                 | {
                     __typename?: 'PageStreamCtasCollection';
@@ -13703,6 +14451,7 @@ export type PageStreamCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -13721,6 +14470,7 @@ export type PageStreamCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13734,6 +14484,7 @@ export type PageStreamCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       mainPicture?:
                                         | {
@@ -13743,6 +14494,7 @@ export type PageStreamCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13771,6 +14523,7 @@ export type PageStreamCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                   mainPicture?:
                                                     | {
@@ -13786,6 +14539,7 @@ export type PageStreamCollectionQuery = {
                                                           publishedAt?:
                                                             | any
                                                             | undefined;
+                                                          id: string;
                                                         };
                                                       }
                                                     | undefined;
@@ -13806,6 +14560,7 @@ export type PageStreamCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13822,6 +14577,7 @@ export type PageStreamCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -13836,6 +14592,7 @@ export type PageStreamCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedFaqGroupsCollection?:
                             | {
@@ -13847,6 +14604,7 @@ export type PageStreamCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       faqItemCollection?:
                                         | {
@@ -13861,6 +14619,7 @@ export type PageStreamCollectionQuery = {
                                                     publishedAt?:
                                                       | any
                                                       | undefined;
+                                                    id: string;
                                                   };
                                                 }
                                               | undefined
@@ -13881,6 +14640,7 @@ export type PageStreamCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13901,6 +14661,7 @@ export type PageStreamCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -13910,6 +14671,7 @@ export type PageStreamCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13921,6 +14683,7 @@ export type PageStreamCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13939,6 +14702,7 @@ export type PageStreamCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -13960,6 +14724,7 @@ export type PageStreamCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -13969,6 +14734,7 @@ export type PageStreamCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13980,6 +14746,7 @@ export type PageStreamCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -13998,6 +14765,7 @@ export type PageStreamCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedIconTilesCollection?:
                             | {
@@ -14015,6 +14783,7 @@ export type PageStreamCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                     }
                                   | undefined
@@ -14029,6 +14798,7 @@ export type PageStreamCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -14044,6 +14814,7 @@ export type PageStreamCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       richDescription?:
                                         | {
@@ -14062,6 +14833,7 @@ export type PageStreamCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -14076,6 +14848,7 @@ export type PageStreamCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -14093,6 +14866,7 @@ export type PageStreamCollectionQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                           handpickedPostsCollection?:
                             | {
@@ -14109,6 +14883,7 @@ export type PageStreamCollectionQuery = {
                                       sys: {
                                         __typename?: 'Sys';
                                         publishedAt?: any | undefined;
+                                        id: string;
                                       };
                                       picture?:
                                         | {
@@ -14118,6 +14893,7 @@ export type PageStreamCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -14129,6 +14905,7 @@ export type PageStreamCollectionQuery = {
                                             sys: {
                                               __typename?: 'Sys';
                                               publishedAt?: any | undefined;
+                                              id: string;
                                             };
                                           }
                                         | undefined;
@@ -14191,6 +14968,7 @@ export type ProductCollectionBySlugQuery = {
                           sys: {
                             __typename?: 'Sys';
                             publishedAt?: any | undefined;
+                            id: string;
                           };
                         }
                       | undefined
@@ -14202,7 +14980,11 @@ export type ProductCollectionBySlugQuery = {
                     __typename?: 'ProductCategory';
                     name?: string | undefined;
                     icon?: string | undefined;
-                    sys: { __typename?: 'Sys'; publishedAt?: any | undefined };
+                    sys: {
+                      __typename?: 'Sys';
+                      publishedAt?: any | undefined;
+                      id: string;
+                    };
                   }
                 | undefined;
             }
@@ -14215,6 +14997,7 @@ export type ProductCollectionBySlugQuery = {
 export const SysFragmentDoc = gql`
   fragment Sys on Sys {
     publishedAt
+    id
   }
 `;
 export const BasicPostCommonFragmentDoc = gql`
@@ -15024,6 +15807,11 @@ export const PageStreamFragmentDoc = gql`
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
+`;
+export const ProductAvailableQuantityFragmentDoc = gql`
+  fragment ProductAvailableQuantity on Product {
+    availableQuantity
+  }
 `;
 export const ProductDetailFragmentDoc = gql`
   fragment ProductDetail on Product {

@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductCheckoutDetail } from '@dehub/shared/model';
 import { richMarkupToPlainString } from '@dehub/shared/utils';
 import { DialogService } from 'primeng/dynamicdialog';
+import { map, switchMap } from 'rxjs/operators';
 import { CheckoutFormComponent } from './components/checkout-form.component';
+import { ProductDetailService } from './services';
 
 @Component({
   selector: 'dhb-checkout-modal',
@@ -14,23 +15,30 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
   constructor(
     private dialogService: DialogService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private productDetailService: ProductDetailService
   ) {}
 
   ngOnInit(): void {
-    const productDetail = this.route.snapshot.data['productDetail'];
-    const data: ProductCheckoutDetail = {
-      sys: productDetail.sys,
-      picture: productDetail.picturesCollection?.items[0],
-      name: productDetail.name,
-      description: richMarkupToPlainString(productDetail.fullDescription.json),
-      availableQuantity: productDetail.availableQuantity,
-      category: productDetail.category,
-      price: productDetail.price,
-      currency: productDetail.currency,
-      contentfulId: productDetail.sys.id,
-      sku: productDetail.sku,
-    };
+    const productDetail$ = this.route.paramMap.pipe(
+      map(paramMap => paramMap.get('slug') ?? undefined),
+      switchMap(slug => this.productDetailService.getProductDetailBySlug(slug)),
+      map(productDetail => ({
+        sys: productDetail.sys,
+        picture: productDetail.picturesCollection?.items[0],
+        name: productDetail.name,
+        description: richMarkupToPlainString(
+          productDetail?.fullDescription?.json
+        ),
+        availableQuantity: productDetail.availableQuantity,
+        category: productDetail.category,
+        price: productDetail.price,
+        currency: productDetail.currency,
+        contentfulId: productDetail.sys.id,
+        sku: productDetail.sku,
+      }))
+    );
+
     const ref = this.dialogService.open(CheckoutFormComponent, {
       showHeader: true,
       header: 'Checkout',
@@ -39,7 +47,7 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
       closeOnEscape: false,
       dismissableMask: false,
       closable: false,
-      data,
+      data: { productDetail$ },
     });
 
     ref.onClose.subscribe(() => {

@@ -2,11 +2,17 @@ interface ContentfulSpaceEnv {
   /** Contentful Space ID */
   spaceId: string;
 
+  /** Contentful Environment ID */
+  environmentId: string;
+
   /** Content Delivery API - access token */
   cdaToken: string;
 
   /** Content Preview API - access token */
   cpaToken: string;
+
+  /** Content Management API - access token */
+  cmaToken: string;
 }
 
 export interface ContentfulEnv {
@@ -111,8 +117,10 @@ export const defaultSharedEnv: SharedEnv = {
     isPreview: false,
     website: {
       spaceId: '4jicnfvodfm8',
+      environmentId: 'master',
       cdaToken: 'P-LDCxYvG6uzay9AVZP28I3usarvMw2mTPeDGqfxTVI',
       cpaToken: 'C__6WRbPa01sIs-K6MAWXGHJkIPTY0aS3_Fg9hGp9xY',
+      cmaToken: 'CFPAT-qMiEgFb3Ctm12wkXELHdlY-G8ymODCEMYKvlevV0BX0',
     },
   },
 

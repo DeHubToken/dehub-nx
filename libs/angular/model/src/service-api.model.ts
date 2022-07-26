@@ -14,6 +14,7 @@ import {
   InitOrderParams,
   InitOrderResult,
   NativeBalance,
+  ProductAvailableQuantityFragment,
   ShopContractPropsType,
   User,
   WalletConnectState,
@@ -107,4 +108,19 @@ export interface IDehubMoralisService {
     price: BigNumber,
     quantity: BigNumber
   ) => Observable<TransactionReceipt>;
+}
+
+export interface IContentFulManagementService {
+  /**
+   * Reduce product available quantity in Contentful.
+   * Apollo cache also synced for watch queries.
+   *
+   * @param productId Contentful Product entry id
+   * @param quantity the buying quantity
+   * @returns the product available quantity after decrease
+   */
+  reduceProductAvailableQuantity: (
+    productId: string,
+    quantity: number
+  ) => Promise<ProductAvailableQuantityFragment | null>;
 }

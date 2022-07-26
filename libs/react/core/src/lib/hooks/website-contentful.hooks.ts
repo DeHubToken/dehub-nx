@@ -6,6 +6,7 @@ const defaultOptions = {} as const;
 export const SysFragmentDoc = gql`
   fragment Sys on Sys {
     publishedAt
+    id
   }
 `;
 export const BasicPostCommonFragmentDoc = gql`
@@ -815,6 +816,11 @@ export const PageStreamFragmentDoc = gql`
   ${PageSectionDappPostsFragmentDoc}
   ${PageSectionGrandPostsFragmentDoc}
   ${PageSectionSectionPostsFragmentDoc}
+`;
+export const ProductAvailableQuantityFragmentDoc = gql`
+  fragment ProductAvailableQuantity on Product {
+    availableQuantity
+  }
 `;
 export const ProductDetailFragmentDoc = gql`
   fragment ProductDetail on Product {

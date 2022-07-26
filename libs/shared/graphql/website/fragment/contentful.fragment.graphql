@@ -1,3 +1,4 @@
 fragment Sys on Sys {
   publishedAt
+  id
 }

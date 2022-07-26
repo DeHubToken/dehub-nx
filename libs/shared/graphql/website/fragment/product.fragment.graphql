@@ -1,3 +1,7 @@
+fragment ProductAvailableQuantity on Product {
+  availableQuantity
+}
+
 fragment ProductCommon on Product {
   sys {
     id

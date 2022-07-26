@@ -4,12 +4,14 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { SysFragment } from '@dehub/shared/model';
 
+// TODO: is there any generated GQL type?
 interface ContentfulPicture {
   __typename?: string;
   title?: string;
   url?: string;
-  sys: { __typename?: 'Sys' };
+  sys: SysFragment;
 }
 
 @Component({

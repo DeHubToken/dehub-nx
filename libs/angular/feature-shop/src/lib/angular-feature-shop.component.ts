@@ -8,7 +8,8 @@ import { PageShopCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageShopFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   template: `
@@ -142,10 +143,11 @@ export class AngularFeatureShopComponent implements OnInit {
 
   ngOnInit() {
     this.pageShop$ = this.pageShopCollectionService
-      .fetch({
+      .watch({
         isPreview: this.env.contentful.isPreview,
       })
-      .pipe(
+      .valueChanges.pipe(
+        filter(({ loading }) => !loading),
         map(
           ({ data: { pageShopCollection } }) =>
             pageShopCollection?.items[0] ?? undefined

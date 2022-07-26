@@ -1,1 +1,1 @@
-export * from './product-detail-resolver.service';
+export * from './product-detail.service';

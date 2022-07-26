@@ -1,5 +1,6 @@
 export enum CheckoutProcessMessage {
   Confirm = 'Confirming',
+  UpdateContacts = 'Updating contact details',
   BalanceCheck = 'Checking balance',
   AllowanceCheck = 'Checking allowance',
   AllowanceSet = 'Approving allowance',

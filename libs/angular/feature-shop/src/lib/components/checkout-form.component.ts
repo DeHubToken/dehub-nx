@@ -12,8 +12,10 @@ import {
 } from '@angular/forms';
 import { provideDehubLoggerWithScope } from '@dehub/angular/core';
 import {
+  ContentfulManagementToken,
   DehubMoralisToken,
   EnvToken,
+  IContentFulManagementService,
   IDehubMoralisService,
   ILoggerService,
   IMoralisService,
@@ -42,6 +44,7 @@ import {
   combineLatest,
   concatMap,
   delay,
+  EMPTY,
   exhaustMap,
   filter,
   finalize,
@@ -53,6 +56,7 @@ import {
   Subscription,
   tap,
   throwError,
+  withLatestFrom,
   zip,
 } from 'rxjs';
 import {
@@ -62,7 +66,7 @@ import {
 
 @Component({
   template: `
-    <ng-container *ngIf="product">
+    <ng-container *ngIf="productDetail$ | async as product">
       <ng-container *ngIf="(isConfirming$ | async) === false; else message">
         <!-- Product Item -->
         <dhb-product-mini [product]="product"></dhb-product-mini>
@@ -219,7 +223,7 @@ import {
 export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   implements OnInit, OnDestroy
 {
-  product?: P;
+  productDetail$?: Observable<P>;
 
   account$?: Observable<string | undefined>;
   userContacts$?: Observable<Contacts>;
@@ -257,8 +261,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   constructor(
     @Inject(MoralisToken) private moralisService: IMoralisService,
-    @Inject(DehubMoralisToken)
-    private dehubMoralis: IDehubMoralisService,
+    @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
+    @Inject(ContentfulManagementToken)
+    private contentfulManagement: IContentFulManagementService,
     @Inject(EnvToken) public env: SharedEnv,
     @Inject(LoggerDehubToken) private logger: ILoggerService,
     public config: DynamicDialogConfig,
@@ -267,7 +272,7 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   ) {}
 
   ngOnInit() {
-    this.product = this.config.data;
+    this.productDetail$ = this.config.data.productDetail$;
     const { account$ } = this.moralisService;
     const { userContacts$, userShippingAddress$, checkoutContract$ } =
       this.dehubMoralis;
@@ -281,31 +286,33 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   }
 
   onConfirm(account: string) {
+    this.isConfirmingSubject.next(true);
+    this.setProcMsg(CheckoutProcessMessage.UpdateContacts);
+
     // Update user contacts
     const { email, phone } = this.checkoutForm.controls.contacts.value;
-
     this.sub = this.moralisService
       .updateUser$({ email, phone })
-      .pipe(tap(() => this.isConfirmingSubject.next(true)))
-      .subscribe(_user => {
+      .pipe(withLatestFrom(this.productDetail$ ? this.productDetail$ : EMPTY))
+      .subscribe(([_user, productDetail]) => {
         const parseUnits = Moralis.web3Library.utils.parseUnits;
         const shippingAddress =
           this.checkoutForm.controls.shippingAddress.controls.address.value;
-        if (this.product && shippingAddress && this.checkoutContract$) {
-          const priceStr = this.product.price.toString();
+        if (productDetail && shippingAddress && this.checkoutContract$) {
+          const priceStr = productDetail.price.toString();
           const totalAmountStr = this.totalAmount.toString();
-          const currency = this.product.currency;
+          const currency = productDetail.currency;
           const quantity = this.checkoutForm.controls.quantity.value;
           const productData: ProductData = {
-            name: this.product.name,
-            description: this.product.description,
-            image: this.product.picture.url || '',
-            sku: this.product.sku,
-            category: this.product.category.name || '',
+            name: productDetail.name,
+            description: productDetail.description,
+            image: productDetail.picture.url || '',
+            sku: productDetail.sku,
+            category: productDetail.category.name || '',
           };
           const params: InitOrderParams = {
             address: account,
-            contentfulId: this.product.contentfulId,
+            contentfulId: productDetail.contentfulId,
             productData,
             shippingAddress,
             quantity,
@@ -390,6 +397,13 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                   repeatWhen(obs => obs.pipe(delay(1000))),
                   filter(data => data.status !== OrderStatus.verified),
                   first()
+                )
+              ),
+              // Decrease product quantity
+              tap(() =>
+                this.contentfulManagement.reduceProductAvailableQuantity(
+                  params.contentfulId,
+                  quantity
                 )
               ),
               map(() => {
