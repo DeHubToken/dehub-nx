@@ -96,7 +96,7 @@ export class ContentfulManagementService
         .then(() =>
           this.cache.updateFragment<ProductAvailableQuantityFragment>(
             {
-              id: 'Product:3W7SZpxFpkBmul9I16xDXM',
+              id: `Product:${productId}`,
               fragment: ProductAvailableQuantityFragmentDoc,
             },
             _data => ({ availableQuantity: newQuantity })
