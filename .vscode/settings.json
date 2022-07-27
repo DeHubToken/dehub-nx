@@ -2,9 +2,10 @@
   // Place your settings in this file to overwrite default and user settings.
   // Files
   "files.exclude": {
-    "**/.git": true,
-    "**/.DS_Store": true,
-    "**/.history": true
+    ".git": true,
+    ".DS_Store": true,
+    ".history": true,
+    ".angular": true
   },
 
   // Search
@@ -14,7 +15,7 @@
     ".angular": true,
     "dist": true,
     "build": true,
-    "**/node_modules": true,
+    "node_modules": true,
     "*lock.json": true,
     "*.svg": true,
   },

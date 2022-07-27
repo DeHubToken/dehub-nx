@@ -8,6 +8,7 @@ export enum CheckoutProcessMessage {
   ReceiptMint = 'Minting NFT receipt',
   VerifyReceipt = 'Verifying NFT Receipt',
   OrderSuccess = 'Thank you for your purchase! We will start working on your order immediately.',
+  ApprovalError = 'Something went wrong during approval stage. Please, try again.',
   OrderError = 'Something went wrong. Please try again.',
 }
 
