@@ -21,3 +21,8 @@ export const filterEmpty =
   <T>() =>
   (source$: Observable<T | null | undefined>) =>
     source$.pipe(filter((object): object is T => !isEmpty(object)));
+
+export const filterUndefined =
+  <T>() =>
+  (source: Observable<T | undefined>) =>
+    source.pipe(filter((value): value is T => value !== undefined));

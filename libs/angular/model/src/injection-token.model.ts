@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+import { InMemoryCache } from '@apollo/client';
 import { SharedEnv } from '@dehub/shared/config';
 import {
   IDehubMoralisService,
@@ -11,6 +12,11 @@ export const EnvToken = new InjectionToken<SharedEnv>('Environment');
 
 /** Token for providing scope */
 export const ScopeToken = new InjectionToken<string>('Scope');
+
+/** Token for providing apollo cache */
+export const ApolloCacheToken = new InjectionToken<InMemoryCache>(
+  'Apollo Cache'
+);
 
 // Logger tokens
 
@@ -45,3 +51,7 @@ export const MoralisToken = new InjectionToken<IMoralisService>(
 export const DehubMoralisToken = new InjectionToken<IDehubMoralisService>(
   'Dehub Moralis Service'
 );
+
+/** Token for providing Contentful Management Service */
+export const ContentfulManagementToken =
+  new InjectionToken<IDehubMoralisService>('Contentful Management Service');

@@ -555,4 +555,10 @@ export class MoralisService implements IMoralisService {
       )
     );
   }
+
+  // Misc
+
+  getCloudFunctionUrl(cloudFunctionName: string) {
+    return `${this.env.moralis.serverUrl}/functions/${cloudFunctionName}`;
+  }
 }

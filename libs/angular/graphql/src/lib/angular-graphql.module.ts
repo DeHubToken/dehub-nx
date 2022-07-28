@@ -1,18 +1,24 @@
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { defaultDataIdFromObject } from '@apollo/client';
 import { InMemoryCache } from '@apollo/client/cache';
-import { from } from '@apollo/client/core';
+import {
+  ApolloClientOptions,
+  from,
+  NormalizedCacheObject,
+} from '@apollo/client/core';
 import { onError } from '@apollo/client/link/error';
 import {
+  ApolloCacheToken,
   EnvToken,
   ILoggerService,
   LoggerContentfulToken,
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
+import { SysFragment } from '@dehub/shared/model';
 import { ApolloModule, APOLLO_FLAGS, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { GraphQLErrorExtensions } from 'graphql';
-
 /**
  * Creating Apollo Client
  *
@@ -22,6 +28,7 @@ import { GraphQLErrorExtensions } from 'graphql';
  */
 export function createApollo(
   httpLink: HttpLink,
+  cache: InMemoryCache,
   {
     contentful: {
       graphqlUri,
@@ -30,8 +37,17 @@ export function createApollo(
     },
   }: SharedEnv,
   logger: ILoggerService
-) {
+): ApolloClientOptions<NormalizedCacheObject> {
   return {
+    defaultOptions: {
+      query: {
+        /**
+         * The default is 'cache-first'.
+         * Docs: https://www.apollographql.com/docs/react/data/queries/#cache-first
+         *  */
+        fetchPolicy: 'cache-first',
+      },
+    },
     link: from([
       onError(({ graphQLErrors, networkError, response }) => {
         /**
@@ -90,7 +106,7 @@ export function createApollo(
         }),
       }),
     ]),
-    cache: new InMemoryCache(),
+    cache,
     connectToDevTools: true,
   };
 }
@@ -98,6 +114,18 @@ export function createApollo(
 @NgModule({
   exports: [HttpClientModule, ApolloModule],
   providers: [
+    {
+      provide: ApolloCacheToken,
+      useValue: new InMemoryCache({
+        dataIdFromObject(responseObject) {
+          if (responseObject['sys']) {
+            const { id } = responseObject['sys'] as SysFragment;
+            return `${responseObject['__typename']}:${id}`;
+          }
+          return defaultDataIdFromObject(responseObject);
+        },
+      }),
+    },
     {
       provide: APOLLO_FLAGS,
       useValue: {
@@ -109,7 +137,7 @@ export function createApollo(
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpLink, EnvToken, LoggerContentfulToken],
+      deps: [HttpLink, ApolloCacheToken, EnvToken, LoggerContentfulToken],
     },
   ],
 })

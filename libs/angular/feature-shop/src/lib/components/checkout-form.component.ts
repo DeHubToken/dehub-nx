@@ -8,8 +8,10 @@ import {
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { provideDehubLoggerWithScope } from '@dehub/angular/core';
 import {
+  ContentfulManagementToken,
   DehubMoralisToken,
   EnvToken,
+  IContentFulManagementService,
   IDehubMoralisService,
   ILoggerService,
   IMoralisService,
@@ -30,6 +32,7 @@ import {
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
+  filterUndefined,
   getContractByCurrency,
   publishReplayRefCount,
 } from '@dehub/shared/utils';
@@ -42,6 +45,7 @@ import {
   combineLatest,
   concatMap,
   delay,
+  EMPTY,
   exhaustMap,
   filter,
   finalize,
@@ -53,6 +57,7 @@ import {
   Subscription,
   tap,
   throwError,
+  withLatestFrom,
   zip,
 } from 'rxjs';
 import {
@@ -62,7 +67,7 @@ import {
 
 @Component({
   template: `
-    <ng-container *ngIf="product">
+    <ng-container *ngIf="productDetail$ | async as product">
       <ng-container *ngIf="(isProcessing$ | async) === false; else message">
         <!-- Product Item -->
         <dhb-product-mini [product]="product"></dhb-product-mini>
@@ -216,7 +221,7 @@ import {
 export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   implements OnInit, OnDestroy
 {
-  product?: P;
+  productDetail$?: Observable<P>;
 
   account$: Observable<string | undefined> = this.moralisService.account$;
   userContacts$: Observable<Contacts> = this.dehubMoralis.userContacts$.pipe(
@@ -276,8 +281,9 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
 
   constructor(
     @Inject(MoralisToken) private moralisService: IMoralisService,
-    @Inject(DehubMoralisToken)
-    private dehubMoralis: IDehubMoralisService,
+    @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService,
+    @Inject(ContentfulManagementToken)
+    private contentfulManagement: IContentFulManagementService,
     @Inject(EnvToken) public env: SharedEnv,
     @Inject(LoggerDehubToken) private logger: ILoggerService,
     public config: DynamicDialogConfig,
@@ -286,65 +292,66 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   ) {}
 
   ngOnInit() {
-    this.product = this.config.data;
+    this.productDetail$ = this.config.data.productDetail$;
 
     // Check token allowance
-    if (this.product) {
-      const currency = this.product.currency;
-      const price = this.product.price;
-      this.hasAllowance$ = this.allowanceChange$.pipe(
-        exhaustMap(() => this.checkoutContractWithTokenMetadata$(currency)),
-        tap(() => this.setProcMsg(CheckoutProcessMessage.AllowanceCheck)),
-        exhaustMap(([checkoutContract, metadata]) =>
-          this.moralisService
-            .getTokenAllowance$(
-              metadata.address,
-              checkoutContract.address,
-              metadata.decimals
-            )
-            .pipe(
-              // We check allowance for at least one item. If we have no allowance, we have to force infinite allowance approval.
-              map(allowance =>
-                allowance.gte(
-                  this.parseUnits(price.toString(), metadata.decimals)
+    this.productDetail$
+      ?.pipe(filterUndefined(), first())
+      .subscribe(({ currency, price }) => {
+        this.hasAllowance$ = this.allowanceChange$.pipe(
+          exhaustMap(() => this.checkoutContractWithTokenMetadata$(currency)),
+          tap(() => this.setProcMsg(CheckoutProcessMessage.AllowanceCheck)),
+          exhaustMap(([checkoutContract, metadata]) =>
+            this.moralisService
+              .getTokenAllowance$(
+                metadata.address,
+                checkoutContract.address,
+                metadata.decimals
+              )
+              .pipe(
+                // We check allowance for at least one item. If we have no allowance, we have to force infinite allowance approval.
+                map(allowance =>
+                  allowance.gte(
+                    this.parseUnits(price.toString(), metadata.decimals)
+                  )
                 )
               )
-            )
-        ),
-        tap(v => this.logger.info('Has allowance?', v))
-      );
-    }
+          ),
+          tap(v => this.logger.info('Has allowance?', v))
+        );
+      });
   }
 
   onApprove() {
-    if (this.product) {
-      const currency = this.product.currency;
-      this.subs.add(
-        this.checkoutContractWithTokenMetadata$(currency)
-          .pipe(
-            tap(() => {
-              this.setProcMsg(CheckoutProcessMessage.AllowanceSet);
-              this.isProcessingSubject.next(true);
-            }),
-            exhaustMap(([checkoutContract, metadata]) =>
-              this.moralisService.setTokenAllowance$(
-                metadata.address,
-                checkoutContract.address
-              )
-            ),
-            tap(() => this.allowanceChangeSubject.next(true)),
-            tap(() => this.isProcessingSubject.next(false)),
-            first(),
-            catchError(() => {
-              this.isCompleteSubject.next(true);
-              this.logger.error('Order failed during approval stage!');
-              this.setProcMsg(CheckoutProcessMessage.ApprovalError);
-              return of(undefined);
-            })
-          )
-          .subscribe()
-      );
-    }
+    this.productDetail$
+      ?.pipe(filterUndefined(), first())
+      .subscribe(({ currency }) => {
+        this.subs.add(
+          this.checkoutContractWithTokenMetadata$(currency)
+            .pipe(
+              tap(() => {
+                this.setProcMsg(CheckoutProcessMessage.AllowanceSet);
+                this.isProcessingSubject.next(true);
+              }),
+              exhaustMap(([checkoutContract, metadata]) =>
+                this.moralisService.setTokenAllowance$(
+                  metadata.address,
+                  checkoutContract.address
+                )
+              ),
+              tap(() => this.allowanceChangeSubject.next(true)),
+              tap(() => this.isProcessingSubject.next(false)),
+              first(),
+              catchError(() => {
+                this.isCompleteSubject.next(true);
+                this.logger.error('Order failed during approval stage!');
+                this.setProcMsg(CheckoutProcessMessage.ApprovalError);
+                return of(undefined);
+              })
+            )
+            .subscribe()
+        );
+      });
   }
 
   onConfirm(account: string) {
@@ -354,31 +361,34 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
       throw new Error('User contacts are missing!');
     }
 
+    this.isProcessingSubject.next(true);
+    this.setProcMsg(CheckoutProcessMessage.UpdateContacts);
+
     const { email, phone } = contacts;
 
     // Update user contacts
     this.subs.add(
       this.moralisService
         .updateUser$({ email, phone })
-        .pipe(tap(() => this.isProcessingSubject.next(true)))
-        .subscribe(_user => {
+        .pipe(withLatestFrom(this.productDetail$ ? this.productDetail$ : EMPTY))
+        .subscribe(([_user, product]) => {
           const parseUnits = Moralis.web3Library.utils.parseUnits;
           const shippingAddress =
             this.checkoutForm.controls.shippingAddress.value;
-          if (this.product && shippingAddress && this.checkoutContract$) {
+          if (product && shippingAddress && this.checkoutContract$) {
             const totalAmountStr = this.totalAmount.toString();
-            const currency = this.product.currency;
+            const currency = product.currency;
             const quantity = this.checkoutForm.controls.quantity.value;
             const productData: ProductData = {
-              name: this.product.name,
-              description: this.product.description,
-              image: this.product.picture.url || '',
-              sku: this.product.sku,
-              category: this.product.category.name || '',
+              name: product.name,
+              description: product.description,
+              image: product.picture.url || '',
+              sku: product.sku,
+              category: product.category.name || '',
             };
             const params: InitOrderParams = {
               address: account,
-              contentfulId: this.product.contentfulId,
+              contentfulId: product.contentfulId,
               productData,
               shippingAddress,
               quantity,
@@ -438,6 +448,13 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                     repeatWhen(obs => obs.pipe(delay(1000))),
                     filter(data => data.status !== OrderStatus.verified),
                     first()
+                  )
+                ),
+                // Decrease product quantity
+                tap(() =>
+                  this.contentfulManagement.reduceProductAvailableQuantity(
+                    params.contentfulId,
+                    quantity
                   )
                 ),
                 map(() => {

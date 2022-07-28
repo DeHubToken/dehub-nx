@@ -11,6 +11,7 @@ import { ProductCheckoutDetail } from '@dehub/shared/model';
   template: `
     <div
       *ngIf="product"
+      [dhbContentfulDraft]="product.sys"
       class="card overview-box border-round-lg gray shadow-2 p-0 mb-3 overflow-hidden"
     >
       <div class="overview-info w-full">

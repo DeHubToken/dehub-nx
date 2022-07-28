@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import {
+  ContentfulManagementToken,
   EnvToken,
   LoggerContentfulToken,
   LoggerDehubMoralisToken,
@@ -13,6 +14,7 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { SwUpdateAvailableComponent } from './components/sw-update-available/sw-update-available.component';
+import { ContentfulManagementService } from './services';
 import { ConsoleLoggerService } from './services/logger.service';
 
 export const provideDehubLoggerWithScope = (scope: string) => [
@@ -43,6 +45,10 @@ export class AngularCoreModule {
       ngModule: AngularCoreModule,
       providers: [
         MessageService,
+        {
+          provide: ContentfulManagementToken,
+          useClass: ContentfulManagementService,
+        },
         // Default Dehub Logger
         ...provideDehubLoggerWithScope(''),
         // Moralis Logger

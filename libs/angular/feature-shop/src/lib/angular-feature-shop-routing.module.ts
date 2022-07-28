@@ -4,7 +4,6 @@ import { AuthenticatedGuard } from '@dehub/angular/core';
 import { AngularFeatureShopCheckoutComponent } from './angular-feature-shop-checkout.component';
 import { AngularFeatureShopProductDetailComponent } from './angular-feature-shop-product-detail.component';
 import { AngularFeatureShopComponent } from './angular-feature-shop.component';
-import { ProductDetailsResolver } from './services/product-details-resolver.service';
 
 const routes: Routes = [
   {
@@ -14,7 +13,6 @@ const routes: Routes = [
   {
     path: ':slug',
     component: AngularFeatureShopProductDetailComponent,
-    resolve: { productDetails: ProductDetailsResolver },
   },
   {
     path: 'checkout',
@@ -23,7 +21,6 @@ const routes: Routes = [
       {
         path: ':slug',
         component: AngularFeatureShopCheckoutComponent,
-        resolve: { productDetails: ProductDetailsResolver },
         canActivate: [AuthenticatedGuard],
       },
     ],

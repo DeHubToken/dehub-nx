@@ -152,7 +152,9 @@ export class DehubMoralisService implements IDehubMoralisService {
    * @returns ipfsHash, orderId
    */
   initOrder$(params: InitOrderParams) {
-    const url = this.env.moralis.serverUrl + '/functions/initOrder';
+    const url = this.moralisService.getCloudFunctionUrl(
+      MoralisFunctions.Shop.InitOrder
+    );
     this.logger.info('Sending initOrder request to Moralis...', params);
     return this.httpClient.post<InitOrderResponse>(url, params).pipe(
       tap(resp => this.logger.info(JSON.stringify(resp))),
@@ -161,7 +163,9 @@ export class DehubMoralisService implements IDehubMoralisService {
   }
 
   checkOrder$(params: CheckOrderParams) {
-    const url = this.env.moralis.serverUrl + '/functions/checkOrder';
+    const url = this.moralisService.getCloudFunctionUrl(
+      MoralisFunctions.Shop.CheckOrder
+    );
     this.logger.info(`Checking order ${params.orderId} status...`);
     let data = new HttpParams();
     data = params.orderId ? data.set('orderId', params.orderId) : data;
@@ -175,7 +179,9 @@ export class DehubMoralisService implements IDehubMoralisService {
    * Get Checkout contract data from Moralis DB via API.
    */
   getCheckoutContract$() {
-    const url = `${this.env.moralis.serverUrl}/functions/${MoralisFunctions.Shop.GetCheckoutContract}`;
+    const url = this.moralisService.getCloudFunctionUrl(
+      MoralisFunctions.Shop.GetCheckoutContract
+    );
     return this.httpClient
       .get<ShopContractResponse>(url)
       .pipe(map(resp => resp.result));
