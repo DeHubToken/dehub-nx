@@ -67,10 +67,10 @@ import {
 
 @Component({
   template: `
-    <ng-container *ngIf="productDetail$ | async as product">
+    <ng-container *ngIf="productDetail$ | async as productDetail">
       <ng-container *ngIf="(isProcessing$ | async) === false; else message">
         <!-- Product Item -->
-        <dhb-product-mini [product]="product"></dhb-product-mini>
+        <dhb-product-mini [product]="productDetail"></dhb-product-mini>
 
         <ng-container>
           <!-- Quantity selection -->
@@ -84,7 +84,7 @@ import {
                   [ariaLabel]="'Quantity'"
                   [ariaRequired]="true"
                   [min]="1"
-                  [max]="product.availableQuantity"
+                  [max]="productDetail.availableQuantity"
                   [allowEmpty]="false"
                   [showButtons]="true"
                 ></p-inputNumber>
@@ -134,8 +134,8 @@ import {
                   <h3
                     class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1"
                   >
-                    {{ calcTotalAmount(product.price, quantity) }}
-                    <span class="text-sm">{{ product.currency }}</span>
+                    {{ calcTotalAmount(productDetail.price, quantity) }}
+                    <span class="text-sm">{{ productDetail.currency }}</span>
                   </h3>
                 </div>
               </div>
@@ -218,10 +218,8 @@ import {
   providers: [...provideDehubLoggerWithScope('Checkout Form')],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckoutFormComponent<P extends ProductCheckoutDetail>
-  implements OnInit, OnDestroy
-{
-  productDetail$?: Observable<P>;
+export class CheckoutFormComponent implements OnInit, OnDestroy {
+  productDetail$?: Observable<ProductCheckoutDetail>;
 
   account$: Observable<string | undefined> = this.moralisService.account$;
   userContacts$: Observable<Contacts> = this.dehubMoralis.userContacts$.pipe(
@@ -292,12 +290,13 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
   ) {}
 
   ngOnInit() {
-    this.productDetail$ = this.config.data.productDetail$;
-
-    // Check token allowance
-    this.productDetail$
-      ?.pipe(filterUndefined(), first())
-      .subscribe(({ currency, price }) => {
+    this.productDetail$ = (
+      this.config.data as { productDetail$: Observable<ProductCheckoutDetail> }
+    ).productDetail$?.pipe(
+      filterUndefined(),
+      first(),
+      tap(({ currency, price }) => {
+        // Check token allowance
         this.hasAllowance$ = this.allowanceChange$.pipe(
           exhaustMap(() => this.checkoutContractWithTokenMetadata$(currency)),
           tap(() => this.setProcMsg(CheckoutProcessMessage.AllowanceCheck)),
@@ -319,7 +318,8 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
           ),
           tap(v => this.logger.info('Has allowance?', v))
         );
-      });
+      })
+    );
   }
 
   onApprove() {
@@ -339,8 +339,10 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
                   checkoutContract.address
                 )
               ),
-              tap(() => this.allowanceChangeSubject.next(true)),
-              tap(() => this.isProcessingSubject.next(false)),
+              tap(() => {
+                this.allowanceChangeSubject.next(true);
+                this.isProcessingSubject.next(false);
+              }),
               first(),
               catchError(() => {
                 this.isCompleteSubject.next(true);
@@ -371,24 +373,24 @@ export class CheckoutFormComponent<P extends ProductCheckoutDetail>
       this.moralisService
         .updateUser$({ email, phone })
         .pipe(withLatestFrom(this.productDetail$ ? this.productDetail$ : EMPTY))
-        .subscribe(([_user, product]) => {
+        .subscribe(([_user, productDetail]) => {
           const parseUnits = Moralis.web3Library.utils.parseUnits;
           const shippingAddress =
             this.checkoutForm.controls.shippingAddress.value;
-          if (product && shippingAddress && this.checkoutContract$) {
+          if (productDetail && shippingAddress && this.checkoutContract$) {
             const totalAmountStr = this.totalAmount.toString();
-            const currency = product.currency;
+            const currency = productDetail.currency;
             const quantity = this.checkoutForm.controls.quantity.value;
             const productData: ProductData = {
-              name: product.name,
-              description: product.description,
-              image: product.picture.url || '',
-              sku: product.sku,
-              category: product.category.name || '',
+              name: productDetail.name,
+              description: productDetail.description,
+              image: productDetail.picture.url || '',
+              sku: productDetail.sku,
+              category: productDetail.category.name || '',
             };
             const params: InitOrderParams = {
               address: account,
-              contentfulId: product.contentfulId,
+              contentfulId: productDetail.contentfulId,
               productData,
               shippingAddress,
               quantity,

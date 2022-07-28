@@ -13,7 +13,9 @@ export class ProductDetailService {
     private productDetailBySlugService: ProductCollectionBySlugService
   ) {}
 
-  getProductDetailBySlug(slug?: string): Observable<ProductDetailFragment> {
+  getProductDetailBySlug(
+    slug?: string
+  ): Observable<ProductDetailFragment | undefined> {
     return this.productDetailBySlugService
       .watch({
         slug,
