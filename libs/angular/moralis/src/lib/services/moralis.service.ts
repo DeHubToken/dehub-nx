@@ -41,16 +41,21 @@ import {
   ConfirmEventType,
   MessageService,
 } from 'primeng/api';
-import { BehaviorSubject, from, iif, Observable, of, throwError } from 'rxjs';
 import {
+  BehaviorSubject,
   catchError,
   concatMap,
   distinctUntilChanged,
   first,
+  from,
+  iif,
   map,
+  Observable,
+  of,
   switchMap,
   tap,
-} from 'rxjs/operators';
+  throwError,
+} from 'rxjs';
 import {
   BinanceConnector,
   BinanceNetworkSwitchRejected,

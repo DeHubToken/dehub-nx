@@ -1,6 +1,5 @@
 import { isEmpty } from 'lodash';
-import { Observable, ReplaySubject, share } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, Observable, ReplaySubject, share } from 'rxjs';
 
 /**
  * Docs: https://rxjs.dev/deprecations/multicasting#publishreplay

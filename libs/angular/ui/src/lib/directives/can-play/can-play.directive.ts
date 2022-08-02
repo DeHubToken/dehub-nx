@@ -10,7 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { DehubMoralisToken, IDehubMoralisService } from '@dehub/angular/model';
 import { WINDOW } from '@ng-web-apis/common';
-import { first } from 'rxjs/operators';
+import { first } from 'rxjs';
 
 @Directive({
   selector: '[dhbCanPlay]',

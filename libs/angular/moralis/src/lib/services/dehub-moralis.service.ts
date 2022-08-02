@@ -32,8 +32,16 @@ import { getAddress } from '@ethersproject/address';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Moralis } from 'moralis';
 import { MessageService } from 'primeng/api';
-import { concatMap, from, iif, Observable, switchMap, tap } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import {
+  concatMap,
+  filter,
+  from,
+  iif,
+  map,
+  Observable,
+  switchMap,
+  tap,
+} from 'rxjs';
 
 @Injectable()
 export class DehubMoralisService implements IDehubMoralisService {

@@ -25,8 +25,7 @@ import {
 } from '@dehub/shared/model';
 import { resolveMessage } from '@dehub/shared/utils';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Observable, of, Subscription, zip } from 'rxjs';
-import { exhaustMap, map, tap } from 'rxjs/operators';
+import { exhaustMap, map, Observable, of, Subscription, tap, zip } from 'rxjs';
 import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({

@@ -3,8 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCheckoutDetail } from '@dehub/shared/model';
 import { filterUndefined, richMarkupToPlainString } from '@dehub/shared/utils';
 import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, Observable, switchMap } from 'rxjs';
 import { CheckoutFormComponent } from './components/checkout-form.component';
 import { ProductDetailService } from './services';
 

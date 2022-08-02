@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, PRIMARY_OUTLET, Router } from '@angular/router';
 import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { first } from 'rxjs/operators';
+import { first } from 'rxjs';
 
 @Component({
   template: ``,
