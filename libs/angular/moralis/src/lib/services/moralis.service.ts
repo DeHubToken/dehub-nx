@@ -13,7 +13,9 @@ import {
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   EnableOptionsPersisted,
+  Erc20Allowance,
   GetNativeBalanceParameters,
+  GetTokenAllowanceParameters,
   GetTokenBalancesParameters,
   GetTokenMetadataParameters,
   MoralisConnectorNames,
@@ -32,7 +34,6 @@ import {
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
-import { BigNumber } from '@ethersproject/bignumber';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
@@ -48,7 +49,6 @@ import {
   distinctUntilChanged,
   first,
   from,
-  iif,
   map,
   Observable,
   of,
@@ -474,28 +474,14 @@ export class MoralisService implements IMoralisService {
   // Token APIs
 
   getTokenAllowance$(
-    contractAddress: string,
-    spender: string,
-    decimals: string
-  ): Observable<BigNumber> {
-    this.logger.info(`Getting ${contractAddress} allowance for ${spender}.`);
-    return this.account$.pipe(
-      switchMap(account =>
-        iif(
-          () => !!account,
-          Moralis.Web3API.token.getTokenAllowance({
-            chain: decimalToHex(this.env.web3.chainId),
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            owner_address: account!,
-            spender_address: spender,
-            address: contractAddress,
-          }),
-          throwError(() => new Error('No account/metadata available'))
-        )
-      ),
-      tap(({ allowance }) => this.logger.info(`Allowance: ${allowance}`)),
-      map(({ allowance }) =>
-        Moralis.web3Library.utils.parseUnits(allowance, decimals)
+    parameters: GetTokenAllowanceParameters
+  ): Observable<Erc20Allowance> {
+    this.logger.info(
+      `Getting ${parameters.address} allowance for ${parameters.spender_address}.`
+    );
+    return from(Moralis.Web3API.token.getTokenAllowance(parameters)).pipe(
+      tap(resp =>
+        this.logger.info(`Moralis.Web3API.token.getTokenAllowance:`, resp)
       )
     );
   }

@@ -82,14 +82,14 @@ export class ContentfulManagementService
       this.logger.info(
         `${productInfo(
           product
-        )} quantity change from ${availableQuantity} to ${newQuantity} (-${quantity}).`
+        )} quantity change request from ${availableQuantity} to ${newQuantity} (-${quantity}).`
       );
       // Update Contentful
       return await this.client.entry
         .update({ entryId: product.sys.id }, product)
         .then(product => {
           this.logger.info(
-            `${productInfo(product)} quantity update was successful.`
+            `${productInfo(product)} availableQuantity update was successful.`
           );
         })
         // Update Apollo Cache
@@ -104,7 +104,7 @@ export class ContentfulManagementService
         )
         .then(updateResult => {
           this.logger.info(
-            `${productId} availableQuantity '${updateResult?.availableQuantity}' CACHE update was successful.`
+            `${productId} availableQuantity cache update was successful with '${updateResult?.availableQuantity}'.`
           );
           return updateResult;
         })

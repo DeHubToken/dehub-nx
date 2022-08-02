@@ -21,7 +21,6 @@ import {
 import { SharedEnv } from '@dehub/shared/config';
 import {
   Contacts,
-  ContractPropsType,
   Currency,
   DeHubShopShippingAddresses,
   InitOrderParams,
@@ -55,6 +54,7 @@ import {
   of,
   repeatWhen,
   Subscription,
+  switchMap,
   tap,
   throwError,
   withLatestFrom,
@@ -93,14 +93,8 @@ import {
             </div>
           </form>
 
-          <ng-container
-            *ngIf="
-              hasAllowance$ && {
-                value: hasAllowance$ | async
-              } as allowanceContext
-            "
-          >
-            <ng-container *ngIf="allowanceContext.value === true">
+          <ng-container *ngIf="hasAllowance$ | async as hasAllowance">
+            <ng-container *ngIf="hasAllowance">
               <!-- Contact -->
               <h5>Contact Details</h5>
               <dhb-contacts-form
@@ -111,7 +105,6 @@ import {
               </dhb-contacts-form>
 
               <!-- Shipping Address -->
-
               <h5>Shipping Address</h5>
               <dhb-address-form
                 *ngIf="userShippingAddress$ | async as resp; else loading"
@@ -123,6 +116,7 @@ import {
                 "
               ></dhb-address-form>
             </ng-container>
+
             <!-- Total -->
             <div
               *ngIf="checkoutForm.controls.quantity.value as quantity"
@@ -156,7 +150,7 @@ import {
 
                 <!-- Approve -->
                 <p-button
-                  *ngIf="allowanceContext.value === false; else confirm"
+                  *ngIf="!hasAllowance; else confirm"
                   label="Approve"
                   icon="fa-regular fa-check"
                   class="w-5"
@@ -168,8 +162,7 @@ import {
                 <ng-template #confirm>
                   <p-button
                     *ngIf="
-                      allowanceContext.value === true &&
-                        (account$ | async) as account;
+                      hasAllowance && (account$ | async) as account;
                       else loading
                     "
                     label="Confirm"
@@ -183,6 +176,7 @@ import {
               </div>
             </div>
           </ng-container>
+
           <!-- Loading Template -->
           <ng-template #loading>
             <dhb-loading></dhb-loading>
@@ -221,26 +215,27 @@ import {
 export class CheckoutFormComponent implements OnInit, OnDestroy {
   productDetail$?: Observable<ProductCheckoutDetail>;
 
-  account$: Observable<string | undefined> = this.moralisService.account$;
-  userContacts$: Observable<Contacts> = this.dehubMoralis.userContacts$.pipe(
+  account$ = this.moralisService.account$;
+  userContacts$ = this.dehubMoralis.userContacts$.pipe(
     tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
   );
-  userShippingAddress$: Observable<DeHubShopShippingAddresses | undefined> =
-    this.dehubMoralis.userShippingAddress$;
-  checkoutContract$: Observable<ContractPropsType> =
-    this.dehubMoralis.checkoutContract$;
+  userShippingAddress$ = this.dehubMoralis.userShippingAddress$;
+  checkoutContract$ = this.dehubMoralis.checkoutContract$;
   hasAllowance$?: Observable<boolean>;
 
-  private allowanceChangeSubject = new BehaviorSubject<boolean>(false);
+  private allowanceChangeSubject = new BehaviorSubject(false);
   allowanceChange$ = this.allowanceChangeSubject
     .asObservable()
     .pipe(tap(() => this.logger.info('Allowance changed!')));
 
-  private isProcessingSubject = new BehaviorSubject<boolean>(false);
+  private isProcessingSubject = new BehaviorSubject(false);
   isProcessing$ = this.isProcessingSubject.asObservable();
 
-  private isCompleteSubject = new BehaviorSubject<boolean>(false);
+  private isCompleteSubject = new BehaviorSubject(false);
   isComplete$ = this.isCompleteSubject.asObservable();
+
+  private parseUnits = Moralis.web3Library.utils.parseUnits;
+  private subs = new Subscription();
 
   private processSubject = new BehaviorSubject<CheckoutProcess>({
     icon: 'fa-solid fa-circle-notch fa-spin',
@@ -257,9 +252,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   });
 
   totalAmount = 0;
-
-  private parseUnits = Moralis.web3Library.utils.parseUnits;
-  private subs = new Subscription();
 
   tokenMetadata$ = (currency: Currency) =>
     this.moralisService
@@ -292,33 +284,47 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.productDetail$ = (
       this.config.data as { productDetail$: Observable<ProductCheckoutDetail> }
-    ).productDetail$?.pipe(
-      filterUndefined(),
-      first(),
-      tap(({ currency, price }) => {
-        // Check token allowance
-        this.hasAllowance$ = this.allowanceChange$.pipe(
-          exhaustMap(() => this.checkoutContractWithTokenMetadata$(currency)),
-          tap(() => this.setProcMsg(CheckoutProcessMessage.AllowanceCheck)),
-          exhaustMap(([checkoutContract, metadata]) =>
-            this.moralisService
-              .getTokenAllowance$(
-                metadata.address,
-                checkoutContract.address,
-                metadata.decimals
-              )
-              .pipe(
-                // We check allowance for at least one item. If we have no allowance, we have to force infinite allowance approval.
-                map(allowance =>
-                  allowance.gte(
-                    this.parseUnits(price.toString(), metadata.decimals)
-                  )
+    ).productDetail$;
+
+    // Check token allowance
+    this.hasAllowance$ = combineLatest([
+      this.account$.pipe(filterUndefined()),
+      this.productDetail$.pipe(filterUndefined()),
+      this.allowanceChange$,
+    ]).pipe(
+      switchMap(([account, productDetail]) =>
+        this.checkoutContractWithTokenMetadata$(productDetail.currency).pipe(
+          withLatestFrom(of({ account, productDetail }))
+        )
+      ),
+      tap(() => this.setProcMsg(CheckoutProcessMessage.AllowanceCheck)),
+      switchMap(
+        ([
+          [checkoutContract, metadata],
+          {
+            account,
+            productDetail: { price },
+          },
+        ]) =>
+          this.moralisService
+            .getTokenAllowance$({
+              chain: decimalToHex(this.env.web3.chainId),
+              owner_address: account,
+              spender_address: checkoutContract.address,
+              address: metadata.address,
+            })
+            .pipe(
+              map(({ allowance }) =>
+                this.parseUnits(allowance, metadata.decimals)
+              ),
+              // We check allowance for at least one item. If we have no allowance, we have to force infinite allowance approval.
+              map(allowance =>
+                allowance.gte(
+                  this.parseUnits(price.toString(), metadata.decimals)
                 )
               )
-          ),
-          tap(v => this.logger.info('Has allowance?', v))
-        );
-      })
+            )
+      )
     );
   }
 

@@ -6,9 +6,11 @@ import {
   Currency,
   DeHubConnectorNames,
   DeHubShopShippingAddresses,
+  Erc20Allowance,
   Erc20Metadata,
   Erc20TokenBalance,
   GetNativeBalanceParameters,
+  GetTokenAllowanceParameters,
   GetTokenBalancesParameters,
   GetTokenMetadataParameters,
   InitOrderParams,
@@ -51,10 +53,8 @@ export interface IMoralisService {
 
   // Token APIs
   getTokenAllowance$: (
-    contractAddress: string,
-    spender: string,
-    decimals: string
-  ) => Observable<BigNumber>;
+    parameters: GetTokenAllowanceParameters
+  ) => Observable<Erc20Allowance>;
   setTokenAllowance$: (
     contractAddress: string,
     spender: string,
