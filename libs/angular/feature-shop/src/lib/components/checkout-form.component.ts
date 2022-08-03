@@ -330,36 +330,34 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
 
   onApprove() {
     this.productDetail$
-      ?.pipe(filterUndefined(), first())
-      .subscribe(({ currency }) => {
-        this.subs.add(
+      ?.pipe(
+        filterUndefined(),
+        first(),
+        switchMap(({ currency }) =>
           this.checkoutContractWithTokenMetadata$(currency)
-            .pipe(
-              tap(() => {
-                this.setProcMsg(CheckoutProcessMessage.AllowanceSet);
-                this.isProcessingSubject.next(true);
-              }),
-              exhaustMap(([checkoutContract, metadata]) =>
-                this.moralisService.setTokenAllowance$(
-                  metadata.address,
-                  checkoutContract.address
-                )
-              ),
-              tap(() => {
-                this.allowanceChangeSubject.next(true);
-                this.isProcessingSubject.next(false);
-              }),
-              first(),
-              catchError(() => {
-                this.isCompleteSubject.next(true);
-                this.logger.error('Order failed during approval stage!');
-                this.setProcMsg(CheckoutProcessMessage.ApprovalError);
-                return of(undefined);
-              })
-            )
-            .subscribe()
-        );
-      });
+        ),
+        tap(() => {
+          this.setProcMsg(CheckoutProcessMessage.AllowanceSet);
+          this.isProcessingSubject.next(true);
+        }),
+        switchMap(([checkoutContract, metadata]) =>
+          this.moralisService.setTokenAllowance$(
+            metadata.address,
+            checkoutContract.address
+          )
+        ),
+        tap(() => {
+          this.allowanceChangeSubject.next(true);
+          this.isProcessingSubject.next(false);
+        }),
+        catchError(() => {
+          this.isCompleteSubject.next(true);
+          this.logger.error('Order failed during approval stage!');
+          this.setProcMsg(CheckoutProcessMessage.ApprovalError);
+          return of(undefined);
+        })
+      )
+      .subscribe();
   }
 
   onConfirm(account: string) {
