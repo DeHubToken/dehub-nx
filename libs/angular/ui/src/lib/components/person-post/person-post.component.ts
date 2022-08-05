@@ -65,7 +65,7 @@ interface SocialLink {
               [disabled]="link.url === '#'"
               type="button"
               class="p-button-rounded p-button-text p-button-plain mr-2 mb-2 text-xl"
-              (onClick)="onSocialClicked($event, link.url)"
+              (click)="onSocialClicked($event, link.url)"
             ></button>
           </ng-container>
         </div>
