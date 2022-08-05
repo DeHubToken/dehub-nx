@@ -86,7 +86,7 @@ export interface IDehubMoralisService {
   checkoutContract$: Observable<ShopContractPropsType>;
 
   getDeHubShopShippingAddresses$: () => Observable<
-    DeHubShopShippingAddresses[]
+    DeHubShopShippingAddress[] | undefined
   >;
   getWalletBalance$: (
     currency: Currency,

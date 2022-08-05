@@ -13,7 +13,7 @@ import {
   CheckOrderParams,
   CheckOrderResponse,
   Currency,
-  DeHubShopShippingAddresses,
+  DeHubShopShippingAddress,
   InitOrderParams,
   InitOrderResponse,
   MoralisClass,
@@ -54,12 +54,13 @@ export class DehubMoralisService implements IDehubMoralisService {
     map(({ email, phone }) => ({ email, phone }))
   );
 
-  // For now, we're just going to use the first address.
+  /** For now, we're just going to use the first address. */
   userShippingAddress$ = this.moralisService.isAuthenticated$.pipe(
     filter(isAuthenticated => isAuthenticated),
     switchMap(() =>
       this.getDeHubShopShippingAddresses$().pipe(
-        map(resp => resp[0] || { attributes: {} })
+        filterNil(),
+        map(addresses => addresses[0])
       )
     )
   );
@@ -81,9 +82,11 @@ export class DehubMoralisService implements IDehubMoralisService {
     const ShippingAddress = Moralis.Object.extend(
       MoralisClass.DeHubShopShippingAddresses
     );
-    const query = new Moralis.Query(ShippingAddress);
-    const result = query.find();
-    return from(result) as unknown as Observable<DeHubShopShippingAddresses[]>;
+    const query = new Moralis.Query<DeHubShopShippingAddress>(ShippingAddress);
+
+    return from(query.find()).pipe(
+      map(result => (result.length ? result : undefined))
+    );
   }
 
   /**
