@@ -28,7 +28,7 @@ import { WINDOW } from '@ng-web-apis/common';
                     [dhbContentfulDraft]="link.sys"
                     [routerLink]="link.routerLink || undefined"
                     [class]="resolveButton(link.type, link.style, link.size)"
-                    (onClick)="onButtonClicked($event, link.externalLink)"
+                    (click)="onButtonClicked($event, link.externalLink)"
                   >
                     <i *ngIf="link.icon" [class]="link.icon"></i>
                     {{ link.label }}
