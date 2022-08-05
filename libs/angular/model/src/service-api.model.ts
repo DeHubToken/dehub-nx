@@ -5,7 +5,7 @@ import {
   Contacts,
   Currency,
   DeHubConnectorNames,
-  DeHubShopShippingAddresses,
+  DeHubShopShippingAddress,
   Erc20Allowance,
   Erc20Metadata,
   Erc20TokenBalance,
@@ -79,11 +79,8 @@ export interface IMoralisService {
 /** Dehub specific moralis business logic */
 export interface IDehubMoralisService {
   canPlay$: Observable<boolean>;
-
-  /** User contact information */
   userContacts$: Observable<Contacts>;
-  userShippingAddress$: Observable<DeHubShopShippingAddresses>;
-  checkoutContract$: Observable<ShopContractPropsType>;
+  userShippingAddress$: Observable<DeHubShopShippingAddress>;
 
   getDeHubShopShippingAddresses$: () => Observable<
     DeHubShopShippingAddress[] | undefined
@@ -99,7 +96,7 @@ export interface IDehubMoralisService {
   ) => Observable<boolean>;
   initOrder$: (params: InitOrderParams) => Observable<InitOrderResult>;
   checkOrder$: (params: CheckOrderParams) => Observable<CheckOrderResult>;
-  getCheckoutContract$: () => Observable<ShopContractPropsType>;
+  getCheckoutContract$: () => Observable<ShopContractPropsType | null>;
   mintReceipt$: (
     orderId: string,
     ipfsHash: string,
@@ -119,8 +116,8 @@ export interface IContentFulManagementService {
    * @param quantity the buying quantity
    * @returns the product available quantity after decrease
    */
-  reduceProductAvailableQuantity: (
+  reduceProductAvailableQuantity$: (
     productId: string,
     quantity: number
-  ) => Promise<ProductAvailableQuantityFragment | null>;
+  ) => Observable<ProductAvailableQuantityFragment | null>;
 }

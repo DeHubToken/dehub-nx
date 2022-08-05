@@ -72,5 +72,5 @@ export interface CheckOrderResponse {
 }
 
 export interface ShopContractResponse {
-  result: ShopContractPropsType;
+  result: ShopContractPropsType | null;
 }

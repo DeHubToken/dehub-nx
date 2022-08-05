@@ -22,11 +22,7 @@ import {
   ShopContractResponse,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
-import {
-  filterEmpty,
-  getContractByCurrency,
-  publishReplayRefCount,
-} from '@dehub/shared/utils';
+import { filterNil, getContractByCurrency } from '@dehub/shared/utils';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { getAddress } from '@ethersproject/address';
 import { BigNumber } from '@ethersproject/bignumber';
@@ -50,7 +46,7 @@ export class DehubMoralisService implements IDehubMoralisService {
   );
 
   userContacts$ = this.moralisService.userAttributes$.pipe(
-    filterEmpty(),
+    filterNil(),
     map(({ email, phone }) => ({ email, phone }))
   );
 
@@ -64,8 +60,6 @@ export class DehubMoralisService implements IDehubMoralisService {
       )
     )
   );
-
-  checkoutContract$ = this.getCheckoutContract$().pipe(publishReplayRefCount());
 
   constructor(
     @Inject(LoggerDehubMoralisToken) private logger: ILoggerService,
@@ -168,7 +162,9 @@ export class DehubMoralisService implements IDehubMoralisService {
     );
     this.logger.info('Sending initOrder request to Moralis...', params);
     return this.httpClient.post<InitOrderResponse>(url, params).pipe(
-      tap(resp => this.logger.info(JSON.stringify(resp))),
+      tap(resp =>
+        this.logger.info(`${MoralisFunctions.Shop.InitOrder} response`, resp)
+      ),
       map(resp => resp.result)
     );
   }
@@ -181,7 +177,9 @@ export class DehubMoralisService implements IDehubMoralisService {
     let data = new HttpParams();
     data = params.orderId ? data.set('orderId', params.orderId) : data;
     return this.httpClient.get<CheckOrderResponse>(url, { params: data }).pipe(
-      tap(resp => this.logger.info(JSON.stringify(resp))),
+      tap(resp =>
+        this.logger.info(`${MoralisFunctions.Shop.CheckOrder} response`, resp)
+      ),
       map(resp => resp.result)
     );
   }
