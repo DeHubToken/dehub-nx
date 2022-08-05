@@ -28,7 +28,7 @@ import {
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
-  filterEmpty,
+  filterNil,
   getRandomRpcUrlByChainId,
   publishReplayRefCount,
   setupMetamaskNetwork,
@@ -96,7 +96,7 @@ export class MoralisService implements IMoralisService {
   isAuthenticated$ = this.user$.pipe(map(user => !!user));
 
   username$ = this.userAttributes$.pipe(
-    filterEmpty(),
+    filterNil(),
     map(({ username }) => username)
   );
 
@@ -171,7 +171,7 @@ export class MoralisService implements IMoralisService {
 
   updateUser$(attributes: Partial<Attributes>): Observable<User> {
     return this.user$.pipe(
-      filterEmpty(),
+      filterNil(),
       first(),
       switchMap(user =>
         from(user.save(attributes)).pipe(
@@ -384,18 +384,14 @@ export class MoralisService implements IMoralisService {
       this.ngZone.run(() => {
         if (account) {
           const newAccount = account.toLowerCase();
-          this.account$
-            .pipe(filterEmpty(), first())
-            .subscribe(currentAccount => {
-              if (newAccount !== currentAccount) {
-                this.logger.warn(
-                  `Moralis account has changed to ${newAccount}!`
-                );
-                this.handleAccountChanged(newAccount);
-              } else {
-                this.logger.warn(`Moralis account has not changed!`);
-              }
-            });
+          this.account$.pipe(filterNil(), first()).subscribe(currentAccount => {
+            if (newAccount !== currentAccount) {
+              this.logger.warn(`Moralis account has changed to ${newAccount}!`);
+              this.handleAccountChanged(newAccount);
+            } else {
+              this.logger.warn(`Moralis account has not changed!`);
+            }
+          });
         } else {
           this.logger.warn(`Moralis all accounts are disconnected!`);
           this.logout();
@@ -406,7 +402,7 @@ export class MoralisService implements IMoralisService {
 
   private handleAccountChanged(newAccount: string) {
     this.user$
-      .pipe(filterEmpty(), first())
+      .pipe(filterNil(), first())
       .subscribe(({ attributes: { accounts = [] } }) => {
         // Ask linking new account
         if (!accounts.includes(newAccount)) {

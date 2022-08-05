@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCheckoutDetail } from '@dehub/shared/model';
-import { filterUndefined, richMarkupToPlainString } from '@dehub/shared/utils';
+import { filterNil, richMarkupToPlainString } from '@dehub/shared/utils';
 import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { map, Observable, switchMap } from 'rxjs';
 import { CheckoutFormComponent } from './components/checkout-form.component';
@@ -24,7 +24,7 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
     const productDetail$ = this.route.paramMap.pipe(
       map(paramMap => paramMap.get('slug') ?? undefined),
       switchMap(slug => this.productDetailService.getProductDetailBySlug(slug)),
-      filterUndefined(),
+      filterNil(),
       map(
         productDetail =>
           ({
