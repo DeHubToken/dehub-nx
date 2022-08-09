@@ -22,8 +22,8 @@ import { Observable } from 'rxjs';
 
     <!-- Loader -->
     <dhb-loader
-      *ngIf="(loaderVisible$ | async)!"
-      [subtitle]="(subtitle$ | async)!"
+      *ngIf="loaderVisible$ | push"
+      [subtitle]="subtitle$ | push"
       [lottieJson]="lottieJson"
     ></dhb-loader>
   `,

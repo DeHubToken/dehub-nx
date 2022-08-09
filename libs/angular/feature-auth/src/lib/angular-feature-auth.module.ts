@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { WalletButtonModule } from '@dehub/angular/ui/components/wallet-button';
+import { PushModule } from '@rx-angular/template';
 import { InplaceModule } from 'primeng/inplace';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
@@ -34,6 +35,9 @@ export const angularFeatureAuthRoutes: Route[] = [];
     // Libs
     WalletButtonModule,
     LoaderModule,
+
+    // Rx Angular,
+    PushModule,
 
     AngularFeatureAuthRoutingModule,
   ],

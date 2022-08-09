@@ -4,6 +4,7 @@ import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
+import { PushModule } from '@rx-angular/template';
 import { ButtonModule } from 'primeng/button';
 import { AngularFeatureNewsDetailComponent } from './angular-feature-news-detail.component';
 import { AngularFeatureNewsRoutingModule } from './angular-feature-news-routing.module';
@@ -22,6 +23,9 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
 
     // PrimeNg
     ButtonModule,
+
+    // Rx Angular,
+    PushModule,
 
     AngularFeatureNewsRoutingModule,
   ],

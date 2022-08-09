@@ -36,8 +36,8 @@
         </li>
         <li class="topbar-item ml-4">
           <dhb-connect-wallet-button
-            [label]="(connectWalletButtonLabel$ | async)!"
-            [isAuthenticated]="(isAuthenticated$ | async)!"
+            [label]="(connectWalletButtonLabel$ | push)!"
+            [isAuthenticated]="(isAuthenticated$ | push)!"
             [icon]="connectWalletButtonIcon"
           ></dhb-connect-wallet-button>
         </li>

@@ -11,6 +11,7 @@ import { ProductMiniModule } from '@dehub/angular/ui/components/product-mini';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
+import { LetModule, PushModule } from '@rx-angular/template';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
@@ -51,6 +52,10 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 
     // Swiper
     SwiperModule,
+
+    // Rx Angular,
+    LetModule,
+    PushModule,
 
     AngularFeatureShopRoutingModule,
   ],

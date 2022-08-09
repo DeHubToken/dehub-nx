@@ -22,7 +22,7 @@ import { ProductDetailService } from './services';
 
         <!-- Basic Post Detail -->
         <dhb-product-detail
-          [productDetail]="(productDetail$ | async)!"
+          [productDetail]="productDetail$ | push"
         ></dhb-product-detail>
       </div>
     </div>

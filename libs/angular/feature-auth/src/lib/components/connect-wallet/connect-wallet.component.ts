@@ -33,7 +33,7 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
   selector: 'dhb-connect-wallet',
   template: `
     <dhb-connect-wallet-options
-      [walletConnectState]="(walletConnectState$ | async)!"
+      [walletConnectState]="walletConnectState$ | push"
       (login)="onLogin($event)"
     ></dhb-connect-wallet-options>
   `,

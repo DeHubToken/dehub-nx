@@ -123,7 +123,7 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
             </span>
             <span class="p-float-label">
               <p-dropdown
-                *ngIf="countries$ | async as countries"
+                *rxLet="countries$ as countries"
                 id="country-select"
                 [formControlName]="'country'"
                 [inputId]="'country'"

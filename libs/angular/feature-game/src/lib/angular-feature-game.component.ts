@@ -11,13 +11,13 @@ import { PageGameFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';
 @Component({
   template: `
-    <ng-container *ngIf="pageGame$ | async as pageGame" class="grid">
+    <ng-container *rxLet="pageGame$ as pageGame" class="grid">
       <!-- Titles -->
       <dhb-page-header [page]="pageGame"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
-        [sections]="pageGame.sectionsCollection?.items"
+        [sections]="pageGame?.sectionsCollection?.items"
         [grandPostsResponsiveOptions]="grandPostsResponsiveOptions"
         [path]="path"
       ></dhb-page-sections>
