@@ -11,6 +11,7 @@
           {
             "banTransitiveDependencies": true,
             "enforceBuildableLibDependency": true,
+            "checkNestedExternalImports": true,
             "allow": [],
             "depConstraints": [
               // Scope boundaries
