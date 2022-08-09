@@ -6,8 +6,9 @@
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/raffle-e2e/cypress.json",
-        "devServerTarget": "raffle:serve"
+        "cypressConfig": "apps/raffle-e2e/cypress.config.ts",
+        "devServerTarget": "raffle:serve",
+        "testingType": "e2e"
       },
       "configurations": {
         "production": {

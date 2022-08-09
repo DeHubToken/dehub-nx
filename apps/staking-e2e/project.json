@@ -6,8 +6,9 @@
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/staking-e2e/cypress.json",
-        "devServerTarget": "staking:serve"
+        "cypressConfig": "apps/staking-e2e/cypress.config.ts",
+        "devServerTarget": "staking:serve",
+        "testingType": "e2e"
       },
       "configurations": {
         "production": {
