@@ -98,7 +98,7 @@
     "lottie-web": "5.8.1",
     "magic-sdk": "8.1.0",
     "moment": "2.29.1",
-    "moralis": "1.8.0",
+    "moralis-v1": "1.11.0",
     "ngx-lottie": "8.0.1",
     "os-browserify": "0.3.0",
     "primeflex": "3.2.0",
