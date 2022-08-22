@@ -13,7 +13,9 @@ import {
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   EnableOptionsPersisted,
+  Erc20Allowance,
   GetNativeBalanceParameters,
+  GetTokenAllowanceParameters,
   GetTokenBalancesParameters,
   GetTokenMetadataParameters,
   MoralisConnectorNames,
@@ -26,13 +28,12 @@ import {
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
-  filterEmpty,
+  filterNil,
   getRandomRpcUrlByChainId,
   publishReplayRefCount,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
-import { BigNumber } from '@ethersproject/bignumber';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
@@ -41,16 +42,20 @@ import {
   ConfirmEventType,
   MessageService,
 } from 'primeng/api';
-import { BehaviorSubject, from, iif, Observable, of, throwError } from 'rxjs';
 import {
+  BehaviorSubject,
   catchError,
   concatMap,
   distinctUntilChanged,
   first,
+  from,
   map,
+  Observable,
+  of,
   switchMap,
   tap,
-} from 'rxjs/operators';
+  throwError,
+} from 'rxjs';
 import {
   BinanceConnector,
   BinanceNetworkSwitchRejected,
@@ -91,7 +96,7 @@ export class MoralisService implements IMoralisService {
   isAuthenticated$ = this.user$.pipe(map(user => !!user));
 
   username$ = this.userAttributes$.pipe(
-    filterEmpty(),
+    filterNil(),
     map(({ username }) => username)
   );
 
@@ -166,7 +171,7 @@ export class MoralisService implements IMoralisService {
 
   updateUser$(attributes: Partial<Attributes>): Observable<User> {
     return this.user$.pipe(
-      filterEmpty(),
+      filterNil(),
       first(),
       switchMap(user =>
         from(user.save(attributes)).pipe(
@@ -379,18 +384,14 @@ export class MoralisService implements IMoralisService {
       this.ngZone.run(() => {
         if (account) {
           const newAccount = account.toLowerCase();
-          this.account$
-            .pipe(filterEmpty(), first())
-            .subscribe(currentAccount => {
-              if (newAccount !== currentAccount) {
-                this.logger.warn(
-                  `Moralis account has changed to ${newAccount}!`
-                );
-                this.handleAccountChanged(newAccount);
-              } else {
-                this.logger.warn(`Moralis account has not changed!`);
-              }
-            });
+          this.account$.pipe(filterNil(), first()).subscribe(currentAccount => {
+            if (newAccount !== currentAccount) {
+              this.logger.warn(`Moralis account has changed to ${newAccount}!`);
+              this.handleAccountChanged(newAccount);
+            } else {
+              this.logger.warn(`Moralis account has not changed!`);
+            }
+          });
         } else {
           this.logger.warn(`Moralis all accounts are disconnected!`);
           this.logout();
@@ -401,7 +402,7 @@ export class MoralisService implements IMoralisService {
 
   private handleAccountChanged(newAccount: string) {
     this.user$
-      .pipe(filterEmpty(), first())
+      .pipe(filterNil(), first())
       .subscribe(({ attributes: { accounts = [] } }) => {
         // Ask linking new account
         if (!accounts.includes(newAccount)) {
@@ -469,28 +470,14 @@ export class MoralisService implements IMoralisService {
   // Token APIs
 
   getTokenAllowance$(
-    contractAddress: string,
-    spender: string,
-    decimals: string
-  ): Observable<BigNumber> {
-    this.logger.info(`Getting ${contractAddress} allowance for ${spender}.`);
-    return this.account$.pipe(
-      switchMap(account =>
-        iif(
-          () => !!account,
-          Moralis.Web3API.token.getTokenAllowance({
-            chain: decimalToHex(this.env.web3.chainId),
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            owner_address: account!,
-            spender_address: spender,
-            address: contractAddress,
-          }),
-          throwError(() => new Error('No account/metadata available'))
-        )
-      ),
-      tap(({ allowance }) => this.logger.info(`Allowance: ${allowance}`)),
-      map(({ allowance }) =>
-        Moralis.web3Library.utils.parseUnits(allowance, decimals)
+    parameters: GetTokenAllowanceParameters
+  ): Observable<Erc20Allowance> {
+    this.logger.info(
+      `Getting ${parameters.address} allowance for ${parameters.spender_address}.`
+    );
+    return from(Moralis.Web3API.token.getTokenAllowance(parameters)).pipe(
+      tap(resp =>
+        this.logger.info(`Moralis.Web3API.token.getTokenAllowance:`, resp)
       )
     );
   }

@@ -9,10 +9,9 @@ import { LegalPostCollectionBySlugService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { LegalPostFragment } from '@dehub/shared/model';
-import { filterEmpty } from '@dehub/shared/utils';
+import { filterNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, Observable, switchMap } from 'rxjs';
 
 @Component({
   template: `
@@ -47,7 +46,7 @@ export class AngularFeatureLegalComponent implements OnInit {
   ngOnInit() {
     this.legalPost$ = this.route.paramMap.pipe(
       map(paramMap => paramMap.get('slug')),
-      filterEmpty(),
+      filterNil(),
       switchMap(slug =>
         this.legalPostBySlugService
           .fetch({

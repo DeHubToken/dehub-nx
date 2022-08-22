@@ -11,7 +11,8 @@ schema:
 
 config:
   preResolveTypes: true
-  maybeValue: T | undefined
+  maybeValue: T
+  avoidOptionals: false
   declarationKind: interface
 
 hooks:

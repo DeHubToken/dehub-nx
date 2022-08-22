@@ -13,7 +13,7 @@ import {
   CheckOrderParams,
   CheckOrderResponse,
   Currency,
-  DeHubShopShippingAddresses,
+  DeHubShopShippingAddress,
   InitOrderParams,
   InitOrderResponse,
   MoralisClass,
@@ -22,18 +22,22 @@ import {
   ShopContractResponse,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
-import {
-  filterEmpty,
-  getContractByCurrency,
-  publishReplayRefCount,
-} from '@dehub/shared/utils';
+import { filterNil, getContractByCurrency } from '@dehub/shared/utils';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { getAddress } from '@ethersproject/address';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Moralis } from 'moralis';
 import { MessageService } from 'primeng/api';
-import { concatMap, from, iif, Observable, switchMap, tap } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import {
+  concatMap,
+  filter,
+  from,
+  iif,
+  map,
+  Observable,
+  switchMap,
+  tap,
+} from 'rxjs';
 
 @Injectable()
 export class DehubMoralisService implements IDehubMoralisService {
@@ -42,21 +46,20 @@ export class DehubMoralisService implements IDehubMoralisService {
   );
 
   userContacts$ = this.moralisService.userAttributes$.pipe(
-    filterEmpty(),
+    filterNil(),
     map(({ email, phone }) => ({ email, phone }))
   );
 
-  // For now, we're just going to use the first address.
+  /** For now, we're just going to use the first address. */
   userShippingAddress$ = this.moralisService.isAuthenticated$.pipe(
     filter(isAuthenticated => isAuthenticated),
     switchMap(() =>
       this.getDeHubShopShippingAddresses$().pipe(
-        map(resp => resp[0] || { attributes: {} })
+        filterNil(),
+        map(addresses => addresses[0])
       )
     )
   );
-
-  checkoutContract$ = this.getCheckoutContract$().pipe(publishReplayRefCount());
 
   constructor(
     @Inject(LoggerDehubMoralisToken) private logger: ILoggerService,
@@ -73,9 +76,11 @@ export class DehubMoralisService implements IDehubMoralisService {
     const ShippingAddress = Moralis.Object.extend(
       MoralisClass.DeHubShopShippingAddresses
     );
-    const query = new Moralis.Query(ShippingAddress);
-    const result = query.find();
-    return from(result) as unknown as Observable<DeHubShopShippingAddresses[]>;
+    const query = new Moralis.Query<DeHubShopShippingAddress>(ShippingAddress);
+
+    return from(query.find()).pipe(
+      map(result => (result.length ? result : undefined))
+    );
   }
 
   /**
@@ -157,7 +162,9 @@ export class DehubMoralisService implements IDehubMoralisService {
     );
     this.logger.info('Sending initOrder request to Moralis...', params);
     return this.httpClient.post<InitOrderResponse>(url, params).pipe(
-      tap(resp => this.logger.info(JSON.stringify(resp))),
+      tap(resp =>
+        this.logger.info(`${MoralisFunctions.Shop.InitOrder} response`, resp)
+      ),
       map(resp => resp.result)
     );
   }
@@ -170,7 +177,9 @@ export class DehubMoralisService implements IDehubMoralisService {
     let data = new HttpParams();
     data = params.orderId ? data.set('orderId', params.orderId) : data;
     return this.httpClient.get<CheckOrderResponse>(url, { params: data }).pipe(
-      tap(resp => this.logger.info(JSON.stringify(resp))),
+      tap(resp =>
+        this.logger.info(`${MoralisFunctions.Shop.CheckOrder} response`, resp)
+      ),
       map(resp => resp.result)
     );
   }

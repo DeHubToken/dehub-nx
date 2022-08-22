@@ -10,8 +10,7 @@ import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { BasicPostDetailFragment } from '@dehub/shared/model';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, Observable } from 'rxjs';
 @Component({
   template: `
     <div [@fadeInUp] class="grid">

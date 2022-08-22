@@ -4,7 +4,7 @@ import { PhysicalAddress } from './location.model';
 /**
  * Moralis Class for DeHub Shop Shipping Addresses.
  */
-export interface DeHubShopShippingAddresses extends Moralis.Object {
+export interface DeHubShopShippingAddress extends Moralis.Object {
   attributes: PhysicalAddress;
 }
 

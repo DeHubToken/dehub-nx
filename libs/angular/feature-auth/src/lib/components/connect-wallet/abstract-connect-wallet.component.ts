@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { filter, first } from 'rxjs/operators';
+import { filter, first } from 'rxjs';
 
 @Directive()
 export class AbstractConnectWalletComponent {

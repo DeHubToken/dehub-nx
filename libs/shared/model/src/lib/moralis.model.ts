@@ -34,6 +34,21 @@ export type GetTokenMetadataParameters =
   operations['getTokenMetadata']['parameters']['query'];
 
 /**
+ * Clone of Moralis non exported 'erc20Allowance' interface.
+ * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
+ */
+export type Erc20Allowance = Awaited<
+  ReturnType<typeof Moralis.Web3API.token.getTokenAllowance>
+>;
+/**
+ * Clone of Moralis non exported 'getTokenAllowance.parameters' interface.
+ * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
+ */
+export type GetTokenAllowanceParameters =
+  operations['getTokenAllowance']['parameters']['query'] &
+    operations['getTokenAllowance']['parameters']['path'];
+
+/**
  * Clone of Moralis non exported 'nativeBalance' interface.
  * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
  */

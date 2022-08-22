@@ -20,6 +20,19 @@ import {
   PlainClientAPI,
 } from 'contentful-management';
 
+import {
+  catchError,
+  concatMap,
+  from,
+  map,
+  Observable,
+  of,
+  switchMap,
+  tap,
+  throwError,
+  withLatestFrom,
+} from 'rxjs';
+
 /**
  * Contentful Management Plain API
  * Docs: https://github.com/contentful/contentful-management.js#alternative-plain-api
@@ -67,57 +80,78 @@ export class ContentfulManagementService
     );
   }
 
-  async reduceProductAvailableQuantity(productId: string, quantity: number) {
-    const product = await this.client.entry.get({
-      entryId: productId,
-    });
+  reduceProductAvailableQuantity$(
+    productId: string,
+    quantity: number
+  ): Observable<ProductAvailableQuantityFragment | null> {
     const productInfo = (product: EntryProps<KeyValueMap>) =>
       `Product '${product.fields.name['en-US']}' (${product.sys.id})`;
-    const availableQuantity = +product.fields.availableQuantity['en-US'];
 
-    if (availableQuantity >= quantity) {
-      const newQuantity = availableQuantity - quantity;
-      product.fields.availableQuantity['en-US'] = newQuantity;
+    // Read product from Contentful
+    return from(this.client.entry.get({ entryId: productId })).pipe(
+      // Check and calculate new quantity
+      concatMap(product => {
+        const availableQuantity = +product.fields.availableQuantity['en-US'];
+        const hasAvailableQuantity = availableQuantity >= quantity;
+        const msg = `Insufficient available quantity (${availableQuantity} vs ${quantity})!`;
 
-      this.logger.info(
-        `${productInfo(
-          product
-        )} quantity change from ${availableQuantity} to ${newQuantity} (-${quantity}).`
-      );
-      // Update Contentful
-      return await this.client.entry
-        .update({ entryId: product.sys.id }, product)
-        .then(product => {
+        if (hasAvailableQuantity) {
+          const newQuantity = availableQuantity - quantity;
+          product.fields.availableQuantity['en-US'] = newQuantity;
+
           this.logger.info(
-            `${productInfo(product)} quantity update was successful.`
+            `Available quantity change request for ${productInfo(
+              product
+            )} (${availableQuantity} - ${quantity} = ${newQuantity}).`
           );
-        })
-        // Update Apollo Cache
-        .then(() =>
-          this.cache.updateFragment<ProductAvailableQuantityFragment>(
-            {
-              id: `Product:${productId}`,
-              fragment: ProductAvailableQuantityFragmentDoc,
-            },
-            _data => ({ availableQuantity: newQuantity })
+
+          return of({ product, newQuantity });
+        } else {
+          this.logger.warn(msg);
+          return throwError(() => new Error(msg));
+        }
+      }),
+
+      // Update Contentful
+      switchMap(({ product, newQuantity }) =>
+        from(
+          this.client.entry.update({ entryId: product.sys.id }, product)
+        ).pipe(
+          withLatestFrom(of({ newQuantity })),
+          tap(([product]) =>
+            this.logger.info(
+              `Available quantity update was successful for ${productInfo(
+                product
+              )}.`
+            )
+          ),
+          catchError(error =>
+            throwError(() => {
+              const msg = `Available quantity update failed for ${productInfo(
+                product
+              )}.`;
+              this.logger.error(msg, error);
+              return new Error(msg);
+            })
           )
         )
-        .then(updateResult => {
-          this.logger.info(
-            `${productId} availableQuantity '${updateResult?.availableQuantity}' CACHE update was successful.`
-          );
-          return updateResult;
-        })
-        .catch(error => {
-          this.logger.error(
-            `${productInfo(product)} quantity update failed.`,
-            error
-          );
-          return Promise.resolve({ availableQuantity });
-        });
-    } else {
-      this.logger.error(`${productInfo(product)} quantity is too low.`);
-    }
-    return Promise.resolve({ availableQuantity });
+      ),
+
+      // Update Apollo Cache
+      map(([_product, { newQuantity }]) =>
+        this.cache.updateFragment<ProductAvailableQuantityFragment>(
+          {
+            id: `Product:${productId}`,
+            fragment: ProductAvailableQuantityFragmentDoc,
+          },
+          _data => ({ availableQuantity: newQuantity })
+        )
+      ),
+      tap(updateResult => {
+        this.logger.info(
+          ` Available quantity cache update (${updateResult?.availableQuantity}) was successful for ${productId}.`
+        );
+      })
+    );
   }
 }
