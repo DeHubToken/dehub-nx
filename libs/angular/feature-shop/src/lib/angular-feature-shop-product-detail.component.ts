@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetailFragment } from '@dehub/shared/model';
+import { filterNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { map, Observable, switchMap } from 'rxjs';
 import { ProductDetailService } from './services';
@@ -21,7 +22,7 @@ import { ProductDetailService } from './services';
 
         <!-- Basic Post Detail -->
         <dhb-product-detail
-          [productDetail]="productDetail$ | push: 'global'"
+          [productDetail$]="productDetail$"
         ></dhb-product-detail>
       </div>
     </div>
@@ -30,7 +31,7 @@ import { ProductDetailService } from './services';
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
 })
 export class AngularFeatureShopProductDetailComponent implements OnInit {
-  productDetail$?: Observable<ProductDetailFragment | undefined>;
+  productDetail$?: Observable<ProductDetailFragment>;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +41,8 @@ export class AngularFeatureShopProductDetailComponent implements OnInit {
   ngOnInit() {
     this.productDetail$ = this.route.paramMap.pipe(
       map(paramMap => paramMap.get('slug') ?? undefined),
-      switchMap(slug => this.productDetailService.getProductDetailBySlug(slug))
+      switchMap(slug => this.productDetailService.getProductDetailBySlug(slug)),
+      filterNil()
     );
   }
 }
