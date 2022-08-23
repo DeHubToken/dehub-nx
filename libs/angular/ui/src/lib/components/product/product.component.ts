@@ -97,7 +97,7 @@ import { ProductFragment } from '@dehub/shared/model';
         <ng-template pTemplate="footer">
           <div class="flex justify-content-end">
             <p-button
-              [routerLink]="['/shop/' + product.slug]"
+              [routerLink]="['/shop', product.slug]"
               label="Details"
               class="w-6 md:w-auto"
               styleClass="p-button-secondary p-button-lg w-full"
@@ -108,7 +108,6 @@ import { ProductFragment } from '@dehub/shared/model';
                 else buyDisabled
               "
               [routerLink]="[
-                './',
                 { outlets: { modal: ['checkout', product.slug] } }
               ]"
               label="Buy"

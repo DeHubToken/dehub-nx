@@ -11,8 +11,7 @@ import {
   PageLearnFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, Observable } from 'rxjs';
 
 @Component({
   template: `

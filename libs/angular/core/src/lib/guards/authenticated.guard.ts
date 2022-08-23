@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { IMoralisService, MoralisToken } from '@dehub/angular/model';
-import { map } from 'rxjs/operators';
+import { map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticatedGuard implements CanActivate {

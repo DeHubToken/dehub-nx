@@ -8,8 +8,7 @@ import {
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, Subscription } from 'rxjs';
 import { AppMainComponent } from '../../app.main.component';
 import { MenuService } from './app.menu.service';
 

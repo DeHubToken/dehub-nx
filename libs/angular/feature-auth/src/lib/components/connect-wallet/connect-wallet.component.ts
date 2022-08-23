@@ -25,8 +25,7 @@ import {
 } from '@dehub/shared/model';
 import { resolveMessage } from '@dehub/shared/utils';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Observable, of, Subscription, zip } from 'rxjs';
-import { exhaustMap, map, tap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({
@@ -67,25 +66,15 @@ export class ConnectWalletComponent
     this.walletConnectState$ = walletConnectState$;
 
     // Show/Hide loader
-    this.sub = walletConnectState$
-      .pipe(
-        map(({ state }) => state),
-        exhaustMap(state => zip(of(state), of(resolveMessage(state)))),
-        tap(([state, subtitle]) => {
-          if (
-            [
-              WalletConnectingState.WAITING,
-              WalletConnectingState.SWITCH_NETWORK,
-              WalletConnectingState.ADD_NETWORK,
-            ].includes(state)
-          ) {
-            this.loaderService.show(subtitle);
-          } else {
-            this.loaderService.hide();
-          }
-        })
-      )
-      .subscribe();
+    this.sub = walletConnectState$.subscribe(({ state }) =>
+      [
+        WalletConnectingState.WAITING,
+        WalletConnectingState.SWITCH_NETWORK,
+        WalletConnectingState.ADD_NETWORK,
+      ].includes(state)
+        ? this.loaderService.show(resolveMessage(state))
+        : this.loaderService.hide()
+    );
   }
 
   onLogin({ connectorId, email = '' }: DeHubConnector) {

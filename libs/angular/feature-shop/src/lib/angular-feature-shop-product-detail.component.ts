@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetailFragment } from '@dehub/shared/model';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, Observable, switchMap } from 'rxjs';
 import { ProductDetailService } from './services';
 @Component({
   template: `
@@ -22,7 +21,7 @@ import { ProductDetailService } from './services';
 
         <!-- Basic Post Detail -->
         <dhb-product-detail
-          [productDetail]="productDetail$ | push"
+          [productDetail]="productDetail$ | push: 'global'"
         ></dhb-product-detail>
       </div>
     </div>

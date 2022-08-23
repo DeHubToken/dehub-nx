@@ -8,8 +8,7 @@ import { PageShopCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageShopFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
-import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, Observable } from 'rxjs';
 
 @Component({
   template: `

@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { DehubMoralisToken, IDehubMoralisService } from '@dehub/angular/model';
-import { map } from 'rxjs/operators';
+import { map } from 'rxjs';
 
 @Injectable()
 export class CanPlayGuard implements CanActivate {

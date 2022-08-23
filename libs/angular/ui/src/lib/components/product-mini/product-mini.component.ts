@@ -71,10 +71,8 @@ import { ProductCheckoutDetail } from '@dehub/shared/model';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductMiniComponent<P extends ProductCheckoutDetail>
-  implements OnInit
-{
-  @Input() product?: P;
+export class ProductMiniComponent implements OnInit {
+  @Input() product?: ProductCheckoutDetail;
 
   constructor() {}
 
