@@ -32,9 +32,11 @@ import {
   filterNil,
   getContractByCurrency,
   publishReplayRefCount,
+  shortenAddress,
 } from '@dehub/shared/utils';
 import { BigNumber } from '@ethersproject/bignumber';
 import Moralis from 'moralis';
+import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {
   BehaviorSubject,
@@ -54,6 +56,7 @@ import {
   zip,
 } from 'rxjs';
 import {
+  CheckoutMessage,
   CheckoutProcess,
   CheckoutProcessMessage,
 } from '../model/checkout-form.model';
@@ -234,17 +237,27 @@ export class CheckoutFormComponent implements OnInit {
           spender_address: checkoutContract.address,
           address: metadata.address,
         })
-        .pipe(withLatestFrom(of({ metadata, productDetail })))
+        .pipe(withLatestFrom(of({ metadata, productDetail, account })))
     ),
     // We check allowance for at least one item. If we have no allowance, we have to force infinite allowance approval.
-    map(([{ allowance }, { metadata, productDetail }]) =>
-      this.parseUnits(allowance, metadata.decimals).gte(
-        this.parseUnits(productDetail.price.toString(), metadata.decimals)
-      )
-    ),
-    tap(hasEnoughBalance =>
-      hasEnoughBalance ? undefined : this.logger.warn('Balance is too low!')
-    )
+    map(([{ allowance }, { metadata, productDetail, account }]) => {
+      const hasEnoughBalance = this.parseUnits(
+        allowance,
+        metadata.decimals
+      ).gte(this.parseUnits(productDetail.price.toString(), metadata.decimals));
+
+      if (!hasEnoughBalance) {
+        this.logger.warn(CheckoutMessage.LowBalance);
+        this.messageService.add({
+          severity: 'warn',
+          summary: CheckoutMessage.LowBalance,
+          detail: `Please, top up your '${shortenAddress(account)}' account.`,
+          closable: true,
+        });
+      }
+
+      return hasEnoughBalance;
+    })
   );
 
   checkoutContract$ = this.dehubMoralis
@@ -300,7 +313,8 @@ export class CheckoutFormComponent implements OnInit {
     @Inject(LoggerDehubToken) private logger: ILoggerService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
-    private fb: NonNullableFormBuilder
+    private fb: NonNullableFormBuilder,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {}

@@ -12,6 +12,10 @@ export enum CheckoutProcessMessage {
   OrderError = 'Something went wrong. Please try again.',
 }
 
+export enum CheckoutMessage {
+  LowBalance = 'Balance is too low.',
+}
+
 export interface CheckoutProcess {
   icon: string;
   text: CheckoutProcessMessage;

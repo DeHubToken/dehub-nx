@@ -19,9 +19,9 @@ import {
   GetTokenBalancesParameters,
   GetTokenMetadataParameters,
   MoralisConnectorNames,
-  MoralisMessages,
+  MoralisMessage,
   User,
-  WalletConnectingMessages,
+  WalletConnectingMessage,
   WalletConnectingState,
   WalletConnectState,
   Web3ConnectorNames,
@@ -176,13 +176,13 @@ export class MoralisService implements IMoralisService {
       switchMap(user =>
         from(user.save(attributes)).pipe(
           catchError(e => {
-            let detail = MoralisMessages.UpdateUserProblem;
+            let detail = MoralisMessage.UpdateUserProblem;
             if (e instanceof Error && e.message.includes('email')) {
-              detail = MoralisMessages.ExistingEmail;
+              detail = MoralisMessage.ExistingEmail;
             }
             this.messageService.add({
               severity: 'error',
-              summary: MoralisMessages.UpdateUser,
+              summary: MoralisMessage.UpdateUser,
               detail,
             });
 
@@ -301,11 +301,11 @@ export class MoralisService implements IMoralisService {
           if (e.code === 4001 || e.code === -32603) {
             this.messageService.add({
               severity: 'warn',
-              summary: WalletConnectingMessages.ConnectWallet,
+              summary: WalletConnectingMessage.ConnectWallet,
               detail:
                 e.code === 4001
-                  ? WalletConnectingMessages.MetamaskSignatureDenied
-                  : WalletConnectingMessages.BinanceSignatureRejected,
+                  ? WalletConnectingMessage.MetamaskSignatureDenied
+                  : WalletConnectingMessage.BinanceSignatureRejected,
             });
             this.setWalletConnectState(WalletConnectingState.INIT, connectorId);
           }
@@ -321,8 +321,8 @@ export class MoralisService implements IMoralisService {
         } else if (e instanceof Error) {
           this.messageService.add({
             severity: 'error',
-            summary: WalletConnectingMessages.ConnectWallet,
-            detail: WalletConnectingMessages.UnsupportedProvider,
+            summary: WalletConnectingMessage.ConnectWallet,
+            detail: WalletConnectingMessage.UnsupportedProvider,
           });
 
           this.setWalletConnectState(
