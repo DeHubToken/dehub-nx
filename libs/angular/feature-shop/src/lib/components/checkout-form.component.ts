@@ -180,28 +180,27 @@ import {
         </ng-container>
 
         <ng-template #message>
-          <div
-            *ngIf="process$ | async as process"
-            class="text-center py-5 mb-4"
-          >
+          <div *rxLet="process$ as process" class="text-center py-5 mb-4">
             <i [ngClass]="process.icon" class="text-4xl"></i>
             <br />
             <div class="mt-3 font-bold">{{ process.text }}</div>
-            <div class="mt-3 text-sm">
-              {{
-                (isComplete$ | async)
-                  ? 'Please get in touch via ' +
-                    env.emails.shopSupport +
-                    ' if you have any questions.'
-                  : 'Please do not close this window.'
-              }}
-            </div>
-            <p-button
-              *ngIf="(isComplete$ | async) === true"
-              label="Close"
-              styleClass="p-button-secondary p-button-lg mt-4"
-              (click)="ref.close()"
-            ></p-button>
+            <ng-container *rxLet="isComplete$ as isComplete">
+              <div class="mt-3 text-sm">
+                {{
+                  isComplete
+                    ? 'Please get in touch via ' +
+                      env.emails.shopSupport +
+                      ' if you have any questions.'
+                    : 'Please do not close this window.'
+                }}
+              </div>
+              <p-button
+                *ngIf="isComplete"
+                label="Close"
+                styleClass="p-button-secondary p-button-lg mt-4"
+                (click)="ref.close()"
+              ></p-button>
+            </ng-container>
           </div>
         </ng-template>
       </ng-container>
