@@ -34,7 +34,7 @@ export class AngularMoralisModule {
              * Docs: https://docs.moralis.io/moralis-server/getting-started/connect-the-sdk#initialize-the-sdk
              **/
             Moralis.start(options).then(() =>
-              logger.info('Moralis has been initialized.')
+              logger.debug('Moralis has been initialized.')
             ),
           multi: true,
           deps: [LoggerMoralisToken],

@@ -59,15 +59,16 @@ export class ContentfulManagementService
         accessToken,
         logHandler: (level: string, data?: Error | string) => {
           if (data instanceof Error) logger.error(`${level}`, data);
-          else logger.info('logHandler', level, data);
+          else logger.debug('logHandler', level, data);
         },
         requestLogger: (request: AxiosRequestConfig | Error) => {
           if (request instanceof Error) logger.error('request', request);
-          else logger.info('requestLogger', `${request.method} ${request.url}`);
+          else
+            logger.debug('requestLogger', `${request.method} ${request.url}`);
         },
         responseLogger: (response: AxiosResponse<unknown> | Error) => {
           if (response instanceof Error) logger.error('response', response);
-          else logger.info('responseLogger', response.data);
+          else logger.debug('responseLogger', response.data);
         },
       },
       {
@@ -119,7 +120,7 @@ export class ContentfulManagementService
         ).pipe(
           withLatestFrom(of({ newQuantity })),
           tap(([product]) =>
-            this.logger.info(
+            this.logger.debug(
               `Available quantity update was successful for ${productInfo(
                 product
               )}.`
@@ -148,7 +149,7 @@ export class ContentfulManagementService
         )
       ),
       tap(updateResult => {
-        this.logger.info(
+        this.logger.debug(
           ` Available quantity cache update (${updateResult?.availableQuantity}) was successful for ${productId}.`
         );
       })

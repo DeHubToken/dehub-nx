@@ -32,6 +32,7 @@ import {
   getRandomRpcUrlByChainId,
   publishReplayRefCount,
   setupMetamaskNetwork,
+  shortenAddress,
 } from '@dehub/shared/utils';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { WINDOW } from '@ng-web-apis/common';
@@ -81,13 +82,13 @@ export class MoralisService implements IMoralisService {
       currentUser ? from(currentUser.fetch()) : of(undefined)
     ),
     tap(loggedInUser =>
-      this.logger.info(`Current user:`, loggedInUser?.attributes)
+      this.logger.debug(`Current user:`, loggedInUser?.attributes)
     )
   );
 
   account$ = this.accountSubject.asObservable().pipe(
     distinctUntilChanged(),
-    tap(account => this.logger.info(`Current account: ${account}`)),
+    tap(account => this.logger.debug(`Current account: ${account}`)),
     publishReplayRefCount()
   );
 
@@ -106,7 +107,7 @@ export class MoralisService implements IMoralisService {
 
   walletConnectState$ = this.walletConnectStateSubject.asObservable().pipe(
     tap(({ connectorId, state }) =>
-      this.logger.info(
+      this.logger.debug(
         `Wallet Connect State: ${WalletConnectingState[state]} ${
           connectorId ? `(${connectorId})` : ''
         }`
@@ -190,7 +191,7 @@ export class MoralisService implements IMoralisService {
           })
         )
       ),
-      tap(({ attributes }) => this.logger.info('Updated user:', attributes))
+      tap(({ attributes }) => this.logger.debug('Updated user:', attributes))
     );
   }
 
@@ -356,7 +357,7 @@ export class MoralisService implements IMoralisService {
   }
 
   private subscribeEvents() {
-    this.logger.info(
+    this.logger.debug(
       'Subscribe: onWeb3Deactivated, onChainChanged, onAccountChanged'
     );
     this.unsubscribeFromWeb3Deactivated = Moralis.onWeb3Deactivated(error => {
@@ -442,7 +443,7 @@ export class MoralisService implements IMoralisService {
   }
 
   private unsubscribeEvents() {
-    this.logger.info('Unsubscribe Moralis events.');
+    this.logger.debug('Unsubscribe Moralis events.');
     this.unsubscribeFromWeb3Deactivated?.();
     this.unsubscribeFromChainChanged?.();
     this.unsubscribeFromAccountChanged?.();
@@ -473,11 +474,13 @@ export class MoralisService implements IMoralisService {
     parameters: GetTokenAllowanceParameters
   ): Observable<Erc20Allowance> {
     this.logger.info(
-      `Getting ${parameters.address} allowance for ${parameters.spender_address}.`
+      `Getting ${shortenAddress(
+        parameters.address
+      )} allowance for ${shortenAddress(parameters.spender_address)}.`
     );
     return from(Moralis.Web3API.token.getTokenAllowance(parameters)).pipe(
       tap(resp =>
-        this.logger.info(`Moralis.Web3API.token.getTokenAllowance:`, resp)
+        this.logger.debug(`Moralis.Web3API.token.getTokenAllowance:`, resp)
       )
     );
   }
@@ -520,7 +523,7 @@ export class MoralisService implements IMoralisService {
   getTokenMetadata$(parameters: GetTokenMetadataParameters) {
     return from(Moralis.Web3API.token.getTokenMetadata(parameters)).pipe(
       tap(resp =>
-        this.logger.info(`Moralis.Web3API.token.getTokenMetadata:`, resp)
+        this.logger.debug(`Moralis.Web3API.token.getTokenMetadata:`, resp)
       )
     );
   }
@@ -530,7 +533,7 @@ export class MoralisService implements IMoralisService {
   getNativeBalance$(parameters: GetNativeBalanceParameters) {
     return from(Moralis.Web3API.account.getNativeBalance(parameters)).pipe(
       tap(resp =>
-        this.logger.info(`Moralis.Web3API.account.getNativeBalance:`, resp)
+        this.logger.debug(`Moralis.Web3API.account.getNativeBalance:`, resp)
       )
     );
   }
@@ -538,7 +541,7 @@ export class MoralisService implements IMoralisService {
   getTokenBalances$(parameters: GetTokenBalancesParameters) {
     return from(Moralis.Web3API.account.getTokenBalances(parameters)).pipe(
       tap(resp =>
-        this.logger.info(`Moralis.Web3API.account.getTokenBalances:`, resp)
+        this.logger.debug(`Moralis.Web3API.account.getTokenBalances:`, resp)
       )
     );
   }

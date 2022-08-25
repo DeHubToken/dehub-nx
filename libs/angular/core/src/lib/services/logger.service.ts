@@ -12,6 +12,16 @@ export class ConsoleLoggerService implements ILoggerService {
     @Inject(EnvToken) private env: SharedEnv
   ) {}
 
+  debug(message: string, ...optionalParams: unknown[]) {
+    if (this.env.env === 'dev')
+      console.debug(
+        this.messageWithScope(message),
+        'color:92,134,246',
+        '',
+        ...optionalParams
+      );
+  }
+
   info(message: string, ...optionalParams: unknown[]) {
     if (this.env.env === 'dev')
       console.info(
