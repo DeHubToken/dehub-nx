@@ -70,7 +70,15 @@ export class CheckoutFormComponent implements OnInit {
     this.config.data as { productDetail$: Observable<ProductCheckoutDetail> }
   ).productDetail$;
 
-  account$ = this.moralisService.account$.pipe(filterNil());
+  account$ = this.moralisService.account$.pipe(
+    tap(account => {
+      // Close popup if account disconnected
+      if (!account) {
+        this.ref.close();
+      }
+    }),
+    filterNil()
+  );
   userContacts$ = this.dehubMoralis.userContacts$.pipe(
     tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
   );
