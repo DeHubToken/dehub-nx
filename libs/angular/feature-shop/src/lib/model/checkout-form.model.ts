@@ -1,4 +1,4 @@
-export enum CheckoutProcessMessage {
+export enum CheckoutStatusMessage {
   Confirm = 'Confirming',
   UpdateContacts = 'Updating contact details',
   BalanceCheck = 'Checking balance',
@@ -16,7 +16,9 @@ export enum CheckoutMessage {
   LowBalance = 'Balance is too low.',
 }
 
-export interface CheckoutProcess {
+export interface CheckoutStatus {
   icon: string;
-  text: CheckoutProcessMessage;
+  text: CheckoutStatusMessage;
+  /** Checkout status at this point */
+  isCompleted: boolean;
 }

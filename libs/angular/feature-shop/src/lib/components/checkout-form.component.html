@@ -1,0 +1,140 @@
+<ng-container *rxLet="checkoutState$ as checkoutState; rxSuspense: loading">
+  <!-- Show Status -->
+  <div
+    *ngIf="checkoutState.status; else showProduct"
+    class="text-center py-5 mb-4"
+  >
+    <!-- Status info -->
+    <i [ngClass]="checkoutState.status.icon" class="text-4xl"></i>
+    <br />
+    <div class="mt-3 font-bold">{{ checkoutState.status.text }}</div>
+
+    <!-- Checkout status complete -->
+    <div class="mt-3 text-sm">
+      {{
+        checkoutState.status.isCompleted
+          ? 'Please get in touch via ' +
+            env.emails.shopSupport +
+            ' if you have any questions.'
+          : 'Please do not close this window.'
+      }}
+    </div>
+
+    <!-- Close -->
+    <p-button
+      *ngIf="checkoutState.status.isCompleted"
+      label="Close"
+      styleClass="p-button-secondary p-button-lg mt-4"
+      (click)="ref.close()"
+    ></p-button>
+  </div>
+
+  <!-- Product Checkout -->
+  <ng-template #showProduct>
+    <ng-container *rxLet="productDetail$ as productDetail">
+      <!-- Product Item -->
+      <dhb-product-mini [product]="productDetail"></dhb-product-mini>
+
+      <!-- Quantity selection -->
+      <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
+        <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
+          <span class="p-float-label">
+            <p-inputNumber
+              [formControlName]="'quantity'"
+              [inputId]="'selectedQuantity'"
+              [(ngModel)]="checkoutForm.value.quantity"
+              [ariaLabel]="'Quantity'"
+              [ariaRequired]="true"
+              [min]="1"
+              [max]="productDetail.availableQuantity"
+              [allowEmpty]="false"
+              [showButtons]="true"
+            ></p-inputNumber>
+            <label for="selectedQuantity">Quantity</label>
+          </span>
+        </div>
+      </form>
+
+      <ng-container *ngIf="checkoutState.hasAllowance">
+        <!-- Contact -->
+        <h5>Contact Details</h5>
+        <dhb-contacts-form
+          *ngIf="userContacts$ | push as contacts; else loading"
+          [formControl]="checkoutForm.controls.contacts"
+          [prefillData]="contacts"
+        >
+        </dhb-contacts-form>
+
+        <!-- Shipping Address -->
+        <h5>Shipping Address</h5>
+        <dhb-address-form
+          *ngIf="userShippingAddress$ | push as address; else loading"
+          [formControl]="checkoutForm.controls.shippingAddress"
+          [prefillData]="
+            !isShippingAddressResponseEmpty(address)
+              ? address.attributes
+              : undefined
+          "
+        ></dhb-address-form>
+      </ng-container>
+
+      <!-- Total -->
+      <div
+        *ngIf="checkoutForm.controls.quantity.value as quantity"
+        class="grid"
+      >
+        <div class="col-12">
+          <div class="flex flex-column justify-content-end text-right">
+            <h5 class="align-self-end mb-1">Total</h5>
+            <h3 class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1">
+              {{ calcTotalAmount(productDetail.price, quantity) }}
+              <span class="text-sm">{{ productDetail.currency }}</span>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="grid">
+        <div
+          class="flex justify-content-end col-12 sm:col-8 col-offset-0 sm:col-offset-4 text-right"
+        >
+          <!-- Cancel -->
+          <p-button
+            label="Cancel"
+            class="w-5"
+            styleClass="p-button-secondary p-button-lg mr-2"
+            (click)="ref.close()"
+          ></p-button>
+
+          <!-- Confirm -->
+          <p-button
+            *ngIf="checkoutState.hasAllowance; else approve"
+            label="Confirm"
+            icon="fa-regular fa-check"
+            class="w-5"
+            styleClass="p-button-primary p-button-lg w-full"
+            [disabled]="!checkoutForm.valid"
+            (onClick)="onConfirm()"
+          ></p-button>
+
+          <!-- Approve -->
+          <ng-template #approve>
+            <p-button
+              label="Approve"
+              icon="fa-regular fa-check"
+              class="w-5"
+              styleClass="p-button-primary p-button-lg w-full"
+              (onClick)="onApprove()"
+            ></p-button>
+          </ng-template>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</ng-container>
+
+<!-- Loading Template -->
+<ng-template #loading>
+  <dhb-loading></dhb-loading>
+</ng-template>
