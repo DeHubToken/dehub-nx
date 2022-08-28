@@ -6,11 +6,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ProductDetailFragment } from '@dehub/shared/model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dhb-product-detail',
   template: `
-    <ng-container *ngIf="productDetail">
+    <ng-container *rxLet="productDetail$ as productDetail">
       <div
         [dhbContentfulDraft]="productDetail.sys"
         class="card image-card shadow-8 mx-4 bg-gradient-2 pb-5 overflow-hidden"
@@ -165,7 +166,7 @@ import { ProductDetailFragment } from '@dehub/shared/model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent implements OnInit {
-  @Input() productDetail?: ProductDetailFragment;
+  @Input() productDetail$?: Observable<ProductDetailFragment>;
 
   constructor() {}
 

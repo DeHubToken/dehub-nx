@@ -28,7 +28,7 @@ import { map, Observable } from 'rxjs';
 
         <!-- Basic Post Detail -->
         <dhb-basic-post-detail
-          [basicPostDetail]="(basicPostDetail$ | async)!"
+          [basicPostDetail]="basicPostDetail$ | push"
         ></dhb-basic-post-detail>
       </div>
     </div>

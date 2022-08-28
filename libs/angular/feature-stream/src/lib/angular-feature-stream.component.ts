@@ -15,13 +15,13 @@ import { map, Observable } from 'rxjs';
 
 @Component({
   template: `
-    <ng-container *ngIf="pageStream$ | async as pageStream" class="grid">
+    <ng-container *rxLet="pageStream$ as pageStream" class="grid">
       <!-- Titles -->
       <dhb-page-header [page]="pageStream"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
-        [sections]="pageStream.sectionsCollection?.items"
+        [sections]="pageStream?.sectionsCollection?.items"
         [thumbnailPostsResponsiveOptions]="thumbnailPostsResponsiveOptions"
         [path]="path"
       ></dhb-page-sections>

@@ -12,13 +12,13 @@ import { map, Observable } from 'rxjs';
 
 @Component({
   template: `
-    <ng-container *ngIf="pageEarn$ | async as pageEarn" class="grid">
+    <ng-container *rxLet="pageEarn$ as pageEarn" class="grid">
       <!-- Titles -->
       <dhb-page-header [page]="pageEarn"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
-        [sections]="pageEarn.sectionsCollection?.items"
+        [sections]="pageEarn?.sectionsCollection?.items"
         [path]="path"
       ></dhb-page-sections>
     </ng-container>

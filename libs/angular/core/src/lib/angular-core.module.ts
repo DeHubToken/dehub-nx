@@ -10,6 +10,7 @@ import {
   ScopeToken,
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
+import { LetModule, PushModule } from '@rx-angular/template';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
@@ -35,9 +36,13 @@ export const provideDehubLoggerWithScope = (scope: string) => [
     // PrimeNg
     ToastModule,
     ButtonModule,
+
+    // Rx Angular,
+    LetModule,
+    PushModule,
   ],
   declarations: [SwUpdateAvailableComponent],
-  exports: [SwUpdateAvailableComponent],
+  exports: [SwUpdateAvailableComponent, LetModule, PushModule],
 })
 export class AngularCoreModule {
   static forRoot(): ModuleWithProviders<AngularCoreModule> {

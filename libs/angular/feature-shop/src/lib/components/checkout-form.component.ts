@@ -51,6 +51,7 @@ import {
   switchMap,
   tap,
   withLatestFrom,
+  zip,
 } from 'rxjs';
 import {
   CheckoutProcess,
@@ -59,145 +60,148 @@ import {
 
 @Component({
   template: `
-    <ng-container *ngIf="productDetail$ | async as productDetail">
-      <ng-container *ngIf="(isProcessing$ | async) === false; else message">
-        <!-- Product Item -->
-        <dhb-product-mini [product]="productDetail"></dhb-product-mini>
+    <ng-container *rxLet="productDetail$ as productDetail">
+      <ng-container *rxLet="isProcessing$ as isProcessing">
+        <ng-container *ngIf="!isProcessing; else message">
+          <!-- Product Item -->
+          <dhb-product-mini [product]="productDetail"></dhb-product-mini>
 
-        <ng-container>
-          <!-- Quantity selection -->
-          <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
-            <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
-              <span class="p-float-label">
-                <p-inputNumber
-                  [formControlName]="'quantity'"
-                  [inputId]="'selectedQuantity'"
-                  [(ngModel)]="checkoutForm.value.quantity"
-                  [ariaLabel]="'Quantity'"
-                  [ariaRequired]="true"
-                  [min]="1"
-                  [max]="productDetail.availableQuantity"
-                  [allowEmpty]="false"
-                  [showButtons]="true"
-                ></p-inputNumber>
-                <label for="selectedQuantity">Quantity</label>
-              </span>
-            </div>
-          </form>
+          <ng-container>
+            <!-- Quantity selection -->
+            <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
+              <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
+                <span class="p-float-label">
+                  <p-inputNumber
+                    [formControlName]="'quantity'"
+                    [inputId]="'selectedQuantity'"
+                    [(ngModel)]="checkoutForm.value.quantity"
+                    [ariaLabel]="'Quantity'"
+                    [ariaRequired]="true"
+                    [min]="1"
+                    [max]="productDetail.availableQuantity"
+                    [allowEmpty]="false"
+                    [showButtons]="true"
+                  ></p-inputNumber>
+                  <label for="selectedQuantity">Quantity</label>
+                </span>
+              </div>
+            </form>
 
-          <ng-container *ngIf="hasAllowance$ | async as hasAllowance">
-            <ng-container *ngIf="hasAllowance">
-              <!-- Contact -->
-              <h5>Contact Details</h5>
-              <dhb-contacts-form
-                *ngIf="userContacts$ | async as contacts; else loading"
-                [formControl]="checkoutForm.controls.contacts"
-                [prefillData]="contacts"
+            <ng-container *rxLet="hasAllowance$ as hasAllowance">
+              <ng-container *ngIf="hasAllowance">
+                <!-- Contact -->
+                <h5>Contact Details</h5>
+                <dhb-contacts-form
+                  *ngIf="userContacts$ | async as contacts; else loading"
+                  [formControl]="checkoutForm.controls.contacts"
+                  [prefillData]="contacts"
+                >
+                </dhb-contacts-form>
+
+                <!-- Shipping Address -->
+
+                <h5>Shipping Address</h5>
+                <dhb-address-form
+                  *ngIf="userShippingAddress$ | async as address; else loading"
+                  [formControl]="checkoutForm.controls.shippingAddress"
+                  [prefillData]="
+                    !isShippingAddressResponseEmpty(address)
+                      ? address.attributes
+                      : undefined
+                  "
+                ></dhb-address-form>
+              </ng-container>
+
+              <!-- Total -->
+              <div
+                *ngIf="checkoutForm.controls.quantity.value as quantity"
+                class="grid"
               >
-              </dhb-contacts-form>
-
-              <!-- Shipping Address -->
-              <h5>Shipping Address</h5>
-              <dhb-address-form
-                *ngIf="userShippingAddress$ | async as resp; else loading"
-                [formControl]="checkoutForm.controls.shippingAddress"
-                [prefillData]="
-                  !isShippingAddressResponseEmpty(resp)
-                    ? resp.attributes
-                    : undefined
-                "
-              ></dhb-address-form>
-            </ng-container>
-
-            <!-- Total -->
-            <div
-              *ngIf="checkoutForm.controls.quantity.value as quantity"
-              class="grid"
-            >
-              <div class="col-12">
-                <div class="flex flex-column justify-content-end text-right">
-                  <h5 class="align-self-end mb-1">Total</h5>
-                  <h3
-                    class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1"
-                  >
-                    {{ calcTotalAmount(productDetail.price, quantity) }}
-                    <span class="text-sm">{{ productDetail.currency }}</span>
-                  </h3>
+                <div class="col-12">
+                  <div class="flex flex-column justify-content-end text-right">
+                    <h5 class="align-self-end mb-1">Total</h5>
+                    <h3
+                      class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1"
+                    >
+                      {{ calcTotalAmount(productDetail.price, quantity) }}
+                      <span class="text-sm">{{ productDetail.currency }}</span>
+                    </h3>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Footer -->
-            <div class="grid">
-              <div
-                class="flex justify-content-end col-12 sm:col-8 col-offset-0 sm:col-offset-4 text-right"
-              >
-                <!-- Cancel -->
-                <p-button
-                  label="Cancel"
-                  class="w-5"
-                  styleClass="p-button-secondary p-button-lg mr-2"
-                  (click)="ref.close()"
-                ></p-button>
-
-                <!-- Approve -->
-                <p-button
-                  *ngIf="!hasAllowance; else confirm"
-                  label="Approve"
-                  icon="fa-regular fa-check"
-                  class="w-5"
-                  styleClass="p-button-primary p-button-lg w-full"
-                  (onClick)="onApprove()"
-                ></p-button>
-
-                <!-- Checkout -->
-                <ng-template #confirm>
+              <!-- Footer -->
+              <div class="grid">
+                <div
+                  class="flex justify-content-end col-12 sm:col-8 col-offset-0 sm:col-offset-4 text-right"
+                >
+                  <!-- Cancel -->
                   <p-button
-                    *ngIf="
-                      hasAllowance && (account$ | async) as account;
-                      else loading
-                    "
-                    label="Confirm"
+                    label="Cancel"
+                    class="w-5"
+                    styleClass="p-button-secondary p-button-lg mr-2"
+                    (click)="ref.close()"
+                  ></p-button>
+
+                  <!-- Approve -->
+                  <p-button
+                    *ngIf="!hasAllowance; else confirm"
+                    label="Approve"
                     icon="fa-regular fa-check"
                     class="w-5"
                     styleClass="p-button-primary p-button-lg w-full"
-                    [disabled]="!checkoutForm.valid"
-                    (onClick)="onConfirm(account)"
+                    (onClick)="onApprove()"
                   ></p-button>
-                </ng-template>
+
+                  <!-- Checkout -->
+                  <ng-template #confirm>
+                    <p-button
+                      *ngIf="hasAllowance; else loading"
+                      label="Confirm"
+                      icon="fa-regular fa-check"
+                      class="w-5"
+                      styleClass="p-button-primary p-button-lg w-full"
+                      [disabled]="!checkoutForm.valid"
+                      (onClick)="onConfirm()"
+                    ></p-button>
+                  </ng-template>
+                </div>
               </div>
-            </div>
+            </ng-container>
+
+            <!-- Loading Template -->
+            <ng-template #loading>
+              <dhb-loading></dhb-loading>
+            </ng-template>
           </ng-container>
-
-          <!-- Loading Template -->
-          <ng-template #loading>
-            <dhb-loading></dhb-loading>
-          </ng-template>
         </ng-container>
-      </ng-container>
 
-      <ng-template #message>
-        <div *ngIf="process$ | async as process" class="text-center py-5 mb-4">
-          <i [ngClass]="process.icon" class="text-4xl"></i>
-          <br />
-          <div class="mt-3 font-bold">{{ process.text }}</div>
-          <div class="mt-3 text-sm">
-            {{
-              (isComplete$ | async)
-                ? 'Please get in touch via ' +
-                  env.emails.shopSupport +
-                  ' if you have any questions.'
-                : 'Please do not close this window.'
-            }}
+        <ng-template #message>
+          <div
+            *ngIf="process$ | async as process"
+            class="text-center py-5 mb-4"
+          >
+            <i [ngClass]="process.icon" class="text-4xl"></i>
+            <br />
+            <div class="mt-3 font-bold">{{ process.text }}</div>
+            <div class="mt-3 text-sm">
+              {{
+                (isComplete$ | async)
+                  ? 'Please get in touch via ' +
+                    env.emails.shopSupport +
+                    ' if you have any questions.'
+                  : 'Please do not close this window.'
+              }}
+            </div>
+            <p-button
+              *ngIf="(isComplete$ | async) === true"
+              label="Close"
+              styleClass="p-button-secondary p-button-lg mt-4"
+              (click)="ref.close()"
+            ></p-button>
           </div>
-          <p-button
-            *ngIf="(isComplete$ | async) === true"
-            label="Close"
-            styleClass="p-button-secondary p-button-lg mt-4"
-            (click)="ref.close()"
-          ></p-button>
-        </div>
-      </ng-template>
+        </ng-template>
+      </ng-container>
     </ng-container>
   `,
   styles: [``],
@@ -209,16 +213,13 @@ export class CheckoutFormComponent implements OnInit {
     this.config.data as { productDetail$: Observable<ProductCheckoutDetail> }
   ).productDetail$;
 
-  account$ = this.moralisService.account$;
+  account$ = this.moralisService.account$.pipe(filterNil());
   userContacts$ = this.dehubMoralis.userContacts$.pipe(
     tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
   );
   userShippingAddress$ = this.dehubMoralis.userShippingAddress$;
 
-  hasAllowance$ = combineLatest([
-    this.account$.pipe(filterNil()),
-    this.productDetail$,
-  ]).pipe(
+  hasAllowance$ = combineLatest([this.account$, this.productDetail$]).pipe(
     switchMap(([account, productDetail]) =>
       this.checkoutContractWithTokenMetadata$(productDetail.currency).pipe(
         withLatestFrom(of({ account, productDetail }))
@@ -305,10 +306,10 @@ export class CheckoutFormComponent implements OnInit {
   ngOnInit() {}
 
   onApprove() {
-    combineLatest([this.productDetail$, this.account$.pipe(filterNil())])
+    this.productDetail$
       .pipe(
         first(),
-        switchMap(([{ currency }]) =>
+        switchMap(({ currency }) =>
           this.checkoutContractWithTokenMetadata$(currency)
         ),
         tap(() => {
@@ -332,7 +333,7 @@ export class CheckoutFormComponent implements OnInit {
       .subscribe();
   }
 
-  onConfirm(account: string) {
+  onConfirm() {
     const contacts = this.checkoutForm.controls.contacts.value;
     if (!contacts) {
       throw new Error('User contacts are missing!');
@@ -353,9 +354,9 @@ export class CheckoutFormComponent implements OnInit {
     this.moralisService
       .updateUser$({ email, phone })
       .pipe(
-        withLatestFrom(this.productDetail$),
+        withLatestFrom(zip(this.account$, this.productDetail$)),
         map(
-          ([_user, productDetail]) =>
+          ([, [account, productDetail]]) =>
             ({
               address: account,
               contentfulId: productDetail.contentfulId,
@@ -384,7 +385,7 @@ export class CheckoutFormComponent implements OnInit {
           this.dehubMoralis
             .hasEnoughBalance$(
               params.currency,
-              account,
+              params.address,
               parseUnits(params.totalAmount.toString(), metadata.decimals)
             )
             .pipe(withLatestFrom(of({ metadata, params })))
@@ -398,9 +399,7 @@ export class CheckoutFormComponent implements OnInit {
             .initOrder$(params)
             .pipe(
               withLatestFrom(
-                this.checkoutContract$.pipe(
-                  withLatestFrom(of({ metadata, params }))
-                )
+                zip(this.checkoutContract$, of({ metadata, params }))
               )
             )
         ),

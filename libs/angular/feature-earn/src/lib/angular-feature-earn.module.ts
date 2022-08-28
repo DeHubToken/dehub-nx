@@ -4,6 +4,7 @@ import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { LetModule } from '@rx-angular/template';
 import { AngularFeatureEarnRoutingModule } from './angular-feature-earn-routing.module';
 import { AngularFeatureEarnComponent } from './angular-feature-earn.component';
 @NgModule({
@@ -17,7 +18,8 @@ import { AngularFeatureEarnComponent } from './angular-feature-earn.component';
     PageHeaderModule,
     PageSectionsModule,
 
-    // PrimeNg
+    // Rx Angular,
+    LetModule,
 
     AngularFeatureEarnRoutingModule,
   ],

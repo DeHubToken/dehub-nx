@@ -27,7 +27,7 @@ import { map, Observable, switchMap } from 'rxjs';
         </p-button>
 
         <!-- Legal Post -->
-        <dhb-legal-post [legalPost]="(legalPost$ | async)!"></dhb-legal-post>
+        <dhb-legal-post [legalPost]="legalPost$ | push"></dhb-legal-post>
       </div>
     </div>
   `,

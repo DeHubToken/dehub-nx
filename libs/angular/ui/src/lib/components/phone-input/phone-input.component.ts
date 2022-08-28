@@ -32,7 +32,7 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
   selector: 'dhb-phone-input',
   template: `
     <div
-      *ngIf="countries$ | async as countries; else loading"
+      *rxLet="countries$ as countries; rxSuspense: loading"
       [formGroup]="phoneForm"
       class="grid grid-nogutter"
     >

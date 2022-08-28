@@ -15,13 +15,13 @@ import { map, Observable } from 'rxjs';
 
 @Component({
   template: `
-    <ng-container *ngIf="pageLearn$ | async as pageLearn" class="grid">
+    <ng-container *rxLet="pageLearn$ as pageLearn" class="grid">
       <!-- Titles -->
       <dhb-page-header [page]="pageLearn"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
-        [sections]="pageLearn.sectionsCollection?.items"
+        [sections]="pageLearn?.sectionsCollection?.items"
         [iconTilesResponsiveOptions]="iconTilesResponsiveOptions"
         [path]="path"
       ></dhb-page-sections>

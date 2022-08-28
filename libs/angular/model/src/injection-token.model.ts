@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { InMemoryCache } from '@apollo/client';
 import { SharedEnv } from '@dehub/shared/config';
 import {
+  IContentFulManagementService,
   IDehubMoralisService,
   ILoggerService,
   IMoralisService,
@@ -54,4 +55,6 @@ export const DehubMoralisToken = new InjectionToken<IDehubMoralisService>(
 
 /** Token for providing Contentful Management Service */
 export const ContentfulManagementToken =
-  new InjectionToken<IDehubMoralisService>('Contentful Management Service');
+  new InjectionToken<IContentFulManagementService>(
+    'Contentful Management Service'
+  );

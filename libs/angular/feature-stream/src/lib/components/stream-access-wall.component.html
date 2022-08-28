@@ -1,5 +1,5 @@
 <ng-container
-  *ngIf="pageStreamAccessWall$ | async as pageStreamAccessWall"
+  *rxLet="pageStreamAccessWall$ as pageStreamAccessWall"
   class="grid"
 >
   <!-- Titles -->
@@ -79,7 +79,7 @@
 
   <!-- Page Sections -->
   <dhb-page-sections
-    [sections]="pageStreamAccessWall.sectionsCollection?.items"
+    [sections]="pageStreamAccessWall?.sectionsCollection?.items"
     [path]="path"
   ></dhb-page-sections>
 </ng-container>

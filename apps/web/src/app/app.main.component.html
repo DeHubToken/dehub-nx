@@ -24,7 +24,7 @@
       <router-outlet></router-outlet>
     </div>
 
-    <dhb-footer [footer]="(footer$ | async)!"></dhb-footer>
+    <dhb-footer [footer]="footer$ | push"></dhb-footer>
   </div>
 
   <div class="layout-mask modal-in"></div>

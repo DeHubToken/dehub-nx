@@ -12,13 +12,13 @@ import { filter, map, Observable } from 'rxjs';
 
 @Component({
   template: `
-    <ng-container *ngIf="pageShop$ | async as pageShop" class="grid">
+    <ng-container *rxLet="pageShop$ as pageShop" class="grid">
       <!-- Titles -->
       <dhb-page-header [page]="pageShop"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
-        [sections]="pageShop.sectionsCollection?.items"
+        [sections]="pageShop?.sectionsCollection?.items"
         [featurePostsResponsiveOptions]="featurePostsResponsiveOptions"
         [thumbnailPostsResponsiveOptions]="thumbnailPostsResponsiveOptions"
         [basicPostsResponsiveOptions]="basicPostsResponsiveOptions"

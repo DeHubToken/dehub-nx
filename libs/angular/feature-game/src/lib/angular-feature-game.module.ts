@@ -4,6 +4,7 @@ import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { LetModule } from '@rx-angular/template';
 import { AngularFeatureGameRoutingModule } from './angular-feature-game-routing.module';
 import { AngularFeatureGameComponent } from './angular-feature-game.component';
 @NgModule({
@@ -17,7 +18,8 @@ import { AngularFeatureGameComponent } from './angular-feature-game.component';
     PageHeaderModule,
     PageSectionsModule,
 
-    // PrimeNg
+    // Rx Angular,
+    LetModule,
 
     AngularFeatureGameRoutingModule,
   ],

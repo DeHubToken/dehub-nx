@@ -4,6 +4,7 @@ import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
+import { PushModule } from '@rx-angular/template';
 import { ButtonModule } from 'primeng/button';
 import { AngularFeatureLegalRoutingModule } from './angular-feature-legal-routing.module';
 import { AngularFeatureLegalComponent } from './angular-feature-legal.component';
@@ -21,6 +22,9 @@ import { LegalPostComponent } from './components/legal-post.component';
 
     // PrimeNg
     ButtonModule,
+
+    // Rx Angular,
+    PushModule,
 
     AngularFeatureLegalRoutingModule,
   ],
