@@ -3,7 +3,7 @@ import {
   DeHubConnectorNames,
   enableOptionsLocalStorageKey,
   MoralisConnectorNames,
-  WalletConnectingMessages,
+  WalletConnectingMessage,
   WalletConnectingState,
   Web3ConnectorNames,
   Web3EnableOptions,
@@ -157,11 +157,11 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
           connectorId === MoralisConnectorNames.Injected &&
           ethereumDisabled()
         ) {
-          console.error(WalletConnectingMessages.UnsupportedProvider);
+          console.error(WalletConnectingMessage.UnsupportedProvider);
           if (isToastEnabled && toastError)
             toastError(
-              WalletConnectingMessages.ConnectWallet,
-              WalletConnectingMessages.UnsupportedProvider
+              WalletConnectingMessage.ConnectWallet,
+              WalletConnectingMessage.UnsupportedProvider
             );
 
           logout();

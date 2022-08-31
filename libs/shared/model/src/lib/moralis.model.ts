@@ -126,7 +126,7 @@ export type WalletConnectState = {
   state: WalletConnectingState;
 };
 
-export enum WalletConnectingMessages {
+export enum WalletConnectingMessage {
   WAITING = 'Please confirm with your wallet.',
   SWITCH_NETWORK = 'Please confirm network switch with your wallet.',
   ADD_NETWORK = 'Please confirm network add with your wallet.',
@@ -136,7 +136,7 @@ export enum WalletConnectingMessages {
   BinanceSignatureRejected = 'Binance signature was rejected.',
 }
 
-export enum MoralisMessages {
+export enum MoralisMessage {
   UpdateUser = 'Update Profile',
   UpdateUserProblem = 'There was some problem updating your profile, please get in touch.',
   ExistingEmail = 'This email is already in use by another user. If you think it’s a mistake, please get in touch.',

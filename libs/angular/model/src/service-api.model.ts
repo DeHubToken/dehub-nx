@@ -26,6 +26,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { Observable } from 'rxjs';
 
 export interface ILoggerService {
+  debug: (message: string, ...optionalParams: unknown[]) => void;
   info: (message: string, ...optionalParams: unknown[]) => void;
   warn: (message: string, ...optionalParams: unknown[]) => void;
   error: (message: string, error?: Error) => void;
