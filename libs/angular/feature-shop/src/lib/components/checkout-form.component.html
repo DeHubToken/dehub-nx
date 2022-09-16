@@ -59,7 +59,7 @@
         <!-- Contact -->
         <h5>Contact Details</h5>
         <dhb-contacts-form
-          *ngIf="userContacts$ | push as contacts; else loading"
+          *rxLet="userContacts$ as contacts; rxSuspense: loading"
           [formControl]="checkoutForm.controls.contacts"
           [prefillData]="contacts"
         >
@@ -68,13 +68,9 @@
         <!-- Shipping Address -->
         <h5>Shipping Address</h5>
         <dhb-address-form
-          *ngIf="userShippingAddress$ | push as address; else loading"
+          *rxLet="userShippingAddress$ as address; rxSuspense: loading"
           [formControl]="checkoutForm.controls.shippingAddress"
-          [prefillData]="
-            !isShippingAddressResponseEmpty(address)
-              ? address.attributes
-              : undefined
-          "
+          [prefillData]="address?.attributes"
         ></dhb-address-form>
       </ng-container>
 
