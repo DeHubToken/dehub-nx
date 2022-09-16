@@ -55,8 +55,7 @@ export class DehubMoralisService implements IDehubMoralisService {
     filter(isAuthenticated => isAuthenticated),
     switchMap(() =>
       this.getDeHubShopShippingAddresses$().pipe(
-        filterNil(),
-        map(addresses => addresses[0])
+        map(addresses => (addresses ? addresses[0] : null))
       )
     )
   );
@@ -79,7 +78,15 @@ export class DehubMoralisService implements IDehubMoralisService {
     const query = new Moralis.Query<DeHubShopShippingAddress>(ShippingAddress);
 
     return from(query.find()).pipe(
-      map(result => (result.length ? result : undefined))
+      map(result => (result.length ? result : undefined)),
+      tap(shippingAddress =>
+        this.logger.debug(
+          `${MoralisClass.DeHubShopShippingAddresses}:`,
+          shippingAddress
+            ? shippingAddress.map(address => address.attributes)
+            : shippingAddress
+        )
+      )
     );
   }
 

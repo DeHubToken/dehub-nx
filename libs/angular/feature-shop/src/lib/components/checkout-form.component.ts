@@ -21,7 +21,6 @@ import { SharedEnv } from '@dehub/shared/config';
 import {
   Contacts,
   Currency,
-  DeHubShopShippingAddress,
   InitOrderParams,
   OrderStatus,
   PhysicalAddress,
@@ -361,10 +360,6 @@ export class CheckoutFormComponent implements OnInit {
         this.logger.info(status.text);
         break;
     }
-  }
-
-  isShippingAddressResponseEmpty(resp: DeHubShopShippingAddress) {
-    return Object.keys(resp.attributes).length === 0;
   }
 
   calcTotalAmount(price: number, quantity: number) {
