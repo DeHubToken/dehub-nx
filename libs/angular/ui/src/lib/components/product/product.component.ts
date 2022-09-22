@@ -104,8 +104,10 @@ import { ProductFragment } from '@dehub/shared/model';
             ></p-button>
             <p-button
               *ngIf="
-                product.availableQuantity && product.availableQuantity > 0;
-                else buyDisabled
+                product.availableQuantity &&
+                  product.availableQuantity > 0 &&
+                  !product.pause;
+                else unavailable
               "
               [routerLink]="[
                 { outlets: { modal: ['checkout', product.slug] } }
@@ -114,8 +116,10 @@ import { ProductFragment } from '@dehub/shared/model';
               class="w-6 md:w-auto"
               styleClass="p-button-primary p-button-lg ml-2 w-full"
             ></p-button>
-            <ng-template #buyDisabled>
+
+            <ng-template #unavailable>
               <p-button
+                *ngIf="!product.pause"
                 label="Sold Out"
                 class="w-6 md:w-auto"
                 styleClass="p-button-primary p-button-lg ml-2 w-full"
