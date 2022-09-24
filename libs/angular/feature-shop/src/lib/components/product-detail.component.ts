@@ -116,14 +116,16 @@ import { Observable } from 'rxjs';
 
                     <ng-template #unavailable>
                       <span
-                        *ngIf="productDetail.pause; else soldout"
+                        *ngIf="productDetail.pause; else soldOut"
                         class="text-bold"
                       >
                         Coming Soon
                       </span>
-                      <ng-template #soldout>
+
+                      <!-- Sold Out -->
+                      <ng-template #soldOut>
                         <span class="text-bold">
-                          {{ productDetail.soldOutLabel || 'Soldout' }}
+                          {{ productDetail.soldOutLabel || 'Sold Out' }}
                         </span>
                       </ng-template>
                     </ng-template>
