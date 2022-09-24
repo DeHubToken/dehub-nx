@@ -80,12 +80,12 @@ import { ProductFragment } from '@dehub/shared/model';
                 </ng-container>
 
                 <ng-template #unavailable>
-                  <span *ngIf="product.pause; else soldout" class="text-bold">
+                  <span *ngIf="product.pause; else soldOut" class="text-bold">
                     Coming Soon
                   </span>
-                  <ng-template #soldout>
+                  <ng-template #soldOut>
                     <span class="text-bold">{{
-                      product.soldOutLabel || 'Soldout'
+                      product.soldOutLabel || 'Sold Out'
                     }}</span>
                   </ng-template>
                 </ng-template>

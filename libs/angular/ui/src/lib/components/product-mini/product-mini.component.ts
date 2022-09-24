@@ -38,7 +38,7 @@ import { ProductCheckoutDetail } from '@dehub/shared/model';
             <ng-container
               *ngIf="
                 product.availableQuantity && product.availableQuantity > 0;
-                else soldout
+                else soldOut
               "
             >
               <span class="opacity-80 uppercase text-xs text-bold pr-1"
@@ -48,7 +48,7 @@ import { ProductCheckoutDetail } from '@dehub/shared/model';
                 product.availableQuantity
               }}</span>
             </ng-container>
-            <ng-template #soldout>
+            <ng-template #soldOut>
               <span class="text-bold"> Sold Out </span>
             </ng-template>
           </div>
