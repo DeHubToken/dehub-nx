@@ -5,9 +5,9 @@ declare namespace MoralisMissingTypes {
   declare namespace Moralis {
     declare namespace Cloud {
       function getLogger(): {
-        info: (error: string) => void;
-        warn: (error: string) => void;
-        error: (error: string) => void;
+        info: (msg: string) => void;
+        warn: (msg: string) => void;
+        error: (msg: string) => void;
       };
 
       const BigNumber: BigNumber;
