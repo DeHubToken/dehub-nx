@@ -12,6 +12,7 @@ import {
   ProductAvailableQuantityFragment,
   ProductAvailableQuantityFragmentDoc,
 } from '@dehub/shared/model';
+import { isContentfulEntityChanged } from '@dehub/shared/utils';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import {
   createClient,
@@ -134,6 +135,31 @@ export class ContentfulManagementService
             })
           )
         )
+      ),
+      // 2. Publish Contentful (update has changed the status from published to changed)
+      switchMap(product =>
+        isContentfulEntityChanged(product)
+          ? from(
+              this.client.entry.publish({ entryId: product.sys.id }, product)
+            ).pipe(
+              tap(product =>
+                this.logger.debug(
+                  `Available quantity publish was successful for ${productInfo(
+                    product
+                  )}.`
+                )
+              ),
+              catchError(error =>
+                throwError(() => {
+                  const msg = `Available quantity publish failed for ${productInfo(
+                    product
+                  )}.`;
+                  this.logger.error(msg, error);
+                  return new Error(msg);
+                })
+              )
+            )
+          : of(product)
       ),
 
       // Update Apollo Cache
