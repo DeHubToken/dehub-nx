@@ -12,6 +12,7 @@ import { getCheckoutContract } from './shop.util';
 
 export const initOrder = async ({
   address,
+  referralAddress,
   productData,
   shippingAddress,
   contentfulId,
@@ -74,6 +75,7 @@ export const initOrder = async ({
     const dehubShopOrders = new DeHubShopOrders();
     dehubShopOrders.set('ipfsHash', ipfsHash);
     dehubShopOrders.set('shippingAddress', deHubShopShippingAddresses);
+    dehubShopOrders.set('referralAddress', referralAddress);
     dehubShopOrders.set('user', user);
     dehubShopOrders.set('status', OrderStatus.verifying);
     // tokenId should be updated after minting NFT

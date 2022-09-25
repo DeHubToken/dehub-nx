@@ -36,6 +36,7 @@ export interface ProductData {
  */
 export interface InitOrderParams {
   address: string;
+  referralAddress?: string;
   productData: ProductData;
   shippingAddress: PhysicalAddress;
   contentfulId: string;

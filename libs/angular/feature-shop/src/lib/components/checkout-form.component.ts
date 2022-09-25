@@ -154,6 +154,7 @@ export class CheckoutFormComponent implements OnInit {
     shippingAddress: this.fb.control<PhysicalAddress | null>(null, [
       Validators.required,
     ]),
+    referralAddress: this.fb.control<string | undefined>(undefined),
   });
 
   totalAmount = 0;
@@ -237,6 +238,7 @@ export class CheckoutFormComponent implements OnInit {
           ([, [account, productDetail]]) =>
             ({
               address: account,
+              referralAddress: this.checkoutForm.controls.referralAddress.value,
               contentfulId: productDetail.contentfulId,
               productData: {
                 name: productDetail.name,

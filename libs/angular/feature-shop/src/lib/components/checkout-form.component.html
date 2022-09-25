@@ -71,6 +71,24 @@
           [formControl]="checkoutForm.controls.shippingAddress"
           [prefillData]="address?.attributes"
         ></dhb-address-form>
+
+        <!-- Referral Address -->
+        <h5>Referral Address</h5>
+        <div class="field col-12 sm:col-5">
+          <div [formGroup]="checkoutForm" class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+              <i class="fa-duotone fa-wallet"></i>
+            </span>
+            <span class="p-float-label">
+              <input
+                [formControlName]="'referralAddress'"
+                pInputText
+                type="text"
+              />
+              <label for="email" class="pr-5">Referral wallet Address</label>
+            </span>
+          </div>
+        </div>
       </ng-container>
 
       <!-- Total -->
