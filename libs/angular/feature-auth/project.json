@@ -9,7 +9,8 @@
       "outputs": ["coverage/libs/angular/feature-auth"],
       "options": {
         "jestConfig": "libs/angular/feature-auth/jest.config.js",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "lint": {

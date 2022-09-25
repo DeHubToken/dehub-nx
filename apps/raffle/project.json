@@ -97,7 +97,8 @@
       "outputs": ["coverage/apps/raffle"],
       "options": {
         "jestConfig": "apps/raffle/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "deploy-prod-draft": {

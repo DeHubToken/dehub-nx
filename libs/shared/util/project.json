@@ -16,7 +16,8 @@
       "outputs": ["coverage/libs/shared/util"],
       "options": {
         "jestConfig": "libs/shared/util/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     }
   },

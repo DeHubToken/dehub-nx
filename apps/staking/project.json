@@ -107,7 +107,8 @@
       "outputs": ["coverage/apps/staking"],
       "options": {
         "jestConfig": "apps/staking/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "deploy-preview-draft": {

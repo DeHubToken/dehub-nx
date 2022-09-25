@@ -9,7 +9,8 @@
       "outputs": ["coverage/libs/angular/feature-legal"],
       "options": {
         "jestConfig": "libs/angular/feature-legal/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "lint": {

@@ -53,7 +53,8 @@
       "outputs": ["coverage/apps/moralis/cloud"],
       "options": {
         "jestConfig": "apps/moralis/cloud/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "deploy-preview-draft": {

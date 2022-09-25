@@ -9,7 +9,8 @@
       "outputs": ["coverage/libs/angular/feature-mailing"],
       "options": {
         "jestConfig": "libs/angular/feature-mailing/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "lint": {
