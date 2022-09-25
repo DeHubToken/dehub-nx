@@ -4,6 +4,7 @@ import {
 } from '@contentful/rich-text-html-renderer';
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { BLOCKS, Document } from '@contentful/rich-text-types';
+import { ContentfulEntity } from '@dehub/shared/model';
 
 export const richMarkupToHtmlString = (richTextDocument: Document) => {
   const richOptions: Options = {
@@ -82,3 +83,26 @@ export const resolveButtonStyle = (
 
   return classes;
 };
+
+/**
+ * Entry state detection APIs
+ * Docs: https://www.contentful.com/developers/docs/tutorials/general/determine-entry-asset-state/
+ */
+
+/** Detect if an entity is in draft state */
+export const isContentfulEntityDraft = (entity: ContentfulEntity) =>
+  !entity.sys.publishedVersion;
+
+/** Detect if an entity is in changed state */
+export const isContentfulEntityChanged = (entity: ContentfulEntity) =>
+  !!entity.sys.publishedVersion &&
+  entity.sys.version >= entity.sys.publishedVersion + 2;
+
+/** Detect if an entity is in published state */
+export const isContentfulEntityPublished = (entity: ContentfulEntity) =>
+  !!entity.sys.publishedVersion &&
+  entity.sys.version == entity.sys.publishedVersion + 1;
+
+/** Detect if an entity is in archived state */
+export const isContentfulEntityArchived = (entity: ContentfulEntity) =>
+  !!entity.sys.archivedVersion;

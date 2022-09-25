@@ -310,7 +310,7 @@ export class CheckoutFormComponent implements OnInit {
         ),
 
         // Decrease product quantity
-        switchMap(([_order, { params }]) =>
+        switchMap(([_orderStatus, { params }]) =>
           this.contentfulManagement.reduceProductAvailableQuantity$(
             params.contentfulId,
             params.quantity

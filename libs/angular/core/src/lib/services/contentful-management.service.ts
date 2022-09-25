@@ -12,6 +12,7 @@ import {
   ProductAvailableQuantityFragment,
   ProductAvailableQuantityFragmentDoc,
 } from '@dehub/shared/model';
+import { isContentfulEntityChanged } from '@dehub/shared/utils';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import {
   createClient,
@@ -30,7 +31,6 @@ import {
   switchMap,
   tap,
   throwError,
-  withLatestFrom,
 } from 'rxjs';
 
 /**
@@ -106,20 +106,19 @@ export class ContentfulManagementService
             )} (${availableQuantity} - ${quantity} = ${newQuantity}).`
           );
 
-          return of({ product, newQuantity });
+          return of(product);
         } else {
           this.logger.warn(msg);
           return throwError(() => new Error(msg));
         }
       }),
 
-      // Update Contentful
-      switchMap(({ product, newQuantity }) =>
+      // 1. Update Contentful
+      switchMap(product =>
         from(
           this.client.entry.update({ entryId: product.sys.id }, product)
         ).pipe(
-          withLatestFrom(of({ newQuantity })),
-          tap(([product]) =>
+          tap(product =>
             this.logger.debug(
               `Available quantity update was successful for ${productInfo(
                 product
@@ -137,15 +136,42 @@ export class ContentfulManagementService
           )
         )
       ),
+      // 2. Publish Contentful (update has changed the status from published to changed)
+      switchMap(product =>
+        isContentfulEntityChanged(product)
+          ? from(
+              this.client.entry.publish({ entryId: product.sys.id }, product)
+            ).pipe(
+              tap(product =>
+                this.logger.debug(
+                  `Available quantity publish was successful for ${productInfo(
+                    product
+                  )}.`
+                )
+              ),
+              catchError(error =>
+                throwError(() => {
+                  const msg = `Available quantity publish failed for ${productInfo(
+                    product
+                  )}.`;
+                  this.logger.error(msg, error);
+                  return new Error(msg);
+                })
+              )
+            )
+          : of(product)
+      ),
 
       // Update Apollo Cache
-      map(([_product, { newQuantity }]) =>
+      map(product =>
         this.cache.updateFragment<ProductAvailableQuantityFragment>(
           {
             id: `Product:${productId}`,
             fragment: ProductAvailableQuantityFragmentDoc,
           },
-          _data => ({ availableQuantity: newQuantity })
+          _data => ({
+            availableQuantity: product.fields.availableQuantity['en-US'],
+          })
         )
       ),
       tap(updateResult => {
