@@ -1,5 +1,6 @@
 export * from './lib/checkout.model';
 export * from './lib/contacts.model';
+export * from './lib/contentful.model';
 export * from './lib/contract.model';
 export * from './lib/dehub-moralis.model';
 export * from './lib/freya.model';
