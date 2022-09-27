@@ -9,7 +9,8 @@
       "outputs": ["coverage/libs/angular/ui"],
       "options": {
         "jestConfig": "libs/angular/ui/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "lint": {

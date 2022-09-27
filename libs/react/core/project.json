@@ -16,7 +16,8 @@
       "outputs": ["coverage/libs/react/core"],
       "options": {
         "jestConfig": "libs/react/core/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     }
   },

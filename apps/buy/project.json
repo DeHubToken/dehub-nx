@@ -107,7 +107,8 @@
       "outputs": ["coverage/apps/buy"],
       "options": {
         "jestConfig": "apps/buy/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "deploy-preview-draft": {

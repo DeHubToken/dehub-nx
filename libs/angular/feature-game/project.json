@@ -9,7 +9,8 @@
       "outputs": ["coverage/libs/angular/feature-game"],
       "options": {
         "jestConfig": "libs/angular/feature-game/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "lint": {

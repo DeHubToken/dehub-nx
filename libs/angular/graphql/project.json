@@ -9,7 +9,8 @@
       "outputs": ["coverage/libs/angular/graphql"],
       "options": {
         "jestConfig": "libs/angular/graphql/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "lint": {

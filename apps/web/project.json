@@ -136,7 +136,8 @@
       "outputs": ["coverage/apps/web"],
       "options": {
         "jestConfig": "apps/web/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "bail": 1
       }
     },
     "deploy-preview-draft": {
