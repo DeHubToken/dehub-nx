@@ -45,7 +45,6 @@ import { PhoneNumberValidator } from '../../validators/phone-number.validator';
             [options]="countries"
             [filter]="true"
             [filterBy]="'name'"
-            [(ngModel)]="selectedCountryCode"
             [optionLabel]="'name'"
             [optionValue]="'code'"
             [required]="true"
@@ -132,12 +131,9 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
 
   // Form
   selectedCountry?: Country;
-  selectedCountryCode?: string;
   phoneForm = this.fb.group({
     code: [''],
-    number: this.fb.control({ value: '', disabled: true }, [
-      PhoneNumberValidator(() => this.selectedCountry?.code),
-    ]),
+    number: ['', [PhoneNumberValidator(() => this.selectedCountry?.code)]],
   });
 
   constructor(
@@ -192,13 +188,12 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
 
       this.selectedCountry = this.getCountryByPhoneCode(countries, phoneCode);
 
-      if (this.selectedCountry) {
-        this.selectedCountryCode = this.selectedCountry.code;
-        this.phoneForm.patchValue({
-          code: this.selectedCountry.code,
-          number: phoneNumber.getNationalNumber()?.toString(),
-        });
-      }
+      this.phoneForm.patchValue({
+        code: this.selectedCountry?.code,
+        number: phoneNumber.getNationalNumber()?.toString(),
+      });
+    } else {
+      this.phoneForm.controls.number.disable();
     }
   }
 
