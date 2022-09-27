@@ -74,25 +74,29 @@
 
         <!-- Referral Address -->
         <h5>Referral Address</h5>
-        <div class="field col-12 sm:col-5">
-          <div [formGroup]="checkoutForm" class="p-inputgroup">
-            <span class="p-inputgroup-addon">
-              <i class="fa-duotone fa-wallet"></i>
-            </span>
-            <span class="p-float-label">
-              <p-inputMask
-                [inputId]="'referralAddress'"
-                [formControlName]="'referralAddress'"
-                [size]="47"
-                [maxlength]="42"
-                mask="******************************************"
-                characterPattern="[ABCDEFXabcdefx]"
-                slotChar=""
-              ></p-inputMask>
-              <label for="referralAddress" class="pr-5">Referral Address</label>
-            </span>
+        <form [formGroup]="checkoutForm" class="p-fluid grid pt-2">
+          <div class="field col-12 sm:col-5">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">
+                <i class="fa-duotone fa-wallet"></i>
+              </span>
+              <span class="p-float-label">
+                <p-inputMask
+                  [inputId]="'referralAddress'"
+                  [formControlName]="'referralAddress'"
+                  [size]="47"
+                  [maxlength]="42"
+                  mask="******************************************"
+                  characterPattern="[ABCDEFXabcdefx]"
+                  slotChar=""
+                ></p-inputMask>
+                <label for="referralAddress" class="pr-5"
+                  >Referral Address</label
+                >
+              </span>
+            </div>
           </div>
-        </div>
+        </form>
       </ng-container>
 
       <!-- Total -->
