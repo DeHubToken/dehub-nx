@@ -13,6 +13,7 @@ import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentf
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { LetModule, PushModule } from '@rx-angular/template';
 import { ButtonModule } from 'primeng/button';
+import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
@@ -49,6 +50,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     ButtonModule,
     InputNumberModule,
     InputTextModule,
+    InputMaskModule,
 
     // Swiper
     SwiperModule,

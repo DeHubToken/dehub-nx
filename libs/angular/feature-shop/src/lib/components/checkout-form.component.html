@@ -80,12 +80,16 @@
               <i class="fa-duotone fa-wallet"></i>
             </span>
             <span class="p-float-label">
-              <input
+              <p-inputMask
+                [inputId]="'referralAddress'"
                 [formControlName]="'referralAddress'"
-                pInputText
-                type="text"
-              />
-              <label for="email" class="pr-5">Referral wallet Address</label>
+                [size]="47"
+                [maxlength]="42"
+                mask="******************************************"
+                characterPattern="[ABCDEFXabcdefx]"
+                slotChar=""
+              ></p-inputMask>
+              <label for="referralAddress" class="pr-5">Referral Address</label>
             </span>
           </div>
         </div>
