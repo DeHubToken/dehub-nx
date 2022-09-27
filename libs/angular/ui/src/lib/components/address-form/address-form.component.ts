@@ -20,7 +20,13 @@ import {
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { Country, PhysicalAddress } from '@dehub/shared/model';
-import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
+import {
+  distinctUntilChanged,
+  identity,
+  Observable,
+  startWith,
+  Subscription,
+} from 'rxjs';
 
 @Component({
   selector: 'dhb-address-form',
@@ -130,7 +136,6 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
                 [options]="countries"
                 [filter]="true"
                 [filterBy]="'name'"
-                [(ngModel)]="selectedCountryCode"
                 [optionLabel]="'name'"
                 [optionValue]="'code'"
                 [required]="true"
@@ -138,12 +143,14 @@ import { distinctUntilChanged, Observable, Subscription } from 'rxjs';
                 [styleClass]="'flex w-full border-noround-left'"
               >
                 <ng-template pTemplate="selectedItem">
-                  <div
-                    class="country-item country-item-value"
-                    *ngIf="selectedCountryCode"
-                  >
+                  <div class="country-item country-item-value">
                     <div>
-                      {{ findCountry(countries, selectedCountryCode)?.name }}
+                      {{
+                        findCountry(
+                          countries,
+                          shippingAddressForm.controls.country.value
+                        )?.name
+                      }}
                     </div>
                   </div>
                 </ng-template>
@@ -230,7 +237,6 @@ export class AddressFormComponent implements OnInit, OnDestroy {
   );
 
   // Form
-  selectedCountryCode?: string;
   shippingAddressForm = this.fb.group({
     name: ['', Validators.required],
     line1: ['', Validators.required],
@@ -257,13 +263,14 @@ export class AddressFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Prefill form if provided
-    if (this.prefillData) {
-      this.selectedCountryCode = this.prefillData.country;
-      this.shippingAddressForm.patchValue(this.prefillData);
-    }
+    if (this.prefillData) this.shippingAddressForm.patchValue(this.prefillData);
+
     // Subscribe to form changes and emit on each change to the parent component.
     this.sub = this.shippingAddressForm.valueChanges
-      .pipe(distinctUntilChanged())
+      .pipe(
+        this.prefillData ? startWith(this.prefillData) : identity,
+        distinctUntilChanged()
+      )
       .subscribe(shippingAddress => {
         this.ngControl.control?.setValue(shippingAddress);
         if (!this.shippingAddressForm.valid) {

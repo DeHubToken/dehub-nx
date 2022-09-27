@@ -78,9 +78,7 @@ export class CheckoutFormComponent implements OnInit {
     }),
     filterNil()
   );
-  userContacts$ = this.dehubMoralis.userContacts$.pipe(
-    tap(contacts => this.checkoutForm.controls.contacts.patchValue(contacts))
-  );
+  userContacts$ = this.dehubMoralis.userContacts$;
   userShippingAddress$ = this.dehubMoralis.userShippingAddress$;
 
   checkoutContract$ = this.dehubMoralis

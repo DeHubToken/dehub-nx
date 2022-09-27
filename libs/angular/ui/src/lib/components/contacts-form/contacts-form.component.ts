@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -15,10 +14,15 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
-import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
+import { NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { Contacts } from '@dehub/shared/model';
-import { distinctUntilChanged, Subscription } from 'rxjs';
+import {
+  combineLatest,
+  distinctUntilChanged,
+  identity,
+  startWith,
+  Subscription,
+} from 'rxjs';
 
 @Component({
   selector: 'dhb-contacts-form',
@@ -52,8 +56,6 @@ import { distinctUntilChanged, Subscription } from 'rxjs';
       </div>
     </form>
   `,
-  styles: [``],
-
   changeDetection: ChangeDetectionStrategy.OnPush,
   viewProviders: [
     {
@@ -64,7 +66,7 @@ import { distinctUntilChanged, Subscription } from 'rxjs';
 })
 export class ContactsFormComponent implements OnInit, OnDestroy {
   @Input() prefillData?: Contacts;
-  private sub?: Subscription;
+  private subs = new Subscription();
 
   contactsForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -73,7 +75,6 @@ export class ContactsFormComponent implements OnInit, OnDestroy {
 
   constructor(
     @Self() @Optional() public ngControl: NgControl,
-    @Inject(EnvToken) private env: SharedEnv,
     private fb: NonNullableFormBuilder
   ) {
     if (this.ngControl) {
@@ -86,23 +87,27 @@ export class ContactsFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Prefill form if provided
-    if (this.prefillData) {
-      this.contactsForm.patchValue(this.prefillData);
-    }
+    if (this.prefillData) this.contactsForm.patchValue(this.prefillData);
+
     // Subscribe to form changes and emit on each change to the parent component.
-    this.sub = this.contactsForm.valueChanges
-      .pipe(distinctUntilChanged())
-      .subscribe(contacts => {
+    this.subs.add(
+      combineLatest([
+        this.contactsForm.valueChanges.pipe(
+          this.prefillData ? startWith(this.prefillData) : identity,
+          distinctUntilChanged()
+        ),
+        // Inner phone input can be invalid
+        this.contactsForm.statusChanges,
+      ]).subscribe(([contacts]) => {
         this.ngControl.control?.setValue(contacts);
         if (!this.contactsForm.valid) {
           this.ngControl.control?.setErrors({ contactsInvalid: true });
         }
-      });
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
+    this.subs.unsubscribe();
   }
 }
