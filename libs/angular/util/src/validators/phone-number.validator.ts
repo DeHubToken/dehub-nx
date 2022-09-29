@@ -3,9 +3,9 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 
 const phoneNumberUtil = PhoneNumberUtil.getInstance();
 
-export function PhoneNumberValidator(regionCode: {
+export const PhoneNumberValidator = (regionCode: {
   (): string | undefined;
-}): ValidatorFn {
+}): ValidatorFn => {
   return (
     control: AbstractControl
   ): { wrongNumber: { [key: string]: string } } | null => {
@@ -25,4 +25,4 @@ export function PhoneNumberValidator(regionCode: {
 
     return validNumber ? null : { wrongNumber: { value: control.value } };
   };
-}
+};
