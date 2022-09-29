@@ -12,13 +12,7 @@ import { ProductDetailService } from './services';
         class="col-12 lg:col-12 xl:col-8 col-offset-0 lg:col-offset-0 xl:col-offset-2"
       >
         <!-- Back (top) -->
-        <p-button
-          label="Back"
-          icon="fas fa-long-arrow-left"
-          [routerLink]="['/shop']"
-          styleClass="p-button-link p-button-lg mb-2"
-        >
-        </p-button>
+        <dhb-back-button [routerLink]="['/shop']"></dhb-back-button>
 
         <!-- Basic Post Detail -->
         <dhb-product-detail
@@ -26,13 +20,7 @@ import { ProductDetailService } from './services';
         ></dhb-product-detail>
 
         <!-- Back (bottom) -->
-        <p-button
-          label="Back"
-          icon="fas fa-long-arrow-left"
-          [routerLink]="['/shop']"
-          styleClass="p-button-link p-button-lg mb-2"
-        >
-        </p-button>
+        <dhb-back-button [routerLink]="['/shop']"></dhb-back-button>
       </div>
     </div>
   `,

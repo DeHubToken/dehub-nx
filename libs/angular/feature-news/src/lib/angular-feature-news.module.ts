@@ -5,7 +5,6 @@ import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/con
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { PushModule } from '@rx-angular/template';
-import { ButtonModule } from 'primeng/button';
 import { AngularFeatureNewsDetailComponent } from './angular-feature-news-detail.component';
 import { AngularFeatureNewsRoutingModule } from './angular-feature-news-routing.module';
 import { AngularFeatureNewsComponent } from './angular-feature-news.component';
@@ -22,7 +21,6 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
     SafeHtmlPipeModule,
 
     // PrimeNg
-    ButtonModule,
 
     // Rx Angular,
     PushModule,

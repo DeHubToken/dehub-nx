@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { AddressFormModule } from '@dehub/angular/ui/components/address-form';
+import { BackButtonModule } from '@dehub/angular/ui/components/buttons/back-button';
 import { ContactsFormModule } from '@dehub/angular/ui/components/contacts-form';
 import { LoadingModule } from '@dehub/angular/ui/components/loading';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
@@ -12,7 +13,6 @@ import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/con
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { LetModule, PushModule } from '@rx-angular/template';
-import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
@@ -45,9 +45,9 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     AddressFormModule,
     ContactsFormModule,
     LoadingModule,
+    BackButtonModule,
 
     // PrimeNg
-    ButtonModule,
     InputNumberModule,
     InputTextModule,
     InputMaskModule,

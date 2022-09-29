@@ -18,13 +18,7 @@ import { map, Observable } from 'rxjs';
         class="col-12 lg:col-12 xl:col-6 col-offset-0 lg:col-offset-0 xl:col-offset-3"
       >
         <!-- Back (top) -->
-        <p-button
-          label="Back"
-          icon="fas fa-long-arrow-left"
-          [routerLink]="['/home']"
-          styleClass="p-button-link p-button-lg mb-2"
-        >
-        </p-button>
+        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
 
         <!-- Basic Post Detail -->
         <dhb-basic-post-detail
@@ -32,13 +26,7 @@ import { map, Observable } from 'rxjs';
         ></dhb-basic-post-detail>
 
         <!-- Back (bottom) -->
-        <p-button
-          label="Back"
-          icon="fas fa-long-arrow-left"
-          [routerLink]="['/home']"
-          styleClass="p-button-link p-button-lg mb-2"
-        >
-        </p-button>
+        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
       </div>
     </div>
   `,
