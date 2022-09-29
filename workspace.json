@@ -16,6 +16,7 @@
     "angular-model": "libs/angular/model",
     "angular-moralis": "libs/angular/moralis",
     "angular-ui": "libs/angular/ui",
+    "angular-util": "libs/angular/util",
     "buy": "apps/buy",
     "buy-e2e": "apps/buy-e2e",
     "moralis-cloud": "apps/moralis/cloud",
@@ -32,6 +33,5 @@
     "staking-e2e": "apps/staking-e2e",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
-  },
-  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
+  }
 }

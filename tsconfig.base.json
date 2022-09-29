@@ -38,6 +38,7 @@
       "@dehub/angular/model": ["libs/angular/model/src/index.ts"],
       "@dehub/angular/moralis": ["libs/angular/moralis/src/index.ts"],
       "@dehub/angular/ui/*": ["libs/angular/ui/src/lib/*"],
+      "@dehub/angular/util": ["libs/angular/util/src/index.ts"],
       "@dehub/moralis/cloud": ["libs/moralis/cloud/src/index.ts"],
       "@dehub/react/core": ["libs/react/core/src/index.ts"],
       "@dehub/react/ui": ["libs/react/ui/src/index.ts"],

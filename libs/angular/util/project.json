@@ -1,13 +1,13 @@
 {
   "projectType": "library",
-  "sourceRoot": "libs/angular/feature-stream/src",
+  "sourceRoot": "libs/angular/util/src",
   "prefix": "dhb",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/angular/feature-stream"],
+      "outputs": ["coverage/libs/angular/util"],
       "options": {
-        "jestConfig": "libs/angular/feature-stream/jest.config.ts",
+        "jestConfig": "libs/angular/util/jest.config.ts",
         "passWithNoTests": true,
         "bail": 1
       }
@@ -16,12 +16,12 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/angular/feature-stream/src/**/*.ts",
-          "libs/angular/feature-stream/src/**/*.html"
+          "libs/angular/util/**/*.ts",
+          "libs/angular/util/**/*.html"
         ],
         "maxWarnings": 0
       }
     }
   },
-  "tags": ["scope:angular", "type:feature"]
+  "tags": ["scope:angular", "type:util"]
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AngularGraphQLModule } from '@dehub/angular/graphql';
-import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buy-dehub-button';
+import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buttons/buy-dehub-button';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';

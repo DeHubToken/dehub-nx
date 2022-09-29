@@ -17,17 +17,14 @@ import { map, Observable, switchMap } from 'rxjs';
   template: `
     <div [@fadeInUp] class="grid">
       <div class="col-12 xl:col-8 col-offset-0 xl:col-offset-2">
-        <!-- Back -->
-        <p-button
-          label="Back"
-          icon="fas fa-long-arrow-left"
-          [routerLink]="['/home']"
-          styleClass="p-button-link p-button-lg mb-2"
-        >
-        </p-button>
+        <!-- Back (top) -->
+        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
 
         <!-- Legal Post -->
         <dhb-legal-post [legalPost]="legalPost$ | push"></dhb-legal-post>
+
+        <!-- Back (bottom) -->
+        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
       </div>
     </div>
   `,
