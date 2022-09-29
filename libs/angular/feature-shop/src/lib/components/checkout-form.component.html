@@ -116,42 +116,38 @@
       </div>
 
       <!-- Footer -->
-      <div class="grid">
-        <div
-          class="flex justify-content-end col-12 sm:col-8 col-offset-0 sm:col-offset-4 text-right"
-        >
-          <!-- Cancel -->
+      <div class="flex justify-content-end">
+        <!-- Cancel -->
+        <p-button
+          label="Cancel"
+          (click)="ref.close()"
+          class="w-6 md:w-auto"
+          styleClass="p-button-secondary p-button-lg w-full"
+        ></p-button>
+
+        <!-- Confirm -->
+        <ng-container *ngIf="productDetail.availableQuantity > 0">
           <p-button
-            label="Cancel"
-            (click)="ref.close()"
+            *ngIf="checkoutState.hasAllowance; else approve"
+            [label]="productDetail.pause ? 'Coming Soon' : 'Confirm'"
+            [disabled]="!checkoutForm.valid || productDetail.pause"
+            (onClick)="onConfirm()"
+            icon="fa-regular fa-check"
+            styleClass="p-button-primary p-button-lg ml-2 "
             class="w-6 md:w-auto"
-            styleClass="p-button-secondary p-button-lg mr-2"
           ></p-button>
+        </ng-container>
 
-          <!-- Confirm -->
-          <ng-container *ngIf="productDetail.availableQuantity > 0">
-            <p-button
-              *ngIf="checkoutState.hasAllowance; else approve"
-              [label]="productDetail.pause ? 'Coming Soon' : 'Confirm'"
-              [disabled]="!checkoutForm.valid || productDetail.pause"
-              (onClick)="onConfirm()"
-              icon="fa-regular fa-check"
-              styleClass="p-button-primary p-button-lg w-full"
-              class="w-6 md:w-auto"
-            ></p-button>
-          </ng-container>
-
-          <!-- Approve -->
-          <ng-template #approve>
-            <p-button
-              label="Approve"
-              icon="fa-regular fa-check"
-              (onClick)="onApprove()"
-              class="w-6 md:w-auto"
-              styleClass="p-button-primary p-button-lg w-full"
-            ></p-button>
-          </ng-template>
-        </div>
+        <!-- Approve -->
+        <ng-template #approve>
+          <p-button
+            label="Approve"
+            icon="fa-regular fa-check"
+            (onClick)="onApprove()"
+            styleClass="p-button-primary p-button-lg ml-2"
+            class="w-6 md:w-auto"
+          ></p-button>
+        </ng-template>
       </div>
     </ng-container>
   </ng-template>

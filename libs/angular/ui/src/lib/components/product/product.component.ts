@@ -116,8 +116,8 @@ import { ProductFragment } from '@dehub/shared/model';
               "
               [label]="product.pause ? 'Coming Soon' : 'Buy'"
               [disabled]="product.pause ?? false"
+              styleClass="p-button-primary p-button-lg ml-2"
               class="w-6 md:w-auto"
-              styleClass="p-button-primary p-button-lg ml-2 w-full"
             ></p-button>
           </div>
         </ng-template>
