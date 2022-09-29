@@ -41,6 +41,7 @@ import { ProductFragment } from '@dehub/shared/model';
             </ng-container>
           </swiper>
         </ng-template>
+
         <!-- Body -->
         <div
           class="flex flex-wrap sm:flex-nowrap justify-content-end align-items-start"
@@ -51,25 +52,25 @@ import { ProductFragment } from '@dehub/shared/model';
             </p>
           </div>
 
+          <!-- Price Widget -->
           <div
             class="card overview-box gray shadow-2 flex-none pt-1 pb-3 min-w-full sm:min-w-max"
           >
             <div class="overview-info text-right w-full">
+              <!-- Price -->
               <h3 class="mt-1 mb-0 pr-0">{{ product.price | number }}</h3>
+
+              <!-- Currency -->
               <h6 class="text-sm mb-2 opacity-80">
                 {{ product.currency }}
               </h6>
 
+              <!-- Quantity -->
               <h6 class="my-0 text-sm inline-block w-full">
                 <hr class="my-0 pb-1 border-dashed" />
 
                 <ng-container
-                  *ngIf="
-                    product.availableQuantity &&
-                      product.availableQuantity > 0 &&
-                      !product.pause;
-                    else unavailable
-                  "
+                  *ngIf="product.availableQuantity ?? 0 > 0; else unavailable"
                 >
                   <span class="opacity-80 uppercase text-xs text-bold pr-1"
                     >Quantity:</span
@@ -93,39 +94,31 @@ import { ProductFragment } from '@dehub/shared/model';
             </div>
           </div>
         </div>
+
         <!-- Footer -->
         <ng-template pTemplate="footer">
           <div class="flex justify-content-end">
+            <!-- Details -->
             <p-button
               [routerLink]="['/shop', product.slug]"
               label="Details"
               class="w-6 md:w-auto"
               styleClass="p-button-secondary p-button-lg w-full"
             ></p-button>
+
+            <!-- Buy -->
             <p-button
-              *ngIf="
-                product.availableQuantity &&
-                  product.availableQuantity > 0 &&
-                  !product.pause;
-                else unavailable
+              *ngIf="product.availableQuantity ?? 0 > 0"
+              [routerLink]="
+                product.pause
+                  ? null
+                  : [{ outlets: { modal: ['checkout', product.slug] } }]
               "
-              [routerLink]="[
-                { outlets: { modal: ['checkout', product.slug] } }
-              ]"
-              label="Buy"
+              [label]="product.pause ? 'Coming Soon' : 'Buy'"
+              [disabled]="product.pause ?? false"
               class="w-6 md:w-auto"
               styleClass="p-button-primary p-button-lg ml-2 w-full"
             ></p-button>
-
-            <ng-template #unavailable>
-              <p-button
-                *ngIf="!product.pause"
-                label="Sold Out"
-                class="w-6 md:w-auto"
-                styleClass="p-button-primary p-button-lg ml-2 w-full"
-                [disabled]="true"
-              ></p-button>
-            </ng-template>
           </div>
         </ng-template>
       </p-card>

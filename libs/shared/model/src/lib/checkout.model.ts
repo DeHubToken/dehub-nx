@@ -16,4 +16,5 @@ export interface ProductCheckoutDetail {
   currency: Currency;
   contentfulId: string;
   sku: string;
+  pause: boolean;
 }
