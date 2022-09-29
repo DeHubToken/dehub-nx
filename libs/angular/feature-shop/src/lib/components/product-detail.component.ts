@@ -61,7 +61,7 @@ import { Observable } from 'rxjs';
             ></div>
 
             <div class="flex-none min-w-full sm:min-w-max xl:w-15rem">
-              <!-- Metainfo -->
+              <!-- Meta Info -->
               <div
                 *ngIf="productDetail.category as category"
                 class="card overview-box gray shadow-2 pt-1 pb-3 mb-3"
@@ -74,23 +74,26 @@ import { Observable } from 'rxjs';
                 </div>
               </div>
 
-              <!-- Price/Quantity -->
+              <!-- Price Widget -->
               <div class="card overview-box gray shadow-2 pt-1 pb-3">
                 <div class="overview-info text-right w-full">
+                  <!-- Price -->
                   <h2 class="mt-1 mb-0 pr-0">
                     {{ productDetail.price | number }}
                   </h2>
+
+                  <!-- Currency -->
                   <h5 class="text-sm mt-0 mb-2 opacity-80 line-height-1">
                     {{ productDetail.currency }}
                   </h5>
 
+                  <!-- Quantity -->
                   <h5 class="my-0 text-sm inline-block line-height-1 w-full">
                     <hr class="my-0 pb-2 border-dashed" />
+
                     <ng-container
                       *ngIf="
-                        productDetail.availableQuantity &&
-                          productDetail.availableQuantity > 0 &&
-                          !productDetail.pause;
+                        productDetail.availableQuantity ?? 0 > 0;
                         else unavailable
                       "
                     >
@@ -101,20 +104,29 @@ import { Observable } from 'rxjs';
                         productDetail.availableQuantity
                       }}</span>
 
+                      <!-- Buy / Coming Soon -->
                       <p-button
-                        [routerLink]="[
-                          '/shop',
-                          {
-                            outlets: { modal: ['checkout', productDetail.slug] }
-                          }
-                        ]"
-                        label="Buy"
+                        [routerLink]="
+                          productDetail.pause
+                            ? null
+                            : [
+                                '/shop',
+                                {
+                                  outlets: {
+                                    modal: ['checkout', productDetail.slug]
+                                  }
+                                }
+                              ]
+                        "
+                        [label]="productDetail.pause ? 'Coming Soon' : 'Buy'"
+                        [disabled]="productDetail.pause ?? false"
                         icon="fa-solid fa-check"
                         styleClass="p-button-primary p-button-lg mt-3 block w-full"
                       ></p-button>
                     </ng-container>
 
                     <ng-template #unavailable>
+                      <!-- Paused -->
                       <span
                         *ngIf="productDetail.pause; else soldOut"
                         class="text-bold"

@@ -123,30 +123,32 @@
           <!-- Cancel -->
           <p-button
             label="Cancel"
-            class="w-5"
-            styleClass="p-button-secondary p-button-lg mr-2"
             (click)="ref.close()"
+            class="w-6 md:w-auto"
+            styleClass="p-button-secondary p-button-lg mr-2"
           ></p-button>
 
           <!-- Confirm -->
-          <p-button
-            *ngIf="checkoutState.hasAllowance; else approve"
-            label="Confirm"
-            icon="fa-regular fa-check"
-            class="w-5"
-            styleClass="p-button-primary p-button-lg w-full"
-            [disabled]="!checkoutForm.valid"
-            (onClick)="onConfirm()"
-          ></p-button>
+          <ng-container *ngIf="productDetail.availableQuantity > 0">
+            <p-button
+              *ngIf="checkoutState.hasAllowance; else approve"
+              [label]="productDetail.pause ? 'Coming Soon' : 'Confirm'"
+              [disabled]="!checkoutForm.valid || productDetail.pause"
+              (onClick)="onConfirm()"
+              icon="fa-regular fa-check"
+              styleClass="p-button-primary p-button-lg w-full"
+              class="w-6 md:w-auto"
+            ></p-button>
+          </ng-container>
 
           <!-- Approve -->
           <ng-template #approve>
             <p-button
               label="Approve"
               icon="fa-regular fa-check"
-              class="w-5"
-              styleClass="p-button-primary p-button-lg w-full"
               (onClick)="onApprove()"
+              class="w-6 md:w-auto"
+              styleClass="p-button-primary p-button-lg w-full"
             ></p-button>
           </ng-template>
         </div>
