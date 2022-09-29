@@ -34,12 +34,13 @@ export class AngularFeatureShopCheckoutComponent implements OnInit {
             description: richMarkupToPlainString(
               productDetail?.fullDescription?.json
             ),
-            availableQuantity: productDetail.availableQuantity,
+            availableQuantity: productDetail.availableQuantity ?? 0,
             category: productDetail.category,
             price: productDetail.price,
             currency: productDetail.currency,
             contentfulId: productDetail.sys.id,
             sku: productDetail.sku,
+            pause: productDetail.pause ?? false,
           } as ProductCheckoutDetail)
       )
     );
