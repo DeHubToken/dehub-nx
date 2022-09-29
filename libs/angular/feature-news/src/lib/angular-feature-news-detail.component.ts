@@ -17,7 +17,7 @@ import { map, Observable } from 'rxjs';
       <div
         class="col-12 lg:col-12 xl:col-6 col-offset-0 lg:col-offset-0 xl:col-offset-3"
       >
-        <!-- Back -->
+        <!-- Back (top) -->
         <p-button
           label="Back"
           icon="fas fa-long-arrow-left"
@@ -30,6 +30,15 @@ import { map, Observable } from 'rxjs';
         <dhb-basic-post-detail
           [basicPostDetail]="basicPostDetail$ | push"
         ></dhb-basic-post-detail>
+
+        <!-- Back (bottom) -->
+        <p-button
+          label="Back"
+          icon="fas fa-long-arrow-left"
+          [routerLink]="['/home']"
+          styleClass="p-button-link p-button-lg mb-2"
+        >
+        </p-button>
       </div>
     </div>
   `,

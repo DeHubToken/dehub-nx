@@ -17,7 +17,7 @@ import { map, Observable, switchMap } from 'rxjs';
   template: `
     <div [@fadeInUp] class="grid">
       <div class="col-12 xl:col-8 col-offset-0 xl:col-offset-2">
-        <!-- Back -->
+        <!-- Back (top) -->
         <p-button
           label="Back"
           icon="fas fa-long-arrow-left"
@@ -28,6 +28,15 @@ import { map, Observable, switchMap } from 'rxjs';
 
         <!-- Legal Post -->
         <dhb-legal-post [legalPost]="legalPost$ | push"></dhb-legal-post>
+
+        <!-- Back (bottom) -->
+        <p-button
+          label="Back"
+          icon="fas fa-long-arrow-left"
+          [routerLink]="['/home']"
+          styleClass="p-button-link p-button-lg mb-2"
+        >
+        </p-button>
       </div>
     </div>
   `,

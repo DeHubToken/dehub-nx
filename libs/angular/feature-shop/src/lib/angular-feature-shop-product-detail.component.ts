@@ -11,7 +11,7 @@ import { ProductDetailService } from './services';
       <div
         class="col-12 lg:col-12 xl:col-8 col-offset-0 lg:col-offset-0 xl:col-offset-2"
       >
-        <!-- Back -->
+        <!-- Back (top) -->
         <p-button
           label="Back"
           icon="fas fa-long-arrow-left"
@@ -24,6 +24,15 @@ import { ProductDetailService } from './services';
         <dhb-product-detail
           [productDetail$]="productDetail$"
         ></dhb-product-detail>
+
+        <!-- Back (bottom) -->
+        <p-button
+          label="Back"
+          icon="fas fa-long-arrow-left"
+          [routerLink]="['/shop']"
+          styleClass="p-button-link p-button-lg mb-2"
+        >
+        </p-button>
       </div>
     </div>
   `,
