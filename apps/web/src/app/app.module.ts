@@ -12,6 +12,7 @@ import { AngularCoreModule } from '@dehub/angular/core';
 import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
+import { AnnouncementModule } from '@dehub/angular/ui/components/announcement';
 import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buttons/buy-dehub-button';
 import { ConnectWalletButtonModule } from '@dehub/angular/ui/components/buttons/connect-wallet-button';
 import { BuyDehubFloozModule } from '@dehub/angular/ui/components/buy-dehub-flooz';
@@ -67,6 +68,7 @@ const { appId, serverUrl } = environment.moralis;
     FooterModule,
     LoaderModule,
     ConnectWalletButtonModule,
+    AnnouncementModule,
 
     AppRoutingModule,
   ],

@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoreService, LoaderService, PwaService } from '@dehub/angular/core';
+import { AnnouncementComponent } from '@dehub/angular/ui/components/announcement';
 import { MenuMode, ThemeMode } from '@dehub/shared/model';
 import { PrimeNGConfig } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
+
 @Component({
   selector: 'dhb-root',
   template: `
@@ -43,7 +46,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private coreService: CoreService,
     private pwaService: PwaService,
     private primengConfig: PrimeNGConfig,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -58,6 +62,20 @@ export class AppComponent implements OnInit, OnDestroy {
     this.lottieJson = lottieJson;
 
     this.primengConfig.ripple = true;
+
+    setTimeout(
+      () =>
+        this.dialogService.open(AnnouncementComponent, {
+          showHeader: true,
+          header: 'Announcement',
+          width: '620px',
+          styleClass: 'bg-gradient-3 border-neon-1',
+          closeOnEscape: true,
+          dismissableMask: true,
+          closable: true,
+        }),
+      500 // Delay in order to show on top of other dialogs like connect wallet
+    );
   }
 
   onSwUpdate() {
