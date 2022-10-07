@@ -50,6 +50,7 @@ import { Observable } from 'rxjs';
 export class InfoComponent implements OnInit {
   ngOnInit() {}
 }
+
 @Component({
   selector: 'dhb-root',
   template: `
