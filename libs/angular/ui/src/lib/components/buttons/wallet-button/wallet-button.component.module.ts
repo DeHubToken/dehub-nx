@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
 import { WalletButtonComponent } from './wallet-button.component';
 
 @NgModule({
@@ -10,7 +9,6 @@ import { WalletButtonComponent } from './wallet-button.component';
     CommonModule,
 
     // PrimeNg
-    ButtonModule,
   ],
   exports: [WalletButtonComponent],
 })
