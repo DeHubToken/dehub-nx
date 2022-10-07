@@ -118,7 +118,7 @@ export class AppComponent implements OnInit, OnDestroy {
           dismissableMask: true,
           closable: true,
         }),
-      500
+      500 // Delay in order to show on top of other dialogs like connect wallet
     );
   }
 
