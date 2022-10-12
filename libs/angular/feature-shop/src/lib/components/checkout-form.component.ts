@@ -236,7 +236,8 @@ export class CheckoutFormComponent implements OnInit {
           ([, [account, productDetail]]) =>
             ({
               address: account,
-              referralAddress: this.checkoutForm.controls.referralAddress.value,
+              referralAddress:
+                this.checkoutForm.controls.referralAddress.value ?? undefined, // TODO: it should not be null by default due to non-nullable form builder
               contentfulId: productDetail.contentfulId,
               productData: {
                 name: productDetail.name,
