@@ -48,6 +48,7 @@ import {
   Observable,
   of,
   repeatWhen,
+  startWith,
   switchMap,
   tap,
   withLatestFrom,
@@ -85,10 +86,23 @@ export class CheckoutFormComponent implements OnInit {
     .getCheckoutContract$()
     .pipe(filterNil());
 
+  /** Represents an ongoing status, otherwise undefined */
+  private statusSubject = new BehaviorSubject<CheckoutStatus | undefined>(
+    undefined
+  );
+
+  private status$ = this.statusSubject.asObservable().pipe();
+
   private hasAllowance$ = combineLatest([
     this.account$,
     this.productDetail$.pipe(
       first(/** Quantity decrease trigger product, so we hide buying more */)
+    ),
+    // Allowance needs to be re-checked after approval
+    this.status$.pipe(
+      filterNil(),
+      filter(({ text }) => text === CheckoutStatusMessage.AllowanceApproved),
+      startWith(CheckoutStatusMessage.AllowanceApproved)
     ),
   ]).pipe(
     switchMap(([account, productDetail]) =>
@@ -129,15 +143,7 @@ export class CheckoutFormComponent implements OnInit {
     tap(() => this.setStatus())
   );
 
-  /** Represents an ongoing status, otherwise undefined */
-  private statusSubject = new BehaviorSubject<CheckoutStatus | undefined>(
-    undefined
-  );
-
-  checkoutState$ = combineLatest([
-    this.statusSubject.asObservable(),
-    this.hasAllowance$,
-  ]).pipe(
+  checkoutState$ = combineLatest([this.status$, this.hasAllowance$]).pipe(
     map(([status, hasAllowance]) => ({
       status,
       hasAllowance,
@@ -202,8 +208,9 @@ export class CheckoutFormComponent implements OnInit {
             checkoutContract.address
           )
         ),
+        tap(() => this.setStatus(CheckoutStatusMessage.AllowanceApproved)),
         catchError(() => {
-          this.setStatus(CheckoutStatusMessage.ApprovalError);
+          this.setStatus(CheckoutStatusMessage.AllowanceApprovalError);
           return of(undefined);
         })
       )
@@ -347,7 +354,7 @@ export class CheckoutFormComponent implements OnInit {
         });
         this.logger.info(status.text);
         break;
-      case CheckoutStatusMessage.ApprovalError:
+      case CheckoutStatusMessage.AllowanceApprovalError:
       case CheckoutStatusMessage.OrderError:
         this.statusSubject.next({
           ...status,
