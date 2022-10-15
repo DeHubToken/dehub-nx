@@ -8,7 +8,6 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
     <swiper
       [navigation]="false"
       [slidesPerView]="'auto'"
-      [grabCursor]="true"
       [direction]="'vertical'"
     >
       <ng-container *ngFor="let announcement of announcements">
