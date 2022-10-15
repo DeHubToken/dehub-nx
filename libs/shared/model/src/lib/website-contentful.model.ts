@@ -37,6 +37,155 @@ export interface Scalars {
   Quality: any;
 }
 
+/** DeHub announcement which will be displayed on the website [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/announcement) */
+export interface Announcement extends Entry {
+  __typename?: 'Announcement';
+  content?: Maybe<AnnouncementContent>;
+  contentfulMetadata: ContentfulMetadata;
+  end?: Maybe<Scalars['DateTime']>;
+  header?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<AnnouncementLinkingCollections>;
+  start?: Maybe<Scalars['DateTime']>;
+  sys: Sys;
+}
+
+/** DeHub announcement which will be displayed on the website [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/announcement) */
+export interface AnnouncementContentArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** DeHub announcement which will be displayed on the website [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/announcement) */
+export interface AnnouncementEndArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** DeHub announcement which will be displayed on the website [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/announcement) */
+export interface AnnouncementHeaderArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** DeHub announcement which will be displayed on the website [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/announcement) */
+export interface AnnouncementIconArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** DeHub announcement which will be displayed on the website [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/announcement) */
+export interface AnnouncementLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** DeHub announcement which will be displayed on the website [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/announcement) */
+export interface AnnouncementStartArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface AnnouncementCollection {
+  __typename?: 'AnnouncementCollection';
+  items: Array<Maybe<Announcement>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface AnnouncementContent {
+  __typename?: 'AnnouncementContent';
+  json: Scalars['JSON'];
+  links: AnnouncementContentLinks;
+}
+
+export interface AnnouncementContentAssets {
+  __typename?: 'AnnouncementContentAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+}
+
+export interface AnnouncementContentEntries {
+  __typename?: 'AnnouncementContentEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+}
+
+export interface AnnouncementContentLinks {
+  __typename?: 'AnnouncementContentLinks';
+  assets: AnnouncementContentAssets;
+  entries: AnnouncementContentEntries;
+}
+
+export interface AnnouncementFilter {
+  AND?: InputMaybe<Array<InputMaybe<AnnouncementFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<AnnouncementFilter>>>;
+  content_contains?: InputMaybe<Scalars['String']>;
+  content_exists?: InputMaybe<Scalars['Boolean']>;
+  content_not_contains?: InputMaybe<Scalars['String']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  end?: InputMaybe<Scalars['DateTime']>;
+  end_exists?: InputMaybe<Scalars['Boolean']>;
+  end_gt?: InputMaybe<Scalars['DateTime']>;
+  end_gte?: InputMaybe<Scalars['DateTime']>;
+  end_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  end_lt?: InputMaybe<Scalars['DateTime']>;
+  end_lte?: InputMaybe<Scalars['DateTime']>;
+  end_not?: InputMaybe<Scalars['DateTime']>;
+  end_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  header?: InputMaybe<Scalars['String']>;
+  header_contains?: InputMaybe<Scalars['String']>;
+  header_exists?: InputMaybe<Scalars['Boolean']>;
+  header_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  header_not?: InputMaybe<Scalars['String']>;
+  header_not_contains?: InputMaybe<Scalars['String']>;
+  header_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon?: InputMaybe<Scalars['String']>;
+  icon_contains?: InputMaybe<Scalars['String']>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_not?: InputMaybe<Scalars['String']>;
+  icon_not_contains?: InputMaybe<Scalars['String']>;
+  icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  start?: InputMaybe<Scalars['DateTime']>;
+  start_exists?: InputMaybe<Scalars['Boolean']>;
+  start_gt?: InputMaybe<Scalars['DateTime']>;
+  start_gte?: InputMaybe<Scalars['DateTime']>;
+  start_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  start_lt?: InputMaybe<Scalars['DateTime']>;
+  start_lte?: InputMaybe<Scalars['DateTime']>;
+  start_not?: InputMaybe<Scalars['DateTime']>;
+  start_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  sys?: InputMaybe<SysFilter>;
+}
+
+export interface AnnouncementLinkingCollections {
+  __typename?: 'AnnouncementLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface AnnouncementLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum AnnouncementOrder {
+  EndAsc = 'end_ASC',
+  EndDesc = 'end_DESC',
+  HeaderAsc = 'header_ASC',
+  HeaderDesc = 'header_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  StartAsc = 'start_ASC',
+  StartDesc = 'start_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 /** Represents a binary file in a space. An asset can be any file type. */
 export interface Asset {
   __typename?: 'Asset';
@@ -5418,6 +5567,8 @@ export enum ProductOrder {
 
 export interface Query {
   __typename?: 'Query';
+  announcement?: Maybe<Announcement>;
+  announcementCollection?: Maybe<AnnouncementCollection>;
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
   basicPost?: Maybe<BasicPost>;
@@ -5491,6 +5642,21 @@ export interface Query {
   sectionPostCollection?: Maybe<SectionPostCollection>;
   thumbnailPost?: Maybe<ThumbnailPost>;
   thumbnailPostCollection?: Maybe<ThumbnailPostCollection>;
+}
+
+export interface QueryAnnouncementArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryAnnouncementCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<AnnouncementOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AnnouncementFilter>;
 }
 
 export interface QueryAssetArgs {
@@ -6492,6 +6658,14 @@ export interface CfProductCategoryNestedFilter {
   name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
 }
+
+export type AnnouncementFragment = {
+  __typename?: 'Announcement';
+  header?: string;
+  icon?: string;
+  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  content?: { __typename?: 'AnnouncementContent'; json: any };
+};
 
 export type BasicPostCommonFragment = {
   __typename?: 'BasicPost';
@@ -9225,6 +9399,25 @@ export type ThumbnailPostFragment = {
   };
 };
 
+export type AnnouncementCollectionQueryVariables = Exact<{
+  now?: InputMaybe<Scalars['DateTime']>;
+  isPreview?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+export type AnnouncementCollectionQuery = {
+  __typename?: 'Query';
+  announcementCollection?: {
+    __typename?: 'AnnouncementCollection';
+    items: Array<{
+      __typename?: 'Announcement';
+      header?: string;
+      icon?: string;
+      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      content?: { __typename?: 'AnnouncementContent'; json: any };
+    }>;
+  };
+};
+
 export type BasicPostCollectionBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
   isPreview?: InputMaybe<Scalars['Boolean']>;
@@ -11535,6 +11728,19 @@ export const SysFragmentDoc = gql`
     id
   }
 `;
+export const AnnouncementFragmentDoc = gql`
+  fragment Announcement on Announcement {
+    sys {
+      ...Sys
+    }
+    header
+    icon
+    content {
+      json
+    }
+  }
+  ${SysFragmentDoc}
+`;
 export const BasicPostCommonFragmentDoc = gql`
   fragment BasicPostCommon on BasicPost {
     sys {
@@ -12358,6 +12564,19 @@ export const ProductDetailFragmentDoc = gql`
   }
   ${ProductCommonFragmentDoc}
 `;
+export const AnnouncementCollectionDocument = gql`
+  query announcementCollection($now: DateTime, $isPreview: Boolean = false) {
+    announcementCollection(
+      where: { start_lte: $now, end_gte: $now }
+      preview: $isPreview
+    ) {
+      items {
+        ...Announcement
+      }
+    }
+  }
+  ${AnnouncementFragmentDoc}
+`;
 export const BasicPostCollectionBySlugDocument = gql`
   query basicPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
     basicPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
@@ -12481,6 +12700,20 @@ export function getSdk(
   withWrapper: SdkFunctionWrapper = defaultWrapper
 ) {
   return {
+    announcementCollection(
+      variables?: AnnouncementCollectionQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AnnouncementCollectionQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<AnnouncementCollectionQuery>(
+            AnnouncementCollectionDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'announcementCollection'
+      );
+    },
     basicPostCollectionBySlug(
       variables?: BasicPostCollectionBySlugQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']

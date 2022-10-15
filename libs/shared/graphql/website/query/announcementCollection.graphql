@@ -1,0 +1,10 @@
+query announcementCollection($now: DateTime, $isPreview: Boolean = false) {
+  announcementCollection(
+    where: { start_lte: $now, end_gte: $now }
+    preview: $isPreview
+  ) {
+    items {
+      ...Announcement
+    }
+  }
+}
