@@ -42,28 +42,6 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
       </ng-container>
     </swiper>
   `,
-  styles: [
-    `
-      /* @import '~swiper/scss'; */
-      /* @import '~swiper/css/effect-cards'; */
-      /* @import '~@dehub/swiper/dhb_swiper_navigation'; */
-      /* @import '~swiper/scss/pagination'; */
-      /* @import '~swiper/scss/lazy'; */
-      /* @import '~swiper/scss/navigation'; */
-
-      /* dhb-announcement {
-        height: 100%;
-        & > div {
-          height: 100%;
-        }
-        .swiper {
-          &.announcements {
-            padding-bottom: 0 !important;
-          }
-        }
-      } */
-    `,
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnnouncementComponent implements OnInit {
