@@ -6663,6 +6663,7 @@ export type AnnouncementFragment = {
   __typename?: 'Announcement';
   header?: string;
   icon?: string;
+  start?: any;
   sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
   content?: { __typename?: 'AnnouncementContent'; json: any };
 };
@@ -9400,7 +9401,7 @@ export type ThumbnailPostFragment = {
 };
 
 export type AnnouncementCollectionQueryVariables = Exact<{
-  now?: InputMaybe<Scalars['DateTime']>;
+  now: Scalars['DateTime'];
   isPreview?: InputMaybe<Scalars['Boolean']>;
 }>;
 
@@ -9412,6 +9413,7 @@ export type AnnouncementCollectionQuery = {
       __typename?: 'Announcement';
       header?: string;
       icon?: string;
+      start?: any;
       sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
       content?: { __typename?: 'AnnouncementContent'; json: any };
     }>;
@@ -11735,6 +11737,7 @@ export const AnnouncementFragmentDoc = gql`
     }
     header
     icon
+    start
     content {
       json
     }
@@ -12565,9 +12568,10 @@ export const ProductDetailFragmentDoc = gql`
   ${ProductCommonFragmentDoc}
 `;
 export const AnnouncementCollectionDocument = gql`
-  query announcementCollection($now: DateTime, $isPreview: Boolean = false) {
+  query announcementCollection($now: DateTime!, $isPreview: Boolean = false) {
     announcementCollection(
       where: { start_lte: $now, end_gte: $now }
+      order: start_ASC
       preview: $isPreview
     ) {
       items {
@@ -12701,7 +12705,7 @@ export function getSdk(
 ) {
   return {
     announcementCollection(
-      variables?: AnnouncementCollectionQueryVariables,
+      variables: AnnouncementCollectionQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<AnnouncementCollectionQuery> {
       return withWrapper(

@@ -1,42 +1,78 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AnnouncementFragment } from '@dehub/shared/model';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'dhb-announcement',
   template: `
-    <div class="mt-5 mb-6 text-center">
-      <i class="fa-duotone fa-megaphone icon-color-duotone-1 text-6xl mt-4"></i>
-      <h1>Important update</h1>
-      <h3>
-        Please refer to our
-        <a href="https://t.me/Dehubannouncements/113">official announcement</a>
-      </h3>
-      <h5>TLDR;</h5>
-      <p>
-        We're upgrading the contract,
-        <b>V3 comes with new tokenomics and everything else remains the same</b
-        >.
-      </p>
-      <div>
-        Private Liquidity generation event sold out in 2 days
-        <i
-          >(LGE is not a presale as all funds go into liquidity pools for
-          traders)</i
-        >.
-      </div>
-      <p>
-        Open to all holders with <b>referral system</b> live on our marketplace
-        giving you the
-        <b>chance to earn a 10% bonus on purchases from referral</b>.
-      </p>
+    <swiper
+      [navigation]="false"
+      [slidesPerView]="'auto'"
+      [grabCursor]="true"
+      [direction]="'vertical'"
+    >
+      <ng-container *ngFor="let announcement of announcements">
+        <ng-template swiperSlide>
+          <div [dhbContentfulDraft]="announcement.sys" class="mt-5 mb-6">
+            <!-- Header -->
+            <div
+              class="flex flex-row align-items-center justify-content-center gap-3"
+            >
+              <span class="text-xl text-bold">{{
+                announcement.start | date
+              }}</span>
+              <i
+                [ngClass]="
+                  announcement.icon ||
+                  'fa-megaphone' + ' fa-duotone icon-color-duotone-1 text-6xl'
+                "
+              ></i>
+            </div>
+            <h1 class="text-center">{{ announcement.header }}</h1>
 
-      <p>
-        Don't miss the public LGE on the 14th and refer to our announcement page
-        starting at Announcement number 113
-      </p>
-    </div>
+            <!-- Content -->
+            <div
+              [innerHtml]="
+                announcement.content?.json
+                  | dhbContentfulRichMarkup
+                  | dhbSafeHtml
+              "
+            ></div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </swiper>
   `,
+  styles: [
+    `
+      /* @import '~swiper/scss'; */
+      /* @import '~swiper/css/effect-cards'; */
+      /* @import '~@dehub/swiper/dhb_swiper_navigation'; */
+      /* @import '~swiper/scss/pagination'; */
+      /* @import '~swiper/scss/lazy'; */
+      /* @import '~swiper/scss/navigation'; */
+
+      /* dhb-announcement {
+        height: 100%;
+        & > div {
+          height: 100%;
+        }
+        .swiper {
+          &.announcements {
+            padding-bottom: 0 !important;
+          }
+        }
+      } */
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnnouncementComponent implements OnInit {
+  announcements = (
+    this.config.data as { announcements: AnnouncementFragment[] }
+  ).announcements;
+
+  constructor(public config: DynamicDialogConfig) {}
+
   ngOnInit() {}
 }

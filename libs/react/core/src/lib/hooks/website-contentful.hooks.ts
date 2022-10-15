@@ -16,6 +16,7 @@ export const AnnouncementFragmentDoc = gql`
     }
     header
     icon
+    start
     content {
       json
     }
@@ -846,9 +847,10 @@ export const ProductDetailFragmentDoc = gql`
   ${ProductCommonFragmentDoc}
 `;
 export const AnnouncementCollectionDocument = gql`
-  query announcementCollection($now: DateTime, $isPreview: Boolean = false) {
+  query announcementCollection($now: DateTime!, $isPreview: Boolean = false) {
     announcementCollection(
       where: { start_lte: $now, end_gte: $now }
+      order: start_ASC
       preview: $isPreview
     ) {
       items {
@@ -877,7 +879,7 @@ export const AnnouncementCollectionDocument = gql`
  * });
  */
 export function useAnnouncementCollectionQuery(
-  baseOptions?: Apollo.QueryHookOptions<
+  baseOptions: Apollo.QueryHookOptions<
     models.AnnouncementCollectionQuery,
     models.AnnouncementCollectionQueryVariables
   >
