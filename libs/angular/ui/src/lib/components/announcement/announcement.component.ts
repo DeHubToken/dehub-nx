@@ -22,8 +22,8 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
               }}</span>
               <i
                 [ngClass]="
-                  announcement.icon ||
-                  'fa-megaphone' + ' fa-duotone icon-color-duotone-1 text-6xl'
+                  (announcement.icon || 'fa-megaphone') +
+                  ' fa-duotone icon-color-duotone-1 text-6xl'
                 "
               ></i>
             </div>
