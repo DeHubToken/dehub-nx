@@ -8,6 +8,20 @@ import { AngularGraphQLModule } from '../angular-graphql.module';
 @Injectable({
   providedIn: AngularGraphQLModule,
 })
+export class AnnouncementCollectionService extends Apollo.Query<
+  models.AnnouncementCollectionQuery,
+  models.AnnouncementCollectionQueryVariables
+> {
+  document = models.AnnouncementCollectionDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: AngularGraphQLModule,
+})
 export class BasicPostCollectionBySlugService extends Apollo.Query<
   models.BasicPostCollectionBySlugQuery,
   models.BasicPostCollectionBySlugQueryVariables

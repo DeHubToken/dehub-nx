@@ -9,6 +9,20 @@ export const SysFragmentDoc = gql`
     id
   }
 `;
+export const AnnouncementFragmentDoc = gql`
+  fragment Announcement on Announcement {
+    sys {
+      ...Sys
+    }
+    header
+    icon
+    start
+    content {
+      json
+    }
+  }
+  ${SysFragmentDoc}
+`;
 export const BasicPostCommonFragmentDoc = gql`
   fragment BasicPostCommon on BasicPost {
     sys {
@@ -832,6 +846,72 @@ export const ProductDetailFragmentDoc = gql`
   }
   ${ProductCommonFragmentDoc}
 `;
+export const AnnouncementCollectionDocument = gql`
+  query announcementCollection($now: DateTime!, $isPreview: Boolean = false) {
+    announcementCollection(
+      where: { start_lte: $now, end_gte: $now }
+      order: start_ASC
+      preview: $isPreview
+    ) {
+      items {
+        ...Announcement
+      }
+    }
+  }
+  ${AnnouncementFragmentDoc}
+`;
+
+/**
+ * __useAnnouncementCollectionQuery__
+ *
+ * To run a query within a React component, call `useAnnouncementCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAnnouncementCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAnnouncementCollectionQuery({
+ *   variables: {
+ *      now: // value for 'now'
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useAnnouncementCollectionQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    models.AnnouncementCollectionQuery,
+    models.AnnouncementCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.AnnouncementCollectionQuery,
+    models.AnnouncementCollectionQueryVariables
+  >(AnnouncementCollectionDocument, options);
+}
+export function useAnnouncementCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.AnnouncementCollectionQuery,
+    models.AnnouncementCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.AnnouncementCollectionQuery,
+    models.AnnouncementCollectionQueryVariables
+  >(AnnouncementCollectionDocument, options);
+}
+export type AnnouncementCollectionQueryHookResult = ReturnType<
+  typeof useAnnouncementCollectionQuery
+>;
+export type AnnouncementCollectionLazyQueryHookResult = ReturnType<
+  typeof useAnnouncementCollectionLazyQuery
+>;
+export type AnnouncementCollectionQueryResult = Apollo.QueryResult<
+  models.AnnouncementCollectionQuery,
+  models.AnnouncementCollectionQueryVariables
+>;
 export const BasicPostCollectionBySlugDocument = gql`
   query basicPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
     basicPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
