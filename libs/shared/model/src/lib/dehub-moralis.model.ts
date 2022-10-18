@@ -4,9 +4,9 @@ import { PhysicalAddress } from './location.model';
 /**
  * Moralis Class for DeHub Shop Shipping Addresses.
  */
-export interface DeHubShopShippingAddress extends Moralis.Object {
-  attributes: PhysicalAddress;
-}
+export type DeHubShopShippingAddress = Moralis.Object<
+  Moralis.Attributes & PhysicalAddress
+>;
 
 /**
  * Moralis MongoDB Class Names for DeHub

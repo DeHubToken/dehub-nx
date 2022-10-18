@@ -38,7 +38,7 @@ export interface InitOrderParams {
   address: string;
   referralAddress?: string;
   productData: ProductData;
-  shippingAddress: PhysicalAddress;
+  shippingAddress?: PhysicalAddress;
   contentfulId: string;
   quantity: number;
   totalAmount: number;

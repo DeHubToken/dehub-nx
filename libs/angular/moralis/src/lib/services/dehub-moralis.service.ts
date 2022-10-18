@@ -22,7 +22,11 @@ import {
   ShopContractResponse,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
-import { filterNil, getContractByCurrency } from '@dehub/shared/utils';
+import {
+  filterNil,
+  getContractByCurrency,
+  isEmptyPhysicalAddress,
+} from '@dehub/shared/utils';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { getAddress } from '@ethersproject/address';
 import { BigNumber } from '@ethersproject/bignumber';
@@ -55,7 +59,26 @@ export class DehubMoralisService implements IDehubMoralisService {
     filter(isAuthenticated => isAuthenticated),
     switchMap(() =>
       this.getDeHubShopShippingAddresses$().pipe(
-        map(addresses => (addresses ? addresses[0] : null))
+        map(addresses => (addresses ? addresses[0] : null)),
+        map(firstAddress => {
+          if (!firstAddress) return null;
+
+          // Address attributes has more fields than just physical address
+          const { name, line1, line2, city, country, postalCode, state } =
+            firstAddress.attributes;
+
+          return isEmptyPhysicalAddress({
+            name,
+            line1,
+            line2,
+            city,
+            country,
+            postalCode,
+            state,
+          })
+            ? null
+            : firstAddress;
+        })
       )
     )
   );

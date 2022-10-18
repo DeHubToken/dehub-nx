@@ -155,9 +155,7 @@ export class CheckoutFormComponent implements OnInit {
   checkoutForm = this.fb.group({
     quantity: [1],
     contacts: this.fb.control<Contacts | null>(null, [Validators.required]),
-    shippingAddress: this.fb.control<PhysicalAddress | null>(null, [
-      Validators.required,
-    ]),
+    shippingAddress: this.fb.control<PhysicalAddress | null>(null),
     referralAddress: this.fb.control<string | undefined>(undefined),
   });
 
@@ -224,10 +222,6 @@ export class CheckoutFormComponent implements OnInit {
       throw new Error('User contacts are missing!');
     }
 
-    const shippingAddress = this.checkoutForm.controls.shippingAddress.value;
-    if (!shippingAddress) {
-      throw new Error('User shipping address is missing!');
-    }
     const parseUnits = Moralis.web3Library.utils.parseUnits;
 
     const { email, phone } = contacts;
@@ -245,6 +239,8 @@ export class CheckoutFormComponent implements OnInit {
               address: account,
               referralAddress:
                 this.checkoutForm.controls.referralAddress.value ?? undefined, // TODO: it should not be null by default due to non-nullable form builder
+              shippingAddress:
+                this.checkoutForm.controls.shippingAddress.value ?? undefined,
               contentfulId: productDetail.contentfulId,
               productData: {
                 name: productDetail.name,
@@ -253,7 +249,6 @@ export class CheckoutFormComponent implements OnInit {
                 sku: productDetail.sku,
                 category: productDetail.category.name || '',
               },
-              shippingAddress,
               quantity: this.checkoutForm.controls.quantity.value,
               totalAmount: this.totalAmount,
               currency: productDetail.currency,
