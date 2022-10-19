@@ -3,7 +3,7 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/moralis/cloud",
@@ -11,7 +11,9 @@
         "tsConfig": "apps/moralis/cloud/tsconfig.app.json",
         "assets": [],
         "sourceMap": false,
-        "extractLicenses": false
+        "extractLicenses": false,
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "preview": {
@@ -49,7 +51,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/moralis/cloud"],
+      "outputs": ["{workspaceRoot}/coverage/apps/moralis/cloud"],
       "options": {
         "jestConfig": "apps/moralis/cloud/jest.config.ts",
         "passWithNoTests": true,
@@ -57,7 +59,7 @@
       }
     },
     "deploy-preview-draft": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com npm run moralis-sync"
@@ -67,19 +69,19 @@
       }
     },
     "deploy-preview": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "echo 'Preview mode not supported in Moralis Cloud.'"
       }
     },
     "deploy-prod-draft": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "echo 'Prod Draft mode not supported in Moralis Cloud.'"
       }
     },
     "deploy-prod": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com npm run moralis-sync"

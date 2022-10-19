@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'angular-feature-auth',
   preset: '../../../jest.preset.js',
