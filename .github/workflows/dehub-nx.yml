@@ -22,10 +22,10 @@ jobs:
   main:
     if: ${{ github.event_name != 'pull_request' }}
     name: Main
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.2
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
       node-version: '16'
-      install-command: npm ci --legacy-peer-deps
+      install-commands: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
         npm run build:preview
         npm run build
@@ -38,10 +38,10 @@ jobs:
   pr:
     if: ${{ github.event_name == 'pull_request' }}
     name: Pull Request
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.2
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
       node-version: '16'
-      install-command: npm ci --legacy-peer-deps
+      install-commands: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
         npm run build:preview
         npm run test
@@ -51,8 +51,8 @@ jobs:
 
   agents:
     name: Agents
-    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.2
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
     with:
       node-version: '16'
-      install-command: npm ci --legacy-peer-deps
+      install-commands: npm ci --legacy-peer-deps
       number-of-agents: 4

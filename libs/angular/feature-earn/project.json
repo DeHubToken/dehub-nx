@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/angular/feature-earn"],
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-earn"],
       "options": {
         "jestConfig": "libs/angular/feature-earn/jest.config.ts",
         "passWithNoTests": true,

@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/angular/util"],
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/util"],
       "options": {
         "jestConfig": "libs/angular/util/jest.config.ts",
         "passWithNoTests": true,
