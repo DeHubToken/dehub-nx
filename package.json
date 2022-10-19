@@ -150,7 +150,7 @@
     "@nrwl/js": "14.5.4",
     "@nrwl/linter": "14.5.4",
     "@nrwl/node": "14.5.4",
-    "@nrwl/nx-cloud": "14.3.0",
+    "@nrwl/nx-cloud": "15.0.0",
     "@nrwl/react": "14.5.4",
     "@nrwl/web": "14.5.4",
     "@nrwl/workspace": "14.5.4",
