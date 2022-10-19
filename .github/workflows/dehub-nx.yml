@@ -25,7 +25,7 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
       node-version: '16'
-      install-command: npm ci --legacy-peer-deps
+      install-commands: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
         npm run build:preview
         npm run build
@@ -41,7 +41,7 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
       node-version: '16'
-      install-command: npm ci --legacy-peer-deps
+      install-commands: npm ci --legacy-peer-deps
       parallel-commands-on-agents: |
         npm run build:preview
         npm run test
@@ -54,5 +54,5 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
     with:
       node-version: '16'
-      install-command: npm ci --legacy-peer-deps
+      install-commands: npm ci --legacy-peer-deps
       number-of-agents: 4
