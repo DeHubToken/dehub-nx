@@ -66,6 +66,7 @@
 
         <!-- Shipping Address -->
         <h5>Shipping Address</h5>
+        <h6 class="text-sm">Optional for digital items</h6>
         <dhb-address-form
           *rxLet="userShippingAddress$ as address; rxSuspense: loading"
           [formControl]="checkoutForm.controls.shippingAddress"
