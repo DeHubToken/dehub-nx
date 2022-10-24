@@ -30,6 +30,9 @@
           }
         ],
         "styles": ["apps/staking/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["./node_modules"]
+        },
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack",
         "optimization": true,
