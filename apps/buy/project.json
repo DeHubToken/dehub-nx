@@ -3,7 +3,7 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -30,6 +30,9 @@
           }
         ],
         "styles": ["apps/buy/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["./node_modules"]
+        },
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack",
         "optimization": true,
@@ -75,7 +78,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "options": {
         "buildTarget": "buy:build",
         "hmr": true
@@ -103,7 +106,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/buy"],
+      "outputs": ["{workspaceRoot}/coverage/apps/buy"],
       "options": {
         "jestConfig": "apps/buy/jest.config.ts",
         "passWithNoTests": true,
@@ -111,28 +114,28 @@
       }
     },
     "deploy-preview-draft": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=aadde395-d33b-4cba-8a96-c6952ae48876 --alias=nx -d ../../dist/apps/buy.preview -o",
         "cwd": "netlify/buy.prod"
       }
     },
     "deploy-preview": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=aadde395-d33b-4cba-8a96-c6952ae48876 -d ../../dist/apps/buy.preview -p -o",
         "cwd": "netlify/buy.prod"
       }
     },
     "deploy-prod-draft": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=11bd4ce0-3bf2-4642-8879-f541c6fed3fe --alias=nx -d ../../dist/apps/buy.prod -o",
         "cwd": "netlify/buy.prod"
       }
     },
     "deploy-prod": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=11bd4ce0-3bf2-4642-8879-f541c6fed3fe -d ../../dist/apps/buy.prod -p -o",
         "cwd": "netlify/buy.prod"

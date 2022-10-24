@@ -152,10 +152,10 @@ import { Observable } from 'rxjs';
   `,
   styles: [
     `
-      @import '~swiper/scss';
-      @import '~@dehub/swiper/dhb_swiper_navigation';
-      @import '~swiper/scss/pagination';
-      @import '~swiper/scss/navigation';
+      @import 'swiper/scss';
+      @import '@dehub/swiper/dhb_swiper_navigation';
+      @import 'swiper/scss/pagination';
+      @import 'swiper/scss/navigation';
       /* Important for keeping all items stretched to same height */
       /*:host when ViewEncapsulation.None*/
       dhb-product-detail {

@@ -5,9 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/angular/feature-auth"],
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-auth"],
       "options": {
-        "jestConfig": "libs/angular/feature-auth/jest.config.js",
+        "jestConfig": "libs/angular/feature-auth/jest.config.ts",
         "passWithNoTests": true,
         "bail": 1
       }

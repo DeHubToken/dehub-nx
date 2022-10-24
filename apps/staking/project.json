@@ -3,7 +3,7 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -30,6 +30,9 @@
           }
         ],
         "styles": ["apps/staking/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["./node_modules"]
+        },
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack",
         "optimization": true,
@@ -75,7 +78,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "options": {
         "buildTarget": "staking:build",
         "hmr": true
@@ -103,7 +106,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/staking"],
+      "outputs": ["{workspaceRoot}/coverage/apps/staking"],
       "options": {
         "jestConfig": "apps/staking/jest.config.ts",
         "passWithNoTests": true,
@@ -111,28 +114,28 @@
       }
     },
     "deploy-preview-draft": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=6861568a-86ef-4c9f-9673-b2dc8b9df18f --alias=nx -d ../../dist/apps/staking.preview -o",
         "cwd": "netlify/staking.prod"
       }
     },
     "deploy-preview": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=6861568a-86ef-4c9f-9673-b2dc8b9df18f -d ../../dist/apps/staking.preview -p -o",
         "cwd": "netlify/staking.prod"
       }
     },
     "deploy-prod-draft": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 --alias=nx -d ../../dist/apps/staking.prod -o",
         "cwd": "netlify/staking.prod"
       }
     },
     "deploy-prod": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking.prod -p -o",
         "cwd": "netlify/staking.prod"

@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/angular/feature-game"],
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-game"],
       "options": {
         "jestConfig": "libs/angular/feature-game/jest.config.ts",
         "passWithNoTests": true,
