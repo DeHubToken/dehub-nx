@@ -126,9 +126,9 @@ import { ProductFragment } from '@dehub/shared/model';
   `,
   styles: [
     `
-      @import '~swiper/scss';
-      @import '~swiper/scss/pagination';
-      @import '~swiper/scss/lazy';
+      @import 'swiper/scss';
+      @import 'swiper/scss/pagination';
+      @import 'swiper/scss/lazy';
       /* Important for keeping all items stretched to same height */
       /*:host when ViewEncapsulation.None*/
       dhb-product {
