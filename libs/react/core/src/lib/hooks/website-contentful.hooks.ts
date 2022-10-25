@@ -737,9 +737,13 @@ export const PageSectionProductsFragmentDoc = gql`
       }
     }
     productsByCategory {
+      icon
       linkedFrom {
         productCollection(limit: 20, preview: $isPreview) {
           items {
+            category {
+              icon
+            }
             ...Product
           }
         }

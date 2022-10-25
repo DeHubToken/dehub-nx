@@ -117,6 +117,9 @@ const routerExtraOptions: ExtraOptions = {
    */
   scrollPositionRestoration: 'enabled',
 
+  /** https://angular.io/api/router/InMemoryScrollingOptions#anchorScrolling */
+  anchorScrolling: 'enabled',
+
   /** https://angular.io/api/router/ExtraOptions#initialNavigation */
   initialNavigation: 'enabledBlocking',
 

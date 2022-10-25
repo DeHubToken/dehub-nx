@@ -9,6 +9,7 @@ import { LoadingModule } from '@dehub/angular/ui/components/loading';
 import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ProductMiniModule } from '@dehub/angular/ui/components/product-mini';
+import { TabMenuModule } from '@dehub/angular/ui/components/tab-menu';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
@@ -46,6 +47,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     ContactsFormModule,
     LoadingModule,
     BackButtonModule,
+    TabMenuModule,
 
     // PrimeNg
     InputNumberModule,

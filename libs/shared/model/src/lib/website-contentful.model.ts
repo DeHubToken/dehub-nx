@@ -8522,6 +8522,7 @@ export type PageSectionProductsFragment = {
   };
   productsByCategory?: {
     __typename?: 'ProductCategory';
+    icon?: string;
     linkedFrom?: {
       __typename?: 'ProductCategoryLinkingCollections';
       productCollection?: {
@@ -8537,6 +8538,12 @@ export type PageSectionProductsFragment = {
           slug?: string;
           soldOutLabel?: string;
           pause?: boolean;
+          category?: {
+            __typename?: 'ProductCategory';
+            icon?: string;
+            name?: string;
+            sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          };
           sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
           picturesCollection?: {
             __typename?: 'AssetCollection';
@@ -8546,12 +8553,6 @@ export type PageSectionProductsFragment = {
               url?: string;
               sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
             }>;
-          };
-          category?: {
-            __typename?: 'ProductCategory';
-            name?: string;
-            icon?: string;
-            sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
           };
         }>;
       };
@@ -8852,6 +8853,7 @@ export type PageShopFragment = {
           };
           productsByCategory?: {
             __typename?: 'ProductCategory';
+            icon?: string;
             linkedFrom?: {
               __typename?: 'ProductCategoryLinkingCollections';
               productCollection?: {
@@ -8867,6 +8869,12 @@ export type PageShopFragment = {
                   slug?: string;
                   soldOutLabel?: string;
                   pause?: boolean;
+                  category?: {
+                    __typename?: 'ProductCategory';
+                    icon?: string;
+                    name?: string;
+                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  };
                   sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
                   picturesCollection?: {
                     __typename?: 'AssetCollection';
@@ -8880,12 +8888,6 @@ export type PageShopFragment = {
                         id: string;
                       };
                     }>;
-                  };
-                  category?: {
-                    __typename?: 'ProductCategory';
-                    name?: string;
-                    icon?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
                   };
                 }>;
               };
@@ -11263,6 +11265,7 @@ export type PageShopCollectionQuery = {
               };
               productsByCategory?: {
                 __typename?: 'ProductCategory';
+                icon?: string;
                 linkedFrom?: {
                   __typename?: 'ProductCategoryLinkingCollections';
                   productCollection?: {
@@ -11278,6 +11281,16 @@ export type PageShopCollectionQuery = {
                       slug?: string;
                       soldOutLabel?: string;
                       pause?: boolean;
+                      category?: {
+                        __typename?: 'ProductCategory';
+                        icon?: string;
+                        name?: string;
+                        sys: {
+                          __typename?: 'Sys';
+                          publishedAt?: any;
+                          id: string;
+                        };
+                      };
                       sys: {
                         __typename?: 'Sys';
                         publishedAt?: any;
@@ -11295,16 +11308,6 @@ export type PageShopCollectionQuery = {
                             id: string;
                           };
                         }>;
-                      };
-                      category?: {
-                        __typename?: 'ProductCategory';
-                        name?: string;
-                        icon?: string;
-                        sys: {
-                          __typename?: 'Sys';
-                          publishedAt?: any;
-                          id: string;
-                        };
                       };
                     }>;
                   };
@@ -12458,9 +12461,13 @@ export const PageSectionProductsFragmentDoc = gql`
       }
     }
     productsByCategory {
+      icon
       linkedFrom {
         productCollection(limit: 20, preview: $isPreview) {
           items {
+            category {
+              icon
+            }
             ...Product
           }
         }
