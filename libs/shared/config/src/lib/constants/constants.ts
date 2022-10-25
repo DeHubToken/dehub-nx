@@ -17,3 +17,5 @@ export const SwUpdateConfig = {
   msgAvailableDetailWarn: 'Update is required.',
   msgAvailableDetailInfo: 'Please update.',
 };
+
+export const emptyRequiredField = ' ';

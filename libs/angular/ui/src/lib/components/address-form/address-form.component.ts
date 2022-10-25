@@ -2,11 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Inject,
   Input,
   OnDestroy,
   OnInit,
   Optional,
+  Output,
   Self,
   ViewEncapsulation,
 } from '@angular/core';
@@ -21,6 +23,7 @@ import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import { Country, PhysicalAddress } from '@dehub/shared/model';
 import {
+  BehaviorSubject,
   distinctUntilChanged,
   identity,
   Observable,
@@ -34,7 +37,9 @@ import {
     <p-fieldset
       [legend]="shippingAddressLabel()"
       [toggleable]="true"
-      [collapsed]="!!prefillData"
+      [collapsed]="collapsed$ | push"
+      (onBeforeToggle)="$event.originalEvent.stopImmediatePropagation()"
+      (onAfterToggle)="collapsedSubject.next($event.collapsed)"
       [styleClass]="'text-sm mb-4'"
       [classList]="'bg-gradient-3-propagate'"
     >
@@ -204,6 +209,21 @@ import {
             </span>
           </div>
         </div>
+
+        <!-- Clear Address -->
+        <div
+          *ngIf="
+            (shippingAddressForm.invalid && shippingAddressForm.dirty) ||
+            shippingAddressForm.valid
+          "
+          class="col-3 col-offset-9 text-right"
+        >
+          <p-button
+            (onClick)="clearAddress()"
+            icon="fa-regular fa-trash-xmark"
+            styleClass="p-button-secondary p-button"
+          ></p-button>
+        </div>
       </form>
     </ng-template>
   `,
@@ -229,8 +249,13 @@ import {
 })
 export class AddressFormComponent implements OnInit, OnDestroy {
   @Input() prefillData?: PhysicalAddress;
+  @Output() readonly clear = new EventEmitter<void>();
+
   private sub?: Subscription;
   path = this.env.baseUrl;
+
+  collapsedSubject = new BehaviorSubject(true);
+  collapsed$ = this.collapsedSubject.asObservable();
 
   countries$: Observable<Country[]> = this.httpClient.get<Country[]>(
     `${this.path}/assets/dehub/data/countries.json`
@@ -289,6 +314,12 @@ export class AddressFormComponent implements OnInit, OnDestroy {
       return `${name.value} | ${line1.value} | ${city.value}...`;
     }
     return 'Please fill in your shipping address';
+  }
+
+  clearAddress() {
+    this.shippingAddressForm.reset();
+    this.collapsedSubject.next(true);
+    this.clear.emit();
   }
 
   ngOnDestroy(): void {

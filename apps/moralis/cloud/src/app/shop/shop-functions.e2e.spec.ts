@@ -21,6 +21,19 @@ describe('E2E Shop functions', () => {
     },
   };
 
+  const orderData = {
+    referralAddress: '0x91573f05f34aaf59ec4849860e61c3762906978e',
+    shippingAddress: {
+      city: 'San Francisco',
+      state: 'California',
+      country: 'US',
+      postalCode: '94116',
+      line1: '2079 46th ave',
+      line2: 'line2',
+      name: 'Ben Weider',
+    },
+  };
+
   beforeAll(async () => {
     await Moralis.start(moralis);
 
@@ -29,27 +42,19 @@ describe('E2E Shop functions', () => {
   });
 
   it('Should add new order with referral address', async () => {
-    const address = config.address;
-    const referralAddress = '0x91573f05f34aaf59ec4849860e61c3762906978e';
+    const { address } = config;
+    const { shippingAddress, referralAddress } = orderData;
     const res: InitOrderResult | null = await Moralis.Cloud.run(
       MoralisFunctions.Shop.InitOrder,
       {
         address,
         referralAddress,
+        shippingAddress,
         productData: {
           image:
             'https://moralis.io/wp-content/uploads/2021/06/Moralis-Glass-Favicon.svg',
           name: 'name',
           sku: 'sku',
-        },
-        shippingAddress: {
-          city: 'San Francisco',
-          state: 'California',
-          country: 'US',
-          postalCode: '94116',
-          line1: '2079 46th ave',
-          line2: 'line2',
-          name: 'Ben Weider',
         },
         contentfulId: 'contentfulId',
         quantity: 1,
@@ -78,35 +83,26 @@ describe('E2E Shop functions', () => {
     );
     const queryAddress = new Moralis.Query(DeHubShopShippingAddresses);
     queryAddress.equalTo('objectId', shippingAddressId);
-    const shippingAddress = await queryAddress.first();
-    expect(shippingAddress).toBeDefined;
+    const newShippingAddress = await queryAddress.first();
+    expect(newShippingAddress).toBeDefined;
 
     // Destroy Order object
     await order.destroy();
   });
 
   it('Should add new order without referral address', async () => {
-    const address = config.address;
-    const referralAddress = undefined;
+    const { address } = config;
+    const { shippingAddress } = orderData;
     const res: InitOrderResult | null = await Moralis.Cloud.run(
       MoralisFunctions.Shop.InitOrder,
       {
         address,
-        referralAddress,
+        shippingAddress,
         productData: {
           image:
             'https://moralis.io/wp-content/uploads/2021/06/Moralis-Glass-Favicon.svg',
           name: 'name',
           sku: 'sku',
-        },
-        shippingAddress: {
-          city: 'San Francisco',
-          state: 'California',
-          country: 'US',
-          postalCode: '94116',
-          line1: '2079 46th ave',
-          line2: 'line2',
-          name: 'Ben Weider',
         },
         contentfulId: 'contentfulId',
         quantity: 1,
@@ -135,8 +131,53 @@ describe('E2E Shop functions', () => {
     );
     const queryAddress = new Moralis.Query(DeHubShopShippingAddresses);
     queryAddress.equalTo('objectId', shippingAddressId);
-    const shippingAddress = await queryAddress.first();
-    expect(shippingAddress).toBeDefined;
+    const newShippingAddress = await queryAddress.first();
+    expect(newShippingAddress).toBeDefined;
+
+    // Destroy Order object
+    await order.destroy();
+  });
+
+  it('Should add new order without shipping address', async () => {
+    const { address } = config;
+    const res: InitOrderResult | null = await Moralis.Cloud.run(
+      MoralisFunctions.Shop.InitOrder,
+      {
+        address,
+        productData: {
+          image:
+            'https://moralis.io/wp-content/uploads/2021/06/Moralis-Glass-Favicon.svg',
+          name: 'name',
+          sku: 'sku',
+        },
+        contentfulId: 'contentfulId',
+        quantity: 1,
+        totalAmount: 100,
+        currency: 'BUSD',
+      } as InitOrderParams
+    );
+    expect(res).not.toBeNull;
+    expect(res.ipfsHash).toBeDefined;
+    expect(res.orderId).toBeDefined;
+
+    // Check if Order is added successfully
+    const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
+    const queryOrders = new Moralis.Query(DeHubShopOrders);
+    queryOrders.equalTo('objectId', res.orderId);
+    const order = await queryOrders.first();
+    expect(order).toBeDefined;
+
+    // Check if ShippingAddress is added successfully
+    const shippingAddressAbstract = order.get('shippingAddress');
+    const shippingAddressId = shippingAddressAbstract.id;
+
+    const DeHubShopShippingAddresses = Moralis.Object.extend(
+      MoralisClass.DeHubShopShippingAddresses
+    );
+    const queryAddress = new Moralis.Query(DeHubShopShippingAddresses);
+    queryAddress.equalTo('objectId', shippingAddressId);
+    const newShippingAddress = await queryAddress.first();
+    expect(newShippingAddress).toBeDefined;
 
     // Destroy Order object
     await order.destroy();
@@ -196,8 +237,8 @@ describe('E2E Shop functions', () => {
     );
     const queryAddress = new Moralis.Query(DeHubShopShippingAddresses);
     queryAddress.equalTo('objectId', shippingAddressId);
-    const shippingAddress = await queryAddress.first();
-    expect(shippingAddress).toBeDefined;
+    const newShippingAddress = await queryAddress.first();
+    expect(newShippingAddress).toBeDefined;
 
     // Destroy Order object
     await order.destroy();

@@ -4,7 +4,9 @@ import {
   MoralisClass,
   MoralisFunctions,
   OrderStatus,
+  PhysicalAddress,
 } from '@dehub/shared/model';
+import { emptyPhysicalAddress } from '@dehub/shared/utils';
 import { environment } from '../../environments/environment';
 import { ChainIdAsNumber, isMoralisUserByAddress } from '../shared';
 import RedisClient from '../shared/redis';
@@ -48,33 +50,17 @@ export const initOrder = async ({
     const ipfsHash = path.match(regSchema)[5].replace('/ipfs/', '');
     logger.info(`ipfs: ${path}`);
 
-    const DeHubShopShippingAddresses = Moralis.Object.extend(
-      MoralisClass.DeHubShopShippingAddresses
+    // Save Shipping address
+    const savedShippingAddress = await upsertShippingAddress(
+      user,
+      shippingAddress
     );
-    // Query if certain address is already registered
-    const queryShippingAddress = new Moralis.Query(DeHubShopShippingAddresses);
-    const queryUser = new Moralis.Query(Moralis.User);
-    queryUser.equalTo('objectId', user.id);
-    queryShippingAddress.matchesQuery('user', queryUser);
-    const addresses = await queryShippingAddress.find({ useMasterKey: true });
-
-    const deHubShopShippingAddresses =
-      addresses.length > 0 ? addresses[0] : new DeHubShopShippingAddresses();
-    deHubShopShippingAddresses.set('user', user);
-    deHubShopShippingAddresses.set('city', shippingAddress.city);
-    deHubShopShippingAddresses.set('state', shippingAddress.state);
-    deHubShopShippingAddresses.set('country', shippingAddress.country);
-    deHubShopShippingAddresses.set('postalCode', shippingAddress.postalCode);
-    deHubShopShippingAddresses.set('line1', shippingAddress.line1);
-    deHubShopShippingAddresses.set('line2', shippingAddress.line2);
-    deHubShopShippingAddresses.set('name', shippingAddress.name);
-    await deHubShopShippingAddresses.save(null, { useMasterKey: true });
 
     // Creates a new DeHubShopOrders item with status IPFSUploading and contentfulId
     const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
     const dehubShopOrders = new DeHubShopOrders();
     dehubShopOrders.set('ipfsHash', ipfsHash);
-    dehubShopOrders.set('shippingAddress', deHubShopShippingAddresses);
+    dehubShopOrders.set('shippingAddress', savedShippingAddress);
     dehubShopOrders.set('referralAddress', referralAddress);
     dehubShopOrders.set('user', user);
     dehubShopOrders.set('status', OrderStatus.verifying);
@@ -100,6 +86,47 @@ export const initOrder = async ({
     );
     return null;
   }
+};
+
+/**
+ * Persist Shipping Address.
+ *
+ * - Save: if address is new for the user
+ * - Update: if address was already set
+ * - Save 'empty': if address were not provided
+ */
+const upsertShippingAddress = async (
+  user: MoralisUser,
+  shippingAddress?: PhysicalAddress
+) => {
+  const DeHubShopShippingAddresses = Moralis.Object.extend(
+    MoralisClass.DeHubShopShippingAddresses
+  );
+  // Query if certain address is already registered
+  const queryShippingAddress = new Moralis.Query(DeHubShopShippingAddresses);
+  const queryUser = new Moralis.Query(Moralis.User);
+  queryUser.equalTo('objectId', user.id);
+  queryShippingAddress.matchesQuery('user', queryUser);
+  const addresses = await queryShippingAddress.find({ useMasterKey: true });
+
+  // Update shipping address fields
+  shippingAddress = shippingAddress ?? emptyPhysicalAddress();
+  const deHubShopShippingAddresses =
+    addresses.length > 0 ? addresses[0] : new DeHubShopShippingAddresses();
+  deHubShopShippingAddresses.set('user', user);
+  deHubShopShippingAddresses.set('city', shippingAddress.city);
+  deHubShopShippingAddresses.set('state', shippingAddress.state);
+  deHubShopShippingAddresses.set('country', shippingAddress.country);
+  deHubShopShippingAddresses.set('postalCode', shippingAddress.postalCode);
+  deHubShopShippingAddresses.set('line1', shippingAddress.line1);
+  deHubShopShippingAddresses.set('line2', shippingAddress.line2);
+  deHubShopShippingAddresses.set('name', shippingAddress.name);
+
+  const savedAddress = await deHubShopShippingAddresses.save(null, {
+    useMasterKey: true,
+  });
+
+  return savedAddress;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

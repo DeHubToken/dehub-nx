@@ -66,10 +66,12 @@
 
         <!-- Shipping Address -->
         <h5>Shipping Address</h5>
+        <h6 class="text-sm">Optional for digital items</h6>
         <dhb-address-form
           *rxLet="userShippingAddress$ as address; rxSuspense: loading"
           [formControl]="checkoutForm.controls.shippingAddress"
           [prefillData]="address?.attributes"
+          (clear)="checkoutForm.controls.shippingAddress.reset()"
         ></dhb-address-form>
 
         <!-- Referral Address -->
@@ -133,7 +135,7 @@
             [disabled]="!checkoutForm.valid || productDetail.pause"
             (onClick)="onConfirm()"
             icon="fa-regular fa-check"
-            styleClass="p-button-primary p-button-lg ml-2 "
+            styleClass="p-button-primary p-button-lg ml-2"
             class="w-6 md:w-auto"
           ></p-button>
         </ng-container>
