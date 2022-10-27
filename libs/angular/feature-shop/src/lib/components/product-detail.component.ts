@@ -98,7 +98,7 @@ import { Observable } from 'rxjs';
                       "
                     >
                       <span class="opacity-80 uppercase text-xs text-bold pr-1"
-                        >Quantity:</span
+                        >Remaining:</span
                       >
                       <span class="text-bold opacity-80">{{
                         productDetail.availableQuantity

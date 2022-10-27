@@ -42,7 +42,7 @@ import { ProductCheckoutDetail } from '@dehub/shared/model';
               "
             >
               <span class="opacity-80 uppercase text-xs text-bold pr-1"
-                >Available Quantity:</span
+                >Remaining:</span
               >
               <span class="text-bold opacity-80">{{
                 product.availableQuantity
