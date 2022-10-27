@@ -9,6 +9,9 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
       [navigation]="false"
       [slidesPerView]="'auto'"
       [direction]="'vertical'"
+      [freeMode]="true"
+      [scrollbar]="true"
+      [mousewheel]="true"
     >
       <ng-container *ngFor="let announcement of announcements">
         <ng-template swiperSlide>
