@@ -18,6 +18,8 @@ import { MenuItem } from 'primeng/api';
           [label]="menuItem.label ?? ''"
           [icon]="menuItem.icon ?? ''"
           [routerLink]="menuItem.routerLink"
+          [fragment]="menuItem.fragment"
+          [disabled]="menuItem.disabled"
           type="button"
           [ngClass]="{
             active: menuItem.routerLink === activeMenuItem?.routerLink

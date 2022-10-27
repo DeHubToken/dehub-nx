@@ -18,6 +18,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
   template: `
     <div
       *ngIf="section"
+      [id]="section.sys.id"
       [dhbContentfulDraft]="section.sys"
       [@fadeInUp]
       class="col-12 mb-8"
