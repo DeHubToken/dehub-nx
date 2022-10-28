@@ -191,7 +191,7 @@ export class AngularFeatureShopComponent implements OnInit {
         productSections.map(productSection => ({
           label: productSection.title,
           icon:
-            productSection.handpickedProductsCollection?.items[0].category
+            productSection.handpickedProductsCollection?.items[0]?.category
               ?.icon ?? productSection.productsByCategory?.icon,
           fragment: productSection.sys.id,
           routerLink: ['.'],
