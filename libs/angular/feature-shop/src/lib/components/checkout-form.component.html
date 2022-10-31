@@ -1,4 +1,4 @@
-<ng-container *rxLet="checkoutState$ as checkoutState; rxSuspense: loading">
+<ng-container *rxLet="checkoutState$ as checkoutState; suspense: loading">
   <!-- Show Status -->
   <div
     *ngIf="checkoutState.status; else showProduct"
@@ -58,7 +58,7 @@
         <!-- Contact -->
         <h5>Contact Details</h5>
         <dhb-contacts-form
-          *rxLet="userContacts$ as contacts; rxSuspense: loading"
+          *rxLet="userContacts$ as contacts; suspense: loading"
           [formControl]="checkoutForm.controls.contacts"
           [prefillData]="contacts"
         >
@@ -68,7 +68,7 @@
         <h5>Shipping Address</h5>
         <h6 class="text-sm">Optional for digital items</h6>
         <dhb-address-form
-          *rxLet="userShippingAddress$ as address; rxSuspense: loading"
+          *rxLet="userShippingAddress$ as address; suspense: loading"
           [formControl]="checkoutForm.controls.shippingAddress"
           [prefillData]="address?.attributes"
           (clear)="checkoutForm.controls.shippingAddress.reset()"

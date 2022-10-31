@@ -32,7 +32,7 @@ import { distinctUntilChanged, Observable, Subscription, tap } from 'rxjs';
   selector: 'dhb-phone-input',
   template: `
     <div
-      *rxLet="countries$ as countries; rxSuspense: loading"
+      *rxLet="countries$ as countries; suspense: loading"
       [formGroup]="phoneForm"
       class="grid grid-nogutter"
     >
