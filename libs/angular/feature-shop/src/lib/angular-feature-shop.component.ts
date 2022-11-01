@@ -7,13 +7,8 @@ import {
 import { PageShopCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
-import {
-  PageSectionProductsFragment,
-  PageShopFragment,
-  SwiperResponsiveOptions,
-} from '@dehub/shared/model';
-import { filterNil, publishReplayRefCount } from '@dehub/shared/utils';
-import { fadeInDownOnEnterAnimation } from 'angular-animations';
+import { PageShopFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
+import { publishReplayRefCount } from '@dehub/shared/utils';
 import { MenuItem } from 'primeng/api';
 import { filter, map, Observable } from 'rxjs';
 
@@ -22,14 +17,6 @@ import { filter, map, Observable } from 'rxjs';
     <ng-container *rxLet="pageShop$ as pageShop" class="grid">
       <!-- Titles -->
       <dhb-page-header [page]="pageShop"></dhb-page-header>
-
-      <!-- Categories links -->
-      <div [@fadeInDown] class="py-0">
-        <dhb-tab-menu
-          [menuItems]="tabMenuItems$ | push"
-          [activeMenuItem]="activeMenuItem$ | push"
-        ></dhb-tab-menu>
-      </div>
 
       <!-- Page Sections -->
       <dhb-page-sections
@@ -45,9 +32,6 @@ import { filter, map, Observable } from 'rxjs';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    fadeInDownOnEnterAnimation({ anchor: 'fadeInDown', delay: 1000 }),
-  ],
 })
 export class AngularFeatureShopComponent implements OnInit {
   pageShop$?: Observable<PageShopFragment | undefined>;
@@ -174,31 +158,5 @@ export class AngularFeatureShopComponent implements OnInit {
         ),
         publishReplayRefCount()
       );
-
-    this.tabMenuItems$ = this.pageShop$.pipe(
-      filterNil(),
-      map(pageShop => pageShop.sectionsCollection?.items),
-      filterNil(),
-      map(
-        pageSections =>
-          // Keep only product sections
-          pageSections.filter(
-            pageSection =>
-              !!pageSection && pageSection.__typename === 'PageSectionProducts'
-          ) as PageSectionProductsFragment[]
-      ),
-      map(productSections =>
-        productSections.map(productSection => ({
-          label: productSection.title,
-          icon:
-            productSection.handpickedProductsCollection?.items[0]?.category
-              ?.icon ?? productSection.productsByCategory?.icon,
-          fragment: productSection.sys.id,
-          routerLink: ['.'],
-        }))
-      )
-    );
-
-    this.activeMenuItem$ = this.tabMenuItems$.pipe(map(items => items[0]));
   }
 }

@@ -27,7 +27,8 @@ import { MenuItem } from 'primeng/api';
           class="p-button-text p-button-plain p-button-lg mt-3 mr-3"
         ></button>
         <div
-          class="md:hidden flex absolute right-0 mr-3 fadeinleft animation-duration-1000 animation-ease-in-out"
+          class="flex absolute right-0 mr-3 fadeinleft animation-duration-1000 animation-ease-in-out"
+          [ngClass]="swipeHintClass"
           [ngStyle]="{
             'margin-top': '63px'
           }"
@@ -47,6 +48,7 @@ import { MenuItem } from 'primeng/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabMenuComponent implements OnInit {
+  @Input() swipeHintClass?: string;
   @Input() menuItems?: MenuItem[];
   @Input() activeMenuItem?: MenuItem;
 

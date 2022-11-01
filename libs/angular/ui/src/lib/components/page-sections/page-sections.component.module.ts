@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { PushModule } from '@rx-angular/template';
 import { PageSectionBasicPostsModule } from '../page-section-basic-posts';
 import { PageSectionDappPostsModule } from '../page-section-dapp-posts';
 import { PageSectionFaQsModule } from '../page-section-faqs';
@@ -20,6 +22,7 @@ import { PageSectionsComponent } from './page-sections.component';
   imports: [
     // Angular
     CommonModule,
+    RouterModule,
 
     // Libs
     PageSectionFeaturePostsModule,
@@ -35,6 +38,9 @@ import { PageSectionsComponent } from './page-sections.component';
     PageSectionPersonPostsSwiperModule,
     PageSectionPersonPostsModule,
     PageSectionProductsModule,
+
+    // Rx Angular
+    PushModule,
   ],
   exports: [PageSectionsComponent],
 })
