@@ -11,7 +11,11 @@ import {
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import {
+  fadeInDownOnEnterAnimation,
+  fadeInUpOnEnterAnimation,
+} from 'angular-animations';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'dhb-page-section-products',
@@ -23,7 +27,21 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       [@fadeInUp]
       class="col-12 mb-8"
     >
-      <h3 *ngIf="section.title as title">{{ title }}</h3>
+      <div class="flex flex-column md:flex-row md:align-items-center">
+        <!-- Title -->
+        <h3 *ngIf="section.title as title" class="white-space-nowrap mr-4">
+          {{ title }}
+        </h3>
+
+        <!-- Categories -->
+        <div [@fadeInDown]>
+          <dhb-tab-menu
+            navigation
+            [menuItems]="menuItems"
+            [activeMenuItem]="activeMenuItem"
+          ></dhb-tab-menu>
+        </div>
+      </div>
       <h5
         *ngIf="section.description as description"
         class="w-full lg:w-8 xl:w-6 mt-0 mb-7 font-normal"
@@ -50,15 +68,26 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
     `
       @import 'swiper/scss';
       @import '@dehub/swiper/dhb_swiper_navigation';
+
+      .dhb-tab-menu {
+        border-bottom: none;
+        padding-bottom: 0px;
+        margin-bottom: 2rem;
+      }
     `,
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+  animations: [
+    fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' }),
+    fadeInDownOnEnterAnimation({ anchor: 'fadeInDown', delay: 1000 }),
+  ],
 })
 export class PageSectionProductsComponent implements OnInit {
   @Input() section!: PageSectionProductsFragment;
   @Input() swiperResponsiveOptions?: SwiperResponsiveOptions;
+  @Input() menuItems: MenuItem[] = [];
+  @Input() activeMenuItem?: MenuItem;
 
   products: ProductFragment[] = [];
 
@@ -66,6 +95,11 @@ export class PageSectionProductsComponent implements OnInit {
 
   ngOnInit() {
     if (!this.section) return;
+
+    // Exclude the current category
+    this.menuItems = this.menuItems.filter(
+      ({ fragment }) => fragment !== this.section.sys.id
+    );
 
     this.products = [
       ...(this.section.handpickedProductsCollection?.items ?? []),

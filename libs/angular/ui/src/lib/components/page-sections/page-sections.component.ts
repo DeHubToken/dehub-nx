@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   PageSectionBasicPostsFragment,
   PageSectionDappPostsFragment,
@@ -17,6 +18,9 @@ import {
   PageSectionThumbnailPostsFragment,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
+import { filterNil } from '@dehub/shared/utils';
+import { MenuItem } from 'primeng/api';
+import { map, Observable } from 'rxjs';
 
 type PageSection =
   | PageSectionFeaturePostsFragment
@@ -133,10 +137,12 @@ type PageSection =
         *ngIf="isPageSectionProducts(section)"
         [section]="section"
         [swiperResponsiveOptions]="productsResponsiveOptions"
-      ></dhb-page-section-products>
+        [menuItems]="productMenuItems"
+        [activeMenuItem]="productActiveMenuItem$ | push"
+      >
+      </dhb-page-section-products>
     </ng-container>
   `,
-  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageSectionsComponent implements OnInit {
@@ -149,9 +155,34 @@ export class PageSectionsComponent implements OnInit {
   @Input() grandPostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() productsResponsiveOptions?: SwiperResponsiveOptions;
 
-  constructor() {}
+  productMenuItems: MenuItem[] = [];
+  productActiveMenuItem$: Observable<MenuItem | undefined> =
+    this.route.fragment.pipe(
+      filterNil(),
+      map(fragment =>
+        this.productMenuItems.find(menuItem => menuItem.fragment === fragment)
+      )
+    );
 
-  ngOnInit() {}
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    if (this.sections) {
+      const productSections = this.sections.filter(
+        (section): section is PageSectionProductsFragment =>
+          this.isPageSectionProducts(section)
+      );
+
+      this.productMenuItems = productSections.map(productSection => ({
+        label: productSection.title,
+        icon:
+          productSection.handpickedProductsCollection?.items[0]?.category
+            ?.icon ?? productSection?.productsByCategory?.icon,
+        fragment: productSection.sys.id,
+        routerLink: ['.'],
+      }));
+    }
+  }
 
   isPageSectionFeaturePosts(
     pageSection: PageSection
