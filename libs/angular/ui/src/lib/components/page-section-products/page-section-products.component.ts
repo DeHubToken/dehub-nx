@@ -36,7 +36,6 @@ import { MenuItem } from 'primeng/api';
         <!-- Categories -->
         <div [@fadeInDown]>
           <dhb-tab-menu
-            navigation
             [menuItems]="menuItems"
             [activeMenuItem]="activeMenuItem"
           ></dhb-tab-menu>
