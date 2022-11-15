@@ -5640,6 +5640,8 @@ export interface Query {
   productCollection?: Maybe<ProductCollection>;
   sectionPost?: Maybe<SectionPost>;
   sectionPostCollection?: Maybe<SectionPostCollection>;
+  testArticle?: Maybe<TestArticle>;
+  testArticleCollection?: Maybe<TestArticleCollection>;
   thumbnailPost?: Maybe<ThumbnailPost>;
   thumbnailPostCollection?: Maybe<ThumbnailPostCollection>;
 }
@@ -6193,6 +6195,21 @@ export interface QuerySectionPostCollectionArgs {
   where?: InputMaybe<SectionPostFilter>;
 }
 
+export interface QueryTestArticleArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryTestArticleCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<TestArticleOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TestArticleFilter>;
+}
+
 export interface QueryThumbnailPostArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -6431,6 +6448,85 @@ export interface SysFilter {
   publishedVersion_lte?: InputMaybe<Scalars['Float']>;
   publishedVersion_not?: InputMaybe<Scalars['Float']>;
   publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testArticle) */
+export interface TestArticle extends Entry {
+  __typename?: 'TestArticle';
+  body?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<TestArticleLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testArticle) */
+export interface TestArticleBodyArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testArticle) */
+export interface TestArticleLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testArticle) */
+export interface TestArticleTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface TestArticleCollection {
+  __typename?: 'TestArticleCollection';
+  items: Array<Maybe<TestArticle>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface TestArticleFilter {
+  AND?: InputMaybe<Array<InputMaybe<TestArticleFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<TestArticleFilter>>>;
+  body?: InputMaybe<Scalars['String']>;
+  body_contains?: InputMaybe<Scalars['String']>;
+  body_exists?: InputMaybe<Scalars['Boolean']>;
+  body_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  body_not?: InputMaybe<Scalars['String']>;
+  body_not_contains?: InputMaybe<Scalars['String']>;
+  body_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface TestArticleLinkingCollections {
+  __typename?: 'TestArticleLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface TestArticleLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum TestArticleOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 /** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */

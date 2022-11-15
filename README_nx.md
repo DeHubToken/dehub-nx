@@ -49,7 +49,7 @@ This project was generated using [Nx](https://nx.dev).
    ```
 
    ```
-   npx nx generate @nrwl/react:application --name=raffle --style=scss --standaloneConfig --strict
+   npx nx generate @nrwl/react:application --name=staking --style=scss --standaloneConfig --strict
    ```
 
    upgrade to [webpack 5](https://nx.dev/l/r/guides/webpack-5#webpack-5-for-react-apps)
@@ -121,11 +121,11 @@ This project was generated using [Nx](https://nx.dev).
    ```
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='npm run raffle:deploy:prod-draft' --project=raffle
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='npm run staking:deploy:prod-draft' --project=staking
    ```
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run raffle:deploy:prod' --project=raffle
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run staking:deploy:prod' --project=staking
    ```
 
 1. Generate Angular lazy module under web:
