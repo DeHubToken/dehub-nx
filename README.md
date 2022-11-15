@@ -8,7 +8,7 @@ _More libraries or apps are supported and will be added as we go under `apps` or
 
 # Dev Setup
 
-`<APP>` can be `web` or `raffle`
+`<APP>` can be `web` or `staking`
 
 1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
 1. Open **VSCode** _(pre-configured editor settings involved)_
@@ -69,14 +69,6 @@ DeHub Buy Dapp
 [![Netlify Status](https://api.netlify.com/api/v1/badges/11bd4ce0-3bf2-4642-8879-f541c6fed3fe/deploy-status)](https://app.netlify.com/sites/buy-dehub/deploys)
 
 - Hosting: **[Netlify](https://buy-dehub.netlify.app)**
-
-### `raffle`
-
-DeHub Raffle Dapp (Inactive)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d1b6b0af-8fcd-4efa-a0ec-818a84cd9283/deploy-status)](https://app.netlify.com/sites/inactive-raffle-dehub/deploys)
-
-- Hosting: **[Netlify](https://inactive-raffle-dehub.netlify.app)**
 
 # Libraries
 

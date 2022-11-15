@@ -87,15 +87,3 @@
    URL:       https://buy-dehub-preview.netlify.app
    Site ID:   aadde395-d33b-4cba-8a96-c6952ae48876
    ```
-
-   **Raffle (React) - inactive**
-
-   ```
-   npx netlify sites:create --account-slug=dehub --name=inactive-raffle-dehub
-   ```
-
-   ```
-   Admin URL: https://app.netlify.com/sites/inactive-raffle-dehub
-   URL:       https://inactive-raffle-dehub.netlify.app
-   Site ID:   d1b6b0af-8fcd-4efa-a0ec-818a84cd9283
-   ```

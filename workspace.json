@@ -20,8 +20,6 @@
     "buy": "apps/buy",
     "buy-e2e": "apps/buy-e2e",
     "moralis-cloud": "apps/moralis/cloud",
-    "raffle": "apps/raffle",
-    "raffle-e2e": "apps/raffle-e2e",
     "react-core": "libs/react/core",
     "react-ui": "libs/react/ui",
     "shared-asset-dehub": "libs/shared/asset/dehub",
