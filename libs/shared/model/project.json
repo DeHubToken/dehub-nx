@@ -1,4 +1,5 @@
 {
+  "name": "shared-model",
   "sourceRoot": "libs/shared/model/src",
   "projectType": "library",
   "targets": {

@@ -1,4 +1,5 @@
 {
+  "name": "angular-moralis",
   "projectType": "library",
   "sourceRoot": "libs/angular/moralis/src",
   "prefix": "dhb",

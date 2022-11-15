@@ -1,4 +1,5 @@
 {
+  "name": "moralis-cloud",
   "sourceRoot": "apps/moralis/cloud/src",
   "projectType": "application",
   "targets": {

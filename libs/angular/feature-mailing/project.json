@@ -1,4 +1,5 @@
 {
+  "name": "angular-feature-mailing",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-mailing/src",
   "prefix": "dhb",

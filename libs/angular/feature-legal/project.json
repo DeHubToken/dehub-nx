@@ -1,4 +1,5 @@
 {
+  "name": "angular-feature-legal",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-legal/src",
   "prefix": "dhb",

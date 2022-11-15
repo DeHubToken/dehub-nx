@@ -1,4 +1,5 @@
 {
+  "name": "web",
   "projectType": "application",
   "sourceRoot": "apps/web/src",
   "prefix": "dhb",

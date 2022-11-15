@@ -1,4 +1,5 @@
 {
+  "name": "angular-model",
   "projectType": "library",
   "sourceRoot": "libs/angular/model/src",
   "prefix": "dhb",

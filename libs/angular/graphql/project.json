@@ -1,4 +1,5 @@
 {
+  "name": "angular-graphql",
   "projectType": "library",
   "sourceRoot": "libs/angular/graphql/src",
   "prefix": "dehub",

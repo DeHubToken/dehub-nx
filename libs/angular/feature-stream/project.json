@@ -1,4 +1,5 @@
 {
+  "name": "angular-feature-stream",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-stream/src",
   "prefix": "dhb",

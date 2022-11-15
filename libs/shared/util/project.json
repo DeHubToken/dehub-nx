@@ -1,4 +1,5 @@
 {
+  "name": "shared-util",
   "sourceRoot": "libs/shared/util/src",
   "projectType": "library",
   "targets": {

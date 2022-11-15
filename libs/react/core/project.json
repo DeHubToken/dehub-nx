@@ -1,4 +1,5 @@
 {
+  "name": "react-core",
   "sourceRoot": "libs/react/core/src",
   "projectType": "library",
   "targets": {

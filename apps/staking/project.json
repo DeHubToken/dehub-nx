@@ -1,4 +1,5 @@
 {
+  "name": "staking",
   "sourceRoot": "apps/staking/src",
   "projectType": "application",
   "targets": {

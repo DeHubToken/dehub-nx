@@ -1,4 +1,5 @@
 {
+  "name": "buy-e2e",
   "sourceRoot": "apps/buy-e2e/src",
   "projectType": "application",
   "targets": {

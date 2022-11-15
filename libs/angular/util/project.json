@@ -1,4 +1,5 @@
 {
+  "name": "angular-util",
   "projectType": "library",
   "sourceRoot": "libs/angular/util/src",
   "prefix": "dhb",

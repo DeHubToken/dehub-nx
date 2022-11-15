@@ -1,4 +1,5 @@
 {
+  "name": "angular-feature-earn",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-earn/src",
   "prefix": "dhb",
