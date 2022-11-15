@@ -113,19 +113,19 @@ This project was generated using [Nx](https://nx.dev).
 1. Run Commands generation
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='npm run web:deploy:prod-draft' --project=web
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='pnpm web:deploy:prod-draft' --project=web
    ```
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run web:deploy:prod' --project=web
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='pnpm web:deploy:prod' --project=web
    ```
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='npm run staking:deploy:prod-draft' --project=staking
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='pnpm staking:deploy:prod-draft' --project=staking
    ```
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='npm run staking:deploy:prod' --project=staking
+   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='pnpm staking:deploy:prod' --project=staking
    ```
 
 1. Generate Angular lazy module under web:

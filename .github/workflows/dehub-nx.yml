@@ -25,15 +25,15 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
       node-version: '16'
-      install-commands: npm ci --legacy-peer-deps
+      install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
-        npm run build:preview
-        npm run build
-        npm run test
-        npm run lint
+        pnpm build:preview
+        pnpm build
+        pnpm test
+        pnpm lint
       final-commands: |
-        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview
-        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:prod
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false pnpm deploy:preview
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false pnpm deploy:prod
 
   pr:
     if: ${{ github.event_name == 'pull_request' }}
@@ -41,18 +41,18 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
       node-version: '16'
-      install-commands: npm ci --legacy-peer-deps
+      install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
-        npm run build:preview
-        npm run test
-        npm run lint
+        pnpm build:preview
+        pnpm test
+        pnpm lint
       final-commands: |
-        NX_CLOUD_DISTRIBUTED_EXECUTION=false npm run deploy:preview-draft
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false pnpm deploy:preview-draft
 
   agents:
     name: Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
     with:
       node-version: '16'
-      install-commands: npm ci --legacy-peer-deps
+      install-commands: pnpm install --frozen-lockfile
       number-of-agents: 4
