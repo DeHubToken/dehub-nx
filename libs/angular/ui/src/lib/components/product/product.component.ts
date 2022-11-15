@@ -72,12 +72,12 @@ import { ProductFragment } from '@dehub/shared/model';
                 <ng-container
                   *ngIf="product.availableQuantity ?? 0 > 0; else unavailable"
                 >
-                  <span class="opacity-80 uppercase text-xs text-bold pr-1"
-                    >Remaining:</span
-                  >
                   <span class="text-bold opacity-80">{{
                     product.availableQuantity
                   }}</span>
+                  <span class="opacity-80 text-xs text-bold pr-1">
+                    left in stock</span
+                  >
                 </ng-container>
 
                 <ng-template #unavailable>

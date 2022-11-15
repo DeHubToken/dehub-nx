@@ -41,12 +41,12 @@ import { ProductCheckoutDetail } from '@dehub/shared/model';
                 else soldOut
               "
             >
-              <span class="opacity-80 uppercase text-xs text-bold pr-1"
-                >Remaining:</span
-              >
               <span class="text-bold opacity-80">{{
                 product.availableQuantity
               }}</span>
+              <span class="opacity-80 text-xs text-bold pr-1">
+                left in stock</span
+              >
             </ng-container>
             <ng-template #soldOut>
               <span class="text-bold"> Sold Out </span>

@@ -97,12 +97,12 @@ import { Observable } from 'rxjs';
                         else unavailable
                       "
                     >
-                      <span class="opacity-80 uppercase text-xs text-bold pr-1"
-                        >Remaining:</span
-                      >
                       <span class="text-bold opacity-80">{{
                         productDetail.availableQuantity
                       }}</span>
+                      <span class="opacity-80 text-xs text-bold pr-1">
+                        left in stock</span
+                      >
 
                       <!-- Buy / Coming Soon -->
                       <p-button
