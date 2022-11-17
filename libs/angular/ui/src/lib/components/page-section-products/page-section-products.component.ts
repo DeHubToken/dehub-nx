@@ -66,7 +66,7 @@ import { MenuItem } from 'primeng/api';
   styles: [
     `
       @import 'swiper/scss';
-      @import '@dehub/swiper/dhb_swiper_navigation';
+      @import 'dhb_swiper_navigation';
 
       .dhb-tab-menu {
         border-bottom: none;

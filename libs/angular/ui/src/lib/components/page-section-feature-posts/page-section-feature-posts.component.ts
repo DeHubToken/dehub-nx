@@ -48,7 +48,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
   styles: [
     `
       @import 'swiper/scss';
-      @import '@dehub/swiper/dhb_swiper_navigation';
+      @import 'dhb_swiper_navigation';
     `,
   ],
   encapsulation: ViewEncapsulation.None,

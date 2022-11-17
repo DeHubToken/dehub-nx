@@ -53,7 +53,6 @@
     "@contentful/rich-text-html-renderer": "15.13.1",
     "@contentful/rich-text-plain-text-renderer": "15.12.1",
     "@contentful/rich-text-types": "15.12.1",
-    "@dehub/swiper": "file:libs/shared/asset/dehub/src/lib/swiper",
     "@ethersproject/abi": "5.5.0",
     "@ethersproject/abstract-provider": "5.5.1",
     "@ethersproject/abstract-signer": "5.5.0",
