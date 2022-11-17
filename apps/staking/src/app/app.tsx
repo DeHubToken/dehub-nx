@@ -50,13 +50,25 @@ export function App() {
   );
 
   if (applicationStatus === ApplicationStatus.INITIAL) {
-    return <FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />;
+    return (
+      <FullScreenLoader
+        baseUrl={baseUrl}
+        pageTitle={pageTitle}
+        loaderGif={`${baseUrl}/assets/dehub/dehub-loader.gif`}
+      />
+    );
   }
 
   return (
     <BrowserRouter basename={baseUrl}>
       <SuspenseWithChunkError
-        fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
+        fallback={
+          <FullScreenLoader
+            baseUrl={baseUrl}
+            pageTitle={pageTitle}
+            loaderGif={`${baseUrl}/assets/dehub/dehub-loader.gif`}
+          />
+        }
       >
         <Routes>
           <Route path="/" element={<Staking />}></Route>

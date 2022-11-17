@@ -1,21 +1,20 @@
 import { PageMeta } from '../Layout';
-import Loader from './';
+import Loader, { LoaderProps } from './';
+
+interface FullScreenLoaderProps extends LoaderProps {
+  baseUrl: string;
+  pageTitle: string;
+}
 
 const FullScreenLoader = ({
   baseUrl = '',
   pageTitle = '',
-  title = 'Loading...',
-  subtitle = '',
-}: {
-  baseUrl: string;
-  pageTitle: string;
-  title?: string;
-  subtitle?: string;
-}) => {
+  ...loaderProps
+}: FullScreenLoaderProps) => {
   return (
     <div>
       <PageMeta baseUrl={baseUrl} title={pageTitle} />
-      <Loader title={title} subtitle={subtitle} />
+      <Loader {...loaderProps} />
     </div>
   );
 };

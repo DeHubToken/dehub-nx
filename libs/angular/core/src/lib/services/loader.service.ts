@@ -11,7 +11,7 @@ export class LoaderService {
   private subtitleSubject = new BehaviorSubject<string>('');
   subtitle$ = this.subtitleSubject.asObservable();
 
-  lottieJson = `${this.env.baseUrl}/assets/dehub/dehub-loader-light-blue.json`;
+  loaderGif = `${this.env.baseUrl}/assets/dehub/dehub-loader.gif`;
 
   constructor(@Inject(EnvToken) private env: SharedEnv) {}
 

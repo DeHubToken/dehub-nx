@@ -30,7 +30,7 @@ import { Observable } from 'rxjs';
     <dhb-loader
       *ngIf="loaderVisible$ | push"
       [subtitle]="subtitle$ | push"
-      [lottieJson]="lottieJson"
+      [loaderGif]="loaderGif"
     ></dhb-loader>
   `,
 })
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   loaderVisible$?: Observable<boolean>;
   subtitle$?: Observable<string>;
-  lottieJson?: string;
+  loaderGif?: string;
 
   constructor(
     private coreService: CoreService,
@@ -60,10 +60,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.pwaService.subscribeForNewUpdates();
     this.announcementService.subscribeForAnnouncements();
 
-    const { loaderVisible$, subtitle$, lottieJson } = this.loaderService;
+    const { loaderVisible$, subtitle$, loaderGif } = this.loaderService;
     this.loaderVisible$ = loaderVisible$;
     this.subtitle$ = subtitle$;
-    this.lottieJson = lottieJson;
+    this.loaderGif = loaderGif;
 
     this.primengConfig.ripple = true;
   }

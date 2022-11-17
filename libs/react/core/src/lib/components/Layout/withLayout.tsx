@@ -1,4 +1,11 @@
-import { Footer, Header, Loader, PageMeta, TabMenu } from '@dehub/react/ui';
+import {
+  Footer,
+  Header,
+  Loader,
+  LoaderProps,
+  PageMeta,
+  TabMenu,
+} from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { iOS } from '@dehub/shared/utils';
@@ -9,7 +16,7 @@ import { useContentfulContext } from '../../hooks/useContentfulContext';
 import ToastListener from '../Toast/ToastListener';
 import UserMenu from '../UserMenu';
 
-const initMessage = {
+const initMessage: LoaderProps = {
   title: '',
   subtitle: '',
 };
@@ -35,7 +42,7 @@ const withLayout =
   ): React.FC<P> =>
   ({ ...props }) => {
     const [showLoader, setShowLoader] = useState(false);
-    const [message, setMessage] = useState(initMessage);
+    const [message, setMessage] = useState<LoaderProps>(initMessage);
 
     const {
       walletConnectingState,
@@ -99,7 +106,12 @@ const withLayout =
       <div>
         <PageMeta baseUrl={baseUrl} title={pageTitle} />
         <ToastListener />
-        {showLoader && <Loader {...message} />}
+        {showLoader && (
+          <Loader
+            {...message}
+            loaderGif={`${baseUrl}/assets/dehub/dehub-loader.gif`}
+          />
+        )}
         <div
           className="layout-wrapper"
           style={{

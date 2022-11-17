@@ -47,7 +47,13 @@ export function App() {
   return (
     <BrowserRouter basename={baseUrl}>
       <SuspenseWithChunkError
-        fallback={<FullScreenLoader baseUrl={baseUrl} pageTitle={pageTitle} />}
+        fallback={
+          <FullScreenLoader
+            baseUrl={baseUrl}
+            pageTitle={pageTitle}
+            loaderGif={`${baseUrl}/assets/dehub/dehub-loader.gif`}
+          />
+        }
       >
         <Routes>
           <Route path="/" element={<BuyDeHub />}></Route>
