@@ -4,7 +4,6 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'dhb-loader',
@@ -14,14 +13,8 @@ import { AnimationOptions } from 'ngx-lottie';
         <tbody>
           <tr>
             <td>
-              <!-- DeHub Lottie -->
-              <ng-lottie
-                *ngIf="lottieJson"
-                [options]="lottieOptions"
-                [styles]="lottieStyles"
-                width="180px"
-                containerClass="pt-2 mx-auto"
-              ></ng-lottie>
+              <!-- DeHub Loader -->
+              <img [src]="loaderGif" width="180px" alt="DeHub Loader" />
 
               <!-- Title -->
               <h4 *ngIf="subtitle" class="dhb-loader-title">{{ title }}</h4>
@@ -39,23 +32,9 @@ import { AnimationOptions } from 'ngx-lottie';
 export class LoaderComponent implements OnInit {
   @Input() title = 'Waiting';
   @Input() subtitle?: string;
-  @Input() lottieJson?: string;
-
-  lottieOptions: AnimationOptions = {};
-  lottieStyles: Partial<CSSStyleDeclaration> = {};
+  @Input() loaderGif?: string;
 
   constructor() {}
 
-  ngOnInit() {
-    if (this.lottieJson) {
-      this.lottieOptions = {
-        path: this.lottieJson,
-      };
-
-      this.lottieStyles = {
-        background: 'transparent',
-        height: 'fit-content',
-      };
-    }
-  }
+  ngOnInit() {}
 }
