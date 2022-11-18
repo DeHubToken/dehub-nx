@@ -1,4 +1,5 @@
 {
+  "name": "moralis-cloud",
   "sourceRoot": "apps/moralis/cloud/src",
   "projectType": "application",
   "targets": {
@@ -62,7 +63,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com npm run moralis-sync"
+          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com pnpm moralis-sync"
         ],
         "readyWhen": "Changes Uploaded Correctly",
         "parallel": true
@@ -84,7 +85,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com npm run moralis-sync"
+          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com pnpm moralis-sync"
         ],
         "readyWhen": "Changes Uploaded Correctly",
         "parallel": true

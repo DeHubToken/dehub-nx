@@ -1,4 +1,5 @@
 {
+  "name": "angular-ui",
   "projectType": "library",
   "sourceRoot": "libs/angular/ui/src",
   "prefix": "dhb",

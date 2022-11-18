@@ -1,4 +1,5 @@
 {
+  "name": "angular-core",
   "projectType": "library",
   "sourceRoot": "libs/angular/core/src",
   "prefix": "dhb",

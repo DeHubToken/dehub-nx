@@ -1,4 +1,5 @@
 {
+  "name": "angular-feature-game",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-game/src",
   "prefix": "dhb",

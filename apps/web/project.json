@@ -1,4 +1,5 @@
 {
+  "name": "web",
   "projectType": "application",
   "sourceRoot": "apps/web/src",
   "prefix": "dhb",
@@ -148,7 +149,7 @@
     "deploy-preview-draft": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 --alias=nx-attila-353 -d ../../dist/apps/web.preview -o",
+        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 --alias=nx -d ../../dist/apps/web.preview -o",
         "cwd": "netlify/web.preview"
       }
     },

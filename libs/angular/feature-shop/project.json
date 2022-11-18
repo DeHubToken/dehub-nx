@@ -1,4 +1,5 @@
 {
+  "name": "angular-feature-shop",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-shop/src",
   "prefix": "dhb",

@@ -1,4 +1,5 @@
 {
+  "name": "angular-feature-home",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-home/src",
   "prefix": "dhb",

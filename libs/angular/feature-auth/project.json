@@ -1,4 +1,5 @@
 {
+  "name": "angular-feature-auth",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-auth/src",
   "prefix": "dhb",

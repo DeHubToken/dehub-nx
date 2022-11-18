@@ -14,17 +14,17 @@ _More libraries or apps are supported and will be added as we go under `apps` or
 1. Open **VSCode** _(pre-configured editor settings involved)_
 1. Be sure to use `node >= 16.13.0`
 1. Add `~/.huskyrc` with content [here](https://typicode.github.io/husky/#/?id=command-not-found)
-1. **Install** dependencies: `npm ci`
+1. **Install** dependencies: `pnpm i`
 1. While installing:
    Add the following line to `/etc/hosts` _(`c:/windows/system32/drivers/hosts`)_:
    ```
    127.0.0.1 dev.localhost
    ```
-1. Run **Dev mode**: `npm run <APP>:start`
-1. Run **Prod mode**: `npm run <APP>:demo` _(serve prod version locally)_
-1. Run **CI**: `npm run ci` _(lint, test, build from affected apps)_
-1. Deploy as **prod-draft**: `npm run deploy:prod-draft`
-1. Deploy to **prod**: `npm run deploy:prod`
+1. Run **Dev mode**: `pnpm <APP>:start`
+1. Run **Prod mode**: `pnpm <APP>:demo` _(serve prod version locally)_
+1. Run **CI**: `pnpm ci` _(lint, test, build from affected apps)_
+1. Deploy as **prod-draft**: `pnpm deploy:prod-draft`
+1. Deploy to **prod**: `pnpm deploy:prod`
 1. We follow [commitlint](https://github.com/merkle-open/frontend-defaults/blob/master/repo/commitlint-conventional-changelog/index.js) guide, so please use these scopes:
 
    `'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'`

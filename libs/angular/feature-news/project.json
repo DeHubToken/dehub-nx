@@ -1,4 +1,5 @@
 {
+  "name": "angular-feature-news",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-news/src",
   "prefix": "dhb",
