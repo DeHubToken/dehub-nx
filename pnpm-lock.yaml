@@ -26,7 +26,6 @@ specifiers:
   '@contentful/rich-text-html-renderer': 15.13.1
   '@contentful/rich-text-plain-text-renderer': 15.12.1
   '@contentful/rich-text-types': 15.12.1
-  '@dehub/swiper': file:libs/shared/asset/dehub/src/lib/swiper
   '@ethersproject/abi': 5.5.0
   '@ethersproject/abstract-provider': 5.5.1
   '@ethersproject/abstract-signer': 5.5.0
@@ -128,13 +127,11 @@ specifiers:
   jest-preset-angular: 12.2.2
   lite-server: 2.6.1
   lodash: 4.17.21
-  lottie-web: 5.8.1
   magic-sdk: 8.1.0
   moment: 2.29.1
   moralis: 1.8.0
   moralis-admin-cli: 2.1.16
   netlify-cli: 8.0.9
-  ngx-lottie: 8.0.1
   node-polyfill-webpack-plugin: 2.0.1
   nx: 15.0.13
   os-browserify: 0.3.0
@@ -147,7 +144,6 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   react-helmet-async: 1.3.0
-  react-lottie-player: 1.4.3
   react-moralis: 1.2.1
   react-redux: 8.0.2
   react-router-dom: 6.4.1
@@ -183,7 +179,6 @@ dependencies:
   '@contentful/rich-text-html-renderer': 15.13.1
   '@contentful/rich-text-plain-text-renderer': 15.12.1
   '@contentful/rich-text-types': 15.12.1
-  '@dehub/swiper': file:libs/shared/asset/dehub/src/lib/swiper
   '@ethersproject/abi': 5.5.0
   '@ethersproject/abstract-provider': 5.5.1
   '@ethersproject/abstract-signer': 5.5.0
@@ -230,11 +225,9 @@ dependencies:
   history: 4.10.1
   https-browserify: 1.0.0
   lodash: 4.17.21
-  lottie-web: 5.8.1
   magic-sdk: 8.1.0
   moment: 2.29.1
   moralis: 1.8.0
-  ngx-lottie: 8.0.1_2axdj2bdsmj3pltglqijo3hsl4
   node-polyfill-webpack-plugin: 2.0.1
   os-browserify: 0.3.0
   primeflex: 3.2.0
@@ -244,7 +237,6 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-helmet-async: 1.3.0_biqbaboplfbrettd7655fr4n2y
-  react-lottie-player: 1.4.3_react@18.2.0
   react-moralis: 1.2.1_63nvvkffkv7yotc6qt4lr43hbi
   react-redux: 8.0.2_6hrpdt74nuubt2lijsfizev3cu
   react-router-dom: 6.4.1_biqbaboplfbrettd7655fr4n2y
@@ -26601,13 +26593,6 @@ packages:
     dependencies:
       js-tokens: 4.0.0
 
-  /lottie-web/5.8.1:
-    resolution:
-      {
-        integrity: sha512-9gIizWADlaHC2GCt+D+yNpk5l2clZQFqnVWWIVdY0LnxC/uLa39dYltAe3fcmC/hrZ2IUQ8dLlY0O934Npjs7Q==,
-      }
-    dev: false
-
   /lower-case-first/2.0.2:
     resolution:
       {
@@ -28053,20 +28038,6 @@ packages:
       minimatch: 3.0.4
       multimatch: 5.0.0
       ts-morph: 10.0.2
-    dev: false
-
-  /ngx-lottie/8.0.1_2axdj2bdsmj3pltglqijo3hsl4:
-    resolution:
-      {
-        integrity: sha512-Ntd1yTMM6cumwaOJbMoIvwrZ9ot1zx6mqzNMildGWlFZJSGFE6qWkMmF8OYISAqWprzTEaDV2dSNWxOKUICSpQ==,
-      }
-    peerDependencies:
-      '@angular/core': '>=13'
-      lottie-web: '>=5.4.0'
-    dependencies:
-      '@angular/core': 14.2.6_rxjs@7.5.0+zone.js@0.11.4
-      lottie-web: 5.8.1
-      tslib: 2.4.0
     dev: false
 
   /nice-napi/1.0.2:
@@ -31761,21 +31732,6 @@ packages:
         integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==,
       }
 
-  /react-lottie-player/1.4.3_react@18.2.0:
-    resolution:
-      {
-        integrity: sha512-RUhbwNgUDY482AbYyrsb2q+UyiCNFfUJbmbFEmrpCrtBV0qFYx6v9fC9ur5q8xGyZLWIYTsmD48oe18xZhXATA==,
-      }
-    engines: { node: '>=10' }
-    peerDependencies:
-      react: ^16.0.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      fast-deep-equal: 3.1.3
-      lottie-web: 5.8.1
-      react: 18.2.0
-      rfdc: 1.3.0
-    dev: false
-
   /react-moralis/1.2.1_63nvvkffkv7yotc6qt4lr43hbi:
     resolution:
       {
@@ -32587,6 +32543,7 @@ packages:
       {
         integrity: sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==,
       }
+    dev: true
 
   /rimraf/2.7.1:
     resolution:
@@ -37795,13 +37752,6 @@ packages:
       }
     dependencies:
       tslib: 2.4.0
-
-  file:libs/shared/asset/dehub/src/lib/swiper:
-    resolution:
-      { directory: libs/shared/asset/dehub/src/lib/swiper, type: directory }
-    name: swiper
-    version: 0.0.0
-    dev: false
 
   github.com/ethereumjs/ethereumjs-abi/ee3994657fa7a427238e6ba92a84d0b529bbcde0:
     resolution:
