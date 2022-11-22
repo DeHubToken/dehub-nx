@@ -2,7 +2,7 @@
 name: Tech Debt
 about: Suggest an improvement for this project
 title: ''
-labels: enhancement, tech debt
+labels: tech debt
 assignees: attilacsanyi
 
 ---

@@ -2,7 +2,7 @@
 name: Bug report
 about: Submit a bug report for a specific project
 title: ''
-labels: bug, enhancement
+labels: bug
 assignees: attilacsanyi
 
 ---
