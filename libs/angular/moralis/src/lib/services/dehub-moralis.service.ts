@@ -30,7 +30,7 @@ import {
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { getAddress } from '@ethersproject/address';
 import { BigNumber } from '@ethersproject/bignumber';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import { MessageService } from 'primeng/api';
 import {
   concatMap,

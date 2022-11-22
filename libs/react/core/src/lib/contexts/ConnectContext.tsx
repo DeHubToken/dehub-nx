@@ -17,7 +17,7 @@ import {
 } from '@dehub/shared/utils';
 import { Web3Provider } from '@ethersproject/providers';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import React, {
   createContext,
   PropsWithChildren,

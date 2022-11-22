@@ -34,7 +34,7 @@ import {
   shortenAddress,
 } from '@dehub/shared/utils';
 import { BigNumber } from '@ethersproject/bignumber';
-import Moralis from 'moralis';
+import Moralis from 'moralis-v1';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {

@@ -9,7 +9,7 @@ import {
 import { WalletConnectingState } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { iOS } from '@dehub/shared/utils';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import React, { useEffect, useState } from 'react';
 import { useWeb3Context } from '../../hooks';
 import { useContentfulContext } from '../../hooks/useContentfulContext';

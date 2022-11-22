@@ -1,4 +1,4 @@
-import Moralis from 'moralis/types';
+import Moralis from 'moralis-v1/types';
 import { PhysicalAddress } from './location.model';
 
 /**

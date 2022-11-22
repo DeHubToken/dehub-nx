@@ -7,7 +7,7 @@ import {
   MoralisToken,
 } from '@dehub/angular/model';
 import { StartOptions } from '@dehub/shared/model';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DehubMoralisService, MoralisService } from './services';
 

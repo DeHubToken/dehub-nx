@@ -12,7 +12,7 @@ import {
 } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
 import { orderBy } from 'lodash';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import { Call, multicallv2 } from '../../utils/multicall';
 import getDehubPrice from '../../utils/priceDehub';
 import {
