@@ -159,6 +159,11 @@ This project was generated using [Nx](https://nx.dev).
    npx nx generate @nrwl/angular:library --name=model --directory=angular --importPath=@dehub/angular/model --prefix=dhb --simpleModuleName --skipModule --standaloneConfig --tags='scope:angular, type:model'
    ```
 
+1. Generate Moralis nodejs app:
+   ```
+   nx generate @nrwl/node:application api --directory=moralis --frontendProject=web --standaloneConfig --tags=type:app
+   ```
+
 # Monorepo Tagging
 
 We define the following **scopes** and **types** for each `project.json` under the `"tags": [...]` section.
