@@ -56,5 +56,5 @@
       }
     }
   },
-  "tags": ["type:app"]
+  "tags": ["scope:node", "type:app"]
 }

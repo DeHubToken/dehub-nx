@@ -17,6 +17,8 @@
     "buy:start": "pnpm website:gql && nx run buy:serve",
     "buy:demo": "nx run buy:build && lite-server -c bs-config-buy.js",
     "buy:preview": "nx run buy:build:preview && lite-server -c bs-config-buy.preview.js",
+    "moralis-api:start": "pnpm nx run moralis-api:serve",
+    "moralis-api:demo": "node -r dotenv/config dist/apps/moralis/api/main",
     "format": "nx format:write --all",
     "lint": "nx affected --target=lint --fix --parallel --max-parallel=2",
     "test": "nx affected --target=test --parallel --max-parallel=3",
@@ -32,9 +34,9 @@
     "dep-graph:a": "nx affected:dep-graph --watch=true",
     "affected": "nx print-affected --select=projects",
     "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config",
-    "moralis-dev": "nx run moralis-cloud:build --configuration=development --watch",
-    "moralis-sync": "npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud",
-    "moralis-logs": "moralis-admin-cli get-logs",
+    "moralis-cloud-dev": "nx run moralis-cloud:build --configuration=development --watch",
+    "moralis-cloud-sync": "npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud",
+    "moralis-cloud-logs": "moralis-admin-cli get-logs",
     "prepare": "husky install"
   },
   "dependencies": {
