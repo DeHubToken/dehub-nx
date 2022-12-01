@@ -1,4 +1,6 @@
-# Netlify Settings
+# Hosting
+
+We use Netlify for hosting and creating sites from the CLI as we use Nx `run-commands` to auto-deploy on Netlify.
 
 1. Configuration details found in `.env` with `NETLIFY_AUTH_TOKEN` created on the Netlify Team page
 

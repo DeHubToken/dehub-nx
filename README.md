@@ -1,18 +1,25 @@
 # DeHub Monorepo
 
-This is the **monorepo of DeHub**. Created based on the awesome [Nx.dev](https://nx.dev) workspace by [Nrwl](https://nrwl.io/) Team.
-
 [![DeHUB Nx](https://github.com/DeHubToken/dehub-nx/actions/workflows/dehub-nx.yml/badge.svg)](https://github.com/DeHubToken/dehub-nx/actions/workflows/dehub-nx.yml)
 
-_More libraries or apps are supported and will be added as we go under `apps` or `libs` folders_
+This is the **monorepo of DeHub**.
 
-# Dev Setup
+_Created based on the awesome [Nx.dev](https://nx.dev) workspace by [Nrwl](https://nrwl.io/) Team utilizing Nx Cloud_
 
-`<APP>` can be `web` or `staking`
+# Dev setup
+
+We recommend [VSCode](https://code.visualstudio.com/) as an editor. _(monorepo includes common settings and plugins for consistent DX)_
+
+## Abbreviations
+
+`<APP>`: specific app, e.g. be `web`, `staking` etc.
+
+## Steps
 
 1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
 1. Open **VSCode** _(pre-configured editor settings involved)_
 1. Be sure to use `node >= 16.13.0`
+1. Install `pnpm` via npm: `npm install -g pnpm`
 1. Add `~/.huskyrc` with content [here](https://typicode.github.io/husky/#/?id=command-not-found)
 1. **Install** dependencies: `pnpm i`
 1. While installing:
@@ -29,131 +36,22 @@ _More libraries or apps are supported and will be added as we go under `apps` or
 
    `'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'`
 
-# Applications
+# Dev flow
 
-Apps represent standalone sites, which can be written in pure JS, React, Vue.JS or Angular and can consume common libraries (`libs`)
+1. **Pick an issue/feature/tech debt** among [github issues](https://github.com/DeHubToken/dehub-nx/issues)
+1. **Create a new branch** from `main` in the following pattern: `{ISSUE_ID}-{NAME}` e.g. `attila-365`
+1. **Implement the task** as you like with commits _(check `pnpm ci` frequently)_
+1. Before Pull Request (PR) ensure that `pnpm ci` run without any issue _(otherwise CI will fail)_
+1. **Create a PR** / Pull request draft to request a review
+1. **In PR include a summary** of your changes, but at least reference the github issue e.g. #356 so after merge the issue will be auto-closed
+1. Ensure **[Github Actions](https://github.com/DeHubToken/dehub-nx/actions) remains green**
+1. **Wait for an approval or collaborate** on review comments
+1. Finally **after approval merge the PR with Squash** _(clean commit history)_
 
-- Repo: **[Github](https://github.com/DeHubToken/dehub-nx)**
-- CI: Github **[Actions](https://github.com/DeHubToken/dehub-nx/actions)**
-- Hosting: **[Netlify](https://dehub.net/)**
+# More Details
 
-Dehub Nx Monorepo consists of the following type of applications:
-
-- Angular
-- React
-
-## Angular
-
-### `web`
-
-DeHub
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a5e07eeb-b383-41df-9bc1-c9dcb4fd93b6/deploy-status)](https://app.netlify.com/sites/web-dehub/deploys)
-
-- Hosting: **[Netlify](https://web-dehub.netlify.app/)**
-
-## React
-
-### `staking`
-
-DeHub Staking Dapp
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3/deploy-status)](https://app.netlify.com/sites/staking-dehub/deploys)
-
-- Hosting: **[Netlify](https://staking-dehub.netlify.app)**
-
-### `buy`
-
-DeHub Buy Dapp
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/11bd4ce0-3bf2-4642-8879-f541c6fed3fe/deploy-status)](https://app.netlify.com/sites/buy-dehub/deploys)
-
-- Hosting: **[Netlify](https://buy-dehub.netlify.app)**
-
-# Libraries
-
-Libraries in Nx are self-contained isolated group of logics. Can represent reusable functionalities or core logic shared across multiple framework (in)dependent apps.
-
-Dehub Nx Monorepo consists of the following type of libraries:
-
-- Angular
-- React
-- Shared
-
-## Angular
-
-Angular libs which can be consumed only from Angular apps like ui libs or core services for example.
-
-### `core`
-
-- Theme switcher
-- GraphQL module with generated services
-
-### `moralis`
-
-- Angular Moralis wrapper _(candidate for [MoralisWeb3 opensource lib](https://github.com/MoralisWeb3/angular-moralis))_
-- Crypto Login, Logout, etc.
-
-### `ui`
-
-_Reusable angular ui components like directives, pipes or components, etc._
-
-## React
-
-Angular libs which can be consumed only from Angular apps like ui libs or core services for example.
-
-### `core`
-
-_React core functionalities_
-
-- Contentful GraphQL generated hooks
-
-### `ui`
-
-_Reusable react ui components like header, footer, etc._
-
-## Shared
-
-Framework independent libs which can be consumed from any Angular or React apps like styles or simple TS utilities or models.
-
-### `config`
-
-_Shared environment variables across react and angular apps_
-
-### `models`
-
-_Common Models, states used in react and angular apps_
-
-- Contentful GraphQL generated models
-
-### `utils`
-
-_Common Utils used in react and angular apps_
-
-### `moralis`
-
-_Common Moralis logic like authentication, walletconnect, etc_
-
-### `graphql`
-
-_GraphQL queries like Contentful (use [graphql codegen](https://www.graphql-code-generator.com/))_
-
-### `assets/dehub`
-
-_Common sass styles, variables, mixins, etc. of DeHUB_
-
-### `assets/freya`
-
-_Common sass styles, assets from the Freya PrimeNG themes_
-
-# PWA Manifest
-
-Generated with [PWA Manifest Generator](https://www.simicart.com/manifest-generator.html/)
-
-1. App name: `DeHub`
-1. Short name: `DeHub`
-1. Display Mode: `fullscreen`
-1. Description: `DeHub - Decentralized Entertainment Hub`
-1. Theme color: `#060d1b`
-1. Background color: `#622f88`
-1. Icon: `shared/asset/dehub/ulogo.png`
+1. [Nx structure](README_nx.md) _([see more](https://nx.dev))_
+1. [Nx generate](README_nx_gen.md)
+1. [Hosting](README_hosting.md)
+1. [Theme](README_theme.md)
+1. [PWA](README_pwa.md) _([see more](https://web.dev/progressive-web-apps/))_
