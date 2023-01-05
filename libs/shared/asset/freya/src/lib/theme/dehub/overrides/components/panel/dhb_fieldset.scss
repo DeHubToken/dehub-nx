@@ -1,0 +1,12 @@
+// @import '../../dhb_theme_variables';
+
+.p-fieldset {
+  &.p-fieldset-toggleable {
+    .p-fieldset-legend {
+      a {
+        // padding: 0 $panelHeaderPadding;
+        padding: 0 1rem;
+      }
+    }
+  }
+}
