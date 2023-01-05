@@ -1,0 +1,13 @@
+fragment GroupPost on GroupPost {
+  sys {
+    ...Sys
+  }
+  icon
+  title
+  description
+  label
+  externalLink
+  highlighted
+  toggleable
+  collapsed
+}
