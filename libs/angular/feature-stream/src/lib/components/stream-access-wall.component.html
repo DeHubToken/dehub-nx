@@ -5,73 +5,42 @@
   <!-- Titles -->
   <dhb-page-header [page]="pageStreamAccessWall"></dhb-page-header>
 
-  <!-- Hardcoded Instructions -->
+  <!-- Group Posts -->
   <div
     [@fadeInUp]
     class="col-12 sm:col-12 md:col-12 xl:col-6 col-offset-0 xl:col-offset-3 mb-8"
   >
-    <!-- Step 1 -->
     <p-fieldset
-      [classList]="'block bg-gradient-2-propagate border-neon-1-propagate'"
+      *rxFor="
+        let group of pageStreamAccessWall?.groupsCollection?.items;
+        let i = index;
+        let isFirst = first
+      "
+      [toggleable]="group.toggleable!"
+      [collapsed]="group.collapsed!"
+      [dhbContentfulDraft]="group.sys"
+      [classList]="'block bg-gradient-2-propagate'"
+      [ngClass]="{
+        'border-neon-1-propagate': !group.highlighted,
+        'border-neon-2-propagate': group.highlighted,
+        'mt-7': !isFirst
+      }"
     >
       <ng-template pTemplate="header">
         <i
-          class="fa-duotone fa-square-1 icon-color-duotone-3 text-4xl pr-3"
+          class="fa-duotone text-4xl pr-3"
+          [class.icon-color-duotone-3]="!group.highlighted"
+          [class.icon-color-duotone-4]="group.highlighted"
+          [ngClass]="group.icon ? group.icon : 'fa-square-' + (i + 1)"
         ></i>
-        <h4 class="inline">Buy</h4>
+        <h4 class="inline">{{ group.title }}</h4>
       </ng-template>
       <p class="text-lg">
-        First things first, you'll need to hold the DeHub token. If you don't
-        hold DeHub yet, buying it is easy. Follow our how-to-buy guidelines if
-        you're unsure.
-      </p>
-      <dhb-buy-dehub-button
-        [cexUrl]="cexUrl"
-        [downloadWalletUrl]="downloadWalletUrl"
-        (buy)="onDexSelected()"
-        (dexSelected)="onDexSelected()"
-      ></dhb-buy-dehub-button>
-    </p-fieldset>
-
-    <!-- Step 2 -->
-    <p-fieldset
-      [classList]="'block bg-gradient-2-propagate border-neon-1-propagate mt-7'"
-    >
-      <ng-template pTemplate="header">
-        <i
-          class="fa-duotone fa-square-2 icon-color-duotone-3 text-4xl pr-3"
-        ></i>
-        <h4 class="inline">Stake</h4>
-      </ng-template>
-      <p class="text-lg">
-        To gain access to the streaming d'app, you'll need to stake a minimum of
-        10,000 DeHub. Hit the link below to stake your DeHub in just a few
-        clicks.
+        {{ group.description }}
       </p>
       <p-button
-        (onClick)="onStakeDeHubClicked($event)"
-        label="Stake DeHub"
-        styleClass="p-button-lg p-button-raised"
-      ></p-button>
-    </p-fieldset>
-
-    <!-- Step 3 -->
-    <p-fieldset
-      [classList]="'block bg-gradient-2-propagate border-neon-2-propagate mt-7'"
-    >
-      <ng-template pTemplate="header">
-        <i
-          class="fa-duotone fa-square-3 icon-color-duotone-4 text-4xl pr-3"
-        ></i>
-        <h4 class="inline">Watch</h4>
-      </ng-template>
-      <p class="text-lg">
-        You now have unlimited access to movies, series, and original
-        productions. Plus, you'll be earning while you stake. Ka-ching.
-      </p>
-      <p-button
-        (onClick)="onWatchClicked($event)"
-        label="Watch"
+        (onClick)="onButtonClicked($event, group.externalLink!)"
+        [label]="group.label!"
         styleClass="p-button-lg p-button-raised"
       ></p-button>
     </p-fieldset>

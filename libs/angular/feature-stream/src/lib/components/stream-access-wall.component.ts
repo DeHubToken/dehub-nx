@@ -6,12 +6,10 @@ import {
 } from '@angular/core';
 import { PageAccessWallCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { BuyDehubFloozComponent } from '@dehub/angular/ui/components/buy-dehub-flooz';
 import { SharedEnv } from '@dehub/shared/config';
 import { PageAccessWallFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { DialogService } from 'primeng/dynamicdialog';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -37,8 +35,7 @@ export class StreamAccessWallComponent implements OnInit {
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
     @Inject(WINDOW) private readonly windowRef: Window,
-    private pageAccessWallCollectionService: PageAccessWallCollectionService,
-    private dialogService: DialogService
+    private pageAccessWallCollectionService: PageAccessWallCollectionService
   ) {}
 
   ngOnInit() {
@@ -54,28 +51,8 @@ export class StreamAccessWallComponent implements OnInit {
       );
   }
 
-  onDexSelected() {
-    this.dialogService.open(BuyDehubFloozComponent, {
-      showHeader: true,
-      header: 'Decentralised Exchange',
-      width: '420px',
-      styleClass: 'bg-gradient-3 border-neon-2',
-      closeOnEscape: true,
-      dismissableMask: true,
-    });
-  }
-
-  onWatchClicked(event: Event) {
+  onButtonClicked(event: Event, externalLink: string) {
     event.preventDefault();
-    this.windowRef.open(this.env.dehub.stream, '_blank', 'noopener,noreferrer');
-  }
-
-  onStakeDeHubClicked(event: Event) {
-    event.preventDefault();
-    this.windowRef.open(
-      this.env.dehub.dapps.staking,
-      '_blank',
-      'noopener,noreferrer'
-    );
+    this.windowRef.open(externalLink, '_blank', 'noopener,noreferrer');
   }
 }

@@ -96,6 +96,22 @@ export const LegalPostFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const GroupPostFragmentDoc = gql`
+  fragment GroupPost on GroupPost {
+    sys {
+      ...Sys
+    }
+    icon
+    title
+    description
+    label
+    externalLink
+    highlighted
+    toggleable
+    collapsed
+  }
+  ${SysFragmentDoc}
+`;
 export const FeaturePostFragmentDoc = gql`
   fragment FeaturePost on FeaturePost {
     sys {
@@ -426,6 +442,11 @@ export const PageAccessWallFragmentDoc = gql`
     }
     headerColumnWidth
     headerAlignCenter
+    groupsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...GroupPost
+      }
+    }
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -440,6 +461,7 @@ export const PageAccessWallFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
+  ${GroupPostFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}

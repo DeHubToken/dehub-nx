@@ -1,0 +1,9 @@
+.p-fieldset {
+  &.p-fieldset-toggleable {
+    .p-fieldset-legend {
+      a {
+        padding: 0 1rem; // TODO: how to reference $panelHeaderPadding here?
+      }
+    }
+  }
+}

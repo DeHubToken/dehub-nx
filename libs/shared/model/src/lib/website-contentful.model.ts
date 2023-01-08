@@ -1911,6 +1911,173 @@ export enum GrandPostOrder {
   VideoUrlDesc = 'videoUrl_DESC',
 }
 
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPost extends Entry {
+  __typename?: 'GroupPost';
+  collapsed?: Maybe<Scalars['Boolean']>;
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  externalLink?: Maybe<Scalars['String']>;
+  highlighted?: Maybe<Scalars['Boolean']>;
+  icon?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<GroupPostLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+  toggleable?: Maybe<Scalars['Boolean']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostCollapsedArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostExternalLinkArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostHighlightedArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostIconArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostLabelArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostToggleableArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface GroupPostCollection {
+  __typename?: 'GroupPostCollection';
+  items: Array<Maybe<GroupPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface GroupPostFilter {
+  AND?: InputMaybe<Array<InputMaybe<GroupPostFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<GroupPostFilter>>>;
+  collapsed?: InputMaybe<Scalars['Boolean']>;
+  collapsed_exists?: InputMaybe<Scalars['Boolean']>;
+  collapsed_not?: InputMaybe<Scalars['Boolean']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  externalLink?: InputMaybe<Scalars['String']>;
+  externalLink_contains?: InputMaybe<Scalars['String']>;
+  externalLink_exists?: InputMaybe<Scalars['Boolean']>;
+  externalLink_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  externalLink_not?: InputMaybe<Scalars['String']>;
+  externalLink_not_contains?: InputMaybe<Scalars['String']>;
+  externalLink_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  highlighted?: InputMaybe<Scalars['Boolean']>;
+  highlighted_exists?: InputMaybe<Scalars['Boolean']>;
+  highlighted_not?: InputMaybe<Scalars['Boolean']>;
+  icon?: InputMaybe<Scalars['String']>;
+  icon_contains?: InputMaybe<Scalars['String']>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_not?: InputMaybe<Scalars['String']>;
+  icon_not_contains?: InputMaybe<Scalars['String']>;
+  icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  label?: InputMaybe<Scalars['String']>;
+  label_contains?: InputMaybe<Scalars['String']>;
+  label_exists?: InputMaybe<Scalars['Boolean']>;
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  label_not?: InputMaybe<Scalars['String']>;
+  label_not_contains?: InputMaybe<Scalars['String']>;
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  toggleable?: InputMaybe<Scalars['Boolean']>;
+  toggleable_exists?: InputMaybe<Scalars['Boolean']>;
+  toggleable_not?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface GroupPostLinkingCollections {
+  __typename?: 'GroupPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
+}
+
+export interface GroupPostLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface GroupPostLinkingCollectionsPageAccessWallCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum GroupPostOrder {
+  CollapsedAsc = 'collapsed_ASC',
+  CollapsedDesc = 'collapsed_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  ExternalLinkAsc = 'externalLink_ASC',
+  ExternalLinkDesc = 'externalLink_DESC',
+  HighlightedAsc = 'highlighted_ASC',
+  HighlightedDesc = 'highlighted_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  ToggleableAsc = 'toggleable_ASC',
+  ToggleableDesc = 'toggleable_DESC',
+}
+
 /** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
 export interface IconTile extends Entry {
   __typename?: 'IconTile';
@@ -2262,6 +2429,7 @@ export interface PageAccessWall extends Entry {
   __typename?: 'PageAccessWall';
   contentfulMetadata: ContentfulMetadata;
   ctasCollection?: Maybe<PageAccessWallCtasCollection>;
+  groupsCollection?: Maybe<PageAccessWallGroupsCollection>;
   headerAlignCenter?: Maybe<Scalars['Boolean']>;
   headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageAccessWallLinkingCollections>;
@@ -2275,6 +2443,14 @@ export interface PageAccessWall extends Entry {
 
 /** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
 export interface PageAccessWallCtasCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
+export interface PageAccessWallGroupsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -2345,6 +2521,7 @@ export interface PageAccessWallFilter {
   OR?: InputMaybe<Array<InputMaybe<PageAccessWallFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   ctasCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  groupsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
@@ -2377,6 +2554,14 @@ export interface PageAccessWallFilter {
   subtitle_not_contains?: InputMaybe<Scalars['String']>;
   subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
+}
+
+export interface PageAccessWallGroupsCollection {
+  __typename?: 'PageAccessWallGroupsCollection';
+  items: Array<Maybe<GroupPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
 }
 
 export interface PageAccessWallLinkingCollections {
@@ -5584,6 +5769,8 @@ export interface Query {
   footerCollection?: Maybe<FooterCollection>;
   grandPost?: Maybe<GrandPost>;
   grandPostCollection?: Maybe<GrandPostCollection>;
+  groupPost?: Maybe<GroupPost>;
+  groupPostCollection?: Maybe<GroupPostCollection>;
   iconTile?: Maybe<IconTile>;
   iconTileCollection?: Maybe<IconTileCollection>;
   legalPost?: Maybe<LegalPost>;
@@ -5838,6 +6025,21 @@ export interface QueryGrandPostCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<GrandPostFilter>;
+}
+
+export interface QueryGroupPostArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryGroupPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<GroupPostOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GroupPostFilter>;
 }
 
 export interface QueryIconTileArgs {
@@ -6941,6 +7143,19 @@ export type GrandPostFragment = {
   };
 };
 
+export type GroupPostFragment = {
+  __typename?: 'GroupPost';
+  icon?: string;
+  title?: string;
+  description?: string;
+  label?: string;
+  externalLink?: string;
+  highlighted?: boolean;
+  toggleable?: boolean;
+  collapsed?: boolean;
+  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+};
+
 export type IconTileFragment = {
   __typename?: 'IconTile';
   icon?: string;
@@ -6979,6 +7194,21 @@ export type PageAccessWallFragment = {
       style?: string;
       size?: string;
       icon?: string;
+      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    }>;
+  };
+  groupsCollection?: {
+    __typename?: 'PageAccessWallGroupsCollection';
+    items: Array<{
+      __typename?: 'GroupPost';
+      icon?: string;
+      title?: string;
+      description?: string;
+      label?: string;
+      externalLink?: string;
+      highlighted?: boolean;
+      toggleable?: boolean;
+      collapsed?: boolean;
       sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
     }>;
   };
@@ -9626,6 +9856,21 @@ export type PageAccessWallCollectionQuery = {
           sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
         }>;
       };
+      groupsCollection?: {
+        __typename?: 'PageAccessWallGroupsCollection';
+        items: Array<{
+          __typename?: 'GroupPost';
+          icon?: string;
+          title?: string;
+          description?: string;
+          label?: string;
+          externalLink?: string;
+          highlighted?: boolean;
+          toggleable?: boolean;
+          collapsed?: boolean;
+          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        }>;
+      };
       sectionsCollection?: {
         __typename?: 'PageAccessWallSectionsCollection';
         items: Array<
@@ -11906,6 +12151,22 @@ export const LegalPostFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const GroupPostFragmentDoc = gql`
+  fragment GroupPost on GroupPost {
+    sys {
+      ...Sys
+    }
+    icon
+    title
+    description
+    label
+    externalLink
+    highlighted
+    toggleable
+    collapsed
+  }
+  ${SysFragmentDoc}
+`;
 export const FeaturePostFragmentDoc = gql`
   fragment FeaturePost on FeaturePost {
     sys {
@@ -12236,6 +12497,11 @@ export const PageAccessWallFragmentDoc = gql`
     }
     headerColumnWidth
     headerAlignCenter
+    groupsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...GroupPost
+      }
+    }
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -12250,6 +12516,7 @@ export const PageAccessWallFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
+  ${GroupPostFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
