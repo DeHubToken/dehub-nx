@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.coreService.loadIcon();
 
     this.pwaService.subscribeForNewUpdates();
-    this.announcementService.subscribeForAnnouncements();
+    // this.announcementService.subscribeForAnnouncements();
 
     const { loaderVisible$, subtitle$, loaderGif } = this.loaderService;
     this.loaderVisible$ = loaderVisible$;

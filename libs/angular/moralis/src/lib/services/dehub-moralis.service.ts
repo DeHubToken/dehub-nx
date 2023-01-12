@@ -20,6 +20,8 @@ import {
   MoralisFunctions,
   ShopContractPropsType,
   ShopContractResponse,
+  ShopOrdersParams,
+  ShopOrdersResult,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
@@ -90,6 +92,42 @@ export class DehubMoralisService implements IDehubMoralisService {
     private messageService: MessageService,
     private httpClient: HttpClient
   ) {}
+
+  /**
+   * Gets a list of all shop orders associated with the given contentfulId.
+   */
+  getDeHubShopOrders$(params: ShopOrdersParams) {
+    const url = this.moralisService.getCloudFunctionUrl(
+      MoralisFunctions.Shop.ShopOrders
+    );
+    this.logger.info(
+      `Sending ${MoralisFunctions.Shop.ShopOrders} request to Moralis...`,
+      params
+    );
+    return this.httpClient.post<ShopOrdersResult>(url, params).pipe(
+      tap(resp =>
+        this.logger.debug(`${MoralisFunctions.Shop.ShopOrders} response`, resp)
+      ),
+      map(resp => resp.result)
+    );
+
+    // const ShopOrder = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
+    // const query = new Moralis.Query<DeHubShopOrder>(ShopOrder);
+    // query.include('user');
+    // query.equalTo('contentfulId', contentfulId);
+    // query.equalTo('status', orderStatus);
+
+    // return from(query.find()).pipe(
+    //   map(result => (result.length ? result : undefined)),
+    //   tap(shopOrder =>
+    //     this.logger.debug(
+    //       `${MoralisClass.DeHubShopOrders}:`,
+    //       shopOrder ? shopOrder.map(order => order.attributes) : shopOrder
+    //     )
+    //   ),
+    //   publishReplayRefCount()
+    // );
+  }
 
   /**
    * Gets a list of all shipping addresses associated with the current user.
@@ -190,7 +228,10 @@ export class DehubMoralisService implements IDehubMoralisService {
     const url = this.moralisService.getCloudFunctionUrl(
       MoralisFunctions.Shop.InitOrder
     );
-    this.logger.info('Sending initOrder request to Moralis...', params);
+    this.logger.info(
+      `Sending ${MoralisFunctions.Shop.InitOrder} request to Moralis...`,
+      params
+    );
     return this.httpClient.post<InitOrderResponse>(url, params).pipe(
       tap(resp =>
         this.logger.debug(`${MoralisFunctions.Shop.InitOrder} response`, resp)

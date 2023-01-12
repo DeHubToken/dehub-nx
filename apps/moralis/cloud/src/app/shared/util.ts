@@ -9,6 +9,7 @@
 import {
   DeHubTokenContractPropsType,
   MoralisClass,
+  MoralisUser,
   StakingContractPropsType,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
@@ -20,7 +21,7 @@ export async function isMoralisUserByAddress(
 ): Promise<MoralisUser | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const query = new Moralis.Query(Moralis.User);
+    const query = new Moralis.Query<MoralisUser>(Moralis.User);
     query.contains('accounts', address);
     const users: MoralisUser[] = await query.find({
       useMasterKey: true,
