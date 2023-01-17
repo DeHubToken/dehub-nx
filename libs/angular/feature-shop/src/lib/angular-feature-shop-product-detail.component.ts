@@ -24,14 +24,10 @@ import { ProductDetailService } from './services';
         <!-- Back (top) -->
         <dhb-back-button [routerLink]="['/shop']"></dhb-back-button>
 
-        <!-- Product Buyers -->
-        <dhb-product-orders
-          [productOrders$]="productOrders$"
-        ></dhb-product-orders>
-
         <!-- Product Detail -->
         <dhb-product-detail
           [productDetail$]="productDetail$"
+          [productOrders$]="productOrders$"
         ></dhb-product-detail>
 
         <!-- Back (bottom) -->

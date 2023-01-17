@@ -176,6 +176,7 @@ export const shopOrders = async ({
     query.include('user');
     query.equalTo('contentfulId', contentfulId);
     query.equalTo('status', orderStatus);
+    query.descending('updatedAt');
 
     const result = await query.find({ useMasterKey: true });
     return result;
