@@ -1,5 +1,7 @@
 import { ShopContractPropsType } from './contract.model';
+import { DeHubShopShippingAddress } from './dehub-moralis.model';
 import { PhysicalAddress } from './location.model';
+import { User } from './moralis.model';
 
 export enum OrderStatus {
   ipfsUploading = 'ipfsUploading',
@@ -38,11 +40,35 @@ export interface InitOrderParams {
   address: string;
   referralAddress?: string;
   productData: ProductData;
-  shippingAddress?: PhysicalAddress;
+  shippingAddress: PhysicalAddress;
   contentfulId: string;
   quantity: number;
   totalAmount: number;
   currency: Currency;
+}
+
+export interface ShopOrdersParams {
+  contentfulId: string;
+  orderStatus: OrderStatus;
+}
+
+export interface ShopOrder {
+  objectId: string;
+  ipfsHash: string;
+  shippingAddress: DeHubShopShippingAddress;
+  quantity: number;
+  user: User;
+  updatedAt: string;
+  currency: Currency;
+  status: OrderStatus;
+  tokeId: number;
+  referralAddress?: string;
+  productName: string;
+  createdAt: string;
+  totalAmount: number;
+  sku: string;
+  imageIpfsHash: string;
+  contentfulId: string;
 }
 
 export interface CheckOrderParams {
@@ -55,6 +81,10 @@ export interface CheckOrderParams {
 export interface InitOrderResult {
   orderId: string;
   ipfsHash: string;
+}
+
+export interface ShopOrdersResult {
+  result: ShopOrder[];
 }
 
 export interface CheckOrderResult {

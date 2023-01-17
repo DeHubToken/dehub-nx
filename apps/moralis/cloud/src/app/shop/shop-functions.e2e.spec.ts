@@ -1,5 +1,6 @@
 require('../shared/mock.include');
 import {
+  DeHubShopOrder,
   InitOrderParams,
   InitOrderResult,
   MoralisClass,
@@ -68,7 +69,7 @@ describe('E2E Shop functions', () => {
 
     // Check if Order is added successfully
     const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
-    const queryOrders = new Moralis.Query(DeHubShopOrders);
+    const queryOrders = new Moralis.Query<DeHubShopOrder>(DeHubShopOrders);
     queryOrders.equalTo('objectId', res.orderId);
     const order = await queryOrders.first();
     expect(order).toBeDefined;
@@ -116,7 +117,7 @@ describe('E2E Shop functions', () => {
 
     // Check if Order is added successfully
     const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
-    const queryOrders = new Moralis.Query(DeHubShopOrders);
+    const queryOrders = new Moralis.Query<DeHubShopOrder>(DeHubShopOrders);
     queryOrders.equalTo('objectId', res.orderId);
     const order = await queryOrders.first();
     expect(order).toBeDefined;
@@ -162,7 +163,7 @@ describe('E2E Shop functions', () => {
 
     // Check if Order is added successfully
     const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
-    const queryOrders = new Moralis.Query(DeHubShopOrders);
+    const queryOrders = new Moralis.Query<DeHubShopOrder>(DeHubShopOrders);
     queryOrders.equalTo('objectId', res.orderId);
     const order = await queryOrders.first();
     expect(order).toBeDefined;
@@ -223,7 +224,7 @@ describe('E2E Shop functions', () => {
 
     // Check if Order is added successfully
     const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
-    const queryOrders = new Moralis.Query(DeHubShopOrders);
+    const queryOrders = new Moralis.Query<DeHubShopOrder>(DeHubShopOrders);
     queryOrders.equalTo('objectId', resOrder.orderId);
     const order = await queryOrders.first();
     expect(order).toBeDefined;

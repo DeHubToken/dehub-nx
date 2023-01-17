@@ -10,6 +10,7 @@ import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ProductMiniModule } from '@dehub/angular/ui/components/product-mini';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+import { AddressPipe } from '@dehub/angular/ui/pipes/address';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { LetModule, PushModule } from '@rx-angular/template';
@@ -23,6 +24,7 @@ import { AngularFeatureShopRoutingModule } from './angular-feature-shop-routing.
 import { AngularFeatureShopComponent } from './angular-feature-shop.component';
 import { CheckoutFormComponent } from './components/checkout-form.component';
 import { ProductDetailComponent } from './components/product-detail.component';
+import { ProductOrdersComponent } from './components/product-orders.component';
 import { ProductDetailService } from './services';
 
 // Install Swiper modules
@@ -46,6 +48,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     ContactsFormModule,
     LoadingModule,
     BackButtonModule,
+    AddressPipe,
 
     // PrimeNg
     InputNumberModule,
@@ -65,6 +68,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     AngularFeatureShopComponent,
     AngularFeatureShopProductDetailComponent,
     ProductDetailComponent,
+    ProductOrdersComponent,
     CheckoutFormComponent,
   ],
   providers: [ProductDetailService],

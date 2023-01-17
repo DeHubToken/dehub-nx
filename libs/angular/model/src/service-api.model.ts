@@ -15,10 +15,12 @@ import {
   GetTokenMetadataParameters,
   InitOrderParams,
   InitOrderResult,
+  MoralisUser,
   NativeBalance,
   ProductAvailableQuantityFragment,
   ShopContractPropsType,
-  User,
+  ShopOrder,
+  ShopOrdersParams,
   WalletConnectState,
 } from '@dehub/shared/model';
 import { TransactionReceipt } from '@ethersproject/abstract-provider';
@@ -34,14 +36,14 @@ export interface ILoggerService {
 
 /** Generic Moralis API service */
 export interface IMoralisService {
-  user$: Observable<User | undefined>;
+  user$: Observable<MoralisUser | undefined>;
   userAttributes$: Observable<Attributes | undefined>;
   account$: Observable<string | undefined>;
   isAuthenticated$: Observable<boolean>;
   username$: Observable<string>;
   walletConnectState$: Observable<WalletConnectState>;
 
-  updateUser$: (attributes: Partial<Attributes>) => Observable<User>;
+  updateUser$: (attributes: Partial<Attributes>) => Observable<MoralisUser>;
 
   // Authentication
   login: (
@@ -49,8 +51,8 @@ export interface IMoralisService {
     chainId: number,
     magicLinkEmail: string,
     magicLinkApiKey: string
-  ) => Promise<void | User>;
-  logout: () => Promise<void | User>;
+  ) => Promise<void | MoralisUser>;
+  logout: () => Promise<void | MoralisUser>;
 
   // Token APIs
   getTokenAllowance$: (
@@ -86,6 +88,9 @@ export interface IDehubMoralisService {
   getDeHubShopShippingAddresses$: () => Observable<
     DeHubShopShippingAddress[] | undefined
   >;
+  getDeHubShopOrders$: (
+    params: ShopOrdersParams
+  ) => Observable<ShopOrder[] | undefined>;
   getWalletBalance$: (
     currency: Currency,
     address: string
