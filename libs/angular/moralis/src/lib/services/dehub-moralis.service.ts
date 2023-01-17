@@ -110,23 +110,6 @@ export class DehubMoralisService implements IDehubMoralisService {
       ),
       map(resp => resp.result)
     );
-
-    // const ShopOrder = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
-    // const query = new Moralis.Query<DeHubShopOrder>(ShopOrder);
-    // query.include('user');
-    // query.equalTo('contentfulId', contentfulId);
-    // query.equalTo('status', orderStatus);
-
-    // return from(query.find()).pipe(
-    //   map(result => (result.length ? result : undefined)),
-    //   tap(shopOrder =>
-    //     this.logger.debug(
-    //       `${MoralisClass.DeHubShopOrders}:`,
-    //       shopOrder ? shopOrder.map(order => order.attributes) : shopOrder
-    //     )
-    //   ),
-    //   publishReplayRefCount()
-    // );
   }
 
   /**

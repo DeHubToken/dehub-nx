@@ -13,7 +13,7 @@ import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/con
 import { AddressPipe } from '@dehub/angular/ui/pipes/address';
 import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
 import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
-import { ForModule, LetModule, PushModule } from '@rx-angular/template';
+import { LetModule, PushModule } from '@rx-angular/template';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
@@ -61,7 +61,6 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     // Rx Angular,
     LetModule,
     PushModule,
-    ForModule,
 
     AngularFeatureShopRoutingModule,
   ],
