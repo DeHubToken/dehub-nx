@@ -3,7 +3,9 @@ import { Signer } from '@ethersproject/abstract-signer';
 import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { Provider } from '@ethersproject/providers';
 import MulticallAbi from '../config/abis/Multicall.json';
-import { getMultiCallAddress } from './addressHelpers';
+import { DeHubStaking } from '../config/typechain/contracts';
+import { DeHubStaking__factory } from '../config/typechain/factories/contracts';
+import { getMultiCallAddress, getStakingAddress } from './addressHelpers';
 import { simpleRpcProvider } from './providers';
 
 /** TODO: use or move to shared/util/contract.utils.ts  */
@@ -33,4 +35,13 @@ export const getVersion = async (contract: Contract) => {
   } catch (error) {
     return 1;
   }
+};
+
+export const getStakingContract = (
+  signer?: Signer | Provider
+): DeHubStaking => {
+  return DeHubStaking__factory.connect(
+    getStakingAddress(),
+    signer ?? simpleRpcProvider
+  );
 };

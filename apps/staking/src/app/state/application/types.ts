@@ -8,89 +8,41 @@ export enum ApplicationStatus {
   ERROR = 'error',
 }
 
-export interface ContractProperties {
-  address: string; // contract address
-  name: string; // contract name
-  chainId: number;
-  abi: string[];
-}
-
-export interface StakingContractProperties extends ContractProperties {
-  year: number;
-  month: number;
-}
-
-export interface SerializedPoolInfo {
-  openTimeStamp: number;
-  closeTimeStamp: number;
-  openBlock: number;
-  closeBlock: number;
-  emergencyPull: boolean;
-  harvestFund: SerializedBigNumber;
-  lastUpdateBlock: SerializedBigNumber;
-  valuePerBlock: SerializedBigNumber;
-  totalStaked: SerializedBigNumber;
-}
-
 export interface PoolInfo {
-  openTimeStamp: number;
-  closeTimeStamp: number;
-  openBlock: number;
-  closeBlock: number;
-  emergencyPull: boolean;
-  harvestFund: BigNumber;
-  lastUpdateBlock: BigNumber;
-  valuePerBlock: BigNumber;
-  totalStaked: BigNumber;
+  stakingStartAt: number;
+  tierPeriods: number[];
+  tierPercents: number[];
+  rewardPeriod: number;
+  lastRewardIndex: number;
+  forceUnstakeFee: number;
 }
 
 export interface PoolPaused {
   paused: boolean;
 }
 
-export type SerializedPoolInfoPaused = SerializedPoolInfo & PoolPaused;
-
 export type PoolInfoAndPaused = PoolInfo & PoolPaused;
 
-export interface SerializedUserInfo {
-  amount: SerializedBigNumber;
-  reflectionDebt: SerializedBigNumber;
-  reflectionPending: SerializedBigNumber;
-  harvestDebt: SerializedBigNumber;
-  harvestPending: SerializedBigNumber;
-  harvested: boolean;
-}
-
-export interface SerializedUserPendingHarvest {
-  pendingHarvest: SerializedBigNumber;
-}
-
-export type SerializedPoolUserInfo = SerializedUserInfo &
-  SerializedUserPendingHarvest;
-
 export interface UserInfo {
-  amount: BigNumber;
-  reflectionDebt: BigNumber;
-  reflectionPending: BigNumber;
-  harvestDebt: BigNumber;
-  harvestPending: BigNumber;
-  harvested: boolean;
+  totalAmount: BigNumber;
+  unlockedAt: number;
+  harvestTotal: BigNumber;
+  harvestClaimed: BigNumber;
 }
 
-export type PoolUserInfo = UserInfo & {
-  pendingHarvest: BigNumber;
-};
+export interface SerializedUserInfo {
+  totalAmount: SerializedBigNumber;
+  unlockedAt: number;
+  harvestTotal: SerializedBigNumber;
+  harvestClaimed: SerializedBigNumber;
+}
 
 export interface ApplicationState {
   applicationStatus: ApplicationStatus;
   dehubPrice: SerializedBigNumber;
-  stakingContracts: StakingContractProperties[] | null;
-  stakingController: ContractProperties | null;
-  bnbRewardContract: ContractProperties | null;
-  pools: SerializedPoolInfoPaused[];
-  poolsLoading: boolean;
-  userInfos: SerializedPoolUserInfo[];
-  userInfosLoading: boolean;
-  pendingHarvestLoading: boolean;
+  poolInfo: PoolInfoAndPaused | undefined;
+  poolInfoLoading: boolean;
+  userInfo: SerializedUserInfo | undefined;
+  userInfoLoading: boolean;
   readonly blockNumber: { readonly [chainId: number]: number };
 }

@@ -33,6 +33,7 @@ export interface ContractsEnv {
   bnbBusd: string;
   busd: string;
   multiCall: string;
+  staking: string;
 }
 
 interface Web3Env {
@@ -140,6 +141,7 @@ export const defaultSharedEnv: SharedEnv = {
         bnbBusd: '0xe0e92035077c39594793e61802a350347c320cf2',
         busd: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
         multiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
+        staking: '',
       },
     },
     auth: {
