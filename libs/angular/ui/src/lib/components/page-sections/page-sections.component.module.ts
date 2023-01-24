@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { PushModule } from '@rx-angular/template';
+import { PushModule } from '@rx-angular/template/push';
 import { PageSectionBasicPostsModule } from '../page-section-basic-posts';
 import { PageSectionDappPostsModule } from '../page-section-dapp-posts';
 import { PageSectionFaQsModule } from '../page-section-faqs';

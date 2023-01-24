@@ -4,7 +4,7 @@ export interface LoaderProps {
   loaderGif?: string;
 }
 
-const Loader = ({
+export const Loader = ({
   title = 'Loading...',
   subtitle = '',
   loaderGif = '',

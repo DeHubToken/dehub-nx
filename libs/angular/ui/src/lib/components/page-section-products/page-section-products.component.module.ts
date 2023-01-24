@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PushModule } from '@rx-angular/template';
+import { PushModule } from '@rx-angular/template/push';
 // Swiper core and required modules
 import SwiperCore, { Navigation } from 'swiper';
 import { SwiperModule } from 'swiper/angular';

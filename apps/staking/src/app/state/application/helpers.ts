@@ -1,5 +1,5 @@
 import { ethersToSerializedBigNumber } from '@dehub/shared/utils';
-import { Call, multicallv2 } from '../../utils/multicall';
+import { Call, multicallV2 } from '../../utils/multicall';
 import { SerializedPoolInfo } from './types';
 
 export const fetchPools = async (
@@ -12,7 +12,7 @@ export const fetchPools = async (
       address,
     }));
 
-    const pools = await multicallv2(abi, calls);
+    const pools = await multicallV2(abi, calls);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return pools.map((poolInfo: any) => ({
       openTimeStamp: Number(poolInfo?.openTimeStamp),
@@ -41,7 +41,7 @@ export const fetchPoolsPaused = async (
       address,
     }));
 
-    const pauseds = await multicallv2(abi, calls);
+    const pauseds = await multicallV2(abi, calls);
     return pauseds.map((paused: boolean[]) => paused[0]);
   } catch (error) {
     console.error(error);

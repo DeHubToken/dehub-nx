@@ -10,7 +10,8 @@ import {
   ScopeToken,
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
-import { LetModule, PushModule } from '@rx-angular/template';
+import { LetModule } from '@rx-angular/template/let';
+import { PushModule } from '@rx-angular/template/push';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';

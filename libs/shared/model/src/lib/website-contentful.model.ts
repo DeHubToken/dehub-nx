@@ -13054,10 +13054,15 @@ export const ProductCollectionBySlugDocument = gql`
 
 export type SdkFunctionWrapper = <T>(
   action: (requestHeaders?: Record<string, string>) => Promise<T>,
-  operationName: string
+  operationName: string,
+  operationType?: string
 ) => Promise<T>;
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+const defaultWrapper: SdkFunctionWrapper = (
+  action,
+  _operationName,
+  _operationType
+) => action();
 
 export function getSdk(
   client: GraphQLClient,
@@ -13075,7 +13080,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'announcementCollection'
+        'announcementCollection',
+        'query'
       );
     },
     basicPostCollectionBySlug(
@@ -13089,7 +13095,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'basicPostCollectionBySlug'
+        'basicPostCollectionBySlug',
+        'query'
       );
     },
     footerCollection(
@@ -13103,7 +13110,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'footerCollection'
+        'footerCollection',
+        'query'
       );
     },
     legalPostCollectionBySlug(
@@ -13117,7 +13125,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'legalPostCollectionBySlug'
+        'legalPostCollectionBySlug',
+        'query'
       );
     },
     pageAccessWallCollection(
@@ -13131,7 +13140,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageAccessWallCollection'
+        'pageAccessWallCollection',
+        'query'
       );
     },
     pageEarnCollection(
@@ -13145,7 +13155,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageEarnCollection'
+        'pageEarnCollection',
+        'query'
       );
     },
     pageGameCollection(
@@ -13159,7 +13170,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageGameCollection'
+        'pageGameCollection',
+        'query'
       );
     },
     pageHomeCollection(
@@ -13173,7 +13185,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageHomeCollection'
+        'pageHomeCollection',
+        'query'
       );
     },
     pageLearnCollection(
@@ -13187,7 +13200,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageLearnCollection'
+        'pageLearnCollection',
+        'query'
       );
     },
     pageShopCollection(
@@ -13201,7 +13215,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageShopCollection'
+        'pageShopCollection',
+        'query'
       );
     },
     pageStreamCollection(
@@ -13215,7 +13230,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageStreamCollection'
+        'pageStreamCollection',
+        'query'
       );
     },
     productCollectionBySlug(
@@ -13229,7 +13245,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'productCollectionBySlug'
+        'productCollectionBySlug',
+        'query'
       );
     },
   };
