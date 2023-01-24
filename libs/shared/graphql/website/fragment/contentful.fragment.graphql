@@ -1,4 +1,5 @@
 fragment Sys on Sys {
+  firstPublishedAt
   publishedAt
   id
 }

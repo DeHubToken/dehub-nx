@@ -5,6 +5,7 @@ import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export const SysFragmentDoc = gql`
   fragment Sys on Sys {
+    firstPublishedAt
     publishedAt
     id
   }
