@@ -4,7 +4,7 @@ export { default as BuyDeHubFloozModal } from './lib/BuyDeHubFloozModal';
 export { default as Footer } from './lib/Footer';
 export { default as Header } from './lib/Header';
 export * from './lib/Layout';
-export { default as Loader, LoaderProps } from './lib/Loader';
+export * from './lib/Loader';
 export { default as FullScreenLoader } from './lib/Loader/FullScreenLoader';
 export * from './lib/MultiStepWizard';
 export { default as SuspenseWithChunkError } from './lib/SuspenseWithChunkError';
