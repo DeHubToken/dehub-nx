@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import applicationReducer from './application';
 
 const store = configureStore({
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env['NODE_ENV'] !== 'production',
   reducer: {
     application: applicationReducer,
   },

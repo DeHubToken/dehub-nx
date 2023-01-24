@@ -119,7 +119,18 @@ const StakeModal: React.FC<StakeModalProps> = ({
 
   const handleEnterPosition = async () => {
     const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
-    const allowance = await dehubContract?.allowance(
+    if (!dehubContract) {
+      toast?.current?.show({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'DeHub Contract was not found!',
+        life: 4000,
+      });
+
+      return;
+    }
+
+    const allowance = await dehubContract['allowance'](
       account,
       stakingContractAddress
     );
@@ -127,7 +138,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
     try {
       setIsTxPending(true);
       if (allowance < decimalValue.toNumber()) {
-        const txApprove = await dehubContract?.approve(
+        const txApprove = await dehubContract['approve'](
           stakingContractAddress,
           MaxUint256
         );
@@ -154,13 +165,13 @@ const StakeModal: React.FC<StakeModalProps> = ({
         let receipt: TransactionReceipt;
         if (type === 'stake') {
           const tx = isV1Quarter
-            ? await stakingContract.deposit(decimalValue.toNumber())
-            : await stakingController.deposit(decimalValue.toNumber());
+            ? await stakingContract['deposit'](decimalValue.toNumber())
+            : await stakingController['deposit'](decimalValue.toNumber());
           receipt = await tx.wait();
         } else {
           const tx = isV1Quarter
-            ? await stakingContract.withdraw(decimalValue.toNumber())
-            : await stakingController.withdraw(decimalValue.toNumber());
+            ? await stakingContract['withdraw'](decimalValue.toNumber())
+            : await stakingController['withdraw'](decimalValue.toNumber());
           receipt = await tx.wait();
         }
 
@@ -198,7 +209,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
     const fetchFee = async () => {
       if (!stakingContract) return;
 
-      const fee = await stakingContract.EARLY_WITHDRAW_FEE();
+      const fee = await stakingContract['EARLY_WITHDRAW_FEE']();
       setWithdrawFee(Number(fee));
     };
     fetchFee();
