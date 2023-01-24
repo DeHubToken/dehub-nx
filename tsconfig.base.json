@@ -48,7 +48,6 @@
       "@dehub/shared/model": ["libs/shared/model/src/index.ts"],
       "@dehub/shared/util/*": ["libs/shared/util/src/lib/*"],
       "@dehub/shared/utils": ["libs/shared/util/src/index.ts"],
-      "assert": ["./node_modules/assert"],
       "crypto": ["./node_modules/crypto-browserify"],
       "http": ["./node_modules/stream-http"],
       "https": ["./node_modules/https-browserify"],
