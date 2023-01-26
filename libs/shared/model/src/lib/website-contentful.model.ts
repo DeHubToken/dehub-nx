@@ -2035,6 +2035,7 @@ export interface GroupPostLinkingCollections {
   __typename?: 'GroupPostLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
   pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
+  pageStreamCollection?: Maybe<PageStreamCollection>;
 }
 
 export interface GroupPostLinkingCollectionsEntryCollectionArgs {
@@ -2045,6 +2046,13 @@ export interface GroupPostLinkingCollectionsEntryCollectionArgs {
 }
 
 export interface GroupPostLinkingCollectionsPageAccessWallCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface GroupPostLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -5024,6 +5032,7 @@ export interface PageStream extends Entry {
   __typename?: 'PageStream';
   contentfulMetadata: ContentfulMetadata;
   ctasCollection?: Maybe<PageStreamCtasCollection>;
+  groupsCollection?: Maybe<PageStreamGroupsCollection>;
   headerAlignCenter?: Maybe<Scalars['Boolean']>;
   headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageStreamLinkingCollections>;
@@ -5037,6 +5046,14 @@ export interface PageStream extends Entry {
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
 export interface PageStreamCtasCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
+export interface PageStreamGroupsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -5107,6 +5124,7 @@ export interface PageStreamFilter {
   OR?: InputMaybe<Array<InputMaybe<PageStreamFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   ctasCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  groupsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
@@ -5139,6 +5157,14 @@ export interface PageStreamFilter {
   subtitle_not_contains?: InputMaybe<Scalars['String']>;
   subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
+}
+
+export interface PageStreamGroupsCollection {
+  __typename?: 'PageStreamGroupsCollection';
+  items: Array<Maybe<GroupPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
 }
 
 export interface PageStreamLinkingCollections {
@@ -5819,6 +5845,8 @@ export interface Query {
   sectionPostCollection?: Maybe<SectionPostCollection>;
   testArticle?: Maybe<TestArticle>;
   testArticleCollection?: Maybe<TestArticleCollection>;
+  testNewContentType?: Maybe<TestNewContentType>;
+  testNewContentTypeCollection?: Maybe<TestNewContentTypeCollection>;
   thumbnailPost?: Maybe<ThumbnailPost>;
   thumbnailPostCollection?: Maybe<ThumbnailPostCollection>;
 }
@@ -6402,6 +6430,21 @@ export interface QueryTestArticleCollectionArgs {
   where?: InputMaybe<TestArticleFilter>;
 }
 
+export interface QueryTestNewContentTypeArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryTestNewContentTypeCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<TestNewContentTypeOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TestNewContentTypeFilter>;
+}
+
 export interface QueryThumbnailPostArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -6719,6 +6762,72 @@ export enum TestArticleOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
+}
+
+/** Test for merge [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testNewContentType) */
+export interface TestNewContentType extends Entry {
+  __typename?: 'TestNewContentType';
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<TestNewContentTypeLinkingCollections>;
+  name?: Maybe<Scalars['String']>;
+  sys: Sys;
+}
+
+/** Test for merge [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testNewContentType) */
+export interface TestNewContentTypeLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Test for merge [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testNewContentType) */
+export interface TestNewContentTypeNameArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface TestNewContentTypeCollection {
+  __typename?: 'TestNewContentTypeCollection';
+  items: Array<Maybe<TestNewContentType>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface TestNewContentTypeFilter {
+  AND?: InputMaybe<Array<InputMaybe<TestNewContentTypeFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<TestNewContentTypeFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  name?: InputMaybe<Scalars['String']>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_exists?: InputMaybe<Scalars['Boolean']>;
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+}
+
+export interface TestNewContentTypeLinkingCollections {
+  __typename?: 'TestNewContentTypeLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface TestNewContentTypeLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum TestNewContentTypeOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 /** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
@@ -10588,6 +10697,26 @@ export type PageStreamFragment = {
       };
     }>;
   };
+  groupsCollection?: {
+    __typename?: 'PageStreamGroupsCollection';
+    items: Array<{
+      __typename?: 'GroupPost';
+      icon?: string;
+      title?: string;
+      description?: string;
+      label?: string;
+      externalLink?: string;
+      highlighted?: boolean;
+      toggleable?: boolean;
+      collapsed?: boolean;
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
+    }>;
+  };
   sectionsCollection?: {
     __typename?: 'PageStreamSectionsCollection';
     items: Array<
@@ -14169,6 +14298,26 @@ export type PageStreamCollectionQuery = {
           };
         }>;
       };
+      groupsCollection?: {
+        __typename?: 'PageStreamGroupsCollection';
+        items: Array<{
+          __typename?: 'GroupPost';
+          icon?: string;
+          title?: string;
+          description?: string;
+          label?: string;
+          externalLink?: string;
+          highlighted?: boolean;
+          toggleable?: boolean;
+          collapsed?: boolean;
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
+        }>;
+      };
       sectionsCollection?: {
         __typename?: 'PageStreamSectionsCollection';
         items: Array<
@@ -15448,6 +15597,11 @@ export const PageStreamFragmentDoc = gql`
     }
     headerColumnWidth
     headerAlignCenter
+    groupsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...GroupPost
+      }
+    }
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -15463,6 +15617,7 @@ export const PageStreamFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
+  ${GroupPostFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}

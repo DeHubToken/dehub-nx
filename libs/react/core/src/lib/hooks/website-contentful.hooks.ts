@@ -833,6 +833,11 @@ export const PageStreamFragmentDoc = gql`
     }
     headerColumnWidth
     headerAlignCenter
+    groupsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...GroupPost
+      }
+    }
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -848,6 +853,7 @@ export const PageStreamFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
+  ${GroupPostFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
