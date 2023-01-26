@@ -81,7 +81,6 @@ export interface IMoralisService {
 
 /** Dehub specific moralis business logic */
 export interface IDehubMoralisService {
-  canPlay$: Observable<boolean>;
   userContacts$: Observable<Contacts>;
   userShippingAddress$: Observable<DeHubShopShippingAddress | null>;
 

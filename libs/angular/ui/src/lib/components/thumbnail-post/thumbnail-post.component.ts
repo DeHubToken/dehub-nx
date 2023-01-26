@@ -15,7 +15,7 @@ import { ThumbnailPostFragment } from '@dehub/shared/model';
           <ng-container *ngIf="thumbnailPost.link as link">
             <!-- Video Post -->
             <ng-container *ngIf="thumbnailPost.isVideo; else notVideo">
-              <a href="#" [dhbCanPlay]="link">
+              <a href="#">
                 <i class="fad fa-play-circle"></i>
                 <dhb-heavy-picture
                   [container]="thumbnailPost"

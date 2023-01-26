@@ -10,7 +10,6 @@ import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { AngularFeatureStreamRoutingModule } from './angular-feature-stream-routing.module';
 import { AngularFeatureStreamComponent } from './angular-feature-stream.component';
-import { CanPlayGuard } from './guards';
 
 @NgModule({
   imports: [
@@ -34,6 +33,5 @@ import { CanPlayGuard } from './guards';
     AngularFeatureStreamRoutingModule,
   ],
   declarations: [AngularFeatureStreamComponent],
-  providers: [CanPlayGuard],
 })
 export class AngularFeatureStreamModule {}
