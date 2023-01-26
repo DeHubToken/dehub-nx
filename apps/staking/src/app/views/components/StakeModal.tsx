@@ -1,31 +1,15 @@
-import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
-import { BalanceInput, Box, Text } from '@dehub/react/ui';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import {
-  BIG_ZERO,
-  getBalanceAmount,
-  getDecimalAmount,
-} from '@dehub/shared/utils';
-import { TransactionReceipt } from '@ethersproject/abstract-provider';
-import { MaxUint256 } from '@ethersproject/constants';
-import { Contract } from '@ethersproject/contracts';
+import { useWeb3Context } from '@dehub/react/core';
+import { Text } from '@dehub/react/ui';
 import BigNumber from 'bignumber.js';
 import { capitalize } from 'lodash';
-import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { Slider, SliderChangeParams } from 'primereact/slider';
 import { Toast } from 'primereact/toast';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import {
-  useDehubContract,
-  usePickStakingContract,
-  usePickStakingControllerContract,
-} from '../../hooks/useContract';
+import { useDehubContract } from '../../hooks/useContract';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { useStakes } from '../../state/application/hooks';
-import { PoolUserInfo } from '../../state/application/types';
-import { getVersion } from '../../utils/contractHelpers';
+import { useUserInfo } from '../../state/application/hooks';
+import { UserInfo } from '../../state/application/types';
 
 interface StakeModalProps {
   poolIndex: number;
@@ -47,14 +31,14 @@ const getButtonProps = (
   type: 'stake' | 'unstake',
   value: BigNumber,
   dehubBalance: BigNumber,
-  userStakeInfo?: PoolUserInfo
+  userStakeInfo?: UserInfo
 ) => {
   if (!userStakeInfo) {
     return { key: 'None', disabled: true };
   }
   if (type === 'stake' && dehubBalance.isZero()) {
     return { key: 'Insufficient DeHub balance', disabled: true };
-  } else if (type === 'unstake' && userStakeInfo.amount.isZero()) {
+  } else if (type === 'unstake' && userStakeInfo.totalAmount.isZero()) {
     return { key: 'No DeHub staked', disabled: true };
   }
 
@@ -71,15 +55,9 @@ const StakeModal: React.FC<StakeModalProps> = ({
   onHide,
 }) => {
   const { account } = useWeb3Context();
-  const stakingController: Contract | null = usePickStakingControllerContract();
-  const stakingContract: Contract | null = usePickStakingContract(poolIndex);
   const dehubContract = useDehubContract();
 
-  const { userInfos, userInfosLoading, pendingHarvestLoading } = useStakes();
-  const userStakeInfo =
-    userInfosLoading || pendingHarvestLoading
-      ? undefined
-      : userInfos[poolIndex];
+  const { userInfo, userInfoLoading } = useUserInfo();
   const dehubBalance = useGetDehubBalance();
 
   const [value, setValue] = useState<string>('');
@@ -89,134 +67,134 @@ const StakeModal: React.FC<StakeModalProps> = ({
 
   const toast = useRef<Toast>(null);
 
-  const maxBalance = !userStakeInfo
-    ? BIG_ZERO.toNumber()
-    : getBalanceAmount(
-        type === 'stake' ? dehubBalance : userStakeInfo.amount,
-        5
-      ).toNumber();
-  const valueAsBn = new BigNumber(value);
+  // const maxBalance = !userStakeInfo
+  //   ? BIG_ZERO.toNumber()
+  //   : getBalanceAmount(
+  //       type === 'stake' ? dehubBalance : userStakeInfo.amount,
+  //       5
+  //     ).toNumber();
+  // const valueAsBn = new BigNumber(value);
 
-  const stakingContractAddress = stakingContract?.address;
-  const showFieldWarning =
-    !!account && valueAsBn.gt(0) && errorMessage !== null;
-  const minBetAmountBalance = 0;
+  // const stakingContractAddress = stakingContract?.address;
+  // const showFieldWarning =
+  //   !!account && valueAsBn.gt(0) && errorMessage !== null;
+  // const minBetAmountBalance = 0;
 
-  const handleChange = (input: string) => {
-    setValue(input);
-  };
+  // const handleChange = (input: string) => {
+  //   setValue(input);
+  // };
 
-  const handleSliderChange = (e: SliderChangeParams) => {
-    setValue((e.value as number).toFixed(5).toString());
-  };
+  // const handleSliderChange = (e: SliderChangeParams) => {
+  //   setValue((e.value as number).toFixed(5).toString());
+  // };
 
-  const { disabled } = getButtonProps(
-    type,
-    valueAsBn,
-    dehubBalance,
-    userStakeInfo
-  );
+  // const { disabled } = getButtonProps(
+  //   type,
+  //   valueAsBn,
+  //   dehubBalance,
+  //   userStakeInfo
+  // );
 
-  const handleEnterPosition = async () => {
-    const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
-    const allowance = await dehubContract?.allowance(
-      account,
-      stakingContractAddress
-    );
+  // const handleEnterPosition = async () => {
+  //   const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
+  //   const allowance = await dehubContract?.allowance(
+  //     account,
+  //     stakingContractAddress
+  //   );
 
-    try {
-      setIsTxPending(true);
-      if (allowance < decimalValue.toNumber()) {
-        const txApprove = await dehubContract?.approve(
-          stakingContractAddress,
-          MaxUint256
-        );
-        const receipt = await txApprove.wait();
+  //   try {
+  //     setIsTxPending(true);
+  //     if (allowance < decimalValue.toNumber()) {
+  //       const txApprove = await dehubContract?.approve(
+  //         stakingContractAddress,
+  //         MaxUint256
+  //       );
+  //       const receipt = await txApprove.wait();
 
-        if (!receipt.status) {
-          const errorMsg =
-            'Please try again. Confirm the transaction and make sure you are paying enough gas!';
+  //       if (!receipt.status) {
+  //         const errorMsg =
+  //           'Please try again. Confirm the transaction and make sure you are paying enough gas!';
 
-          toast?.current?.show({
-            severity: 'error',
-            summary: 'Error',
-            detail: errorMsg,
-            life: 4000,
-          });
-          setIsTxPending(false);
-          return;
-        }
-      }
+  //         toast?.current?.show({
+  //           severity: 'error',
+  //           summary: 'Error',
+  //           detail: errorMsg,
+  //           life: 4000,
+  //         });
+  //         setIsTxPending(false);
+  //         return;
+  //       }
+  //     }
 
-      if (stakingContract && stakingController) {
-        const isV1Quarter = (await getVersion(stakingContract)) === 1;
+  //     if (stakingContract && stakingController) {
+  //       const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
-        let receipt: TransactionReceipt;
-        if (type === 'stake') {
-          const tx = isV1Quarter
-            ? await stakingContract.deposit(decimalValue.toNumber())
-            : await stakingController.deposit(decimalValue.toNumber());
-          receipt = await tx.wait();
-        } else {
-          const tx = isV1Quarter
-            ? await stakingContract.withdraw(decimalValue.toNumber())
-            : await stakingController.withdraw(decimalValue.toNumber());
-          receipt = await tx.wait();
-        }
+  //       let receipt: TransactionReceipt;
+  //       if (type === 'stake') {
+  //         const tx = isV1Quarter
+  //           ? await stakingContract.deposit(decimalValue.toNumber())
+  //           : await stakingController.deposit(decimalValue.toNumber());
+  //         receipt = await tx.wait();
+  //       } else {
+  //         const tx = isV1Quarter
+  //           ? await stakingContract.withdraw(decimalValue.toNumber())
+  //           : await stakingController.withdraw(decimalValue.toNumber());
+  //         receipt = await tx.wait();
+  //       }
 
-        if (receipt.status) {
-          toast?.current?.show({
-            severity: 'success',
-            summary: `Success`,
-            detail: (
-              <Box>
-                <Text style={{ marginBottom: '8px' }}>
-                  {`${valueAsBn.toString()} $DeHub has been successfully ${type}d!`}
-                </Text>
-              </Box>
-            ),
-            life: 4000,
-          });
-        }
-        onHide();
-      }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast?.current?.show({
-        severity: 'error',
-        summary: 'Error',
-        detail: `${type.toUpperCase()} failed - ${
-          error?.data?.message ?? error.message
-        }`,
-        life: 4000,
-      });
-    }
-    setIsTxPending(false);
-  };
+  //       if (receipt.status) {
+  //         toast?.current?.show({
+  //           severity: 'success',
+  //           summary: `Success`,
+  //           detail: (
+  //             <Box>
+  //               <Text style={{ marginBottom: '8px' }}>
+  //                 {`${valueAsBn.toString()} $DeHub has been successfully ${type}d!`}
+  //               </Text>
+  //             </Box>
+  //           ),
+  //           life: 4000,
+  //         });
+  //       }
+  //       onHide();
+  //     }
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   } catch (error: any) {
+  //     toast?.current?.show({
+  //       severity: 'error',
+  //       summary: 'Error',
+  //       detail: `${type.toUpperCase()} failed - ${
+  //         error?.data?.message ?? error.message
+  //       }`,
+  //       life: 4000,
+  //     });
+  //   }
+  //   setIsTxPending(false);
+  // };
 
-  useEffect(() => {
-    const fetchFee = async () => {
-      if (!stakingContract) return;
+  // useEffect(() => {
+  //   const fetchFee = async () => {
+  //     if (!stakingContract) return;
 
-      const fee = await stakingContract.EARLY_WITHDRAW_FEE();
-      setWithdrawFee(Number(fee));
-    };
-    fetchFee();
-  }, [stakingContract]);
+  //     const fee = await stakingContract.EARLY_WITHDRAW_FEE();
+  //     setWithdrawFee(Number(fee));
+  //   };
+  //   fetchFee();
+  // }, [stakingContract]);
 
-  // Warnings
-  useEffect(() => {
-    const bnValue = new BigNumber(value);
-    const hasSufficientBalance = bnValue.gt(0) && bnValue.lte(maxBalance);
+  // // Warnings
+  // useEffect(() => {
+  //   const bnValue = new BigNumber(value);
+  //   const hasSufficientBalance = bnValue.gt(0) && bnValue.lte(maxBalance);
 
-    if (!hasSufficientBalance) {
-      setErrorMessage('Insufficient DEHUB balance');
-    } else if (bnValue.gt(0) && bnValue.lt(minBetAmountBalance)) {
-      setErrorMessage('A minimum amount of 0 DEHUB is required');
-    } else {
-      setErrorMessage(null);
-    }
-  }, [value, maxBalance, minBetAmountBalance, setErrorMessage]);
+  //   if (!hasSufficientBalance) {
+  //     setErrorMessage('Insufficient DEHUB balance');
+  //   } else if (bnValue.gt(0) && bnValue.lt(minBetAmountBalance)) {
+  //     setErrorMessage('A minimum amount of 0 DEHUB is required');
+  //   } else {
+  //     setErrorMessage(null);
+  //   }
+  // }, [value, maxBalance, minBetAmountBalance, setErrorMessage]);
 
   return (
     <>
@@ -256,7 +234,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
               </Text>
             </div>
           </div>
-          <BalanceInput
+          {/* <BalanceInput
             value={value}
             onUserInput={handleChange}
             isWarning={showFieldWarning}
@@ -321,7 +299,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
             ) : (
               <ConnectWalletButton />
             )}
-          </div>
+          </div> */}
         </div>
       </Dialog>
     </>

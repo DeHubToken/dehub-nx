@@ -44,7 +44,7 @@ export const useFetchPool = () => {
   }, [dispatch, account, fastRefresh]);
 };
 
-export const usePools = (): {
+export const usePool = (): {
   poolInfo: PoolInfoAndPaused | undefined;
   poolInfoLoading: boolean;
 } => {
@@ -54,12 +54,28 @@ export const usePools = (): {
   );
 
   return {
-    poolInfo,
+    poolInfo: useMemo(
+      () =>
+        poolInfo
+          ? {
+              stakingStartAt: poolInfo.stakingStartAt,
+              tierPeriods: poolInfo.tierPeriods,
+              tierPercents: poolInfo.tierPercents,
+              rewardPeriod: poolInfo.rewardPeriod,
+              lastRewardIndex: poolInfo.lastRewardIndex,
+              forceUnstakeFee: poolInfo.forceUnstakeFee,
+              totalStaked: new BigNumber(poolInfo.totalStaked),
+              totalStakers: poolInfo.totalStakers,
+              paused: poolInfo.paused,
+            }
+          : undefined,
+      [poolInfo]
+    ),
     poolInfoLoading,
   };
 };
 
-export const useStakes = (): {
+export const useUserInfo = (): {
   userInfo: UserInfo | undefined;
   userInfoLoading: boolean;
 } => {
@@ -74,9 +90,10 @@ export const useStakes = (): {
         userInfo
           ? {
               totalAmount: new BigNumber(userInfo.totalAmount),
+              stakingShares: userInfo.stakingShares,
               unlockedAt: userInfo.unlockedAt,
-              harvestTotal: new BigNumber(userInfo.harvestTotal),
-              harvestClaimed: new BigNumber(userInfo.harvestClaimed),
+              lastTierIndex: userInfo.lastTierIndex,
+              pendingHarvest: new BigNumber(userInfo.pendingHarvest),
             }
           : undefined,
       [userInfo]

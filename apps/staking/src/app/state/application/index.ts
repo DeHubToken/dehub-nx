@@ -1,7 +1,9 @@
 import {
+  ethersToBigNumber,
   ethersToSerializedBigNumber,
   SerializedBigNumber,
 } from '@dehub/shared/utils';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import {
   createAction,
   createAsyncThunk,
@@ -9,15 +11,14 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
-import { DeHubStaking__factory } from '../../config/typechain/factories/contracts';
+import DeHubStakingAbi from '../../config/abis/DeHubStaking.json';
 import { getStakingAddress } from '../../utils/addressHelpers';
-import { getStakingContract } from '../../utils/contractHelpers';
 import { Call, multicallv2 } from '../../utils/multicall';
 import getDehubPrice from '../../utils/priceDehub';
 import {
   ApplicationState,
   ApplicationStatus,
-  PoolInfoAndPaused,
+  SerializedPoolInfoAndPaused,
   SerializedUserInfo,
 } from './types';
 
@@ -39,7 +40,7 @@ export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
   }
 );
 
-export const fetchPool = createAsyncThunk<PoolInfoAndPaused>(
+export const fetchPool = createAsyncThunk<SerializedPoolInfoAndPaused>(
   'application/fetchPool',
   async () => {
     const calls: Call[] = [
@@ -53,14 +54,34 @@ export const fetchPool = createAsyncThunk<PoolInfoAndPaused>(
         address: getStakingAddress(),
         params: [],
       },
+      {
+        name: 'totalStaked',
+        address: getStakingAddress(),
+        params: [],
+      },
+      {
+        name: 'totalStakers',
+        address: getStakingAddress(),
+        params: [],
+      },
     ];
 
-    const stakingAbi = DeHubStaking__factory.abi;
-    const pool = await multicallv2(stakingAbi, calls);
+    const result = await multicallv2(DeHubStakingAbi, calls);
     return {
-      ...pool[0],
-      paused: pool[1],
-    };
+      stakingStartAt: result[0][0].stakingStartAt.toNumber(),
+      tierPeriods: result[0][0].tierPeriods.map((item: EthersBigNumber) =>
+        item.toNumber()
+      ),
+      tierPercents: result[0][0].tierPercents.map((item: EthersBigNumber) =>
+        item.toNumber()
+      ),
+      rewardPeriod: result[0][0].rewardPeriod,
+      lastRewardIndex: result[0][0].lastRewardIndex.toNumber(),
+      forceUnstakeFee: result[0][0].forceUnstakeFee.toNumber(),
+      totalStaked: ethersToSerializedBigNumber(result[2][0]),
+      totalStakers: result[3][0].toNumber(),
+      paused: result[1][0],
+    } as SerializedPoolInfoAndPaused;
   }
 );
 
@@ -70,14 +91,42 @@ export const fetchUserInfo = createAsyncThunk<
     staker: string;
   }
 >('application/fetchUserInfo', async ({ staker }) => {
-  const stakingContract = getStakingContract();
-  const userInfo = await stakingContract.userInfos(staker);
+  const calls: Call[] = [
+    {
+      name: 'userInfos',
+      address: getStakingAddress(),
+      params: [staker],
+    },
+    {
+      name: 'userStakingShares',
+      address: getStakingAddress(),
+      params: [staker],
+    },
+    {
+      name: 'totalShares',
+      address: getStakingAddress(),
+      params: [],
+    },
+    {
+      name: 'pendingHarvest',
+      address: getStakingAddress(),
+      params: [staker],
+    },
+  ];
+
+  const result = await multicallv2(DeHubStakingAbi, calls);
+  const lastTierIndex = result[0].lastTierIndex.toNumber();
+  const totalSharesOnTier = ethersToBigNumber(result[2][0][lastTierIndex]);
+  const stakingShares = ethersToBigNumber(result[1][0])
+    .multipliedBy(new BigNumber(100))
+    .dividedBy(totalSharesOnTier);
 
   return {
-    totalAmount: ethersToSerializedBigNumber(userInfo.totalAmount),
-    unlockedAt: Number(userInfo.unlockAt),
-    harvestTotal: ethersToSerializedBigNumber(userInfo.harvestTotal),
-    harvestClaimed: ethersToSerializedBigNumber(userInfo.harvestClaimed),
+    totalAmount: ethersToSerializedBigNumber(result[0].totalAmount),
+    stakingShares: stakingShares.toNumber(),
+    unlockedAt: result[0].unlockAt.toNumber(),
+    lastTierIndex: lastTierIndex,
+    pendingHarvest: ethersToSerializedBigNumber(result[3][0]),
   } as SerializedUserInfo;
 });
 

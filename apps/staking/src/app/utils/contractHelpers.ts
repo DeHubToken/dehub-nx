@@ -2,9 +2,8 @@ import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
 import { Signer } from '@ethersproject/abstract-signer';
 import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { Provider } from '@ethersproject/providers';
+import DeHubStakingAbi from '../config/abis/DeHubStaking.json';
 import MulticallAbi from '../config/abis/Multicall.json';
-import { DeHubStaking } from '../config/typechain/contracts';
-import { DeHubStaking__factory } from '../config/typechain/factories/contracts';
 import { getMultiCallAddress, getStakingAddress } from './addressHelpers';
 import { simpleRpcProvider } from './providers';
 
@@ -37,11 +36,10 @@ export const getVersion = async (contract: Contract) => {
   }
 };
 
-export const getStakingContract = (
-  signer?: Signer | Provider
-): DeHubStaking => {
-  return DeHubStaking__factory.connect(
+export const getStakingContract = (signer?: Signer | Provider) => {
+  return getContract(
     getStakingAddress(),
+    DeHubStakingAbi,
     signer ?? simpleRpcProvider
   );
 };

@@ -15,6 +15,8 @@ export interface PoolInfo {
   rewardPeriod: number;
   lastRewardIndex: number;
   forceUnstakeFee: number;
+  totalStaked: BigNumber;
+  totalStakers: number;
 }
 
 export interface PoolPaused {
@@ -23,24 +25,39 @@ export interface PoolPaused {
 
 export type PoolInfoAndPaused = PoolInfo & PoolPaused;
 
+export interface SerializedPoolInfo {
+  stakingStartAt: number;
+  tierPeriods: number[];
+  tierPercents: number[];
+  rewardPeriod: number;
+  lastRewardIndex: number;
+  forceUnstakeFee: number;
+  totalStaked: SerializedBigNumber;
+  totalStakers: number;
+}
+
+export type SerializedPoolInfoAndPaused = SerializedPoolInfo & PoolPaused;
+
 export interface UserInfo {
   totalAmount: BigNumber;
+  stakingShares: number;
   unlockedAt: number;
-  harvestTotal: BigNumber;
-  harvestClaimed: BigNumber;
+  lastTierIndex: number;
+  pendingHarvest: BigNumber;
 }
 
 export interface SerializedUserInfo {
   totalAmount: SerializedBigNumber;
+  stakingShares: number;
   unlockedAt: number;
-  harvestTotal: SerializedBigNumber;
-  harvestClaimed: SerializedBigNumber;
+  lastTierIndex: number;
+  pendingHarvest: SerializedBigNumber;
 }
 
 export interface ApplicationState {
   applicationStatus: ApplicationStatus;
   dehubPrice: SerializedBigNumber;
-  poolInfo: PoolInfoAndPaused | undefined;
+  poolInfo: SerializedPoolInfoAndPaused | undefined;
   poolInfoLoading: boolean;
   userInfo: SerializedUserInfo | undefined;
   userInfoLoading: boolean;
