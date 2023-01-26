@@ -11,7 +11,7 @@ export const inheritPreviewEnvFrom = (
     ...originEnv.contentful,
     website: {
       ...originEnv.contentful.website,
-      environmentId: 'dev',
+      environmentId: 'preview',
     },
     isPreview: true,
   },
