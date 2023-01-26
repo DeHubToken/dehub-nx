@@ -5579,8 +5579,6 @@ export interface Query {
   sectionPostCollection?: Maybe<SectionPostCollection>;
   testArticle?: Maybe<TestArticle>;
   testArticleCollection?: Maybe<TestArticleCollection>;
-  testNewContentType?: Maybe<TestNewContentType>;
-  testNewContentTypeCollection?: Maybe<TestNewContentTypeCollection>;
   thumbnailPost?: Maybe<ThumbnailPost>;
   thumbnailPostCollection?: Maybe<ThumbnailPostCollection>;
 }
@@ -6149,21 +6147,6 @@ export interface QueryTestArticleCollectionArgs {
   where?: InputMaybe<TestArticleFilter>;
 }
 
-export interface QueryTestNewContentTypeArgs {
-  id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-}
-
-export interface QueryTestNewContentTypeCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<Array<InputMaybe<TestNewContentTypeOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<TestNewContentTypeFilter>;
-}
-
 export interface QueryThumbnailPostArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -6481,72 +6464,6 @@ export enum TestArticleOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
-}
-
-/** Test for merge [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testNewContentType) */
-export interface TestNewContentType extends Entry {
-  __typename?: 'TestNewContentType';
-  contentfulMetadata: ContentfulMetadata;
-  linkedFrom?: Maybe<TestNewContentTypeLinkingCollections>;
-  name?: Maybe<Scalars['String']>;
-  sys: Sys;
-}
-
-/** Test for merge [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testNewContentType) */
-export interface TestNewContentTypeLinkedFromArgs {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-/** Test for merge [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/testNewContentType) */
-export interface TestNewContentTypeNameArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-export interface TestNewContentTypeCollection {
-  __typename?: 'TestNewContentTypeCollection';
-  items: Array<Maybe<TestNewContentType>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export interface TestNewContentTypeFilter {
-  AND?: InputMaybe<Array<InputMaybe<TestNewContentTypeFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<TestNewContentTypeFilter>>>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  name?: InputMaybe<Scalars['String']>;
-  name_contains?: InputMaybe<Scalars['String']>;
-  name_exists?: InputMaybe<Scalars['Boolean']>;
-  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  name_not?: InputMaybe<Scalars['String']>;
-  name_not_contains?: InputMaybe<Scalars['String']>;
-  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-}
-
-export interface TestNewContentTypeLinkingCollections {
-  __typename?: 'TestNewContentTypeLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-}
-
-export interface TestNewContentTypeLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export enum TestNewContentTypeOrder {
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 /** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
