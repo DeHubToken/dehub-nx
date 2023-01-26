@@ -5,27 +5,23 @@ import {
   BIG_ZERO,
   getBalanceAmount,
   getDecimalAmount,
+  getFullDisplayBalance,
 } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import {
-  InputNumber,
-  InputNumberValueChangeParams,
-} from 'primereact/inputnumber';
 import { Skeleton } from 'primereact/skeleton';
 import { Slider, SliderChangeParams } from 'primereact/slider';
 import { Toast } from 'primereact/toast';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { DAY_IN_SECONDS } from '../../config/constants';
 import { FetchStatus } from '../../config/constants/types';
 import { useDehubContract } from '../../hooks/useContract';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { useUserInfo } from '../../state/application/hooks';
+import { usePool, useUserInfo } from '../../state/application/hooks';
 import { getStakingAddress } from '../../utils/addressHelpers';
 
-interface StakeModalProps {
+interface UnstakeModalProps {
   open: boolean;
   onHide: () => void;
 }
@@ -39,10 +35,11 @@ const SimpleGrid = styled.div<{ columns: number }>`
 
 const percentShortcuts = [10, 25, 50, 75, 100];
 
-const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
+const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
   const { account } = useWeb3Context();
   const dehubContract = useDehubContract();
 
+  const { poolInfo } = usePool();
   const { userInfo } = useUserInfo();
   const { balance: dehubBalance, fetchStatus: fetchBalanceStatus } =
     useGetDehubBalance();
@@ -51,8 +48,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   const [isTxPending, setIsTxPending] = useState(false);
   const [disableStake, setDisableStake] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [period, setPeriod] = useState<number>(1);
-  const [unlockDate, setUnlockDate] = useState(new Date());
 
   const toast = useRef<Toast>(null);
 
@@ -76,13 +71,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
 
   const handleSliderChange = (e: SliderChangeParams) => {
     setValue((e.value as number).toFixed(DEHUB_DISPLAY_DECIMALS).toString());
-  };
-
-  const handlePeriodChange = (e: InputNumberValueChangeParams) => {
-    const days = Number(e.value);
-    setPeriod(days);
-    const now = new Date().getTime() + days * DAY_IN_SECONDS * 1000;
-    setUnlockDate(new Date(now));
   };
 
   const handleEnterPosition = async () => {
@@ -184,7 +172,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
         visible={open}
         modal
         className="border-neon-1"
-        header={`Stake Your Tokens`}
+        header={`Unstake Your Tokens`}
         onHide={onHide}
         style={{
           minWidth: '288px',
@@ -199,7 +187,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
             style={{ marginBottom: '8px' }}
           >
             <div className="flex align-items-center">
-              <Text fontWeight={600}>{`Stake:`}</Text>
+              <Text fontWeight={600}>{`Unstake:`}</Text>
             </div>
             <div className="flex align-items-center">
               <Text fontWeight={600} textTransform="uppercase">
@@ -225,11 +213,15 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
           )}
           <div className="flex justify-content-end align-items-center mt-2 mb-5">
             <Text textAlign="right" fontSize="12px" className="mr-1">
-              Balance:
+              Total staked:
             </Text>
-            {fetchBalanceStatus === FetchStatus.SUCCESS ? (
+            {userInfo ? (
               <Text textAlign="right" fontSize="12px">
-                {maxBalance.toString()}
+                {getFullDisplayBalance(
+                  userInfo.totalAmount,
+                  DEHUB_DECIMALS,
+                  DEHUB_DISPLAY_DECIMALS
+                ).toString()}
               </Text>
             ) : (
               <Skeleton width="5rem" height="1rem" />
@@ -266,37 +258,18 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               );
             })}
           </SimpleGrid>
-          <div className="flex flex-row align-items-center gap-3">
-            <Text textAlign="left" className="w-3">
-              Period:
-            </Text>
-            <InputNumber
-              value={period}
-              onValueChange={handlePeriodChange}
-              onChange={handlePeriodChange}
-              showButtons
-              className="w-full text-right"
-              min={1}
-            />
-            <Text textAlign="right" className="w-2">
-              days
-            </Text>
-          </div>
-          <div className="flex justify-content-end align-items-center mt-2 mb-4">
-            <Text textAlign="right" fontSize="12px" className="mr-1">
-              Unlock date:
-            </Text>
-            <Text textAlign="right" fontSize="12px">
-              {unlockDate.toLocaleString()}
-            </Text>
-          </div>
+          <Text className="mb-4 text-pink-500 text-sm">
+            Unstaking before the end of the staking period will incur{' '}
+            <b>{Number(poolInfo?.forceUnstakeFee) / 100}%</b> fee. Are you sure
+            you want to proceed?
+          </Text>
           <div className="overview-info text-left w-full mb-2">
             {account ? (
               <Button
                 className="p-button w-full"
                 disabled={!account || disableStake}
                 onClick={handleEnterPosition}
-                label="Stake"
+                label="Unstake"
                 loading={isTxPending}
                 loadingIcon={'pi pi-spin pi-spinner'}
               />
@@ -310,4 +283,4 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   );
 };
 
-export default StakeModal;
+export default UnstakeModal;

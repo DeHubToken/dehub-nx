@@ -5,6 +5,7 @@ import {
   BIG_ZERO,
   getBalanceAmount,
   getDecimalAmount,
+  getFullDisplayBalance,
 } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
@@ -22,10 +23,10 @@ import { DAY_IN_SECONDS } from '../../config/constants';
 import { FetchStatus } from '../../config/constants/types';
 import { useDehubContract } from '../../hooks/useContract';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { useUserInfo } from '../../state/application/hooks';
+import { usePool, useUserInfo } from '../../state/application/hooks';
 import { getStakingAddress } from '../../utils/addressHelpers';
 
-interface StakeModalProps {
+interface RestakeModalProps {
   open: boolean;
   onHide: () => void;
 }
@@ -39,10 +40,11 @@ const SimpleGrid = styled.div<{ columns: number }>`
 
 const percentShortcuts = [10, 25, 50, 75, 100];
 
-const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
+const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
   const { account } = useWeb3Context();
   const dehubContract = useDehubContract();
 
+  const { poolInfo } = usePool();
   const { userInfo } = useUserInfo();
   const { balance: dehubBalance, fetchStatus: fetchBalanceStatus } =
     useGetDehubBalance();
@@ -52,6 +54,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   const [disableStake, setDisableStake] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [period, setPeriod] = useState<number>(1);
+  const [count, setCount] = useState<number>(1);
   const [unlockDate, setUnlockDate] = useState(new Date());
 
   const toast = useRef<Toast>(null);
@@ -81,7 +84,14 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   const handlePeriodChange = (e: InputNumberValueChangeParams) => {
     const days = Number(e.value);
     setPeriod(days);
-    const now = new Date().getTime() + days * DAY_IN_SECONDS * 1000;
+    const now = new Date().getTime() + days * count * DAY_IN_SECONDS * 1000;
+    setUnlockDate(new Date(now));
+  };
+
+  const handleCountChange = (e: InputNumberValueChangeParams) => {
+    const times = Number(e.value);
+    setCount(times);
+    const now = new Date().getTime() + period * times * DAY_IN_SECONDS * 1000;
     setUnlockDate(new Date(now));
   };
 
@@ -184,7 +194,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
         visible={open}
         modal
         className="border-neon-1"
-        header={`Stake Your Tokens`}
+        header={`Restake Your Tokens`}
         onHide={onHide}
         style={{
           minWidth: '288px',
@@ -199,7 +209,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
             style={{ marginBottom: '8px' }}
           >
             <div className="flex align-items-center">
-              <Text fontWeight={600}>{`Stake:`}</Text>
+              <Text fontWeight={600}>{`Unstake:`}</Text>
             </div>
             <div className="flex align-items-center">
               <Text fontWeight={600} textTransform="uppercase">
@@ -225,11 +235,15 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
           )}
           <div className="flex justify-content-end align-items-center mt-2 mb-5">
             <Text textAlign="right" fontSize="12px" className="mr-1">
-              Balance:
+              Total staked:
             </Text>
-            {fetchBalanceStatus === FetchStatus.SUCCESS ? (
+            {userInfo ? (
               <Text textAlign="right" fontSize="12px">
-                {maxBalance.toString()}
+                {getFullDisplayBalance(
+                  userInfo.totalAmount,
+                  DEHUB_DECIMALS,
+                  DEHUB_DISPLAY_DECIMALS
+                ).toString()}
               </Text>
             ) : (
               <Skeleton width="5rem" height="1rem" />
@@ -282,7 +296,23 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               days
             </Text>
           </div>
-          <div className="flex justify-content-end align-items-center mt-2 mb-4">
+          <div className="flex flex-row align-items-center gap-3 mt-2">
+            <Text textAlign="left" className="w-3">
+              Count:
+            </Text>
+            <InputNumber
+              value={count}
+              onValueChange={handleCountChange}
+              onChange={handleCountChange}
+              showButtons
+              className="w-full text-right"
+              min={1}
+            />
+            <Text textAlign="right" className="w-2">
+              times
+            </Text>
+          </div>
+          <div className="flex justify-content-end align-items-center mt-2 mb-3">
             <Text textAlign="right" fontSize="12px" className="mr-1">
               Unlock date:
             </Text>
@@ -290,13 +320,18 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               {unlockDate.toLocaleString()}
             </Text>
           </div>
+          <Text className="mb-4 text-pink-500 text-sm">
+            Unstaking before the end of the staking period will incur{' '}
+            <b>{Number(poolInfo?.forceUnstakeFee) / 100}%</b> fee. Are you sure
+            you want to proceed?
+          </Text>
           <div className="overview-info text-left w-full mb-2">
             {account ? (
               <Button
                 className="p-button w-full"
                 disabled={!account || disableStake}
                 onClick={handleEnterPosition}
-                label="Stake"
+                label="Restake"
                 loading={isTxPending}
                 loadingIcon={'pi pi-spin pi-spinner'}
               />
@@ -310,4 +345,4 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   );
 };
 
-export default StakeModal;
+export default RestakeModal;

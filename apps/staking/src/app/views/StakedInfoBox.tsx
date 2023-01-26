@@ -15,7 +15,7 @@ const StakedInfoBox = () => {
   return (
     <div className="grid">
       <div className="col-12 md:col-4 lg:col-4">
-        <div className="card overview-box gray shadow-2">
+        <div className="gray shadow-2">
           <div className="text-center w-full">
             {poolInfo ? (
               <>
@@ -24,20 +24,21 @@ const StakedInfoBox = () => {
                     poolInfo.totalStaked,
                     DEHUB_DECIMALS,
                     DEHUB_DISPLAY_DECIMALS
-                  )}{' '}
-                  $DHB
+                  ).concat(' $DHB')}
                 </Text>
-                <Heading className="pb-1">Total Staked</Heading>
+                <Heading className="pb-1" fontSize="16px">
+                  Total Staked
+                </Heading>
               </>
             ) : (
-              <Skeleton width="100%" height="1.5rem" />
+              <Skeleton width="100%" height="5rem" />
             )}
           </div>
         </div>
       </div>
 
       <div className="col-12 md:col-4 lg:col-4">
-        <div className="card overview-box gray shadow-2">
+        <div className="gray shadow-2">
           <div className="text-center w-full">
             {poolInfo ? (
               <>
@@ -49,27 +50,31 @@ const StakedInfoBox = () => {
                     BUSD_DISPLAY_DECIMALS
                   )}
                 </Text>
-                <Heading className="pb-1">TVL</Heading>
+                <Heading className="pb-1" fontSize="16px">
+                  TVL
+                </Heading>
               </>
             ) : (
-              <Skeleton width="100%" height="1.5rem" />
+              <Skeleton width="100%" height="5rem" />
             )}
           </div>
         </div>
       </div>
 
       <div className="col-12 md:col-4 lg:col-4">
-        <div className="card overview-box gray shadow-2">
+        <div className="gray shadow-2">
           <div className="text-center w-full">
             {poolInfo ? (
               <>
                 <Text fontSize="24px" fontWeight={900} textAlign="center">
                   {poolInfo.totalStakers}
                 </Text>
-                <Heading className="pb-1">Stakers</Heading>
+                <Heading className="pb-1" fontSize="16px">
+                  Stakers
+                </Heading>
               </>
             ) : (
-              <Skeleton width="100%" height="1.5rem" />
+              <Skeleton width="100%" height="5rem" />
             )}
           </div>
         </div>
