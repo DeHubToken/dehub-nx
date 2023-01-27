@@ -5,6 +5,10 @@ export const defaultSharedDevEnv: SharedEnv = {
 
   contentful: {
     ...defaultSharedEnv.contentful,
+    website: {
+      ...defaultSharedEnv.contentful.website,
+      environmentId: 'dev',
+    },
     isPreview: true,
   },
 };

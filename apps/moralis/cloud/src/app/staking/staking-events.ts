@@ -1,6 +1,4 @@
 import { environment } from '../../environments/environment';
-import { updateCanPlay } from '../shared';
-import { ChainIdAsNumber } from '../shared/model';
 
 Moralis.Cloud.afterSave(
   environment.staking.eventTables.deposit,
@@ -9,8 +7,6 @@ Moralis.Cloud.afterSave(
     try {
       const address = request.object.get('user');
       logger.info(`Noticed DeHubStakingDepositEvents, address: ${address}`);
-
-      await updateCanPlay(environment.web3.chainId as ChainIdAsNumber, address);
     } catch (err) {
       logger.error(`DeHubStakingDepositEvents error: ${JSON.stringify(err)}`);
       return;
@@ -25,8 +21,6 @@ Moralis.Cloud.afterSave(
     try {
       const address = request.object.get('user');
       logger.info(`Noticed DeHubStakingHarvestEvents, address: ${address}`);
-
-      await updateCanPlay(environment.web3.chainId as ChainIdAsNumber, address);
     } catch (err) {
       logger.error(`DeHubStakingHarvestEvents error: ${JSON.stringify(err)}`);
       return;
@@ -41,8 +35,6 @@ Moralis.Cloud.afterSave(
     try {
       const address = request.object.get('user');
       logger.info(`Noticed DeHubStakingWithdrawEvents, address: ${address}`);
-
-      await updateCanPlay(environment.web3.chainId as ChainIdAsNumber, address);
     } catch (err) {
       logger.error(`DeHubStakingWithdrawEvents error: ${JSON.stringify(err)}`);
       return;
@@ -59,11 +51,6 @@ environment.staking.deprecatedEventTables &&
         const address = request.object.get('user');
         logger.info(
           `Noticed DeprecatedDeHubStakingDepositEvents, address: ${address}`
-        );
-
-        await updateCanPlay(
-          environment.web3.chainId as ChainIdAsNumber,
-          address
         );
       } catch (err) {
         logger.error(
@@ -84,11 +71,6 @@ environment.staking.deprecatedEventTables &&
         logger.info(
           `Noticed DeprecatedDeHubStakingHarvestEvents, address: ${address}`
         );
-
-        await updateCanPlay(
-          environment.web3.chainId as ChainIdAsNumber,
-          address
-        );
       } catch (err) {
         logger.error(
           `DeprecatedStakingHarvestEvents error: ${JSON.stringify(err)}`
@@ -107,11 +89,6 @@ environment.staking.deprecatedEventTables &&
         const address = request.object.get('user');
         logger.info(
           `Noticed DeprecatedDeHubStakingWithdrawEvents, address: ${address}`
-        );
-
-        await updateCanPlay(
-          environment.web3.chainId as ChainIdAsNumber,
-          address
         );
       } catch (err) {
         logger.error(

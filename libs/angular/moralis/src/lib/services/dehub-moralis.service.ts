@@ -47,10 +47,6 @@ import {
 
 @Injectable()
 export class DehubMoralisService implements IDehubMoralisService {
-  canPlay$ = this.moralisService.userAttributes$.pipe(
-    map(attributes => attributes?.can_play ?? false)
-  );
-
   userContacts$ = this.moralisService.userAttributes$.pipe(
     filterNil(),
     map(({ email, phone }) => ({ email, phone }))
