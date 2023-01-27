@@ -1,45 +1,5 @@
 [
   {
-    "inputs": [],
-    "name": "InvalidTier",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidTierPeriods",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidUnstakeAmount",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NotEnoughRewards",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "StakeOnPastRewardIndex",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "ZeroAmount",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "ZeroHarvestAmount",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "ZeroPeriod",
-    "type": "error"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -767,6 +727,29 @@
       }
     ],
     "name": "restake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "period",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "restakeCount",
+        "type": "uint256"
+      }
+    ],
+    "name": "restakePortion",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

@@ -1,5 +1,5 @@
 import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
-import { BalanceInput, Text } from '@dehub/react/ui';
+import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
 import {
   BIG_ZERO,
@@ -7,6 +7,8 @@ import {
   getDecimalAmount,
   getFullDisplayBalance,
 } from '@dehub/shared/utils';
+import { TransactionReceipt } from '@ethersproject/abstract-provider';
+import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -15,11 +17,15 @@ import { Slider, SliderChangeParams } from 'primereact/slider';
 import { Toast } from 'primereact/toast';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { FetchStatus } from '../../config/constants/types';
-import { useDehubContract } from '../../hooks/useContract';
-import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { usePool, useUserInfo } from '../../state/application/hooks';
-import { getStakingAddress } from '../../utils/addressHelpers';
+import {
+  useDehubContract,
+  usePickStakingContract,
+} from '../../hooks/useContract';
+import {
+  useFetchPool,
+  usePool,
+  useUserInfo,
+} from '../../state/application/hooks';
 
 interface UnstakeModalProps {
   open: boolean;
@@ -38,11 +44,11 @@ const percentShortcuts = [10, 25, 50, 75, 100];
 const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
   const { account } = useWeb3Context();
   const dehubContract = useDehubContract();
+  const stakingContract = usePickStakingContract();
 
+  const { updatePool, updateUser } = useFetchPool();
   const { poolInfo } = usePool();
   const { userInfo } = useUserInfo();
-  const { balance: dehubBalance, fetchStatus: fetchBalanceStatus } =
-    useGetDehubBalance();
 
   const [value, setValue] = useState<string>('');
   const [isTxPending, setIsTxPending] = useState(false);
@@ -53,15 +59,14 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
 
   const maxBalance = useMemo(
     () =>
-      fetchBalanceStatus === FetchStatus.SUCCESS
-        ? getBalanceAmount(dehubBalance, DEHUB_DECIMALS).toNumber()
+      userInfo
+        ? getBalanceAmount(userInfo.totalAmount, DEHUB_DECIMALS).toNumber()
         : BIG_ZERO.toNumber(),
-    [fetchBalanceStatus, dehubBalance]
+    [userInfo]
   );
 
   const valueAsBn = new BigNumber(value);
 
-  const stakingContractAddress = getStakingAddress();
   const showFieldWarning =
     !!account && valueAsBn.gt(0) && errorMessage !== null;
 
@@ -74,80 +79,45 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
   };
 
   const handleEnterPosition = async () => {
-    const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
-    const allowance = await dehubContract?.allowance(
-      account,
-      stakingContractAddress
-    );
+    if (!dehubContract || !stakingContract) return;
 
-    //   try {
-    //     setIsTxPending(true);
-    //     if (allowance < decimalValue.toNumber()) {
-    //       const txApprove = await dehubContract?.approve(
-    //         stakingContractAddress,
-    //         MaxUint256
-    //       );
-    //       const receipt = await txApprove.wait();
+    try {
+      const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
 
-    //       if (!receipt.status) {
-    //         const errorMsg =
-    //           'Please try again. Confirm the transaction and make sure you are paying enough gas!';
+      setIsTxPending(true);
+      const tx = await stakingContract.unstake(
+        EthersBigNumber.from(decimalValue.toString())
+      );
+      const receipt: TransactionReceipt = await tx.wait();
 
-    //         toast?.current?.show({
-    //           severity: 'error',
-    //           summary: 'Error',
-    //           detail: errorMsg,
-    //           life: 4000,
-    //         });
-    //         setIsTxPending(false);
-    //         return;
-    //       }
-    //     }
+      updatePool();
+      updateUser();
 
-    //     if (stakingContract && stakingController) {
-    //       const isV1Quarter = (await getVersion(stakingContract)) === 1;
-
-    //       let receipt: TransactionReceipt;
-    //       if (type === 'stake') {
-    //         const tx = isV1Quarter
-    //           ? await stakingContract.deposit(decimalValue.toNumber())
-    //           : await stakingController.deposit(decimalValue.toNumber());
-    //         receipt = await tx.wait();
-    //       } else {
-    //         const tx = isV1Quarter
-    //           ? await stakingContract.withdraw(decimalValue.toNumber())
-    //           : await stakingController.withdraw(decimalValue.toNumber());
-    //         receipt = await tx.wait();
-    //       }
-
-    //       if (receipt.status) {
-    //         toast?.current?.show({
-    //           severity: 'success',
-    //           summary: `Success`,
-    //           detail: (
-    //             <Box>
-    //               <Text style={{ marginBottom: '8px' }}>
-    //                 {`${valueAsBn.toString()} $DeHub has been successfully ${type}d!`}
-    //               </Text>
-    //             </Box>
-    //           ),
-    //           life: 4000,
-    //         });
-    //       }
-    //       onHide();
-    //     }
-    //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    //   } catch (error: any) {
-    //     toast?.current?.show({
-    //       severity: 'error',
-    //       summary: 'Error',
-    //       detail: `${type.toUpperCase()} failed - ${
-    //         error?.data?.message ?? error.message
-    //       }`,
-    //       life: 4000,
-    //     });
-    //   }
-    //   setIsTxPending(false);
+      if (receipt.status) {
+        toast?.current?.show({
+          severity: 'success',
+          summary: `Success`,
+          detail: (
+            <Box>
+              <Text style={{ marginBottom: '8px' }}>
+                {`${valueAsBn.toString()} $DeHub has been successfully unstaked!`}
+              </Text>
+            </Box>
+          ),
+          life: 4000,
+        });
+      }
+      onHide();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast?.current?.show({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Unstaking failed - ${error?.data?.message ?? error.message}`,
+        life: 4000,
+      });
+    }
+    setIsTxPending(false);
   };
 
   // Warnings

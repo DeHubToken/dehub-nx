@@ -1,6 +1,6 @@
 import { useRefresh, useWeb3Context } from '@dehub/react/core';
 import BigNumber from 'bignumber.js';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
 import { AppState } from '../index';
@@ -28,20 +28,35 @@ export const useFetchPool = () => {
   const { slowRefresh, fastRefresh } = useRefresh();
   const { isInitialized, account } = useWeb3Context();
 
+  const [immediatePool, setImmediatePool] = useState<number>(1);
+  const [immediateUser, setImmediateUser] = useState<number>(1);
+
   useEffect(() => {
     const fetchInitialize = async () => {
       dispatch(fetchPool());
       dispatch(setApplicationStatus({ appStatus: ApplicationStatus.LIVE }));
     };
 
-    if (isInitialized) fetchInitialize();
-  }, [dispatch, isInitialized, slowRefresh]);
+    if (isInitialized && immediatePool) fetchInitialize();
+  }, [dispatch, isInitialized, immediatePool, slowRefresh]);
 
   useEffect(() => {
-    if (account) {
+    if (account && immediateUser) {
       dispatch(fetchUserInfo({ staker: account }));
     }
-  }, [dispatch, account, fastRefresh]);
+  }, [dispatch, immediateUser, account, fastRefresh]);
+
+  const updatePool = useCallback(() => {
+    setImmediatePool(immediatePool + 1);
+  }, [immediatePool]);
+  const updateUser = useCallback(() => {
+    setImmediateUser(immediateUser + 1);
+  }, [immediateUser]);
+
+  return {
+    updatePool,
+    updateUser,
+  };
 };
 
 export const usePool = (): {

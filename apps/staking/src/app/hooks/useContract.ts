@@ -51,7 +51,7 @@ export const usePickStakingContract = (): Contract | null => {
 
   return useMemo(
     () =>
-      web3 && chainId == getChainId()
+      web3 && chainId === getChainId()
         ? getStakingContract(web3.getSigner())
         : null,
     [web3, chainId]

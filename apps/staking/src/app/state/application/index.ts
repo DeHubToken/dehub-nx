@@ -1,4 +1,5 @@
 import {
+  BIG_ZERO,
   ethersToBigNumber,
   ethersToSerializedBigNumber,
   SerializedBigNumber,
@@ -117,9 +118,11 @@ export const fetchUserInfo = createAsyncThunk<
   const result = await multicallv2(DeHubStakingAbi, calls);
   const lastTierIndex = result[0].lastTierIndex.toNumber();
   const totalSharesOnTier = ethersToBigNumber(result[2][0][lastTierIndex]);
-  const stakingShares = ethersToBigNumber(result[1][0])
-    .multipliedBy(new BigNumber(100))
-    .dividedBy(totalSharesOnTier);
+  const stakingShares = totalSharesOnTier.isEqualTo(BIG_ZERO)
+    ? BIG_ZERO
+    : ethersToBigNumber(result[1][0])
+        .multipliedBy(new BigNumber(100))
+        .dividedBy(totalSharesOnTier);
 
   return {
     totalAmount: ethersToSerializedBigNumber(result[0].totalAmount),
