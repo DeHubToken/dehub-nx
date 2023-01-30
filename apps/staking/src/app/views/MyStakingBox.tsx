@@ -108,7 +108,11 @@ const MyStakingBox = () => {
                   {userInfo ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
-                        {new Date(userInfo.unlockedAt * 1000).toLocaleString()}
+                        {userInfo.unlockedAt > 0
+                          ? new Date(
+                              userInfo.unlockedAt * 1000
+                            ).toLocaleString()
+                          : new Date().toLocaleString()}
                       </Text>
                       <Text></Text>
                     </>
