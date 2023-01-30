@@ -1,20 +1,28 @@
+import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
 import { Box, Heading, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { usePool, useUserInfo } from '../state/application/hooks';
 import { RestakeModal, StakeModal, UnstakeModal } from './components';
 
 const MyStakingBox = () => {
+  const { account } = useWeb3Context();
+
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
   const [openRestakeModal, setOpenRestakeModal] = useState<boolean>(false);
   const { poolInfo } = usePool();
   const { userInfo } = useUserInfo();
   const now = new Date();
+
+  const isReady = useMemo(
+    () => poolInfo && userInfo && account,
+    [poolInfo, userInfo, account]
+  );
 
   const handleModal = (modal: string, showOrHide: boolean) => {
     if (modal === 'stake') {
@@ -35,11 +43,11 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Total Staked</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full">
-                  {userInfo ? (
+                  {isReady ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
                         {getFullDisplayBalance(
-                          userInfo.totalAmount,
+                          userInfo!.totalAmount,
                           DEHUB_DECIMALS
                         )}
                       </Text>
@@ -59,10 +67,10 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Staking Shares</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full">
-                  {userInfo ? (
+                  {isReady ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
-                        {userInfo.stakingShares.toString()}%
+                        {userInfo!.stakingShares.toString()}%
                       </Text>
                       <Text></Text>
                     </>
@@ -80,13 +88,13 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Current Tier</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full flex flex-column align-items-start">
-                  {userInfo && poolInfo ? (
+                  {isReady ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
-                        Tier {userInfo.lastTierIndex + 1}
+                        Tier {userInfo!.lastTierIndex + 1}
                       </Text>
                       <Text className="mt-2">
-                        {poolInfo.tierPercents[userInfo.lastTierIndex]}% share
+                        {poolInfo!.tierPercents[userInfo!.lastTierIndex]}% share
                         of total rewards
                       </Text>
                     </>
@@ -105,12 +113,12 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Unlock date</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full flex flex-column align-items-start">
-                  {userInfo ? (
+                  {isReady ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
-                        {userInfo.unlockedAt > 0
+                        {userInfo!.unlockedAt > 0
                           ? new Date(
-                              userInfo.unlockedAt * 1000
+                              userInfo!.unlockedAt * 1000
                             ).toLocaleString()
                           : new Date().toLocaleString()}
                       </Text>
@@ -130,15 +138,15 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Total Unlocked</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full">
-                  {userInfo ? (
+                  {isReady ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
-                        {now.getTime() > userInfo.unlockedAt * 1000
-                          ? getFullDisplayBalance(
-                              userInfo.totalAmount,
-                              DEHUB_DECIMALS
-                            )
-                          : '---'}
+                        {getFullDisplayBalance(
+                          now.getTime() > userInfo!.unlockedAt * 1000
+                            ? userInfo!.totalAmount
+                            : BIG_ZERO,
+                          DEHUB_DECIMALS
+                        )}
                       </Text>
                       <Text></Text>
                     </>
@@ -156,11 +164,11 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Pending Reward</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full">
-                  {userInfo ? (
+                  {isReady ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
                         {getFullDisplayBalance(
-                          userInfo.pendingHarvest,
+                          userInfo!.pendingHarvest,
                           DEHUB_DECIMALS
                         )}
                       </Text>
@@ -179,34 +187,30 @@ const MyStakingBox = () => {
           </div>
           <div className="grid mt-2">
             <div className="col-12 md:col-12 lg:col-12 align-self-start">
-              <Button
-                className="p-button mt-2 justify-content-center w-2 mr-3"
-                onClick={() => handleModal('stake', true)}
-                disabled={!poolInfo || poolInfo.paused || !userInfo}
-                label="Stake"
-              />
-              <Button
-                className="p-button-outlined mt-2 mr-3 justify-content-center w-2 text-white border-primary"
-                onClick={() => handleModal('unstake', true)}
-                disabled={
-                  !poolInfo ||
-                  poolInfo.paused ||
-                  !userInfo ||
-                  userInfo.totalAmount.eq(BIG_ZERO)
-                }
-                label="Unstake"
-              />
-              <Button
-                className="p-button mt-2 justify-content-center w-2 text-white border-primary"
-                onClick={() => handleModal('restake', true)}
-                disabled={
-                  !poolInfo ||
-                  poolInfo.paused ||
-                  !userInfo ||
-                  userInfo.totalAmount.eq(BIG_ZERO)
-                }
-                label="Restake"
-              />
+              {!account ? (
+                <ConnectWalletButton />
+              ) : (
+                <>
+                  <Button
+                    className="p-button mt-2 justify-content-center w-2 mr-3"
+                    onClick={() => handleModal('stake', true)}
+                    disabled={!isReady}
+                    label="Stake"
+                  />
+                  <Button
+                    className="p-button-outlined mt-2 mr-3 justify-content-center w-2 text-white border-primary"
+                    onClick={() => handleModal('unstake', true)}
+                    disabled={!isReady || userInfo!.totalAmount.eq(BIG_ZERO)}
+                    label="Unstake"
+                  />
+                  <Button
+                    className="p-button mt-2 justify-content-center w-2 text-white border-primary"
+                    onClick={() => handleModal('restake', true)}
+                    disabled={!isReady || userInfo!.totalAmount.eq(BIG_ZERO)}
+                    label="Restake"
+                  />
+                </>
+              )}
             </div>
           </div>
         </Box>

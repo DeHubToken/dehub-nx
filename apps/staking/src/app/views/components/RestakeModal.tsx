@@ -3,12 +3,15 @@ import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
 import {
   BIG_ZERO,
+  ethersToBigNumber,
   getBalanceAmount,
   getDecimalAmount,
   getFullDisplayBalance,
 } from '@dehub/shared/utils';
-import { TransactionReceipt } from '@ethersproject/abstract-provider';
+import { Interface } from '@ethersproject/abi';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import { ContractReceipt, Event } from '@ethersproject/contracts';
+import { id } from '@ethersproject/hash';
 import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -55,7 +58,7 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
   const { poolInfo } = usePool();
   const { userInfo } = useUserInfo();
 
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>('0.00');
   const [isTxPending, setIsTxPending] = useState(false);
   const [disableStake, setDisableStake] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -105,32 +108,52 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
     try {
       const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
 
+      const StakedTopic = id(
+        'Staked(address,uint256,uint256,uint256,uint256,uint256)'
+      );
+      const RestakedInterface = new Interface([
+        'event Staked(address indexed user,uint256 period,uint256 amount,uint256 stakeAt,uint256 indexed rewardIndex,uint256 indexed tierIndex)',
+      ]);
+
       setIsTxPending(true);
       const tx = await stakingContract.restakePortion(
         EthersBigNumber.from(decimalValue.toString()),
         period * DAY_IN_SECONDS,
         count
       );
-      const receipt: TransactionReceipt = await tx.wait();
+      await tx
+        .wait()
+        .then((receipt: ContractReceipt) => {
+          updatePool();
+          updateUser();
 
-      updatePool();
-      updateUser();
+          const events = receipt.events?.filter(
+            (event: Event) => event.topics[0] === StakedTopic
+          );
+          const lastEvent =
+            events && events.length > 0 ? events.slice(-1)[0] : undefined;
+          if (!lastEvent) return;
 
-      if (receipt.status) {
-        toast?.current?.show({
-          severity: 'success',
-          summary: `Success`,
-          detail: (
-            <Box>
-              <Text style={{ marginBottom: '8px' }}>
-                {`${valueAsBn.toString()} $DeHub has been successfully restaked!`}
-              </Text>
-            </Box>
-          ),
-          life: 4000,
-        });
-      }
-      onHide();
+          const parsed = RestakedInterface.parseLog(lastEvent);
+
+          toast?.current?.show({
+            severity: 'success',
+            summary: `Success`,
+            detail: (
+              <Box>
+                <Text style={{ marginBottom: '8px' }}>
+                  {`${getFullDisplayBalance(
+                    ethersToBigNumber(parsed.args.amount),
+                    DEHUB_DECIMALS,
+                    DEHUB_DISPLAY_DECIMALS
+                  )} $DeHub has been successfully restaked!`}
+                </Text>
+              </Box>
+            ),
+            life: 4000,
+          });
+        })
+        .then(() => onHide());
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast?.current?.show({
@@ -277,6 +300,7 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
             </Text>
             <InputNumber
               value={period}
+              disabled={!account || isTxPending}
               onValueChange={handlePeriodChange}
               onChange={handlePeriodChange}
               showButtons
@@ -293,6 +317,7 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
             </Text>
             <InputNumber
               value={count}
+              disabled={!account || isTxPending}
               onValueChange={handleCountChange}
               onChange={handleCountChange}
               showButtons

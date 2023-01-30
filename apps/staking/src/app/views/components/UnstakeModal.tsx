@@ -3,12 +3,15 @@ import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
 import {
   BIG_ZERO,
+  ethersToBigNumber,
   getBalanceAmount,
   getDecimalAmount,
   getFullDisplayBalance,
 } from '@dehub/shared/utils';
-import { TransactionReceipt } from '@ethersproject/abstract-provider';
+import { Interface } from '@ethersproject/abi';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
+import { ContractReceipt, Event } from '@ethersproject/contracts';
+import { id } from '@ethersproject/hash';
 import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -50,7 +53,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
   const { poolInfo } = usePool();
   const { userInfo } = useUserInfo();
 
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>('0.00');
   const [isTxPending, setIsTxPending] = useState(false);
   const [disableStake, setDisableStake] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -83,30 +86,49 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
     try {
       const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
 
+      const UnstakedTopic = id('Unstaked(address,uint256,uint256,uint256)');
+      const UnstakedInterface = new Interface([
+        'event Unstaked(address indexed user,uint256 actualAmount,uint256 transferAmount,uint256 unstakeAt)',
+      ]);
+
       setIsTxPending(true);
       const tx = await stakingContract.unstake(
         EthersBigNumber.from(decimalValue.toString())
       );
-      const receipt: TransactionReceipt = await tx.wait();
+      await tx
+        .wait()
+        .then((receipt: ContractReceipt) => {
+          updatePool();
+          updateUser();
 
-      updatePool();
-      updateUser();
+          const events = receipt.events?.filter(
+            (event: Event) => event.topics[0] === UnstakedTopic
+          );
+          const lastEvent =
+            events && events.length > 0 ? events.slice(-1)[0] : undefined;
+          if (!lastEvent) return;
 
-      if (receipt.status) {
-        toast?.current?.show({
-          severity: 'success',
-          summary: `Success`,
-          detail: (
-            <Box>
-              <Text style={{ marginBottom: '8px' }}>
-                {`${valueAsBn.toString()} $DeHub has been successfully unstaked!`}
-              </Text>
-            </Box>
-          ),
-          life: 4000,
-        });
-      }
-      onHide();
+          const parsed = UnstakedInterface.parseLog(lastEvent);
+
+          toast?.current?.show({
+            severity: 'success',
+            summary: `Success`,
+            detail: (
+              <Box>
+                <Text style={{ marginBottom: '8px' }}>
+                  {`${getFullDisplayBalance(
+                    ethersToBigNumber(parsed.args.transferAmount),
+                    DEHUB_DECIMALS,
+                    DEHUB_DISPLAY_DECIMALS
+                  )} $DeHub has been successfully unstaked!`}
+                </Text>
+              </Box>
+            ),
+            life: 4000,
+          });
+        })
+        .then(() => onHide());
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast?.current?.show({
@@ -172,7 +194,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
           />
           {showFieldWarning && (
             <Text
-              color="failure"
+              color="#ed4b9e"
               fontSize="12px"
               textAlign="right"
               style={{ marginTop: '4px' }}

@@ -3,12 +3,16 @@ import { BalanceInput, Box, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
 import {
   BIG_ZERO,
+  ethersToBigNumber,
   getBalanceAmount,
   getDecimalAmount,
+  getFullDisplayBalance,
 } from '@dehub/shared/utils';
-import { TransactionReceipt } from '@ethersproject/abstract-provider';
+import { Interface } from '@ethersproject/abi';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
 import { MaxUint256 } from '@ethersproject/constants';
+import { ContractReceipt, Event } from '@ethersproject/contracts';
+import { id } from '@ethersproject/hash';
 import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -54,7 +58,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   const { balance: dehubBalance, fetchStatus: fetchBalanceStatus } =
     useGetDehubBalance();
 
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>('0.00');
   const [isTxPending, setIsTxPending] = useState(false);
   const [disableStake, setDisableStake] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -122,30 +126,50 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
         }
       }
 
+      const StakedTopic = id(
+        'Staked(address,uint256,uint256,uint256,uint256,uint256)'
+      );
+      const StakedInterface = new Interface([
+        'event Staked(address indexed user,uint256 period,uint256 amount,uint256 stakeAt,uint256 indexed rewardIndex,uint256 indexed tierIndex)',
+      ]);
+
       const tx = await stakingContract.stake(
         period * DAY_IN_SECONDS,
         EthersBigNumber.from(decimalValue.toString())
       );
-      const receipt: TransactionReceipt = await tx.wait();
+      await tx
+        .wait()
+        .then((receipt: ContractReceipt) => {
+          updatePool();
+          updateUser();
 
-      updatePool();
-      updateUser();
+          const events = receipt.events?.filter(
+            (event: Event) => event.topics[0] === StakedTopic
+          );
+          const lastEvent =
+            events && events.length > 0 ? events.slice(-1)[0] : undefined;
+          if (!lastEvent) return;
 
-      if (receipt.status) {
-        toast?.current?.show({
-          severity: 'success',
-          summary: `Success`,
-          detail: (
-            <Box>
-              <Text style={{ marginBottom: '8px' }}>
-                {`${valueAsBn.toString()} $DeHub has been successfully staked!`}
-              </Text>
-            </Box>
-          ),
-          life: 4000,
-        });
-      }
-      onHide();
+          const parsed = StakedInterface.parseLog(lastEvent);
+
+          toast?.current?.show({
+            severity: 'success',
+            summary: `Success`,
+            detail: (
+              <Box>
+                <Text style={{ marginBottom: '8px' }}>
+                  {`${getFullDisplayBalance(
+                    ethersToBigNumber(parsed.args.amount),
+                    DEHUB_DECIMALS,
+                    DEHUB_DISPLAY_DECIMALS
+                  )} $DeHub has been successfully staked!`}
+                </Text>
+              </Box>
+            ),
+            life: 4000,
+          });
+        })
+        .then(() => onHide());
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast?.current?.show({
@@ -211,7 +235,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
           />
           {showFieldWarning && (
             <Text
-              color="failure"
+              color="#ed4b9e"
               fontSize="12px"
               textAlign="right"
               style={{ marginTop: '4px' }}
@@ -268,6 +292,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
             </Text>
             <InputNumber
               value={period}
+              disabled={!account || isTxPending}
               onValueChange={handlePeriodChange}
               onChange={handlePeriodChange}
               showButtons

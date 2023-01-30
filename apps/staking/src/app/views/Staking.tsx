@@ -10,7 +10,7 @@ export default function Staking() {
       <div className="my-8">
         <StakedInfoBox />
       </div>
-      <div className="my-8">
+      <div className="mt-4">
         <MyStakingBox />
       </div>
     </Container>
