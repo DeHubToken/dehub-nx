@@ -67,8 +67,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
 
   const valueAsBn = new BigNumber(value);
 
-  const showFieldWarning =
-    !!account && valueAsBn.gt(0) && errorMessage !== null;
+  const showFieldWarning = !!account && errorMessage !== null;
 
   const handleChange = (input: string) => {
     setValue(input);

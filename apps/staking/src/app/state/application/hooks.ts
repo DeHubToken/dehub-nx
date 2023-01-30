@@ -1,4 +1,8 @@
-import { useRefresh, useWeb3Context } from '@dehub/react/core';
+import {
+  useIsBrowserTabActive,
+  useRefresh,
+  useWeb3Context,
+} from '@dehub/react/core';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -27,6 +31,7 @@ export const useFetchPool = () => {
   const dispatch = useAppDispatch();
   const { slowRefresh, fastRefresh } = useRefresh();
   const { isInitialized, account } = useWeb3Context();
+  const isTabActive = useIsBrowserTabActive();
 
   const [immediatePool, setImmediatePool] = useState<number>(1);
   const [immediateUser, setImmediateUser] = useState<number>(1);
@@ -37,8 +42,8 @@ export const useFetchPool = () => {
       dispatch(setApplicationStatus({ appStatus: ApplicationStatus.LIVE }));
     };
 
-    if (isInitialized && immediatePool) fetchInitialize();
-  }, [dispatch, isInitialized, immediatePool, slowRefresh]);
+    if (isInitialized && immediatePool && isTabActive) fetchInitialize();
+  }, [dispatch, isInitialized, immediatePool, isTabActive, slowRefresh]);
 
   useEffect(() => {
     if (account && immediateUser) {

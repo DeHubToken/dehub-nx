@@ -1,6 +1,6 @@
 import { Box, Heading, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS } from '@dehub/shared/config';
-import { getFullDisplayBalance } from '@dehub/shared/utils';
+import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
@@ -188,13 +188,23 @@ const MyStakingBox = () => {
               <Button
                 className="p-button-outlined mt-2 mr-3 justify-content-center w-2 text-white border-primary"
                 onClick={() => handleModal('unstake', true)}
-                disabled={!poolInfo || poolInfo.paused || !userInfo}
+                disabled={
+                  !poolInfo ||
+                  poolInfo.paused ||
+                  !userInfo ||
+                  userInfo.totalAmount.eq(BIG_ZERO)
+                }
                 label="Unstake"
               />
               <Button
                 className="p-button mt-2 justify-content-center w-2 text-white border-primary"
                 onClick={() => handleModal('restake', true)}
-                disabled={!poolInfo || poolInfo.paused || !userInfo}
+                disabled={
+                  !poolInfo ||
+                  poolInfo.paused ||
+                  !userInfo ||
+                  userInfo.totalAmount.eq(BIG_ZERO)
+                }
                 label="Restake"
               />
             </div>
