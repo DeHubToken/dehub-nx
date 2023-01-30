@@ -75,8 +75,7 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
 
   const valueAsBn = new BigNumber(value);
 
-  const showFieldWarning =
-    !!account && valueAsBn.gt(0) && errorMessage !== null;
+  const showFieldWarning = !!account && errorMessage !== null;
 
   const handleChange = (input: string) => {
     setValue(input);
@@ -197,7 +196,7 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
           />
           {showFieldWarning && (
             <Text
-              color="failure"
+              color="#ed4b9e"
               fontSize="12px"
               textAlign="right"
               style={{ marginTop: '4px' }}
@@ -205,7 +204,7 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
               {errorMessage}
             </Text>
           )}
-          <div className="flex justify-content-end align-items-center mt-2 mb-5">
+          <div className="flex justify-content-end align-items-center mt-2">
             <Text textAlign="right" fontSize="12px" className="mr-1">
               Total staked:
             </Text>
@@ -214,6 +213,26 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
                 {getFullDisplayBalance(
                   userInfo.totalAmount,
                   DEHUB_DECIMALS,
+                  DEHUB_DISPLAY_DECIMALS
+                ).toString()}
+              </Text>
+            ) : (
+              <Skeleton width="5rem" height="1rem" />
+            )}
+          </div>
+          <div className="flex justify-content-end align-items-center mt-1 mb-5">
+            <Text textAlign="right" fontSize="12px" className="mr-1">
+              Restakable:
+            </Text>
+            {userInfo && poolInfo ? (
+              <Text textAlign="right" fontSize="12px">
+                {getFullDisplayBalance(
+                  new Date().getTime() / 1000 > userInfo.unlockedAt
+                    ? valueAsBn
+                    : valueAsBn
+                        .multipliedBy(10000 - poolInfo.forceUnstakeFee)
+                        .dividedBy(10000),
+                  0,
                   DEHUB_DISPLAY_DECIMALS
                 ).toString()}
               </Text>

@@ -180,7 +180,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
               {errorMessage}
             </Text>
           )}
-          <div className="flex justify-content-end align-items-center mt-2 mb-5">
+          <div className="flex justify-content-end align-items-center mt-2">
             <Text textAlign="right" fontSize="12px" className="mr-1">
               Total staked:
             </Text>
@@ -189,6 +189,26 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
                 {getFullDisplayBalance(
                   userInfo.totalAmount,
                   DEHUB_DECIMALS,
+                  DEHUB_DISPLAY_DECIMALS
+                ).toString()}
+              </Text>
+            ) : (
+              <Skeleton width="5rem" height="1rem" />
+            )}
+          </div>
+          <div className="flex justify-content-end align-items-center mt-1 mb-5">
+            <Text textAlign="right" fontSize="12px" className="mr-1">
+              Returnable:
+            </Text>
+            {userInfo && poolInfo ? (
+              <Text textAlign="right" fontSize="12px">
+                {getFullDisplayBalance(
+                  new Date().getTime() / 1000 > userInfo.unlockedAt
+                    ? valueAsBn
+                    : valueAsBn
+                        .multipliedBy(10000 - poolInfo.forceUnstakeFee)
+                        .dividedBy(10000),
+                  0,
                   DEHUB_DISPLAY_DECIMALS
                 ).toString()}
               </Text>
