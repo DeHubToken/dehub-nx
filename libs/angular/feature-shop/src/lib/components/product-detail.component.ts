@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { ProductDetailFragment } from '@dehub/shared/model';
+import { ProductDetailFragment, ShopOrder } from '@dehub/shared/model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -60,7 +60,7 @@ import { Observable } from 'rxjs';
               class="flex-grow pr-3 mb-4 line-height-3"
             ></div>
 
-            <div class="flex-none min-w-full sm:min-w-max xl:w-15rem">
+            <div class="flex-none min-w-full sm:min-w-max xl:w-17rem">
               <!-- Meta Info -->
               <div
                 *ngIf="productDetail.category as category"
@@ -75,7 +75,7 @@ import { Observable } from 'rxjs';
               </div>
 
               <!-- Price Widget -->
-              <div class="card overview-box gray shadow-2 pt-1 pb-3">
+              <div class="card overview-box gray shadow-2 pt-1 pb-3 mb-3">
                 <div class="overview-info text-right w-full">
                   <!-- Price -->
                   <h2 class="mt-1 mb-0 pr-0">
@@ -144,6 +144,11 @@ import { Observable } from 'rxjs';
                   </h5>
                 </div>
               </div>
+
+              <!-- Orders Widget -->
+              <dhb-product-orders
+                [productOrders$]="productOrders$"
+              ></dhb-product-orders>
             </div>
           </div>
         </div>
@@ -181,6 +186,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductDetailComponent implements OnInit {
   @Input() productDetail$?: Observable<ProductDetailFragment>;
+  @Input() productOrders$?: Observable<ShopOrder[]>;
 
   constructor() {}
 

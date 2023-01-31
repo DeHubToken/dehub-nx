@@ -13,7 +13,7 @@ import store from './states';
 const Providers: React.FC<PropsWithChildren<unknown>> = ({ children }) => {
   return (
     <ToastProvider>
-      <Web3Providers moralis={environment.moralis} web3={environment.web3}>
+      <Web3Providers web3={environment.web3}>
         <Provider store={store}>
           <ContentfulProvider contentful={environment.contentful}>
             <RefreshContextProvider>

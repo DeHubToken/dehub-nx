@@ -1,7 +1,17 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductDetailFragment } from '@dehub/shared/model';
-import { filterNil } from '@dehub/shared/utils';
+import { DehubMoralisToken, IDehubMoralisService } from '@dehub/angular/model';
+import {
+  OrderStatus,
+  ProductDetailFragment,
+  ShopOrder,
+} from '@dehub/shared/model';
+import { filterNil, publishReplayRefCount } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { map, Observable, switchMap } from 'rxjs';
 import { ProductDetailService } from './services';
@@ -14,9 +24,10 @@ import { ProductDetailService } from './services';
         <!-- Back (top) -->
         <dhb-back-button [routerLink]="['/shop']"></dhb-back-button>
 
-        <!-- Basic Post Detail -->
+        <!-- Product Detail -->
         <dhb-product-detail
           [productDetail$]="productDetail$"
+          [productOrders$]="productOrders$"
         ></dhb-product-detail>
 
         <!-- Back (bottom) -->
@@ -29,17 +40,32 @@ import { ProductDetailService } from './services';
 })
 export class AngularFeatureShopProductDetailComponent implements OnInit {
   productDetail$?: Observable<ProductDetailFragment>;
+  productOrders$?: Observable<ShopOrder[]>;
 
   constructor(
     private route: ActivatedRoute,
-    private productDetailService: ProductDetailService
+    private productDetailService: ProductDetailService,
+    @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService
   ) {}
 
   ngOnInit() {
     this.productDetail$ = this.route.paramMap.pipe(
       map(paramMap => paramMap.get('slug') ?? undefined),
       switchMap(slug => this.productDetailService.getProductDetailBySlug(slug)),
-      filterNil()
+      filterNil(),
+      publishReplayRefCount()
+    );
+
+    this.productOrders$ = this.productDetail$.pipe(
+      map(({ sys: { id } }) => id),
+      switchMap(contentfulId =>
+        this.dehubMoralis.getDeHubShopOrders$({
+          contentfulId,
+          orderStatus: OrderStatus.verified,
+        })
+      ),
+      map(orders => orders ?? []),
+      publishReplayRefCount()
     );
   }
 }

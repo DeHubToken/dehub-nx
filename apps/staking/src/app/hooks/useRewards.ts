@@ -31,14 +31,14 @@ export const useWeeklyRewards = (staker: string | null) => {
         }
         const rewards = totalStaked.eq(BIG_ZERO)
           ? BIG_ZERO
-          : await rewardsContract.calcCurrentClaimableShare(
+          : await rewardsContract['calcCurrentClaimableShare'](
               EthersBigNumber.from(amount.toString()),
               EthersBigNumber.from(totalStaked.toString())
             );
         if (rewards) setBNBRewards(ethersToBigNumber(rewards));
-        const claimed = await rewardsContract.hasAlreadyClaimed(staker);
+        const claimed = await rewardsContract['hasAlreadyClaimed'](staker);
         setHasAlreadyClaimed(claimed);
-        const nextCycle = await rewardsContract.nextCycleResetTimestamp();
+        const nextCycle = await rewardsContract['nextCycleResetTimestamp']();
         setNextCycleResetTimestamp(nextCycle.toNumber());
 
         setFetchStatus(rewards ? FetchStatus.SUCCESS : FetchStatus.FAILED);
@@ -55,9 +55,9 @@ export const useWeeklyRewards = (staker: string | null) => {
     const fetch = async () => {
       try {
         if (!rewardsContract) return;
-        const ret = await rewardsContract.claimableDistribution();
+        const ret = await rewardsContract['claimableDistribution']();
         setTotalBNBRewards(ethersToBigNumber(ret));
-        const enabled = await rewardsContract.isDistributionEnabled();
+        const enabled = await rewardsContract['isDistributionEnabled']();
         setDistributionEnabled(enabled);
       } catch (error) {
         console.error(error);

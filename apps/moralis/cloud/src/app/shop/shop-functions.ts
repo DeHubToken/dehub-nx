@@ -1,10 +1,13 @@
 import {
+  DeHubShopOrder,
   InitOrderParams,
   InitOrderResult,
   MoralisClass,
   MoralisFunctions,
+  MoralisUser,
   OrderStatus,
   PhysicalAddress,
+  ShopOrdersParams,
 } from '@dehub/shared/model';
 import { emptyPhysicalAddress } from '@dehub/shared/utils';
 import { environment } from '../../environments/environment';
@@ -129,11 +132,13 @@ const upsertShippingAddress = async (
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const findOrder = async (orderId: string): Promise<any | null> => {
+export const findOrder = async (
+  orderId: string
+): Promise<DeHubShopOrder | null> => {
   const logger = Moralis.Cloud.getLogger();
   try {
     const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
-    const query = new Moralis.Query(DeHubShopOrders);
+    const query = new Moralis.Query<DeHubShopOrder>(DeHubShopOrders);
     query.equalTo('objectId', orderId);
     const result = await query.first();
     if (!result) return null;
@@ -155,6 +160,29 @@ export const checkOrder = async (orderId: string): Promise<string | null> => {
   } catch (err) {
     logger.error(
       `${MoralisFunctions.Shop.InitOrder} error: ${JSON.stringify(err)}`
+    );
+    return null;
+  }
+};
+
+export const shopOrders = async ({
+  contentfulId,
+  orderStatus,
+}: ShopOrdersParams): Promise<DeHubShopOrder[] | null> => {
+  const logger = Moralis.Cloud.getLogger();
+  try {
+    const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
+    const query = new Moralis.Query<DeHubShopOrder>(DeHubShopOrders);
+    query.include('user');
+    query.equalTo('contentfulId', contentfulId);
+    query.equalTo('status', orderStatus);
+    query.descending('updatedAt');
+
+    const result = await query.find({ useMasterKey: true });
+    return result;
+  } catch (err) {
+    logger.error(
+      `${MoralisFunctions.Shop.ShopOrders} error: ${JSON.stringify(err)}`
     );
     return null;
   }

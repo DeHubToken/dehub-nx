@@ -9,6 +9,7 @@
 import {
   DeHubTokenContractPropsType,
   MoralisClass,
+  MoralisUser,
   StakingContractPropsType,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
@@ -20,7 +21,7 @@ export async function isMoralisUserByAddress(
 ): Promise<MoralisUser | null> {
   const logger = Moralis.Cloud.getLogger();
   try {
-    const query = new Moralis.Query(Moralis.User);
+    const query = new Moralis.Query<MoralisUser>(Moralis.User);
     query.contains('accounts', address);
     const users: MoralisUser[] = await query.find({
       useMasterKey: true,
@@ -32,39 +33,6 @@ export async function isMoralisUserByAddress(
     logger.error(`isMoralisUserByAddress error: ${JSON.stringify(err)}`);
   }
   return null;
-}
-
-/**
- * Update can_play according to the balance of holding and staking
- * @param {*} address user address
- */
-export async function updateCanPlay(chainId: ChainIdAsNumber, address: string) {
-  const logger = Moralis.Cloud.getLogger();
-  try {
-    const user = await isMoralisUserByAddress(address);
-    if (!user) {
-      logger.error(`Not found Moralis User: ${address}`);
-      return;
-    }
-    // Check if user is already whitelisted
-    const whitelisted = await getWhitelisted();
-    if (whitelisted && whitelisted.indexOf(address) >= 0) {
-      logger.error(`Whitelisted user: ${address}`);
-      const canPlay = user.get('can_play');
-      if (!canPlay) {
-        await setCanPlay(user, true);
-      }
-      return;
-    }
-    const staked = await getStakedAmount(chainId, address);
-    logger.info(`user staked DeHub amount(${address}): ${staked.toString()}`);
-
-    const minAmount = await getOTTMinTokensToPlay();
-    await setCanPlay(user, staked.gte(minAmount) ? true : false);
-  } catch (err) {
-    logger.error(`updateCanPlay error: ${JSON.stringify(err)}`);
-    return;
-  }
 }
 
 /**
@@ -174,28 +142,12 @@ export async function getDeHubTokenContract(
   return null;
 }
 
-async function getWhitelisted(): Promise<string[] | null> {
-  const logger = Moralis.Cloud.getLogger();
-  try {
-    const DeHubOTTDapp = Moralis.Object.extend(environment.dappName.ott);
-    const query = new Moralis.Query(DeHubOTTDapp);
-    const records = await query.first({ useMasterKey: true });
-    if (!records) return null;
-
-    const relation = records.relation('whitelisted');
-    const users = await relation.query().find({ useMasterKey: true });
-    return users.map(user => user.get('ethAddress'));
-  } catch (err) {
-    logger.error(`getWhitelisted error: ${JSON.stringify(err)}`);
-  }
-  return null;
-}
-
 /**
  * Get staked token amount of given wallet address.
  * @param {*} targetChainId network
  * @param {*} address user address
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function getStakedAmount(
   targetChainId: ChainIdAsNumber,
   address: string
@@ -229,45 +181,5 @@ async function getStakedAmount(
   } catch (err) {
     logger.error(`getStakedAmount error: ${JSON.stringify(err)}`);
     return null;
-  }
-}
-
-async function getOTTMinTokensToPlay(): Promise<
-  typeof Moralis.Cloud.BigNumber | null
-> {
-  const logger = Moralis.Cloud.getLogger();
-  try {
-    const DeHubOTTDapp = Moralis.Object.extend(environment.dappName.ott);
-    const query = new Moralis.Query(DeHubOTTDapp);
-    const config = await query.find();
-    return config.length > 0
-      ? new Moralis.Cloud.BigNumber(config[0].get('minTokensToPlay')).times(
-          new Moralis.Cloud.BigNumber(100000)
-        )
-      : null;
-  } catch (err) {
-    logger.error(`getOTTMinTokensToPlay error: ${JSON.stringify(err)}`);
-  }
-  return null;
-}
-
-async function setCanPlay(user: MoralisUser, value: boolean) {
-  const logger = Moralis.Cloud.getLogger();
-  try {
-    if (user) {
-      logger.info(`setting can_play: ${JSON.stringify(user)}, ${value}`);
-      user.set('can_play', value);
-      await user
-        .save(null, { useMasterKey: true })
-        .then((user: MoralisUser) => {
-          logger.info(
-            `setCanPlay(${user.get('ethAddress')}, ${user.get('can_play')})`
-          );
-        });
-    } else {
-      logger.error('Not found Moralis User to set can_play');
-    }
-  } catch (err) {
-    logger.error(`setCanPlay error: ${JSON.stringify(err)}`);
   }
 }

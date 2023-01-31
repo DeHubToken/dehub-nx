@@ -4,7 +4,9 @@ import { Moralis } from 'moralis-v1';
 import { environment } from '../../environments/environment';
 import { AuthAllritesReturns } from './allrites.model';
 
-const { moralis } = environment;
+const {
+  web3: { moralis },
+} = environment;
 
 describe('E2E Allrites functions', () => {
   beforeAll(async () => await Moralis.start(moralis));

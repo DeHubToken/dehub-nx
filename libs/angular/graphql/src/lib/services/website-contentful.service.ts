@@ -64,20 +64,6 @@ export class LegalPostCollectionBySlugService extends Apollo.Query<
 @Injectable({
   providedIn: AngularGraphQLModule,
 })
-export class PageAccessWallCollectionService extends Apollo.Query<
-  models.PageAccessWallCollectionQuery,
-  models.PageAccessWallCollectionQueryVariables
-> {
-  document = models.PageAccessWallCollectionDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
-}
-
-@Injectable({
-  providedIn: AngularGraphQLModule,
-})
 export class PageEarnCollectionService extends Apollo.Query<
   models.PageEarnCollectionQuery,
   models.PageEarnCollectionQueryVariables

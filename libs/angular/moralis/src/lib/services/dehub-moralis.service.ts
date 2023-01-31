@@ -20,6 +20,8 @@ import {
   MoralisFunctions,
   ShopContractPropsType,
   ShopContractResponse,
+  ShopOrdersParams,
+  ShopOrdersResult,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
@@ -45,10 +47,6 @@ import {
 
 @Injectable()
 export class DehubMoralisService implements IDehubMoralisService {
-  canPlay$ = this.moralisService.userAttributes$.pipe(
-    map(attributes => attributes?.can_play ?? false)
-  );
-
   userContacts$ = this.moralisService.userAttributes$.pipe(
     filterNil(),
     map(({ email, phone }) => ({ email, phone }))
@@ -90,6 +88,25 @@ export class DehubMoralisService implements IDehubMoralisService {
     private messageService: MessageService,
     private httpClient: HttpClient
   ) {}
+
+  /**
+   * Gets a list of all shop orders associated with the given contentfulId.
+   */
+  getDeHubShopOrders$(params: ShopOrdersParams) {
+    const url = this.moralisService.getCloudFunctionUrl(
+      MoralisFunctions.Shop.ShopOrders
+    );
+    this.logger.info(
+      `Sending ${MoralisFunctions.Shop.ShopOrders} request to Moralis...`,
+      params
+    );
+    return this.httpClient.post<ShopOrdersResult>(url, params).pipe(
+      tap(resp =>
+        this.logger.debug(`${MoralisFunctions.Shop.ShopOrders} response`, resp)
+      ),
+      map(resp => resp.result)
+    );
+  }
 
   /**
    * Gets a list of all shipping addresses associated with the current user.
@@ -190,7 +207,10 @@ export class DehubMoralisService implements IDehubMoralisService {
     const url = this.moralisService.getCloudFunctionUrl(
       MoralisFunctions.Shop.InitOrder
     );
-    this.logger.info('Sending initOrder request to Moralis...', params);
+    this.logger.info(
+      `Sending ${MoralisFunctions.Shop.InitOrder} request to Moralis...`,
+      params
+    );
     return this.httpClient.post<InitOrderResponse>(url, params).pipe(
       tap(resp =>
         this.logger.debug(`${MoralisFunctions.Shop.InitOrder} response`, resp)

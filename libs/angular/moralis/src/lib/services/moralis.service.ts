@@ -20,7 +20,7 @@ import {
   GetTokenMetadataParameters,
   MoralisConnectorNames,
   MoralisMessage,
-  User,
+  MoralisUser,
   WalletConnectingMessage,
   WalletConnectingState,
   WalletConnectState,
@@ -69,7 +69,7 @@ const web3Connectors: { [key: string]: Moralis.Connector } = {
 
 @Injectable()
 export class MoralisService implements IMoralisService {
-  private userSubject = new BehaviorSubject<User | undefined>(
+  private userSubject = new BehaviorSubject<MoralisUser | undefined>(
     Moralis.User.current()
   );
   private accountSubject = new BehaviorSubject<string | undefined>(
@@ -170,7 +170,7 @@ export class MoralisService implements IMoralisService {
     }
   }
 
-  updateUser$(attributes: Partial<Attributes>): Observable<User> {
+  updateUser$(attributes: Partial<Attributes>): Observable<MoralisUser> {
     return this.user$.pipe(
       filterNil(),
       first(),
@@ -339,7 +339,7 @@ export class MoralisService implements IMoralisService {
     this.logger.info('Logging out.');
 
     this.unsubscribeEvents();
-    return Moralis.User.logOut<User>()
+    return Moralis.User.logOut<MoralisUser>()
       .catch(e => this.logger.error('Moralis logout problem:', e))
       .finally(() => {
         // Cleanup local storage
@@ -453,7 +453,7 @@ export class MoralisService implements IMoralisService {
     loggedInUser?: Moralis.User<Moralis.Attributes>,
     account?: string
   ) {
-    this.userSubject.next(loggedInUser as User);
+    this.userSubject.next(loggedInUser as MoralisUser);
     this.accountSubject.next(account ?? loggedInUser?.attributes.ethAddress);
   }
 
@@ -549,6 +549,6 @@ export class MoralisService implements IMoralisService {
   // Misc
 
   getCloudFunctionUrl(cloudFunctionName: string) {
-    return `${this.env.moralis.serverUrl}/functions/${cloudFunctionName}`;
+    return `${this.env.web3.moralis.serverUrl}/functions/${cloudFunctionName}`;
   }
 }

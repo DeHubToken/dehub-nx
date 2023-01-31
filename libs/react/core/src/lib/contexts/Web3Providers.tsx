@@ -1,31 +1,16 @@
+import { Web3Env } from '@dehub/shared/config';
 import { Web3Provider } from '@ethersproject/providers';
 import { Web3ReactProvider } from '@web3-react/core';
 import { PropsWithChildren, useCallback } from 'react';
 import { MoralisProvider } from 'react-moralis';
 import { ConnectProvider } from './ConnectContext';
 
-interface MoralisProps {
-  /** Application ID */
-  appId: string;
-  /** Server URL */
-  serverUrl: string;
-}
-
-interface Web3Props {
-  chainId: number;
-  auth: {
-    magicLinkApiKey: string;
-  };
-}
-
 interface Web3ProviderProps extends PropsWithChildren<unknown> {
-  moralis: MoralisProps;
-  web3: Web3Props;
+  web3: Web3Env;
 }
 
 export const Web3Providers: React.FC<Web3ProviderProps> = ({
   children,
-  moralis,
   web3,
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,8 +22,8 @@ export const Web3Providers: React.FC<Web3ProviderProps> = ({
 
   return (
     <MoralisProvider
-      appId={moralis.appId}
-      serverUrl={moralis.serverUrl}
+      appId={web3.moralis.appId}
+      serverUrl={web3.moralis.serverUrl}
       initializeOnMount={true}
     >
       <Web3ReactProvider getLibrary={getLibrary}>

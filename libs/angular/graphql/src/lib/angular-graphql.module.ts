@@ -33,7 +33,7 @@ export function createApollo(
     contentful: {
       graphqlUri,
       isPreview,
-      website: { spaceId, cpaToken, cdaToken },
+      website: { spaceId, environmentId, cpaToken, cdaToken },
     },
   }: SharedEnv,
   logger: ILoggerService
@@ -100,7 +100,7 @@ export function createApollo(
           );
       }),
       httpLink.create({
-        uri: `${graphqlUri}/${spaceId}`,
+        uri: `${graphqlUri}/${spaceId}/environments/${environmentId}`,
         headers: new HttpHeaders({
           Authorization: `Bearer ${isPreview ? cpaToken : cdaToken}`,
         }),

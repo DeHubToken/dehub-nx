@@ -78,16 +78,18 @@ export type GetTokenBalancesParameters =
   operations['getTokenBalances']['parameters']['query'] &
     operations['getTokenBalances']['parameters']['path'];
 
-export type Attributes = Moralis.Attributes &
-  Contacts & {
-    username: string;
-    accounts: string[];
-    ethAddress: string;
-    /** OTT can play flag */
-    can_play?: boolean;
-  };
+export interface User {
+  username: string;
+  accounts: string[];
+  ethAddress: string;
+  /** OTT can play flag */
+  can_play?: boolean;
+}
 
-export type User = Moralis.User<Attributes>;
+export type Attributes = Moralis.Attributes & Contacts & User;
+
+export type MoralisUser = Moralis.User<Attributes>;
+
 export type EnableOptionsPersisted = Moralis.EnableOptions & {
   connector?: Web3ConnectorNames;
 };

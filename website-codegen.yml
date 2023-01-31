@@ -5,7 +5,7 @@
 overwrite: true
 
 schema:
-  - https://graphql.contentful.com/content/v1/spaces/${WEBSITE_SPACE_ID}:
+  - https://graphql.contentful.com/content/v1/spaces/${WEBSITE_SPACE_ID}/environments/${WEBSITE_ENVIRONMENT}:
       headers:
         Authorization: 'Bearer ${WEBSITE_CPA_TOKEN}'
 

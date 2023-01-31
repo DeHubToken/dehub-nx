@@ -25,6 +25,7 @@ export class PwaService {
       .subscribe(() => this.swUpdate.checkForUpdate());
 
     // Service Worker Version Ready
+    // docs: https://angular.io/guide/service-worker-communications#updating-to-the-latest-version
     this.swUpdate.versionUpdates
       .pipe(
         takeWhile(() => this.isAlive),

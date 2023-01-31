@@ -3,7 +3,9 @@ import { MoralisFunctions } from '@dehub/shared/model';
 import { Moralis } from 'moralis-v1';
 import { environment } from '../../environments/environment';
 
-const { moralis } = environment;
+const {
+  web3: { moralis },
+} = environment;
 
 describe('E2E DeHub functions', () => {
   beforeAll(async () => await Moralis.start(moralis));

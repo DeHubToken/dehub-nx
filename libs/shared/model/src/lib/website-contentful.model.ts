@@ -752,7 +752,6 @@ export interface CallToActionLinkingCollections {
   __typename?: 'CallToActionLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
   footerCollection?: Maybe<FooterCollection>;
-  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -769,13 +768,6 @@ export interface CallToActionLinkingCollectionsEntryCollectionArgs {
 }
 
 export interface CallToActionLinkingCollectionsFooterCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface CallToActionLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1911,6 +1903,173 @@ export enum GrandPostOrder {
   VideoUrlDesc = 'videoUrl_DESC',
 }
 
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPost extends Entry {
+  __typename?: 'GroupPost';
+  collapsed?: Maybe<Scalars['Boolean']>;
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  externalLink?: Maybe<Scalars['String']>;
+  highlighted?: Maybe<Scalars['Boolean']>;
+  icon?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<GroupPostLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+  toggleable?: Maybe<Scalars['Boolean']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostCollapsedArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostExternalLinkArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostHighlightedArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostIconArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostLabelArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
+export interface GroupPostToggleableArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface GroupPostCollection {
+  __typename?: 'GroupPostCollection';
+  items: Array<Maybe<GroupPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface GroupPostFilter {
+  AND?: InputMaybe<Array<InputMaybe<GroupPostFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<GroupPostFilter>>>;
+  collapsed?: InputMaybe<Scalars['Boolean']>;
+  collapsed_exists?: InputMaybe<Scalars['Boolean']>;
+  collapsed_not?: InputMaybe<Scalars['Boolean']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  externalLink?: InputMaybe<Scalars['String']>;
+  externalLink_contains?: InputMaybe<Scalars['String']>;
+  externalLink_exists?: InputMaybe<Scalars['Boolean']>;
+  externalLink_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  externalLink_not?: InputMaybe<Scalars['String']>;
+  externalLink_not_contains?: InputMaybe<Scalars['String']>;
+  externalLink_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  highlighted?: InputMaybe<Scalars['Boolean']>;
+  highlighted_exists?: InputMaybe<Scalars['Boolean']>;
+  highlighted_not?: InputMaybe<Scalars['Boolean']>;
+  icon?: InputMaybe<Scalars['String']>;
+  icon_contains?: InputMaybe<Scalars['String']>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_not?: InputMaybe<Scalars['String']>;
+  icon_not_contains?: InputMaybe<Scalars['String']>;
+  icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  label?: InputMaybe<Scalars['String']>;
+  label_contains?: InputMaybe<Scalars['String']>;
+  label_exists?: InputMaybe<Scalars['Boolean']>;
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  label_not?: InputMaybe<Scalars['String']>;
+  label_not_contains?: InputMaybe<Scalars['String']>;
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  toggleable?: InputMaybe<Scalars['Boolean']>;
+  toggleable_exists?: InputMaybe<Scalars['Boolean']>;
+  toggleable_not?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface GroupPostLinkingCollections {
+  __typename?: 'GroupPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageStreamCollection?: Maybe<PageStreamCollection>;
+}
+
+export interface GroupPostLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface GroupPostLinkingCollectionsPageStreamCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum GroupPostOrder {
+  CollapsedAsc = 'collapsed_ASC',
+  CollapsedDesc = 'collapsed_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  ExternalLinkAsc = 'externalLink_ASC',
+  ExternalLinkDesc = 'externalLink_DESC',
+  HighlightedAsc = 'highlighted_ASC',
+  HighlightedDesc = 'highlighted_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  ToggleableAsc = 'toggleable_ASC',
+  ToggleableDesc = 'toggleable_DESC',
+}
+
 /** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
 export interface IconTile extends Entry {
   __typename?: 'IconTile';
@@ -2256,180 +2415,6 @@ export enum LegalPostOrder {
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
 }
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWall extends Entry {
-  __typename?: 'PageAccessWall';
-  contentfulMetadata: ContentfulMetadata;
-  ctasCollection?: Maybe<PageAccessWallCtasCollection>;
-  headerAlignCenter?: Maybe<Scalars['Boolean']>;
-  headerColumnWidth?: Maybe<Scalars['String']>;
-  linkedFrom?: Maybe<PageAccessWallLinkingCollections>;
-  mainTitle?: Maybe<Scalars['String']>;
-  sectionsCollection?: Maybe<PageAccessWallSectionsCollection>;
-  showSubtitle?: Maybe<Scalars['Boolean']>;
-  showTitle?: Maybe<Scalars['Boolean']>;
-  subtitle?: Maybe<Scalars['String']>;
-  sys: Sys;
-}
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWallCtasCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWallHeaderAlignCenterArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWallHeaderColumnWidthArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWallLinkedFromArgs {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWallMainTitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWallSectionsCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWallShowSubtitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWallShowTitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** Access Wall page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageAccessWall) */
-export interface PageAccessWallSubtitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-export interface PageAccessWallCollection {
-  __typename?: 'PageAccessWallCollection';
-  items: Array<Maybe<PageAccessWall>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export interface PageAccessWallCtasCollection {
-  __typename?: 'PageAccessWallCtasCollection';
-  items: Array<Maybe<CallToAction>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export interface PageAccessWallFilter {
-  AND?: InputMaybe<Array<InputMaybe<PageAccessWallFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<PageAccessWallFilter>>>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  ctasCollection_exists?: InputMaybe<Scalars['Boolean']>;
-  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
-  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
-  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
-  headerColumnWidth?: InputMaybe<Scalars['String']>;
-  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
-  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
-  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
-  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
-  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  mainTitle?: InputMaybe<Scalars['String']>;
-  mainTitle_contains?: InputMaybe<Scalars['String']>;
-  mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
-  mainTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  mainTitle_not?: InputMaybe<Scalars['String']>;
-  mainTitle_not_contains?: InputMaybe<Scalars['String']>;
-  mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
-  showSubtitle?: InputMaybe<Scalars['Boolean']>;
-  showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
-  showSubtitle_not?: InputMaybe<Scalars['Boolean']>;
-  showTitle?: InputMaybe<Scalars['Boolean']>;
-  showTitle_exists?: InputMaybe<Scalars['Boolean']>;
-  showTitle_not?: InputMaybe<Scalars['Boolean']>;
-  subtitle?: InputMaybe<Scalars['String']>;
-  subtitle_contains?: InputMaybe<Scalars['String']>;
-  subtitle_exists?: InputMaybe<Scalars['Boolean']>;
-  subtitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  subtitle_not?: InputMaybe<Scalars['String']>;
-  subtitle_not_contains?: InputMaybe<Scalars['String']>;
-  subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-}
-
-export interface PageAccessWallLinkingCollections {
-  __typename?: 'PageAccessWallLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-}
-
-export interface PageAccessWallLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export enum PageAccessWallOrder {
-  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
-  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
-  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
-  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
-  MainTitleAsc = 'mainTitle_ASC',
-  MainTitleDesc = 'mainTitle_DESC',
-  ShowSubtitleAsc = 'showSubtitle_ASC',
-  ShowSubtitleDesc = 'showSubtitle_DESC',
-  ShowTitleAsc = 'showTitle_ASC',
-  ShowTitleDesc = 'showTitle_DESC',
-  SubtitleAsc = 'subtitle_ASC',
-  SubtitleDesc = 'subtitle_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-}
-
-export interface PageAccessWallSectionsCollection {
-  __typename?: 'PageAccessWallSectionsCollection';
-  items: Array<Maybe<PageAccessWallSectionsItem>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export type PageAccessWallSectionsItem =
-  | PageSectionBasicPosts
-  | PageSectionFaQs
-  | PageSectionFeaturePosts
-  | PageSectionGrandPosts
-  | PageSectionIconTiles
-  | PageSectionSectionPosts
-  | PageSectionThumbnailPosts;
 
 /** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
 export interface PageEarn extends Entry {
@@ -3224,7 +3209,6 @@ export interface PageSectionBasicPostsHandpickedPostsCollection {
 export interface PageSectionBasicPostsLinkingCollections {
   __typename?: 'PageSectionBasicPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -3234,13 +3218,6 @@ export interface PageSectionBasicPostsLinkingCollections {
 }
 
 export interface PageSectionBasicPostsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionBasicPostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3514,7 +3491,6 @@ export interface PageSectionFaQsHandpickedFaqGroupsCollection {
 export interface PageSectionFaQsLinkingCollections {
   __typename?: 'PageSectionFaQsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -3523,13 +3499,6 @@ export interface PageSectionFaQsLinkingCollections {
 }
 
 export interface PageSectionFaQsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionFaQsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3666,7 +3635,6 @@ export interface PageSectionFeaturePostsHandpickedPostsCollection {
 export interface PageSectionFeaturePostsLinkingCollections {
   __typename?: 'PageSectionFeaturePostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -3676,13 +3644,6 @@ export interface PageSectionFeaturePostsLinkingCollections {
 }
 
 export interface PageSectionFeaturePostsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionFeaturePostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3835,7 +3796,6 @@ export interface PageSectionGrandPostsHandpickedPostsCollection {
 export interface PageSectionGrandPostsLinkingCollections {
   __typename?: 'PageSectionGrandPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -3845,13 +3805,6 @@ export interface PageSectionGrandPostsLinkingCollections {
 }
 
 export interface PageSectionGrandPostsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionGrandPostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -4006,7 +3959,6 @@ export interface PageSectionIconTilesHandpickedIconTilesCollection {
 export interface PageSectionIconTilesLinkingCollections {
   __typename?: 'PageSectionIconTilesLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -4016,13 +3968,6 @@ export interface PageSectionIconTilesLinkingCollections {
 }
 
 export interface PageSectionIconTilesLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionIconTilesLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -4421,7 +4366,6 @@ export interface PageSectionSectionPostsHandpickedPostsCollection {
 export interface PageSectionSectionPostsLinkingCollections {
   __typename?: 'PageSectionSectionPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -4431,13 +4375,6 @@ export interface PageSectionSectionPostsLinkingCollections {
 }
 
 export interface PageSectionSectionPostsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionSectionPostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -4581,7 +4518,6 @@ export interface PageSectionThumbnailPostsHandpickedPostsCollection {
 export interface PageSectionThumbnailPostsLinkingCollections {
   __typename?: 'PageSectionThumbnailPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
@@ -4591,13 +4527,6 @@ export interface PageSectionThumbnailPostsLinkingCollections {
 }
 
 export interface PageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionThumbnailPostsLinkingCollectionsPageAccessWallCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -4839,6 +4768,7 @@ export interface PageStream extends Entry {
   __typename?: 'PageStream';
   contentfulMetadata: ContentfulMetadata;
   ctasCollection?: Maybe<PageStreamCtasCollection>;
+  groupsCollection?: Maybe<PageStreamGroupsCollection>;
   headerAlignCenter?: Maybe<Scalars['Boolean']>;
   headerColumnWidth?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageStreamLinkingCollections>;
@@ -4852,6 +4782,14 @@ export interface PageStream extends Entry {
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
 export interface PageStreamCtasCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
+export interface PageStreamGroupsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -4922,6 +4860,7 @@ export interface PageStreamFilter {
   OR?: InputMaybe<Array<InputMaybe<PageStreamFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   ctasCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  groupsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
@@ -4954,6 +4893,14 @@ export interface PageStreamFilter {
   subtitle_not_contains?: InputMaybe<Scalars['String']>;
   subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
+}
+
+export interface PageStreamGroupsCollection {
+  __typename?: 'PageStreamGroupsCollection';
+  items: Array<Maybe<GroupPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
 }
 
 export interface PageStreamLinkingCollections {
@@ -5584,12 +5531,12 @@ export interface Query {
   footerCollection?: Maybe<FooterCollection>;
   grandPost?: Maybe<GrandPost>;
   grandPostCollection?: Maybe<GrandPostCollection>;
+  groupPost?: Maybe<GroupPost>;
+  groupPostCollection?: Maybe<GroupPostCollection>;
   iconTile?: Maybe<IconTile>;
   iconTileCollection?: Maybe<IconTileCollection>;
   legalPost?: Maybe<LegalPost>;
   legalPostCollection?: Maybe<LegalPostCollection>;
-  pageAccessWall?: Maybe<PageAccessWall>;
-  pageAccessWallCollection?: Maybe<PageAccessWallCollection>;
   pageEarn?: Maybe<PageEarn>;
   pageEarnCollection?: Maybe<PageEarnCollection>;
   pageGame?: Maybe<PageGame>;
@@ -5840,6 +5787,21 @@ export interface QueryGrandPostCollectionArgs {
   where?: InputMaybe<GrandPostFilter>;
 }
 
+export interface QueryGroupPostArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryGroupPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<GroupPostOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GroupPostFilter>;
+}
+
 export interface QueryIconTileArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -5868,21 +5830,6 @@ export interface QueryLegalPostCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<LegalPostFilter>;
-}
-
-export interface QueryPageAccessWallArgs {
-  id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-}
-
-export interface QueryPageAccessWallCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<Array<InputMaybe<PageAccessWallOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageAccessWallFilter>;
 }
 
 export interface QueryPageEarnArgs {
@@ -6750,19 +6697,34 @@ export type AnnouncementFragment = {
   header?: string;
   icon?: string;
   start?: any;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   content?: { __typename?: 'AnnouncementContent'; json: any };
 };
 
 export type BasicPostCommonFragment = {
   __typename?: 'BasicPost';
   title?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   mainPicture?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
@@ -6771,12 +6733,22 @@ export type BasicPostFragment = {
   summary?: string;
   slug?: string;
   title?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   mainPicture?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
@@ -6784,12 +6756,22 @@ export type BasicPostDetailFragment = {
   __typename?: 'BasicPost';
   title?: string;
   description?: { __typename?: 'BasicPostDescription'; json: any };
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   mainPicture?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
@@ -6802,7 +6784,12 @@ export type CallToActionFragment = {
   style?: string;
   size?: string;
   icon?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
 };
 
 export type ChartPostFragment = {
@@ -6812,10 +6799,20 @@ export type ChartPostFragment = {
   chartType?: string;
   chartData?: any;
   chartOptions?: any;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
 };
 
-export type SysFragment = { __typename?: 'Sys'; publishedAt?: any; id: string };
+export type SysFragment = {
+  __typename?: 'Sys';
+  firstPublishedAt?: any;
+  publishedAt?: any;
+  id: string;
+};
 
 export type DappPostFragment = {
   __typename?: 'DappPost';
@@ -6825,7 +6822,12 @@ export type DappPostFragment = {
   description?: string;
   urlToDapp?: string;
   urlToLearnMore?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
 };
 
 export type EmbedPostFragment = {
@@ -6835,20 +6837,35 @@ export type EmbedPostFragment = {
   embedCode?: string;
   scriptUrl?: string;
   aspectRatio?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
 };
 
 export type FaqGroupFragment = {
   __typename?: 'FaqGroup';
   name?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   faqItemCollection?: {
     __typename?: 'FaqGroupFaqItemCollection';
     items: Array<{
       __typename?: 'FaqItem';
       question?: string;
       answer?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
 };
@@ -6857,7 +6874,12 @@ export type FaqItemFragment = {
   __typename?: 'FaqItem';
   question?: string;
   answer?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
 };
 
 export type FeaturePostFragment = {
@@ -6868,25 +6890,45 @@ export type FeaturePostFragment = {
   description?: string;
   callToActionUrl?: string;
   callToActionButtonLabel?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   picture?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
   heavyPicture?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
 export type FooterFragment = {
   __typename?: 'Footer';
   copyright?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   linksCollection?: {
     __typename?: 'FooterLinksCollection';
     items: Array<{
@@ -6898,7 +6940,12 @@ export type FooterFragment = {
       style?: string;
       size?: string;
       icon?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   socialIconsCollection?: {
@@ -6912,7 +6959,12 @@ export type FooterFragment = {
       style?: string;
       size?: string;
       icon?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
 };
@@ -6926,18 +6978,51 @@ export type GrandPostFragment = {
   description?: string;
   callToActionUrl?: string;
   callToActionButtonLabel?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   picture?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
   heavyPicture?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
+  };
+};
+
+export type GroupPostFragment = {
+  __typename?: 'GroupPost';
+  icon?: string;
+  title?: string;
+  description?: string;
+  label?: string;
+  externalLink?: string;
+  highlighted?: boolean;
+  toggleable?: boolean;
+  collapsed?: boolean;
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
   };
 };
 
@@ -6948,269 +7033,25 @@ export type IconTileFragment = {
   description?: string;
   callToActionUrl?: string;
   callToActionButtonLabel?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
 };
 
 export type LegalPostFragment = {
   __typename?: 'LegalPost';
   title?: string;
   slug?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   description?: { __typename?: 'LegalPostDescription'; json: any };
-};
-
-export type PageAccessWallFragment = {
-  __typename?: 'PageAccessWall';
-  mainTitle?: string;
-  showTitle?: boolean;
-  subtitle?: string;
-  showSubtitle?: boolean;
-  headerColumnWidth?: string;
-  headerAlignCenter?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-  ctasCollection?: {
-    __typename?: 'PageAccessWallCtasCollection';
-    items: Array<{
-      __typename?: 'CallToAction';
-      label?: string;
-      externalLink?: string;
-      routerLink?: any;
-      type?: string;
-      style?: string;
-      size?: string;
-      icon?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-    }>;
-  };
-  sectionsCollection?: {
-    __typename?: 'PageAccessWallSectionsCollection';
-    items: Array<
-      | {
-          __typename: 'PageSectionBasicPosts';
-          title?: string;
-          description?: string;
-          swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-          handpickedPostsCollection?: {
-            __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
-            items: Array<{
-              __typename?: 'BasicPost';
-              summary?: string;
-              slug?: string;
-              title?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              mainPicture?: {
-                __typename?: 'Asset';
-                title?: string;
-                url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              };
-            }>;
-          };
-          postsByCategory?: {
-            __typename?: 'BasicPostCategory';
-            linkedFrom?: {
-              __typename?: 'BasicPostCategoryLinkingCollections';
-              basicPostCollection?: {
-                __typename?: 'BasicPostCollection';
-                items: Array<{
-                  __typename?: 'BasicPost';
-                  summary?: string;
-                  slug?: string;
-                  title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  mainPicture?: {
-                    __typename?: 'Asset';
-                    title?: string;
-                    url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                }>;
-              };
-            };
-          };
-        }
-      | {
-          __typename: 'PageSectionFaQs';
-          title?: string;
-          description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-          handpickedFaqGroupsCollection?: {
-            __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
-            items: Array<{
-              __typename?: 'FaqGroup';
-              name?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              faqItemCollection?: {
-                __typename?: 'FaqGroupFaqItemCollection';
-                items: Array<{
-                  __typename?: 'FaqItem';
-                  question?: string;
-                  answer?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                }>;
-              };
-            }>;
-          };
-        }
-      | {
-          __typename: 'PageSectionFeaturePosts';
-          title?: string;
-          description?: string;
-          swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-          handpickedPostsCollection?: {
-            __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
-            items: Array<{
-              __typename?: 'FeaturePost';
-              videoUrl?: string;
-              showHeavyPictureOnHover?: boolean;
-              title?: string;
-              description?: string;
-              callToActionUrl?: string;
-              callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              picture?: {
-                __typename?: 'Asset';
-                title?: string;
-                url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              };
-              heavyPicture?: {
-                __typename?: 'Asset';
-                title?: string;
-                url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              };
-            }>;
-          };
-        }
-      | {
-          __typename: 'PageSectionGrandPosts';
-          title?: string;
-          description?: string;
-          isSwiper?: boolean;
-          swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-          handpickedPostsCollection?: {
-            __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
-            items: Array<{
-              __typename?: 'GrandPost';
-              videoUrl?: string;
-              showHeavyPictureOnHover?: boolean;
-              title?: string;
-              subtitle?: string;
-              description?: string;
-              callToActionUrl?: string;
-              callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              picture?: {
-                __typename?: 'Asset';
-                title?: string;
-                url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              };
-              heavyPicture?: {
-                __typename?: 'Asset';
-                title?: string;
-                url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              };
-            }>;
-          };
-        }
-      | {
-          __typename: 'PageSectionIconTiles';
-          title?: string;
-          description?: string;
-          isSwiper?: boolean;
-          swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-          handpickedIconTilesCollection?: {
-            __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
-            items: Array<{
-              __typename?: 'IconTile';
-              icon?: string;
-              title?: string;
-              description?: string;
-              callToActionUrl?: string;
-              callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-            }>;
-          };
-        }
-      | {
-          __typename: 'PageSectionSectionPosts';
-          title?: string;
-          description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-          handpickedPostsCollection?: {
-            __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
-            items: Array<{
-              __typename?: 'SectionPost';
-              title?: string;
-              showTitle?: boolean;
-              columnWidth?: string;
-              alignCenter?: boolean;
-              titleSize?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              richDescription?: {
-                __typename?: 'SectionPostDescription';
-                json: any;
-              };
-              chartPost?: {
-                __typename?: 'ChartPost';
-                title?: string;
-                hideTitle?: boolean;
-                chartType?: string;
-                chartData?: any;
-                chartOptions?: any;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              };
-              embedPost?: {
-                __typename?: 'EmbedPost';
-                title?: string;
-                hideTitle?: boolean;
-                embedCode?: string;
-                scriptUrl?: string;
-                aspectRatio?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              };
-            }>;
-          };
-        }
-      | {
-          __typename: 'PageSectionThumbnailPosts';
-          title?: string;
-          description?: string;
-          swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-          handpickedPostsCollection?: {
-            __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
-            items: Array<{
-              __typename?: 'ThumbnailPost';
-              showHeavyPictureOnHover?: boolean;
-              title?: string;
-              link?: string;
-              isVideo?: boolean;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              picture?: {
-                __typename?: 'Asset';
-                title?: string;
-                url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              };
-              heavyPicture?: {
-                __typename?: 'Asset';
-                title?: string;
-                url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              };
-            }>;
-          };
-        }
-    >;
-  };
 };
 
 export type PageEarnFragment = {
@@ -7221,7 +7062,12 @@ export type PageEarnFragment = {
   showSubtitle?: boolean;
   headerColumnWidth?: string;
   headerAlignCenter?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   ctasCollection?: {
     __typename?: 'PageEarnCtasCollection';
     items: Array<{
@@ -7233,7 +7079,12 @@ export type PageEarnFragment = {
       style?: string;
       size?: string;
       icon?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   sectionsCollection?: {
@@ -7244,7 +7095,12 @@ export type PageEarnFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
             items: Array<{
@@ -7252,12 +7108,22 @@ export type PageEarnFragment = {
               summary?: string;
               slug?: string;
               title?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7272,12 +7138,22 @@ export type PageEarnFragment = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -7288,7 +7164,12 @@ export type PageEarnFragment = {
           __typename: 'PageSectionDappPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
             items: Array<{
@@ -7299,7 +7180,12 @@ export type PageEarnFragment = {
               description?: string;
               urlToDapp?: string;
               urlToLearnMore?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -7307,20 +7193,35 @@ export type PageEarnFragment = {
           __typename: 'PageSectionFaQs';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedFaqGroupsCollection?: {
             __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
             items: Array<{
               __typename?: 'FaqGroup';
               name?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               faqItemCollection?: {
                 __typename?: 'FaqGroupFaqItemCollection';
                 items: Array<{
                   __typename?: 'FaqItem';
                   question?: string;
                   answer?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }>;
@@ -7331,7 +7232,12 @@ export type PageEarnFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
             items: Array<{
@@ -7342,18 +7248,33 @@ export type PageEarnFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7364,7 +7285,12 @@ export type PageEarnFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
             items: Array<{
@@ -7376,18 +7302,33 @@ export type PageEarnFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7398,7 +7339,12 @@ export type PageEarnFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedIconTilesCollection?: {
             __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
             items: Array<{
@@ -7408,7 +7354,12 @@ export type PageEarnFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -7416,7 +7367,12 @@ export type PageEarnFragment = {
           __typename: 'PageSectionSectionPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
             items: Array<{
@@ -7426,7 +7382,12 @@ export type PageEarnFragment = {
               columnWidth?: string;
               alignCenter?: boolean;
               titleSize?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               richDescription?: {
                 __typename?: 'SectionPostDescription';
                 json: any;
@@ -7438,7 +7399,12 @@ export type PageEarnFragment = {
                 chartType?: string;
                 chartData?: any;
                 chartOptions?: any;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               embedPost?: {
                 __typename?: 'EmbedPost';
@@ -7447,7 +7413,12 @@ export type PageEarnFragment = {
                 embedCode?: string;
                 scriptUrl?: string;
                 aspectRatio?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7457,7 +7428,12 @@ export type PageEarnFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
             items: Array<{
@@ -7466,18 +7442,33 @@ export type PageEarnFragment = {
               title?: string;
               link?: string;
               isVideo?: boolean;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7494,7 +7485,12 @@ export type PageGameFragment = {
   showSubtitle?: boolean;
   headerColumnWidth?: string;
   headerAlignCenter?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   ctasCollection?: {
     __typename?: 'PageGameCtasCollection';
     items: Array<{
@@ -7506,7 +7502,12 @@ export type PageGameFragment = {
       style?: string;
       size?: string;
       icon?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   sectionsCollection?: {
@@ -7517,7 +7518,12 @@ export type PageGameFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
             items: Array<{
@@ -7525,12 +7531,22 @@ export type PageGameFragment = {
               summary?: string;
               slug?: string;
               title?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7545,12 +7561,22 @@ export type PageGameFragment = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -7561,7 +7587,12 @@ export type PageGameFragment = {
           __typename: 'PageSectionDappPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
             items: Array<{
@@ -7572,7 +7603,12 @@ export type PageGameFragment = {
               description?: string;
               urlToDapp?: string;
               urlToLearnMore?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -7580,20 +7616,35 @@ export type PageGameFragment = {
           __typename: 'PageSectionFaQs';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedFaqGroupsCollection?: {
             __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
             items: Array<{
               __typename?: 'FaqGroup';
               name?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               faqItemCollection?: {
                 __typename?: 'FaqGroupFaqItemCollection';
                 items: Array<{
                   __typename?: 'FaqItem';
                   question?: string;
                   answer?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }>;
@@ -7604,7 +7655,12 @@ export type PageGameFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
             items: Array<{
@@ -7615,18 +7671,33 @@ export type PageGameFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7637,7 +7708,12 @@ export type PageGameFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
             items: Array<{
@@ -7649,18 +7725,33 @@ export type PageGameFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7671,7 +7762,12 @@ export type PageGameFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedIconTilesCollection?: {
             __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
             items: Array<{
@@ -7681,7 +7777,12 @@ export type PageGameFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -7689,7 +7790,12 @@ export type PageGameFragment = {
           __typename: 'PageSectionSectionPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
             items: Array<{
@@ -7699,7 +7805,12 @@ export type PageGameFragment = {
               columnWidth?: string;
               alignCenter?: boolean;
               titleSize?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               richDescription?: {
                 __typename?: 'SectionPostDescription';
                 json: any;
@@ -7711,7 +7822,12 @@ export type PageGameFragment = {
                 chartType?: string;
                 chartData?: any;
                 chartOptions?: any;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               embedPost?: {
                 __typename?: 'EmbedPost';
@@ -7720,7 +7836,12 @@ export type PageGameFragment = {
                 embedCode?: string;
                 scriptUrl?: string;
                 aspectRatio?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7730,7 +7851,12 @@ export type PageGameFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
             items: Array<{
@@ -7739,18 +7865,33 @@ export type PageGameFragment = {
               title?: string;
               link?: string;
               isVideo?: boolean;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7767,7 +7908,12 @@ export type PageHomeFragment = {
   showSubtitle?: boolean;
   headerColumnWidth?: string;
   headerAlignCenter?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   ctasCollection?: {
     __typename?: 'PageHomeCtasCollection';
     items: Array<{
@@ -7779,7 +7925,12 @@ export type PageHomeFragment = {
       style?: string;
       size?: string;
       icon?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   sectionsCollection?: {
@@ -7790,7 +7941,12 @@ export type PageHomeFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
             items: Array<{
@@ -7798,12 +7954,22 @@ export type PageHomeFragment = {
               summary?: string;
               slug?: string;
               title?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7818,12 +7984,22 @@ export type PageHomeFragment = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -7834,7 +8010,12 @@ export type PageHomeFragment = {
           __typename: 'PageSectionDappPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
             items: Array<{
@@ -7845,7 +8026,12 @@ export type PageHomeFragment = {
               description?: string;
               urlToDapp?: string;
               urlToLearnMore?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -7853,20 +8039,35 @@ export type PageHomeFragment = {
           __typename: 'PageSectionFaQs';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedFaqGroupsCollection?: {
             __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
             items: Array<{
               __typename?: 'FaqGroup';
               name?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               faqItemCollection?: {
                 __typename?: 'FaqGroupFaqItemCollection';
                 items: Array<{
                   __typename?: 'FaqItem';
                   question?: string;
                   answer?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }>;
@@ -7877,7 +8078,12 @@ export type PageHomeFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
             items: Array<{
@@ -7888,18 +8094,33 @@ export type PageHomeFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7910,7 +8131,12 @@ export type PageHomeFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
             items: Array<{
@@ -7922,18 +8148,33 @@ export type PageHomeFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7944,7 +8185,12 @@ export type PageHomeFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedIconTilesCollection?: {
             __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
             items: Array<{
@@ -7954,7 +8200,12 @@ export type PageHomeFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -7964,7 +8215,12 @@ export type PageHomeFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
             items: Array<{
@@ -7976,12 +8232,22 @@ export type PageHomeFragment = {
               linkedin?: string;
               instagram?: string;
               github?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               avatar?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -7990,7 +8256,12 @@ export type PageHomeFragment = {
           __typename: 'PageSectionSectionPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
             items: Array<{
@@ -8000,7 +8271,12 @@ export type PageHomeFragment = {
               columnWidth?: string;
               alignCenter?: boolean;
               titleSize?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               richDescription?: {
                 __typename?: 'SectionPostDescription';
                 json: any;
@@ -8012,7 +8288,12 @@ export type PageHomeFragment = {
                 chartType?: string;
                 chartData?: any;
                 chartOptions?: any;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               embedPost?: {
                 __typename?: 'EmbedPost';
@@ -8021,7 +8302,12 @@ export type PageHomeFragment = {
                 embedCode?: string;
                 scriptUrl?: string;
                 aspectRatio?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8031,7 +8317,12 @@ export type PageHomeFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
             items: Array<{
@@ -8040,18 +8331,33 @@ export type PageHomeFragment = {
               title?: string;
               link?: string;
               isVideo?: boolean;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8068,7 +8374,12 @@ export type PageLearnFragment = {
   showSubtitle?: boolean;
   headerColumnWidth?: string;
   headerAlignCenter?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   ctasCollection?: {
     __typename?: 'PageLearnCtasCollection';
     items: Array<{
@@ -8080,7 +8391,12 @@ export type PageLearnFragment = {
       style?: string;
       size?: string;
       icon?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   sectionsCollection?: {
@@ -8091,7 +8407,12 @@ export type PageLearnFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
             items: Array<{
@@ -8099,12 +8420,22 @@ export type PageLearnFragment = {
               summary?: string;
               slug?: string;
               title?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8119,12 +8450,22 @@ export type PageLearnFragment = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -8135,7 +8476,12 @@ export type PageLearnFragment = {
           __typename: 'PageSectionDappPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
             items: Array<{
@@ -8146,7 +8492,12 @@ export type PageLearnFragment = {
               description?: string;
               urlToDapp?: string;
               urlToLearnMore?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -8154,20 +8505,35 @@ export type PageLearnFragment = {
           __typename: 'PageSectionFaQs';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedFaqGroupsCollection?: {
             __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
             items: Array<{
               __typename?: 'FaqGroup';
               name?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               faqItemCollection?: {
                 __typename?: 'FaqGroupFaqItemCollection';
                 items: Array<{
                   __typename?: 'FaqItem';
                   question?: string;
                   answer?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }>;
@@ -8178,7 +8544,12 @@ export type PageLearnFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
             items: Array<{
@@ -8189,18 +8560,33 @@ export type PageLearnFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8211,7 +8597,12 @@ export type PageLearnFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
             items: Array<{
@@ -8223,18 +8614,33 @@ export type PageLearnFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8245,7 +8651,12 @@ export type PageLearnFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedIconTilesCollection?: {
             __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
             items: Array<{
@@ -8255,7 +8666,12 @@ export type PageLearnFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -8265,7 +8681,12 @@ export type PageLearnFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
             items: Array<{
@@ -8277,12 +8698,22 @@ export type PageLearnFragment = {
               linkedin?: string;
               instagram?: string;
               github?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               avatar?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8291,7 +8722,12 @@ export type PageLearnFragment = {
           __typename: 'PageSectionSectionPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
             items: Array<{
@@ -8301,7 +8737,12 @@ export type PageLearnFragment = {
               columnWidth?: string;
               alignCenter?: boolean;
               titleSize?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               richDescription?: {
                 __typename?: 'SectionPostDescription';
                 json: any;
@@ -8313,7 +8754,12 @@ export type PageLearnFragment = {
                 chartType?: string;
                 chartData?: any;
                 chartOptions?: any;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               embedPost?: {
                 __typename?: 'EmbedPost';
@@ -8322,7 +8768,12 @@ export type PageLearnFragment = {
                 embedCode?: string;
                 scriptUrl?: string;
                 aspectRatio?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8332,7 +8783,12 @@ export type PageLearnFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
             items: Array<{
@@ -8341,18 +8797,33 @@ export type PageLearnFragment = {
               title?: string;
               link?: string;
               isVideo?: boolean;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8366,7 +8837,12 @@ export type PageSectionBasicPostsFragment = {
   title?: string;
   description?: string;
   swiperResponsiveOptions?: any;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedPostsCollection?: {
     __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
     items: Array<{
@@ -8374,12 +8850,22 @@ export type PageSectionBasicPostsFragment = {
       summary?: string;
       slug?: string;
       title?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       mainPicture?: {
         __typename?: 'Asset';
         title?: string;
         url?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -8394,12 +8880,22 @@ export type PageSectionBasicPostsFragment = {
           summary?: string;
           slug?: string;
           title?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           mainPicture?: {
             __typename?: 'Asset';
             title?: string;
             url?: string;
-            sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+            sys: {
+              __typename?: 'Sys';
+              firstPublishedAt?: any;
+              publishedAt?: any;
+              id: string;
+            };
           };
         }>;
       };
@@ -8411,7 +8907,12 @@ export type PageSectionDappPostsFragment = {
   __typename: 'PageSectionDappPosts';
   title?: string;
   description?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedPostsCollection?: {
     __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
     items: Array<{
@@ -8422,7 +8923,12 @@ export type PageSectionDappPostsFragment = {
       description?: string;
       urlToDapp?: string;
       urlToLearnMore?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
 };
@@ -8431,20 +8937,35 @@ export type PageSectionFaQsFragment = {
   __typename: 'PageSectionFaQs';
   title?: string;
   description?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedFaqGroupsCollection?: {
     __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
     items: Array<{
       __typename?: 'FaqGroup';
       name?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       faqItemCollection?: {
         __typename?: 'FaqGroupFaqItemCollection';
         items: Array<{
           __typename?: 'FaqItem';
           question?: string;
           answer?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
     }>;
@@ -8456,7 +8977,12 @@ export type PageSectionFeaturePostsFragment = {
   title?: string;
   description?: string;
   swiperResponsiveOptions?: any;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedPostsCollection?: {
     __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
     items: Array<{
@@ -8467,18 +8993,33 @@ export type PageSectionFeaturePostsFragment = {
       description?: string;
       callToActionUrl?: string;
       callToActionButtonLabel?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       picture?: {
         __typename?: 'Asset';
         title?: string;
         url?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
       heavyPicture?: {
         __typename?: 'Asset';
         title?: string;
         url?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -8490,7 +9031,12 @@ export type PageSectionGrandPostsFragment = {
   description?: string;
   isSwiper?: boolean;
   swiperResponsiveOptions?: any;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedPostsCollection?: {
     __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
     items: Array<{
@@ -8502,18 +9048,33 @@ export type PageSectionGrandPostsFragment = {
       description?: string;
       callToActionUrl?: string;
       callToActionButtonLabel?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       picture?: {
         __typename?: 'Asset';
         title?: string;
         url?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
       heavyPicture?: {
         __typename?: 'Asset';
         title?: string;
         url?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -8525,7 +9086,12 @@ export type PageSectionIconTilesFragment = {
   description?: string;
   isSwiper?: boolean;
   swiperResponsiveOptions?: any;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedIconTilesCollection?: {
     __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
     items: Array<{
@@ -8535,7 +9101,12 @@ export type PageSectionIconTilesFragment = {
       description?: string;
       callToActionUrl?: string;
       callToActionButtonLabel?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
 };
@@ -8546,7 +9117,12 @@ export type PageSectionPersonPostsFragment = {
   description?: string;
   isSwiper?: boolean;
   swiperResponsiveOptions?: any;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedPostsCollection?: {
     __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
     items: Array<{
@@ -8558,12 +9134,22 @@ export type PageSectionPersonPostsFragment = {
       linkedin?: string;
       instagram?: string;
       github?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       avatar?: {
         __typename?: 'Asset';
         title?: string;
         url?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -8574,7 +9160,12 @@ export type PageSectionProductsFragment = {
   title?: string;
   description?: string;
   swiperResponsiveOptions?: any;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedProductsCollection?: {
     __typename?: 'PageSectionProductsHandpickedProductsCollection';
     items: Array<{
@@ -8588,21 +9179,36 @@ export type PageSectionProductsFragment = {
       slug?: string;
       soldOutLabel?: string;
       pause?: boolean;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       picturesCollection?: {
         __typename?: 'AssetCollection';
         items: Array<{
           __typename?: 'Asset';
           title?: string;
           url?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
       category?: {
         __typename?: 'ProductCategory';
         name?: string;
         icon?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -8628,16 +9234,31 @@ export type PageSectionProductsFragment = {
             __typename?: 'ProductCategory';
             icon?: string;
             name?: string;
-            sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+            sys: {
+              __typename?: 'Sys';
+              firstPublishedAt?: any;
+              publishedAt?: any;
+              id: string;
+            };
           };
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           picturesCollection?: {
             __typename?: 'AssetCollection';
             items: Array<{
               __typename?: 'Asset';
               title?: string;
               url?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }>;
@@ -8650,7 +9271,12 @@ export type PageSectionSectionPostsFragment = {
   __typename: 'PageSectionSectionPosts';
   title?: string;
   description?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedPostsCollection?: {
     __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
     items: Array<{
@@ -8660,7 +9286,12 @@ export type PageSectionSectionPostsFragment = {
       columnWidth?: string;
       alignCenter?: boolean;
       titleSize?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       richDescription?: { __typename?: 'SectionPostDescription'; json: any };
       chartPost?: {
         __typename?: 'ChartPost';
@@ -8669,7 +9300,12 @@ export type PageSectionSectionPostsFragment = {
         chartType?: string;
         chartData?: any;
         chartOptions?: any;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
       embedPost?: {
         __typename?: 'EmbedPost';
@@ -8678,7 +9314,12 @@ export type PageSectionSectionPostsFragment = {
         embedCode?: string;
         scriptUrl?: string;
         aspectRatio?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -8689,7 +9330,12 @@ export type PageSectionThumbnailPostsFragment = {
   title?: string;
   description?: string;
   swiperResponsiveOptions?: any;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   handpickedPostsCollection?: {
     __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
     items: Array<{
@@ -8698,18 +9344,33 @@ export type PageSectionThumbnailPostsFragment = {
       title?: string;
       link?: string;
       isVideo?: boolean;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       picture?: {
         __typename?: 'Asset';
         title?: string;
         url?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
       heavyPicture?: {
         __typename?: 'Asset';
         title?: string;
         url?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -8723,7 +9384,12 @@ export type PageShopFragment = {
   showSubtitle?: boolean;
   headerColumnWidth?: string;
   headerAlignCenter?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   ctasCollection?: {
     __typename?: 'PageShopCtasCollection';
     items: Array<{
@@ -8735,7 +9401,12 @@ export type PageShopFragment = {
       style?: string;
       size?: string;
       icon?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   sectionsCollection?: {
@@ -8746,7 +9417,12 @@ export type PageShopFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
             items: Array<{
@@ -8754,12 +9430,22 @@ export type PageShopFragment = {
               summary?: string;
               slug?: string;
               title?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8774,12 +9460,22 @@ export type PageShopFragment = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -8791,7 +9487,12 @@ export type PageShopFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
             items: Array<{
@@ -8802,18 +9503,33 @@ export type PageShopFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8824,7 +9540,12 @@ export type PageShopFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
             items: Array<{
@@ -8836,18 +9557,33 @@ export type PageShopFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8858,7 +9594,12 @@ export type PageShopFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedIconTilesCollection?: {
             __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
             items: Array<{
@@ -8868,7 +9609,12 @@ export type PageShopFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -8878,7 +9624,12 @@ export type PageShopFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
             items: Array<{
@@ -8890,12 +9641,22 @@ export type PageShopFragment = {
               linkedin?: string;
               instagram?: string;
               github?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               avatar?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8905,7 +9666,12 @@ export type PageShopFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedProductsCollection?: {
             __typename?: 'PageSectionProductsHandpickedProductsCollection';
             items: Array<{
@@ -8919,21 +9685,36 @@ export type PageShopFragment = {
               slug?: string;
               soldOutLabel?: string;
               pause?: boolean;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picturesCollection?: {
                 __typename?: 'AssetCollection';
                 items: Array<{
                   __typename?: 'Asset';
                   title?: string;
                   url?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
               category?: {
                 __typename?: 'ProductCategory';
                 name?: string;
                 icon?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -8959,9 +9740,19 @@ export type PageShopFragment = {
                     __typename?: 'ProductCategory';
                     icon?: string;
                     name?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picturesCollection?: {
                     __typename?: 'AssetCollection';
                     items: Array<{
@@ -8970,6 +9761,7 @@ export type PageShopFragment = {
                       url?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -8984,7 +9776,12 @@ export type PageShopFragment = {
           __typename: 'PageSectionSectionPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
             items: Array<{
@@ -8994,7 +9791,12 @@ export type PageShopFragment = {
               columnWidth?: string;
               alignCenter?: boolean;
               titleSize?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               richDescription?: {
                 __typename?: 'SectionPostDescription';
                 json: any;
@@ -9006,7 +9808,12 @@ export type PageShopFragment = {
                 chartType?: string;
                 chartData?: any;
                 chartOptions?: any;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               embedPost?: {
                 __typename?: 'EmbedPost';
@@ -9015,7 +9822,12 @@ export type PageShopFragment = {
                 embedCode?: string;
                 scriptUrl?: string;
                 aspectRatio?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -9025,7 +9837,12 @@ export type PageShopFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
             items: Array<{
@@ -9034,18 +9851,33 @@ export type PageShopFragment = {
               title?: string;
               link?: string;
               isVideo?: boolean;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -9062,7 +9894,12 @@ export type PageStreamFragment = {
   showSubtitle?: boolean;
   headerColumnWidth?: string;
   headerAlignCenter?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   ctasCollection?: {
     __typename?: 'PageStreamCtasCollection';
     items: Array<{
@@ -9074,7 +9911,32 @@ export type PageStreamFragment = {
       style?: string;
       size?: string;
       icon?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
+    }>;
+  };
+  groupsCollection?: {
+    __typename?: 'PageStreamGroupsCollection';
+    items: Array<{
+      __typename?: 'GroupPost';
+      icon?: string;
+      title?: string;
+      description?: string;
+      label?: string;
+      externalLink?: string;
+      highlighted?: boolean;
+      toggleable?: boolean;
+      collapsed?: boolean;
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   sectionsCollection?: {
@@ -9085,7 +9947,12 @@ export type PageStreamFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
             items: Array<{
@@ -9093,12 +9960,22 @@ export type PageStreamFragment = {
               summary?: string;
               slug?: string;
               title?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -9113,12 +9990,22 @@ export type PageStreamFragment = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -9129,7 +10016,12 @@ export type PageStreamFragment = {
           __typename: 'PageSectionDappPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
             items: Array<{
@@ -9140,7 +10032,12 @@ export type PageStreamFragment = {
               description?: string;
               urlToDapp?: string;
               urlToLearnMore?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -9148,20 +10045,35 @@ export type PageStreamFragment = {
           __typename: 'PageSectionFaQs';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedFaqGroupsCollection?: {
             __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
             items: Array<{
               __typename?: 'FaqGroup';
               name?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               faqItemCollection?: {
                 __typename?: 'FaqGroupFaqItemCollection';
                 items: Array<{
                   __typename?: 'FaqItem';
                   question?: string;
                   answer?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }>;
@@ -9172,7 +10084,12 @@ export type PageStreamFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
             items: Array<{
@@ -9183,18 +10100,33 @@ export type PageStreamFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -9205,7 +10137,12 @@ export type PageStreamFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
             items: Array<{
@@ -9217,18 +10154,33 @@ export type PageStreamFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -9239,7 +10191,12 @@ export type PageStreamFragment = {
           description?: string;
           isSwiper?: boolean;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedIconTilesCollection?: {
             __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
             items: Array<{
@@ -9249,7 +10206,12 @@ export type PageStreamFragment = {
               description?: string;
               callToActionUrl?: string;
               callToActionButtonLabel?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
             }>;
           };
         }
@@ -9257,7 +10219,12 @@ export type PageStreamFragment = {
           __typename: 'PageSectionSectionPosts';
           title?: string;
           description?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
             items: Array<{
@@ -9267,7 +10234,12 @@ export type PageStreamFragment = {
               columnWidth?: string;
               alignCenter?: boolean;
               titleSize?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               richDescription?: {
                 __typename?: 'SectionPostDescription';
                 json: any;
@@ -9279,7 +10251,12 @@ export type PageStreamFragment = {
                 chartType?: string;
                 chartData?: any;
                 chartOptions?: any;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               embedPost?: {
                 __typename?: 'EmbedPost';
@@ -9288,7 +10265,12 @@ export type PageStreamFragment = {
                 embedCode?: string;
                 scriptUrl?: string;
                 aspectRatio?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -9298,7 +10280,12 @@ export type PageStreamFragment = {
           title?: string;
           description?: string;
           swiperResponsiveOptions?: any;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
           handpickedPostsCollection?: {
             __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
             items: Array<{
@@ -9307,18 +10294,33 @@ export type PageStreamFragment = {
               title?: string;
               link?: string;
               isVideo?: boolean;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
                 url?: string;
-                sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                sys: {
+                  __typename?: 'Sys';
+                  firstPublishedAt?: any;
+                  publishedAt?: any;
+                  id: string;
+                };
               };
             }>;
           };
@@ -9336,12 +10338,22 @@ export type PersonPostFragment = {
   linkedin?: string;
   instagram?: string;
   github?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   avatar?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
@@ -9360,21 +10372,36 @@ export type ProductCommonFragment = {
   slug?: string;
   soldOutLabel?: string;
   pause?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   picturesCollection?: {
     __typename?: 'AssetCollection';
     items: Array<{
       __typename?: 'Asset';
       title?: string;
       url?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   category?: {
     __typename?: 'ProductCategory';
     name?: string;
     icon?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
@@ -9389,21 +10416,36 @@ export type ProductFragment = {
   slug?: string;
   soldOutLabel?: string;
   pause?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   picturesCollection?: {
     __typename?: 'AssetCollection';
     items: Array<{
       __typename?: 'Asset';
       title?: string;
       url?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   category?: {
     __typename?: 'ProductCategory';
     name?: string;
     icon?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
@@ -9420,21 +10462,36 @@ export type ProductDetailFragment = {
   soldOutLabel?: string;
   pause?: boolean;
   fullDescription?: { __typename?: 'ProductFullDescription'; json: any };
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   picturesCollection?: {
     __typename?: 'AssetCollection';
     items: Array<{
       __typename?: 'Asset';
       title?: string;
       url?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
     }>;
   };
   category?: {
     __typename?: 'ProductCategory';
     name?: string;
     icon?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
@@ -9445,7 +10502,12 @@ export type SectionPostFragment = {
   columnWidth?: string;
   alignCenter?: boolean;
   titleSize?: string;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   richDescription?: { __typename?: 'SectionPostDescription'; json: any };
   chartPost?: {
     __typename?: 'ChartPost';
@@ -9454,7 +10516,12 @@ export type SectionPostFragment = {
     chartType?: string;
     chartData?: any;
     chartOptions?: any;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
   embedPost?: {
     __typename?: 'EmbedPost';
@@ -9463,7 +10530,12 @@ export type SectionPostFragment = {
     embedCode?: string;
     scriptUrl?: string;
     aspectRatio?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
@@ -9473,18 +10545,33 @@ export type ThumbnailPostFragment = {
   title?: string;
   link?: string;
   isVideo?: boolean;
-  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
   picture?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
   heavyPicture?: {
     __typename?: 'Asset';
     title?: string;
     url?: string;
-    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
   };
 };
 
@@ -9502,7 +10589,12 @@ export type AnnouncementCollectionQuery = {
       header?: string;
       icon?: string;
       start?: any;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       content?: { __typename?: 'AnnouncementContent'; json: any };
     }>;
   };
@@ -9521,12 +10613,22 @@ export type BasicPostCollectionBySlugQuery = {
       __typename?: 'BasicPost';
       title?: string;
       description?: { __typename?: 'BasicPostDescription'; json: any };
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       mainPicture?: {
         __typename?: 'Asset';
         title?: string;
         url?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -9543,7 +10645,12 @@ export type FooterCollectionQuery = {
     items: Array<{
       __typename?: 'Footer';
       copyright?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       linksCollection?: {
         __typename?: 'FooterLinksCollection';
         items: Array<{
@@ -9555,7 +10662,12 @@ export type FooterCollectionQuery = {
           style?: string;
           size?: string;
           icon?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
       socialIconsCollection?: {
@@ -9569,7 +10681,12 @@ export type FooterCollectionQuery = {
           style?: string;
           size?: string;
           icon?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
     }>;
@@ -9589,284 +10706,13 @@ export type LegalPostCollectionBySlugQuery = {
       __typename?: 'LegalPost';
       title?: string;
       slug?: string;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       description?: { __typename?: 'LegalPostDescription'; json: any };
-    }>;
-  };
-};
-
-export type PageAccessWallCollectionQueryVariables = Exact<{
-  isPreview?: InputMaybe<Scalars['Boolean']>;
-}>;
-
-export type PageAccessWallCollectionQuery = {
-  __typename?: 'Query';
-  pageAccessWallCollection?: {
-    __typename?: 'PageAccessWallCollection';
-    items: Array<{
-      __typename?: 'PageAccessWall';
-      mainTitle?: string;
-      showTitle?: boolean;
-      subtitle?: string;
-      showSubtitle?: boolean;
-      headerColumnWidth?: string;
-      headerAlignCenter?: boolean;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-      ctasCollection?: {
-        __typename?: 'PageAccessWallCtasCollection';
-        items: Array<{
-          __typename?: 'CallToAction';
-          label?: string;
-          externalLink?: string;
-          routerLink?: any;
-          type?: string;
-          style?: string;
-          size?: string;
-          icon?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-        }>;
-      };
-      sectionsCollection?: {
-        __typename?: 'PageAccessWallSectionsCollection';
-        items: Array<
-          | {
-              __typename: 'PageSectionBasicPosts';
-              title?: string;
-              description?: string;
-              swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              handpickedPostsCollection?: {
-                __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
-                items: Array<{
-                  __typename?: 'BasicPost';
-                  summary?: string;
-                  slug?: string;
-                  title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  mainPicture?: {
-                    __typename?: 'Asset';
-                    title?: string;
-                    url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                }>;
-              };
-              postsByCategory?: {
-                __typename?: 'BasicPostCategory';
-                linkedFrom?: {
-                  __typename?: 'BasicPostCategoryLinkingCollections';
-                  basicPostCollection?: {
-                    __typename?: 'BasicPostCollection';
-                    items: Array<{
-                      __typename?: 'BasicPost';
-                      summary?: string;
-                      slug?: string;
-                      title?: string;
-                      sys: {
-                        __typename?: 'Sys';
-                        publishedAt?: any;
-                        id: string;
-                      };
-                      mainPicture?: {
-                        __typename?: 'Asset';
-                        title?: string;
-                        url?: string;
-                        sys: {
-                          __typename?: 'Sys';
-                          publishedAt?: any;
-                          id: string;
-                        };
-                      };
-                    }>;
-                  };
-                };
-              };
-            }
-          | {
-              __typename: 'PageSectionFaQs';
-              title?: string;
-              description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              handpickedFaqGroupsCollection?: {
-                __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
-                items: Array<{
-                  __typename?: 'FaqGroup';
-                  name?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  faqItemCollection?: {
-                    __typename?: 'FaqGroupFaqItemCollection';
-                    items: Array<{
-                      __typename?: 'FaqItem';
-                      question?: string;
-                      answer?: string;
-                      sys: {
-                        __typename?: 'Sys';
-                        publishedAt?: any;
-                        id: string;
-                      };
-                    }>;
-                  };
-                }>;
-              };
-            }
-          | {
-              __typename: 'PageSectionFeaturePosts';
-              title?: string;
-              description?: string;
-              swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              handpickedPostsCollection?: {
-                __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
-                items: Array<{
-                  __typename?: 'FeaturePost';
-                  videoUrl?: string;
-                  showHeavyPictureOnHover?: boolean;
-                  title?: string;
-                  description?: string;
-                  callToActionUrl?: string;
-                  callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  picture?: {
-                    __typename?: 'Asset';
-                    title?: string;
-                    url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                  heavyPicture?: {
-                    __typename?: 'Asset';
-                    title?: string;
-                    url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                }>;
-              };
-            }
-          | {
-              __typename: 'PageSectionGrandPosts';
-              title?: string;
-              description?: string;
-              isSwiper?: boolean;
-              swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              handpickedPostsCollection?: {
-                __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
-                items: Array<{
-                  __typename?: 'GrandPost';
-                  videoUrl?: string;
-                  showHeavyPictureOnHover?: boolean;
-                  title?: string;
-                  subtitle?: string;
-                  description?: string;
-                  callToActionUrl?: string;
-                  callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  picture?: {
-                    __typename?: 'Asset';
-                    title?: string;
-                    url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                  heavyPicture?: {
-                    __typename?: 'Asset';
-                    title?: string;
-                    url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                }>;
-              };
-            }
-          | {
-              __typename: 'PageSectionIconTiles';
-              title?: string;
-              description?: string;
-              isSwiper?: boolean;
-              swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              handpickedIconTilesCollection?: {
-                __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
-                items: Array<{
-                  __typename?: 'IconTile';
-                  icon?: string;
-                  title?: string;
-                  description?: string;
-                  callToActionUrl?: string;
-                  callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                }>;
-              };
-            }
-          | {
-              __typename: 'PageSectionSectionPosts';
-              title?: string;
-              description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              handpickedPostsCollection?: {
-                __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
-                items: Array<{
-                  __typename?: 'SectionPost';
-                  title?: string;
-                  showTitle?: boolean;
-                  columnWidth?: string;
-                  alignCenter?: boolean;
-                  titleSize?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  richDescription?: {
-                    __typename?: 'SectionPostDescription';
-                    json: any;
-                  };
-                  chartPost?: {
-                    __typename?: 'ChartPost';
-                    title?: string;
-                    hideTitle?: boolean;
-                    chartType?: string;
-                    chartData?: any;
-                    chartOptions?: any;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                  embedPost?: {
-                    __typename?: 'EmbedPost';
-                    title?: string;
-                    hideTitle?: boolean;
-                    embedCode?: string;
-                    scriptUrl?: string;
-                    aspectRatio?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                }>;
-              };
-            }
-          | {
-              __typename: 'PageSectionThumbnailPosts';
-              title?: string;
-              description?: string;
-              swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-              handpickedPostsCollection?: {
-                __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
-                items: Array<{
-                  __typename?: 'ThumbnailPost';
-                  showHeavyPictureOnHover?: boolean;
-                  title?: string;
-                  link?: string;
-                  isVideo?: boolean;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  picture?: {
-                    __typename?: 'Asset';
-                    title?: string;
-                    url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                  heavyPicture?: {
-                    __typename?: 'Asset';
-                    title?: string;
-                    url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
-                  };
-                }>;
-              };
-            }
-        >;
-      };
     }>;
   };
 };
@@ -9887,7 +10733,12 @@ export type PageEarnCollectionQuery = {
       showSubtitle?: boolean;
       headerColumnWidth?: string;
       headerAlignCenter?: boolean;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       ctasCollection?: {
         __typename?: 'PageEarnCtasCollection';
         items: Array<{
@@ -9899,7 +10750,12 @@ export type PageEarnCollectionQuery = {
           style?: string;
           size?: string;
           icon?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
       sectionsCollection?: {
@@ -9910,7 +10766,12 @@ export type PageEarnCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
                 items: Array<{
@@ -9918,12 +10779,22 @@ export type PageEarnCollectionQuery = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -9940,6 +10811,7 @@ export type PageEarnCollectionQuery = {
                       title?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -9949,6 +10821,7 @@ export type PageEarnCollectionQuery = {
                         url?: string;
                         sys: {
                           __typename?: 'Sys';
+                          firstPublishedAt?: any;
                           publishedAt?: any;
                           id: string;
                         };
@@ -9962,7 +10835,12 @@ export type PageEarnCollectionQuery = {
               __typename: 'PageSectionDappPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
                 items: Array<{
@@ -9973,7 +10851,12 @@ export type PageEarnCollectionQuery = {
                   description?: string;
                   urlToDapp?: string;
                   urlToLearnMore?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -9981,13 +10864,23 @@ export type PageEarnCollectionQuery = {
               __typename: 'PageSectionFaQs';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedFaqGroupsCollection?: {
                 __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
                 items: Array<{
                   __typename?: 'FaqGroup';
                   name?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   faqItemCollection?: {
                     __typename?: 'FaqGroupFaqItemCollection';
                     items: Array<{
@@ -9996,6 +10889,7 @@ export type PageEarnCollectionQuery = {
                       answer?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -10009,7 +10903,12 @@ export type PageEarnCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
                 items: Array<{
@@ -10020,18 +10919,33 @@ export type PageEarnCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10042,7 +10956,12 @@ export type PageEarnCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10054,18 +10973,33 @@ export type PageEarnCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10076,7 +11010,12 @@ export type PageEarnCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedIconTilesCollection?: {
                 __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
                 items: Array<{
@@ -10086,7 +11025,12 @@ export type PageEarnCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -10094,7 +11038,12 @@ export type PageEarnCollectionQuery = {
               __typename: 'PageSectionSectionPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10104,7 +11053,12 @@ export type PageEarnCollectionQuery = {
                   columnWidth?: string;
                   alignCenter?: boolean;
                   titleSize?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   richDescription?: {
                     __typename?: 'SectionPostDescription';
                     json: any;
@@ -10116,7 +11070,12 @@ export type PageEarnCollectionQuery = {
                     chartType?: string;
                     chartData?: any;
                     chartOptions?: any;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   embedPost?: {
                     __typename?: 'EmbedPost';
@@ -10125,7 +11084,12 @@ export type PageEarnCollectionQuery = {
                     embedCode?: string;
                     scriptUrl?: string;
                     aspectRatio?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10135,7 +11099,12 @@ export type PageEarnCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10144,18 +11113,33 @@ export type PageEarnCollectionQuery = {
                   title?: string;
                   link?: string;
                   isVideo?: boolean;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10182,7 +11166,12 @@ export type PageGameCollectionQuery = {
       showSubtitle?: boolean;
       headerColumnWidth?: string;
       headerAlignCenter?: boolean;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       ctasCollection?: {
         __typename?: 'PageGameCtasCollection';
         items: Array<{
@@ -10194,7 +11183,12 @@ export type PageGameCollectionQuery = {
           style?: string;
           size?: string;
           icon?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
       sectionsCollection?: {
@@ -10205,7 +11199,12 @@ export type PageGameCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10213,12 +11212,22 @@ export type PageGameCollectionQuery = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10235,6 +11244,7 @@ export type PageGameCollectionQuery = {
                       title?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -10244,6 +11254,7 @@ export type PageGameCollectionQuery = {
                         url?: string;
                         sys: {
                           __typename?: 'Sys';
+                          firstPublishedAt?: any;
                           publishedAt?: any;
                           id: string;
                         };
@@ -10257,7 +11268,12 @@ export type PageGameCollectionQuery = {
               __typename: 'PageSectionDappPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10268,7 +11284,12 @@ export type PageGameCollectionQuery = {
                   description?: string;
                   urlToDapp?: string;
                   urlToLearnMore?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -10276,13 +11297,23 @@ export type PageGameCollectionQuery = {
               __typename: 'PageSectionFaQs';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedFaqGroupsCollection?: {
                 __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
                 items: Array<{
                   __typename?: 'FaqGroup';
                   name?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   faqItemCollection?: {
                     __typename?: 'FaqGroupFaqItemCollection';
                     items: Array<{
@@ -10291,6 +11322,7 @@ export type PageGameCollectionQuery = {
                       answer?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -10304,7 +11336,12 @@ export type PageGameCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
                 items: Array<{
@@ -10315,18 +11352,33 @@ export type PageGameCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10337,7 +11389,12 @@ export type PageGameCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10349,18 +11406,33 @@ export type PageGameCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10371,7 +11443,12 @@ export type PageGameCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedIconTilesCollection?: {
                 __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
                 items: Array<{
@@ -10381,7 +11458,12 @@ export type PageGameCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -10389,7 +11471,12 @@ export type PageGameCollectionQuery = {
               __typename: 'PageSectionSectionPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10399,7 +11486,12 @@ export type PageGameCollectionQuery = {
                   columnWidth?: string;
                   alignCenter?: boolean;
                   titleSize?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   richDescription?: {
                     __typename?: 'SectionPostDescription';
                     json: any;
@@ -10411,7 +11503,12 @@ export type PageGameCollectionQuery = {
                     chartType?: string;
                     chartData?: any;
                     chartOptions?: any;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   embedPost?: {
                     __typename?: 'EmbedPost';
@@ -10420,7 +11517,12 @@ export type PageGameCollectionQuery = {
                     embedCode?: string;
                     scriptUrl?: string;
                     aspectRatio?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10430,7 +11532,12 @@ export type PageGameCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10439,18 +11546,33 @@ export type PageGameCollectionQuery = {
                   title?: string;
                   link?: string;
                   isVideo?: boolean;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10477,7 +11599,12 @@ export type PageHomeCollectionQuery = {
       showSubtitle?: boolean;
       headerColumnWidth?: string;
       headerAlignCenter?: boolean;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       ctasCollection?: {
         __typename?: 'PageHomeCtasCollection';
         items: Array<{
@@ -10489,7 +11616,12 @@ export type PageHomeCollectionQuery = {
           style?: string;
           size?: string;
           icon?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
       sectionsCollection?: {
@@ -10500,7 +11632,12 @@ export type PageHomeCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10508,12 +11645,22 @@ export type PageHomeCollectionQuery = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10530,6 +11677,7 @@ export type PageHomeCollectionQuery = {
                       title?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -10539,6 +11687,7 @@ export type PageHomeCollectionQuery = {
                         url?: string;
                         sys: {
                           __typename?: 'Sys';
+                          firstPublishedAt?: any;
                           publishedAt?: any;
                           id: string;
                         };
@@ -10552,7 +11701,12 @@ export type PageHomeCollectionQuery = {
               __typename: 'PageSectionDappPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10563,7 +11717,12 @@ export type PageHomeCollectionQuery = {
                   description?: string;
                   urlToDapp?: string;
                   urlToLearnMore?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -10571,13 +11730,23 @@ export type PageHomeCollectionQuery = {
               __typename: 'PageSectionFaQs';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedFaqGroupsCollection?: {
                 __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
                 items: Array<{
                   __typename?: 'FaqGroup';
                   name?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   faqItemCollection?: {
                     __typename?: 'FaqGroupFaqItemCollection';
                     items: Array<{
@@ -10586,6 +11755,7 @@ export type PageHomeCollectionQuery = {
                       answer?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -10599,7 +11769,12 @@ export type PageHomeCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
                 items: Array<{
@@ -10610,18 +11785,33 @@ export type PageHomeCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10632,7 +11822,12 @@ export type PageHomeCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10644,18 +11839,33 @@ export type PageHomeCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10666,7 +11876,12 @@ export type PageHomeCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedIconTilesCollection?: {
                 __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
                 items: Array<{
@@ -10676,7 +11891,12 @@ export type PageHomeCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -10686,7 +11906,12 @@ export type PageHomeCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10698,12 +11923,22 @@ export type PageHomeCollectionQuery = {
                   linkedin?: string;
                   instagram?: string;
                   github?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   avatar?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10712,7 +11947,12 @@ export type PageHomeCollectionQuery = {
               __typename: 'PageSectionSectionPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10722,7 +11962,12 @@ export type PageHomeCollectionQuery = {
                   columnWidth?: string;
                   alignCenter?: boolean;
                   titleSize?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   richDescription?: {
                     __typename?: 'SectionPostDescription';
                     json: any;
@@ -10734,7 +11979,12 @@ export type PageHomeCollectionQuery = {
                     chartType?: string;
                     chartData?: any;
                     chartOptions?: any;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   embedPost?: {
                     __typename?: 'EmbedPost';
@@ -10743,7 +11993,12 @@ export type PageHomeCollectionQuery = {
                     embedCode?: string;
                     scriptUrl?: string;
                     aspectRatio?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10753,7 +12008,12 @@ export type PageHomeCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10762,18 +12022,33 @@ export type PageHomeCollectionQuery = {
                   title?: string;
                   link?: string;
                   isVideo?: boolean;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10800,7 +12075,12 @@ export type PageLearnCollectionQuery = {
       showSubtitle?: boolean;
       headerColumnWidth?: string;
       headerAlignCenter?: boolean;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       ctasCollection?: {
         __typename?: 'PageLearnCtasCollection';
         items: Array<{
@@ -10812,7 +12092,12 @@ export type PageLearnCollectionQuery = {
           style?: string;
           size?: string;
           icon?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
       sectionsCollection?: {
@@ -10823,7 +12108,12 @@ export type PageLearnCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10831,12 +12121,22 @@ export type PageLearnCollectionQuery = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10853,6 +12153,7 @@ export type PageLearnCollectionQuery = {
                       title?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -10862,6 +12163,7 @@ export type PageLearnCollectionQuery = {
                         url?: string;
                         sys: {
                           __typename?: 'Sys';
+                          firstPublishedAt?: any;
                           publishedAt?: any;
                           id: string;
                         };
@@ -10875,7 +12177,12 @@ export type PageLearnCollectionQuery = {
               __typename: 'PageSectionDappPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10886,7 +12193,12 @@ export type PageLearnCollectionQuery = {
                   description?: string;
                   urlToDapp?: string;
                   urlToLearnMore?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -10894,13 +12206,23 @@ export type PageLearnCollectionQuery = {
               __typename: 'PageSectionFaQs';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedFaqGroupsCollection?: {
                 __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
                 items: Array<{
                   __typename?: 'FaqGroup';
                   name?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   faqItemCollection?: {
                     __typename?: 'FaqGroupFaqItemCollection';
                     items: Array<{
@@ -10909,6 +12231,7 @@ export type PageLearnCollectionQuery = {
                       answer?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -10922,7 +12245,12 @@ export type PageLearnCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
                 items: Array<{
@@ -10933,18 +12261,33 @@ export type PageLearnCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10955,7 +12298,12 @@ export type PageLearnCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
                 items: Array<{
@@ -10967,18 +12315,33 @@ export type PageLearnCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -10989,7 +12352,12 @@ export type PageLearnCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedIconTilesCollection?: {
                 __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
                 items: Array<{
@@ -10999,7 +12367,12 @@ export type PageLearnCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -11009,7 +12382,12 @@ export type PageLearnCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11021,12 +12399,22 @@ export type PageLearnCollectionQuery = {
                   linkedin?: string;
                   instagram?: string;
                   github?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   avatar?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11035,7 +12423,12 @@ export type PageLearnCollectionQuery = {
               __typename: 'PageSectionSectionPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11045,7 +12438,12 @@ export type PageLearnCollectionQuery = {
                   columnWidth?: string;
                   alignCenter?: boolean;
                   titleSize?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   richDescription?: {
                     __typename?: 'SectionPostDescription';
                     json: any;
@@ -11057,7 +12455,12 @@ export type PageLearnCollectionQuery = {
                     chartType?: string;
                     chartData?: any;
                     chartOptions?: any;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   embedPost?: {
                     __typename?: 'EmbedPost';
@@ -11066,7 +12469,12 @@ export type PageLearnCollectionQuery = {
                     embedCode?: string;
                     scriptUrl?: string;
                     aspectRatio?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11076,7 +12484,12 @@ export type PageLearnCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11085,18 +12498,33 @@ export type PageLearnCollectionQuery = {
                   title?: string;
                   link?: string;
                   isVideo?: boolean;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11123,7 +12551,12 @@ export type PageShopCollectionQuery = {
       showSubtitle?: boolean;
       headerColumnWidth?: string;
       headerAlignCenter?: boolean;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       ctasCollection?: {
         __typename?: 'PageShopCtasCollection';
         items: Array<{
@@ -11135,7 +12568,12 @@ export type PageShopCollectionQuery = {
           style?: string;
           size?: string;
           icon?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
       sectionsCollection?: {
@@ -11146,7 +12584,12 @@ export type PageShopCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11154,12 +12597,22 @@ export type PageShopCollectionQuery = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11176,6 +12629,7 @@ export type PageShopCollectionQuery = {
                       title?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -11185,6 +12639,7 @@ export type PageShopCollectionQuery = {
                         url?: string;
                         sys: {
                           __typename?: 'Sys';
+                          firstPublishedAt?: any;
                           publishedAt?: any;
                           id: string;
                         };
@@ -11199,7 +12654,12 @@ export type PageShopCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
                 items: Array<{
@@ -11210,18 +12670,33 @@ export type PageShopCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11232,7 +12707,12 @@ export type PageShopCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11244,18 +12724,33 @@ export type PageShopCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11266,7 +12761,12 @@ export type PageShopCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedIconTilesCollection?: {
                 __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
                 items: Array<{
@@ -11276,7 +12776,12 @@ export type PageShopCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -11286,7 +12791,12 @@ export type PageShopCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionPersonPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11298,12 +12808,22 @@ export type PageShopCollectionQuery = {
                   linkedin?: string;
                   instagram?: string;
                   github?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   avatar?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11313,7 +12833,12 @@ export type PageShopCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedProductsCollection?: {
                 __typename?: 'PageSectionProductsHandpickedProductsCollection';
                 items: Array<{
@@ -11327,7 +12852,12 @@ export type PageShopCollectionQuery = {
                   slug?: string;
                   soldOutLabel?: string;
                   pause?: boolean;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picturesCollection?: {
                     __typename?: 'AssetCollection';
                     items: Array<{
@@ -11336,6 +12866,7 @@ export type PageShopCollectionQuery = {
                       url?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -11345,7 +12876,12 @@ export type PageShopCollectionQuery = {
                     __typename?: 'ProductCategory';
                     name?: string;
                     icon?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11373,12 +12909,14 @@ export type PageShopCollectionQuery = {
                         name?: string;
                         sys: {
                           __typename?: 'Sys';
+                          firstPublishedAt?: any;
                           publishedAt?: any;
                           id: string;
                         };
                       };
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -11390,6 +12928,7 @@ export type PageShopCollectionQuery = {
                           url?: string;
                           sys: {
                             __typename?: 'Sys';
+                            firstPublishedAt?: any;
                             publishedAt?: any;
                             id: string;
                           };
@@ -11404,7 +12943,12 @@ export type PageShopCollectionQuery = {
               __typename: 'PageSectionSectionPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11414,7 +12958,12 @@ export type PageShopCollectionQuery = {
                   columnWidth?: string;
                   alignCenter?: boolean;
                   titleSize?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   richDescription?: {
                     __typename?: 'SectionPostDescription';
                     json: any;
@@ -11426,7 +12975,12 @@ export type PageShopCollectionQuery = {
                     chartType?: string;
                     chartData?: any;
                     chartOptions?: any;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   embedPost?: {
                     __typename?: 'EmbedPost';
@@ -11435,7 +12989,12 @@ export type PageShopCollectionQuery = {
                     embedCode?: string;
                     scriptUrl?: string;
                     aspectRatio?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11445,7 +13004,12 @@ export type PageShopCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11454,18 +13018,33 @@ export type PageShopCollectionQuery = {
                   title?: string;
                   link?: string;
                   isVideo?: boolean;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11492,7 +13071,12 @@ export type PageStreamCollectionQuery = {
       showSubtitle?: boolean;
       headerColumnWidth?: string;
       headerAlignCenter?: boolean;
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       ctasCollection?: {
         __typename?: 'PageStreamCtasCollection';
         items: Array<{
@@ -11504,7 +13088,32 @@ export type PageStreamCollectionQuery = {
           style?: string;
           size?: string;
           icon?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
+        }>;
+      };
+      groupsCollection?: {
+        __typename?: 'PageStreamGroupsCollection';
+        items: Array<{
+          __typename?: 'GroupPost';
+          icon?: string;
+          title?: string;
+          description?: string;
+          label?: string;
+          externalLink?: string;
+          highlighted?: boolean;
+          toggleable?: boolean;
+          collapsed?: boolean;
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
       sectionsCollection?: {
@@ -11515,7 +13124,12 @@ export type PageStreamCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionBasicPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11523,12 +13137,22 @@ export type PageStreamCollectionQuery = {
                   summary?: string;
                   slug?: string;
                   title?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11545,6 +13169,7 @@ export type PageStreamCollectionQuery = {
                       title?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -11554,6 +13179,7 @@ export type PageStreamCollectionQuery = {
                         url?: string;
                         sys: {
                           __typename?: 'Sys';
+                          firstPublishedAt?: any;
                           publishedAt?: any;
                           id: string;
                         };
@@ -11567,7 +13193,12 @@ export type PageStreamCollectionQuery = {
               __typename: 'PageSectionDappPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionDappPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11578,7 +13209,12 @@ export type PageStreamCollectionQuery = {
                   description?: string;
                   urlToDapp?: string;
                   urlToLearnMore?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -11586,13 +13222,23 @@ export type PageStreamCollectionQuery = {
               __typename: 'PageSectionFaQs';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedFaqGroupsCollection?: {
                 __typename?: 'PageSectionFaQsHandpickedFAQGroupsCollection';
                 items: Array<{
                   __typename?: 'FaqGroup';
                   name?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   faqItemCollection?: {
                     __typename?: 'FaqGroupFaqItemCollection';
                     items: Array<{
@@ -11601,6 +13247,7 @@ export type PageStreamCollectionQuery = {
                       answer?: string;
                       sys: {
                         __typename?: 'Sys';
+                        firstPublishedAt?: any;
                         publishedAt?: any;
                         id: string;
                       };
@@ -11614,7 +13261,12 @@ export type PageStreamCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionFeaturePostsHandpickedPostsCollection';
                 items: Array<{
@@ -11625,18 +13277,33 @@ export type PageStreamCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11647,7 +13314,12 @@ export type PageStreamCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionGrandPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11659,18 +13331,33 @@ export type PageStreamCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11681,7 +13368,12 @@ export type PageStreamCollectionQuery = {
               description?: string;
               isSwiper?: boolean;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedIconTilesCollection?: {
                 __typename?: 'PageSectionIconTilesHandpickedIconTilesCollection';
                 items: Array<{
@@ -11691,7 +13383,12 @@ export type PageStreamCollectionQuery = {
                   description?: string;
                   callToActionUrl?: string;
                   callToActionButtonLabel?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                 }>;
               };
             }
@@ -11699,7 +13396,12 @@ export type PageStreamCollectionQuery = {
               __typename: 'PageSectionSectionPosts';
               title?: string;
               description?: string;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionSectionPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11709,7 +13411,12 @@ export type PageStreamCollectionQuery = {
                   columnWidth?: string;
                   alignCenter?: boolean;
                   titleSize?: string;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   richDescription?: {
                     __typename?: 'SectionPostDescription';
                     json: any;
@@ -11721,7 +13428,12 @@ export type PageStreamCollectionQuery = {
                     chartType?: string;
                     chartData?: any;
                     chartOptions?: any;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   embedPost?: {
                     __typename?: 'EmbedPost';
@@ -11730,7 +13442,12 @@ export type PageStreamCollectionQuery = {
                     embedCode?: string;
                     scriptUrl?: string;
                     aspectRatio?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11740,7 +13457,12 @@ export type PageStreamCollectionQuery = {
               title?: string;
               description?: string;
               swiperResponsiveOptions?: any;
-              sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+              sys: {
+                __typename?: 'Sys';
+                firstPublishedAt?: any;
+                publishedAt?: any;
+                id: string;
+              };
               handpickedPostsCollection?: {
                 __typename?: 'PageSectionThumbnailPostsHandpickedPostsCollection';
                 items: Array<{
@@ -11749,18 +13471,33 @@ export type PageStreamCollectionQuery = {
                   title?: string;
                   link?: string;
                   isVideo?: boolean;
-                  sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                  sys: {
+                    __typename?: 'Sys';
+                    firstPublishedAt?: any;
+                    publishedAt?: any;
+                    id: string;
+                  };
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
                     url?: string;
-                    sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+                    sys: {
+                      __typename?: 'Sys';
+                      firstPublishedAt?: any;
+                      publishedAt?: any;
+                      id: string;
+                    };
                   };
                 }>;
               };
@@ -11793,21 +13530,36 @@ export type ProductCollectionBySlugQuery = {
       soldOutLabel?: string;
       pause?: boolean;
       fullDescription?: { __typename?: 'ProductFullDescription'; json: any };
-      sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
       picturesCollection?: {
         __typename?: 'AssetCollection';
         items: Array<{
           __typename?: 'Asset';
           title?: string;
           url?: string;
-          sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
         }>;
       };
       category?: {
         __typename?: 'ProductCategory';
         name?: string;
         icon?: string;
-        sys: { __typename?: 'Sys'; publishedAt?: any; id: string };
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -11815,6 +13567,7 @@ export type ProductCollectionBySlugQuery = {
 
 export const SysFragmentDoc = gql`
   fragment Sys on Sys {
+    firstPublishedAt
     publishedAt
     id
   }
@@ -12105,6 +13858,37 @@ export const PageSectionFaQsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${FaqGroupFragmentDoc}
 `;
+export const DappPostFragmentDoc = gql`
+  fragment DappPost on DappPost {
+    sys {
+      ...Sys
+    }
+    icon
+    iconTitle
+    title
+    description
+    urlToDapp
+    urlToLearnMore
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionDappPostsFragmentDoc = gql`
+  fragment PageSectionDappPosts on PageSectionDappPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...DappPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${DappPostFragmentDoc}
+`;
 export const GrandPostFragmentDoc = gql`
   fragment GrandPost on GrandPost {
     sys {
@@ -12219,75 +14003,6 @@ export const PageSectionSectionPostsFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${SectionPostFragmentDoc}
-`;
-export const PageAccessWallFragmentDoc = gql`
-  fragment PageAccessWall on PageAccessWall {
-    sys {
-      ...Sys
-    }
-    mainTitle
-    showTitle
-    subtitle
-    showSubtitle
-    ctasCollection(limit: 3, preview: $isPreview) {
-      items {
-        ...CallToAction
-      }
-    }
-    headerColumnWidth
-    headerAlignCenter
-    sectionsCollection(limit: 10, preview: $isPreview) {
-      items {
-        ...PageSectionFeaturePosts
-        ...PageSectionThumbnailPosts
-        ...PageSectionBasicPosts
-        ...PageSectionIconTiles
-        ...PageSectionFaQs
-        ...PageSectionGrandPosts
-        ...PageSectionSectionPosts
-      }
-    }
-  }
-  ${SysFragmentDoc}
-  ${CallToActionFragmentDoc}
-  ${PageSectionFeaturePostsFragmentDoc}
-  ${PageSectionThumbnailPostsFragmentDoc}
-  ${PageSectionBasicPostsFragmentDoc}
-  ${PageSectionIconTilesFragmentDoc}
-  ${PageSectionFaQsFragmentDoc}
-  ${PageSectionGrandPostsFragmentDoc}
-  ${PageSectionSectionPostsFragmentDoc}
-`;
-export const DappPostFragmentDoc = gql`
-  fragment DappPost on DappPost {
-    sys {
-      ...Sys
-    }
-    icon
-    iconTitle
-    title
-    description
-    urlToDapp
-    urlToLearnMore
-  }
-  ${SysFragmentDoc}
-`;
-export const PageSectionDappPostsFragmentDoc = gql`
-  fragment PageSectionDappPosts on PageSectionDappPosts {
-    __typename
-    sys {
-      ...Sys
-    }
-    title
-    description
-    handpickedPostsCollection(limit: 5, preview: $isPreview) {
-      items {
-        ...DappPost
-      }
-    }
-  }
-  ${SysFragmentDoc}
-  ${DappPostFragmentDoc}
 `;
 export const PageEarnFragmentDoc = gql`
   fragment PageEarn on PageEarn {
@@ -12604,6 +14319,22 @@ export const PageShopFragmentDoc = gql`
   ${PageSectionPersonPostsFragmentDoc}
   ${PageSectionProductsFragmentDoc}
 `;
+export const GroupPostFragmentDoc = gql`
+  fragment GroupPost on GroupPost {
+    sys {
+      ...Sys
+    }
+    icon
+    title
+    description
+    label
+    externalLink
+    highlighted
+    toggleable
+    collapsed
+  }
+  ${SysFragmentDoc}
+`;
 export const PageStreamFragmentDoc = gql`
   fragment PageStream on PageStream {
     sys {
@@ -12620,6 +14351,11 @@ export const PageStreamFragmentDoc = gql`
     }
     headerColumnWidth
     headerAlignCenter
+    groupsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...GroupPost
+      }
+    }
     sectionsCollection(limit: 10, preview: $isPreview) {
       items {
         ...PageSectionFeaturePosts
@@ -12635,6 +14371,7 @@ export const PageStreamFragmentDoc = gql`
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
+  ${GroupPostFragmentDoc}
   ${PageSectionFeaturePostsFragmentDoc}
   ${PageSectionThumbnailPostsFragmentDoc}
   ${PageSectionBasicPostsFragmentDoc}
@@ -12703,16 +14440,6 @@ export const LegalPostCollectionBySlugDocument = gql`
     }
   }
   ${LegalPostFragmentDoc}
-`;
-export const PageAccessWallCollectionDocument = gql`
-  query pageAccessWallCollection($isPreview: Boolean = false) {
-    pageAccessWallCollection(limit: 2, preview: $isPreview) {
-      items {
-        ...PageAccessWall
-      }
-    }
-  }
-  ${PageAccessWallFragmentDoc}
 `;
 export const PageEarnCollectionDocument = gql`
   query pageEarnCollection($isPreview: Boolean = false) {
@@ -12787,10 +14514,15 @@ export const ProductCollectionBySlugDocument = gql`
 
 export type SdkFunctionWrapper = <T>(
   action: (requestHeaders?: Record<string, string>) => Promise<T>,
-  operationName: string
+  operationName: string,
+  operationType?: string
 ) => Promise<T>;
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+const defaultWrapper: SdkFunctionWrapper = (
+  action,
+  _operationName,
+  _operationType
+) => action();
 
 export function getSdk(
   client: GraphQLClient,
@@ -12808,7 +14540,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'announcementCollection'
+        'announcementCollection',
+        'query'
       );
     },
     basicPostCollectionBySlug(
@@ -12822,7 +14555,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'basicPostCollectionBySlug'
+        'basicPostCollectionBySlug',
+        'query'
       );
     },
     footerCollection(
@@ -12836,7 +14570,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'footerCollection'
+        'footerCollection',
+        'query'
       );
     },
     legalPostCollectionBySlug(
@@ -12850,21 +14585,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'legalPostCollectionBySlug'
-      );
-    },
-    pageAccessWallCollection(
-      variables?: PageAccessWallCollectionQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<PageAccessWallCollectionQuery> {
-      return withWrapper(
-        wrappedRequestHeaders =>
-          client.request<PageAccessWallCollectionQuery>(
-            PageAccessWallCollectionDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'pageAccessWallCollection'
+        'legalPostCollectionBySlug',
+        'query'
       );
     },
     pageEarnCollection(
@@ -12878,7 +14600,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageEarnCollection'
+        'pageEarnCollection',
+        'query'
       );
     },
     pageGameCollection(
@@ -12892,7 +14615,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageGameCollection'
+        'pageGameCollection',
+        'query'
       );
     },
     pageHomeCollection(
@@ -12906,7 +14630,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageHomeCollection'
+        'pageHomeCollection',
+        'query'
       );
     },
     pageLearnCollection(
@@ -12920,7 +14645,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageLearnCollection'
+        'pageLearnCollection',
+        'query'
       );
     },
     pageShopCollection(
@@ -12934,7 +14660,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageShopCollection'
+        'pageShopCollection',
+        'query'
       );
     },
     pageStreamCollection(
@@ -12948,7 +14675,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageStreamCollection'
+        'pageStreamCollection',
+        'query'
       );
     },
     productCollectionBySlug(
@@ -12962,7 +14690,8 @@ export function getSdk(
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'productCollectionBySlug'
+        'productCollectionBySlug',
+        'query'
       );
     },
   };

@@ -105,8 +105,8 @@ const PastCard = ({ poolIndex }: CardProps) => {
         const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
         const tx: TransactionResponse = isV1Quarter
-          ? await stakingContract.harvestAndWithdraw()
-          : await stakingController.harvestAndWithdraw(quarterNum);
+          ? await stakingContract['harvestAndWithdraw']()
+          : await stakingController['harvestAndWithdraw'](quarterNum);
         const receipt: TransactionReceipt = await tx.wait();
         if (receipt.status) {
           toast?.current?.show({
@@ -170,8 +170,8 @@ const PastCard = ({ poolIndex }: CardProps) => {
     try {
       steps = updateRestakeStep(steps, 0, StepStatus.DOING);
       const txHarvest: TransactionResponse = isV1Quarter
-        ? await stakingContract.harvestAndWithdraw()
-        : await stakingController.harvestAndWithdraw(quarterNum);
+        ? await stakingContract['harvestAndWithdraw']()
+        : await stakingController['harvestAndWithdraw'](quarterNum);
       const receiptHarvest: TransactionReceipt = await txHarvest.wait();
       if (!receiptHarvest.status) {
         steps = updateRestakeStep(
@@ -223,14 +223,28 @@ const PastCard = ({ poolIndex }: CardProps) => {
     try {
       steps = updateRestakeStep(steps, 1, StepStatus.DOING);
 
-      const activeStakingAddress: string =
-        await stakingController.getActiveStaking();
+      const activeStakingAddress: string = await stakingController[
+        'getActiveStaking'
+      ]();
+
+      if (!dehubContract) {
+        const errorMsg = 'DeHub Contract was not found!';
+        toast?.current?.show({
+          severity: 'error',
+          summary: 'Error',
+          detail: errorMsg,
+          life: 4000,
+        });
+        console.error(errorMsg);
+        return;
+      }
+
       const allowance = ethersToBigNumber(
-        await dehubContract?.allowance(account, activeStakingAddress)
+        await dehubContract['allowance'](account, activeStakingAddress)
       );
 
       if (allowance.lt(restakeAmount)) {
-        const txApprove = await dehubContract?.approve(
+        const txApprove = await dehubContract['approve'](
           activeStakingAddress,
           MaxUint256
         );
@@ -273,7 +287,7 @@ const PastCard = ({ poolIndex }: CardProps) => {
     // Final step
     try {
       steps = updateRestakeStep(steps, 2, StepStatus.DOING);
-      const txDeposit: TransactionResponse = await stakingController.deposit(
+      const txDeposit: TransactionResponse = await stakingController['deposit'](
         restakeAmount?.toString()
       );
       const receiptDeposit: TransactionReceipt = await txDeposit.wait();

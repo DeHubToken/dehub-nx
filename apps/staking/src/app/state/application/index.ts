@@ -13,7 +13,7 @@ import {
 import BigNumber from 'bignumber.js';
 import { orderBy } from 'lodash';
 import { Moralis } from 'moralis-v1';
-import { Call, multicallv2 } from '../../utils/multicall';
+import { Call, multicallV2 } from '../../utils/multicall';
 import getDehubPrice from '../../utils/priceDehub';
 import {
   ApplicationState,
@@ -60,7 +60,7 @@ export const fetchUserInfos = createAsyncThunk<
   }));
 
   const abi = contracts[0].abi;
-  const userInfos = await multicallv2(abi, calls);
+  const userInfos = await multicallV2(abi, calls);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return userInfos.map((userInfo: any) => ({
@@ -87,7 +87,7 @@ export const fetchPendingHarvest = createAsyncThunk<
   }));
 
   const abi = contracts[0].abi;
-  const pendingHarvests = await multicallv2(abi, calls);
+  const pendingHarvests = await multicallV2(abi, calls);
 
   return pendingHarvests.map((pendings: EthersBigNumber[]) =>
     ethersToSerializedBigNumber(pendings[0].add(pendings[1]))

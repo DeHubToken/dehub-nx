@@ -145,7 +145,9 @@ const LiveCard = ({ poolIndex }: CardProps) => {
         userStakeInfo.pendingHarvest.eq(BIG_ZERO)
       ) {
         if (rewardsContract) {
-          const tx: TransactionResponse = await rewardsContract?.claimReward();
+          const tx: TransactionResponse = await rewardsContract[
+            'claimReward'
+          ]();
           const receipt: TransactionReceipt = await tx.wait();
           if (receipt.status) {
             toast?.current?.show({
@@ -162,8 +164,8 @@ const LiveCard = ({ poolIndex }: CardProps) => {
         const isV1Quarter = (await getVersion(stakingContract)) === 1;
 
         const tx: TransactionResponse = isV1Quarter
-          ? await stakingContract?.claimBNBRewards()
-          : await stakingController?.claimBNBRewards();
+          ? await stakingContract['claimBNBRewards']()
+          : await stakingController['claimBNBRewards']();
         const receipt: TransactionReceipt = await tx.wait();
         if (receipt.status) {
           toast?.current?.show({
