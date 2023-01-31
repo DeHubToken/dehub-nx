@@ -1,23 +1,38 @@
 import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
 import { Box, Heading, Text } from '@dehub/react/ui';
 import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
-import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
+import {
+  BIG_ZERO,
+  ethersToBigNumber,
+  getFullDisplayBalance,
+} from '@dehub/shared/utils';
+import { Interface } from '@ethersproject/abi';
+import { ContractReceipt, Event } from '@ethersproject/contracts';
+import { id } from '@ethersproject/hash';
 import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
-import { useMemo, useState } from 'react';
-import { usePool, useUserInfo } from '../state/application/hooks';
+import { Toast } from 'primereact/toast';
+import { useMemo, useRef, useState } from 'react';
+import { usePickStakingContract } from '../hooks/useContract';
+import { useFetchPool, usePool, useUserInfo } from '../state/application/hooks';
 import { RestakeModal, StakeModal, UnstakeModal } from './components';
 
 const MyStakingBox = () => {
   const { account } = useWeb3Context();
+  const stakingContract = usePickStakingContract();
+  const { poolInfo } = usePool();
+  const { userInfo } = useUserInfo();
 
+  const { updatePool, updateUser } = useFetchPool();
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
   const [openRestakeModal, setOpenRestakeModal] = useState<boolean>(false);
-  const { poolInfo } = usePool();
-  const { userInfo } = useUserInfo();
+  const [isTxPending, setIsTxPending] = useState(false);
+
+  const toast = useRef<Toast>(null);
+
   const now = new Date();
 
   const isReady = useMemo(
@@ -35,8 +50,61 @@ const MyStakingBox = () => {
     }
   };
 
+  const handleClaim = async () => {
+    if (!stakingContract) return;
+
+    try {
+      const ClaimedTopic = id('Claimed(address,uint256)');
+      const ClaimedInterface = new Interface([
+        'event Claimed(address indexed user, uint256 amount)',
+      ]);
+
+      setIsTxPending(true);
+      const tx = await stakingContract.claim();
+      await tx.wait().then((receipt: ContractReceipt) => {
+        updatePool();
+        updateUser();
+
+        const events = receipt.events?.filter(
+          (event: Event) => event.topics[0] === ClaimedTopic
+        );
+        const lastEvent =
+          events && events.length > 0 ? events.slice(-1)[0] : undefined;
+        if (!lastEvent) return;
+
+        const parsed = ClaimedInterface.parseLog(lastEvent);
+
+        toast?.current?.show({
+          severity: 'success',
+          summary: `Success`,
+          detail: (
+            <Box>
+              <Text style={{ marginBottom: '8px' }}>
+                {`${getFullDisplayBalance(
+                  ethersToBigNumber(parsed.args.amount),
+                  DEHUB_DECIMALS,
+                  DEHUB_DISPLAY_DECIMALS
+                )} $DeHub has been successfully claimed!`}
+              </Text>
+            </Box>
+          ),
+          life: 4000,
+        });
+      });
+    } catch (error: any) {
+      toast?.current?.show({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Staking failed - ${error?.data?.message ?? error.message}`,
+        life: 4000,
+      });
+    }
+    setIsTxPending(false);
+  };
+
   return (
     <>
+      <Toast ref={toast} />
       <Card className="border-neon-1 overflow-hidden">
         <Box style={{ padding: '1rem' }}>
           <div className="grid">
@@ -200,20 +268,35 @@ const MyStakingBox = () => {
                   <Button
                     className="p-button mt-2 justify-content-center w-2 mr-3"
                     onClick={() => handleModal('stake', true)}
-                    disabled={!isReady}
+                    disabled={!isReady || isTxPending}
                     label="Stake"
                   />
                   <Button
                     className="p-button-outlined mt-2 mr-3 justify-content-center w-2 text-white border-primary"
                     onClick={() => handleModal('unstake', true)}
-                    disabled={!isReady || userInfo!.totalAmount.eq(BIG_ZERO)}
+                    disabled={
+                      !isReady ||
+                      userInfo!.totalAmount.eq(BIG_ZERO) ||
+                      isTxPending
+                    }
                     label="Unstake"
                   />
                   <Button
-                    className="p-button mt-2 justify-content-center w-2 text-white border-primary"
+                    className="p-button mt-2 justify-content-center mr-3 w-2 text-white border-primary"
                     onClick={() => handleModal('restake', true)}
-                    disabled={!isReady || userInfo!.totalAmount.eq(BIG_ZERO)}
+                    disabled={
+                      !isReady ||
+                      userInfo!.totalAmount.eq(BIG_ZERO) ||
+                      isTxPending
+                    }
                     label="Restake"
+                  />
+                  <Button
+                    className="p-button-outlined mt-2 justify-content-center w-2 text-white border-primary"
+                    onClick={() => handleClaim()}
+                    disabled={!isReady || userInfo!.pendingHarvest.eq(BIG_ZERO)}
+                    loading={isTxPending}
+                    label="Claim"
                   />
                 </>
               )}
