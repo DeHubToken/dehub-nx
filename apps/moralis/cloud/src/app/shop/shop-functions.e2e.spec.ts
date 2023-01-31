@@ -10,7 +10,9 @@ import {
 import { Moralis } from 'moralis';
 import { environment } from '../../environments/environment';
 
-const { moralis } = environment;
+const {
+  web3: { moralis },
+} = environment;
 
 describe('E2E Shop functions', () => {
   const config = {

@@ -3,7 +3,9 @@ import { MoralisFunctions } from '@dehub/shared/model';
 import { Moralis } from 'moralis';
 import { environment } from '../../environments/environment';
 
-const { moralis, web3 } = environment;
+const {
+  web3: { moralis, chainId },
+} = environment;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isValidContract = (contract: any) => {
@@ -22,7 +24,7 @@ export const isValidContract = (contract: any) => {
   // check validation
   expect(contract.address.length > 0).toBeTruthy();
   expect(contract.name.length > 0).toBeTruthy();
-  expect(contract.chainId).toEqual(web3.chainId);
+  expect(contract.chainId).toEqual(chainId);
   expect(contract.abi.length > 0).toBeTruthy();
 };
 

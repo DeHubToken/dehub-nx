@@ -7,6 +7,5 @@ export const environment: Env = {
   ...inheritPreviewEnvFrom(prodEnv),
 
   // Preview should use Testnet
-  moralis: { ...defaultEnv.moralis },
   web3: { ...defaultEnv.web3 },
 };

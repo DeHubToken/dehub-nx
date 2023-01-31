@@ -36,7 +36,7 @@ import { AppMenuComponent } from './topbar/menu/app.menu.component';
 import { MenuService } from './topbar/menu/app.menu.service';
 import { AppMenuitemComponent } from './topbar/menu/app.menuitem.component';
 
-const { appId, serverUrl } = environment.moralis;
+const { appId, serverUrl } = environment.web3.moralis;
 @NgModule({
   imports: [
     // Angular
