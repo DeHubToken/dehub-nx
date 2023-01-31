@@ -218,8 +218,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
             ? undefined
             : poolInfo.tierPeriods[userInfo.lastTierIndex + 1];
 
-        console.log('nextPeriod', nowPeriod, nextPeriod);
-
         setMinPeriod(Math.floor(nowPeriod / DAY_IN_SECONDS));
         setMaxPeriod(
           nextPeriod ? Math.floor(nextPeriod / DAY_IN_SECONDS) - 1 : undefined
