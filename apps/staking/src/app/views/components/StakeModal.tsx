@@ -32,7 +32,11 @@ import {
   usePickStakingContract,
 } from '../../hooks/useContract';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { useFetchPool } from '../../state/application/hooks';
+import {
+  useFetchPool,
+  usePool,
+  useUserInfo,
+} from '../../state/application/hooks';
 import { getStakingAddress } from '../../utils/addressHelpers';
 
 interface StakeModalProps {
@@ -57,8 +61,12 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   const { updatePool, updateUser } = useFetchPool();
   const { balance: dehubBalance, fetchStatus: fetchBalanceStatus } =
     useGetDehubBalance();
+  const { poolInfo } = usePool();
+  const { userInfo } = useUserInfo();
 
   const [value, setValue] = useState<string>('0.00');
+  const [minPeriod, setMinPeriod] = useState<number>(1);
+  const [maxPeriod, setMaxPeriod] = useState<number | undefined>(undefined);
   const [isTxPending, setIsTxPending] = useState(false);
   const [disableStake, setDisableStake] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -197,6 +205,29 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
     setDisableStake(true);
   }, [value, maxBalance, setErrorMessage]);
 
+  useEffect(() => {
+    if (poolInfo) {
+      setMinPeriod(1);
+      setMaxPeriod(undefined);
+
+      if (userInfo) {
+        const nowPeriod = poolInfo.tierPeriods[userInfo.lastTierIndex];
+        const nextPeriod =
+          userInfo.unlockedAt === 0 ||
+          userInfo.lastTierIndex >= poolInfo.tierPeriods.length - 1
+            ? undefined
+            : poolInfo.tierPeriods[userInfo.lastTierIndex + 1];
+
+        console.log('nextPeriod', nowPeriod, nextPeriod);
+
+        setMinPeriod(Math.floor(nowPeriod / DAY_IN_SECONDS));
+        setMaxPeriod(
+          nextPeriod ? Math.floor(nextPeriod / DAY_IN_SECONDS) - 1 : undefined
+        );
+      }
+    }
+  }, [userInfo, poolInfo]);
+
   return (
     <>
       <Toast ref={toast} />
@@ -297,7 +328,8 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               onChange={handlePeriodChange}
               showButtons
               className="w-full text-right"
-              min={1}
+              min={minPeriod}
+              max={maxPeriod}
             />
             <Text textAlign="right" className="w-2">
               days
