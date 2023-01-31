@@ -92,7 +92,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
       ]);
 
       setIsTxPending(true);
-      const tx = await stakingContract.unstake(
+      const tx = await stakingContract['unstake'](
         EthersBigNumber.from(decimalValue.toString())
       );
       await tx
@@ -117,7 +117,7 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
               <Box>
                 <Text style={{ marginBottom: '8px' }}>
                   {`${getFullDisplayBalance(
-                    ethersToBigNumber(parsed.args.transferAmount),
+                    ethersToBigNumber(parsed.args['transferAmount']),
                     DEHUB_DECIMALS,
                     DEHUB_DISPLAY_DECIMALS
                   )} $DeHub has been successfully unstaked!`}

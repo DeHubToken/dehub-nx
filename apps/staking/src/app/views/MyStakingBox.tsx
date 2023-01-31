@@ -60,7 +60,7 @@ const MyStakingBox = () => {
       ]);
 
       setIsTxPending(true);
-      const tx = await stakingContract.claim();
+      const tx = await stakingContract['claim']();
       await tx.wait().then((receipt: ContractReceipt) => {
         updatePool();
         updateUser();
@@ -81,7 +81,7 @@ const MyStakingBox = () => {
             <Box>
               <Text style={{ marginBottom: '8px' }}>
                 {`${getFullDisplayBalance(
-                  ethersToBigNumber(parsed.args.amount),
+                  ethersToBigNumber(parsed.args['amount']),
                   DEHUB_DECIMALS,
                   DEHUB_DISPLAY_DECIMALS
                 )} $DeHub has been successfully claimed!`}

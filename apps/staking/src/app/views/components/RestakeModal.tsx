@@ -116,7 +116,7 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
       ]);
 
       setIsTxPending(true);
-      const tx = await stakingContract.restakePortion(
+      const tx = await stakingContract['restakePortion'](
         EthersBigNumber.from(decimalValue.toString()),
         period * DAY_IN_SECONDS,
         count
@@ -143,7 +143,7 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
               <Box>
                 <Text style={{ marginBottom: '8px' }}>
                   {`${getFullDisplayBalance(
-                    ethersToBigNumber(parsed.args.amount),
+                    ethersToBigNumber(parsed.args['amount']),
                     DEHUB_DECIMALS,
                     DEHUB_DISPLAY_DECIMALS
                   )} $DeHub has been successfully restaked!`}

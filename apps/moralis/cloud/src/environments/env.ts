@@ -5,7 +5,6 @@ export interface Env extends SharedEnv {
     bnbReward: string;
     token: string;
     staking: string;
-    ott: string;
     shop: string;
   };
   staking: {
@@ -37,7 +36,6 @@ export const defaultEnv: Env = {
     bnbReward: 'DeHubBNBRewardsDapp',
     token: 'DeHubTokenDapp',
     staking: 'DeHubStakingDapp',
-    ott: 'DeHubOTTDapp',
     shop: 'DeHubShopDapp',
   },
   staking: {

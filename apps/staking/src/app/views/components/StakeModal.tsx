@@ -107,13 +107,13 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
 
     try {
       const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
-      const allowance = await dehubContract.allowance(
+      const allowance = await dehubContract['allowance'](
         account,
         getStakingAddress()
       );
       setIsTxPending(true);
       if (allowance < decimalValue.toNumber()) {
-        const txApprove = await dehubContract.approve(
+        const txApprove = await dehubContract['approve'](
           getStakingAddress(),
           MaxUint256
         );
@@ -141,7 +141,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
         'event Staked(address indexed user,uint256 period,uint256 amount,uint256 stakeAt,uint256 indexed rewardIndex,uint256 indexed tierIndex)',
       ]);
 
-      const tx = await stakingContract.stake(
+      const tx = await stakingContract['stake'](
         period * DAY_IN_SECONDS,
         EthersBigNumber.from(decimalValue.toString())
       );
@@ -167,7 +167,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               <Box>
                 <Text style={{ marginBottom: '8px' }}>
                   {`${getFullDisplayBalance(
-                    ethersToBigNumber(parsed.args.amount),
+                    ethersToBigNumber(parsed.args['amount']),
                     DEHUB_DECIMALS,
                     DEHUB_DISPLAY_DECIMALS
                   )} $DeHub has been successfully staked!`}

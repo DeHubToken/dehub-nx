@@ -33,7 +33,7 @@ export const useTokenBalance = (tokenAddress: string) => {
     const fetchBalance = async () => {
       const contract = getBep20Contract(tokenAddress);
       try {
-        const res = await contract.balanceOf(account);
+        const res = await contract['balanceOf'](account);
         if (!mountedRef.current) {
           return;
         }

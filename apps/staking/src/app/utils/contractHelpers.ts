@@ -30,7 +30,7 @@ export const getBep20Contract = (
 
 export const getVersion = async (contract: Contract) => {
   try {
-    return await contract.version();
+    return await contract['version']();
   } catch (error) {
     return 1;
   }

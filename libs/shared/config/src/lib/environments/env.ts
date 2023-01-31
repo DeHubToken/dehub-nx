@@ -36,7 +36,15 @@ export interface ContractsEnv {
   staking: string;
 }
 
-interface Web3Env {
+export interface Web3Env {
+  /** Moralis configuration */
+  moralis: {
+    /** Application ID */
+    appId: string;
+    /** Server URL */
+    serverUrl: string;
+  };
+
   /** Default Network ChainId */
   chainId: number;
   addresses: { contracts: ContractsEnv };
@@ -71,21 +79,11 @@ export interface SharedEnv {
     downloadWalletUrl: string;
     /** Official DeHUB landing page */
     landing: string;
-    /** Official Allrites stream page */
-    stream: string;
     /** Official DeHUB dapp pages */
     dapps: { staking: string; buy: string };
   };
 
   contentful: ContentfulEnv;
-
-  /** Moralis configuration */
-  moralis: {
-    /** Application ID */
-    appId: string;
-    /** Server URL */
-    serverUrl: string;
-  };
 
   web3: Web3Env;
 
@@ -106,7 +104,6 @@ export const defaultSharedEnv: SharedEnv = {
     cexUrl: 'https://www.gate.io/trade/DEHUB_USDT',
     downloadWalletUrl: 'https://metamask.io/download/',
     landing: 'https://dehub.net',
-    stream: 'https://beta-stream.dehub.net',
     dapps: {
       staking: 'https://dehub.net/staking',
       buy: 'https://dehub.net/buy',
@@ -125,13 +122,12 @@ export const defaultSharedEnv: SharedEnv = {
     },
   },
 
-  // DeHub Test
-  moralis: {
-    appId: 'UxvDeanBLvO8ym31e6x6dYdQa2Qlzw2jOSrhm3cE',
-    serverUrl: 'https://nm6dir4me3i0.usemoralis.com:2053/server',
-  },
-
   web3: {
+    // DeHub Test
+    moralis: {
+      appId: 'UxvDeanBLvO8ym31e6x6dYdQa2Qlzw2jOSrhm3cE',
+      serverUrl: 'https://nm6dir4me3i0.usemoralis.com:2053/server',
+    },
     chainId: 97,
     addresses: {
       contracts: {

@@ -9,6 +9,10 @@ export const inheritPreviewEnvFrom = (
 
   contentful: {
     ...originEnv.contentful,
+    website: {
+      ...originEnv.contentful.website,
+      environmentId: 'preview',
+    },
     isPreview: true,
   },
 });

@@ -14,7 +14,7 @@ import {
 import BigNumber from 'bignumber.js';
 import DeHubStakingAbi from '../../config/abis/DeHubStaking.json';
 import { getStakingAddress } from '../../utils/addressHelpers';
-import { Call, multicallv2 } from '../../utils/multicall';
+import { Call, multicallV2 } from '../../utils/multicall';
 import getDehubPrice from '../../utils/priceDehub';
 import {
   ApplicationState,
@@ -67,7 +67,7 @@ export const fetchPool = createAsyncThunk<SerializedPoolInfoAndPaused>(
       },
     ];
 
-    const result = await multicallv2(DeHubStakingAbi, calls);
+    const result = await multicallV2(DeHubStakingAbi, calls);
     return {
       stakingStartAt: result[0][0].stakingStartAt.toNumber(),
       tierPeriods: result[0][0].tierPeriods.map((item: EthersBigNumber) =>
@@ -115,7 +115,7 @@ export const fetchUserInfo = createAsyncThunk<
     },
   ];
 
-  const result = await multicallv2(DeHubStakingAbi, calls);
+  const result = await multicallV2(DeHubStakingAbi, calls);
   const lastTierIndex = result[0].lastTierIndex.toNumber();
   const totalSharesOnTier = ethersToBigNumber(result[2][0][lastTierIndex]);
   const stakingShares = totalSharesOnTier.isEqualTo(BIG_ZERO)

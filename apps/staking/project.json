@@ -12,7 +12,6 @@
         "outputPath": "dist/apps/staking.prod/staking",
         "index": "apps/staking/src/index.html",
         "main": "apps/staking/src/main.tsx",
-        "polyfills": "apps/staking/src/polyfills.ts",
         "tsConfig": "apps/staking/tsconfig.app.json",
         "assets": [
           "apps/staking/src/assets",
@@ -35,7 +34,7 @@
           "includePaths": ["./node_modules"]
         },
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack",
+        "webpackConfig": "apps/staking/webpack.config.js",
         "optimization": true,
         "outputHashing": "all",
         "sourceMap": false,
@@ -69,7 +68,7 @@
           "optimization": false,
           "vendorChunk": true,
           "extractLicenses": false,
-          "sourceMap": true,
+          "sourceMap": false,
           "namedChunks": true,
           "outputHashing": "none",
           "extractCss": false,
