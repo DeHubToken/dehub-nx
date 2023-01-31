@@ -35,7 +35,15 @@ export interface ContractsEnv {
   multiCall: string;
 }
 
-interface Web3Env {
+export interface Web3Env {
+  /** Moralis configuration */
+  moralis: {
+    /** Application ID */
+    appId: string;
+    /** Server URL */
+    serverUrl: string;
+  };
+
   /** Default Network ChainId */
   chainId: number;
   addresses: { contracts: ContractsEnv };
@@ -76,15 +84,6 @@ export interface SharedEnv {
 
   contentful: ContentfulEnv;
 
-  /** Moralis configuration */
-  moralis: {
-    /** Application ID */
-    appId: string;
-    /** Server URL */
-    serverUrl: string;
-  };
-
-  /** TODO: merge moralis under web3 */
   web3: Web3Env;
 
   emails: {
@@ -122,13 +121,12 @@ export const defaultSharedEnv: SharedEnv = {
     },
   },
 
-  // DeHub Test
-  moralis: {
-    appId: 'UxvDeanBLvO8ym31e6x6dYdQa2Qlzw2jOSrhm3cE',
-    serverUrl: 'https://nm6dir4me3i0.usemoralis.com:2053/server',
-  },
-
   web3: {
+    // DeHub Test
+    moralis: {
+      appId: 'UxvDeanBLvO8ym31e6x6dYdQa2Qlzw2jOSrhm3cE',
+      serverUrl: 'https://nm6dir4me3i0.usemoralis.com:2053/server',
+    },
     chainId: 97,
     addresses: {
       contracts: {
