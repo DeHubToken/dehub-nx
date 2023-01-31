@@ -70,8 +70,6 @@ export interface SharedEnv {
     downloadWalletUrl: string;
     /** Official DeHUB landing page */
     landing: string;
-    /** Official Allrites stream page */
-    stream: string;
     /** Official DeHUB dapp pages */
     dapps: { staking: string; buy: string };
   };
@@ -86,6 +84,7 @@ export interface SharedEnv {
     serverUrl: string;
   };
 
+  /** TODO: merge moralis under web3 */
   web3: Web3Env;
 
   emails: {
@@ -105,7 +104,6 @@ export const defaultSharedEnv: SharedEnv = {
     cexUrl: 'https://www.gate.io/trade/DEHUB_USDT',
     downloadWalletUrl: 'https://metamask.io/download/',
     landing: 'https://dehub.net',
-    stream: 'https://beta-stream.dehub.net',
     dapps: {
       staking: 'https://dehub.net/staking',
       buy: 'https://dehub.net/buy',
