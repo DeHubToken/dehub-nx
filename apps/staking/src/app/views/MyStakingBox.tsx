@@ -1,7 +1,8 @@
 import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
 import { Box, Heading, Text } from '@dehub/react/ui';
-import { DEHUB_DECIMALS } from '@dehub/shared/config';
+import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
 import { BIG_ZERO, getFullDisplayBalance } from '@dehub/shared/utils';
+import BigNumber from 'bignumber.js';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Skeleton } from 'primereact/skeleton';
@@ -70,7 +71,12 @@ const MyStakingBox = () => {
                   {isReady ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
-                        {userInfo!.stakingShares.toString()}%
+                        {getFullDisplayBalance(
+                          new BigNumber(userInfo!.stakingShares),
+                          0,
+                          DEHUB_DISPLAY_DECIMALS
+                        )}
+                        %
                       </Text>
                       <Text></Text>
                     </>
