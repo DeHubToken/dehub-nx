@@ -67,7 +67,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "uint256",
         "name": "rewardIndex",
         "type": "uint256"
@@ -125,6 +125,25 @@
       }
     ],
     "name": "Paused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "transferAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "RemainingTransfered",
     "type": "event"
   },
   {
@@ -240,6 +259,18 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "stakeAt",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "rewardIndex",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tierIndex",
         "type": "uint256"
       }
     ],
@@ -1097,6 +1128,11 @@
       {
         "internalType": "uint256",
         "name": "harvestClaimed",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lastStakeAt",
         "type": "uint256"
       }
     ],

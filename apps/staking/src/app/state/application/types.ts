@@ -44,6 +44,7 @@ export interface UserInfo {
   unlockedAt: number;
   lastTierIndex: number;
   pendingHarvest: BigNumber;
+  stakedAt: number;
 }
 
 export interface SerializedUserInfo {
@@ -52,6 +53,7 @@ export interface SerializedUserInfo {
   unlockedAt: number;
   lastTierIndex: number;
   pendingHarvest: SerializedBigNumber;
+  stakedAt: number;
 }
 
 export interface ApplicationState {

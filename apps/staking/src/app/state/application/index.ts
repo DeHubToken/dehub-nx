@@ -130,6 +130,7 @@ export const fetchUserInfo = createAsyncThunk<
     unlockedAt: result[0].unlockAt.toNumber(),
     lastTierIndex: lastTierIndex,
     pendingHarvest: ethersToSerializedBigNumber(result[3][0]),
+    stakedAt: result[0].lastStakeAt.toNumber(),
   } as SerializedUserInfo;
 });
 

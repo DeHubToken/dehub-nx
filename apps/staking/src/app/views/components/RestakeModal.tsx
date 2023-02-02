@@ -21,7 +21,7 @@ import {
 } from 'primereact/inputnumber';
 import { Skeleton } from 'primereact/skeleton';
 import { Slider, SliderChangeParams } from 'primereact/slider';
-import { Toast } from 'primereact/toast';
+import { Toast, ToastMessageType } from 'primereact/toast';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { DAY_IN_SECONDS } from '../../config/constants';
@@ -80,6 +80,16 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
 
   const showFieldWarning = !!account && errorMessage !== null;
 
+  const restakeableAmount = useMemo(() => {
+    if (!userInfo || !poolInfo) {
+      return new BigNumber(0);
+    }
+    const unstakeAmount = userInfo.totalAmount
+      .multipliedBy(10000 - poolInfo.forceUnstakeFee)
+      .dividedBy(10000);
+    return unstakeAmount;
+  }, [userInfo, poolInfo]);
+
   const handleChange = (input: string) => {
     setValue(input);
   };
@@ -111,8 +121,12 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
       const StakedTopic = id(
         'Staked(address,uint256,uint256,uint256,uint256,uint256)'
       );
+      const RemainingTransferedTopic = id(
+        'RemainingTransfered(address,uint256)'
+      );
       const RestakedInterface = new Interface([
         'event Staked(address indexed user,uint256 period,uint256 amount,uint256 stakeAt,uint256 indexed rewardIndex,uint256 indexed tierIndex)',
+        'event RemainingTransfered(address indexed user, uint256 transferAmount)',
       ]);
 
       setIsTxPending(true);
@@ -127,31 +141,66 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
           updatePool();
           updateUser();
 
-          const events = receipt.events?.filter(
+          const stakedEvents = receipt.events?.filter(
             (event: Event) => event.topics[0] === StakedTopic
           );
-          const lastEvent =
-            events && events.length > 0 ? events.slice(-1)[0] : undefined;
-          if (!lastEvent) return;
+          const lastStakedEvent =
+            stakedEvents && stakedEvents.length > 0
+              ? stakedEvents.slice(-1)[0]
+              : undefined;
+          if (!lastStakedEvent) return;
 
-          const parsed = RestakedInterface.parseLog(lastEvent);
+          const remainingEvents = receipt.events?.filter(
+            (event: Event) => event.topics[0] === RemainingTransferedTopic
+          );
+          const lastRemainingEvent =
+            remainingEvents && remainingEvents.length > 0
+              ? remainingEvents.slice(-1)[0]
+              : undefined;
 
-          toast?.current?.show({
-            severity: 'success',
-            summary: `Success`,
-            detail: (
-              <Box>
-                <Text style={{ marginBottom: '8px' }}>
-                  {`${getFullDisplayBalance(
-                    ethersToBigNumber(parsed.args['amount']),
-                    DEHUB_DECIMALS,
-                    DEHUB_DISPLAY_DECIMALS
-                  )} $DeHub has been successfully restaked!`}
-                </Text>
-              </Box>
-            ),
-            life: 4000,
-          });
+          const parsedStaked = RestakedInterface.parseLog(lastStakedEvent);
+          const parsedRemaining = lastRemainingEvent
+            ? RestakedInterface.parseLog(lastRemainingEvent)
+            : undefined;
+
+          const messages: ToastMessageType = [
+            {
+              severity: 'success',
+              summary: `Success`,
+              detail: (
+                <Box>
+                  <Text style={{ marginBottom: '8px' }}>
+                    {`${getFullDisplayBalance(
+                      ethersToBigNumber(parsedStaked.args['amount']),
+                      DEHUB_DECIMALS,
+                      DEHUB_DISPLAY_DECIMALS
+                    )} $DeHub has been successfully restaked!`}
+                  </Text>
+                </Box>
+              ),
+              life: 4000,
+            },
+          ];
+          if (parsedRemaining) {
+            messages.push({
+              severity: 'success',
+              summary: `Success`,
+              detail: (
+                <Box>
+                  <Text style={{ marginBottom: '8px' }}>
+                    {`${getFullDisplayBalance(
+                      ethersToBigNumber(parsedRemaining.args['transferAmount']),
+                      DEHUB_DECIMALS,
+                      DEHUB_DISPLAY_DECIMALS
+                    )} $DeHub has been successfully refunded!`}
+                  </Text>
+                </Box>
+              ),
+              life: 4000,
+            });
+          }
+
+          toast?.current?.show(messages);
         })
         .then(() => onHide());
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -245,17 +294,13 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
           </div>
           <div className="flex justify-content-end align-items-center mt-1 mb-5">
             <Text textAlign="right" fontSize="12px" className="mr-1">
-              Restakable:
+              Restakeable:
             </Text>
             {userInfo && poolInfo ? (
               <Text textAlign="right" fontSize="12px">
                 {getFullDisplayBalance(
-                  new Date().getTime() / 1000 > userInfo.unlockedAt
-                    ? valueAsBn
-                    : valueAsBn
-                        .multipliedBy(10000 - poolInfo.forceUnstakeFee)
-                        .dividedBy(10000),
-                  0,
+                  restakeableAmount,
+                  DEHUB_DECIMALS,
                   DEHUB_DISPLAY_DECIMALS
                 ).toString()}
               </Text>

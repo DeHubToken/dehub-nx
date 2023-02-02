@@ -114,6 +114,7 @@ export const useUserInfo = (): {
               unlockedAt: userInfo.unlockedAt,
               lastTierIndex: userInfo.lastTierIndex,
               pendingHarvest: new BigNumber(userInfo.pendingHarvest),
+              stakedAt: userInfo.stakedAt,
             }
           : undefined,
       [userInfo]

@@ -190,13 +190,22 @@ const MyStakingBox = () => {
                   {isReady ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
+                        {userInfo!.stakedAt > 0
+                          ? new Date(userInfo!.stakedAt * 1000).toLocaleString()
+                          : new Date().toLocaleString()}
+                        {` - `}
+                      </Text>
+                      <Text
+                        fontSize="16px"
+                        fontWeight={900}
+                        className="mt-2 ml-2"
+                      >
                         {userInfo!.unlockedAt > 0
                           ? new Date(
                               userInfo!.unlockedAt * 1000
                             ).toLocaleString()
                           : new Date().toLocaleString()}
                       </Text>
-                      <Text></Text>
                     </>
                   ) : (
                     <>
