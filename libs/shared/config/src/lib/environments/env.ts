@@ -132,7 +132,7 @@ export const defaultSharedEnv: SharedEnv = {
     addresses: {
       contracts: {
         dehub: '0xEad75F6d5E16E86b157937Ba227c13B5fb6864fC',
-        dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
+        dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D', // todo
         wbnb: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
         bnbBusd: '0xe0e92035077c39594793e61802a350347c320cf2',
         busd: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',

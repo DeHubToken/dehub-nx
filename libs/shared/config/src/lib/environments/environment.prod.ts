@@ -15,8 +15,8 @@ export const defaultSharedProdEnv: SharedEnv = {
     chainId: 56,
     addresses: {
       contracts: {
-        dehub: '0xFC206f429d55c71cb7294EfF40c6ADb20dC21508',
-        dehubBnb: '0xE876eE0945CE80Ef821633f2C18950b33Fb85633',
+        dehub: '0x680D3113caf77B61b510f332D5Ef4cf5b41A761D',
+        dehubBnb: '0xE876eE0945CE80Ef821633f2C18950b33Fb85633', // todo
         wbnb: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
         bnbBusd: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
         busd: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
