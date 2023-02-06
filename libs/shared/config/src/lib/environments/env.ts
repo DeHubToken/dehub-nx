@@ -79,7 +79,7 @@ export interface SharedEnv {
     /** Official DeHUB landing page */
     landing: string;
     /** Official DeHUB dapp pages */
-    dapps: { staking: string; buy: string };
+    dapps: { staking: string };
   };
 
   contentful: ContentfulEnv;
@@ -105,7 +105,6 @@ export const defaultSharedEnv: SharedEnv = {
     landing: 'https://dehub.net',
     dapps: {
       staking: 'https://dehub.net/staking',
-      buy: 'https://dehub.net/buy',
     },
   },
 
