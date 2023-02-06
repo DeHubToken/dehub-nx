@@ -2,13 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Inject,
   Input,
   OnInit,
   Output,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { WINDOW } from '@ng-web-apis/common';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -26,16 +24,12 @@ export class BuyDehubButtonComponent implements OnInit {
   @Input() label = 'Buy DeHub';
   @Input() cexUrl?: string;
   @Input() downloadWalletUrl?: string;
-  @Input() buyDappUrl?: string;
 
   @Output() buyWithCard = new EventEmitter<void>();
 
   items: MenuItem[] = [];
 
-  constructor(
-    @Inject(WINDOW) private readonly windowRef: Window,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.items = [
@@ -55,11 +49,6 @@ export class BuyDehubButtonComponent implements OnInit {
       },
     ];
   }
-
-  // onBuyClicked(event: Event) {
-  //   event.preventDefault();
-  //   this.windowRef.open(this.buyDappUrl, '_self', 'noopener,noreferrer');
-  // }
 
   onBuyClicked() {
     this.router.navigate(['/shop']);
