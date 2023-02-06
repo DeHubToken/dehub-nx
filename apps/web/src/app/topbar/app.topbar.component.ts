@@ -5,10 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
-import { BuyDehubFloozComponent } from '@dehub/angular/ui/components/buy-dehub-flooz';
 import { shortenAddress } from '@dehub/shared/utils';
 import { MenuItem } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
 import { map, Observable } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
@@ -39,20 +37,8 @@ export class AppTopBarComponent implements OnInit {
     @Inject(EnvToken) private env: Env,
     @Inject(MoralisToken) private moralisService: IMoralisService,
     public app: AppComponent,
-    public appMain: AppMainComponent,
-    private dialogService: DialogService
+    public appMain: AppMainComponent
   ) {}
-
-  onBuyWithCard() {
-    this.dialogService.open(BuyDehubFloozComponent, {
-      showHeader: true,
-      header: 'Decentralised Exchange',
-      width: '420px',
-      styleClass: 'bg-gradient-3 border-neon-2',
-      closeOnEscape: true,
-      dismissableMask: true,
-    });
-  }
 
   ngOnInit() {
     const { account$, isAuthenticated$ } = this.moralisService;
