@@ -4,7 +4,7 @@ import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
 import {
   BIG_ZERO,
   ethersToBigNumber,
-  getFullDisplayBalance,
+  getFullDisplayBalance
 } from '@dehub/shared/utils';
 import { Interface } from '@ethersproject/abi';
 import { ContractReceipt, Event } from '@ethersproject/contracts';
@@ -112,11 +112,11 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Total Staked</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full">
-                  {isReady ? (
+                  {isReady && userInfo ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
                         {getFullDisplayBalance(
-                          userInfo!.totalAmount,
+                          userInfo.totalAmount,
                           DEHUB_DECIMALS
                         )}
                       </Text>
@@ -136,11 +136,11 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Staking Shares</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full">
-                  {isReady ? (
+                  {isReady && userInfo ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
                         {getFullDisplayBalance(
-                          new BigNumber(userInfo!.stakingShares),
+                          new BigNumber(userInfo.stakingShares),
                           0,
                           DEHUB_DISPLAY_DECIMALS
                         )}
@@ -162,13 +162,13 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Current Tier</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full flex flex-column align-items-start">
-                  {isReady ? (
+                  {isReady && userInfo && poolInfo ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
-                        Tier {userInfo!.lastTierIndex + 1}
+                        Tier {userInfo.lastTierIndex + 1}
                       </Text>
                       <Text className="mt-2">
-                        {poolInfo!.tierPercents[userInfo!.lastTierIndex]}% share
+                        {poolInfo.tierPercents[userInfo.lastTierIndex]}% share
                         of total rewards
                       </Text>
                     </>
@@ -187,11 +187,11 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Unlock date</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full flex flex-column align-items-start">
-                  {isReady ? (
+                  {isReady && userInfo ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
-                        {userInfo!.stakedAt > 0
-                          ? new Date(userInfo!.stakedAt * 1000).toLocaleString()
+                        {userInfo.stakedAt > 0
+                          ? new Date(userInfo.stakedAt * 1000).toLocaleString()
                           : new Date().toLocaleString()}
                         {` - `}
                       </Text>
@@ -200,10 +200,10 @@ const MyStakingBox = () => {
                         fontWeight={900}
                         className="mt-2 ml-2"
                       >
-                        {userInfo!.unlockedAt > 0
+                        {userInfo.unlockedAt > 0
                           ? new Date(
-                              userInfo!.unlockedAt * 1000
-                            ).toLocaleString()
+                            userInfo.unlockedAt * 1000
+                          ).toLocaleString()
                           : new Date().toLocaleString()}
                       </Text>
                     </>
@@ -221,12 +221,12 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Total Unlocked</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full">
-                  {isReady ? (
+                  {isReady && userInfo ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
                         {getFullDisplayBalance(
-                          now.getTime() > userInfo!.unlockedAt * 1000
-                            ? userInfo!.totalAmount
+                          now.getTime() > userInfo.unlockedAt * 1000
+                            ? userInfo.totalAmount
                             : BIG_ZERO,
                           DEHUB_DECIMALS
                         )}
@@ -247,11 +247,11 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Pending Reward</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full">
-                  {isReady ? (
+                  {isReady && userInfo ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
                         {getFullDisplayBalance(
-                          userInfo!.pendingHarvest,
+                          userInfo.pendingHarvest,
                           DEHUB_DECIMALS
                         )}
                       </Text>
@@ -285,7 +285,7 @@ const MyStakingBox = () => {
                     onClick={() => handleModal('unstake', true)}
                     disabled={
                       !isReady ||
-                      userInfo!.totalAmount.eq(BIG_ZERO) ||
+                      userInfo && userInfo.totalAmount.eq(BIG_ZERO) ||
                       isTxPending
                     }
                     label="Unstake"
@@ -295,7 +295,7 @@ const MyStakingBox = () => {
                     onClick={() => handleModal('restake', true)}
                     disabled={
                       !isReady ||
-                      userInfo!.totalAmount.eq(BIG_ZERO) ||
+                      userInfo && userInfo.totalAmount.eq(BIG_ZERO) ||
                       isTxPending
                     }
                     label="Restake"
@@ -303,7 +303,7 @@ const MyStakingBox = () => {
                   <Button
                     className="p-button-outlined mt-2 justify-content-center w-2 text-white border-primary"
                     onClick={() => handleClaim()}
-                    disabled={!isReady || userInfo!.pendingHarvest.eq(BIG_ZERO)}
+                    disabled={!isReady || userInfo && userInfo.pendingHarvest.eq(BIG_ZERO)}
                     loading={isTxPending}
                     label="Claim"
                   />
