@@ -4,7 +4,7 @@ import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
 import {
   BIG_ZERO,
   ethersToBigNumber,
-  getFullDisplayBalance
+  getFullDisplayBalance,
 } from '@dehub/shared/utils';
 import { Interface } from '@ethersproject/abi';
 import { ContractReceipt, Event } from '@ethersproject/contracts';
@@ -91,11 +91,20 @@ const MyStakingBox = () => {
           life: 4000,
         });
       });
-    } catch (error: any) {
+    } catch (error) {
+      let errMsg;
+      if (error instanceof Error && error.message) {
+        errMsg = error.message;
+      } else if ((error as { data: { message: string } }).data.message) {
+        errMsg = (error as { data: { message: string } }).data.message;
+      } else {
+        console.error(error);
+        throw new Error('unknown error during handling claim');
+      }
       toast?.current?.show({
         severity: 'error',
         summary: 'Error',
-        detail: `Staking failed - ${error?.data?.message ?? error.message}`,
+        detail: `Staking failed - ${errMsg}`,
         life: 4000,
       });
     }
@@ -202,8 +211,8 @@ const MyStakingBox = () => {
                       >
                         {userInfo.unlockedAt > 0
                           ? new Date(
-                            userInfo.unlockedAt * 1000
-                          ).toLocaleString()
+                              userInfo.unlockedAt * 1000
+                            ).toLocaleString()
                           : new Date().toLocaleString()}
                       </Text>
                     </>
@@ -285,7 +294,7 @@ const MyStakingBox = () => {
                     onClick={() => handleModal('unstake', true)}
                     disabled={
                       !isReady ||
-                      userInfo && userInfo.totalAmount.eq(BIG_ZERO) ||
+                      (userInfo && userInfo.totalAmount.eq(BIG_ZERO)) ||
                       isTxPending
                     }
                     label="Unstake"
@@ -295,7 +304,7 @@ const MyStakingBox = () => {
                     onClick={() => handleModal('restake', true)}
                     disabled={
                       !isReady ||
-                      userInfo && userInfo.totalAmount.eq(BIG_ZERO) ||
+                      (userInfo && userInfo.totalAmount.eq(BIG_ZERO)) ||
                       isTxPending
                     }
                     label="Restake"
@@ -303,7 +312,10 @@ const MyStakingBox = () => {
                   <Button
                     className="p-button-outlined mt-2 justify-content-center w-2 text-white border-primary"
                     onClick={() => handleClaim()}
-                    disabled={!isReady || userInfo && userInfo.pendingHarvest.eq(BIG_ZERO)}
+                    disabled={
+                      !isReady ||
+                      (userInfo && userInfo.pendingHarvest.eq(BIG_ZERO))
+                    }
                     loading={isTxPending}
                     label="Claim"
                   />
