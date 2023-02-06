@@ -1,9 +1,0 @@
-[[redirects]]
-  from = "/"
-  to = "buy/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/buy/*"
-  to = "buy/index.html"
-  status = 200
