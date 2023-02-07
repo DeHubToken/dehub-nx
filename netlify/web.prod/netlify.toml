@@ -14,10 +14,3 @@
   to = "https://staking-dehub.netlify.app/staking/:splat"
   status = 200
   force = true
-
-# Buy
-[[redirects]]
-  from = "/buy/*"
-  to = "https://buy-dehub.netlify.app/buy/:splat"
-  status = 200
-  force = true
