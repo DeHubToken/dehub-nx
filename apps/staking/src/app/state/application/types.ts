@@ -15,6 +15,7 @@ export interface PoolInfo {
   rewardPeriod: number;
   lastRewardIndex: number;
   forceUnstakeFee: number;
+  minPeriod: number;
   totalStaked: BigNumber;
   totalStakers: number;
 }
@@ -32,6 +33,7 @@ export interface SerializedPoolInfo {
   rewardPeriod: number;
   lastRewardIndex: number;
   forceUnstakeFee: number;
+  minPeriod: number;
   totalStaked: SerializedBigNumber;
   totalStakers: number;
 }

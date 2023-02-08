@@ -84,6 +84,7 @@ export const usePool = (): {
               rewardPeriod: poolInfo.rewardPeriod,
               lastRewardIndex: poolInfo.lastRewardIndex,
               forceUnstakeFee: poolInfo.forceUnstakeFee,
+              minPeriod: poolInfo.minPeriod,
               totalStaked: new BigNumber(poolInfo.totalStaked),
               totalStakers: poolInfo.totalStakers,
               paused: poolInfo.paused,

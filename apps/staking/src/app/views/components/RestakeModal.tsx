@@ -344,13 +344,15 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
               Period:
             </Text>
             <InputNumber
+              min={
+                poolInfo ? Math.floor(poolInfo.minPeriod / DAY_IN_SECONDS) : 1
+              }
               value={period}
               disabled={!account || isTxPending}
               onValueChange={handlePeriodChange}
               onChange={handlePeriodChange}
               showButtons
               className="w-full text-right"
-              min={1}
             />
             <Text textAlign="right" className="w-2">
               days

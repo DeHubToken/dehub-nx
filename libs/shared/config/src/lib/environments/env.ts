@@ -137,7 +137,7 @@ export const defaultSharedEnv: SharedEnv = {
         bnbBusd: '0xe0e92035077c39594793e61802a350347c320cf2',
         busd: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
         multiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
-        staking: '0x5F562ED7797204edE6Fbbc5ac9c06109d2ef8Cdc',
+        staking: '0x592342c9203E9c5CB3697F2F1a2CFdDAd6e2E725',
       },
     },
     auth: {

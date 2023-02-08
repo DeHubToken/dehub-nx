@@ -207,7 +207,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
 
   useEffect(() => {
     if (poolInfo) {
-      setMinPeriod(1);
+      setMinPeriod(Math.floor(poolInfo.minPeriod / DAY_IN_SECONDS));
       setMaxPeriod(undefined);
 
       if (userInfo) {
@@ -218,7 +218,12 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
             ? undefined
             : poolInfo.tierPeriods[userInfo.lastTierIndex + 1];
 
-        setMinPeriod(Math.floor(nowPeriod / DAY_IN_SECONDS));
+        setMinPeriod(
+          Math.max(
+            Math.floor(nowPeriod / DAY_IN_SECONDS),
+            Math.floor(poolInfo.minPeriod / DAY_IN_SECONDS)
+          )
+        );
         setMaxPeriod(
           nextPeriod ? Math.floor(nextPeriod / DAY_IN_SECONDS) - 1 : undefined
         );

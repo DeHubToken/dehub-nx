@@ -99,6 +99,19 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "minPeriod",
+        "type": "uint256"
+      }
+    ],
+    "name": "MinPeriod",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "address",
         "name": "previousOwner",
@@ -389,6 +402,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint256",
+        "name": "minPeriod_",
+        "type": "uint256"
+      },
+      {
         "internalType": "uint256[]",
         "name": "tierPeriods_",
         "type": "uint256[]"
@@ -461,6 +479,11 @@
           {
             "internalType": "uint256",
             "name": "forceUnstakeFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minPeriod",
             "type": "uint256"
           },
           {
@@ -701,6 +724,11 @@
         "internalType": "uint256",
         "name": "forceUnstakeFee",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minPeriod",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -849,6 +877,19 @@
       }
     ],
     "name": "setForceUnstakeFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "minPeriod_",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMinStakePeriod",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1226,6 +1267,19 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdrawFund",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

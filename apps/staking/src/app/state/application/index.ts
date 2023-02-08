@@ -79,6 +79,7 @@ export const fetchPool = createAsyncThunk<SerializedPoolInfoAndPaused>(
       rewardPeriod: result[0][0].rewardPeriod,
       lastRewardIndex: result[0][0].lastRewardIndex.toNumber(),
       forceUnstakeFee: result[0][0].forceUnstakeFee.toNumber(),
+      minPeriod: result[0][0].minPeriod.toNumber(),
       totalStaked: ethersToSerializedBigNumber(result[2][0]),
       totalStakers: result[3][0].toNumber(),
       paused: result[1][0],
@@ -117,6 +118,9 @@ export const fetchUserInfo = createAsyncThunk<
 
   const result = await multicallV2(DeHubStakingAbi, calls);
   const lastTierIndex = result[0].lastTierIndex.toNumber();
+  // if (lastTierIndex >= result[2][0].length) {
+  //   lastTierIndex = 0;
+  // }
   const totalSharesOnTier = ethersToBigNumber(result[2][0][lastTierIndex]);
   const stakingShares = totalSharesOnTier.isEqualTo(BIG_ZERO)
     ? BIG_ZERO
