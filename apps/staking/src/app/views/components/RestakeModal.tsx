@@ -322,7 +322,7 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
               const handleClick = () => {
                 setValue(
                   new BigNumber(((percent / 100) * maxBalance).toString())
-                    .toFixed(DEHUB_DISPLAY_DECIMALS)
+                    .toFixed(DEHUB_DISPLAY_DECIMALS, BigNumber.ROUND_DOWN)
                     .toString()
                 );
               };
