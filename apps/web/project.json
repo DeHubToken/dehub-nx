@@ -122,10 +122,7 @@
           "port": 8301
         }
       },
-      "defaultConfiguration": "development",
-      "options": {
-        "proxyConfig": "apps/web/proxy.conf.json"
-      }
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
