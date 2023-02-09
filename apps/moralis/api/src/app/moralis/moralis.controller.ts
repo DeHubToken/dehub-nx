@@ -11,7 +11,7 @@ export const nativeBalance = async (
     // Get native balance
     const nativeBalance = await Moralis.EvmApi.balance.getNativeBalance({
       address: EvmAddress.create(`${req.query.address}`).lowercase,
-      chain: EvmChain.ETHEREUM,
+      chain: EvmChain.ETHEREUM.name,
     });
 
     // Format the native balance formatted in ether via the .ether getter

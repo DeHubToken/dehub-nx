@@ -27,6 +27,18 @@
     <div class="layout-topbar-right">
       <ul class="layout-topbar-actions">
         <li class="topbar-item">
+          <p-button
+            label="Supabase Login"
+            (onClick)="onSupabaseAuth()"
+          ></p-button>
+        </li>
+        <li class="topbar-item">
+          <p-button
+            label="Supabase Sign Out"
+            (onClick)="onSupabaseSignOut()"
+          ></p-button>
+        </li>
+        <li class="topbar-item">
           <dhb-buy-dehub-button
             [cexUrl]="cexUrl"
             [downloadWalletUrl]="downloadWalletUrl"

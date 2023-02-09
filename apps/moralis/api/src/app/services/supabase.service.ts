@@ -1,8 +1,7 @@
-import { Database } from '@dehub/shared/model';
-import { createClient } from '@supabase/supabase-js';
+import { getSupabase } from '@dehub/shared/utils';
 import { env } from '../../config';
 
-export const supabase = createClient<Database>(
+export const supabase = getSupabase(
   env.SUPABASE_API_URL,
   env.SUPABASE_SERVICE_KEY
 );

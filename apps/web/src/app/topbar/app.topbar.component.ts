@@ -4,6 +4,7 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
+import { AuthService } from '@dehub/angular/core';
 import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
 import { shortenAddress } from '@dehub/shared/utils';
 import { MenuItem } from 'primeng/api';
@@ -36,11 +37,20 @@ export class AppTopBarComponent implements OnInit {
   constructor(
     @Inject(EnvToken) private env: Env,
     @Inject(MoralisToken) private moralisService: IMoralisService,
+    private authService: AuthService,
     public app: AppComponent,
     public appMain: AppMainComponent
   ) {}
 
+  async onSupabaseSignOut() {
+    this.authService.signOut();
+  }
+  async onSupabaseAuth() {
+    await this.authService.login();
+  }
+
   ngOnInit() {
+    this.authService.user$.subscribe(/** REMOOOOOOVE */);
     const { account$, isAuthenticated$ } = this.moralisService;
 
     this.isAuthenticated$ = isAuthenticated$;

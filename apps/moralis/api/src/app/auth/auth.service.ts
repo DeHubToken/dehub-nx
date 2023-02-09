@@ -4,11 +4,15 @@ import {
   VerifyMessageRequest,
   VerifyMessageResponse,
 } from '@dehub/shared/model';
-import { getUserAddress } from '@dehub/shared/utils';
+import {
+  createUser,
+  getUserAddress,
+  getUserByProfileId,
+} from '@dehub/shared/utils';
 import jwt from 'jsonwebtoken';
 import Moralis from 'moralis';
 import { env } from '../../config';
-import { createUser, getUserByProfileId } from '../services/user.service';
+import { supabase } from '../services';
 
 export const requestMessage = async ({
   address,
@@ -53,11 +57,11 @@ export const verifyMessage = async ({
   const authData = result.toJSON();
 
   // Find user by profile Id
-  let { data: user } = await getUserByProfileId(authData.profileId);
+  let { data: user } = await getUserByProfileId(supabase, authData.profileId);
 
   // Create user if not exists
   if (!user) {
-    const { data: newUser } = await createUser({
+    const { data: newUser } = await createUser(supabase, {
       moralis_provider_id: authData.profileId,
       metadata: authData,
     });
