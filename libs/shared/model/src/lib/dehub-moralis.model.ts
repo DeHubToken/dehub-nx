@@ -33,7 +33,7 @@ export const MoralisFunctions = {
     Auth: 'authAllrites',
   },
   Dehub: {
-    TotalCirculatingSupply: 'totalCirculatingSupply',
+    TotalSupply: 'totalSupply',
   },
   Shop: {
     InitOrder: 'initOrder',
