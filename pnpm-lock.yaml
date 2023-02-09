@@ -32,8 +32,10 @@ specifiers:
   '@ethersproject/abstract-signer': 5.7.0
   '@ethersproject/address': 5.7.0
   '@ethersproject/bignumber': 5.7.0
+  '@ethersproject/bytes': 5.7.0
   '@ethersproject/constants': 5.7.0
   '@ethersproject/contracts': 5.7.0
+  '@ethersproject/hash': 5.7.0
   '@ethersproject/providers': 5.7.2
   '@ethersproject/solidity': 5.7.0
   '@fortawesome/fontawesome-pro': 6.2.1
@@ -215,8 +217,10 @@ dependencies:
   '@ethersproject/abstract-signer': 5.7.0
   '@ethersproject/address': 5.7.0
   '@ethersproject/bignumber': 5.7.0
+  '@ethersproject/bytes': 5.7.0
   '@ethersproject/constants': 5.7.0
   '@ethersproject/contracts': 5.7.0
+  '@ethersproject/hash': 5.7.0
   '@ethersproject/providers': 5.7.2
   '@ethersproject/solidity': 5.7.0
   '@fortawesome/fontawesome-pro': 6.2.1
@@ -4837,7 +4841,7 @@ packages:
       '@ethersproject/keccak256': 5.7.0
       '@ethersproject/logger': 5.7.0
       '@ethersproject/sha2': 5.6.0
-      '@ethersproject/strings': 5.6.0
+      '@ethersproject/strings': 5.7.0
     dev: false
 
   /@ethersproject/solidity/5.7.0:

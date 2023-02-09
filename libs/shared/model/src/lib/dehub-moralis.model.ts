@@ -29,11 +29,8 @@ export enum MoralisClass {
  * Moralis Functions for DeHub
  */
 export const MoralisFunctions = {
-  Allrites: {
-    Auth: 'authAllrites',
-  },
   Dehub: {
-    TotalCirculatingSupply: 'totalCirculatingSupply',
+    TotalSupply: 'totalSupply',
   },
   Shop: {
     InitOrder: 'initOrder',

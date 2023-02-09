@@ -19,3 +19,7 @@ export const getDehubAddress = (): string => {
 export const getBnbAddress = (): string => {
   return getAddress('bnb') as string;
 };
+
+export const getStakingAddress = (): string => {
+  return getAddress('staking') as string;
+};

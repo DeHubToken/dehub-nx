@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'buy',
+  displayName: 'staking',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nrwl/react/plugins/jest',

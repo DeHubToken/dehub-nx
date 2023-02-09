@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { CallToActionFragment } from '@dehub/shared/model';
 
-@Pipe({ name: 'dhbCTAGroup', pure: true })
+@Pipe({ standalone: true, name: 'dhbCTAGroup', pure: true })
 export class CTAGroupPipe implements PipeTransform {
   constructor() {}
 

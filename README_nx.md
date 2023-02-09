@@ -42,14 +42,6 @@ DeHub Staking Dapp
 
 - Hosting: **[Netlify](https://staking-dehub.netlify.app)**
 
-### `buy`
-
-DeHub Buy Dapp
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/11bd4ce0-3bf2-4642-8879-f541c6fed3fe/deploy-status)](https://app.netlify.com/sites/buy-dehub/deploys)
-
-- Hosting: **[Netlify](https://buy-dehub.netlify.app)**
-
 # Libraries
 
 Libraries in Nx are self-contained isolated group of logics. Can represent reusable functionalities or core logic shared across multiple framework (in)dependent apps.

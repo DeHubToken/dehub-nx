@@ -1,28 +1,15 @@
-import { useRefresh, useWeb3Context } from '@dehub/react/core';
+import {
+  useIsBrowserTabActive,
+  useRefresh,
+  useWeb3Context,
+} from '@dehub/react/core';
 import BigNumber from 'bignumber.js';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
-import { getChainId } from '../../config/constants';
 import { AppState } from '../index';
-import {
-  fetchContracts,
-  fetchPendingHarvest,
-  fetchUserInfos,
-  setApplicationStatus,
-  setPools,
-} from './';
-import { fetchPools, fetchPoolsPaused } from './helpers';
-import {
-  ApplicationStatus,
-  ContractProperties,
-  PoolInfoAndPaused,
-  PoolUserInfo,
-  SerializedPoolInfo,
-  SerializedPoolInfoPaused,
-  SerializedPoolUserInfo,
-  StakingContractProperties,
-} from './types';
+import { fetchPool, fetchUserInfo, setApplicationStatus } from './';
+import { ApplicationStatus, PoolInfoAndPaused, UserInfo } from './types';
 
 export const useApplicationStatus = (): ApplicationStatus => {
   return useSelector((state: AppState) => state.application.applicationStatus);
@@ -40,149 +27,100 @@ export const useDehubBusdPrice = (): BigNumber => {
   return dehubPriceBusd;
 };
 
-export const useFetchPools = () => {
+export const useFetchPool = () => {
   const dispatch = useAppDispatch();
   const { slowRefresh, fastRefresh } = useRefresh();
   const { isInitialized, account } = useWeb3Context();
+  const isTabActive = useIsBrowserTabActive();
 
-  const contracts: StakingContractProperties[] | null = useStakingContracts();
-
-  useEffect(() => {
-    if (isInitialized) {
-      dispatch(fetchContracts());
-    }
-  }, [dispatch, isInitialized]);
+  const [immediatePool, setImmediatePool] = useState<number>(1);
+  const [immediateUser, setImmediateUser] = useState<number>(1);
 
   useEffect(() => {
     const fetchInitialize = async () => {
-      if (!contracts || contracts.length < 1) return;
-      const addresses = contracts.map(contract => contract.address);
-      const abi = contracts[0].abi;
-
-      const pools: SerializedPoolInfo[] | undefined = await fetchPools(
-        abi,
-        addresses
-      );
-      const pauses: boolean[] | undefined = await fetchPoolsPaused(
-        abi,
-        addresses
-      );
-      if (pools && pauses) {
-        dispatch(
-          setPools(
-            pools.map((pool: SerializedPoolInfo, index: number) => ({
-              ...pool,
-              paused: pauses[index],
-            }))
-          )
-        );
-        dispatch(setApplicationStatus({ appStatus: ApplicationStatus.LIVE }));
-      }
+      dispatch(fetchPool());
+      dispatch(setApplicationStatus({ appStatus: ApplicationStatus.LIVE }));
     };
 
-    if (contracts && contracts.length > 0) {
-      fetchInitialize();
-    }
-  }, [dispatch, contracts, slowRefresh]);
+    if (isInitialized && immediatePool && isTabActive) fetchInitialize();
+  }, [dispatch, isInitialized, immediatePool, isTabActive, slowRefresh]);
 
   useEffect(() => {
-    if (account && contracts) {
-      dispatch(fetchUserInfos({ contracts, staker: account }));
-      dispatch(fetchPendingHarvest({ contracts, staker: account }));
+    if (account && immediateUser) {
+      dispatch(fetchUserInfo({ staker: account }));
     }
-  }, [dispatch, account, contracts, fastRefresh]);
-};
+  }, [dispatch, immediateUser, account, fastRefresh]);
 
-export const useStakingContracts = (): StakingContractProperties[] | null => {
-  const chainId = getChainId();
-
-  const contracts = useSelector(
-    (state: AppState) => state.application.stakingContracts
-  );
-
-  return useMemo(() => {
-    if (!contracts) return null;
-    return contracts.filter(
-      (contract: StakingContractProperties) => contract.chainId === chainId
-    );
-  }, [contracts, chainId]);
-};
-
-export const useStakingControllerContract = (): ContractProperties | null => {
-  const controller = useSelector(
-    (state: AppState) => state.application.stakingController
-  );
-  return controller;
-};
-
-export const useBNBRewardContract = (): ContractProperties | null => {
-  const bnbRewardContract = useSelector(
-    (state: AppState) => state.application.bnbRewardContract
-  );
-  return bnbRewardContract;
-};
-
-export const usePools = (): {
-  pools: PoolInfoAndPaused[];
-  poolsLoading: boolean;
-} => {
-  const pools = useSelector((state: AppState) => state.application.pools);
-  const poolsLoading = useSelector(
-    (state: AppState) => state.application.poolsLoading
-  );
+  const updatePool = useCallback(() => {
+    setImmediatePool(immediatePool + 1);
+  }, [immediatePool]);
+  const updateUser = useCallback(() => {
+    setImmediateUser(immediateUser + 1);
+  }, [immediateUser]);
 
   return {
-    pools: useMemo(
-      () =>
-        pools.map((pool: SerializedPoolInfoPaused) => ({
-          openTimeStamp: pool.openTimeStamp,
-          closeTimeStamp: pool.closeTimeStamp,
-          openBlock: pool.openBlock,
-          closeBlock: pool.closeBlock,
-          emergencyPull: pool.emergencyPull,
-          harvestFund: new BigNumber(pool.harvestFund),
-          lastUpdateBlock: new BigNumber(pool.lastUpdateBlock),
-          valuePerBlock: new BigNumber(pool.valuePerBlock),
-          totalStaked: new BigNumber(pool.totalStaked),
-          paused: pool.paused,
-        })),
-      [pools]
-    ),
-    poolsLoading,
+    updatePool,
+    updateUser,
   };
 };
 
-export const useStakes = (): {
-  userInfos: PoolUserInfo[];
-  userInfosLoading: boolean;
-  pendingHarvestLoading: boolean;
+export const usePool = (): {
+  poolInfo: PoolInfoAndPaused | undefined;
+  poolInfoLoading: boolean;
 } => {
-  const userInfos = useSelector(
-    (state: AppState) => state.application.userInfos
-  );
-  const userInfosLoading = useSelector(
-    (state: AppState) => state.application.userInfosLoading
-  );
-  const pendingHarvestLoading = useSelector(
-    (state: AppState) => state.application.pendingHarvestLoading
+  const poolInfo = useSelector((state: AppState) => state.application.poolInfo);
+  const poolInfoLoading = useSelector(
+    (state: AppState) => state.application.poolInfoLoading
   );
 
   return {
-    userInfos: useMemo(
+    poolInfo: useMemo(
       () =>
-        userInfos.map((userInfo: SerializedPoolUserInfo) => ({
-          amount: new BigNumber(userInfo.amount),
-          reflectionDebt: new BigNumber(userInfo.reflectionDebt),
-          reflectionPending: new BigNumber(userInfo.reflectionPending),
-          harvestDebt: new BigNumber(userInfo.harvestDebt),
-          harvestPending: new BigNumber(userInfo.harvestPending),
-          harvested: userInfo.harvested,
-          pendingHarvest: new BigNumber(userInfo.pendingHarvest),
-        })),
-      [userInfos]
+        poolInfo
+          ? {
+              stakingStartAt: poolInfo.stakingStartAt,
+              tierPeriods: poolInfo.tierPeriods,
+              tierPercents: poolInfo.tierPercents,
+              rewardPeriod: poolInfo.rewardPeriod,
+              lastRewardIndex: poolInfo.lastRewardIndex,
+              forceUnstakeFee: poolInfo.forceUnstakeFee,
+              minPeriod: poolInfo.minPeriod,
+              totalStaked: new BigNumber(poolInfo.totalStaked),
+              totalStakers: poolInfo.totalStakers,
+              paused: poolInfo.paused,
+            }
+          : undefined,
+      [poolInfo]
     ),
-    userInfosLoading,
-    pendingHarvestLoading,
+    poolInfoLoading,
+  };
+};
+
+export const useUserInfo = (): {
+  userInfo: UserInfo | undefined;
+  userInfoLoading: boolean;
+} => {
+  const userInfo = useSelector((state: AppState) => state.application.userInfo);
+  const userInfoLoading = useSelector(
+    (state: AppState) => state.application.userInfoLoading
+  );
+
+  return {
+    userInfo: useMemo(
+      () =>
+        userInfo
+          ? {
+              totalAmount: new BigNumber(userInfo.totalAmount),
+              stakingShares: userInfo.stakingShares,
+              unlockedAt: userInfo.unlockedAt,
+              lastTierIndex: userInfo.lastTierIndex,
+              pendingHarvest: new BigNumber(userInfo.pendingHarvest),
+              stakedAt: userInfo.stakedAt,
+            }
+          : undefined,
+      [userInfo]
+    ),
+    userInfoLoading,
   };
 };
 

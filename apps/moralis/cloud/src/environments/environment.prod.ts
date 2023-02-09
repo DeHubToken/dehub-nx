@@ -17,10 +17,6 @@ export const environment: Env = {
       withdraw: 'DeprecatedStakingWithdrawEvents',
     },
   },
-  allrites: {
-    clientId: '637f7235fdc05497aeba37ccffeed2b1',
-    clientSecret: 'badac733900a8685d83954892b22c0cc',
-  },
   shop: {
     eventTables: {
       purchase: 'ShopPurchaseEvents',

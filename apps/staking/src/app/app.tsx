@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { environment } from '../environments/environment';
 import usePullBlockNumber from './hooks/usePullBlockNumber';
 import usePullBusdPrice from './hooks/usePullBusdPrice';
-import { useApplicationStatus, useFetchPools } from './state/application/hooks';
+import { useApplicationStatus, useFetchPool } from './state/application/hooks';
 import { ApplicationStatus } from './state/application/types';
 
 // This config is required for number formatting
@@ -22,12 +22,11 @@ BigNumber.config({
 const { baseUrl } = environment;
 const pageTitle = 'DeHub Staking';
 const { cexUrl, downloadWalletUrl } = environment.dehub;
-const { landing } = environment.dehub;
 const activeTab = NavigationTabMenu.Earn;
 
 export function App() {
   useEagerWeb3();
-  useFetchPools();
+  useFetchPool();
   usePullBusdPrice();
   usePullBlockNumber();
 
@@ -41,7 +40,6 @@ export function App() {
           pageTitle,
           cexUrl,
           downloadWalletUrl,
-          landing,
           activeTab,
         },
         lazy(() => import('./views/Staking'))
