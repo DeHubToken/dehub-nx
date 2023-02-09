@@ -27,12 +27,12 @@ const ContentfulApollo: React.FC<ContentfulApolloProps> = ({
   contentful: {
     graphqlUri,
     isPreview,
-    website: { spaceId, cpaToken, cdaToken },
+    website: { spaceId, environmentId, cpaToken, cdaToken },
   },
 }) => {
   const client = useMemo(() => {
     const httpLink = createHttpLink({
-      uri: `${graphqlUri}/${spaceId}`,
+      uri: `${graphqlUri}/${spaceId}/environments/${environmentId}`,
       headers: {
         Authorization: `Bearer ${isPreview ? cpaToken : cdaToken}`,
       },
@@ -44,7 +44,7 @@ const ContentfulApollo: React.FC<ContentfulApolloProps> = ({
     });
 
     return client;
-  }, [graphqlUri, isPreview, spaceId, cpaToken, cdaToken]);
+  }, [graphqlUri, isPreview, spaceId, environmentId, cpaToken, cdaToken]);
 
   return (
     <ApolloProvider client={client}>
