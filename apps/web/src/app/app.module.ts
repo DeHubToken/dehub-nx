@@ -15,7 +15,7 @@ import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { AnnouncementModule } from '@dehub/angular/ui/components/announcement';
 import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buttons/buy-dehub-button';
 import { ConnectWalletButtonModule } from '@dehub/angular/ui/components/buttons/connect-wallet-button';
-import { FooterModule } from '@dehub/angular/ui/components/footer';
+import { FooterComponent } from '@dehub/angular/ui/components/footer';
 import { LoaderModule } from '@dehub/angular/ui/components/loader';
 import { TabMenuModule } from '@dehub/angular/ui/components/tab-menu';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
@@ -63,7 +63,7 @@ const { appId, serverUrl } = environment.web3.moralis;
     // Libs
     TabMenuModule,
     BuyDehubButtonModule,
-    FooterModule,
+    FooterComponent,
     LoaderModule,
     ConnectWalletButtonModule,
     AnnouncementModule,
