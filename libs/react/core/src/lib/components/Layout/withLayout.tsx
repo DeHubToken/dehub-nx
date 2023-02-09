@@ -26,16 +26,14 @@ const withLayout =
     {
       baseUrl = '/',
       pageTitle = 'DeHub D’App',
-      cexUrl = 'https://www.gate.io/trade/DEHUB_USDT',
-      downloadWalletUrl = 'https://metamask.io/download/',
-      landing = 'https://dehub.net',
+      cexUrl,
+      downloadWalletUrl,
       activeTab,
     }: {
       baseUrl?: string;
       pageTitle?: string;
-      cexUrl?: string;
-      downloadWalletUrl?: string;
-      landing?: string;
+      cexUrl: string;
+      downloadWalletUrl: string;
       activeTab: string;
     },
     Component: React.ComponentType<P>
