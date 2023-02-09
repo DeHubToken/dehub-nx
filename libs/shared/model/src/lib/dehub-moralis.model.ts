@@ -30,7 +30,7 @@ export enum MoralisClass {
  */
 export const MoralisFunctions = {
   Dehub: {
-    TotalCirculatingSupply: 'totalCirculatingSupply',
+    TotalSupply: 'totalSupply',
   },
   Shop: {
     InitOrder: 'initOrder',

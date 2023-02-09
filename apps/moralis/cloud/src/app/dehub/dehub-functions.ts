@@ -1,10 +1,10 @@
 import { MoralisFunctions } from '@dehub/shared/model';
 
-export const totalCirculatingSupplyFn = async () => {
+export const totalSupplyFn = async () => {
   const ABI = [
     {
       inputs: [],
-      name: MoralisFunctions.Dehub.TotalCirculatingSupply,
+      name: MoralisFunctions.Dehub.TotalSupply,
       outputs: [
         {
           internalType: 'uint256',
@@ -20,7 +20,7 @@ export const totalCirculatingSupplyFn = async () => {
   const data = await Moralis.Web3API.native.runContractFunction({
     chain: 'bsc',
     address: '0x680D3113caf77B61b510f332D5Ef4cf5b41A761D',
-    function_name: MoralisFunctions.Dehub.TotalCirculatingSupply,
+    function_name: MoralisFunctions.Dehub.TotalSupply,
     // Moralis TS Issue: https://forum.moralis.io/t/react-runcontractfunction-error-codes/4228/25
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore:next-line
