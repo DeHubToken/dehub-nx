@@ -17,8 +17,6 @@
     "angular-moralis": "libs/angular/moralis",
     "angular-ui": "libs/angular/ui",
     "angular-util": "libs/angular/util",
-    "buy": "apps/buy",
-    "buy-e2e": "apps/buy-e2e",
     "moralis-cloud": "apps/moralis/cloud",
     "react-core": "libs/react/core",
     "react-ui": "libs/react/ui",

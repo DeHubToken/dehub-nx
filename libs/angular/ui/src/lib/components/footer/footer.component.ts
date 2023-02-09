@@ -1,15 +1,34 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
   Input,
 } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { FooterFragment } from '@dehub/shared/model';
 import { resolveButtonStyle } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
+import { ButtonModule } from 'primeng/button';
+import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
+import { CTAGroupPipe } from './cta-group.pipe';
 
 @Component({
+  standalone: true,
   selector: 'dhb-footer',
+  imports: [
+    // Angular
+    CommonModule,
+    RouterModule,
+
+    // PrimeNg
+    ButtonModule,
+
+    // Libs
+    ContentfulDraftDirectiveModule,
+
+    CTAGroupPipe,
+  ],
   template: `
     <div *ngIf="footer" class="layout-footer">
       <div class="grid">

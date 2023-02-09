@@ -22,7 +22,6 @@ BigNumber.config({
 const { baseUrl } = environment;
 const pageTitle = 'DeHub Staking';
 const { cexUrl, downloadWalletUrl } = environment.dehub;
-const { landing } = environment.dehub;
 const activeTab = NavigationTabMenu.Earn;
 
 export function App() {
@@ -41,7 +40,6 @@ export function App() {
           pageTitle,
           cexUrl,
           downloadWalletUrl,
-          landing,
           activeTab,
         },
         lazy(() => import('./views/Staking'))

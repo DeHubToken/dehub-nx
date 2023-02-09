@@ -80,7 +80,7 @@ export interface SharedEnv {
     /** Official DeHUB landing page */
     landing: string;
     /** Official DeHUB dapp pages */
-    dapps: { staking: string; buy: string };
+    dapps: { staking: string };
   };
 
   contentful: ContentfulEnv;
@@ -101,12 +101,11 @@ export const defaultSharedEnv: SharedEnv = {
   baseUrl: '',
 
   dehub: {
-    cexUrl: 'https://www.gate.io/trade/DEHUB_USDT',
+    cexUrl: 'https://www.gate.io',
     downloadWalletUrl: 'https://metamask.io/download/',
     landing: 'https://dehub.net',
     dapps: {
       staking: 'https://dehub.net/staking',
-      buy: 'https://dehub.net/buy',
     },
   },
 
