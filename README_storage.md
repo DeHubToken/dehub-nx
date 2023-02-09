@@ -13,7 +13,7 @@ _Follow the instructions below to setup Supabase locally or read their [official
 
 Full guide [here](https://supabase.com/docs/guides/cli/local-development) or just the [video](https://www.youtube.com/watch?v=vyHyYpvjaks).
 
-1. `supabase login` and use the `supabaseAccessToken` access token from `.env`
+1. `supabase login` and use the `SUPABASE_ACCESS_TOKEN` access token from `.env`
 2. `supabase start` to start local Supabase Studio in docker
 3. `supabase stop` to stop local Supabase Studio
 

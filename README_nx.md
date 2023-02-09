@@ -92,6 +92,14 @@ _React core functionalities_
 
 _Reusable react ui components like header, footer, etc._
 
+## Node
+
+NodeJS backed api's providing business functionality like authentication or trading, etc.
+
+### `moralis-api`
+
+- Moralis Supabase Authentication api
+
 ## Shared
 
 Framework independent libs which can be consumed from any Angular or React apps like styles or simple TS utilities or models.
