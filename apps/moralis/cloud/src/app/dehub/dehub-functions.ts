@@ -1,3 +1,4 @@
+import { DEHUB_DECIMALS } from '@dehub/shared/config';
 import { MoralisFunctions } from '@dehub/shared/model';
 
 export const totalSupplyFn = async () => {
@@ -27,5 +28,5 @@ export const totalSupplyFn = async () => {
     abi: ABI,
   });
 
-  return +data / 1e5;
+  return +data / Math.pow(10, DEHUB_DECIMALS);
 };
