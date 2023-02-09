@@ -10,7 +10,6 @@ import {
 } from '@dehub/shared/utils';
 import { Interface } from '@ethersproject/abi';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
-import { MaxUint256 } from '@ethersproject/constants';
 import { ContractReceipt, Event } from '@ethersproject/contracts';
 import { id } from '@ethersproject/hash';
 import BigNumber from 'bignumber.js';
@@ -22,24 +21,21 @@ import {
 } from 'primereact/inputnumber';
 import { Skeleton } from 'primereact/skeleton';
 import { Slider, SliderChangeParams } from 'primereact/slider';
-import { Toast } from 'primereact/toast';
+import { Toast, ToastMessageType } from 'primereact/toast';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { DAY_IN_SECONDS } from '../../config/constants';
-import { FetchStatus } from '../../config/constants/types';
 import {
   useDehubContract,
   usePickStakingContract,
 } from '../../hooks/useContract';
-import { useGetDehubBalance } from '../../hooks/useTokenBalance';
 import {
   useFetchPool,
   usePool,
   useUserInfo,
 } from '../../state/application/hooks';
-import { getStakingAddress } from '../../utils/addressHelpers';
 
-interface StakeModalProps {
+interface RestakeModalProps {
   open: boolean;
   onHide: () => void;
 }
@@ -53,39 +49,46 @@ const SimpleGrid = styled.div<{ columns: number }>`
 
 const percentShortcuts = [10, 25, 50, 75, 100];
 
-const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
+const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
   const { account } = useWeb3Context();
   const dehubContract = useDehubContract();
   const stakingContract = usePickStakingContract();
 
   const { updatePool, updateUser } = useFetchPool();
-  const { balance: dehubBalance, fetchStatus: fetchBalanceStatus } =
-    useGetDehubBalance();
   const { poolInfo } = usePool();
   const { userInfo } = useUserInfo();
 
   const [value, setValue] = useState<string>('0.00');
-  const [minPeriod, setMinPeriod] = useState<number>(1);
-  const [maxPeriod, setMaxPeriod] = useState<number | undefined>(undefined);
   const [isTxPending, setIsTxPending] = useState(false);
   const [disableStake, setDisableStake] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [period, setPeriod] = useState<number>(1);
+  const [count, setCount] = useState<number>(1);
   const [unlockDate, setUnlockDate] = useState(new Date());
 
   const toast = useRef<Toast>(null);
 
   const maxBalance = useMemo(
     () =>
-      fetchBalanceStatus === FetchStatus.SUCCESS
-        ? getBalanceAmount(dehubBalance, DEHUB_DECIMALS).toNumber()
+      userInfo
+        ? getBalanceAmount(userInfo.totalAmount, DEHUB_DECIMALS).toNumber()
         : BIG_ZERO.toNumber(),
-    [fetchBalanceStatus, dehubBalance]
+    [userInfo]
   );
 
   const valueAsBn = new BigNumber(value);
 
   const showFieldWarning = !!account && errorMessage !== null;
+
+  const restakeableAmount = useMemo(() => {
+    if (!userInfo || !poolInfo) {
+      return new BigNumber(0);
+    }
+    const unstakeAmount = userInfo.totalAmount
+      .multipliedBy(10000 - poolInfo.forceUnstakeFee)
+      .dividedBy(10000);
+    return unstakeAmount;
+  }, [userInfo, poolInfo]);
 
   const handleChange = (input: string) => {
     setValue(input);
@@ -98,7 +101,14 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   const handlePeriodChange = (e: InputNumberValueChangeParams) => {
     const days = Number(e.value);
     setPeriod(days);
-    const now = new Date().getTime() + days * DAY_IN_SECONDS * 1000;
+    const now = new Date().getTime() + days * count * DAY_IN_SECONDS * 1000;
+    setUnlockDate(new Date(now));
+  };
+
+  const handleCountChange = (e: InputNumberValueChangeParams) => {
+    const times = Number(e.value);
+    setCount(times);
+    const now = new Date().getTime() + period * times * DAY_IN_SECONDS * 1000;
     setUnlockDate(new Date(now));
   };
 
@@ -107,43 +117,23 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
 
     try {
       const decimalValue = getDecimalAmount(valueAsBn, DEHUB_DECIMALS);
-      const allowance = await dehubContract['allowance'](
-        account,
-        getStakingAddress()
-      );
-      setIsTxPending(true);
-      if (allowance < decimalValue.toNumber()) {
-        const txApprove = await dehubContract['approve'](
-          getStakingAddress(),
-          MaxUint256
-        );
-        const receipt = await txApprove.wait();
-
-        if (!receipt.status) {
-          const errorMsg =
-            'Please try again. Confirm the transaction and make sure you are paying enough gas!';
-
-          toast?.current?.show({
-            severity: 'error',
-            summary: 'Error',
-            detail: errorMsg,
-            life: 4000,
-          });
-          setIsTxPending(false);
-          return;
-        }
-      }
 
       const StakedTopic = id(
         'Staked(address,uint256,uint256,uint256,uint256,uint256)'
       );
-      const StakedInterface = new Interface([
+      const RemainingTransferedTopic = id(
+        'RemainingTransfered(address,uint256)'
+      );
+      const RestakedInterface = new Interface([
         'event Staked(address indexed user,uint256 period,uint256 amount,uint256 stakeAt,uint256 indexed rewardIndex,uint256 indexed tierIndex)',
+        'event RemainingTransfered(address indexed user, uint256 transferAmount)',
       ]);
 
-      const tx = await stakingContract['stake'](
+      setIsTxPending(true);
+      const tx = await stakingContract['restakePortion'](
+        EthersBigNumber.from(decimalValue.toString()),
         period * DAY_IN_SECONDS,
-        EthersBigNumber.from(decimalValue.toString())
+        count
       );
       await tx
         .wait()
@@ -151,31 +141,66 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
           updatePool();
           updateUser();
 
-          const events = receipt.events?.filter(
+          const stakedEvents = receipt.events?.filter(
             (event: Event) => event.topics[0] === StakedTopic
           );
-          const lastEvent =
-            events && events.length > 0 ? events.slice(-1)[0] : undefined;
-          if (!lastEvent) return;
+          const lastStakedEvent =
+            stakedEvents && stakedEvents.length > 0
+              ? stakedEvents.slice(-1)[0]
+              : undefined;
+          if (!lastStakedEvent) return;
 
-          const parsed = StakedInterface.parseLog(lastEvent);
+          const remainingEvents = receipt.events?.filter(
+            (event: Event) => event.topics[0] === RemainingTransferedTopic
+          );
+          const lastRemainingEvent =
+            remainingEvents && remainingEvents.length > 0
+              ? remainingEvents.slice(-1)[0]
+              : undefined;
 
-          toast?.current?.show({
-            severity: 'success',
-            summary: `Success`,
-            detail: (
-              <Box>
-                <Text style={{ marginBottom: '8px' }}>
-                  {`${getFullDisplayBalance(
-                    ethersToBigNumber(parsed.args['amount']),
-                    DEHUB_DECIMALS,
-                    DEHUB_DISPLAY_DECIMALS
-                  )} $DeHub has been successfully staked!`}
-                </Text>
-              </Box>
-            ),
-            life: 4000,
-          });
+          const parsedStaked = RestakedInterface.parseLog(lastStakedEvent);
+          const parsedRemaining = lastRemainingEvent
+            ? RestakedInterface.parseLog(lastRemainingEvent)
+            : undefined;
+
+          const messages: ToastMessageType = [
+            {
+              severity: 'success',
+              summary: `Success`,
+              detail: (
+                <Box>
+                  <Text style={{ marginBottom: '8px' }}>
+                    {`${getFullDisplayBalance(
+                      ethersToBigNumber(parsedStaked.args['amount']),
+                      DEHUB_DECIMALS,
+                      DEHUB_DISPLAY_DECIMALS
+                    )} $DeHub has been successfully restaked!`}
+                  </Text>
+                </Box>
+              ),
+              life: 4000,
+            },
+          ];
+          if (parsedRemaining) {
+            messages.push({
+              severity: 'success',
+              summary: `Success`,
+              detail: (
+                <Box>
+                  <Text style={{ marginBottom: '8px' }}>
+                    {`${getFullDisplayBalance(
+                      ethersToBigNumber(parsedRemaining.args['transferAmount']),
+                      DEHUB_DECIMALS,
+                      DEHUB_DISPLAY_DECIMALS
+                    )} $DeHub has been successfully refunded!`}
+                  </Text>
+                </Box>
+              ),
+              life: 4000,
+            });
+          }
+
+          toast?.current?.show(messages);
         })
         .then(() => onHide());
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -183,7 +208,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
       toast?.current?.show({
         severity: 'error',
         summary: 'Error',
-        detail: `Staking failed - ${error?.data?.message ?? error.message}`,
+        detail: `Unstaking failed - ${error?.data?.message ?? error.message}`,
         life: 4000,
       });
     }
@@ -205,32 +230,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
     setDisableStake(true);
   }, [value, maxBalance, setErrorMessage]);
 
-  useEffect(() => {
-    if (poolInfo) {
-      setMinPeriod(Math.floor(poolInfo.minPeriod / DAY_IN_SECONDS));
-      setMaxPeriod(undefined);
-
-      if (userInfo) {
-        const nowPeriod = poolInfo.tierPeriods[userInfo.lastTierIndex];
-        const nextPeriod =
-          userInfo.unlockedAt === 0 ||
-          userInfo.lastTierIndex >= poolInfo.tierPeriods.length - 1
-            ? undefined
-            : poolInfo.tierPeriods[userInfo.lastTierIndex + 1];
-
-        setMinPeriod(
-          Math.max(
-            Math.floor(nowPeriod / DAY_IN_SECONDS),
-            Math.floor(poolInfo.minPeriod / DAY_IN_SECONDS)
-          )
-        );
-        setMaxPeriod(
-          nextPeriod ? Math.floor(nextPeriod / DAY_IN_SECONDS) - 1 : undefined
-        );
-      }
-    }
-  }, [userInfo, poolInfo]);
-
   return (
     <>
       <Toast ref={toast} />
@@ -238,7 +237,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
         visible={open}
         modal
         className="border-neon-1"
-        header={`Stake Your Tokens`}
+        header={`Restake Your Tokens`}
         onHide={onHide}
         style={{
           minWidth: '288px',
@@ -253,7 +252,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
             style={{ marginBottom: '8px' }}
           >
             <div className="flex align-items-center">
-              <Text fontWeight={600}>{`Stake:`}</Text>
+              <Text fontWeight={600}>{`Unstake:`}</Text>
             </div>
             <div className="flex align-items-center">
               <Text fontWeight={600} textTransform="uppercase">
@@ -277,13 +276,33 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               {errorMessage}
             </Text>
           )}
-          <div className="flex justify-content-end align-items-center mt-2 mb-5">
+          <div className="flex justify-content-end align-items-center mt-2">
             <Text textAlign="right" fontSize="12px" className="mr-1">
-              Balance:
+              Total staked:
             </Text>
-            {fetchBalanceStatus === FetchStatus.SUCCESS ? (
+            {userInfo ? (
               <Text textAlign="right" fontSize="12px">
-                {maxBalance.toString()}
+                {getFullDisplayBalance(
+                  userInfo.totalAmount,
+                  DEHUB_DECIMALS,
+                  DEHUB_DISPLAY_DECIMALS
+                ).toString()}
+              </Text>
+            ) : (
+              <Skeleton width="5rem" height="1rem" />
+            )}
+          </div>
+          <div className="flex justify-content-end align-items-center mt-1 mb-5">
+            <Text textAlign="right" fontSize="12px" className="mr-1">
+              Restakeable:
+            </Text>
+            {userInfo && poolInfo ? (
+              <Text textAlign="right" fontSize="12px">
+                {getFullDisplayBalance(
+                  restakeableAmount,
+                  DEHUB_DECIMALS,
+                  DEHUB_DISPLAY_DECIMALS
+                ).toString()}
               </Text>
             ) : (
               <Skeleton width="5rem" height="1rem" />
@@ -325,20 +344,38 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               Period:
             </Text>
             <InputNumber
+              min={
+                poolInfo ? Math.floor(poolInfo.minPeriod / DAY_IN_SECONDS) : 1
+              }
               value={period}
               disabled={!account || isTxPending}
               onValueChange={handlePeriodChange}
               onChange={handlePeriodChange}
               showButtons
               className="w-full text-right"
-              min={minPeriod}
-              max={maxPeriod}
             />
             <Text textAlign="right" className="w-2">
               days
             </Text>
           </div>
-          <div className="flex justify-content-end align-items-center mt-2 mb-4">
+          <div className="flex flex-row align-items-center gap-3 mt-2">
+            <Text textAlign="left" className="w-3">
+              Count:
+            </Text>
+            <InputNumber
+              value={count}
+              disabled={!account || isTxPending}
+              onValueChange={handleCountChange}
+              onChange={handleCountChange}
+              showButtons
+              className="w-full text-right"
+              min={1}
+            />
+            <Text textAlign="right" className="w-2">
+              times
+            </Text>
+          </div>
+          <div className="flex justify-content-end align-items-center mt-2 mb-3">
             <Text textAlign="right" fontSize="12px" className="mr-1">
               Unlock date:
             </Text>
@@ -346,13 +383,18 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               {unlockDate.toLocaleString()}
             </Text>
           </div>
+          <Text className="mb-4 text-pink-500 text-sm">
+            Unstaking before the end of the staking period will incur{' '}
+            <b>{Number(poolInfo?.forceUnstakeFee) / 100}%</b> fee. Are you sure
+            you want to proceed?
+          </Text>
           <div className="overview-info text-left w-full mb-2">
             {account ? (
               <Button
                 className="p-button w-full"
                 disabled={!account || disableStake}
                 onClick={handleEnterPosition}
-                label="Stake"
+                label="Restake"
                 loading={isTxPending}
                 loadingIcon={'pi pi-spin pi-spinner'}
               />
@@ -366,4 +408,4 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   );
 };
 
-export default StakeModal;
+export default RestakeModal;

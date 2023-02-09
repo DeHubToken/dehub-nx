@@ -11,6 +11,9 @@ const StyledContainer = styled.div`
   @media screen and (min-width: 768px) {
     max-width: 756px;
   }
+  @media screen and (min-width: 992px) {
+    max-width: 960px;
+  }
 `;
 
 const Container: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({

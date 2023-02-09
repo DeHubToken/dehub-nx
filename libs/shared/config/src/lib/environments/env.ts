@@ -33,6 +33,7 @@ export interface ContractsEnv {
   bnbBusd: string;
   busd: string;
   multiCall: string;
+  staking: string;
 }
 
 export interface Web3Env {
@@ -129,12 +130,13 @@ export const defaultSharedEnv: SharedEnv = {
     chainId: 97,
     addresses: {
       contracts: {
-        dehub: '0xf571900aCe63Bc9b4C8F382bda9062232e4Ff477',
-        dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
+        dehub: '0xEad75F6d5E16E86b157937Ba227c13B5fb6864fC',
+        dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D', // todo
         wbnb: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
         bnbBusd: '0xe0e92035077c39594793e61802a350347c320cf2',
         busd: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
         multiCall: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
+        staking: '0x592342c9203E9c5CB3697F2F1a2CFdDAd6e2E725',
       },
     },
     auth: {

@@ -14,7 +14,10 @@ export const getFullDisplayBalance = (
   decimals = 18,
   displayDecimals?: number
 ) => {
-  return getBalanceAmount(balance, decimals).toFixed(displayDecimals ?? 2);
+  return getBalanceAmount(balance, decimals).toFixed(
+    displayDecimals ?? 2,
+    BigNumber.ROUND_DOWN
+  );
 };
 
 export const getBalanceAmount = (amount: BigNumber, decimals = 18) => {

@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { environment } from '../environments/environment';
 import usePullBlockNumber from './hooks/usePullBlockNumber';
 import usePullBusdPrice from './hooks/usePullBusdPrice';
-import { useApplicationStatus, useFetchPools } from './state/application/hooks';
+import { useApplicationStatus, useFetchPool } from './state/application/hooks';
 import { ApplicationStatus } from './state/application/types';
 
 // This config is required for number formatting
@@ -26,7 +26,7 @@ const activeTab = NavigationTabMenu.Earn;
 
 export function App() {
   useEagerWeb3();
-  useFetchPools();
+  useFetchPool();
   usePullBusdPrice();
   usePullBlockNumber();
 

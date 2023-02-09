@@ -2,8 +2,9 @@ import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
 import { Signer } from '@ethersproject/abstract-signer';
 import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { Provider } from '@ethersproject/providers';
+import DeHubStakingAbi from '../config/abis/DeHubStaking.json';
 import MulticallAbi from '../config/abis/Multicall.json';
-import { getMultiCallAddress } from './addressHelpers';
+import { getMultiCallAddress, getStakingAddress } from './addressHelpers';
 import { simpleRpcProvider } from './providers';
 
 /** TODO: use or move to shared/util/contract.utils.ts  */
@@ -33,4 +34,12 @@ export const getVersion = async (contract: Contract) => {
   } catch (error) {
     return 1;
   }
+};
+
+export const getStakingContract = (signer?: Signer | Provider) => {
+  return getContract(
+    getStakingAddress(),
+    DeHubStakingAbi,
+    signer ?? simpleRpcProvider
+  );
 };
