@@ -37,8 +37,8 @@ Moralis.Cloud.define(MoralisFunctions.Shop.ShopOrders, async request => {
 });
 
 /**
- * Dev:  https://nm6dir4me3i0.usemoralis.com:2053/server/functions/salesAirdrop
- * Prod: https://vamoxwojj7ht.moralisweb3.com:2053/server/functions/salesAirdrop
+ * Dev:  https://nm6dir4me3i0.usemoralis.com:2053/server/functions/salesAirdrop?orderStatus=verified&aggregate=true
+ * Prod: https://vamoxwojj7ht.moralisweb3.com:2053/server/functions/salesAirdrop?orderStatus=verified&aggregate=true
  */
 Moralis.Cloud.define(MoralisFunctions.Shop.SalesAirdrop, async request => {
   return salesAirdrop(request.params as unknown as SalesAirdropParams);
