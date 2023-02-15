@@ -1,5 +1,6 @@
 import Moralis from 'moralis/types';
 import { PhysicalAddress } from './location.model';
+import { User } from './moralis.model';
 import { ShopOrder } from './shop.model';
 
 /**
@@ -12,7 +13,9 @@ export type DeHubShopShippingAddress = Moralis.Object<
 /**
  * Moralis Class for DeHub Shop Orders.
  */
-export type DeHubShopOrder = Moralis.Object<Moralis.Attributes & ShopOrder>;
+export type DeHubShopOrder<U = User> = Moralis.Object<
+  Moralis.Attributes & ShopOrder<U>
+>;
 
 /**
  * Moralis MongoDB Class Names for DeHub
@@ -36,6 +39,7 @@ export const MoralisFunctions = {
     InitOrder: 'initOrder',
     CheckOrder: 'checkOrder',
     ShopOrders: 'shopOrders',
+    SalesAirdrop: 'salesAirdrop',
     GetCheckoutContract: 'getCheckoutContract',
   },
   Staking: {

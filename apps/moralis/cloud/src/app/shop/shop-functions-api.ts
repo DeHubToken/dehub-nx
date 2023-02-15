@@ -1,12 +1,14 @@
 import {
   InitOrderParams,
   MoralisFunctions,
+  SalesAirdropParams,
   ShopOrdersParams,
 } from '@dehub/shared/model';
 import {
   checkOrder,
   getCheckoutContractFn,
   initOrder,
+  salesAirdrop,
   shopOrders,
 } from './shop-functions';
 
@@ -32,6 +34,14 @@ Moralis.Cloud.define(MoralisFunctions.Shop.CheckOrder, async request => {
  */
 Moralis.Cloud.define(MoralisFunctions.Shop.ShopOrders, async request => {
   return shopOrders(request.params as unknown as ShopOrdersParams);
+});
+
+/**
+ * Dev:  https://nm6dir4me3i0.usemoralis.com:2053/server/functions/salesAirdrop
+ * Prod: https://vamoxwojj7ht.moralisweb3.com:2053/server/functions/salesAirdrop
+ */
+Moralis.Cloud.define(MoralisFunctions.Shop.SalesAirdrop, async request => {
+  return salesAirdrop(request.params as unknown as SalesAirdropParams);
 });
 
 /**

@@ -7,6 +7,8 @@ import {
   MoralisUser,
   OrderStatus,
   PhysicalAddress,
+  SalesAirdrop,
+  SalesAirdropParams,
   ShopOrdersParams,
 } from '@dehub/shared/model';
 import { emptyPhysicalAddress } from '@dehub/shared/utils';
@@ -183,6 +185,111 @@ export const shopOrders = async ({
   } catch (err) {
     logger.error(
       `${MoralisFunctions.Shop.ShopOrders} error: ${JSON.stringify(err)}`
+    );
+    return null;
+  }
+};
+
+export const salesAirdrop = async ({
+  orderStatus = OrderStatus.verified,
+  aggregate = false,
+}: SalesAirdropParams): Promise<SalesAirdrop[] | null> => {
+  const logger = Moralis.Cloud.getLogger();
+
+  // Relevant NFTs for Airdrops
+  const legendNFT = '3qSWZCVebyqIWBZW57KAg';
+  const heroNFT = '2KBxICRPg35FeZ7bHUjdEy';
+  const soldierNFT = '7GF9nt7rkMotpqZuf0kgbC';
+  const mythicNFT = '3kQ3HVQx10NPmkuQxUYSfr';
+
+  try {
+    const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
+    const query = new Moralis.Query<DeHubShopOrder<MoralisUser> & SalesAirdrop>(
+      DeHubShopOrders
+    );
+    query.include('user');
+    query.containedIn('contentfulId', [
+      legendNFT,
+      heroNFT,
+      soldierNFT,
+      mythicNFT,
+    ]);
+    query.equalTo('status', orderStatus);
+    query.descending('updatedAt');
+
+    const shopOrders = await query.find({ useMasterKey: true });
+
+    const airdrops: SalesAirdrop[] = shopOrders.map(
+      ({
+        attributes: {
+          quantity,
+          totalAmount,
+          referralAddress,
+          contentfulId,
+          user: {
+            attributes: { ethAddress },
+          },
+        },
+      }) => {
+        const nft =
+          contentfulId === legendNFT
+            ? 'legend'
+            : (contentfulId = heroNFT
+                ? 'hero'
+                : contentfulId === soldierNFT
+                ? 'soldier'
+                : 'mythic');
+        const airdrop = quantity * totalAmount * 0.008;
+        return {
+          ethAddress,
+          nft,
+          airdrop,
+          ...(referralAddress && {
+            referrals: [
+              { ethAddress: referralAddress, airdrop: airdrop * 0.1 },
+            ],
+          }),
+        };
+      }
+    );
+
+    // Merge same ethAddresses amounts
+    const aggregatedAirdrops: SalesAirdrop[] = airdrops.reduce(
+      (prevAirdrops, actAirdrop) => {
+        const airdropIndexToUpdate = prevAirdrops.findIndex(
+          ({ ethAddress }) => ethAddress === actAirdrop.ethAddress.toLowerCase()
+        );
+        // Address already exists, update
+        if (airdropIndexToUpdate !== -1) {
+          const airdropToUpdate = prevAirdrops[airdropIndexToUpdate];
+
+          const updatedAirdrop: SalesAirdrop = {
+            ...airdropToUpdate,
+            // Append which nft was purchased
+            nft: (airdropToUpdate.nft += `, ${actAirdrop.nft}`),
+            // Add new airdrop amount
+            airdrop: (airdropToUpdate.airdrop += actAirdrop.airdrop),
+            // Append new referrals
+            referrals: actAirdrop.referrals
+              ? [...airdropToUpdate.referrals, ...actAirdrop.referrals]
+              : (actAirdrop.referrals as any),
+          };
+          return [
+            ...prevAirdrops.slice(0, airdropIndexToUpdate),
+            updatedAirdrop,
+            ...prevAirdrops.slice(airdropIndexToUpdate + 1),
+          ];
+        }
+        // Append the new airdrop
+        return [...prevAirdrops, actAirdrop];
+      },
+      [] as SalesAirdrop[]
+    );
+
+    return aggregate ? aggregatedAirdrops : airdrops;
+  } catch (err) {
+    logger.error(
+      `${MoralisFunctions.Shop.SalesAirdrop} error: ${JSON.stringify(err)}`
     );
     return null;
   }

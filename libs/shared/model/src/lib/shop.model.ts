@@ -52,12 +52,24 @@ export interface ShopOrdersParams {
   orderStatus: OrderStatus;
 }
 
-export interface ShopOrder {
+export interface SalesAirdropParams {
+  aggregate: boolean;
+  orderStatus: OrderStatus;
+}
+
+export interface SalesAirdrop {
+  ethAddress: string;
+  airdrop: number;
+  referrals: [{ ethAddress: string; airdrop: number }] | undefined;
+  nft: string;
+}
+
+export interface ShopOrder<U = User> {
   objectId: string;
   ipfsHash: string;
   shippingAddress: DeHubShopShippingAddress;
   quantity: number;
-  user: User;
+  user: U;
   updatedAt: string;
   currency: Currency;
   status: OrderStatus;
@@ -85,6 +97,10 @@ export interface InitOrderResult {
 
 export interface ShopOrdersResult {
   result: ShopOrder[];
+}
+
+export interface SalesAirdropResult {
+  result: SalesAirdrop[];
 }
 
 export interface CheckOrderResult {
