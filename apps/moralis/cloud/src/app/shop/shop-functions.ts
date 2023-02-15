@@ -196,6 +196,8 @@ export const salesAirdrop = async ({
 }: SalesAirdropParams): Promise<SalesAirdrop[] | null> => {
   const logger = Moralis.Cloud.getLogger();
 
+  logger.info(`orderStatus: ${orderStatus}, aggregate: ${aggregate}`);
+
   // Relevant NFTs for Airdrops
   const legendNFT = '3qSWZCVebyqIWBZW57KAg';
   const heroNFT = '2KBxICRPg35FeZ7bHUjdEy';
@@ -253,40 +255,37 @@ export const salesAirdrop = async ({
       }
     );
 
+    if (!aggregate) return airdrops;
+
     // Merge same ethAddresses amounts
-    const aggregatedAirdrops: SalesAirdrop[] = airdrops.reduce(
-      (prevAirdrops, actAirdrop) => {
-        const airdropIndexToUpdate = prevAirdrops.findIndex(
-          ({ ethAddress }) => ethAddress === actAirdrop.ethAddress.toLowerCase()
-        );
-        // Address already exists, update
-        if (airdropIndexToUpdate !== -1) {
-          const airdropToUpdate = prevAirdrops[airdropIndexToUpdate];
+    return airdrops.reduce((prevAirdrops, actAirdrop) => {
+      const airdropIndexToUpdate = prevAirdrops.findIndex(
+        ({ ethAddress }) => ethAddress === actAirdrop.ethAddress.toLowerCase()
+      );
+      // Address already exists, update
+      if (airdropIndexToUpdate !== -1) {
+        const airdropToUpdate = prevAirdrops[airdropIndexToUpdate];
 
-          const updatedAirdrop: SalesAirdrop = {
-            ...airdropToUpdate,
-            // Append which nft was purchased
-            nft: (airdropToUpdate.nft += `, ${actAirdrop.nft}`),
-            // Add new airdrop amount
-            airdrop: (airdropToUpdate.airdrop += actAirdrop.airdrop),
-            // Append new referrals
-            referrals: actAirdrop.referrals
-              ? [...airdropToUpdate.referrals, ...actAirdrop.referrals]
-              : (actAirdrop.referrals as any),
-          };
-          return [
-            ...prevAirdrops.slice(0, airdropIndexToUpdate),
-            updatedAirdrop,
-            ...prevAirdrops.slice(airdropIndexToUpdate + 1),
-          ];
-        }
-        // Append the new airdrop
-        return [...prevAirdrops, actAirdrop];
-      },
-      [] as SalesAirdrop[]
-    );
-
-    return aggregate ? aggregatedAirdrops : airdrops;
+        const updatedAirdrop: SalesAirdrop = {
+          ...airdropToUpdate,
+          // Append which nft was purchased
+          nft: (airdropToUpdate.nft += `, ${actAirdrop.nft}`),
+          // Add new airdrop amount
+          airdrop: (airdropToUpdate.airdrop += actAirdrop.airdrop),
+          // Append new referrals
+          referrals: actAirdrop.referrals
+            ? [...airdropToUpdate.referrals, ...actAirdrop.referrals]
+            : (actAirdrop.referrals as any),
+        };
+        return [
+          ...prevAirdrops.slice(0, airdropIndexToUpdate),
+          updatedAirdrop,
+          ...prevAirdrops.slice(airdropIndexToUpdate + 1),
+        ];
+      }
+      // Append the new airdrop
+      return [...prevAirdrops, actAirdrop];
+    }, [] as SalesAirdrop[]);
   } catch (err) {
     logger.error(
       `${MoralisFunctions.Shop.SalesAirdrop} error: ${JSON.stringify(err)}`
