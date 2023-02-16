@@ -284,8 +284,36 @@ export const salesAirdrop = async ({
 
     if (!aggregate) return airdrops;
 
-    // Merge same ethAddresses amounts
-    return airdrops.reduce((prevAirdrops, actAirdrop) => {
+    const mergeReferrals = (
+      currentReferrals: AirdropReferral[],
+      newReferrals: AirdropReferral[]
+    ): AirdropReferral[] =>
+      newReferrals.reduce((prevReferrals, actNewReferral) => {
+        const referralIndexToUpdate = prevReferrals.findIndex(
+          ({ ethAddress }) =>
+            ethAddress.toLowerCase() === actNewReferral.ethAddress.toLowerCase()
+        );
+        // Address already exists, update
+        if (referralIndexToUpdate !== -1) {
+          const referralToUpdate = prevReferrals[referralIndexToUpdate];
+
+          const updatedReferral: AirdropReferral = {
+            ...referralToUpdate,
+            // Add new airdrop amount
+            airdrop: (referralToUpdate.airdrop += actNewReferral.airdrop),
+          };
+          return [
+            ...prevReferrals.slice(0, referralIndexToUpdate),
+            updatedReferral,
+            ...prevReferrals.slice(referralIndexToUpdate + 1),
+          ];
+        }
+        // Append the new referral
+        return [...prevReferrals, actNewReferral];
+      }, currentReferrals);
+
+    // Merge same ethAddresses amounts and referral amounts
+    const aggregatedAirdrops = airdrops.reduce((prevAirdrops, actAirdrop) => {
       const airdropIndexToUpdate = prevAirdrops.findIndex(
         ({ ethAddress }) =>
           ethAddress.toLowerCase() === actAirdrop.ethAddress.toLowerCase()
@@ -303,7 +331,7 @@ export const salesAirdrop = async ({
           // Append new referrals
           ...((airdropToUpdate.referrals || actAirdrop.referrals) && {
             referrals: (airdropToUpdate.referrals && actAirdrop.referrals
-              ? [...airdropToUpdate.referrals, ...actAirdrop.referrals]
+              ? mergeReferrals(airdropToUpdate.referrals, actAirdrop.referrals)
               : airdropToUpdate.referrals && !actAirdrop.referrals
               ? airdropToUpdate.referrals
               : actAirdrop.referrals) as AirdropReferral[],
@@ -318,6 +346,28 @@ export const salesAirdrop = async ({
       // Append the new airdrop
       return [...prevAirdrops, actAirdrop];
     }, [] as SalesAirdrop[]);
+
+    // Filter out referrals which referred himself
+    const aggregatedFilteredAirdrops = aggregatedAirdrops.map(airdrop => {
+      const filteredReferrals: AirdropReferral[] | undefined = airdrop.referrals
+        ? airdrop.referrals.filter(
+            ({ ethAddress: referralEthAddress }) =>
+              referralEthAddress.toLowerCase() !==
+              airdrop.ethAddress.toLowerCase()
+          )
+        : undefined;
+
+      // Delete key if nothing remains
+      delete airdrop.referrals;
+
+      return {
+        ...airdrop,
+        ...(filteredReferrals &&
+          filteredReferrals.length > 0 && { referrals: filteredReferrals }),
+      };
+    });
+
+    return aggregatedFilteredAirdrops;
   } catch (err) {
     logger.error(
       `${MoralisFunctions.Shop.SalesAirdrop} error: ${JSON.stringify(err)}`
