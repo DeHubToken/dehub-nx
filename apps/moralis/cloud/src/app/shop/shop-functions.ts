@@ -367,7 +367,28 @@ export const salesAirdrop = async ({
       };
     });
 
-    return aggregatedFilteredAirdrops;
+    // Flatten referral addresses
+    const aggregatedFilteredFlattenedAirdrops =
+      aggregatedFilteredAirdrops.reduce((prevAirdrops, actAirdrop) => {
+        if (actAirdrop.referrals) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { referrals, ...actAirdropWithoutReferrals } = actAirdrop;
+          return [
+            ...prevAirdrops,
+            actAirdropWithoutReferrals,
+            ...actAirdrop.referrals.map(({ ethAddress, airdrop }) => ({
+              userId: `${actAirdrop.userId} referral`,
+              ethAddress,
+              nft: '',
+              airdrop,
+            })),
+          ];
+        } else {
+          return [...prevAirdrops, actAirdrop];
+        }
+      }, [] as SalesAirdrop[]);
+
+    return aggregatedFilteredFlattenedAirdrops;
   } catch (err) {
     logger.error(
       `${MoralisFunctions.Shop.SalesAirdrop} error: ${JSON.stringify(err)}`
