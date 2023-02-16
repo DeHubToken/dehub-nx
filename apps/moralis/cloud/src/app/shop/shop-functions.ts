@@ -230,7 +230,7 @@ export const salesAirdrop = async ({
 
     query.equalTo('status', orderStatus);
     query.descending('updatedAt');
-    query.limit(10000);
+    query.limit(2000);
 
     const shopOrders = await query.find({ useMasterKey: true });
 
@@ -275,7 +275,7 @@ export const salesAirdrop = async ({
           airdrop,
           ...(referralAddress && {
             referrals: [
-              { ethAddress: referralAddress, airdrop: airdrop * 0.1 },
+              { ethAddress: referralAddress, airdrop: airdrop * 0.1, nft },
             ],
           }),
         };
@@ -376,10 +376,10 @@ export const salesAirdrop = async ({
           return [
             ...prevAirdrops,
             actAirdropWithoutReferrals,
-            ...actAirdrop.referrals.map(({ ethAddress, airdrop }) => ({
+            ...actAirdrop.referrals.map(({ ethAddress, airdrop, nft }) => ({
               userId: `${actAirdrop.userId} referral`,
               ethAddress,
-              nft: '',
+              nft,
               airdrop,
             })),
           ];

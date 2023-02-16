@@ -60,6 +60,7 @@ export interface SalesAirdropParams {
 export interface AirdropReferral {
   ethAddress: string;
   airdrop: number;
+  nft: string;
 }
 export interface SalesAirdrop {
   userId: string;
