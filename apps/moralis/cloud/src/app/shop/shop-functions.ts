@@ -1,4 +1,5 @@
 import {
+  AirdropReferral,
   DeHubShopOrder,
   InitOrderParams,
   InitOrderResult,
@@ -198,11 +199,17 @@ export const salesAirdrop = async ({
 
   logger.info(`orderStatus: ${orderStatus}, aggregate: ${aggregate}`);
 
-  // Relevant NFTs for Airdrops
-  const legendNFT = '3qSWZCVebyqIWBZW57KAg';
-  const heroNFT = '2KBxICRPg35FeZ7bHUjdEy';
-  const soldierNFT = '7GF9nt7rkMotpqZuf0kgbC';
-  const mythicNFT = '3kQ3HVQx10NPmkuQxUYSfr';
+  // Relevant NFTs for Airdrops (public)
+  const pubLegendNFT = '3qSWZCVebyqIWBZW57KAg';
+  const pubHeroNFT = '2KBxICRPg35FeZ7bHUjdEy';
+  const pubSoldierNFT = '7GF9nt7rkMotpqZuf0kgbC';
+  const pubMythicNFT = '3kQ3HVQx10NPmkuQxUYSfr';
+
+  // Relevant NFTs for Airdrops (private)
+  const privLegendNFT = '5vm9CpfkSKrNAxQM96G27L';
+  const privHeroNFT = '4xJtOrEbw4iAkOsTA7v0cp';
+  const privSoldierNFT = '2uTmXzmmETIXTMoNXLUuTG';
+  const privMythicNFT = '4WqjauLmCpizNFt12MR5tz';
 
   try {
     const DeHubShopOrders = Moralis.Object.extend(MoralisClass.DeHubShopOrders);
@@ -211,13 +218,19 @@ export const salesAirdrop = async ({
     );
     query.include('user');
     query.containedIn('contentfulId', [
-      legendNFT,
-      heroNFT,
-      soldierNFT,
-      mythicNFT,
+      pubLegendNFT,
+      pubHeroNFT,
+      pubSoldierNFT,
+      pubMythicNFT,
+      privLegendNFT,
+      privHeroNFT,
+      privSoldierNFT,
+      privMythicNFT,
     ]);
+
     query.equalTo('status', orderStatus);
     query.descending('updatedAt');
+    query.limit(10000);
 
     const shopOrders = await query.find({ useMasterKey: true });
 
@@ -229,20 +242,34 @@ export const salesAirdrop = async ({
           referralAddress,
           contentfulId,
           user: {
+            id: userId,
             attributes: { ethAddress },
           },
         },
       }) => {
         const nft =
-          contentfulId === legendNFT
-            ? 'legend'
-            : (contentfulId = heroNFT
-                ? 'hero'
-                : contentfulId === soldierNFT
-                ? 'soldier'
-                : 'mythic');
+          contentfulId === pubLegendNFT
+            ? 'legend (pub)'
+            : contentfulId === pubHeroNFT
+            ? 'hero (pub)'
+            : contentfulId === pubSoldierNFT
+            ? 'soldier (pub)'
+            : contentfulId === pubMythicNFT
+            ? 'mythic (pub)'
+            : contentfulId === privLegendNFT
+            ? 'legend (priv)'
+            : contentfulId === privHeroNFT
+            ? 'hero (priv)'
+            : contentfulId === privSoldierNFT
+            ? 'soldier (priv)'
+            : contentfulId === privMythicNFT
+            ? 'mythic (priv)'
+            : '<ISSUE>';
+
         const airdrop = quantity * totalAmount * 0.008;
+
         return {
+          userId,
           ethAddress,
           nft,
           airdrop,
@@ -260,7 +287,8 @@ export const salesAirdrop = async ({
     // Merge same ethAddresses amounts
     return airdrops.reduce((prevAirdrops, actAirdrop) => {
       const airdropIndexToUpdate = prevAirdrops.findIndex(
-        ({ ethAddress }) => ethAddress === actAirdrop.ethAddress.toLowerCase()
+        ({ ethAddress }) =>
+          ethAddress.toLowerCase() === actAirdrop.ethAddress.toLowerCase()
       );
       // Address already exists, update
       if (airdropIndexToUpdate !== -1) {
@@ -273,9 +301,13 @@ export const salesAirdrop = async ({
           // Add new airdrop amount
           airdrop: (airdropToUpdate.airdrop += actAirdrop.airdrop),
           // Append new referrals
-          referrals: actAirdrop.referrals
-            ? [...airdropToUpdate.referrals, ...actAirdrop.referrals]
-            : (actAirdrop.referrals as any),
+          ...((airdropToUpdate.referrals || actAirdrop.referrals) && {
+            referrals: (airdropToUpdate.referrals && actAirdrop.referrals
+              ? [...airdropToUpdate.referrals, ...actAirdrop.referrals]
+              : airdropToUpdate.referrals && !actAirdrop.referrals
+              ? airdropToUpdate.referrals
+              : actAirdrop.referrals) as AirdropReferral[],
+          }),
         };
         return [
           ...prevAirdrops.slice(0, airdropIndexToUpdate),

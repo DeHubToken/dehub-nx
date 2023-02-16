@@ -57,10 +57,15 @@ export interface SalesAirdropParams {
   orderStatus: OrderStatus;
 }
 
-export interface SalesAirdrop {
+export interface AirdropReferral {
   ethAddress: string;
   airdrop: number;
-  referrals: [{ ethAddress: string; airdrop: number }] | undefined;
+}
+export interface SalesAirdrop {
+  userId: string;
+  ethAddress: string;
+  airdrop: number;
+  referrals?: AirdropReferral[] | undefined;
   nft: string;
 }
 
