@@ -54,6 +54,7 @@ export interface ShopOrdersParams {
 
 export interface SalesAirdropParams {
   aggregate: boolean;
+  airdropFormat: boolean;
   orderStatus: OrderStatus;
 }
 
@@ -68,6 +69,13 @@ export interface SalesAirdrop {
   airdrop: number;
   referrals?: AirdropReferral[] | undefined;
   nft: string;
+}
+
+export interface SalesAirdropFormat {
+  [key: string]: {
+    address: string;
+    amount: string;
+  };
 }
 
 export interface ShopOrder<U = User> {

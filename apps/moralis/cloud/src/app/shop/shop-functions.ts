@@ -9,6 +9,7 @@ import {
   OrderStatus,
   PhysicalAddress,
   SalesAirdrop,
+  SalesAirdropFormat,
   SalesAirdropParams,
   ShopOrdersParams,
 } from '@dehub/shared/model';
@@ -194,7 +195,10 @@ export const shopOrders = async ({
 export const salesAirdrop = async ({
   orderStatus = OrderStatus.verified,
   aggregate = false,
-}: SalesAirdropParams): Promise<SalesAirdrop[] | null> => {
+  airdropFormat = false,
+}: SalesAirdropParams): Promise<
+  SalesAirdrop[] | SalesAirdropFormat[] | null
+> => {
   const logger = Moralis.Cloud.getLogger();
 
   logger.info(`orderStatus: ${orderStatus}, aggregate: ${aggregate}`);
@@ -388,7 +392,24 @@ export const salesAirdrop = async ({
         }
       }, [] as SalesAirdrop[]);
 
-    return aggregatedFilteredFlattenedAirdrops;
+    if (!airdropFormat) return aggregatedFilteredFlattenedAirdrops;
+
+    /**
+       Airdrop format
+
+        "0xB3B720a3491e97c91b49E5E8279BaEe4eB6eF561": {
+          "address": "0xB3B720a3491e97c91b49E5E8279BaEe4eB6eF561",
+          "amount": "203238114201"
+        }
+      */
+    const aggregatedFilteredFlattenedAirdropsFormat: SalesAirdropFormat[] =
+      aggregatedFilteredFlattenedAirdrops.map(
+        ({ ethAddress: address, airdrop: amount }) => ({
+          [`${address}`]: { address, amount: `${amount}` },
+        })
+      );
+
+    return aggregatedFilteredFlattenedAirdropsFormat;
   } catch (err) {
     logger.error(
       `${MoralisFunctions.Shop.SalesAirdrop} error: ${JSON.stringify(err)}`
