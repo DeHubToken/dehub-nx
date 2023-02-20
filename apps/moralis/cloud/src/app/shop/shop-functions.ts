@@ -270,7 +270,7 @@ export const salesAirdrop = async ({
             ? 'mythic (priv)'
             : '<ISSUE>';
 
-        const airdrop = quantity * totalAmount * 0.008;
+        const airdrop = (quantity * totalAmount) / 0.0008;
 
         return {
           userId,
