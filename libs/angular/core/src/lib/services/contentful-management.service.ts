@@ -176,7 +176,7 @@ export class ContentfulManagementService
       ),
       tap(updateResult => {
         this.logger.debug(
-          ` Available quantity cache update (${updateResult?.availableQuantity}) was successful for ${productId}.`
+          `Available quantity cache update (${updateResult?.availableQuantity}) was successful for ${productId}.`
         );
       })
     );
