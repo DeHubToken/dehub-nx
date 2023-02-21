@@ -241,7 +241,6 @@ export const salesAirdrop = async ({
     const airdrops: SalesAirdrop[] = shopOrders.map(
       ({
         attributes: {
-          quantity,
           totalAmount,
           referralAddress,
           contentfulId,
@@ -394,14 +393,6 @@ export const salesAirdrop = async ({
 
     if (!airdropFormat) return aggregatedFilteredFlattenedAirdrops;
 
-    /**
-       Airdrop format
-
-        "0xB3B720a3491e97c91b49E5E8279BaEe4eB6eF561": {
-          "address": "0xB3B720a3491e97c91b49E5E8279BaEe4eB6eF561",
-          "amount": "203238114201"
-        }
-      */
     const aggregatedFilteredFlattenedAirdropsFormat: SalesAirdropFormat[] =
       aggregatedFilteredFlattenedAirdrops.map(
         ({ ethAddress: address, airdrop: amount }) => ({

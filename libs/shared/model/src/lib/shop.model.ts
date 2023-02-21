@@ -71,6 +71,14 @@ export interface SalesAirdrop {
   nft: string;
 }
 
+/**
+  Airdrop format
+
+  "0xB3B720a3491e97c91b49E5E8279BaEe4eB6eF561": {
+    "address": "0xB3B720a3491e97c91b49E5E8279BaEe4eB6eF561",
+    "amount": "203238114201"
+  }
+*/
 export interface SalesAirdropFormat {
   [key: string]: {
     address: string;
