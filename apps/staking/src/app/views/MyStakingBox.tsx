@@ -282,15 +282,15 @@ const MyStakingBox = () => {
               {!account ? (
                 <ConnectWalletButton />
               ) : (
-                <>
+                <div className="flex flex-wrap">
                   <Button
-                    className="p-button mt-2 justify-content-center w-2 mr-3"
+                    className="p-button mt-2 justify-content-center mr-3"
                     onClick={() => handleModal('stake', true)}
                     disabled={!isReady || isTxPending}
                     label="Stake"
                   />
                   <Button
-                    className="p-button-outlined mt-2 mr-3 justify-content-center w-2 text-white border-primary"
+                    className="p-button-outlined mt-2 mr-3 justify-content-center text-white border-primary"
                     onClick={() => handleModal('unstake', true)}
                     disabled={
                       !isReady ||
@@ -300,7 +300,7 @@ const MyStakingBox = () => {
                     label="Unstake"
                   />
                   <Button
-                    className="p-button mt-2 justify-content-center mr-3 w-2 text-white border-primary"
+                    className="p-button mt-2 justify-content-center mr-3 text-white border-primary"
                     onClick={() => handleModal('restake', true)}
                     disabled={
                       !isReady ||
@@ -310,7 +310,7 @@ const MyStakingBox = () => {
                     label="Restake"
                   />
                   <Button
-                    className="p-button-outlined mt-2 justify-content-center w-2 text-white border-primary"
+                    className="p-button-outlined mt-2 justify-content-center text-white border-primary"
                     onClick={() => handleClaim()}
                     disabled={
                       !isReady ||
@@ -319,7 +319,7 @@ const MyStakingBox = () => {
                     loading={isTxPending}
                     label="Claim"
                   />
-                </>
+                </div>
               )}
             </div>
           </div>
