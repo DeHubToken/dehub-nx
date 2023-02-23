@@ -151,7 +151,6 @@ import {
       </div>
     </div>
   `,
-  styles: [],
   animations: [
     fadeInRightOnEnterAnimation({ anchor: 'fadeInRight', duration: 500 }),
     fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 500 }),

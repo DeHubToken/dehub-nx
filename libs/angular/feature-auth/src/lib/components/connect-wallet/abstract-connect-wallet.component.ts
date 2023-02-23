@@ -23,7 +23,6 @@ export class AbstractConnectWalletComponent {
         ),
         first()
       )
-      //
       .subscribe(() =>
         honorNext ? this.dialogRef.close(true) : this.dialogRef.close()
       );

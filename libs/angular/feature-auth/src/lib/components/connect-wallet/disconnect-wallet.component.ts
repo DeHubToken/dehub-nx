@@ -29,7 +29,6 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
       </div>
     </div>
   `,
-  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisconnectWalletComponent
