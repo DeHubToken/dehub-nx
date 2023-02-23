@@ -52,12 +52,46 @@ export interface ShopOrdersParams {
   orderStatus: OrderStatus;
 }
 
-export interface ShopOrder {
+export interface SalesAirdropParams {
+  aggregate: boolean;
+  airdropFormat: boolean;
+  orderStatus: OrderStatus;
+}
+
+export interface AirdropReferral {
+  ethAddress: string;
+  airdrop: number;
+  nft: string;
+}
+export interface SalesAirdrop {
+  userId: string;
+  ethAddress: string;
+  airdrop: number;
+  referrals?: AirdropReferral[] | undefined;
+  nft: string;
+}
+
+/**
+  Airdrop format
+
+  "0xB3B720a3491e97c91b49E5E8279BaEe4eB6eF561": {
+    "address": "0xB3B720a3491e97c91b49E5E8279BaEe4eB6eF561",
+    "amount": "203238114201"
+  }
+*/
+export interface SalesAirdropFormat {
+  [key: string]: {
+    address: string;
+    amount: string;
+  };
+}
+
+export interface ShopOrder<U = User> {
   objectId: string;
   ipfsHash: string;
   shippingAddress: DeHubShopShippingAddress;
   quantity: number;
-  user: User;
+  user: U;
   updatedAt: string;
   currency: Currency;
   status: OrderStatus;
@@ -85,6 +119,10 @@ export interface InitOrderResult {
 
 export interface ShopOrdersResult {
   result: ShopOrder[];
+}
+
+export interface SalesAirdropResult {
+  result: SalesAirdrop[];
 }
 
 export interface CheckOrderResult {

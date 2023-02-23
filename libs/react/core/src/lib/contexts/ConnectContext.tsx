@@ -206,7 +206,10 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
             setWalletConnectingState(WalletConnectingState.INIT);
           },
           onSuccess: async (loggedInUser: Moralis.User) => {
-            if (
+            if (connectorId === MoralisConnectorNames.WalletConnect) {
+              console.log('Wallet Connect');
+              setWalletConnectingState(WalletConnectingState.COMPLETE);
+            } else if (
               await setupMetamaskNetwork(
                 defaultChainId,
                 onSwitchNetwork,

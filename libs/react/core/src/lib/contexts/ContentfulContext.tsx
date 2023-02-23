@@ -1,11 +1,7 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache,
-} from '@apollo/client';
+import { ApolloClient, ApolloProvider } from '@apollo/client';
 import { ContentfulEnv } from '@dehub/shared/config';
 import { FooterFragment } from '@dehub/shared/model';
+import { createApolloClient } from '@dehub/shared/utils';
 import React, { createContext, PropsWithChildren, useMemo } from 'react';
 import { useFooterCollectionQuery } from '../hooks';
 
@@ -24,31 +20,18 @@ interface ContentfulApolloProps extends PropsWithChildren<unknown> {
 
 const ContentfulApollo: React.FC<ContentfulApolloProps> = ({
   children,
-  contentful: {
-    graphqlUri,
-    isPreview,
-    website: { spaceId, environmentId, cpaToken, cdaToken },
-  },
+  contentful,
 }) => {
-  const client = useMemo(() => {
-    const httpLink = createHttpLink({
-      uri: `${graphqlUri}/${spaceId}/environments/${environmentId}`,
-      headers: {
-        Authorization: `Bearer ${isPreview ? cpaToken : cdaToken}`,
-      },
-    });
-
-    const client = new ApolloClient({
-      link: httpLink,
-      cache: new InMemoryCache(),
-    });
-
-    return client;
-  }, [graphqlUri, isPreview, spaceId, environmentId, cpaToken, cdaToken]);
+  const client = useMemo(
+    () => new ApolloClient(createApolloClient(contentful)),
+    [contentful]
+  );
 
   return (
     <ApolloProvider client={client}>
-      <ContentfulProvider isPreview={isPreview}>{children}</ContentfulProvider>
+      <ContentfulProvider isPreview={contentful.isPreview}>
+        {children}
+      </ContentfulProvider>
     </ApolloProvider>
   );
 };

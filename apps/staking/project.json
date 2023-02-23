@@ -12,6 +12,7 @@
         "outputPath": "dist/apps/staking.prod/staking",
         "index": "apps/staking/src/index.html",
         "main": "apps/staking/src/main.tsx",
+        "polyfills": "apps/staking/src/polyfills.ts",
         "tsConfig": "apps/staking/tsconfig.app.json",
         "assets": [
           "apps/staking/src/assets",
