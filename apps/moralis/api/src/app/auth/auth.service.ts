@@ -1,6 +1,9 @@
 import {
+  AuthenticateRequest,
+  AuthenticateResponse,
   RequestMessageRequest,
   RequestMessageResponse,
+  SupabaseUser,
   VerifyMessageRequest,
   VerifyMessageResponse,
 } from '@dehub/shared/model';
@@ -9,7 +12,7 @@ import {
   getUserAddress,
   getUserByProfileId,
 } from '@dehub/shared/utils';
-import jwt from 'jsonwebtoken';
+import jwt, { JsonWebTokenError } from 'jsonwebtoken';
 import Moralis from 'moralis';
 import { env } from '../../config';
 import { supabase } from '../services';
@@ -83,4 +86,31 @@ export const verifyMessage = async ({
   );
 
   return { user, token };
+};
+
+export const auth = ({ token }: AuthenticateRequest): AuthenticateResponse => {
+  let user: SupabaseUser | undefined = undefined;
+  let error: string;
+  let errorDetail: string;
+
+  try {
+    // Verify JWT token
+    const { user: decodedUser, exp } = jwt.verify(
+      token,
+      env.SUPABASE_JWT_SECRET
+    ) as {
+      user: SupabaseUser;
+      exp: number;
+    };
+
+    // Check expiration
+    if (Date.now() > +exp) errorDetail = 'token has expired';
+    else user = decodedUser;
+  } catch (e) {
+    if (e instanceof JsonWebTokenError) errorDetail = e.message;
+  }
+
+  if (errorDetail) error = `JWT verification failed (${errorDetail})!`;
+
+  return { user, error };
 };

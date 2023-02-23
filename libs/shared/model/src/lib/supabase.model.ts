@@ -17,6 +17,15 @@ export interface VerifyMessageRequest {
   message: string;
 }
 
+export interface AuthenticateRequest {
+  token: string | null;
+}
+
+export interface AuthenticateResponse {
+  user?: SupabaseUser;
+  error?: string;
+}
+
 export interface VerifyMessageResponse {
   /** Logged in user */
   user: SupabaseUser;

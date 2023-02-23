@@ -7,6 +7,8 @@ import {
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
 import {
+  AuthenticateRequest,
+  AuthenticateResponse,
   RequestMessageRequest,
   RequestMessageResponse,
   SupabaseJwt,
@@ -16,13 +18,12 @@ import {
 } from '@dehub/shared/model';
 import { ethereumEnabled, getUserAddress } from '@dehub/shared/utils';
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
-import jwt_decode from 'jwt-decode';
 import { BehaviorSubject, firstValueFrom, map, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private userSubject = new BehaviorSubject<SupabaseUser | undefined>(
-    this.decodeUserFromJwt()
+    undefined
   );
 
   user$ = this.userSubject.asObservable().pipe(
@@ -41,6 +42,21 @@ export class AuthService {
     @Inject(LoggerDehubToken) private logger: ILoggerService,
     private httpClient: HttpClient
   ) {}
+
+  async auth() {
+    await this.authenticate({ token: localStorage.getItem(SupabaseJwt) }).then(
+      ({ user, error }) => {
+        if (user) {
+          this.logger.debug(`Authenticate from jwt: ${getUserAddress(user)}`);
+          this.userSubject.next(user);
+        }
+        if (error) {
+          this.logger.error(`Authentication failed: ${error}`);
+          this.signOut();
+        }
+      }
+    );
+  }
 
   async login() {
     const { signer, chain, address } = await this.connectToMetamask();
@@ -68,30 +84,9 @@ export class AuthService {
     localStorage.setItem(SupabaseJwt, token);
   }
 
-  async signOut() {
+  signOut() {
     this.logger.debug('Signing out.');
     localStorage.removeItem(SupabaseJwt);
-  }
-
-  private decodeUserFromJwt(token?: string): SupabaseUser | undefined {
-    if (token) {
-      try {
-        const { exp, user } = jwt_decode<{ user: SupabaseUser; exp: number }>(
-          token
-        );
-
-        // Check expiration
-        if (Date.now() > +exp) {
-          this.logger.warn(`JWT token has expired!`);
-          localStorage.removeItem(SupabaseJwt);
-        } else {
-          return user;
-        }
-      } catch (error) {
-        this.logger.error(`JWT decode error: ${JSON.stringify(error)}`);
-      }
-    }
-    return undefined;
   }
 
   private async connectToMetamask(): Promise<{
@@ -123,6 +118,15 @@ export class AuthService {
     return firstValueFrom(
       this.httpClient.post<VerifyMessageResponse>(
         `${this.env.api}/auth/verify-message`,
+        payload
+      )
+    );
+  }
+
+  private async authenticate(payload: AuthenticateRequest) {
+    return firstValueFrom(
+      this.httpClient.post<AuthenticateResponse>(
+        `${this.env.api}/auth/authenticate`,
         payload
       )
     );

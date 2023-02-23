@@ -42,6 +42,10 @@ export class AppTopBarComponent implements OnInit {
     public appMain: AppMainComponent
   ) {}
 
+  async onAuth() {
+    this.authService.auth();
+  }
+
   async onSupabaseSignOut() {
     this.authService.signOut();
   }
@@ -50,6 +54,7 @@ export class AppTopBarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.auth();
     this.authService.user$.subscribe(/** REMOOOOOOVE */);
     const { account$, isAuthenticated$ } = this.moralisService;
 
