@@ -79,7 +79,7 @@ export const verifyMessage = async ({
       role: 'authenticated',
       exp: tokenExpirationTime,
     },
-    env.SUPABASE_JWT
+    env.SUPABASE_JWT_SECRET
   );
 
   return { user, token };

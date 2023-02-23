@@ -8,7 +8,7 @@ export const env = cleanEnv(process.env, {
   NAME: str({ default: 'moralis-api' }),
   MORALIS_WEB3_API_KEY: str(),
   SUPABASE_API_URL: str(),
-  SUPABASE_JWT: str(),
+  SUPABASE_JWT_SECRET: str(),
   SUPABASE_PUBLIC_ANON_KEY: str(),
   SUPABASE_SERVICE_KEY: str(),
 });
