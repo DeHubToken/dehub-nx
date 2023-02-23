@@ -168,7 +168,7 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   react-helmet-async: 1.3.0
-  react-moralis: 1.2.1
+  react-moralis: 1.4.2
   react-redux: 8.0.5
   react-refresh: 0.14.0
   react-router-dom: 6.7.0
@@ -285,7 +285,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-helmet-async: 1.3.0_biqbaboplfbrettd7655fr4n2y
-  react-moralis: 1.2.1_wx75xejmrchgfw4g4w3lr4uveu
+  react-moralis: 1.4.2_c7rdi2s4r2kvd6ouh3t7z4szii
   react-redux: 8.0.5_cn3ejhfta5lq2dae4xucvtkwvu
   react-router-dom: 6.7.0_biqbaboplfbrettd7655fr4n2y
   redux-localstorage-simple: 2.5.1
@@ -30569,20 +30569,20 @@ packages:
         integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==,
       }
 
-  /react-moralis/1.2.1_wx75xejmrchgfw4g4w3lr4uveu:
+  /react-moralis/1.4.2_c7rdi2s4r2kvd6ouh3t7z4szii:
     resolution:
       {
-        integrity: sha512-+35NOMVXsPrvNRyjLBZFmKYJ9HSS4Zqir/o0O8rsf+yUw7oZNHhkBI8mEu9sOJ2qDu86bvUGxlhq9czsUjb6iw==,
+        integrity: sha512-M6R9+AO4r/ZmJEMbv2IySnp1+8fRvzu1osehAWYqQgN8cPsHWGuDpnmNSd8Q+DegZ/sjiBkfWjuEXFRwrHYorQ==,
       }
     engines: { node: '>=v12.22.0' }
     peerDependencies:
-      moralis: '>=1.1.0'
+      moralis-v1: '>=1.11.0'
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
     dependencies:
       fast-deep-equal: 3.1.3
       immer: 9.0.19
-      moralis: 2.14.1
+      moralis-v1: 1.12.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-immer: 0.6.0_immer@9.0.19+react@18.2.0
