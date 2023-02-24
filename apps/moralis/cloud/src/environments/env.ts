@@ -7,18 +7,6 @@ export interface Env extends SharedEnv {
     staking: string;
     shop: string;
   };
-  staking: {
-    eventTables: {
-      deposit: string;
-      harvest: string;
-      withdraw: string;
-    };
-    deprecatedEventTables?: {
-      deposit: string;
-      harvest: string;
-      withdraw: string;
-    };
-  };
   shop: {
     eventTables: {
       purchase: string;
@@ -33,13 +21,6 @@ export const defaultEnv: Env = {
     token: 'DeHubTokenDapp',
     staking: 'DeHubStakingDapp',
     shop: 'DeHubShopDapp',
-  },
-  staking: {
-    eventTables: {
-      deposit: 'DeHubStakingDepositEvents',
-      harvest: 'DeHubStakingHarvestEvents',
-      withdraw: 'DeHubStakingWithdrawEvents',
-    },
   },
   shop: {
     eventTables: {
