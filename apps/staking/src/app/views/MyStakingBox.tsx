@@ -177,8 +177,8 @@ const MyStakingBox = () => {
                         Tier {userInfo.lastTierIndex + 1}
                       </Text>
                       <Text className="mt-2">
-                        {poolInfo.tierPercents[userInfo.lastTierIndex]}% share
-                        of total rewards
+                        {poolInfo.tierPercents[userInfo.lastTierIndex] / 100}%
+                        share of total rewards
                       </Text>
                     </>
                   ) : (
