@@ -1,6 +1,6 @@
 import { Networks } from '@dehub/shared/config';
 import { random } from 'lodash';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import { decimalToHex } from './decimal-to-hex';
 import { hexToDecimal } from './hex-to-decimal';
 

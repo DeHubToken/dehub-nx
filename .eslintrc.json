@@ -28,6 +28,17 @@
                 "bannedExternalImports": ["*angular*", "*primeng*"]
               },
               {
+                "sourceTag": "scope:node",
+                "onlyDependOnLibsWithTags": ["scope:shared"],
+                // projects tagged with "scope:node" can't import from "angular" or "react" related projects
+                "bannedExternalImports": [
+                  "*angular*",
+                  "*primeng*",
+                  "*react*",
+                  "*primereact*"
+                ]
+              },
+              {
                 "sourceTag": "scope:shared",
                 "onlyDependOnLibsWithTags": ["scope:shared"],
                 // projects tagged with "scope:shared" can't import from "react" or "angular" related projects

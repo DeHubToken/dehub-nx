@@ -41,6 +41,11 @@ export const LoggerContentfulToken = new InjectionToken<ILoggerService>(
   'Logger for Contentful'
 );
 
+/** Token for providing Logger for Supabase */
+export const LoggerSupabaseToken = new InjectionToken<ILoggerService>(
+  'Logger for Supabase'
+);
+
 // Service Tokens
 
 /** Token for providing Moralis Service */

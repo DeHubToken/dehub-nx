@@ -63,7 +63,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com pnpm moralis-sync"
+          "cross-env MORALIS_CLI_API_KEY=rSh7aP5Qba9Lw3o MORALIS_CLI_API_SECRET=VcMhTuAMDwY5r7u MORALIS_SUBDOMAIN=nm6dir4me3i0.usemoralis.com pnpm moralis-cloud-sync"
         ],
         "readyWhen": "Changes Uploaded Correctly",
         "parallel": true
@@ -85,7 +85,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com pnpm moralis-sync"
+          "cross-env MORALIS_CLI_API_KEY=rSh7aP5Qba9Lw3o MORALIS_CLI_API_SECRET=VcMhTuAMDwY5r7u MORALIS_SUBDOMAIN=vamoxwojj7ht.moralisweb3.com pnpm moralis-cloud-sync"
         ],
         "readyWhen": "Changes Uploaded Correctly",
         "parallel": true

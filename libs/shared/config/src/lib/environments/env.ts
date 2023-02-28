@@ -71,7 +71,10 @@ export interface SharedEnv {
    */
   baseUrl: string;
 
-  /** DeHUB URLs */
+  /** DeHub api */
+  api: string;
+
+  /** DeHub URLs */
   dehub: {
     /** CEX trade */
     cexUrl: string;
@@ -84,6 +87,11 @@ export interface SharedEnv {
   };
 
   contentful: ContentfulEnv;
+
+  supabase: {
+    supabaseApiUrl: string;
+    supabasePublicAnonKey: string;
+  };
 
   web3: Web3Env;
 
@@ -99,6 +107,8 @@ export const defaultSharedEnv: SharedEnv = {
   env: 'dev',
   production: false,
   baseUrl: '',
+
+  api: 'http://localhost:3333',
 
   dehub: {
     cexUrl: 'https://www.gate.io',
@@ -119,6 +129,13 @@ export const defaultSharedEnv: SharedEnv = {
       cpaToken: 'C__6WRbPa01sIs-K6MAWXGHJkIPTY0aS3_Fg9hGp9xY',
       cmaToken: 'CFPAT-qMiEgFb3Ctm12wkXELHdlY-G8ymODCEMYKvlevV0BX0',
     },
+  },
+
+  // Supabase Local
+  supabase: {
+    supabaseApiUrl: 'http://localhost:54323', // Studio url needed for read
+    supabasePublicAnonKey:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0',
   },
 
   web3: {

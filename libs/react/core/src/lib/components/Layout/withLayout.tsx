@@ -9,7 +9,7 @@ import {
 import { WalletConnectingState } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { iOS } from '@dehub/shared/utils';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import React, { useEffect, useState } from 'react';
 import { useWeb3Context } from '../../hooks';
 import { useContentfulContext } from '../../hooks/useContentfulContext';
@@ -42,19 +42,12 @@ const withLayout =
     const [showLoader, setShowLoader] = useState(false);
     const [message, setMessage] = useState<LoaderProps>(initMessage);
 
-    const {
-      walletConnectingState,
-      defaultChainId,
-      // baseUrl,
-      // pageTitle,
-      // landingUrl: landing,
-      logout,
-    } = useWeb3Context();
+    const { walletConnectingState, defaultChainId, logout } = useWeb3Context();
 
     const { footer } = useContentfulContext();
 
     /*
-     * Hack to avoid trustwallet redirecting to a open in app website on iOS...
+     * Hack to avoid trust wallet redirecting to a open in app website on iOS...
      * Ref: https://github.com/WalletConnect/walletconnect-monorepo/issues/552
      */
     useEffect(() => {
@@ -66,11 +59,17 @@ const withLayout =
     }, []);
 
     useEffect(() => {
-      Moralis.onChainChanged(newChainId => {
+      const unsubscribeFromChainChanged = Moralis.onChainChanged(newChainId => {
         if (newChainId !== decimalToHex(defaultChainId)) {
+          console.info(`Chain changed! Logging out.`);
+          unsubscribeFromChainChanged();
           logout();
         }
       });
+
+      return () => {
+        unsubscribeFromChainChanged();
+      };
     }, [logout, defaultChainId]);
 
     useEffect(() => {

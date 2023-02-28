@@ -5,6 +5,14 @@ export const defaultSharedProdEnv: SharedEnv = {
   env: 'prod',
   production: true,
 
+  api: '',
+
+  supabase: {
+    supabaseApiUrl: 'https://wmmjdexrwjxkfgxntrcu.supabase.co',
+    supabasePublicAnonKey:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndtbWpkZXhyd2p4a2ZneG50cmN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njk3MzczMTYsImV4cCI6MTk4NTMxMzMxNn0.XgG7HSMbdqHUFXJlpSHN5ABBKlsaBP0OK3KKlKV3t1M',
+  },
+
   web3: {
     ...defaultSharedEnv.web3,
     // DeHub Prod

@@ -8,5 +8,7 @@ export * from './lib/location.model';
 export * from './lib/moralis.model';
 export * from './lib/prime.model';
 export * from './lib/shop.model';
+export * from './lib/supabase.model';
 export * from './lib/swiper.model';
 export * from './lib/website-contentful.model';
+export * from './lib/website-database.model';

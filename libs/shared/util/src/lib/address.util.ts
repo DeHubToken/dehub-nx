@@ -19,7 +19,7 @@ export const isAddress = (value: string): string | false => {
 /**
  * Shorten the checksum version
  * @param address the address
- * @param chars
+ * @param chars the chars visible from start and end of the address
  * @returns checksum version of the input address to have 0x + 4 characters at start and end
  */
 export const shortenAddress = (address: string, chars = 4): string => {

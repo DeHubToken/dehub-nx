@@ -17,6 +17,7 @@
     "angular-moralis": "libs/angular/moralis",
     "angular-ui": "libs/angular/ui",
     "angular-util": "libs/angular/util",
+    "moralis-api": "apps/moralis/api",
     "moralis-cloud": "apps/moralis/cloud",
     "react-core": "libs/react/core",
     "react-ui": "libs/react/ui",

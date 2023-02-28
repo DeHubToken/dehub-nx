@@ -52,6 +52,7 @@ We recommend [VSCode](https://code.visualstudio.com/) as an editor. _(monorepo i
 
 1. [Nx structure](README_nx.md) _([see more](https://nx.dev))_
 1. [Nx generate](README_nx_gen.md)
+1. [Storage](README_storage.md)
 1. [Hosting](README_hosting.md)
 1. [Theme](README_theme.md)
 1. [PWA](README_pwa.md) _([see more](https://web.dev/progressive-web-apps/))_

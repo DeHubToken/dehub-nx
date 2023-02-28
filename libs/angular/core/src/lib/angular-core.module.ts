@@ -7,6 +7,7 @@ import {
   LoggerDehubMoralisToken,
   LoggerDehubToken,
   LoggerMoralisToken,
+  LoggerSupabaseToken,
   ScopeToken,
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/config';
@@ -76,6 +77,13 @@ export class AngularCoreModule {
           provide: LoggerContentfulToken,
           useFactory: (env: SharedEnv) =>
             new ConsoleLoggerService('Contentful', env),
+          deps: [EnvToken],
+        },
+        // Supabase Logger
+        {
+          provide: LoggerSupabaseToken,
+          useFactory: (env: SharedEnv) =>
+            new ConsoleLoggerService('Supabase', env),
           deps: [EnvToken],
         },
       ],

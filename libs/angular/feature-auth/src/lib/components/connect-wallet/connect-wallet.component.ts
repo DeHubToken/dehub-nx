@@ -36,7 +36,6 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
       (login)="onLogin($event)"
     ></dhb-connect-wallet-options>
   `,
-  styles: [],
   providers: [...provideDehubLoggerWithScope('Connect Wallet')],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

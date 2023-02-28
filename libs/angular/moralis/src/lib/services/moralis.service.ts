@@ -37,7 +37,7 @@ import {
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import {
   ConfirmationService,
   ConfirmEventType,
