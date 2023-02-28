@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import {
   EnvToken,
@@ -16,7 +16,11 @@ import {
   VerifyMessageRequest,
   VerifyMessageResponse,
 } from '@dehub/shared/model';
-import { ethereumEnabled, getUserAddress } from '@dehub/shared/utils';
+import {
+  ethereumEnabled,
+  getUserAddress,
+  shortenAddress,
+} from '@dehub/shared/utils';
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
 import { BehaviorSubject, firstValueFrom, map, tap } from 'rxjs';
 
@@ -44,23 +48,25 @@ export class AuthService {
   ) {}
 
   async auth() {
-    await this.authenticate({ token: localStorage.getItem(SupabaseJwt) }).then(
-      ({ user, error }) => {
-        if (user) {
-          this.logger.debug(`Authenticate from jwt: ${getUserAddress(user)}`);
-          this.userSubject.next(user);
-        }
-        if (error) {
-          this.logger.error(`Authentication failed: ${error}`);
+    const token = localStorage.getItem(SupabaseJwt);
+    if (token) {
+      this.logger.debug(`Authenticate from JWT...`);
+
+      return await this.authenticate({ token })
+        .then(({ user }) => this.userSubject.next(user))
+        .catch(e => {
+          if (e instanceof HttpErrorResponse)
+            this.logger.error(`Authentication failed: ${e.error.error}`);
+          else this.logger.error(`Unexpected Authentication issue`, e);
+
           this.signOut();
-        }
-      }
-    );
+        });
+    }
   }
 
   async login() {
     const { signer, chain, address } = await this.connectToMetamask();
-    this.logger.debug(`Address for login: ${address}`);
+    this.logger.debug(`Login from Metamask: ${shortenAddress(address)}`);
 
     if (!address) throw new Error('No account found in Metamask');
     if (!chain) throw new Error('No chain found in Metamask');
