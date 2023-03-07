@@ -44,7 +44,6 @@
       "@dehub/react/ui": ["libs/react/ui/src/index.ts"],
       "@dehub/shared/asset/dehub/*": ["libs/shared/asset/dehub/src/lib/*"],
       "@dehub/shared/asset/freya/*": ["libs/shared/asset/freya/src/lib/*"],
-      "@dehub/shared/config": ["libs/shared/config/src/index.ts"],
       "@dehub/shared/model": ["libs/shared/model/src/index.ts"],
       "@dehub/shared/util/*": ["libs/shared/util/src/lib/*"],
       "@dehub/shared/utils": ["libs/shared/util/src/index.ts"],

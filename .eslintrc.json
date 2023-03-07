@@ -46,7 +46,6 @@
                   "type:ui",
                   "type:util",
                   "type:model",
-                  "type:config",
                   "type:asset"
                 ]
               },
@@ -57,7 +56,6 @@
                   "type:ui",
                   "type:util",
                   "type:model",
-                  "type:config",
                   "type:asset"
                 ]
               },
@@ -67,25 +65,16 @@
                   "type:ui",
                   "type:util",
                   "type:model",
-                  "type:config",
                   "type:asset"
                 ]
               },
               {
                 "sourceTag": "type:util",
-                "onlyDependOnLibsWithTags": [
-                  "type:util",
-                  "type:model",
-                  "type:config"
-                ]
+                "onlyDependOnLibsWithTags": ["type:util", "type:model"]
               },
               {
                 "sourceTag": "type:model",
-                "onlyDependOnLibsWithTags": ["type:model", "type:config"]
-              },
-              {
-                "sourceTag": "type:config",
-                "onlyDependOnLibsWithTags": ["type:config"]
+                "onlyDependOnLibsWithTags": ["type:model"]
               },
               {
                 "sourceTag": "type:asset",
