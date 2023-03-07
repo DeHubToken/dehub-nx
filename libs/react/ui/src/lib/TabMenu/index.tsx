@@ -1,17 +1,7 @@
+import { NavigationTabMenu } from '@dehub/shared/model';
 import classNames from 'classnames';
 import { Button } from 'primereact/button';
 import { MenuItem } from 'primereact/menuitem';
-
-export enum NavigationTabMenu {
-  Home = 'Home',
-  Stream = 'Stream',
-  Game = 'Game',
-  Shop = 'Shop',
-  Learn = 'Learn',
-  Earn = 'Earn',
-  News = 'News',
-  Legal = 'Legal',
-}
 
 export const tabMenuItems: MenuItem[] = [
   {

@@ -1,21 +1,11 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
 import { PwaService } from '@dehub/angular/core';
+import { NavigationTabMenu } from '@dehub/shared/model';
 import { MenuItem } from 'primeng/api';
 // import { MenuItem } from '@dehub/shared/model';
 import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
-
-enum NavigationTabMenu {
-  Home = 'home',
-  Stream = 'stream',
-  Game = 'game',
-  Shop = 'shop',
-  Learn = 'learn',
-  Earn = 'earn',
-  News = 'news',
-  Legal = 'legal',
-}
 
 export const getMenuItems = (pwaService: PwaService): MenuItem[] => [
   {
