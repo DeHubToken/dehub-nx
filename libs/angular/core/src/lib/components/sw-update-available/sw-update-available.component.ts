@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { SwUpdateConfig } from '@dehub/shared/config';
+import { serviceWorkerConfig } from '@dehub/shared/model';
 
 @Component({
   selector: 'dhb-sw-update-available',
@@ -53,7 +53,7 @@ export class SwUpdateAvailableComponent implements OnInit {
   @Output() update = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
-  key = SwUpdateConfig.componentKey;
+  key = serviceWorkerConfig.componentKey;
 
   constructor() {}
 
