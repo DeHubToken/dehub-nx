@@ -1,6 +1,6 @@
 import { ConnectWalletButton, useWeb3Context } from '@dehub/react/core';
 import { BalanceInput, Box, Text } from '@dehub/react/ui';
-import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/config';
+import { DEHUB_DECIMALS, DEHUB_DISPLAY_DECIMALS } from '@dehub/shared/model';
 import {
   BIG_ZERO,
   ethersToBigNumber,
