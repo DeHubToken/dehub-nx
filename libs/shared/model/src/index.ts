@@ -7,6 +7,7 @@ export * from './lib/dehub-moralis.model';
 export * from './lib/freya.model';
 export * from './lib/location.model';
 export * from './lib/moralis.model';
+export * from './lib/network.model';
 export * from './lib/prime.model';
 export * from './lib/service-worker.model';
 export * from './lib/shop.model';
