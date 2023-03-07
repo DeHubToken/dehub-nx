@@ -17,9 +17,9 @@ import {
   LoggerDehubToken,
   MoralisToken,
 } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
 import {
   DeHubConnector,
+  SharedEnv,
   WalletConnectingState,
   WalletConnectState,
 } from '@dehub/shared/model';

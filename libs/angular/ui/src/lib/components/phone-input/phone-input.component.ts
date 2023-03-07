@@ -19,8 +19,7 @@ import {
 } from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { PhoneNumberValidator } from '@dehub/angular/util';
-import { SharedEnv } from '@dehub/shared/config';
-import { Country } from '@dehub/shared/model';
+import { Country, SharedEnv } from '@dehub/shared/model';
 import {
   PhoneNumber,
   PhoneNumberFormat,

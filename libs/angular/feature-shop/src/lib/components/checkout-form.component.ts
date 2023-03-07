@@ -17,7 +17,6 @@ import {
   LoggerDehubToken,
   MoralisToken,
 } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
 import {
   Contacts,
   Currency,
@@ -25,6 +24,7 @@ import {
   OrderStatus,
   PhysicalAddress,
   ProductCheckoutDetail,
+  SharedEnv,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {

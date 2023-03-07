@@ -20,8 +20,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
-import { Country, PhysicalAddress } from '@dehub/shared/model';
+import { Country, PhysicalAddress, SharedEnv } from '@dehub/shared/model';
 import {
   BehaviorSubject,
   distinctUntilChanged,

@@ -2,8 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { AnnouncementCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { AnnouncementComponent } from '@dehub/angular/ui/components/announcement';
-import { SharedEnv } from '@dehub/shared/config';
-import { AnnouncementFragment } from '@dehub/shared/model';
+import { AnnouncementFragment, SharedEnv } from '@dehub/shared/model';
 import { DialogService } from 'primeng/dynamicdialog';
 import { filter, map, takeWhile } from 'rxjs';
 @Injectable({ providedIn: 'root' })

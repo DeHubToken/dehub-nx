@@ -6,7 +6,7 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client/core';
 import { ApolloCacheToken, EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
+import { SharedEnv } from '@dehub/shared/model';
 import { createApolloCache, createApolloClient } from '@dehub/shared/utils';
 import { ApolloModule, APOLLO_FLAGS, APOLLO_OPTIONS } from 'apollo-angular';
 

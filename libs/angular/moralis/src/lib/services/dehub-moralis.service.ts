@@ -8,7 +8,6 @@ import {
   LoggerDehubMoralisToken,
   MoralisToken,
 } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
 import {
   CheckOrderParams,
   CheckOrderResponse,
@@ -19,6 +18,7 @@ import {
   MoralisClass,
   MoralisFunctions,
   networks,
+  SharedEnv,
   ShopContractPropsType,
   ShopContractResponse,
   ShopOrdersParams,

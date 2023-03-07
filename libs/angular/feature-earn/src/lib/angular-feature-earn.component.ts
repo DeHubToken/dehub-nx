@@ -6,8 +6,7 @@ import {
 } from '@angular/core';
 import { PageEarnCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
-import { PageEarnFragment } from '@dehub/shared/model';
+import { PageEarnFragment, SharedEnv } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';
 
 @Component({

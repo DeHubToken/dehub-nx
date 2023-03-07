@@ -7,8 +7,7 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { ContentfulEnv } from '@dehub/shared/config';
-import { SysFragment } from '@dehub/shared/model';
+import { ContentfulEnv, SysFragment } from '@dehub/shared/model';
 import { GraphQLErrorExtensions } from 'graphql';
 
 export const createApolloClient = (

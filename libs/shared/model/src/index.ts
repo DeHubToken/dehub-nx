@@ -4,6 +4,7 @@ export * from './lib/contentful.model';
 export * from './lib/contract.model';
 export * from './lib/decimal.model';
 export * from './lib/dehub-moralis.model';
+export * from './lib/environments';
 export * from './lib/freya.model';
 export * from './lib/location.model';
 export * from './lib/moralis.model';

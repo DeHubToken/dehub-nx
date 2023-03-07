@@ -6,8 +6,11 @@ import {
 } from '@angular/core';
 import { PageGameCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
-import { PageGameFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
+import {
+  PageGameFragment,
+  SharedEnv,
+  SwiperResponsiveOptions,
+} from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';
 @Component({
   template: `

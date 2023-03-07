@@ -1,4 +1,4 @@
-import { Web3Env } from '@dehub/shared/config';
+import { Web3Env } from '@dehub/shared/model';
 import { Web3Provider } from '@ethersproject/providers';
 import { Web3ReactProvider } from '@web3-react/core';
 import { PropsWithChildren, useCallback } from 'react';

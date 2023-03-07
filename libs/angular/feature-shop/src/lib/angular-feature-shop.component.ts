@@ -6,8 +6,11 @@ import {
 } from '@angular/core';
 import { PageShopCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
-import { PageShopFragment, SwiperResponsiveOptions } from '@dehub/shared/model';
+import {
+  PageShopFragment,
+  SharedEnv,
+  SwiperResponsiveOptions,
+} from '@dehub/shared/model';
 import { publishReplayRefCount } from '@dehub/shared/utils';
 import { MenuItem } from 'primeng/api';
 import { filter, map, Observable } from 'rxjs';
