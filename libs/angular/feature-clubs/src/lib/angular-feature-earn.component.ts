@@ -26,7 +26,7 @@ import { map, Observable } from 'rxjs';
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureEarnComponent implements OnInit {
+export class AngularFeatureClubsComponent implements OnInit {
   pageEarn$?: Observable<PageEarnFragment | undefined>;
 
   path = this.env.baseUrl;

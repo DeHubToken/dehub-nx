@@ -3,7 +3,7 @@
   "projects": {
     "angular-core": "libs/angular/core",
     "angular-feature-auth": "libs/angular/feature-auth",
-    "angular-feature-earn": "libs/angular/feature-earn",
+    "angular-feature-clubs": "libs/angular/feature-clubs",
     "angular-feature-game": "libs/angular/feature-game",
     "angular-feature-home": "libs/angular/feature-home",
     "angular-feature-learn": "libs/angular/feature-learn",

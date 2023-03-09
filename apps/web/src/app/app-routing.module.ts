@@ -180,8 +180,8 @@ const routerExtraOptions: ExtraOptions = {
             {
               path: NavigationTabMenu.Earn,
               loadChildren: () =>
-                import('@dehub/angular/feature-earn').then(
-                  module => module.AngularFeatureEarnModule
+                import('@dehub/angular/feature-clubs').then(
+                  module => module.AngularFeatureClubsModule
                 ),
             },
             {
