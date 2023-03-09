@@ -1,4 +1,4 @@
-fragment PageEarn on PageEarn {
+fragment PageClubs on PageClubs {
   sys {
     ...Sys
   }

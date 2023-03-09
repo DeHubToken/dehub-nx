@@ -1,0 +1,7 @@
+query pageClubsCollection($isPreview: Boolean = false) {
+  pageClubsCollection(limit: 2, preview: $isPreview) {
+    items {
+      ...PageClubs
+    }
+  }
+}

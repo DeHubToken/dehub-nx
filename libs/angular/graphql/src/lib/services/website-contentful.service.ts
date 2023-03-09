@@ -64,11 +64,11 @@ export class LegalPostCollectionBySlugService extends Apollo.Query<
 @Injectable({
   providedIn: AngularGraphQLModule,
 })
-export class PageEarnCollectionService extends Apollo.Query<
-  models.PageEarnCollectionQuery,
-  models.PageEarnCollectionQueryVariables
+export class PageClubsCollectionService extends Apollo.Query<
+  models.PageClubsCollectionQuery,
+  models.PageClubsCollectionQueryVariables
 > {
-  document = models.PageEarnCollectionDocument;
+  document = models.PageClubsCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

@@ -442,8 +442,8 @@ export const PageSectionSectionPostsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${SectionPostFragmentDoc}
 `;
-export const PageEarnFragmentDoc = gql`
-  fragment PageEarn on PageEarn {
+export const PageClubsFragmentDoc = gql`
+  fragment PageClubs on PageClubs {
     sys {
       ...Sys
     }
@@ -1086,66 +1086,66 @@ export type LegalPostCollectionBySlugQueryResult = Apollo.QueryResult<
   models.LegalPostCollectionBySlugQuery,
   models.LegalPostCollectionBySlugQueryVariables
 >;
-export const PageEarnCollectionDocument = gql`
-  query pageEarnCollection($isPreview: Boolean = false) {
-    pageEarnCollection(limit: 2, preview: $isPreview) {
+export const PageClubsCollectionDocument = gql`
+  query pageClubsCollection($isPreview: Boolean = false) {
+    pageClubsCollection(limit: 2, preview: $isPreview) {
       items {
-        ...PageEarn
+        ...PageClubs
       }
     }
   }
-  ${PageEarnFragmentDoc}
+  ${PageClubsFragmentDoc}
 `;
 
 /**
- * __usePageEarnCollectionQuery__
+ * __usePageClubsCollectionQuery__
  *
- * To run a query within a React component, call `usePageEarnCollectionQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageEarnCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePageClubsCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageClubsCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePageEarnCollectionQuery({
+ * const { data, loading, error } = usePageClubsCollectionQuery({
  *   variables: {
  *      isPreview: // value for 'isPreview'
  *   },
  * });
  */
-export function usePageEarnCollectionQuery(
+export function usePageClubsCollectionQuery(
   baseOptions?: Apollo.QueryHookOptions<
-    models.PageEarnCollectionQuery,
-    models.PageEarnCollectionQueryVariables
+    models.PageClubsCollectionQuery,
+    models.PageClubsCollectionQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
-    models.PageEarnCollectionQuery,
-    models.PageEarnCollectionQueryVariables
-  >(PageEarnCollectionDocument, options);
+    models.PageClubsCollectionQuery,
+    models.PageClubsCollectionQueryVariables
+  >(PageClubsCollectionDocument, options);
 }
-export function usePageEarnCollectionLazyQuery(
+export function usePageClubsCollectionLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    models.PageEarnCollectionQuery,
-    models.PageEarnCollectionQueryVariables
+    models.PageClubsCollectionQuery,
+    models.PageClubsCollectionQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
-    models.PageEarnCollectionQuery,
-    models.PageEarnCollectionQueryVariables
-  >(PageEarnCollectionDocument, options);
+    models.PageClubsCollectionQuery,
+    models.PageClubsCollectionQueryVariables
+  >(PageClubsCollectionDocument, options);
 }
-export type PageEarnCollectionQueryHookResult = ReturnType<
-  typeof usePageEarnCollectionQuery
+export type PageClubsCollectionQueryHookResult = ReturnType<
+  typeof usePageClubsCollectionQuery
 >;
-export type PageEarnCollectionLazyQueryHookResult = ReturnType<
-  typeof usePageEarnCollectionLazyQuery
+export type PageClubsCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageClubsCollectionLazyQuery
 >;
-export type PageEarnCollectionQueryResult = Apollo.QueryResult<
-  models.PageEarnCollectionQuery,
-  models.PageEarnCollectionQueryVariables
+export type PageClubsCollectionQueryResult = Apollo.QueryResult<
+  models.PageClubsCollectionQuery,
+  models.PageClubsCollectionQueryVariables
 >;
 export const PageGameCollectionDocument = gql`
   query pageGameCollection($isPreview: Boolean = false) {

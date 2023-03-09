@@ -752,7 +752,7 @@ export interface CallToActionLinkingCollections {
   __typename?: 'CallToActionLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
   footerCollection?: Maybe<FooterCollection>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
@@ -774,7 +774,7 @@ export interface CallToActionLinkingCollectionsFooterCollectionArgs {
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export interface CallToActionLinkingCollectionsPageEarnCollectionArgs {
+export interface CallToActionLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -2416,92 +2416,92 @@ export enum LegalPostOrder {
   TitleDesc = 'title_DESC',
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarn extends Entry {
-  __typename?: 'PageEarn';
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubs extends Entry {
+  __typename?: 'PageClubs';
   contentfulMetadata: ContentfulMetadata;
-  ctasCollection?: Maybe<PageEarnCtasCollection>;
+  ctasCollection?: Maybe<PageClubsCtasCollection>;
   headerAlignCenter?: Maybe<Scalars['Boolean']>;
   headerColumnWidth?: Maybe<Scalars['String']>;
-  linkedFrom?: Maybe<PageEarnLinkingCollections>;
+  linkedFrom?: Maybe<PageClubsLinkingCollections>;
   mainTitle?: Maybe<Scalars['String']>;
-  sectionsCollection?: Maybe<PageEarnSectionsCollection>;
+  sectionsCollection?: Maybe<PageClubsSectionsCollection>;
   showSubtitle?: Maybe<Scalars['Boolean']>;
   showTitle?: Maybe<Scalars['Boolean']>;
   subtitle?: Maybe<Scalars['String']>;
   sys: Sys;
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarnCtasCollectionArgs {
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubsCtasCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarnHeaderAlignCenterArgs {
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubsHeaderAlignCenterArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarnHeaderColumnWidthArgs {
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubsHeaderColumnWidthArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarnLinkedFromArgs {
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubsLinkedFromArgs {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarnMainTitleArgs {
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubsMainTitleArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarnSectionsCollectionArgs {
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubsSectionsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarnShowSubtitleArgs {
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubsShowSubtitleArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarnShowTitleArgs {
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubsShowTitleArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
-/** Earn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageEarn) */
-export interface PageEarnSubtitleArgs {
+/** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
+export interface PageClubsSubtitleArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
-export interface PageEarnCollection {
-  __typename?: 'PageEarnCollection';
-  items: Array<Maybe<PageEarn>>;
+export interface PageClubsCollection {
+  __typename?: 'PageClubsCollection';
+  items: Array<Maybe<PageClubs>>;
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
 }
 
-export interface PageEarnCtasCollection {
-  __typename?: 'PageEarnCtasCollection';
+export interface PageClubsCtasCollection {
+  __typename?: 'PageClubsCtasCollection';
   items: Array<Maybe<CallToAction>>;
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
 }
 
-export interface PageEarnFilter {
-  AND?: InputMaybe<Array<InputMaybe<PageEarnFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<PageEarnFilter>>>;
+export interface PageClubsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageClubsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageClubsFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   ctasCollection_exists?: InputMaybe<Scalars['Boolean']>;
   headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
@@ -2538,19 +2538,19 @@ export interface PageEarnFilter {
   sys?: InputMaybe<SysFilter>;
 }
 
-export interface PageEarnLinkingCollections {
-  __typename?: 'PageEarnLinkingCollections';
+export interface PageClubsLinkingCollections {
+  __typename?: 'PageClubsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
 }
 
-export interface PageEarnLinkingCollectionsEntryCollectionArgs {
+export interface PageClubsLinkingCollectionsEntryCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export enum PageEarnOrder {
+export enum PageClubsOrder {
   HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
   HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
   HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
@@ -2573,15 +2573,15 @@ export enum PageEarnOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
-export interface PageEarnSectionsCollection {
-  __typename?: 'PageEarnSectionsCollection';
-  items: Array<Maybe<PageEarnSectionsItem>>;
+export interface PageClubsSectionsCollection {
+  __typename?: 'PageClubsSectionsCollection';
+  items: Array<Maybe<PageClubsSectionsItem>>;
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
 }
 
-export type PageEarnSectionsItem =
+export type PageClubsSectionsItem =
   | PageSectionBasicPosts
   | PageSectionDappPosts
   | PageSectionFaQs
@@ -3209,7 +3209,7 @@ export interface PageSectionBasicPostsHandpickedPostsCollection {
 export interface PageSectionBasicPostsLinkingCollections {
   __typename?: 'PageSectionBasicPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
@@ -3224,7 +3224,7 @@ export interface PageSectionBasicPostsLinkingCollectionsEntryCollectionArgs {
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export interface PageSectionBasicPostsLinkingCollectionsPageEarnCollectionArgs {
+export interface PageSectionBasicPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3354,7 +3354,7 @@ export interface PageSectionDappPostsHandpickedPostsCollection {
 export interface PageSectionDappPostsLinkingCollections {
   __typename?: 'PageSectionDappPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
@@ -3368,7 +3368,7 @@ export interface PageSectionDappPostsLinkingCollectionsEntryCollectionArgs {
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export interface PageSectionDappPostsLinkingCollectionsPageEarnCollectionArgs {
+export interface PageSectionDappPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3491,7 +3491,7 @@ export interface PageSectionFaQsHandpickedFaqGroupsCollection {
 export interface PageSectionFaQsLinkingCollections {
   __typename?: 'PageSectionFaQsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
@@ -3505,7 +3505,7 @@ export interface PageSectionFaQsLinkingCollectionsEntryCollectionArgs {
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export interface PageSectionFaQsLinkingCollectionsPageEarnCollectionArgs {
+export interface PageSectionFaQsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3635,7 +3635,7 @@ export interface PageSectionFeaturePostsHandpickedPostsCollection {
 export interface PageSectionFeaturePostsLinkingCollections {
   __typename?: 'PageSectionFeaturePostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
@@ -3650,7 +3650,7 @@ export interface PageSectionFeaturePostsLinkingCollectionsEntryCollectionArgs {
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export interface PageSectionFeaturePostsLinkingCollectionsPageEarnCollectionArgs {
+export interface PageSectionFeaturePostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3796,7 +3796,7 @@ export interface PageSectionGrandPostsHandpickedPostsCollection {
 export interface PageSectionGrandPostsLinkingCollections {
   __typename?: 'PageSectionGrandPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
@@ -3811,7 +3811,7 @@ export interface PageSectionGrandPostsLinkingCollectionsEntryCollectionArgs {
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export interface PageSectionGrandPostsLinkingCollectionsPageEarnCollectionArgs {
+export interface PageSectionGrandPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3959,7 +3959,7 @@ export interface PageSectionIconTilesHandpickedIconTilesCollection {
 export interface PageSectionIconTilesLinkingCollections {
   __typename?: 'PageSectionIconTilesLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
@@ -3974,7 +3974,7 @@ export interface PageSectionIconTilesLinkingCollectionsEntryCollectionArgs {
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export interface PageSectionIconTilesLinkingCollectionsPageEarnCollectionArgs {
+export interface PageSectionIconTilesLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -4366,7 +4366,7 @@ export interface PageSectionSectionPostsHandpickedPostsCollection {
 export interface PageSectionSectionPostsLinkingCollections {
   __typename?: 'PageSectionSectionPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
@@ -4381,7 +4381,7 @@ export interface PageSectionSectionPostsLinkingCollectionsEntryCollectionArgs {
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export interface PageSectionSectionPostsLinkingCollectionsPageEarnCollectionArgs {
+export interface PageSectionSectionPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -4518,7 +4518,7 @@ export interface PageSectionThumbnailPostsHandpickedPostsCollection {
 export interface PageSectionThumbnailPostsLinkingCollections {
   __typename?: 'PageSectionThumbnailPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
@@ -4533,7 +4533,7 @@ export interface PageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs 
   skip?: InputMaybe<Scalars['Int']>;
 }
 
-export interface PageSectionThumbnailPostsLinkingCollectionsPageEarnCollectionArgs {
+export interface PageSectionThumbnailPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -5537,8 +5537,8 @@ export interface Query {
   iconTileCollection?: Maybe<IconTileCollection>;
   legalPost?: Maybe<LegalPost>;
   legalPostCollection?: Maybe<LegalPostCollection>;
-  pageEarn?: Maybe<PageEarn>;
-  pageEarnCollection?: Maybe<PageEarnCollection>;
+  pageClubs?: Maybe<PageClubs>;
+  pageClubsCollection?: Maybe<PageClubsCollection>;
   pageGame?: Maybe<PageGame>;
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHome?: Maybe<PageHome>;
@@ -5832,19 +5832,19 @@ export interface QueryLegalPostCollectionArgs {
   where?: InputMaybe<LegalPostFilter>;
 }
 
-export interface QueryPageEarnArgs {
+export interface QueryPageClubsArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
 }
 
-export interface QueryPageEarnCollectionArgs {
+export interface QueryPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<Array<InputMaybe<PageEarnOrder>>>;
+  order?: InputMaybe<Array<InputMaybe<PageClubsOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageEarnFilter>;
+  where?: InputMaybe<PageClubsFilter>;
 }
 
 export interface QueryPageGameArgs {
@@ -7054,8 +7054,8 @@ export type LegalPostFragment = {
   description?: { __typename?: 'LegalPostDescription'; json: any };
 };
 
-export type PageEarnFragment = {
-  __typename?: 'PageEarn';
+export type PageClubsFragment = {
+  __typename?: 'PageClubs';
   mainTitle?: string;
   showTitle?: boolean;
   subtitle?: string;
@@ -7069,7 +7069,7 @@ export type PageEarnFragment = {
     id: string;
   };
   ctasCollection?: {
-    __typename?: 'PageEarnCtasCollection';
+    __typename?: 'PageClubsCtasCollection';
     items: Array<{
       __typename?: 'CallToAction';
       label?: string;
@@ -7088,7 +7088,7 @@ export type PageEarnFragment = {
     }>;
   };
   sectionsCollection?: {
-    __typename?: 'PageEarnSectionsCollection';
+    __typename?: 'PageClubsSectionsCollection';
     items: Array<
       | {
           __typename: 'PageSectionBasicPosts';
@@ -10717,16 +10717,16 @@ export type LegalPostCollectionBySlugQuery = {
   };
 };
 
-export type PageEarnCollectionQueryVariables = Exact<{
+export type PageClubsCollectionQueryVariables = Exact<{
   isPreview?: InputMaybe<Scalars['Boolean']>;
 }>;
 
-export type PageEarnCollectionQuery = {
+export type PageClubsCollectionQuery = {
   __typename?: 'Query';
-  pageEarnCollection?: {
-    __typename?: 'PageEarnCollection';
+  pageClubsCollection?: {
+    __typename?: 'PageClubsCollection';
     items: Array<{
-      __typename?: 'PageEarn';
+      __typename?: 'PageClubs';
       mainTitle?: string;
       showTitle?: boolean;
       subtitle?: string;
@@ -10740,7 +10740,7 @@ export type PageEarnCollectionQuery = {
         id: string;
       };
       ctasCollection?: {
-        __typename?: 'PageEarnCtasCollection';
+        __typename?: 'PageClubsCtasCollection';
         items: Array<{
           __typename?: 'CallToAction';
           label?: string;
@@ -10759,7 +10759,7 @@ export type PageEarnCollectionQuery = {
         }>;
       };
       sectionsCollection?: {
-        __typename?: 'PageEarnSectionsCollection';
+        __typename?: 'PageClubsSectionsCollection';
         items: Array<
           | {
               __typename: 'PageSectionBasicPosts';
@@ -14004,8 +14004,8 @@ export const PageSectionSectionPostsFragmentDoc = gql`
   ${SysFragmentDoc}
   ${SectionPostFragmentDoc}
 `;
-export const PageEarnFragmentDoc = gql`
-  fragment PageEarn on PageEarn {
+export const PageClubsFragmentDoc = gql`
+  fragment PageClubs on PageClubs {
     sys {
       ...Sys
     }
@@ -14441,15 +14441,15 @@ export const LegalPostCollectionBySlugDocument = gql`
   }
   ${LegalPostFragmentDoc}
 `;
-export const PageEarnCollectionDocument = gql`
-  query pageEarnCollection($isPreview: Boolean = false) {
-    pageEarnCollection(limit: 2, preview: $isPreview) {
+export const PageClubsCollectionDocument = gql`
+  query pageClubsCollection($isPreview: Boolean = false) {
+    pageClubsCollection(limit: 2, preview: $isPreview) {
       items {
-        ...PageEarn
+        ...PageClubs
       }
     }
   }
-  ${PageEarnFragmentDoc}
+  ${PageClubsFragmentDoc}
 `;
 export const PageGameCollectionDocument = gql`
   query pageGameCollection($isPreview: Boolean = false) {
@@ -14589,18 +14589,18 @@ export function getSdk(
         'query'
       );
     },
-    pageEarnCollection(
-      variables?: PageEarnCollectionQueryVariables,
+    pageClubsCollection(
+      variables?: PageClubsCollectionQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<PageEarnCollectionQuery> {
+    ): Promise<PageClubsCollectionQuery> {
       return withWrapper(
         wrappedRequestHeaders =>
-          client.request<PageEarnCollectionQuery>(
-            PageEarnCollectionDocument,
+          client.request<PageClubsCollectionQuery>(
+            PageClubsCollectionDocument,
             variables,
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
-        'pageEarnCollection',
+        'pageClubsCollection',
         'query'
       );
     },
