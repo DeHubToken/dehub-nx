@@ -5,8 +5,8 @@ import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
 import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
 import { LetModule } from '@rx-angular/template/let';
-import { AngularFeatureClubsRoutingModule } from './angular-feature-earn-routing.module';
-import { AngularFeatureClubsComponent } from './angular-feature-earn.component';
+import { AngularFeatureClubsRoutingModule } from './angular-feature-clubs-routing.module';
+import { AngularFeatureClubsComponent } from './angular-feature-clubs.component';
 @NgModule({
   imports: [
     // Angular

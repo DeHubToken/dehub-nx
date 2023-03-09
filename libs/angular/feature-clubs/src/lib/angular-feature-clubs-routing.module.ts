@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularFeatureClubsComponent } from './angular-feature-earn.component';
+import { AngularFeatureClubsComponent } from './angular-feature-clubs.component';
 
 const routes: Routes = [
   {

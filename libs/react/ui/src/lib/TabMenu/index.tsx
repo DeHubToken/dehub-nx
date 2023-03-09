@@ -8,7 +8,7 @@ export enum NavigationTabMenu {
   Game = 'Game',
   Shop = 'Shop',
   Learn = 'Learn',
-  Earn = 'Earn',
+  Clubs = 'Clubs',
   News = 'News',
   Legal = 'Legal',
 }
@@ -40,9 +40,9 @@ export const tabMenuItems: MenuItem[] = [
     url: 'https://dehub.net/web/learn',
   },
   {
-    label: NavigationTabMenu.Earn,
-    icon: 'fad fa-coins',
-    url: 'https://dehub.net/web/earn',
+    label: NavigationTabMenu.Clubs,
+    icon: 'fad fa-people-group',
+    url: 'https://dehub.net/web/clubs',
   },
 ];
 

@@ -12,7 +12,7 @@ enum NavigationTabMenu {
   Game = 'game',
   Shop = 'shop',
   Learn = 'learn',
-  Earn = 'earn',
+  Clubs = 'clubs',
   News = 'news',
   Legal = 'legal',
 }
@@ -94,9 +94,9 @@ export const tabMenuItems: MenuItem[] = [
     routerLink: [NavigationTabMenu.Learn],
   },
   {
-    label: 'Earn',
-    icon: 'fad fa-coins',
-    routerLink: [NavigationTabMenu.Earn],
+    label: 'Clubs',
+    icon: 'fad fa-people-group',
+    routerLink: [NavigationTabMenu.Clubs],
   },
 ];
 
@@ -178,7 +178,7 @@ const routerExtraOptions: ExtraOptions = {
                 ),
             },
             {
-              path: NavigationTabMenu.Earn,
+              path: NavigationTabMenu.Clubs,
               loadChildren: () =>
                 import('@dehub/angular/feature-clubs').then(
                   module => module.AngularFeatureClubsModule
