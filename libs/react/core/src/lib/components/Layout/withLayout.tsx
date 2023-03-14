@@ -25,12 +25,14 @@ const withLayout =
   <P extends object>(
     {
       baseUrl = '/',
+      landing,
       pageTitle = 'DeHub D’App',
       cexUrl,
       downloadWalletUrl,
       activeTab,
     }: {
       baseUrl?: string;
+      landing: string;
       pageTitle?: string;
       cexUrl: string;
       downloadWalletUrl: string;
@@ -127,7 +129,7 @@ const withLayout =
             }}
           />
           <div className="layout-content py-0">
-            <TabMenu activeTab={activeTab} />
+            <TabMenu activeTab={activeTab} landing={landing} />
           </div>
 
           <div className="layout-main">

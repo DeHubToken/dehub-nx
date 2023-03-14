@@ -57,39 +57,6 @@ export const getMenuItems = (pwaService: PwaService): MenuItem[] => [
   },
 ];
 
-export const tabMenuItems: MenuItem[] = [
-  {
-    label: 'Home',
-    icon: 'fad fa-home',
-    routerLink: [NavigationTabMenu.Home],
-  },
-  {
-    label: 'Stream',
-    icon: 'fad fa-tv',
-    routerLink: [NavigationTabMenu.Stream],
-  },
-  {
-    label: 'Game',
-    icon: 'fad fa-gamepad-alt',
-    routerLink: [NavigationTabMenu.Game],
-  },
-  {
-    label: 'Shop',
-    icon: 'fad fa-shopping-bag',
-    routerLink: [NavigationTabMenu.Shop],
-  },
-  {
-    label: 'Learn',
-    icon: 'fad fa-lightbulb-on',
-    routerLink: [NavigationTabMenu.Learn],
-  },
-  {
-    label: 'Earn',
-    icon: 'fad fa-coins',
-    routerLink: [NavigationTabMenu.Earn],
-  },
-];
-
 /**
  * Router extra options
  * Docs: https://angular.io/api/router/ExtraOptions

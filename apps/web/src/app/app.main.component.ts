@@ -3,9 +3,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { FooterCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { FooterFragment, SharedEnv } from '@dehub/shared/model';
+import { getTabMenuItems } from '@dehub/shared/utils';
 import { MenuItem } from 'primeng/api';
 import { filter, map, Observable, Subscription } from 'rxjs';
-import { tabMenuItems } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuService } from './topbar/menu/app.menu.service';
 
@@ -29,7 +29,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
 
   /** Can be undefined if none of the tab menu items is active */
   activeMenuItem?: MenuItem;
-  tabMenuItems = tabMenuItems;
+  tabMenuItems = getTabMenuItems(this.env.dehub.landing);
   private sub: Subscription;
 
   footer$?: Observable<FooterFragment | undefined>;
@@ -50,7 +50,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
       .pipe(filter(isNavigationEnd))
       .subscribe(
         ({ url }) =>
-          (this.activeMenuItem = tabMenuItems.find(
+          (this.activeMenuItem = this.tabMenuItems.find(
             ({ routerLink }) => routerLink && url.includes(routerLink[0])
           ))
       );
