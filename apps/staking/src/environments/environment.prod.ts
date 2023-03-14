@@ -6,4 +6,9 @@ export const environment: Env = {
   ...defaultSharedProdEnv,
 
   baseUrl: '/staking',
+
+  dehub: {
+    ...defaultSharedProdEnv.dehub,
+    landing: 'https://dehub.net/web',
+  },
 };

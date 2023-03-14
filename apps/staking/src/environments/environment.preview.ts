@@ -6,6 +6,11 @@ export const environment: Env = {
   ...defaultEnv,
   ...inheritPreviewEnvFrom(prodEnv),
 
+  dehub: {
+    ...inheritPreviewEnvFrom(prodEnv).dehub,
+    landing: 'https://preview.dehub.net/web',
+  },
+
   // Preview should use Testnet
   web3: { ...defaultEnv.web3 },
 };

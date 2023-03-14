@@ -16,7 +16,10 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 });
 
-const { baseUrl } = environment;
+const {
+  baseUrl,
+  dehub: { landing },
+} = environment;
 const pageTitle = 'DeHub Staking';
 const { cexUrl, downloadWalletUrl } = environment.dehub;
 const activeTab = NavigationTabMenu.Earn;
@@ -34,6 +37,7 @@ export function App() {
       withLayout(
         {
           baseUrl,
+          landing,
           pageTitle,
           cexUrl,
           downloadWalletUrl,
