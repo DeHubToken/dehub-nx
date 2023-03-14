@@ -1,4 +1,4 @@
-import { inheritPreviewEnvFrom } from '@dehub/shared/config';
+import { inheritPreviewEnvFrom } from '@dehub/shared/model';
 import { defaultEnv, Env } from './env';
 import { environment as prodEnv } from './environment.prod';
 

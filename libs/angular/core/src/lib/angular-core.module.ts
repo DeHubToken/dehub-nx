@@ -9,7 +9,7 @@ import {
   LoggerMoralisToken,
   ScopeToken,
 } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
+import { SharedEnv } from '@dehub/shared/model';
 import { LetModule } from '@rx-angular/template/let';
 import { PushModule } from '@rx-angular/template/push';
 import { MessageService } from 'primeng/api';

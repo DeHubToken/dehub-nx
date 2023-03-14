@@ -7,8 +7,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { LegalPostCollectionBySlugService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
-import { LegalPostFragment } from '@dehub/shared/model';
+import { LegalPostFragment, SharedEnv } from '@dehub/shared/model';
 import { filterNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { map, Observable, switchMap } from 'rxjs';

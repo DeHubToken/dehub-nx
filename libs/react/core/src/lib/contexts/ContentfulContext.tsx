@@ -1,6 +1,5 @@
 import { ApolloClient, ApolloProvider } from '@apollo/client';
-import { ContentfulEnv } from '@dehub/shared/config';
-import { FooterFragment } from '@dehub/shared/model';
+import { ContentfulEnv, FooterFragment } from '@dehub/shared/model';
 import { createApolloClient } from '@dehub/shared/utils';
 import React, { createContext, PropsWithChildren, useMemo } from 'react';
 import { useFooterCollectionQuery } from '../hooks';

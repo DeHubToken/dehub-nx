@@ -1,4 +1,4 @@
-import { defaultSharedDevEnv, SharedEnv } from '@dehub/shared/config';
+import { defaultSharedDevEnv, SharedEnv } from '@dehub/shared/model';
 
 export interface Env extends SharedEnv {
   dappName: {

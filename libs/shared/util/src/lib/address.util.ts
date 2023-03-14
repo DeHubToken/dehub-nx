@@ -1,4 +1,3 @@
-import { emptyRequiredField } from '@dehub/shared/config';
 import { PhysicalAddress } from '@dehub/shared/model';
 import { getAddress } from '@ethersproject/address';
 import { isEqual } from 'lodash';
@@ -31,13 +30,13 @@ export const shortenAddress = (address: string, chars = 4): string => {
 };
 
 export const emptyPhysicalAddress = (): PhysicalAddress => ({
-  name: emptyRequiredField,
-  line1: emptyRequiredField,
-  line2: emptyRequiredField,
-  city: emptyRequiredField,
-  country: emptyRequiredField,
-  postalCode: emptyRequiredField,
-  state: emptyRequiredField,
+  name: ' ',
+  line1: ' ',
+  line2: ' ',
+  city: ' ',
+  country: ' ',
+  postalCode: ' ',
+  state: ' ',
 });
 
 export const isEmptyPhysicalAddress = (physicalAddress?: PhysicalAddress) =>

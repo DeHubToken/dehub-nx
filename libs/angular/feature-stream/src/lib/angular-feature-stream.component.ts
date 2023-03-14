@@ -6,9 +6,9 @@ import {
 } from '@angular/core';
 import { PageStreamCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
 import {
   PageStreamFragment,
+  SharedEnv,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';

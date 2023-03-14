@@ -1,9 +1,6 @@
 import { useEagerWeb3, withLayout } from '@dehub/react/core';
-import {
-  FullScreenLoader,
-  NavigationTabMenu,
-  SuspenseWithChunkError,
-} from '@dehub/react/ui';
+import { FullScreenLoader, SuspenseWithChunkError } from '@dehub/react/ui';
+import { NavigationTabMenu } from '@dehub/shared/model';
 import BigNumber from 'bignumber.js';
 import { lazy, useMemo } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';

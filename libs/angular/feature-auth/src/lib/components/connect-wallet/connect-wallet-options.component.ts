@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
 import {
   DeHubConnector,
+  SharedEnv,
   WalletConnectingState,
   WalletConnectState,
 } from '@dehub/shared/model';

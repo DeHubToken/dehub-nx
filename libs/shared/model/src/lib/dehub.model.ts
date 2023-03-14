@@ -1,0 +1,10 @@
+export enum NavigationTabMenu {
+  Home = 'home',
+  Stream = 'stream',
+  Game = 'game',
+  Shop = 'shop',
+  Learn = 'learn',
+  Clubs = 'clubs',
+  News = 'news',
+  Legal = 'legal',
+}

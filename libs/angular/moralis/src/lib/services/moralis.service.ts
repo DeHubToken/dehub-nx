@@ -6,7 +6,6 @@ import {
   LoggerMoralisToken,
 } from '@dehub/angular/model';
 import Bep20Abi from '@dehub/shared/asset/dehub/abis/erc20.json';
-import { SharedEnv } from '@dehub/shared/config';
 import {
   Attributes,
   ChainId,
@@ -21,6 +20,7 @@ import {
   MoralisConnectorNames,
   MoralisMessage,
   MoralisUser,
+  SharedEnv,
   WalletConnectingMessage,
   WalletConnectingState,
   WalletConnectState,

@@ -22,7 +22,6 @@
     "react-ui": "libs/react/ui",
     "shared-asset-dehub": "libs/shared/asset/dehub",
     "shared-asset-freya": "libs/shared/asset/freya",
-    "shared-config": "libs/shared/config",
     "shared-model": "libs/shared/model",
     "shared-util": "libs/shared/util",
     "staking": "apps/staking",

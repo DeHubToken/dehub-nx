@@ -6,8 +6,7 @@ import {
 } from '@angular/core';
 import { PageClubsCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
-import { PageClubsFragment } from '@dehub/shared/model';
+import { PageClubsFragment, SharedEnv } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';
 
 @Component({

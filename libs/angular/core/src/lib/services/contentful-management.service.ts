@@ -7,10 +7,10 @@ import {
   ILoggerService,
   LoggerContentfulToken,
 } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
 import {
   ProductAvailableQuantityFragment,
   ProductAvailableQuantityFragmentDoc,
+  SharedEnv,
 } from '@dehub/shared/model';
 import { isContentfulEntityChanged } from '@dehub/shared/utils';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';

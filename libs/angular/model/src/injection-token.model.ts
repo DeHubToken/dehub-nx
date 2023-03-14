@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { InMemoryCache } from '@apollo/client';
-import { SharedEnv } from '@dehub/shared/config';
+import { SharedEnv } from '@dehub/shared/model';
 import {
   IContentFulManagementService,
   IDehubMoralisService,

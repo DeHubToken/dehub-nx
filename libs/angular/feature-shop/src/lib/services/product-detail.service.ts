@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { ProductCollectionBySlugService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
-import { ProductDetailFragment } from '@dehub/shared/model';
+import { ProductDetailFragment, SharedEnv } from '@dehub/shared/model';
 
 import { filter, map, Observable } from 'rxjs';
 

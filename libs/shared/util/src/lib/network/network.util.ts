@@ -1,4 +1,4 @@
-import { Networks } from '@dehub/shared/config';
+import { networks } from '@dehub/shared/model';
 import { random } from 'lodash';
 import { Moralis } from 'moralis';
 import { decimalToHex } from './decimal-to-hex';
@@ -52,7 +52,7 @@ export const addNetwork = async (
     chainName,
     blockExplorerUrl,
     nativeCurrency: { name: currencyName, symbol: currencySymbol },
-  } = Networks[requestedChainId];
+  } = networks[requestedChainId];
 
   const rpcUrl = getRandomRpcUrlByChainId(requestedChainId);
 
@@ -78,6 +78,6 @@ export const addNetwork = async (
  * @returns random node url as rpc
  */
 export const getRandomRpcUrlByChainId = (chainId: number) => {
-  const rpcNodesByChainId = Networks[chainId].nodes;
+  const rpcNodesByChainId = networks[chainId].nodes;
   return rpcNodesByChainId[random(0, rpcNodesByChainId.length - 1)];
 };
