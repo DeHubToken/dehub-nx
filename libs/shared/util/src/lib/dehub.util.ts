@@ -26,8 +26,8 @@ export const getTabMenuItems = (
       icon: 'fad fa-lightbulb-on',
     },
     {
-      label: NavigationTabMenu.Earn,
-      icon: 'fad fa-coins',
+      label: NavigationTabMenu.Clubs,
+      icon: 'fad fa-people-group',
     },
   ].map(menuItem => ({
     ...menuItem,

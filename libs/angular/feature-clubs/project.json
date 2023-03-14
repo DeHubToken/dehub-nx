@@ -1,14 +1,15 @@
 {
-  "name": "angular-feature-earn",
+  "name": "angular-feature-clubs",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/angular/feature-earn/src",
+  "sourceRoot": "libs/angular/feature-clubs/src",
   "prefix": "dhb",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-earn"],
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-clubs"],
       "options": {
-        "jestConfig": "libs/angular/feature-earn/jest.config.ts",
+        "jestConfig": "libs/angular/feature-clubs/jest.config.ts",
         "passWithNoTests": true,
         "bail": 1
       }
@@ -17,8 +18,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/angular/feature-earn/src/**/*.ts",
-          "libs/angular/feature-earn/src/**/*.html"
+          "libs/angular/feature-clubs/src/**/*.ts",
+          "libs/angular/feature-clubs/src/**/*.html"
         ],
         "maxWarnings": 0
       }

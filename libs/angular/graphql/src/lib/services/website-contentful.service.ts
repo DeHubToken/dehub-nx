@@ -12,7 +12,7 @@ export class AnnouncementCollectionService extends Apollo.Query<
   models.AnnouncementCollectionQuery,
   models.AnnouncementCollectionQueryVariables
 > {
-  document = models.AnnouncementCollectionDocument;
+  override document = models.AnnouncementCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -26,7 +26,7 @@ export class BasicPostCollectionBySlugService extends Apollo.Query<
   models.BasicPostCollectionBySlugQuery,
   models.BasicPostCollectionBySlugQueryVariables
 > {
-  document = models.BasicPostCollectionBySlugDocument;
+  override document = models.BasicPostCollectionBySlugDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -40,7 +40,7 @@ export class FooterCollectionService extends Apollo.Query<
   models.FooterCollectionQuery,
   models.FooterCollectionQueryVariables
 > {
-  document = models.FooterCollectionDocument;
+  override document = models.FooterCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -54,7 +54,7 @@ export class LegalPostCollectionBySlugService extends Apollo.Query<
   models.LegalPostCollectionBySlugQuery,
   models.LegalPostCollectionBySlugQueryVariables
 > {
-  document = models.LegalPostCollectionBySlugDocument;
+  override document = models.LegalPostCollectionBySlugDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -64,11 +64,11 @@ export class LegalPostCollectionBySlugService extends Apollo.Query<
 @Injectable({
   providedIn: AngularGraphQLModule,
 })
-export class PageEarnCollectionService extends Apollo.Query<
-  models.PageEarnCollectionQuery,
-  models.PageEarnCollectionQueryVariables
+export class PageClubsCollectionService extends Apollo.Query<
+  models.PageClubsCollectionQuery,
+  models.PageClubsCollectionQueryVariables
 > {
-  document = models.PageEarnCollectionDocument;
+  override document = models.PageClubsCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -82,7 +82,7 @@ export class PageGameCollectionService extends Apollo.Query<
   models.PageGameCollectionQuery,
   models.PageGameCollectionQueryVariables
 > {
-  document = models.PageGameCollectionDocument;
+  override document = models.PageGameCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -96,7 +96,7 @@ export class PageHomeCollectionService extends Apollo.Query<
   models.PageHomeCollectionQuery,
   models.PageHomeCollectionQueryVariables
 > {
-  document = models.PageHomeCollectionDocument;
+  override document = models.PageHomeCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -110,7 +110,7 @@ export class PageLearnCollectionService extends Apollo.Query<
   models.PageLearnCollectionQuery,
   models.PageLearnCollectionQueryVariables
 > {
-  document = models.PageLearnCollectionDocument;
+  override document = models.PageLearnCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -124,7 +124,7 @@ export class PageShopCollectionService extends Apollo.Query<
   models.PageShopCollectionQuery,
   models.PageShopCollectionQueryVariables
 > {
-  document = models.PageShopCollectionDocument;
+  override document = models.PageShopCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -138,7 +138,7 @@ export class PageStreamCollectionService extends Apollo.Query<
   models.PageStreamCollectionQuery,
   models.PageStreamCollectionQueryVariables
 > {
-  document = models.PageStreamCollectionDocument;
+  override document = models.PageStreamCollectionDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
@@ -152,7 +152,7 @@ export class ProductCollectionBySlugService extends Apollo.Query<
   models.ProductCollectionBySlugQuery,
   models.ProductCollectionBySlugQueryVariables
 > {
-  document = models.ProductCollectionBySlugDocument;
+  override document = models.ProductCollectionBySlugDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

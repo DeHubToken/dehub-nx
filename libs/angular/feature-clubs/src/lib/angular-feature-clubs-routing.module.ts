@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularFeatureEarnComponent } from './angular-feature-earn.component';
+import { AngularFeatureClubsComponent } from './angular-feature-clubs.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AngularFeatureEarnComponent,
+    component: AngularFeatureClubsComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AngularFeatureEarnRoutingModule {}
+export class AngularFeatureClubsRoutingModule {}

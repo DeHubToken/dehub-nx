@@ -50,6 +50,7 @@ generates:
       - typescript-apollo-angular
     config:
       noExport: false
+      addExplicitOverride: true
       importOperationTypesFrom: 'models'
       documentMode: external
       importDocumentNodeExternallyFrom: '@dehub/shared/model'

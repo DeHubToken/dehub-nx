@@ -4,20 +4,20 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { PageEarnCollectionService } from '@dehub/angular/graphql';
+import { PageClubsCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { PageEarnFragment, SharedEnv } from '@dehub/shared/model';
+import { PageClubsFragment, SharedEnv } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';
 
 @Component({
   template: `
-    <ng-container *rxLet="pageEarn$ as pageEarn" class="grid">
+    <ng-container *rxLet="pageClubs$ as pageClubs" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageEarn"></dhb-page-header>
+      <dhb-page-header [page]="pageClubs"></dhb-page-header>
 
       <!-- Page Sections -->
       <dhb-page-sections
-        [sections]="pageEarn?.sectionsCollection?.items"
+        [sections]="pageClubs?.sectionsCollection?.items"
         [path]="path"
       ></dhb-page-sections>
     </ng-container>
@@ -25,25 +25,25 @@ import { map, Observable } from 'rxjs';
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureEarnComponent implements OnInit {
-  pageEarn$?: Observable<PageEarnFragment | undefined>;
+export class AngularFeatureClubsComponent implements OnInit {
+  pageClubs$?: Observable<PageClubsFragment | undefined>;
 
   path = this.env.baseUrl;
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
-    private pageEarnCollectionService: PageEarnCollectionService
+    private pageClubsCollectionService: PageClubsCollectionService
   ) {}
 
   ngOnInit() {
-    this.pageEarn$ = this.pageEarnCollectionService
+    this.pageClubs$ = this.pageClubsCollectionService
       .fetch({
         isPreview: this.env.contentful.isPreview,
       })
       .pipe(
         map(
-          ({ data: { pageEarnCollection } }) =>
-            pageEarnCollection?.items[0] ?? undefined
+          ({ data: { pageClubsCollection } }) =>
+            pageClubsCollection?.items[0] ?? undefined
         )
       );
   }

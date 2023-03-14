@@ -3,7 +3,6 @@ import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
 import { PwaService } from '@dehub/angular/core';
 import { NavigationTabMenu } from '@dehub/shared/model';
 import { MenuItem } from 'primeng/api';
-// import { MenuItem } from '@dehub/shared/model';
 import { environment } from '../environments/environment';
 import { AppMainComponent } from './app.main.component';
 
@@ -135,10 +134,10 @@ const routerExtraOptions: ExtraOptions = {
                 ),
             },
             {
-              path: NavigationTabMenu.Earn,
+              path: NavigationTabMenu.Clubs,
               loadChildren: () =>
-                import('@dehub/angular/feature-earn').then(
-                  module => module.AngularFeatureEarnModule
+                import('@dehub/angular/feature-clubs').then(
+                  module => module.AngularFeatureClubsModule
                 ),
             },
             {

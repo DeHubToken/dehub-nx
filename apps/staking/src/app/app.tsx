@@ -22,7 +22,7 @@ const {
 } = environment;
 const pageTitle = 'DeHub Staking';
 const { cexUrl, downloadWalletUrl } = environment.dehub;
-const activeTab = NavigationTabMenu.Earn;
+const activeTab = NavigationTabMenu.Clubs;
 
 export function App() {
   useEagerWeb3();

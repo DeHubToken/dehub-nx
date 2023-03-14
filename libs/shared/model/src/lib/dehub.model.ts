@@ -4,7 +4,7 @@ export enum NavigationTabMenu {
   Game = 'game',
   Shop = 'shop',
   Learn = 'learn',
-  Earn = 'earn',
+  Clubs = 'clubs',
   News = 'news',
   Legal = 'legal',
 }
