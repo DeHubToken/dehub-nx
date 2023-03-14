@@ -3,7 +3,7 @@ import {
   BUSD_DISPLAY_DECIMALS,
   DEHUB_DECIMALS,
   DEHUB_DISPLAY_DECIMALS,
-} from '@dehub/shared/config';
+} from '@dehub/shared/model';
 import { getFullDisplayBalance } from '@dehub/shared/utils';
 import { Skeleton } from 'primereact/skeleton';
 import { useDehubBusdPrice, usePool } from '../state/application/hooks';

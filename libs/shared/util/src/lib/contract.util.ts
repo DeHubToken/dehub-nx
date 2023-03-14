@@ -1,5 +1,4 @@
-import { ContractsEnv } from '@dehub/shared/config';
-import { Currency } from '@dehub/shared/model';
+import { ContractsEnv, Currency } from '@dehub/shared/model';
 import { getAddress } from '@ethersproject/address';
 import { AddressZero } from '@ethersproject/constants';
 import { Contract, ContractInterface } from '@ethersproject/contracts';

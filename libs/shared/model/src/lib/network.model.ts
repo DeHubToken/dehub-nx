@@ -14,7 +14,7 @@ interface NetworkInfo {
   nodes: string[];
 }
 
-export const Networks: { [key: number]: NetworkInfo } = {
+export const networks: { [key: number]: NetworkInfo } = {
   56: {
     chainId: 56,
     chainName: 'Binance Smart Chain Mainnet',

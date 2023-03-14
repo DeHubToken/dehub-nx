@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { EnvToken, ILoggerService, ScopeToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
+import { SharedEnv } from '@dehub/shared/model';
 
 /**
  * Simple Console Logger Service

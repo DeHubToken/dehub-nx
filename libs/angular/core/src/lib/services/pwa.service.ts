@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
-import { SwUpdateConfig } from '@dehub/shared/config';
+import { serviceWorkerConfig } from '@dehub/shared/model';
 import { MessageService } from 'primeng/api';
 import { filter, takeWhile } from 'rxjs';
 import { CoreService } from './core.service';
@@ -21,7 +21,7 @@ export class PwaService {
     // Service Worker check for update
     // docs: https://angular.io/guide/service-worker-communications#checking-for-updates
     this.coreService
-      .appStableAwareInterval$(SwUpdateConfig.checkForUpdateInterval)
+      .appStableAwareInterval$(serviceWorkerConfig.checkForUpdateInterval)
       .subscribe(() => this.swUpdate.checkForUpdate());
 
     // Service Worker Version Ready
@@ -48,15 +48,15 @@ export class PwaService {
   ) {
     const detail =
       severity === 'warn'
-        ? SwUpdateConfig.msgAvailableDetailWarn
-        : SwUpdateConfig.msgAvailableDetailInfo;
+        ? serviceWorkerConfig.msgAvailableDetailWarn
+        : serviceWorkerConfig.msgAvailableDetailInfo;
 
     this.messageService.add({
-      key: SwUpdateConfig.componentKey,
+      key: serviceWorkerConfig.componentKey,
       sticky: true,
       closable: false,
       severity,
-      summary: SwUpdateConfig.msgAvailableSummary,
+      summary: serviceWorkerConfig.msgAvailableSummary,
       detail,
       data: { hash: hash?.slice(-4) },
     });
@@ -67,7 +67,7 @@ export class PwaService {
   }
 
   cancelUpdate() {
-    this.messageService.clear(SwUpdateConfig.componentKey);
+    this.messageService.clear(serviceWorkerConfig.componentKey);
   }
 
   unsubscribeNotifications() {

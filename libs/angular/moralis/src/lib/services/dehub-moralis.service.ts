@@ -8,7 +8,6 @@ import {
   LoggerDehubMoralisToken,
   MoralisToken,
 } from '@dehub/angular/model';
-import { Networks, SharedEnv } from '@dehub/shared/config';
 import {
   CheckOrderParams,
   CheckOrderResponse,
@@ -18,6 +17,8 @@ import {
   InitOrderResponse,
   MoralisClass,
   MoralisFunctions,
+  networks,
+  SharedEnv,
   ShopContractPropsType,
   ShopContractResponse,
   ShopOrdersParams,
@@ -143,7 +144,7 @@ export class DehubMoralisService implements IDehubMoralisService {
     address: string
   ): Observable<BigNumber> {
     const chain = decimalToHex(this.env.web3.chainId);
-    const { nativeCurrency } = Networks[this.env.web3.chainId];
+    const { nativeCurrency } = networks[this.env.web3.chainId];
 
     return iif(
       () => currency === nativeCurrency.name,
@@ -266,7 +267,7 @@ export class DehubMoralisService implements IDehubMoralisService {
     price: BigNumber,
     quantity: BigNumber
   ) {
-    const { nativeCurrency } = Networks[this.env.web3.chainId];
+    const { nativeCurrency } = networks[this.env.web3.chainId];
     let params: Moralis.ExecuteFunctionParams = {
       _quantity: quantity.toString(),
       _totalAmount: price.toString(),

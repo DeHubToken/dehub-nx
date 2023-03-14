@@ -6,9 +6,9 @@ import {
 } from '@angular/core';
 import { PageLearnCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
 import {
   PageLearnFragment,
+  SharedEnv,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { map, Observable } from 'rxjs';

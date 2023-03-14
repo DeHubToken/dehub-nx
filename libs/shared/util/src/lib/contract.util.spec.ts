@@ -1,4 +1,4 @@
-import { ContractsEnv } from '@dehub/shared/config';
+import { ContractsEnv } from '@dehub/shared/model';
 import { getAddress } from '@ethersproject/address';
 import { getContractByCurrency } from './contract.util';
 

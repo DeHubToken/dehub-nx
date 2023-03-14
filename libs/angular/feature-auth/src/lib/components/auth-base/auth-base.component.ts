@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
+import { SharedEnv } from '@dehub/shared/model';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter, take } from 'rxjs';
 

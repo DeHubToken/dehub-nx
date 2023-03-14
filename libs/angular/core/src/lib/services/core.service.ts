@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { ApplicationRef, Inject, Injectable } from '@angular/core';
 import { EnvToken } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/config';
+import { SharedEnv } from '@dehub/shared/model';
 import { first, interval, SchedulerLike, switchMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
