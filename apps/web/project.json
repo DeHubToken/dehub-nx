@@ -173,6 +173,20 @@
         "command": "npx netlify deploy --site=a5e07eeb-b383-41df-9bc1-c9dcb4fd93b6 -d ../../dist/apps/web.prod -p -o",
         "cwd": "netlify/web.prod"
       }
+    },
+    "demo": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9301 -o web",
+        "cwd": "dist/apps/web.prod"
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9301 -o web",
+        "cwd": "dist/apps/web.preview"
+      }
     }
   },
   "tags": ["scope:angular", "type:app"],
