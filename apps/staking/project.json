@@ -141,6 +141,20 @@
         "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking.prod -p -o",
         "cwd": "netlify/staking.prod"
       }
+    },
+    "demo": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9601 -o staking",
+        "cwd": "dist/apps/staking.prod"
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9601 -o staking",
+        "cwd": "dist/apps/staking.preview"
+      }
     }
   },
   "tags": ["scope:react", "type:app"],
