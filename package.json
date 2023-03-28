@@ -150,7 +150,7 @@
     "@nrwl/js": "15.6.0",
     "@nrwl/linter": "15.6.0",
     "@nrwl/node": "15.6.0",
-    "@nrwl/nx-cloud": "15.0.2",
+    "@nrwl/nx-cloud": "15.3.2",
     "@nrwl/react": "15.6.0",
     "@nrwl/vite": "15.6.0",
     "@nrwl/web": "15.6.0",
