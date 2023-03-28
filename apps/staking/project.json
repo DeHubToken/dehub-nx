@@ -1,5 +1,6 @@
 {
   "name": "staking",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/staking/src",
   "projectType": "application",
   "targets": {
@@ -44,7 +45,8 @@
         "extractLicenses": true,
         "vendorChunk": false,
         "deployUrl": "/staking/",
-        "baseHref": "/staking"
+        "baseHref": "/staking",
+        "isolatedConfig": true
       },
       "configurations": {
         "production": {
