@@ -4,18 +4,10 @@ fragment GrandPost on GrandPost {
   }
   videoUrl
   picture(preview: $isPreview) {
-    sys {
-      ...Sys
-    }
-    title
-    url
+    ...Asset
   }
   heavyPicture(preview: $isPreview) {
-    sys {
-      ...Sys
-    }
-    title
-    url
+    ...Asset
   }
   showHeavyPictureOnHover
   title

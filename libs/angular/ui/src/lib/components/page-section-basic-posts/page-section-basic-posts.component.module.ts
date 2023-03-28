@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import SwiperCore, { Navigation } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
-import { BasicPostModule } from '../basic-post';
+import { BasicPostComponent } from '../basic-post';
 import { PageSectionBasicPostsComponent } from './page-section-basic-posts.component';
 
 // Install Swiper modules
@@ -21,7 +21,7 @@ SwiperCore.use([Navigation]);
 
     // Libs
     ContentfulDraftDirectiveModule,
-    BasicPostModule,
+    BasicPostComponent,
   ],
   exports: [PageSectionBasicPostsComponent],
 })
