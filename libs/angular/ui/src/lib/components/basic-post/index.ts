@@ -1,1 +1,1 @@
-export * from './basic-post.component.module';
+export * from './basic-post.component';

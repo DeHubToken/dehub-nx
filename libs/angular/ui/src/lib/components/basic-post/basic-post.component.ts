@@ -1,13 +1,32 @@
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BasicPostFragment } from '@dehub/shared/model';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
 
 @Component({
+  standalone: true,
   selector: 'dhb-basic-post',
+  imports: [
+    // Angular
+    CommonModule,
+    RouterModule,
+    NgOptimizedImage,
+
+    // PrimeNg
+    ButtonModule,
+    CardModule,
+
+    // Libs
+    ContentfulDraftDirectiveModule,
+  ],
   template: `
     <div [dhbContentfulDraft]="basicPost.sys">
       <p-card
@@ -16,12 +35,18 @@ import { BasicPostFragment } from '@dehub/shared/model';
         styleClass="p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
-          <img
-            *ngIf="basicPost.mainPicture as mainPicture"
-            [dhbContentfulDraft]="mainPicture.sys"
-            [src]="mainPicture.url"
-            [alt]="mainPicture.title"
-          />
+          <ng-container *ngIf="basicPost.mainPicture as mainPicture">
+            <img
+              *ngIf="mainPicture.url"
+              [dhbContentfulDraft]="mainPicture.sys"
+              [ngSrc]="mainPicture.url"
+              [width]="mainPicture.width"
+              [height]="mainPicture.height"
+              [alt]="mainPicture.description || mainPicture.title"
+              sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+              class="h-auto"
+            />
+          </ng-container>
         </ng-template>
         <p>
           {{ basicPost.summary }}

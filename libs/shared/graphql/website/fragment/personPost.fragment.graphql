@@ -3,11 +3,7 @@ fragment PersonPost on PersonPost {
     ...Sys
   }
   avatar(preview: $isPreview) {
-    sys {
-      ...Sys
-    }
-    title
-    url
+    ...Asset
   }
   name
   title

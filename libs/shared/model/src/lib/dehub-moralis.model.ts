@@ -49,3 +49,15 @@ export const MoralisFunctions = {
     GetRewardContract: 'getRewardContract',
   },
 };
+
+export interface AmountByChain {
+  bsc: number;
+  eth: number;
+  polygon: number;
+}
+
+export interface Stats {
+  totalSupply: AmountByChain;
+  totalBurned: AmountByChain;
+  activeSupply: AmountByChain;
+}

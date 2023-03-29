@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
-import { PersonPostModule } from '../person-post';
+import { PersonPostComponent } from '../person-post';
 import { PageSectionPersonPostsComponent } from './page-section-person-posts.component';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { PageSectionPersonPostsComponent } from './page-section-person-posts.com
 
     // Libs
     ContentfulDraftDirectiveModule,
-    PersonPostModule,
+    PersonPostComponent,
   ],
   exports: [PageSectionPersonPostsComponent],
 })
