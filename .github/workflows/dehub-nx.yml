@@ -22,9 +22,10 @@ jobs:
   main:
     if: ${{ github.event_name != 'pull_request' }}
     name: Main
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.11.3
     with:
-      node-version: '16'
+      node-version: '16.13.0'
+      pnpm-version: '7.30.0'
       install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
         pnpm build:preview
@@ -38,9 +39,10 @@ jobs:
   pr:
     if: ${{ github.event_name == 'pull_request' && github.event.pull_request.draft == false }}
     name: Pull Request
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.11.3
     with:
-      node-version: '16'
+      node-version: '16.13.0'
+      pnpm-version: '7.30.0'
       install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
         pnpm build:preview
@@ -51,8 +53,9 @@ jobs:
 
   agents:
     name: Agents
-    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.11.3
     with:
-      node-version: '16'
+      node-version: '16.13.0'
+      pnpm-version: '7.30.0'
       install-commands: pnpm install --frozen-lockfile
       number-of-agents: 4

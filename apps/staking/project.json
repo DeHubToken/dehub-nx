@@ -1,5 +1,6 @@
 {
   "name": "staking",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/staking/src",
   "projectType": "application",
   "targets": {
@@ -44,7 +45,8 @@
         "extractLicenses": true,
         "vendorChunk": false,
         "deployUrl": "/staking/",
-        "baseHref": "/staking"
+        "baseHref": "/staking",
+        "isolatedConfig": true
       },
       "configurations": {
         "production": {
@@ -140,6 +142,20 @@
       "options": {
         "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/staking.prod -p -o",
         "cwd": "netlify/staking.prod"
+      }
+    },
+    "demo": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9601 -o staking",
+        "cwd": "dist/apps/staking.prod"
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9601 -o staking",
+        "cwd": "dist/apps/staking.preview"
       }
     }
   },
