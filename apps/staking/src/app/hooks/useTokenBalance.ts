@@ -3,7 +3,7 @@ import { BIG_ZERO } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { useEffect, useRef, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';
-import { getDehubAddress } from '../utils/addressHelpers';
+import { getDehubBscAddress } from '../utils/addressHelpers';
 import { getBep20Contract } from '../utils/contractHelpers';
 
 type UseTokenBalanceState = {
@@ -63,7 +63,7 @@ export const useTokenBalance = (tokenAddress: string) => {
 };
 
 export const useGetDehubBalance = () => {
-  return useTokenBalance(getDehubAddress());
+  return useTokenBalance(getDehubBscAddress());
 };
 
 export default useTokenBalance;
