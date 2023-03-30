@@ -1,1 +1,1 @@
-export * from './heavy-picture.component';
+export * from './heavy-picture.component.module';

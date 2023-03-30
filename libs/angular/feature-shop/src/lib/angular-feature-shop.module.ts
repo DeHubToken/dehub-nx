@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularGraphQLModule } from '@dehub/angular/graphql';
@@ -36,7 +36,6 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgOptimizedImage,
 
     // Libs
     AngularGraphQLModule,

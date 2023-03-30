@@ -37,14 +37,9 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
           section.swiperResponsiveOptions || swiperResponsiveOptions
         "
       >
-        <ng-container
-          *ngFor="let featurePost of featurePosts; let isFirst = first"
-        >
+        <ng-container *ngFor="let featurePost of featurePosts">
           <ng-template swiperSlide>
-            <dhb-feature-post
-              [featurePost]="featurePost"
-              [firstPost]="isFirst"
-            ></dhb-feature-post>
+            <dhb-feature-post [featurePost]="featurePost"></dhb-feature-post>
           </ng-template>
         </ng-container>
       </swiper>

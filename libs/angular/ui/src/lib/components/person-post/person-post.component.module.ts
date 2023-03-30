@@ -1,23 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { HeavyPictureModule } from '../../components//heavy-picture';
+import { TagModule } from 'primeng/tag';
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
-import { ThumbnailPostComponent } from '../thumbnail-post/thumbnail-post.component';
+import { PersonPostComponent } from './person-post.component';
 
 @NgModule({
-  declarations: [ThumbnailPostComponent],
+  declarations: [PersonPostComponent],
   imports: [
     // Angular
     CommonModule,
 
     // PrimeNg
+    ButtonModule,
     CardModule,
+    TagModule,
 
     // Libs
     ContentfulDraftDirectiveModule,
-    HeavyPictureModule,
   ],
-  exports: [ThumbnailPostComponent],
+  exports: [PersonPostComponent],
 })
-export class ThumbnailPostModule {}
+export class PersonPostModule {}

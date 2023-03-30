@@ -1,4 +1,3 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,10 +7,6 @@ import {
 } from '@angular/core';
 import { PersonPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
-import { TagModule } from 'primeng/tag';
-import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
 
 interface SocialLink {
   name: string;
@@ -20,21 +15,7 @@ interface SocialLink {
 }
 
 @Component({
-  standalone: true,
   selector: 'dhb-person-post',
-  imports: [
-    // Angular
-    CommonModule,
-    NgOptimizedImage,
-
-    // PrimeNg
-    ButtonModule,
-    CardModule,
-    TagModule,
-
-    // Libs
-    ContentfulDraftDirectiveModule,
-  ],
   template: `
     <div [dhbContentfulDraft]="personPost.sys" class="w-full">
       <p-card
@@ -42,19 +23,15 @@ interface SocialLink {
         styleClass="person h-full text-center mt-2 px-2 pt-6 pb-4 border-neon-1 bg-gradient-2 anim-hover-1-reverse"
       >
         <ng-template pTemplate="header">
-          <ng-container *ngIf="personPost.avatar as avatar">
-            <img
-              [dhbContentfulDraft]="avatar.sys"
-              [ngSrc]="
-                avatar.url ?? path + '/assets/dehub/images/avatar-default.svg'
-              "
-              [width]="avatar.width"
-              [height]="avatar.height"
-              [alt]="avatar.description ?? avatar.title ?? 'Avatar'"
-              sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
-              class="h-auto border-circle border-3 border-cyan-900 shadow-5 w-8 bg-gradient-1"
-            />
-          </ng-container>
+          <img
+            [dhbContentfulDraft]="personPost.avatar?.sys"
+            [src]="
+              personPost.avatar?.url ??
+              path + '/assets/dehub/images/avatar-default.svg'
+            "
+            [alt]="personPost.avatar?.title ?? 'Avatar'"
+            class="border-circle border-3 border-cyan-900 shadow-5 w-8 bg-gradient-1"
+          />
         </ng-template>
 
         <!-- Name -->

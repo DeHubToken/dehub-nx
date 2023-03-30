@@ -3,18 +3,3 @@ fragment Sys on Sys {
   publishedAt
   id
 }
-
-fragment Asset on Asset {
-  sys {
-    ...Sys
-  }
-  title
-  fileName
-  description
-  contentType
-  width
-  height
-  url
-  webpUrl: url(transform: { format: WEBP })
-  avifUrl: url(transform: { format: AVIF })
-}
