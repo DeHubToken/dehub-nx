@@ -33,15 +33,15 @@ export const getContract = (
  */
 export const getContractByCurrency = (
   currency: Currency,
-  contracts: ContractsEnv
+  { dehubBsc, wbnb, busd }: ContractsEnv
 ) => {
   switch (currency) {
     case 'DeHub':
-      return getAddress(contracts['dehub']);
+      return getAddress(dehubBsc);
     case 'BNB':
-      return getAddress(contracts['wbnb']);
+      return getAddress(wbnb);
     case 'BUSD':
-      return getAddress(contracts['busd']);
+      return getAddress(busd);
 
     default:
       assertUnreachable(currency);
