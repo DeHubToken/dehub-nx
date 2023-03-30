@@ -1,4 +1,4 @@
-import { CommonModule, ImageLoaderConfig, IMAGE_LOADER } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import {
   ContentfulManagementToken,
@@ -50,21 +50,6 @@ export class AngularCoreModule {
     return {
       ngModule: AngularCoreModule,
       providers: [
-        {
-          provide: IMAGE_LOADER,
-          useValue: (config: ImageLoaderConfig) => {
-            const isGif = config.src.toLowerCase().endsWith('.gif');
-            // Serve gif's as gif and images as webp
-            // heavy-picture handel gif separately
-            const format: 'webp' | 'avif' | undefined = isGif
-              ? undefined
-              : 'webp';
-
-            return `${config.src}?w=${config.width}${
-              format ? `&fm=${format}` : ''
-            }`;
-          },
-        },
         MessageService,
         {
           provide: ContentfulManagementToken,

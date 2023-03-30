@@ -27,11 +27,7 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
               class="fad fa-play-circle"
               (click)="onVideoPlayClicked()"
             ></i>
-            <dhb-heavy-picture
-              [container]="featurePost"
-              [autoHeight]="false"
-              [priority]="firstPost"
-            ></dhb-heavy-picture>
+            <dhb-heavy-picture [container]="featurePost"></dhb-heavy-picture>
           </div>
         </ng-template>
 
@@ -68,7 +64,6 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
 })
 export class FeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
-  @Input() firstPost = false;
 
   constructor(
     @Inject(WINDOW) private readonly windowRef: Window,

@@ -1,28 +1,13 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
-import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
-import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
-import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
 import { BasicPostDetailFragment } from '@dehub/shared/model';
 
 @Component({
-  standalone: true,
   selector: 'dhb-basic-post-detail',
-  imports: [
-    // Angular
-    CommonModule,
-    NgOptimizedImage,
-
-    // Libs
-    ContentfulDraftDirectiveModule,
-    ContentfulRichMarkupPipeModule,
-    SafeHtmlPipeModule,
-  ],
   template: `
     <ng-container *ngIf="basicPostDetail">
       <div
@@ -32,14 +17,9 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
         <!-- Main Picture -->
         <ng-container *ngIf="basicPostDetail.mainPicture as mainPicture">
           <img
-            *ngIf="mainPicture.url"
             [dhbContentfulDraft]="mainPicture.sys"
-            [ngSrc]="mainPicture.url"
-            [width]="mainPicture.width"
-            [height]="mainPicture.height"
-            [alt]="mainPicture.description ?? mainPicture.title"
-            sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
-            class="h-auto"
+            [src]="mainPicture.url"
+            [alt]="mainPicture.title"
           />
         </ng-container>
 

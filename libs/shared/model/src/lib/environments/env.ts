@@ -27,9 +27,7 @@ export interface ContentfulEnv {
 }
 
 export interface ContractsEnv {
-  dehubBsc: string;
-  dehubEth: string;
-  dehubPolygon: string;
+  dehub: string;
   dehubBnb: string;
   wbnb: string;
   bnbBusd: string;
@@ -132,10 +130,8 @@ export const defaultSharedEnv: SharedEnv = {
     chainId: 97,
     addresses: {
       contracts: {
-        dehubBsc: '0xEad75F6d5E16E86b157937Ba227c13B5fb6864fC', // bsc testnet
-        dehubEth: '0xBf0F5738FFc190AF894b0b6Aa1526b126c6D1654', // goerli testnet
-        dehubPolygon: '0x7B7A0023C59822478caA0c1A26BF83d69F586bb6', // mumbai testnet
-        dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
+        dehub: '0xEad75F6d5E16E86b157937Ba227c13B5fb6864fC',
+        dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D', // todo
         wbnb: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
         bnbBusd: '0xe0e92035077c39594793e61802a350347c320cf2',
         busd: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',

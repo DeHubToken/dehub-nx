@@ -24,23 +24,6 @@ export const AnnouncementFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
-export const AssetFragmentDoc = gql`
-  fragment Asset on Asset {
-    sys {
-      ...Sys
-    }
-    title
-    fileName
-    description
-    contentType
-    width
-    height
-    url
-    webpUrl: url(transform: { format: WEBP })
-    avifUrl: url(transform: { format: AVIF })
-  }
-  ${SysFragmentDoc}
-`;
 export const BasicPostCommonFragmentDoc = gql`
   fragment BasicPostCommon on BasicPost {
     sys {
@@ -48,11 +31,14 @@ export const BasicPostCommonFragmentDoc = gql`
     }
     title
     mainPicture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const BasicPostDetailFragmentDoc = gql`
   fragment BasicPostDetail on BasicPost {
@@ -118,10 +104,18 @@ export const FeaturePostFragmentDoc = gql`
     }
     videoUrl
     picture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     heavyPicture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     showHeavyPictureOnHover
     title
@@ -130,7 +124,6 @@ export const FeaturePostFragmentDoc = gql`
     callToActionButtonLabel
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const PageSectionFeaturePostsFragmentDoc = gql`
   fragment PageSectionFeaturePosts on PageSectionFeaturePosts {
@@ -156,10 +149,18 @@ export const ThumbnailPostFragmentDoc = gql`
       ...Sys
     }
     picture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     heavyPicture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     showHeavyPictureOnHover
     title
@@ -167,7 +168,6 @@ export const ThumbnailPostFragmentDoc = gql`
     isVideo
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const PageSectionThumbnailPostsFragmentDoc = gql`
   fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {
@@ -334,10 +334,18 @@ export const GrandPostFragmentDoc = gql`
     }
     videoUrl
     picture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     heavyPicture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     showHeavyPictureOnHover
     title
@@ -347,7 +355,6 @@ export const GrandPostFragmentDoc = gql`
     callToActionButtonLabel
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const PageSectionGrandPostsFragmentDoc = gql`
   fragment PageSectionGrandPosts on PageSectionGrandPosts {
@@ -521,7 +528,11 @@ export const PersonPostFragmentDoc = gql`
       ...Sys
     }
     avatar(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     name
     title
@@ -532,7 +543,6 @@ export const PersonPostFragmentDoc = gql`
     github
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const PageSectionPersonPostsFragmentDoc = gql`
   fragment PageSectionPersonPosts on PageSectionPersonPosts {
@@ -644,7 +654,11 @@ export const ProductCommonFragmentDoc = gql`
     }
     picturesCollection(limit: 10, preview: $isPreview) {
       items {
-        ...Asset
+        sys {
+          ...Sys
+        }
+        title
+        url
       }
     }
     name
@@ -664,7 +678,6 @@ export const ProductCommonFragmentDoc = gql`
     pause
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const ProductFragmentDoc = gql`
   fragment Product on Product {

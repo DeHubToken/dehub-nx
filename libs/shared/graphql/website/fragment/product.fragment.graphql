@@ -8,7 +8,11 @@ fragment ProductCommon on Product {
   }
   picturesCollection(limit: 10, preview: $isPreview) {
     items {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
   }
   name

@@ -6718,14 +6718,7 @@ export type BasicPostCommonFragment = {
   mainPicture?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -6749,14 +6742,7 @@ export type BasicPostFragment = {
   mainPicture?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -6779,14 +6765,7 @@ export type BasicPostDetailFragment = {
   mainPicture?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -6833,25 +6812,6 @@ export type SysFragment = {
   firstPublishedAt?: any;
   publishedAt?: any;
   id: string;
-};
-
-export type AssetFragment = {
-  __typename?: 'Asset';
-  title?: string;
-  fileName?: string;
-  description?: string;
-  contentType?: string;
-  width?: number;
-  height?: number;
-  url?: string;
-  webpUrl?: string;
-  avifUrl?: string;
-  sys: {
-    __typename?: 'Sys';
-    firstPublishedAt?: any;
-    publishedAt?: any;
-    id: string;
-  };
 };
 
 export type DappPostFragment = {
@@ -6939,14 +6899,7 @@ export type FeaturePostFragment = {
   picture?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -6957,14 +6910,7 @@ export type FeaturePostFragment = {
   heavyPicture?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -7041,14 +6987,7 @@ export type GrandPostFragment = {
   picture?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -7059,14 +6998,7 @@ export type GrandPostFragment = {
   heavyPicture?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -7185,14 +7117,7 @@ export type PageClubsFragment = {
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7222,14 +7147,7 @@ export type PageClubsFragment = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -7339,14 +7257,7 @@ export type PageClubsFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7357,14 +7268,7 @@ export type PageClubsFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7407,14 +7311,7 @@ export type PageClubsFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7425,14 +7322,7 @@ export type PageClubsFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7561,14 +7451,7 @@ export type PageClubsFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7579,14 +7462,7 @@ export type PageClubsFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7664,14 +7540,7 @@ export type PageGameFragment = {
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7701,14 +7570,7 @@ export type PageGameFragment = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -7818,14 +7680,7 @@ export type PageGameFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7836,14 +7691,7 @@ export type PageGameFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7886,14 +7734,7 @@ export type PageGameFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -7904,14 +7745,7 @@ export type PageGameFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8040,14 +7874,7 @@ export type PageGameFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8058,14 +7885,7 @@ export type PageGameFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8143,14 +7963,7 @@ export type PageHomeFragment = {
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8180,14 +7993,7 @@ export type PageHomeFragment = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -8297,14 +8103,7 @@ export type PageHomeFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8315,14 +8114,7 @@ export type PageHomeFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8365,14 +8157,7 @@ export type PageHomeFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8383,14 +8168,7 @@ export type PageHomeFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8463,14 +8241,7 @@ export type PageHomeFragment = {
               avatar?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8569,14 +8340,7 @@ export type PageHomeFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8587,14 +8351,7 @@ export type PageHomeFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8672,14 +8429,7 @@ export type PageLearnFragment = {
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8709,14 +8459,7 @@ export type PageLearnFragment = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -8826,14 +8569,7 @@ export type PageLearnFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8844,14 +8580,7 @@ export type PageLearnFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8894,14 +8623,7 @@ export type PageLearnFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8912,14 +8634,7 @@ export type PageLearnFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8992,14 +8707,7 @@ export type PageLearnFragment = {
               avatar?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9098,14 +8806,7 @@ export type PageLearnFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9116,14 +8817,7 @@ export type PageLearnFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9165,14 +8859,7 @@ export type PageSectionBasicPostsFragment = {
       mainPicture?: {
         __typename?: 'Asset';
         title?: string;
-        fileName?: string;
-        description?: string;
-        contentType?: string;
-        width?: number;
-        height?: number;
         url?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -9202,14 +8889,7 @@ export type PageSectionBasicPostsFragment = {
           mainPicture?: {
             __typename?: 'Asset';
             title?: string;
-            fileName?: string;
-            description?: string;
-            contentType?: string;
-            width?: number;
-            height?: number;
             url?: string;
-            webpUrl?: string;
-            avifUrl?: string;
             sys: {
               __typename?: 'Sys';
               firstPublishedAt?: any;
@@ -9322,14 +9002,7 @@ export type PageSectionFeaturePostsFragment = {
       picture?: {
         __typename?: 'Asset';
         title?: string;
-        fileName?: string;
-        description?: string;
-        contentType?: string;
-        width?: number;
-        height?: number;
         url?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -9340,14 +9013,7 @@ export type PageSectionFeaturePostsFragment = {
       heavyPicture?: {
         __typename?: 'Asset';
         title?: string;
-        fileName?: string;
-        description?: string;
-        contentType?: string;
-        width?: number;
-        height?: number;
         url?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -9391,14 +9057,7 @@ export type PageSectionGrandPostsFragment = {
       picture?: {
         __typename?: 'Asset';
         title?: string;
-        fileName?: string;
-        description?: string;
-        contentType?: string;
-        width?: number;
-        height?: number;
         url?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -9409,14 +9068,7 @@ export type PageSectionGrandPostsFragment = {
       heavyPicture?: {
         __typename?: 'Asset';
         title?: string;
-        fileName?: string;
-        description?: string;
-        contentType?: string;
-        width?: number;
-        height?: number;
         url?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -9491,14 +9143,7 @@ export type PageSectionPersonPostsFragment = {
       avatar?: {
         __typename?: 'Asset';
         title?: string;
-        fileName?: string;
-        description?: string;
-        contentType?: string;
-        width?: number;
-        height?: number;
         url?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -9545,14 +9190,7 @@ export type PageSectionProductsFragment = {
         items: Array<{
           __typename?: 'Asset';
           title?: string;
-          fileName?: string;
-          description?: string;
-          contentType?: string;
-          width?: number;
-          height?: number;
           url?: string;
-          webpUrl?: string;
-          avifUrl?: string;
           sys: {
             __typename?: 'Sys';
             firstPublishedAt?: any;
@@ -9614,14 +9252,7 @@ export type PageSectionProductsFragment = {
             items: Array<{
               __typename?: 'Asset';
               title?: string;
-              fileName?: string;
-              description?: string;
-              contentType?: string;
-              width?: number;
-              height?: number;
               url?: string;
-              webpUrl?: string;
-              avifUrl?: string;
               sys: {
                 __typename?: 'Sys';
                 firstPublishedAt?: any;
@@ -9722,14 +9353,7 @@ export type PageSectionThumbnailPostsFragment = {
       picture?: {
         __typename?: 'Asset';
         title?: string;
-        fileName?: string;
-        description?: string;
-        contentType?: string;
-        width?: number;
-        height?: number;
         url?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -9740,14 +9364,7 @@ export type PageSectionThumbnailPostsFragment = {
       heavyPicture?: {
         __typename?: 'Asset';
         title?: string;
-        fileName?: string;
-        description?: string;
-        contentType?: string;
-        width?: number;
-        height?: number;
         url?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -9822,14 +9439,7 @@ export type PageShopFragment = {
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9859,14 +9469,7 @@ export type PageShopFragment = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -9909,14 +9512,7 @@ export type PageShopFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9927,14 +9523,7 @@ export type PageShopFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9977,14 +9566,7 @@ export type PageShopFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9995,14 +9577,7 @@ export type PageShopFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10075,14 +9650,7 @@ export type PageShopFragment = {
               avatar?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10128,14 +9696,7 @@ export type PageShopFragment = {
                 items: Array<{
                   __typename?: 'Asset';
                   title?: string;
-                  fileName?: string;
-                  description?: string;
-                  contentType?: string;
-                  width?: number;
-                  height?: number;
                   url?: string;
-                  webpUrl?: string;
-                  avifUrl?: string;
                   sys: {
                     __typename?: 'Sys';
                     firstPublishedAt?: any;
@@ -10197,14 +9758,7 @@ export type PageShopFragment = {
                     items: Array<{
                       __typename?: 'Asset';
                       title?: string;
-                      fileName?: string;
-                      description?: string;
-                      contentType?: string;
-                      width?: number;
-                      height?: number;
                       url?: string;
-                      webpUrl?: string;
-                      avifUrl?: string;
                       sys: {
                         __typename?: 'Sys';
                         firstPublishedAt?: any;
@@ -10306,14 +9860,7 @@ export type PageShopFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10324,14 +9871,7 @@ export type PageShopFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10429,14 +9969,7 @@ export type PageStreamFragment = {
               mainPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10466,14 +9999,7 @@ export type PageStreamFragment = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -10583,14 +10109,7 @@ export type PageStreamFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10601,14 +10120,7 @@ export type PageStreamFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10651,14 +10163,7 @@ export type PageStreamFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10669,14 +10174,7 @@ export type PageStreamFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10805,14 +10303,7 @@ export type PageStreamFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10823,14 +10314,7 @@ export type PageStreamFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
-                fileName?: string;
-                description?: string;
-                contentType?: string;
-                width?: number;
-                height?: number;
                 url?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10863,14 +10347,7 @@ export type PersonPostFragment = {
   avatar?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -10906,14 +10383,7 @@ export type ProductCommonFragment = {
     items: Array<{
       __typename?: 'Asset';
       title?: string;
-      fileName?: string;
-      description?: string;
-      contentType?: string;
-      width?: number;
-      height?: number;
       url?: string;
-      webpUrl?: string;
-      avifUrl?: string;
       sys: {
         __typename?: 'Sys';
         firstPublishedAt?: any;
@@ -10957,14 +10427,7 @@ export type ProductFragment = {
     items: Array<{
       __typename?: 'Asset';
       title?: string;
-      fileName?: string;
-      description?: string;
-      contentType?: string;
-      width?: number;
-      height?: number;
       url?: string;
-      webpUrl?: string;
-      avifUrl?: string;
       sys: {
         __typename?: 'Sys';
         firstPublishedAt?: any;
@@ -11010,14 +10473,7 @@ export type ProductDetailFragment = {
     items: Array<{
       __typename?: 'Asset';
       title?: string;
-      fileName?: string;
-      description?: string;
-      contentType?: string;
-      width?: number;
-      height?: number;
       url?: string;
-      webpUrl?: string;
-      avifUrl?: string;
       sys: {
         __typename?: 'Sys';
         firstPublishedAt?: any;
@@ -11098,14 +10554,7 @@ export type ThumbnailPostFragment = {
   picture?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -11116,14 +10565,7 @@ export type ThumbnailPostFragment = {
   heavyPicture?: {
     __typename?: 'Asset';
     title?: string;
-    fileName?: string;
-    description?: string;
-    contentType?: string;
-    width?: number;
-    height?: number;
     url?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -11180,14 +10622,7 @@ export type BasicPostCollectionBySlugQuery = {
       mainPicture?: {
         __typename?: 'Asset';
         title?: string;
-        fileName?: string;
-        description?: string;
-        contentType?: string;
-        width?: number;
-        height?: number;
         url?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -11353,14 +10788,7 @@ export type PageClubsCollectionQuery = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11390,14 +10818,7 @@ export type PageClubsCollectionQuery = {
                       mainPicture?: {
                         __typename?: 'Asset';
                         title?: string;
-                        fileName?: string;
-                        description?: string;
-                        contentType?: string;
-                        width?: number;
-                        height?: number;
                         url?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -11507,14 +10928,7 @@ export type PageClubsCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11525,14 +10939,7 @@ export type PageClubsCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11575,14 +10982,7 @@ export type PageClubsCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11593,14 +10993,7 @@ export type PageClubsCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11729,14 +11122,7 @@ export type PageClubsCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11747,14 +11133,7 @@ export type PageClubsCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11842,14 +11221,7 @@ export type PageGameCollectionQuery = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11879,14 +11251,7 @@ export type PageGameCollectionQuery = {
                       mainPicture?: {
                         __typename?: 'Asset';
                         title?: string;
-                        fileName?: string;
-                        description?: string;
-                        contentType?: string;
-                        width?: number;
-                        height?: number;
                         url?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -11996,14 +11361,7 @@ export type PageGameCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12014,14 +11372,7 @@ export type PageGameCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12064,14 +11415,7 @@ export type PageGameCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12082,14 +11426,7 @@ export type PageGameCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12218,14 +11555,7 @@ export type PageGameCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12236,14 +11566,7 @@ export type PageGameCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12331,14 +11654,7 @@ export type PageHomeCollectionQuery = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12368,14 +11684,7 @@ export type PageHomeCollectionQuery = {
                       mainPicture?: {
                         __typename?: 'Asset';
                         title?: string;
-                        fileName?: string;
-                        description?: string;
-                        contentType?: string;
-                        width?: number;
-                        height?: number;
                         url?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -12485,14 +11794,7 @@ export type PageHomeCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12503,14 +11805,7 @@ export type PageHomeCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12553,14 +11848,7 @@ export type PageHomeCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12571,14 +11859,7 @@ export type PageHomeCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12651,14 +11932,7 @@ export type PageHomeCollectionQuery = {
                   avatar?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12757,14 +12031,7 @@ export type PageHomeCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12775,14 +12042,7 @@ export type PageHomeCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12870,14 +12130,7 @@ export type PageLearnCollectionQuery = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12907,14 +12160,7 @@ export type PageLearnCollectionQuery = {
                       mainPicture?: {
                         __typename?: 'Asset';
                         title?: string;
-                        fileName?: string;
-                        description?: string;
-                        contentType?: string;
-                        width?: number;
-                        height?: number;
                         url?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -13024,14 +12270,7 @@ export type PageLearnCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13042,14 +12281,7 @@ export type PageLearnCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13092,14 +12324,7 @@ export type PageLearnCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13110,14 +12335,7 @@ export type PageLearnCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13190,14 +12408,7 @@ export type PageLearnCollectionQuery = {
                   avatar?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13296,14 +12507,7 @@ export type PageLearnCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13314,14 +12518,7 @@ export type PageLearnCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13409,14 +12606,7 @@ export type PageShopCollectionQuery = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13446,14 +12636,7 @@ export type PageShopCollectionQuery = {
                       mainPicture?: {
                         __typename?: 'Asset';
                         title?: string;
-                        fileName?: string;
-                        description?: string;
-                        contentType?: string;
-                        width?: number;
-                        height?: number;
                         url?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -13496,14 +12679,7 @@ export type PageShopCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13514,14 +12690,7 @@ export type PageShopCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13564,14 +12733,7 @@ export type PageShopCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13582,14 +12744,7 @@ export type PageShopCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13662,14 +12817,7 @@ export type PageShopCollectionQuery = {
                   avatar?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13715,14 +12863,7 @@ export type PageShopCollectionQuery = {
                     items: Array<{
                       __typename?: 'Asset';
                       title?: string;
-                      fileName?: string;
-                      description?: string;
-                      contentType?: string;
-                      width?: number;
-                      height?: number;
                       url?: string;
-                      webpUrl?: string;
-                      avifUrl?: string;
                       sys: {
                         __typename?: 'Sys';
                         firstPublishedAt?: any;
@@ -13784,14 +12925,7 @@ export type PageShopCollectionQuery = {
                         items: Array<{
                           __typename?: 'Asset';
                           title?: string;
-                          fileName?: string;
-                          description?: string;
-                          contentType?: string;
-                          width?: number;
-                          height?: number;
                           url?: string;
-                          webpUrl?: string;
-                          avifUrl?: string;
                           sys: {
                             __typename?: 'Sys';
                             firstPublishedAt?: any;
@@ -13893,14 +13027,7 @@ export type PageShopCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13911,14 +13038,7 @@ export type PageShopCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14026,14 +13146,7 @@ export type PageStreamCollectionQuery = {
                   mainPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14063,14 +13176,7 @@ export type PageStreamCollectionQuery = {
                       mainPicture?: {
                         __typename?: 'Asset';
                         title?: string;
-                        fileName?: string;
-                        description?: string;
-                        contentType?: string;
-                        width?: number;
-                        height?: number;
                         url?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -14180,14 +13286,7 @@ export type PageStreamCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14198,14 +13297,7 @@ export type PageStreamCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14248,14 +13340,7 @@ export type PageStreamCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14266,14 +13351,7 @@ export type PageStreamCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14402,14 +13480,7 @@ export type PageStreamCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14420,14 +13491,7 @@ export type PageStreamCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
-                    fileName?: string;
-                    description?: string;
-                    contentType?: string;
-                    width?: number;
-                    height?: number;
                     url?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14477,14 +13541,7 @@ export type ProductCollectionBySlugQuery = {
         items: Array<{
           __typename?: 'Asset';
           title?: string;
-          fileName?: string;
-          description?: string;
-          contentType?: string;
-          width?: number;
-          height?: number;
           url?: string;
-          webpUrl?: string;
-          avifUrl?: string;
           sys: {
             __typename?: 'Sys';
             firstPublishedAt?: any;
@@ -14529,23 +13586,6 @@ export const AnnouncementFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
-export const AssetFragmentDoc = gql`
-  fragment Asset on Asset {
-    sys {
-      ...Sys
-    }
-    title
-    fileName
-    description
-    contentType
-    width
-    height
-    url
-    webpUrl: url(transform: { format: WEBP })
-    avifUrl: url(transform: { format: AVIF })
-  }
-  ${SysFragmentDoc}
-`;
 export const BasicPostCommonFragmentDoc = gql`
   fragment BasicPostCommon on BasicPost {
     sys {
@@ -14553,11 +13593,14 @@ export const BasicPostCommonFragmentDoc = gql`
     }
     title
     mainPicture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const BasicPostDetailFragmentDoc = gql`
   fragment BasicPostDetail on BasicPost {
@@ -14623,10 +13666,18 @@ export const FeaturePostFragmentDoc = gql`
     }
     videoUrl
     picture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     heavyPicture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     showHeavyPictureOnHover
     title
@@ -14635,7 +13686,6 @@ export const FeaturePostFragmentDoc = gql`
     callToActionButtonLabel
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const PageSectionFeaturePostsFragmentDoc = gql`
   fragment PageSectionFeaturePosts on PageSectionFeaturePosts {
@@ -14661,10 +13711,18 @@ export const ThumbnailPostFragmentDoc = gql`
       ...Sys
     }
     picture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     heavyPicture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     showHeavyPictureOnHover
     title
@@ -14672,7 +13730,6 @@ export const ThumbnailPostFragmentDoc = gql`
     isVideo
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const PageSectionThumbnailPostsFragmentDoc = gql`
   fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {
@@ -14839,10 +13896,18 @@ export const GrandPostFragmentDoc = gql`
     }
     videoUrl
     picture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     heavyPicture(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     showHeavyPictureOnHover
     title
@@ -14852,7 +13917,6 @@ export const GrandPostFragmentDoc = gql`
     callToActionButtonLabel
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const PageSectionGrandPostsFragmentDoc = gql`
   fragment PageSectionGrandPosts on PageSectionGrandPosts {
@@ -15026,7 +14090,11 @@ export const PersonPostFragmentDoc = gql`
       ...Sys
     }
     avatar(preview: $isPreview) {
-      ...Asset
+      sys {
+        ...Sys
+      }
+      title
+      url
     }
     name
     title
@@ -15037,7 +14105,6 @@ export const PersonPostFragmentDoc = gql`
     github
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const PageSectionPersonPostsFragmentDoc = gql`
   fragment PageSectionPersonPosts on PageSectionPersonPosts {
@@ -15149,7 +14216,11 @@ export const ProductCommonFragmentDoc = gql`
     }
     picturesCollection(limit: 10, preview: $isPreview) {
       items {
-        ...Asset
+        sys {
+          ...Sys
+        }
+        title
+        url
       }
     }
     name
@@ -15169,7 +14240,6 @@ export const ProductCommonFragmentDoc = gql`
     pause
   }
   ${SysFragmentDoc}
-  ${AssetFragmentDoc}
 `;
 export const ProductFragmentDoc = gql`
   fragment Product on Product {

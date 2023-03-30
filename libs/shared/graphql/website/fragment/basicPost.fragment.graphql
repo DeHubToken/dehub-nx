@@ -4,7 +4,11 @@ fragment BasicPostCommon on BasicPost {
   }
   title
   mainPicture(preview: $isPreview) {
-    ...Asset
+    sys {
+      ...Sys
+    }
+    title
+    url
   }
 }
 
