@@ -17,7 +17,7 @@
     "format": "nx format:write --all",
     "lint": "nx affected --target=lint --fix --parallel --max-parallel=2",
     "test": "nx affected --target=test --parallel --max-parallel=3",
-    "tdd": "nx affected --target=test --watchAll",
+    "tdd": "nx watch --all -- pnpm nx affected --target=test --files=\\$NX_FILE_CHANGES",
     "build": "nx affected --target=build --parallel --max-parallel=4",
     "build:preview": "nx affected --target=build --configuration=preview --parallel --max-parallel=4",
     "ci": "pnpm lint && pnpm test && pnpm build",
