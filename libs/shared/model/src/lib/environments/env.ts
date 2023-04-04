@@ -103,7 +103,7 @@ export const defaultSharedEnv: SharedEnv = {
   baseUrl: '',
 
   dehub: {
-    cexUrl: 'https://www.gate.io',
+    cexUrl: 'https://www.gate.io/trade/DHB_USDT',
     downloadWalletUrl: 'https://metamask.io/download/',
     landing: 'https://dehub.net',
     dapps: {
