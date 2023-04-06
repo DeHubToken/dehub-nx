@@ -13,21 +13,18 @@ import { LegalPostComponent } from './components/legal-post.component';
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     ContentfulRichMarkupPipeModule,
     SafeHtmlPipeModule,
     BackButtonModule,
-
     // PrimeNg
-
     // Rx Angular,
     PushModule,
-
     AngularFeatureLegalRoutingModule,
+    AngularFeatureLegalComponent,
+    LegalPostComponent,
   ],
-  declarations: [AngularFeatureLegalComponent, LegalPostComponent],
 })
 export class AngularFeatureLegalModule {}

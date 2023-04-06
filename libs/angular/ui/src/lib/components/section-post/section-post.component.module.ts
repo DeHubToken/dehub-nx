@@ -8,17 +8,16 @@ import { EmbedPostModule } from '../embed-post/embed-post.component.module';
 import { SectionPostComponent } from './section-post.component';
 
 @NgModule({
-  declarations: [SectionPostComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     ChartPostModule,
     EmbedPostModule,
     ContentfulDraftDirectiveModule,
     ContentfulRichMarkupPipeModule,
     SafeHtmlPipeModule,
+    SectionPostComponent,
   ],
   exports: [SectionPostComponent],
 })

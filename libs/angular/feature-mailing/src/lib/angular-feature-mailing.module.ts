@@ -10,9 +10,8 @@ export const angularFeatureMailingRoutes: Route[] = [];
   imports: [
     // Angular
     CommonModule,
-
     AngularFeatureMailingRoutingModule,
+    AngularFeatureMailingComponent,
   ],
-  declarations: [AngularFeatureMailingComponent],
 })
 export class AngularFeatureMailingModule {}

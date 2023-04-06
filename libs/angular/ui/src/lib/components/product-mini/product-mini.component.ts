@@ -5,6 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { ProductCheckoutDetail } from '@dehub/shared/model';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'dhb-product-mini',
@@ -70,6 +72,8 @@ import { ProductCheckoutDetail } from '@dehub/shared/model';
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, ContentfulDraftDirective],
 })
 export class ProductMiniComponent implements OnInit {
   @Input() product?: ProductCheckoutDetail;

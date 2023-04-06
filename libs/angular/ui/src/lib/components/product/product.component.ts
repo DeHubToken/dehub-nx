@@ -6,10 +6,17 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ProductFragment } from '@dehub/shared/model';
+import { RouterLink } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { SwiperModule } from 'swiper/angular';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
+import { NgIf, NgFor, DecimalPipe } from '@angular/common';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
-  selector: 'dhb-product',
-  template: `
+    selector: 'dhb-product',
+    template: `
     <div [dhbContentfulDraft]="product.sys">
       <p-card
         *ngIf="product"
@@ -124,8 +131,8 @@ import { ProductFragment } from '@dehub/shared/model';
       </p-card>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       @import 'swiper/scss';
       @import 'swiper/scss/pagination';
       @import 'swiper/scss/lazy';
@@ -143,9 +150,11 @@ import { ProductFragment } from '@dehub/shared/model';
         }
       }
     `,
-  ],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    ],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ContentfulDraftDirective, NgIf, CardModule, SharedModule, SwiperModule, NgFor, ButtonModule, RouterLink, DecimalPipe]
 })
 export class ProductComponent implements OnInit {
   @Input() product!: ProductFragment;

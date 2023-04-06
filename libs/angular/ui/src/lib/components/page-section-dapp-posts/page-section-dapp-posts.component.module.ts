@@ -5,14 +5,13 @@ import { PageSectionDappPostsComponent } from '../../components/page-section-dap
 import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
 
 @NgModule({
-  declarations: [PageSectionDappPostsComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     DappPostModule,
+    PageSectionDappPostsComponent,
   ],
   exports: [PageSectionDappPostsComponent],
 })

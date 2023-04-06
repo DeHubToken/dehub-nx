@@ -18,12 +18,10 @@ import { PageSectionThumbnailPostsModule } from '../page-section-thumbnail-posts
 import { PageSectionsComponent } from './page-sections.component';
 
 @NgModule({
-  declarations: [PageSectionsComponent],
   imports: [
     // Angular
     CommonModule,
     RouterModule,
-
     // Libs
     PageSectionFeaturePostsModule,
     PageSectionThumbnailPostsModule,
@@ -38,9 +36,9 @@ import { PageSectionsComponent } from './page-sections.component';
     PageSectionPersonPostsSwiperModule,
     PageSectionPersonPostsModule,
     PageSectionProductsModule,
-
     // Rx Angular
     PushModule,
+    PageSectionsComponent,
   ],
   exports: [PageSectionsComponent],
 })

@@ -5,6 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { SysFragment } from '@dehub/shared/model';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgIf, NgClass } from '@angular/common';
 
 // TODO: is there any generated GQL type?
 interface ContentfulPicture {
@@ -48,6 +50,8 @@ interface ContentfulPicture {
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, ContentfulDraftDirective, NgClass],
 })
 export class HeavyPictureComponent<
   C extends {

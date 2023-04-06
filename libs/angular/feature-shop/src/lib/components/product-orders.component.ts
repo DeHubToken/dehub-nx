@@ -1,10 +1,13 @@
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { AddressPipe } from '@dehub/angular/ui/pipes/address/address.pipe';
 import { ShopOrder } from '@dehub/shared/model';
+import { LetModule } from '@rx-angular/template/let';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -44,6 +47,8 @@ import { Observable } from 'rxjs';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [LetModule, NgIf, NgFor, DatePipe, AddressPipe],
 })
 export class ProductOrdersComponent implements OnInit {
   @Input() productOrders$?: Observable<ShopOrder[]>;

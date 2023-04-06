@@ -8,22 +8,19 @@ import { LoadingModule } from '../loading';
 import { PhoneInputComponent } from './phone-input.component';
 
 @NgModule({
-  declarations: [PhoneInputComponent],
   imports: [
     // Angular
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
     // PrimeNg
     InputTextModule,
     DropdownModule,
-
     // Lib
     LoadingModule,
-
     // Rx Angular,
     LetModule,
+    PhoneInputComponent,
   ],
   exports: [PhoneInputComponent],
 })

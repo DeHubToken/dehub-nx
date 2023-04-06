@@ -36,7 +36,6 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
     // Libs
     AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
@@ -50,22 +49,16 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     LoadingModule,
     BackButtonModule,
     AddressPipe,
-
     // PrimeNg
     InputNumberModule,
     InputTextModule,
     InputMaskModule,
-
     // Swiper
     SwiperModule,
-
     // Rx Angular,
     LetModule,
     PushModule,
-
     AngularFeatureShopRoutingModule,
-  ],
-  declarations: [
     AngularFeatureShopComponent,
     AngularFeatureShopProductDetailComponent,
     ProductDetailComponent,

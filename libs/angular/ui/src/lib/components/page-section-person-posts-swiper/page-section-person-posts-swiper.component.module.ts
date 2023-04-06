@@ -11,17 +11,15 @@ import { PageSectionPersonPostsSwiperComponent } from './page-section-person-pos
 SwiperCore.use([Navigation]);
 
 @NgModule({
-  declarations: [PageSectionPersonPostsSwiperComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Swiper
     SwiperModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     PersonPostModule,
+    PageSectionPersonPostsSwiperComponent,
   ],
   exports: [PageSectionPersonPostsSwiperComponent],
 })

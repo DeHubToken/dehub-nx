@@ -7,18 +7,16 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { BasicPostComponent } from './basic-post.component';
 
 @NgModule({
-  declarations: [BasicPostComponent],
   imports: [
     // Angular
     CommonModule,
     RouterModule,
-
     // PrimeNg
     ButtonModule,
     CardModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
+    BasicPostComponent,
   ],
   exports: [BasicPostComponent],
 })

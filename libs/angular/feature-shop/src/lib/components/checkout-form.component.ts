@@ -1,10 +1,15 @@
+import { NgClass, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
   OnInit,
 } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { provideDehubLoggerWithScope } from '@dehub/angular/core';
 import {
   ContentfulManagementToken,
@@ -17,6 +22,10 @@ import {
   LoggerDehubToken,
   MoralisToken,
 } from '@dehub/angular/model';
+import { AddressFormComponent } from '@dehub/angular/ui/components/address-form/address-form.component';
+import { ContactsFormComponent } from '@dehub/angular/ui/components/contacts-form/contacts-form.component';
+import { LoadingComponent } from '@dehub/angular/ui/components/loading/loading.component';
+import { ProductMiniComponent } from '@dehub/angular/ui/components/product-mini/product-mini.component';
 import {
   Contacts,
   Currency,
@@ -34,18 +43,22 @@ import {
   shortenAddress,
 } from '@dehub/shared/utils';
 import { BigNumber } from '@ethersproject/bignumber';
+import { LetModule } from '@rx-angular/template/let';
 import Moralis from 'moralis';
 import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputNumberModule } from 'primeng/inputnumber';
 import {
   BehaviorSubject,
+  Observable,
   catchError,
   combineLatest,
   delay,
   filter,
   first,
   map,
-  Observable,
   of,
   repeatWhen,
   startWith,
@@ -64,6 +77,20 @@ import {
   templateUrl: './checkout-form.component.html',
   providers: [...provideDehubLoggerWithScope('Checkout Form')],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    LetModule,
+    NgIf,
+    NgClass,
+    ButtonModule,
+    ProductMiniComponent,
+    ReactiveFormsModule,
+    InputNumberModule,
+    ContactsFormComponent,
+    AddressFormComponent,
+    InputMaskModule,
+    LoadingComponent,
+  ],
 })
 export class CheckoutFormComponent implements OnInit {
   productDetail$ = (

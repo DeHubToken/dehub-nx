@@ -7,19 +7,17 @@ import { PhoneInputModule } from '../phone-input/phone-input.component.module';
 import { ContactsFormComponent } from './contacts-form.component';
 
 @NgModule({
-  declarations: [ContactsFormComponent],
   imports: [
     // Angular
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
     // Lib
     PhoneInputModule,
-
     // PrimeNg
     InputTextModule,
     DropdownModule,
+    ContactsFormComponent,
   ],
   exports: [ContactsFormComponent],
 })

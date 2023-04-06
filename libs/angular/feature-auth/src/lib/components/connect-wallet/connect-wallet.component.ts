@@ -27,6 +27,8 @@ import { resolveMessage } from '@dehub/shared/utils';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, Subscription } from 'rxjs';
 import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
+import { PushModule } from '@rx-angular/template/push';
+import { ConnectWalletOptionsComponent } from './connect-wallet-options.component';
 
 @Component({
   selector: 'dhb-connect-wallet',
@@ -39,6 +41,8 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
   styles: [],
   providers: [...provideDehubLoggerWithScope('Connect Wallet')],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [ConnectWalletOptionsComponent, PushModule],
 })
 export class ConnectWalletComponent
   extends AbstractConnectWalletComponent

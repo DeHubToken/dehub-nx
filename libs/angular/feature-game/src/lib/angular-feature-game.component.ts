@@ -6,12 +6,15 @@ import {
 } from '@angular/core';
 import { PageGameCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
+import { PageHeaderComponent } from '@dehub/angular/ui/components/page-header/page-header.component';
+import { PageSectionsComponent } from '@dehub/angular/ui/components/page-sections/page-sections.component';
 import {
   PageGameFragment,
   SharedEnv,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
-import { map, Observable } from 'rxjs';
+import { LetModule } from '@rx-angular/template/let';
+import { Observable, map } from 'rxjs';
 @Component({
   template: `
     <ng-container *rxLet="pageGame$ as pageGame" class="grid">
@@ -28,6 +31,8 @@ import { map, Observable } from 'rxjs';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [LetModule, PageHeaderComponent, PageSectionsComponent],
 })
 export class AngularFeatureGameComponent implements OnInit {
   pageGame$?: Observable<PageGameFragment | undefined>;

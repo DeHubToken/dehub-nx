@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgIf } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -13,6 +13,8 @@ import {
 import { WINDOW } from '@ng-web-apis/common';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { debounceTime, fromEvent, Subscription } from 'rxjs';
+import { YoutubeVideoIdPipe } from '../../pipes/youtube-video-id/youtube-video-id.pipe';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 let youtubeApiLoaded = false;
 
@@ -30,6 +32,8 @@ let youtubeApiLoaded = false;
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, YouTubePlayerModule, YoutubeVideoIdPipe],
 })
 export class YoutubeEmbedComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('youTubePlayer') youTubePlayer?: ElementRef<HTMLDivElement>;

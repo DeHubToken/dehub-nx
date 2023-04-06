@@ -12,6 +12,10 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { GrandPostComponent } from '../grand-post/grand-post.component';
+import { SwiperModule } from 'swiper/angular';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'dhb-page-section-grand-posts-swiper',
@@ -58,6 +62,14 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+  standalone: true,
+  imports: [
+    NgIf,
+    ContentfulDraftDirective,
+    SwiperModule,
+    NgFor,
+    GrandPostComponent,
+  ],
 })
 export class PageSectionGrandPostsSwiperComponent implements OnInit {
   @Input() section!: PageSectionGrandPostsFragment;

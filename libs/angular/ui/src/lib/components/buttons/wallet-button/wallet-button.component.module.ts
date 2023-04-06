@@ -3,12 +3,10 @@ import { NgModule } from '@angular/core';
 import { WalletButtonComponent } from './wallet-button.component';
 
 @NgModule({
-  declarations: [WalletButtonComponent],
   imports: [
     // Angular
     CommonModule,
-
-    // PrimeNg
+    WalletButtonComponent,
   ],
   exports: [WalletButtonComponent],
 })

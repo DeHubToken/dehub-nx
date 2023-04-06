@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'dhb-loader',
@@ -28,6 +29,8 @@ import {
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf],
 })
 export class LoaderComponent implements OnInit {
   @Input() title = 'Waiting';

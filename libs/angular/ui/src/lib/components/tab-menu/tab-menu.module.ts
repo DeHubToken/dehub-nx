@@ -6,15 +6,14 @@ import { RippleModule } from 'primeng/ripple';
 import { TabMenuComponent } from './tab-menu.component';
 
 @NgModule({
-  declarations: [TabMenuComponent],
   imports: [
     // Angular
     CommonModule,
     RouterModule,
-
     // PrimeNg
     ButtonModule,
     RippleModule,
+    TabMenuComponent,
   ],
   exports: [TabMenuComponent],
 })

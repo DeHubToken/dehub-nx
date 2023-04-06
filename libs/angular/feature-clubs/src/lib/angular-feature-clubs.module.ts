@@ -11,18 +11,15 @@ import { AngularFeatureClubsComponent } from './angular-feature-clubs.component'
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
     PageSectionsModule,
-
     // Rx Angular,
     LetModule,
-
     AngularFeatureClubsRoutingModule,
+    AngularFeatureClubsComponent,
   ],
-  declarations: [AngularFeatureClubsComponent],
 })
 export class AngularFeatureClubsModule {}

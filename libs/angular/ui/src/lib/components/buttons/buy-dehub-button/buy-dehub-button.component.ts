@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 @Component({
   selector: 'dhb-buy-dehub-button',
@@ -17,6 +18,8 @@ import { MenuItem } from 'primeng/api';
     ></p-splitButton>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [SplitButtonModule],
 })
 export class BuyDehubButtonComponent implements OnInit {
   @Input() label = 'Buy DeHub';

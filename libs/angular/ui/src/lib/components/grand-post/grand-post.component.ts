@@ -9,10 +9,16 @@ import { GrandPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
 import { DialogService } from 'primeng/dynamicdialog';
 import { YoutubeEmbedComponent } from '../youtube-embed';
+import { ButtonModule } from 'primeng/button';
+import { HeavyPictureComponent } from '../heavy-picture/heavy-picture.component';
+import { SharedModule } from 'primeng/api';
+import { CardModule } from 'primeng/card';
+import { NgIf } from '@angular/common';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
-  selector: 'dhb-grand-post',
-  template: `
+    selector: 'dhb-grand-post',
+    template: `
     <div [dhbContentfulDraft]="grandPost.sys">
       <p-card
         *ngIf="grandPost"
@@ -47,8 +53,8 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
       </p-card>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       /* Important for keeping all items stretched to same height */
       :host {
         height: 100%;
@@ -57,8 +63,10 @@ import { YoutubeEmbedComponent } from '../youtube-embed';
         }
       }
     `,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ContentfulDraftDirective, NgIf, CardModule, SharedModule, HeavyPictureComponent, ButtonModule]
 })
 export class GrandPostComponent implements OnInit {
   @Input() grandPost!: GrandPostFragment;

@@ -5,14 +5,13 @@ import { PersonPostModule } from '../person-post';
 import { PageSectionPersonPostsComponent } from './page-section-person-posts.component';
 
 @NgModule({
-  declarations: [PageSectionPersonPostsComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     PersonPostModule,
+    PageSectionPersonPostsComponent,
   ],
   exports: [PageSectionPersonPostsComponent],
 })

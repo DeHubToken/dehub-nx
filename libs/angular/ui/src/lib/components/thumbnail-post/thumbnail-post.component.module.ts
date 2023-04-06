@@ -6,17 +6,15 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { ThumbnailPostComponent } from '../thumbnail-post/thumbnail-post.component';
 
 @NgModule({
-  declarations: [ThumbnailPostComponent],
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     CardModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     HeavyPictureModule,
+    ThumbnailPostComponent,
   ],
   exports: [ThumbnailPostComponent],
 })

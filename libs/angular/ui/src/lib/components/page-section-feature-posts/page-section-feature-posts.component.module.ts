@@ -11,17 +11,15 @@ import { PageSectionFeaturePostsComponent } from './page-section-feature-posts.c
 SwiperCore.use([Navigation]);
 
 @NgModule({
-  declarations: [PageSectionFeaturePostsComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Swiper
     SwiperModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     FeaturePostModule,
+    PageSectionFeaturePostsComponent,
   ],
   exports: [PageSectionFeaturePostsComponent],
 })

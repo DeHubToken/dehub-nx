@@ -1,9 +1,13 @@
+import { DatePipe, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentful-draft/contentful-draft.directive';
+import { ContentfulRichMarkupPipe } from '@dehub/angular/ui/pipes/contentful-rich-markup/contentful-rich-markup.pipe';
+import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
 import { LegalPostFragment } from '@dehub/shared/model';
 
 @Component({
@@ -37,6 +41,14 @@ import { LegalPostFragment } from '@dehub/shared/model';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    ContentfulDraftDirective,
+    DatePipe,
+    ContentfulRichMarkupPipe,
+    SafeHtmlPipe,
+  ],
 })
 export class LegalPostComponent implements OnInit {
   @Input() legalPost?: LegalPostFragment;

@@ -6,14 +6,17 @@ import {
 } from '@angular/core';
 import { PageShopCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
+import { PageHeaderComponent } from '@dehub/angular/ui/components/page-header/page-header.component';
+import { PageSectionsComponent } from '@dehub/angular/ui/components/page-sections/page-sections.component';
 import {
   PageShopFragment,
   SharedEnv,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { publishReplayRefCount } from '@dehub/shared/utils';
+import { LetModule } from '@rx-angular/template/let';
 import { MenuItem } from 'primeng/api';
-import { filter, map, Observable } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 @Component({
   template: `
@@ -35,6 +38,8 @@ import { filter, map, Observable } from 'rxjs';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [LetModule, PageHeaderComponent, PageSectionsComponent],
 })
 export class AngularFeatureShopComponent implements OnInit {
   pageShop$?: Observable<PageShopFragment | undefined>;

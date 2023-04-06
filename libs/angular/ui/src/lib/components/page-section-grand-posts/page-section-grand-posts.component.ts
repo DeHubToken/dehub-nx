@@ -10,10 +10,13 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { GrandPostComponent } from '../grand-post/grand-post.component';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'dhb-page-section-grand-posts',
-  template: `
+    selector: 'dhb-page-section-grand-posts',
+    template: `
     <div
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
@@ -39,9 +42,11 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       </div>
     </div>
   `,
-  styles: [``],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+    styles: [``],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+    standalone: true,
+    imports: [NgIf, ContentfulDraftDirective, NgFor, GrandPostComponent]
 })
 export class PageSectionGrandPostsComponent implements OnInit {
   @Input() section!: PageSectionGrandPostsFragment;

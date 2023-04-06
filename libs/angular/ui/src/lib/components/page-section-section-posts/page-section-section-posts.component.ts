@@ -10,10 +10,13 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil, resolveColumnWidth } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { SectionPostComponent } from '../section-post/section-post.component';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'dhb-page-section-section-posts',
-  template: `
+    selector: 'dhb-page-section-section-posts',
+    template: `
     <div
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
@@ -41,9 +44,11 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       </div>
     </div>
   `,
-  styles: [``],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+    styles: [``],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+    standalone: true,
+    imports: [NgIf, ContentfulDraftDirective, NgFor, SectionPostComponent]
 })
 export class PageSectionSectionPostsComponent implements OnInit {
   @Input() section!: PageSectionSectionPostsFragment;

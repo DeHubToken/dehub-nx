@@ -6,17 +6,15 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { DappPostComponent } from '../dapp-post/dapp-post.component';
 
 @NgModule({
-  declarations: [DappPostComponent],
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     ButtonModule,
     CardModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
+    DappPostComponent,
   ],
   exports: [DappPostComponent],
 })

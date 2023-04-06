@@ -5,13 +5,13 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { ConnectWalletButtonComponent } from './connect-wallet-button.component';
 
 @NgModule({
-  declarations: [ConnectWalletButtonComponent],
   imports: [
     // Angular
     CommonModule,
     // PrimeNG
     ButtonModule,
     SplitButtonModule,
+    ConnectWalletButtonComponent,
   ],
   exports: [ConnectWalletButtonComponent],
 })

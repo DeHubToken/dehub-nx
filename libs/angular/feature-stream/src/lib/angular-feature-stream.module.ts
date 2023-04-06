@@ -15,23 +15,19 @@ import { AngularFeatureStreamComponent } from './angular-feature-stream.componen
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
     PageSectionsModule,
-
     // PrimeNg
     ButtonModule,
     FieldsetModule,
-
     // Rx Angular,
     LetModule,
     ForModule,
-
     AngularFeatureStreamRoutingModule,
+    AngularFeatureStreamComponent,
   ],
-  declarations: [AngularFeatureStreamComponent],
 })
 export class AngularFeatureStreamModule {}

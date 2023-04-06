@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgFor, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'dhb-wallet-button',
@@ -22,6 +23,8 @@ import { Component, Input, OnInit } from '@angular/core';
       </div>
     </button>
   `,
+  standalone: true,
+  imports: [NgFor, NgStyle],
 })
 export class WalletButtonComponent implements OnInit {
   @Input() label?: string;

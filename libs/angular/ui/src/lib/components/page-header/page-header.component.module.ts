@@ -6,15 +6,14 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { PageHeaderComponent } from './page-header.component';
 
 @NgModule({
-  declarations: [PageHeaderComponent],
   imports: [
     // Angular
     CommonModule,
     RouterModule,
     ContentfulDraftDirectiveModule,
-
     // PrimeNg
     ButtonModule,
+    PageHeaderComponent,
   ],
   exports: [PageHeaderComponent],
 })

@@ -5,16 +5,14 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { FaqGroupComponent } from './faq-group.component';
 
 @NgModule({
-  declarations: [FaqGroupComponent],
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     AccordionModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
+    FaqGroupComponent,
   ],
   exports: [FaqGroupComponent],
 })

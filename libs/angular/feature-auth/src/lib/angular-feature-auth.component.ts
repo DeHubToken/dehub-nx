@@ -6,6 +6,7 @@ import { first } from 'rxjs';
 @Component({
   template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class AngularFeatureAuthComponent implements OnInit {
   constructor(

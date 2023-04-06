@@ -1,3 +1,4 @@
+import { NgIf, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,18 +8,28 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { EnvToken } from '@dehub/angular/model';
+import { WalletButtonComponent } from '@dehub/angular/ui/components/buttons/wallet-button/wallet-button.component';
 import {
   DeHubConnector,
   SharedEnv,
-  WalletConnectingState,
   WalletConnectState,
+  WalletConnectingState,
 } from '@dehub/shared/model';
 import {
   fadeInRightOnEnterAnimation,
   fadeInUpOnEnterAnimation,
 } from 'angular-animations';
+import { SharedModule } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { InplaceModule } from 'primeng/inplace';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'dhb-connect-wallet-options',
@@ -157,6 +168,17 @@ import {
     fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 500 }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    WalletButtonComponent,
+    ReactiveFormsModule,
+    InplaceModule,
+    SharedModule,
+    InputTextModule,
+    ButtonModule,
+    NgStyle,
+  ],
 })
 export class ConnectWalletOptionsComponent implements OnInit {
   @Input() walletConnectState?: WalletConnectState;

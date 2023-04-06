@@ -33,16 +33,14 @@ export const provideDehubLoggerWithScope = (scope: string) => [
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     ToastModule,
     ButtonModule,
-
     // Rx Angular,
     LetModule,
     PushModule,
+    SwUpdateAvailableComponent,
   ],
-  declarations: [SwUpdateAvailableComponent],
   exports: [SwUpdateAvailableComponent, LetModule, PushModule],
 })
 export class AngularCoreModule {

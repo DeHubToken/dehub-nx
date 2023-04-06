@@ -5,14 +5,13 @@ import { SafeHtmlPipeModule } from '../../pipes/safe-html';
 import { EmbedPostComponent } from './embed-post.component';
 
 @NgModule({
-  declarations: [EmbedPostComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     SafeHtmlPipeModule,
+    EmbedPostComponent,
   ],
   exports: [EmbedPostComponent],
 })

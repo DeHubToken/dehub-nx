@@ -26,22 +26,16 @@ export const angularFeatureAuthRoutes: Route[] = [];
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-
     // PrimeNg
     InplaceModule,
     InputTextModule,
-    ToastModule, // TODO: not sure why p-inplace need this
-
+    ToastModule,
     // Libs
     WalletButtonModule,
     LoaderModule,
-
     // Rx Angular
     PushModule,
-
     AngularFeatureAuthRoutingModule,
-  ],
-  declarations: [
     AngularFeatureAuthComponent,
     ConnectWalletRequestComponent,
     ConnectWalletComponent,

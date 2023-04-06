@@ -4,8 +4,9 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DehubMoralisToken, IDehubMoralisService } from '@dehub/angular/model';
+import { BackButtonComponent } from '@dehub/angular/ui/components/buttons/back-button/back-button.component';
 import {
   OrderStatus,
   ProductDetailFragment,
@@ -13,7 +14,8 @@ import {
 } from '@dehub/shared/model';
 import { filterNil, publishReplayRefCount } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { map, Observable, switchMap } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
+import { ProductDetailComponent } from './components/product-detail.component';
 import { ProductDetailService } from './services';
 @Component({
   template: `
@@ -37,6 +39,8 @@ import { ProductDetailService } from './services';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
+  standalone: true,
+  imports: [BackButtonComponent, RouterLink, ProductDetailComponent],
 })
 export class AngularFeatureShopProductDetailComponent implements OnInit {
   productDetail$?: Observable<ProductDetailFragment>;

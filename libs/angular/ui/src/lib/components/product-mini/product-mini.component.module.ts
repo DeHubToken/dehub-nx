@@ -8,13 +8,12 @@ import { ProductMiniComponent } from './product-mini.component';
 SwiperCore.use([Pagination, Lazy]);
 
 @NgModule({
-  declarations: [ProductMiniComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Lib
     ContentfulDraftDirectiveModule,
+    ProductMiniComponent,
   ],
   exports: [ProductMiniComponent],
 })

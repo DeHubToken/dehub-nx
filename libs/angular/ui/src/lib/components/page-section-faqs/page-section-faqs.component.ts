@@ -7,6 +7,9 @@ import {
 import { FaqGroupFragment, PageSectionFaQsFragment } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { FaqGroupComponent } from '../faq-group/faq-group.component';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'dhb-page-section-faqs',
@@ -39,6 +42,8 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+  standalone: true,
+  imports: [NgIf, ContentfulDraftDirective, NgFor, FaqGroupComponent],
 })
 export class PageSectionFaQsComponent implements OnInit {
   @Input() section!: PageSectionFaQsFragment;

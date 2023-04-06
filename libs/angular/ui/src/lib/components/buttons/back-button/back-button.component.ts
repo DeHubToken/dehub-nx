@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'dhb-back-button',
@@ -10,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
     >
     </p-button>
   `,
+  standalone: true,
+  imports: [ButtonModule],
 })
 export class BackButtonComponent implements OnInit {
   ngOnInit() {}

@@ -5,16 +5,14 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { ChartPostComponent } from './chart-post.component';
 
 @NgModule({
-  declarations: [ChartPostComponent],
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     ChartModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
+    ChartPostComponent,
   ],
   exports: [ChartPostComponent],
 })

@@ -13,7 +13,6 @@ import { AngularFeatureHomeComponent } from './angular-feature-home.component';
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
@@ -21,12 +20,10 @@ import { AngularFeatureHomeComponent } from './angular-feature-home.component';
     YoutubeEmbedModule,
     PageHeaderModule,
     PageSectionsModule,
-
     // Rx Angular,
     LetModule,
-
     AngularFeatureHomeRoutingModule,
+    AngularFeatureHomeComponent,
   ],
-  declarations: [AngularFeatureHomeComponent],
 })
 export class AngularFeatureHomeModule {}

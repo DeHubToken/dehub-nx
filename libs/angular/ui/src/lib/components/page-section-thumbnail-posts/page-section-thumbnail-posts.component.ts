@@ -12,6 +12,10 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { ThumbnailPostComponent } from '../thumbnail-post/thumbnail-post.component';
+import { SwiperModule } from 'swiper/angular';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'dhb-page-section-thumbnail-posts',
@@ -56,6 +60,14 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+  standalone: true,
+  imports: [
+    NgIf,
+    ContentfulDraftDirective,
+    SwiperModule,
+    NgFor,
+    ThumbnailPostComponent,
+  ],
 })
 export class PageSectionThumbnailPostsComponent implements OnInit {
   @Input() section!: PageSectionThumbnailPostsFragment;

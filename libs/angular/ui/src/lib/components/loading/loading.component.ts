@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'dhb-loading',
@@ -19,6 +20,8 @@ import {
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgClass],
 })
 export class LoadingComponent implements OnInit {
   @Input() title = 'Loading...';

@@ -13,21 +13,15 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     ContentfulRichMarkupPipeModule,
     SafeHtmlPipeModule,
-
     // PrimeNg
-
     // Rx Angular,
     PushModule,
-
     AngularFeatureNewsRoutingModule,
-  ],
-  declarations: [
     AngularFeatureNewsComponent,
     AngularFeatureNewsDetailComponent,
     BasicPostDetailComponent,

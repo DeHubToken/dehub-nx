@@ -16,6 +16,11 @@ import {
   fadeInUpOnEnterAnimation,
 } from 'angular-animations';
 import { MenuItem } from 'primeng/api';
+import { ProductComponent } from '../product/product.component';
+import { SwiperModule } from 'swiper/angular';
+import { TabMenuComponent } from '../tab-menu/tab-menu.component';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'dhb-page-section-products',
@@ -80,6 +85,15 @@ import { MenuItem } from 'primeng/api';
   animations: [
     fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' }),
     fadeInDownOnEnterAnimation({ anchor: 'fadeInDown', delay: 1000 }),
+  ],
+  standalone: true,
+  imports: [
+    NgIf,
+    ContentfulDraftDirective,
+    TabMenuComponent,
+    SwiperModule,
+    NgFor,
+    ProductComponent,
   ],
 })
 export class PageSectionProductsComponent implements OnInit {

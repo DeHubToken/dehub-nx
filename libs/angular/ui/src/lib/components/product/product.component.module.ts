@@ -12,21 +12,18 @@ import { ProductComponent } from './product.component';
 SwiperCore.use([Pagination, Lazy]);
 
 @NgModule({
-  declarations: [ProductComponent],
   imports: [
     // Angular
     CommonModule,
     RouterModule,
-
     // PrimeNg
     ButtonModule,
     CardModule,
-
     // Swiper
     SwiperModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
+    ProductComponent,
   ],
   exports: [ProductComponent],
 })

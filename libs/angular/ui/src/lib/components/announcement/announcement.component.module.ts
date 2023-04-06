@@ -6,18 +6,16 @@ import { ContentfulRichMarkupPipeModule } from '../../pipes/contentful-rich-mark
 import { SafeHtmlPipeModule } from '../../pipes/safe-html';
 import { AnnouncementComponent } from './announcement.component';
 @NgModule({
-  declarations: [AnnouncementComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Swiper
     SwiperModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     ContentfulRichMarkupPipeModule,
     SafeHtmlPipeModule,
+    AnnouncementComponent,
   ],
   exports: [AnnouncementComponent],
 })

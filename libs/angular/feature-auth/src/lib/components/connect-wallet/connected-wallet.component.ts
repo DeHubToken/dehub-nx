@@ -15,6 +15,7 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class ConnectedWalletComponent
   extends AbstractConnectWalletComponent

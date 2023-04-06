@@ -5,14 +5,13 @@ import { YoutubeVideoIdPipeModule } from '../../pipes/youtube-video-id/youtube-v
 import { YoutubeEmbedComponent } from './youtube-embed.component';
 
 @NgModule({
-  declarations: [YoutubeEmbedComponent],
   imports: [
     // Angular
     CommonModule,
     YouTubePlayerModule,
-
     // Libs
     YoutubeVideoIdPipeModule,
+    YoutubeEmbedComponent,
   ],
   exports: [YoutubeEmbedComponent],
 })

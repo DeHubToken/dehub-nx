@@ -12,6 +12,10 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { PersonPostComponent } from '../person-post/person-post.component';
+import { SwiperModule } from 'swiper/angular';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'dhb-page-section-person-posts-swiper',
@@ -59,6 +63,14 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+  standalone: true,
+  imports: [
+    NgIf,
+    ContentfulDraftDirective,
+    SwiperModule,
+    NgFor,
+    PersonPostComponent,
+  ],
 })
 export class PageSectionPersonPostsSwiperComponent implements OnInit {
   @Input() section!: PageSectionPersonPostsFragment;

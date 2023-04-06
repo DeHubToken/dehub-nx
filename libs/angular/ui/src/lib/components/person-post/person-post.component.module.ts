@@ -7,18 +7,16 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { PersonPostComponent } from './person-post.component';
 
 @NgModule({
-  declarations: [PersonPostComponent],
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     ButtonModule,
     CardModule,
     TagModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
+    PersonPostComponent,
   ],
   exports: [PersonPostComponent],
 })

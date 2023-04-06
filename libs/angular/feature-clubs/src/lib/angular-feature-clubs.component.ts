@@ -6,8 +6,11 @@ import {
 } from '@angular/core';
 import { PageClubsCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
+import { PageHeaderComponent } from '@dehub/angular/ui/components/page-header/page-header.component';
+import { PageSectionsComponent } from '@dehub/angular/ui/components/page-sections/page-sections.component';
 import { PageClubsFragment, SharedEnv } from '@dehub/shared/model';
-import { map, Observable } from 'rxjs';
+import { LetModule } from '@rx-angular/template/let';
+import { Observable, map } from 'rxjs';
 
 @Component({
   template: `
@@ -24,6 +27,8 @@ import { map, Observable } from 'rxjs';
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [LetModule, PageHeaderComponent, PageSectionsComponent],
 })
 export class AngularFeatureClubsComponent implements OnInit {
   pageClubs$?: Observable<PageClubsFragment | undefined>;

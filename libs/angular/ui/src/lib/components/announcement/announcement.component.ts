@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AnnouncementFragment } from '@dehub/shared/model';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
+import { ContentfulRichMarkupPipe } from '../../pipes/contentful-rich-markup/contentful-rich-markup.pipe';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { NgFor, NgClass, DatePipe } from '@angular/common';
+import { SwiperModule } from 'swiper/angular';
 
 @Component({
   selector: 'dhb-announcement',
@@ -48,6 +53,16 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    SwiperModule,
+    NgFor,
+    ContentfulDraftDirective,
+    NgClass,
+    DatePipe,
+    ContentfulRichMarkupPipe,
+    SafeHtmlPipe,
+  ],
 })
 export class AnnouncementComponent implements OnInit {
   announcements = (

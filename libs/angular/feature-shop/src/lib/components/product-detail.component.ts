@@ -1,3 +1,4 @@
+import { DecimalPipe, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,8 +6,16 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentful-draft/contentful-draft.directive';
+import { ContentfulRichMarkupPipe } from '@dehub/angular/ui/pipes/contentful-rich-markup/contentful-rich-markup.pipe';
+import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
 import { ProductDetailFragment, ShopOrder } from '@dehub/shared/model';
+import { LetModule } from '@rx-angular/template/let';
+import { ButtonModule } from 'primeng/button';
 import { Observable } from 'rxjs';
+import { SwiperModule } from 'swiper/angular';
+import { ProductOrdersComponent } from './product-orders.component';
 
 @Component({
   selector: 'dhb-product-detail',
@@ -183,6 +192,20 @@ import { Observable } from 'rxjs';
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    LetModule,
+    ContentfulDraftDirective,
+    NgIf,
+    SwiperModule,
+    NgFor,
+    ButtonModule,
+    RouterLink,
+    ProductOrdersComponent,
+    DecimalPipe,
+    ContentfulRichMarkupPipe,
+    SafeHtmlPipe,
+  ],
 })
 export class ProductDetailComponent implements OnInit {
   @Input() productDetail$?: Observable<ProductDetailFragment>;

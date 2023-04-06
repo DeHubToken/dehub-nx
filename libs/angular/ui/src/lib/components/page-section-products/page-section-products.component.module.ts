@@ -13,21 +13,18 @@ import { PageSectionProductsComponent } from './page-section-products.component'
 SwiperCore.use([Navigation]);
 
 @NgModule({
-  declarations: [PageSectionProductsComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Swiper
     SwiperModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     ProductModule,
     TabMenuModule,
-
     // Rx
     PushModule,
+    PageSectionProductsComponent,
   ],
   exports: [PageSectionProductsComponent],
 })

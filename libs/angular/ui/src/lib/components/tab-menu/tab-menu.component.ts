@@ -5,6 +5,10 @@ import {
   OnInit,
 } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { RouterLink } from '@angular/router';
+import { RippleModule } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
+import { NgFor, NgClass, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'dhb-tab-menu',
@@ -46,6 +50,8 @@ import { MenuItem } from 'primeng/api';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgFor, ButtonModule, RippleModule, RouterLink, NgClass, NgStyle],
 })
 export class TabMenuComponent implements OnInit {
   @Input() swipeHintClass?: string;

@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { LoaderComponent } from './loader.component';
 
 @NgModule({
-  declarations: [LoaderComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, LoaderComponent],
   exports: [LoaderComponent],
 })
 export class LoaderModule {}

@@ -5,14 +5,13 @@ import { SectionPostModule } from '../section-post';
 import { PageSectionSectionPostsComponent } from './page-section-section-posts.component';
 
 @NgModule({
-  declarations: [PageSectionSectionPostsComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     SectionPostModule,
+    PageSectionSectionPostsComponent,
   ],
   exports: [PageSectionSectionPostsComponent],
 })

@@ -9,20 +9,18 @@ import { GrandPostComponent } from '../grand-post/grand-post.component';
 import { YoutubeEmbedModule } from '../youtube-embed';
 
 @NgModule({
-  declarations: [GrandPostComponent],
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     ButtonModule,
     CardModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     YoutubeEmbedModule,
     YoutubeVideoIdPipeModule,
     HeavyPictureModule,
+    GrandPostComponent,
   ],
   exports: [GrandPostComponent],
 })

@@ -6,6 +6,9 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'dhb-connect-wallet-button',
@@ -28,6 +31,8 @@ import { MenuItem } from 'primeng/api';
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, SplitButtonModule, ButtonModule],
 })
 export class ConnectWalletButtonComponent implements OnInit {
   @Input() label = 'Connect Wallet';

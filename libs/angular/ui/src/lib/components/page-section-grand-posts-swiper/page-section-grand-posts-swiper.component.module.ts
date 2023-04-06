@@ -11,17 +11,15 @@ import { PageSectionGrandPostsSwiperComponent } from '../page-section-grand-post
 SwiperCore.use([Navigation]);
 
 @NgModule({
-  declarations: [PageSectionGrandPostsSwiperComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Swiper
     SwiperModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     GrandPostModule,
+    PageSectionGrandPostsSwiperComponent,
   ],
   exports: [PageSectionGrandPostsSwiperComponent],
 })

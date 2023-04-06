@@ -9,20 +9,18 @@ import { YoutubeEmbedModule } from '../youtube-embed';
 import { FeaturePostComponent } from './feature-post.component';
 
 @NgModule({
-  declarations: [FeaturePostComponent],
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     ButtonModule,
     CardModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     YoutubeEmbedModule,
     YoutubeVideoIdPipeModule,
     HeavyPictureModule,
+    FeaturePostComponent,
   ],
   exports: [FeaturePostComponent],
 })

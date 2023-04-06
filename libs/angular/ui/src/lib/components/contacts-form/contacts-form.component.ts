@@ -13,6 +13,7 @@ import {
   NgControl,
   NonNullableFormBuilder,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { Contacts } from '@dehub/shared/model';
@@ -23,6 +24,8 @@ import {
   startWith,
   Subscription,
 } from 'rxjs';
+import { PhoneInputComponent } from '../phone-input/phone-input.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'dhb-contacts-form',
@@ -63,6 +66,8 @@ import {
       useExisting: FormGroupDirective,
     },
   ],
+  standalone: true,
+  imports: [ReactiveFormsModule, InputTextModule, PhoneInputComponent],
 })
 export class ContactsFormComponent implements OnInit, OnDestroy {
   @Input() prefillData?: Contacts;

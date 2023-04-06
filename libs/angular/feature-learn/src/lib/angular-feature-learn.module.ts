@@ -11,18 +11,15 @@ import { AngularFeatureLearnComponent } from './angular-feature-learn.component'
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
     PageSectionsModule,
-
     // Rx Angular,
     LetModule,
-
     AngularFeatureLearnRoutingModule,
+    AngularFeatureLearnComponent,
   ],
-  declarations: [AngularFeatureLearnComponent],
 })
 export class AngularFeatureLearnModule {}

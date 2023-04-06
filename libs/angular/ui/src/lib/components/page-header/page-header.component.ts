@@ -9,10 +9,14 @@ import { CallToActionFragment } from '@dehub/shared/model';
 import { resolveButtonStyle, resolveColumnWidth } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { RouterLink } from '@angular/router';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { ButtonModule } from 'primeng/button';
+import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'dhb-page-header',
-  template: `
+    selector: 'dhb-page-header',
+    template: `
     <div
       *ngIf="page"
       [@fadeInUp]
@@ -47,9 +51,11 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       </div>
     </div>
   `,
-  styles: [``],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+    styles: [``],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+    standalone: true,
+    imports: [NgIf, NgClass, NgFor, ButtonModule, ContentfulDraftDirective, RouterLink]
 })
 export class PageHeaderComponent<
   P extends {

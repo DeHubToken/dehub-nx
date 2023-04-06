@@ -4,13 +4,12 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { HeavyPictureComponent } from './heavy-picture.component';
 
 @NgModule({
-  declarations: [HeavyPictureComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
+    HeavyPictureComponent,
   ],
   exports: [HeavyPictureComponent],
 })

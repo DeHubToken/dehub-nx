@@ -11,17 +11,15 @@ import { PageSectionBasicPostsComponent } from './page-section-basic-posts.compo
 SwiperCore.use([Navigation]);
 
 @NgModule({
-  declarations: [PageSectionBasicPostsComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Swiper
     SwiperModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     BasicPostModule,
+    PageSectionBasicPostsComponent,
   ],
   exports: [PageSectionBasicPostsComponent],
 })

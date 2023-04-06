@@ -5,14 +5,13 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { BuyDehubButtonComponent } from './buy-dehub-button.component';
 
 @NgModule({
-  declarations: [BuyDehubButtonComponent],
   imports: [
     // Angular
     CommonModule,
     RouterModule,
-
     // PrimeNg
     SplitButtonModule,
+    BuyDehubButtonComponent,
   ],
   exports: [BuyDehubButtonComponent],
 })

@@ -4,13 +4,12 @@ import { ButtonModule } from 'primeng/button';
 import { BackButtonComponent } from './back-button.component';
 
 @NgModule({
-  declarations: [BackButtonComponent],
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     ButtonModule,
+    BackButtonComponent,
   ],
   exports: [BackButtonComponent, ButtonModule],
 })

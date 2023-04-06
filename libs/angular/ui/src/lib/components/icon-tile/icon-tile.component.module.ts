@@ -5,16 +5,14 @@ import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draf
 import { IconTileComponent } from './icon-tile.component';
 
 @NgModule({
-  declarations: [IconTileComponent],
   imports: [
     // Angular
     CommonModule,
-
     // PrimeNg
     ButtonModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
+    IconTileComponent,
   ],
   exports: [IconTileComponent],
 })

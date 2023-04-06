@@ -11,17 +11,15 @@ import { ThumbnailPostModule } from '../thumbnail-post';
 SwiperCore.use([Navigation]);
 
 @NgModule({
-  declarations: [PageSectionThumbnailPostsComponent],
   imports: [
     // Angular
     CommonModule,
-
     // Swiper
     SwiperModule,
-
     // Libs
     ContentfulDraftDirectiveModule,
     ThumbnailPostModule,
+    PageSectionThumbnailPostsComponent,
   ],
   exports: [PageSectionThumbnailPostsComponent],
 })

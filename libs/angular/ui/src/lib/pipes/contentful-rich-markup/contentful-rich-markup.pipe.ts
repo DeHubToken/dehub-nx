@@ -2,7 +2,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Document } from '@contentful/rich-text-types';
 import { richMarkupToHtmlString } from '@dehub/shared/utils';
 
-@Pipe({ name: 'dhbContentfulRichMarkup', pure: true })
+@Pipe({
+  name: 'dhbContentfulRichMarkup',
+  pure: true,
+  standalone: true,
+})
 export class ContentfulRichMarkupPipe implements PipeTransform {
   constructor() {}
 

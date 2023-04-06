@@ -3,7 +3,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 /**
  * Pipe to get the youtube video id from the youtube url
  */
-@Pipe({ name: 'dhbYoutubeVideoId', pure: true })
+@Pipe({
+  name: 'dhbYoutubeVideoId',
+  pure: true,
+  standalone: true,
+})
 export class YoutubeVideoIdPipe implements PipeTransform {
   constructor() {}
 

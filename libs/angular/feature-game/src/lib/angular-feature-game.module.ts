@@ -11,18 +11,15 @@ import { AngularFeatureGameComponent } from './angular-feature-game.component';
   imports: [
     // Angular
     CommonModule,
-
     // Libs
     AngularGraphQLModule,
     ContentfulDraftDirectiveModule,
     PageHeaderModule,
     PageSectionsModule,
-
     // Rx Angular,
     LetModule,
-
     AngularFeatureGameRoutingModule,
+    AngularFeatureGameComponent,
   ],
-  declarations: [AngularFeatureGameComponent],
 })
 export class AngularFeatureGameModule {}

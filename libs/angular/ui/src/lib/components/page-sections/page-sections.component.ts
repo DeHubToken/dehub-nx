@@ -21,6 +21,21 @@ import {
 import { filterNil } from '@dehub/shared/utils';
 import { MenuItem } from 'primeng/api';
 import { map, Observable } from 'rxjs';
+import { PushModule } from '@rx-angular/template/push';
+import { PageSectionProductsComponent } from '../page-section-products/page-section-products.component';
+import { PageSectionPersonPostsComponent } from '../page-section-person-posts/page-section-person-posts.component';
+import { PageSectionPersonPostsSwiperComponent } from '../page-section-person-posts-swiper/page-section-person-posts-swiper.component';
+import { PageSectionSectionPostsComponent } from '../page-section-section-posts/page-section-section-posts.component';
+import { PageSectionGrandPostsComponent } from '../page-section-grand-posts/page-section-grand-posts.component';
+import { PageSectionGrandPostsSwiperComponent } from '../page-section-grand-posts-swiper/page-section-grand-posts-swiper.component';
+import { PageSectionDappPostsComponent } from '../page-section-dapp-posts/page-section-dapp-posts.component';
+import { PageSectionFaQsComponent } from '../page-section-faqs/page-section-faqs.component';
+import { PageSectionIconTilesComponent } from '../page-section-icon-tiles/page-section-icon-tiles.component';
+import { PageSectionIconTilesSwiperComponent } from '../page-section-icon-tiles-swiper/page-section-icon-tiles-swiper.component';
+import { PageSectionBasicPostsComponent } from '../page-section-basic-posts/page-section-basic-posts.component';
+import { PageSectionThumbnailPostsComponent } from '../page-section-thumbnail-posts/page-section-thumbnail-posts.component';
+import { PageSectionFeaturePostsComponent } from '../page-section-feature-posts/page-section-feature-posts.component';
+import { NgFor, NgIf } from '@angular/common';
 
 type PageSection =
   | PageSectionFeaturePostsFragment
@@ -144,6 +159,25 @@ type PageSection =
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgFor,
+    NgIf,
+    PageSectionFeaturePostsComponent,
+    PageSectionThumbnailPostsComponent,
+    PageSectionBasicPostsComponent,
+    PageSectionIconTilesSwiperComponent,
+    PageSectionIconTilesComponent,
+    PageSectionFaQsComponent,
+    PageSectionDappPostsComponent,
+    PageSectionGrandPostsSwiperComponent,
+    PageSectionGrandPostsComponent,
+    PageSectionSectionPostsComponent,
+    PageSectionPersonPostsSwiperComponent,
+    PageSectionPersonPostsComponent,
+    PageSectionProductsComponent,
+    PushModule,
+  ],
 })
 export class PageSectionsComponent implements OnInit {
   @Input() sections?: PageSection[];
