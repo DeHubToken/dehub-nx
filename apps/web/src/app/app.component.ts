@@ -1,12 +1,19 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import {
+  AngularCoreModule,
   AnnouncementService,
   CoreService,
   LoaderService,
   PwaService,
 } from '@dehub/angular/core';
+import { LoaderModule } from '@dehub/angular/ui/components/loader/loader.module';
 import { MenuMode, ThemeMode } from '@dehub/shared/model';
+import { PushModule } from '@rx-angular/template/push';
 import { PrimeNGConfig } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -33,6 +40,24 @@ import { Observable } from 'rxjs';
       [loaderGif]="loaderGif"
     ></dhb-loader>
   `,
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    RouterOutlet,
+
+    // Rx Angular
+    PushModule,
+
+    // PrimeNg
+    ToastModule,
+    ConfirmDialogModule,
+
+    // Libs
+    LoaderModule,
+
+    AngularCoreModule,
+  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
   menuMode: MenuMode = 'horizontal';
