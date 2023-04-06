@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AngularGraphQLModule } from '@dehub/angular/graphql';
-import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
-import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
-import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
+
 import { LetModule } from '@rx-angular/template/let';
 import { AngularFeatureGameRoutingModule } from './angular-feature-game-routing.module';
 import { AngularFeatureGameComponent } from './angular-feature-game.component';
@@ -13,9 +11,6 @@ import { AngularFeatureGameComponent } from './angular-feature-game.component';
     CommonModule,
     // Libs
     AngularGraphQLModule,
-    ContentfulDraftDirectiveModule,
-    PageHeaderModule,
-    PageSectionsModule,
     // Rx Angular,
     LetModule,
     AngularFeatureGameRoutingModule,

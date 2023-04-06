@@ -2,17 +2,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularGraphQLModule } from '@dehub/angular/graphql';
-import { AddressFormModule } from '@dehub/angular/ui/components/address-form';
-import { BackButtonModule } from '@dehub/angular/ui/components/buttons/back-button';
-import { ContactsFormModule } from '@dehub/angular/ui/components/contacts-form';
-import { LoadingModule } from '@dehub/angular/ui/components/loading';
-import { PageHeaderModule } from '@dehub/angular/ui/components/page-header';
-import { PageSectionsModule } from '@dehub/angular/ui/components/page-sections';
-import { ProductMiniModule } from '@dehub/angular/ui/components/product-mini';
-import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
-import { AddressPipe } from '@dehub/angular/ui/pipes/address';
-import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
-import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
+
+import { AddressPipe } from '@dehub/angular/ui/pipes/address/address.pipe';
+
 import { LetModule } from '@rx-angular/template/let';
 import { PushModule } from '@rx-angular/template/push';
 import { InputMaskModule } from 'primeng/inputmask';
@@ -38,16 +30,6 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
     ReactiveFormsModule,
     // Libs
     AngularGraphQLModule,
-    ContentfulDraftDirectiveModule,
-    ContentfulRichMarkupPipeModule,
-    SafeHtmlPipeModule,
-    PageHeaderModule,
-    PageSectionsModule,
-    ProductMiniModule,
-    AddressFormModule,
-    ContactsFormModule,
-    LoadingModule,
-    BackButtonModule,
     AddressPipe,
     // PrimeNg
     InputNumberModule,

@@ -10,7 +10,7 @@ import { WINDOW } from '@ng-web-apis/common';
 import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
 import { HeavyPictureComponent } from '../heavy-picture/heavy-picture.component';
-import { YoutubeEmbedComponent } from '../youtube-embed';
+import { YoutubeEmbedComponent } from '../youtube-embed/youtube-embed.component';
 
 import { NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';

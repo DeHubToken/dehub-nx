@@ -7,8 +7,9 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
-import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buttons/buy-dehub-button';
-import { ConnectWalletButtonModule } from '@dehub/angular/ui/components/buttons/connect-wallet-button';
+
+import { BuyDehubButtonComponent } from '@dehub/angular/ui/components/buttons/buy-dehub-button/buy-dehub-button.component';
+import { ConnectWalletButtonComponent } from '@dehub/angular/ui/components/buttons/connect-wallet-button/connect-wallet-button.component';
 import { shortenAddress } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
 import { MenuItem } from 'primeng/api';
@@ -32,8 +33,8 @@ import { AppMenuComponent } from './menu/app.menu.component';
     PushModule,
 
     // Libs
-    BuyDehubButtonModule,
-    ConnectWalletButtonModule,
+    BuyDehubButtonComponent,
+    ConnectWalletButtonComponent,
 
     AppMenuComponent,
   ],

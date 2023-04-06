@@ -10,7 +10,8 @@ import { FooterFragment } from '@dehub/shared/model';
 import { resolveButtonStyle } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import { ButtonModule } from 'primeng/button';
-import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
+
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 import { CTAGroupPipe } from './cta-group.pipe';
 
 @Component({
@@ -25,8 +26,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
     ButtonModule,
 
     // Libs
-    ContentfulDraftDirectiveModule,
-
+    ContentfulDraftDirective,
     CTAGroupPipe,
   ],
   template: `

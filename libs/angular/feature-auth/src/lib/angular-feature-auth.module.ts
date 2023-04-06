@@ -2,8 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
-import { WalletButtonModule } from '@dehub/angular/ui/components/buttons/wallet-button';
-import { LoaderModule } from '@dehub/angular/ui/components/loader';
+
 import { PushModule } from '@rx-angular/template/push';
 import { InplaceModule } from 'primeng/inplace';
 import { InputTextModule } from 'primeng/inputtext';
@@ -30,9 +29,6 @@ export const angularFeatureAuthRoutes: Route[] = [];
     InplaceModule,
     InputTextModule,
     ToastModule,
-    // Libs
-    WalletButtonModule,
-    LoaderModule,
     // Rx Angular
     PushModule,
     AngularFeatureAuthRoutingModule,

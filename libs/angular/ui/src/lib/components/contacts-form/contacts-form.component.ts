@@ -12,20 +12,20 @@ import {
   FormGroupDirective,
   NgControl,
   NonNullableFormBuilder,
-  Validators,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { Contacts } from '@dehub/shared/model';
+import { InputTextModule } from 'primeng/inputtext';
 import {
+  Subscription,
   combineLatest,
   distinctUntilChanged,
   identity,
   startWith,
-  Subscription,
 } from 'rxjs';
 import { PhoneInputComponent } from '../phone-input/phone-input.component';
-import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'dhb-contacts-form',

@@ -3,8 +3,9 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FooterCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { FooterComponent } from '@dehub/angular/ui/components/footer';
-import { TabMenuModule } from '@dehub/angular/ui/components/tab-menu';
+import { FooterComponent } from '@dehub/angular/ui/components/footer/footer.component';
+
+import { TabMenuComponent } from '@dehub/angular/ui/components/tab-menu/tab-menu.component';
 import { FooterFragment, SharedEnv } from '@dehub/shared/model';
 import { getTabMenuItems } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
@@ -23,12 +24,9 @@ import { MenuService } from './topbar/menu/app.menu.service';
     PushModule,
     RouterOutlet,
 
-    // PrimeNg
-    TabMenuModule,
-
     // Libs
+    TabMenuComponent,
     FooterComponent,
-
     AppTopBarComponent,
   ],
 })

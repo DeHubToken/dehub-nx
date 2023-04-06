@@ -8,7 +8,8 @@ import {
   LoaderService,
   PwaService,
 } from '@dehub/angular/core';
-import { LoaderModule } from '@dehub/angular/ui/components/loader/loader.module';
+
+import { LoaderComponent } from '@dehub/angular/ui/components/loader/loader.component';
 import { MenuMode, ThemeMode } from '@dehub/shared/model';
 import { PushModule } from '@rx-angular/template/push';
 import { PrimeNGConfig } from 'primeng/api';
@@ -54,7 +55,7 @@ import { Observable } from 'rxjs';
     ConfirmDialogModule,
 
     // Libs
-    LoaderModule,
+    LoaderComponent,
 
     AngularCoreModule,
   ],
