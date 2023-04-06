@@ -1,21 +1,42 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
   OnInit,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
+import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buttons/buy-dehub-button';
+import { ConnectWalletButtonModule } from '@dehub/angular/ui/components/buttons/connect-wallet-button';
 import { shortenAddress } from '@dehub/shared/utils';
+import { PushModule } from '@rx-angular/template/push';
 import { MenuItem } from 'primeng/api';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
 import { AppMainComponent } from '../app.main.component';
+import { AppMenuComponent } from './menu/app.menu.component';
 
 @Component({
   selector: 'dhb-topbar',
   templateUrl: './app.topbar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    RouterLink,
+
+    // Rx Angular
+    PushModule,
+
+    // Libs
+    BuyDehubButtonModule,
+    ConnectWalletButtonModule,
+
+    AppMenuComponent,
+  ],
 })
 export class AppTopBarComponent implements OnInit {
   items?: MenuItem[];

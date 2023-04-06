@@ -5,10 +5,17 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { Component, Input, OnDestroy, OnInit, forwardRef } from '@angular/core';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { filter, Subscription } from 'rxjs';
+import { RippleModule } from 'primeng/ripple';
+import { Subscription, filter } from 'rxjs';
 import { AppMainComponent } from '../../app.main.component';
 import { MenuService } from './app.menu.service';
 
@@ -158,6 +165,20 @@ import { MenuService } from './app.menu.service';
         animate('400ms cubic-bezier(.05,.74,.2,.99)')
       ),
     ]),
+  ],
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgClass,
+    RouterLinkActive,
+    RouterLink,
+    NgFor,
+
+    // PrimeNg
+    RippleModule,
+
+    forwardRef(() => AppMenuitemComponent),
   ],
 })
 export class AppMenuitemComponent implements OnInit, OnDestroy {

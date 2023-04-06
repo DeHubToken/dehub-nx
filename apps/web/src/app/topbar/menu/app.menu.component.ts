@@ -1,7 +1,9 @@
+import { NgClass, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { PwaService } from '@dehub/angular/core';
 import { getMenuItems } from '../../app-routing.module';
 import { AppMainComponent } from '../../app.main.component';
+import { AppMenuitemComponent } from './app.menuitem.component';
 
 @Component({
   selector: 'dhb-menu',
@@ -24,6 +26,14 @@ import { AppMainComponent } from '../../app.main.component';
       </div>
     </div>
   `,
+  standalone: true,
+  imports: [
+    // Angular
+    NgClass,
+    NgFor,
+
+    AppMenuitemComponent,
+  ],
 })
 export class AppMenuComponent {
   model = getMenuItems(this.pwaService);

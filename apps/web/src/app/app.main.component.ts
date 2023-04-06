@@ -1,16 +1,36 @@
+import { NgClass } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FooterCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
+import { FooterComponent } from '@dehub/angular/ui/components/footer';
+import { TabMenuModule } from '@dehub/angular/ui/components/tab-menu';
 import { FooterFragment, SharedEnv } from '@dehub/shared/model';
 import { getTabMenuItems } from '@dehub/shared/utils';
+import { PushModule } from '@rx-angular/template/push';
 import { MenuItem } from 'primeng/api';
-import { filter, map, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, filter, map } from 'rxjs';
 import { AppComponent } from './app.component';
+import { AppTopBarComponent } from './topbar/app.topbar.component';
 import { MenuService } from './topbar/menu/app.menu.service';
 
 @Component({
   templateUrl: './app.main.component.html',
+  standalone: true,
+  imports: [
+    // Angular
+    NgClass,
+    PushModule,
+    RouterOutlet,
+
+    // PrimeNg
+    TabMenuModule,
+
+    // Libs
+    FooterComponent,
+
+    AppTopBarComponent,
+  ],
 })
 export class AppMainComponent implements OnInit, OnDestroy {
   sidebarStatic?: boolean;

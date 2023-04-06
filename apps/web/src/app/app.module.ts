@@ -13,27 +13,16 @@ import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { AnnouncementModule } from '@dehub/angular/ui/components/announcement';
-import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buttons/buy-dehub-button';
-import { ConnectWalletButtonModule } from '@dehub/angular/ui/components/buttons/connect-wallet-button';
-import { FooterComponent } from '@dehub/angular/ui/components/footer';
 import { LoaderModule } from '@dehub/angular/ui/components/loader';
-import { TabMenuModule } from '@dehub/angular/ui/components/tab-menu';
 import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
-import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
-import { MenuModule } from 'primeng/menu';
-import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { Env } from '../environments/env';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppMainComponent } from './app.main.component';
-import { AppTopBarComponent } from './topbar/app.topbar.component';
-import { AppMenuComponent } from './topbar/menu/app.menu.component';
 import { MenuService } from './topbar/menu/app.menu.service';
-import { AppMenuitemComponent } from './topbar/menu/app.menuitem.component';
 
 const { appId, serverUrl } = environment.web3.moralis;
 @NgModule({
@@ -45,12 +34,8 @@ const { appId, serverUrl } = environment.web3.moralis;
     HttpClientModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register(`web/ngsw-worker.js`),
-    ContentfulDraftDirectiveModule,
 
     // PrimeNg
-    ButtonModule,
-    RippleModule,
-    MenuModule,
     ToastModule,
     DynamicDialogModule,
     ConfirmDialogModule,
@@ -61,24 +46,13 @@ const { appId, serverUrl } = environment.web3.moralis;
     AngularGraphQLModule,
 
     // Libs
-    TabMenuModule,
-    BuyDehubButtonModule,
-    FooterComponent,
     LoaderModule,
-    ConnectWalletButtonModule,
     AnnouncementModule,
+    ContentfulDraftDirectiveModule,
 
     AppRoutingModule,
   ],
-  declarations: [
-    AppComponent,
-
-    // Layout from Freya
-    AppMainComponent,
-    AppMenuComponent,
-    AppMenuitemComponent,
-    AppTopBarComponent,
-  ],
+  declarations: [AppComponent],
   providers: [
     MenuService,
     DialogService,

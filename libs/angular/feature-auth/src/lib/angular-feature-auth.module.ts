@@ -11,10 +11,10 @@ import { ToastModule } from 'primeng/toast';
 import { AngularFeatureAuthRoutingModule } from './angular-feature-auth-routing.module';
 import { AngularFeatureAuthComponent } from './angular-feature-auth.component';
 import {
-  ConnectedWalletComponent,
   ConnectWalletComponent,
   ConnectWalletOptionsComponent,
   ConnectWalletRequestComponent,
+  ConnectedWalletComponent,
   DisconnectWalletComponent,
 } from './components/connect-wallet';
 
@@ -36,7 +36,7 @@ export const angularFeatureAuthRoutes: Route[] = [];
     WalletButtonModule,
     LoaderModule,
 
-    // Rx Angular,
+    // Rx Angular
     PushModule,
 
     AngularFeatureAuthRoutingModule,
