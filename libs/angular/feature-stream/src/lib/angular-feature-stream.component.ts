@@ -19,7 +19,7 @@ import { WINDOW } from '@ng-web-apis/common';
 import { ForModule } from '@rx-angular/template/for';
 import { LetModule } from '@rx-angular/template/let';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { SharedModule } from 'primeng/api';
+
 import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { Observable, map } from 'rxjs';
@@ -89,7 +89,6 @@ import { Observable, map } from 'rxjs';
     FieldsetModule,
     ContentfulDraftDirective,
     NgClass,
-    SharedModule,
     ButtonModule,
     PageSectionsComponent,
   ],

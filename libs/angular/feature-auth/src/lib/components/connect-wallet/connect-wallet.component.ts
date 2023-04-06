@@ -20,14 +20,14 @@ import {
 import {
   DeHubConnector,
   SharedEnv,
-  WalletConnectingState,
   WalletConnectState,
+  WalletConnectingState,
 } from '@dehub/shared/model';
 import { resolveMessage } from '@dehub/shared/utils';
+import { PushModule } from '@rx-angular/template/push';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, Subscription } from 'rxjs';
 import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
-import { PushModule } from '@rx-angular/template/push';
 import { ConnectWalletOptionsComponent } from './connect-wallet-options.component';
 
 @Component({
@@ -38,7 +38,7 @@ import { ConnectWalletOptionsComponent } from './connect-wallet-options.componen
       (login)="onLogin($event)"
     ></dhb-connect-wallet-options>
   `,
-  styles: [],
+
   providers: [...provideDehubLoggerWithScope('Connect Wallet')],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,

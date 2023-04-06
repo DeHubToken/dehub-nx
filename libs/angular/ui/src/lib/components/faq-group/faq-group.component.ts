@@ -6,14 +6,14 @@ import {
 } from '@angular/core';
 import { FaqGroupFragment, FaqItemFragment } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
-import { SharedModule } from 'primeng/api';
+
+import { NgFor, NgIf } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-    selector: 'dhb-faq-group',
-    template: `
+  selector: 'dhb-faq-group',
+  template: `
     <div
       *ngIf="faqGroup"
       [dhbContentfulDraft]="faqGroup.sys"
@@ -44,10 +44,9 @@ import { NgIf, NgFor } from '@angular/common';
       </p-accordion>
     </div>
   `,
-    styles: [``],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NgIf, ContentfulDraftDirective, AccordionModule, NgFor, SharedModule]
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, ContentfulDraftDirective, AccordionModule, NgFor],
 })
 export class FaqGroupComponent implements OnInit {
   @Input() faqGroup!: FaqGroupFragment;

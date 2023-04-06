@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,11 +10,10 @@ import { IconTileFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
 import { ButtonModule } from 'primeng/button';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'dhb-icon-tile',
-    template: `
+  selector: 'dhb-icon-tile',
+  template: `
     <div
       *ngIf="iconTile"
       [dhbContentfulDraft]="iconTile.sys"
@@ -36,10 +36,10 @@ import { NgIf } from '@angular/common';
       ></p-button>
     </div>
   `,
-    styles: [``],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NgIf, ContentfulDraftDirective, ButtonModule]
+
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, ContentfulDraftDirective, ButtonModule],
 })
 export class IconTileComponent implements OnInit {
   @Input() iconTile!: IconTileFragment;

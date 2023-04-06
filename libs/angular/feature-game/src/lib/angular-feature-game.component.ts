@@ -29,7 +29,7 @@ import { Observable, map } from 'rxjs';
       ></dhb-page-sections>
     </ng-container>
   `,
-  styles: [``],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [LetModule, PageHeaderComponent, PageSectionsComponent],

@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,7 +9,6 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { SplitButtonModule } from 'primeng/splitbutton';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'dhb-connect-wallet-button',
@@ -29,7 +29,7 @@ import { NgIf } from '@angular/common';
       ></p-button>
     </ng-template>
   `,
-  styles: [],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [NgIf, SplitButtonModule, ButtonModule],

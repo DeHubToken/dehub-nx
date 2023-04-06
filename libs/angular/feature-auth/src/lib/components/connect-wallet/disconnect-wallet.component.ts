@@ -6,10 +6,10 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { IMoralisService, MoralisToken } from '@dehub/angular/model';
+import { ButtonModule } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { first, tap } from 'rxjs';
 import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
-import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'dhb-disconnect-wallet',
@@ -30,7 +30,7 @@ import { ButtonModule } from 'primeng/button';
       </div>
     </div>
   `,
-  styles: [],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [ButtonModule],

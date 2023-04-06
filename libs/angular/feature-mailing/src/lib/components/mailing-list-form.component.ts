@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     >
     </iframe>
   `,
-  styles: [``],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MailingListFormComponent implements OnInit {

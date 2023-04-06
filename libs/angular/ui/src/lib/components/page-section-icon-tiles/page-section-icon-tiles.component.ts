@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,13 +11,12 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { IconTileComponent } from '../icon-tile/icon-tile.component';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { NgIf, NgFor } from '@angular/common';
+import { IconTileComponent } from '../icon-tile/icon-tile.component';
 
 @Component({
-    selector: 'dhb-page-section-icon-tiles',
-    template: `
+  selector: 'dhb-page-section-icon-tiles',
+  template: `
     <div
       *ngIf="section"
       [dhbContentfulDraft]="section.sys"
@@ -42,11 +42,11 @@ import { NgIf, NgFor } from '@angular/common';
       </div>
     </div>
   `,
-    styles: [``],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
-    standalone: true,
-    imports: [NgIf, ContentfulDraftDirective, NgFor, IconTileComponent]
+
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
+  standalone: true,
+  imports: [NgIf, ContentfulDraftDirective, NgFor, IconTileComponent],
 })
 export class PageSectionIconTilesComponent implements OnInit {
   @Input() section!: PageSectionIconTilesFragment;

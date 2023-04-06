@@ -28,7 +28,6 @@ import { filter, take } from 'rxjs';
       </div>
     </div>
   `,
-  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisconnectWalletComponent implements OnInit {

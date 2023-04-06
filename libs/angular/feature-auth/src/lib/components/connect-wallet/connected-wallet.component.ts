@@ -13,7 +13,6 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
       </h6>
     </div>
   `,
-  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })

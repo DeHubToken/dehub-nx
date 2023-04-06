@@ -9,9 +9,9 @@ import { PersonPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
-import { SharedModule } from 'primeng/api';
+
+import { NgFor, NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';
-import { NgIf, NgFor } from '@angular/common';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 interface SocialLink {
@@ -21,8 +21,8 @@ interface SocialLink {
 }
 
 @Component({
-    selector: 'dhb-person-post',
-    template: `
+  selector: 'dhb-person-post',
+  template: `
     <div [dhbContentfulDraft]="personPost.sys" class="w-full">
       <p-card
         *ngIf="personPost"
@@ -78,8 +78,8 @@ interface SocialLink {
       </p-card>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       /* Important for keeping all items stretched to same height */
       :host {
         height: 100%;
@@ -88,10 +88,17 @@ interface SocialLink {
         }
       }
     `,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [ContentfulDraftDirective, NgIf, CardModule, SharedModule, TagModule, NgFor, ButtonModule]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    ContentfulDraftDirective,
+    NgIf,
+    CardModule,
+    TagModule,
+    NgFor,
+    ButtonModule,
+  ],
 })
 export class PersonPostComponent implements OnInit {
   @Input() personPost!: PersonPostFragment;

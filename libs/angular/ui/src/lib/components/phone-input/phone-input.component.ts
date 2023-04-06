@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
@@ -9,7 +10,15 @@ import {
   Optional,
   Self,
 } from '@angular/core';
-import { ControlContainer, FormControlStatus, FormGroupDirective, NgControl, NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  ControlContainer,
+  FormControlStatus,
+  FormGroupDirective,
+  NgControl,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { PhoneNumberValidator } from '@dehub/angular/util';
 import { Country, SharedEnv } from '@dehub/shared/model';
@@ -18,17 +27,16 @@ import {
   PhoneNumberFormat,
   PhoneNumberUtil,
 } from 'google-libphonenumber';
-import { distinctUntilChanged, Observable, Subscription, tap } from 'rxjs';
-import { LoadingComponent } from '../loading/loading.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { NgIf } from '@angular/common';
-import { SharedModule } from 'primeng/api';
-import { DropdownModule } from 'primeng/dropdown';
+import { Observable, Subscription, distinctUntilChanged, tap } from 'rxjs';
+import { LoadingComponent } from '../loading/loading.component';
+
 import { LetModule } from '@rx-angular/template/let';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
-    selector: 'dhb-phone-input',
-    template: `
+  selector: 'dhb-phone-input',
+  template: `
     <div
       *rxLet="countries$ as countries; suspense: loading"
       [formGroup]="phoneForm"
@@ -89,8 +97,8 @@ import { LetModule } from '@rx-angular/template/let';
       <dhb-loading></dhb-loading>
     </ng-template>
   `,
-    styles: [
-        `
+  styles: [
+    `
       #phone-code .country-item {
         min-width: 250px;
       }
@@ -106,16 +114,23 @@ import { LetModule } from '@rx-angular/template/let';
         margin: 0;
       }
     `,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    viewProviders: [
-        {
-            provide: ControlContainer,
-            useExisting: FormGroupDirective,
-        },
-    ],
-    standalone: true,
-    imports: [LetModule, ReactiveFormsModule, DropdownModule, SharedModule, NgIf, InputTextModule, LoadingComponent]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useExisting: FormGroupDirective,
+    },
+  ],
+  standalone: true,
+  imports: [
+    LetModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    NgIf,
+    InputTextModule,
+    LoadingComponent,
+  ],
 })
 export class PhoneInputComponent implements OnInit, OnDestroy {
   @Input() prefillData?: string;

@@ -26,7 +26,6 @@ import {
   fadeInRightOnEnterAnimation,
   fadeInUpOnEnterAnimation,
 } from 'angular-animations';
-import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InplaceModule } from 'primeng/inplace';
 import { InputTextModule } from 'primeng/inputtext';
@@ -162,7 +161,6 @@ import { InputTextModule } from 'primeng/inputtext';
       </div>
     </div>
   `,
-  styles: [],
   animations: [
     fadeInRightOnEnterAnimation({ anchor: 'fadeInRight', duration: 500 }),
     fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 500 }),
@@ -174,7 +172,6 @@ import { InputTextModule } from 'primeng/inputtext';
     WalletButtonComponent,
     ReactiveFormsModule,
     InplaceModule,
-    SharedModule,
     InputTextModule,
     ButtonModule,
     NgStyle,

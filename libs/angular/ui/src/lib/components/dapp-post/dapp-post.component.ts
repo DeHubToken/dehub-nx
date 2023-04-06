@@ -8,14 +8,14 @@ import {
 import { DappPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
 import { ButtonModule } from 'primeng/button';
-import { SharedModule } from 'primeng/api';
-import { CardModule } from 'primeng/card';
+
 import { NgIf } from '@angular/common';
+import { CardModule } from 'primeng/card';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
-    selector: 'dhb-dapp-post',
-    template: `
+  selector: 'dhb-dapp-post',
+  template: `
     <div [dhbContentfulDraft]="dappPost.sys">
       <p-card
         *ngIf="dappPost"
@@ -57,8 +57,8 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
       </p-card>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       /* Important for keeping all items stretched to same height */
       :host {
         height: 100%;
@@ -67,10 +67,10 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
         }
       }
     `,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [ContentfulDraftDirective, NgIf, CardModule, SharedModule, ButtonModule]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [ContentfulDraftDirective, NgIf, CardModule, ButtonModule],
 })
 export class DappPostComponent implements OnInit {
   @Input() dappPost!: DappPostFragment;

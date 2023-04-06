@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { serviceWorkerConfig } from '@dehub/shared/model';
 import { ButtonModule } from 'primeng/button';
-import { SharedModule } from 'primeng/api';
+
 import { ToastModule } from 'primeng/toast';
 
 @Component({
-    selector: 'dhb-sw-update-available',
-    template: `
+  selector: 'dhb-sw-update-available',
+  template: `
     <p-toast
       [key]="key"
       (onClose)="onCancel()"
@@ -51,8 +51,8 @@ import { ToastModule } from 'primeng/toast';
       </ng-template>
     </p-toast>
   `,
-    standalone: true,
-    imports: [ToastModule, SharedModule, ButtonModule]
+  standalone: true,
+  imports: [ToastModule, ButtonModule],
 })
 export class SwUpdateAvailableComponent implements OnInit {
   @Output() update = new EventEmitter<void>();

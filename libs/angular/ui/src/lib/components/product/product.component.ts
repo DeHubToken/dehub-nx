@@ -5,18 +5,18 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { ProductFragment } from '@dehub/shared/model';
 import { RouterLink } from '@angular/router';
+import { ProductFragment } from '@dehub/shared/model';
 import { ButtonModule } from 'primeng/button';
 import { SwiperModule } from 'swiper/angular';
-import { SharedModule } from 'primeng/api';
+
+import { DecimalPipe, NgFor, NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';
-import { NgIf, NgFor, DecimalPipe } from '@angular/common';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
-    selector: 'dhb-product',
-    template: `
+  selector: 'dhb-product',
+  template: `
     <div [dhbContentfulDraft]="product.sys">
       <p-card
         *ngIf="product"
@@ -131,8 +131,8 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
       </p-card>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       @import 'swiper/scss';
       @import 'swiper/scss/pagination';
       @import 'swiper/scss/lazy';
@@ -150,11 +150,20 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
         }
       }
     `,
-    ],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [ContentfulDraftDirective, NgIf, CardModule, SharedModule, SwiperModule, NgFor, ButtonModule, RouterLink, DecimalPipe]
+  ],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    ContentfulDraftDirective,
+    NgIf,
+    CardModule,
+    SwiperModule,
+    NgFor,
+    ButtonModule,
+    RouterLink,
+    DecimalPipe,
+  ],
 })
 export class ProductComponent implements OnInit {
   @Input() product!: ProductFragment;

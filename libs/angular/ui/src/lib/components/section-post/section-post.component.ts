@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,16 +6,15 @@ import {
   OnInit,
 } from '@angular/core';
 import { SectionPostFragment } from '@dehub/shared/model';
-import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
-import { ContentfulRichMarkupPipe } from '../../pipes/contentful-rich-markup/contentful-rich-markup.pipe';
-import { EmbedPostComponent } from '../embed-post/embed-post.component';
-import { ChartPostComponent } from '../chart-post/chart-post.component';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { NgIf } from '@angular/common';
+import { ContentfulRichMarkupPipe } from '../../pipes/contentful-rich-markup/contentful-rich-markup.pipe';
+import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
+import { ChartPostComponent } from '../chart-post/chart-post.component';
+import { EmbedPostComponent } from '../embed-post/embed-post.component';
 
 @Component({
-    selector: 'dhb-section-post',
-    template: `
+  selector: 'dhb-section-post',
+  template: `
     <div
       *ngIf="sectionPost"
       [dhbContentfulDraft]="sectionPost.sys"
@@ -56,10 +56,17 @@ import { NgIf } from '@angular/common';
       </dhb-embed-post>
     </div>
   `,
-    styles: [``],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NgIf, ContentfulDraftDirective, ChartPostComponent, EmbedPostComponent, ContentfulRichMarkupPipe, SafeHtmlPipe]
+
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    ContentfulDraftDirective,
+    ChartPostComponent,
+    EmbedPostComponent,
+    ContentfulRichMarkupPipe,
+    SafeHtmlPipe,
+  ],
 })
 export class SectionPostComponent implements OnInit {
   @Input() sectionPost!: SectionPostFragment;

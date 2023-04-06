@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 import { ButtonModule } from 'primeng/button';
+import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({
-    selector: 'dhb-connect-wallet-base',
-    template: `
+  selector: 'dhb-connect-wallet-base',
+  template: `
     <div class="text-center">
       <i
         class="fa-duotone fa-key-skeleton-left-right icon-color-duotone-1 text-6xl mt-4"
@@ -21,10 +21,9 @@ import { ButtonModule } from 'primeng/button';
       </div>
     </div>
   `,
-    styles: [``],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [ButtonModule]
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [ButtonModule],
 })
 export class ConnectWalletRequestComponent
   extends AbstractConnectWalletComponent

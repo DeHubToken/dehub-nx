@@ -12,29 +12,36 @@ import {
   Self,
   ViewEncapsulation,
 } from '@angular/core';
-import { ControlContainer, FormGroupDirective, NgControl, NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  ControlContainer,
+  FormGroupDirective,
+  NgControl,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { Country, PhysicalAddress, SharedEnv } from '@dehub/shared/model';
-import {
-  BehaviorSubject,
-  distinctUntilChanged,
-  identity,
-  Observable,
-  startWith,
-  Subscription,
-} from 'rxjs';
 import { PushModule } from '@rx-angular/template/push';
 import { ButtonModule } from 'primeng/button';
-import { SharedModule } from 'primeng/api';
-import { DropdownModule } from 'primeng/dropdown';
+import {
+  BehaviorSubject,
+  Observable,
+  Subscription,
+  distinctUntilChanged,
+  identity,
+  startWith,
+} from 'rxjs';
+
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { LetModule } from '@rx-angular/template/let';
-import { InputTextModule } from 'primeng/inputtext';
-import { NgTemplateOutlet, NgIf } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
 import { FieldsetModule } from 'primeng/fieldset';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
-    selector: 'dhb-address-form',
-    template: `
+  selector: 'dhb-address-form',
+  template: `
     <p-fieldset
       [legend]="shippingAddressLabel()"
       [toggleable]="true"
@@ -228,8 +235,8 @@ import { FieldsetModule } from 'primeng/fieldset';
       </form>
     </ng-template>
   `,
-    styles: [
-        `
+  styles: [
+    `
       /* Issue ref: https://github.com/primefaces/primeng/issues/9741 */
       #country-select {
         .p-dropdown-filter {
@@ -237,18 +244,28 @@ import { FieldsetModule } from 'primeng/fieldset';
         }
       }
     `,
-    ],
-    // Issue ref: https://github.com/primefaces/primeng/issues/9741
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    viewProviders: [
-        {
-            provide: ControlContainer,
-            useExisting: FormGroupDirective,
-        },
-    ],
-    standalone: true,
-    imports: [FieldsetModule, NgTemplateOutlet, ReactiveFormsModule, InputTextModule, LetModule, DropdownModule, SharedModule, NgIf, ButtonModule, PushModule]
+  ],
+  // Issue ref: https://github.com/primefaces/primeng/issues/9741
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useExisting: FormGroupDirective,
+    },
+  ],
+  standalone: true,
+  imports: [
+    FieldsetModule,
+    NgTemplateOutlet,
+    ReactiveFormsModule,
+    InputTextModule,
+    LetModule,
+    DropdownModule,
+    NgIf,
+    ButtonModule,
+    PushModule,
+  ],
 })
 export class AddressFormComponent implements OnInit, OnDestroy {
   @Input() prefillData?: PhysicalAddress;
