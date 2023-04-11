@@ -30,7 +30,7 @@
     "affected": "nx print-affected --select=projects",
     "website:gql": "graphql-codegen --config website-codegen.yml --require dotenv/config",
     "moralis-dev": "nx run moralis-cloud:build --configuration=development --watch",
-    "moralis-sync": "npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud",
+    "moralis-sync": "npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud.dev",
     "moralis-logs": "moralis-admin-cli get-logs",
     "prepare": "husky install"
   },

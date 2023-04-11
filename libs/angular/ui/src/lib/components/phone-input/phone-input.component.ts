@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import {
   ControlContainer,
-  FormControlStatus,
   FormGroupDirective,
   NgControl,
   NonNullableFormBuilder,
@@ -28,7 +27,7 @@ import {
   PhoneNumberUtil,
 } from 'google-libphonenumber';
 import { InputTextModule } from 'primeng/inputtext';
-import { Observable, Subscription, distinctUntilChanged, tap } from 'rxjs';
+import { Observable, distinctUntilChanged, takeWhile, tap } from 'rxjs';
 import { LoadingComponent } from '../loading/loading.component';
 
 import { LetModule } from '@rx-angular/template/let';
@@ -135,7 +134,6 @@ import { DropdownModule } from 'primeng/dropdown';
 export class PhoneInputComponent implements OnInit, OnDestroy {
   @Input() prefillData?: string;
 
-  private subs = new Subscription();
   path = this.env.baseUrl;
 
   phoneNumberUtil = PhoneNumberUtil.getInstance();
@@ -150,6 +148,8 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
     code: [''],
     number: ['', [PhoneNumberValidator(() => this.selectedCountry?.code)]],
   });
+
+  private isAlive = true;
 
   constructor(
     @Self() @Optional() public ngControl: NgControl,
@@ -171,29 +171,30 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
       Validators.required(this.phoneForm.controls.number)
     );
 
-    this.subs.add(
-      this.phoneForm.statusChanges
-        .pipe(distinctUntilChanged())
-        .subscribe((status: FormControlStatus) => {
-          const country = this.selectedCountry;
-          if (country) {
-            const phoneNumber = new PhoneNumber();
-            const numberControl = this.phoneForm.controls.number;
-            phoneNumber.setCountryCode(parseInt(country.phoneCode));
-            if (numberControl.value)
-              phoneNumber.setNationalNumber(parseInt(numberControl.value));
-            this.ngControl.control?.setValue(
-              this.phoneNumberUtil.format(
-                phoneNumber,
-                PhoneNumberFormat.INTERNATIONAL
-              )
-            );
-            if (status === 'INVALID') {
-              this.ngControl.control?.setErrors({ phoneInvalid: true });
-            }
+    this.phoneForm.statusChanges
+      .pipe(
+        takeWhile(() => this.isAlive),
+        distinctUntilChanged()
+      )
+      .subscribe(status => {
+        const country = this.selectedCountry;
+        if (country) {
+          const phoneNumber = new PhoneNumber();
+          const numberControl = this.phoneForm.controls.number;
+          phoneNumber.setCountryCode(parseInt(country.phoneCode));
+          if (numberControl.value)
+            phoneNumber.setNationalNumber(parseInt(numberControl.value));
+          this.ngControl.control?.setValue(
+            this.phoneNumberUtil.format(
+              phoneNumber,
+              PhoneNumberFormat.INTERNATIONAL
+            )
+          );
+          if (status === 'INVALID') {
+            this.ngControl.control?.setErrors({ phoneInvalid: true });
           }
-        })
-    );
+        }
+      });
   }
 
   prefillPhone(countries: Country[]) {
@@ -233,6 +234,6 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.isAlive = false;
   }
 }
