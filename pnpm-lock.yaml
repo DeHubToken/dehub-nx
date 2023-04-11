@@ -126,7 +126,7 @@ specifiers:
   eslint-plugin-react-hooks: 4.6.0
   events: 3.3.0
   framer-motion: 8.5.0
-  google-libphonenumber: 3.2.32
+  google-libphonenumber: 3.2.31
   graphql: 16.6.0
   graphql-request: 5.1.0
   graphql-tag: 2.12.6
@@ -151,7 +151,7 @@ specifiers:
   pretty-quick: 3.1.1
   primeflex: 3.3.0
   primeicons: 6.0.1
-  primeng: 15.3.0
+  primeng: 15.1.0
   primereact: 8.7.3
   process: 0.11.10
   react: 18.2.0
@@ -245,7 +245,7 @@ dependencies:
   eip1193-provider: 1.0.1
   events: 3.3.0
   framer-motion: 8.5.0_biqbaboplfbrettd7655fr4n2y
-  google-libphonenumber: 3.2.32
+  google-libphonenumber: 3.2.31
   graphql-request: 5.1.0_graphql@16.6.0
   graphql-tag: 2.12.6_graphql@16.6.0
   history: 5.3.0
@@ -258,7 +258,7 @@ dependencies:
   os-browserify: 0.3.0
   primeflex: 3.3.0
   primeicons: 6.0.1
-  primeng: 15.3.0_3ikyzexty34mnlumyz3kbbjqoq
+  primeng: 15.1.0_3ikyzexty34mnlumyz3kbbjqoq
   primereact: 8.7.3_esim4yelhr35vesnk67vhutmai
   process: 0.11.10
   react: 18.2.0
@@ -19975,10 +19975,10 @@ packages:
       minimist: 1.2.7
     dev: true
 
-  /google-libphonenumber/3.2.32:
+  /google-libphonenumber/3.2.31:
     resolution:
       {
-        integrity: sha512-mcNgakausov/B/eTgVeX8qc8IwWjRrupk9UzZZ/QDEvdh5fAjE7Aa211bkZpZj42zKkeS6MTT8avHUwjcLxuGQ==,
+        integrity: sha512-l3bzAkfN4ITICKvuqEiY7JN06RxDAviOoKMtD2KfGYjGK3btPO8Xav7k0fgmf1Ud/pEm523yBh1/s/xDtKEvnw==,
       }
     engines: { node: '>=0.10' }
     dev: false
@@ -28568,15 +28568,15 @@ packages:
       }
     dev: false
 
-  /primeng/15.3.0_3ikyzexty34mnlumyz3kbbjqoq:
+  /primeng/15.1.0_3ikyzexty34mnlumyz3kbbjqoq:
     resolution:
       {
-        integrity: sha512-vfNPk+KV5Bihu7vU+KYY4eTKmh3V+CPLt9l7kSuCqx02UAtDWHN579BS1AXrQleoUcg4G63/tvuI7JEuiRF0FQ==,
+        integrity: sha512-Ne6KqS/jeFR3Ln4Cc9mXBMmLWND5XjAojKx8HkYKua3M0uMcnM00h/YXX++V59zNDFecMOI9VhA7ZQ/QvwllHg==,
       }
     peerDependencies:
-      '@angular/common': ^15.2.1
-      '@angular/core': ^15.2.1
-      '@angular/forms': ^15.2.1
+      '@angular/common': ^15.1.0
+      '@angular/core': ^15.1.0
+      '@angular/forms': ^15.1.0
       primeicons: ^6.0.1
       rxjs: ^6.0.0 || ^7.5.0
       zone.js: ^0.10.2 || ^0.11.0 || ^0.12.0
