@@ -19,10 +19,17 @@ import { MenuService } from './app/topbar/menu/app.menu.service';
 import { Env } from './environments/env';
 import { environment } from './environments/environment';
 
+import {
+  PreloadAllModules,
+  provideRouter,
+  withEnabledBlockingInitialNavigation,
+  withInMemoryScrolling,
+  withPreloading,
+} from '@angular/router';
 import { AngularCoreModule } from '@dehub/angular/core';
 import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
-import { AppRoutingModule } from './app/app-routing.module';
+import { routes } from './app/app.routes';
 
 if (environment.production) {
   enableProdMode();
@@ -32,6 +39,28 @@ const { appId, serverUrl } = environment.web3.moralis;
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideRouter(
+      routes,
+      /**
+       * Preload all Lazy modules while the user start navigating the app
+       * Docs :https://angular.io/api/router/ExtraOptions#preloadingStrategy
+       */
+      withPreloading(PreloadAllModules),
+      withInMemoryScrolling({
+        /**
+         * The scroll position needs to be restored when navigating back
+         * Docs: https://angular.io/api/router/ExtraOptions#scrollPositionRestoration
+         */
+        scrollPositionRestoration: 'enabled',
+        /** https://angular.io/api/router/InMemoryScrollingOptions#anchorScrolling */
+        anchorScrolling: 'enabled',
+      }),
+      /** https://angular.io/api/router/ExtraOptions#initialNavigation */
+      withEnabledBlockingInitialNavigation()
+    ),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideAnimations(),
+
     importProvidersFrom(
       // Angular
       ServiceWorkerModule.register(`web/ngsw-worker.js`),
@@ -39,10 +68,9 @@ bootstrapApplication(AppComponent, {
       // Optional feature modules
       AngularCoreModule.forRoot(),
       AngularMoralisModule.forRoot({ appId, serverUrl }),
-      AngularGraphQLModule,
-
-      AppRoutingModule
+      AngularGraphQLModule
     ),
+
     MenuService,
     DialogService,
     { provide: EnvToken, useValue: environment },
@@ -64,7 +92,5 @@ bootstrapApplication(AppComponent, {
       }),
       deps: [EnvToken],
     },
-    provideHttpClient(withInterceptorsFromDi()),
-    provideAnimations(),
   ],
 }).catch(err => console.error(err));
