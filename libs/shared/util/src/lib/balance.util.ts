@@ -1,17 +1,20 @@
+import { DEHUB_DECIMALS } from '@dehub/shared/model';
 import BigNumber from 'bignumber.js';
 import { BIG_TEN } from './number.util';
 
-export const getDecimalAmount = (amount: BigNumber, decimals = 18) => {
-  return new BigNumber(amount).times(BIG_TEN.pow(decimals));
-};
+export const getDecimalAmount = (
+  amount: BigNumber,
+  decimals = DEHUB_DECIMALS
+) => new BigNumber(amount).times(BIG_TEN.pow(decimals));
 
-export const getBalanceNumber = (balance: BigNumber, decimals = 18) => {
-  return getBalanceAmount(balance, decimals).toNumber();
-};
+export const getBalanceNumber = (
+  balance: BigNumber,
+  decimals = DEHUB_DECIMALS
+) => getBalanceAmount(balance, decimals).toNumber();
 
 export const getFullDisplayBalance = (
   balance: BigNumber,
-  decimals = 18,
+  decimals = DEHUB_DECIMALS,
   displayDecimals?: number
 ) => {
   return getBalanceAmount(balance, decimals).toFixed(
@@ -20,9 +23,10 @@ export const getFullDisplayBalance = (
   );
 };
 
-export const getBalanceAmount = (amount: BigNumber, decimals = 18) => {
-  return new BigNumber(amount).dividedBy(BIG_TEN.pow(decimals));
-};
+export const getBalanceAmount = (
+  amount: BigNumber | string,
+  decimals = DEHUB_DECIMALS
+) => new BigNumber(amount).dividedBy(BIG_TEN.pow(decimals));
 
 export const formatNumber = (
   number: number,

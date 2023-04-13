@@ -7,7 +7,7 @@
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/moralis/cloud",
+        "outputPath": "dist/apps/moralis/cloud.dev",
         "main": "apps/moralis/cloud/src/main.ts",
         "tsConfig": "apps/moralis/cloud/tsconfig.app.json",
         "assets": [],
@@ -19,7 +19,8 @@
       "configurations": {
         "preview": {
           "optimization": true,
-          "inspect": false
+          "inspect": false,
+          "outputPath": "dist/apps/moralis/cloud.preview"
         },
         "development": {
           "optimization": false
@@ -27,6 +28,7 @@
         "production": {
           "optimization": true,
           "inspect": false,
+          "outputPath": "dist/apps/moralis/cloud.prod",
           "fileReplacements": [
             {
               "replace": "apps/moralis/cloud/src/environments/environment.ts",
@@ -62,17 +64,17 @@
     "deploy-preview-draft": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com pnpm moralis-sync"
-        ],
-        "readyWhen": "Changes Uploaded Correctly",
-        "parallel": true
+        "commands": ["pnpm nx run moralis-cloud:deploy-preview"]
       }
     },
     "deploy-preview": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "echo 'Preview mode not supported in Moralis Cloud.'"
+        "commands": [
+          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud.preview"
+        ],
+        "readyWhen": "Changes Uploaded Correctly",
+        "parallel": true
       }
     },
     "deploy-prod-draft": {
@@ -85,7 +87,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com pnpm moralis-sync"
+          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud.prod"
         ],
         "readyWhen": "Changes Uploaded Correctly",
         "parallel": true

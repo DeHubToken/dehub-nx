@@ -3,7 +3,7 @@ import { getContract } from '@dehub/shared/utils';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
 import { getChainId } from '../config/constants';
-import { getBnbAddress, getDehubAddress } from '../utils/addressHelpers';
+import { getBnbAddress, getDehubBscAddress } from '../utils/addressHelpers';
 import { getBep20Contract, getStakingContract } from '../utils/contractHelpers';
 
 export function useContract(
@@ -36,7 +36,7 @@ export const useDehubContract = (): Contract | null => {
   return useMemo(
     () =>
       web3 && chainId === getChainId()
-        ? getBep20Contract(getDehubAddress(), web3.getSigner())
+        ? getBep20Contract(getDehubBscAddress(), web3.getSigner())
         : null,
     [web3, chainId]
   );

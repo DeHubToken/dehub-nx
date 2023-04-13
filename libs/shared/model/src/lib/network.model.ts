@@ -14,6 +14,8 @@ interface NetworkInfo {
   nodes: string[];
 }
 
+export const nullAddress = '0x000000000000000000000000000000000000dead';
+
 export const networks: { [key: number]: NetworkInfo } = {
   56: {
     chainId: 56,
