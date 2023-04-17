@@ -9,11 +9,13 @@ import { useWeb3Context } from '../../hooks';
 import ConnectWalletButton from '../ConnectWalletButton';
 
 const UserMenu = ({
+  landing,
   cexUrl,
-  downloadWalletUrl,
+  downloadMetamaskUrl,
 }: {
+  landing: string;
   cexUrl: string;
-  downloadWalletUrl: string;
+  downloadMetamaskUrl: string;
 }) => {
   const { account, logout } = useWeb3Context();
 
@@ -54,7 +56,11 @@ const UserMenu = ({
   return (
     <ul className="layout-topbar-actions">
       <li className="topbar-item">
-        <BuyDeHubButton cexUrl={cexUrl} downloadWalletUrl={downloadWalletUrl} />
+        <BuyDeHubButton
+          landing={landing}
+          cexUrl={cexUrl}
+          downloadMetamaskUrl={downloadMetamaskUrl}
+        />
       </li>
       <li className="topbar-item ml-4">
         {account ? (

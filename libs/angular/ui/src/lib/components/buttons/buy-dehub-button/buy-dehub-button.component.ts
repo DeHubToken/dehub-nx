@@ -1,48 +1,38 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { NavigationTabMenu } from '@dehub/shared/model';
 import { MenuItem } from 'primeng/api';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 @Component({
+  standalone: true,
   selector: 'dhb-buy-dehub-button',
+  imports: [
+    // Angular
+    CommonModule,
+    RouterModule,
+
+    // PrimeNg
+    SplitButtonModule,
+  ],
   template: `
     <p-splitButton
-      [label]="label"
+      *ngIf="items"
+      label="Buy DeHub"
       [model]="items"
+      [icon]="items[0].icon!"
       (onClick)="onBuyClicked()"
     ></p-splitButton>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BuyDehubButtonComponent implements OnInit {
-  @Input() label = 'Buy DeHub';
-  @Input() cexUrl?: string;
-  @Input() downloadWalletUrl?: string;
-
-  items: MenuItem[] = [];
+export class BuyDehubButtonComponent {
+  @Input() items?: MenuItem[];
 
   constructor(private router: Router) {}
 
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'CEX',
-        url: this.cexUrl,
-        target: '_blank',
-      },
-      {
-        label: 'Download Wallet',
-        url: this.downloadWalletUrl,
-        target: '_blank',
-      },
-    ];
-  }
-
   onBuyClicked() {
-    this.router.navigate(['/shop']);
+    this.router.navigate([NavigationTabMenu.Shop]);
   }
 }

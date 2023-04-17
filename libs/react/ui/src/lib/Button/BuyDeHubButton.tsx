@@ -1,33 +1,24 @@
-import { MenuItem } from 'primereact/menuitem';
+import { getBuyDehubMenuItems } from '@dehub/shared/utils';
 import { SplitButton } from 'primereact/splitbutton';
-import { useMemo } from 'react';
 
 const BuyDeHubButton = ({
+  landing,
   cexUrl,
-  downloadWalletUrl,
+  downloadMetamaskUrl,
 }: {
+  landing: string;
   cexUrl: string;
-  downloadWalletUrl: string;
+  downloadMetamaskUrl: string;
 }) => {
-  const items: MenuItem[] = useMemo(
-    () => [
-      {
-        label: 'CEX',
-        command: () => window.open(cexUrl, '_blank'),
-      },
-      {
-        label: 'Download Wallet',
-        command: () => window.open(downloadWalletUrl, '_blank'),
-      },
-    ],
-    [cexUrl, downloadWalletUrl]
-  );
+  const items = getBuyDehubMenuItems(landing, cexUrl, downloadMetamaskUrl);
+  const directLink = items[0];
 
   return (
     <SplitButton
-      className="p-button-primary"
       label="Buy DeHub"
       model={items}
+      icon={directLink.icon}
+      onClick={directLink.command}
     ></SplitButton>
   );
 };

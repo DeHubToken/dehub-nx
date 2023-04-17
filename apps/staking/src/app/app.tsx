@@ -21,7 +21,7 @@ const {
   dehub: { landing },
 } = environment;
 const pageTitle = 'DeHub Staking';
-const { cexUrl, downloadWalletUrl } = environment.dehub;
+const { cexUrl, downloadMetamaskUrl } = environment.dehub;
 const activeTab = NavigationTabMenu.Clubs;
 
 export function App() {
@@ -40,7 +40,7 @@ export function App() {
           landing,
           pageTitle,
           cexUrl,
-          downloadWalletUrl,
+          downloadMetamaskUrl,
           activeTab,
         },
         lazy(() => import('./views/Staking'))

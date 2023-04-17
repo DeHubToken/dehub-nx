@@ -28,14 +28,14 @@ const withLayout =
       landing,
       pageTitle = 'DeHub D’App',
       cexUrl,
-      downloadWalletUrl,
+      downloadMetamaskUrl,
       activeTab,
     }: {
       baseUrl?: string;
       landing: string;
       pageTitle?: string;
       cexUrl: string;
-      downloadWalletUrl: string;
+      downloadMetamaskUrl: string;
       activeTab: string;
     },
     Component: React.ComponentType<P>
@@ -120,7 +120,11 @@ const withLayout =
         >
           <Header
             userMenu={
-              <UserMenu cexUrl={cexUrl} downloadWalletUrl={downloadWalletUrl} />
+              <UserMenu
+                landing={landing}
+                cexUrl={cexUrl}
+                downloadMetamaskUrl={downloadMetamaskUrl}
+              />
             }
             logo={{
               href: 'https://dehub.net',
