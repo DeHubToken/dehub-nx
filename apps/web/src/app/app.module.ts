@@ -13,7 +13,7 @@ import { AngularGraphQLModule } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
 import { AnnouncementModule } from '@dehub/angular/ui/components/announcement';
-import { BuyDehubButtonModule } from '@dehub/angular/ui/components/buttons/buy-dehub-button';
+import { BuyDehubButtonComponent } from '@dehub/angular/ui/components/buttons/buy-dehub-button';
 import { ConnectWalletButtonModule } from '@dehub/angular/ui/components/buttons/connect-wallet-button';
 import { FooterComponent } from '@dehub/angular/ui/components/footer';
 import { LoaderModule } from '@dehub/angular/ui/components/loader';
@@ -62,7 +62,7 @@ const { appId, serverUrl } = environment.web3.moralis;
 
     // Libs
     TabMenuModule,
-    BuyDehubButtonModule,
+    BuyDehubButtonComponent,
     FooterComponent,
     LoaderModule,
     ConnectWalletButtonModule,

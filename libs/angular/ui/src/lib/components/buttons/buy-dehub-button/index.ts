@@ -1,1 +1,1 @@
-export * from './buy-dehub-button.module';
+export * from './buy-dehub-button.component';
