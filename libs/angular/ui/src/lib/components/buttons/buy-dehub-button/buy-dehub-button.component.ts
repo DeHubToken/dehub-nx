@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { NavigationTabMenu } from '@dehub/shared/model';
 import { MenuItem } from 'primeng/api';
 import { SplitButtonModule } from 'primeng/splitbutton';
 
@@ -10,7 +11,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
   imports: [
     // Angular
     NgIf,
-    RouterLink,
+    RouterModule,
 
     // PrimeNg
     SplitButtonModule,
@@ -18,14 +19,20 @@ import { SplitButtonModule } from 'primeng/splitbutton';
   template: `
     <p-splitButton
       *ngIf="items"
-      label="Buy DeHub"
+      label="Buy DHB"
       [model]="items"
       [icon]="items[0].icon!"
-      [routerLink]="items[0].routerLink"
+      (onClick)="onBuyClick()"
     ></p-splitButton>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BuyDehubButtonComponent {
   @Input() items?: MenuItem[];
+
+  constructor(private router: Router) {}
+
+  onBuyClick() {
+    this.router.navigate([NavigationTabMenu.Shop]);
+  }
 }

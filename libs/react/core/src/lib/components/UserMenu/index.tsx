@@ -62,7 +62,7 @@ const UserMenu = ({
           downloadMetamaskUrl={downloadMetamaskUrl}
         />
       </li>
-      <li className="topbar-item ml-4">
+      <li className="topbar-item ml-2 md:ml-4">
         {account ? (
           <SplitButton
             className="p-button-primary"

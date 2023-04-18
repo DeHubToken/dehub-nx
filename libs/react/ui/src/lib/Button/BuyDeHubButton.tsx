@@ -15,7 +15,7 @@ const BuyDeHubButton = ({
 
   return (
     <SplitButton
-      label="Buy DeHub"
+      label="Buy DHB"
       model={items}
       icon={directLink.icon}
       onClick={directLink.command}
