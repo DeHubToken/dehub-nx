@@ -30,10 +30,7 @@ export const routes: Routes = [
       },
       {
         path: NavigationTabMenu.News,
-        loadChildren: () =>
-          import('@dehub/angular/feature-news').then(
-            module => module.AngularFeatureNewsModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-news'),
       },
       {
         path: NavigationTabMenu.Clubs,
