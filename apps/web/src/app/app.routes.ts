@@ -26,10 +26,7 @@ export const routes: Routes = [
       },
       {
         path: NavigationTabMenu.Learn,
-        loadChildren: () =>
-          import('@dehub/angular/feature-learn').then(
-            module => module.AngularFeatureLearnModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-learn'),
       },
       {
         path: NavigationTabMenu.News,
