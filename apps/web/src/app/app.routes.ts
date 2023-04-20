@@ -53,10 +53,7 @@ export const routes: Routes = [
       },
       {
         path: NavigationTabMenu.Legal,
-        loadChildren: () =>
-          import('@dehub/angular/feature-legal').then(
-            module => module.AngularFeatureLegalModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-legal'),
       },
       {
         path: 'mailing',
