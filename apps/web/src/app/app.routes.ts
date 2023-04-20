@@ -60,10 +60,7 @@ export const routes: Routes = [
       },
       {
         path: 'mailing',
-        loadChildren: () =>
-          import('@dehub/angular/feature-mailing').then(
-            module => module.AngularFeatureMailingModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-mailing'),
         outlet: 'modal',
       },
       {
