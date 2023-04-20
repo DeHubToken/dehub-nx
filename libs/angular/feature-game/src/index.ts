@@ -1,1 +1,3 @@
-export * from './lib/angular-feature-game.module';
+import { routes } from './lib/angular-feature-game.routes';
+
+export default routes;

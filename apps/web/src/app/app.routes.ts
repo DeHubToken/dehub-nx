@@ -18,10 +18,7 @@ export const routes: Routes = [
       },
       {
         path: NavigationTabMenu.Game,
-        loadChildren: () =>
-          import('@dehub/angular/feature-game').then(
-            module => module.AngularFeatureGameModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-game'),
       },
       {
         path: NavigationTabMenu.Shop,
