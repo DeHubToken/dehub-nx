@@ -34,10 +34,7 @@ export const routes: Routes = [
       },
       {
         path: NavigationTabMenu.Clubs,
-        loadChildren: () =>
-          import('@dehub/angular/feature-clubs').then(
-            module => module.AngularFeatureClubsModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-clubs'),
       },
       {
         path: NavigationTabMenu.Legal,
