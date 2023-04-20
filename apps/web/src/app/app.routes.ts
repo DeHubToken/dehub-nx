@@ -22,10 +22,7 @@ export const routes: Routes = [
       },
       {
         path: NavigationTabMenu.Shop,
-        loadChildren: () =>
-          import('@dehub/angular/feature-shop').then(
-            module => module.AngularFeatureShopModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-shop'),
       },
       {
         path: NavigationTabMenu.Learn,

@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthenticatedGuard } from '@dehub/angular/core';
 import { AngularFeatureShopCheckoutComponent } from './angular-feature-shop-checkout.component';
 import { AngularFeatureShopProductDetailComponent } from './angular-feature-shop-product-detail.component';
 import { AngularFeatureShopComponent } from './angular-feature-shop.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: AngularFeatureShopComponent,
@@ -26,9 +25,3 @@ const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class AngularFeatureShopRoutingModule {}
