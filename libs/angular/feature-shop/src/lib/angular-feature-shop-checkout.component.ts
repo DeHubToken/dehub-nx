@@ -3,11 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCheckoutDetail } from '@dehub/shared/model';
 import { filterNil, richMarkupToPlainString } from '@dehub/shared/utils';
 import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { map, Observable, switchMap } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { CheckoutFormComponent } from './components/checkout-form.component';
 import { ProductDetailService } from './services';
 
 @Component({
+  standalone: true,
   selector: 'dhb-checkout-modal',
   template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
