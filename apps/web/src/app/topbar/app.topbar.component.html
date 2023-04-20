@@ -28,11 +28,10 @@
       <ul class="layout-topbar-actions">
         <li class="topbar-item">
           <dhb-buy-dehub-button
-            [cexUrl]="cexUrl"
-            [downloadWalletUrl]="downloadWalletUrl"
+            [items]="buyDehubMenuItems"
           ></dhb-buy-dehub-button>
         </li>
-        <li class="topbar-item ml-4">
+        <li class="topbar-item ml-2 md:ml-4">
           <dhb-connect-wallet-button
             [label]="(connectWalletButtonLabel$ | push)!"
             [isAuthenticated]="(isAuthenticated$ | push)!"

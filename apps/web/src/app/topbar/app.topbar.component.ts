@@ -10,9 +10,8 @@ import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
 
 import { BuyDehubButtonComponent } from '@dehub/angular/ui/components/buttons/buy-dehub-button/buy-dehub-button.component';
 import { ConnectWalletButtonComponent } from '@dehub/angular/ui/components/buttons/connect-wallet-button/connect-wallet-button.component';
-import { shortenAddress } from '@dehub/shared/utils';
+import { getBuyDehubMenuItems, shortenAddress } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
-import { MenuItem } from 'primeng/api';
 import { Observable, map } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
@@ -40,13 +39,16 @@ import { AppMenuComponent } from './menu/app.menu.component';
   ],
 })
 export class AppTopBarComponent implements OnInit {
-  items?: MenuItem[];
+  buyDehubMenuItems = getBuyDehubMenuItems(
+    this.env.dehub.landing,
+    this.env.dehub.cexUrl,
+    this.env.dehub.downloadMetamaskUrl,
+    true
+  );
 
   path = this.env.baseUrl;
   chainId = this.env.web3.chainId;
   magicLinkApiKey = this.env.web3.auth.magicLinkApiKey;
-  cexUrl = this.env.dehub.cexUrl;
-  downloadWalletUrl = this.env.dehub.downloadWalletUrl;
   isDev = this.env.env === 'dev';
 
   // Connect Wallet Button
