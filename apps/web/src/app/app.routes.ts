@@ -10,10 +10,7 @@ export const routes: Routes = [
       { path: '', redirectTo: NavigationTabMenu.Home, pathMatch: 'full' },
       {
         path: NavigationTabMenu.Home,
-        loadChildren: () =>
-          import('@dehub/angular/feature-home').then(
-            module => module.AngularFeatureHomeModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-home'),
       },
       {
         path: NavigationTabMenu.Stream,

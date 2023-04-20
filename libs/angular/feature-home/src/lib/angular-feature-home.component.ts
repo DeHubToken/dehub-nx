@@ -17,6 +17,15 @@ import { LetModule } from '@rx-angular/template/let';
 import { Observable, map } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [
+    // Rx Angular
+    LetModule,
+
+    // Libs
+    PageHeaderComponent,
+    PageSectionsComponent,
+  ],
   template: `
     <ng-container *rxLet="pageHome$ as pageHome" class="grid">
       <!-- Titles -->
@@ -35,8 +44,6 @@ import { Observable, map } from 'rxjs';
   `,
 
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [LetModule, PageHeaderComponent, PageSectionsComponent],
 })
 export class AngularFeatureHomeComponent implements OnInit {
   pageHome$?: Observable<PageHomeFragment | undefined>;
