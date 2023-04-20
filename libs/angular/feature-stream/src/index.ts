@@ -1,1 +1,2 @@
-export * from './lib/angular-feature-stream.module';
+import { routes } from './lib/angular-feature-stream.routes';
+export default routes;

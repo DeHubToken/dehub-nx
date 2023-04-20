@@ -14,10 +14,7 @@ export const routes: Routes = [
       },
       {
         path: NavigationTabMenu.Stream,
-        loadChildren: () =>
-          import('@dehub/angular/feature-stream').then(
-            module => module.AngularFeatureStreamModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-stream'),
       },
       {
         path: NavigationTabMenu.Game,
