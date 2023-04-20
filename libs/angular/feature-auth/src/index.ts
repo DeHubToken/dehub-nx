@@ -1,1 +1,3 @@
-export * from './lib/angular-feature-auth.module';
+import { routes } from './lib/angular-feature-auth.routes';
+
+export default routes;

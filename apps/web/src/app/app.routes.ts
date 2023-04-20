@@ -71,10 +71,7 @@ export const routes: Routes = [
       },
       {
         path: 'auth',
-        loadChildren: () =>
-          import('@dehub/angular/feature-auth').then(
-            module => module.AngularFeatureAuthModule
-          ),
+        loadChildren: () => import('@dehub/angular/feature-auth'),
         outlet: 'modal',
       },
     ],

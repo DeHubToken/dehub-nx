@@ -1,16 +1,15 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthenticatedGuard, DeAuthenticatedGuard } from '@dehub/angular/core';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { AngularFeatureAuthComponent } from './angular-feature-auth.component';
 import {
-  ConnectedWalletComponent,
   ConnectWalletComponent,
+  ConnectedWalletComponent,
   DisconnectWalletComponent,
 } from './components/connect-wallet';
 import { ConnectWalletRequestComponent } from './components/connect-wallet/connect-wallet-request.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     children: [
@@ -64,9 +63,3 @@ const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class AngularFeatureAuthRoutingModule {}
