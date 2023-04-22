@@ -19,6 +19,15 @@ import { MenuItem } from 'primeng/api';
 import { Observable, filter, map } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [
+    // Rx Angular
+    LetModule,
+
+    // Libs
+    PageHeaderComponent,
+    PageSectionsComponent,
+  ],
   template: `
     <ng-container *rxLet="pageShop$ as pageShop" class="grid">
       <!-- Titles -->
@@ -36,10 +45,7 @@ import { Observable, filter, map } from 'rxjs';
       ></dhb-page-sections>
     </ng-container>
   `,
-
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [LetModule, PageHeaderComponent, PageSectionsComponent],
 })
 export class AngularFeatureShopComponent implements OnInit {
   pageShop$?: Observable<PageShopFragment | undefined>;
