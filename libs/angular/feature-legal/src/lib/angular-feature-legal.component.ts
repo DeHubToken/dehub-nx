@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { LegalPostCollectionBySlugService } from '@dehub/angular/graphql';
+import { LegalPostCollectionBySlugService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
 import { BackButtonComponent } from '@dehub/angular/ui/components/buttons/back-button/back-button.component';
 import { LegalPostFragment, SharedEnv } from '@dehub/shared/model';

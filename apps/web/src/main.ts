@@ -7,18 +7,6 @@ import {
 } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { EnvToken } from '@dehub/angular/model';
-
-import {
-  ServiceWorkerModule,
-  SwRegistrationOptions,
-} from '@angular/service-worker';
-import { DialogService } from 'primeng/dynamicdialog';
-import { AppComponent } from './app/app.component';
-import { MenuService } from './app/topbar/menu/app.menu.service';
-import { Env } from './environments/env';
-import { environment } from './environments/environment';
-
 import {
   PreloadAllModules,
   provideRouter,
@@ -26,10 +14,27 @@ import {
   withInMemoryScrolling,
   withPreloading,
 } from '@angular/router';
+import {
+  ServiceWorkerModule,
+  SwRegistrationOptions,
+} from '@angular/service-worker';
+import { InMemoryCache } from '@apollo/client/cache';
+import {
+  ApolloClientOptions,
+  NormalizedCacheObject,
+} from '@apollo/client/core';
 import { AngularCoreModule } from '@dehub/angular/core';
-import { AngularGraphQLModule } from '@dehub/angular/graphql';
+import { ApolloCacheToken, EnvToken } from '@dehub/angular/model';
 import { AngularMoralisModule } from '@dehub/angular/moralis';
+import { SharedEnv } from '@dehub/shared/model';
+import { createApolloCache, createApolloClient } from '@dehub/shared/utils';
+import { APOLLO_FLAGS, APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
+import { MenuService } from './app/topbar/menu/app.menu.service';
+import { Env } from './environments/env';
+import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
@@ -61,6 +66,7 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
 
+    // TODO: use provideXXX when available
     importProvidersFrom(
       // Angular
       ServiceWorkerModule.register(`web/ngsw-worker.js`),
@@ -68,7 +74,9 @@ bootstrapApplication(AppComponent, {
       // Optional feature modules
       AngularCoreModule.forRoot(),
       AngularMoralisModule.forRoot({ appId, serverUrl }),
-      AngularGraphQLModule
+
+      // GraphQL
+      ApolloModule
     ),
 
     MenuService,
@@ -79,6 +87,38 @@ bootstrapApplication(AppComponent, {
       useFactory: ({ baseUrl }: Env) => baseUrl,
       deps: [EnvToken],
     },
+
+    // GraphQL
+    {
+      provide: ApolloCacheToken,
+      useValue: createApolloCache(),
+    },
+    {
+      provide: APOLLO_FLAGS,
+      useValue: {
+        // https://github.com/kamilkisiela/apollo-angular/blob/master/website/docs/data/queries.md#loading-state
+        useInitialLoading: true,
+        useMutationLoading: true,
+      },
+    },
+    {
+      provide: APOLLO_OPTIONS,
+      /**
+       * Creating Apollo Client
+       *
+       * Apollo Angular Docs: https://apollo-angular.com/docs/get-started#installation-without-angular-schematics
+       * Contentful Docs: https://www.contentful.com/developers/docs/references/graphql/#/introduction
+       * Contentful Example: https://github.com/contentful/the-example-app.graphql.js/blob/master/src/index.js#L24
+       */
+      useFactory: (
+        cache: InMemoryCache,
+        { contentful }: SharedEnv
+      ): ApolloClientOptions<NormalizedCacheObject> =>
+        createApolloClient(contentful, cache),
+      deps: [ApolloCacheToken, EnvToken],
+    },
+
+    // PWA
     {
       provide: SwRegistrationOptions,
       useFactory: ({ production, baseUrl }: Env) => ({

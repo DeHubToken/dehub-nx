@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { FooterCollectionService } from '@dehub/angular/graphql';
+import { FooterCollectionService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
 import { FooterComponent } from '@dehub/angular/ui/components/footer/footer.component';
 

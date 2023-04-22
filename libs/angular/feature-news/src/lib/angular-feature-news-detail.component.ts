@@ -5,12 +5,12 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { BasicPostCollectionBySlugService } from '@dehub/angular/graphql';
+import { BasicPostCollectionBySlugService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
 import { BasicPostDetailFragment, SharedEnv } from '@dehub/shared/model';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { map, Observable } from 'rxjs';
 import { PushModule } from '@rx-angular/template/push';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { Observable, map } from 'rxjs';
 import { BasicPostDetailComponent } from './components/basic-post-detail.component';
 @Component({
   template: `

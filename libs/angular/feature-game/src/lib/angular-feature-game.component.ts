@@ -4,7 +4,7 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { PageGameCollectionService } from '@dehub/angular/graphql';
+import { PageGameCollectionService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
 import { PageHeaderComponent } from '@dehub/angular/ui/components/page-header/page-header.component';
 import { PageSectionsComponent } from '@dehub/angular/ui/components/page-sections/page-sections.component';
