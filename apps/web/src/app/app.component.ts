@@ -2,7 +2,6 @@ import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
-  AngularCoreModule,
   AnnouncementService,
   CoreService,
   LoaderService,
@@ -10,6 +9,7 @@ import {
 } from '@dehub/angular/core';
 
 import { LoaderComponent } from '@dehub/angular/ui/components/loader/loader.component';
+import { SwUpdateAvailableComponent } from '@dehub/angular/ui/components/sw-update-available/sw-update-available.component';
 import { MenuMode, ThemeMode } from '@dehub/shared/model';
 import { PushModule } from '@rx-angular/template/push';
 import { PrimeNGConfig } from 'primeng/api';
@@ -46,18 +46,14 @@ import { Observable } from 'rxjs';
     // Angular
     NgIf,
     RouterOutlet,
-
     // Rx Angular
     PushModule,
-
     // PrimeNg
     ToastModule,
     ConfirmDialogModule,
-
     // Libs
     LoaderComponent,
-
-    AngularCoreModule,
+    SwUpdateAvailableComponent,
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {

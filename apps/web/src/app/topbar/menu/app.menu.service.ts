@@ -5,7 +5,7 @@ import { PwaService } from '@dehub/angular/core';
 import { MenuItem } from 'primeng/api';
 import { environment } from '../../../environments/environment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MenuService {
   private menuSource = new Subject<string>();
   private resetSource = new Subject<void>();

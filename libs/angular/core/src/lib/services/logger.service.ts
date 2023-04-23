@@ -5,7 +5,7 @@ import { SharedEnv } from '@dehub/shared/model';
 /**
  * Simple Console Logger Service
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ConsoleLoggerService implements ILoggerService {
   constructor(
     @Inject(ScopeToken) private scope: string,

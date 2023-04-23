@@ -1,5 +1,3 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
-
 import { APP_BASE_HREF } from '@angular/common';
 import {
   provideHttpClient,
@@ -50,10 +48,10 @@ import { SharedEnv } from '@dehub/shared/model';
 import { createApolloCache, createApolloClient } from '@dehub/shared/utils';
 import { APOLLO_FLAGS, APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { Moralis } from 'moralis';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
-import { MenuService } from './app/topbar/menu/app.menu.service';
 import { Env } from './environments/env';
 import { environment } from './environments/environment';
 
@@ -92,15 +90,13 @@ bootstrapApplication(AppComponent, {
       // Angular
       ServiceWorkerModule.register(`web/ngsw-worker.js`),
 
-      // Optional feature modules
-      AngularCoreModule.forRoot(),
-      AngularMoralisModule.forRoot({ appId, serverUrl }),
-
       // GraphQL
       ApolloModule
     ),
 
-    MenuService,
+    // PrimeNG
+    MessageService,
+    ConfirmationService,
     DialogService,
 
     { provide: EnvToken, useValue: environment },
@@ -162,6 +158,35 @@ bootstrapApplication(AppComponent, {
       provide: ContentfulManagementToken,
       useClass: ContentfulManagementService,
     },
+
+    // Loggers
+    // Default Dehub Logger
+    {
+      provide: LoggerDehubToken,
+      useFactory: (env: SharedEnv) => new ConsoleLoggerService('', env),
+      deps: [EnvToken],
+    },
+    // Moralis Logger
+    {
+      provide: LoggerMoralisToken,
+      useFactory: (env: SharedEnv) => new ConsoleLoggerService('Moralis', env),
+      deps: [EnvToken],
+    },
+    // Dehub Moralis Logger
+    {
+      provide: LoggerDehubMoralisToken,
+      useFactory: (env: SharedEnv) =>
+        new ConsoleLoggerService('Dehub Moralis', env),
+      deps: [EnvToken],
+    },
+    // Contentful Logger
+    {
+      provide: LoggerContentfulToken,
+      useFactory: (env: SharedEnv) =>
+        new ConsoleLoggerService('Contentful', env),
+      deps: [EnvToken],
+    },
+
     // PWA
     {
       provide: SwRegistrationOptions,
