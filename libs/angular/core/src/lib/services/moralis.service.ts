@@ -10,7 +10,6 @@ import {
   Attributes,
   ChainId,
   DeHubConnectorNames,
-  enableOptionsLocalStorageKey,
   EnableOptionsPersisted,
   Erc20Allowance,
   GetNativeBalanceParameters,
@@ -21,10 +20,11 @@ import {
   MoralisMessage,
   MoralisUser,
   SharedEnv,
+  WalletConnectState,
   WalletConnectingMessage,
   WalletConnectingState,
-  WalletConnectState,
   Web3ConnectorNames,
+  enableOptionsLocalStorageKey,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
@@ -39,19 +39,19 @@ import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
 import { Moralis } from 'moralis';
 import {
-  ConfirmationService,
   ConfirmEventType,
+  ConfirmationService,
   MessageService,
 } from 'primeng/api';
 import {
   BehaviorSubject,
+  Observable,
   catchError,
   concatMap,
   distinctUntilChanged,
   first,
   from,
   map,
-  Observable,
   of,
   switchMap,
   tap,
@@ -67,7 +67,7 @@ const web3Connectors: { [key: string]: Moralis.Connector } = {
     .constructor as BinanceConnector,
 };
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MoralisService implements IMoralisService {
   private userSubject = new BehaviorSubject<MoralisUser | undefined>(
     Moralis.User.current()

@@ -17,12 +17,12 @@ import {
   InitOrderResponse,
   MoralisClass,
   MoralisFunctions,
-  networks,
   SharedEnv,
   ShopContractPropsType,
   ShopContractResponse,
   ShopOrdersParams,
   ShopOrdersResult,
+  networks,
 } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
@@ -36,17 +36,17 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { Moralis } from 'moralis';
 import { MessageService } from 'primeng/api';
 import {
+  Observable,
   concatMap,
   filter,
   from,
   iif,
   map,
-  Observable,
   switchMap,
   tap,
 } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DehubMoralisService implements IDehubMoralisService {
   userContacts$ = this.moralisService.userAttributes$.pipe(
     filterNil(),

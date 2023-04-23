@@ -5,6 +5,11 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import {
+  APP_INITIALIZER,
+  enableProdMode,
+  importProvidersFrom,
+} from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
@@ -23,12 +28,28 @@ import {
   ApolloClientOptions,
   NormalizedCacheObject,
 } from '@apollo/client/core';
-import { AngularCoreModule } from '@dehub/angular/core';
-import { ApolloCacheToken, EnvToken } from '@dehub/angular/model';
-import { AngularMoralisModule } from '@dehub/angular/moralis';
+import {
+  ConsoleLoggerService,
+  ContentfulManagementService,
+  DehubMoralisService,
+  MoralisService,
+} from '@dehub/angular/core';
+import {
+  ApolloCacheToken,
+  ContentfulManagementToken,
+  DehubMoralisToken,
+  EnvToken,
+  ILoggerService,
+  LoggerContentfulToken,
+  LoggerDehubMoralisToken,
+  LoggerDehubToken,
+  LoggerMoralisToken,
+  MoralisToken,
+} from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/model';
 import { createApolloCache, createApolloClient } from '@dehub/shared/utils';
 import { APOLLO_FLAGS, APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { Moralis } from 'moralis';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
@@ -81,6 +102,7 @@ bootstrapApplication(AppComponent, {
 
     MenuService,
     DialogService,
+
     { provide: EnvToken, useValue: environment },
     {
       provide: APP_BASE_HREF,
@@ -118,6 +140,28 @@ bootstrapApplication(AppComponent, {
       deps: [ApolloCacheToken, EnvToken],
     },
 
+    // Moralis
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (logger: ILoggerService) => () =>
+        /**
+         * Initialize the SDK
+         * Docs: https://docs.moralis.io/moralis-server/getting-started/connect-the-sdk#initialize-the-sdk
+         **/
+        Moralis.start({ appId, serverUrl }).then(() =>
+          logger.debug('Moralis has been initialized.')
+        ),
+      multi: true,
+      deps: [LoggerMoralisToken],
+    },
+    { provide: MoralisToken, useClass: MoralisService },
+    { provide: DehubMoralisToken, useClass: DehubMoralisService },
+
+    // Contentful
+    {
+      provide: ContentfulManagementToken,
+      useClass: ContentfulManagementService,
+    },
     // PWA
     {
       provide: SwRegistrationOptions,

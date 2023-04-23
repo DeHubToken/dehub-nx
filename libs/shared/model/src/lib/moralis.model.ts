@@ -4,21 +4,6 @@ import { Contacts } from './contacts.model';
 
 export type ChainId = components['schemas']['chainList'];
 
-interface PluginSpecs {
-  name: string;
-  functions: string[];
-}
-
-/** Moralis TODO: replace with Moralis version, when it gets properly publicly exposed. */
-export interface StartOptions {
-  serverUrl?: string;
-  appId?: string;
-  moralisSecret?: string;
-  plugins?: PluginSpecs[];
-  javascriptKey?: string;
-  masterKey?: string;
-}
-
 /**
  * Clone of Moralis non exported 'erc20Metadata' interface.
  * Moralis TODO: replace with Moralis version, when it gets properly publicly exposed.
