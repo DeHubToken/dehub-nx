@@ -141,7 +141,7 @@ const withLayout =
               <Component {...(props as P)} />
             </div>
           </div>
-            <Footer footer={footer} landing={landing} />
+          <Footer footer={footer} landing={landing} />
         </div>
       </div>
     );
