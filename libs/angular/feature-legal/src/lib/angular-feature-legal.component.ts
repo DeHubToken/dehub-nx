@@ -8,7 +8,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LegalPostCollectionBySlugService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
 import { BackButtonComponent } from '@dehub/angular/ui/components/buttons/back-button/back-button.component';
-import { LegalPostFragment, SharedEnv } from '@dehub/shared/model';
+import {
+  LegalPostFragment,
+  SharedEnv,
+  animationDuration,
+} from '@dehub/shared/model';
 import { filterNil } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
@@ -41,7 +45,12 @@ import { LegalPostComponent } from './components/legal-post.component';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
+  animations: [
+    fadeInUpOnEnterAnimation({
+      anchor: 'fadeInUp',
+      duration: animationDuration,
+    }),
+  ],
 })
 export class AngularFeatureLegalComponent implements OnInit {
   legalPost$!: Observable<LegalPostFragment | undefined>;

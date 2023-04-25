@@ -11,6 +11,7 @@ import {
   OrderStatus,
   ProductDetailFragment,
   ShopOrder,
+  animationDuration,
 } from '@dehub/shared/model';
 import { filterNil, publishReplayRefCount } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
@@ -46,7 +47,12 @@ import { ProductDetailService } from './services';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
+  animations: [
+    fadeInUpOnEnterAnimation({
+      anchor: 'fadeInUp',
+      duration: animationDuration,
+    }),
+  ],
 })
 export class AngularFeatureShopProductDetailComponent implements OnInit {
   productDetail$?: Observable<ProductDetailFragment>;

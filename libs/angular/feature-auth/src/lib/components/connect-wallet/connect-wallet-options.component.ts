@@ -21,6 +21,7 @@ import {
   SharedEnv,
   WalletConnectState,
   WalletConnectingState,
+  animationDuration,
 } from '@dehub/shared/model';
 import {
   fadeInRightOnEnterAnimation,
@@ -175,8 +176,14 @@ import { InputTextModule } from 'primeng/inputtext';
     </div>
   `,
   animations: [
-    fadeInRightOnEnterAnimation({ anchor: 'fadeInRight', duration: 500 }),
-    fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 500 }),
+    fadeInRightOnEnterAnimation({
+      anchor: 'fadeInRight',
+      duration: animationDuration,
+    }),
+    fadeInUpOnEnterAnimation({
+      anchor: 'fadeInUp',
+      duration: animationDuration,
+    }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

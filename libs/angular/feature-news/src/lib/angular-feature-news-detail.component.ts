@@ -7,7 +7,11 @@ import {
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BasicPostCollectionBySlugService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
-import { BasicPostDetailFragment, SharedEnv } from '@dehub/shared/model';
+import {
+  BasicPostDetailFragment,
+  SharedEnv,
+  animationDuration,
+} from '@dehub/shared/model';
 import { PushModule } from '@rx-angular/template/push';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { Observable, map } from 'rxjs';
@@ -41,7 +45,12 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
+  animations: [
+    fadeInUpOnEnterAnimation({
+      anchor: 'fadeInUp',
+      duration: animationDuration,
+    }),
+  ],
 })
 export class AngularFeatureNewsDetailComponent implements OnInit {
   basicPostDetail$!: Observable<BasicPostDetailFragment | undefined>;

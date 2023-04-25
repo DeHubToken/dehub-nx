@@ -8,3 +8,5 @@ export enum NavigationTabMenu {
   News = 'news',
   Legal = 'legal',
 }
+
+export const animationDuration = 500;

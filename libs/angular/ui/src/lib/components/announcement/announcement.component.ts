@@ -15,7 +15,6 @@ import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
     NgFor,
     NgClass,
     DatePipe,
-    // PrimeNG
     // UI
     ContentfulDraftDirective,
     ContentfulRichMarkupPipe,
