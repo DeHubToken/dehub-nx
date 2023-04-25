@@ -37,7 +37,6 @@ import { Observable, map } from 'rxjs';
       ></dhb-page-sections>
     </ng-container>
   `,
-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureGameComponent implements OnInit {

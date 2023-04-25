@@ -16,6 +16,16 @@ import { Observable, map, switchMap } from 'rxjs';
 import { LegalPostComponent } from './components/legal-post.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    // Angular
+    RouterLink,
+    // UI
+    BackButtonComponent,
+    LegalPostComponent,
+    // 3rd Party
+    PushModule,
+  ],
   template: `
     <div [@fadeInUp] class="grid">
       <div class="col-12 xl:col-8 col-offset-0 xl:col-offset-2">
@@ -32,8 +42,6 @@ import { LegalPostComponent } from './components/legal-post.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
-  standalone: true,
-  imports: [BackButtonComponent, RouterLink, LegalPostComponent, PushModule],
 })
 export class AngularFeatureLegalComponent implements OnInit {
   legalPost$!: Observable<LegalPostFragment | undefined>;

@@ -14,6 +14,17 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
 @Component({
   selector: 'dhb-basic-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    RouterLink,
+    // PrimeNG
+    CardModule,
+    ButtonModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div [dhbContentfulDraft]="basicPost.sys">
       <p-card
@@ -54,14 +65,6 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    ContentfulDraftDirective,
-    NgIf,
-    CardModule,
-    ButtonModule,
-    RouterLink,
-  ],
 })
 export class BasicPostComponent implements OnInit {
   @Input() basicPost!: BasicPostFragment;

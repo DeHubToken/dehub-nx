@@ -6,6 +6,14 @@ import { AppMenuitemComponent } from './app.menuitem.component';
 
 @Component({
   selector: 'dhb-menu',
+  standalone: true,
+  imports: [
+    // Angular
+    NgClass,
+    NgFor,
+
+    AppMenuitemComponent,
+  ],
   template: `
     <div
       class="menu-wrapper"
@@ -25,14 +33,6 @@ import { AppMenuitemComponent } from './app.menuitem.component';
       </div>
     </div>
   `,
-  standalone: true,
-  imports: [
-    // Angular
-    NgClass,
-    NgFor,
-
-    AppMenuitemComponent,
-  ],
 })
 export class AppMenuComponent {
   model = this.menuService.getMenuItems();
