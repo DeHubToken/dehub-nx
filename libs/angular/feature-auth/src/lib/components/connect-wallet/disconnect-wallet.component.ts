@@ -13,6 +13,11 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
 
 @Component({
   selector: 'dhb-disconnect-wallet',
+  standalone: true,
+  imports: [
+    // PrimeNG
+    ButtonModule,
+  ],
   template: `
     <div class="text-center">
       <i class="fa-duotone fa-hand-wave icon-color-duotone-1 text-6xl mt-4"></i>
@@ -32,8 +37,6 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
   `,
 
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [ButtonModule],
 })
 export class DisconnectWalletComponent
   extends AbstractConnectWalletComponent

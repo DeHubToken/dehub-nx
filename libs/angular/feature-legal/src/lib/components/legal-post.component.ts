@@ -12,6 +12,16 @@ import { LegalPostFragment } from '@dehub/shared/model';
 
 @Component({
   selector: 'dhb-legal-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    DatePipe,
+    SafeHtmlPipe,
+    // UI
+    ContentfulDraftDirective,
+    ContentfulRichMarkupPipe,
+  ],
   template: `
     <ng-container *ngIf="legalPost">
       <div
@@ -41,14 +51,6 @@ import { LegalPostFragment } from '@dehub/shared/model';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    NgIf,
-    ContentfulDraftDirective,
-    DatePipe,
-    ContentfulRichMarkupPipe,
-    SafeHtmlPipe,
-  ],
 })
 export class LegalPostComponent implements OnInit {
   @Input() legalPost?: LegalPostFragment;

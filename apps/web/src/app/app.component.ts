@@ -19,6 +19,20 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dhb-root',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    RouterOutlet,
+    // 3rd Party
+    PushModule,
+    // PrimeNg
+    ToastModule,
+    ConfirmDialogModule,
+    // UI
+    LoaderComponent,
+    SwUpdateAvailableComponent,
+  ],
   template: `
     <router-outlet></router-outlet>
 
@@ -41,20 +55,6 @@ import { Observable } from 'rxjs';
       [loaderGif]="loaderGif"
     ></dhb-loader>
   `,
-  standalone: true,
-  imports: [
-    // Angular
-    NgIf,
-    RouterOutlet,
-    // Rx Angular
-    PushModule,
-    // PrimeNg
-    ToastModule,
-    ConfirmDialogModule,
-    // Libs
-    LoaderComponent,
-    SwUpdateAvailableComponent,
-  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
   menuMode: MenuMode = 'horizontal';

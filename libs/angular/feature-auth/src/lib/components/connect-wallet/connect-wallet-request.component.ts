@@ -4,6 +4,11 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
 
 @Component({
   selector: 'dhb-connect-wallet-base',
+  standalone: true,
+  imports: [
+    // PrimeNG
+    ButtonModule,
+  ],
   template: `
     <div class="text-center">
       <i
@@ -22,8 +27,6 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [ButtonModule],
 })
 export class ConnectWalletRequestComponent
   extends AbstractConnectWalletComponent

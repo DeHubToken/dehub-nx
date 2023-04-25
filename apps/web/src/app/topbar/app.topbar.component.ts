@@ -20,23 +20,21 @@ import { AppMenuComponent } from './menu/app.menu.component';
 
 @Component({
   selector: 'dhb-topbar',
-  templateUrl: './app.topbar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     // Angular
     NgIf,
     RouterLink,
-
-    // Rx Angular
+    // 3rd Party
     PushModule,
-
-    // Libs
+    // UI
     BuyDehubButtonComponent,
     ConnectWalletButtonComponent,
 
     AppMenuComponent,
   ],
+  templateUrl: './app.topbar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppTopBarComponent implements OnInit {
   buyDehubMenuItems = getBuyDehubMenuItems(

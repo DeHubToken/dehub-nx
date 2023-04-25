@@ -3,6 +3,7 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
 
 @Component({
   selector: 'dhb-connected-wallet',
+  standalone: true,
   template: `
     <div class="text-center">
       <i class="fa-duotone fa-thumbs-up icon-color-duotone-1 text-6xl mt-4"></i>
@@ -14,7 +15,6 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
 })
 export class ConnectedWalletComponent
   extends AbstractConnectWalletComponent

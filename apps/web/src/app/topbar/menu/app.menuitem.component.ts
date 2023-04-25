@@ -22,6 +22,19 @@ import { MenuService } from './app.menu.service';
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[dhb-menuitem]',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgClass,
+    RouterLinkActive,
+    RouterLink,
+    NgFor,
+    // PrimeNg
+    RippleModule,
+
+    forwardRef(() => AppMenuitemComponent),
+  ],
   template: `
     <ng-container>
       <a
@@ -165,20 +178,6 @@ import { MenuService } from './app.menu.service';
         animate('400ms cubic-bezier(.05,.74,.2,.99)')
       ),
     ]),
-  ],
-  standalone: true,
-  imports: [
-    // Angular
-    NgIf,
-    NgClass,
-    RouterLinkActive,
-    RouterLink,
-    NgFor,
-
-    // PrimeNg
-    RippleModule,
-
-    forwardRef(() => AppMenuitemComponent),
   ],
 })
 export class AppMenuitemComponent implements OnInit, OnDestroy {

@@ -13,6 +13,15 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { Observable, map } from 'rxjs';
 import { BasicPostDetailComponent } from './components/basic-post-detail.component';
 @Component({
+  standalone: true,
+  imports: [
+    // Angular
+    RouterLink,
+    // UI
+    BasicPostDetailComponent,
+    // 3rd Party
+    PushModule,
+  ],
   template: `
     <div [@fadeInUp] class="grid">
       <div
@@ -33,8 +42,6 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
-  standalone: true,
-  imports: [RouterLink, BasicPostDetailComponent, PushModule],
 })
 export class AngularFeatureNewsDetailComponent implements OnInit {
   basicPostDetail$!: Observable<BasicPostDetailFragment | undefined>;

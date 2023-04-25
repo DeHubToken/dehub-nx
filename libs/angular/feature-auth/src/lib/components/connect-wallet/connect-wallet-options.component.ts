@@ -32,6 +32,19 @@ import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'dhb-connect-wallet-options',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgStyle,
+    ReactiveFormsModule,
+    // PrimeNG
+    InplaceModule,
+    InputTextModule,
+    ButtonModule,
+    // UI
+    WalletButtonComponent,
+  ],
   template: `
     <div *ngIf="walletConnectState" class="p-fluid">
       <!-- Metamask -->
@@ -166,16 +179,6 @@ import { InputTextModule } from 'primeng/inputtext';
     fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 500 }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    NgIf,
-    WalletButtonComponent,
-    ReactiveFormsModule,
-    InplaceModule,
-    InputTextModule,
-    ButtonModule,
-    NgStyle,
-  ],
 })
 export class ConnectWalletOptionsComponent implements OnInit {
   @Input() walletConnectState?: WalletConnectState;

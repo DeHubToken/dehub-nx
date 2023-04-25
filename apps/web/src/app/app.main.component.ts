@@ -23,10 +23,10 @@ import { MenuService } from './topbar/menu/app.menu.service';
     NgClass,
     PushModule,
     RouterOutlet,
-
-    // Libs
+    // UI
     TabMenuComponent,
     FooterComponent,
+
     AppTopBarComponent,
   ],
 })

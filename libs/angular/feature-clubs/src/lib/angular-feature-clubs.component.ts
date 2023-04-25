@@ -13,6 +13,14 @@ import { LetModule } from '@rx-angular/template/let';
 import { Observable, map } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [
+    // UI
+    PageHeaderComponent,
+    PageSectionsComponent,
+    // 3rd Party
+    LetModule,
+  ],
   template: `
     <ng-container *rxLet="pageClubs$ as pageClubs" class="grid">
       <!-- Titles -->
@@ -27,8 +35,6 @@ import { Observable, map } from 'rxjs';
   `,
 
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [LetModule, PageHeaderComponent, PageSectionsComponent],
 })
 export class AngularFeatureClubsComponent implements OnInit {
   pageClubs$?: Observable<PageClubsFragment | undefined>;

@@ -12,6 +12,15 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
 
 @Component({
   selector: 'dhb-basic-post-detail',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    SafeHtmlPipe,
+    // UI
+    ContentfulDraftDirective,
+    ContentfulRichMarkupPipe,
+  ],
   template: `
     <ng-container *ngIf="basicPostDetail">
       <div
@@ -45,13 +54,6 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    NgIf,
-    ContentfulDraftDirective,
-    ContentfulRichMarkupPipe,
-    SafeHtmlPipe,
-  ],
 })
 export class BasicPostDetailComponent implements OnInit {
   @Input() basicPostDetail?: BasicPostDetailFragment;

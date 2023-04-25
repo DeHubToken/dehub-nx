@@ -19,12 +19,11 @@ import { Observable, map } from 'rxjs';
 @Component({
   standalone: true,
   imports: [
-    // Rx Angular
-    LetModule,
-
-    // Libs
+    // UI
     PageHeaderComponent,
     PageSectionsComponent,
+    // 3rd Party
+    LetModule,
   ],
   template: `
     <ng-container *rxLet="pageHome$ as pageHome" class="grid">

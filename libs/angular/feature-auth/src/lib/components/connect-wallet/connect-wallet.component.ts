@@ -32,6 +32,13 @@ import { ConnectWalletOptionsComponent } from './connect-wallet-options.componen
 
 @Component({
   selector: 'dhb-connect-wallet',
+  standalone: true,
+  imports: [
+    // UI
+    ConnectWalletOptionsComponent,
+    // 3rd PArty
+    PushModule,
+  ],
   template: `
     <dhb-connect-wallet-options
       [walletConnectState]="walletConnectState$ | push"
@@ -41,8 +48,6 @@ import { ConnectWalletOptionsComponent } from './connect-wallet-options.componen
 
   providers: [...provideDehubLoggerWithScope('Connect Wallet')],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [ConnectWalletOptionsComponent, PushModule],
 })
 export class ConnectWalletComponent
   extends AbstractConnectWalletComponent

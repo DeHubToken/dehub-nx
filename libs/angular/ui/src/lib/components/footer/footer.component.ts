@@ -25,7 +25,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
     // PrimeNg
     ButtonModule,
 
-    // Libs
+    // UI
     ContentfulDraftDirective,
     CTAGroupPipe,
   ],
