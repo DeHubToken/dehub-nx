@@ -50,16 +50,19 @@ import { APOLLO_FLAGS, APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { Moralis } from 'moralis';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import SwiperCore, { Autoplay, Lazy, Navigation, Pagination } from 'swiper';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 import { Env } from './environments/env';
 import { environment } from './environments/environment';
-
 if (environment.production) {
   enableProdMode();
 }
 
 const { appId, serverUrl } = environment.web3.moralis;
+
+// Install Swiper modules
+SwiperCore.use([Pagination, Lazy, Navigation, Autoplay]);
 
 bootstrapApplication(AppComponent, {
   providers: [
