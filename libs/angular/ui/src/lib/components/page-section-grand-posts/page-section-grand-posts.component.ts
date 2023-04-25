@@ -16,6 +16,15 @@ import { GrandPostComponent } from '../grand-post/grand-post.component';
 
 @Component({
   selector: 'dhb-page-section-grand-posts',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // UI
+    ContentfulDraftDirective,
+    GrandPostComponent,
+  ],
   template: `
     <div
       *ngIf="section"
@@ -45,8 +54,6 @@ import { GrandPostComponent } from '../grand-post/grand-post.component';
 
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
-  standalone: true,
-  imports: [NgIf, ContentfulDraftDirective, NgFor, GrandPostComponent],
 })
 export class PageSectionGrandPostsComponent implements OnInit {
   @Input() section!: PageSectionGrandPostsFragment;

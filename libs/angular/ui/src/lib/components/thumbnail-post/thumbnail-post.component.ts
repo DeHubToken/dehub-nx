@@ -13,6 +13,16 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
 @Component({
   selector: 'dhb-thumbnail-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // PrimeNG
+    CardModule,
+    // UI
+    ContentfulDraftDirective,
+    HeavyPictureComponent,
+  ],
   template: `
     <div [dhbContentfulDraft]="thumbnailPost.sys">
       <p-card *ngIf="thumbnailPost" styleClass="thumbnail p-card-shadow">
@@ -42,8 +52,6 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [ContentfulDraftDirective, NgIf, CardModule, HeavyPictureComponent],
 })
 export class ThumbnailPostComponent implements OnInit {
   @Input() thumbnailPost!: ThumbnailPostFragment;

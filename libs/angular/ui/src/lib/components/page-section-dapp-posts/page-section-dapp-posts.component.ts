@@ -16,6 +16,15 @@ import { DappPostComponent } from '../dapp-post/dapp-post.component';
 
 @Component({
   selector: 'dhb-page-section-dapp-posts',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // UI
+    ContentfulDraftDirective,
+    DappPostComponent,
+  ],
   template: `
     <div
       *ngIf="section"
@@ -45,8 +54,6 @@ import { DappPostComponent } from '../dapp-post/dapp-post.component';
 
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
-  standalone: true,
-  imports: [NgIf, ContentfulDraftDirective, NgFor, DappPostComponent],
 })
 export class PageSectionDappPostsComponent implements OnInit {
   @Input() section!: PageSectionDappPostsFragment;

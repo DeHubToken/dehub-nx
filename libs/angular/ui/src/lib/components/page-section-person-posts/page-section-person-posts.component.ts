@@ -16,6 +16,15 @@ import { PersonPostComponent } from '../person-post/person-post.component';
 
 @Component({
   selector: 'dhb-page-section-person-posts',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // UI
+    ContentfulDraftDirective,
+    PersonPostComponent,
+  ],
   template: `
     <div
       *ngIf="section"
@@ -46,8 +55,6 @@ import { PersonPostComponent } from '../person-post/person-post.component';
 
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
-  standalone: true,
-  imports: [NgIf, ContentfulDraftDirective, NgFor, PersonPostComponent],
 })
 export class PageSectionPersonPostsComponent implements OnInit {
   @Input() section!: PageSectionPersonPostsFragment;

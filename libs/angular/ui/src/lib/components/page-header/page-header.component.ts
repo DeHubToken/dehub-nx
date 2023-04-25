@@ -16,6 +16,18 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
 @Component({
   selector: 'dhb-page-header',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgClass,
+    RouterLink,
+    NgFor,
+    // PrimeNG
+    ButtonModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div
       *ngIf="page"
@@ -54,15 +66,6 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
-  standalone: true,
-  imports: [
-    NgIf,
-    NgClass,
-    NgFor,
-    ButtonModule,
-    ContentfulDraftDirective,
-    RouterLink,
-  ],
 })
 export class PageHeaderComponent<
   P extends {

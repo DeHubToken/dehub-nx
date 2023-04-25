@@ -6,6 +6,12 @@ import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'dhb-sw-update-available',
+  standalone: true,
+  imports: [
+    // PrimeNG
+    ToastModule,
+    ButtonModule,
+  ],
   template: `
     <p-toast
       [key]="key"
@@ -51,8 +57,6 @@ import { ToastModule } from 'primeng/toast';
       </ng-template>
     </p-toast>
   `,
-  standalone: true,
-  imports: [ToastModule, ButtonModule],
 })
 export class SwUpdateAvailableComponent implements OnInit {
   @Output() update = new EventEmitter<void>();

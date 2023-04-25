@@ -36,7 +36,7 @@ import { ConnectWalletOptionsComponent } from './connect-wallet-options.componen
   imports: [
     // UI
     ConnectWalletOptionsComponent,
-    // 3rd PArty
+    // 3rd Party
     PushModule,
   ],
   template: `

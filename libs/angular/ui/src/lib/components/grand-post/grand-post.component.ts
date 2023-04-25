@@ -18,6 +18,17 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
 @Component({
   selector: 'dhb-grand-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // PrimeNG
+    ButtonModule,
+    CardModule,
+    // UI
+    HeavyPictureComponent,
+    ContentfulDraftDirective,
+  ],
   template: `
     <div [dhbContentfulDraft]="grandPost.sys">
       <p-card
@@ -65,14 +76,6 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    ContentfulDraftDirective,
-    NgIf,
-    CardModule,
-    HeavyPictureComponent,
-    ButtonModule,
-  ],
 })
 export class GrandPostComponent implements OnInit {
   @Input() grandPost!: GrandPostFragment;

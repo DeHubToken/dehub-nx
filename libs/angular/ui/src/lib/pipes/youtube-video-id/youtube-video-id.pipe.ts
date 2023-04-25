@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
  */
 @Pipe({
   name: 'dhbYoutubeVideoId',
-  pure: true,
   standalone: true,
+  pure: true,
 })
 export class YoutubeVideoIdPipe implements PipeTransform {
   constructor() {}

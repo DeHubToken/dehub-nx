@@ -12,6 +12,17 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dhb-product-orders',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    DatePipe,
+    // UI
+    AddressPipe,
+    // 3rd Party
+    LetModule,
+  ],
   template: `
     <ng-container *rxLet="productOrders$ as productOrders">
       <div
@@ -47,8 +58,6 @@ import { Observable } from 'rxjs';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [LetModule, NgIf, NgFor, DatePipe, AddressPipe],
 })
 export class ProductOrdersComponent implements OnInit {
   @Input() productOrders$?: Observable<ShopOrder[]>;

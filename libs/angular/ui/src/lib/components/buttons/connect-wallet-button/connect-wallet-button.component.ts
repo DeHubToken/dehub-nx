@@ -12,6 +12,14 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 
 @Component({
   selector: 'dhb-connect-wallet-button',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // PrimeNG
+    SplitButtonModule,
+    ButtonModule,
+  ],
   template: `
     <!-- Logout State -->
     <p-splitButton
@@ -31,8 +39,6 @@ import { SplitButtonModule } from 'primeng/splitbutton';
   `,
 
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgIf, SplitButtonModule, ButtonModule],
 })
 export class ConnectWalletButtonComponent implements OnInit {
   @Input() label = 'Connect Wallet';

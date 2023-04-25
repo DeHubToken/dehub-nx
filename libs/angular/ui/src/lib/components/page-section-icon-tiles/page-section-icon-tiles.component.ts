@@ -16,6 +16,15 @@ import { IconTileComponent } from '../icon-tile/icon-tile.component';
 
 @Component({
   selector: 'dhb-page-section-icon-tiles',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // UI
+    ContentfulDraftDirective,
+    IconTileComponent,
+  ],
   template: `
     <div
       *ngIf="section"
@@ -45,8 +54,6 @@ import { IconTileComponent } from '../icon-tile/icon-tile.component';
 
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
-  standalone: true,
-  imports: [NgIf, ContentfulDraftDirective, NgFor, IconTileComponent],
 })
 export class PageSectionIconTilesComponent implements OnInit {
   @Input() section!: PageSectionIconTilesFragment;

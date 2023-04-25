@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,13 +13,23 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { IconTileComponent } from '../icon-tile/icon-tile.component';
 import { SwiperModule } from 'swiper/angular';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { NgIf, NgFor } from '@angular/common';
+import { IconTileComponent } from '../icon-tile/icon-tile.component';
 
 @Component({
   selector: 'dhb-page-section-icon-tiles-swiper',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // UI
+    ContentfulDraftDirective,
+    IconTileComponent,
+    // 3rd Party
+    SwiperModule,
+  ],
   template: `
     <div
       *ngIf="section"
@@ -58,14 +69,6 @@ import { NgIf, NgFor } from '@angular/common';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
-  standalone: true,
-  imports: [
-    NgIf,
-    ContentfulDraftDirective,
-    SwiperModule,
-    NgFor,
-    IconTileComponent,
-  ],
 })
 export class PageSectionIconTilesSwiperComponent implements OnInit {
   @Input() section!: PageSectionIconTilesFragment;

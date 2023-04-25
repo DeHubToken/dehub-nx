@@ -18,6 +18,14 @@ import { Observable, map, switchMap } from 'rxjs';
 import { ProductDetailComponent } from './components/product-detail.component';
 import { ProductDetailService } from './services';
 @Component({
+  standalone: true,
+  imports: [
+    // Angular
+    RouterLink,
+    // UI
+    BackButtonComponent,
+    ProductDetailComponent,
+  ],
   template: `
     <div [@fadeInUp] class="grid">
       <div
@@ -39,8 +47,6 @@ import { ProductDetailService } from './services';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
-  standalone: true,
-  imports: [BackButtonComponent, RouterLink, ProductDetailComponent],
 })
 export class AngularFeatureShopProductDetailComponent implements OnInit {
   productDetail$?: Observable<ProductDetailFragment>;

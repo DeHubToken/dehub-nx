@@ -35,6 +35,19 @@ import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'dhb-phone-input',
+  standalone: true,
+  imports: [
+    // Angular
+    ReactiveFormsModule,
+    NgIf,
+    // PrimeNG
+    DropdownModule,
+    InputTextModule,
+    // UI
+    LoadingComponent,
+    // 3rd Party
+    LetModule,
+  ],
   template: `
     <div
       *rxLet="countries$ as countries; suspense: loading"
@@ -120,15 +133,6 @@ import { DropdownModule } from 'primeng/dropdown';
       provide: ControlContainer,
       useExisting: FormGroupDirective,
     },
-  ],
-  standalone: true,
-  imports: [
-    LetModule,
-    ReactiveFormsModule,
-    DropdownModule,
-    NgIf,
-    InputTextModule,
-    LoadingComponent,
   ],
 })
 export class PhoneInputComponent implements OnInit, OnDestroy {

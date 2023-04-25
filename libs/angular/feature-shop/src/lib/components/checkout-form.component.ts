@@ -74,23 +74,27 @@ import {
 } from '../model/checkout-form.model';
 
 @Component({
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgClass,
+    ReactiveFormsModule,
+    // PrimeNG
+    ButtonModule,
+    InputMaskModule,
+    InputNumberModule,
+    // UI
+    ProductMiniComponent,
+    ContactsFormComponent,
+    AddressFormComponent,
+    LoadingComponent,
+    // 3rd Party
+    LetModule,
+  ],
   templateUrl: './checkout-form.component.html',
   providers: [...provideDehubLoggerWithScope('Checkout Form')],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    LetModule,
-    NgIf,
-    NgClass,
-    ButtonModule,
-    ProductMiniComponent,
-    ReactiveFormsModule,
-    InputNumberModule,
-    ContactsFormComponent,
-    AddressFormComponent,
-    InputMaskModule,
-    LoadingComponent,
-  ],
 })
 export class CheckoutFormComponent implements OnInit {
   productDetail$ = (

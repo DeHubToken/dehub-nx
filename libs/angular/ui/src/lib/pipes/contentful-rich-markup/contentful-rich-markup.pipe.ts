@@ -4,8 +4,8 @@ import { richMarkupToHtmlString } from '@dehub/shared/utils';
 
 @Pipe({
   name: 'dhbContentfulRichMarkup',
-  pure: true,
   standalone: true,
+  pure: true,
 })
 export class ContentfulRichMarkupPipe implements PipeTransform {
   constructor() {}

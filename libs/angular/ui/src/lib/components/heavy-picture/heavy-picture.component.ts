@@ -1,3 +1,4 @@
+import { NgClass, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +7,6 @@ import {
 } from '@angular/core';
 import { SysFragment } from '@dehub/shared/model';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { NgIf, NgClass } from '@angular/common';
 
 // TODO: is there any generated GQL type?
 interface ContentfulPicture {
@@ -18,6 +18,14 @@ interface ContentfulPicture {
 
 @Component({
   selector: 'dhb-heavy-picture',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgClass,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <span (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
       <img
@@ -50,8 +58,6 @@ interface ContentfulPicture {
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgIf, ContentfulDraftDirective, NgClass],
 })
 export class HeavyPictureComponent<
   C extends {

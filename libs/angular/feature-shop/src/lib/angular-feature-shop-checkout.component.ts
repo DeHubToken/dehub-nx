@@ -8,8 +8,8 @@ import { CheckoutFormComponent } from './components/checkout-form.component';
 import { ProductDetailService } from './services';
 
 @Component({
-  standalone: true,
   selector: 'dhb-checkout-modal',
+  standalone: true,
   template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

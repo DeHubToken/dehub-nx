@@ -15,8 +15,8 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 import { CTAGroupPipe } from './cta-group.pipe';
 
 @Component({
-  standalone: true,
   selector: 'dhb-footer',
+  standalone: true,
   imports: [
     // Angular
     CommonModule,

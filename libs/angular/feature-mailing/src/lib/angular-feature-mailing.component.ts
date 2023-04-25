@@ -5,9 +5,9 @@ import { MailingListFormComponent } from './components/mailing-list-form.compone
 
 @Component({
   selector: 'dhb-mailing-modal',
+  standalone: true,
   template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
 })
 export class AngularFeatureMailingComponent implements OnInit {
   constructor(private dialogService: DialogService, private router: Router) {}

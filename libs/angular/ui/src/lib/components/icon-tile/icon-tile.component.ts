@@ -13,6 +13,15 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
 @Component({
   selector: 'dhb-icon-tile',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // PrimeNG
+    ButtonModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div
       *ngIf="iconTile"
@@ -36,10 +45,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
       ></p-button>
     </div>
   `,
-
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgIf, ContentfulDraftDirective, ButtonModule],
 })
 export class IconTileComponent implements OnInit {
   @Input() iconTile!: IconTileFragment;

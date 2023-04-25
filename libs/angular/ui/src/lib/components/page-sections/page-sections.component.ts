@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,23 +20,22 @@ import {
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { filterNil } from '@dehub/shared/utils';
-import { MenuItem } from 'primeng/api';
-import { map, Observable } from 'rxjs';
 import { PushModule } from '@rx-angular/template/push';
-import { PageSectionProductsComponent } from '../page-section-products/page-section-products.component';
-import { PageSectionPersonPostsComponent } from '../page-section-person-posts/page-section-person-posts.component';
-import { PageSectionPersonPostsSwiperComponent } from '../page-section-person-posts-swiper/page-section-person-posts-swiper.component';
-import { PageSectionSectionPostsComponent } from '../page-section-section-posts/page-section-section-posts.component';
-import { PageSectionGrandPostsComponent } from '../page-section-grand-posts/page-section-grand-posts.component';
-import { PageSectionGrandPostsSwiperComponent } from '../page-section-grand-posts-swiper/page-section-grand-posts-swiper.component';
+import { MenuItem } from 'primeng/api';
+import { Observable, map } from 'rxjs';
+import { PageSectionBasicPostsComponent } from '../page-section-basic-posts/page-section-basic-posts.component';
 import { PageSectionDappPostsComponent } from '../page-section-dapp-posts/page-section-dapp-posts.component';
 import { PageSectionFaQsComponent } from '../page-section-faqs/page-section-faqs.component';
-import { PageSectionIconTilesComponent } from '../page-section-icon-tiles/page-section-icon-tiles.component';
-import { PageSectionIconTilesSwiperComponent } from '../page-section-icon-tiles-swiper/page-section-icon-tiles-swiper.component';
-import { PageSectionBasicPostsComponent } from '../page-section-basic-posts/page-section-basic-posts.component';
-import { PageSectionThumbnailPostsComponent } from '../page-section-thumbnail-posts/page-section-thumbnail-posts.component';
 import { PageSectionFeaturePostsComponent } from '../page-section-feature-posts/page-section-feature-posts.component';
-import { NgFor, NgIf } from '@angular/common';
+import { PageSectionGrandPostsSwiperComponent } from '../page-section-grand-posts-swiper/page-section-grand-posts-swiper.component';
+import { PageSectionGrandPostsComponent } from '../page-section-grand-posts/page-section-grand-posts.component';
+import { PageSectionIconTilesSwiperComponent } from '../page-section-icon-tiles-swiper/page-section-icon-tiles-swiper.component';
+import { PageSectionIconTilesComponent } from '../page-section-icon-tiles/page-section-icon-tiles.component';
+import { PageSectionPersonPostsSwiperComponent } from '../page-section-person-posts-swiper/page-section-person-posts-swiper.component';
+import { PageSectionPersonPostsComponent } from '../page-section-person-posts/page-section-person-posts.component';
+import { PageSectionProductsComponent } from '../page-section-products/page-section-products.component';
+import { PageSectionSectionPostsComponent } from '../page-section-section-posts/page-section-section-posts.component';
+import { PageSectionThumbnailPostsComponent } from '../page-section-thumbnail-posts/page-section-thumbnail-posts.component';
 
 type PageSection =
   | PageSectionFeaturePostsFragment
@@ -53,116 +53,12 @@ type PageSection =
 
 @Component({
   selector: 'dhb-page-sections',
-  template: `
-    <ng-container *ngFor="let section of sections">
-      <!-- Feature Posts -->
-      <dhb-page-section-feature-posts
-        *ngIf="isPageSectionFeaturePosts(section)"
-        [section]="section"
-        [swiperResponsiveOptions]="featurePostsResponsiveOptions"
-      ></dhb-page-section-feature-posts>
-
-      <!-- Thumbnail Posts -->
-      <dhb-page-section-thumbnail-posts
-        *ngIf="isPageSectionThumbnailPosts(section)"
-        [section]="section"
-        [swiperResponsiveOptions]="thumbnailPostsResponsiveOptions"
-      ></dhb-page-section-thumbnail-posts>
-
-      <!-- Basic Posts -->
-      <dhb-page-section-basic-posts
-        *ngIf="isPageSectionBasicPosts(section)"
-        [section]="section"
-        [swiperResponsiveOptions]="basicPostsResponsiveOptions"
-      ></dhb-page-section-basic-posts>
-
-      <!-- Icon Tiles Swiper -->
-      <dhb-page-section-icon-tiles-swiper
-        *ngIf="
-          isPageSectionIconTiles(section) && section.isSwiper;
-          else iconTiles
-        "
-        [section]="section"
-        [swiperResponsiveOptions]="iconTilesResponsiveOptions"
-      ></dhb-page-section-icon-tiles-swiper>
-
-      <!-- Icon Tiles -->
-      <ng-template #iconTiles>
-        <dhb-page-section-icon-tiles
-          *ngIf="isPageSectionIconTiles(section)"
-          [section]="section"
-        ></dhb-page-section-icon-tiles>
-      </ng-template>
-
-      <!-- FaQs -->
-      <dhb-page-section-faqs
-        *ngIf="isPageSectionFaQs(section)"
-        [section]="section"
-      ></dhb-page-section-faqs>
-
-      <!-- Dapp Posts -->
-      <dhb-page-section-dapp-posts
-        *ngIf="isPageSectionDappPosts(section)"
-        [section]="section"
-      ></dhb-page-section-dapp-posts>
-
-      <!-- Grand Posts -->
-      <dhb-page-section-grand-posts-swiper
-        *ngIf="
-          isPageSectionGrandPosts(section) && section.isSwiper;
-          else grandPosts
-        "
-        [section]="section"
-        [swiperResponsiveOptions]="grandPostsResponsiveOptions"
-      ></dhb-page-section-grand-posts-swiper>
-
-      <ng-template #grandPosts>
-        <dhb-page-section-grand-posts
-          *ngIf="isPageSectionGrandPosts(section)"
-          [section]="section"
-        ></dhb-page-section-grand-posts>
-      </ng-template>
-
-      <!-- Section Posts -->
-      <dhb-page-section-section-posts
-        *ngIf="isPageSectionSectionPosts(section)"
-        [section]="section"
-      ></dhb-page-section-section-posts>
-
-      <!-- Person Posts Swiper -->
-      <dhb-page-section-person-posts-swiper
-        *ngIf="
-          isPageSectionPersonPosts(section) && section.isSwiper;
-          else personPosts
-        "
-        [section]="section"
-        [path]="path"
-      ></dhb-page-section-person-posts-swiper>
-
-      <ng-template #personPosts>
-        <dhb-page-section-person-posts
-          *ngIf="isPageSectionPersonPosts(section)"
-          [section]="section"
-          [path]="path"
-        ></dhb-page-section-person-posts>
-      </ng-template>
-
-      <!-- Products -->
-      <dhb-page-section-products
-        *ngIf="isPageSectionProducts(section)"
-        [section]="section"
-        [swiperResponsiveOptions]="productsResponsiveOptions"
-        [menuItems]="productMenuItems"
-        [activeMenuItem]="productActiveMenuItem$ | push"
-      >
-      </dhb-page-section-products>
-    </ng-container>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    // Angular
     NgFor,
     NgIf,
+    // UI
     PageSectionFeaturePostsComponent,
     PageSectionThumbnailPostsComponent,
     PageSectionBasicPostsComponent,
@@ -176,8 +72,11 @@ type PageSection =
     PageSectionPersonPostsSwiperComponent,
     PageSectionPersonPostsComponent,
     PageSectionProductsComponent,
+    // 3rd Party
     PushModule,
   ],
+  templateUrl: './page-sections.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageSectionsComponent implements OnInit {
   @Input() sections?: PageSection[];

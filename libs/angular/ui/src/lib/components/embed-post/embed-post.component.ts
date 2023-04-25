@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,10 +9,16 @@ import {
 } from '@angular/core';
 import { EmbedPostFragment } from '@dehub/shared/model';
 import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'dhb-embed-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgClass,
+    // UI
+    SafeHtmlPipe,
+  ],
   template: `
     <div
       [innerHtml]="embedPost.embedCode! | dhbSafeHtml"
@@ -62,8 +69,6 @@ import { NgClass } from '@angular/common';
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgClass, SafeHtmlPipe],
 })
 export class EmbedPostComponent implements OnInit {
   @Input() embedPost!: EmbedPostFragment;

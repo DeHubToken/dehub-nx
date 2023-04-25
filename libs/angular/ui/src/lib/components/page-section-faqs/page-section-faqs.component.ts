@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,12 +8,20 @@ import {
 import { FaqGroupFragment, PageSectionFaQsFragment } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { FaqGroupComponent } from '../faq-group/faq-group.component';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { NgIf, NgFor } from '@angular/common';
+import { FaqGroupComponent } from '../faq-group/faq-group.component';
 
 @Component({
   selector: 'dhb-page-section-faqs',
+  standalone: true,
+  imports: [
+    // Angular
+    NgFor,
+    NgIf,
+    // UI
+    ContentfulDraftDirective,
+    FaqGroupComponent,
+  ],
   template: `
     <div
       *ngIf="section"
@@ -42,8 +51,6 @@ import { NgIf, NgFor } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
-  standalone: true,
-  imports: [NgIf, ContentfulDraftDirective, NgFor, FaqGroupComponent],
 })
 export class PageSectionFaQsComponent implements OnInit {
   @Input() section!: PageSectionFaQsFragment;

@@ -22,6 +22,18 @@ interface SocialLink {
 
 @Component({
   selector: 'dhb-person-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // PrimeNG
+    ButtonModule,
+    TagModule,
+    CardModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div [dhbContentfulDraft]="personPost.sys" class="w-full">
       <p-card
@@ -90,15 +102,6 @@ interface SocialLink {
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    ContentfulDraftDirective,
-    NgIf,
-    CardModule,
-    TagModule,
-    NgFor,
-    ButtonModule,
-  ],
 })
 export class PersonPostComponent implements OnInit {
   @Input() personPost!: PersonPostFragment;

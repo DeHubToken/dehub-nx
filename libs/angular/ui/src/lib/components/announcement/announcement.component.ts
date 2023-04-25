@@ -1,14 +1,28 @@
+import { DatePipe, NgClass, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AnnouncementFragment } from '@dehub/shared/model';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
-import { ContentfulRichMarkupPipe } from '../../pipes/contentful-rich-markup/contentful-rich-markup.pipe';
-import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { NgFor, NgClass, DatePipe } from '@angular/common';
 import { SwiperModule } from 'swiper/angular';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { ContentfulRichMarkupPipe } from '../../pipes/contentful-rich-markup/contentful-rich-markup.pipe';
+import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
 
 @Component({
   selector: 'dhb-announcement',
+  standalone: true,
+  imports: [
+    // Angular
+    NgFor,
+    NgClass,
+    DatePipe,
+    // PrimeNG
+    // UI
+    ContentfulDraftDirective,
+    ContentfulRichMarkupPipe,
+    SafeHtmlPipe,
+    // 3rd Party
+    SwiperModule,
+  ],
   template: `
     <div class="mx-4">
       <swiper
@@ -53,16 +67,6 @@ import { SwiperModule } from 'swiper/angular';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    SwiperModule,
-    NgFor,
-    ContentfulDraftDirective,
-    NgClass,
-    DatePipe,
-    ContentfulRichMarkupPipe,
-    SafeHtmlPipe,
-  ],
 })
 export class AnnouncementComponent implements OnInit {
   announcements = (

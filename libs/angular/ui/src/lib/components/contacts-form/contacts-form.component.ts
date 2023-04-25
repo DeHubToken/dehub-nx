@@ -29,6 +29,15 @@ import { PhoneInputComponent } from '../phone-input/phone-input.component';
 
 @Component({
   selector: 'dhb-contacts-form',
+  standalone: true,
+  imports: [
+    // Angular
+    ReactiveFormsModule,
+    // PrimeNG
+    InputTextModule,
+    // UI
+    PhoneInputComponent,
+  ],
   template: `
     <form [formGroup]="contactsForm" class="p-fluid grid pt-2">
       <!-- Email -->
@@ -66,8 +75,6 @@ import { PhoneInputComponent } from '../phone-input/phone-input.component';
       useExisting: FormGroupDirective,
     },
   ],
-  standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, PhoneInputComponent],
 })
 export class ContactsFormComponent implements OnInit, OnDestroy {
   @Input() prefillData?: Contacts;

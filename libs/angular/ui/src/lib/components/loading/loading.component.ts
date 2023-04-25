@@ -1,13 +1,18 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'dhb-loading',
+  standalone: true,
+  imports: [
+    // Angular
+    NgClass,
+  ],
   template: ` <p><i [ngClass]="iconClass"></i>&nbsp;{{ title }}</p> `,
   styles: [
     `
@@ -20,8 +25,6 @@ import { NgClass } from '@angular/common';
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgClass],
 })
 export class LoadingComponent implements OnInit {
   @Input() title = 'Loading...';

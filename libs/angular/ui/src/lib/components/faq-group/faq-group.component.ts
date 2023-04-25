@@ -13,6 +13,16 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
 @Component({
   selector: 'dhb-faq-group',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // PrimeNG
+    AccordionModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div
       *ngIf="faqGroup"
@@ -45,8 +55,6 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgIf, ContentfulDraftDirective, AccordionModule, NgFor],
 })
 export class FaqGroupComponent implements OnInit {
   @Input() faqGroup!: FaqGroupFragment;

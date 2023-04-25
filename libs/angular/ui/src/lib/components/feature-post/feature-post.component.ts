@@ -18,6 +18,19 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
 @Component({
   selector: 'dhb-feature-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    DatePipe,
+    // PrimeNG
+    CardModule,
+    // UI
+    ButtonModule,
+    HeavyPictureComponent,
+    ContentfulDraftDirective,
+    // 3rd Party
+  ],
   template: `
     <div [dhbContentfulDraft]="featurePost.sys">
       <p-card
@@ -67,15 +80,6 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    ContentfulDraftDirective,
-    NgIf,
-    CardModule,
-    HeavyPictureComponent,
-    ButtonModule,
-    DatePipe,
-  ],
 })
 export class FeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;

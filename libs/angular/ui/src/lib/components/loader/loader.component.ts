@@ -1,13 +1,18 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'dhb-loader',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+  ],
   template: `
     <div class="dhb-loader">
       <table>
@@ -29,8 +34,6 @@ import { NgIf } from '@angular/common';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgIf],
 })
 export class LoaderComponent implements OnInit {
   @Input() title = 'Waiting';

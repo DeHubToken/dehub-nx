@@ -25,6 +25,21 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { Observable, map } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [
+    // Angular
+    ForModule,
+    NgClass,
+    // PrimeNG
+    FieldsetModule,
+    ButtonModule,
+    // UI
+    PageHeaderComponent,
+    ContentfulDraftDirective,
+    PageSectionsComponent,
+    // 3rd Party
+    LetModule,
+  ],
   template: `
     <ng-container *rxLet="pageStream$ as pageStream" class="grid">
       <!-- Titles -->
@@ -81,17 +96,6 @@ import { Observable, map } from 'rxjs';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
-  standalone: true,
-  imports: [
-    LetModule,
-    PageHeaderComponent,
-    ForModule,
-    FieldsetModule,
-    ContentfulDraftDirective,
-    NgClass,
-    ButtonModule,
-    PageSectionsComponent,
-  ],
 })
 export class AngularFeatureStreamComponent implements OnInit {
   pageStream$?: Observable<PageStreamFragment | undefined>;

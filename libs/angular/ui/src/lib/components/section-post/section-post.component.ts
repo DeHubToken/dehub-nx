@@ -14,6 +14,17 @@ import { EmbedPostComponent } from '../embed-post/embed-post.component';
 
 @Component({
   selector: 'dhb-section-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // UI
+    ContentfulDraftDirective,
+    ChartPostComponent,
+    EmbedPostComponent,
+    ContentfulRichMarkupPipe,
+    SafeHtmlPipe,
+  ],
   template: `
     <div
       *ngIf="sectionPost"
@@ -58,15 +69,6 @@ import { EmbedPostComponent } from '../embed-post/embed-post.component';
   `,
 
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    NgIf,
-    ContentfulDraftDirective,
-    ChartPostComponent,
-    EmbedPostComponent,
-    ContentfulRichMarkupPipe,
-    SafeHtmlPipe,
-  ],
 })
 export class SectionPostComponent implements OnInit {
   @Input() sectionPost!: SectionPostFragment;

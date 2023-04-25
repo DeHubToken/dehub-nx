@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,14 +17,25 @@ import {
   fadeInUpOnEnterAnimation,
 } from 'angular-animations';
 import { MenuItem } from 'primeng/api';
-import { ProductComponent } from '../product/product.component';
 import { SwiperModule } from 'swiper/angular';
-import { TabMenuComponent } from '../tab-menu/tab-menu.component';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { NgIf, NgFor } from '@angular/common';
+import { ProductComponent } from '../product/product.component';
+import { TabMenuComponent } from '../tab-menu/tab-menu.component';
 
 @Component({
   selector: 'dhb-page-section-products',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // UI
+    TabMenuComponent,
+    ContentfulDraftDirective,
+    ProductComponent,
+    // 3rd Party
+    SwiperModule,
+  ],
   template: `
     <div
       *ngIf="section"
@@ -85,15 +97,6 @@ import { NgIf, NgFor } from '@angular/common';
   animations: [
     fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' }),
     fadeInDownOnEnterAnimation({ anchor: 'fadeInDown', delay: 1000 }),
-  ],
-  standalone: true,
-  imports: [
-    NgIf,
-    ContentfulDraftDirective,
-    TabMenuComponent,
-    SwiperModule,
-    NgFor,
-    ProductComponent,
   ],
 })
 export class PageSectionProductsComponent implements OnInit {

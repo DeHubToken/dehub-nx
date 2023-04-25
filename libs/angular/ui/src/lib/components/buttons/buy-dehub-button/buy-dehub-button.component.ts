@@ -12,7 +12,6 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     // Angular
     NgIf,
     RouterModule,
-
     // PrimeNg
     SplitButtonModule,
   ],

@@ -15,6 +15,16 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
 @Component({
   selector: 'dhb-dapp-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // PrimeNG
+    ButtonModule,
+    CardModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div [dhbContentfulDraft]="dappPost.sys">
       <p-card
@@ -69,8 +79,6 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [ContentfulDraftDirective, NgIf, CardModule, ButtonModule],
 })
 export class DappPostComponent implements OnInit {
   @Input() dappPost!: DappPostFragment;
