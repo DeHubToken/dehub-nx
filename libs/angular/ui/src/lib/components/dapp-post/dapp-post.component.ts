@@ -47,22 +47,25 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
         <!-- Description -->
         <p>{{ dappPost.description }}</p>
 
+        <!-- Buttons -->
         <ng-template
           *ngIf="dappPost.urlToLearnMore || dappPost.urlToDapp"
           pTemplate="footer"
         >
-          <p-button
-            *ngIf="dappPost.urlToLearnMore as urlLearnMore"
-            label="Learn More"
-            (onClick)="onLearnMoreClicked($event)"
-            styleClass="p-button-secondary p-button-lg p-button-raised mr-3"
-          ></p-button>
-          <p-button
-            *ngIf="dappPost.urlToDapp as urlDapp"
-            label="Open D'App"
-            (onClick)="onDappClicked($event)"
-            styleClass="p-button-primary p-button-lg p-button-raised"
-          ></p-button>
+          <div class="flex flex-column gap-3 md:flex-row md:align-content-end">
+            <p-button
+              *ngIf="dappPost.urlToLearnMore as urlLearnMore"
+              label="Learn More"
+              (onClick)="onLearnMoreClicked($event)"
+              styleClass="p-button-secondary p-button-lg p-button-raised"
+            ></p-button>
+            <p-button
+              *ngIf="dappPost.urlToDapp as urlDapp"
+              label="Open D'App"
+              (onClick)="onDappClicked($event)"
+              styleClass="p-button-primary p-button-lg p-button-raised"
+            ></p-button>
+          </div>
         </ng-template>
       </p-card>
     </div>
