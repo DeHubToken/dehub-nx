@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,6 +8,11 @@ import {
 
 @Component({
   selector: 'dhb-loading',
+  standalone: true,
+  imports: [
+    // Angular
+    NgClass,
+  ],
   template: ` <p><i [ngClass]="iconClass"></i>&nbsp;{{ title }}</p> `,
   styles: [
     `

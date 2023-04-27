@@ -7,11 +7,29 @@ import {
 } from '@angular/core';
 import { FeaturePostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
+import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
-import { YoutubeEmbedComponent } from '../youtube-embed';
+import { HeavyPictureComponent } from '../heavy-picture/heavy-picture.component';
+import { YoutubeEmbedComponent } from '../youtube-embed/youtube-embed.component';
+
+import { DatePipe, NgIf } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
   selector: 'dhb-feature-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    DatePipe,
+    // PrimeNG
+    CardModule,
+    // UI
+    ButtonModule,
+    HeavyPictureComponent,
+    ContentfulDraftDirective,
+  ],
   template: `
     <div [dhbContentfulDraft]="featurePost.sys">
       <p-card

@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,9 +13,23 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { SwiperModule } from 'swiper/angular';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { PersonPostComponent } from '../person-post/person-post.component';
 
 @Component({
   selector: 'dhb-page-section-person-posts-swiper',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // UI
+    ContentfulDraftDirective,
+    PersonPostComponent,
+    // 3rd Party
+    SwiperModule,
+  ],
   template: `
     <div
       *ngIf="section"

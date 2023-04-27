@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,9 +8,17 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { EmbedPostFragment } from '@dehub/shared/model';
+import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
 
 @Component({
   selector: 'dhb-embed-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgClass,
+    // UI
+    SafeHtmlPipe,
+  ],
   template: `
     <div
       [innerHtml]="embedPost.embedCode! | dhbSafeHtml"

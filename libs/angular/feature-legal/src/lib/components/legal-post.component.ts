@@ -1,13 +1,27 @@
+import { DatePipe, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentful-draft/contentful-draft.directive';
+import { ContentfulRichMarkupPipe } from '@dehub/angular/ui/pipes/contentful-rich-markup/contentful-rich-markup.pipe';
+import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
 import { LegalPostFragment } from '@dehub/shared/model';
 
 @Component({
   selector: 'dhb-legal-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    DatePipe,
+    SafeHtmlPipe,
+    // UI
+    ContentfulDraftDirective,
+    ContentfulRichMarkupPipe,
+  ],
   template: `
     <ng-container *ngIf="legalPost">
       <div

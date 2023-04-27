@@ -1,8 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({
   selector: 'dhb-connect-wallet-base',
+  standalone: true,
+  imports: [
+    // PrimeNG
+    ButtonModule,
+  ],
   template: `
     <div class="text-center">
       <i
@@ -20,7 +26,6 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
       </div>
     </div>
   `,
-  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectWalletRequestComponent

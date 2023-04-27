@@ -7,9 +7,10 @@ import { memo, useMemo } from 'react';
 export interface FooterProps {
   footer?: FooterFragment;
   ctaGroup?: number;
+  landing: string;
 }
 
-function Footer({ footer, ctaGroup = 5 }: FooterProps) {
+function Footer({ footer, ctaGroup = 5, landing }: FooterProps) {
   const groups = useMemo(() => {
     if (!footer?.linksCollection) return undefined;
 
@@ -38,7 +39,7 @@ function Footer({ footer, ctaGroup = 5 }: FooterProps) {
                             link?.style,
                             link?.size
                           )}
-                          href={link?.routerLink}
+                          href={landing + link?.routerLink}
                         >
                           <i className={link?.icon}></i>
                           {link && link.label}

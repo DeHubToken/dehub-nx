@@ -1,30 +1,52 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
   OnInit,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
-import { shortenAddress } from '@dehub/shared/utils';
-import { MenuItem } from 'primeng/api';
-import { map, Observable } from 'rxjs';
+
+import { BuyDehubButtonComponent } from '@dehub/angular/ui/components/buttons/buy-dehub-button/buy-dehub-button.component';
+import { ConnectWalletButtonComponent } from '@dehub/angular/ui/components/buttons/connect-wallet-button/connect-wallet-button.component';
+import { getBuyDehubMenuItems, shortenAddress } from '@dehub/shared/utils';
+import { PushModule } from '@rx-angular/template/push';
+import { Observable, map } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
 import { AppMainComponent } from '../app.main.component';
+import { AppMenuComponent } from './menu/app.menu.component';
 
 @Component({
   selector: 'dhb-topbar',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    RouterLink,
+    // 3rd Party
+    PushModule,
+    // UI
+    BuyDehubButtonComponent,
+    ConnectWalletButtonComponent,
+
+    AppMenuComponent,
+  ],
   templateUrl: './app.topbar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppTopBarComponent implements OnInit {
-  items?: MenuItem[];
+  buyDehubMenuItems = getBuyDehubMenuItems(
+    this.env.dehub.landing,
+    this.env.dehub.cexUrl,
+    this.env.dehub.downloadMetamaskUrl,
+    true
+  );
 
   path = this.env.baseUrl;
   chainId = this.env.web3.chainId;
   magicLinkApiKey = this.env.web3.auth.magicLinkApiKey;
-  cexUrl = this.env.dehub.cexUrl;
-  downloadWalletUrl = this.env.dehub.downloadWalletUrl;
   isDev = this.env.env === 'dev';
 
   // Connect Wallet Button

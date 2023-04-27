@@ -1,27 +1,26 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgIf, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
-import { ContentfulDraftDirectiveModule } from '@dehub/angular/ui/directives/contentful-draft';
-import { ContentfulRichMarkupPipeModule } from '@dehub/angular/ui/pipes/contentful-rich-markup';
-import { SafeHtmlPipeModule } from '@dehub/angular/ui/pipes/safe-html';
+import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentful-draft/contentful-draft.directive';
+import { ContentfulRichMarkupPipe } from '@dehub/angular/ui/pipes/contentful-rich-markup/contentful-rich-markup.pipe';
+import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
 import { BasicPostDetailFragment } from '@dehub/shared/model';
 
 @Component({
-  standalone: true,
   selector: 'dhb-basic-post-detail',
+  standalone: true,
   imports: [
     // Angular
-    CommonModule,
+    NgIf,
+    SafeHtmlPipe,
     NgOptimizedImage,
-
-    // Libs
-    ContentfulDraftDirectiveModule,
-    ContentfulRichMarkupPipeModule,
-    SafeHtmlPipeModule,
+    // UI
+    ContentfulDraftDirective,
+    ContentfulRichMarkupPipe,
   ],
   template: `
     <ng-container *ngIf="basicPostDetail">

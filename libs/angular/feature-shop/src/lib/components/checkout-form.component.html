@@ -118,13 +118,13 @@
       </div>
 
       <!-- Footer -->
-      <div class="flex justify-content-end">
+      <div class="flex justify-content-between gap-2 sm:justify-content-end">
         <!-- Cancel -->
         <p-button
           label="Cancel"
           (click)="ref.close()"
-          class="w-6 md:w-auto"
           styleClass="p-button-secondary p-button-lg w-full"
+          class="w-6 sm:w-auto"
         ></p-button>
 
         <!-- Confirm -->
@@ -135,8 +135,8 @@
             [disabled]="!checkoutForm.valid || productDetail.pause"
             (onClick)="onConfirm()"
             icon="fa-regular fa-check"
-            styleClass="p-button-primary p-button-lg ml-2"
-            class="w-6 md:w-auto"
+            styleClass="p-button-primary p-button-lg w-full"
+            class="w-6 sm:w-auto"
           ></p-button>
         </ng-container>
 
@@ -146,8 +146,8 @@
             label="Approve"
             icon="fa-regular fa-check"
             (onClick)="onApprove()"
-            styleClass="p-button-primary p-button-lg ml-2"
-            class="w-6 md:w-auto"
+            styleClass="p-button-primary p-button-lg w-full"
+            class="w-6 sm:w-auto"
           ></p-button>
         </ng-template>
       </div>

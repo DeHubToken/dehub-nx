@@ -1,10 +1,19 @@
+import { NgClass, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { PwaService } from '@dehub/angular/core';
-import { getMenuItems } from '../../app-routing.module';
 import { AppMainComponent } from '../../app.main.component';
+import { MenuService } from './app.menu.service';
+import { AppMenuitemComponent } from './app.menuitem.component';
 
 @Component({
   selector: 'dhb-menu',
+  standalone: true,
+  imports: [
+    // Angular
+    NgClass,
+    NgFor,
+
+    AppMenuitemComponent,
+  ],
   template: `
     <div
       class="menu-wrapper"
@@ -26,10 +35,10 @@ import { AppMainComponent } from '../../app.main.component';
   `,
 })
 export class AppMenuComponent {
-  model = getMenuItems(this.pwaService);
+  model = this.menuService.getMenuItems();
 
   constructor(
     public appMain: AppMainComponent,
-    private pwaService: PwaService
+    private menuService: MenuService
   ) {}
 }

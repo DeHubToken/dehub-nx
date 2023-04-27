@@ -5,9 +5,24 @@ import {
   OnInit,
 } from '@angular/core';
 import { ThumbnailPostFragment } from '@dehub/shared/model';
+import { HeavyPictureComponent } from '../heavy-picture/heavy-picture.component';
+
+import { NgIf } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
   selector: 'dhb-thumbnail-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // PrimeNG
+    CardModule,
+    // UI
+    ContentfulDraftDirective,
+    HeavyPictureComponent,
+  ],
   template: `
     <div [dhbContentfulDraft]="thumbnailPost.sys">
       <p-card *ngIf="thumbnailPost" styleClass="thumbnail p-card-shadow">
@@ -36,7 +51,6 @@ import { ThumbnailPostFragment } from '@dehub/shared/model';
       </p-card>
     </div>
   `,
-  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThumbnailPostComponent implements OnInit {

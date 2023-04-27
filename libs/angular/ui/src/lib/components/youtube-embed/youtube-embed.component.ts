@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgIf } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -10,14 +10,25 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 import { WINDOW } from '@ng-web-apis/common';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { debounceTime, fromEvent, Subscription } from 'rxjs';
+import { Subscription, debounceTime, fromEvent } from 'rxjs';
+import { YoutubeVideoIdPipe } from '../../pipes/youtube-video-id/youtube-video-id.pipe';
 
 let youtubeApiLoaded = false;
 
 @Component({
   selector: 'dhb-youtube-embed',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // UI
+    YoutubeVideoIdPipe,
+    // 3rd Party
+    YouTubePlayerModule,
+  ],
   template: `
     <div #youTubePlayer class="text-center">
       <youtube-player

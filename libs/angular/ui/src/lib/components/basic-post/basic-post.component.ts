@@ -1,31 +1,31 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { BasicPostFragment } from '@dehub/shared/model';
 import { ButtonModule } from 'primeng/button';
+
+import { NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';
-import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
-  standalone: true,
   selector: 'dhb-basic-post',
+  standalone: true,
   imports: [
     // Angular
-    CommonModule,
-    RouterModule,
+    NgIf,
+    RouterLink,
     NgOptimizedImage,
-
-    // PrimeNg
-    ButtonModule,
+    // PrimeNG
     CardModule,
-
-    // Libs
-    ContentfulDraftDirectiveModule,
+    ButtonModule,
+    // UI
+    ContentfulDraftDirective,
   ],
   template: `
     <div [dhbContentfulDraft]="basicPost.sys">

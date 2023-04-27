@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,9 +6,17 @@ import {
   OnInit,
 } from '@angular/core';
 import { ProductCheckoutDetail } from '@dehub/shared/model';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
   selector: 'dhb-product-mini',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div
       *ngIf="product"

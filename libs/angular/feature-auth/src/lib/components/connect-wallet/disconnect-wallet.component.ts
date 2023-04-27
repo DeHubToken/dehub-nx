@@ -6,12 +6,18 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { IMoralisService, MoralisToken } from '@dehub/angular/model';
+import { ButtonModule } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { first, tap } from 'rxjs';
 import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
 
 @Component({
   selector: 'dhb-disconnect-wallet',
+  standalone: true,
+  imports: [
+    // PrimeNG
+    ButtonModule,
+  ],
   template: `
     <div class="text-center">
       <i class="fa-duotone fa-hand-wave icon-color-duotone-1 text-6xl mt-4"></i>
@@ -29,7 +35,7 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
       </div>
     </div>
   `,
-  styles: [],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisconnectWalletComponent

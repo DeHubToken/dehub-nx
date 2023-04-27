@@ -5,16 +5,36 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { Component, Input, OnDestroy, OnInit, forwardRef } from '@angular/core';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { filter, Subscription } from 'rxjs';
+import { RippleModule } from 'primeng/ripple';
+import { Subscription, filter } from 'rxjs';
 import { AppMainComponent } from '../../app.main.component';
 import { MenuService } from './app.menu.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[dhb-menuitem]',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgClass,
+    RouterLinkActive,
+    RouterLink,
+    NgFor,
+    // PrimeNg
+    RippleModule,
+
+    forwardRef(() => AppMenuitemComponent),
+  ],
   template: `
     <ng-container>
       <a

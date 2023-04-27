@@ -1,3 +1,4 @@
+import { NgIf, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,21 +8,44 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { EnvToken } from '@dehub/angular/model';
+import { WalletButtonComponent } from '@dehub/angular/ui/components/buttons/wallet-button/wallet-button.component';
 import {
   DeHubConnector,
   SharedEnv,
-  WalletConnectingState,
   WalletConnectState,
+  WalletConnectingState,
+  animationDuration,
 } from '@dehub/shared/model';
 import {
   fadeInRightOnEnterAnimation,
   fadeInUpOnEnterAnimation,
 } from 'angular-animations';
+import { ButtonModule } from 'primeng/button';
+import { InplaceModule } from 'primeng/inplace';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'dhb-connect-wallet-options',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgStyle,
+    ReactiveFormsModule,
+    // PrimeNG
+    InplaceModule,
+    InputTextModule,
+    ButtonModule,
+    // UI
+    WalletButtonComponent,
+  ],
   template: `
     <div *ngIf="walletConnectState" class="p-fluid">
       <!-- Metamask -->
@@ -151,10 +175,15 @@ import {
       </div>
     </div>
   `,
-  styles: [],
   animations: [
-    fadeInRightOnEnterAnimation({ anchor: 'fadeInRight', duration: 500 }),
-    fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 500 }),
+    fadeInRightOnEnterAnimation({
+      anchor: 'fadeInRight',
+      duration: animationDuration,
+    }),
+    fadeInUpOnEnterAnimation({
+      anchor: 'fadeInUp',
+      duration: animationDuration,
+    }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

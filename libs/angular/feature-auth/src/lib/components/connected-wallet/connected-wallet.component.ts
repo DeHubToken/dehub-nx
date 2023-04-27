@@ -15,7 +15,6 @@ import { filter, take } from 'rxjs';
       </h6>
     </div>
   `,
-  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectedWalletComponent implements OnInit {

@@ -1,16 +1,38 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import {
   AnnouncementService,
   CoreService,
   LoaderService,
   PwaService,
 } from '@dehub/angular/core';
+
+import { LoaderComponent } from '@dehub/angular/ui/components/loader/loader.component';
+import { SwUpdateAvailableComponent } from '@dehub/angular/ui/components/sw-update-available/sw-update-available.component';
 import { MenuMode, ThemeMode } from '@dehub/shared/model';
+import { PushModule } from '@rx-angular/template/push';
 import { PrimeNGConfig } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dhb-root',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    RouterOutlet,
+    // 3rd Party
+    PushModule,
+    // PrimeNg
+    ToastModule,
+    ConfirmDialogModule,
+    // UI
+    LoaderComponent,
+    SwUpdateAvailableComponent,
+  ],
   template: `
     <router-outlet></router-outlet>
 

@@ -4,18 +4,29 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { PageShopCollectionService } from '@dehub/angular/graphql';
+import { PageShopCollectionService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
+import { PageHeaderComponent } from '@dehub/angular/ui/components/page-header/page-header.component';
+import { PageSectionsComponent } from '@dehub/angular/ui/components/page-sections/page-sections.component';
 import {
   PageShopFragment,
   SharedEnv,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { publishReplayRefCount } from '@dehub/shared/utils';
+import { LetModule } from '@rx-angular/template/let';
 import { MenuItem } from 'primeng/api';
-import { filter, map, Observable } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [
+    // UI
+    PageHeaderComponent,
+    PageSectionsComponent,
+    // 3rd Party
+    LetModule,
+  ],
   template: `
     <ng-container *rxLet="pageShop$ as pageShop" class="grid">
       <!-- Titles -->
@@ -33,7 +44,6 @@ import { filter, map, Observable } from 'rxjs';
       ></dhb-page-sections>
     </ng-container>
   `,
-  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureShopComponent implements OnInit {

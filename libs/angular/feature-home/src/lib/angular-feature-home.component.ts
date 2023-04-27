@@ -4,16 +4,27 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { PageHomeCollectionService } from '@dehub/angular/graphql';
+import { PageHomeCollectionService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
+import { PageHeaderComponent } from '@dehub/angular/ui/components/page-header/page-header.component';
+import { PageSectionsComponent } from '@dehub/angular/ui/components/page-sections/page-sections.component';
 import {
   PageHomeFragment,
   SharedEnv,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
-import { map, Observable } from 'rxjs';
+import { LetModule } from '@rx-angular/template/let';
+import { Observable, map } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [
+    // UI
+    PageHeaderComponent,
+    PageSectionsComponent,
+    // 3rd Party
+    LetModule,
+  ],
   template: `
     <ng-container *rxLet="pageHome$ as pageHome" class="grid">
       <!-- Titles -->
@@ -30,7 +41,7 @@ import { map, Observable } from 'rxjs';
       ></dhb-page-sections>
     </ng-container>
   `,
-  styles: [``],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureHomeComponent implements OnInit {

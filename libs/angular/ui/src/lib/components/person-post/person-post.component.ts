@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,9 +9,11 @@ import {
 import { PersonPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
 import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
-import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
+
+import { NgFor, NgIf } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 interface SocialLink {
   name: string;
@@ -20,20 +22,19 @@ interface SocialLink {
 }
 
 @Component({
-  standalone: true,
   selector: 'dhb-person-post',
+  standalone: true,
   imports: [
     // Angular
-    CommonModule,
+    NgIf,
+    NgFor,
     NgOptimizedImage,
-
-    // PrimeNg
+    // PrimeNG
     ButtonModule,
-    CardModule,
     TagModule,
-
-    // Libs
-    ContentfulDraftDirectiveModule,
+    CardModule,
+    // UI
+    ContentfulDraftDirective,
   ],
   template: `
     <div [dhbContentfulDraft]="personPost.sys" class="w-full">

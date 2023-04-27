@@ -4,13 +4,28 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BasicPostCollectionBySlugService } from '@dehub/angular/graphql';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { BasicPostCollectionBySlugService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
-import { BasicPostDetailFragment, SharedEnv } from '@dehub/shared/model';
+import {
+  BasicPostDetailFragment,
+  SharedEnv,
+  animationDuration,
+} from '@dehub/shared/model';
+import { PushModule } from '@rx-angular/template/push';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { BasicPostDetailComponent } from './components/basic-post-detail.component';
 @Component({
+  standalone: true,
+  imports: [
+    // Angular
+    RouterLink,
+    // UI
+    BasicPostDetailComponent,
+    // 3rd Party
+    PushModule,
+  ],
   template: `
     <div [@fadeInUp] class="grid">
       <div
@@ -30,7 +45,12 @@ import { map, Observable } from 'rxjs';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
+  animations: [
+    fadeInUpOnEnterAnimation({
+      anchor: 'fadeInUp',
+      duration: animationDuration,
+    }),
+  ],
 })
 export class AngularFeatureNewsDetailComponent implements OnInit {
   basicPostDetail$!: Observable<BasicPostDetailFragment | undefined>;

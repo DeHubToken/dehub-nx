@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,18 +6,18 @@ import {
   OnInit,
 } from '@angular/core';
 import { AssetFragment } from '@dehub/shared/model';
-import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
-  standalone: true,
   selector: 'dhb-heavy-picture',
+  standalone: true,
   imports: [
     // Angular
-    CommonModule,
+    NgIf,
+    NgClass,
     NgOptimizedImage,
-
-    // Libs
-    ContentfulDraftDirectiveModule,
+    // UI
+    ContentfulDraftDirective,
   ],
   template: `
     <span (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">

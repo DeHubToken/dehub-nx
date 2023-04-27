@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,9 +7,19 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 @Component({
   selector: 'dhb-connect-wallet-button',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // PrimeNG
+    SplitButtonModule,
+    ButtonModule,
+  ],
   template: `
     <!-- Logout State -->
     <p-splitButton
@@ -26,7 +37,7 @@ import { MenuItem } from 'primeng/api';
       ></p-button>
     </ng-template>
   `,
-  styles: [],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectWalletButtonComponent implements OnInit {

@@ -7,11 +7,28 @@ import {
 } from '@angular/core';
 import { GrandPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
+import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
-import { YoutubeEmbedComponent } from '../youtube-embed';
+import { HeavyPictureComponent } from '../heavy-picture/heavy-picture.component';
+import { YoutubeEmbedComponent } from '../youtube-embed/youtube-embed.component';
+
+import { NgIf } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
   selector: 'dhb-grand-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // PrimeNG
+    ButtonModule,
+    CardModule,
+    // UI
+    HeavyPictureComponent,
+    ContentfulDraftDirective,
+  ],
   template: `
     <div [dhbContentfulDraft]="grandPost.sys">
       <p-card
