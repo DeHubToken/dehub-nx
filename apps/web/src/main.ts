@@ -70,7 +70,7 @@ bootstrapApplication(AppComponent, {
       routes,
       /**
        * Preload all Lazy modules while the user start navigating the app
-       * Docs :https://angular.io/api/router/ExtraOptions#preloadingStrategy
+       * Docs: https://angular.io/api/router/ExtraOptions#preloadingStrategy
        */
       withPreloading(PreloadAllModules),
       withInMemoryScrolling({

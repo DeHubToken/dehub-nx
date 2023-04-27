@@ -29,7 +29,6 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     ButtonModule,
     HeavyPictureComponent,
     ContentfulDraftDirective,
-    // 3rd Party
   ],
   template: `
     <div [dhbContentfulDraft]="featurePost.sys">
