@@ -119,6 +119,20 @@ export class PageLearnCollectionService extends Apollo.Query<
 @Injectable({
   providedIn: 'root',
 })
+export class PageNewsCollectionService extends Apollo.Query<
+  models.PageNewsCollectionQuery,
+  models.PageNewsCollectionQueryVariables
+> {
+  override document = models.PageNewsCollectionDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: 'root',
+})
 export class PageShopCollectionService extends Apollo.Query<
   models.PageShopCollectionQuery,
   models.PageShopCollectionQueryVariables

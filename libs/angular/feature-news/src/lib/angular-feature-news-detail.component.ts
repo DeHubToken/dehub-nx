@@ -58,7 +58,7 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
 export class AngularFeatureNewsDetailComponent implements OnInit {
   basicPostDetail$!: Observable<BasicPostDetailFragment | undefined>;
 
-  routerLink = [`/${NavigationTabMenu.Home}`];
+  routerLink = [`/${NavigationTabMenu.News}`];
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

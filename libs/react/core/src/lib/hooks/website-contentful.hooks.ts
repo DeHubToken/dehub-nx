@@ -647,6 +647,26 @@ export const PageLearnFragmentDoc = gql`
   ${PageSectionSectionPostsFragmentDoc}
   ${PageSectionPersonPostsFragmentDoc}
 `;
+export const PageNewsFragmentDoc = gql`
+  fragment PageNews on PageNews {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    headerColumnWidth
+    headerAlignCenter
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionBasicPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+`;
 export const ProductCommonFragmentDoc = gql`
   fragment ProductCommon on Product {
     sys {
@@ -1329,6 +1349,67 @@ export type PageLearnCollectionLazyQueryHookResult = ReturnType<
 export type PageLearnCollectionQueryResult = Apollo.QueryResult<
   models.PageLearnCollectionQuery,
   models.PageLearnCollectionQueryVariables
+>;
+export const PageNewsCollectionDocument = gql`
+  query pageNewsCollection($isPreview: Boolean = false) {
+    pageNewsCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageNews
+      }
+    }
+  }
+  ${PageNewsFragmentDoc}
+`;
+
+/**
+ * __usePageNewsCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageNewsCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageNewsCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageNewsCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageNewsCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageNewsCollectionQuery,
+    models.PageNewsCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageNewsCollectionQuery,
+    models.PageNewsCollectionQueryVariables
+  >(PageNewsCollectionDocument, options);
+}
+export function usePageNewsCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageNewsCollectionQuery,
+    models.PageNewsCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageNewsCollectionQuery,
+    models.PageNewsCollectionQueryVariables
+  >(PageNewsCollectionDocument, options);
+}
+export type PageNewsCollectionQueryHookResult = ReturnType<
+  typeof usePageNewsCollectionQuery
+>;
+export type PageNewsCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageNewsCollectionLazyQuery
+>;
+export type PageNewsCollectionQueryResult = Apollo.QueryResult<
+  models.PageNewsCollectionQuery,
+  models.PageNewsCollectionQueryVariables
 >;
 export const PageShopCollectionDocument = gql`
   query pageShopCollection($isPreview: Boolean = false) {

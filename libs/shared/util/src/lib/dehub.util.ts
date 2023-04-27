@@ -10,6 +10,10 @@ export const getTabMenuItems = (
       icon: 'fad fa-home',
     },
     {
+      label: NavigationTabMenu.News,
+      icon: 'fad fa-newspaper',
+    },
+    {
       label: NavigationTabMenu.Stream,
       icon: 'fad fa-tv',
     },

@@ -1,0 +1,7 @@
+query pageNewsCollection($isPreview: Boolean = false) {
+  pageNewsCollection(limit: 2, preview: $isPreview) {
+    items {
+      ...PageNews
+    }
+  }
+}

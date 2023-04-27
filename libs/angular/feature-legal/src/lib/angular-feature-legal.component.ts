@@ -10,6 +10,7 @@ import { EnvToken } from '@dehub/angular/model';
 import { BackButtonComponent } from '@dehub/angular/ui/components/buttons/back-button/back-button.component';
 import {
   LegalPostFragment,
+  NavigationTabMenu,
   SharedEnv,
   animationDuration,
 } from '@dehub/shared/model';
@@ -34,13 +35,13 @@ import { LegalPostComponent } from './components/legal-post.component';
     <div [@fadeInUp] class="grid">
       <div class="col-12 xl:col-8 col-offset-0 xl:col-offset-2">
         <!-- Back (top) -->
-        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
+        <dhb-back-button [routerLink]="routerLink"></dhb-back-button>
 
         <!-- Legal Post -->
         <dhb-legal-post [legalPost]="legalPost$ | push"></dhb-legal-post>
 
         <!-- Back (bottom) -->
-        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
+        <dhb-back-button [routerLink]="routerLink"></dhb-back-button>
       </div>
     </div>
   `,
@@ -54,6 +55,8 @@ import { LegalPostComponent } from './components/legal-post.component';
 })
 export class AngularFeatureLegalComponent implements OnInit {
   legalPost$!: Observable<LegalPostFragment | undefined>;
+
+  routerLink = [`/${NavigationTabMenu.Home}`];
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,

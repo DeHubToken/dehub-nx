@@ -1,0 +1,16 @@
+fragment PageNews on PageNews {
+  sys {
+    ...Sys
+  }
+  mainTitle
+  showTitle
+  subtitle
+  showSubtitle
+  headerColumnWidth
+  headerAlignCenter
+  sectionsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...PageSectionBasicPosts
+    }
+  }
+}
