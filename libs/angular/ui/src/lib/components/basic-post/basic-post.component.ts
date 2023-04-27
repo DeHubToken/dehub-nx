@@ -4,10 +4,27 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { BasicPostFragment } from '@dehub/shared/model';
+import { ButtonModule } from 'primeng/button';
+
+import { NgIf } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
   selector: 'dhb-basic-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    RouterLink,
+    // PrimeNG
+    CardModule,
+    ButtonModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div [dhbContentfulDraft]="basicPost.sys">
       <p-card

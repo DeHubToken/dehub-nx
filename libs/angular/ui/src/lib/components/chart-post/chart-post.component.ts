@@ -6,9 +6,15 @@ import {
 } from '@angular/core';
 import { ChartPostFragment } from '@dehub/shared/model';
 import { ChartData, ChartOptions } from 'chart.js';
+import { ChartModule } from 'primeng/chart';
 
 @Component({
   selector: 'dhb-chart-post',
+  standalone: true,
+  imports: [
+    // PrimeNG
+    ChartModule,
+  ],
   template: `
     <div class="px-5 pt-6 pb-7">
       <p-chart
@@ -19,7 +25,7 @@ import { ChartData, ChartOptions } from 'chart.js';
       ></p-chart>
     </div>
   `,
-  styles: [``],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartPostComponent implements OnInit {

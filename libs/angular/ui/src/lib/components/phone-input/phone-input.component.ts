@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
@@ -14,6 +15,7 @@ import {
   FormGroupDirective,
   NgControl,
   NonNullableFormBuilder,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
@@ -24,10 +26,28 @@ import {
   PhoneNumberFormat,
   PhoneNumberUtil,
 } from 'google-libphonenumber';
+import { InputTextModule } from 'primeng/inputtext';
 import { Observable, distinctUntilChanged, takeWhile, tap } from 'rxjs';
+import { LoadingComponent } from '../loading/loading.component';
+
+import { LetModule } from '@rx-angular/template/let';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'dhb-phone-input',
+  standalone: true,
+  imports: [
+    // Angular
+    ReactiveFormsModule,
+    NgIf,
+    // PrimeNG
+    DropdownModule,
+    InputTextModule,
+    // UI
+    LoadingComponent,
+    // 3rd Party
+    LetModule,
+  ],
   template: `
     <div
       *rxLet="countries$ as countries; suspense: loading"

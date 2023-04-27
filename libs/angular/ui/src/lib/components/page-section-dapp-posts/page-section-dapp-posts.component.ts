@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,9 +11,20 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { DappPostComponent } from '../dapp-post/dapp-post.component';
 
 @Component({
   selector: 'dhb-page-section-dapp-posts',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // UI
+    ContentfulDraftDirective,
+    DappPostComponent,
+  ],
   template: `
     <div
       *ngIf="section"
@@ -39,7 +51,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       </div>
     </div>
   `,
-  styles: [``],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })

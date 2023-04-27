@@ -3,6 +3,7 @@ import { SysFragment } from '@dehub/shared/model';
 
 @Directive({
   selector: '[dhbContentfulDraft]',
+  standalone: true,
 })
 export class ContentfulDraftDirective {
   @Input() dhbContentfulDraft?: SysFragment;

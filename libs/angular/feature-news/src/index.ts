@@ -1,1 +1,3 @@
-export * from './lib/angular-feature-news.module';
+import { routes } from './lib/angular-feature-news.routes';
+
+export default routes;

@@ -1,14 +1,28 @@
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { AddressPipe } from '@dehub/angular/ui/pipes/address/address.pipe';
 import { ShopOrder } from '@dehub/shared/model';
+import { LetModule } from '@rx-angular/template/let';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dhb-product-orders',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    DatePipe,
+    // UI
+    AddressPipe,
+    // 3rd Party
+    LetModule,
+  ],
   template: `
     <ng-container *rxLet="productOrders$ as productOrders">
       <div

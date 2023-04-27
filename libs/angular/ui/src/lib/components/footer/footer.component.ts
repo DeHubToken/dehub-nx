@@ -10,12 +10,13 @@ import { FooterFragment } from '@dehub/shared/model';
 import { resolveButtonStyle } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import { ButtonModule } from 'primeng/button';
-import { ContentfulDraftDirectiveModule } from '../../directives/contentful-draft';
+
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 import { CTAGroupPipe } from './cta-group.pipe';
 
 @Component({
-  standalone: true,
   selector: 'dhb-footer',
+  standalone: true,
   imports: [
     // Angular
     CommonModule,
@@ -24,9 +25,8 @@ import { CTAGroupPipe } from './cta-group.pipe';
     // PrimeNg
     ButtonModule,
 
-    // Libs
-    ContentfulDraftDirectiveModule,
-
+    // UI
+    ContentfulDraftDirective,
     CTAGroupPipe,
   ],
   template: `

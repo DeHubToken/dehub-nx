@@ -1,1 +1,3 @@
-export * from './lib/angular-feature-shop.module';
+import { routes } from './lib/angular-feature-shop.routes';
+
+export default routes;

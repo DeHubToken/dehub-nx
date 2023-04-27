@@ -1,21 +1,45 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
   OnInit,
 } from '@angular/core';
-import { PageStreamCollectionService } from '@dehub/angular/graphql';
+import { PageStreamCollectionService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
+import { PageHeaderComponent } from '@dehub/angular/ui/components/page-header/page-header.component';
+import { PageSectionsComponent } from '@dehub/angular/ui/components/page-sections/page-sections.component';
+import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentful-draft/contentful-draft.directive';
 import {
   PageStreamFragment,
   SharedEnv,
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
+import { ForModule } from '@rx-angular/template/for';
+import { LetModule } from '@rx-angular/template/let';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { map, Observable } from 'rxjs';
+
+import { ButtonModule } from 'primeng/button';
+import { FieldsetModule } from 'primeng/fieldset';
+import { Observable, map } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [
+    // Angular
+    ForModule,
+    NgClass,
+    // PrimeNG
+    FieldsetModule,
+    ButtonModule,
+    // UI
+    PageHeaderComponent,
+    ContentfulDraftDirective,
+    PageSectionsComponent,
+    // 3rd Party
+    LetModule,
+  ],
   template: `
     <ng-container *rxLet="pageStream$ as pageStream" class="grid">
       <!-- Titles -->

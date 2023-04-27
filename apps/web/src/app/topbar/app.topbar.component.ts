@@ -1,18 +1,38 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
   OnInit,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
+
+import { BuyDehubButtonComponent } from '@dehub/angular/ui/components/buttons/buy-dehub-button/buy-dehub-button.component';
+import { ConnectWalletButtonComponent } from '@dehub/angular/ui/components/buttons/connect-wallet-button/connect-wallet-button.component';
 import { getBuyDehubMenuItems, shortenAddress } from '@dehub/shared/utils';
+import { PushModule } from '@rx-angular/template/push';
 import { Observable, map } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
 import { AppMainComponent } from '../app.main.component';
+import { AppMenuComponent } from './menu/app.menu.component';
 
 @Component({
   selector: 'dhb-topbar',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    RouterLink,
+    // 3rd Party
+    PushModule,
+    // UI
+    BuyDehubButtonComponent,
+    ConnectWalletButtonComponent,
+
+    AppMenuComponent,
+  ],
   templateUrl: './app.topbar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

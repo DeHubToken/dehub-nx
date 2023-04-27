@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,6 +8,11 @@ import {
 
 @Component({
   selector: 'dhb-loader',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+  ],
   template: `
     <div class="dhb-loader">
       <table>

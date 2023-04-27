@@ -5,6 +5,7 @@ import { MailingListFormComponent } from './components/mailing-list-form.compone
 
 @Component({
   selector: 'dhb-mailing-modal',
+  standalone: true,
   template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

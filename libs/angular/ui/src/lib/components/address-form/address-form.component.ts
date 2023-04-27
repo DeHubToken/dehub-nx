@@ -17,215 +17,46 @@ import {
   FormGroupDirective,
   NgControl,
   NonNullableFormBuilder,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
 import { Country, PhysicalAddress, SharedEnv } from '@dehub/shared/model';
+import { PushModule } from '@rx-angular/template/push';
+import { ButtonModule } from 'primeng/button';
 import {
   BehaviorSubject,
+  Observable,
+  Subscription,
   distinctUntilChanged,
   identity,
-  Observable,
   startWith,
-  Subscription,
 } from 'rxjs';
+
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { LetModule } from '@rx-angular/template/let';
+import { DropdownModule } from 'primeng/dropdown';
+import { FieldsetModule } from 'primeng/fieldset';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'dhb-address-form',
-  template: `
-    <p-fieldset
-      [legend]="shippingAddressLabel()"
-      [toggleable]="true"
-      [collapsed]="collapsed$ | push"
-      (onBeforeToggle)="$event.originalEvent.stopImmediatePropagation()"
-      (onAfterToggle)="collapsedSubject.next($event.collapsed)"
-      [styleClass]="'text-sm mb-4'"
-      [classList]="'bg-gradient-3-propagate'"
-    >
-      <ng-container *ngTemplateOutlet="formFields"></ng-container>
-    </p-fieldset>
-
-    <ng-template #formFields>
-      <form [formGroup]="shippingAddressForm" class="p-fluid grid pt-2">
-        <!-- Name -->
-        <div class="field col-12">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">
-              <i class="fa-duotone fa-user-crown"></i>
-            </span>
-            <span class="p-float-label">
-              <input
-                [formControlName]="'name'"
-                type="text"
-                id="name"
-                autocomplete="name"
-                pInputText
-              />
-              <label for="name" class="pr-5">Name</label>
-            </span>
-          </div>
-        </div>
-
-        <!-- Line1 -->
-        <div class="field col-12 sm:col-6">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">
-              <i class="fa-duotone fa-map-location-dot"></i>
-            </span>
-            <span class="p-float-label">
-              <input
-                [formControlName]="'line1'"
-                type="text"
-                id="address-line1"
-                autocomplete="address-line1"
-                pInputText
-              />
-              <label for="address-line1" class="pr-5">Address</label>
-            </span>
-          </div>
-        </div>
-
-        <!-- Line2 -->
-        <div class="field col-12 sm:col-6">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">
-              <i class="fa-duotone fa-map-location-dot"></i>
-            </span>
-            <span class="p-float-label">
-              <input
-                [formControlName]="'line2'"
-                type="text"
-                id="address-line2"
-                autocomplete="address-line2"
-                pInputText
-              />
-              <label for="address-line2" class="pr-5">
-                Apt., suite, etc. (optional)
-              </label>
-            </span>
-          </div>
-        </div>
-
-        <!-- City -->
-        <div class="field col-12 sm:col-6">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">
-              <i class="fa-duotone fa-city"></i>
-            </span>
-            <span class="p-float-label">
-              <input
-                [formControlName]="'city'"
-                type="text"
-                id="city"
-                autocomplete="address-level2"
-                pInputText
-              />
-              <label for="city" class="pr-5">City</label>
-            </span>
-          </div>
-        </div>
-
-        <!-- Country -->
-        <div class="field col-12 sm:col-6">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">
-              <i class="fa-duotone fa-earth-europe"></i>
-            </span>
-            <span class="p-float-label">
-              <p-dropdown
-                *rxLet="countries$ as countries"
-                id="country-select"
-                [formControlName]="'country'"
-                [inputId]="'country'"
-                [options]="countries"
-                [filter]="true"
-                [filterBy]="'name'"
-                [optionLabel]="'name'"
-                [optionValue]="'code'"
-                [required]="true"
-                [autoDisplayFirst]="false"
-                [styleClass]="'flex w-full border-noround-left'"
-              >
-                <ng-template pTemplate="selectedItem">
-                  <div class="country-item country-item-value">
-                    <div>
-                      {{
-                        findCountry(
-                          countries,
-                          shippingAddressForm.controls.country.value
-                        )?.name
-                      }}
-                    </div>
-                  </div>
-                </ng-template>
-                <ng-template let-country pTemplate="item">
-                  <div class="country-item">
-                    <div>{{ country.name }}</div>
-                  </div>
-                </ng-template>
-              </p-dropdown>
-              <label for="country" class="pr-5">Country</label>
-            </span>
-          </div>
-        </div>
-
-        <!-- Postal code -->
-        <div class="field col-12 sm:col-6">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">
-              <i class="fa-duotone fa-mailbox"></i>
-            </span>
-            <span class="p-float-label">
-              <input
-                [formControlName]="'postalCode'"
-                type="text"
-                id="postalCode"
-                autocomplete="postal-code"
-                pInputText
-              />
-              <label for="postalCode" class="pr-5">ZIP Code</label>
-            </span>
-          </div>
-        </div>
-
-        <!-- State -->
-        <div class="field col-12 sm:col-6">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">
-              <i class="fa-duotone fa-flag"></i>
-            </span>
-            <span class="p-float-label">
-              <input
-                [formControlName]="'state'"
-                type="text"
-                id="state"
-                autocomplete="address-level1"
-                pInputText
-              />
-              <label for="state" class="pr-5">
-                State, county, province, etc.
-              </label>
-            </span>
-          </div>
-        </div>
-
-        <!-- Clear Address -->
-        <div
-          *ngIf="
-            (shippingAddressForm.invalid && shippingAddressForm.dirty) ||
-            shippingAddressForm.valid
-          "
-          class="col-3 col-offset-9 text-right"
-        >
-          <p-button
-            (onClick)="clearAddress()"
-            icon="fa-regular fa-trash-xmark"
-            styleClass="p-button-secondary p-button"
-          ></p-button>
-        </div>
-      </form>
-    </ng-template>
-  `,
+  standalone: true,
+  imports: [
+    // Angular
+    NgTemplateOutlet,
+    ReactiveFormsModule,
+    NgIf,
+    // PrimeNG
+    FieldsetModule,
+    InputTextModule,
+    DropdownModule,
+    ButtonModule,
+    // 3rd Party
+    LetModule,
+    PushModule,
+  ],
+  templateUrl: './address-form.component.html',
   styles: [
     `
       /* Issue ref: https://github.com/primefaces/primeng/issues/9741 */

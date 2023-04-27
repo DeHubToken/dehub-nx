@@ -1,13 +1,28 @@
+import { NgClass, NgFor, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'dhb-tab-menu',
+  standalone: true,
+  imports: [
+    // Angular
+    NgFor,
+    NgClass,
+    NgStyle,
+    RouterLink,
+    // PrimeNG
+    ButtonModule,
+    RippleModule,
+  ],
   template: `
     <div class="dhb-tab-menu">
       <div class="dhb-tab-menu-wrapper">

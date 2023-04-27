@@ -7,9 +7,24 @@ import {
 } from '@angular/core';
 import { DappPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
+import { ButtonModule } from 'primeng/button';
+
+import { NgIf } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
   selector: 'dhb-dapp-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    // PrimeNG
+    ButtonModule,
+    CardModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div [dhbContentfulDraft]="dappPost.sys">
       <p-card

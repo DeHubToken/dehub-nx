@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,9 +17,25 @@ import {
   fadeInUpOnEnterAnimation,
 } from 'angular-animations';
 import { MenuItem } from 'primeng/api';
+import { SwiperModule } from 'swiper/angular';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { ProductComponent } from '../product/product.component';
+import { TabMenuComponent } from '../tab-menu/tab-menu.component';
 
 @Component({
   selector: 'dhb-page-section-products',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // UI
+    TabMenuComponent,
+    ContentfulDraftDirective,
+    ProductComponent,
+    // 3rd Party
+    SwiperModule,
+  ],
   template: `
     <div
       *ngIf="section"

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { ProductCollectionBySlugService } from '@dehub/angular/graphql';
+import { ProductCollectionBySlugService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
 import { ProductDetailFragment, SharedEnv } from '@dehub/shared/model';
 

@@ -1,3 +1,4 @@
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,13 +6,28 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CallToActionFragment } from '@dehub/shared/model';
 import { resolveButtonStyle, resolveColumnWidth } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { ButtonModule } from 'primeng/button';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 @Component({
   selector: 'dhb-page-header',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgClass,
+    RouterLink,
+    NgFor,
+    // PrimeNG
+    ButtonModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div
       *ngIf="page"
@@ -47,7 +63,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
       </div>
     </div>
   `,
-  styles: [``],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })

@@ -60,9 +60,6 @@ Angular libs which can be consumed only from Angular apps like ui libs or core s
 
 - Theme switcher
 - GraphQL module with generated services
-
-### `moralis`
-
 - Angular Moralis wrapper _(candidate for [MoralisWeb3 opensource lib](https://github.com/MoralisWeb3/angular-moralis))_
 - Crypto Login, Logout, etc.
 
@@ -92,6 +89,10 @@ Framework independent libs which can be consumed from any Angular or React apps 
 
 _Shared environment variables across react and angular apps_
 
+### `graphql`
+
+_GraphQL queries like Contentful (use [graphql codegen](https://www.graphql-code-generator.com/))_
+
 ### `models`
 
 _Common Models, states used in react and angular apps_
@@ -105,10 +106,6 @@ _Common Utils used in react and angular apps_
 ### `moralis`
 
 _Common Moralis logic like authentication, walletconnect, etc_
-
-### `graphql`
-
-_GraphQL queries like Contentful (use [graphql codegen](https://www.graphql-code-generator.com/))_
 
 ### `assets/dehub`
 

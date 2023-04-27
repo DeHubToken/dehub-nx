@@ -1,7 +1,14 @@
+import { NgFor, NgStyle } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'dhb-wallet-button',
+  standalone: true,
+  imports: [
+    // Angular
+    NgFor,
+    NgStyle,
+  ],
   template: `
     <button class="p-button flex justify-content-between text-500">
       <!-- Label -->

@@ -7,8 +7,22 @@ import {
 import { FaqGroupFragment, FaqItemFragment } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 
+import { NgFor, NgIf } from '@angular/common';
+import { AccordionModule } from 'primeng/accordion';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+
 @Component({
   selector: 'dhb-faq-group',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // PrimeNG
+    AccordionModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div
       *ngIf="faqGroup"
@@ -40,7 +54,6 @@ import { isNotNil } from '@dehub/shared/utils';
       </p-accordion>
     </div>
   `,
-  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FaqGroupComponent implements OnInit {

@@ -7,6 +7,12 @@ import {
 } from '@angular/core';
 import { PersonPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
+
+import { NgFor, NgIf } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
 interface SocialLink {
   name: string;
@@ -16,6 +22,18 @@ interface SocialLink {
 
 @Component({
   selector: 'dhb-person-post',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // PrimeNG
+    ButtonModule,
+    TagModule,
+    CardModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
   template: `
     <div [dhbContentfulDraft]="personPost.sys" class="w-full">
       <p-card

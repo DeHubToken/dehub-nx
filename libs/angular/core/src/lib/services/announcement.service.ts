@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
-import { AnnouncementCollectionService } from '@dehub/angular/graphql';
 import { EnvToken } from '@dehub/angular/model';
-import { AnnouncementComponent } from '@dehub/angular/ui/components/announcement';
+import { AnnouncementComponent } from '@dehub/angular/ui/components/announcement/announcement.component';
 import { AnnouncementFragment, SharedEnv } from '@dehub/shared/model';
 import { DialogService } from 'primeng/dynamicdialog';
 import { filter, map, takeWhile } from 'rxjs';
+import { AnnouncementCollectionService } from './website-contentful.service';
 @Injectable({ providedIn: 'root' })
 export class AnnouncementService {
   private isAlive = true;

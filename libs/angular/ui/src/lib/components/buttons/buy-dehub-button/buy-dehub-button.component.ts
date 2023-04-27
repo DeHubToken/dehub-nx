@@ -6,13 +6,12 @@ import { MenuItem } from 'primeng/api';
 import { SplitButtonModule } from 'primeng/splitbutton';
 
 @Component({
-  standalone: true,
   selector: 'dhb-buy-dehub-button',
+  standalone: true,
   imports: [
     // Angular
     NgIf,
     RouterModule,
-
     // PrimeNg
     SplitButtonModule,
   ],

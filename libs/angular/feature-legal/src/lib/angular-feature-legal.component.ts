@@ -4,15 +4,32 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LegalPostCollectionBySlugService } from '@dehub/angular/graphql';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { LegalPostCollectionBySlugService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
-import { LegalPostFragment, SharedEnv } from '@dehub/shared/model';
+import { BackButtonComponent } from '@dehub/angular/ui/components/buttons/back-button/back-button.component';
+import {
+  LegalPostFragment,
+  SharedEnv,
+  animationDuration,
+} from '@dehub/shared/model';
 import { filterNil } from '@dehub/shared/utils';
+import { PushModule } from '@rx-angular/template/push';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { map, Observable, switchMap } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
+import { LegalPostComponent } from './components/legal-post.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    // Angular
+    RouterLink,
+    // UI
+    BackButtonComponent,
+    LegalPostComponent,
+    // 3rd Party
+    PushModule,
+  ],
   template: `
     <div [@fadeInUp] class="grid">
       <div class="col-12 xl:col-8 col-offset-0 xl:col-offset-2">
@@ -28,7 +45,12 @@ import { map, Observable, switchMap } from 'rxjs';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp', duration: 300 })],
+  animations: [
+    fadeInUpOnEnterAnimation({
+      anchor: 'fadeInUp',
+      duration: animationDuration,
+    }),
+  ],
 })
 export class AngularFeatureLegalComponent implements OnInit {
   legalPost$!: Observable<LegalPostFragment | undefined>;

@@ -40,7 +40,7 @@ generates:
   ##############################################################################################
   # Angular GraphQL Services
   ##############################################################################################
-  libs/angular/graphql/src/lib/services/website-contentful.service.ts:
+  libs/angular/core/src/lib/services/website-contentful.service.ts:
     plugins:
       - add:
           content:
@@ -54,7 +54,6 @@ generates:
       importOperationTypesFrom: 'models'
       documentMode: external
       importDocumentNodeExternallyFrom: '@dehub/shared/model'
-      ngModule: ../angular-graphql.module#AngularGraphQLModule
       querySuffix: 'Service'
 
   ##############################################################################################

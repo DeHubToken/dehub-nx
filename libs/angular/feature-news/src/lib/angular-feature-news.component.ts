@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  template: `news`,
+  template: ``,
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AngularFeatureNewsComponent implements OnInit {
