@@ -16,7 +16,6 @@ import { AppTopBarComponent } from './topbar/app.topbar.component';
 import { MenuService } from './topbar/menu/app.menu.service';
 
 @Component({
-  templateUrl: './app.main.component.html',
   standalone: true,
   imports: [
     // Angular
@@ -29,6 +28,7 @@ import { MenuService } from './topbar/menu/app.menu.service';
 
     AppTopBarComponent,
   ],
+  templateUrl: './app.main.component.html',
 })
 export class AppMainComponent implements OnInit, OnDestroy {
   sidebarStatic?: boolean;
