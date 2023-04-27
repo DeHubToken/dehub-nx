@@ -6,8 +6,9 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DehubMoralisToken, IDehubMoralisService } from '@dehub/angular/model';
-import { BackButtonComponent } from '@dehub/angular/ui/components/buttons/back-button/back-button.component';
+import { BackAwareComponent } from '@dehub/angular/ui/components/back-aware/back-aware.component';
 import {
+  NavigationTabMenu,
   OrderStatus,
   ProductDetailFragment,
   ShopOrder,
@@ -24,7 +25,7 @@ import { ProductDetailService } from './services';
     // Angular
     RouterLink,
     // UI
-    BackButtonComponent,
+    BackAwareComponent,
     ProductDetailComponent,
   ],
   template: `
@@ -32,17 +33,13 @@ import { ProductDetailService } from './services';
       <div
         class="col-12 lg:col-12 xl:col-8 col-offset-0 lg:col-offset-0 xl:col-offset-2"
       >
-        <!-- Back (top) -->
-        <dhb-back-button [routerLink]="['/shop']"></dhb-back-button>
-
-        <!-- Product Detail -->
-        <dhb-product-detail
-          [productDetail$]="productDetail$"
-          [productOrders$]="productOrders$"
-        ></dhb-product-detail>
-
-        <!-- Back (bottom) -->
-        <dhb-back-button [routerLink]="['/shop']"></dhb-back-button>
+        <dhb-back-aware [backRouterLink]="routerLink">
+          <!-- Product Detail -->
+          <dhb-product-detail
+            [productDetail$]="productDetail$"
+            [productOrders$]="productOrders$"
+          ></dhb-product-detail>
+        </dhb-back-aware>
       </div>
     </div>
   `,
@@ -57,6 +54,8 @@ import { ProductDetailService } from './services';
 export class AngularFeatureShopProductDetailComponent implements OnInit {
   productDetail$?: Observable<ProductDetailFragment>;
   productOrders$?: Observable<ShopOrder[]>;
+
+  routerLink = [`/${NavigationTabMenu.Shop}`];
 
   constructor(
     private route: ActivatedRoute,

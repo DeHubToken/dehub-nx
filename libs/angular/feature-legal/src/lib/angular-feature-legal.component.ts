@@ -7,9 +7,10 @@ import {
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LegalPostCollectionBySlugService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
-import { BackButtonComponent } from '@dehub/angular/ui/components/buttons/back-button/back-button.component';
+import { BackAwareComponent } from '@dehub/angular/ui/components/back-aware/back-aware.component';
 import {
   LegalPostFragment,
+  NavigationTabMenu,
   SharedEnv,
   animationDuration,
 } from '@dehub/shared/model';
@@ -25,7 +26,7 @@ import { LegalPostComponent } from './components/legal-post.component';
     // Angular
     RouterLink,
     // UI
-    BackButtonComponent,
+    BackAwareComponent,
     LegalPostComponent,
     // 3rd Party
     PushModule,
@@ -33,14 +34,10 @@ import { LegalPostComponent } from './components/legal-post.component';
   template: `
     <div [@fadeInUp] class="grid">
       <div class="col-12 xl:col-8 col-offset-0 xl:col-offset-2">
-        <!-- Back (top) -->
-        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
-
-        <!-- Legal Post -->
-        <dhb-legal-post [legalPost]="legalPost$ | push"></dhb-legal-post>
-
-        <!-- Back (bottom) -->
-        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
+        <dhb-back-aware [backRouterLink]="routerLink">
+          <!-- Legal Post -->
+          <dhb-legal-post [legalPost]="legalPost$ | push"></dhb-legal-post>
+        </dhb-back-aware>
       </div>
     </div>
   `,
@@ -54,6 +51,8 @@ import { LegalPostComponent } from './components/legal-post.component';
 })
 export class AngularFeatureLegalComponent implements OnInit {
   legalPost$!: Observable<LegalPostFragment | undefined>;
+
+  routerLink = [`/${NavigationTabMenu.Home}`];
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
