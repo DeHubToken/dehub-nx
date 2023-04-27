@@ -23,19 +23,19 @@ import { filterNil } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
 import { MenuItem } from 'primeng/api';
 import { Observable, map } from 'rxjs';
-import { PageSectionBasicPostsComponent } from '../page-section-basic-posts/page-section-basic-posts.component';
-import { PageSectionDappPostsComponent } from '../page-section-dapp-posts/page-section-dapp-posts.component';
-import { PageSectionFaQsComponent } from '../page-section-faqs/page-section-faqs.component';
-import { PageSectionFeaturePostsComponent } from '../page-section-feature-posts/page-section-feature-posts.component';
-import { PageSectionGrandPostsSwiperComponent } from '../page-section-grand-posts-swiper/page-section-grand-posts-swiper.component';
-import { PageSectionGrandPostsComponent } from '../page-section-grand-posts/page-section-grand-posts.component';
-import { PageSectionIconTilesSwiperComponent } from '../page-section-icon-tiles-swiper/page-section-icon-tiles-swiper.component';
-import { PageSectionIconTilesComponent } from '../page-section-icon-tiles/page-section-icon-tiles.component';
-import { PageSectionPersonPostsSwiperComponent } from '../page-section-person-posts-swiper/page-section-person-posts-swiper.component';
-import { PageSectionPersonPostsComponent } from '../page-section-person-posts/page-section-person-posts.component';
-import { PageSectionProductsComponent } from '../page-section-products/page-section-products.component';
-import { PageSectionSectionPostsComponent } from '../page-section-section-posts/page-section-section-posts.component';
-import { PageSectionThumbnailPostsComponent } from '../page-section-thumbnail-posts/page-section-thumbnail-posts.component';
+import { PageSectionBasicPostsComponent } from '../page-section/page-section-basic-posts/page-section-basic-posts.component';
+import { PageSectionDappPostsComponent } from '../page-section/page-section-dapp-posts/page-section-dapp-posts.component';
+import { PageSectionFaQsComponent } from '../page-section/page-section-faqs/page-section-faqs.component';
+import { PageSectionFeaturePostsComponent } from '../page-section/page-section-feature-posts/page-section-feature-posts.component';
+import { PageSectionGrandPostsSwiperComponent } from '../page-section/page-section-grand-posts-swiper/page-section-grand-posts-swiper.component';
+import { PageSectionGrandPostsComponent } from '../page-section/page-section-grand-posts/page-section-grand-posts.component';
+import { PageSectionIconTilesSwiperComponent } from '../page-section/page-section-icon-tiles-swiper/page-section-icon-tiles-swiper.component';
+import { PageSectionIconTilesComponent } from '../page-section/page-section-icon-tiles/page-section-icon-tiles.component';
+import { PageSectionPersonPostsSwiperComponent } from '../page-section/page-section-person-posts-swiper/page-section-person-posts-swiper.component';
+import { PageSectionPersonPostsComponent } from '../page-section/page-section-person-posts/page-section-person-posts.component';
+import { PageSectionProductsComponent } from '../page-section/page-section-products/page-section-products.component';
+import { PageSectionSectionPostsComponent } from '../page-section/page-section-section-posts/page-section-section-posts.component';
+import { PageSectionThumbnailPostsComponent } from '../page-section/page-section-thumbnail-posts/page-section-thumbnail-posts.component';
 
 type PageSection =
   | PageSectionFeaturePostsFragment
