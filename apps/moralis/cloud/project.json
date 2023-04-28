@@ -64,7 +64,7 @@
     "deploy-preview-draft": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["pnpm nx run moralis-cloud:deploy-preview"]
+        "command": "npx nx run moralis-cloud:deploy-preview"
       }
     },
     "deploy-preview": {
