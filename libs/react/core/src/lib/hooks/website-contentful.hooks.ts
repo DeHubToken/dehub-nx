@@ -64,12 +64,32 @@ export const CallToActionFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const AssetFragmentDoc = gql`
+  fragment Asset on Asset {
+    sys {
+      ...Sys
+    }
+    title
+    fileName
+    description
+    contentType
+    width
+    height
+    url
+    webpUrl: url(transform: { format: WEBP })
+    avifUrl: url(transform: { format: AVIF })
+  }
+  ${SysFragmentDoc}
+`;
 export const FooterFragmentDoc = gql`
   fragment Footer on Footer {
     sys {
       ...Sys
     }
     copyright
+    address {
+      json
+    }
     linksCollection(limit: 20, preview: $isPreview) {
       items {
         ...CallToAction
@@ -80,9 +100,16 @@ export const FooterFragmentDoc = gql`
         ...CallToAction
       }
     }
+    awardsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...Asset
+        webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
+      }
+    }
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
+  ${AssetFragmentDoc}
 `;
 export const LegalPostFragmentDoc = gql`
   fragment LegalPost on LegalPost {
