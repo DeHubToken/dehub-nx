@@ -64,14 +64,14 @@
     "deploy-preview-draft": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["pnpm nx run moralis-cloud:deploy-preview"]
+        "commands": ["npx nx run moralis-cloud:deploy-preview"]
       }
     },
     "deploy-preview": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud.preview"
+          "NODE_OPTIONS=--openssl-legacy-provider cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud.preview"
         ],
         "readyWhen": "Changes Uploaded Correctly",
         "parallel": true
@@ -87,7 +87,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud.prod"
+          "NODE_OPTIONS=--openssl-legacy-provider cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud.prod"
         ],
         "readyWhen": "Changes Uploaded Correctly",
         "parallel": true

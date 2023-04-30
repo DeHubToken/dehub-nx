@@ -3125,154 +3125,6 @@ export type PageLearnSectionsItem =
   | PageSectionSectionPosts
   | PageSectionThumbnailPosts;
 
-/** News page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageNews) */
-export interface PageNews extends Entry {
-  __typename?: 'PageNews';
-  contentfulMetadata: ContentfulMetadata;
-  headerAlignCenter?: Maybe<Scalars['Boolean']>;
-  headerColumnWidth?: Maybe<Scalars['String']>;
-  linkedFrom?: Maybe<PageNewsLinkingCollections>;
-  mainTitle?: Maybe<Scalars['String']>;
-  sectionsCollection?: Maybe<PageNewsSectionsCollection>;
-  showSubtitle?: Maybe<Scalars['Boolean']>;
-  showTitle?: Maybe<Scalars['Boolean']>;
-  subtitle?: Maybe<Scalars['String']>;
-  sys: Sys;
-}
-
-/** News page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageNews) */
-export interface PageNewsHeaderAlignCenterArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** News page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageNews) */
-export interface PageNewsHeaderColumnWidthArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** News page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageNews) */
-export interface PageNewsLinkedFromArgs {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-/** News page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageNews) */
-export interface PageNewsMainTitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** News page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageNews) */
-export interface PageNewsSectionsCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-/** News page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageNews) */
-export interface PageNewsShowSubtitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** News page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageNews) */
-export interface PageNewsShowTitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** News page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageNews) */
-export interface PageNewsSubtitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-export interface PageNewsCollection {
-  __typename?: 'PageNewsCollection';
-  items: Array<Maybe<PageNews>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export interface PageNewsFilter {
-  AND?: InputMaybe<Array<InputMaybe<PageNewsFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<PageNewsFilter>>>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  headerAlignCenter?: InputMaybe<Scalars['Boolean']>;
-  headerAlignCenter_exists?: InputMaybe<Scalars['Boolean']>;
-  headerAlignCenter_not?: InputMaybe<Scalars['Boolean']>;
-  headerColumnWidth?: InputMaybe<Scalars['String']>;
-  headerColumnWidth_contains?: InputMaybe<Scalars['String']>;
-  headerColumnWidth_exists?: InputMaybe<Scalars['Boolean']>;
-  headerColumnWidth_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  headerColumnWidth_not?: InputMaybe<Scalars['String']>;
-  headerColumnWidth_not_contains?: InputMaybe<Scalars['String']>;
-  headerColumnWidth_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  mainTitle?: InputMaybe<Scalars['String']>;
-  mainTitle_contains?: InputMaybe<Scalars['String']>;
-  mainTitle_exists?: InputMaybe<Scalars['Boolean']>;
-  mainTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  mainTitle_not?: InputMaybe<Scalars['String']>;
-  mainTitle_not_contains?: InputMaybe<Scalars['String']>;
-  mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sections?: InputMaybe<CfPageSectionBasicPostsNestedFilter>;
-  sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
-  showSubtitle?: InputMaybe<Scalars['Boolean']>;
-  showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
-  showSubtitle_not?: InputMaybe<Scalars['Boolean']>;
-  showTitle?: InputMaybe<Scalars['Boolean']>;
-  showTitle_exists?: InputMaybe<Scalars['Boolean']>;
-  showTitle_not?: InputMaybe<Scalars['Boolean']>;
-  subtitle?: InputMaybe<Scalars['String']>;
-  subtitle_contains?: InputMaybe<Scalars['String']>;
-  subtitle_exists?: InputMaybe<Scalars['Boolean']>;
-  subtitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  subtitle_not?: InputMaybe<Scalars['String']>;
-  subtitle_not_contains?: InputMaybe<Scalars['String']>;
-  subtitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-}
-
-export interface PageNewsLinkingCollections {
-  __typename?: 'PageNewsLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-}
-
-export interface PageNewsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export enum PageNewsOrder {
-  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
-  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
-  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
-  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
-  MainTitleAsc = 'mainTitle_ASC',
-  MainTitleDesc = 'mainTitle_DESC',
-  ShowSubtitleAsc = 'showSubtitle_ASC',
-  ShowSubtitleDesc = 'showSubtitle_DESC',
-  ShowTitleAsc = 'showTitle_ASC',
-  ShowTitleDesc = 'showTitle_DESC',
-  SubtitleAsc = 'subtitle_ASC',
-  SubtitleDesc = 'subtitle_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-}
-
-export interface PageNewsSectionsCollection {
-  __typename?: 'PageNewsSectionsCollection';
-  items: Array<Maybe<PageSectionBasicPosts>>;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
 /** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
 export interface PageSectionBasicPosts extends Entry {
   __typename?: 'PageSectionBasicPosts';
@@ -3369,7 +3221,6 @@ export interface PageSectionBasicPostsLinkingCollections {
   pageGameCollection?: Maybe<PageGameCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
-  pageNewsCollection?: Maybe<PageNewsCollection>;
   pageShopCollection?: Maybe<PageShopCollection>;
   pageStreamCollection?: Maybe<PageStreamCollection>;
 }
@@ -3403,13 +3254,6 @@ export interface PageSectionBasicPostsLinkingCollectionsPageHomeCollectionArgs {
 }
 
 export interface PageSectionBasicPostsLinkingCollectionsPageLearnCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface PageSectionBasicPostsLinkingCollectionsPageNewsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -5721,8 +5565,6 @@ export interface Query {
   pageHomeCollection?: Maybe<PageHomeCollection>;
   pageLearn?: Maybe<PageLearn>;
   pageLearnCollection?: Maybe<PageLearnCollection>;
-  pageNews?: Maybe<PageNews>;
-  pageNewsCollection?: Maybe<PageNewsCollection>;
   pageSectionBasicPosts?: Maybe<PageSectionBasicPosts>;
   pageSectionBasicPostsCollection?: Maybe<PageSectionBasicPostsCollection>;
   pageSectionDappPosts?: Maybe<PageSectionDappPosts>;
@@ -6068,21 +5910,6 @@ export interface QueryPageLearnCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<PageLearnFilter>;
-}
-
-export interface QueryPageNewsArgs {
-  id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-}
-
-export interface QueryPageNewsCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<Array<InputMaybe<PageNewsOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageNewsFilter>;
 }
 
 export interface QueryPageSectionBasicPostsArgs {
@@ -7222,30 +7049,6 @@ export interface CfIconTileNestedFilter {
   icon_not?: InputMaybe<Scalars['String']>;
   icon_not_contains?: InputMaybe<Scalars['String']>;
   icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']>;
-  title_contains?: InputMaybe<Scalars['String']>;
-  title_exists?: InputMaybe<Scalars['Boolean']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title_not?: InputMaybe<Scalars['String']>;
-  title_not_contains?: InputMaybe<Scalars['String']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-export interface CfPageSectionBasicPostsNestedFilter {
-  AND?: InputMaybe<Array<InputMaybe<CfPageSectionBasicPostsNestedFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<CfPageSectionBasicPostsNestedFilter>>>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  description?: InputMaybe<Scalars['String']>;
-  description_contains?: InputMaybe<Scalars['String']>;
-  description_exists?: InputMaybe<Scalars['Boolean']>;
-  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  description_not?: InputMaybe<Scalars['String']>;
-  description_not_contains?: InputMaybe<Scalars['String']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  handpickedPostsCollection_exists?: InputMaybe<Scalars['Boolean']>;
-  postsByCategory_exists?: InputMaybe<Scalars['Boolean']>;
-  swiperResponsiveOptions_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
