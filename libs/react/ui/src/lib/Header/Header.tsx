@@ -1,6 +1,5 @@
 import { memo, ReactElement } from 'react';
-import Logo from './Logo';
-import { LogoTypes } from './types';
+import Logo, { LogoTypes } from './Logo';
 
 export interface HeaderProps {
   userMenu?: ReactElement;

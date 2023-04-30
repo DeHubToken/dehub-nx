@@ -3,6 +3,7 @@ import {
   Header,
   Loader,
   LoaderProps,
+  LogoTypes,
   PageMeta,
   TabMenu,
 } from '@dehub/react/ui';
@@ -54,6 +55,12 @@ const withLayout =
     } = useWeb3Context();
 
     const { footer } = useContentfulContext();
+
+    const logo: LogoTypes = {
+      href: 'https://dehub.net',
+      icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,
+      alt: 'DeHub logo',
+    };
 
     /*
      * Hack to avoid trustwallet redirecting to a open in app website on iOS...
@@ -126,11 +133,7 @@ const withLayout =
                 downloadMetamaskUrl={downloadMetamaskUrl}
               />
             }
-            logo={{
-              href: 'https://dehub.net',
-              icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,
-              alt: 'DeHub logo',
-            }}
+            logo={logo}
           />
           <div className="layout-content py-0">
             <TabMenu activeTab={activeTab} landing={landing} />
@@ -141,7 +144,7 @@ const withLayout =
               <Component {...(props as P)} />
             </div>
           </div>
-          <Footer footer={footer} landing={landing} />
+          <Footer footer={footer} landing={landing} logo={logo} />
         </div>
       </div>
     );

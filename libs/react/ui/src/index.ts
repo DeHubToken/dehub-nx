@@ -1,7 +1,7 @@
 export { default as BalanceInput } from './lib/BalanceInput';
 export * from './lib/Button';
 export { default as Footer } from './lib/Footer';
-export { default as Header } from './lib/Header';
+export { default as Header, LogoTypes } from './lib/Header';
 export * from './lib/Layout';
 export * from './lib/Loader';
 export { default as FullScreenLoader } from './lib/Loader/FullScreenLoader';

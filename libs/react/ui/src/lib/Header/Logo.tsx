@@ -1,9 +1,15 @@
 import { memo } from 'react';
-import { LogoTypes } from './types';
 
 interface LogoProps {
   logo: LogoTypes;
 }
+
+export type LogoTypes = {
+  label?: string;
+  href: string;
+  icon?: string;
+  alt?: string;
+};
 
 const Logo = ({ logo }: LogoProps) => {
   return (
