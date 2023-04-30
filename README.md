@@ -29,7 +29,7 @@ We recommend [VSCode](https://code.visualstudio.com/) as an editor. _(monorepo i
    ```
 1. Run **Dev mode**: `pnpm <APP>:start`
 1. Run **Prod mode**: `pnpm <APP>:demo` _(serve prod version locally)_
-1. Run **CI**: `pnpm ci` _(lint, test, build from affected apps)_
+1. Run **CI**: `pnpm run ci` _(lint, test, build from affected apps)_
 1. Deploy as **prod-draft**: `pnpm deploy:prod-draft`
 1. Deploy to **prod**: `pnpm deploy:prod`
 1. We follow [commitlint](https://github.com/merkle-open/frontend-defaults/blob/master/repo/commitlint-conventional-changelog/index.js) guide, so please use these scopes:
@@ -40,8 +40,8 @@ We recommend [VSCode](https://code.visualstudio.com/) as an editor. _(monorepo i
 
 1. **Pick an issue/feature/tech debt** among [github issues](https://github.com/DeHubToken/dehub-nx/issues)
 1. **Create a new branch** from `main` in the following pattern: `{ISSUE_ID}-{NAME}` e.g. `attila-365`
-1. **Implement the task** as you like with commits _(check `pnpm ci` frequently)_
-1. Before Pull Request (PR) ensure that `pnpm ci` run without any issue _(otherwise CI will fail)_
+1. **Implement the task** as you like with commits _(check `pnpm run ci` frequently)_
+1. Before Pull Request (PR) ensure that `pnpm run ci` run without any issue _(otherwise CI will fail)_
 1. **Create a PR** / Pull request draft to request a review
 1. **In PR include a summary** of your changes, but at least reference the github issue e.g. #356 so after merge the issue will be auto-closed
 1. Ensure **[Github Actions](https://github.com/DeHubToken/dehub-nx/actions) remains green**
