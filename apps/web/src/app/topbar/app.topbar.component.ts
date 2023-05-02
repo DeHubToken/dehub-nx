@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,7 +12,7 @@ import { BuyDehubButtonComponent } from '@dehub/angular/ui/components/buttons/bu
 import { ConnectWalletButtonComponent } from '@dehub/angular/ui/components/buttons/connect-wallet-button/connect-wallet-button.component';
 import { getBuyDehubMenuItems, shortenAddress } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
-import { Observable, map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
 import { AppMainComponent } from '../app.main.component';
@@ -25,6 +25,7 @@ import { AppMenuComponent } from './menu/app.menu.component';
     // Angular
     NgIf,
     RouterLink,
+    NgOptimizedImage,
     // 3rd Party
     PushModule,
     // UI
@@ -33,7 +34,52 @@ import { AppMenuComponent } from './menu/app.menu.component';
 
     AppMenuComponent,
   ],
-  templateUrl: './app.topbar.component.html',
+  template: `<div class="layout-topbar">
+    <div class="layout-topbar-wrapper flex-column sm:flex-row">
+      <div class="layout-topbar-left">
+        <a
+          *ngIf="isDev"
+          tabindex="0"
+          class="menu-button"
+          (click)="appMain.onMenuButtonClick($event)"
+        >
+          <i class="pi pi-bars"></i>
+        </a>
+        <a routerLink="" tabindex="0" id="logo-link" class="layout-topbar-logo">
+          <img
+            [ngSrc]="
+              path +
+              '/assets/dehub/logo-' +
+              (app.topbarTheme === 'dark' ? 'dehub-white' : 'dehub') +
+              '.svg'
+            "
+            height="25"
+            width="107"
+            alt="DeHub logo"
+          />
+        </a>
+      </div>
+
+      <dhb-menu *ngIf="isDev"></dhb-menu>
+
+      <div class="layout-topbar-right">
+        <ul class="layout-topbar-actions">
+          <li class="topbar-item">
+            <dhb-buy-dehub-button
+              [items]="buyDehubMenuItems"
+            ></dhb-buy-dehub-button>
+          </li>
+          <li class="topbar-item ml-2 md:ml-4">
+            <dhb-connect-wallet-button
+              [label]="(connectWalletButtonLabel$ | push)!"
+              [isAuthenticated]="(isAuthenticated$ | push)!"
+              [icon]="connectWalletButtonIcon"
+            ></dhb-connect-wallet-button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppTopBarComponent implements OnInit {

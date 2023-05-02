@@ -320,6 +320,7 @@ export interface AssetLinkingCollections {
   basicPostCollection?: Maybe<BasicPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
   featurePostCollection?: Maybe<FeaturePostCollection>;
+  footerCollection?: Maybe<FooterCollection>;
   grandPostCollection?: Maybe<GrandPostCollection>;
   personPostCollection?: Maybe<PersonPostCollection>;
   productCollection?: Maybe<ProductCollection>;
@@ -341,6 +342,13 @@ export interface AssetLinkingCollectionsEntryCollectionArgs {
 }
 
 export interface AssetLinkingCollectionsFeaturePostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface AssetLinkingCollectionsFooterCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1629,12 +1637,27 @@ export enum FeaturePostOrder {
 /** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
 export interface Footer extends Entry {
   __typename?: 'Footer';
+  address?: Maybe<FooterAddress>;
+  awardsCollection?: Maybe<AssetCollection>;
   contentfulMetadata: ContentfulMetadata;
   copyright?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<FooterLinkingCollections>;
   linksCollection?: Maybe<FooterLinksCollection>;
   socialIconsCollection?: Maybe<FooterSocialIconsCollection>;
   sys: Sys;
+}
+
+/** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
+export interface FooterAddressArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
+export interface FooterAwardsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
 }
 
 /** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
@@ -1663,6 +1686,31 @@ export interface FooterSocialIconsCollectionArgs {
   skip?: InputMaybe<Scalars['Int']>;
 }
 
+export interface FooterAddress {
+  __typename?: 'FooterAddress';
+  json: Scalars['JSON'];
+  links: FooterAddressLinks;
+}
+
+export interface FooterAddressAssets {
+  __typename?: 'FooterAddressAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+}
+
+export interface FooterAddressEntries {
+  __typename?: 'FooterAddressEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+}
+
+export interface FooterAddressLinks {
+  __typename?: 'FooterAddressLinks';
+  assets: FooterAddressAssets;
+  entries: FooterAddressEntries;
+}
+
 export interface FooterCollection {
   __typename?: 'FooterCollection';
   items: Array<Maybe<Footer>>;
@@ -1674,6 +1722,10 @@ export interface FooterCollection {
 export interface FooterFilter {
   AND?: InputMaybe<Array<InputMaybe<FooterFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<FooterFilter>>>;
+  address_contains?: InputMaybe<Scalars['String']>;
+  address_exists?: InputMaybe<Scalars['Boolean']>;
+  address_not_contains?: InputMaybe<Scalars['String']>;
+  awardsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   copyright?: InputMaybe<Scalars['String']>;
   copyright_contains?: InputMaybe<Scalars['String']>;
@@ -7422,6 +7474,25 @@ export type SysFragment = {
   id: string;
 };
 
+export type AssetFragment = {
+  __typename?: 'Asset';
+  title?: string;
+  fileName?: string;
+  description?: string;
+  contentType?: string;
+  width?: number;
+  height?: number;
+  url?: string;
+  webpUrl?: string;
+  avifUrl?: string;
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
+};
+
 export type DappPostFragment = {
   __typename?: 'DappPost';
   icon?: string;
@@ -7537,6 +7608,7 @@ export type FooterFragment = {
     publishedAt?: any;
     id: string;
   };
+  address?: { __typename?: 'FooterAddress'; json: any };
   linksCollection?: {
     __typename?: 'FooterLinksCollection';
     items: Array<{
@@ -7567,6 +7639,28 @@ export type FooterFragment = {
       style?: string;
       size?: string;
       icon?: string;
+      sys: {
+        __typename?: 'Sys';
+        firstPublishedAt?: any;
+        publishedAt?: any;
+        id: string;
+      };
+    }>;
+  };
+  awardsCollection?: {
+    __typename?: 'AssetCollection';
+    items: Array<{
+      __typename?: 'Asset';
+      title?: string;
+      fileName?: string;
+      description?: string;
+      contentType?: string;
+      width?: number;
+      height?: number;
+      url?: string;
+      webpUrlWithRadius?: string;
+      webpUrl?: string;
+      avifUrl?: string;
       sys: {
         __typename?: 'Sys';
         firstPublishedAt?: any;
@@ -11259,6 +11353,7 @@ export type FooterCollectionQuery = {
         publishedAt?: any;
         id: string;
       };
+      address?: { __typename?: 'FooterAddress'; json: any };
       linksCollection?: {
         __typename?: 'FooterLinksCollection';
         items: Array<{
@@ -11289,6 +11384,28 @@ export type FooterCollectionQuery = {
           style?: string;
           size?: string;
           icon?: string;
+          sys: {
+            __typename?: 'Sys';
+            firstPublishedAt?: any;
+            publishedAt?: any;
+            id: string;
+          };
+        }>;
+      };
+      awardsCollection?: {
+        __typename?: 'AssetCollection';
+        items: Array<{
+          __typename?: 'Asset';
+          title?: string;
+          fileName?: string;
+          description?: string;
+          contentType?: string;
+          width?: number;
+          height?: number;
+          url?: string;
+          webpUrlWithRadius?: string;
+          webpUrl?: string;
+          avifUrl?: string;
           sys: {
             __typename?: 'Sys';
             firstPublishedAt?: any;
@@ -14234,12 +14351,32 @@ export const CallToActionFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
+export const AssetFragmentDoc = gql`
+  fragment Asset on Asset {
+    sys {
+      ...Sys
+    }
+    title
+    fileName
+    description
+    contentType
+    width
+    height
+    url
+    webpUrl: url(transform: { format: WEBP })
+    avifUrl: url(transform: { format: AVIF })
+  }
+  ${SysFragmentDoc}
+`;
 export const FooterFragmentDoc = gql`
   fragment Footer on Footer {
     sys {
       ...Sys
     }
     copyright
+    address {
+      json
+    }
     linksCollection(limit: 20, preview: $isPreview) {
       items {
         ...CallToAction
@@ -14250,9 +14387,16 @@ export const FooterFragmentDoc = gql`
         ...CallToAction
       }
     }
+    awardsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...Asset
+        webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
+      }
+    }
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
+  ${AssetFragmentDoc}
 `;
 export const LegalPostFragmentDoc = gql`
   fragment LegalPost on LegalPost {

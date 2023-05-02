@@ -3,6 +3,9 @@ fragment Footer on Footer {
     ...Sys
   }
   copyright
+  address {
+    json
+  }
   linksCollection(limit: 20, preview: $isPreview) {
     items {
       ...CallToAction
@@ -11,6 +14,12 @@ fragment Footer on Footer {
   socialIconsCollection(limit: 10, preview: $isPreview) {
     items {
       ...CallToAction
+    }
+  }
+  awardsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...Asset
+      webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
     }
   }
 }

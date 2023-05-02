@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,12 +6,15 @@ import {
   Input,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FooterFragment } from '@dehub/shared/model';
+import { EnvToken } from '@dehub/angular/model';
+import { FooterFragment, SharedEnv } from '@dehub/shared/model';
 import { resolveButtonStyle } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import { ButtonModule } from 'primeng/button';
 
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { ContentfulRichMarkupPipe } from '../../pipes/contentful-rich-markup/contentful-rich-markup.pipe';
+import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
 import { CTAGroupPipe } from './cta-group.pipe';
 
 @Component({
@@ -21,19 +24,21 @@ import { CTAGroupPipe } from './cta-group.pipe';
     // Angular
     CommonModule,
     RouterModule,
-
+    NgOptimizedImage,
     // PrimeNg
     ButtonModule,
-
     // UI
     ContentfulDraftDirective,
     CTAGroupPipe,
+    ContentfulRichMarkupPipe,
+    SafeHtmlPipe,
   ],
   template: `
     <div *ngIf="footer" class="layout-footer">
       <div class="grid">
         <div class="col-12 lg-4">
           <div class="grid">
+            <!-- Links -->
             <div
               *ngFor="
                 let group of footer?.linksCollection?.items | dhbCTAGroup: 5
@@ -55,12 +60,29 @@ import { CTAGroupPipe } from './cta-group.pipe';
                 </li>
               </ul>
             </div>
+
+            <!-- Awards -->
+            <div class="col-12 md:col-4 lg:col-2">
+              <ng-container
+                *ngFor="let award of footer?.awardsCollection?.items"
+              >
+                <img
+                  [ngSrc]="award.webpUrlWithRadius!"
+                  [width]="award.width"
+                  [height]="award.height"
+                  [alt]="award.description ?? award.title"
+                  sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+                  class="w-6 md:w-9 h-auto anim-hover-1-reverse"
+                />
+              </ng-container>
+            </div>
           </div>
         </div>
 
         <div class="col-12">
-          <div class="footer-bottom flex-wrap">
+          <div class="footer-bottom flex-wrap gap-3">
             <ul class="block w-full mb-3">
+              <!-- Social Links -->
               <li
                 *ngFor="let socialLink of footer.socialIconsCollection?.items"
                 class="inline"
@@ -82,10 +104,29 @@ import { CTAGroupPipe } from './cta-group.pipe';
                 </p-button>
               </li>
             </ul>
-            <h4 class="mr-0">DeHub&nbsp;|&nbsp;</h4>
-            <h6 *ngIf="footer.copyright" class="uppercase font-bold text-xs">
-              {{ footer.copyright }}
-            </h6>
+            <div class="flex align-items-end gap-2 mb-2">
+              <!-- Logo -->
+              <img
+                [ngSrc]="path + '/assets/dehub/logo-dehub-white.svg'"
+                height="25"
+                width="107"
+                alt="DeHub logo"
+              />
+              <h6 *ngIf="footer.copyright" class="uppercase font-bold text-xs">
+                {{ footer.copyright }}
+              </h6>
+            </div>
+
+            <!-- Address -->
+            <div
+              [innerHtml]="
+                footer.address?.json | dhbContentfulRichMarkup | dhbSafeHtml
+              "
+              class="line-height-3 block w-full"
+            ></div>
+
+            <!-- Year -->
+            <h6 class="uppercase font-bold text-xs">© {{ thisYear }}</h6>
           </div>
         </div>
       </div>
@@ -96,7 +137,13 @@ import { CTAGroupPipe } from './cta-group.pipe';
 export class FooterComponent {
   @Input() footer?: FooterFragment | undefined;
 
-  constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
+  path = this.env.baseUrl;
+  thisYear = new Date().getFullYear();
+
+  constructor(
+    @Inject(EnvToken) private env: SharedEnv,
+    @Inject(WINDOW) private readonly windowRef: Window
+  ) {}
 
   resolveButton(type?: string, style?: string, size?: string) {
     return resolveButtonStyle(type, style, size);
