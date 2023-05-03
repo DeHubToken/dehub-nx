@@ -7,8 +7,10 @@ import {
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BasicPostCollectionBySlugService } from '@dehub/angular/core';
 import { EnvToken } from '@dehub/angular/model';
+import { BackAwareComponent } from '@dehub/angular/ui/components/back-aware/back-aware.component';
 import {
   BasicPostDetailFragment,
+  NavigationTabMenu,
   SharedEnv,
   animationDuration,
 } from '@dehub/shared/model';
@@ -22,6 +24,7 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
     // Angular
     RouterLink,
     // UI
+    BackAwareComponent,
     BasicPostDetailComponent,
     // 3rd Party
     PushModule,
@@ -31,16 +34,12 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
       <div
         class="col-12 lg:col-12 xl:col-6 col-offset-0 lg:col-offset-0 xl:col-offset-3"
       >
-        <!-- Back (top) -->
-        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
-
-        <!-- Basic Post Detail -->
-        <dhb-basic-post-detail
-          [basicPostDetail]="basicPostDetail$ | push"
-        ></dhb-basic-post-detail>
-
-        <!-- Back (bottom) -->
-        <dhb-back-button [routerLink]="['/home']"></dhb-back-button>
+        <dhb-back-aware [backRouterLink]="routerLink">
+          <!-- Basic Post Detail -->
+          <dhb-basic-post-detail
+            [basicPostDetail]="basicPostDetail$ | push"
+          ></dhb-basic-post-detail>
+        </dhb-back-aware>
       </div>
     </div>
   `,
@@ -54,6 +53,8 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
 })
 export class AngularFeatureNewsDetailComponent implements OnInit {
   basicPostDetail$!: Observable<BasicPostDetailFragment | undefined>;
+
+  routerLink = [`/${NavigationTabMenu.Home}`];
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
