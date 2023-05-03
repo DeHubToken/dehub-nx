@@ -188,6 +188,20 @@
         "command": "http-server -a dev.localhost -b -p 9301 -o web",
         "cwd": "dist/apps/web.preview"
       }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/web/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "web:serve",
+        "port": 8302
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "web:serve:production"
+        }
+      }
     }
   },
   "tags": ["scope:angular", "type:app"],
