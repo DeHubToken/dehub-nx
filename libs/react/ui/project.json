@@ -1,10 +1,11 @@
 {
   "name": "react-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/react/ui/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/react/ui/**/*.{ts,tsx,js,jsx}"],
@@ -12,7 +13,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/react/ui"],
       "options": {
         "jestConfig": "libs/react/ui/jest.config.ts",

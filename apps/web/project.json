@@ -1,5 +1,6 @@
 {
   "name": "web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/web/src",
   "prefix": "dhb",
@@ -131,14 +132,14 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["apps/web/src/**/*.ts", "apps/web/src/**/*.html"],
         "maxWarnings": 0
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/web"],
       "options": {
         "jestConfig": "apps/web/jest.config.ts",
@@ -186,6 +187,20 @@
       "options": {
         "command": "http-server -a dev.localhost -b -p 9301 -o web",
         "cwd": "dist/apps/web.preview"
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/web/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "web:serve",
+        "port": 8302
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "web:serve:production"
+        }
       }
     }
   },
