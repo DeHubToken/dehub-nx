@@ -157,6 +157,20 @@
         "command": "http-server -a dev.localhost -b -p 9601 -o staking",
         "cwd": "dist/apps/staking.preview"
       }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/staking/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "staking:serve",
+        "port": 8602
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "staking:serve:production"
+        }
+      }
     }
   },
   "tags": ["scope:react", "type:app"],
