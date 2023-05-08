@@ -72,14 +72,29 @@ export const AssetFragmentDoc = gql`
     title
     fileName
     description
-    contentType
     width
     height
     url
+    contentType
+    webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
     webpUrl: url(transform: { format: WEBP })
     avifUrl: url(transform: { format: AVIF })
   }
   ${SysFragmentDoc}
+`;
+export const AwardPostFragmentDoc = gql`
+  fragment AwardPost on AwardPost {
+    sys {
+      ...Sys
+    }
+    picture(preview: $isPreview) {
+      ...Asset
+    }
+    link
+    isRounded
+  }
+  ${SysFragmentDoc}
+  ${AssetFragmentDoc}
 `;
 export const FooterFragmentDoc = gql`
   fragment Footer on Footer {
@@ -102,14 +117,13 @@ export const FooterFragmentDoc = gql`
     }
     awardsCollection(limit: 10, preview: $isPreview) {
       items {
-        ...Asset
-        webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
+        ...AwardPost
       }
     }
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
-  ${AssetFragmentDoc}
+  ${AwardPostFragmentDoc}
 `;
 export const LegalPostFragmentDoc = gql`
   fragment LegalPost on LegalPost {
@@ -176,18 +190,10 @@ export const ThumbnailPostFragmentDoc = gql`
       ...Sys
     }
     picture(preview: $isPreview) {
-      sys {
-        ...Sys
-      }
-      title
-      url
+      ...Asset
     }
     heavyPicture(preview: $isPreview) {
-      sys {
-        ...Sys
-      }
-      title
-      url
+      ...Asset
     }
     showHeavyPictureOnHover
     title
@@ -195,6 +201,7 @@ export const ThumbnailPostFragmentDoc = gql`
     isVideo
   }
   ${SysFragmentDoc}
+  ${AssetFragmentDoc}
 `;
 export const PageSectionThumbnailPostsFragmentDoc = gql`
   fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {

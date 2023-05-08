@@ -317,14 +317,21 @@ export interface AssetFilter {
 
 export interface AssetLinkingCollections {
   __typename?: 'AssetLinkingCollections';
+  awardPostCollection?: Maybe<AwardPostCollection>;
   basicPostCollection?: Maybe<BasicPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
   featurePostCollection?: Maybe<FeaturePostCollection>;
-  footerCollection?: Maybe<FooterCollection>;
   grandPostCollection?: Maybe<GrandPostCollection>;
   personPostCollection?: Maybe<PersonPostCollection>;
   productCollection?: Maybe<ProductCollection>;
   thumbnailPostCollection?: Maybe<ThumbnailPostCollection>;
+}
+
+export interface AssetLinkingCollectionsAwardPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
 }
 
 export interface AssetLinkingCollectionsBasicPostCollectionArgs {
@@ -342,13 +349,6 @@ export interface AssetLinkingCollectionsEntryCollectionArgs {
 }
 
 export interface AssetLinkingCollectionsFeaturePostCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-export interface AssetLinkingCollectionsFooterCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -404,6 +404,99 @@ export enum AssetOrder {
   UrlDesc = 'url_DESC',
   WidthAsc = 'width_ASC',
   WidthDesc = 'width_DESC',
+}
+
+/** Single award post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/awardPost) */
+export interface AwardPost extends Entry {
+  __typename?: 'AwardPost';
+  contentfulMetadata: ContentfulMetadata;
+  isRounded?: Maybe<Scalars['Boolean']>;
+  link?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<AwardPostLinkingCollections>;
+  picture?: Maybe<Asset>;
+  sys: Sys;
+}
+
+/** Single award post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/awardPost) */
+export interface AwardPostIsRoundedArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Single award post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/awardPost) */
+export interface AwardPostLinkArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Single award post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/awardPost) */
+export interface AwardPostLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** Single award post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/awardPost) */
+export interface AwardPostPictureArgs {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface AwardPostCollection {
+  __typename?: 'AwardPostCollection';
+  items: Array<Maybe<AwardPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface AwardPostFilter {
+  AND?: InputMaybe<Array<InputMaybe<AwardPostFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<AwardPostFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  isRounded?: InputMaybe<Scalars['Boolean']>;
+  isRounded_exists?: InputMaybe<Scalars['Boolean']>;
+  isRounded_not?: InputMaybe<Scalars['Boolean']>;
+  link?: InputMaybe<Scalars['String']>;
+  link_contains?: InputMaybe<Scalars['String']>;
+  link_exists?: InputMaybe<Scalars['Boolean']>;
+  link_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  link_not?: InputMaybe<Scalars['String']>;
+  link_not_contains?: InputMaybe<Scalars['String']>;
+  link_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  picture_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+}
+
+export interface AwardPostLinkingCollections {
+  __typename?: 'AwardPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  footerCollection?: Maybe<FooterCollection>;
+}
+
+export interface AwardPostLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface AwardPostLinkingCollectionsFooterCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum AwardPostOrder {
+  IsRoundedAsc = 'isRounded_ASC',
+  IsRoundedDesc = 'isRounded_DESC',
+  LinkAsc = 'link_ASC',
+  LinkDesc = 'link_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 /** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
@@ -1638,7 +1731,7 @@ export enum FeaturePostOrder {
 export interface Footer extends Entry {
   __typename?: 'Footer';
   address?: Maybe<FooterAddress>;
-  awardsCollection?: Maybe<AssetCollection>;
+  awardsCollection?: Maybe<FooterAwardsCollection>;
   contentfulMetadata: ContentfulMetadata;
   copyright?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<FooterLinkingCollections>;
@@ -1711,6 +1804,14 @@ export interface FooterAddressLinks {
   entries: FooterAddressEntries;
 }
 
+export interface FooterAwardsCollection {
+  __typename?: 'FooterAwardsCollection';
+  items: Array<Maybe<AwardPost>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
 export interface FooterCollection {
   __typename?: 'FooterCollection';
   items: Array<Maybe<Footer>>;
@@ -1725,6 +1826,7 @@ export interface FooterFilter {
   address_contains?: InputMaybe<Scalars['String']>;
   address_exists?: InputMaybe<Scalars['Boolean']>;
   address_not_contains?: InputMaybe<Scalars['String']>;
+  awards?: InputMaybe<CfAwardPostNestedFilter>;
   awardsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   copyright?: InputMaybe<Scalars['String']>;
@@ -5580,6 +5682,8 @@ export interface Query {
   announcementCollection?: Maybe<AnnouncementCollection>;
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
+  awardPost?: Maybe<AwardPost>;
+  awardPostCollection?: Maybe<AwardPostCollection>;
   basicPost?: Maybe<BasicPost>;
   basicPostCategory?: Maybe<BasicPostCategory>;
   basicPostCategoryCollection?: Maybe<BasicPostCategoryCollection>;
@@ -5683,6 +5787,21 @@ export interface QueryAssetCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AssetFilter>;
+}
+
+export interface QueryAwardPostArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryAwardPostCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<AwardPostOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AwardPostFilter>;
 }
 
 export interface QueryBasicPostArgs {
@@ -6665,6 +6784,24 @@ export enum ThumbnailPostOrder {
   TitleDesc = 'title_DESC',
 }
 
+export interface CfAwardPostNestedFilter {
+  AND?: InputMaybe<Array<InputMaybe<CfAwardPostNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfAwardPostNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  isRounded?: InputMaybe<Scalars['Boolean']>;
+  isRounded_exists?: InputMaybe<Scalars['Boolean']>;
+  isRounded_not?: InputMaybe<Scalars['Boolean']>;
+  link?: InputMaybe<Scalars['String']>;
+  link_contains?: InputMaybe<Scalars['String']>;
+  link_exists?: InputMaybe<Scalars['Boolean']>;
+  link_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  link_not?: InputMaybe<Scalars['String']>;
+  link_not_contains?: InputMaybe<Scalars['String']>;
+  link_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  picture_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+}
+
 export interface CfBasicPostCategoryNestedFilter {
   AND?: InputMaybe<Array<InputMaybe<CfBasicPostCategoryNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfBasicPostCategoryNestedFilter>>>;
@@ -7366,6 +7503,37 @@ export type AnnouncementFragment = {
   content?: { __typename?: 'AnnouncementContent'; json: any };
 };
 
+export type AwardPostFragment = {
+  __typename?: 'AwardPost';
+  link?: string;
+  isRounded?: boolean;
+  sys: {
+    __typename?: 'Sys';
+    firstPublishedAt?: any;
+    publishedAt?: any;
+    id: string;
+  };
+  picture?: {
+    __typename?: 'Asset';
+    title?: string;
+    fileName?: string;
+    description?: string;
+    width?: number;
+    height?: number;
+    url?: string;
+    contentType?: string;
+    webpUrlWithRadius?: string;
+    webpUrl?: string;
+    avifUrl?: string;
+    sys: {
+      __typename?: 'Sys';
+      firstPublishedAt?: any;
+      publishedAt?: any;
+      id: string;
+    };
+  };
+};
+
 export type BasicPostCommonFragment = {
   __typename?: 'BasicPost';
   title?: string;
@@ -7479,10 +7647,11 @@ export type AssetFragment = {
   title?: string;
   fileName?: string;
   description?: string;
-  contentType?: string;
   width?: number;
   height?: number;
   url?: string;
+  contentType?: string;
+  webpUrlWithRadius?: string;
   webpUrl?: string;
   avifUrl?: string;
   sys: {
@@ -7648,24 +7817,35 @@ export type FooterFragment = {
     }>;
   };
   awardsCollection?: {
-    __typename?: 'AssetCollection';
+    __typename?: 'FooterAwardsCollection';
     items: Array<{
-      __typename?: 'Asset';
-      title?: string;
-      fileName?: string;
-      description?: string;
-      contentType?: string;
-      width?: number;
-      height?: number;
-      url?: string;
-      webpUrlWithRadius?: string;
-      webpUrl?: string;
-      avifUrl?: string;
+      __typename?: 'AwardPost';
+      link?: string;
+      isRounded?: boolean;
       sys: {
         __typename?: 'Sys';
         firstPublishedAt?: any;
         publishedAt?: any;
         id: string;
+      };
+      picture?: {
+        __typename?: 'Asset';
+        title?: string;
+        fileName?: string;
+        description?: string;
+        width?: number;
+        height?: number;
+        url?: string;
+        contentType?: string;
+        webpUrlWithRadius?: string;
+        webpUrl?: string;
+        avifUrl?: string;
+        sys: {
+          __typename?: 'Sys';
+          firstPublishedAt?: any;
+          publishedAt?: any;
+          id: string;
+        };
       };
     }>;
   };
@@ -8153,7 +8333,15 @@ export type PageClubsFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8164,7 +8352,15 @@ export type PageClubsFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8576,7 +8772,15 @@ export type PageGameFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -8587,7 +8791,15 @@ export type PageGameFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9042,7 +9254,15 @@ export type PageHomeFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9053,7 +9273,15 @@ export type PageHomeFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9508,7 +9736,15 @@ export type PageLearnFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -9519,7 +9755,15 @@ export type PageLearnFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10055,7 +10299,15 @@ export type PageSectionThumbnailPostsFragment = {
       picture?: {
         __typename?: 'Asset';
         title?: string;
+        fileName?: string;
+        description?: string;
+        width?: number;
+        height?: number;
         url?: string;
+        contentType?: string;
+        webpUrlWithRadius?: string;
+        webpUrl?: string;
+        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -10066,7 +10318,15 @@ export type PageSectionThumbnailPostsFragment = {
       heavyPicture?: {
         __typename?: 'Asset';
         title?: string;
+        fileName?: string;
+        description?: string;
+        width?: number;
+        height?: number;
         url?: string;
+        contentType?: string;
+        webpUrlWithRadius?: string;
+        webpUrl?: string;
+        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -10562,7 +10822,15 @@ export type PageShopFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -10573,7 +10841,15 @@ export type PageShopFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11005,7 +11281,15 @@ export type PageStreamFragment = {
               picture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11016,7 +11300,15 @@ export type PageStreamFragment = {
               heavyPicture?: {
                 __typename?: 'Asset';
                 title?: string;
+                fileName?: string;
+                description?: string;
+                width?: number;
+                height?: number;
                 url?: string;
+                contentType?: string;
+                webpUrlWithRadius?: string;
+                webpUrl?: string;
+                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11256,7 +11548,15 @@ export type ThumbnailPostFragment = {
   picture?: {
     __typename?: 'Asset';
     title?: string;
+    fileName?: string;
+    description?: string;
+    width?: number;
+    height?: number;
     url?: string;
+    contentType?: string;
+    webpUrlWithRadius?: string;
+    webpUrl?: string;
+    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -11267,7 +11567,15 @@ export type ThumbnailPostFragment = {
   heavyPicture?: {
     __typename?: 'Asset';
     title?: string;
+    fileName?: string;
+    description?: string;
+    width?: number;
+    height?: number;
     url?: string;
+    contentType?: string;
+    webpUrlWithRadius?: string;
+    webpUrl?: string;
+    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -11393,24 +11701,35 @@ export type FooterCollectionQuery = {
         }>;
       };
       awardsCollection?: {
-        __typename?: 'AssetCollection';
+        __typename?: 'FooterAwardsCollection';
         items: Array<{
-          __typename?: 'Asset';
-          title?: string;
-          fileName?: string;
-          description?: string;
-          contentType?: string;
-          width?: number;
-          height?: number;
-          url?: string;
-          webpUrlWithRadius?: string;
-          webpUrl?: string;
-          avifUrl?: string;
+          __typename?: 'AwardPost';
+          link?: string;
+          isRounded?: boolean;
           sys: {
             __typename?: 'Sys';
             firstPublishedAt?: any;
             publishedAt?: any;
             id: string;
+          };
+          picture?: {
+            __typename?: 'Asset';
+            title?: string;
+            fileName?: string;
+            description?: string;
+            width?: number;
+            height?: number;
+            url?: string;
+            contentType?: string;
+            webpUrlWithRadius?: string;
+            webpUrl?: string;
+            avifUrl?: string;
+            sys: {
+              __typename?: 'Sys';
+              firstPublishedAt?: any;
+              publishedAt?: any;
+              id: string;
+            };
           };
         }>;
       };
@@ -11847,7 +12166,15 @@ export type PageClubsCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11858,7 +12185,15 @@ export type PageClubsCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12280,7 +12615,15 @@ export type PageGameCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12291,7 +12634,15 @@ export type PageGameCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12756,7 +13107,15 @@ export type PageHomeCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12767,7 +13126,15 @@ export type PageHomeCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13232,7 +13599,15 @@ export type PageLearnCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13243,7 +13618,15 @@ export type PageLearnCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13752,7 +14135,15 @@ export type PageShopCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13763,7 +14154,15 @@ export type PageShopCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14205,7 +14604,15 @@ export type PageStreamCollectionQuery = {
                   picture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14216,7 +14623,15 @@ export type PageStreamCollectionQuery = {
                   heavyPicture?: {
                     __typename?: 'Asset';
                     title?: string;
+                    fileName?: string;
+                    description?: string;
+                    width?: number;
+                    height?: number;
                     url?: string;
+                    contentType?: string;
+                    webpUrlWithRadius?: string;
+                    webpUrl?: string;
+                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14359,14 +14774,29 @@ export const AssetFragmentDoc = gql`
     title
     fileName
     description
-    contentType
     width
     height
     url
+    contentType
+    webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
     webpUrl: url(transform: { format: WEBP })
     avifUrl: url(transform: { format: AVIF })
   }
   ${SysFragmentDoc}
+`;
+export const AwardPostFragmentDoc = gql`
+  fragment AwardPost on AwardPost {
+    sys {
+      ...Sys
+    }
+    picture(preview: $isPreview) {
+      ...Asset
+    }
+    link
+    isRounded
+  }
+  ${SysFragmentDoc}
+  ${AssetFragmentDoc}
 `;
 export const FooterFragmentDoc = gql`
   fragment Footer on Footer {
@@ -14389,14 +14819,13 @@ export const FooterFragmentDoc = gql`
     }
     awardsCollection(limit: 10, preview: $isPreview) {
       items {
-        ...Asset
-        webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
+        ...AwardPost
       }
     }
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
-  ${AssetFragmentDoc}
+  ${AwardPostFragmentDoc}
 `;
 export const LegalPostFragmentDoc = gql`
   fragment LegalPost on LegalPost {
@@ -14463,18 +14892,10 @@ export const ThumbnailPostFragmentDoc = gql`
       ...Sys
     }
     picture(preview: $isPreview) {
-      sys {
-        ...Sys
-      }
-      title
-      url
+      ...Asset
     }
     heavyPicture(preview: $isPreview) {
-      sys {
-        ...Sys
-      }
-      title
-      url
+      ...Asset
     }
     showHeavyPictureOnHover
     title
@@ -14482,6 +14903,7 @@ export const ThumbnailPostFragmentDoc = gql`
     isVideo
   }
   ${SysFragmentDoc}
+  ${AssetFragmentDoc}
 `;
 export const PageSectionThumbnailPostsFragmentDoc = gql`
   fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {

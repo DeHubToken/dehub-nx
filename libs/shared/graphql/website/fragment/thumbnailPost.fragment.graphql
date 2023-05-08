@@ -3,18 +3,10 @@ fragment ThumbnailPost on ThumbnailPost {
     ...Sys
   }
   picture(preview: $isPreview) {
-    sys {
-      ...Sys
-    }
-    title
-    url
+    ...Asset
   }
   heavyPicture(preview: $isPreview) {
-    sys {
-      ...Sys
-    }
-    title
-    url
+    ...Asset
   }
   showHeavyPictureOnHover
   title
