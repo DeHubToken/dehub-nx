@@ -5,16 +5,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { SysFragment } from '@dehub/shared/model';
+import { AssetFragment } from '@dehub/shared/model';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-
-// TODO: is there any generated GQL type?
-interface ContentfulPicture {
-  __typename?: string;
-  title?: string;
-  url?: string;
-  sys: SysFragment;
-}
 
 @Component({
   selector: 'dhb-heavy-picture',
@@ -61,8 +53,8 @@ interface ContentfulPicture {
 })
 export class HeavyPictureComponent<
   C extends {
-    picture?: ContentfulPicture;
-    heavyPicture?: ContentfulPicture;
+    picture?: AssetFragment;
+    heavyPicture?: AssetFragment;
     showHeavyPictureOnHover?: boolean;
   }
 > implements OnInit

@@ -18,8 +18,7 @@ fragment Footer on Footer {
   }
   awardsCollection(limit: 10, preview: $isPreview) {
     items {
-      ...Asset
-      webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
+      ...AwardPost
     }
   }
 }

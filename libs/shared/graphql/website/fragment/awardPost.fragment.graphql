@@ -1,0 +1,10 @@
+fragment AwardPost on AwardPost {
+  sys {
+    ...Sys
+  }
+  picture(preview: $isPreview) {
+    ...Asset
+  }
+  link
+  isRounded
+}
