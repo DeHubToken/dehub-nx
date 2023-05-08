@@ -6,6 +6,7 @@ import {
 import classNames from 'classnames';
 import { Button } from 'primereact/button';
 import { memo, useMemo } from 'react';
+import AwardPost from '../AwardPost/AwardPost';
 import Logo, { LogoTypes } from '../Header/Logo';
 
 export interface FooterProps {
@@ -27,7 +28,7 @@ function Footer({ footer, ctaGroup = 5, landing, logo }: FooterProps) {
     return linkGroups;
   }, [footer?.linksCollection, ctaGroup]);
 
-  const awards = footer?.awardsCollection?.items;
+  const awards = footer?.awardsCollection?.items ?? [];
   const thisYear = new Date().getFullYear();
 
   return (
@@ -59,18 +60,14 @@ function Footer({ footer, ctaGroup = 5, landing, logo }: FooterProps) {
                 ))}
             </div>
             {/* Awards */}
-            <div className="col-12 md:col-4 lg:col-2">
-              {awards &&
-                awards.map(award => (
-                  <img
-                    src={award.webpUrlWithRadius}
-                    width={award.width}
-                    height={award.height}
-                    alt={award.description ?? award.title}
-                    sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
-                    className="w-6 md:w-9 h-auto anim-hover-1-reverse"
-                  />
+            <div className="col-12 md:col-6">
+              <div className="grid">
+                {awards.map(awardPost => (
+                  <div className="col-12 md:col-6 lg:col-4">
+                    <AwardPost awardPost={awardPost} />
+                  </div>
                 ))}
+              </div>
             </div>
           </div>
         </div>
