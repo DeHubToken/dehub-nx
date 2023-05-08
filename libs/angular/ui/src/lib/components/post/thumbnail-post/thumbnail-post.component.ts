@@ -40,7 +40,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
 
             <!-- Other Post -->
             <ng-template #notVideo>
-              <a [href]="link" target="_blank">
+              <a [href]="link" target="_blank" rel="noreferrer">
                 <dhb-heavy-picture
                   [container]="thumbnailPost"
                 ></dhb-heavy-picture>

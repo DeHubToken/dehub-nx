@@ -24,7 +24,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
   template: `
     <div [dhbContentfulDraft]="awardPost.sys">
       <ng-container *ngIf="awardPost.link as link">
-        <a [href]="link" target="_blank">
+        <a [href]="link" target="_blank" rel="noreferrer">
           <ng-container *ngIf="awardPost.picture as award">
             <img
               [ngSrc]="award.webpUrlWithRadius!"
