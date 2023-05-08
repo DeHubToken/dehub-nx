@@ -64,7 +64,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
             </div>
 
             <!-- Awards -->
-            <div class="col-12 md:col-6 lg:col-6">
+            <div class="col-12 md:col-6">
               <div class="grid">
                 <div
                   *ngFor="let awardPost of footer?.awardsCollection?.items"
