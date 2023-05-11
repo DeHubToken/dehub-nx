@@ -2,9 +2,9 @@ import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   PageSectionPersonPostsFragment,
@@ -13,10 +13,11 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { SwiperModule } from 'swiper/angular';
-import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
-import { PersonPostComponent } from '../../post/person-post/person-post.component';
+import { Navigation, SwiperOptions } from 'swiper';
 
+import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
+import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
+import { PersonPostComponent } from '../../post/person-post/person-post.component';
 @Component({
   selector: 'dhb-page-section-person-posts-swiper',
   standalone: true,
@@ -27,9 +28,9 @@ import { PersonPostComponent } from '../../post/person-post/person-post.componen
     // UI
     ContentfulDraftDirective,
     PersonPostComponent,
-    // 3rd Party
-    SwiperModule,
+    SwiperDirective,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div
       *ngIf="section"
@@ -46,7 +47,15 @@ import { PersonPostComponent } from '../../post/person-post/person-post.componen
       </h5>
 
       <!-- Person Posts -->
-      <swiper
+      <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
+        <swiper-slide *ngFor="let personPost of personPosts">
+          <dhb-person-post
+            [personPost]="personPost"
+            [path]="path"
+          ></dhb-person-post>
+        </swiper-slide>
+      </swiper-container>
+      <!-- <swiper
         [navigation]="true"
         [breakpoints]="
           section.swiperResponsiveOptions || swiperResponsiveOptions
@@ -62,16 +71,16 @@ import { PersonPostComponent } from '../../post/person-post/person-post.componen
             ></dhb-person-post>
           </ng-template>
         </ng-container>
-      </swiper>
+      </swiper> -->
     </div>
   `,
   styles: [
     `
-      @import 'swiper/scss';
+      /* @import 'swiper/scss'; */
       @import 'dhb_swiper_navigation';
     `,
   ],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
@@ -82,10 +91,19 @@ export class PageSectionPersonPostsSwiperComponent implements OnInit {
 
   personPosts: PersonPostFragment[] = [];
 
+  swiperOptions?: SwiperOptions;
+
   constructor() {}
 
   ngOnInit() {
     if (!this.section) return;
+
+    this.swiperOptions = {
+      modules: [Navigation],
+      navigation: true,
+      breakpoints:
+        this.section.swiperResponsiveOptions || this.swiperResponsiveOptions,
+    };
 
     this.personPosts = (
       this.section.handpickedPostsCollection?.items ?? []

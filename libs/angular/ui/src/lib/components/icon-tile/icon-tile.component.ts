@@ -45,6 +45,17 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
       ></p-button>
     </div>
   `,
+  styles: [
+    `
+      /* Important for keeping all items stretched to same height */
+      :host {
+        height: 100%;
+        & > div {
+          height: 100%;
+        }
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconTileComponent implements OnInit {
