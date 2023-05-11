@@ -47,6 +47,7 @@ export const swiperPrevNextStyles = `
     height: 40px;
     top: auto;
     bottom: 0px;
+    z-index: 9999;
   }
 
   .swiper-button-prev::after, .swiper-button-next::after {

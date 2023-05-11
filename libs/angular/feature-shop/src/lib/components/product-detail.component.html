@@ -4,12 +4,7 @@
     class="card image-card shadow-8 mx-4 bg-gradient-2 pb-5 overflow-hidden"
   >
     <!-- Main Picture -->
-    <swiper-container
-      dhbSwiper
-      [swiperOptions]="swiperOptions"
-      init="false"
-      class="gallery"
-    >
+    <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
       <swiper-slide
         *ngFor="let picture of productDetail.picturesCollection?.items ?? []"
       >
