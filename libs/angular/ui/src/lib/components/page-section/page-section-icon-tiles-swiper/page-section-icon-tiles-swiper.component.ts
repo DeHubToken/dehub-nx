@@ -2,9 +2,9 @@ import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   IconTileFragment,
@@ -13,7 +13,9 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { SwiperModule } from 'swiper/angular';
+import { SwiperOptions } from 'swiper';
+import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
+
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { IconTileComponent } from '../../icon-tile/icon-tile.component';
 
@@ -27,9 +29,9 @@ import { IconTileComponent } from '../../icon-tile/icon-tile.component';
     // UI
     ContentfulDraftDirective,
     IconTileComponent,
-    // 3rd Party
-    SwiperModule,
+    SwiperDirective,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div
       *ngIf="section"
@@ -46,27 +48,13 @@ import { IconTileComponent } from '../../icon-tile/icon-tile.component';
       </h5>
 
       <!-- Icon Tiles -->
-      <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-      >
-        <ng-container *ngFor="let iconTile of iconTiles">
-          <ng-template swiperSlide>
-            <dhb-icon-tile [iconTile]="iconTile" class="w-full"></dhb-icon-tile>
-          </ng-template>
-        </ng-container>
-      </swiper>
+      <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
+        <swiper-slide *ngFor="let iconTile of iconTiles">
+          <dhb-icon-tile [iconTile]="iconTile"></dhb-icon-tile>
+        </swiper-slide>
+      </swiper-container>
     </div>
   `,
-  styles: [
-    `
-      @import 'swiper/scss';
-      @import 'dhb_swiper_navigation';
-    `,
-  ],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
@@ -76,9 +64,19 @@ export class PageSectionIconTilesSwiperComponent implements OnInit {
 
   iconTiles: IconTileFragment[] = [];
 
+  swiperOptions?: SwiperOptions;
+
   constructor() {}
 
   ngOnInit() {
+    if (!this.section) return;
+
+    this.swiperOptions = {
+      navigation: true,
+      breakpoints:
+        this.section.swiperResponsiveOptions || this.swiperResponsiveOptions,
+    };
+
     this.iconTiles = (
       this.section.handpickedIconTilesCollection?.items ?? []
     ).filter(isNotNil);

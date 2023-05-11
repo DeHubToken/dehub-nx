@@ -2,9 +2,9 @@ import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   GrandPostFragment,
@@ -13,10 +13,11 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { SwiperModule } from 'swiper/angular';
-import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
-import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
+import { SwiperOptions } from 'swiper';
 
+import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
+import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
+import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
 @Component({
   selector: 'dhb-page-section-grand-posts-swiper',
   standalone: true,
@@ -27,9 +28,9 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
     // UI
     ContentfulDraftDirective,
     GrandPostComponent,
-    // 3rd Party
-    SwiperModule,
+    SwiperDirective,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div
       *ngIf="section"
@@ -46,31 +47,13 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
       </h5>
 
       <!-- Grand Posts -->
-      <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-        class="px-3"
-      >
-        <ng-container *ngFor="let grandPost of grandPosts">
-          <ng-template swiperSlide>
-            <dhb-grand-post
-              [grandPost]="grandPost"
-              class="flex-grow-1"
-            ></dhb-grand-post>
-          </ng-template>
-        </ng-container>
-      </swiper>
+      <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
+        <swiper-slide *ngFor="let grandPost of grandPosts">
+          <dhb-grand-post [grandPost]="grandPost"></dhb-grand-post>
+        </swiper-slide>
+      </swiper-container>
     </div>
   `,
-  styles: [
-    `
-      @import 'swiper/scss';
-      @import 'dhb_swiper_navigation';
-    `,
-  ],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
@@ -80,10 +63,18 @@ export class PageSectionGrandPostsSwiperComponent implements OnInit {
 
   grandPosts: GrandPostFragment[] = [];
 
+  swiperOptions?: SwiperOptions;
+
   constructor() {}
 
   ngOnInit() {
     if (!this.section) return;
+
+    this.swiperOptions = {
+      navigation: true,
+      breakpoints:
+        this.section.swiperResponsiveOptions || this.swiperResponsiveOptions,
+    };
 
     this.grandPosts = (
       this.section.handpickedPostsCollection?.items ?? []

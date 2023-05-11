@@ -2,9 +2,9 @@ import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   PageSectionThumbnailPostsFragment,
@@ -13,10 +13,11 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { SwiperModule } from 'swiper/angular';
-import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
-import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post.component';
+import { SwiperOptions } from 'swiper';
 
+import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
+import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
+import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post.component';
 @Component({
   selector: 'dhb-page-section-thumbnail-posts',
   standalone: true,
@@ -27,9 +28,9 @@ import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post
     // UI
     ContentfulDraftDirective,
     ThumbnailPostComponent,
-    // 3rd Party
-    SwiperModule,
+    SwiperDirective,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div
       *ngIf="section"
@@ -46,29 +47,16 @@ import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post
       </h5>
 
       <!-- Thumbnail Posts -->
-      <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-      >
-        <ng-container *ngFor="let thumbnailPost of thumbnailPosts">
-          <ng-template swiperSlide>
-            <dhb-thumbnail-post
-              [thumbnailPost]="thumbnailPost"
-            ></dhb-thumbnail-post>
-          </ng-template>
-        </ng-container>
-      </swiper>
+      <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
+        <swiper-slide *ngFor="let thumbnailPost of thumbnailPosts">
+          <dhb-thumbnail-post
+            [thumbnailPost]="thumbnailPost"
+          ></dhb-thumbnail-post>
+        </swiper-slide>
+      </swiper-container>
     </div>
   `,
-  styles: [
-    `
-      @import 'swiper/scss';
-      @import 'dhb_swiper_navigation';
-    `,
-  ],
-  encapsulation: ViewEncapsulation.None,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
@@ -78,10 +66,18 @@ export class PageSectionThumbnailPostsComponent implements OnInit {
 
   thumbnailPosts: ThumbnailPostFragment[] = [];
 
+  swiperOptions?: SwiperOptions;
+
   constructor() {}
 
   ngOnInit() {
     if (!this.section) return;
+
+    this.swiperOptions = {
+      navigation: true,
+      breakpoints:
+        this.section.swiperResponsiveOptions || this.swiperResponsiveOptions,
+    };
 
     this.thumbnailPosts = (
       this.section.handpickedPostsCollection?.items ?? []
