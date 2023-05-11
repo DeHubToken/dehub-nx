@@ -1,4 +1,9 @@
 import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
+import {
+  swiperContainerStyles,
+  swiperPrevNextStyles,
+  swiperSlideStyles,
+} from '@dehub/shared/model';
 import Swiper, { SwiperOptions } from 'swiper';
 
 @Directive({
@@ -8,18 +13,25 @@ import Swiper, { SwiperOptions } from 'swiper';
 export class SwiperDirective implements AfterViewInit {
   @Input() swiperOptions?: SwiperOptions;
 
-  private readonly dhbSwiper: HTMLElement;
-
   constructor(
     private el: ElementRef<
       HTMLElement & { swiper?: Swiper } & { initialize: () => void }
     >
-  ) {
-    this.dhbSwiper = el.nativeElement;
-  }
+  ) {}
 
   ngAfterViewInit() {
-    Object.assign(this.el.nativeElement, this.swiperOptions);
+    const defaultOptions: SwiperOptions = {
+      injectStyles: [
+        swiperContainerStyles,
+        swiperSlideStyles,
+        swiperPrevNextStyles,
+      ],
+    };
+
+    Object.assign(this.el.nativeElement, {
+      ...defaultOptions,
+      ...this.swiperOptions,
+    });
 
     this.el.nativeElement.initialize();
   }

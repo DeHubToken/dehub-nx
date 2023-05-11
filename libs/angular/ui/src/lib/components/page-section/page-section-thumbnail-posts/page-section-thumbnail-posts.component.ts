@@ -56,11 +56,7 @@ import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post
       </swiper-container>
     </div>
   `,
-  styles: [
-    `
-      @import 'dhb_swiper_navigation';
-    `,
-  ],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })

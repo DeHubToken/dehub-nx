@@ -54,11 +54,6 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
       </swiper-container>
     </div>
   `,
-  styles: [
-    `
-      @import 'dhb_swiper_navigation';
-    `,
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })

@@ -55,11 +55,6 @@ import { IconTileComponent } from '../../icon-tile/icon-tile.component';
       </swiper-container>
     </div>
   `,
-  styles: [
-    `
-      @import 'dhb_swiper_navigation';
-    `,
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })

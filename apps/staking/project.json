@@ -33,7 +33,7 @@
         ],
         "styles": ["apps/staking/src/styles.scss"],
         "stylePreprocessorOptions": {
-          "includePaths": ["./node_modules"]
+          "includePaths": ["libs/shared/asset/dehub/src/lib"]
         },
         "scripts": [],
         "webpackConfig": "apps/staking/webpack.config.js",

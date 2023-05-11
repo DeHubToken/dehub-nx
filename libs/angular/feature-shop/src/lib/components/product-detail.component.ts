@@ -40,11 +40,6 @@ import { ProductOrdersComponent } from './product-orders.component';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './product-detail.component.html',
-  styles: [
-    `
-      @import 'dhb_swiper_navigation';
-    `,
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent implements OnInit {

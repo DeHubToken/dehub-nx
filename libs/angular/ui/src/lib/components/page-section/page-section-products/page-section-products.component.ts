@@ -77,8 +77,6 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
   `,
   styles: [
     `
-      @import 'dhb_swiper_navigation';
-
       .dhb-tab-menu {
         border-bottom: none;
         padding-bottom: 0px;

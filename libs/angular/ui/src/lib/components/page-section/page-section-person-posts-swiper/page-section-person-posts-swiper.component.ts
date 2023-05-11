@@ -57,11 +57,6 @@ import { PersonPostComponent } from '../../post/person-post/person-post.componen
       </swiper-container>
     </div>
   `,
-  styles: [
-    `
-      @import 'dhb_swiper_navigation';
-    `,
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
