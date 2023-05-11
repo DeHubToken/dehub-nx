@@ -15,7 +15,7 @@ import { ProductDetailFragment, ShopOrder } from '@dehub/shared/model';
 import { LetModule } from '@rx-angular/template/let';
 import { ButtonModule } from 'primeng/button';
 import { Observable } from 'rxjs';
-import { Navigation, Pagination, SwiperOptions } from 'swiper';
+import { SwiperOptions } from 'swiper';
 import { ProductOrdersComponent } from './product-orders.component';
 
 @Component({
@@ -43,31 +43,8 @@ import { ProductOrdersComponent } from './product-orders.component';
   styles: [
     `
       @import 'dhb_swiper_navigation';
-      /* @import 'swiper/scss';
-      @import 'dhb_swiper_navigation';
-      @import 'swiper/scss/pagination';
-      @import 'swiper/scss/navigation'; */
-      /* Important for keeping all items stretched to same height */
-      /*:host when ViewEncapsulation.None*/
-      /* dhb-product-detail  {
-        .swiper {
-        &.gallery {
-        padding-bottom: 40px !important;
-        .swiper-button-prev {
-          right: 45px !important;
-        }
-        .swiper-button-prev,
-        .swiper-button-next {
-          z-index: 9999;
-          width: 30px !important;
-          height: 30px !important;
-        }
-        }
-        }
-      } */
     `,
   ],
-  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent implements OnInit {
@@ -75,52 +52,8 @@ export class ProductDetailComponent implements OnInit {
   @Input() productOrders$?: Observable<ShopOrder[]>;
 
   swiperOptions: SwiperOptions = {
-    modules: [Navigation, Pagination],
     autoplay: true,
     pagination: { clickable: true },
-    navigation: true,
-    // injectStylesUrls: [
-    //   'swiper/scss',
-    //   'dhb_swiper_navigation',
-    //   'swiper/scss/pagination',
-    //   'swiper/scss/navigation',
-    // ],
-    // injectStyles: [
-    //   `
-    //   .swiper-wrapper {
-    //     padding-bottom: 40px !important;
-    //     .swiper-button-prev {
-    //       right: 45px !important;
-    //     }
-    //     .swiper-button-prev,
-    //     .swiper-button-next {
-    //       z-index: 9999;
-    //       width: 30px !important;
-    //       height: 30px !important;
-    //     }
-    //   }
-    //   `,
-    // ],
-
-    // injectStyles: [
-    //   `
-
-    //     .swiper-container {
-    //       &.gallery {
-    //         padding-bottom: 40px !important;
-    //         .swiper-button-prev {
-    //           right: 45px !important;
-    //         }
-    //         .swiper-button-prev,
-    //         .swiper-button-next {
-    //           z-index: 9999;
-    //           width: 30px !important;
-    //           height: 30px !important;
-    //         }
-    //       }
-    //     }
-    //   `,
-    // ],
   };
 
   constructor() {}

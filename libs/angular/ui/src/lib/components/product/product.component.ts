@@ -11,7 +11,7 @@ import { ButtonModule } from 'primeng/button';
 
 import { DecimalPipe, NgFor, NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';
-import { Navigation, SwiperOptions } from 'swiper';
+import { SwiperOptions } from 'swiper';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../directives/swiper/swiper.directive';
 
@@ -49,12 +49,7 @@ import { SwiperDirective } from '../../directives/swiper/swiper.directive';
 export class ProductComponent implements OnInit {
   @Input() product!: ProductFragment;
 
-  swiperOptions: SwiperOptions = {
-    modules: [Navigation],
-    pagination: {
-      clickable: true,
-    },
-  };
+  swiperOptions: SwiperOptions = {};
 
   constructor() {}
 

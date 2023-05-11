@@ -17,7 +17,7 @@ import {
   fadeInUpOnEnterAnimation,
 } from 'angular-animations';
 import { MenuItem } from 'primeng/api';
-import { Navigation, SwiperOptions } from 'swiper';
+import { SwiperOptions } from 'swiper';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
 
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
@@ -108,7 +108,6 @@ export class PageSectionProductsComponent implements OnInit {
     if (!this.section) return;
 
     this.swiperOptions = {
-      modules: [Navigation],
       navigation: true,
       breakpoints:
         this.section.swiperResponsiveOptions || this.swiperResponsiveOptions,
