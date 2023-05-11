@@ -1,6 +1,3 @@
-// @import 'swiper/scss/navigation';
-// @import 'swiper/swiper';
-
 :root {
   --swiper-theme-color: #fafafa !important;
 }
@@ -45,7 +42,6 @@ swiper-slide {
 }
 
 .swiper-button-next {
-  // background-color: red !important;
   background-image: url('icons/next.svg') !important;
   background-repeat: no-repeat !important;
   background-size: 100% auto !important;

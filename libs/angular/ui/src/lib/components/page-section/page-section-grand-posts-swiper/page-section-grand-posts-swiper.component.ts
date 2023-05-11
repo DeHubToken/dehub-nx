@@ -49,29 +49,9 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
       <!-- Grand Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
         <swiper-slide *ngFor="let grandPost of grandPosts">
-          <dhb-grand-post
-            [grandPost]="grandPost"
-            class="flex-grow-1"
-          ></dhb-grand-post>
+          <dhb-grand-post [grandPost]="grandPost"></dhb-grand-post>
         </swiper-slide>
       </swiper-container>
-
-      <!-- <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-        class="px-3"
-      >
-        <ng-container *ngFor="let grandPost of grandPosts">
-          <ng-template swiperSlide>
-            <dhb-grand-post
-              [grandPost]="grandPost"
-              class="flex-grow-1"
-            ></dhb-grand-post>
-          </ng-template>
-        </ng-container>
-      </swiper> -->
     </div>
   `,
   styles: [

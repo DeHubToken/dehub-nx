@@ -73,25 +73,10 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
           <dhb-product [product]="product"></dhb-product>
         </swiper-slide>
       </swiper-container>
-      <!-- <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-      >
-        <ng-container *ngFor="let product of products">
-          <ng-template swiperSlide>
-            <dhb-product [product]="product"></dhb-product>
-          </ng-template>
-        </ng-container>
-      </swiper> -->
     </div>
   `,
   styles: [
     `
-      /* @import 'swiper/scss';
-      @import 'dhb_swiper_navigation'; */
-
       @import 'dhb_swiper_navigation';
 
       .dhb-tab-menu {
@@ -101,7 +86,6 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
       }
     `,
   ],
-  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' }),

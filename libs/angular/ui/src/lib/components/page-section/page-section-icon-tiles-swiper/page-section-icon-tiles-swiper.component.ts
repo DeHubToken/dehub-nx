@@ -53,18 +53,6 @@ import { IconTileComponent } from '../../icon-tile/icon-tile.component';
           <dhb-icon-tile [iconTile]="iconTile"></dhb-icon-tile>
         </swiper-slide>
       </swiper-container>
-      <!-- <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-      >
-        <ng-container *ngFor="let iconTile of iconTiles">
-          <ng-template swiperSlide>
-            <dhb-icon-tile [iconTile]="iconTile" class="w-full"></dhb-icon-tile>
-          </ng-template>
-        </ng-container>
-      </swiper> -->
     </div>
   `,
   styles: [

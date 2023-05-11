@@ -6,35 +6,7 @@
   >
     <!-- Header -->
     <ng-template pTemplate="header">
-      <!-- <swiper
-        *ngIf="
-          product.picturesCollection &&
-          product.picturesCollection.items as pictures
-        "
-        class="gallery"
-        [pagination]="{
-          clickable: true
-        }"
-        [lazy]="true"
-      >
-        <ng-container *ngFor="let picture of pictures">
-          <ng-template swiperSlide>
-            <img
-              *ngIf="picture"
-              [dhbContentfulDraft]="picture.sys"
-              [src]="picture.url"
-              [alt]="picture.title"
-            />
-          </ng-template>
-        </ng-container>
-      </swiper> -->
-      <!-- <ng-container *ngIf="product.picturesCollection?.items ?? [] as pictures"> -->
-      <swiper-container
-        dhbSwiper
-        [swiperOptions]="swiperOptions"
-        init="false"
-        class="gallery"
-      >
+      <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
         <swiper-slide
           *ngFor="let picture of product.picturesCollection?.items ?? []"
         >
@@ -46,7 +18,6 @@
           />
         </swiper-slide>
       </swiper-container>
-      <!-- </ng-container> -->
     </ng-template>
 
     <!-- Body -->

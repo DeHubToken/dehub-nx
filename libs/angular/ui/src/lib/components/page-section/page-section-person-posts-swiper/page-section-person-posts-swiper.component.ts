@@ -55,32 +55,13 @@ import { PersonPostComponent } from '../../post/person-post/person-post.componen
           ></dhb-person-post>
         </swiper-slide>
       </swiper-container>
-      <!-- <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-        class="px-3"
-      >
-        <ng-container *ngFor="let personPost of personPosts">
-          <ng-template swiperSlide>
-            <dhb-person-post
-              [personPost]="personPost"
-              [path]="path"
-              class="flex-grow-1"
-            ></dhb-person-post>
-          </ng-template>
-        </ng-container>
-      </swiper> -->
     </div>
   `,
   styles: [
     `
-      /* @import 'swiper/scss'; */
       @import 'dhb_swiper_navigation';
     `,
   ],
-  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })

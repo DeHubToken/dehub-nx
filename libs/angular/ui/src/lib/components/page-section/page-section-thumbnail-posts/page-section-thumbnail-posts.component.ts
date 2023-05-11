@@ -54,29 +54,13 @@ import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post
           ></dhb-thumbnail-post>
         </swiper-slide>
       </swiper-container>
-      <!-- <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-      >
-        <ng-container *ngFor="let thumbnailPost of thumbnailPosts">
-          <ng-template swiperSlide>
-            <dhb-thumbnail-post
-              [thumbnailPost]="thumbnailPost"
-            ></dhb-thumbnail-post>
-          </ng-template>
-        </ng-container>
-      </swiper> -->
     </div>
   `,
   styles: [
     `
-      /* @import 'swiper/scss'; */
       @import 'dhb_swiper_navigation';
     `,
   ],
-  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
