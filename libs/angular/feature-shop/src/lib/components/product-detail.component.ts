@@ -47,7 +47,6 @@ export class ProductDetailComponent implements OnInit {
   @Input() productOrders$?: Observable<ShopOrder[]>;
 
   swiperOptions: SwiperOptions = {
-    navigation: true,
     autoplay: true,
     pagination: { clickable: true },
   };
