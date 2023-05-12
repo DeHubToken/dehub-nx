@@ -5,6 +5,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
+  ViewEncapsulation,
 } from '@angular/core';
 import {
   PageSectionProductsFragment,
@@ -53,7 +54,7 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
         </h3>
 
         <!-- Categories -->
-        <div [@fadeInDown]>
+        <div [@fadeInDown] class="category-tab-menu">
           <dhb-tab-menu
             [menuItems]="menuItems"
             [activeMenuItem]="activeMenuItem"
@@ -77,13 +78,14 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
   `,
   styles: [
     `
-      .dhb-tab-menu {
+      .category-tab-menu .dhb-tab-menu {
         border-bottom: none;
         padding-bottom: 0px;
         margin-bottom: 2rem;
       }
     `,
   ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' }),
