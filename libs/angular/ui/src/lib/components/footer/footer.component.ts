@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 import { ContentfulRichMarkupPipe } from '../../pipes/contentful-rich-markup/contentful-rich-markup.pipe';
 import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
+import { AwardPostComponent } from '../post/award-post/award-post.component';
 import { CTAGroupPipe } from './cta-group.pipe';
 
 @Component({
@@ -30,6 +31,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
     // UI
     ContentfulDraftDirective,
     CTAGroupPipe,
+    AwardPostComponent,
     ContentfulRichMarkupPipe,
     SafeHtmlPipe,
   ],
@@ -62,19 +64,15 @@ import { CTAGroupPipe } from './cta-group.pipe';
             </div>
 
             <!-- Awards -->
-            <div class="col-12 md:col-4 lg:col-2">
-              <ng-container
-                *ngFor="let award of footer?.awardsCollection?.items"
-              >
-                <img
-                  [ngSrc]="award.webpUrlWithRadius!"
-                  [width]="award.width"
-                  [height]="award.height"
-                  [alt]="award.description ?? award.title"
-                  sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
-                  class="w-6 md:w-9 h-auto anim-hover-1-reverse"
-                />
-              </ng-container>
+            <div class="col-12 md:col-6">
+              <div class="grid">
+                <div
+                  *ngFor="let awardPost of footer?.awardsCollection?.items"
+                  class="col-12 md:col-6 lg:col-4"
+                >
+                  <dhb-award-post [awardPost]="awardPost"></dhb-award-post>
+                </div>
+              </div>
             </div>
           </div>
         </div>

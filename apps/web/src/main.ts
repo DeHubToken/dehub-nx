@@ -46,23 +46,24 @@ import {
 } from '@dehub/angular/model';
 import { SharedEnv } from '@dehub/shared/model';
 import { createApolloCache, createApolloClient } from '@dehub/shared/utils';
-import { APOLLO_FLAGS, APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { ApolloModule, APOLLO_FLAGS, APOLLO_OPTIONS } from 'apollo-angular';
 import { Moralis } from 'moralis';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import SwiperCore, { Autoplay, Lazy, Navigation, Pagination } from 'swiper';
+import { register } from 'swiper/element/bundle';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 import { Env } from './environments/env';
 import { environment } from './environments/environment';
+
 if (environment.production) {
   enableProdMode();
 }
 
 const { appId, serverUrl } = environment.web3.moralis;
 
-// Install Swiper modules
-SwiperCore.use([Pagination, Lazy, Navigation, Autoplay]);
+// Register Swiper custom elements
+register();
 
 bootstrapApplication(AppComponent, {
   providers: [

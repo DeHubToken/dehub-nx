@@ -32,10 +32,11 @@ export const AssetFragmentDoc = gql`
     title
     fileName
     description
-    contentType
     width
     height
     url
+    contentType
+    webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
     webpUrl: url(transform: { format: WEBP })
     avifUrl: url(transform: { format: AVIF })
   }
@@ -78,22 +79,19 @@ export const CallToActionFragmentDoc = gql`
   }
   ${SysFragmentDoc}
 `;
-export const AssetFragmentDoc = gql`
-  fragment Asset on Asset {
+export const AwardPostFragmentDoc = gql`
+  fragment AwardPost on AwardPost {
     sys {
       ...Sys
     }
-    title
-    fileName
-    description
-    contentType
-    width
-    height
-    url
-    webpUrl: url(transform: { format: WEBP })
-    avifUrl: url(transform: { format: AVIF })
+    picture(preview: $isPreview) {
+      ...Asset
+    }
+    link
+    isRounded
   }
   ${SysFragmentDoc}
+  ${AssetFragmentDoc}
 `;
 export const FooterFragmentDoc = gql`
   fragment Footer on Footer {
@@ -116,14 +114,13 @@ export const FooterFragmentDoc = gql`
     }
     awardsCollection(limit: 10, preview: $isPreview) {
       items {
-        ...Asset
-        webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
+        ...AwardPost
       }
     }
   }
   ${SysFragmentDoc}
   ${CallToActionFragmentDoc}
-  ${AssetFragmentDoc}
+  ${AwardPostFragmentDoc}
 `;
 export const LegalPostFragmentDoc = gql`
   fragment LegalPost on LegalPost {

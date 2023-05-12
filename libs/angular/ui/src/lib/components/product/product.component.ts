@@ -1,18 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
-  ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProductFragment } from '@dehub/shared/model';
 import { ButtonModule } from 'primeng/button';
-import { SwiperModule } from 'swiper/angular';
 
 import { DecimalPipe, NgFor, NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';
+import { SwiperOptions } from 'swiper';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { SwiperDirective } from '../../directives/swiper/swiper.directive';
 
 @Component({
   selector: 'dhb-product',
@@ -28,35 +29,27 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     ButtonModule,
     // UI
     ContentfulDraftDirective,
-    // 3rd Party
-    SwiperModule,
+    SwiperDirective,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './product.component.html',
   styles: [
     `
-      @import 'swiper/scss';
-      @import 'swiper/scss/pagination';
-      @import 'swiper/scss/lazy';
       /* Important for keeping all items stretched to same height */
-      /*:host when ViewEncapsulation.None*/
-      dhb-product {
+      :host {
         height: 100%;
         & > div {
           height: 100%;
         }
-        .swiper {
-          &.gallery {
-            padding-bottom: 0 !important;
-          }
-        }
       }
     `,
   ],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductComponent implements OnInit {
   @Input() product!: ProductFragment;
+
+  swiperOptions: SwiperOptions = {};
 
   constructor() {}
 

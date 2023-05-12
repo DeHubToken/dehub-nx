@@ -5,7 +5,7 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -33,7 +33,7 @@
         ],
         "styles": ["apps/staking/src/styles.scss"],
         "stylePreprocessorOptions": {
-          "includePaths": ["./node_modules"]
+          "includePaths": ["libs/shared/asset/dehub/src/lib"]
         },
         "scripts": [],
         "webpackConfig": "apps/staking/webpack.config.js",
@@ -81,7 +81,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/webpack:dev-server",
+      "executor": "@nx/webpack:dev-server",
       "options": {
         "buildTarget": "staking:build",
         "hmr": true
@@ -100,7 +100,7 @@
       "defaultConfiguration": "development"
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/staking/**/*.{ts,tsx,js,jsx}"],
@@ -108,7 +108,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/staking"],
       "options": {
         "jestConfig": "apps/staking/jest.config.ts",
@@ -156,6 +156,20 @@
       "options": {
         "command": "http-server -a dev.localhost -b -p 9601 -o staking",
         "cwd": "dist/apps/staking.preview"
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/staking/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "staking:serve",
+        "port": 8602
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "staking:serve:production"
+        }
       }
     }
   },

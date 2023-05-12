@@ -5,7 +5,6 @@ import {
   Input,
   OnInit,
   Renderer2,
-  ViewEncapsulation,
 } from '@angular/core';
 import { EmbedPostFragment } from '@dehub/shared/model';
 import { SafeHtmlPipe } from '../../../pipes/safe-html/safe-html.pipe';
@@ -67,7 +66,7 @@ import { SafeHtmlPipe } from '../../../pipes/safe-html/safe-html.pipe';
       }
     `,
   ],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmbedPostComponent implements OnInit {

@@ -1,11 +1,12 @@
 {
   "name": "angular-feature-stream",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/angular/feature-stream/src",
   "prefix": "dhb",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-stream"],
       "options": {
         "jestConfig": "libs/angular/feature-stream/jest.config.ts",
@@ -14,7 +15,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/angular/feature-stream/src/**/*.ts",

@@ -2,9 +2,9 @@ import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   FeaturePostFragment,
@@ -13,8 +13,9 @@ import {
 } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
-import { SwiperModule } from 'swiper/angular';
+import { SwiperOptions } from 'swiper';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
+import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
 import { FeaturePostComponent } from '../../post/feature-post/feature-post.component';
 
 @Component({
@@ -27,9 +28,9 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
     // UI
     ContentfulDraftDirective,
     FeaturePostComponent,
-    // 3rd Party
-    SwiperModule,
+    SwiperDirective,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div
       *ngIf="section"
@@ -46,32 +47,18 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
       </h5>
 
       <!-- Feature Posts -->
-      <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-      >
-        <ng-container
+      <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
+        <swiper-slide
           *ngFor="let featurePost of featurePosts; let isFirst = first"
         >
-          <ng-template swiperSlide>
-            <dhb-feature-post
-              [featurePost]="featurePost"
-              [firstPost]="isFirst"
-            ></dhb-feature-post>
-          </ng-template>
-        </ng-container>
-      </swiper>
+          <dhb-feature-post
+            [featurePost]="featurePost"
+            [firstPost]="isFirst"
+          ></dhb-feature-post>
+        </swiper-slide>
+      </swiper-container>
     </div>
   `,
-  styles: [
-    `
-      @import 'swiper/scss';
-      @import 'dhb_swiper_navigation';
-    `,
-  ],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
@@ -81,10 +68,18 @@ export class PageSectionFeaturePostsComponent implements OnInit {
 
   featurePosts: FeaturePostFragment[] = [];
 
+  swiperOptions?: SwiperOptions;
+
   constructor() {}
 
   ngOnInit() {
     if (!this.section) return;
+
+    this.swiperOptions = {
+      navigation: true,
+      breakpoints:
+        this.section.swiperResponsiveOptions || this.swiperResponsiveOptions,
+    };
 
     this.featurePosts = (
       this.section.handpickedPostsCollection?.items ?? []

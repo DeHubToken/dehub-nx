@@ -8,15 +8,15 @@ The following [Nx](https://nx.dev) commands were used in the project.
    ```
 1. Add Angular support:<br>
    ```
-   pnpm i -D @nrwl/angular
+   pnpm i -D @nx/angular
    ```
 1. Generate Angular app:
    ```
-   npx nx generate @nrwl/angular:application --name=web --style=scss --prefix=dhb --routing --standaloneConfig
+   npx nx generate @nx/angular:application --name=web --style=scss --prefix=dhb --routing --standaloneConfig
    ```
 1. Generate Angular app feature:
    ```
-   npx nx generate @nrwl/angular:library --name=feature-home --directory=angular --importPath=@dehub/angular/feature-home --prefix=dhb --routing --standaloneConfig --tags='scope:angular, type:feature'
+   npx nx generate @nx/angular:library --name=feature-home --directory=angular --importPath=@dehub/angular/feature-home --prefix=dhb --routing --standaloneConfig --tags='scope:angular, type:feature'
    ```
 1. Local website serving with [lite-server](https://github.com/johnpapa/lite-server)
    ```
@@ -43,81 +43,81 @@ The following [Nx](https://nx.dev) commands were used in the project.
 1. Generate React App
 
    ```
-   npm i @nrwl/react -D
+   npm i @nx/react -D
    ```
 
    ```
-   npx nx generate @nrwl/react:application --name=staking --style=scss --standaloneConfig --strict
+   npx nx generate @nx/react:application --name=staking --style=scss --standaloneConfig --strict
    ```
 
    upgrade to [webpack 5](https://nx.dev/l/r/guides/webpack-5#webpack-5-for-react-apps)
 
    ```
-   npx nx g @nrwl/web:webpack5
+   npx nx g @nx/web:webpack5
    ```
 
 1. Generate Shared Assets<br>
    **Freya** _Used to store Primefaces template assets_
 
    ```
-   npx nx generate @nrwl/workspace:library --name=freya --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
+   npx nx generate @nx/workspace:library --name=freya --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
 
    **DeHUB** _Used to store common assets like logo, etc._
 
    ```
-   npx nx generate @nrwl/workspace:library --name=dehub --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
+   npx nx generate @nx/workspace:library --name=dehub --directory=shared/asset --skipBabelrc --skipTsConfig --standaloneConfig --strict --unitTestRunner=none
    ```
 
 1. Generate Shared Models _used for types, states, custom models_
 
    ```
-   npx nx generate @nrwl/workspace:library --name=models --directory=shared --standaloneConfig --strict
+   npx nx generate @nx/workspace:library --name=models --directory=shared --standaloneConfig --strict
 
    ```
 
 1. Generate Shared Utils _used for utilities, and common functions_
 
    ```
-   npx nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
+   npx nx generate @nx/workspace:library --name=utils --directory=shared --standaloneConfig --strict
    ```
 
 1. Generate Utils lib:
 
    ```
-   npx nx generate @nrwl/workspace:library --name=utils --directory=shared --standaloneConfig --strict
+   npx nx generate @nx/workspace:library --name=utils --directory=shared --standaloneConfig --strict
    ```
 
 1. Generate React lib:
 
    ```
-   npx nx generate @nrwl/react:lib --name=ui --directory=react --standaloneConfig --strict
+   npx nx generate @nx/react:lib --name=ui --directory=react --standaloneConfig --strict
 
-   npx nx generate @nrwl/react:lib --name=core --directory=react --standaloneConfig --strict
+   npx nx generate @nx/react:lib --name=core --directory=react --standaloneConfig --strict
    ```
 
 1. Generate Moralis Cloud lib:
 
    ```
-   npx nx generate @nrwl/js:library --name=cloud --directory=moralis --importPath=@dehub/moralis/cloud --publishable --tags='scope:shared, type:util'
+   npx nx generate @nx/js:library --name=cloud --directory=moralis --importPath=@dehub/moralis/cloud --publishable --tags='scope:shared, type:util'
    ```
 
 1. Run Commands generation
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='pnpm web:deploy:prod-draft' --project=web
+   npx nx generate @nx/workspace:run-commands --name=deploy-prod-draft --command='pnpm web:deploy:prod-draft' --project=web
    ```
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='pnpm web:deploy:prod' --project=web
+   npx nx generate @nx/workspace:run-commands --name=deploy-prod --command='pnpm web:deploy:prod' --project=web
    ```
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod-draft --command='pnpm staking:deploy:prod-draft' --project=staking
+   npx nx generate @nx/workspace:run-commands --name=deploy-prod-draft --command='pnpm staking:deploy:prod-draft' --project=staking
    ```
 
    ```
-   npx nx generate @nrwl/workspace:run-commands --name=deploy-prod --command='pnpm staking:deploy:prod' --project=staking
+   npx nx generate @nx/workspace:run-commands --name=deploy-prod --command='pnpm staking:deploy:prod' --project=staking
    ```
 
 1. Generate Angular lazy module under web:
@@ -136,19 +136,19 @@ The following [Nx](https://nx.dev) commands were used in the project.
 1. Generate Angular Core lib:
 
    ```
-   npx nx generate @nrwl/angular:library --name=core --directory=angular --standaloneConfig --strict
+   npx nx generate @nx/angular:library --name=core --directory=angular --standaloneConfig --strict
    ```
 
 1. Generate Angular Moralis lib:
 
    ```
-   npx nx generate @nrwl/angular:library --name=moralis --directory=angular --standaloneConfig
+   npx nx generate @nx/angular:library --name=moralis --directory=angular --standaloneConfig
    ```
 
 1. Generate Angular Model lib:
 
    ```
-   npx nx generate @nrwl/angular:library --name=model --directory=angular --importPath=@dehub/angular/model --prefix=dhb --simpleModuleName --skipModule --standaloneConfig --tags='scope:angular, type:model'
+   npx nx generate @nx/angular:library --name=model --directory=angular --importPath=@dehub/angular/model --prefix=dhb --simpleModuleName --skipModule --standaloneConfig --tags='scope:angular, type:model'
    ```
 
 # Monorepo Tagging
@@ -185,23 +185,23 @@ These capabilities include generating applications, libraries, etc as well as th
 Below are our core plugins:
 
 - [React](https://reactjs.org)
-  - `pnpm i -D @nrwl/react`
+  - `pnpm i -D @nx/react`
 - Web (no framework frontends)
-  - `pnpm i -D @nrwl/web`
+  - `pnpm i -D @nx/web`
 - [Angular](https://angular.io)
-  - `pnpm i -D @nrwl/angular`
+  - `pnpm i -D @nx/angular`
 - [Nest](https://nestjs.com)
   - `pnpm i -D @nrwl/nest`
 - [Express](https://expressjs.com)
   - `pnpm i -D @nrwl/express`
 - [Node](https://nodejs.org)
-  - `pnpm i -D @nrwl/node`
+  - `pnpm i -D @nx/node`
 
 There are also many [community plugins](https://nx.dev/community) you could add.
 
 ## Generate an application
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+Run `nx g @nx/react:app my-app` to generate an application.
 
 > You can use any of the plugins above to generate applications as well.
 
@@ -209,7 +209,7 @@ When using Nx, you can create multiple applications and libraries in the same wo
 
 ## Generate a library
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+Run `nx g @nx/react:lib my-lib` to generate a library.
 
 > You can also use any of the plugins above to generate libraries as well.
 
@@ -221,7 +221,7 @@ Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The 
 
 ## Code scaffolding
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+Run `nx g @nx/react:component my-component --project=my-app` to generate a new component.
 
 ## Build
 

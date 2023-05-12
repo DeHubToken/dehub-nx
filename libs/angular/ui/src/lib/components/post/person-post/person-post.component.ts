@@ -40,7 +40,7 @@ interface SocialLink {
     <div [dhbContentfulDraft]="personPost.sys" class="w-full">
       <p-card
         *ngIf="personPost"
-        styleClass="person h-full text-center mt-2 px-2 pt-6 pb-4 border-neon-1 bg-gradient-2 anim-hover-1-reverse"
+        styleClass="person h-full mt-2 mb-4 pt-6 px-2 text-center border-neon-1 bg-gradient-2 anim-hover-1-reverse"
       >
         <ng-template pTemplate="header">
           <ng-container *ngIf="personPost.avatar as avatar">
@@ -96,17 +96,6 @@ interface SocialLink {
       </p-card>
     </div>
   `,
-  styles: [
-    `
-      /* Important for keeping all items stretched to same height */
-      :host {
-        height: 100%;
-        & > div {
-          height: 100%;
-        }
-      }
-    `,
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonPostComponent implements OnInit {
