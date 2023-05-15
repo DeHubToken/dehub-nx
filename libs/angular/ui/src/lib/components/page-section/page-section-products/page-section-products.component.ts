@@ -2,6 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
   ViewEncapsulation,
@@ -17,7 +18,9 @@ import {
   fadeInUpOnEnterAnimation,
 } from 'angular-animations';
 import { MenuItem } from 'primeng/api';
-import { SwiperModule } from 'swiper/angular';
+import { SwiperOptions } from 'swiper';
+import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
+
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { ProductComponent } from '../../product/product.component';
 import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
@@ -33,9 +36,9 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
     TabMenuComponent,
     ContentfulDraftDirective,
     ProductComponent,
-    // 3rd Party
-    SwiperModule,
+    SwiperDirective,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div
       *ngIf="section"
@@ -51,7 +54,7 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
         </h3>
 
         <!-- Categories -->
-        <div [@fadeInDown]>
+        <div [@fadeInDown] class="category-tab-menu">
           <dhb-tab-menu
             [menuItems]="menuItems"
             [activeMenuItem]="activeMenuItem"
@@ -66,26 +69,16 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
       </h5>
 
       <!-- Product -->
-      <swiper
-        [navigation]="true"
-        [breakpoints]="
-          section.swiperResponsiveOptions || swiperResponsiveOptions
-        "
-      >
-        <ng-container *ngFor="let product of products">
-          <ng-template swiperSlide>
-            <dhb-product [product]="product"></dhb-product>
-          </ng-template>
-        </ng-container>
-      </swiper>
+      <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
+        <swiper-slide *ngFor="let product of products">
+          <dhb-product [product]="product"></dhb-product>
+        </swiper-slide>
+      </swiper-container>
     </div>
   `,
   styles: [
     `
-      @import 'swiper/scss';
-      @import 'dhb_swiper_navigation';
-
-      .dhb-tab-menu {
+      .category-tab-menu .dhb-tab-menu {
         border-bottom: none;
         padding-bottom: 0px;
         margin-bottom: 2rem;
@@ -107,10 +100,18 @@ export class PageSectionProductsComponent implements OnInit {
 
   products: ProductFragment[] = [];
 
+  swiperOptions?: SwiperOptions;
+
   constructor() {}
 
   ngOnInit() {
     if (!this.section) return;
+
+    this.swiperOptions = {
+      navigation: true,
+      breakpoints:
+        this.section.swiperResponsiveOptions || this.swiperResponsiveOptions,
+    };
 
     // Exclude the current category
     this.menuItems = this.menuItems.filter(
