@@ -10,6 +10,7 @@ import {
   SectionPostFragment,
 } from '@dehub/shared/model';
 import { isNotNil, resolveColumnWidth } from '@dehub/shared/utils';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { SectionPostComponent } from '../../post/section-post/section-post.component';
 
@@ -53,6 +54,7 @@ import { SectionPostComponent } from '../../post/section-post/section-post.compo
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
 export class PageSectionSectionPostsComponent implements OnInit {
   @Input() section!: PageSectionSectionPostsFragment;

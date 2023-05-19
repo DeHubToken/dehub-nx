@@ -67,10 +67,16 @@ import { CTAGroupPipe } from './cta-group.pipe';
             <div class="col-12 md:col-6">
               <div class="grid">
                 <div
-                  *ngFor="let awardPost of footer?.awardsCollection?.items"
+                  *ngFor="
+                    let awardPost of footer?.awardsCollection?.items;
+                    let isFirst = first
+                  "
                   class="col-12 md:col-6 lg:col-4"
                 >
-                  <dhb-award-post [awardPost]="awardPost"></dhb-award-post>
+                  <dhb-award-post
+                    [awardPost]="awardPost"
+                    [priority]="isFirst"
+                  ></dhb-award-post>
                 </div>
               </div>
             </div>

@@ -14,7 +14,7 @@ import {
   SwiperResponsiveOptions,
 } from '@dehub/shared/model';
 import { LetModule } from '@rx-angular/template/let';
-import { Observable, map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   standalone: true,

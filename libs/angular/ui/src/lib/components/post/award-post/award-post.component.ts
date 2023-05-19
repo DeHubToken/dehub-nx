@@ -5,7 +5,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { AwardPostFragment } from '@dehub/shared/model';
-import { HeavyPictureComponent } from '../../heavy-picture/heavy-picture.component';
 
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
@@ -19,7 +18,6 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
     NgOptimizedImage,
     // UI
     ContentfulDraftDirective,
-    HeavyPictureComponent,
   ],
   template: `
     <div [dhbContentfulDraft]="awardPost.sys">
@@ -30,9 +28,10 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
               [ngSrc]="award.webpUrlWithRadius!"
               [width]="award.width"
               [height]="award.height"
+              [priority]="priority"
               [alt]="award.description ?? award.title"
-              sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
               class="w-6 md:w-9 h-auto anim-hover-1-reverse"
+              sizes="(max-width: 576px) 15vw, 100vw"
             />
           </ng-container>
         </a>
@@ -43,6 +42,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
 })
 export class AwardPostComponent implements OnInit {
   @Input() awardPost!: AwardPostFragment;
+  @Input() priority = false;
 
   constructor() {}
 

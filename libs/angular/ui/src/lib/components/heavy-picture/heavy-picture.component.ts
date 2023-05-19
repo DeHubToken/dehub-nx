@@ -28,10 +28,10 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
           [ngSrc]="picture.url"
           [width]="picture.width"
           [height]="picture.height"
-          [attr.priority]="priority"
+          [priority]="priority"
           [alt]="picture.description ?? picture.title"
-          sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
-          [ngClass]="{ hidden: showHeavyPic, 'h-auto': autoHeight }"
+          sizes="50vw"
+          [ngClass]="{ hidden: showHeavyPic, 'h-auto': true }"
         />
       </ng-container>
       <ng-container *ngIf="container.heavyPicture as heavyPicture">
@@ -44,11 +44,15 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
           [ngSrc]="heavyPicture.url"
           [width]="heavyPicture.width"
           [height]="heavyPicture.height"
-          [attr.priority]="priority"
+          [priority]="priority"
           [alt]="heavyPicture.description ?? heavyPicture.title"
           (load)="onLoad()"
-          sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
-          [ngClass]="{ hidden: !showHeavyPic, 'h-auto': autoHeight }"
+          sizes="100vw"
+          [ngClass]="{
+            hidden: !showHeavyPic,
+            'h-auto': true,
+            'w-auto': false
+          }"
         />
         <ng-template #gif>
           <!-- https://codelabs.developers.google.com/codelabs/avif#5 -->
@@ -57,14 +61,16 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
             loop
             muted
             playsinline
-            [ngClass]="{ hidden: !showHeavyPic, 'h-auto': autoHeight }"
+            [ngClass]="{
+              hidden: !showHeavyPic
+            }"
           >
             <source
               type="image/webp"
               [srcset]="heavyPicture.webpUrl"
               [width]="heavyPicture.width"
               [height]="heavyPicture.height"
-              sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+              sizes="100vw"
             />
             <!-- TODO: Safari not render avif -->
             <!-- <source
@@ -72,7 +78,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
               [srcset]="heavyPicture.avifUrl"
               [width]="heavyPicture.width"
               [height]="heavyPicture.height"
-              sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+              sizes="100vw"
             /> -->
             <img
               *ngIf="heavyPicture.url"
@@ -80,10 +86,14 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
               [ngSrc]="heavyPicture.url"
               [width]="heavyPicture.width"
               [height]="heavyPicture.height"
-              [attr.priority]="priority"
+              [priority]="priority"
               [alt]="heavyPicture.description ?? heavyPicture.title"
               (load)="onLoad()"
-              sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+              sizes="100vw"
+              [ngClass]="{
+                'h-auto': true,
+                'w-auto': false
+              }"
             />
           </picture>
         </ng-template>
@@ -109,7 +119,7 @@ export class HeavyPictureComponent<
 {
   @Input() container!: C;
   @Input() showOnHover = false;
-  @Input() autoHeight = true;
+  @Input() autoHeight = false;
   @Input() priority = false;
   showHeavyPic = false;
 
