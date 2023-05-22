@@ -3,6 +3,16 @@
 $menuBgColor: transparent;
 
 /* ---------------------------------- Main ---------------------------------- */
+
+a {
+  color: $dhb_link_color;
+
+  &:hover {
+    color: $dhb_link_hover_color;
+    text-decoration: underline;
+  }
+}
+
 .layout-wrapper {
   background: $dhb_gradient1;
 

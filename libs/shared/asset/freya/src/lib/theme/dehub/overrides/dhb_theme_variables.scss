@@ -227,7 +227,7 @@ $dangerButtonFocusShadow: 0 0 0 1px
   scale-color($dangerButtonBg, $lightness: 30%);
 
 $linkButtonColor: $dhb_link_color;
-$linkButtonHoverColor: $dhb_link_color;
+$linkButtonHoverColor: $dhb_link_hover_color;
 $linkButtonTextHoverDecoration: underline;
 $linkButtonFocusShadow: 0 0 0 0 $focusOutlineColor;
 
