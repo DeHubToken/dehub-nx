@@ -697,6 +697,8 @@ export const ProductCommonFragmentDoc = gql`
     }
     name
     price
+    softCap
+    hardCap
     currency
     sku
     availableQuantity

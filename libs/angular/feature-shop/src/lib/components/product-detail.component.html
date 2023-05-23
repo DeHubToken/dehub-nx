@@ -36,7 +36,7 @@
           class="flex-grow pr-3 mb-4 line-height-3"
         ></div>
 
-        <div class="flex-none min-w-full sm:min-w-max md:w-17rem">
+        <div class="min-w-full sm:min-w-max">
           <!-- Meta Info -->
           <div
             *ngIf="productDetail.category as category"
@@ -120,6 +120,11 @@
               </h5>
             </div>
           </div>
+
+          <!-- Sales Widget -->
+          <dhb-product-sales
+            [productSales$]="productSales$"
+          ></dhb-product-sales>
 
           <!-- Orders Widget -->
           <dhb-product-orders
