@@ -43,10 +43,13 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
       <!-- Grand Posts -->
       <div class="grid">
         <div
-          *ngFor="let grandPost of grandPosts"
+          *ngFor="let grandPost of grandPosts; let i = index"
           class="col-12 md:col-6 flex sm:mb-5"
         >
-          <dhb-grand-post [grandPost]="grandPost"></dhb-grand-post>
+          <dhb-grand-post
+            [grandPost]="grandPost"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          ></dhb-grand-post>
         </div>
       </div>
     </div>
