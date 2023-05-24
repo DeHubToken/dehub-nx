@@ -7,9 +7,12 @@ import {
 } from '@angular/core';
 import { AddressPipe } from '@dehub/angular/ui/pipes/address/address.pipe';
 import { ExplorerUrlPipe } from '@dehub/angular/ui/pipes/explorer-url/explorer-url.pipe';
+import { animationDuration } from '@dehub/shared/model';
 import { LetModule } from '@rx-angular/template/let';
+import { jelloAnimation, rubberBandAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
 import { ProductSales } from '../model/product.model';
+
 @Component({
   selector: 'dhb-product-sales',
   standalone: true,
@@ -64,7 +67,11 @@ import { ProductSales } from '../model/product.model';
               class="col-6 flex flex-column gap-1"
             >
               <div class="opacity-80">Soft Cap</div>
-              <div class="text-xl">
+              <div
+                [@animateSoftCap]="softCapPercent === 1 && animSmallCapState"
+                (@animateSoftCap.done)="animSmallCapState = !animSmallCapState"
+                class="text-xl"
+              >
                 {{ softCapPercent | percent: '1.0-2' }}
               </div>
             </div>
@@ -75,7 +82,11 @@ import { ProductSales } from '../model/product.model';
               class="col-6 flex flex-column gap-1"
             >
               <div class="opacity-80">Hard Cap</div>
-              <div class="text-xl">
+              <div
+                [@animateHardCap]="hardCapPercent === 1 && animHardCapState"
+                (@animateHardCap.done)="animHardCapState = !animHardCapState"
+                class="text-xl"
+              >
                 {{ hardCapPercent | percent: '1.0-2' }}
               </div>
             </div>
@@ -85,9 +96,24 @@ import { ProductSales } from '../model/product.model';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    jelloAnimation({
+      anchor: 'animateSoftCap',
+      duration: 3 * animationDuration,
+      delay: 2 * animationDuration,
+    }),
+    rubberBandAnimation({
+      anchor: 'animateHardCap',
+      duration: 3 * animationDuration,
+      delay: 2 * animationDuration,
+    }),
+  ],
 })
 export class ProductSalesComponent implements OnInit {
   @Input({ required: true }) productSales$?: Observable<ProductSales>;
+
+  animSmallCapState = false;
+  animHardCapState = false;
 
   constructor() {}
 
