@@ -62,32 +62,38 @@ import { ProductSales } from '../model/product.model';
             </div>
 
             <!-- Soft Cap -->
-            <div
-              *ngIf="productSales.softCapPercent as softCapPercent"
-              class="col-6 flex flex-column gap-1"
-            >
+            <div class="col-6 flex flex-column gap-1">
               <div class="opacity-80">Soft Cap</div>
               <div
-                [@animateSoftCap]="softCapPercent === 1 && animSmallCapState"
+                [@animateSoftCap]="
+                  productSales.softCapPercent === 1 && animSmallCapState
+                "
                 (@animateSoftCap.done)="animSmallCapState = !animSmallCapState"
                 class="text-xl"
               >
-                {{ softCapPercent | percent: '1.0-2' }}
+                {{
+                  productSales.softCapPercent
+                    ? (productSales.softCapPercent | percent: '1.0-2')
+                    : '-'
+                }}
               </div>
             </div>
 
             <!-- Hard Cap -->
-            <div
-              *ngIf="productSales.hardCapPercent as hardCapPercent"
-              class="col-6 flex flex-column gap-1"
-            >
+            <div class="col-6 flex flex-column gap-1">
               <div class="opacity-80">Hard Cap</div>
               <div
-                [@animateHardCap]="hardCapPercent === 1 && animHardCapState"
+                [@animateHardCap]="
+                  productSales.hardCapPercent === 1 && animHardCapState
+                "
                 (@animateHardCap.done)="animHardCapState = !animHardCapState"
                 class="text-xl"
               >
-                {{ hardCapPercent | percent: '1.0-2' }}
+                {{
+                  productSales.hardCapPercent
+                    ? (productSales.hardCapPercent | percent: '1.0-2')
+                    : '&infin;'
+                }}
               </div>
             </div>
           </div>
