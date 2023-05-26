@@ -52,7 +52,7 @@ import { BasicPostComponent } from '../../post/basic-post/basic-post.component';
           <dhb-basic-post
             [basicPost]="basicPost"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-          ></dhb-basic-post>
+          />
         </swiper-slide>
       </swiper-container>
     </div>

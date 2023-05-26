@@ -35,7 +35,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
       <p-card
         *ngIf="featurePost"
         [header]="featurePost.title ?? ''"
-        [subheader]="(featurePost.sys.firstPublishedAt | date: 'fullDate')!"
+        [subheader]="(featurePost.sys.firstPublishedAt | date : 'fullDate')!"
         styleClass="feature p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
@@ -45,7 +45,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
               class="fad fa-play-circle"
               (click)="onVideoPlayClicked()"
             ></i>
-            <dhb-heavy-picture [container]="featurePost"></dhb-heavy-picture>
+            <dhb-heavy-picture [container]="featurePost" />
           </div>
         </ng-template>
 
@@ -62,7 +62,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
             [label]="featurePost.callToActionButtonLabel"
             (onClick)="onCTAClicked($event)"
             styleClass="p-button-primary p-button-lg p-button-raised"
-          ></p-button>
+          />
         </ng-template>
       </p-card>
     </div>

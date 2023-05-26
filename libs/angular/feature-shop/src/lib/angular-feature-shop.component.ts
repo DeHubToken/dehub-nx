@@ -30,7 +30,7 @@ import { Observable, filter, map } from 'rxjs';
   template: `
     <ng-container *rxLet="pageShop$ as pageShop" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageShop"></dhb-page-header>
+      <dhb-page-header [page]="pageShop" />
 
       <!-- Page Sections -->
       <dhb-page-sections
@@ -41,7 +41,7 @@ import { Observable, filter, map } from 'rxjs';
         [iconTilesResponsiveOptions]="iconTilesResponsiveOptions"
         [productsResponsiveOptions]="productsResponsiveOptions"
         [path]="path"
-      ></dhb-page-sections>
+      />
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

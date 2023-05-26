@@ -27,14 +27,14 @@ import { Observable, map } from 'rxjs';
   template: `
     <ng-container *rxLet="pageGame$ as pageGame" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageGame"></dhb-page-header>
+      <dhb-page-header [page]="pageGame" />
 
       <!-- Page Sections -->
       <dhb-page-sections
         [sections]="pageGame?.sectionsCollection?.items"
         [grandPostsResponsiveOptions]="grandPostsResponsiveOptions"
         [path]="path"
-      ></dhb-page-sections>
+      />
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

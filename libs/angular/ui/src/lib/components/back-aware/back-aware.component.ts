@@ -15,18 +15,12 @@ import { BackButtonComponent } from '../buttons/back-button/back-button.componen
   ],
   template: `
     <!-- Back (top) -->
-    <dhb-back-button
-      [@fadeInUp]
-      [routerLink]="backRouterLink"
-    ></dhb-back-button>
+    <dhb-back-button [@fadeInUp] [routerLink]="backRouterLink" />
 
-    <ng-content></ng-content>
+    <ng-content />
 
     <!-- Back (bottom) -->
-    <dhb-back-button
-      [@fadeInUp]
-      [routerLink]="backRouterLink"
-    ></dhb-back-button>
+    <dhb-back-button [@fadeInUp] [routerLink]="backRouterLink" />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [

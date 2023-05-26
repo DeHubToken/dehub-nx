@@ -52,7 +52,7 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
           <dhb-grand-post
             [grandPost]="grandPost"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-          ></dhb-grand-post>
+          />
         </swiper-slide>
       </swiper-container>
     </div>

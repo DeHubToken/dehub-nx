@@ -106,7 +106,7 @@ import { DropdownModule } from 'primeng/dropdown';
 
     <!-- Loading -->
     <ng-template #loading>
-      <dhb-loading></dhb-loading>
+      <dhb-loading />
     </ng-template>
   `,
   styles: [

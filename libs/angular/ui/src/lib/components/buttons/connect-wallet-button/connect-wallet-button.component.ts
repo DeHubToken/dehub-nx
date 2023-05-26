@@ -27,14 +27,10 @@ import { SplitButtonModule } from 'primeng/splitbutton';
       [label]="label"
       [icon]="icon"
       [model]="items"
-    ></p-splitButton>
+    />
     <ng-template #notAuthenticated>
       <!-- Login State -->
-      <p-button
-        [label]="label"
-        [icon]="icon"
-        (onClick)="onLoginClick()"
-      ></p-button>
+      <p-button [label]="label" [icon]="icon" (onClick)="onLoginClick()" />
     </ng-template>
   `,
 

@@ -64,7 +64,7 @@ import { PhoneInputComponent } from '../phone-input/phone-input.component';
         <dhb-phone-input
           [formControl]="contactsForm.controls.phone"
           [prefillData]="prefillData?.phone"
-        ></dhb-phone-input>
+        />
       </div>
     </form>
   `,

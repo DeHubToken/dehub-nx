@@ -38,7 +38,7 @@ import { ProductDetailService } from './services';
           <dhb-product-detail
             [productDetail$]="productDetail$"
             [productOrders$]="productOrders$"
-          ></dhb-product-detail>
+          />
         </dhb-back-aware>
       </div>
     </div>

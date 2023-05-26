@@ -31,7 +31,7 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
           [label]="'Reconnect Wallet'"
           [icon]="'fas fa-wallet'"
           (onClick)="onReconnectClick()"
-        ></p-button>
+        />
       </div>
     </div>
   `,

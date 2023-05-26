@@ -44,7 +44,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
               class="fad fa-play-circle"
               (click)="onVideoPlayClicked()"
             ></i>
-            <dhb-heavy-picture [container]="grandPost"></dhb-heavy-picture>
+            <dhb-heavy-picture [container]="grandPost" />
           </div>
         </ng-template>
 
@@ -59,7 +59,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
             [label]="grandPost.callToActionButtonLabel"
             (onClick)="onCTAClicked($event)"
             styleClass="p-button-primary p-button-lg p-button-raised"
-          ></p-button>
+          />
         </ng-template>
       </p-card>
     </div>

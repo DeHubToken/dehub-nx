@@ -43,7 +43,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
             <!-- Links -->
             <div
               *ngFor="
-                let group of footer?.linksCollection?.items | dhbCTAGroup: 5
+                let group of footer?.linksCollection?.items | dhbCTAGroup : 5
               "
               class="col-12 md:col-4 lg:col-2"
             >
@@ -70,7 +70,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
                   *ngFor="let awardPost of footer?.awardsCollection?.items"
                   class="col-12 md:col-6 lg:col-4"
                 >
-                  <dhb-award-post [awardPost]="awardPost"></dhb-award-post>
+                  <dhb-award-post [awardPost]="awardPost" />
                 </div>
               </div>
             </div>

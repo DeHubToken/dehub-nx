@@ -58,14 +58,14 @@ interface SocialLink {
           [value]="name"
           styleClass="block mx-auto mb-3 px-3 py-2 font-normal text-xl shadow-3 bg-cyan-900"
           [style]="{ width: 'fit-content', 'margin-top': '-66px' }"
-        ></p-tag>
+        />
 
         <!-- Title -->
         <p-tag
           *ngIf="personPost.title as title"
           [value]="title"
           styleClass="uppercase text-sm px-3 py-1 bg-gradient-4 shadow-2"
-        ></p-tag>
+        />
 
         <div *ngIf="personPost.description as desc" class="text-sm pt-5">
           {{ desc }}

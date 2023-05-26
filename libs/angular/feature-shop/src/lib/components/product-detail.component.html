@@ -98,7 +98,7 @@
                     [disabled]="productDetail.pause ?? false"
                     icon="fa-solid fa-check"
                     styleClass="p-button-primary p-button-lg mt-3 block w-full"
-                  ></p-button>
+                  />
                 </ng-container>
 
                 <ng-template #unavailable>
@@ -122,14 +122,10 @@
           </div>
 
           <!-- Sales Widget -->
-          <dhb-product-sales
-            [productSales$]="productSales$"
-          ></dhb-product-sales>
+          <dhb-product-sales [productSales$]="productSales$" />
 
           <!-- Orders Widget -->
-          <dhb-product-orders
-            [productOrders$]="productOrders$"
-          ></dhb-product-orders>
+          <dhb-product-orders [productOrders$]="productOrders$" />
         </div>
       </div>
     </div>

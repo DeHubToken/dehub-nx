@@ -35,26 +35,23 @@ import { Observable } from 'rxjs';
     SwUpdateAvailableComponent,
   ],
   template: `
-    <router-outlet></router-outlet>
+    <router-outlet />
 
     <!-- Toast Messages -->
-    <p-toast></p-toast>
+    <p-toast />
 
     <!-- Confirmations -->
-    <p-confirmDialog></p-confirmDialog>
+    <p-confirmDialog />
 
     <!-- PWA update available popup -->
-    <dhb-sw-update-available
-      (update)="onSwUpdate()"
-      (cancel)="onSwCancel()"
-    ></dhb-sw-update-available>
+    <dhb-sw-update-available (update)="onSwUpdate()" (cancel)="onSwCancel()" />
 
     <!-- Loader -->
     <dhb-loader
       *ngIf="loaderVisible$ | push"
       [subtitle]="subtitle$ | push"
       [loaderGif]="loaderGif"
-    ></dhb-loader>
+    />
   `,
 })
 export class AppComponent implements OnInit, OnDestroy {

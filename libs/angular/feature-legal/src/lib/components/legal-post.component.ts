@@ -34,7 +34,7 @@ import { LegalPostFragment } from '@dehub/shared/model';
 
           <!-- Date -->
           <p>
-            Last updated: {{ legalPost.sys.publishedAt | date: 'fullDate' }}
+            Last updated: {{ legalPost.sys.publishedAt | date : 'fullDate' }}
           </p>
 
           <!-- Description -->

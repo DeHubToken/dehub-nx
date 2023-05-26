@@ -12,7 +12,7 @@ import { BuyDehubButtonComponent } from '@dehub/angular/ui/components/buttons/bu
 import { ConnectWalletButtonComponent } from '@dehub/angular/ui/components/buttons/connect-wallet-button/connect-wallet-button.component';
 import { getBuyDehubMenuItems, shortenAddress } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
 import { AppMainComponent } from '../app.main.component';
@@ -60,21 +60,19 @@ import { AppMenuComponent } from './menu/app.menu.component';
         </a>
       </div>
 
-      <dhb-menu *ngIf="isDev"></dhb-menu>
+      <dhb-menu *ngIf="isDev" />
 
       <div class="layout-topbar-right">
         <ul class="layout-topbar-actions">
           <li class="topbar-item">
-            <dhb-buy-dehub-button
-              [items]="buyDehubMenuItems"
-            ></dhb-buy-dehub-button>
+            <dhb-buy-dehub-button [items]="buyDehubMenuItems" />
           </li>
           <li class="topbar-item ml-2 md:ml-4">
             <dhb-connect-wallet-button
               [label]="(connectWalletButtonLabel$ | push)!"
               [isAuthenticated]="(isAuthenticated$ | push)!"
               [icon]="connectWalletButtonIcon"
-            ></dhb-connect-wallet-button>
+            />
           </li>
         </ul>
       </div>

@@ -58,7 +58,7 @@ import { EmbedPostComponent } from '../embed-post/embed-post.component';
       <dhb-chart-post
         *ngIf="sectionPost.chartPost as chartPost"
         [chartPost]="chartPost"
-      ></dhb-chart-post>
+      />
 
       <dhb-embed-post
         *ngIf="sectionPost.embedPost as embedPost"

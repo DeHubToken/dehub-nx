@@ -53,7 +53,7 @@ import { IconTileComponent } from '../../icon-tile/icon-tile.component';
           <dhb-icon-tile
             [iconTile]="iconTile"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-          ></dhb-icon-tile>
+          />
         </swiper-slide>
       </swiper-container>
     </div>

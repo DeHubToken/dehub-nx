@@ -44,7 +44,7 @@ import { FaqGroupComponent } from '../../faq-group/faq-group.component';
           [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           class="col-12"
         >
-          <dhb-faq-group [faqGroup]="faqGroup"></dhb-faq-group>
+          <dhb-faq-group [faqGroup]="faqGroup" />
         </div>
       </div>
     </div>
