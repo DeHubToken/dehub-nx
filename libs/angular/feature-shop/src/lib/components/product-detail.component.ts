@@ -1,8 +1,8 @@
 import { DecimalPipe, NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
 } from '@angular/core';
@@ -14,9 +14,11 @@ import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
 import { ProductDetailFragment, ShopOrder } from '@dehub/shared/model';
 import { LetModule } from '@rx-angular/template/let';
 import { ButtonModule } from 'primeng/button';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 import { SwiperOptions } from 'swiper';
+import { ProductSales } from '../model/product.model';
 import { ProductOrdersComponent } from './product-orders.component';
+import { ProductSalesComponent } from './product-sales.component';
 
 @Component({
   selector: 'dhb-product-detail',
@@ -33,6 +35,7 @@ import { ProductOrdersComponent } from './product-orders.component';
     SafeHtmlPipe,
     ContentfulDraftDirective,
     ProductOrdersComponent,
+    ProductSalesComponent,
     ContentfulRichMarkupPipe,
     SwiperDirective,
     // 3rd Party
@@ -43,15 +46,52 @@ import { ProductOrdersComponent } from './product-orders.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent implements OnInit {
-  @Input() productDetail$?: Observable<ProductDetailFragment>;
-  @Input() productOrders$?: Observable<ShopOrder[]>;
+  @Input({ required: true }) productDetail$!: Observable<ProductDetailFragment>;
+  @Input({ required: true }) productOrders$!: Observable<ShopOrder[]>;
 
   swiperOptions: SwiperOptions = {
     autoplay: true,
     pagination: { clickable: true },
   };
 
+  productSales$?: Observable<ProductSales>;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.productSales$ = combineLatest([
+      this.productDetail$,
+      this.productOrders$,
+    ]).pipe(
+      map(
+        ([
+          { price = 0, availableQuantity = 0, softCap, hardCap },
+          productOrders,
+        ]) => {
+          const totalSales = productOrders.reduce(
+            (totalSales, { totalAmount }) => totalSales + totalAmount,
+            0
+          );
+          const remainingSales = price * availableQuantity;
+          const softCapPercent = softCap
+            ? totalSales >= softCap
+              ? 1
+              : totalSales / softCap
+            : undefined;
+          const hardCapPercent = hardCap
+            ? totalSales >= hardCap
+              ? 1
+              : totalSales / hardCap
+            : undefined;
+
+          return {
+            totalSales,
+            remainingSales,
+            softCapPercent,
+            hardCapPercent,
+          };
+        }
+      )
+    );
+  }
 }

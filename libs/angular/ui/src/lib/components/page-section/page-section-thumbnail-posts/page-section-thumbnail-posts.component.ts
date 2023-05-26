@@ -1,8 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
 } from '@angular/core';
@@ -48,9 +48,12 @@ import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post
 
       <!-- Thumbnail Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let thumbnailPost of thumbnailPosts">
+        <swiper-slide
+          *ngFor="let thumbnailPost of thumbnailPosts; let i = index"
+        >
           <dhb-thumbnail-post
             [thumbnailPost]="thumbnailPost"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           ></dhb-thumbnail-post>
         </swiper-slide>
       </swiper-container>

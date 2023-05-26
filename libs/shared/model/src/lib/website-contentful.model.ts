@@ -5312,6 +5312,7 @@ export interface Product extends Entry {
   contentfulMetadata: ContentfulMetadata;
   currency?: Maybe<Scalars['String']>;
   fullDescription?: Maybe<ProductFullDescription>;
+  hardCap?: Maybe<Scalars['Int']>;
   linkedFrom?: Maybe<ProductLinkingCollections>;
   name?: Maybe<Scalars['String']>;
   pause?: Maybe<Scalars['Boolean']>;
@@ -5320,6 +5321,7 @@ export interface Product extends Entry {
   shortDescription?: Maybe<Scalars['String']>;
   sku?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  softCap?: Maybe<Scalars['Int']>;
   soldOutLabel?: Maybe<Scalars['String']>;
   sys: Sys;
 }
@@ -5352,6 +5354,11 @@ export interface ProductCurrencyArgs {
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface ProductFullDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductHardCapArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
@@ -5395,6 +5402,11 @@ export interface ProductSkuArgs {
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface ProductSlugArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductSoftCapArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
@@ -5553,6 +5565,15 @@ export interface ProductFilter {
   fullDescription_contains?: InputMaybe<Scalars['String']>;
   fullDescription_exists?: InputMaybe<Scalars['Boolean']>;
   fullDescription_not_contains?: InputMaybe<Scalars['String']>;
+  hardCap?: InputMaybe<Scalars['Int']>;
+  hardCap_exists?: InputMaybe<Scalars['Boolean']>;
+  hardCap_gt?: InputMaybe<Scalars['Int']>;
+  hardCap_gte?: InputMaybe<Scalars['Int']>;
+  hardCap_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  hardCap_lt?: InputMaybe<Scalars['Int']>;
+  hardCap_lte?: InputMaybe<Scalars['Int']>;
+  hardCap_not?: InputMaybe<Scalars['Int']>;
+  hardCap_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5594,6 +5615,15 @@ export interface ProductFilter {
   slug_not?: InputMaybe<Scalars['String']>;
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  softCap?: InputMaybe<Scalars['Int']>;
+  softCap_exists?: InputMaybe<Scalars['Boolean']>;
+  softCap_gt?: InputMaybe<Scalars['Int']>;
+  softCap_gte?: InputMaybe<Scalars['Int']>;
+  softCap_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  softCap_lt?: InputMaybe<Scalars['Int']>;
+  softCap_lte?: InputMaybe<Scalars['Int']>;
+  softCap_not?: InputMaybe<Scalars['Int']>;
+  softCap_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   soldOutLabel?: InputMaybe<Scalars['String']>;
   soldOutLabel_contains?: InputMaybe<Scalars['String']>;
   soldOutLabel_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5654,6 +5684,8 @@ export enum ProductOrder {
   AvailableQuantityDesc = 'availableQuantity_DESC',
   CurrencyAsc = 'currency_ASC',
   CurrencyDesc = 'currency_DESC',
+  HardCapAsc = 'hardCap_ASC',
+  HardCapDesc = 'hardCap_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   PauseAsc = 'pause_ASC',
@@ -5664,6 +5696,8 @@ export enum ProductOrder {
   SkuDesc = 'sku_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
+  SoftCapAsc = 'softCap_ASC',
+  SoftCapDesc = 'softCap_DESC',
   SoldOutLabelAsc = 'soldOutLabel_ASC',
   SoldOutLabelDesc = 'soldOutLabel_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -7370,6 +7404,15 @@ export interface CfProductNestedFilter {
   fullDescription_contains?: InputMaybe<Scalars['String']>;
   fullDescription_exists?: InputMaybe<Scalars['Boolean']>;
   fullDescription_not_contains?: InputMaybe<Scalars['String']>;
+  hardCap?: InputMaybe<Scalars['Int']>;
+  hardCap_exists?: InputMaybe<Scalars['Boolean']>;
+  hardCap_gt?: InputMaybe<Scalars['Int']>;
+  hardCap_gte?: InputMaybe<Scalars['Int']>;
+  hardCap_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  hardCap_lt?: InputMaybe<Scalars['Int']>;
+  hardCap_lte?: InputMaybe<Scalars['Int']>;
+  hardCap_not?: InputMaybe<Scalars['Int']>;
+  hardCap_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -7411,6 +7454,15 @@ export interface CfProductNestedFilter {
   slug_not?: InputMaybe<Scalars['String']>;
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  softCap?: InputMaybe<Scalars['Int']>;
+  softCap_exists?: InputMaybe<Scalars['Boolean']>;
+  softCap_gt?: InputMaybe<Scalars['Int']>;
+  softCap_gte?: InputMaybe<Scalars['Int']>;
+  softCap_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  softCap_lt?: InputMaybe<Scalars['Int']>;
+  softCap_lte?: InputMaybe<Scalars['Int']>;
+  softCap_not?: InputMaybe<Scalars['Int']>;
+  softCap_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   soldOutLabel?: InputMaybe<Scalars['String']>;
   soldOutLabel_contains?: InputMaybe<Scalars['String']>;
   soldOutLabel_exists?: InputMaybe<Scalars['Boolean']>;
@@ -10119,6 +10171,8 @@ export type PageSectionProductsFragment = {
       shortDescription?: string;
       name?: string;
       price?: number;
+      softCap?: number;
+      hardCap?: number;
       currency?: string;
       sku?: string;
       availableQuantity?: number;
@@ -10170,6 +10224,8 @@ export type PageSectionProductsFragment = {
           shortDescription?: string;
           name?: string;
           price?: number;
+          softCap?: number;
+          hardCap?: number;
           currency?: string;
           sku?: string;
           availableQuantity?: number;
@@ -10641,6 +10697,8 @@ export type PageShopFragment = {
               shortDescription?: string;
               name?: string;
               price?: number;
+              softCap?: number;
+              hardCap?: number;
               currency?: string;
               sku?: string;
               availableQuantity?: number;
@@ -10692,6 +10750,8 @@ export type PageShopFragment = {
                   shortDescription?: string;
                   name?: string;
                   price?: number;
+                  softCap?: number;
+                  hardCap?: number;
                   currency?: string;
                   sku?: string;
                   availableQuantity?: number;
@@ -11360,6 +11420,8 @@ export type ProductCommonFragment = {
   __typename?: 'Product';
   name?: string;
   price?: number;
+  softCap?: number;
+  hardCap?: number;
   currency?: string;
   sku?: string;
   availableQuantity?: number;
@@ -11404,6 +11466,8 @@ export type ProductFragment = {
   shortDescription?: string;
   name?: string;
   price?: number;
+  softCap?: number;
+  hardCap?: number;
   currency?: string;
   sku?: string;
   availableQuantity?: number;
@@ -11449,6 +11513,8 @@ export type ProductDetailFragment = {
   availableSizes?: Array<string>;
   name?: string;
   price?: number;
+  softCap?: number;
+  hardCap?: number;
   currency?: string;
   sku?: string;
   availableQuantity?: number;
@@ -13954,6 +14020,8 @@ export type PageShopCollectionQuery = {
                   shortDescription?: string;
                   name?: string;
                   price?: number;
+                  softCap?: number;
+                  hardCap?: number;
                   currency?: string;
                   sku?: string;
                   availableQuantity?: number;
@@ -14005,6 +14073,8 @@ export type PageShopCollectionQuery = {
                       shortDescription?: string;
                       name?: string;
                       price?: number;
+                      softCap?: number;
+                      hardCap?: number;
                       currency?: string;
                       sku?: string;
                       availableQuantity?: number;
@@ -14663,6 +14733,8 @@ export type ProductCollectionBySlugQuery = {
       availableSizes?: Array<string>;
       name?: string;
       price?: number;
+      softCap?: number;
+      hardCap?: number;
       currency?: string;
       sku?: string;
       availableQuantity?: number;
@@ -15399,6 +15471,8 @@ export const ProductCommonFragmentDoc = gql`
     }
     name
     price
+    softCap
+    hardCap
     currency
     sku
     availableQuantity

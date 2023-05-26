@@ -1,8 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
   ViewEncapsulation,
@@ -70,8 +70,11 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
 
       <!-- Product -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let product of products">
-          <dhb-product [product]="product"></dhb-product>
+        <swiper-slide *ngFor="let product of products; let i = index">
+          <dhb-product
+            [product]="product"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          ></dhb-product>
         </swiper-slide>
       </swiper-container>
     </div>

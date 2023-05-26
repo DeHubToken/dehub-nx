@@ -1,8 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
 } from '@angular/core';
@@ -48,10 +48,11 @@ import { PersonPostComponent } from '../../post/person-post/person-post.componen
 
       <!-- Person Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let personPost of personPosts">
+        <swiper-slide *ngFor="let personPost of personPosts; let i = index">
           <dhb-person-post
             [personPost]="personPost"
             [path]="path"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           ></dhb-person-post>
         </swiper-slide>
       </swiper-container>

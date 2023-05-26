@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { AddressPipe } from '@dehub/angular/ui/pipes/address/address.pipe';
+import { ExplorerUrlPipe } from '@dehub/angular/ui/pipes/explorer-url/explorer-url.pipe';
 import { ShopOrder } from '@dehub/shared/model';
 import { LetModule } from '@rx-angular/template/let';
 import { Observable } from 'rxjs';
@@ -20,6 +21,7 @@ import { Observable } from 'rxjs';
     DatePipe,
     // UI
     AddressPipe,
+    ExplorerUrlPipe,
     // 3rd Party
     LetModule,
   ],
@@ -42,10 +44,19 @@ import { Observable } from 'rxjs';
               *ngFor="let productOrder of productOrders; let orderCount = count"
               class="grid flex align-items-center text-right mt-2"
             >
-              <div class="col-4 text-sm">
-                {{ productOrder.user.ethAddress | dhbAddress }}
+              <div class="col-5 text-sm">
+                <a
+                  [href]="
+                    productOrder.user.ethAddress
+                      | dhbExplorerUrl: 'tokentxnsErc721'
+                  "
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {{ productOrder.user.ethAddress | dhbAddress: true }}
+                </a>
               </div>
-              <div class="col-6 opacity-80 text-xs">
+              <div class="col-5 opacity-80 text-xs">
                 {{ productOrder.updatedAt | date: 'M/dd/yy, H:mm' }}
               </div>
               <div class="col-2 text-sm">

@@ -7,7 +7,8 @@ import { shortenAddress } from '@dehub/shared/utils';
   pure: true,
 })
 export class AddressPipe implements PipeTransform {
-  transform(ethAddress: string): string {
-    return shortenAddress(ethAddress);
+  transform(ethAddress: string, lowerCase = false): string {
+    const shortenedAddress = shortenAddress(ethAddress);
+    return lowerCase ? shortenedAddress.toLowerCase() : shortenedAddress;
   }
 }

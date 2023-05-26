@@ -52,8 +52,24 @@ import { ProductDetailService } from './services';
   ],
 })
 export class AngularFeatureShopProductDetailComponent implements OnInit {
-  productDetail$?: Observable<ProductDetailFragment>;
-  productOrders$?: Observable<ShopOrder[]>;
+  productDetail$: Observable<ProductDetailFragment> = this.route.paramMap.pipe(
+    map(paramMap => paramMap.get('slug') ?? undefined),
+    switchMap(slug => this.productDetailService.getProductDetailBySlug(slug)),
+    filterNil(),
+    publishReplayRefCount()
+  );
+
+  productOrders$: Observable<ShopOrder[]> = this.productDetail$.pipe(
+    map(({ sys: { id } }) => id),
+    switchMap(contentfulId =>
+      this.dehubMoralis.getDeHubShopOrders$({
+        contentfulId,
+        orderStatus: OrderStatus.verified,
+      })
+    ),
+    map(orders => orders ?? []),
+    publishReplayRefCount()
+  );
 
   routerLink = [`/${NavigationTabMenu.Shop}`];
 
@@ -63,24 +79,5 @@ export class AngularFeatureShopProductDetailComponent implements OnInit {
     @Inject(DehubMoralisToken) private dehubMoralis: IDehubMoralisService
   ) {}
 
-  ngOnInit() {
-    this.productDetail$ = this.route.paramMap.pipe(
-      map(paramMap => paramMap.get('slug') ?? undefined),
-      switchMap(slug => this.productDetailService.getProductDetailBySlug(slug)),
-      filterNil(),
-      publishReplayRefCount()
-    );
-
-    this.productOrders$ = this.productDetail$.pipe(
-      map(({ sys: { id } }) => id),
-      switchMap(contentfulId =>
-        this.dehubMoralis.getDeHubShopOrders$({
-          contentfulId,
-          orderStatus: OrderStatus.verified,
-        })
-      ),
-      map(orders => orders ?? []),
-      publishReplayRefCount()
-    );
-  }
+  ngOnInit() {}
 }

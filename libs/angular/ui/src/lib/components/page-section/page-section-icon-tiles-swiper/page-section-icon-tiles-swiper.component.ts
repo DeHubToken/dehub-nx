@@ -1,8 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
 } from '@angular/core';
@@ -49,8 +49,11 @@ import { IconTileComponent } from '../../icon-tile/icon-tile.component';
 
       <!-- Icon Tiles -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let iconTile of iconTiles">
-          <dhb-icon-tile [iconTile]="iconTile"></dhb-icon-tile>
+        <swiper-slide *ngFor="let iconTile of iconTiles; let i = index">
+          <dhb-icon-tile
+            [iconTile]="iconTile"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          ></dhb-icon-tile>
         </swiper-slide>
       </swiper-container>
     </div>

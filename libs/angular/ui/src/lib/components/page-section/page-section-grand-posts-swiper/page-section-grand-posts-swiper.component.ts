@@ -1,8 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
 } from '@angular/core';
@@ -48,8 +48,11 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
 
       <!-- Grand Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let grandPost of grandPosts">
-          <dhb-grand-post [grandPost]="grandPost"></dhb-grand-post>
+        <swiper-slide *ngFor="let grandPost of grandPosts; let i = index">
+          <dhb-grand-post
+            [grandPost]="grandPost"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          ></dhb-grand-post>
         </swiper-slide>
       </swiper-container>
     </div>

@@ -1,8 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
 } from '@angular/core';
@@ -48,8 +48,11 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
 
       <!-- Feature Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let featurePost of featurePosts">
-          <dhb-feature-post [featurePost]="featurePost"></dhb-feature-post>
+        <swiper-slide *ngFor="let featurePost of featurePosts; let i = index">
+          <dhb-feature-post
+            [featurePost]="featurePost"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          ></dhb-feature-post>
         </swiper-slide>
       </swiper-container>
     </div>
