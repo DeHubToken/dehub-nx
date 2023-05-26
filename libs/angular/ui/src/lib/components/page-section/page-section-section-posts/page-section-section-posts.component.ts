@@ -46,7 +46,7 @@ import { SectionPostComponent } from '../../post/section-post/section-post.compo
           [class]="resolveCol(sectionPost)"
         >
           <div [@fadeInUp]="{ value: '', params: { delay: i * 200 } }">
-            <dhb-section-post [sectionPost]="sectionPost"></dhb-section-post>
+            <dhb-section-post [sectionPost]="sectionPost" />
           </div>
         </div>
       </div>

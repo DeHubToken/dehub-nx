@@ -48,16 +48,16 @@ import { Observable } from 'rxjs';
                 <a
                   [href]="
                     productOrder.user.ethAddress
-                      | dhbExplorerUrl: 'tokentxnsErc721'
+                      | dhbExplorerUrl : 'tokentxnsErc721'
                   "
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {{ productOrder.user.ethAddress | dhbAddress: true }}
+                  {{ productOrder.user.ethAddress | dhbAddress : true }}
                 </a>
               </div>
               <div class="col-5 opacity-80 text-xs">
-                {{ productOrder.updatedAt | date: 'M/dd/yy, H:mm' }}
+                {{ productOrder.updatedAt | date : 'M/dd/yy, H:mm' }}
               </div>
               <div class="col-2 text-sm">
                 {{ productOrder.quantity }}

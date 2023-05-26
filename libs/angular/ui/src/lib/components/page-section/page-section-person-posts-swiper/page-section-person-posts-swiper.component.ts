@@ -53,7 +53,7 @@ import { PersonPostComponent } from '../../post/person-post/person-post.componen
             [personPost]="personPost"
             [path]="path"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-          ></dhb-person-post>
+          />
         </swiper-slide>
       </swiper-container>
     </div>

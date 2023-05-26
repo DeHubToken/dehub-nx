@@ -58,7 +58,7 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
           <dhb-tab-menu
             [menuItems]="menuItems"
             [activeMenuItem]="activeMenuItem"
-          ></dhb-tab-menu>
+          />
         </div>
       </div>
       <h5
@@ -74,7 +74,7 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
           <dhb-product
             [product]="product"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-          ></dhb-product>
+          />
         </swiper-slide>
       </swiper-container>
     </div>

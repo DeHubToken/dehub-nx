@@ -58,13 +58,13 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
               label="Learn More"
               (onClick)="onLearnMoreClicked($event)"
               styleClass="p-button-secondary p-button-lg p-button-raised"
-            ></p-button>
+            />
             <p-button
               *ngIf="dappPost.urlToDapp as urlDapp"
               label="Open D'App"
               (onClick)="onDappClicked($event)"
               styleClass="p-button-primary p-button-lg p-button-raised"
-            ></p-button>
+            />
           </div>
         </ng-template>
       </p-card>

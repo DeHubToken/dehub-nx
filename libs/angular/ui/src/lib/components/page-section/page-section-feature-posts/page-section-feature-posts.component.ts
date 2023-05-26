@@ -52,7 +52,7 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
           <dhb-feature-post
             [featurePost]="featurePost"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-          ></dhb-feature-post>
+          />
         </swiper-slide>
       </swiper-container>
     </div>

@@ -22,7 +22,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
       [model]="items"
       [icon]="items[0].icon!"
       (onClick)="onBuyClick()"
-    ></p-splitButton>
+    />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

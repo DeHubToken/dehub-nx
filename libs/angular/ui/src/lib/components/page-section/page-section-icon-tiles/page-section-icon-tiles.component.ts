@@ -47,7 +47,7 @@ import { IconTileComponent } from '../../icon-tile/icon-tile.component';
           [iconTile]="iconTile"
           [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
           class="col-12 sm:col-12 md:col-6 xl:col-4 flex flex-auto"
-        ></dhb-icon-tile>
+        />
       </div>
     </div>
   `,

@@ -11,4 +11,5 @@
 **/*.insomnia.json
 !**/*.json
 !**/*.js
+pnpm-lock.yaml
 

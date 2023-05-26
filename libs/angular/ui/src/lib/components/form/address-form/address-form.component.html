@@ -7,7 +7,7 @@
   [styleClass]="'text-sm mb-4'"
   [classList]="'bg-gradient-3-propagate'"
 >
-  <ng-container *ngTemplateOutlet="formFields"></ng-container>
+  <ng-container *ngTemplateOutlet="formFields" />
 </p-fieldset>
 
 <ng-template #formFields>
@@ -186,7 +186,7 @@
         (onClick)="clearAddress()"
         icon="fa-regular fa-trash-xmark"
         styleClass="p-button-secondary p-button"
-      ></p-button>
+      />
     </div>
   </form>
 </ng-template>

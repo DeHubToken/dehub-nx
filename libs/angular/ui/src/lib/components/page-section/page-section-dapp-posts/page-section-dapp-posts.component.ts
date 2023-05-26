@@ -47,7 +47,7 @@ import { DappPostComponent } from '../../post/dapp-post/dapp-post.component';
           [dappPost]="dappPost"
           [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
           class="col-12 sm:col-12 md:col-6 xl:col-4 flex flex-auto"
-        ></dhb-dapp-post>
+        />
       </div>
     </div>
   `,

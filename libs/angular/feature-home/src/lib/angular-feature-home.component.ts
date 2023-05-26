@@ -28,7 +28,7 @@ import { Observable, map } from 'rxjs';
   template: `
     <ng-container *rxLet="pageHome$ as pageHome" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageHome"></dhb-page-header>
+      <dhb-page-header [page]="pageHome" />
 
       <!-- Page Sections -->
       <dhb-page-sections
@@ -38,7 +38,7 @@ import { Observable, map } from 'rxjs';
         [basicPostsResponsiveOptions]="basicPostsResponsiveOptions"
         [iconTilesResponsiveOptions]="iconTilesResponsiveOptions"
         [path]="path"
-      ></dhb-page-sections>
+      />
     </ng-container>
   `,
 

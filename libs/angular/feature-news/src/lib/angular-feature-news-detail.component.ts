@@ -36,9 +36,7 @@ import { BasicPostDetailComponent } from './components/basic-post-detail.compone
       >
         <dhb-back-aware [backRouterLink]="routerLink">
           <!-- Basic Post Detail -->
-          <dhb-basic-post-detail
-            [basicPostDetail]="basicPostDetail$ | push"
-          ></dhb-basic-post-detail>
+          <dhb-basic-post-detail [basicPostDetail]="basicPostDetail$ | push" />
         </dhb-back-aware>
       </div>
     </div>

@@ -60,7 +60,7 @@ import { ButtonModule } from 'primeng/button';
               [disabled]="productDetail.pause ?? false"
               icon="fa-solid fa-check"
               styleClass="p-button-primary p-button-lg mt-3 block w-full"
-            ></p-button>
+            />
           </ng-container>
 
           <ng-template #unavailable>

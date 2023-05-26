@@ -54,7 +54,7 @@ import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post
           <dhb-thumbnail-post
             [thumbnailPost]="thumbnailPost"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
-          ></dhb-thumbnail-post>
+          />
         </swiper-slide>
       </swiper-container>
     </div>

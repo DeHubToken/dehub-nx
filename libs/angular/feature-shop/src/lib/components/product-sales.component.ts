@@ -47,7 +47,10 @@ import { ProductSales } from '../model/product.model';
             <div class="col-6">
               <div class="opacity-80">Total</div>
               <div class="text-xl">
-                {{ productSales.totalSales | currency: 'USD':'symbol':'1.0-2' }}
+                {{
+                  productSales.totalSales
+                    | currency : 'USD' : 'symbol' : '1.0-2'
+                }}
               </div>
             </div>
 
@@ -56,7 +59,8 @@ import { ProductSales } from '../model/product.model';
               <div class="opacity-80">Remaining</div>
               <div class="text-xl">
                 {{
-                  productSales.remainingSales | currency: 'USD':'symbol':'1.0-2'
+                  productSales.remainingSales
+                    | currency : 'USD' : 'symbol' : '1.0-2'
                 }}
               </div>
             </div>
@@ -73,7 +77,7 @@ import { ProductSales } from '../model/product.model';
               >
                 {{
                   productSales.softCapPercent
-                    ? (productSales.softCapPercent | percent: '1.0-2')
+                    ? (productSales.softCapPercent | percent : '1.0-2')
                     : '-'
                 }}
               </div>
@@ -91,7 +95,7 @@ import { ProductSales } from '../model/product.model';
               >
                 {{
                   productSales.hardCapPercent
-                    ? (productSales.hardCapPercent | percent: '1.0-2')
+                    ? (productSales.hardCapPercent | percent : '1.0-2')
                     : '&infin;'
                 }}
               </div>
