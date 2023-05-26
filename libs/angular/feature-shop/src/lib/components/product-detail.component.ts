@@ -1,4 +1,4 @@
-import { DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
@@ -6,17 +6,16 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '@dehub/angular/ui/directives/swiper/swiper.directive';
 import { ContentfulRichMarkupPipe } from '@dehub/angular/ui/pipes/contentful-rich-markup/contentful-rich-markup.pipe';
 import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
 import { ProductDetailFragment, ShopOrder } from '@dehub/shared/model';
 import { LetModule } from '@rx-angular/template/let';
-import { ButtonModule } from 'primeng/button';
 import { Observable, combineLatest, map } from 'rxjs';
 import { SwiperOptions } from 'swiper';
 import { ProductSales } from '../model/product.model';
+import { ProductInfoComponent } from './product-info.component';
 import { ProductOrdersComponent } from './product-orders.component';
 import { ProductSalesComponent } from './product-sales.component';
 
@@ -27,13 +26,10 @@ import { ProductSalesComponent } from './product-sales.component';
     // Angular
     NgIf,
     NgFor,
-    RouterLink,
-    DecimalPipe,
-    // PrimeNG
-    ButtonModule,
     // UI
     SafeHtmlPipe,
     ContentfulDraftDirective,
+    ProductInfoComponent,
     ProductOrdersComponent,
     ProductSalesComponent,
     ContentfulRichMarkupPipe,
