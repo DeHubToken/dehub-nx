@@ -2,6 +2,7 @@ import {
   BIG_ZERO,
   ethersToBigNumber,
   ethersToSerializedBigNumber,
+  getDehubPrice,
   SerializedBigNumber,
 } from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
@@ -15,7 +16,6 @@ import BigNumber from 'bignumber.js';
 import DeHubStakingAbi from '../../config/abis/DeHubStaking.json';
 import { getStakingAddress } from '../../utils/addressHelpers';
 import { Call, multicallV2 } from '../../utils/multicall';
-import getDehubPrice from '../../utils/priceDehub';
 import {
   ApplicationState,
   ApplicationStatus,

@@ -51,7 +51,27 @@
           </div>
 
           <!-- Info Widget -->
-          <dhb-product-info [productDetail]="productDetail" />
+          <dhb-product-info [productDetail]="productDetail">
+            <!-- Buy / Coming Soon -->
+            <p-button
+              [routerLink]="
+                productDetail.pause
+                  ? null
+                  : [
+                      '/shop',
+                      {
+                        outlets: {
+                          modal: ['checkout', productDetail.slug]
+                        }
+                      }
+                    ]
+              "
+              [label]="productDetail.pause ? 'Coming Soon' : 'Buy'"
+              [disabled]="productDetail.pause ?? false"
+              icon="fa-solid fa-check"
+              styleClass="p-button-primary p-button-lg mt-3 block w-full"
+            />
+          </dhb-product-info>
 
           <!-- Sales Widget -->
           <dhb-product-sales [productSales$]="productSales$" />
