@@ -40,6 +40,7 @@ export const getBuyDehubMenuItems = (
   landing: string,
   cexUrl: string,
   downloadMetamaskUrl: string,
+  onSwap: () => void,
   useRouterLink = false
 ): {
   label: string;
@@ -48,6 +49,11 @@ export const getBuyDehubMenuItems = (
   routerLink?: string[];
   target?: string;
 }[] => [
+  {
+    label: 'Swap',
+    command: onSwap,
+    icon: 'fad fa-bolt',
+  },
   {
     label: 'Direct',
     ...(useRouterLink
