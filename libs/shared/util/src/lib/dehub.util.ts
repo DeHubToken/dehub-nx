@@ -40,7 +40,7 @@ export const getBuyDehubMenuItems = (
   landing: string,
   cexUrl: string,
   downloadMetamaskUrl: string,
-  onSwap: () => void = () => {},
+  onSwap: () => void,
   useRouterLink = false
 ): {
   label: string;

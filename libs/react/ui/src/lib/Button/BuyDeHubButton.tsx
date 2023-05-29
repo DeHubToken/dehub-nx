@@ -5,12 +5,19 @@ const BuyDeHubButton = ({
   landing,
   cexUrl,
   downloadMetamaskUrl,
+  onSwap,
 }: {
   landing: string;
   cexUrl: string;
   downloadMetamaskUrl: string;
+  onSwap: () => void;
 }) => {
-  const items = getBuyDehubMenuItems(landing, cexUrl, downloadMetamaskUrl);
+  const items = getBuyDehubMenuItems(
+    landing,
+    cexUrl,
+    downloadMetamaskUrl,
+    onSwap
+  );
   const directLink = items[0];
 
   return (

@@ -6,12 +6,12 @@ import { DomSanitizer } from '@angular/platform-browser';
   template: `
     <iframe
       [src]="letsExchangeUrl"
+      loading="lazy"
       title="LetsExchange"
       width="100%"
       height="400"
-      frameborder="0"
       allow="clipboard-read; clipboard-write"
-      class="border-round"
+      class="border-none border-round"
     ></iframe>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

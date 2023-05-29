@@ -127,7 +127,6 @@ export class AppTopBarComponent implements OnInit {
 
   onSwap() {
     this.dialogService.open(LetsExchangeComponent, {
-      showHeader: true,
       header: 'Swap',
       width: '420px',
       styleClass: 'bg-gradient-3 border-neon-2',
