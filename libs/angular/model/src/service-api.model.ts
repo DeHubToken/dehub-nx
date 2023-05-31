@@ -126,3 +126,12 @@ export interface IContentFulManagementService {
     quantity: number
   ) => Observable<ProductAvailableQuantityFragment | null>;
 }
+
+export interface ICoingeckoService {
+  /**
+   * Read Dehub usd price.
+   *
+   * @returns the usd price of dehub polled
+   */
+  getDehubUsdPricePoll$: () => Observable<string>;
+}

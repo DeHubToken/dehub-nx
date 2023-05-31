@@ -27,6 +27,7 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client/core';
 import {
+  CoingeckoService,
   ConsoleLoggerService,
   ContentfulManagementService,
   DehubMoralisService,
@@ -34,6 +35,7 @@ import {
 } from '@dehub/angular/core';
 import {
   ApolloCacheToken,
+  CoingeckoToken,
   ContentfulManagementToken,
   DehubMoralisToken,
   EnvToken,
@@ -161,6 +163,12 @@ bootstrapApplication(AppComponent, {
     {
       provide: ContentfulManagementToken,
       useClass: ContentfulManagementService,
+    },
+
+    // Coingecko
+    {
+      provide: CoingeckoToken,
+      useClass: CoingeckoService,
     },
 
     // Loggers
