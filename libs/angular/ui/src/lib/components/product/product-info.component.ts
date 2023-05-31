@@ -1,5 +1,4 @@
 import {
-  CurrencyPipe,
   DecimalPipe,
   NgIf,
   NgOptimizedImage,
@@ -15,9 +14,10 @@ import {
 import { EnvToken } from '@dehub/angular/model';
 import { ProductDetailFragment, SharedEnv } from '@dehub/shared/model';
 import { getDehubPrice } from '@dehub/shared/utils';
-import { PushModule } from '@rx-angular/template/push';
+import { LetModule } from '@rx-angular/template/let';
 import BigNumber from 'bignumber.js';
 import { from, map } from 'rxjs';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'dhb-product-info',
@@ -26,29 +26,48 @@ import { from, map } from 'rxjs';
     // Angular
     NgIf,
     DecimalPipe,
-    CurrencyPipe,
     NgTemplateOutlet,
     NgOptimizedImage,
+    // Lib
+    LoadingComponent,
     // 3rd Party
-    PushModule,
+    LetModule,
   ],
   template: `
-    <div class="card overview-box gray shadow-2 pt-1 pb-3 mb-3">
+    <div
+      [class.min-w-full]="!isBundle"
+      [class.sm:min-w-max]="!isBundle"
+      class="card overview-box gray shadow-2 pt-1 pb-3 mb-3"
+    >
       <div class="overview-info text-right w-full">
         <!-- Bundle price -->
         <div *ngIf="isBundle; else notBundle" class="grid pr-0">
           <div class="col-6 pb-0">
             <!-- DHB price -->
             <ng-container
-              *ngTemplateOutlet="
-                priceWithCurrency;
-                context: {
-                  price: productDehubPrice$ | push,
-                  currency: '$DHB',
-                  estimated: true
-                }
+              *rxLet="
+                productDehubPrice$ as productDehubPrice;
+                suspense: loading
               "
-            />
+            >
+              <ng-container
+                *ngTemplateOutlet="
+                  priceWithCurrency;
+                  context: {
+                    price: productDehubPrice,
+                    currency: '$DHB',
+                    estimated: true
+                  }
+                "
+              />
+            </ng-container>
+
+            <!-- Loading Template -->
+            <ng-template #loading>
+              <dhb-loading
+                iconClass="fa-duotone fa-circle-dollar fa-2xl fa-spin"
+              />
+            </ng-template>
           </div>
 
           <div class="col-6 pb-0">
@@ -89,17 +108,25 @@ import { from, map } from 'rxjs';
           let-estimated="estimated"
         >
           <!--  Price -->
-          <h2 class="mt-1 mb-0 pr-0">
-            <span *ngIf="estimated" class="vertical-align-sub line-height-1"
-              >~</span
-            >{{ price | number : '1.0-2' }}
-          </h2>
+          <h3 class="mt-1 mb-0 pr-0">
+            <!-- Estimated -->
+            <ng-container *ngIf="estimated; else accurate">
+              <span *ngIf="estimated" class="vertical-align-sub line-height-1"
+                >~</span
+              >{{ price }}
+            </ng-container>
+
+            <!-- Accurate -->
+            <ng-template #accurate>
+              {{ price | number : '.0-2' }}
+            </ng-template>
+          </h3>
 
           <!-- Currency -->
           <div [class.flex]="estimated" [class.justify-content-end]="estimated">
-            <h5 class="text-sm mt-0 mb-2 opacity-80 line-height-1">
+            <h6 class="text-sm mt-0 mb-2 opacity-80 line-height-1">
               {{ currency }}
-            </h5>
+            </h6>
             <img
               *ngIf="estimated"
               [ngSrc]="coingeckoUrl"
@@ -113,7 +140,7 @@ import { from, map } from 'rxjs';
         </ng-template>
 
         <!-- Quantity -->
-        <h5 class="my-0 text-sm inline-block line-height-1 w-full">
+        <h6 class="my-0 text-sm inline-block line-height-1 w-full">
           <hr class="my-0 pb-2 border-dashed" />
 
           <ng-container
@@ -143,7 +170,7 @@ import { from, map } from 'rxjs';
               </span>
             </ng-template>
           </ng-template>
-        </h5>
+        </h6>
       </div>
     </div>
   `,
@@ -151,13 +178,30 @@ import { from, map } from 'rxjs';
 })
 export class ProductInfoComponent implements OnInit {
   @Input({ required: true }) productDetail!: ProductDetailFragment;
+  @Input() larger = false;
 
   productDehubPrice$ = from(getDehubPrice()).pipe(
     map(dehubPriceStr =>
-      new BigNumber(dehubPriceStr)
-        .times(this.productDetail.price ?? 0)
+      new BigNumber(this.productDetail.price ?? 0)
+        .dividedBy(new BigNumber(dehubPriceStr))
         .toNumber()
-    )
+    ),
+    map(price => {
+      const unitList = ['', 'K', 'M', 'B', 'T'];
+
+      const formatNumber = (num: number) => {
+        let unit = 0;
+
+        while (Math.abs(num) > 1000) {
+          num = Math.floor(Math.abs(num) / 100) / 10;
+          unit++;
+        }
+        return `${Math.sign(num) * Math.abs(num)} ${unitList[unit]}`;
+      };
+
+      return formatNumber(price);
+    })
+    // delay(6000)
   );
 
   isBundle = false;
