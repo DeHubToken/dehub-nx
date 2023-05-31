@@ -1,6 +1,6 @@
 import { memoize } from 'lodash';
 
-export const getDehubPrice = memoize(async (): Promise<string> => {
+export const getDehubUsdPrice = memoize(async (): Promise<string> => {
   const json = await fetch(
     'https://api.coingecko.com/api/v3/simple/price?ids=dehub&vs_currencies=usd'
   );

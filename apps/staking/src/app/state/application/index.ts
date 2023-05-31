@@ -2,7 +2,7 @@ import {
   BIG_ZERO,
   ethersToBigNumber,
   ethersToSerializedBigNumber,
-  getDehubPrice,
+  getDehubUsdPrice,
   SerializedBigNumber,
 } from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
@@ -36,7 +36,7 @@ const initialState: ApplicationState = {
 export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
   'application/fetchDehubPrice',
   async () => {
-    const dehubPrice = await getDehubPrice();
+    const dehubPrice = await getDehubUsdPrice();
     return dehubPrice;
   }
 );
