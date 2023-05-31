@@ -14,6 +14,7 @@ import { CardModule } from 'primeng/card';
 import { SwiperOptions } from 'swiper';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../directives/swiper/swiper.directive';
+import { ProductInfoComponent } from './product-info.component';
 
 @Component({
   selector: 'dhb-product',
@@ -30,6 +31,7 @@ import { SwiperDirective } from '../../directives/swiper/swiper.directive';
     // UI
     ContentfulDraftDirective,
     SwiperDirective,
+    ProductInfoComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './product.component.html',

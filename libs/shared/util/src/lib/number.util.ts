@@ -14,3 +14,23 @@ export const ethersToSerializedBigNumber = (
 
 export const ethersToBigNumber = (ethersBn: EthersBigNumber): BigNumber =>
   new BigNumber(ethersBn.toString());
+
+/**
+ * Round number with SI postfix.
+ *
+ * @param num the number to format
+ * @param unitList K (Kilo), M (Million), etc.
+ * @returns the SI formatted number like 5 K
+ */
+export const formatSIPostfix = (
+  num: number,
+  unitList = ['', 'K', 'M', 'B', 'T']
+) => {
+  let unit = 0;
+
+  while (Math.abs(num) >= 1000) {
+    num = Math.floor(Math.abs(num) / 100) / 10;
+    unit++;
+  }
+  return `${Math.sign(num) * Math.abs(num)} ${unitList[unit]}`.trim();
+};

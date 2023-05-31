@@ -1,5 +1,6 @@
 export * from './lib/address.util';
 export * from './lib/balance.util';
+export * from './lib/coingecko.util';
 export * from './lib/contentful.util';
 export * from './lib/contract.util';
 export * from './lib/dehub.util';

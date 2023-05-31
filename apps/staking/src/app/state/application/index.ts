@@ -2,6 +2,7 @@ import {
   BIG_ZERO,
   ethersToBigNumber,
   ethersToSerializedBigNumber,
+  getDehubUsdPrice,
   SerializedBigNumber,
 } from '@dehub/shared/utils';
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber';
@@ -15,7 +16,6 @@ import BigNumber from 'bignumber.js';
 import DeHubStakingAbi from '../../config/abis/DeHubStaking.json';
 import { getStakingAddress } from '../../utils/addressHelpers';
 import { Call, multicallV2 } from '../../utils/multicall';
-import getDehubPrice from '../../utils/priceDehub';
 import {
   ApplicationState,
   ApplicationStatus,
@@ -36,7 +36,7 @@ const initialState: ApplicationState = {
 export const fetchDehubPrice = createAsyncThunk<SerializedBigNumber>(
   'application/fetchDehubPrice',
   async () => {
-    const dehubPrice = await getDehubPrice();
+    const dehubPrice = await getDehubUsdPrice();
     return dehubPrice;
   }
 );

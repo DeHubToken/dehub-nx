@@ -25,7 +25,7 @@ import {
 import { AddressFormComponent } from '@dehub/angular/ui/components/form/address-form/address-form.component';
 import { ContactsFormComponent } from '@dehub/angular/ui/components/form/contacts-form/contacts-form.component';
 import { LoadingComponent } from '@dehub/angular/ui/components/loading/loading.component';
-import { ProductMiniComponent } from '@dehub/angular/ui/components/product-mini/product-mini.component';
+import { ProductMiniComponent } from '@dehub/angular/ui/components/product/product-mini.component';
 import {
   Contacts,
   Currency,
