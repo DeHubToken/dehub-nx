@@ -46,7 +46,7 @@ import { LoadingComponent } from '../loading/loading.component';
 })
 export class ProductInfoComponent implements OnInit, OnDestroy {
   @Input({ required: true }) productDetail!: ProductDetailFragment;
-  @Input() larger = false;
+  @Input() increaseFontSize = false;
 
   private isAlive = true;
 

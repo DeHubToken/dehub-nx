@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 /**
  * Courtesy: https://www.w3schools.com/howto/howto_css_flip_card.asp
@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       [class.flipped]="flipped"
       class="flip-card animated"
     >
-      <div class="flip-card-inner">
+      <div [style.height.px]="heightPx || 59" class="flip-card-inner">
         <div class="flip-card-front">
           <ng-content select="[flip-card-front]" />
         </div>
@@ -31,5 +31,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FlipCardComponent {
+  @Input() heightPx?: number;
+
   flipped = false;
 }

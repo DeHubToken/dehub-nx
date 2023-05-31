@@ -6,7 +6,7 @@
   <div class="overview-info text-right w-full">
     <!-- Bundle price -->
     <div *ngIf="isBundle; else notBundle" class="pr-0">
-      <dhb-flip-card>
+      <dhb-flip-card [heightPx]="increaseFontSize ? 62 : undefined">
         <!-- BUSD price -->
         <div flip-card-front>
           <ng-container
@@ -70,10 +70,14 @@
       let-estimated="estimated"
     >
       <!-- Price -->
-      <h3 class="mt-1 mb-0 pr-0">
+      <h3
+        [class.text-4xl]="increaseFontSize"
+        [style.line-height.rem]="increaseFontSize ? 2.8 : 2.4"
+        class="mt-1 mb-0 pr-0"
+      >
         <!-- Estimated -->
         <ng-container *ngIf="estimated; else accurate">
-          <span *ngIf="estimated" class="vertical-align-sub line-height-1"
+          <span *ngIf="estimated" [class.line-height-1]="increaseFontSize"
             >~</span
           >{{ price | dhbSIPostfix }}
         </ng-container>
@@ -85,10 +89,11 @@
       </h3>
 
       <!-- Currency -->
-      <div [class.flex]="estimated" [class.justify-content-end]="estimated">
-        <h6 class="text-sm mt-0 mb-2 opacity-80 line-height-1">
-          {{ currency }}
-        </h6>
+      <h6
+        [class.line-height-1]="increaseFontSize"
+        class="text-sm mt-0 mb-2 opacity-80"
+      >
+        {{ currency }}
         <!-- Coingecko Logo -->
         <img
           *ngIf="estimated"
@@ -99,12 +104,19 @@
           title="Powered by CoinGecko"
           class="ml-1 opacity-80"
         />
-      </div>
+      </h6>
     </ng-template>
 
     <!-- Quantity -->
-    <h6 class="my-0 text-sm inline-block line-height-1 w-full">
-      <hr class="my-0 pb-2 border-dashed" />
+    <h6
+      [class.line-height-1]="increaseFontSize"
+      class="my-0 text-sm inline-block w-full"
+    >
+      <hr
+        [class.pb-1]="!increaseFontSize"
+        [class.pb-2]="increaseFontSize"
+        class="my-0 border-dashed"
+      />
 
       <ng-container
         *ngIf="productDetail.availableQuantity ?? 0 > 0; else unavailable"
