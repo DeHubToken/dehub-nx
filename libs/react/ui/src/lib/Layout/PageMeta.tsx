@@ -6,11 +6,40 @@ const PageMeta = ({ baseUrl, title }: { baseUrl: string; title: string }) => {
       <title>{title}</title>
       <base href={`${baseUrl}/`} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="description" content="DeHub D’App"></meta>
-      <meta property="og:type" content="website"></meta>
-      <meta property="og:site_name" content="DeHub D’App"></meta>
-      <meta property="og:description" content="DeHub D’App"></meta>
-      <meta property="og:url" content={baseUrl}></meta>
+
+      {/* <!-- HTML Meta Tags --> */}
+      <title>DeHub - Staking D’App</title>
+      <meta name="description" content="DeHub Staking D’App." />
+
+      {/* <!-- Google / Search Engine Tags --> */}
+      <meta itemProp="name" content="DeHub - Staking D’App" />
+      <meta itemProp="description" content="DeHub Staking D’App." />
+      <meta
+        itemProp="image"
+        content="https://images.ctfassets.net/4jicnfvodfm8/1SqWTgh7HdbGfryephE7RZ/b8f43419737eb3d98c7e22e07ad6f900/dehub-logo.png?w=1200"
+      />
+
+      {/* <!-- Facebook Meta Tags --> */}
+      <meta property="og:url" content={baseUrl} />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Staking"></meta>
+      <meta property="og:title" content="DeHub - Staking D’App" />
+      <meta property="og:description" content="DeHub Staking D’App." />
+      <meta
+        property="og:image"
+        content="https://images.ctfassets.net/4jicnfvodfm8/1SqWTgh7HdbGfryephE7RZ/b8f43419737eb3d98c7e22e07ad6f900/dehub-logo.png?w=1200"
+      />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:alt" content="DeHub Logo" />
+
+      {/* <!-- Twitter Meta Tags --> */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="DeHub - Staking D’App" />
+      <meta name="twitter:description" content="DeHub Staking D’App." />
+      <meta
+        name="twitter:image"
+        content="https://images.ctfassets.net/4jicnfvodfm8/1SqWTgh7HdbGfryephE7RZ/b8f43419737eb3d98c7e22e07ad6f900/dehub-logo.png?w=1200"
+      />
       <link
         rel="icon"
         type="image/x-icon"
