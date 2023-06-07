@@ -1,16 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 
-const PageMeta = ({ baseUrl, title }: { baseUrl: string; title: string }) => {
+const PageMeta = ({ baseUrl }: { baseUrl: string }) => {
   return (
     <Helmet>
-      <title>{title}</title>
       <base href={`${baseUrl}/`} />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="description" content="DeHub D’App"></meta>
-      <meta property="og:type" content="website"></meta>
-      <meta property="og:site_name" content="DeHub D’App"></meta>
-      <meta property="og:description" content="DeHub D’App"></meta>
-      <meta property="og:url" content={baseUrl}></meta>
+
       <link
         rel="icon"
         type="image/x-icon"
