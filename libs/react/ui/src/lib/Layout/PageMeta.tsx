@@ -9,11 +9,17 @@ const PageMeta = ({ baseUrl, title }: { baseUrl: string; title: string }) => {
 
       {/* <!-- HTML Meta Tags --> */}
       <title>DeHub - Staking D’App</title>
-      <meta name="description" content="DeHub Staking D’App." />
+      <meta
+        name="description"
+        content="Earn your fair share of protocol fees in ratio to your stake holdings and tier access."
+      />
 
       {/* <!-- Google / Search Engine Tags --> */}
       <meta itemProp="name" content="DeHub - Staking D’App" />
-      <meta itemProp="description" content="DeHub Staking D’App." />
+      <meta
+        itemProp="description"
+        content="Earn your fair share of protocol fees in ratio to your stake holdings and tier access."
+      />
       <meta
         itemProp="image"
         content="https://images.ctfassets.net/4jicnfvodfm8/1SqWTgh7HdbGfryephE7RZ/b8f43419737eb3d98c7e22e07ad6f900/dehub-logo.png?w=1200"
@@ -24,7 +30,10 @@ const PageMeta = ({ baseUrl, title }: { baseUrl: string; title: string }) => {
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Staking"></meta>
       <meta property="og:title" content="DeHub - Staking D’App" />
-      <meta property="og:description" content="DeHub Staking D’App." />
+      <meta
+        property="og:description"
+        content="Earn your fair share of protocol fees in ratio to your stake holdings and tier access."
+      />
       <meta
         property="og:image"
         content="https://images.ctfassets.net/4jicnfvodfm8/1SqWTgh7HdbGfryephE7RZ/b8f43419737eb3d98c7e22e07ad6f900/dehub-logo.png?w=1200"
@@ -35,7 +44,10 @@ const PageMeta = ({ baseUrl, title }: { baseUrl: string; title: string }) => {
       {/* <!-- Twitter Meta Tags --> */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="DeHub - Staking D’App" />
-      <meta name="twitter:description" content="DeHub Staking D’App." />
+      <meta
+        name="twitter:description"
+        content="Earn your fair share of protocol fees in ratio to your stake holdings and tier access."
+      />
       <meta
         name="twitter:image"
         content="https://images.ctfassets.net/4jicnfvodfm8/1SqWTgh7HdbGfryephE7RZ/b8f43419737eb3d98c7e22e07ad6f900/dehub-logo.png?w=1200"
