@@ -1,7 +1,7 @@
 {
   "name": "DeHub",
-  "short_name": "DeHub",
-  "description": "DeHub - The Decentralised Entertainment Hub",
+  "short_name": "DeHub Staking",
+  "description": "Earn your fair share of protocol fees in ratio to your stake holdings and tier access.",
   "theme_color": "#060d1b",
   "background_color": "#622f88",
   "display": "fullscreen",
