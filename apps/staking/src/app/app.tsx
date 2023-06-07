@@ -20,7 +20,7 @@ const {
   baseUrl,
   dehub: { landing },
 } = environment;
-const pageTitle = 'DeHub Staking';
+const pageTitle = 'DeHub - Staking D’App';
 const { cexUrl, downloadMetamaskUrl } = environment.dehub;
 const activeTab = NavigationTabMenu.Clubs;
 
