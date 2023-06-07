@@ -46,7 +46,7 @@ import { Observable, filter, map } from 'rxjs';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureShopComponent implements OnInit {
+export default class AngularFeatureShopComponent implements OnInit {
   pageShop$?: Observable<PageShopFragment | undefined>;
 
   path = this.env.baseUrl;

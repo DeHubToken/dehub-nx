@@ -49,7 +49,7 @@ import { LegalPostComponent } from './components/legal-post.component';
     }),
   ],
 })
-export class AngularFeatureLegalComponent implements OnInit {
+export default class AngularFeatureLegalComponent implements OnInit {
   legalPost$!: Observable<LegalPostFragment | undefined>;
 
   routerLink = [`/${NavigationTabMenu.Home}`];

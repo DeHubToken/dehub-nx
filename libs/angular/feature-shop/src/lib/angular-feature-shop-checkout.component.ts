@@ -13,7 +13,7 @@ import { ProductDetailService } from './services';
   template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureShopCheckoutComponent implements OnInit {
+export default class AngularFeatureShopCheckoutComponent implements OnInit {
   constructor(
     private dialogService: DialogService,
     private router: Router,

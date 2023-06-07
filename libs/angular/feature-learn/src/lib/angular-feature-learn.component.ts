@@ -40,7 +40,7 @@ import { Observable, map } from 'rxjs';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureLearnComponent implements OnInit {
+export default class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;
 
   path = this.env.baseUrl;

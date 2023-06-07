@@ -44,7 +44,7 @@ import { Observable, map } from 'rxjs';
 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureHomeComponent implements OnInit {
+export default class AngularFeatureHomeComponent implements OnInit {
   pageHome$?: Observable<PageHomeFragment | undefined>;
 
   path = this.env.baseUrl;

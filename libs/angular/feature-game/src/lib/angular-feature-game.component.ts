@@ -39,7 +39,7 @@ import { Observable, map } from 'rxjs';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureGameComponent implements OnInit {
+export default class AngularFeatureGameComponent implements OnInit {
   pageGame$?: Observable<PageGameFragment | undefined>;
 
   path = this.env.baseUrl;

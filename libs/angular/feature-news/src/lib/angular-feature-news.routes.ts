@@ -1,14 +1,12 @@
 import { Routes } from '@angular/router';
-import { AngularFeatureNewsDetailComponent } from './angular-feature-news-detail.component';
-import { AngularFeatureNewsComponent } from './angular-feature-news.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: AngularFeatureNewsComponent,
+    loadComponent: () => import('./angular-feature-news.component'),
   },
   {
     path: ':slug',
-    component: AngularFeatureNewsDetailComponent,
+    loadComponent: () => import('./angular-feature-news-detail.component'),
   },
 ];

@@ -173,3 +173,5 @@ export class AppMainComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 }
+
+export default AppMainComponent;

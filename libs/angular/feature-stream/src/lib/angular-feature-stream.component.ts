@@ -97,7 +97,7 @@ import { Observable, map } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
-export class AngularFeatureStreamComponent implements OnInit {
+export default class AngularFeatureStreamComponent implements OnInit {
   pageStream$?: Observable<PageStreamFragment | undefined>;
 
   path = this.env.baseUrl;

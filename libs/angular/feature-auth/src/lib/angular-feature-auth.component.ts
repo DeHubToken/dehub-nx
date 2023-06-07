@@ -8,7 +8,7 @@ import { first } from 'rxjs';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureAuthComponent implements OnInit {
+export default class AngularFeatureAuthComponent implements OnInit {
   constructor(
     private dialogService: DialogService,
     private router: Router,

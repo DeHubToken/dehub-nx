@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AngularFeatureLegalComponent } from './angular-feature-legal.component';
 
 export const routes: Routes = [
   {
@@ -9,6 +8,6 @@ export const routes: Routes = [
   },
   {
     path: ':slug',
-    component: AngularFeatureLegalComponent,
+    loadComponent: () => import('./angular-feature-legal.component'),
   },
 ];

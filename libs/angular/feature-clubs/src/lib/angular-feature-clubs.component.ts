@@ -36,7 +36,7 @@ import { Observable, map } from 'rxjs';
 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureClubsComponent implements OnInit {
+export default class AngularFeatureClubsComponent implements OnInit {
   pageClubs$?: Observable<PageClubsFragment | undefined>;
 
   path = this.env.baseUrl;

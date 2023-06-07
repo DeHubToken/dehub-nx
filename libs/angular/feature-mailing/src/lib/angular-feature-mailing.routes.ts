@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AngularFeatureMailingComponent } from './angular-feature-mailing.component';
 
 export const routes: Routes = [
   {
@@ -7,7 +6,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'subscribe',
-        component: AngularFeatureMailingComponent,
+        loadComponent: () => import('./angular-feature-mailing.component'),
       },
     ],
   },

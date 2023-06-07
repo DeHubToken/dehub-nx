@@ -51,7 +51,9 @@ import { ProductDetailService } from './services';
     }),
   ],
 })
-export class AngularFeatureShopProductDetailComponent implements OnInit {
+export default class AngularFeatureShopProductDetailComponent
+  implements OnInit
+{
   productDetail$: Observable<ProductDetailFragment> = this.route.paramMap.pipe(
     map(paramMap => paramMap.get('slug') ?? undefined),
     switchMap(slug => this.productDetailService.getProductDetailBySlug(slug)),

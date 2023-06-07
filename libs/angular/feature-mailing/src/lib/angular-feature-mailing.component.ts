@@ -9,7 +9,7 @@ import { MailingListFormComponent } from './components/mailing-list-form.compone
   template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureMailingComponent implements OnInit {
+export default class AngularFeatureMailingComponent implements OnInit {
   constructor(private dialogService: DialogService, private router: Router) {}
 
   ngOnInit(): void {

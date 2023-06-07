@@ -16,7 +16,7 @@
     "dist": true,
     "build": true,
     "node_modules": true,
-    "*lock.json": true,
+    "*lock.*": true,
     "*.svg": true,
   },
   // Typescript
