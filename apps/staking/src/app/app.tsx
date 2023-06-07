@@ -20,7 +20,6 @@ const {
   baseUrl,
   dehub: { landing },
 } = environment;
-const pageTitle = 'DeHub - Staking D’App';
 const { cexUrl, downloadMetamaskUrl } = environment.dehub;
 const activeTab = NavigationTabMenu.Clubs;
 
@@ -38,7 +37,6 @@ export function App() {
         {
           baseUrl,
           landing,
-          pageTitle,
           cexUrl,
           downloadMetamaskUrl,
           activeTab,
@@ -52,7 +50,6 @@ export function App() {
     return (
       <FullScreenLoader
         baseUrl={baseUrl}
-        pageTitle={pageTitle}
         loaderGif={`${baseUrl}/assets/dehub/dehub-loader.gif`}
       />
     );
@@ -64,7 +61,6 @@ export function App() {
         fallback={
           <FullScreenLoader
             baseUrl={baseUrl}
-            pageTitle={pageTitle}
             loaderGif={`${baseUrl}/assets/dehub/dehub-loader.gif`}
           />
         }
