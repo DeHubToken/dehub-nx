@@ -20,7 +20,7 @@ export class MenuService {
       label: 'Dapps',
       items: [
         {
-          label: 'DeStake',
+          label: 'Staking',
           url: environment.dehub.dapps.staking,
           icon: 'far fa-coins',
         },
