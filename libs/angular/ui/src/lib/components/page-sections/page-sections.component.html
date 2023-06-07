@@ -1,4 +1,4 @@
-<ng-container *ngFor="let section of sections">
+<ng-container *ngFor="let section of sections; trackBy: trackByFn">
   <!-- Feature Posts -->
   <dhb-page-section-feature-posts
     *ngIf="isPageSectionFeaturePosts(section)"

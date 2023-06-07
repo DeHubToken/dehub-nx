@@ -16,6 +16,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { SwiperOptions } from 'swiper';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
 
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { IconTileComponent } from '../../icon-tile/icon-tile.component';
 
@@ -49,7 +50,9 @@ import { IconTileComponent } from '../../icon-tile/icon-tile.component';
 
       <!-- Icon Tiles -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let iconTile of iconTiles; let i = index">
+        <swiper-slide
+          *ngFor="let iconTile of iconTiles; let i = index; trackBy: trackByFn"
+        >
           <dhb-icon-tile
             [iconTile]="iconTile"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
@@ -68,6 +71,8 @@ export class PageSectionIconTilesSwiperComponent implements OnInit {
   iconTiles: IconTileFragment[] = [];
 
   swiperOptions?: SwiperOptions;
+
+  trackByFn = trackByContentfulIdFn<IconTileFragment>();
 
   constructor() {}
 

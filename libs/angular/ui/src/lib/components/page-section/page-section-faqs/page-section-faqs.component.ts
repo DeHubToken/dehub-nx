@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { FaqGroupFragment, PageSectionFaQsFragment } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
@@ -40,7 +41,7 @@ import { FaqGroupComponent } from '../../faq-group/faq-group.component';
       <!-- Faq Groups -->
       <div class="grid">
         <div
-          *ngFor="let faqGroup of faqGroups; let i = index"
+          *ngFor="let faqGroup of faqGroups; let i = index; trackBy: trackByFn"
           [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           class="col-12"
         >
@@ -56,6 +57,8 @@ export class PageSectionFaQsComponent implements OnInit {
   @Input() section!: PageSectionFaQsFragment;
 
   faqGroups: FaqGroupFragment[] = [];
+
+  trackByFn = trackByContentfulIdFn<FaqGroupFragment>();
 
   constructor() {}
 

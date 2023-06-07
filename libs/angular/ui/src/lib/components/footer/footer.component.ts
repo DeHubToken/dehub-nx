@@ -12,6 +12,7 @@ import { resolveButtonStyle } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
 import { ButtonModule } from 'primeng/button';
 
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 import { ContentfulRichMarkupPipe } from '../../pipes/contentful-rich-markup/contentful-rich-markup.pipe';
 import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
@@ -43,12 +44,13 @@ import { CTAGroupPipe } from './cta-group.pipe';
             <!-- Links -->
             <div
               *ngFor="
-                let group of footer?.linksCollection?.items | dhbCTAGroup : 5
+                let group of footer?.linksCollection?.items | dhbCTAGroup : 5;
+                trackBy: indexTrackByFn
               "
               class="col-12 md:col-4 lg:col-2"
             >
               <ul>
-                <li *ngFor="let link of group">
+                <li *ngFor="let link of group; trackBy: trackByFn">
                   <a
                     *ngIf="link"
                     [dhbContentfulDraft]="link.sys"
@@ -67,7 +69,10 @@ import { CTAGroupPipe } from './cta-group.pipe';
             <div class="col-12 md:col-6">
               <div class="grid">
                 <div
-                  *ngFor="let awardPost of footer?.awardsCollection?.items"
+                  *ngFor="
+                    let awardPost of footer?.awardsCollection?.items;
+                    trackBy: trackByFn
+                  "
                   class="col-12 md:col-6 lg:col-4"
                 >
                   <dhb-award-post [awardPost]="awardPost" />
@@ -82,7 +87,10 @@ import { CTAGroupPipe } from './cta-group.pipe';
             <ul class="block w-full mb-3">
               <!-- Social Links -->
               <li
-                *ngFor="let socialLink of footer.socialIconsCollection?.items"
+                *ngFor="
+                  let socialLink of footer.socialIconsCollection?.items;
+                  trackBy: trackByFn
+                "
                 class="inline"
               >
                 <p-button
@@ -138,6 +146,8 @@ export class FooterComponent {
   path = this.env.baseUrl;
   thisYear = new Date().getFullYear();
 
+  trackByFn = trackByContentfulIdFn<FooterFragment>();
+
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
     @Inject(WINDOW) private readonly windowRef: Window
@@ -152,5 +162,9 @@ export class FooterComponent {
     if (link) {
       this.windowRef.open(link, '_blank', 'noopener,noreferrer');
     }
+  }
+
+  indexTrackByFn(index: number, _item?: unknown) {
+    return index;
   }
 }

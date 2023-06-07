@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import {
   FeaturePostFragment,
   PageSectionFeaturePostsFragment,
@@ -48,7 +49,13 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
 
       <!-- Feature Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let featurePost of featurePosts; let i = index">
+        <swiper-slide
+          *ngFor="
+            let featurePost of featurePosts;
+            let i = index;
+            trackBy: trackByFn
+          "
+        >
           <dhb-feature-post
             [featurePost]="featurePost"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
@@ -67,6 +74,8 @@ export class PageSectionFeaturePostsComponent implements OnInit {
   featurePosts: FeaturePostFragment[] = [];
 
   swiperOptions?: SwiperOptions;
+
+  trackByFn = trackByContentfulIdFn<FeaturePostFragment>();
 
   constructor() {}
 

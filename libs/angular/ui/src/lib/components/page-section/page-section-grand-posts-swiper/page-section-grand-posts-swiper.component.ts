@@ -15,6 +15,7 @@ import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { SwiperOptions } from 'swiper';
 
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
 import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
@@ -48,7 +49,13 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
 
       <!-- Grand Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let grandPost of grandPosts; let i = index">
+        <swiper-slide
+          *ngFor="
+            let grandPost of grandPosts;
+            let i = index;
+            trackBy: trackByFn
+          "
+        >
           <dhb-grand-post
             [grandPost]="grandPost"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
@@ -67,6 +74,8 @@ export class PageSectionGrandPostsSwiperComponent implements OnInit {
   grandPosts: GrandPostFragment[] = [];
 
   swiperOptions?: SwiperOptions;
+
+  trackByFn = trackByContentfulIdFn<GrandPostFragment>();
 
   constructor() {}
 

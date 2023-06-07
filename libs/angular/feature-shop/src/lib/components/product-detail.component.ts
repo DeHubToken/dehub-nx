@@ -12,7 +12,12 @@ import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentfu
 import { SwiperDirective } from '@dehub/angular/ui/directives/swiper/swiper.directive';
 import { ContentfulRichMarkupPipe } from '@dehub/angular/ui/pipes/contentful-rich-markup/contentful-rich-markup.pipe';
 import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
-import { ProductDetailFragment, ShopOrder } from '@dehub/shared/model';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
+import {
+  AssetFragment,
+  ProductDetailFragment,
+  ShopOrder,
+} from '@dehub/shared/model';
 import { LetModule } from '@rx-angular/template/let';
 import { ButtonModule } from 'primeng/button';
 import { Observable, combineLatest, map } from 'rxjs';
@@ -56,6 +61,8 @@ export class ProductDetailComponent implements OnInit {
   };
 
   productSales$?: Observable<ProductSales>;
+
+  trackByFn = trackByContentfulIdFn<AssetFragment>();
 
   constructor() {}
 

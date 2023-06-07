@@ -1,5 +1,6 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { trackByMenuItemFn } from '@dehub/angular/util';
 import { AppMainComponent } from '../../app.main.component';
 import { MenuService } from './app.menu.service';
 import { AppMenuitemComponent } from './app.menuitem.component';
@@ -24,7 +25,7 @@ import { AppMenuitemComponent } from './app.menuitem.component';
         <ul class="layout-menu">
           <li
             dhb-menuitem
-            *ngFor="let item of model; let i = index"
+            *ngFor="let item of model; let i = index; trackBy: trackByFn"
             [item]="item"
             [index]="i"
             [root]="true"
@@ -36,6 +37,8 @@ import { AppMenuitemComponent } from './app.menuitem.component';
 })
 export class AppMenuComponent {
   model = this.menuService.getMenuItems();
+
+  trackByFn = trackByMenuItemFn();
 
   constructor(
     public appMain: AppMainComponent,

@@ -21,6 +21,7 @@ import { MenuItem } from 'primeng/api';
 import { SwiperOptions } from 'swiper';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
 
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { ProductComponent } from '../../product/product.component';
 import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
@@ -70,7 +71,9 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
 
       <!-- Product -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let product of products; let i = index">
+        <swiper-slide
+          *ngFor="let product of products; let i = index; trackBy: trackByFn"
+        >
           <dhb-product
             [product]="product"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
@@ -104,6 +107,8 @@ export class PageSectionProductsComponent implements OnInit {
   products: ProductFragment[] = [];
 
   swiperOptions?: SwiperOptions;
+
+  trackByFn = trackByContentfulIdFn<ProductFragment>();
 
   constructor() {}
 

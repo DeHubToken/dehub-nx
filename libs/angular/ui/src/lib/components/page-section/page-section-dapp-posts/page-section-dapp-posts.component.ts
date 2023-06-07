@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import {
   DappPostFragment,
   PageSectionDappPostsFragment,
@@ -43,7 +44,7 @@ import { DappPostComponent } from '../../post/dapp-post/dapp-post.component';
       <!-- Dapp Posts -->
       <div class="grid">
         <dhb-dapp-post
-          *ngFor="let dappPost of dappPosts; let i = index"
+          *ngFor="let dappPost of dappPosts; let i = index; trackBy: trackByFn"
           [dappPost]="dappPost"
           [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
           class="col-12 sm:col-12 md:col-6 xl:col-4 flex flex-auto"
@@ -59,6 +60,8 @@ export class PageSectionDappPostsComponent implements OnInit {
   @Input() section!: PageSectionDappPostsFragment;
 
   dappPosts: DappPostFragment[] = [];
+
+  trackByFn = trackByContentfulIdFn<DappPostFragment>();
 
   constructor() {}
 

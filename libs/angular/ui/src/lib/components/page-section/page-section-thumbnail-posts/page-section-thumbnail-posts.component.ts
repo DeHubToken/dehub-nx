@@ -15,6 +15,7 @@ import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { SwiperOptions } from 'swiper';
 
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
 import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post.component';
@@ -49,7 +50,11 @@ import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post
       <!-- Thumbnail Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
         <swiper-slide
-          *ngFor="let thumbnailPost of thumbnailPosts; let i = index"
+          *ngFor="
+            let thumbnailPost of thumbnailPosts;
+            let i = index;
+            trackBy: trackByFn
+          "
         >
           <dhb-thumbnail-post
             [thumbnailPost]="thumbnailPost"
@@ -70,6 +75,8 @@ export class PageSectionThumbnailPostsComponent implements OnInit {
   thumbnailPosts: ThumbnailPostFragment[] = [];
 
   swiperOptions?: SwiperOptions;
+
+  trackByFn = trackByContentfulIdFn<ThumbnailPostFragment>();
 
   constructor() {}
 

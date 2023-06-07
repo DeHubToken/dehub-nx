@@ -4,6 +4,7 @@ import {
   Component,
   Input,
   OnInit,
+  TrackByFunction,
 } from '@angular/core';
 import { AddressPipe } from '@dehub/angular/ui/pipes/address/address.pipe';
 import { ExplorerUrlPipe } from '@dehub/angular/ui/pipes/explorer-url/explorer-url.pipe';
@@ -41,7 +42,11 @@ import { Observable } from 'rxjs';
           <!-- Orders -->
           <div class="overflow-x-hidden overflow-y-auto max-h-9rem">
             <div
-              *ngFor="let productOrder of productOrders; let orderCount = count"
+              *ngFor="
+                let productOrder of productOrders;
+                let orderCount = count;
+                trackBy: trackByFn
+              "
               class="grid flex align-items-center text-right mt-2"
             >
               <div class="col-5 text-sm">
@@ -72,6 +77,9 @@ import { Observable } from 'rxjs';
 })
 export class ProductOrdersComponent implements OnInit {
   @Input() productOrders$?: Observable<ShopOrder[]>;
+
+  trackByFn: TrackByFunction<ShopOrder> = (index_: number, item: ShopOrder) =>
+    item.contentfulId;
 
   constructor() {}
 

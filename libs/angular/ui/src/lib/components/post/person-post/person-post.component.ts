@@ -4,6 +4,7 @@ import {
   Inject,
   Input,
   OnInit,
+  TrackByFunction,
 } from '@angular/core';
 import { PersonPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
@@ -73,7 +74,7 @@ interface SocialLink {
 
         <!-- Social Links -->
         <div class="mt-4">
-          <ng-container *ngFor="let link of socialLinks">
+          <ng-container *ngFor="let link of socialLinks; trackBy: trackByFn">
             <button
               *ngIf="link.url"
               pButton
@@ -97,6 +98,9 @@ export class PersonPostComponent implements OnInit {
   @Input() path?: string;
 
   socialLinks: SocialLink[] = [];
+
+  trackByFn: TrackByFunction<SocialLink> = (index_: number, item: SocialLink) =>
+    item.name;
 
   constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
 

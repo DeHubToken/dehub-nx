@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { trackByMenuItemFn } from '@dehub/angular/util';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -27,7 +28,7 @@ import { RippleModule } from 'primeng/ripple';
     <div class="dhb-tab-menu">
       <div class="dhb-tab-menu-wrapper">
         <button
-          *ngFor="let menuItem of menuItems"
+          *ngFor="let menuItem of menuItems; trackBy: trackByFn"
           pButton
           pRipple
           [label]="menuItem.label ?? ''"
@@ -66,6 +67,8 @@ export class TabMenuComponent implements OnInit {
   @Input() swipeHintClass?: string;
   @Input() menuItems?: MenuItem[];
   @Input() activeMenuItem?: MenuItem;
+
+  trackByFn = trackByMenuItemFn();
 
   ngOnInit() {}
 }

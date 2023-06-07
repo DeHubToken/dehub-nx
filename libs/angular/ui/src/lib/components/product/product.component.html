@@ -8,7 +8,10 @@
     <ng-template pTemplate="header">
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
         <swiper-slide
-          *ngFor="let picture of product.picturesCollection?.items ?? []"
+          *ngFor="
+            let picture of product.picturesCollection?.items ?? [];
+            trackBy: trackByFn
+          "
         >
           <img
             *ngIf="picture"

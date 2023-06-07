@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import {
   PageSectionPersonPostsFragment,
   PersonPostFragment,
@@ -43,7 +44,11 @@ import { PersonPostComponent } from '../../post/person-post/person-post.componen
       <!-- Person Posts -->
       <div class="grid">
         <dhb-person-post
-          *ngFor="let personPost of personPosts; let i = index"
+          *ngFor="
+            let personPost of personPosts;
+            let i = index;
+            trackBy: trackByFn
+          "
           [personPost]="personPost"
           [path]="path"
           [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
@@ -61,6 +66,8 @@ export class PageSectionPersonPostsComponent implements OnInit {
   @Input() path?: string;
 
   personPosts: PersonPostFragment[] = [];
+
+  trackByFn = trackByContentfulIdFn<PersonPostFragment>();
 
   constructor() {}
 
