@@ -55,7 +55,7 @@ import { RippleModule } from 'primeng/ripple';
             swipe menu&nbsp;
           </span>
           <i
-            class="flex align-items-center fal fa-long-arrow-right text-3xl"
+            class="flex align-items-center fal fa-long-arrow-right text-3xl fa-fade"
           ></i>
         </div>
       </div>

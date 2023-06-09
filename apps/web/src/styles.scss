@@ -8,7 +8,11 @@
 @import 'primeflex/primeflex.scss';
 @import 'primeicons/primeicons.css';
 
-// Swiper
 :root {
-  --swiper-theme-color: #fafafa !important;
+  // Swiper
+  --swiper-theme-color: #fafafa;
+
+  // Font Awesome
+  --fa-animation-duration: 2s;
+  --fa-animation-delay: 4s;
 }

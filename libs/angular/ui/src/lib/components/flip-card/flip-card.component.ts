@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 /**
@@ -9,14 +9,22 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   standalone: true,
   imports: [
     // Angular
+    NgIf,
     NgTemplateOutlet,
   ],
   template: `
     <div
-      (click)="flipped = !flipped"
+      (click)="flipped = !flipped; visited = true"
       [class.flipped]="flipped"
-      class="flip-card animated"
+      [class.animated]="visited"
+      class="flip-card"
     >
+      <!-- Touch area -->
+      <span *ngIf="!visited" class="opacity-20 pt-4" style="float: left">
+        <i class="fa-solid fa-mouse fa-fade fa-xl hidden xl:block"></i>
+        <i class="fa-solid fa-fingerprint fa-fade fa-xl block xl:hidden"></i>
+      </span>
+
       <div [style.height.px]="heightPx || 59" class="flip-card-inner">
         <div class="flip-card-front">
           <ng-content select="[flip-card-front]" />
@@ -34,4 +42,5 @@ export class FlipCardComponent {
   @Input() heightPx?: number;
 
   flipped = false;
+  visited = false;
 }

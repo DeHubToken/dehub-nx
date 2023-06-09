@@ -37,7 +37,7 @@ export const TabMenu = ({
           <span className="flex align-items-center uppercase font-bold text-xs pr-1">
             swipe menu&nbsp;
           </span>
-          <i className="flex align-items-center fal fa-long-arrow-right text-3xl"></i>
+          <i className="flex align-items-center fal fa-long-arrow-right text-3xl fa-fade"></i>
         </div>
       </div>
     </div>
