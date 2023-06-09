@@ -6,12 +6,17 @@
   >
     <!-- Header -->
     <ng-template pTemplate="header">
-      <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
+      <swiper-container
+        *ngIf="product.picturesCollection?.items ?? [] as pictures"
+        dhbSwiper
+        [swiperOptions]="swiperOptions"
+        init="false"
+        [attr.grab-cursor]="pictures.length > 1"
+        [class.no-padding-bottom]="swiperIsClickable"
+      >
         <swiper-slide
-          *ngFor="
-            let picture of product.picturesCollection?.items ?? [];
-            trackBy: trackByFn
-          "
+          *ngFor="let picture of pictures; trackBy: trackByFn"
+          lazy="true"
         >
           <img
             *ngIf="picture"

@@ -18,6 +18,7 @@ import {
   ProductDetailFragment,
   ShopOrder,
 } from '@dehub/shared/model';
+import { isPaginationClickable } from '@dehub/shared/utils';
 import { LetModule } from '@rx-angular/template/let';
 import { ButtonModule } from 'primeng/button';
 import { Observable, combineLatest, map } from 'rxjs';
@@ -59,6 +60,7 @@ export class ProductDetailComponent implements OnInit {
     autoplay: true,
     pagination: { clickable: true },
   };
+  swiperIsClickable = isPaginationClickable(this.swiperOptions);
 
   productSales$?: Observable<ProductSales>;
 
