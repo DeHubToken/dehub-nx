@@ -3,7 +3,7 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 
 const phoneNumberUtil = PhoneNumberUtil.getInstance();
 
-export const PhoneNumberValidator = (regionCode: {
+export const phoneNumberValidator = (regionCode: {
   (): string | undefined;
 }): ValidatorFn => {
   return (
