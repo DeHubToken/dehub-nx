@@ -10,7 +10,7 @@ export const phoneNumberValidator = (regionCode: {
     control: AbstractControl
   ): { wrongNumber: { [key: string]: string } } | null => {
     let validNumber = false;
-    if (!control.value) {
+    if (control.value === undefined) {
       return null;
     }
     try {
