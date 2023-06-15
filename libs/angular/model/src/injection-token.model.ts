@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { InMemoryCache } from '@apollo/client';
 import { SharedEnv } from '@dehub/shared/model';
 import {
+  IAnnouncementService,
   ICoingeckoService,
   IContentFulManagementService,
   IDehubMoralisService,
@@ -63,4 +64,9 @@ export const ContentfulManagementToken =
 /** Token for providing Coingecko Service */
 export const CoingeckoToken = new InjectionToken<ICoingeckoService>(
   'Coingecko Service'
+);
+
+/** Token for providing Announcement Service */
+export const AnnouncementToken = new InjectionToken<IAnnouncementService>(
+  'Announcement Service'
 );

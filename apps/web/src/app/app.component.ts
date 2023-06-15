@@ -1,17 +1,11 @@
 import { NgIf } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {
-  AnnouncementService,
-  CoreService,
-  LoaderService,
-  PwaService,
-} from '@dehub/angular/core';
-import { EnvToken } from '@dehub/angular/model';
+import { CoreService, LoaderService, PwaService } from '@dehub/angular/core';
 
 import { LoaderComponent } from '@dehub/angular/ui/components/loader/loader.component';
 import { SwUpdateAvailableComponent } from '@dehub/angular/ui/components/sw-update-available/sw-update-available.component';
-import { MenuMode, SharedEnv, ThemeMode } from '@dehub/shared/model';
+import { MenuMode, ThemeMode } from '@dehub/shared/model';
 import { PushModule } from '@rx-angular/template/push';
 import { PrimeNGConfig } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -69,9 +63,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private coreService: CoreService,
     private pwaService: PwaService,
     private primengConfig: PrimeNGConfig,
-    private loaderService: LoaderService,
-    private announcementService: AnnouncementService,
-    @Inject(EnvToken) private env: SharedEnv
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit() {
@@ -79,8 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.coreService.loadIcon();
 
     this.pwaService.subscribeForNewUpdates();
-    if (this.env.env !== 'dev')
-      this.announcementService.subscribeForAnnouncements();
 
     const { loaderVisible$, subtitle$, loaderGif } = this.loaderService;
     this.loaderVisible$ = loaderVisible$;
@@ -100,6 +90,5 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.pwaService.unsubscribeNotifications();
-    this.announcementService.unsubscribeAnnouncements();
   }
 }

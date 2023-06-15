@@ -26,6 +26,7 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client/core';
 import {
+  AnnouncementService,
   CoingeckoService,
   ConsoleLoggerService,
   ContentfulManagementService,
@@ -33,6 +34,7 @@ import {
   MoralisService,
 } from '@dehub/angular/core';
 import {
+  AnnouncementToken,
   ApolloCacheToken,
   CoingeckoToken,
   ContentfulManagementToken,
@@ -164,6 +166,12 @@ export const appConfig: ApplicationConfig = {
     {
       provide: CoingeckoToken,
       useClass: CoingeckoService,
+    },
+
+    // Announcement
+    {
+      provide: AnnouncementToken,
+      useClass: AnnouncementService,
     },
 
     // Loggers

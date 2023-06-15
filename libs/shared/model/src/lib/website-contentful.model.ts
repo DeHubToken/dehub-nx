@@ -11676,6 +11676,19 @@ export type AnnouncementCollectionQuery = {
   };
 };
 
+export type AnnouncementCollectionCountQueryVariables = Exact<{
+  now?: InputMaybe<Scalars['DateTime']>;
+  isPreview?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+export type AnnouncementCollectionCountQuery = {
+  __typename?: 'Query';
+  announcementCollection?: {
+    __typename?: 'AnnouncementCollection';
+    total: number;
+  };
+};
+
 export type BasicPostCollectionBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
   isPreview?: InputMaybe<Scalars['Boolean']>;
@@ -15659,6 +15672,20 @@ export const AnnouncementCollectionDocument = gql`
   }
   ${AnnouncementFragmentDoc}
 `;
+export const AnnouncementCollectionCountDocument = gql`
+  query announcementCollectionCount(
+    $now: DateTime
+    $isPreview: Boolean = false
+  ) {
+    announcementCollection(
+      where: { start_lte: $now, end_gte: $now }
+      order: start_ASC
+      preview: $isPreview
+    ) {
+      total
+    }
+  }
+`;
 export const BasicPostCollectionBySlugDocument = gql`
   query basicPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
     basicPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
@@ -15789,6 +15816,21 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'announcementCollection',
+        'query'
+      );
+    },
+    announcementCollectionCount(
+      variables?: AnnouncementCollectionCountQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AnnouncementCollectionCountQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<AnnouncementCollectionCountQuery>(
+            AnnouncementCollectionCountDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'announcementCollectionCount',
         'query'
       );
     },

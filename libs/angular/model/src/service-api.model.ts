@@ -1,4 +1,5 @@
 import {
+  AnnouncementFragment,
   Attributes,
   CheckOrderParams,
   CheckOrderResult,
@@ -128,10 +129,14 @@ export interface IContentFulManagementService {
 }
 
 export interface ICoingeckoService {
-  /**
-   * Read Dehub usd price.
-   *
-   * @returns the usd price of dehub polled
-   */
+  /** Get Dehub usd price polled. */
   getDehubUsdPricePoll$: () => Observable<string>;
+}
+
+export interface IAnnouncementService {
+  /** Get active announcements  */
+  getAnnouncements$: () => Observable<AnnouncementFragment[]>;
+
+  /** The number of active announcements polled */
+  announcementsCountPoll$: Observable<number>;
 }
