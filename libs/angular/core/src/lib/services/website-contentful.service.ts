@@ -21,6 +21,20 @@ export class AnnouncementCollectionService extends Apollo.Query<
 @Injectable({
   providedIn: 'root',
 })
+export class AnnouncementCollectionCountService extends Apollo.Query<
+  models.AnnouncementCollectionCountQuery,
+  models.AnnouncementCollectionCountQueryVariables
+> {
+  override document = models.AnnouncementCollectionCountDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+
+@Injectable({
+  providedIn: 'root',
+})
 export class BasicPostCollectionBySlugService extends Apollo.Query<
   models.BasicPostCollectionBySlugQuery,
   models.BasicPostCollectionBySlugQueryVariables

@@ -8,9 +8,10 @@ import {
 import { RouterLink } from '@angular/router';
 import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
 
-import { LetsExchangeComponent } from '@dehub/angular/ui/components//lets-exchange/lets-exchange.component';
+import { AnnouncementBadgeComponent } from '@dehub/angular/ui/components/announcement-badge/announcement-badge.component';
 import { BuyDehubButtonComponent } from '@dehub/angular/ui/components/buttons/buy-dehub-button/buy-dehub-button.component';
 import { ConnectWalletButtonComponent } from '@dehub/angular/ui/components/buttons/connect-wallet-button/connect-wallet-button.component';
+import { LetsExchangeComponent } from '@dehub/angular/ui/components/lets-exchange/lets-exchange.component';
 import { getBuyDehubMenuItems, shortenAddress } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -33,6 +34,7 @@ import { AppMenuComponent } from './menu/app.menu.component';
     BuyDehubButtonComponent,
     ConnectWalletButtonComponent,
     LetsExchangeComponent,
+    AnnouncementBadgeComponent,
 
     AppMenuComponent,
   ],
@@ -55,11 +57,17 @@ import { AppMenuComponent } from './menu/app.menu.component';
               (app.topbarTheme === 'dark' ? 'dehub-white' : 'dehub') +
               '.svg'
             "
+            tabindex="1"
             height="25"
             width="107"
             alt="DeHub logo"
           />
         </a>
+
+        <!-- Announcement Badge -->
+        <div class="ml-4 mt-2">
+          <dhb-announcement-badge tabindex="2" />
+        </div>
       </div>
 
       <dhb-menu *ngIf="isDev" />

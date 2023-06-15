@@ -1,50 +1,58 @@
 import { Inject, Injectable } from '@angular/core';
-import { EnvToken } from '@dehub/angular/model';
-import { AnnouncementComponent } from '@dehub/angular/ui/components/announcement/announcement.component';
-import { AnnouncementFragment, SharedEnv } from '@dehub/shared/model';
-import { DialogService } from 'primeng/dynamicdialog';
-import { filter, map, takeWhile } from 'rxjs';
-import { AnnouncementCollectionService } from './website-contentful.service';
+import { EnvToken, IAnnouncementService } from '@dehub/angular/model';
+import {
+  AnnouncementFragment,
+  SharedEnv,
+  pollInterval,
+} from '@dehub/shared/model';
+import { filter, map, switchMap, timer } from 'rxjs';
+import {
+  AnnouncementCollectionCountService,
+  AnnouncementCollectionService,
+} from './website-contentful.service';
+
 @Injectable({ providedIn: 'root' })
-export class AnnouncementService {
-  private isAlive = true;
+export class AnnouncementService implements IAnnouncementService {
+  getAnnouncements$ = this.getAnnouncements;
+
+  announcementsCountPoll$ = timer(0, pollInterval).pipe(
+    switchMap(() => this.getAnnouncementsCount())
+  );
 
   constructor(
     @Inject(EnvToken) private env: SharedEnv,
-    private dialogService: DialogService,
-    private announcementCollectionService: AnnouncementCollectionService
+    private announcementCollectionService: AnnouncementCollectionService,
+    private announcementCollectionPollService: AnnouncementCollectionCountService
   ) {}
 
-  subscribeForAnnouncements() {
-    this.announcementCollectionService
-      .watch({
+  private getAnnouncements() {
+    return this.announcementCollectionService
+      .fetch({
         now: new Date(),
         isPreview: this.env.contentful.isPreview,
       })
-      .valueChanges.pipe(
-        takeWhile(() => this.isAlive),
+      .pipe(
         filter(({ loading }) => !loading),
         map(
           ({ data: { announcementCollection } }) =>
             (announcementCollection?.items as AnnouncementFragment[]) ?? []
         ),
         filter(announcements => announcements.length > 0)
-      )
-      .subscribe(announcements => {
-        this.dialogService.open(AnnouncementComponent, {
-          data: { announcements },
-          showHeader: true,
-          header: 'Announcements',
-          width: '620px',
-          styleClass: 'bg-gradient-3 border-neon-1',
-          closeOnEscape: true,
-          dismissableMask: true,
-          closable: true,
-        });
-      });
+      );
   }
 
-  unsubscribeAnnouncements() {
-    this.isAlive = false;
+  private getAnnouncementsCount() {
+    return this.announcementCollectionPollService
+      .fetch({
+        now: new Date(),
+        isPreview: this.env.contentful.isPreview,
+      })
+      .pipe(
+        filter(({ loading }) => !loading),
+        map(
+          ({ data: { announcementCollection } }) =>
+            announcementCollection?.total ?? 0
+        )
+      );
   }
 }
