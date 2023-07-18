@@ -12,6 +12,7 @@ import { hexToDecimal } from '@dehub/shared/util/network/hex-to-decimal';
 import {
   ethereumDisabled,
   getRandomRpcUrlByChainId,
+  getWalletConnectQrModalOptions,
   isMoralisConnector,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
@@ -52,12 +53,16 @@ const ConnectContext = createContext<undefined | ConnectContextValue>(
 interface ConnectProviderProps extends PropsWithChildren<unknown> {
   defaultChainId: number;
   magicLinkApiKey: string;
+  walletConnectProjectId: string;
+  landing: string;
 }
 
 const ConnectProvider: React.FC<ConnectProviderProps> = ({
   children,
   defaultChainId = 1,
   magicLinkApiKey,
+  walletConnectProjectId,
+  landing,
 }) => {
   const [walletConnectingState, setWalletConnectingState] =
     useState<WalletConnectingState>(WalletConnectingState.INIT);
@@ -176,29 +181,13 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
             chainId: defaultChainId,
           };
         } else if (connectorId === MoralisConnectorNames.WalletConnect) {
-          const walletConnectProjectId = '68ed2e099585095b550883260d2b11e4';
           enableOptions = {
             provider: connectorId,
-            chainId: 56, //: defaultChainId,
+            chainId: defaultChainId,
             newSession: true,
             projectId: walletConnectProjectId,
-            // https://rpc.walletconnect.com/v1/?chainId=eip155:1&projectId=68ed2e099585095b550883260d2b11e4
-            // rpcMap: {
-            //   '1': `https://rpc.walletconnect.com/v1/?chainId=eip155:${chainId}&projectId=${walletConnectProjectId}`,
-            // },
-            qrModalOptions: {
-              themeMode: 'dark',
-              explorerRecommendedWalletIds: [
-                'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-                '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0',
-                '0b415a746fb9ee99cce155c2ceca0c6f6061b1dbca2d722b3ba16381d0562150',
-              ],
-              explorerExcludedWalletIds: 'ALL',
-              termsOfServiceUrl: 'https://dehub.net/web/legal/terms',
-              privacyPolicyUrl: 'https://dehub.net/web/legal/privacy',
-            },
+            qrModalOptions: getWalletConnectQrModalOptions(landing),
           };
-          console.log('enableOptions', enableOptions);
         } else if (connectorId === MoralisConnectorNames.MagicLink) {
           enableOptions = {
             provider: connectorId,
@@ -324,6 +313,8 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
       cleanConnectorStorage,
       defaultChainId,
       magicLinkApiKey,
+      walletConnectProjectId,
+      landing,
     ]
   );
 

@@ -52,6 +52,7 @@ export interface Web3Env {
   addresses: { contracts: ContractsEnv };
   auth: {
     magicLinkApiKey: string;
+    walletConnectProjectId: string;
   };
 }
 
@@ -145,6 +146,7 @@ export const defaultSharedEnv: SharedEnv = {
     },
     auth: {
       magicLinkApiKey: 'pk_live_559E42CB7F45E462',
+      walletConnectProjectId: '68ed2e099585095b550883260d2b11e4',
     },
   },
 

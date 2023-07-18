@@ -17,3 +17,21 @@ export const resolveMessage = (state: WalletConnectingState) => {
   }
   return msg;
 };
+/**
+ * Return WalletConnectModal options.
+ *
+ * Docs: https://docs.walletconnect.com/2.0/web/walletConnectModal/modal/options
+ * @param env the Dehub Environment
+ * @returns preferred WalletConnectModal options
+ */
+export const getWalletConnectQrModalOptions = (landing: string) => ({
+  themeMode: 'dark',
+  explorerRecommendedWalletIds: [
+    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+    '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0',
+    '0b415a746fb9ee99cce155c2ceca0c6f6061b1dbca2d722b3ba16381d0562150',
+  ],
+  explorerExcludedWalletIds: 'ALL',
+  termsOfServiceUrl: `${landing}/legal/terms`,
+  privacyPolicyUrl: `${landing}/legal/privacy`,
+});

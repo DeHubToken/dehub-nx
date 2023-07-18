@@ -30,6 +30,7 @@ import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
   filterNil,
   getRandomRpcUrlByChainId,
+  getWalletConnectQrModalOptions,
   publishReplayRefCount,
   setupMetamaskNetwork,
   shortenAddress,
@@ -201,6 +202,13 @@ export class MoralisService implements IMoralisService {
     magicLinkEmail: string,
     magicLinkApiKey: string
   ) {
+    const {
+      web3: {
+        auth: { walletConnectProjectId },
+      },
+      dehub: { landing },
+    } = this.env;
+
     let enableOptions: Moralis.EnableOptions;
 
     this.requiredChainHex = decimalToHex(chainId);
@@ -209,8 +217,6 @@ export class MoralisService implements IMoralisService {
 
     let userPromise: Promise<Moralis.User<Moralis.Attributes> | undefined> =
       Promise.resolve(undefined);
-
-    const walletConnectProjectId = '68ed2e099585095b550883260d2b11e4';
 
     switch (connectorId) {
       case MoralisConnectorNames.Injected:
@@ -230,28 +236,12 @@ export class MoralisService implements IMoralisService {
         break;
 
       case MoralisConnectorNames.WalletConnect:
-        // enableOptions = { chainId, provider: connectorId };
-        console.log('>>> chainId', chainId);
         enableOptions = {
-          chainId: 56,
+          chainId,
           provider: connectorId,
           newSession: true,
           projectId: walletConnectProjectId,
-          // https://rpc.walletconnect.com/v1/?chainId=eip155:1&projectId=68ed2e099585095b550883260d2b11e4
-          // rpcMap: {
-          //   '1': `https://rpc.walletconnect.com/v1/?chainId=eip155:${chainId}&projectId=${walletConnectProjectId}`,
-          // },
-          qrModalOptions: {
-            themeMode: 'dark',
-            explorerRecommendedWalletIds: [
-              'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-              '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0',
-              '0b415a746fb9ee99cce155c2ceca0c6f6061b1dbca2d722b3ba16381d0562150',
-            ],
-            explorerExcludedWalletIds: 'ALL',
-            termsOfServiceUrl: 'https://dehub.net/web/legal/terms',
-            privacyPolicyUrl: 'https://dehub.net/web/legal/privacy',
-          },
+          qrModalOptions: getWalletConnectQrModalOptions(landing),
         };
         userPromise = Moralis.authenticate({
           ...enableOptions,
