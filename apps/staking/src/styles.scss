@@ -7,3 +7,17 @@
 @import 'primereact/resources/primereact.min.css';
 @import 'primeflex/primeflex.scss';
 @import 'primeicons/primeicons.css';
+
+:root {
+  // Swiper
+  --swiper-theme-color: #fafafa;
+
+  // Font Awesome
+  --fa-animation-duration: 2s;
+  --fa-animation-delay: 4s;
+}
+
+body {
+  // WalletConnect
+  --wcm-z-index: 3200;
+}
