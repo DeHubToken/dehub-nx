@@ -170,14 +170,35 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
         }
 
         let enableOptions: Moralis.EnableOptions;
-        if (
-          connectorId === MoralisConnectorNames.Injected ||
-          connectorId === MoralisConnectorNames.WalletConnect
-        ) {
+        if (connectorId === MoralisConnectorNames.Injected) {
           enableOptions = {
             provider: connectorId,
             chainId: defaultChainId,
           };
+        } else if (connectorId === MoralisConnectorNames.WalletConnect) {
+          const walletConnectProjectId = '68ed2e099585095b550883260d2b11e4';
+          enableOptions = {
+            provider: connectorId,
+            chainId: 56, //: defaultChainId,
+            newSession: true,
+            projectId: walletConnectProjectId,
+            // https://rpc.walletconnect.com/v1/?chainId=eip155:1&projectId=68ed2e099585095b550883260d2b11e4
+            // rpcMap: {
+            //   '1': `https://rpc.walletconnect.com/v1/?chainId=eip155:${chainId}&projectId=${walletConnectProjectId}`,
+            // },
+            qrModalOptions: {
+              themeMode: 'dark',
+              explorerRecommendedWalletIds: [
+                'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+                '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0',
+                '0b415a746fb9ee99cce155c2ceca0c6f6061b1dbca2d722b3ba16381d0562150',
+              ],
+              explorerExcludedWalletIds: 'ALL',
+              termsOfServiceUrl: 'https://dehub.net/web/legal/terms',
+              privacyPolicyUrl: 'https://dehub.net/web/legal/privacy',
+            },
+          };
+          console.log('enableOptions', enableOptions);
         } else if (connectorId === MoralisConnectorNames.MagicLink) {
           enableOptions = {
             provider: connectorId,
@@ -192,11 +213,6 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
           throw new Error(`Not supported provider: ${connectorId}!`);
         }
 
-        window.localStorage.setItem(
-          enableOptionsLocalStorageKey,
-          JSON.stringify(enableOptions)
-        );
-
         // if moralis connector
         moralisLogin({
           ...enableOptions,
@@ -209,6 +225,10 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
             if (connectorId === MoralisConnectorNames.WalletConnect) {
               console.log('Wallet Connect');
               setWalletConnectingState(WalletConnectingState.COMPLETE);
+              // Not save new session into local storage
+              delete (
+                enableOptions as Moralis.WalletConnectWeb3ConnectorEnableOptions
+              ).newSession;
             } else if (
               await setupMetamaskNetwork(
                 defaultChainId,
@@ -232,6 +252,12 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
               logout();
               setWalletConnectingState(WalletConnectingState.INIT);
             }
+
+            // Store enableOptions
+            window.localStorage.setItem(
+              enableOptionsLocalStorageKey,
+              JSON.stringify(enableOptions)
+            );
           },
         });
       } else {
