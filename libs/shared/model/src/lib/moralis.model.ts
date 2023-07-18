@@ -1,5 +1,5 @@
-import { Moralis } from 'moralis';
-import { components, operations } from 'moralis/types/generated/web3Api';
+import { Moralis } from 'moralis-v1';
+import { components, operations } from 'moralis-v1/types/generated/web3Api';
 import { Contacts } from './contacts.model';
 
 export type ChainId = components['schemas']['chainList'];

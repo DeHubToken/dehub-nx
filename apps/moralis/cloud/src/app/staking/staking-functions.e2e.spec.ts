@@ -1,6 +1,6 @@
 require('../shared/mock.include');
 import { MoralisFunctions } from '@dehub/shared/model';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import { environment } from '../../environments/environment';
 
 const {
