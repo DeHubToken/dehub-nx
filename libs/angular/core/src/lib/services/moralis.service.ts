@@ -203,11 +203,13 @@ export class MoralisService implements IMoralisService {
     magicLinkApiKey: string
   ) {
     const {
+      baseUrl,
       web3: {
         auth: { walletConnectProjectId },
       },
       dehub: { landing },
     } = this.env;
+    const legalPage = `${landing}${baseUrl}`;
 
     let enableOptions: Moralis.EnableOptions;
 
@@ -241,7 +243,7 @@ export class MoralisService implements IMoralisService {
           provider: connectorId,
           newSession: true,
           projectId: walletConnectProjectId,
-          qrModalOptions: getWalletConnectQrModalOptions(landing),
+          qrModalOptions: getWalletConnectQrModalOptions(legalPage),
         };
         userPromise = Moralis.authenticate({
           ...enableOptions,

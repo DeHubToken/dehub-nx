@@ -7,13 +7,13 @@ import { ConnectProvider } from './ConnectContext';
 
 interface Web3ProviderProps extends PropsWithChildren<unknown> {
   web3: Web3Env;
-  landing: string;
+  legalPage: string;
 }
 
 export const Web3Providers: React.FC<Web3ProviderProps> = ({
   children,
   web3,
-  landing,
+  legalPage,
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getLibrary = useCallback((provider: any) => {
@@ -38,7 +38,7 @@ export const Web3Providers: React.FC<Web3ProviderProps> = ({
           defaultChainId={chainId}
           magicLinkApiKey={magicLinkApiKey}
           walletConnectProjectId={walletConnectProjectId}
-          landing={landing}
+          legalPage={legalPage}
         >
           {children}
         </ConnectProvider>

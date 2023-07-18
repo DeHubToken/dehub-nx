@@ -54,7 +54,7 @@ interface ConnectProviderProps extends PropsWithChildren<unknown> {
   defaultChainId: number;
   magicLinkApiKey: string;
   walletConnectProjectId: string;
-  landing: string;
+  legalPage: string;
 }
 
 const ConnectProvider: React.FC<ConnectProviderProps> = ({
@@ -62,7 +62,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
   defaultChainId = 1,
   magicLinkApiKey,
   walletConnectProjectId,
-  landing,
+  legalPage,
 }) => {
   const [walletConnectingState, setWalletConnectingState] =
     useState<WalletConnectingState>(WalletConnectingState.INIT);
@@ -186,7 +186,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
             chainId: defaultChainId,
             newSession: true,
             projectId: walletConnectProjectId,
-            qrModalOptions: getWalletConnectQrModalOptions(landing),
+            qrModalOptions: getWalletConnectQrModalOptions(legalPage),
           };
         } else if (connectorId === MoralisConnectorNames.MagicLink) {
           enableOptions = {
@@ -314,7 +314,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
       defaultChainId,
       magicLinkApiKey,
       walletConnectProjectId,
-      landing,
+      legalPage,
     ]
   );
 

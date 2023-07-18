@@ -24,7 +24,7 @@ export const resolveMessage = (state: WalletConnectingState) => {
  * @param env the Dehub Environment
  * @returns preferred WalletConnectModal options
  */
-export const getWalletConnectQrModalOptions = (landing: string) => ({
+export const getWalletConnectQrModalOptions = (legalPage: string) => ({
   themeMode: 'dark',
   explorerRecommendedWalletIds: [
     'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
@@ -32,6 +32,6 @@ export const getWalletConnectQrModalOptions = (landing: string) => ({
     '0b415a746fb9ee99cce155c2ceca0c6f6061b1dbca2d722b3ba16381d0562150',
   ],
   explorerExcludedWalletIds: 'ALL',
-  termsOfServiceUrl: `${landing}/legal/terms`,
-  privacyPolicyUrl: `${landing}/legal/privacy`,
+  termsOfServiceUrl: `${legalPage}/terms`,
+  privacyPolicyUrl: `${legalPage}/privacy`,
 });
