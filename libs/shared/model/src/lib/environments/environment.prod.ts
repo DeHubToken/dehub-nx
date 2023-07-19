@@ -28,6 +28,7 @@ export const defaultSharedProdEnv: SharedEnv = {
     },
     auth: {
       magicLinkApiKey: 'pk_live_A3DB34BA3F84FB3B',
+      walletConnectProjectId: 'b81c35555879db44a7b2b6392838dcbe',
     },
   },
 

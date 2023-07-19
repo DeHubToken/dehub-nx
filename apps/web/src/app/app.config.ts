@@ -50,7 +50,7 @@ import {
 import { SharedEnv } from '@dehub/shared/model';
 import { createApolloCache, createApolloClient } from '@dehub/shared/utils';
 import { APOLLO_FLAGS, APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { register } from 'swiper/element/bundle';

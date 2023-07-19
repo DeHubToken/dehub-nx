@@ -53,10 +53,10 @@
           "hash.js",
           "bignumber.js",
           "query-string",
-          "@walletconnect/window-getters",
-          "@walletconnect/socket-transport",
-          "@walletconnect/window-metadata",
-          "@walletconnect/environment"
+          "@walletconnect/environment",
+          "cross-fetch",
+          "qrcode",
+          "@stablelib/ed25519"
         ],
         "budgets": [
           {

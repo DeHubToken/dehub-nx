@@ -44,7 +44,7 @@ import {
 } from '@dehub/shared/utils';
 import { BigNumber } from '@ethersproject/bignumber';
 import { LetModule } from '@rx-angular/template/let';
-import Moralis from 'moralis';
+import Moralis from 'moralis-v1';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';

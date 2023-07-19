@@ -1,7 +1,7 @@
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { bscEnabled } from '@dehub/shared/utils';
 import { EIP1193Provider } from 'eip1193-provider';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import {
   AbstractWeb3Connector,
   ActivateResponse,

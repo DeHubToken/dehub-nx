@@ -30,6 +30,7 @@ import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import {
   filterNil,
   getRandomRpcUrlByChainId,
+  getWalletConnectQrModalOptions,
   publishReplayRefCount,
   setupMetamaskNetwork,
   shortenAddress,
@@ -37,7 +38,7 @@ import {
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import {
   ConfirmEventType,
   ConfirmationService,
@@ -201,6 +202,15 @@ export class MoralisService implements IMoralisService {
     magicLinkEmail: string,
     magicLinkApiKey: string
   ) {
+    const {
+      baseUrl,
+      web3: {
+        auth: { walletConnectProjectId },
+      },
+      dehub: { landing },
+    } = this.env;
+    const legalPage = `${landing}${baseUrl}`;
+
     let enableOptions: Moralis.EnableOptions;
 
     this.requiredChainHex = decimalToHex(chainId);
@@ -228,11 +238,20 @@ export class MoralisService implements IMoralisService {
         break;
 
       case MoralisConnectorNames.WalletConnect:
-        enableOptions = { chainId, provider: connectorId };
+        enableOptions = {
+          chainId,
+          provider: connectorId,
+          newSession: true,
+          projectId: walletConnectProjectId,
+          qrModalOptions: getWalletConnectQrModalOptions(legalPage),
+        };
         userPromise = Moralis.authenticate({
           ...enableOptions,
           signingMessage,
         });
+
+        // Not save new session into local storage
+        delete enableOptions.newSession;
         break;
 
       case MoralisConnectorNames.MagicLink:

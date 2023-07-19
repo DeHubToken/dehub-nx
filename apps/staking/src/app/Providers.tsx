@@ -11,11 +11,18 @@ import { environment } from '../environments/environment';
 import store from './state';
 
 const Providers: React.FC<PropsWithChildren<unknown>> = ({ children }) => {
+  const {
+    baseUrl,
+    web3,
+    contentful,
+    dehub: { landing },
+  } = environment;
+  const legalPage = `${landing}${baseUrl}`;
   return (
     <ToastProvider>
-      <Web3Providers web3={environment.web3}>
+      <Web3Providers web3={web3} legalPage={legalPage}>
         <Provider store={store}>
-          <ContentfulProvider contentful={environment.contentful}>
+          <ContentfulProvider contentful={contentful}>
             <RefreshContextProvider>
               <HelmetProvider>{children}</HelmetProvider>
             </RefreshContextProvider>

@@ -12,12 +12,13 @@ import { hexToDecimal } from '@dehub/shared/util/network/hex-to-decimal';
 import {
   ethereumDisabled,
   getRandomRpcUrlByChainId,
+  getWalletConnectQrModalOptions,
   isMoralisConnector,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
 import { Web3Provider } from '@ethersproject/providers';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import React, {
   createContext,
   PropsWithChildren,
@@ -52,12 +53,16 @@ const ConnectContext = createContext<undefined | ConnectContextValue>(
 interface ConnectProviderProps extends PropsWithChildren<unknown> {
   defaultChainId: number;
   magicLinkApiKey: string;
+  walletConnectProjectId: string;
+  legalPage: string;
 }
 
 const ConnectProvider: React.FC<ConnectProviderProps> = ({
   children,
   defaultChainId = 1,
   magicLinkApiKey,
+  walletConnectProjectId,
+  legalPage,
 }) => {
   const [walletConnectingState, setWalletConnectingState] =
     useState<WalletConnectingState>(WalletConnectingState.INIT);
@@ -170,13 +175,18 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
         }
 
         let enableOptions: Moralis.EnableOptions;
-        if (
-          connectorId === MoralisConnectorNames.Injected ||
-          connectorId === MoralisConnectorNames.WalletConnect
-        ) {
+        if (connectorId === MoralisConnectorNames.Injected) {
           enableOptions = {
             provider: connectorId,
             chainId: defaultChainId,
+          };
+        } else if (connectorId === MoralisConnectorNames.WalletConnect) {
+          enableOptions = {
+            provider: connectorId,
+            chainId: defaultChainId,
+            newSession: true,
+            projectId: walletConnectProjectId,
+            qrModalOptions: getWalletConnectQrModalOptions(legalPage),
           };
         } else if (connectorId === MoralisConnectorNames.MagicLink) {
           enableOptions = {
@@ -192,11 +202,6 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
           throw new Error(`Not supported provider: ${connectorId}!`);
         }
 
-        window.localStorage.setItem(
-          enableOptionsLocalStorageKey,
-          JSON.stringify(enableOptions)
-        );
-
         // if moralis connector
         moralisLogin({
           ...enableOptions,
@@ -209,6 +214,10 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
             if (connectorId === MoralisConnectorNames.WalletConnect) {
               console.log('Wallet Connect');
               setWalletConnectingState(WalletConnectingState.COMPLETE);
+              // Not save new session into local storage
+              delete (
+                enableOptions as Moralis.WalletConnectWeb3ConnectorEnableOptions
+              ).newSession;
             } else if (
               await setupMetamaskNetwork(
                 defaultChainId,
@@ -232,6 +241,12 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
               logout();
               setWalletConnectingState(WalletConnectingState.INIT);
             }
+
+            // Store enableOptions
+            window.localStorage.setItem(
+              enableOptionsLocalStorageKey,
+              JSON.stringify(enableOptions)
+            );
           },
         });
       } else {
@@ -298,6 +313,8 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
       cleanConnectorStorage,
       defaultChainId,
       magicLinkApiKey,
+      walletConnectProjectId,
+      legalPage,
     ]
   );
 
