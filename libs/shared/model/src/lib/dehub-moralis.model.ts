@@ -1,4 +1,4 @@
-import Moralis from 'moralis-v1/types';
+import type Moralis from 'moralis-v1/types';
 import { PhysicalAddress } from './location.model';
 import { User } from './moralis.model';
 import { ShopOrder } from './shop.model';
