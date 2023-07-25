@@ -19,7 +19,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { EnvToken, NOOP_VALUE_ACCESSOR } from '@dehub/angular/model';
-import { PhoneNumberValidator } from '@dehub/angular/util';
+import { phoneNumberValidator } from '@dehub/angular/util';
 import { Country, SharedEnv } from '@dehub/shared/model';
 import {
   PhoneNumber,
@@ -27,7 +27,7 @@ import {
   PhoneNumberUtil,
 } from 'google-libphonenumber';
 import { InputTextModule } from 'primeng/inputtext';
-import { Observable, distinctUntilChanged, takeWhile, tap } from 'rxjs';
+import { distinctUntilChanged, Observable, takeWhile, tap } from 'rxjs';
 import { LoadingComponent } from '../../loading/loading.component';
 
 import { LetModule } from '@rx-angular/template/let';
@@ -106,7 +106,7 @@ import { DropdownModule } from 'primeng/dropdown';
 
     <!-- Loading -->
     <ng-template #loading>
-      <dhb-loading></dhb-loading>
+      <dhb-loading />
     </ng-template>
   `,
   styles: [
@@ -150,7 +150,7 @@ export class PhoneInputComponent implements OnInit, OnDestroy {
   selectedCountry?: Country;
   phoneForm = this.fb.group({
     code: [''],
-    number: ['', [PhoneNumberValidator(() => this.selectedCountry?.code)]],
+    number: ['', [phoneNumberValidator(() => this.selectedCountry?.code)]],
   });
 
   private isAlive = true;

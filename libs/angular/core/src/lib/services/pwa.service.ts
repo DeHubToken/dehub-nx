@@ -22,6 +22,7 @@ export class PwaService {
     // docs: https://angular.io/guide/service-worker-communications#checking-for-updates
     this.coreService
       .appStableAwareInterval$(serviceWorkerConfig.checkForUpdateInterval)
+      .pipe(takeWhile(() => this.isAlive))
       .subscribe(() => this.swUpdate.checkForUpdate());
 
     // Service Worker Version Ready

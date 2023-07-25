@@ -1,4 +1,5 @@
 import {
+  AnnouncementFragment,
   Attributes,
   CheckOrderParams,
   CheckOrderResult,
@@ -125,4 +126,17 @@ export interface IContentFulManagementService {
     productId: string,
     quantity: number
   ) => Observable<ProductAvailableQuantityFragment | null>;
+}
+
+export interface ICoingeckoService {
+  /** Get Dehub usd price polled. */
+  getDehubUsdPricePoll$: () => Observable<string>;
+}
+
+export interface IAnnouncementService {
+  /** Get active announcements  */
+  getAnnouncements$: () => Observable<AnnouncementFragment[]>;
+
+  /** The number of active announcements polled */
+  announcementsCountPoll$: Observable<number>;
 }

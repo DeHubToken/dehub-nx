@@ -8,7 +8,7 @@ import { first } from 'rxjs';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureAuthComponent implements OnInit {
+export default class AngularFeatureAuthComponent implements OnInit {
   constructor(
     private dialogService: DialogService,
     private router: Router,
@@ -51,7 +51,7 @@ export class AngularFeatureAuthComponent implements OnInit {
    * (Use 'honorNext' if you want to follow 'nextUrl'. By default this will be
    * ignored, for cases when user just click on "X" or escape or clicks outside the modal)
    */
-  closeModal(honorNext: boolean = false, replaceNext?: string) {
+  closeModal(honorNext = false, replaceNext?: string) {
     this.getRelativeTo(this.route, lastFirstChild => {
       const closeProps = ['./', { outlets: { modal: null } }];
       if (honorNext) {

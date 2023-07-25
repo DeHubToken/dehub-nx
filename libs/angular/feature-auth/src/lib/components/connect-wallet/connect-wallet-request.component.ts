@@ -22,7 +22,7 @@ import { AbstractConnectWalletComponent } from './abstract-connect-wallet.compon
           [label]="'Connect Wallet'"
           [icon]="'fas fa-wallet'"
           (onClick)="onConnectClick()"
-        ></p-button>
+        />
       </div>
     </div>
   `,

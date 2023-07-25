@@ -1,11 +1,12 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import {
   FeaturePostFragment,
   PageSectionFeaturePostsFragment,
@@ -49,12 +50,18 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
       <!-- Feature Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
         <swiper-slide
-          *ngFor="let featurePost of featurePosts; let isFirst = first"
+          *ngFor="
+            let featurePost of featurePosts;
+            let i = index;
+            let isFirst = first;
+            trackBy: trackByFn
+          "
         >
           <dhb-feature-post
             [featurePost]="featurePost"
             [firstPost]="isFirst"
-          ></dhb-feature-post>
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          />
         </swiper-slide>
       </swiper-container>
     </div>
@@ -69,6 +76,8 @@ export class PageSectionFeaturePostsComponent implements OnInit {
   featurePosts: FeaturePostFragment[] = [];
 
   swiperOptions?: SwiperOptions;
+
+  trackByFn = trackByContentfulIdFn<FeaturePostFragment>();
 
   constructor() {}
 

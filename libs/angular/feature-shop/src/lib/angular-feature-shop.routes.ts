@@ -1,18 +1,16 @@
 import { Routes } from '@angular/router';
 import { AuthenticatedGuard } from '@dehub/angular/core';
-import { AngularFeatureShopCheckoutComponent } from './angular-feature-shop-checkout.component';
-import { AngularFeatureShopProductDetailComponent } from './angular-feature-shop-product-detail.component';
-import { AngularFeatureShopComponent } from './angular-feature-shop.component';
 import { ProductDetailService } from './services';
 
 export const routes: Routes = [
   {
     path: '',
-    component: AngularFeatureShopComponent,
+    loadComponent: () => import('./angular-feature-shop.component'),
   },
   {
     path: ':slug',
-    component: AngularFeatureShopProductDetailComponent,
+    loadComponent: () =>
+      import('./angular-feature-shop-product-detail.component'),
     providers: [ProductDetailService],
   },
   {
@@ -21,7 +19,8 @@ export const routes: Routes = [
     children: [
       {
         path: ':slug',
-        component: AngularFeatureShopCheckoutComponent,
+        loadComponent: () =>
+          import('./angular-feature-shop-checkout.component'),
         canActivate: [AuthenticatedGuard],
         providers: [ProductDetailService],
       },

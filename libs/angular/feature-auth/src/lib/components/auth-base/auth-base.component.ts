@@ -25,7 +25,7 @@ import { filter, take } from 'rxjs';
           [label]="'Connect Wallet'"
           [icon]="'fas fa-wallet'"
           (onClick)="onConnectClick()"
-        ></p-button>
+        />
       </div>
     </div>
   `,

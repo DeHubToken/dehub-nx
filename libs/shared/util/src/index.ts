@@ -1,5 +1,6 @@
 export * from './lib/address.util';
 export * from './lib/balance.util';
+export * from './lib/coingecko.util';
 export * from './lib/contentful.util';
 export * from './lib/contract.util';
 export * from './lib/dehub.util';
@@ -9,6 +10,7 @@ export * from './lib/moralis.util';
 export * from './lib/network';
 export * from './lib/number.util';
 export * from './lib/rxjs.util';
+export * from './lib/swiper.util';
 export * from './lib/type-guard.util';
 export * from './lib/validation.util';
 export * from './lib/web3.util';

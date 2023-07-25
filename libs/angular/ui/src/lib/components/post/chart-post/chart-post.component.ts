@@ -22,7 +22,7 @@ import { ChartModule } from 'primeng/chart';
         [data]="chartData"
         [options]="chartOptions"
         [style]="{ width: chartWidth }"
-      ></p-chart>
+      />
     </div>
   `,
 

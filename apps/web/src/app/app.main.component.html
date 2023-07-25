@@ -10,13 +10,13 @@
   [class]="'layout-menu-' + app.menuTheme + ' layout-topbar-' + app.topbarTheme"
   (click)="onLayoutClick()"
 >
-  <dhb-topbar></dhb-topbar>
+  <dhb-topbar />
   <div class="layout-content py-0">
     <dhb-tab-menu
       swipeHintClass="md:hidden"
       [menuItems]="tabMenuItems"
       [activeMenuItem]="activeMenuItem"
-    ></dhb-tab-menu>
+    />
   </div>
 
   <div class="layout-main">
@@ -25,7 +25,7 @@
       <router-outlet></router-outlet>
     </div>
 
-    <dhb-footer [footer]="footer$ | push"></dhb-footer>
+    <dhb-footer [footer]="footer$ | push" />
   </div>
 
   <div class="layout-mask modal-in"></div>

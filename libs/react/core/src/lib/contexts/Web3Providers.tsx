@@ -7,11 +7,13 @@ import { ConnectProvider } from './ConnectContext';
 
 interface Web3ProviderProps extends PropsWithChildren<unknown> {
   web3: Web3Env;
+  legalPage: string;
 }
 
 export const Web3Providers: React.FC<Web3ProviderProps> = ({
   children,
   web3,
+  legalPage,
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getLibrary = useCallback((provider: any) => {
@@ -19,6 +21,11 @@ export const Web3Providers: React.FC<Web3ProviderProps> = ({
     library.pollingInterval = 12000;
     return library;
   }, []);
+
+  const {
+    chainId,
+    auth: { walletConnectProjectId, magicLinkApiKey },
+  } = web3;
 
   return (
     <MoralisProvider
@@ -28,8 +35,10 @@ export const Web3Providers: React.FC<Web3ProviderProps> = ({
     >
       <Web3ReactProvider getLibrary={getLibrary}>
         <ConnectProvider
-          defaultChainId={web3.chainId}
-          magicLinkApiKey={web3.auth.magicLinkApiKey}
+          defaultChainId={chainId}
+          magicLinkApiKey={magicLinkApiKey}
+          walletConnectProjectId={walletConnectProjectId}
+          legalPage={legalPage}
         >
           {children}
         </ConnectProvider>

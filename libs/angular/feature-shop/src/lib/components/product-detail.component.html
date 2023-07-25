@@ -4,10 +4,15 @@
     class="card image-card shadow-8 mx-4 bg-gradient-2 pb-5 overflow-hidden"
   >
     <!-- Main Picture -->
-    <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-      <swiper-slide
-        *ngFor="let picture of productDetail.picturesCollection?.items ?? []"
-      >
+    <swiper-container
+      *ngIf="productDetail.picturesCollection?.items ?? [] as pictures"
+      dhbSwiper
+      [swiperOptions]="swiperOptions"
+      init="false"
+      [attr.grab-cursor]="pictures.length > 1"
+      [class.no-padding-bottom]="swiperIsClickable"
+    >
+      <swiper-slide *ngFor="let picture of pictures; trackBy: trackByFn">
         <img
           *ngIf="picture"
           [dhbContentfulDraft]="picture.sys"
@@ -36,7 +41,7 @@
           class="flex-grow pr-3 mb-4 line-height-3"
         ></div>
 
-        <div class="flex-none min-w-full sm:min-w-max xl:w-17rem">
+        <div class="min-w-full sm:min-w-max">
           <!-- Meta Info -->
           <div
             *ngIf="productDetail.category as category"
@@ -50,81 +55,37 @@
             </div>
           </div>
 
-          <!-- Price Widget -->
-          <div class="card overview-box gray shadow-2 pt-1 pb-3 mb-3">
-            <div class="overview-info text-right w-full">
-              <!-- Price -->
-              <h2 class="mt-1 mb-0 pr-0">
-                {{ productDetail.price | number }}
-              </h2>
+          <!-- Info Widget -->
+          <dhb-product-info
+            [productDetail]="productDetail"
+            [increaseFontSize]="true"
+          >
+            <!-- Buy / Coming Soon -->
+            <p-button
+              [routerLink]="
+                productDetail.pause
+                  ? null
+                  : [
+                      '/shop',
+                      {
+                        outlets: {
+                          modal: ['checkout', productDetail.slug]
+                        }
+                      }
+                    ]
+              "
+              [label]="productDetail.pause ? 'Coming Soon' : 'Buy'"
+              [disabled]="productDetail.pause ?? false"
+              icon="fa-solid fa-check"
+              styleClass="p-button-primary p-button-lg mt-3 block w-full"
+            />
+          </dhb-product-info>
 
-              <!-- Currency -->
-              <h5 class="text-sm mt-0 mb-2 opacity-80 line-height-1">
-                {{ productDetail.currency }}
-              </h5>
-
-              <!-- Quantity -->
-              <h5 class="my-0 text-sm inline-block line-height-1 w-full">
-                <hr class="my-0 pb-2 border-dashed" />
-
-                <ng-container
-                  *ngIf="
-                    productDetail.availableQuantity ?? 0 > 0;
-                    else unavailable
-                  "
-                >
-                  <span class="text-bold opacity-80">{{
-                    productDetail.availableQuantity
-                  }}</span>
-                  <span class="opacity-80 text-xs text-bold pr-1">
-                    left in stock</span
-                  >
-
-                  <!-- Buy / Coming Soon -->
-                  <p-button
-                    [routerLink]="
-                      productDetail.pause
-                        ? null
-                        : [
-                            '/shop',
-                            {
-                              outlets: {
-                                modal: ['checkout', productDetail.slug]
-                              }
-                            }
-                          ]
-                    "
-                    [label]="productDetail.pause ? 'Coming Soon' : 'Buy'"
-                    [disabled]="productDetail.pause ?? false"
-                    icon="fa-solid fa-check"
-                    styleClass="p-button-primary p-button-lg mt-3 block w-full"
-                  ></p-button>
-                </ng-container>
-
-                <ng-template #unavailable>
-                  <!-- Paused -->
-                  <span
-                    *ngIf="productDetail.pause; else soldOut"
-                    class="text-bold"
-                  >
-                    Coming Soon
-                  </span>
-
-                  <!-- Sold Out -->
-                  <ng-template #soldOut>
-                    <span class="text-bold">
-                      {{ productDetail.soldOutLabel || 'Sold Out' }}
-                    </span>
-                  </ng-template>
-                </ng-template>
-              </h5>
-            </div>
-          </div>
+          <!-- Sales Widget -->
+          <dhb-product-sales [productSales$]="productSales$" />
 
           <!-- Orders Widget -->
-          <dhb-product-orders
-            [productOrders$]="productOrders$"
-          ></dhb-product-orders>
+          <dhb-product-orders [productOrders$]="productOrders$" />
         </div>
       </div>
     </div>

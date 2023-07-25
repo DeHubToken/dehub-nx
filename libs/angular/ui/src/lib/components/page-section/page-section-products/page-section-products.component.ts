@@ -1,8 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
   ViewEncapsulation,
@@ -21,6 +21,7 @@ import { MenuItem } from 'primeng/api';
 import { SwiperOptions } from 'swiper';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
 
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { ProductComponent } from '../../product/product.component';
 import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
@@ -58,7 +59,7 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
           <dhb-tab-menu
             [menuItems]="menuItems"
             [activeMenuItem]="activeMenuItem"
-          ></dhb-tab-menu>
+          />
         </div>
       </div>
       <h5
@@ -70,8 +71,13 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
 
       <!-- Product -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let product of products">
-          <dhb-product [product]="product"></dhb-product>
+        <swiper-slide
+          *ngFor="let product of products; let i = index; trackBy: trackByFn"
+        >
+          <dhb-product
+            [product]="product"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          />
         </swiper-slide>
       </swiper-container>
     </div>
@@ -101,6 +107,8 @@ export class PageSectionProductsComponent implements OnInit {
   products: ProductFragment[] = [];
 
   swiperOptions?: SwiperOptions;
+
+  trackByFn = trackByContentfulIdFn<ProductFragment>();
 
   constructor() {}
 

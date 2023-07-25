@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import {
   PageSectionSectionPostsFragment,
   SectionPostFragment,
@@ -43,11 +44,15 @@ import { SectionPostComponent } from '../../post/section-post/section-post.compo
       <!-- Section Posts -->
       <div class="grid mt-4">
         <div
-          *ngFor="let sectionPost of sectionPosts; let i = index"
+          *ngFor="
+            let sectionPost of sectionPosts;
+            let i = index;
+            trackBy: trackByFn
+          "
           [class]="resolveCol(sectionPost)"
         >
           <div [@fadeInUp]="{ value: '', params: { delay: i * 200 } }">
-            <dhb-section-post [sectionPost]="sectionPost"></dhb-section-post>
+            <dhb-section-post [sectionPost]="sectionPost" />
           </div>
         </div>
       </div>
@@ -60,6 +65,8 @@ export class PageSectionSectionPostsComponent implements OnInit {
   @Input() section!: PageSectionSectionPostsFragment;
 
   sectionPosts: SectionPostFragment[] = [];
+
+  trackByFn = trackByContentfulIdFn<SectionPostFragment>();
 
   constructor() {}
 

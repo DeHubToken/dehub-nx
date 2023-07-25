@@ -2,7 +2,7 @@ import {
   enableOptionsLocalStorageKey,
   MoralisConnectorNames,
 } from '@dehub/shared/model';
-import { Moralis } from 'moralis';
+import { type Moralis } from 'moralis-v1';
 import { useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
 

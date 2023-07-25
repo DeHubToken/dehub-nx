@@ -10,10 +10,13 @@ import { ProductFragment } from '@dehub/shared/model';
 import { ButtonModule } from 'primeng/button';
 
 import { DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
+import { isPaginationClickable } from '@dehub/shared/utils';
 import { CardModule } from 'primeng/card';
 import { SwiperOptions } from 'swiper';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../directives/swiper/swiper.directive';
+import { ProductInfoComponent } from './product-info.component';
 
 @Component({
   selector: 'dhb-product',
@@ -30,6 +33,7 @@ import { SwiperDirective } from '../../directives/swiper/swiper.directive';
     // UI
     ContentfulDraftDirective,
     SwiperDirective,
+    ProductInfoComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './product.component.html',
@@ -49,7 +53,12 @@ import { SwiperDirective } from '../../directives/swiper/swiper.directive';
 export class ProductComponent implements OnInit {
   @Input() product!: ProductFragment;
 
-  swiperOptions: SwiperOptions = {};
+  swiperOptions: SwiperOptions = {
+    pagination: { clickable: true },
+  };
+  swiperIsClickable = isPaginationClickable(this.swiperOptions);
+
+  trackByFn = trackByContentfulIdFn<ProductFragment>();
 
   constructor() {}
 

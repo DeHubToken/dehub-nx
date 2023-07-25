@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import {
   GrandPostFragment,
   PageSectionGrandPostsFragment,
@@ -43,10 +44,17 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
       <!-- Grand Posts -->
       <div class="grid">
         <div
-          *ngFor="let grandPost of grandPosts"
+          *ngFor="
+            let grandPost of grandPosts;
+            let i = index;
+            trackBy: trackByFn
+          "
           class="col-12 md:col-6 flex sm:mb-5"
         >
-          <dhb-grand-post [grandPost]="grandPost"></dhb-grand-post>
+          <dhb-grand-post
+            [grandPost]="grandPost"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          />
         </div>
       </div>
     </div>
@@ -59,6 +67,8 @@ export class PageSectionGrandPostsComponent implements OnInit {
   @Input() section!: PageSectionGrandPostsFragment;
 
   grandPosts: GrandPostFragment[] = [];
+
+  trackByFn = trackByContentfulIdFn<GrandPostFragment>();
 
   constructor() {}
 

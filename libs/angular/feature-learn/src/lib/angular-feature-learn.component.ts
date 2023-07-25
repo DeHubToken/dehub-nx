@@ -28,19 +28,19 @@ import { map, Observable } from 'rxjs';
   template: `
     <ng-container *rxLet="pageLearn$ as pageLearn" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageLearn"></dhb-page-header>
+      <dhb-page-header [page]="pageLearn" />
 
       <!-- Page Sections -->
       <dhb-page-sections
         [sections]="pageLearn?.sectionsCollection?.items"
         [iconTilesResponsiveOptions]="iconTilesResponsiveOptions"
         [path]="path"
-      ></dhb-page-sections>
+      />
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureLearnComponent implements OnInit {
+export default class AngularFeatureLearnComponent implements OnInit {
   pageLearn$?: Observable<PageLearnFragment | undefined>;
 
   path = this.env.baseUrl;

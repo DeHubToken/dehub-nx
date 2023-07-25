@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import {
   IconTileFragment,
   PageSectionIconTilesFragment,
@@ -43,11 +44,11 @@ import { IconTileComponent } from '../../icon-tile/icon-tile.component';
       <!-- Icon Tiles -->
       <div class="grid">
         <dhb-icon-tile
-          *ngFor="let iconTile of iconTiles; let i = index"
+          *ngFor="let iconTile of iconTiles; let i = index; trackBy: trackByFn"
           [iconTile]="iconTile"
           [@fadeInUp]="{ value: '', params: { delay: i + 1 * 100 } }"
           class="col-12 sm:col-12 md:col-6 xl:col-4 flex flex-auto"
-        ></dhb-icon-tile>
+        />
       </div>
     </div>
   `,
@@ -59,6 +60,8 @@ export class PageSectionIconTilesComponent implements OnInit {
   @Input() section!: PageSectionIconTilesFragment;
 
   iconTiles: IconTileFragment[] = [];
+
+  trackByFn = trackByContentfulIdFn<IconTileFragment>();
 
   constructor() {}
 

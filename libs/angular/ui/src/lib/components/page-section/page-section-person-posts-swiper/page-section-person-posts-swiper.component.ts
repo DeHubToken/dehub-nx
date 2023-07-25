@@ -1,8 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
 } from '@angular/core';
@@ -15,6 +15,7 @@ import { isNotNil } from '@dehub/shared/utils';
 import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { SwiperOptions } from 'swiper';
 
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
 import { PersonPostComponent } from '../../post/person-post/person-post.component';
@@ -48,11 +49,18 @@ import { PersonPostComponent } from '../../post/person-post/person-post.componen
 
       <!-- Person Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let personPost of personPosts">
+        <swiper-slide
+          *ngFor="
+            let personPost of personPosts;
+            let i = index;
+            trackBy: trackByFn
+          "
+        >
           <dhb-person-post
             [personPost]="personPost"
             [path]="path"
-          ></dhb-person-post>
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          />
         </swiper-slide>
       </swiper-container>
     </div>
@@ -68,6 +76,8 @@ export class PageSectionPersonPostsSwiperComponent implements OnInit {
   personPosts: PersonPostFragment[] = [];
 
   swiperOptions?: SwiperOptions;
+
+  trackByFn = trackByContentfulIdFn<PersonPostFragment>();
 
   constructor() {}
 

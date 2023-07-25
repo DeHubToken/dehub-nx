@@ -10,7 +10,7 @@ import {
 import { WalletConnectingState } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { iOS } from '@dehub/shared/utils';
-import { Moralis } from 'moralis';
+import { Moralis } from 'moralis-v1';
 import React, { useEffect, useState } from 'react';
 import { useWeb3Context } from '../../hooks';
 import { useContentfulContext } from '../../hooks/useContentfulContext';
@@ -27,14 +27,12 @@ const withLayout =
     {
       baseUrl = '/',
       landing,
-      pageTitle = 'DeHub D’App',
       cexUrl,
       downloadMetamaskUrl,
       activeTab,
     }: {
       baseUrl?: string;
       landing: string;
-      pageTitle?: string;
       cexUrl: string;
       downloadMetamaskUrl: string;
       activeTab: string;
@@ -49,7 +47,6 @@ const withLayout =
       walletConnectingState,
       defaultChainId,
       // baseUrl,
-      // pageTitle,
       // landingUrl: landing,
       logout,
     } = useWeb3Context();
@@ -111,7 +108,7 @@ const withLayout =
 
     return (
       <div>
-        <PageMeta baseUrl={baseUrl} title={pageTitle} />
+        <PageMeta baseUrl={baseUrl} />
         <ToastListener />
         {showLoader && (
           <Loader

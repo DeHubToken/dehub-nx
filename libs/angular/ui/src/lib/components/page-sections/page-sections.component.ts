@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import {
   PageSectionBasicPostsFragment,
   PageSectionDappPostsFragment,
@@ -96,6 +97,8 @@ export class PageSectionsComponent implements OnInit {
         this.productMenuItems.find(menuItem => menuItem.fragment === fragment)
       )
     );
+
+  trackByFn = trackByContentfulIdFn<PageSection>();
 
   constructor(private route: ActivatedRoute) {}
 

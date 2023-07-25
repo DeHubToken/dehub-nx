@@ -8,6 +8,7 @@ import { FaqGroupFragment, FaqItemFragment } from '@dehub/shared/model';
 import { isNotNil } from '@dehub/shared/utils';
 
 import { NgFor, NgIf } from '@angular/common';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { AccordionModule } from 'primeng/accordion';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 
@@ -33,7 +34,9 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
 
       <!-- Faq Items -->
       <p-accordion>
-        <ng-container *ngFor="let faqItem of faqItems; let i = index">
+        <ng-container
+          *ngFor="let faqItem of faqItems; let i = index; trackBy: trackByFn"
+        >
           <ng-container *ngIf="faqItem.question">
             <p-accordionTab [selected]="i === 0">
               <!-- Header -->
@@ -60,6 +63,8 @@ export class FaqGroupComponent implements OnInit {
   @Input() faqGroup!: FaqGroupFragment;
 
   faqItems: FaqItemFragment[] = [];
+
+  trackByFn = trackByContentfulIdFn<FaqItemFragment>();
 
   constructor() {}
 

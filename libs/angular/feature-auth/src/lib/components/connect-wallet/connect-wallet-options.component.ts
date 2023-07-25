@@ -57,7 +57,7 @@ import { InputTextModule } from 'primeng/inputtext';
             path + '/assets/dehub/icons/trustwallet.svg'
           ]"
           (click)="login.emit({ connectorId: 'metamask' })"
-        ></dhb-wallet-button>
+        />
         <div
           *ngIf="
             walletConnectState &&
@@ -83,7 +83,7 @@ import { InputTextModule } from 'primeng/inputtext';
               label="Magic"
               [imageSources]="[path + '/assets/dehub/icons/magic.svg']"
               (click)="inplaceMagic.activate()"
-            ></dhb-wallet-button>
+            />
           </ng-template>
 
           <!-- Content -->
@@ -135,7 +135,7 @@ import { InputTextModule } from 'primeng/inputtext';
           label="Trust Wallet"
           [imageSources]="[path + '/assets/dehub/icons/trustwallet.svg']"
           (click)="login.emit({ connectorId: 'metamask' })"
-        ></dhb-wallet-button>
+        />
       </div>
 
       <!-- Wallet Connect -->
@@ -144,7 +144,7 @@ import { InputTextModule } from 'primeng/inputtext';
           label="WalletConnect"
           [imageSources]="[path + '/assets/dehub/icons/walletconnect.svg']"
           (click)="login.emit({ connectorId: 'walletconnect' })"
-        ></dhb-wallet-button>
+        />
       </div>
 
       <!-- Binance -->
@@ -153,7 +153,7 @@ import { InputTextModule } from 'primeng/inputtext';
           label="Binance"
           [imageSources]="[path + '/assets/dehub/icons/bsc.svg']"
           (click)="login.emit({ connectorId: 'binance' })"
-        ></dhb-wallet-button>
+        />
         <div
           *ngIf="
             walletConnectState &&

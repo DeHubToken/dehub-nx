@@ -1,5 +1,6 @@
 import { NgFor, NgStyle } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { trackByItemFn } from '@dehub/angular/util';
 
 @Component({
   selector: 'dhb-wallet-button',
@@ -17,7 +18,7 @@ import { Component, Input, OnInit } from '@angular/core';
       <!-- Icons -->
       <div class="flex flex-row align-items-center">
         <img
-          *ngFor="let imageSource of imageSources"
+          *ngFor="let imageSource of imageSources; trackBy: trackByFn"
           [alt]="label"
           [src]="imageSource"
           [ngStyle]="{
@@ -33,6 +34,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class WalletButtonComponent implements OnInit {
   @Input() label?: string;
   @Input() imageSources?: string[];
+
+  trackByFn = trackByItemFn<string>();
 
   constructor() {}
 

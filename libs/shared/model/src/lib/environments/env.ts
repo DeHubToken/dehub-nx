@@ -52,6 +52,7 @@ export interface Web3Env {
   addresses: { contracts: ContractsEnv };
   auth: {
     magicLinkApiKey: string;
+    walletConnectProjectId: string;
   };
 }
 
@@ -105,7 +106,7 @@ export const defaultSharedEnv: SharedEnv = {
   dehub: {
     cexUrl: 'https://www.gate.io/trade/DHB_USDT',
     downloadMetamaskUrl: 'https://metamask.io/download/',
-    landing: 'https://dehub.net',
+    landing: 'https://dehub.net/web',
     dapps: {
       staking: 'https://dehub.net/staking',
     },
@@ -145,6 +146,7 @@ export const defaultSharedEnv: SharedEnv = {
     },
     auth: {
       magicLinkApiKey: 'pk_live_559E42CB7F45E462',
+      walletConnectProjectId: 'c397e6eb260337a782a750adf6e0eec0',
     },
   },
 

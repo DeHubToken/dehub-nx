@@ -36,7 +36,7 @@ import { LegalPostComponent } from './components/legal-post.component';
       <div class="col-12 xl:col-8 col-offset-0 xl:col-offset-2">
         <dhb-back-aware [backRouterLink]="routerLink">
           <!-- Legal Post -->
-          <dhb-legal-post [legalPost]="legalPost$ | push"></dhb-legal-post>
+          <dhb-legal-post [legalPost]="legalPost$ | push" />
         </dhb-back-aware>
       </div>
     </div>
@@ -49,7 +49,7 @@ import { LegalPostComponent } from './components/legal-post.component';
     }),
   ],
 })
-export class AngularFeatureLegalComponent implements OnInit {
+export default class AngularFeatureLegalComponent implements OnInit {
   legalPost$!: Observable<LegalPostFragment | undefined>;
 
   routerLink = [`/${NavigationTabMenu.Home}`];

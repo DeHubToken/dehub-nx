@@ -8,16 +8,18 @@ import {
 import { RouterLink } from '@angular/router';
 import { EnvToken, IMoralisService, MoralisToken } from '@dehub/angular/model';
 
+import { AnnouncementBadgeComponent } from '@dehub/angular/ui/components/announcement-badge/announcement-badge.component';
 import { BuyDehubButtonComponent } from '@dehub/angular/ui/components/buttons/buy-dehub-button/buy-dehub-button.component';
 import { ConnectWalletButtonComponent } from '@dehub/angular/ui/components/buttons/connect-wallet-button/connect-wallet-button.component';
+import { LetsExchangeComponent } from '@dehub/angular/ui/components/lets-exchange/lets-exchange.component';
 import { getBuyDehubMenuItems, shortenAddress } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
-import { map, Observable } from 'rxjs';
+import { DialogService } from 'primeng/dynamicdialog';
+import { Observable, map } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
 import { AppMainComponent } from '../app.main.component';
 import { AppMenuComponent } from './menu/app.menu.component';
-
 @Component({
   selector: 'dhb-topbar',
   standalone: true,
@@ -31,6 +33,8 @@ import { AppMenuComponent } from './menu/app.menu.component';
     // UI
     BuyDehubButtonComponent,
     ConnectWalletButtonComponent,
+    LetsExchangeComponent,
+    AnnouncementBadgeComponent,
 
     AppMenuComponent,
   ],
@@ -53,28 +57,35 @@ import { AppMenuComponent } from './menu/app.menu.component';
               (app.topbarTheme === 'dark' ? 'dehub-white' : 'dehub') +
               '.svg'
             "
+            tabindex="1"
             height="25"
             width="107"
             alt="DeHub logo"
           />
         </a>
+
+        <!-- Announcement Badge -->
+        <div class="ml-4 mt-2">
+          <dhb-announcement-badge tabindex="2" />
+        </div>
       </div>
 
-      <dhb-menu *ngIf="isDev"></dhb-menu>
+      <dhb-menu *ngIf="isDev" />
 
       <div class="layout-topbar-right">
         <ul class="layout-topbar-actions">
           <li class="topbar-item">
             <dhb-buy-dehub-button
               [items]="buyDehubMenuItems"
-            ></dhb-buy-dehub-button>
+              (defaultBuy)="onDefaultBuy()"
+            />
           </li>
           <li class="topbar-item ml-2 md:ml-4">
             <dhb-connect-wallet-button
               [label]="(connectWalletButtonLabel$ | push)!"
               [isAuthenticated]="(isAuthenticated$ | push)!"
               [icon]="connectWalletButtonIcon"
-            ></dhb-connect-wallet-button>
+            />
           </li>
         </ul>
       </div>
@@ -87,6 +98,7 @@ export class AppTopBarComponent implements OnInit {
     this.env.dehub.landing,
     this.env.dehub.cexUrl,
     this.env.dehub.downloadMetamaskUrl,
+    this.onSwap.bind(this),
     true
   );
 
@@ -105,7 +117,8 @@ export class AppTopBarComponent implements OnInit {
     @Inject(EnvToken) private env: Env,
     @Inject(MoralisToken) private moralisService: IMoralisService,
     public app: AppComponent,
-    public appMain: AppMainComponent
+    public appMain: AppMainComponent,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
@@ -118,5 +131,21 @@ export class AppTopBarComponent implements OnInit {
         account ? shortenAddress(account) : this.connectWalletButtonLabel
       )
     );
+  }
+
+  onSwap() {
+    this.dialogService.open(LetsExchangeComponent, {
+      header: 'Swap',
+      width: '420px',
+      styleClass: 'bg-gradient-3 border-neon-2',
+      closeOnEscape: true,
+      dismissableMask: true,
+    });
+  }
+
+  onDefaultBuy() {
+    // Use first item which is the Swap as default
+    this.buyDehubMenuItems[0].command &&
+      this.buyDehubMenuItems[0].command(undefined);
   }
 }

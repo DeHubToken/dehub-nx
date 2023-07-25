@@ -3,17 +3,15 @@ import Loader, { LoaderProps } from './';
 
 interface FullScreenLoaderProps extends LoaderProps {
   baseUrl: string;
-  pageTitle: string;
 }
 
 const FullScreenLoader = ({
   baseUrl = '',
-  pageTitle = '',
   ...loaderProps
 }: FullScreenLoaderProps) => {
   return (
     <div>
-      <PageMeta baseUrl={baseUrl} title={pageTitle} />
+      <PageMeta baseUrl={baseUrl} />
       <Loader {...loaderProps} />
     </div>
   );

@@ -15,6 +15,10 @@ export interface SwiperResponsiveOptions {
 export const swiperContainerStyles = `
   swiper-container {
     padding-bottom: 60px;
+
+    &.no-padding-bottom {
+      padding-bottom: 0px;
+    }
   }
 `;
 

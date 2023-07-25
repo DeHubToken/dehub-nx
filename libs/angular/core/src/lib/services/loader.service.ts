@@ -15,7 +15,7 @@ export class LoaderService {
 
   constructor(@Inject(EnvToken) private env: SharedEnv) {}
 
-  show(subtitle: string = '') {
+  show(subtitle = '') {
     this.subtitleSubject.next(subtitle);
     this.loaderVisibleSubject.next(true);
   }

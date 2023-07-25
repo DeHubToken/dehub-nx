@@ -37,6 +37,6 @@ declare namespace MoralisMissingTypes {
 
 declare const {
   Moralis,
-}: typeof import('moralis') & typeof MoralisMissingTypes;
+}: typeof import('moralis-v1') & typeof MoralisMissingTypes;
 
 declare module 'xhr2';

@@ -24,7 +24,7 @@ import { filter, take } from 'rxjs';
           [label]="'Reconnect Wallet'"
           [icon]="'fas fa-wallet'"
           (onClick)="onReconnectClick()"
-        ></p-button>
+        />
       </div>
     </div>
   `,

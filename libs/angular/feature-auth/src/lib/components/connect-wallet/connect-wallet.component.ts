@@ -43,7 +43,7 @@ import { ConnectWalletOptionsComponent } from './connect-wallet-options.componen
     <dhb-connect-wallet-options
       [walletConnectState]="walletConnectState$ | push"
       (login)="onLogin($event)"
-    ></dhb-connect-wallet-options>
+    />
   `,
 
   providers: [...provideDehubLoggerWithScope('Connect Wallet')],

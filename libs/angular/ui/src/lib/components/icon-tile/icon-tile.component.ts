@@ -42,7 +42,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
         [label]="iconTile.callToActionButtonLabel ?? 'Click'"
         (onClick)="onCTAClicked($event)"
         styleClass="p-button-secondary p-button-lg p-button-raised w-9"
-      ></p-button>
+      />
     </div>
   `,
   styles: [

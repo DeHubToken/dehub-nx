@@ -24,19 +24,19 @@ import { Observable, map } from 'rxjs';
   template: `
     <ng-container *rxLet="pageClubs$ as pageClubs" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageClubs"></dhb-page-header>
+      <dhb-page-header [page]="pageClubs" />
 
       <!-- Page Sections -->
       <dhb-page-sections
         [sections]="pageClubs?.sectionsCollection?.items"
         [path]="path"
-      ></dhb-page-sections>
+      />
     </ng-container>
   `,
 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AngularFeatureClubsComponent implements OnInit {
+export default class AngularFeatureClubsComponent implements OnInit {
   pageClubs$?: Observable<PageClubsFragment | undefined>;
 
   path = this.env.baseUrl;

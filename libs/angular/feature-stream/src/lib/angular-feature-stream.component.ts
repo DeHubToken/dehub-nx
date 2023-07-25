@@ -43,7 +43,7 @@ import { Observable, map } from 'rxjs';
   template: `
     <ng-container *rxLet="pageStream$ as pageStream" class="grid">
       <!-- Titles -->
-      <dhb-page-header [page]="pageStream"></dhb-page-header>
+      <dhb-page-header [page]="pageStream" />
 
       <!-- Group Posts -->
       <div
@@ -82,7 +82,7 @@ import { Observable, map } from 'rxjs';
             (onClick)="onButtonClicked($event, group.externalLink!)"
             [label]="group.label!"
             styleClass="p-button-lg p-button-raised"
-          ></p-button>
+          />
         </p-fieldset>
       </div>
 
@@ -91,13 +91,13 @@ import { Observable, map } from 'rxjs';
         [sections]="pageStream?.sectionsCollection?.items"
         [thumbnailPostsResponsiveOptions]="thumbnailPostsResponsiveOptions"
         [path]="path"
-      ></dhb-page-sections>
+      />
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })
-export class AngularFeatureStreamComponent implements OnInit {
+export default class AngularFeatureStreamComponent implements OnInit {
   pageStream$?: Observable<PageStreamFragment | undefined>;
 
   path = this.env.baseUrl;

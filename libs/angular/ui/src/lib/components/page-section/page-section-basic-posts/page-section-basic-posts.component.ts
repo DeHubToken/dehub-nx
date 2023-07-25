@@ -1,11 +1,12 @@
 import { NgFor, NgIf } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   Input,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import {
   BasicPostFragment,
   PageSectionBasicPostsFragment,
@@ -48,8 +49,17 @@ import { BasicPostComponent } from '../../post/basic-post/basic-post.component';
 
       <!-- Basic Posts -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let basicPost of basicPosts">
-          <dhb-basic-post [basicPost]="basicPost"></dhb-basic-post>
+        <swiper-slide
+          *ngFor="
+            let basicPost of basicPosts;
+            let i = index;
+            trackBy: trackByFn
+          "
+        >
+          <dhb-basic-post
+            [basicPost]="basicPost"
+            [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
+          />
         </swiper-slide>
       </swiper-container>
     </div>
@@ -64,6 +74,8 @@ export class PageSectionBasicPostsComponent implements OnInit {
   basicPosts: BasicPostFragment[] = [];
 
   swiperOptions?: SwiperOptions;
+
+  trackByFn = trackByContentfulIdFn<BasicPostFragment>();
 
   constructor() {}
 

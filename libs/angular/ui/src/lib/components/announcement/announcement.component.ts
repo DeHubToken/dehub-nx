@@ -1,10 +1,11 @@
 import { DatePipe, NgClass, NgFor } from '@angular/common';
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   OnInit,
 } from '@angular/core';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { AnnouncementFragment } from '@dehub/shared/model';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { SwiperOptions } from 'swiper';
@@ -31,7 +32,9 @@ import { SafeHtmlPipe } from '../../pipes/safe-html/safe-html.pipe';
   template: `
     <div class="mx-4">
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
-        <swiper-slide *ngFor="let announcement of announcements">
+        <swiper-slide
+          *ngFor="let announcement of announcements; trackBy: trackByFn"
+        >
           <div [dhbContentfulDraft]="announcement.sys" class="mt-5 mb-6">
             <!-- Header -->
             <div
@@ -75,6 +78,8 @@ export class AnnouncementComponent implements OnInit {
     freeMode: true,
     mousewheel: true,
   };
+
+  trackByFn = trackByContentfulIdFn<AnnouncementFragment>();
 
   constructor(public config: DynamicDialogConfig) {}
 

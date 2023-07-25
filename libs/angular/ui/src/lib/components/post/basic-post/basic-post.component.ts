@@ -56,7 +56,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
             [routerLink]="['/news/' + basicPost.slug]"
             label="Read More"
             styleClass="p-button-secondary"
-          ></p-button>
+          />
         </ng-template>
       </p-card>
     </div>

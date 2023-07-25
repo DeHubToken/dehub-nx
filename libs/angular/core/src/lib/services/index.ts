@@ -1,4 +1,5 @@
 export { AnnouncementService } from './announcement.service';
+export { CoingeckoService } from './coingecko.service';
 export { ContentfulManagementService } from './contentful-management.service';
 export { CoreService } from './core.service';
 export { DehubMoralisService } from './dehub-moralis.service';

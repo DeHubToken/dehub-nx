@@ -101,6 +101,12 @@ export interface AnnouncementContentLinks {
   __typename?: 'AnnouncementContentLinks';
   assets: AnnouncementContentAssets;
   entries: AnnouncementContentEntries;
+  resources: AnnouncementContentResources;
+}
+
+export interface AnnouncementContentResources {
+  __typename?: 'AnnouncementContentResources';
+  block: Array<ResourceLink>;
 }
 
 export interface AnnouncementFilter {
@@ -330,6 +336,9 @@ export interface AssetLinkingCollections {
 export interface AssetLinkingCollectionsAwardPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<AssetLinkingCollectionsAwardPostCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -337,6 +346,9 @@ export interface AssetLinkingCollectionsAwardPostCollectionArgs {
 export interface AssetLinkingCollectionsBasicPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<AssetLinkingCollectionsBasicPostCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -351,6 +363,9 @@ export interface AssetLinkingCollectionsEntryCollectionArgs {
 export interface AssetLinkingCollectionsFeaturePostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<AssetLinkingCollectionsFeaturePostCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -358,6 +373,9 @@ export interface AssetLinkingCollectionsFeaturePostCollectionArgs {
 export interface AssetLinkingCollectionsGrandPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<AssetLinkingCollectionsGrandPostCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -365,6 +383,9 @@ export interface AssetLinkingCollectionsGrandPostCollectionArgs {
 export interface AssetLinkingCollectionsPersonPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<AssetLinkingCollectionsPersonPostCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -372,6 +393,9 @@ export interface AssetLinkingCollectionsPersonPostCollectionArgs {
 export interface AssetLinkingCollectionsProductCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<AssetLinkingCollectionsProductCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -379,8 +403,162 @@ export interface AssetLinkingCollectionsProductCollectionArgs {
 export interface AssetLinkingCollectionsThumbnailPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<AssetLinkingCollectionsThumbnailPostCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum AssetLinkingCollectionsAwardPostCollectionOrder {
+  IsRoundedAsc = 'isRounded_ASC',
+  IsRoundedDesc = 'isRounded_DESC',
+  LinkAsc = 'link_ASC',
+  LinkDesc = 'link_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum AssetLinkingCollectionsBasicPostCollectionOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SummaryAsc = 'summary_ASC',
+  SummaryDesc = 'summary_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
+export enum AssetLinkingCollectionsFeaturePostCollectionOrder {
+  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
+  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
+  CallToActionUrlAsc = 'callToActionUrl_ASC',
+  CallToActionUrlDesc = 'callToActionUrl_DESC',
+  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
+  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  VideoUrlAsc = 'videoUrl_ASC',
+  VideoUrlDesc = 'videoUrl_DESC',
+}
+
+export enum AssetLinkingCollectionsGrandPostCollectionOrder {
+  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
+  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
+  CallToActionUrlAsc = 'callToActionUrl_ASC',
+  CallToActionUrlDesc = 'callToActionUrl_DESC',
+  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
+  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  VideoUrlAsc = 'videoUrl_ASC',
+  VideoUrlDesc = 'videoUrl_DESC',
+}
+
+export enum AssetLinkingCollectionsPersonPostCollectionOrder {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  GithubAsc = 'github_ASC',
+  GithubDesc = 'github_DESC',
+  InstagramAsc = 'instagram_ASC',
+  InstagramDesc = 'instagram_DESC',
+  LinkedinAsc = 'linkedin_ASC',
+  LinkedinDesc = 'linkedin_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  TwitterAsc = 'twitter_ASC',
+  TwitterDesc = 'twitter_DESC',
+}
+
+export enum AssetLinkingCollectionsProductCollectionOrder {
+  AvailableQuantityAsc = 'availableQuantity_ASC',
+  AvailableQuantityDesc = 'availableQuantity_DESC',
+  CurrencyAsc = 'currency_ASC',
+  CurrencyDesc = 'currency_DESC',
+  HardCapAsc = 'hardCap_ASC',
+  HardCapDesc = 'hardCap_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PauseAsc = 'pause_ASC',
+  PauseDesc = 'pause_DESC',
+  PriceAsc = 'price_ASC',
+  PriceDesc = 'price_DESC',
+  SkuAsc = 'sku_ASC',
+  SkuDesc = 'sku_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SoftCapAsc = 'softCap_ASC',
+  SoftCapDesc = 'softCap_DESC',
+  SoldOutLabelAsc = 'soldOutLabel_ASC',
+  SoldOutLabelDesc = 'soldOutLabel_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum AssetLinkingCollectionsThumbnailPostCollectionOrder {
+  IsVideoAsc = 'isVideo_ASC',
+  IsVideoDesc = 'isVideo_DESC',
+  LinkAsc = 'link_ASC',
+  LinkDesc = 'link_DESC',
+  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
+  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum AssetOrder {
@@ -480,8 +658,24 @@ export interface AwardPostLinkingCollectionsEntryCollectionArgs {
 export interface AwardPostLinkingCollectionsFooterCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<AwardPostLinkingCollectionsFooterCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum AwardPostLinkingCollectionsFooterCollectionOrder {
+  CopyrightAsc = 'copyright_ASC',
+  CopyrightDesc = 'copyright_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum AwardPostOrder {
@@ -517,6 +711,7 @@ export interface BasicPost extends Entry {
 export interface BasicPostCategoryArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<BasicPostCategoryFilter>;
 }
 
 /** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
@@ -601,6 +796,11 @@ export interface BasicPostCategoryLinkingCollections {
 export interface BasicPostCategoryLinkingCollectionsBasicPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<BasicPostCategoryLinkingCollectionsBasicPostCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -615,8 +815,43 @@ export interface BasicPostCategoryLinkingCollectionsEntryCollectionArgs {
 export interface BasicPostCategoryLinkingCollectionsPageSectionBasicPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<BasicPostCategoryLinkingCollectionsPageSectionBasicPostsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum BasicPostCategoryLinkingCollectionsBasicPostCollectionOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SummaryAsc = 'summary_ASC',
+  SummaryDesc = 'summary_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
+export enum BasicPostCategoryLinkingCollectionsPageSectionBasicPostsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum BasicPostCategoryOrder {
@@ -663,6 +898,12 @@ export interface BasicPostDescriptionLinks {
   __typename?: 'BasicPostDescriptionLinks';
   assets: BasicPostDescriptionAssets;
   entries: BasicPostDescriptionEntries;
+  resources: BasicPostDescriptionResources;
+}
+
+export interface BasicPostDescriptionResources {
+  __typename?: 'BasicPostDescriptionResources';
+  block: Array<ResourceLink>;
 }
 
 export interface BasicPostFilter {
@@ -715,8 +956,26 @@ export interface BasicPostLinkingCollectionsEntryCollectionArgs {
 export interface BasicPostLinkingCollectionsPageSectionBasicPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<BasicPostLinkingCollectionsPageSectionBasicPostsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum BasicPostLinkingCollectionsPageSectionBasicPostsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum BasicPostOrder {
@@ -871,6 +1130,9 @@ export interface CallToActionLinkingCollectionsEntryCollectionArgs {
 export interface CallToActionLinkingCollectionsFooterCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<CallToActionLinkingCollectionsFooterCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -878,6 +1140,9 @@ export interface CallToActionLinkingCollectionsFooterCollectionArgs {
 export interface CallToActionLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<CallToActionLinkingCollectionsPageClubsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -885,6 +1150,9 @@ export interface CallToActionLinkingCollectionsPageClubsCollectionArgs {
 export interface CallToActionLinkingCollectionsPageGameCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<CallToActionLinkingCollectionsPageGameCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -892,6 +1160,9 @@ export interface CallToActionLinkingCollectionsPageGameCollectionArgs {
 export interface CallToActionLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<CallToActionLinkingCollectionsPageHomeCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -899,6 +1170,9 @@ export interface CallToActionLinkingCollectionsPageHomeCollectionArgs {
 export interface CallToActionLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<CallToActionLinkingCollectionsPageLearnCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -906,6 +1180,9 @@ export interface CallToActionLinkingCollectionsPageLearnCollectionArgs {
 export interface CallToActionLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<CallToActionLinkingCollectionsPageShopCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -913,8 +1190,162 @@ export interface CallToActionLinkingCollectionsPageShopCollectionArgs {
 export interface CallToActionLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<CallToActionLinkingCollectionsPageStreamCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum CallToActionLinkingCollectionsFooterCollectionOrder {
+  CopyrightAsc = 'copyright_ASC',
+  CopyrightDesc = 'copyright_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum CallToActionLinkingCollectionsPageClubsCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum CallToActionLinkingCollectionsPageGameCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum CallToActionLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum CallToActionLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum CallToActionLinkingCollectionsPageShopCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum CallToActionLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum CallToActionOrder {
@@ -1033,8 +1464,32 @@ export interface ChartPostLinkingCollectionsEntryCollectionArgs {
 export interface ChartPostLinkingCollectionsSectionPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<ChartPostLinkingCollectionsSectionPostCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum ChartPostLinkingCollectionsSectionPostCollectionOrder {
+  AlignCenterAsc = 'alignCenter_ASC',
+  AlignCenterDesc = 'alignCenter_DESC',
+  ColumnWidthAsc = 'columnWidth_ASC',
+  ColumnWidthDesc = 'columnWidth_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleSizeAsc = 'titleSize_ASC',
+  TitleSizeDesc = 'titleSize_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum ChartPostOrder {
@@ -1202,8 +1657,26 @@ export interface DappPostLinkingCollectionsEntryCollectionArgs {
 export interface DappPostLinkingCollectionsPageSectionDappPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<DappPostLinkingCollectionsPageSectionDappPostsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum DappPostLinkingCollectionsPageSectionDappPostsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum DappPostOrder {
@@ -1332,8 +1805,32 @@ export interface EmbedPostLinkingCollectionsEntryCollectionArgs {
 export interface EmbedPostLinkingCollectionsSectionPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<EmbedPostLinkingCollectionsSectionPostCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum EmbedPostLinkingCollectionsSectionPostCollectionOrder {
+  AlignCenterAsc = 'alignCenter_ASC',
+  AlignCenterDesc = 'alignCenter_DESC',
+  ColumnWidthAsc = 'columnWidth_ASC',
+  ColumnWidthDesc = 'columnWidth_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleSizeAsc = 'titleSize_ASC',
+  TitleSizeDesc = 'titleSize_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum EmbedPostOrder {
@@ -1400,8 +1897,10 @@ export interface FaqGroup extends Entry {
 export interface FaqGroupFaqItemCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<FaqGroupFaqItemCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<FaqItemFilter>;
 }
 
 /** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqGroup) */
@@ -1428,6 +1927,19 @@ export interface FaqGroupFaqItemCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export enum FaqGroupFaqItemCollectionOrder {
+  QuestionAsc = 'question_ASC',
+  QuestionDesc = 'question_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export interface FaqGroupFilter {
@@ -1462,8 +1974,24 @@ export interface FaqGroupLinkingCollectionsEntryCollectionArgs {
 export interface FaqGroupLinkingCollectionsPageSectionFaQsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<FaqGroupLinkingCollectionsPageSectionFaQsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum FaqGroupLinkingCollectionsPageSectionFaQsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum FaqGroupOrder {
@@ -1549,8 +2077,24 @@ export interface FaqItemLinkingCollectionsEntryCollectionArgs {
 export interface FaqItemLinkingCollectionsFaqGroupCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<FaqItemLinkingCollectionsFaqGroupCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum FaqItemLinkingCollectionsFaqGroupCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum FaqItemOrder {
@@ -1702,8 +2246,26 @@ export interface FeaturePostLinkingCollectionsEntryCollectionArgs {
 export interface FeaturePostLinkingCollectionsPageSectionFeaturePostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<FeaturePostLinkingCollectionsPageSectionFeaturePostsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum FeaturePostLinkingCollectionsPageSectionFeaturePostsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum FeaturePostOrder {
@@ -1749,8 +2311,10 @@ export interface FooterAddressArgs {
 export interface FooterAwardsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<FooterAwardsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AwardPostFilter>;
 }
 
 /** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
@@ -1767,16 +2331,20 @@ export interface FooterLinkedFromArgs {
 export interface FooterLinksCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<FooterLinksCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CallToActionFilter>;
 }
 
 /** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
 export interface FooterSocialIconsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<FooterSocialIconsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CallToActionFilter>;
 }
 
 export interface FooterAddress {
@@ -1802,6 +2370,12 @@ export interface FooterAddressLinks {
   __typename?: 'FooterAddressLinks';
   assets: FooterAddressAssets;
   entries: FooterAddressEntries;
+  resources: FooterAddressResources;
+}
+
+export interface FooterAddressResources {
+  __typename?: 'FooterAddressResources';
+  block: Array<ResourceLink>;
 }
 
 export interface FooterAwardsCollection {
@@ -1810,6 +2384,21 @@ export interface FooterAwardsCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export enum FooterAwardsCollectionOrder {
+  IsRoundedAsc = 'isRounded_ASC',
+  IsRoundedDesc = 'isRounded_DESC',
+  LinkAsc = 'link_ASC',
+  LinkDesc = 'link_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export interface FooterCollection {
@@ -1863,6 +2452,29 @@ export interface FooterLinksCollection {
   total: Scalars['Int'];
 }
 
+export enum FooterLinksCollectionOrder {
+  ExternalLinkAsc = 'external_link_ASC',
+  ExternalLinkDesc = 'external_link_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+  StyleAsc = 'style_ASC',
+  StyleDesc = 'style_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
+}
+
 export enum FooterOrder {
   CopyrightAsc = 'copyright_ASC',
   CopyrightDesc = 'copyright_DESC',
@@ -1882,6 +2494,29 @@ export interface FooterSocialIconsCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export enum FooterSocialIconsCollectionOrder {
+  ExternalLinkAsc = 'external_link_ASC',
+  ExternalLinkDesc = 'external_link_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+  StyleAsc = 'style_ASC',
+  StyleDesc = 'style_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
 }
 
 /** A post with the biggest surface area on the screen. Best displayed in pairs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/grandPost) */
@@ -2033,8 +2668,28 @@ export interface GrandPostLinkingCollectionsEntryCollectionArgs {
 export interface GrandPostLinkingCollectionsPageSectionGrandPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<GrandPostLinkingCollectionsPageSectionGrandPostsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum GrandPostLinkingCollectionsPageSectionGrandPostsCollectionOrder {
+  IsSwiperAsc = 'isSwiper_ASC',
+  IsSwiperDesc = 'isSwiper_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum GrandPostOrder {
@@ -2196,8 +2851,34 @@ export interface GroupPostLinkingCollectionsEntryCollectionArgs {
 export interface GroupPostLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<GroupPostLinkingCollectionsPageStreamCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum GroupPostLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum GroupPostOrder {
@@ -2338,8 +3019,28 @@ export interface IconTileLinkingCollectionsEntryCollectionArgs {
 export interface IconTileLinkingCollectionsPageSectionIconTilesCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<IconTileLinkingCollectionsPageSectionIconTilesCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum IconTileLinkingCollectionsPageSectionIconTilesCollectionOrder {
+  IsSwiperAsc = 'isSwiper_ASC',
+  IsSwiperDesc = 'isSwiper_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum IconTileOrder {
@@ -2520,6 +3221,12 @@ export interface LegalPostDescriptionLinks {
   __typename?: 'LegalPostDescriptionLinks';
   assets: LegalPostDescriptionAssets;
   entries: LegalPostDescriptionEntries;
+  resources: LegalPostDescriptionResources;
+}
+
+export interface LegalPostDescriptionResources {
+  __typename?: 'LegalPostDescriptionResources';
+  block: Array<ResourceLink>;
 }
 
 export interface LegalPostFilter {
@@ -2593,8 +3300,10 @@ export interface PageClubs extends Entry {
 export interface PageClubsCtasCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageClubsCtasCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CallToActionFilter>;
 }
 
 /** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
@@ -2623,6 +3332,7 @@ export interface PageClubsSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
 }
 
 /** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
@@ -2656,6 +3366,29 @@ export interface PageClubsCtasCollection {
   total: Scalars['Int'];
 }
 
+export enum PageClubsCtasCollectionOrder {
+  ExternalLinkAsc = 'external_link_ASC',
+  ExternalLinkDesc = 'external_link_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+  StyleAsc = 'style_ASC',
+  StyleDesc = 'style_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
+}
+
 export interface PageClubsFilter {
   AND?: InputMaybe<Array<InputMaybe<PageClubsFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageClubsFilter>>>;
@@ -2679,6 +3412,7 @@ export interface PageClubsFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2769,8 +3503,10 @@ export interface PageGame extends Entry {
 export interface PageGameCtasCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageGameCtasCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CallToActionFilter>;
 }
 
 /** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
@@ -2799,6 +3535,7 @@ export interface PageGameSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
 }
 
 /** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
@@ -2832,6 +3569,29 @@ export interface PageGameCtasCollection {
   total: Scalars['Int'];
 }
 
+export enum PageGameCtasCollectionOrder {
+  ExternalLinkAsc = 'external_link_ASC',
+  ExternalLinkDesc = 'external_link_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+  StyleAsc = 'style_ASC',
+  StyleDesc = 'style_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
+}
+
 export interface PageGameFilter {
   AND?: InputMaybe<Array<InputMaybe<PageGameFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageGameFilter>>>;
@@ -2855,6 +3615,7 @@ export interface PageGameFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -2945,8 +3706,10 @@ export interface PageHome extends Entry {
 export interface PageHomeCtasCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageHomeCtasCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CallToActionFilter>;
 }
 
 /** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
@@ -2975,6 +3738,7 @@ export interface PageHomeSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
 }
 
 /** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
@@ -3008,6 +3772,29 @@ export interface PageHomeCtasCollection {
   total: Scalars['Int'];
 }
 
+export enum PageHomeCtasCollectionOrder {
+  ExternalLinkAsc = 'external_link_ASC',
+  ExternalLinkDesc = 'external_link_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+  StyleAsc = 'style_ASC',
+  StyleDesc = 'style_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
+}
+
 export interface PageHomeFilter {
   AND?: InputMaybe<Array<InputMaybe<PageHomeFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageHomeFilter>>>;
@@ -3031,6 +3818,7 @@ export interface PageHomeFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3122,8 +3910,10 @@ export interface PageLearn extends Entry {
 export interface PageLearnCtasCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageLearnCtasCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CallToActionFilter>;
 }
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
@@ -3152,6 +3942,7 @@ export interface PageLearnSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
 }
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
@@ -3185,6 +3976,29 @@ export interface PageLearnCtasCollection {
   total: Scalars['Int'];
 }
 
+export enum PageLearnCtasCollectionOrder {
+  ExternalLinkAsc = 'external_link_ASC',
+  ExternalLinkDesc = 'external_link_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+  StyleAsc = 'style_ASC',
+  StyleDesc = 'style_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
+}
+
 export interface PageLearnFilter {
   AND?: InputMaybe<Array<InputMaybe<PageLearnFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageLearnFilter>>>;
@@ -3208,6 +4022,7 @@ export interface PageLearnFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3301,8 +4116,12 @@ export interface PageSectionBasicPostsDescriptionArgs {
 export interface PageSectionBasicPostsHandpickedPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionBasicPostsHandpickedPostsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<BasicPostFilter>;
 }
 
 /** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
@@ -3314,6 +4133,7 @@ export interface PageSectionBasicPostsLinkedFromArgs {
 export interface PageSectionBasicPostsPostsByCategoryArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<BasicPostCategoryFilter>;
 }
 
 /** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
@@ -3368,6 +4188,23 @@ export interface PageSectionBasicPostsHandpickedPostsCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionBasicPostsHandpickedPostsCollectionOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SummaryAsc = 'summary_ASC',
+  SummaryDesc = 'summary_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 export interface PageSectionBasicPostsLinkingCollections {
   __typename?: 'PageSectionBasicPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -3389,6 +4226,11 @@ export interface PageSectionBasicPostsLinkingCollectionsEntryCollectionArgs {
 export interface PageSectionBasicPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsLinkingCollectionsPageClubsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3396,6 +4238,11 @@ export interface PageSectionBasicPostsLinkingCollectionsPageClubsCollectionArgs 
 export interface PageSectionBasicPostsLinkingCollectionsPageGameCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsLinkingCollectionsPageGameCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3403,6 +4250,11 @@ export interface PageSectionBasicPostsLinkingCollectionsPageGameCollectionArgs {
 export interface PageSectionBasicPostsLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsLinkingCollectionsPageHomeCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3410,6 +4262,11 @@ export interface PageSectionBasicPostsLinkingCollectionsPageHomeCollectionArgs {
 export interface PageSectionBasicPostsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsLinkingCollectionsPageLearnCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3417,11 +4274,390 @@ export interface PageSectionBasicPostsLinkingCollectionsPageLearnCollectionArgs 
 export interface PageSectionBasicPostsLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsLinkingCollectionsPageShopCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
 
 export interface PageSectionBasicPostsLinkingCollectionsPageStreamCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsLinkingCollectionsPageStreamCollectionOrder>
+    >
+  >;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionBasicPostsLinkingCollectionsPageClubsCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionBasicPostsLinkingCollectionsPageGameCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionBasicPostsLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionBasicPostsLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionBasicPostsLinkingCollectionsPageShopCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionBasicPostsLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts
+  extends Entry {
+  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts';
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection {
+  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection';
+  items: Array<
+    Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts>
+  >;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter {
+  AND?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
+    >
+  >;
+  OR?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
+    >
+  >;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections {
+  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts
+  extends Entry {
+  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts';
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection {
+  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection';
+  items: Array<
+    Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts>
+  >;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter {
+  AND?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
+    >
+  >;
+  OR?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
+    >
+  >;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections {
+  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts
+  extends Entry {
+  __typename?: 'PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts';
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkedFromArgs {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
+export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsTitleArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection {
+  __typename?: 'PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection';
+  items: Array<
+    Maybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts>
+  >;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
+export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter {
+  AND?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
+    >
+  >;
+  OR?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
+    >
+  >;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections {
+  __typename?: 'PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+}
+
+export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -3461,8 +4697,12 @@ export interface PageSectionDappPostsDescriptionArgs {
 export interface PageSectionDappPostsHandpickedPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionDappPostsHandpickedPostsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DappPostFilter>;
 }
 
 /** Page section with D`App Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionDappPosts) */
@@ -3514,6 +4754,27 @@ export interface PageSectionDappPostsHandpickedPostsCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionDappPostsHandpickedPostsCollectionOrder {
+  IconTitleAsc = 'iconTitle_ASC',
+  IconTitleDesc = 'iconTitle_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UrlToDappAsc = 'urlToDapp_ASC',
+  UrlToDappDesc = 'urlToDapp_DESC',
+  UrlToLearnMoreAsc = 'urlToLearnMore_ASC',
+  UrlToLearnMoreDesc = 'urlToLearnMore_DESC',
+}
+
 export interface PageSectionDappPostsLinkingCollections {
   __typename?: 'PageSectionDappPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -3534,6 +4795,11 @@ export interface PageSectionDappPostsLinkingCollectionsEntryCollectionArgs {
 export interface PageSectionDappPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionDappPostsLinkingCollectionsPageClubsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3541,6 +4807,11 @@ export interface PageSectionDappPostsLinkingCollectionsPageClubsCollectionArgs {
 export interface PageSectionDappPostsLinkingCollectionsPageGameCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionDappPostsLinkingCollectionsPageGameCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3548,6 +4819,11 @@ export interface PageSectionDappPostsLinkingCollectionsPageGameCollectionArgs {
 export interface PageSectionDappPostsLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionDappPostsLinkingCollectionsPageHomeCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3555,6 +4831,11 @@ export interface PageSectionDappPostsLinkingCollectionsPageHomeCollectionArgs {
 export interface PageSectionDappPostsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionDappPostsLinkingCollectionsPageLearnCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3562,8 +4843,128 @@ export interface PageSectionDappPostsLinkingCollectionsPageLearnCollectionArgs {
 export interface PageSectionDappPostsLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionDappPostsLinkingCollectionsPageStreamCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionDappPostsLinkingCollectionsPageClubsCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionDappPostsLinkingCollectionsPageGameCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionDappPostsLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionDappPostsLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionDappPostsLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum PageSectionDappPostsOrder {
@@ -3599,8 +5000,12 @@ export interface PageSectionFaQsDescriptionArgs {
 export interface PageSectionFaQsHandpickedFaqGroupsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionFaQsHandpickedFaqGroupsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<FaqGroupFilter>;
 }
 
 /** Page section with FAQs. Displays a limited amount of handpicked FAQ groups. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFaQs) */
@@ -3652,6 +5057,19 @@ export interface PageSectionFaQsHandpickedFaqGroupsCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionFaQsHandpickedFaqGroupsCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 export interface PageSectionFaQsLinkingCollections {
   __typename?: 'PageSectionFaQsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -3672,6 +5090,9 @@ export interface PageSectionFaQsLinkingCollectionsEntryCollectionArgs {
 export interface PageSectionFaQsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionFaQsLinkingCollectionsPageClubsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3679,6 +5100,9 @@ export interface PageSectionFaQsLinkingCollectionsPageClubsCollectionArgs {
 export interface PageSectionFaQsLinkingCollectionsPageGameCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionFaQsLinkingCollectionsPageGameCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3686,6 +5110,9 @@ export interface PageSectionFaQsLinkingCollectionsPageGameCollectionArgs {
 export interface PageSectionFaQsLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionFaQsLinkingCollectionsPageHomeCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3693,6 +5120,9 @@ export interface PageSectionFaQsLinkingCollectionsPageHomeCollectionArgs {
 export interface PageSectionFaQsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionFaQsLinkingCollectionsPageLearnCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3700,8 +5130,128 @@ export interface PageSectionFaQsLinkingCollectionsPageLearnCollectionArgs {
 export interface PageSectionFaQsLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionFaQsLinkingCollectionsPageStreamCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionFaQsLinkingCollectionsPageClubsCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionFaQsLinkingCollectionsPageGameCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionFaQsLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionFaQsLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionFaQsLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum PageSectionFaQsOrder {
@@ -3738,8 +5288,12 @@ export interface PageSectionFeaturePostsDescriptionArgs {
 export interface PageSectionFeaturePostsHandpickedPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionFeaturePostsHandpickedPostsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<FeaturePostFilter>;
 }
 
 /** Page section with Feature Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFeaturePosts) */
@@ -3797,6 +5351,27 @@ export interface PageSectionFeaturePostsHandpickedPostsCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionFeaturePostsHandpickedPostsCollectionOrder {
+  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
+  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
+  CallToActionUrlAsc = 'callToActionUrl_ASC',
+  CallToActionUrlDesc = 'callToActionUrl_DESC',
+  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
+  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  VideoUrlAsc = 'videoUrl_ASC',
+  VideoUrlDesc = 'videoUrl_DESC',
+}
+
 export interface PageSectionFeaturePostsLinkingCollections {
   __typename?: 'PageSectionFeaturePostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -3818,6 +5393,11 @@ export interface PageSectionFeaturePostsLinkingCollectionsEntryCollectionArgs {
 export interface PageSectionFeaturePostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionFeaturePostsLinkingCollectionsPageClubsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3825,6 +5405,11 @@ export interface PageSectionFeaturePostsLinkingCollectionsPageClubsCollectionArg
 export interface PageSectionFeaturePostsLinkingCollectionsPageGameCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionFeaturePostsLinkingCollectionsPageGameCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3832,6 +5417,11 @@ export interface PageSectionFeaturePostsLinkingCollectionsPageGameCollectionArgs
 export interface PageSectionFeaturePostsLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionFeaturePostsLinkingCollectionsPageHomeCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3839,6 +5429,11 @@ export interface PageSectionFeaturePostsLinkingCollectionsPageHomeCollectionArgs
 export interface PageSectionFeaturePostsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionFeaturePostsLinkingCollectionsPageLearnCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3846,6 +5441,11 @@ export interface PageSectionFeaturePostsLinkingCollectionsPageLearnCollectionArg
 export interface PageSectionFeaturePostsLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionFeaturePostsLinkingCollectionsPageShopCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3853,8 +5453,151 @@ export interface PageSectionFeaturePostsLinkingCollectionsPageShopCollectionArgs
 export interface PageSectionFeaturePostsLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionFeaturePostsLinkingCollectionsPageStreamCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionFeaturePostsLinkingCollectionsPageClubsCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionFeaturePostsLinkingCollectionsPageGameCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionFeaturePostsLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionFeaturePostsLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionFeaturePostsLinkingCollectionsPageShopCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionFeaturePostsLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum PageSectionFeaturePostsOrder {
@@ -3892,8 +5635,12 @@ export interface PageSectionGrandPostsDescriptionArgs {
 export interface PageSectionGrandPostsHandpickedPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionGrandPostsHandpickedPostsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GrandPostFilter>;
 }
 
 /** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
@@ -3959,6 +5706,29 @@ export interface PageSectionGrandPostsHandpickedPostsCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionGrandPostsHandpickedPostsCollectionOrder {
+  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
+  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
+  CallToActionUrlAsc = 'callToActionUrl_ASC',
+  CallToActionUrlDesc = 'callToActionUrl_DESC',
+  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
+  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  VideoUrlAsc = 'videoUrl_ASC',
+  VideoUrlDesc = 'videoUrl_DESC',
+}
+
 export interface PageSectionGrandPostsLinkingCollections {
   __typename?: 'PageSectionGrandPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -3980,6 +5750,11 @@ export interface PageSectionGrandPostsLinkingCollectionsEntryCollectionArgs {
 export interface PageSectionGrandPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionGrandPostsLinkingCollectionsPageClubsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3987,6 +5762,11 @@ export interface PageSectionGrandPostsLinkingCollectionsPageClubsCollectionArgs 
 export interface PageSectionGrandPostsLinkingCollectionsPageGameCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionGrandPostsLinkingCollectionsPageGameCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -3994,6 +5774,11 @@ export interface PageSectionGrandPostsLinkingCollectionsPageGameCollectionArgs {
 export interface PageSectionGrandPostsLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionGrandPostsLinkingCollectionsPageHomeCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4001,6 +5786,11 @@ export interface PageSectionGrandPostsLinkingCollectionsPageHomeCollectionArgs {
 export interface PageSectionGrandPostsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionGrandPostsLinkingCollectionsPageLearnCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4008,6 +5798,11 @@ export interface PageSectionGrandPostsLinkingCollectionsPageLearnCollectionArgs 
 export interface PageSectionGrandPostsLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionGrandPostsLinkingCollectionsPageShopCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4015,8 +5810,151 @@ export interface PageSectionGrandPostsLinkingCollectionsPageShopCollectionArgs {
 export interface PageSectionGrandPostsLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionGrandPostsLinkingCollectionsPageStreamCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionGrandPostsLinkingCollectionsPageClubsCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionGrandPostsLinkingCollectionsPageGameCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionGrandPostsLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionGrandPostsLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionGrandPostsLinkingCollectionsPageShopCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionGrandPostsLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum PageSectionGrandPostsOrder {
@@ -4056,8 +5994,12 @@ export interface PageSectionIconTilesDescriptionArgs {
 export interface PageSectionIconTilesHandpickedIconTilesCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionIconTilesHandpickedIconTilesCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<IconTileFilter>;
 }
 
 /** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
@@ -4123,6 +6065,27 @@ export interface PageSectionIconTilesHandpickedIconTilesCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionIconTilesHandpickedIconTilesCollectionOrder {
+  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
+  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
+  CallToActionUrlAsc = 'callToActionUrl_ASC',
+  CallToActionUrlDesc = 'callToActionUrl_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 export interface PageSectionIconTilesLinkingCollections {
   __typename?: 'PageSectionIconTilesLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -4144,6 +6107,11 @@ export interface PageSectionIconTilesLinkingCollectionsEntryCollectionArgs {
 export interface PageSectionIconTilesLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionIconTilesLinkingCollectionsPageClubsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4151,6 +6119,11 @@ export interface PageSectionIconTilesLinkingCollectionsPageClubsCollectionArgs {
 export interface PageSectionIconTilesLinkingCollectionsPageGameCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionIconTilesLinkingCollectionsPageGameCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4158,6 +6131,11 @@ export interface PageSectionIconTilesLinkingCollectionsPageGameCollectionArgs {
 export interface PageSectionIconTilesLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionIconTilesLinkingCollectionsPageHomeCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4165,6 +6143,11 @@ export interface PageSectionIconTilesLinkingCollectionsPageHomeCollectionArgs {
 export interface PageSectionIconTilesLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionIconTilesLinkingCollectionsPageLearnCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4172,6 +6155,11 @@ export interface PageSectionIconTilesLinkingCollectionsPageLearnCollectionArgs {
 export interface PageSectionIconTilesLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionIconTilesLinkingCollectionsPageShopCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4179,8 +6167,151 @@ export interface PageSectionIconTilesLinkingCollectionsPageShopCollectionArgs {
 export interface PageSectionIconTilesLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionIconTilesLinkingCollectionsPageStreamCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionIconTilesLinkingCollectionsPageClubsCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionIconTilesLinkingCollectionsPageGameCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionIconTilesLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionIconTilesLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionIconTilesLinkingCollectionsPageShopCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionIconTilesLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum PageSectionIconTilesOrder {
@@ -4220,8 +6351,12 @@ export interface PageSectionPersonPostsDescriptionArgs {
 export interface PageSectionPersonPostsHandpickedPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionPersonPostsHandpickedPostsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PersonPostFilter>;
 }
 
 /** Page section with Persons. Displays a limited amount of handpicked person posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionPersonPosts) */
@@ -4287,6 +6422,31 @@ export interface PageSectionPersonPostsHandpickedPostsCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionPersonPostsHandpickedPostsCollectionOrder {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  GithubAsc = 'github_ASC',
+  GithubDesc = 'github_DESC',
+  InstagramAsc = 'instagram_ASC',
+  InstagramDesc = 'instagram_DESC',
+  LinkedinAsc = 'linkedin_ASC',
+  LinkedinDesc = 'linkedin_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  TwitterAsc = 'twitter_ASC',
+  TwitterDesc = 'twitter_DESC',
+}
+
 export interface PageSectionPersonPostsLinkingCollections {
   __typename?: 'PageSectionPersonPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -4305,6 +6465,11 @@ export interface PageSectionPersonPostsLinkingCollectionsEntryCollectionArgs {
 export interface PageSectionPersonPostsLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionPersonPostsLinkingCollectionsPageHomeCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4312,6 +6477,11 @@ export interface PageSectionPersonPostsLinkingCollectionsPageHomeCollectionArgs 
 export interface PageSectionPersonPostsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionPersonPostsLinkingCollectionsPageLearnCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4319,8 +6489,82 @@ export interface PageSectionPersonPostsLinkingCollectionsPageLearnCollectionArgs
 export interface PageSectionPersonPostsLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionPersonPostsLinkingCollectionsPageShopCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionPersonPostsLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionPersonPostsLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionPersonPostsLinkingCollectionsPageShopCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum PageSectionPersonPostsOrder {
@@ -4360,8 +6604,12 @@ export interface PageSectionProductsDescriptionArgs {
 export interface PageSectionProductsHandpickedProductsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionProductsHandpickedProductsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ProductFilter>;
 }
 
 /** Page section with Products. Can display handpicked products together with the products from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionProducts) */
@@ -4373,6 +6621,7 @@ export interface PageSectionProductsLinkedFromArgs {
 export interface PageSectionProductsProductsByCategoryArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<ProductCategoryFilter>;
 }
 
 /** Page section with Products. Can display handpicked products together with the products from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionProducts) */
@@ -4427,6 +6676,37 @@ export interface PageSectionProductsHandpickedProductsCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionProductsHandpickedProductsCollectionOrder {
+  AvailableQuantityAsc = 'availableQuantity_ASC',
+  AvailableQuantityDesc = 'availableQuantity_DESC',
+  CurrencyAsc = 'currency_ASC',
+  CurrencyDesc = 'currency_DESC',
+  HardCapAsc = 'hardCap_ASC',
+  HardCapDesc = 'hardCap_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PauseAsc = 'pause_ASC',
+  PauseDesc = 'pause_DESC',
+  PriceAsc = 'price_ASC',
+  PriceDesc = 'price_DESC',
+  SkuAsc = 'sku_ASC',
+  SkuDesc = 'sku_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SoftCapAsc = 'softCap_ASC',
+  SoftCapDesc = 'softCap_DESC',
+  SoldOutLabelAsc = 'soldOutLabel_ASC',
+  SoldOutLabelDesc = 'soldOutLabel_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 export interface PageSectionProductsLinkingCollections {
   __typename?: 'PageSectionProductsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -4443,8 +6723,36 @@ export interface PageSectionProductsLinkingCollectionsEntryCollectionArgs {
 export interface PageSectionProductsLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionProductsLinkingCollectionsPageShopCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionProductsLinkingCollectionsPageShopCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum PageSectionProductsOrder {
@@ -4480,8 +6788,12 @@ export interface PageSectionSectionPostsDescriptionArgs {
 export interface PageSectionSectionPostsHandpickedPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionSectionPostsHandpickedPostsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SectionPostFilter>;
 }
 
 /** Page section with Section Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionSectionPosts) */
@@ -4533,6 +6845,27 @@ export interface PageSectionSectionPostsHandpickedPostsCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionSectionPostsHandpickedPostsCollectionOrder {
+  AlignCenterAsc = 'alignCenter_ASC',
+  AlignCenterDesc = 'alignCenter_DESC',
+  ColumnWidthAsc = 'columnWidth_ASC',
+  ColumnWidthDesc = 'columnWidth_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleSizeAsc = 'titleSize_ASC',
+  TitleSizeDesc = 'titleSize_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 export interface PageSectionSectionPostsLinkingCollections {
   __typename?: 'PageSectionSectionPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -4554,6 +6887,11 @@ export interface PageSectionSectionPostsLinkingCollectionsEntryCollectionArgs {
 export interface PageSectionSectionPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionSectionPostsLinkingCollectionsPageClubsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4561,6 +6899,11 @@ export interface PageSectionSectionPostsLinkingCollectionsPageClubsCollectionArg
 export interface PageSectionSectionPostsLinkingCollectionsPageGameCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionSectionPostsLinkingCollectionsPageGameCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4568,6 +6911,11 @@ export interface PageSectionSectionPostsLinkingCollectionsPageGameCollectionArgs
 export interface PageSectionSectionPostsLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionSectionPostsLinkingCollectionsPageHomeCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4575,6 +6923,11 @@ export interface PageSectionSectionPostsLinkingCollectionsPageHomeCollectionArgs
 export interface PageSectionSectionPostsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionSectionPostsLinkingCollectionsPageLearnCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4582,6 +6935,11 @@ export interface PageSectionSectionPostsLinkingCollectionsPageLearnCollectionArg
 export interface PageSectionSectionPostsLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionSectionPostsLinkingCollectionsPageShopCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4589,8 +6947,151 @@ export interface PageSectionSectionPostsLinkingCollectionsPageShopCollectionArgs
 export interface PageSectionSectionPostsLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionSectionPostsLinkingCollectionsPageStreamCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionSectionPostsLinkingCollectionsPageClubsCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionSectionPostsLinkingCollectionsPageGameCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionSectionPostsLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionSectionPostsLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionSectionPostsLinkingCollectionsPageShopCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionSectionPostsLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum PageSectionSectionPostsOrder {
@@ -4627,8 +7128,12 @@ export interface PageSectionThumbnailPostsDescriptionArgs {
 export interface PageSectionThumbnailPostsHandpickedPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<PageSectionThumbnailPostsHandpickedPostsCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ThumbnailPostFilter>;
 }
 
 /** Page section with Thumbnail Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionThumbnailPosts) */
@@ -4686,6 +7191,25 @@ export interface PageSectionThumbnailPostsHandpickedPostsCollection {
   total: Scalars['Int'];
 }
 
+export enum PageSectionThumbnailPostsHandpickedPostsCollectionOrder {
+  IsVideoAsc = 'isVideo_ASC',
+  IsVideoDesc = 'isVideo_DESC',
+  LinkAsc = 'link_ASC',
+  LinkDesc = 'link_DESC',
+  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
+  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 export interface PageSectionThumbnailPostsLinkingCollections {
   __typename?: 'PageSectionThumbnailPostsLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -4707,6 +7231,11 @@ export interface PageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs 
 export interface PageSectionThumbnailPostsLinkingCollectionsPageClubsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionThumbnailPostsLinkingCollectionsPageClubsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4714,6 +7243,11 @@ export interface PageSectionThumbnailPostsLinkingCollectionsPageClubsCollectionA
 export interface PageSectionThumbnailPostsLinkingCollectionsPageGameCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionThumbnailPostsLinkingCollectionsPageGameCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4721,6 +7255,11 @@ export interface PageSectionThumbnailPostsLinkingCollectionsPageGameCollectionAr
 export interface PageSectionThumbnailPostsLinkingCollectionsPageHomeCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionThumbnailPostsLinkingCollectionsPageHomeCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4728,6 +7267,11 @@ export interface PageSectionThumbnailPostsLinkingCollectionsPageHomeCollectionAr
 export interface PageSectionThumbnailPostsLinkingCollectionsPageLearnCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionThumbnailPostsLinkingCollectionsPageLearnCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4735,6 +7279,11 @@ export interface PageSectionThumbnailPostsLinkingCollectionsPageLearnCollectionA
 export interface PageSectionThumbnailPostsLinkingCollectionsPageShopCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionThumbnailPostsLinkingCollectionsPageShopCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -4742,8 +7291,151 @@ export interface PageSectionThumbnailPostsLinkingCollectionsPageShopCollectionAr
 export interface PageSectionThumbnailPostsLinkingCollectionsPageStreamCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PageSectionThumbnailPostsLinkingCollectionsPageStreamCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PageSectionThumbnailPostsLinkingCollectionsPageClubsCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionThumbnailPostsLinkingCollectionsPageGameCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionThumbnailPostsLinkingCollectionsPageHomeCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionThumbnailPostsLinkingCollectionsPageLearnCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionThumbnailPostsLinkingCollectionsPageShopCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageSectionThumbnailPostsLinkingCollectionsPageStreamCollectionOrder {
+  HeaderAlignCenterAsc = 'headerAlignCenter_ASC',
+  HeaderAlignCenterDesc = 'headerAlignCenter_DESC',
+  HeaderColumnWidthAsc = 'headerColumnWidth_ASC',
+  HeaderColumnWidthDesc = 'headerColumnWidth_DESC',
+  MainTitleAsc = 'mainTitle_ASC',
+  MainTitleDesc = 'mainTitle_DESC',
+  ShowSubtitleAsc = 'showSubtitle_ASC',
+  ShowSubtitleDesc = 'showSubtitle_DESC',
+  ShowTitleAsc = 'showTitle_ASC',
+  ShowTitleDesc = 'showTitle_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum PageSectionThumbnailPostsOrder {
@@ -4779,8 +7471,10 @@ export interface PageShop extends Entry {
 export interface PageShopCtasCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageShopCtasCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CallToActionFilter>;
 }
 
 /** Shop page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageShop) */
@@ -4809,6 +7503,7 @@ export interface PageShopSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
 }
 
 /** Shop page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageShop) */
@@ -4842,6 +7537,29 @@ export interface PageShopCtasCollection {
   total: Scalars['Int'];
 }
 
+export enum PageShopCtasCollectionOrder {
+  ExternalLinkAsc = 'external_link_ASC',
+  ExternalLinkDesc = 'external_link_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+  StyleAsc = 'style_ASC',
+  StyleDesc = 'style_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
+}
+
 export interface PageShopFilter {
   AND?: InputMaybe<Array<InputMaybe<PageShopFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageShopFilter>>>;
@@ -4865,6 +7583,7 @@ export interface PageShopFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -4956,16 +7675,20 @@ export interface PageStream extends Entry {
 export interface PageStreamCtasCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageStreamCtasCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CallToActionFilter>;
 }
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
 export interface PageStreamGroupsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageStreamGroupsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GroupPostFilter>;
 }
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
@@ -4994,6 +7717,7 @@ export interface PageStreamSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
 }
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
@@ -5027,6 +7751,29 @@ export interface PageStreamCtasCollection {
   total: Scalars['Int'];
 }
 
+export enum PageStreamCtasCollectionOrder {
+  ExternalLinkAsc = 'external_link_ASC',
+  ExternalLinkDesc = 'external_link_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+  StyleAsc = 'style_ASC',
+  StyleDesc = 'style_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
+}
+
 export interface PageStreamFilter {
   AND?: InputMaybe<Array<InputMaybe<PageStreamFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageStreamFilter>>>;
@@ -5052,6 +7799,7 @@ export interface PageStreamFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5075,6 +7823,33 @@ export interface PageStreamGroupsCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export enum PageStreamGroupsCollectionOrder {
+  CollapsedAsc = 'collapsed_ASC',
+  CollapsedDesc = 'collapsed_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  ExternalLinkAsc = 'externalLink_ASC',
+  ExternalLinkDesc = 'externalLink_DESC',
+  HighlightedAsc = 'highlighted_ASC',
+  HighlightedDesc = 'highlighted_DESC',
+  IconAsc = 'icon_ASC',
+  IconDesc = 'icon_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  ToggleableAsc = 'toggleable_ASC',
+  ToggleableDesc = 'toggleable_DESC',
 }
 
 export interface PageStreamLinkingCollections {
@@ -5273,8 +8048,28 @@ export interface PersonPostLinkingCollectionsEntryCollectionArgs {
 export interface PersonPostLinkingCollectionsPageSectionPersonPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<PersonPostLinkingCollectionsPageSectionPersonPostsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum PersonPostLinkingCollectionsPageSectionPersonPostsCollectionOrder {
+  IsSwiperAsc = 'isSwiper_ASC',
+  IsSwiperDesc = 'isSwiper_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum PersonPostOrder {
@@ -5312,6 +8107,7 @@ export interface Product extends Entry {
   contentfulMetadata: ContentfulMetadata;
   currency?: Maybe<Scalars['String']>;
   fullDescription?: Maybe<ProductFullDescription>;
+  hardCap?: Maybe<Scalars['Int']>;
   linkedFrom?: Maybe<ProductLinkingCollections>;
   name?: Maybe<Scalars['String']>;
   pause?: Maybe<Scalars['Boolean']>;
@@ -5320,6 +8116,7 @@ export interface Product extends Entry {
   shortDescription?: Maybe<Scalars['String']>;
   sku?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  softCap?: Maybe<Scalars['Int']>;
   soldOutLabel?: Maybe<Scalars['String']>;
   sys: Sys;
 }
@@ -5343,6 +8140,7 @@ export interface ProductAvailableSizesArgs {
 export interface ProductCategoryArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<ProductCategoryFilter>;
 }
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
@@ -5352,6 +8150,11 @@ export interface ProductCurrencyArgs {
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface ProductFullDescriptionArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductHardCapArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
@@ -5395,6 +8198,11 @@ export interface ProductSkuArgs {
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
 export interface ProductSlugArgs {
+  locale?: InputMaybe<Scalars['String']>;
+}
+
+/** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
+export interface ProductSoftCapArgs {
   locale?: InputMaybe<Scalars['String']>;
 }
 
@@ -5474,6 +8282,11 @@ export interface ProductCategoryLinkingCollectionsEntryCollectionArgs {
 export interface ProductCategoryLinkingCollectionsPageSectionProductsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<ProductCategoryLinkingCollectionsPageSectionProductsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -5481,8 +8294,55 @@ export interface ProductCategoryLinkingCollectionsPageSectionProductsCollectionA
 export interface ProductCategoryLinkingCollectionsProductCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<InputMaybe<ProductCategoryLinkingCollectionsProductCollectionOrder>>
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum ProductCategoryLinkingCollectionsPageSectionProductsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
+export enum ProductCategoryLinkingCollectionsProductCollectionOrder {
+  AvailableQuantityAsc = 'availableQuantity_ASC',
+  AvailableQuantityDesc = 'availableQuantity_DESC',
+  CurrencyAsc = 'currency_ASC',
+  CurrencyDesc = 'currency_DESC',
+  HardCapAsc = 'hardCap_ASC',
+  HardCapDesc = 'hardCap_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PauseAsc = 'pause_ASC',
+  PauseDesc = 'pause_DESC',
+  PriceAsc = 'price_ASC',
+  PriceDesc = 'price_DESC',
+  SkuAsc = 'sku_ASC',
+  SkuDesc = 'sku_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SoftCapAsc = 'softCap_ASC',
+  SoftCapDesc = 'softCap_DESC',
+  SoldOutLabelAsc = 'soldOutLabel_ASC',
+  SoldOutLabelDesc = 'soldOutLabel_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum ProductCategoryOrder {
@@ -5553,6 +8413,15 @@ export interface ProductFilter {
   fullDescription_contains?: InputMaybe<Scalars['String']>;
   fullDescription_exists?: InputMaybe<Scalars['Boolean']>;
   fullDescription_not_contains?: InputMaybe<Scalars['String']>;
+  hardCap?: InputMaybe<Scalars['Int']>;
+  hardCap_exists?: InputMaybe<Scalars['Boolean']>;
+  hardCap_gt?: InputMaybe<Scalars['Int']>;
+  hardCap_gte?: InputMaybe<Scalars['Int']>;
+  hardCap_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  hardCap_lt?: InputMaybe<Scalars['Int']>;
+  hardCap_lte?: InputMaybe<Scalars['Int']>;
+  hardCap_not?: InputMaybe<Scalars['Int']>;
+  hardCap_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5594,6 +8463,15 @@ export interface ProductFilter {
   slug_not?: InputMaybe<Scalars['String']>;
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  softCap?: InputMaybe<Scalars['Int']>;
+  softCap_exists?: InputMaybe<Scalars['Boolean']>;
+  softCap_gt?: InputMaybe<Scalars['Int']>;
+  softCap_gte?: InputMaybe<Scalars['Int']>;
+  softCap_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  softCap_lt?: InputMaybe<Scalars['Int']>;
+  softCap_lte?: InputMaybe<Scalars['Int']>;
+  softCap_not?: InputMaybe<Scalars['Int']>;
+  softCap_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   soldOutLabel?: InputMaybe<Scalars['String']>;
   soldOutLabel_contains?: InputMaybe<Scalars['String']>;
   soldOutLabel_exists?: InputMaybe<Scalars['Boolean']>;
@@ -5627,6 +8505,12 @@ export interface ProductFullDescriptionLinks {
   __typename?: 'ProductFullDescriptionLinks';
   assets: ProductFullDescriptionAssets;
   entries: ProductFullDescriptionEntries;
+  resources: ProductFullDescriptionResources;
+}
+
+export interface ProductFullDescriptionResources {
+  __typename?: 'ProductFullDescriptionResources';
+  block: Array<ResourceLink>;
 }
 
 export interface ProductLinkingCollections {
@@ -5645,8 +8529,26 @@ export interface ProductLinkingCollectionsEntryCollectionArgs {
 export interface ProductLinkingCollectionsPageSectionProductsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<ProductLinkingCollectionsPageSectionProductsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum ProductLinkingCollectionsPageSectionProductsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum ProductOrder {
@@ -5654,6 +8556,8 @@ export enum ProductOrder {
   AvailableQuantityDesc = 'availableQuantity_DESC',
   CurrencyAsc = 'currency_ASC',
   CurrencyDesc = 'currency_DESC',
+  HardCapAsc = 'hardCap_ASC',
+  HardCapDesc = 'hardCap_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   PauseAsc = 'pause_ASC',
@@ -5664,6 +8568,8 @@ export enum ProductOrder {
   SkuDesc = 'sku_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
+  SoftCapAsc = 'softCap_ASC',
+  SoftCapDesc = 'softCap_DESC',
   SoldOutLabelAsc = 'soldOutLabel_ASC',
   SoldOutLabelDesc = 'soldOutLabel_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -5723,6 +8629,12 @@ export interface Query {
   pageLearnCollection?: Maybe<PageLearnCollection>;
   pageSectionBasicPosts?: Maybe<PageSectionBasicPosts>;
   pageSectionBasicPostsCollection?: Maybe<PageSectionBasicPostsCollection>;
+  pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts>;
+  pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection>;
+  pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts>;
+  pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection>;
+  pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts?: Maybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts>;
+  pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection?: Maybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection>;
   pageSectionDappPosts?: Maybe<PageSectionDappPosts>;
   pageSectionDappPostsCollection?: Maybe<PageSectionDappPostsCollection>;
   pageSectionFaQs?: Maybe<PageSectionFaQs>;
@@ -6098,6 +9010,48 @@ export interface QueryPageSectionBasicPostsCollectionArgs {
   where?: InputMaybe<PageSectionBasicPostsFilter>;
 }
 
+export interface QueryPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
+}
+
+export interface QueryPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
+}
+
+export interface QueryPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsArgs {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollectionArgs {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
+}
+
 export interface QueryPageSectionDappPostsArgs {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -6353,6 +9307,18 @@ export interface QueryThumbnailPostCollectionArgs {
   where?: InputMaybe<ThumbnailPostFilter>;
 }
 
+export interface ResourceLink {
+  __typename?: 'ResourceLink';
+  sys: ResourceSys;
+}
+
+export interface ResourceSys {
+  __typename?: 'ResourceSys';
+  linkType: Scalars['String'];
+  type: Scalars['String'];
+  urn: Scalars['String'];
+}
+
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
 export interface SectionPost extends Entry {
   __typename?: 'SectionPost';
@@ -6378,6 +9344,7 @@ export interface SectionPostAlignCenterArgs {
 export interface SectionPostChartPostArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<ChartPostFilter>;
 }
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
@@ -6394,6 +9361,7 @@ export interface SectionPostDescriptionArgs {
 export interface SectionPostEmbedPostArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<EmbedPostFilter>;
 }
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
@@ -6447,6 +9415,12 @@ export interface SectionPostDescriptionLinks {
   __typename?: 'SectionPostDescriptionLinks';
   assets: SectionPostDescriptionAssets;
   entries: SectionPostDescriptionEntries;
+  resources: SectionPostDescriptionResources;
+}
+
+export interface SectionPostDescriptionResources {
+  __typename?: 'SectionPostDescriptionResources';
+  block: Array<ResourceLink>;
 }
 
 export interface SectionPostFilter {
@@ -6506,8 +9480,26 @@ export interface SectionPostLinkingCollectionsEntryCollectionArgs {
 export interface SectionPostLinkingCollectionsPageSectionSectionPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<SectionPostLinkingCollectionsPageSectionSectionPostsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum SectionPostLinkingCollectionsPageSectionSectionPostsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum SectionPostOrder {
@@ -6761,8 +9753,26 @@ export interface ThumbnailPostLinkingCollectionsEntryCollectionArgs {
 export interface ThumbnailPostLinkingCollectionsPageSectionThumbnailPostsCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<
+    Array<
+      InputMaybe<ThumbnailPostLinkingCollectionsPageSectionThumbnailPostsCollectionOrder>
+    >
+  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export enum ThumbnailPostLinkingCollectionsPageSectionThumbnailPostsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 export enum ThumbnailPostOrder {
@@ -7248,6 +10258,93 @@ export interface CfIconTileNestedFilter {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 }
 
+export interface CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter {
+  AND?: InputMaybe<
+    Array<
+      InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
+    >
+  >;
+  OR?: InputMaybe<
+    Array<
+      InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
+    >
+  >;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter {
+  AND?: InputMaybe<
+    Array<
+      InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
+    >
+  >;
+  OR?: InputMaybe<
+    Array<
+      InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
+    >
+  >;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface CfPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter {
+  AND?: InputMaybe<
+    Array<
+      InputMaybe<CfPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
+    >
+  >;
+  OR?: InputMaybe<
+    Array<
+      InputMaybe<CfPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
+    >
+  >;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
 export interface CfPersonPostNestedFilter {
   AND?: InputMaybe<Array<InputMaybe<CfPersonPostNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfPersonPostNestedFilter>>>;
@@ -7370,6 +10467,15 @@ export interface CfProductNestedFilter {
   fullDescription_contains?: InputMaybe<Scalars['String']>;
   fullDescription_exists?: InputMaybe<Scalars['Boolean']>;
   fullDescription_not_contains?: InputMaybe<Scalars['String']>;
+  hardCap?: InputMaybe<Scalars['Int']>;
+  hardCap_exists?: InputMaybe<Scalars['Boolean']>;
+  hardCap_gt?: InputMaybe<Scalars['Int']>;
+  hardCap_gte?: InputMaybe<Scalars['Int']>;
+  hardCap_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  hardCap_lt?: InputMaybe<Scalars['Int']>;
+  hardCap_lte?: InputMaybe<Scalars['Int']>;
+  hardCap_not?: InputMaybe<Scalars['Int']>;
+  hardCap_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -7411,6 +10517,15 @@ export interface CfProductNestedFilter {
   slug_not?: InputMaybe<Scalars['String']>;
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  softCap?: InputMaybe<Scalars['Int']>;
+  softCap_exists?: InputMaybe<Scalars['Boolean']>;
+  softCap_gt?: InputMaybe<Scalars['Int']>;
+  softCap_gte?: InputMaybe<Scalars['Int']>;
+  softCap_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  softCap_lt?: InputMaybe<Scalars['Int']>;
+  softCap_lte?: InputMaybe<Scalars['Int']>;
+  softCap_not?: InputMaybe<Scalars['Int']>;
+  softCap_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   soldOutLabel?: InputMaybe<Scalars['String']>;
   soldOutLabel_contains?: InputMaybe<Scalars['String']>;
   soldOutLabel_exists?: InputMaybe<Scalars['Boolean']>;
@@ -10439,6 +13554,8 @@ export type PageSectionProductsFragment = {
       shortDescription?: string;
       name?: string;
       price?: number;
+      softCap?: number;
+      hardCap?: number;
       currency?: string;
       sku?: string;
       availableQuantity?: number;
@@ -10498,6 +13615,8 @@ export type PageSectionProductsFragment = {
           shortDescription?: string;
           name?: string;
           price?: number;
+          softCap?: number;
+          hardCap?: number;
           currency?: string;
           sku?: string;
           availableQuantity?: number;
@@ -11033,6 +14152,8 @@ export type PageShopFragment = {
               shortDescription?: string;
               name?: string;
               price?: number;
+              softCap?: number;
+              hardCap?: number;
               currency?: string;
               sku?: string;
               availableQuantity?: number;
@@ -11092,6 +14213,8 @@ export type PageShopFragment = {
                   shortDescription?: string;
                   name?: string;
                   price?: number;
+                  softCap?: number;
+                  hardCap?: number;
                   currency?: string;
                   sku?: string;
                   availableQuantity?: number;
@@ -11824,6 +14947,8 @@ export type ProductCommonFragment = {
   __typename?: 'Product';
   name?: string;
   price?: number;
+  softCap?: number;
+  hardCap?: number;
   currency?: string;
   sku?: string;
   availableQuantity?: number;
@@ -11876,6 +15001,8 @@ export type ProductFragment = {
   shortDescription?: string;
   name?: string;
   price?: number;
+  softCap?: number;
+  hardCap?: number;
   currency?: string;
   sku?: string;
   availableQuantity?: number;
@@ -11929,6 +15056,8 @@ export type ProductDetailFragment = {
   availableSizes?: Array<string>;
   name?: string;
   price?: number;
+  softCap?: number;
+  hardCap?: number;
   currency?: string;
   sku?: string;
   availableQuantity?: number;
@@ -12095,6 +15224,19 @@ export type AnnouncementCollectionQuery = {
       };
       content?: { __typename?: 'AnnouncementContent'; json: any };
     }>;
+  };
+};
+
+export type AnnouncementCollectionCountQueryVariables = Exact<{
+  now?: InputMaybe<Scalars['DateTime']>;
+  isPreview?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+export type AnnouncementCollectionCountQuery = {
+  __typename?: 'Query';
+  announcementCollection?: {
+    __typename?: 'AnnouncementCollection';
+    total: number;
   };
 };
 
@@ -14714,6 +17856,8 @@ export type PageShopCollectionQuery = {
                   shortDescription?: string;
                   name?: string;
                   price?: number;
+                  softCap?: number;
+                  hardCap?: number;
                   currency?: string;
                   sku?: string;
                   availableQuantity?: number;
@@ -14773,6 +17917,8 @@ export type PageShopCollectionQuery = {
                       shortDescription?: string;
                       name?: string;
                       price?: number;
+                      softCap?: number;
+                      hardCap?: number;
                       currency?: string;
                       sku?: string;
                       availableQuantity?: number;
@@ -15487,6 +18633,8 @@ export type ProductCollectionBySlugQuery = {
       availableSizes?: Array<string>;
       name?: string;
       price?: number;
+      softCap?: number;
+      hardCap?: number;
       currency?: string;
       sku?: string;
       availableQuantity?: number;
@@ -16207,6 +19355,8 @@ export const ProductCommonFragmentDoc = gql`
     }
     name
     price
+    softCap
+    hardCap
     currency
     sku
     availableQuantity
@@ -16394,6 +19544,20 @@ export const AnnouncementCollectionDocument = gql`
   }
   ${AnnouncementFragmentDoc}
 `;
+export const AnnouncementCollectionCountDocument = gql`
+  query announcementCollectionCount(
+    $now: DateTime
+    $isPreview: Boolean = false
+  ) {
+    announcementCollection(
+      where: { start_lte: $now, end_gte: $now }
+      order: start_ASC
+      preview: $isPreview
+    ) {
+      total
+    }
+  }
+`;
 export const BasicPostCollectionBySlugDocument = gql`
   query basicPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
     basicPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
@@ -16524,6 +19688,21 @@ export function getSdk(
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'announcementCollection',
+        'query'
+      );
+    },
+    announcementCollectionCount(
+      variables?: AnnouncementCollectionCountQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AnnouncementCollectionCountQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<AnnouncementCollectionCountQuery>(
+            AnnouncementCollectionCountDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'announcementCollectionCount',
         'query'
       );
     },

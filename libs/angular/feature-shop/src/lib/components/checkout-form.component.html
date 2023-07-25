@@ -26,14 +26,14 @@
       label="Close"
       styleClass="p-button-secondary p-button-lg mt-4"
       (click)="ref.close()"
-    ></p-button>
+    />
   </div>
 
   <!-- Product Checkout -->
   <ng-template #showProduct>
     <ng-container *rxLet="productDetail$ as productDetail">
       <!-- Product Item -->
-      <dhb-product-mini [product]="productDetail"></dhb-product-mini>
+      <dhb-product-mini [product]="productDetail" />
 
       <!-- Quantity selection -->
       <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
@@ -48,7 +48,7 @@
               [max]="productDetail.availableQuantity"
               [allowEmpty]="false"
               [showButtons]="true"
-            ></p-inputNumber>
+            />
             <label for="selectedQuantity">Quantity</label>
           </span>
         </div>
@@ -72,7 +72,7 @@
           [formControl]="checkoutForm.controls.shippingAddress"
           [prefillData]="address?.attributes"
           (clear)="checkoutForm.controls.shippingAddress.reset()"
-        ></dhb-address-form>
+        />
 
         <!-- Referral Address -->
         <h5>Referral Address</h5>
@@ -91,7 +91,7 @@
                   mask="******************************************"
                   characterPattern="[ABCDEFXabcdefx]"
                   slotChar=""
-                ></p-inputMask>
+                />
                 <label for="referralAddress" class="pr-5"
                   >Referral Address</label
                 >
@@ -125,7 +125,7 @@
           (click)="ref.close()"
           styleClass="p-button-secondary p-button-lg w-full"
           class="w-6 sm:w-auto"
-        ></p-button>
+        />
 
         <!-- Confirm -->
         <ng-container *ngIf="productDetail.availableQuantity > 0">
@@ -137,7 +137,7 @@
             icon="fa-regular fa-check"
             styleClass="p-button-primary p-button-lg w-full"
             class="w-6 sm:w-auto"
-          ></p-button>
+          />
         </ng-container>
 
         <!-- Approve -->
@@ -148,7 +148,7 @@
             (onClick)="onApprove()"
             styleClass="p-button-primary p-button-lg w-full"
             class="w-6 sm:w-auto"
-          ></p-button>
+          />
         </ng-template>
       </div>
     </ng-container>
@@ -157,5 +157,5 @@
 
 <!-- Loading Template -->
 <ng-template #loading>
-  <dhb-loading></dhb-loading>
+  <dhb-loading />
 </ng-template>

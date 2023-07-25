@@ -13,6 +13,8 @@ fragment ProductCommon on Product {
   }
   name
   price
+  softCap
+  hardCap
   currency
   sku
   availableQuantity

@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthenticatedGuard, DeAuthenticatedGuard } from '@dehub/angular/core';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { AngularFeatureAuthComponent } from './angular-feature-auth.component';
 import {
   ConnectWalletComponent,
   ConnectedWalletComponent,
@@ -20,13 +19,13 @@ export const routes: Routes = [
       },
       {
         path: 'request',
-        component: AngularFeatureAuthComponent,
+        loadComponent: () => import('./angular-feature-auth.component'),
         data: { dialogComponent: ConnectWalletRequestComponent },
         canActivate: [DeAuthenticatedGuard],
       },
       {
         path: 'connect',
-        component: AngularFeatureAuthComponent,
+        loadComponent: () => import('./angular-feature-auth.component'),
         data: {
           dialogComponent: ConnectWalletComponent,
           dialogConfig: {
@@ -38,7 +37,7 @@ export const routes: Routes = [
       },
       {
         path: 'disconnect',
-        component: AngularFeatureAuthComponent,
+        loadComponent: () => import('./angular-feature-auth.component'),
         data: {
           dialogComponent: DisconnectWalletComponent,
           dialogConfig: {
@@ -50,7 +49,7 @@ export const routes: Routes = [
       },
       {
         path: 'connected',
-        component: AngularFeatureAuthComponent,
+        loadComponent: () => import('./angular-feature-auth.component'),
         data: {
           dialogComponent: ConnectedWalletComponent,
           dialogConfig: {

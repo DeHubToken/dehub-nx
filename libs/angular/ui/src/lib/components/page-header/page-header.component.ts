@@ -7,6 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { CallToActionFragment } from '@dehub/shared/model';
 import { resolveButtonStyle, resolveColumnWidth } from '@dehub/shared/utils';
 import { WINDOW } from '@ng-web-apis/common';
@@ -48,7 +49,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
       </h5>
 
       <div *ngIf="page.ctasCollection?.items as ctas" class="mb-7">
-        <ng-container *ngFor="let cta of ctas">
+        <ng-container *ngFor="let cta of ctas; trackBy: trackByFn">
           <p-button
             *ngIf="cta"
             [dhbContentfulDraft]="cta.sys"
@@ -83,6 +84,8 @@ export class PageHeaderComponent<
 > implements OnInit
 {
   @Input() page?: P;
+
+  trackByFn = trackByContentfulIdFn<CallToActionFragment>();
 
   constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
 

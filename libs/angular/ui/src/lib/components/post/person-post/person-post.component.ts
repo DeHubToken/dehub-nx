@@ -5,6 +5,7 @@ import {
   Inject,
   Input,
   OnInit,
+  TrackByFunction,
 } from '@angular/core';
 import { PersonPostFragment } from '@dehub/shared/model';
 import { WINDOW } from '@ng-web-apis/common';
@@ -64,14 +65,14 @@ interface SocialLink {
           [value]="name"
           styleClass="block mx-auto mb-3 px-3 py-2 font-normal text-xl shadow-3 bg-cyan-900"
           [style]="{ width: 'fit-content', 'margin-top': '-66px' }"
-        ></p-tag>
+        />
 
         <!-- Title -->
         <p-tag
           *ngIf="personPost.title as title"
           [value]="title"
           styleClass="uppercase text-sm px-3 py-1 bg-gradient-4 shadow-2"
-        ></p-tag>
+        />
 
         <div *ngIf="personPost.description as desc" class="text-sm pt-5">
           {{ desc }}
@@ -79,7 +80,7 @@ interface SocialLink {
 
         <!-- Social Links -->
         <div class="mt-4">
-          <ng-container *ngFor="let link of socialLinks">
+          <ng-container *ngFor="let link of socialLinks; trackBy: trackByFn">
             <button
               *ngIf="link.url"
               pButton
@@ -103,6 +104,9 @@ export class PersonPostComponent implements OnInit {
   @Input() path?: string;
 
   socialLinks: SocialLink[] = [];
+
+  trackByFn: TrackByFunction<SocialLink> = (index_: number, item: SocialLink) =>
+    item.name;
 
   constructor(@Inject(WINDOW) private readonly windowRef: Window) {}
 

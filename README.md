@@ -19,7 +19,7 @@ We recommend [VSCode](https://code.visualstudio.com/) as an editor. _(monorepo i
 1. **Checkout** the project: `https://github.com/DeHubToken/dehub-nx`
 1. Open **VSCode** _(pre-configured editor settings involved)_
 1. Be sure to use `node ^18.10.0`
-1. Install `pnpm` via npm: `npm install -g pnpm`
+1. Install `pnpm` via npm: `npm install -g pnpm` (^8.6.0)
 1. Add `~/.huskyrc` with content [here](https://typicode.github.io/husky/#/?id=command-not-found)
 1. **Install** dependencies: `pnpm i`
 1. While installing:

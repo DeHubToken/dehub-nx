@@ -15,6 +15,7 @@ $dhb_h3_line_height: 2.4rem;
 $dhb_h5_line_height: 2.2rem;
 
 $dhb_link_color: #1791a7;
+$dhb_link_hover_color: lighten($dhb_link_color, 10%);
 
 $dhb_gradient1: linear-gradient(
   45deg,

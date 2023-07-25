@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
 import { NavigationTabMenu } from '@dehub/shared/model';
-import { AppMainComponent } from './app.main.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: AppMainComponent,
+    loadComponent: () => import('./app.main.component'),
     children: [
       { path: '', redirectTo: NavigationTabMenu.Home, pathMatch: 'full' },
       {

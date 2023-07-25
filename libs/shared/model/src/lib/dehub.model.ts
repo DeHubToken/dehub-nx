@@ -10,3 +10,5 @@ export enum NavigationTabMenu {
 }
 
 export const animationDuration = 500;
+
+export const pollInterval = 10000;
