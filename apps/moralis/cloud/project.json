@@ -41,7 +41,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nx/node:node",
+      "executor": "@nx/js:node",
       "options": {
         "buildTarget": "moralis-cloud:build"
       }
