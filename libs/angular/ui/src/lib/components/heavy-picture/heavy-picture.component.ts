@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { AssetFragment } from '@dehub/shared/model';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { ContentfulImgAltPipe } from '../../pipes/contentful-img-alt/contentful-img-alt.pipe';
 
 @Component({
   selector: 'dhb-heavy-picture',
@@ -18,6 +19,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     NgOptimizedImage,
     // UI
     ContentfulDraftDirective,
+    ContentfulImgAltPipe,
   ],
   template: `
     <span (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
@@ -29,7 +31,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
           [width]="picture.width"
           [height]="picture.height"
           [priority]="priority"
-          [alt]="picture.description ?? picture.title"
+          [alt]="picture | dhbContentfulImgAlt"
           sizes="50vw"
           [ngClass]="{ hidden: showHeavyPic, 'h-auto': true }"
         />
@@ -45,7 +47,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
           [width]="heavyPicture.width"
           [height]="heavyPicture.height"
           [priority]="priority"
-          [alt]="heavyPicture.description ?? heavyPicture.title"
+          [alt]="heavyPicture | dhbContentfulImgAlt"
           (load)="onLoad()"
           sizes="100vw"
           [ngClass]="{
@@ -87,7 +89,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
               [width]="heavyPicture.width"
               [height]="heavyPicture.height"
               [priority]="priority"
-              [alt]="heavyPicture.description ?? heavyPicture.title"
+              [alt]="heavyPicture | dhbContentfulImgAlt"
               (load)="onLoad()"
               sizes="100vw"
               [ngClass]="{

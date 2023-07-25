@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { ProductInfoComponent } from '@dehub/angular/ui/components/product/product-info.component';
 import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '@dehub/angular/ui/directives/swiper/swiper.directive';
+import { ContentfulImgAltPipe } from '@dehub/angular/ui/pipes/contentful-img-alt/contentful-img-alt.pipe';
 import { ContentfulRichMarkupPipe } from '@dehub/angular/ui/pipes/contentful-rich-markup/contentful-rich-markup.pipe';
 import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
 import { trackByContentfulIdFn } from '@dehub/angular/util';
@@ -42,6 +43,7 @@ import { ProductSalesComponent } from './product-sales.component';
     ProductOrdersComponent,
     ProductSalesComponent,
     ContentfulRichMarkupPipe,
+    ContentfulImgAltPipe,
     SwiperDirective,
     // PrimeNG
     ButtonModule,

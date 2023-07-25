@@ -15,6 +15,7 @@ import { TagModule } from 'primeng/tag';
 import { NgFor, NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
+import { ContentfulImgAltPipe } from '../../../pipes/contentful-img-alt/contentful-img-alt.pipe';
 
 interface SocialLink {
   name: string;
@@ -36,6 +37,7 @@ interface SocialLink {
     CardModule,
     // UI
     ContentfulDraftDirective,
+    ContentfulImgAltPipe,
   ],
   template: `
     <div [dhbContentfulDraft]="personPost.sys" class="w-full">
@@ -52,7 +54,7 @@ interface SocialLink {
               "
               [width]="avatar.width"
               [height]="avatar.height"
-              [alt]="avatar.description ?? avatar.title ?? 'Avatar'"
+              [alt]="avatar | dhbContentfulImgAlt : 'Avatar'"
               sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
               class="h-auto border-circle border-3 border-cyan-900 shadow-5 w-8 bg-gradient-1"
             />

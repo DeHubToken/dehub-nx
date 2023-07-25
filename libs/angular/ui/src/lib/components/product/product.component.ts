@@ -16,6 +16,7 @@ import { CardModule } from 'primeng/card';
 import { SwiperOptions } from 'swiper';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../directives/swiper/swiper.directive';
+import { ContentfulImgAltPipe } from '../../pipes/contentful-img-alt/contentful-img-alt.pipe';
 import { ProductInfoComponent } from './product-info.component';
 
 @Component({
@@ -34,6 +35,7 @@ import { ProductInfoComponent } from './product-info.component';
     ContentfulDraftDirective,
     SwiperDirective,
     ProductInfoComponent,
+    ContentfulImgAltPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './product.component.html',

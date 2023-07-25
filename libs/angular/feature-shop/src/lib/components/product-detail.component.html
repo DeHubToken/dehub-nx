@@ -17,7 +17,7 @@
           *ngIf="picture"
           [dhbContentfulDraft]="picture.sys"
           [src]="picture.url"
-          [alt]="picture.title"
+          [alt]="picture | dhbContentfulImgAlt"
         />
       </swiper-slide>
     </swiper-container>

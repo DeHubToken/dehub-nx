@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { ProductCheckoutDetail } from '@dehub/shared/model';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { ContentfulImgAltPipe } from '../../pipes/contentful-img-alt/contentful-img-alt.pipe';
 
 @Component({
   selector: 'dhb-product-mini',
@@ -16,6 +17,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     NgIf,
     // UI
     ContentfulDraftDirective,
+    ContentfulImgAltPipe,
   ],
   template: `
     <div
@@ -28,7 +30,7 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
           <div class="flex-grow w-5">
             <img
               [src]="product.picture.url"
-              [alt]="product.picture.title"
+              [alt]="product | dhbContentfulImgAlt"
               class="product-picture w-full h-full block "
             />
           </div>

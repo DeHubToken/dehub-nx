@@ -8,6 +8,7 @@ import { AwardPostFragment } from '@dehub/shared/model';
 
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
+import { ContentfulImgAltPipe } from '../../../pipes/contentful-img-alt/contentful-img-alt.pipe';
 
 @Component({
   selector: 'dhb-award-post',
@@ -18,6 +19,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
     NgOptimizedImage,
     // UI
     ContentfulDraftDirective,
+    ContentfulImgAltPipe,
   ],
   template: `
     <div [dhbContentfulDraft]="awardPost.sys">
@@ -29,7 +31,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
               [width]="award.width"
               [height]="award.height"
               [priority]="priority"
-              [alt]="award.description ?? award.title"
+              [alt]="award | dhbContentfulImgAlt"
               class="w-6 md:w-9 h-auto anim-hover-1-reverse"
               sizes="(max-width: 576px) 15vw, 100vw"
             />
