@@ -27,7 +27,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
     CommonModule,
     RouterModule,
     NgOptimizedImage,
-    // PrimeNg
+    // PrimeNG
     ButtonModule,
     // UI
     ContentfulDraftDirective,

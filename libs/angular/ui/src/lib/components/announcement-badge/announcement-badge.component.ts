@@ -26,7 +26,7 @@ import { AnnouncementComponent } from '../announcement/announcement.component';
   imports: [
     // Angular
     NgIf,
-    // PrimeNg
+    // PrimeNG
     BadgeModule,
     ButtonModule,
     RippleModule,

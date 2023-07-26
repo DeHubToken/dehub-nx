@@ -188,13 +188,17 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
             projectId: walletConnectProjectId,
             qrModalOptions: getWalletConnectQrModalOptions(legalPage),
           };
-        } else if (connectorId === MoralisConnectorNames.MagicLink) {
+        } else if (
+          connectorId === MoralisConnectorNames.MagicLink &&
+          magicLinkEmail
+        ) {
           enableOptions = {
             provider: connectorId,
             network: {
               rpcUrl: getRandomRpcUrlByChainId(defaultChainId),
               chainId: defaultChainId,
             } as unknown as string,
+            newSession: 'true',
             email: magicLinkEmail,
             apiKey: magicLinkApiKey,
           };
@@ -237,6 +241,9 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
               }
 
               setWalletConnectingState(WalletConnectingState.COMPLETE);
+              // Not save new session into local storage
+              delete (enableOptions as Moralis.MagicWeb3ConnectorEnableOptions)
+                .newSession;
             } else {
               logout();
               setWalletConnectingState(WalletConnectingState.INIT);

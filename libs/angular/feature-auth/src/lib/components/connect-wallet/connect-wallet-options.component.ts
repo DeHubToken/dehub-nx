@@ -80,7 +80,7 @@ import { InputTextModule } from 'primeng/inputtext';
           <!-- Display Template -->
           <ng-template pTemplate="display">
             <dhb-wallet-button
-              label="Magic"
+              label="MagicLink"
               [imageSources]="[path + '/assets/dehub/icons/magic.svg']"
               (click)="inplaceMagic.activate()"
             />
@@ -129,15 +129,6 @@ import { InputTextModule } from 'primeng/inputtext';
         </p-inplace>
       </div>
 
-      <!-- Trust Wallet (visible on Mobile only) -->
-      <div class="mt-2 mb-3 md:hidden">
-        <dhb-wallet-button
-          label="Trust Wallet"
-          [imageSources]="[path + '/assets/dehub/icons/trustwallet.svg']"
-          (click)="login.emit({ connectorId: 'metamask' })"
-        />
-      </div>
-
       <!-- Wallet Connect -->
       <div class="mt-2 mb-3">
         <dhb-wallet-button
@@ -172,6 +163,15 @@ import { InputTextModule } from 'primeng/inputtext';
             Binance Wallet </a
           >&nbsp;extension on your browser.
         </div>
+      </div>
+
+      <!-- Trust Wallet (visible on Mobile only) -->
+      <div class="mt-2 mb-3 md:hidden">
+        <dhb-wallet-button
+          label="Trust Wallet"
+          [imageSources]="[path + '/assets/dehub/icons/trustwallet.svg']"
+          (click)="login.emit({ connectorId: 'metamask' })"
+        />
       </div>
     </div>
   `,

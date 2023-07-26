@@ -261,6 +261,7 @@ export class MoralisService implements IMoralisService {
             chainId,
           } as unknown as string,
           provider: connectorId,
+          newSession: 'true',
           email: magicLinkEmail,
           apiKey: magicLinkApiKey,
         };
@@ -275,6 +276,9 @@ export class MoralisService implements IMoralisService {
 
           return loggedInUser.save();
         });
+
+        // Not save new session into local storage
+        delete enableOptions.newSession;
         break;
 
       case Web3ConnectorNames.BSC:
