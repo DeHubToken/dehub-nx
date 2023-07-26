@@ -10,8 +10,8 @@ Generated with [PWA Manifest Generator](https://www.simicart.com/manifest-genera
 1. Short name: `DeHub`
 1. Display Mode: `fullscreen`
 1. Description: `DeHub - The Decentralised Entertainment Hub`
-1. Theme color: `#060d1b`
-1. Background color: `#622f88`
+1. Theme color: `#622f88`
+1. Background color: `#321338`
 1. Icon: `shared/asset/dehub/ulogo.png`
 
 _Note: only configured for Angular app currently_
