@@ -9,8 +9,9 @@ import { AssetFragment } from '@dehub/shared/model';
 export class ContentfulImgAltPipe implements PipeTransform {
   transform(
     { description, title }: AssetFragment,
-    fallbackAlt = 'image'
+    fallbackAlt = 'dehub image'
   ): unknown {
-    return `${description ?? title ?? fallbackAlt}`;
+    const alt = `${description ?? title}`;
+    return `${alt.length > 1 ? alt : fallbackAlt}`;
   }
 }
