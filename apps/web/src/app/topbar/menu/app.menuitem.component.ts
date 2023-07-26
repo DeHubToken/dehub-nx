@@ -30,7 +30,7 @@ import { MenuService } from './app.menu.service';
     RouterLinkActive,
     RouterLink,
     NgFor,
-    // PrimeNg
+    // PrimeNG
     RippleModule,
 
     forwardRef(() => AppMenuitemComponent),

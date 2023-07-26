@@ -21,7 +21,7 @@ import { Observable } from 'rxjs';
     RouterOutlet,
     // 3rd Party
     PushModule,
-    // PrimeNg
+    // PrimeNG
     ToastModule,
     ConfirmDialogModule,
     // UI

@@ -1,6 +1,7 @@
 import { NgFor, NgStyle } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { trackByItemFn } from '@dehub/angular/util';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'dhb-wallet-button',
@@ -9,9 +10,11 @@ import { trackByItemFn } from '@dehub/angular/util';
     // Angular
     NgFor,
     NgStyle,
+    // PrimeNG
+    ButtonModule,
   ],
   template: `
-    <button class="p-button flex justify-content-between text-500">
+    <p-button styleClass="flex justify-content-between text-500">
       <!-- Label -->
       <div>{{ label }}</div>
 
@@ -23,12 +26,11 @@ import { trackByItemFn } from '@dehub/angular/util';
           [src]="imageSource"
           [ngStyle]="{
             width: '32px',
-            height: '16px',
-            paddingRight: '10px'
+            height: '20px'
           }"
         />
       </div>
-    </button>
+    </p-button>
   `,
 })
 export class WalletButtonComponent implements OnInit {

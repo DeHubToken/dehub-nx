@@ -15,7 +15,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
   imports: [
     // Angular
     NgIf,
-    // PrimeNg
+    // PrimeNG
     SplitButtonModule,
   ],
   template: `
