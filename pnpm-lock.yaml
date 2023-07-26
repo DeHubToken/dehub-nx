@@ -201,8 +201,8 @@ dependencies:
     specifier: 4.17.21
     version: 4.17.21
   magic-sdk:
-    specifier: 8.1.0
-    version: 8.1.0
+    specifier: 18.5.0
+    version: 18.5.0
   moment:
     specifier: 2.29.4
     version: 2.29.4
@@ -6649,22 +6649,22 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /@magic-sdk/commons@4.1.1(@magic-sdk/provider@8.2.0)(@magic-sdk/types@7.2.0):
-    resolution: {integrity: sha512-nHbMRkssAC1z5rHpPwkiYolp3qxmtnkNaynGlreVxgtPTemJ8USRrXjg/cF0WVhRwtPTpegdTvtpJWOMd0Ratg==}
+  /@magic-sdk/commons@14.5.0(@magic-sdk/provider@18.5.0)(@magic-sdk/types@15.7.0):
+    resolution: {integrity: sha512-KsHOuyfWyhn2qwcVq7ZfPGUpi+hqsLt5D9hrLiJto2SRAOTOkVQ5a0lOI6wOy/HY1VNLyC0n1CWq8zVCxav2xQ==}
     peerDependencies:
       '@magic-sdk/provider': '>=4.3.0'
       '@magic-sdk/types': '>=3.1.1'
     dependencies:
-      '@magic-sdk/provider': 8.2.0(localforage@1.10.0)
-      '@magic-sdk/types': 7.2.0
+      '@magic-sdk/provider': 18.5.0(localforage@1.10.0)
+      '@magic-sdk/types': 15.7.0
     dev: false
 
-  /@magic-sdk/provider@8.2.0(localforage@1.10.0):
-    resolution: {integrity: sha512-gm8pHvHbXctAp393M0W8eocP7/qifpqBIIrIXiMKpdlGRKzuMvv5x1LQvb8CuOjPIK3eXxY2qdCZnvWE2qiV0A==}
+  /@magic-sdk/provider@18.5.0(localforage@1.10.0):
+    resolution: {integrity: sha512-n/zmi0xY67xwOfPxhaN1O70khFp5biGo2j1zSQzMSCUJBZ4oiEs5fTgUgpoLJZhOPsMM0Hha793cFGQoJ63VZw==}
     peerDependencies:
       localforage: ^1.7.4
     dependencies:
-      '@magic-sdk/types': 7.2.0
+      '@magic-sdk/types': 15.7.0
       eventemitter3: 4.0.7
       localforage: 1.10.0
       web3-core: 1.5.2
@@ -6672,8 +6672,8 @@ packages:
       - supports-color
     dev: false
 
-  /@magic-sdk/types@7.2.0:
-    resolution: {integrity: sha512-YpfRhY6dBjMEvW+YApoDTSVWBqb5skOyoOcAcKbQvkuV4yCBBvJXAstOPYvFp7Vgw97AQkuie7mLdx7EZahS1Q==}
+  /@magic-sdk/types@15.7.0:
+    resolution: {integrity: sha512-t5i0fkyZWSsWzZlGkHJ2XenfzNFzI/AVVrx67gARz2j+ehsjQx6ey5Z+5kpERulRIgK6cyVgYczy0OfQCqNqYg==}
     dev: false
 
   /@mapbox/node-pre-gyp@1.0.10:
@@ -20097,12 +20097,12 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /magic-sdk@8.1.0:
-    resolution: {integrity: sha512-108nJO4etJmwkemQ3ATAHjveBx2kwfoNJsG31Ge5WGkPhDQd//CVJlDXYF2HW59P+lbeZAWCro9mmFWbwZLOAg==}
+  /magic-sdk@18.5.0:
+    resolution: {integrity: sha512-HkJS6eLCAno61bMtZxGCuQ7dUuryt37gkNkygeJk/+Hfnfd+ZygYVek8sRt1BdORDbJ1K4NUzEahQ523VUQeBw==}
     dependencies:
-      '@magic-sdk/commons': 4.1.1(@magic-sdk/provider@8.2.0)(@magic-sdk/types@7.2.0)
-      '@magic-sdk/provider': 8.2.0(localforage@1.10.0)
-      '@magic-sdk/types': 7.2.0
+      '@magic-sdk/commons': 14.5.0(@magic-sdk/provider@18.5.0)(@magic-sdk/types@15.7.0)
+      '@magic-sdk/provider': 18.5.0(localforage@1.10.0)
+      '@magic-sdk/types': 15.7.0
       localforage: 1.10.0
     transitivePeerDependencies:
       - supports-color
