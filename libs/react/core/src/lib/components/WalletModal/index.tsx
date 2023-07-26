@@ -69,7 +69,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
         >
           <div>Browser Wallet</div>
           <div className="flex flex-row align-items-center">
-            <MetaMaskIcon style={{ width: '32px', height: '16px' }} />
+            <MetaMaskIcon style={{ width: '32px', height: '20px' }} />
             <TrustWalletIcon
               style={{
                 width: '32px',
@@ -110,7 +110,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
             <WalletButton className="flex justify-content-between text-500">
               <div>MagicLink</div>
               <div className="flex flex-row align-items-center">
-                <MagicLinkIcon style={{ width: '32px', height: '16px' }} />
+                <MagicLinkIcon style={{ width: '32px', height: '20px' }} />
               </div>
             </WalletButton>
           </div>
@@ -171,22 +171,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
         >
           <div>WalletConnect</div>
           <div className="flex flex-row align-items-center">
-            <WalletConnectIcon style={{ width: '32px', height: '11px' }} />
-          </div>
-        </WalletButton>
-      </div>
-
-      <div className="mt-2 mb-3">
-        <WalletButton
-          className="flex justify-content-between text-500"
-          onClick={() => {
-            setConnectorId(Web3ConnectorNames.WalletLink);
-            doConnect(Web3ConnectorNames.WalletLink);
-          }}
-        >
-          <div>Coinbase</div>
-          <div className="flex flex-row align-items-center">
-            <CoinbaseIcon style={{ width: '32px', height: '20px' }} />
+            <WalletConnectIcon style={{ width: '32px', height: '20px' }} />
           </div>
         </WalletButton>
       </div>
@@ -232,6 +217,21 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
               </motion.div>
             </AnimatePresence>
           )}
+      </div>
+
+      <div className="mt-2 mb-3">
+        <WalletButton
+          className="flex justify-content-between text-500"
+          onClick={() => {
+            setConnectorId(Web3ConnectorNames.WalletLink);
+            doConnect(Web3ConnectorNames.WalletLink);
+          }}
+        >
+          <div>Coinbase</div>
+          <div className="flex flex-row align-items-center">
+            <CoinbaseIcon style={{ width: '32px', height: '20px' }} />
+          </div>
+        </WalletButton>
       </div>
     </Dialog>
   );
