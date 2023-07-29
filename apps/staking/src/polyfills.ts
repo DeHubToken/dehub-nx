@@ -68,7 +68,7 @@ import { Buffer } from 'buffer';
 import 'zone.js'; // Included with Angular CLI.
 
 /**
- * ISSUE: https://github.com/ChainSafe/web3.js#web3-and-angular
+ * @audit https://github.com/ChainSafe/web3.js#web3-and-angular
  */
 (window as any).global = window;
 global.Buffer = Buffer;
