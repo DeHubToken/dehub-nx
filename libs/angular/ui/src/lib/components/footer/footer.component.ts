@@ -71,11 +71,15 @@ import { CTAGroupPipe } from './cta-group.pipe';
                 <div
                   *ngFor="
                     let awardPost of footer?.awardsCollection?.items;
+                    let isFirst = first;
                     trackBy: trackByFn
                   "
                   class="col-12 md:col-6 lg:col-4"
                 >
-                  <dhb-award-post [awardPost]="awardPost" />
+                  <dhb-award-post
+                    [awardPost]="awardPost"
+                    [priority]="isFirst"
+                  />
                 </div>
               </div>
             </div>

@@ -26,7 +26,7 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
       <!-- Simple Picture -->
       <ng-container *ngIf="container.picture as picture">
         <img
-          *ngIf="!showHeavyPic && picture.url"
+          *ngIf="picture.url"
           [dhbContentfulDraft]="picture.sys"
           [ngSrc]="picture.url"
           [fill]="autoHeight"
@@ -36,17 +36,21 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [sizes]="sizes"
           [alt]="picture | dhbContentfulImageAlt"
           [ngClass]="{
-            'h-auto': !autoHeight
+            'opacity-0': showHeavyPic,
+            'h-auto': !autoHeight,
           }"
         />
       </ng-container>
 
       <!-- Heavy Picture -->
+      <!-- @audit Safari not support avif, and cannot loop either Chrome/Safari instead of gif -->
+      <!-- @note https://codelabs.developers.google.com/codelabs/avif#5 -->
       <ng-container *ngIf="container.heavyPicture as heavyPicture">
         <img
-          *ngIf="showHeavyPic && heavyPicture.url"
+          *ngIf="heavyPicture.url"
           [dhbContentfulDraft]="heavyPicture.sys"
           [ngSrc]="heavyPicture.url"
+          [loaderParams]="{ format: 'webp' }"
           [fill]="autoHeight"
           [width]="autoHeight ? undefined : heavyPicture.width"
           [height]="autoHeight ? undefined : heavyPicture.height"
@@ -55,96 +59,10 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [sizes]="sizes"
           [alt]="heavyPicture | dhbContentfulImageAlt"
           [ngClass]="{
-            'h-auto': !autoHeight
+            'opacity-0': !showHeavyPic,
+            'h-auto': !autoHeight,
           }"
         />
-      </ng-container>
-
-      <ng-container *ngIf="container.picture as picture">
-        <!-- <img
-          *ngIf="false && picture.url"
-          [dhbContentfulDraft]="picture.sys"
-          [fill]="autoHeight"
-          [ngSrc]="picture.url"
-          [width]="autoHeight ? undefined : picture.width"
-          [height]="autoHeight ? undefined : picture.height"
-          [priority]="priority"
-          [alt]="picture | dhbContentfulImageAlt"
-          [sizes]="sizes"
-          [ngClass]="{ hidden: showHeavyPic, 'h-auto': !autoHeight }"
-        /> -->
-      </ng-container>
-
-      <ng-container *ngIf="container.heavyPicture as heavyPicture">
-        <!-- <img
-          *ngIf="
-            false &&
-              heavyPicture.url &&
-              heavyPicture.contentType !== 'image/gif';
-            else gif
-          "
-          [dhbContentfulDraft]="heavyPicture.sys"
-          [fill]="autoHeight"
-          [ngSrc]="heavyPicture.url"
-          [width]="autoHeight ? undefined : heavyPicture.width"
-          [height]="autoHeight ? undefined : heavyPicture.height"
-          [priority]="priority"
-          [alt]="heavyPicture | dhbContentfulImageAlt"
-          (load)="onLoad()"
-          [sizes]="sizes"
-          [ngClass]="{
-            hidden: !showHeavyPic,
-            'h-auto': !autoHeight,
-            'w-auto': false
-          }"
-        /> -->
-        <ng-template #gif>
-          <!-- https://codelabs.developers.google.com/codelabs/avif#5 -->
-          <!-- <picture
-            autoplay
-            loop
-            muted
-            playsinline
-            [ngClass]="{
-              hidden: !showHeavyPic
-            }"
-          > -->
-          <!-- <source
-              type="image/webp"
-              [srcset]="heavyPicture.url"
-              [width]="heavyPicture.width"
-              [height]="heavyPicture.height"
-              [sizes]="sizes"
-            /> -->
-
-          <!-- TODO: Safari not render avif -->
-          <!-- <source
-              type="image/avif"
-              [srcset]="heavyPicture.avifUrl"
-              [width]="heavyPicture.width"
-              [height]="heavyPicture.height"
-              [sizes]="sizes"
-            /> -->
-
-          <!-- <img
-              *ngIf="heavyPicture.url"
-              [dhbContentfulDraft]="heavyPicture.sys"
-              [fill]="autoHeight"
-              [ngSrc]="heavyPicture.url"
-              [width]="autoHeight ? undefined : heavyPicture.width"
-              [height]="autoHeight ? undefined : heavyPicture.height"
-              [priority]="priority"
-              [alt]="heavyPicture | dhbContentfulImageAlt"
-              (load)="onLoad()"
-              [sizes]="sizes"
-              [ngClass]="{
-                'h-auto': !autoHeight,
-                'w-auto': false
-              }"
-            /> -->
-
-          <!-- </picture> -->
-        </ng-template>
       </ng-container>
     </span>
   `,

@@ -64,7 +64,7 @@ function Footer({ footer, ctaGroup = 5, landing, logo }: FooterProps) {
               <div className="grid">
                 {awards.map((awardPost, index) => (
                   <div key={index} className="col-12 md:col-6 lg:col-4">
-                    <AwardPost awardPost={awardPost} />
+                    <AwardPost awardPost={awardPost} priority={index === 0} />
                   </div>
                 ))}
               </div>
