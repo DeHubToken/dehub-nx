@@ -27,13 +27,15 @@ import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/cont
         <a [href]="link" target="_blank" rel="noreferrer">
           <ng-container *ngIf="awardPost.picture as award">
             <img
-              [ngSrc]="award.webpUrlWithRadius!"
+              *ngIf="award.url"
+              [ngSrc]="award.url"
+              [loaderParams]="{ cornerRadius: 1000 }"
               [width]="award.width"
               [height]="award.height"
-              [priority]="priority"
+              [priority]="false"
               [alt]="award | dhbContentfulImageAlt"
               class="w-6 md:w-9 h-auto anim-hover-1-reverse"
-              sizes="(max-width: 576px) 15vw, 100vw"
+              sizes="(max-width: 750px) 30vw, 5vw"
             />
           </ng-container>
         </a>
@@ -44,7 +46,6 @@ import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/cont
 })
 export class AwardPostComponent implements OnInit {
   @Input() awardPost!: AwardPostFragment;
-  @Input() priority = false;
 
   constructor() {}
 

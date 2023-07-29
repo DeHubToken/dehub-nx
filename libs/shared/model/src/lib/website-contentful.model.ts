@@ -10637,9 +10637,6 @@ export type AwardPostFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -10667,9 +10664,6 @@ export type BasicPostCommonFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -10699,9 +10693,6 @@ export type BasicPostFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -10730,9 +10721,6 @@ export type BasicPostDetailFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -10790,9 +10778,6 @@ export type AssetFragment = {
   height?: number;
   url?: string;
   contentType?: string;
-  webpUrlWithRadius?: string;
-  webpUrl?: string;
-  avifUrl?: string;
   sys: {
     __typename?: 'Sys';
     firstPublishedAt?: any;
@@ -10892,9 +10877,6 @@ export type FeaturePostFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -10911,9 +10893,6 @@ export type FeaturePostFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -10992,9 +10971,6 @@ export type FooterFragment = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -11030,9 +11006,6 @@ export type GrandPostFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -11049,9 +11022,6 @@ export type GrandPostFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -11176,9 +11146,6 @@ export type PageClubsFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11214,9 +11181,6 @@ export type PageClubsFragment = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11332,9 +11296,6 @@ export type PageClubsFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11351,9 +11312,6 @@ export type PageClubsFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11402,9 +11360,6 @@ export type PageClubsFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11421,9 +11376,6 @@ export type PageClubsFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11558,9 +11510,6 @@ export type PageClubsFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11577,9 +11526,6 @@ export type PageClubsFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11663,9 +11609,6 @@ export type PageGameFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11701,9 +11644,6 @@ export type PageGameFragment = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -11819,9 +11759,6 @@ export type PageGameFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11838,9 +11775,6 @@ export type PageGameFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11889,9 +11823,6 @@ export type PageGameFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -11908,9 +11839,6 @@ export type PageGameFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12045,9 +11973,6 @@ export type PageGameFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12064,9 +11989,6 @@ export type PageGameFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12150,9 +12072,6 @@ export type PageHomeFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12188,9 +12107,6 @@ export type PageHomeFragment = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12306,9 +12222,6 @@ export type PageHomeFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12325,9 +12238,6 @@ export type PageHomeFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12376,9 +12286,6 @@ export type PageHomeFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12395,9 +12302,6 @@ export type PageHomeFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12476,9 +12380,6 @@ export type PageHomeFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12583,9 +12484,6 @@ export type PageHomeFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12602,9 +12500,6 @@ export type PageHomeFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12688,9 +12583,6 @@ export type PageLearnFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12726,9 +12618,6 @@ export type PageLearnFragment = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -12844,9 +12733,6 @@ export type PageLearnFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12863,9 +12749,6 @@ export type PageLearnFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12914,9 +12797,6 @@ export type PageLearnFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -12933,9 +12813,6 @@ export type PageLearnFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -13014,9 +12891,6 @@ export type PageLearnFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -13121,9 +12995,6 @@ export type PageLearnFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -13140,9 +13011,6 @@ export type PageLearnFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -13190,9 +13058,6 @@ export type PageSectionBasicPostsFragment = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -13228,9 +13093,6 @@ export type PageSectionBasicPostsFragment = {
             height?: number;
             url?: string;
             contentType?: string;
-            webpUrlWithRadius?: string;
-            webpUrl?: string;
-            avifUrl?: string;
             sys: {
               __typename?: 'Sys';
               firstPublishedAt?: any;
@@ -13349,9 +13211,6 @@ export type PageSectionFeaturePostsFragment = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -13368,9 +13227,6 @@ export type PageSectionFeaturePostsFragment = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -13420,9 +13276,6 @@ export type PageSectionGrandPostsFragment = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -13439,9 +13292,6 @@ export type PageSectionGrandPostsFragment = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -13522,9 +13372,6 @@ export type PageSectionPersonPostsFragment = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -13579,9 +13426,6 @@ export type PageSectionProductsFragment = {
           height?: number;
           url?: string;
           contentType?: string;
-          webpUrlWithRadius?: string;
-          webpUrl?: string;
-          avifUrl?: string;
           sys: {
             __typename?: 'Sys';
             firstPublishedAt?: any;
@@ -13651,9 +13495,6 @@ export type PageSectionProductsFragment = {
               height?: number;
               url?: string;
               contentType?: string;
-              webpUrlWithRadius?: string;
-              webpUrl?: string;
-              avifUrl?: string;
               sys: {
                 __typename?: 'Sys';
                 firstPublishedAt?: any;
@@ -13760,9 +13601,6 @@ export type PageSectionThumbnailPostsFragment = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -13779,9 +13617,6 @@ export type PageSectionThumbnailPostsFragment = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -13862,9 +13697,6 @@ export type PageShopFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -13900,9 +13732,6 @@ export type PageShopFragment = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -13951,9 +13780,6 @@ export type PageShopFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -13970,9 +13796,6 @@ export type PageShopFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14021,9 +13844,6 @@ export type PageShopFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14040,9 +13860,6 @@ export type PageShopFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14121,9 +13938,6 @@ export type PageShopFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14177,9 +13991,6 @@ export type PageShopFragment = {
                   height?: number;
                   url?: string;
                   contentType?: string;
-                  webpUrlWithRadius?: string;
-                  webpUrl?: string;
-                  avifUrl?: string;
                   sys: {
                     __typename?: 'Sys';
                     firstPublishedAt?: any;
@@ -14249,9 +14060,6 @@ export type PageShopFragment = {
                       height?: number;
                       url?: string;
                       contentType?: string;
-                      webpUrlWithRadius?: string;
-                      webpUrl?: string;
-                      avifUrl?: string;
                       sys: {
                         __typename?: 'Sys';
                         firstPublishedAt?: any;
@@ -14359,9 +14167,6 @@ export type PageShopFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14378,9 +14183,6 @@ export type PageShopFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14484,9 +14286,6 @@ export type PageStreamFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14522,9 +14321,6 @@ export type PageStreamFragment = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -14640,9 +14436,6 @@ export type PageStreamFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14659,9 +14452,6 @@ export type PageStreamFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14710,9 +14500,6 @@ export type PageStreamFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14729,9 +14516,6 @@ export type PageStreamFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14866,9 +14650,6 @@ export type PageStreamFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14885,9 +14666,6 @@ export type PageStreamFragment = {
                 height?: number;
                 url?: string;
                 contentType?: string;
-                webpUrlWithRadius?: string;
-                webpUrl?: string;
-                avifUrl?: string;
                 sys: {
                   __typename?: 'Sys';
                   firstPublishedAt?: any;
@@ -14926,9 +14704,6 @@ export type PersonPostFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -14972,9 +14747,6 @@ export type ProductCommonFragment = {
       height?: number;
       url?: string;
       contentType?: string;
-      webpUrlWithRadius?: string;
-      webpUrl?: string;
-      avifUrl?: string;
       sys: {
         __typename?: 'Sys';
         firstPublishedAt?: any;
@@ -15026,9 +14798,6 @@ export type ProductFragment = {
       height?: number;
       url?: string;
       contentType?: string;
-      webpUrlWithRadius?: string;
-      webpUrl?: string;
-      avifUrl?: string;
       sys: {
         __typename?: 'Sys';
         firstPublishedAt?: any;
@@ -15082,9 +14851,6 @@ export type ProductDetailFragment = {
       height?: number;
       url?: string;
       contentType?: string;
-      webpUrlWithRadius?: string;
-      webpUrl?: string;
-      avifUrl?: string;
       sys: {
         __typename?: 'Sys';
         firstPublishedAt?: any;
@@ -15171,9 +14937,6 @@ export type ThumbnailPostFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -15190,9 +14953,6 @@ export type ThumbnailPostFragment = {
     height?: number;
     url?: string;
     contentType?: string;
-    webpUrlWithRadius?: string;
-    webpUrl?: string;
-    avifUrl?: string;
     sys: {
       __typename?: 'Sys';
       firstPublishedAt?: any;
@@ -15268,9 +15028,6 @@ export type BasicPostCollectionBySlugQuery = {
         height?: number;
         url?: string;
         contentType?: string;
-        webpUrlWithRadius?: string;
-        webpUrl?: string;
-        avifUrl?: string;
         sys: {
           __typename?: 'Sys';
           firstPublishedAt?: any;
@@ -15359,9 +15116,6 @@ export type FooterCollectionQuery = {
             height?: number;
             url?: string;
             contentType?: string;
-            webpUrlWithRadius?: string;
-            webpUrl?: string;
-            avifUrl?: string;
             sys: {
               __typename?: 'Sys';
               firstPublishedAt?: any;
@@ -15476,9 +15230,6 @@ export type PageClubsCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -15514,9 +15265,6 @@ export type PageClubsCollectionQuery = {
                         height?: number;
                         url?: string;
                         contentType?: string;
-                        webpUrlWithRadius?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -15632,9 +15380,6 @@ export type PageClubsCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -15651,9 +15396,6 @@ export type PageClubsCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -15702,9 +15444,6 @@ export type PageClubsCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -15721,9 +15460,6 @@ export type PageClubsCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -15858,9 +15594,6 @@ export type PageClubsCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -15877,9 +15610,6 @@ export type PageClubsCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -15973,9 +15703,6 @@ export type PageGameCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16011,9 +15738,6 @@ export type PageGameCollectionQuery = {
                         height?: number;
                         url?: string;
                         contentType?: string;
-                        webpUrlWithRadius?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -16129,9 +15853,6 @@ export type PageGameCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16148,9 +15869,6 @@ export type PageGameCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16199,9 +15917,6 @@ export type PageGameCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16218,9 +15933,6 @@ export type PageGameCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16355,9 +16067,6 @@ export type PageGameCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16374,9 +16083,6 @@ export type PageGameCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16470,9 +16176,6 @@ export type PageHomeCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16508,9 +16211,6 @@ export type PageHomeCollectionQuery = {
                         height?: number;
                         url?: string;
                         contentType?: string;
-                        webpUrlWithRadius?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -16626,9 +16326,6 @@ export type PageHomeCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16645,9 +16342,6 @@ export type PageHomeCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16696,9 +16390,6 @@ export type PageHomeCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16715,9 +16406,6 @@ export type PageHomeCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16796,9 +16484,6 @@ export type PageHomeCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16903,9 +16588,6 @@ export type PageHomeCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -16922,9 +16604,6 @@ export type PageHomeCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17018,9 +16697,6 @@ export type PageLearnCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17056,9 +16732,6 @@ export type PageLearnCollectionQuery = {
                         height?: number;
                         url?: string;
                         contentType?: string;
-                        webpUrlWithRadius?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -17174,9 +16847,6 @@ export type PageLearnCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17193,9 +16863,6 @@ export type PageLearnCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17244,9 +16911,6 @@ export type PageLearnCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17263,9 +16927,6 @@ export type PageLearnCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17344,9 +17005,6 @@ export type PageLearnCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17451,9 +17109,6 @@ export type PageLearnCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17470,9 +17125,6 @@ export type PageLearnCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17566,9 +17218,6 @@ export type PageShopCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17604,9 +17253,6 @@ export type PageShopCollectionQuery = {
                         height?: number;
                         url?: string;
                         contentType?: string;
-                        webpUrlWithRadius?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -17655,9 +17301,6 @@ export type PageShopCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17674,9 +17317,6 @@ export type PageShopCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17725,9 +17365,6 @@ export type PageShopCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17744,9 +17381,6 @@ export type PageShopCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17825,9 +17459,6 @@ export type PageShopCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -17881,9 +17512,6 @@ export type PageShopCollectionQuery = {
                       height?: number;
                       url?: string;
                       contentType?: string;
-                      webpUrlWithRadius?: string;
-                      webpUrl?: string;
-                      avifUrl?: string;
                       sys: {
                         __typename?: 'Sys';
                         firstPublishedAt?: any;
@@ -17953,9 +17581,6 @@ export type PageShopCollectionQuery = {
                           height?: number;
                           url?: string;
                           contentType?: string;
-                          webpUrlWithRadius?: string;
-                          webpUrl?: string;
-                          avifUrl?: string;
                           sys: {
                             __typename?: 'Sys';
                             firstPublishedAt?: any;
@@ -18063,9 +17688,6 @@ export type PageShopCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -18082,9 +17704,6 @@ export type PageShopCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -18198,9 +17817,6 @@ export type PageStreamCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -18236,9 +17852,6 @@ export type PageStreamCollectionQuery = {
                         height?: number;
                         url?: string;
                         contentType?: string;
-                        webpUrlWithRadius?: string;
-                        webpUrl?: string;
-                        avifUrl?: string;
                         sys: {
                           __typename?: 'Sys';
                           firstPublishedAt?: any;
@@ -18354,9 +17967,6 @@ export type PageStreamCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -18373,9 +17983,6 @@ export type PageStreamCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -18424,9 +18031,6 @@ export type PageStreamCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -18443,9 +18047,6 @@ export type PageStreamCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -18580,9 +18181,6 @@ export type PageStreamCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -18599,9 +18197,6 @@ export type PageStreamCollectionQuery = {
                     height?: number;
                     url?: string;
                     contentType?: string;
-                    webpUrlWithRadius?: string;
-                    webpUrl?: string;
-                    avifUrl?: string;
                     sys: {
                       __typename?: 'Sys';
                       firstPublishedAt?: any;
@@ -18659,9 +18254,6 @@ export type ProductCollectionBySlugQuery = {
           height?: number;
           url?: string;
           contentType?: string;
-          webpUrlWithRadius?: string;
-          webpUrl?: string;
-          avifUrl?: string;
           sys: {
             __typename?: 'Sys';
             firstPublishedAt?: any;
@@ -18718,9 +18310,6 @@ export const AssetFragmentDoc = gql`
     height
     url
     contentType
-    webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
-    webpUrl: url(transform: { format: WEBP })
-    avifUrl: url(transform: { format: AVIF })
   }
   ${SysFragmentDoc}
 `;

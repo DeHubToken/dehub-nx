@@ -70,7 +70,7 @@ generates:
     config:
       noExport: false
       importOperationTypesFrom: 'models'
-      # ISSUE: https://github.com/dotansimha/graphql-code-generator/issues/4980
+      # @audit https://github.com/dotansimha/graphql-code-generator/issues/4980
       # -> gql is generated duplicated in react hooks (already in the models)
       # documentMode: external
       # importDocumentNodeExternallyFrom: '@dehub/shared/model'

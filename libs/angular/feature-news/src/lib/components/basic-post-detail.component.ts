@@ -38,7 +38,9 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
             [ngSrc]="mainPicture.url"
             [width]="mainPicture.width"
             [height]="mainPicture.height"
+            [priority]="true"
             [alt]="mainPicture | dhbContentfulImageAlt"
+            sizes="(max-width: 1200px) 50vw, 23vw"
             class="h-auto"
           />
         </ng-container>

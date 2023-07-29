@@ -23,42 +23,84 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
   ],
   template: `
     <span (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
+      <!-- Simple Picture -->
       <ng-container *ngIf="container.picture as picture">
         <img
-          *ngIf="picture.url"
+          *ngIf="!showHeavyPic && picture.url"
           [dhbContentfulDraft]="picture.sys"
           [ngSrc]="picture.url"
-          [width]="picture.width"
-          [height]="picture.height"
+          [fill]="autoHeight"
+          [width]="autoHeight ? undefined : picture.width"
+          [height]="autoHeight ? undefined : picture.height"
           [priority]="priority"
+          [sizes]="sizes"
           [alt]="picture | dhbContentfulImageAlt"
+          [ngClass]="{
+            'h-auto': !autoHeight
+          }"
         />
       </ng-container>
+
+      <!-- Heavy Picture -->
       <ng-container *ngIf="container.heavyPicture as heavyPicture">
         <img
+          *ngIf="showHeavyPic && heavyPicture.url"
+          [dhbContentfulDraft]="heavyPicture.sys"
+          [ngSrc]="heavyPicture.url"
+          [fill]="autoHeight"
+          [width]="autoHeight ? undefined : heavyPicture.width"
+          [height]="autoHeight ? undefined : heavyPicture.height"
+          (load)="onLoad()"
+          [priority]="priority"
+          [sizes]="sizes"
           [alt]="heavyPicture | dhbContentfulImageAlt"
+          [ngClass]="{
+            'h-auto': !autoHeight
+          }"
+        />
+      </ng-container>
+
+      <ng-container *ngIf="container.picture as picture">
+        <!-- <img
+          *ngIf="false && picture.url"
+          [dhbContentfulDraft]="picture.sys"
+          [fill]="autoHeight"
+          [ngSrc]="picture.url"
+          [width]="autoHeight ? undefined : picture.width"
+          [height]="autoHeight ? undefined : picture.height"
+          [priority]="priority"
           [alt]="picture | dhbContentfulImageAlt"
+          [sizes]="sizes"
+          [ngClass]="{ hidden: showHeavyPic, 'h-auto': !autoHeight }"
+        /> -->
+      </ng-container>
+
+      <ng-container *ngIf="container.heavyPicture as heavyPicture">
+        <!-- <img
           *ngIf="
-            heavyPicture.url && heavyPicture.contentType !== 'image/gif';
+            false &&
+              heavyPicture.url &&
+              heavyPicture.contentType !== 'image/gif';
             else gif
           "
           [dhbContentfulDraft]="heavyPicture.sys"
+          [fill]="autoHeight"
           [ngSrc]="heavyPicture.url"
-          [width]="heavyPicture.width"
-          [height]="heavyPicture.height"
+          [width]="autoHeight ? undefined : heavyPicture.width"
+          [height]="autoHeight ? undefined : heavyPicture.height"
           [priority]="priority"
           [alt]="heavyPicture | dhbContentfulImageAlt"
           (load)="onLoad()"
-          sizes="100vw"
+          [sizes]="sizes"
           [ngClass]="{
             hidden: !showHeavyPic,
-            'h-auto': true,
+            'h-auto': !autoHeight,
             'w-auto': false
           }"
-        />
+        /> -->
         <ng-template #gif>
           <!-- https://codelabs.developers.google.com/codelabs/avif#5 -->
-          <picture
+          <!-- <picture
             autoplay
             loop
             muted
@@ -66,38 +108,42 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
             [ngClass]="{
               hidden: !showHeavyPic
             }"
-          >
-            <source
+          > -->
+          <!-- <source
               type="image/webp"
-              [srcset]="heavyPicture.webpUrl"
+              [srcset]="heavyPicture.url"
               [width]="heavyPicture.width"
               [height]="heavyPicture.height"
-              sizes="100vw"
-            />
-            <!-- TODO: Safari not render avif -->
-            <!-- <source
+              [sizes]="sizes"
+            /> -->
+
+          <!-- TODO: Safari not render avif -->
+          <!-- <source
               type="image/avif"
               [srcset]="heavyPicture.avifUrl"
               [width]="heavyPicture.width"
               [height]="heavyPicture.height"
-              sizes="100vw"
+              [sizes]="sizes"
             /> -->
-            <img
+
+          <!-- <img
               *ngIf="heavyPicture.url"
               [dhbContentfulDraft]="heavyPicture.sys"
+              [fill]="autoHeight"
               [ngSrc]="heavyPicture.url"
-              [width]="heavyPicture.width"
-              [height]="heavyPicture.height"
+              [width]="autoHeight ? undefined : heavyPicture.width"
+              [height]="autoHeight ? undefined : heavyPicture.height"
               [priority]="priority"
               [alt]="heavyPicture | dhbContentfulImageAlt"
               (load)="onLoad()"
-              sizes="100vw"
+              [sizes]="sizes"
               [ngClass]="{
-                'h-auto': true,
+                'h-auto': !autoHeight,
                 'w-auto': false
               }"
-            />
-          </picture>
+            /> -->
+
+          <!-- </picture> -->
         </ng-template>
       </ng-container>
     </span>
@@ -124,6 +170,9 @@ export class HeavyPictureComponent<
   @Input() autoHeight = false;
   @Input() priority = false;
   showHeavyPic = false;
+
+  sizes =
+    '(max-width: 991px) 50vw, (max-width: 1250px) 25vw, (max-width: 1700px) 20vw, 10vw';
 
   constructor() {}
 

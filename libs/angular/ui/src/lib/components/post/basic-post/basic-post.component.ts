@@ -44,7 +44,7 @@ import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/cont
               [width]="mainPicture.width"
               [height]="mainPicture.height"
               [alt]="mainPicture | dhbContentfulImageAlt"
-              sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+              sizes="(max-width: 320px) 70vw, (max-width: 750px) 50vw, (max-width: 960px) 25vw, (max-width: 1700px) 15vw, 10vw"
               class="h-auto"
             />
           </ng-container>

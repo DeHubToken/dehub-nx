@@ -36,9 +36,6 @@ export const AssetFragmentDoc = gql`
     height
     url
     contentType
-    webpUrlWithRadius: url(transform: { format: WEBP, cornerRadius: 1000 })
-    webpUrl: url(transform: { format: WEBP })
-    avifUrl: url(transform: { format: AVIF })
   }
   ${SysFragmentDoc}
 `;

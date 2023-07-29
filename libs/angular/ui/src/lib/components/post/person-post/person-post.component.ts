@@ -55,7 +55,7 @@ interface SocialLink {
               [width]="avatar.width"
               [height]="avatar.height"
               [alt]="avatar | dhbContentfulImageAlt : 'Avatar'"
-              sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+              sizes="(max-width: 750px) 50vw, (max-width: 960px) 30vw, (max-width: 1700px) 15vw, 7vw"
               class="h-auto border-circle border-3 border-cyan-900 shadow-5 w-8 bg-gradient-1"
             />
           </ng-container>

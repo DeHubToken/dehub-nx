@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
@@ -36,6 +36,7 @@ import { ProductSalesComponent } from './product-sales.component';
     NgIf,
     NgFor,
     RouterLink,
+    NgOptimizedImage,
     // UI
     SafeHtmlPipe,
     ContentfulDraftDirective,

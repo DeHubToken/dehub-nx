@@ -12,20 +12,31 @@
       [attr.grab-cursor]="pictures.length > 1"
       [class.no-padding-bottom]="swiperIsClickable"
     >
-      <swiper-slide *ngFor="let picture of pictures; trackBy: trackByFn">
+      <swiper-slide
+        *ngFor="
+          let picture of pictures;
+          let isFirst = first;
+          trackBy: trackByFn
+        "
+        [lazy]="!isFirst"
+      >
         <img
-          *ngIf="picture"
+          *ngIf="picture.url"
           [dhbContentfulDraft]="picture.sys"
+          [ngSrc]="picture.url"
+          [width]="picture.width"
+          [height]="picture.height"
+          [priority]="isFirst"
           [alt]="picture | dhbContentfulImageAlt"
+          sizes="(max-width: 1200px) 50vw, 23vw"
+          class="h-auto w-full"
         />
       </swiper-slide>
     </swiper-container>
 
     <div class="image-content px-4 xl:px-8">
       <!-- Title -->
-      <h2 class="border-bottom-2 pb-1 mb-5">
-        {{ productDetail.name || '' }}
-      </h2>
+      <h2 class="border-bottom-2 pb-1 mb-5">{{ productDetail.name || '' }}</h2>
 
       <!-- Body -->
       <div
