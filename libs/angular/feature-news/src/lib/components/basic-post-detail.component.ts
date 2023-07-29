@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentful-draft/contentful-draft.directive';
-import { ContentfulImgAltPipe } from '@dehub/angular/ui/pipes/contentful-img-alt/contentful-img-alt.pipe';
+import { ContentfulImageAltPipe } from '@dehub/angular/ui/pipes/contentful-image-alt/contentful-image-alt.pipe';
 import { ContentfulRichMarkupPipe } from '@dehub/angular/ui/pipes/contentful-rich-markup/contentful-rich-markup.pipe';
 import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
 import { BasicPostDetailFragment } from '@dehub/shared/model';
@@ -22,7 +22,7 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
     // UI
     ContentfulDraftDirective,
     ContentfulRichMarkupPipe,
-    ContentfulImgAltPipe,
+    ContentfulImageAltPipe,
   ],
   template: `
     <ng-container *ngIf="basicPostDetail">
@@ -38,8 +38,7 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
             [ngSrc]="mainPicture.url"
             [width]="mainPicture.width"
             [height]="mainPicture.height"
-            [alt]="mainPicture | dhbContentfulImgAlt"
-            sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+            [alt]="mainPicture | dhbContentfulImageAlt"
             class="h-auto"
           />
         </ng-container>

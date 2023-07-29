@@ -12,7 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
-import { ContentfulImgAltPipe } from '../../../pipes/contentful-img-alt/contentful-img-alt.pipe';
+import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/contentful-image-alt.pipe';
 @Component({
   selector: 'dhb-basic-post',
   standalone: true,
@@ -26,7 +26,7 @@ import { ContentfulImgAltPipe } from '../../../pipes/contentful-img-alt/contentf
     ButtonModule,
     // UI
     ContentfulDraftDirective,
-    ContentfulImgAltPipe,
+    ContentfulImageAltPipe,
   ],
   template: `
     <div [dhbContentfulDraft]="basicPost.sys">
@@ -43,7 +43,7 @@ import { ContentfulImgAltPipe } from '../../../pipes/contentful-img-alt/contentf
               [ngSrc]="mainPicture.url"
               [width]="mainPicture.width"
               [height]="mainPicture.height"
-              [alt]="mainPicture | dhbContentfulImgAlt"
+              [alt]="mainPicture | dhbContentfulImageAlt"
               sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
               class="h-auto"
             />

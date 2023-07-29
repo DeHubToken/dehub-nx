@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AssetFragment } from '@dehub/shared/model';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
-import { ContentfulImgAltPipe } from '../../pipes/contentful-img-alt/contentful-img-alt.pipe';
+import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/contentful-image-alt.pipe';
 
 @Component({
   selector: 'dhb-heavy-picture',
@@ -19,7 +19,7 @@ import { ContentfulImgAltPipe } from '../../pipes/contentful-img-alt/contentful-
     NgOptimizedImage,
     // UI
     ContentfulDraftDirective,
-    ContentfulImgAltPipe,
+    ContentfulImageAltPipe,
   ],
   template: `
     <span (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
@@ -31,13 +31,13 @@ import { ContentfulImgAltPipe } from '../../pipes/contentful-img-alt/contentful-
           [width]="picture.width"
           [height]="picture.height"
           [priority]="priority"
-          [alt]="picture | dhbContentfulImgAlt"
-          sizes="50vw"
-          [ngClass]="{ hidden: showHeavyPic, 'h-auto': true }"
+          [alt]="picture | dhbContentfulImageAlt"
         />
       </ng-container>
       <ng-container *ngIf="container.heavyPicture as heavyPicture">
         <img
+          [alt]="heavyPicture | dhbContentfulImageAlt"
+          [alt]="picture | dhbContentfulImageAlt"
           *ngIf="
             heavyPicture.url && heavyPicture.contentType !== 'image/gif';
             else gif
@@ -47,7 +47,7 @@ import { ContentfulImgAltPipe } from '../../pipes/contentful-img-alt/contentful-
           [width]="heavyPicture.width"
           [height]="heavyPicture.height"
           [priority]="priority"
-          [alt]="heavyPicture | dhbContentfulImgAlt"
+          [alt]="heavyPicture | dhbContentfulImageAlt"
           (load)="onLoad()"
           sizes="100vw"
           [ngClass]="{
@@ -89,7 +89,7 @@ import { ContentfulImgAltPipe } from '../../pipes/contentful-img-alt/contentful-
               [width]="heavyPicture.width"
               [height]="heavyPicture.height"
               [priority]="priority"
-              [alt]="heavyPicture | dhbContentfulImgAlt"
+              [alt]="heavyPicture | dhbContentfulImageAlt"
               (load)="onLoad()"
               sizes="100vw"
               [ngClass]="{

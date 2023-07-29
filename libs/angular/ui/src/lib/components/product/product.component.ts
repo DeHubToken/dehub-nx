@@ -9,14 +9,14 @@ import { RouterLink } from '@angular/router';
 import { ProductFragment } from '@dehub/shared/model';
 import { ButtonModule } from 'primeng/button';
 
-import { DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { DecimalPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { isPaginationClickable } from '@dehub/shared/utils';
 import { CardModule } from 'primeng/card';
 import { SwiperOptions } from 'swiper';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../directives/swiper/swiper.directive';
-import { ContentfulImgAltPipe } from '../../pipes/contentful-img-alt/contentful-img-alt.pipe';
+import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/contentful-image-alt.pipe';
 import { ProductInfoComponent } from './product-info.component';
 
 @Component({
@@ -28,6 +28,7 @@ import { ProductInfoComponent } from './product-info.component';
     NgFor,
     RouterLink,
     DecimalPipe,
+    NgOptimizedImage,
     // PrimeNG
     CardModule,
     ButtonModule,
@@ -35,7 +36,7 @@ import { ProductInfoComponent } from './product-info.component';
     ContentfulDraftDirective,
     SwiperDirective,
     ProductInfoComponent,
-    ContentfulImgAltPipe,
+    ContentfulImageAltPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './product.component.html',
