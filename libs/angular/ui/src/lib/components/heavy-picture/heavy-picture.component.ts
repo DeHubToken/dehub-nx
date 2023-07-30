@@ -29,16 +29,13 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           *ngIf="picture.url"
           [dhbContentfulDraft]="picture.sys"
           [ngSrc]="picture.url"
-          [fill]="autoHeight"
-          [width]="autoHeight ? undefined : picture.width"
-          [height]="autoHeight ? undefined : picture.height"
+          [width]="picture.width"
+          [height]="picture.height"
           [priority]="priority"
           [sizes]="sizes"
           [alt]="picture | dhbContentfulImageAlt"
-          [ngClass]="{
-            'opacity-0': showHeavyPic,
-            'h-auto': !autoHeight,
-          }"
+          [class.hidden]="showHeavyPic"
+          class="h-auto"
         />
       </ng-container>
 
@@ -51,17 +48,14 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [dhbContentfulDraft]="heavyPicture.sys"
           [ngSrc]="heavyPicture.url"
           [loaderParams]="{ format: 'webp' }"
-          [fill]="autoHeight"
-          [width]="autoHeight ? undefined : heavyPicture.width"
-          [height]="autoHeight ? undefined : heavyPicture.height"
+          [width]="heavyPicture.width"
+          [height]="heavyPicture.height"
           (load)="onLoad()"
           [priority]="priority"
           [sizes]="sizes"
           [alt]="heavyPicture | dhbContentfulImageAlt"
-          [ngClass]="{
-            'opacity-0': !showHeavyPic,
-            'h-auto': !autoHeight,
-          }"
+          [class.hidden]="!showHeavyPic"
+          class="h-auto"
         />
       </ng-container>
     </span>
