@@ -34,8 +34,8 @@ import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/cont
               [height]="award.height"
               [priority]="priority"
               [alt]="award | dhbContentfulImageAlt"
+              sizes="(max-width: 750px) 30vw, 10vw"
               class="w-6 md:w-9 h-auto anim-hover-1-reverse"
-              sizes="(max-width: 750px) 30vw, 5vw"
             />
           </ng-container>
         </a>

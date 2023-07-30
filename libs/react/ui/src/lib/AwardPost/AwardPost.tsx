@@ -20,7 +20,7 @@ const AwardPost = ({
         height={award.height}
         loading={priority ? 'eager' : 'lazy'}
         alt={getContentfulImageAlt(award)}
-        sizes="(max-width: 750px) 30vw, 5vw"
+        sizes="(max-width: 750px) 30vw, 10vw"
         className="w-6 md:w-9 h-auto anim-hover-1-reverse"
       />
     </a>
