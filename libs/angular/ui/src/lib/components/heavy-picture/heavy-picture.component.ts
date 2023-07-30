@@ -34,8 +34,10 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [priority]="priority"
           [sizes]="sizes"
           [alt]="picture | dhbContentfulImageAlt"
-          [class.hidden]="showHeavyPic"
-          class="h-auto"
+          [ngClass]="{
+            hidden: showHeavyPic,
+            'h-auto': autoHeight,
+          }"
         />
       </ng-container>
 
@@ -54,8 +56,10 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [priority]="priority"
           [sizes]="sizes"
           [alt]="heavyPicture | dhbContentfulImageAlt"
-          [class.hidden]="!showHeavyPic"
-          class="h-auto"
+          [ngClass]="{
+            hidden: !showHeavyPic,
+            'h-auto': autoHeight
+          }"
         />
       </ng-container>
     </span>
@@ -78,8 +82,7 @@ export class HeavyPictureComponent<
 > implements OnInit
 {
   @Input() container!: C;
-  @Input() showOnHover = false;
-  @Input() autoHeight = false;
+  @Input() autoHeight = true;
   @Input() priority = false;
   showHeavyPic = false;
 

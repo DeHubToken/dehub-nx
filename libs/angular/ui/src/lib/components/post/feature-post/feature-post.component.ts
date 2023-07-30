@@ -47,7 +47,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
             ></i>
             <dhb-heavy-picture
               [container]="featurePost"
-              [autoHeight]="true"
+              [autoHeight]="false"
               [priority]="firstPost"
             />
           </div>
