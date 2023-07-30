@@ -2,6 +2,7 @@ import { memo } from 'react';
 
 interface LogoProps {
   logo: LogoTypes;
+  priority: boolean;
 }
 
 export type LogoTypes = {
@@ -11,7 +12,7 @@ export type LogoTypes = {
   alt?: string;
 };
 
-const Logo = ({ logo }: LogoProps) => {
+const Logo = ({ logo, priority }: LogoProps) => {
   return (
     <a
       className="p-link layout-topbar-logo"
@@ -19,7 +20,13 @@ const Logo = ({ logo }: LogoProps) => {
       aria-label="DeHub"
     >
       {logo.icon ? (
-        <img src={logo.icon} width="106px" height="25px" alt={logo.alt} />
+        <img
+          src={logo.icon}
+          width="106px"
+          height="25px"
+          alt={logo.alt}
+          loading={priority ? 'eager' : 'lazy'}
+        />
       ) : logo.label ? (
         <h1>{logo.label}</h1>
       ) : (

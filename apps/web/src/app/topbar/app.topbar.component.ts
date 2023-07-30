@@ -60,6 +60,7 @@ import { AppMenuComponent } from './menu/app.menu.component';
             tabindex="1"
             height="25"
             width="107"
+            priority="true"
             alt="DeHub logo"
           />
         </a>

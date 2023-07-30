@@ -12,7 +12,7 @@ function Header({ userMenu, logo }: HeaderProps) {
       <div className="layout-topbar">
         <div className="layout-topbar-wrapper flex-column sm:flex-row">
           <div className="layout-topbar-left">
-            <Logo logo={logo} />
+            <Logo logo={logo} priority={true} />
           </div>
           <div className="layout-topbar-right">{userMenu}</div>
         </div>

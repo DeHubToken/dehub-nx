@@ -102,7 +102,7 @@ function Footer({ footer, ctaGroup = 5, landing, logo }: FooterProps) {
 
             <div className="flex align-items-end gap-2 mb-2">
               {/* Logo */}
-              <Logo logo={logo} />
+              <Logo logo={logo} priority={false} />
               <h6 className="uppercase font-bold text-xs">
                 {footer?.copyright}
               </h6>

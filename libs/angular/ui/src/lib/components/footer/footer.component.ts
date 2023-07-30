@@ -120,6 +120,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
                 [ngSrc]="path + '/assets/dehub/logo-dehub-white.svg'"
                 height="25"
                 width="107"
+                priority="false"
                 alt="DeHub logo"
               />
               <h6 *ngIf="footer.copyright" class="uppercase font-bold text-xs">
