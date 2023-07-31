@@ -39,7 +39,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
         styleClass="feature p-card-shadow"
       >
         <ng-template pTemplate="header">
-          <div class="picture-frame h-14rem md:h-20rem xl:h-30rem">
+          <div class="picture-frame h-30rem md:h-20rem xl:h-25rem">
             <i
               *ngIf="featurePost.videoUrl"
               class="fad fa-play-circle"
