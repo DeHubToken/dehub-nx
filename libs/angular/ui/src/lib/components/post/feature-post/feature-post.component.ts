@@ -36,7 +36,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
         *ngIf="featurePost"
         [header]="featurePost.title ?? ''"
         [subheader]="(featurePost.sys.firstPublishedAt | date : 'fullDate')!"
-        styleClass="feature p-card-shadow h-full"
+        styleClass="feature p-card-shadow h-30rem"
       >
         <ng-template pTemplate="header">
           <div class="picture-frame">

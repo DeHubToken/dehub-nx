@@ -1,6 +1,7 @@
 import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
@@ -29,13 +30,15 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           *ngIf="picture.url"
           [dhbContentfulDraft]="picture.sys"
           [ngSrc]="picture.url"
-          [width]="picture.width"
-          [height]="picture.height"
+          [fill]="!autoHeight"
+          [width]="!autoHeight ? undefined : picture.width"
+          [height]="!autoHeight ? undefined : picture.height"
           [priority]="priority"
           [sizes]="sizes"
           [alt]="picture | dhbContentfulImageAlt"
           [ngClass]="{
-            hidden: showHeavyPic,
+            'opacity-0': !autoHeight && showHeavyPic,
+            'hidden': autoHeight && showHeavyPic,
             'h-auto': autoHeight,
           }"
         />
@@ -50,15 +53,17 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [dhbContentfulDraft]="heavyPicture.sys"
           [ngSrc]="heavyPicture.url"
           [loaderParams]="{ format: 'webp' }"
-          [width]="heavyPicture.width"
-          [height]="heavyPicture.height"
+          [fill]="!autoHeight"
+          [width]="!autoHeight ? undefined : heavyPicture.width"
+          [height]="!autoHeight ? undefined : heavyPicture.height"
           (load)="onLoad()"
           [priority]="priority"
           [sizes]="sizes"
           [alt]="heavyPicture | dhbContentfulImageAlt"
           [ngClass]="{
-            hidden: !showHeavyPic,
-            'h-auto': autoHeight
+            'opacity-0': !autoHeight && !showHeavyPic,
+            'hidden': autoHeight && !showHeavyPic,
+            'h-auto': autoHeight,
           }"
         />
       </ng-container>
@@ -86,12 +91,15 @@ export class HeavyPictureComponent<
   @Input() priority = false;
   showHeavyPic = false;
 
-  sizes =
-    '(max-width: 991px) 50vw, (max-width: 1250px) 25vw, (max-width: 1700px) 20vw, 10vw';
+  sizes?: string;
 
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.sizes = this.autoHeight
+      ? '(max-width: 991px) 30vw, (max-width: 1250px) 25vw, (max-width: 1700px) 20vw, 15vw'
+      : '(max-width: 991px) 50vw, (max-width: 1250px) 25vw, (max-width: 1700px) 20vw, 10vw';
+  }
 
   onMouseOver() {
     if (this.container.showHeavyPictureOnHover) {
@@ -108,6 +116,7 @@ export class HeavyPictureComponent<
   onLoad() {
     if (!this.container.showHeavyPictureOnHover) {
       this.showHeavyPic = true;
+      this.cdr.detectChanges(); // Due to OnPush and img load event
     }
   }
 }
