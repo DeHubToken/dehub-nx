@@ -32,7 +32,6 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [fill]="!autoHeight"
           [width]="!autoHeight ? undefined : picture.width"
           [height]="!autoHeight ? undefined : picture.height"
-          (load)="onLoad()"
           [priority]="priority"
           [sizes]="sizes"
           [alt]="picture | dhbContentfulImageAlt"
