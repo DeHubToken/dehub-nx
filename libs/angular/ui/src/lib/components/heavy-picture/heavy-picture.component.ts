@@ -116,7 +116,7 @@ export class HeavyPictureComponent<
   onLoad() {
     if (!this.container.showHeavyPictureOnHover) {
       this.showHeavyPic = true;
-      this.cdr.detectChanges(); // Due to OnPush and img load event
     }
+    this.cdr.markForCheck(); // Due to OnPush and img load event
   }
 }
