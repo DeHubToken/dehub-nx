@@ -36,10 +36,10 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
         *ngIf="featurePost"
         [header]="featurePost.title ?? ''"
         [subheader]="(featurePost.sys.firstPublishedAt | date : 'fullDate')!"
-        styleClass="feature p-card-shadow h-30rem"
+        styleClass="feature p-card-shadow"
       >
         <ng-template pTemplate="header">
-          <div class="picture-frame">
+          <div class="picture-frame h-14rem md:h-20rem xl:h-30rem">
             <i
               *ngIf="featurePost.videoUrl"
               class="fad fa-play-circle"
