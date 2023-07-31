@@ -1,7 +1,6 @@
 import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
@@ -33,6 +32,7 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [fill]="!autoHeight"
           [width]="!autoHeight ? undefined : picture.width"
           [height]="!autoHeight ? undefined : picture.height"
+          (load)="onLoad()"
           [priority]="priority"
           [sizes]="sizes"
           [alt]="picture | dhbContentfulImageAlt"
@@ -93,7 +93,7 @@ export class HeavyPictureComponent<
 
   sizes?: string;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit() {
     this.sizes = this.autoHeight
@@ -117,6 +117,5 @@ export class HeavyPictureComponent<
     if (!this.container.showHeavyPictureOnHover) {
       this.showHeavyPic = true;
     }
-    this.cdr.markForCheck(); // Due to OnPush and img load event
   }
 }
