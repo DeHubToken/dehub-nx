@@ -168,13 +168,16 @@ export const getContentfulImageApiQuery = (
 
   // Loader Params: https://angular.io/guide/image-directive#the-loaderparams-property
   if (lParams) {
-    const { cornerRadius, format } = lParams;
+    const { cornerRadius, format, height } = lParams;
 
     // Format:  https://www.contentful.com/developers/docs/references/images-api/#/reference/changing-formats
     queryParams.push(`fm=${format}`);
 
     // Radius: https://www.contentful.com/developers/docs/references/images-api/#/reference/resizing-&-cropping/crop-rounded-corners-&-circle-elipsis
     if (cornerRadius) queryParams.push(`r=${cornerRadius}`);
+
+    // Resize and Cropping: https://www.contentful.com/developers/docs/references/images-api/#/reference/resizing-&-cropping
+    if (height) queryParams.push('fit=fill', 'f=center', `h=${height}`);
   }
 
   return `${src}?${queryParams.join('&')}`;

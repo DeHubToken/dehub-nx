@@ -11,6 +11,7 @@ type ContentfulImageFormat = 'jpg' | 'png' | 'webp' | 'gif' | 'avif';
 export type ContentfulImageLoaderParams = {
   format?: ContentfulImageFormat;
   cornerRadius?: number;
+  height?: number;
 };
 
 /**
