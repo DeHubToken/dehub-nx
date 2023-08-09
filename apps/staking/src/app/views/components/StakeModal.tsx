@@ -328,7 +328,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               value={period}
               disabled={!account || isTxPending}
               onValueChange={handlePeriodChange}
-              onChange={handlePeriodChange}
               showButtons
               className="w-full text-right"
               min={minPeriod}
