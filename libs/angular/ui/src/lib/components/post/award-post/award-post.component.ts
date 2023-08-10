@@ -32,7 +32,7 @@ import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/cont
               [loaderParams]="{ cornerRadius: 1000 }"
               [width]="award.width"
               [height]="award.height"
-              [priority]="priority"
+              [attr.priority]="priorityImage"
               [alt]="award | dhbContentfulImageAlt"
               sizes="(max-width: 750px) 30vw, 10vw"
               class="w-6 md:w-9 h-auto anim-hover-1-reverse"
@@ -46,7 +46,7 @@ import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/cont
 })
 export class AwardPostComponent implements OnInit {
   @Input() awardPost!: AwardPostFragment;
-  @Input({ required: true }) priority = false;
+  @Input() priorityImage = false;
 
   constructor() {}
 

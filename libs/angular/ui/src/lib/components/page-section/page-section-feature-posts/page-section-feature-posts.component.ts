@@ -59,7 +59,7 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
         >
           <dhb-feature-post
             [featurePost]="featurePost"
-            [firstPost]="isFirst"
+            [priorityImage]="isFirst"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           />
         </swiper-slide>

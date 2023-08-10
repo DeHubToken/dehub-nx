@@ -48,7 +48,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
             <dhb-heavy-picture
               [container]="featurePost"
               [autoHeight]="false"
-              [priority]="firstPost"
+              [attr.priority]="priorityImage"
             />
           </div>
         </ng-template>
@@ -86,7 +86,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
 })
 export class FeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
-  @Input() firstPost = false;
+  @Input() priorityImage = false;
 
   constructor(
     @Inject(WINDOW) private readonly windowRef: Window,

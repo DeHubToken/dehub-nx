@@ -58,6 +58,7 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
         >
           <dhb-grand-post
             [grandPost]="grandPost"
+            [priorityImage]="isFirst"
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           />
         </swiper-slide>

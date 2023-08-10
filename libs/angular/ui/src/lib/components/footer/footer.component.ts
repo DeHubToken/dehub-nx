@@ -78,7 +78,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
                 >
                   <dhb-award-post
                     [awardPost]="awardPost"
-                    [priority]="isFirst"
+                    [priorityImage]="isFirst"
                   />
                 </div>
               </div>
