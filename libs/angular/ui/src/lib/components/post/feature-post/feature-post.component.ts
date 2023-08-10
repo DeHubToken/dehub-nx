@@ -86,7 +86,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
       }
       @media screen and (min-width: 391px) {
         .picture-frame {
-          height: 30rem !important;
+          height: 15rem !important;
         }
       }
       @media screen and (min-width: 992px) {
