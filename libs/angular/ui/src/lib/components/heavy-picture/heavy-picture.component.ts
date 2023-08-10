@@ -1,9 +1,11 @@
 import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
+  inject,
 } from '@angular/core';
 import { AssetFragment } from '@dehub/shared/model';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
@@ -92,7 +94,7 @@ export class HeavyPictureComponent<
 
   sizes?: string;
 
-  constructor() {}
+  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit() {
     this.sizes = this.autoHeight
@@ -116,5 +118,6 @@ export class HeavyPictureComponent<
     if (!this.container.showHeavyPictureOnHover) {
       this.showHeavyPic = true;
     }
+    this.cdr.detectChanges();
   }
 }
