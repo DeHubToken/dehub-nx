@@ -18,7 +18,9 @@ import { SwiperOptions } from 'swiper';
 import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
+import { SwiperImagePriorityPipe } from '../../../pipes/swiper-image-priority/swiper-image-priority.pipe';
 import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
+
 @Component({
   selector: 'dhb-page-section-grand-posts-swiper',
   standalone: true,
@@ -30,6 +32,7 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
     ContentfulDraftDirective,
     GrandPostComponent,
     SwiperDirective,
+    SwiperImagePriorityPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
@@ -58,7 +61,9 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
         >
           <dhb-grand-post
             [grandPost]="grandPost"
-            [priorityImage]="isFirst"
+            [priorityImage]="
+              i | dhbSwiperImagePriority : swiperOptions?.breakpoints
+            "
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           />
         </swiper-slide>
@@ -77,8 +82,6 @@ export class PageSectionGrandPostsSwiperComponent implements OnInit {
   swiperOptions?: SwiperOptions;
 
   trackByFn = trackByContentfulIdFn<GrandPostFragment>();
-
-  constructor() {}
 
   ngOnInit() {
     if (!this.section) return;

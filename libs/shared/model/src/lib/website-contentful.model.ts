@@ -3332,7 +3332,7 @@ export interface PageClubsSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
+  where?: InputMaybe<PageClubsSectionsFilter>;
 }
 
 /** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
@@ -3412,7 +3412,7 @@ export interface PageClubsFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
+  sections?: InputMaybe<CfsectionsMultiTypeNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3471,6 +3471,27 @@ export interface PageClubsSectionsCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export interface PageClubsSectionsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageClubsSectionsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageClubsSectionsFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 }
 
 export type PageClubsSectionsItem =
@@ -3535,7 +3556,7 @@ export interface PageGameSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
+  where?: InputMaybe<PageGameSectionsFilter>;
 }
 
 /** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
@@ -3615,7 +3636,7 @@ export interface PageGameFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
+  sections?: InputMaybe<CfsectionsMultiTypeNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3674,6 +3695,27 @@ export interface PageGameSectionsCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export interface PageGameSectionsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageGameSectionsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageGameSectionsFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 }
 
 export type PageGameSectionsItem =
@@ -3738,7 +3780,7 @@ export interface PageHomeSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
+  where?: InputMaybe<PageHomeSectionsFilter>;
 }
 
 /** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
@@ -3818,7 +3860,7 @@ export interface PageHomeFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
+  sections?: InputMaybe<CfsectionsMultiTypeNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3877,6 +3919,27 @@ export interface PageHomeSectionsCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export interface PageHomeSectionsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageHomeSectionsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageHomeSectionsFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 }
 
 export type PageHomeSectionsItem =
@@ -3942,7 +4005,7 @@ export interface PageLearnSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
+  where?: InputMaybe<PageLearnSectionsFilter>;
 }
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
@@ -4022,7 +4085,7 @@ export interface PageLearnFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
+  sections?: InputMaybe<CfsectionsMultiTypeNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -4081,6 +4144,27 @@ export interface PageLearnSectionsCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export interface PageLearnSectionsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageLearnSectionsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageLearnSectionsFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 }
 
 export type PageLearnSectionsItem =
@@ -4431,237 +4515,6 @@ export enum PageSectionBasicPostsLinkingCollectionsPageStreamCollectionOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts
-  extends Entry {
-  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts';
-  contentfulMetadata: ContentfulMetadata;
-  description?: Maybe<Scalars['String']>;
-  linkedFrom?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections>;
-  sys: Sys;
-  title?: Maybe<Scalars['String']>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsDescriptionArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkedFromArgs {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsTitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection {
-  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection';
-  items: Array<
-    Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts>
-  >;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter {
-  AND?: InputMaybe<
-    Array<
-      InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
-    >
-  >;
-  OR?: InputMaybe<
-    Array<
-      InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
-    >
-  >;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  description?: InputMaybe<Scalars['String']>;
-  description_contains?: InputMaybe<Scalars['String']>;
-  description_exists?: InputMaybe<Scalars['Boolean']>;
-  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  description_not?: InputMaybe<Scalars['String']>;
-  description_not_contains?: InputMaybe<Scalars['String']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']>;
-  title_contains?: InputMaybe<Scalars['String']>;
-  title_exists?: InputMaybe<Scalars['Boolean']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title_not?: InputMaybe<Scalars['String']>;
-  title_not_contains?: InputMaybe<Scalars['String']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections {
-  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-}
-
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts
-  extends Entry {
-  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts';
-  contentfulMetadata: ContentfulMetadata;
-  description?: Maybe<Scalars['String']>;
-  linkedFrom?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections>;
-  sys: Sys;
-  title?: Maybe<Scalars['String']>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsDescriptionArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkedFromArgs {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsTitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection {
-  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection';
-  items: Array<
-    Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts>
-  >;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter {
-  AND?: InputMaybe<
-    Array<
-      InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
-    >
-  >;
-  OR?: InputMaybe<
-    Array<
-      InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
-    >
-  >;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  description?: InputMaybe<Scalars['String']>;
-  description_contains?: InputMaybe<Scalars['String']>;
-  description_exists?: InputMaybe<Scalars['Boolean']>;
-  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  description_not?: InputMaybe<Scalars['String']>;
-  description_not_contains?: InputMaybe<Scalars['String']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']>;
-  title_contains?: InputMaybe<Scalars['String']>;
-  title_exists?: InputMaybe<Scalars['Boolean']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title_not?: InputMaybe<Scalars['String']>;
-  title_not_contains?: InputMaybe<Scalars['String']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections {
-  __typename?: 'PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-}
-
-export interface PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts
-  extends Entry {
-  __typename?: 'PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts';
-  contentfulMetadata: ContentfulMetadata;
-  description?: Maybe<Scalars['String']>;
-  linkedFrom?: Maybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections>;
-  sys: Sys;
-  title?: Maybe<Scalars['String']>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsDescriptionArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkedFromArgs {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts) */
-export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsTitleArgs {
-  locale?: InputMaybe<Scalars['String']>;
-}
-
-export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection {
-  __typename?: 'PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection';
-  items: Array<
-    Maybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts>
-  >;
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-  total: Scalars['Int'];
-}
-
-export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter {
-  AND?: InputMaybe<
-    Array<
-      InputMaybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
-    >
-  >;
-  OR?: InputMaybe<
-    Array<
-      InputMaybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>
-    >
-  >;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  description?: InputMaybe<Scalars['String']>;
-  description_contains?: InputMaybe<Scalars['String']>;
-  description_exists?: InputMaybe<Scalars['Boolean']>;
-  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  description_not?: InputMaybe<Scalars['String']>;
-  description_not_contains?: InputMaybe<Scalars['String']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']>;
-  title_contains?: InputMaybe<Scalars['String']>;
-  title_exists?: InputMaybe<Scalars['Boolean']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title_not?: InputMaybe<Scalars['String']>;
-  title_not_contains?: InputMaybe<Scalars['String']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections {
-  __typename?: 'PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-}
-
-export interface PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsLinkingCollectionsEntryCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
 }
 
 export enum PageSectionBasicPostsOrder {
@@ -7503,7 +7356,7 @@ export interface PageShopSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
+  where?: InputMaybe<PageShopSectionsFilter>;
 }
 
 /** Shop page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageShop) */
@@ -7583,7 +7436,7 @@ export interface PageShopFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
+  sections?: InputMaybe<CfsectionsMultiTypeNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -7642,6 +7495,27 @@ export interface PageShopSectionsCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export interface PageShopSectionsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageShopSectionsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageShopSectionsFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 }
 
 export type PageShopSectionsItem =
@@ -7717,7 +7591,7 @@ export interface PageStreamSectionsCollectionArgs {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
+  where?: InputMaybe<PageStreamSectionsFilter>;
 }
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
@@ -7799,7 +7673,7 @@ export interface PageStreamFilter {
   mainTitle_not?: InputMaybe<Scalars['String']>;
   mainTitle_not_contains?: InputMaybe<Scalars['String']>;
   mainTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sections?: InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>;
+  sections?: InputMaybe<CfsectionsMultiTypeNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   showSubtitle?: InputMaybe<Scalars['Boolean']>;
   showSubtitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -7893,6 +7767,27 @@ export interface PageStreamSectionsCollection {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+}
+
+export interface PageStreamSectionsFilter {
+  AND?: InputMaybe<Array<InputMaybe<PageStreamSectionsFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageStreamSectionsFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 }
 
 export type PageStreamSectionsItem =
@@ -8629,12 +8524,6 @@ export interface Query {
   pageLearnCollection?: Maybe<PageLearnCollection>;
   pageSectionBasicPosts?: Maybe<PageSectionBasicPosts>;
   pageSectionBasicPostsCollection?: Maybe<PageSectionBasicPostsCollection>;
-  pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPosts>;
-  pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection>;
-  pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPosts>;
-  pageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection?: Maybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection>;
-  pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts?: Maybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPosts>;
-  pageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection?: Maybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollection>;
   pageSectionDappPosts?: Maybe<PageSectionDappPosts>;
   pageSectionDappPostsCollection?: Maybe<PageSectionDappPostsCollection>;
   pageSectionFaQs?: Maybe<PageSectionFaQs>;
@@ -9008,48 +8897,6 @@ export interface QueryPageSectionBasicPostsCollectionArgs {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<PageSectionBasicPostsFilter>;
-}
-
-export interface QueryPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsArgs {
-  id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-}
-
-export interface QueryPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
-}
-
-export interface QueryPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsArgs {
-  id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-}
-
-export interface QueryPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
-}
-
-export interface QueryPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsArgs {
-  id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-}
-
-export interface QueryPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsCollectionArgs {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsFilter>;
 }
 
 export interface QueryPageSectionDappPostsArgs {
@@ -10258,93 +10105,6 @@ export interface CfIconTileNestedFilter {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 }
 
-export interface CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter {
-  AND?: InputMaybe<
-    Array<
-      InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
-    >
-  >;
-  OR?: InputMaybe<
-    Array<
-      InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
-    >
-  >;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  description?: InputMaybe<Scalars['String']>;
-  description_contains?: InputMaybe<Scalars['String']>;
-  description_exists?: InputMaybe<Scalars['Boolean']>;
-  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  description_not?: InputMaybe<Scalars['String']>;
-  description_not_contains?: InputMaybe<Scalars['String']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']>;
-  title_contains?: InputMaybe<Scalars['String']>;
-  title_exists?: InputMaybe<Scalars['Boolean']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title_not?: InputMaybe<Scalars['String']>;
-  title_not_contains?: InputMaybe<Scalars['String']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-export interface CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter {
-  AND?: InputMaybe<
-    Array<
-      InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
-    >
-  >;
-  OR?: InputMaybe<
-    Array<
-      InputMaybe<CfPageSectionBasicPostsOrPageSectionDappPostsOrPageSectionFaQsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
-    >
-  >;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  description?: InputMaybe<Scalars['String']>;
-  description_contains?: InputMaybe<Scalars['String']>;
-  description_exists?: InputMaybe<Scalars['Boolean']>;
-  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  description_not?: InputMaybe<Scalars['String']>;
-  description_not_contains?: InputMaybe<Scalars['String']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']>;
-  title_contains?: InputMaybe<Scalars['String']>;
-  title_exists?: InputMaybe<Scalars['Boolean']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title_not?: InputMaybe<Scalars['String']>;
-  title_not_contains?: InputMaybe<Scalars['String']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
-export interface CfPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter {
-  AND?: InputMaybe<
-    Array<
-      InputMaybe<CfPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
-    >
-  >;
-  OR?: InputMaybe<
-    Array<
-      InputMaybe<CfPageSectionBasicPostsOrPageSectionFeaturePostsOrPageSectionGrandPostsOrPageSectionIconTilesOrPageSectionPersonPostsOrPageSectionProductsOrPageSectionSectionPostsOrPageSectionThumbnailPostsNestedFilter>
-    >
-  >;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  description?: InputMaybe<Scalars['String']>;
-  description_contains?: InputMaybe<Scalars['String']>;
-  description_exists?: InputMaybe<Scalars['Boolean']>;
-  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  description_not?: InputMaybe<Scalars['String']>;
-  description_not_contains?: InputMaybe<Scalars['String']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']>;
-  title_contains?: InputMaybe<Scalars['String']>;
-  title_exists?: InputMaybe<Scalars['Boolean']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title_not?: InputMaybe<Scalars['String']>;
-  title_not_contains?: InputMaybe<Scalars['String']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-}
-
 export interface CfPersonPostNestedFilter {
   AND?: InputMaybe<Array<InputMaybe<CfPersonPostNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfPersonPostNestedFilter>>>;
@@ -10594,6 +10354,27 @@ export interface CfThumbnailPostNestedFilter {
   showHeavyPictureOnHover?: InputMaybe<Scalars['Boolean']>;
   showHeavyPictureOnHover_exists?: InputMaybe<Scalars['Boolean']>;
   showHeavyPictureOnHover_not?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface CfsectionsMultiTypeNestedFilter {
+  AND?: InputMaybe<Array<InputMaybe<CfsectionsMultiTypeNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfsectionsMultiTypeNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;

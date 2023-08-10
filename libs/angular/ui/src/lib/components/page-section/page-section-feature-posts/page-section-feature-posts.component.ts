@@ -17,6 +17,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { SwiperOptions } from 'swiper';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
+import { SwiperImagePriorityPipe } from '../../../pipes/swiper-image-priority/swiper-image-priority.pipe';
 import { FeaturePostComponent } from '../../post/feature-post/feature-post.component';
 
 @Component({
@@ -30,6 +31,7 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
     ContentfulDraftDirective,
     FeaturePostComponent,
     SwiperDirective,
+    SwiperImagePriorityPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
@@ -53,13 +55,14 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
           *ngFor="
             let featurePost of featurePosts;
             let i = index;
-            let isFirst = first;
             trackBy: trackByFn
           "
         >
           <dhb-feature-post
             [featurePost]="featurePost"
-            [priorityImage]="isFirst"
+            [priorityImage]="
+              i | dhbSwiperImagePriority : swiperOptions?.breakpoints
+            "
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           />
         </swiper-slide>
@@ -78,8 +81,6 @@ export class PageSectionFeaturePostsComponent implements OnInit {
   swiperOptions?: SwiperOptions;
 
   trackByFn = trackByContentfulIdFn<FeaturePostFragment>();
-
-  constructor() {}
 
   ngOnInit() {
     if (!this.section) return;
