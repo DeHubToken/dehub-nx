@@ -39,7 +39,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
         styleClass="feature p-card-shadow"
       >
         <ng-template pTemplate="header">
-          <div class="picture-frame h-30rem md:h-20rem xl:h-25rem">
+          <div class="picture-frame">
             <i
               *ngIf="featurePost.videoUrl"
               class="fad fa-play-circle"
@@ -78,6 +78,25 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
         height: 100%;
         & > div {
           height: 100%;
+        }
+      }
+
+      .picture-frame {
+        height: 12rem !important;
+      }
+      @media screen and (min-width: 391px) {
+        .picture-frame {
+          height: 30rem !important;
+        }
+      }
+      @media screen and (min-width: 992px) {
+        .picture-frame {
+          height: 20rem !important;
+        }
+      }
+      @media screen and (min-width: 1250px) {
+        .picture-frame {
+          height: 24rem !important;
         }
       }
     `,
