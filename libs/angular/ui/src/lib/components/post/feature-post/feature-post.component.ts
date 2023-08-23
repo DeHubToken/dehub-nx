@@ -50,7 +50,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
               [container]="featurePost"
               [autoHeight]="false"
               [numOfVisibleImages]="numOfVisibleImages"
-              [attr.priority]="priorityImage"
+              [priority]="priorityImage"
             />
           </div>
         </ng-template>
@@ -84,9 +84,9 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
       }
 
       .picture-frame {
-        height: 12rem !important;
+        height: 15rem !important;
       }
-      @media screen and (min-width: 391px) {
+      @media screen and (min-width: 450px) {
         .picture-frame {
           height: 36rem !important;
         }

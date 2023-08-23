@@ -35,7 +35,7 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [fill]="!autoHeight"
           [width]="!autoHeight ? undefined : picture.width"
           [height]="!autoHeight ? undefined : picture.height"
-          [attr.priority]="priority"
+          [priority]="priority"
           [sizes]="sizes"
           [alt]="picture | dhbContentfulImageAlt"
           [ngClass]="{
@@ -59,7 +59,7 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
           [width]="!autoHeight ? undefined : heavyPicture.width"
           [height]="!autoHeight ? undefined : heavyPicture.height"
           (load)="onLoad()"
-          [attr.priority]="priority"
+          [priority]="priority"
           [sizes]="sizes"
           [alt]="heavyPicture | dhbContentfulImageAlt"
           [ngClass]="{

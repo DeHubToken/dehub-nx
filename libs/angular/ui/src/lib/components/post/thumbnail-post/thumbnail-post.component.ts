@@ -32,14 +32,20 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
             <ng-container *ngIf="thumbnailPost.isVideo; else notVideo">
               <a href="#">
                 <i class="fad fa-play-circle"></i>
-                <dhb-heavy-picture [container]="thumbnailPost" />
+                <dhb-heavy-picture
+                  [container]="thumbnailPost"
+                  [priority]="priorityImage"
+                />
               </a>
             </ng-container>
 
             <!-- Other Post -->
             <ng-template #notVideo>
               <a [href]="link" target="_blank" rel="noreferrer">
-                <dhb-heavy-picture [container]="thumbnailPost" />
+                <dhb-heavy-picture
+                  [container]="thumbnailPost"
+                  [priority]="priorityImage"
+                />
               </a>
             </ng-template>
           </ng-container>
@@ -51,6 +57,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
 })
 export class ThumbnailPostComponent implements OnInit {
   @Input() thumbnailPost!: ThumbnailPostFragment;
+  @Input() priorityImage = false;
 
   constructor() {}
 

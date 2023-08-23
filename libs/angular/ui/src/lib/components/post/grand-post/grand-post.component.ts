@@ -46,7 +46,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
             ></i>
             <dhb-heavy-picture
               [container]="grandPost"
-              [attr.priority]="priorityImage"
+              [priority]="priorityImage"
             />
           </div>
         </ng-template>

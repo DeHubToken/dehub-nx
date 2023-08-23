@@ -26,13 +26,14 @@ import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/cont
       <ng-container *ngIf="awardPost.link as link">
         <a [href]="link" target="_blank" rel="noreferrer">
           <ng-container *ngIf="awardPost.picture as award">
+            priorityImage: {{ priorityImage }}
             <img
               *ngIf="award.url"
               [ngSrc]="award.url"
               [loaderParams]="{ cornerRadius: 1000 }"
               [width]="award.width"
               [height]="award.height"
-              [attr.priority]="priorityImage"
+              [priority]="priorityImage"
               [alt]="award | dhbContentfulImageAlt"
               sizes="(max-width: 750px) 30vw, 10vw"
               class="w-6 md:w-9 h-auto anim-hover-1-reverse"
