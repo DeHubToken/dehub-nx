@@ -26,7 +26,6 @@ import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/cont
       <ng-container *ngIf="awardPost.link as link">
         <a [href]="link" target="_blank" rel="noreferrer">
           <ng-container *ngIf="awardPost.picture as award">
-            priorityImage: {{ priorityImage }}
             <img
               *ngIf="award.url"
               [ngSrc]="award.url"

@@ -31,7 +31,6 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
     ContentfulDraftDirective,
   ],
   template: `
-    <!-- Feature Post: {{ numOfVisibleImages }} -->
     <div [dhbContentfulDraft]="featurePost.sys">
       <p-card
         *ngIf="featurePost"

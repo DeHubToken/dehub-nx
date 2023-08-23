@@ -17,7 +17,7 @@ import { fadeInUpOnEnterAnimation } from 'angular-animations';
 import { SwiperOptions } from 'swiper';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
-import { SwiperImagePriorityPipe } from '../../../pipes/swiper-image-priority/swiper-image-priority.pipe';
+import { SwiperVisibleImagesPipe } from '../../../pipes/swiper-visible-images/swiper-visible-images.pipe';
 import { FeaturePostComponent } from '../../post/feature-post/feature-post.component';
 
 @Component({
@@ -31,9 +31,8 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
     ContentfulDraftDirective,
     FeaturePostComponent,
     SwiperDirective,
-    SwiperImagePriorityPipe,
+    SwiperVisibleImagesPipe,
   ],
-  providers: [SwiperImagePriorityPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div
@@ -51,7 +50,6 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
       </h5>
 
       <!-- Feature Posts -->
-      <!-- Feature Posts: {{ numOfVisibleImages }} -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
         <swiper-slide
           *ngFor="
