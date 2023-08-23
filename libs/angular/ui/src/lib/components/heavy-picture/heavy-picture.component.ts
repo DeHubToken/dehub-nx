@@ -25,6 +25,7 @@ import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/content
   ],
   template: `
     <span (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
+      <!-- dhb-heavy-picture: {{ numOfVisibleImages }} -->
       <!-- Simple Picture -->
       <ng-container *ngIf="container.picture as picture">
         <img
@@ -89,6 +90,7 @@ export class HeavyPictureComponent<
 {
   @Input() container!: C;
   @Input() autoHeight = true;
+  @Input() numOfVisibleImages?: number;
   @Input() priority = false;
   showHeavyPic = false;
 
@@ -99,7 +101,10 @@ export class HeavyPictureComponent<
   ngOnInit() {
     this.sizes = this.autoHeight
       ? '(max-width: 991px) 30vw, (max-width: 1250px) 25vw, (max-width: 1700px) 20vw, 15vw'
+      : this.numOfVisibleImages && this.numOfVisibleImages === 1
+      ? '50vw'
       : '(max-width: 991px) 50vw, (max-width: 1250px) 25vw, (max-width: 1700px) 20vw, 10vw';
+    console.log(this.autoHeight, this.numOfVisibleImages, this.sizes);
   }
 
   onMouseOver() {

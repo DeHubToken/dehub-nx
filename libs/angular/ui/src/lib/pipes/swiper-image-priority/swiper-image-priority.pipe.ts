@@ -18,10 +18,7 @@ export class SwiperImagePriorityPipe implements PipeTransform {
   /**
    * @param imageIndex 0 based image index coming from ngFor
    */
-  transform(
-    imageIndex: number,
-    breakpoints?: SwiperResponsiveOptions
-  ): boolean {
+  transform(imageIndex: number, breakpoints: SwiperResponsiveOptions): boolean {
     if (!breakpoints) return false;
 
     // Find how many images are visible based on the given breakpoints
@@ -36,5 +33,22 @@ export class SwiperImagePriorityPipe implements PipeTransform {
     );
 
     return imageIndex < visibleImages;
+  }
+
+  /** Find how many images are visible based on the given breakpoints */
+  numOfVisibleImages(breakpoints: SwiperResponsiveOptions): number {
+    if (!breakpoints) return 1;
+
+    const visibleImages = Object.entries(breakpoints).reduce(
+      (prevCount, [media, { slidesPerView }]) =>
+        slidesPerView &&
+        slidesPerView !== 'auto' &&
+        this.breakPointObserver.isMatched(`(min-width: ${media}px)`)
+          ? Math.max(prevCount, slidesPerView)
+          : prevCount,
+      1
+    );
+
+    return visibleImages;
   }
 }

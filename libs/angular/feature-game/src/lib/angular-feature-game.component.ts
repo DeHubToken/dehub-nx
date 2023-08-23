@@ -32,6 +32,7 @@ import { Observable, map } from 'rxjs';
       <!-- Page Sections -->
       <dhb-page-sections
         [sections]="pageGame?.sectionsCollection?.items"
+        [wideFeaturePosts]="true"
         [grandPostsResponsiveOptions]="grandPostsResponsiveOptions"
         [path]="path"
       />

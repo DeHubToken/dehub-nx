@@ -33,6 +33,7 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
     SwiperDirective,
     SwiperImagePriorityPipe,
   ],
+  providers: [SwiperImagePriorityPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div
@@ -50,6 +51,7 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
       </h5>
 
       <!-- Feature Posts -->
+      <!-- Feature Posts: {{ numOfVisibleImages }} -->
       <swiper-container dhbSwiper [swiperOptions]="swiperOptions" init="false">
         <swiper-slide
           *ngFor="
@@ -60,6 +62,7 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
         >
           <dhb-feature-post
             [featurePost]="featurePost"
+            [numOfVisibleImages]="numOfVisibleImages"
             [priorityImage]="
               i | dhbSwiperImagePriority : swiperOptions?.breakpoints
             "
@@ -82,13 +85,21 @@ export class PageSectionFeaturePostsComponent implements OnInit {
 
   trackByFn = trackByContentfulIdFn<FeaturePostFragment>();
 
+  numOfVisibleImages = 1;
+
+  constructor(private pipe: SwiperImagePriorityPipe) {}
+
   ngOnInit() {
     if (!this.section) return;
 
+    const breakpoints =
+      this.section.swiperResponsiveOptions || this.swiperResponsiveOptions;
+
+    this.numOfVisibleImages = this.pipe.numOfVisibleImages(breakpoints);
+
     this.swiperOptions = {
       navigation: true,
-      breakpoints:
-        this.section.swiperResponsiveOptions || this.swiperResponsiveOptions,
+      breakpoints,
     };
 
     this.featurePosts = (

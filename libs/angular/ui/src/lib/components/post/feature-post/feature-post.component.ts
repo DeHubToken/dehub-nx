@@ -31,15 +31,16 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
     ContentfulDraftDirective,
   ],
   template: `
+    <!-- Feature Post: {{ numOfVisibleImages }} -->
     <div [dhbContentfulDraft]="featurePost.sys">
       <p-card
         *ngIf="featurePost"
         [header]="featurePost.title ?? ''"
         [subheader]="(featurePost.sys.firstPublishedAt | date : 'fullDate')!"
-        styleClass="feature p-card-shadow"
+        styleClass="feature p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
-          <div class="picture-frame">
+          <div class="picture-frame" [class.wide]="numOfVisibleImages === 1">
             <i
               *ngIf="featurePost.videoUrl"
               class="fad fa-play-circle"
@@ -48,6 +49,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
             <dhb-heavy-picture
               [container]="featurePost"
               [autoHeight]="false"
+              [numOfVisibleImages]="numOfVisibleImages"
               [attr.priority]="priorityImage"
             />
           </div>
@@ -86,7 +88,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
       }
       @media screen and (min-width: 391px) {
         .picture-frame {
-          height: 15rem !important;
+          height: 36rem !important;
         }
       }
       @media screen and (min-width: 992px) {
@@ -96,7 +98,12 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
       }
       @media screen and (min-width: 1250px) {
         .picture-frame {
-          height: 24rem !important;
+          height: 26rem !important;
+        }
+      }
+      @media screen and (min-width: 1350px) {
+        .picture-frame.wide {
+          height: 50rem !important;
         }
       }
     `,
@@ -106,6 +113,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
 export class FeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
   @Input() priorityImage = false;
+  @Input() numOfVisibleImages = 1;
 
   constructor(
     @Inject(WINDOW) private readonly windowRef: Window,
