@@ -102,7 +102,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
       }
       @media screen and (min-width: 1350px) {
         .picture-frame.wide {
-          height: 50rem !important;
+          height: 40rem !important;
         }
       }
     `,
