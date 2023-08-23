@@ -60,9 +60,13 @@ import { FeaturePostComponent } from '../../post/feature-post/feature-post.compo
         >
           <dhb-feature-post
             [featurePost]="featurePost"
-            [numOfVisibleImages]="numOfVisibleImages"
+            [numOfVisibleImages]="
+              swiperOptions?.breakpoints | dhbSwiperVisibleImages
+            "
             [priorityImage]="
-              i | dhbSwiperImagePriority : swiperOptions?.breakpoints
+              swiperOptions?.breakpoints
+                ? i < (swiperOptions?.breakpoints | dhbSwiperVisibleImages)
+                : false
             "
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           />
@@ -83,17 +87,11 @@ export class PageSectionFeaturePostsComponent implements OnInit {
 
   trackByFn = trackByContentfulIdFn<FeaturePostFragment>();
 
-  numOfVisibleImages = 1;
-
-  constructor(private pipe: SwiperImagePriorityPipe) {}
-
   ngOnInit() {
     if (!this.section) return;
 
     const breakpoints =
       this.section.swiperResponsiveOptions || this.swiperResponsiveOptions;
-
-    this.numOfVisibleImages = this.pipe.numOfVisibleImages(breakpoints);
 
     this.swiperOptions = {
       navigation: true,

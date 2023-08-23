@@ -18,7 +18,7 @@ import { SwiperOptions } from 'swiper';
 import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
-import { SwiperImagePriorityPipe } from '../../../pipes/swiper-image-priority/swiper-image-priority.pipe';
+import { SwiperVisibleImagesPipe } from '../../../pipes/swiper-visible-images/swiper-visible-images.pipe';
 import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
 
 @Component({
@@ -32,7 +32,7 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
     ContentfulDraftDirective,
     GrandPostComponent,
     SwiperDirective,
-    SwiperImagePriorityPipe,
+    SwiperVisibleImagesPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
@@ -62,7 +62,9 @@ import { GrandPostComponent } from '../../post/grand-post/grand-post.component';
           <dhb-grand-post
             [grandPost]="grandPost"
             [priorityImage]="
-              i | dhbSwiperImagePriority : swiperOptions?.breakpoints
+              swiperOptions?.breakpoints
+                ? i < (swiperOptions?.breakpoints | dhbSwiperVisibleImages)
+                : false
             "
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           />
