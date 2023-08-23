@@ -55,6 +55,7 @@ import { ProductInfoComponent } from './product-info.component';
 })
 export class ProductComponent implements OnInit {
   @Input() product!: ProductFragment;
+  @Input() priorityImage = false;
 
   swiperOptions: SwiperOptions = {
     pagination: { clickable: true },

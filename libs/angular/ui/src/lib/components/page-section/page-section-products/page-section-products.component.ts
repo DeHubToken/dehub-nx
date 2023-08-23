@@ -23,6 +23,7 @@ import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
 
 import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
+import { SwiperVisibleImagesPipe } from '../../../pipes/swiper-visible-images/swiper-visible-images.pipe';
 import { ProductComponent } from '../../product/product.component';
 import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
 
@@ -38,6 +39,7 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
     ContentfulDraftDirective,
     ProductComponent,
     SwiperDirective,
+    SwiperVisibleImagesPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
@@ -76,6 +78,11 @@ import { TabMenuComponent } from '../../tab-menu/tab-menu.component';
         >
           <dhb-product
             [product]="product"
+            [priorityImage]="
+              swiperOptions?.breakpoints
+                ? i < (swiperOptions?.breakpoints | dhbSwiperVisibleImages)
+                : false
+            "
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           />
         </swiper-slide>

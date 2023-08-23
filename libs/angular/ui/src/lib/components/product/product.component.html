@@ -20,7 +20,7 @@
             let isFirst = first;
             trackBy: trackByFn
           "
-          [lazy]="!isFirst"
+          [lazy]="!isFirst || !priorityImage"
         >
           <img
             *ngIf="picture.url"
@@ -28,7 +28,7 @@
             [ngSrc]="picture.url"
             [width]="picture.width"
             [height]="picture.height"
-            [priority]="isFirst"
+            [priority]="isFirst && priorityImage"
             [alt]="picture | dhbContentfulImageAlt"
             sizes="(max-width: 320px) 70vw, (max-width: 960px) 50vw, (max-width: 1350px) 30vw, (max-width: 1700px) 15vw, 10vw"
             class="h-auto"
