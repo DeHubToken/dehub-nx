@@ -18,6 +18,7 @@ import { SwiperOptions } from 'swiper';
 import { trackByContentfulIdFn } from '@dehub/angular/util';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
 import { SwiperDirective } from '../../../directives/swiper/swiper.directive';
+import { SwiperVisibleImagesPipe } from '../../../pipes/swiper-visible-images/swiper-visible-images.pipe';
 import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post.component';
 @Component({
   selector: 'dhb-page-section-thumbnail-posts',
@@ -30,6 +31,7 @@ import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post
     ContentfulDraftDirective,
     ThumbnailPostComponent,
     SwiperDirective,
+    SwiperVisibleImagesPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
@@ -58,13 +60,17 @@ import { ThumbnailPostComponent } from '../../post/thumbnail-post/thumbnail-post
         >
           <dhb-thumbnail-post
             [thumbnailPost]="thumbnailPost"
+            [priorityImage]="
+              swiperOptions?.breakpoints
+                ? i < (swiperOptions?.breakpoints | dhbSwiperVisibleImages)
+                : false
+            "
             [@fadeInUp]="{ value: '', params: { delay: i * 100 } }"
           />
         </swiper-slide>
       </swiper-container>
     </div>
   `,
-
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInUpOnEnterAnimation({ anchor: 'fadeInUp' })],
 })

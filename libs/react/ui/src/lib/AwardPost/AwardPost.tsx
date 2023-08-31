@@ -1,19 +1,26 @@
 import { AwardPostFragment } from '@dehub/shared/model';
+import {
+  getContentfulImageAlt,
+  getContentfulImageSrcSet,
+} from '@dehub/shared/utils';
 import { memo } from 'react';
 
 const AwardPost = ({
   awardPost: { picture: award, link },
+  priority,
 }: {
   awardPost: AwardPostFragment;
+  priority: boolean;
 }) =>
-  award && link ? (
+  award && award.url && link ? (
     <a href={link} target="_blank" rel="noreferrer">
       <img
-        src={award.webpUrlWithRadius}
+        srcSet={getContentfulImageSrcSet(award.url, { cornerRadius: 1000 })}
         width={award.width}
         height={award.height}
-        alt={award.description ?? award.title}
-        sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+        loading={priority ? 'eager' : 'lazy'}
+        alt={getContentfulImageAlt(award)}
+        sizes="(max-width: 750px) 30vw, 10vw"
         className="w-6 md:w-9 h-auto anim-hover-1-reverse"
       />
     </a>

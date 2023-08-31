@@ -2,7 +2,7 @@ const { composePlugins, withNx } = require('@nx/webpack');
 const { withReact } = require('@nx/react');
 
 /**
- * ISSUE: https://github.com/nrwl/nx/issues/14383#issuecomment-1384196230
+ * @audit https://github.com/nrwl/nx/issues/14383#issuecomment-1384196230
  */
 const moveRuleToFront = (config, loaderPattern) => {
   const { rule, index } = config.module.rules

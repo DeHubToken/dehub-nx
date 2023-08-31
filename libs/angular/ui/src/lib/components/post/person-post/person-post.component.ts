@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,6 +15,7 @@ import { TagModule } from 'primeng/tag';
 import { NgFor, NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
+import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/contentful-image-alt.pipe';
 
 interface SocialLink {
   name: string;
@@ -28,12 +30,14 @@ interface SocialLink {
     // Angular
     NgIf,
     NgFor,
+    NgOptimizedImage,
     // PrimeNG
     ButtonModule,
     TagModule,
     CardModule,
     // UI
     ContentfulDraftDirective,
+    ContentfulImageAltPipe,
   ],
   template: `
     <div [dhbContentfulDraft]="personPost.sys" class="w-full">
@@ -42,15 +46,19 @@ interface SocialLink {
         styleClass="person h-full mt-2 mb-4 pt-6 px-2 text-center border-neon-1 bg-gradient-2 anim-hover-1-reverse"
       >
         <ng-template pTemplate="header">
-          <img
-            [dhbContentfulDraft]="personPost.avatar?.sys"
-            [src]="
-              personPost.avatar?.url ??
-              path + '/assets/dehub/images/avatar-default.svg'
-            "
-            [alt]="personPost.avatar?.title ?? 'Avatar'"
-            class="border-circle border-3 border-cyan-900 shadow-5 w-8 bg-gradient-1"
-          />
+          <ng-container *ngIf="personPost.avatar as avatar">
+            <img
+              [dhbContentfulDraft]="avatar.sys"
+              [ngSrc]="
+                avatar.url ?? path + '/assets/dehub/images/avatar-default.svg'
+              "
+              [width]="avatar.width"
+              [height]="avatar.height"
+              [alt]="avatar | dhbContentfulImageAlt : 'Avatar'"
+              sizes="(max-width: 750px) 50vw, (max-width: 960px) 30vw, (max-width: 1700px) 15vw, 7vw"
+              class="h-auto border-circle border-3 border-cyan-900 shadow-5 w-8 bg-gradient-1"
+            />
+          </ng-container>
         </ng-template>
 
         <!-- Name -->

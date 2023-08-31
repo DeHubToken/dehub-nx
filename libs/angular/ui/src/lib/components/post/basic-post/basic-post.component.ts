@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
-
+import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/contentful-image-alt.pipe';
 @Component({
   selector: 'dhb-basic-post',
   standalone: true,
@@ -19,11 +20,13 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
     // Angular
     NgIf,
     RouterLink,
+    NgOptimizedImage,
     // PrimeNG
     CardModule,
     ButtonModule,
     // UI
     ContentfulDraftDirective,
+    ContentfulImageAltPipe,
   ],
   template: `
     <div [dhbContentfulDraft]="basicPost.sys">
@@ -33,12 +36,18 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
         styleClass="p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
-          <img
-            *ngIf="basicPost.mainPicture as mainPicture"
-            [dhbContentfulDraft]="mainPicture.sys"
-            [src]="mainPicture.url"
-            [alt]="mainPicture.title"
-          />
+          <ng-container *ngIf="basicPost.mainPicture as mainPicture">
+            <img
+              *ngIf="mainPicture.url"
+              [dhbContentfulDraft]="mainPicture.sys"
+              [ngSrc]="mainPicture.url"
+              [width]="mainPicture.width"
+              [height]="mainPicture.height"
+              [alt]="mainPicture | dhbContentfulImageAlt"
+              sizes="(max-width: 320px) 70vw, (max-width: 750px) 50vw, (max-width: 960px) 25vw, (max-width: 1700px) 15vw, 10vw"
+              class="h-auto"
+            />
+          </ng-container>
         </ng-template>
         <p>
           {{ basicPost.summary }}

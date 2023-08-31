@@ -5,10 +5,10 @@ import {
   OnInit,
 } from '@angular/core';
 import { AwardPostFragment } from '@dehub/shared/model';
-import { HeavyPictureComponent } from '../../heavy-picture/heavy-picture.component';
 
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { ContentfulDraftDirective } from '../../../directives/contentful-draft/contentful-draft.directive';
+import { ContentfulImageAltPipe } from '../../../pipes/contentful-image-alt/contentful-image-alt.pipe';
 
 @Component({
   selector: 'dhb-award-post',
@@ -19,7 +19,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
     NgOptimizedImage,
     // UI
     ContentfulDraftDirective,
-    HeavyPictureComponent,
+    ContentfulImageAltPipe,
   ],
   template: `
     <div [dhbContentfulDraft]="awardPost.sys">
@@ -27,11 +27,14 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
         <a [href]="link" target="_blank" rel="noreferrer">
           <ng-container *ngIf="awardPost.picture as award">
             <img
-              [ngSrc]="award.webpUrlWithRadius!"
+              *ngIf="award.url"
+              [ngSrc]="award.url"
+              [loaderParams]="{ cornerRadius: 1000 }"
               [width]="award.width"
               [height]="award.height"
-              [alt]="award.description ?? award.title"
-              sizes="(min-width: 66em) 33vw, (min-width: 44em) 50vw, 100vw"
+              [priority]="priorityImage"
+              [alt]="award | dhbContentfulImageAlt"
+              sizes="(max-width: 750px) 30vw, 10vw"
               class="w-6 md:w-9 h-auto anim-hover-1-reverse"
             />
           </ng-container>
@@ -43,6 +46,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
 })
 export class AwardPostComponent implements OnInit {
   @Input() awardPost!: AwardPostFragment;
+  @Input() priorityImage = false;
 
   constructor() {}
 

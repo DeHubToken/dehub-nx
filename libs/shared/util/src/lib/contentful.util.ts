@@ -4,7 +4,12 @@ import {
 } from '@contentful/rich-text-html-renderer';
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { BLOCKS, Document } from '@contentful/rich-text-types';
-import { ContentfulEntity } from '@dehub/shared/model';
+import {
+  AssetFragment,
+  ContentfulEntity,
+  ContentfulImageLoaderParams,
+  responsiveImageBreakpoints,
+} from '@dehub/shared/model';
 
 export const richMarkupToHtmlString = (richTextDocument: Document) => {
   const richOptions: Options = {
@@ -106,3 +111,74 @@ export const isContentfulEntityPublished = (entity: ContentfulEntity) =>
 /** Detect if an entity is in archived state */
 export const isContentfulEntityArchived = (entity: ContentfulEntity) =>
   !!entity.sys.archivedVersion;
+
+/** Generate image alt for Contentful Asset */
+export const getContentfulImageAlt = (
+  { description, title }: AssetFragment,
+  fallbackAlt = 'dehub image'
+) => {
+  const alt = `${description ?? title}`;
+  return `${alt.length > 1 ? alt : fallbackAlt}`;
+};
+
+/** Image srcset for responsive images based on Contentful Image API */
+export const getContentfulImageSrcSet = (
+  src: string,
+  loaderParams?: ContentfulImageLoaderParams
+) =>
+  responsiveImageBreakpoints
+    .map(
+      breakpoint =>
+        `${getContentfulImageApiQuery(
+          src,
+          loaderParams,
+          breakpoint
+        )} ${breakpoint}w`
+    )
+    .join(', ');
+
+/**
+ * Get image url based on Contentful Image API
+ * Docs: https://www.contentful.com/developers/docs/references/images-api
+ *
+ * @param src the contentful asset src
+ * @param loaderParams customisable image api params
+ * @param width desired image width
+ * @returns the contentful image url
+ */
+export const getContentfulImageApiQuery = (
+  src: string,
+  loaderParams?: ContentfulImageLoaderParams,
+  width?: number
+) => {
+  const queryParams: string[] = [];
+
+  // Custom Loader Params
+  let lParams = loaderParams;
+
+  // Default Loader Params
+  lParams =
+    lParams && lParams.format ? lParams : { ...lParams, format: 'avif' };
+
+  // Quality: https://www.contentful.com/developers/docs/references/images-api/#/reference/image-manipulation/quality
+  queryParams.push('q=75');
+
+  // Width: https://www.contentful.com/developers/docs/references/images-api/#/reference/resizing-&-cropping/specify-width-&-height
+  if (width) queryParams.push(`w=${width}`);
+
+  // Loader Params: https://angular.io/guide/image-directive#the-loaderparams-property
+  if (lParams) {
+    const { cornerRadius, format, height } = lParams;
+
+    // Format:  https://www.contentful.com/developers/docs/references/images-api/#/reference/changing-formats
+    queryParams.push(`fm=${format}`);
+
+    // Radius: https://www.contentful.com/developers/docs/references/images-api/#/reference/resizing-&-cropping/crop-rounded-corners-&-circle-elipsis
+    if (cornerRadius) queryParams.push(`r=${cornerRadius}`);
+
+    // Resize and Cropping: https://www.contentful.com/developers/docs/references/images-api/#/reference/resizing-&-cropping
+    if (height) queryParams.push('fit=fill', 'f=center', `h=${height}`);
+  }
+
+  return `${src}?${queryParams.join('&')}`;
+};

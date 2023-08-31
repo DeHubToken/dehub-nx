@@ -88,6 +88,7 @@ export class PageSectionsComponent implements OnInit {
   @Input() iconTilesResponsiveOptions?: SwiperResponsiveOptions;
   @Input() grandPostsResponsiveOptions?: SwiperResponsiveOptions;
   @Input() productsResponsiveOptions?: SwiperResponsiveOptions;
+  @Input() wideFeaturePosts = false;
 
   productMenuItems: MenuItem[] = [];
   productActiveMenuItem$: Observable<MenuItem | undefined> =

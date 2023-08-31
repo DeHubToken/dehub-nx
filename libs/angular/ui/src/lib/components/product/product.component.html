@@ -15,14 +15,23 @@
         [class.no-padding-bottom]="swiperIsClickable"
       >
         <swiper-slide
-          *ngFor="let picture of pictures; trackBy: trackByFn"
-          lazy="true"
+          *ngFor="
+            let picture of pictures;
+            let isFirst = first;
+            trackBy: trackByFn
+          "
+          [lazy]="!isFirst || !priorityImage"
         >
           <img
-            *ngIf="picture"
+            *ngIf="picture.url"
             [dhbContentfulDraft]="picture.sys"
-            [src]="picture.url"
-            [alt]="picture.title"
+            [ngSrc]="picture.url"
+            [width]="picture.width"
+            [height]="picture.height"
+            [priority]="isFirst && priorityImage"
+            [alt]="picture | dhbContentfulImageAlt"
+            sizes="(max-width: 320px) 70vw, (max-width: 960px) 50vw, (max-width: 1350px) 30vw, (max-width: 1700px) 15vw, 10vw"
+            class="h-auto"
           />
         </swiper-slide>
       </swiper-container>

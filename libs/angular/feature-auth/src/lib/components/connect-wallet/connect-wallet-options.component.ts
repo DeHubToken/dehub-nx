@@ -113,7 +113,7 @@ import { InputTextModule } from 'primeng/inputtext';
                   [disabled]="magicLinkForm.invalid"
                 >
                   <img
-                    alt="Magic"
+                    alt="Magic Link"
                     [src]="path + '/assets/dehub/icons/magic.svg'"
                     [ngStyle]="{
                       width: '32px',

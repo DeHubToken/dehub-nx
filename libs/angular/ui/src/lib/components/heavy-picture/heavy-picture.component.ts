@@ -1,12 +1,15 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
+  inject,
 } from '@angular/core';
 import { AssetFragment } from '@dehub/shared/model';
 import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+import { ContentfulImageAltPipe } from '../../pipes/contentful-image-alt/contentful-image-alt.pipe';
 
 @Component({
   selector: 'dhb-heavy-picture',
@@ -15,29 +18,54 @@ import { ContentfulDraftDirective } from '../../directives/contentful-draft/cont
     // Angular
     NgIf,
     NgClass,
+    NgOptimizedImage,
     // UI
     ContentfulDraftDirective,
+    ContentfulImageAltPipe,
   ],
   template: `
     <span (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
-      <img
-        *ngIf="container.picture as picture"
-        [dhbContentfulDraft]="picture.sys"
-        [src]="picture.url"
-        [alt]="picture.title"
-        [ngClass]="{
-          hidden: showHeavyPic
-        }"
-      />
+      <!-- Simple Picture -->
+      <ng-container *ngIf="container.picture as picture">
+        <img
+          *ngIf="picture.url"
+          [dhbContentfulDraft]="picture.sys"
+          [ngSrc]="picture.url"
+          [fill]="!autoHeight"
+          [width]="!autoHeight ? undefined : picture.width"
+          [height]="!autoHeight ? undefined : picture.height"
+          [priority]="priority"
+          [sizes]="sizes"
+          [alt]="picture | dhbContentfulImageAlt"
+          [ngClass]="{
+            'opacity-0': !autoHeight && showHeavyPic,
+            'hidden': autoHeight && showHeavyPic,
+            'h-auto': autoHeight,
+          }"
+        />
+      </ng-container>
+
+      <!-- Heavy Picture -->
+      <!-- @audit Safari not support avif, and cannot loop either Chrome/Safari instead of gif -->
+      <!-- @note https://codelabs.developers.google.com/codelabs/avif#5 -->
       <ng-container *ngIf="container.heavyPicture as heavyPicture">
         <img
+          *ngIf="heavyPicture.url"
           [dhbContentfulDraft]="heavyPicture.sys"
-          [src]="heavyPicture.url"
-          [alt]="heavyPicture.title"
-          [ngClass]="{
-            hidden: !showHeavyPic
-          }"
+          [ngSrc]="heavyPicture.url"
+          [loaderParams]="{ format: 'webp' }"
+          [fill]="!autoHeight"
+          [width]="!autoHeight ? undefined : heavyPicture.width"
+          [height]="!autoHeight ? undefined : heavyPicture.height"
           (load)="onLoad()"
+          [priority]="priority"
+          [sizes]="sizes"
+          [alt]="heavyPicture | dhbContentfulImageAlt"
+          [ngClass]="{
+            'opacity-0': !autoHeight && !showHeavyPic,
+            'hidden': autoHeight && !showHeavyPic,
+            'h-auto': autoHeight,
+          }"
         />
       </ng-container>
     </span>
@@ -60,12 +88,22 @@ export class HeavyPictureComponent<
 > implements OnInit
 {
   @Input() container!: C;
-  @Input() showOnHover = false;
+  @Input() autoHeight = true;
+  @Input() numOfVisibleImages?: number;
+  @Input() priority = false;
   showHeavyPic = false;
 
-  constructor() {}
+  sizes?: string;
 
-  ngOnInit() {}
+  private cdr = inject(ChangeDetectorRef);
+
+  ngOnInit() {
+    this.sizes = this.autoHeight
+      ? '(max-width: 991px) 30vw, (max-width: 1250px) 25vw, (max-width: 1700px) 20vw, 15vw'
+      : this.numOfVisibleImages && this.numOfVisibleImages === 1
+      ? '50vw'
+      : '(max-width: 991px) 50vw, (max-width: 1250px) 25vw, (max-width: 1700px) 20vw, 10vw';
+  }
 
   onMouseOver() {
     if (this.container.showHeavyPictureOnHover) {
@@ -83,5 +121,6 @@ export class HeavyPictureComponent<
     if (!this.container.showHeavyPictureOnHover) {
       this.showHeavyPic = true;
     }
+    this.cdr.detectChanges();
   }
 }

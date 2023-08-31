@@ -1,4 +1,9 @@
-import { APP_BASE_HREF } from '@angular/common';
+import {
+  APP_BASE_HREF,
+  IMAGE_CONFIG,
+  IMAGE_LOADER,
+  ImageLoaderConfig,
+} from '@angular/common';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -47,8 +52,16 @@ import {
   LoggerMoralisToken,
   MoralisToken,
 } from '@dehub/angular/model';
-import { SharedEnv } from '@dehub/shared/model';
-import { createApolloCache, createApolloClient } from '@dehub/shared/utils';
+import {
+  ContentfulImageLoaderParams,
+  SharedEnv,
+  responsiveImageBreakpoints,
+} from '@dehub/shared/model';
+import {
+  createApolloCache,
+  createApolloClient,
+  getContentfulImageApiQuery,
+} from '@dehub/shared/utils';
 import { APOLLO_FLAGS, APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { Moralis } from 'moralis-v1';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -172,6 +185,28 @@ export const appConfig: ApplicationConfig = {
     {
       provide: AnnouncementToken,
       useClass: AnnouncementService,
+    },
+
+    // Responsive Image Loader: https://angular.io/guide/image-directive#custom-loaders
+    {
+      provide: IMAGE_LOADER,
+      useValue: ({ src, width, loaderParams }: ImageLoaderConfig) => {
+        // Project Assets not served from Contentful CDN
+        if (src.includes('assets/')) return src;
+
+        return getContentfulImageApiQuery(
+          src,
+          loaderParams as ContentfulImageLoaderParams,
+          width
+        );
+      },
+    },
+    // Responsive Image Breakpoints: https://angular.io/guide/image-directive#responsive-images
+    {
+      provide: IMAGE_CONFIG,
+      useValue: {
+        breakpoints: responsiveImageBreakpoints,
+      },
     },
 
     // Loggers

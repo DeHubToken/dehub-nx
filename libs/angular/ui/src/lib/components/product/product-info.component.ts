@@ -36,7 +36,7 @@ import { LoadingComponent } from '../loading/loading.component';
     DecimalPipe,
     NgTemplateOutlet,
     NgOptimizedImage,
-    // Lib
+    // UI
     LoadingComponent,
     FlipCardComponent,
     SIPostfixPipe,

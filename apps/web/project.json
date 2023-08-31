@@ -111,12 +111,16 @@
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
+        "options": {
+          "host": "dev.localhost"
+        },
         "production": {
-          "browserTarget": "web:build:production"
+          "browserTarget": "web:build:production",
+          "port": 8302,
+          "servePath": "/web"
         },
         "development": {
           "browserTarget": "web:build:development",
-          "host": "dev.localhost",
           "port": 8301
         }
       },

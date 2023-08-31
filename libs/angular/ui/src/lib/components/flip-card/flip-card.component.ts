@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 /**
@@ -10,7 +10,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   imports: [
     // Angular
     NgIf,
-    NgTemplateOutlet,
   ],
   template: `
     <div

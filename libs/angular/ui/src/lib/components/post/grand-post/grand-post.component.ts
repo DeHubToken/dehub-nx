@@ -44,7 +44,10 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
               class="fad fa-play-circle"
               (click)="onVideoPlayClicked()"
             ></i>
-            <dhb-heavy-picture [container]="grandPost" />
+            <dhb-heavy-picture
+              [container]="grandPost"
+              [priority]="priorityImage"
+            />
           </div>
         </ng-template>
 
@@ -79,6 +82,7 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
 })
 export class GrandPostComponent implements OnInit {
   @Input() grandPost!: GrandPostFragment;
+  @Input() priorityImage = false;
 
   constructor(
     @Inject(WINDOW) private readonly windowRef: Window,

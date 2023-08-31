@@ -71,11 +71,15 @@ import { CTAGroupPipe } from './cta-group.pipe';
                 <div
                   *ngFor="
                     let awardPost of footer?.awardsCollection?.items;
+                    let isFirst = first;
                     trackBy: trackByFn
                   "
                   class="col-12 md:col-6 lg:col-4"
                 >
-                  <dhb-award-post [awardPost]="awardPost" />
+                  <dhb-award-post
+                    [awardPost]="awardPost"
+                    [priorityImage]="isFirst"
+                  />
                 </div>
               </div>
             </div>
@@ -116,6 +120,7 @@ import { CTAGroupPipe } from './cta-group.pipe';
                 [ngSrc]="path + '/assets/dehub/logo-dehub-white.svg'"
                 height="25"
                 width="107"
+                priority="false"
                 alt="DeHub logo"
               />
               <h6 *ngIf="footer.copyright" class="uppercase font-bold text-xs">

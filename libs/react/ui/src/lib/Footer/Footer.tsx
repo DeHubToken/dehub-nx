@@ -64,7 +64,7 @@ function Footer({ footer, ctaGroup = 5, landing, logo }: FooterProps) {
               <div className="grid">
                 {awards.map((awardPost, index) => (
                   <div key={index} className="col-12 md:col-6 lg:col-4">
-                    <AwardPost awardPost={awardPost} />
+                    <AwardPost awardPost={awardPost} priority={index === 0} />
                   </div>
                 ))}
               </div>
@@ -102,7 +102,7 @@ function Footer({ footer, ctaGroup = 5, landing, logo }: FooterProps) {
 
             <div className="flex align-items-end gap-2 mb-2">
               {/* Logo */}
-              <Logo logo={logo} />
+              <Logo logo={logo} priority={false} />
               <h6 className="uppercase font-bold text-xs">
                 {footer?.copyright}
               </h6>

@@ -39,13 +39,18 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
         styleClass="feature p-card-shadow h-full"
       >
         <ng-template pTemplate="header">
-          <div class="picture-frame">
+          <div class="picture-frame" [class.wide]="numOfVisibleImages === 1">
             <i
               *ngIf="featurePost.videoUrl"
               class="fad fa-play-circle"
               (click)="onVideoPlayClicked()"
             ></i>
-            <dhb-heavy-picture [container]="featurePost" />
+            <dhb-heavy-picture
+              [container]="featurePost"
+              [autoHeight]="false"
+              [numOfVisibleImages]="numOfVisibleImages"
+              [priority]="priorityImage"
+            />
           </div>
         </ng-template>
 
@@ -76,12 +81,38 @@ import { ContentfulDraftDirective } from '../../../directives/contentful-draft/c
           height: 100%;
         }
       }
+
+      .picture-frame {
+        height: 15rem !important;
+      }
+      @media screen and (min-width: 450px) {
+        .picture-frame {
+          height: 36rem !important;
+        }
+      }
+      @media screen and (min-width: 992px) {
+        .picture-frame {
+          height: 20rem !important;
+        }
+      }
+      @media screen and (min-width: 1250px) {
+        .picture-frame {
+          height: 26rem !important;
+        }
+      }
+      @media screen and (min-width: 1350px) {
+        .picture-frame.wide {
+          height: 40rem !important;
+        }
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeaturePostComponent implements OnInit {
   @Input() featurePost!: FeaturePostFragment;
+  @Input() priorityImage = false;
+  @Input() numOfVisibleImages = 1;
 
   constructor(
     @Inject(WINDOW) private readonly windowRef: Window,

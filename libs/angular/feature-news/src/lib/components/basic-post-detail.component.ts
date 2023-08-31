@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ContentfulDraftDirective } from '@dehub/angular/ui/directives/contentful-draft/contentful-draft.directive';
+import { ContentfulImageAltPipe } from '@dehub/angular/ui/pipes/contentful-image-alt/contentful-image-alt.pipe';
 import { ContentfulRichMarkupPipe } from '@dehub/angular/ui/pipes/contentful-rich-markup/contentful-rich-markup.pipe';
 import { SafeHtmlPipe } from '@dehub/angular/ui/pipes/safe-html/safe-html.pipe';
 import { BasicPostDetailFragment } from '@dehub/shared/model';
@@ -17,9 +18,11 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
     // Angular
     NgIf,
     SafeHtmlPipe,
+    NgOptimizedImage,
     // UI
     ContentfulDraftDirective,
     ContentfulRichMarkupPipe,
+    ContentfulImageAltPipe,
   ],
   template: `
     <ng-container *ngIf="basicPostDetail">
@@ -30,9 +33,15 @@ import { BasicPostDetailFragment } from '@dehub/shared/model';
         <!-- Main Picture -->
         <ng-container *ngIf="basicPostDetail.mainPicture as mainPicture">
           <img
+            *ngIf="mainPicture.url"
             [dhbContentfulDraft]="mainPicture.sys"
-            [src]="mainPicture.url"
-            [alt]="mainPicture.title"
+            [ngSrc]="mainPicture.url"
+            [width]="mainPicture.width"
+            [height]="mainPicture.height"
+            [priority]="true"
+            [alt]="mainPicture | dhbContentfulImageAlt"
+            sizes="(max-width: 1200px) 50vw, 23vw"
+            class="h-auto"
           />
         </ng-container>
 
