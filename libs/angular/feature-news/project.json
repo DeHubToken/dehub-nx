@@ -10,12 +10,11 @@
       "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-news"],
       "options": {
         "jestConfig": "libs/angular/feature-news/jest.config.ts",
-        "passWithNoTests": true,
         "bail": 1
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/angular/feature-news/src/**/*.ts",

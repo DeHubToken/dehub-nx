@@ -47,7 +47,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/moralis/cloud/**/*.ts"]
@@ -58,7 +58,6 @@
       "outputs": ["{workspaceRoot}/coverage/apps/moralis/cloud"],
       "options": {
         "jestConfig": "apps/moralis/cloud/jest.config.ts",
-        "passWithNoTests": true,
         "bail": 1
       }
     },

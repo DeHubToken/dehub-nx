@@ -10,12 +10,11 @@
       "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-home"],
       "options": {
         "jestConfig": "libs/angular/feature-home/jest.config.ts",
-        "passWithNoTests": true,
         "bail": 1
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/angular/feature-home/src/**/*.ts",

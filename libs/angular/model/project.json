@@ -10,12 +10,11 @@
       "outputs": ["{workspaceRoot}/coverage/libs/angular/model"],
       "options": {
         "jestConfig": "libs/angular/model/jest.config.ts",
-        "passWithNoTests": true,
         "bail": 1
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/angular/model/src/**/*.ts",

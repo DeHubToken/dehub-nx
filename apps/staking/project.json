@@ -100,7 +100,7 @@
       "defaultConfiguration": "development"
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/staking/**/*.{ts,tsx,js,jsx}"],
@@ -112,7 +112,6 @@
       "outputs": ["{workspaceRoot}/coverage/apps/staking"],
       "options": {
         "jestConfig": "apps/staking/jest.config.ts",
-        "passWithNoTests": true,
         "bail": 1
       }
     },

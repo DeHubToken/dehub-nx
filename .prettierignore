@@ -13,3 +13,5 @@
 !**/*.js
 pnpm-lock.yaml
 
+
+/.nx/cache

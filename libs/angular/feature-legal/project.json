@@ -10,12 +10,11 @@
       "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-legal"],
       "options": {
         "jestConfig": "libs/angular/feature-legal/jest.config.ts",
-        "passWithNoTests": true,
         "bail": 1
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/angular/feature-legal/src/**/*.ts",
