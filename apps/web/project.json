@@ -80,16 +80,16 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/web/src/environments/environment.ts",
-              "with": "apps/web/src/environments/environment.prod.ts"
+              "replace": "./apps/web/src/environments/environment.ts",
+              "with": "./apps/web/src/environments/environment.prod.ts"
             }
           ]
         },
         "preview": {
           "fileReplacements": [
             {
-              "replace": "apps/web/src/environments/environment.ts",
-              "with": "apps/web/src/environments/environment.preview.ts"
+              "replace": "./apps/web/src/environments/environment.ts",
+              "with": "./apps/web/src/environments/environment.preview.ts"
             }
           ],
           "outputPath": "dist/apps/web.preview/web"

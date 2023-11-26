@@ -52,16 +52,16 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/staking/src/environments/environment.ts",
-              "with": "apps/staking/src/environments/environment.prod.ts"
+              "replace": "./apps/staking/src/environments/environment.ts",
+              "with": "./apps/staking/src/environments/environment.prod.ts"
             }
           ]
         },
         "preview": {
           "fileReplacements": [
             {
-              "replace": "apps/staking/src/environments/environment.ts",
-              "with": "apps/staking/src/environments/environment.preview.ts"
+              "replace": "./apps/staking/src/environments/environment.ts",
+              "with": "./apps/staking/src/environments/environment.preview.ts"
             }
           ],
           "outputPath": "dist/apps/staking.preview/staking"
