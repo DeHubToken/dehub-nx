@@ -15,7 +15,8 @@
         "sourceMap": false,
         "extractLicenses": false,
         "target": "node",
-        "compiler": "tsc"
+        "compiler": "tsc",
+        "webpackConfig": "apps/moralis/cloud/webpack.config.js"
       },
       "configurations": {
         "preview": {

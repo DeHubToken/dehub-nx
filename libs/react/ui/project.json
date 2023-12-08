@@ -8,7 +8,6 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/react/ui/**/*.{ts,tsx,js,jsx}"],
         "maxWarnings": 0
       }
     },
