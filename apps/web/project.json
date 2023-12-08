@@ -80,16 +80,16 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/web/src/environments/environment.ts",
-              "with": "apps/web/src/environments/environment.prod.ts"
+              "replace": "./apps/web/src/environments/environment.ts",
+              "with": "./apps/web/src/environments/environment.prod.ts"
             }
           ]
         },
         "preview": {
           "fileReplacements": [
             {
-              "replace": "apps/web/src/environments/environment.ts",
-              "with": "apps/web/src/environments/environment.preview.ts"
+              "replace": "./apps/web/src/environments/environment.ts",
+              "with": "./apps/web/src/environments/environment.preview.ts"
             }
           ],
           "outputPath": "dist/apps/web.preview/web"
@@ -115,13 +115,13 @@
           "host": "dev.localhost"
         },
         "production": {
-          "browserTarget": "web:build:production",
           "port": 8302,
-          "servePath": "/web"
+          "servePath": "/web",
+          "buildTarget": "web:build:production"
         },
         "development": {
-          "browserTarget": "web:build:development",
-          "port": 8301
+          "port": 8301,
+          "buildTarget": "web:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -129,13 +129,12 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "web:build"
+        "buildTarget": "web:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
-        "lintFilePatterns": ["apps/web/src/**/*.ts", "apps/web/src/**/*.html"],
         "maxWarnings": 0
       }
     },
@@ -144,7 +143,6 @@
       "outputs": ["{workspaceRoot}/coverage/apps/web"],
       "options": {
         "jestConfig": "apps/web/jest.config.ts",
-        "passWithNoTests": true,
         "bail": 1
       }
     },

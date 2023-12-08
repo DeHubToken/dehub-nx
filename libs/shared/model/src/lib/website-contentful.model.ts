@@ -107,6 +107,8 @@ export interface AnnouncementContentLinks {
 export interface AnnouncementContentResources {
   __typename?: 'AnnouncementContentResources';
   block: Array<ResourceLink>;
+  hyperlink: Array<ResourceLink>;
+  inline: Array<ResourceLink>;
 }
 
 export interface AnnouncementFilter {
@@ -336,9 +338,6 @@ export interface AssetLinkingCollections {
 export interface AssetLinkingCollectionsAwardPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsAwardPostCollectionOrder>>
-  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -346,9 +345,6 @@ export interface AssetLinkingCollectionsAwardPostCollectionArgs {
 export interface AssetLinkingCollectionsBasicPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsBasicPostCollectionOrder>>
-  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -363,9 +359,6 @@ export interface AssetLinkingCollectionsEntryCollectionArgs {
 export interface AssetLinkingCollectionsFeaturePostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsFeaturePostCollectionOrder>>
-  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -373,9 +366,6 @@ export interface AssetLinkingCollectionsFeaturePostCollectionArgs {
 export interface AssetLinkingCollectionsGrandPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsGrandPostCollectionOrder>>
-  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -383,9 +373,6 @@ export interface AssetLinkingCollectionsGrandPostCollectionArgs {
 export interface AssetLinkingCollectionsPersonPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsPersonPostCollectionOrder>>
-  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -393,9 +380,6 @@ export interface AssetLinkingCollectionsPersonPostCollectionArgs {
 export interface AssetLinkingCollectionsProductCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsProductCollectionOrder>>
-  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 }
@@ -403,162 +387,8 @@ export interface AssetLinkingCollectionsProductCollectionArgs {
 export interface AssetLinkingCollectionsThumbnailPostCollectionArgs {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  order?: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsThumbnailPostCollectionOrder>>
-  >;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
-}
-
-export enum AssetLinkingCollectionsAwardPostCollectionOrder {
-  IsRoundedAsc = 'isRounded_ASC',
-  IsRoundedDesc = 'isRounded_DESC',
-  LinkAsc = 'link_ASC',
-  LinkDesc = 'link_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-}
-
-export enum AssetLinkingCollectionsBasicPostCollectionOrder {
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  SummaryAsc = 'summary_ASC',
-  SummaryDesc = 'summary_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-}
-
-export enum AssetLinkingCollectionsFeaturePostCollectionOrder {
-  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
-  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
-  CallToActionUrlAsc = 'callToActionUrl_ASC',
-  CallToActionUrlDesc = 'callToActionUrl_DESC',
-  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
-  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  VideoUrlAsc = 'videoUrl_ASC',
-  VideoUrlDesc = 'videoUrl_DESC',
-}
-
-export enum AssetLinkingCollectionsGrandPostCollectionOrder {
-  CallToActionButtonLabelAsc = 'callToActionButtonLabel_ASC',
-  CallToActionButtonLabelDesc = 'callToActionButtonLabel_DESC',
-  CallToActionUrlAsc = 'callToActionUrl_ASC',
-  CallToActionUrlDesc = 'callToActionUrl_DESC',
-  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
-  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
-  SubtitleAsc = 'subtitle_ASC',
-  SubtitleDesc = 'subtitle_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  VideoUrlAsc = 'videoUrl_ASC',
-  VideoUrlDesc = 'videoUrl_DESC',
-}
-
-export enum AssetLinkingCollectionsPersonPostCollectionOrder {
-  DescriptionAsc = 'description_ASC',
-  DescriptionDesc = 'description_DESC',
-  GithubAsc = 'github_ASC',
-  GithubDesc = 'github_DESC',
-  InstagramAsc = 'instagram_ASC',
-  InstagramDesc = 'instagram_DESC',
-  LinkedinAsc = 'linkedin_ASC',
-  LinkedinDesc = 'linkedin_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  TwitterAsc = 'twitter_ASC',
-  TwitterDesc = 'twitter_DESC',
-}
-
-export enum AssetLinkingCollectionsProductCollectionOrder {
-  AvailableQuantityAsc = 'availableQuantity_ASC',
-  AvailableQuantityDesc = 'availableQuantity_DESC',
-  CurrencyAsc = 'currency_ASC',
-  CurrencyDesc = 'currency_DESC',
-  HardCapAsc = 'hardCap_ASC',
-  HardCapDesc = 'hardCap_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  PauseAsc = 'pause_ASC',
-  PauseDesc = 'pause_DESC',
-  PriceAsc = 'price_ASC',
-  PriceDesc = 'price_DESC',
-  SkuAsc = 'sku_ASC',
-  SkuDesc = 'sku_DESC',
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  SoftCapAsc = 'softCap_ASC',
-  SoftCapDesc = 'softCap_DESC',
-  SoldOutLabelAsc = 'soldOutLabel_ASC',
-  SoldOutLabelDesc = 'soldOutLabel_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-}
-
-export enum AssetLinkingCollectionsThumbnailPostCollectionOrder {
-  IsVideoAsc = 'isVideo_ASC',
-  IsVideoDesc = 'isVideo_DESC',
-  LinkAsc = 'link_ASC',
-  LinkDesc = 'link_DESC',
-  ShowHeavyPictureOnHoverAsc = 'showHeavyPictureOnHover_ASC',
-  ShowHeavyPictureOnHoverDesc = 'showHeavyPictureOnHover_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
 }
 
 export enum AssetOrder {
@@ -904,6 +734,8 @@ export interface BasicPostDescriptionLinks {
 export interface BasicPostDescriptionResources {
   __typename?: 'BasicPostDescriptionResources';
   block: Array<ResourceLink>;
+  hyperlink: Array<ResourceLink>;
+  inline: Array<ResourceLink>;
 }
 
 export interface BasicPostFilter {
@@ -2376,6 +2208,8 @@ export interface FooterAddressLinks {
 export interface FooterAddressResources {
   __typename?: 'FooterAddressResources';
   block: Array<ResourceLink>;
+  hyperlink: Array<ResourceLink>;
+  inline: Array<ResourceLink>;
 }
 
 export interface FooterAwardsCollection {
@@ -3227,6 +3061,8 @@ export interface LegalPostDescriptionLinks {
 export interface LegalPostDescriptionResources {
   __typename?: 'LegalPostDescriptionResources';
   block: Array<ResourceLink>;
+  hyperlink: Array<ResourceLink>;
+  inline: Array<ResourceLink>;
 }
 
 export interface LegalPostFilter {
@@ -8406,6 +8242,8 @@ export interface ProductFullDescriptionLinks {
 export interface ProductFullDescriptionResources {
   __typename?: 'ProductFullDescriptionResources';
   block: Array<ResourceLink>;
+  hyperlink: Array<ResourceLink>;
+  inline: Array<ResourceLink>;
 }
 
 export interface ProductLinkingCollections {
@@ -9251,6 +9089,8 @@ export interface SectionPostDescriptionLinks {
 export interface SectionPostDescriptionResources {
   __typename?: 'SectionPostDescriptionResources';
   block: Array<ResourceLink>;
+  hyperlink: Array<ResourceLink>;
+  inline: Array<ResourceLink>;
 }
 
 export interface SectionPostFilter {

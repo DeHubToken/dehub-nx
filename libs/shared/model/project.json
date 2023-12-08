@@ -5,10 +5,9 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/model/**/*.ts"],
         "maxWarnings": 0
       }
     },
@@ -17,7 +16,6 @@
       "outputs": ["{workspaceRoot}/coverage/libs/shared/model"],
       "options": {
         "jestConfig": "libs/shared/model/jest.config.ts",
-        "passWithNoTests": true,
         "bail": 1
       }
     }

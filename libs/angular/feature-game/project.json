@@ -10,17 +10,12 @@
       "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-game"],
       "options": {
         "jestConfig": "libs/angular/feature-game/jest.config.ts",
-        "passWithNoTests": true,
         "bail": 1
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
-        "lintFilePatterns": [
-          "libs/angular/feature-game/src/**/*.ts",
-          "libs/angular/feature-game/src/**/*.html"
-        ],
         "maxWarnings": 0
       }
     }
