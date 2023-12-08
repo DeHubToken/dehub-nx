@@ -25,7 +25,7 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.14.0
     with:
       node-version: '18.10.0'
-      pnpm-version: '8.6.10'
+      pnpm-version: '8.9.0'
       number-of-agents: 4
       install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
@@ -43,7 +43,7 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.14.0
     with:
       node-version: '18.10.0'
-      pnpm-version: '8.6.10'
+      pnpm-version: '8.9.0'
       number-of-agents: 4
       install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
@@ -58,6 +58,6 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.14.0
     with:
       node-version: '18.10.0'
-      pnpm-version: '8.6.10'
+      pnpm-version: '8.9.0'
       number-of-agents: 4
       install-commands: pnpm install --frozen-lockfile
