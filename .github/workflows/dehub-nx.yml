@@ -26,13 +26,11 @@ jobs:
     with:
       node-version: '20.10.0'
       pnpm-version: '8.9.0'
-      number-of-agents: 4
+      number-of-agents: 3
       install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
-        pnpm build:preview
-        pnpm build
-        pnpm test
-        pnpm lint
+        pnpm nx affected -t build --configuration=preview --parallel=2
+        pnpm nx affected -t lint,test,build --parallel=2
       final-commands: |
         NX_CLOUD_DISTRIBUTED_EXECUTION=false pnpm deploy:preview
         NX_CLOUD_DISTRIBUTED_EXECUTION=false pnpm deploy:prod
@@ -44,12 +42,10 @@ jobs:
     with:
       node-version: '20.10.0'
       pnpm-version: '8.9.0'
-      number-of-agents: 4
+      number-of-agents: 3
       install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
-        pnpm build:preview
-        pnpm test
-        pnpm lint
+        pnpm nx affected -t lint,test,build --configuration=preview --parallel=2
       final-commands: |
         NX_CLOUD_DISTRIBUTED_EXECUTION=false pnpm deploy:preview-draft
 
@@ -59,5 +55,5 @@ jobs:
     with:
       node-version: '20.10.0'
       pnpm-version: '8.9.0'
-      number-of-agents: 4
+      number-of-agents: 3
       install-commands: pnpm install --frozen-lockfile
