@@ -26,7 +26,7 @@ jobs:
     with:
       node-version: '20.10.0'
       pnpm-version: '8.9.0'
-      number-of-agents: 3
+      number-of-agents: 4
       install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
         pnpm nx affected -t build --configuration=preview --parallel=2
@@ -42,7 +42,7 @@ jobs:
     with:
       node-version: '20.10.0'
       pnpm-version: '8.9.0'
-      number-of-agents: 3
+      number-of-agents: 4
       install-commands: pnpm install --frozen-lockfile
       parallel-commands-on-agents: |
         pnpm nx affected -t lint,test,build --configuration=preview --parallel=2
@@ -55,5 +55,5 @@ jobs:
     with:
       node-version: '20.10.0'
       pnpm-version: '8.9.0'
-      number-of-agents: 3
+      number-of-agents: 4
       install-commands: pnpm install --frozen-lockfile
