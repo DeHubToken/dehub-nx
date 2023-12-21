@@ -24,7 +24,7 @@ jobs:
     name: Main
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.14.0
     with:
-      node-version: '18.10.0'
+      node-version: '20.10.0'
       pnpm-version: '8.9.0'
       number-of-agents: 4
       install-commands: pnpm install --frozen-lockfile
@@ -42,7 +42,7 @@ jobs:
     name: Pull Request
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.14.0
     with:
-      node-version: '18.10.0'
+      node-version: '20.10.0'
       pnpm-version: '8.9.0'
       number-of-agents: 4
       install-commands: pnpm install --frozen-lockfile
@@ -57,7 +57,7 @@ jobs:
     name: Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.14.0
     with:
-      node-version: '18.10.0'
+      node-version: '20.10.0'
       pnpm-version: '8.9.0'
       number-of-agents: 4
       install-commands: pnpm install --frozen-lockfile
