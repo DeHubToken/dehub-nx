@@ -17,7 +17,7 @@ import { Toast } from 'primereact/toast';
 import { useMemo, useRef, useState } from 'react';
 import { usePickStakingContract } from '../hooks/useContract';
 import { useFetchPool, usePool, useUserInfo } from '../state/application/hooks';
-import { RestakeModal, StakeModal, UnstakeModal } from './components';
+import { /* RestakeModal, */ StakeModal, UnstakeModal } from './components';
 
 const MyStakingBox = () => {
   const { account } = useWeb3Context();
@@ -28,7 +28,7 @@ const MyStakingBox = () => {
   const { updatePool, updateUser } = useFetchPool();
   const [openStakeModal, setOpenStakeModal] = useState<boolean>(false);
   const [openUnstakeModal, setOpenUnstakeModal] = useState<boolean>(false);
-  const [openRestakeModal, setOpenRestakeModal] = useState<boolean>(false);
+  // const [openRestakeModal, setOpenRestakeModal] = useState<boolean>(false);
   const [isTxPending, setIsTxPending] = useState(false);
 
   const toast = useRef<Toast>(null);
@@ -45,9 +45,9 @@ const MyStakingBox = () => {
       setOpenStakeModal(showOrHide);
     } else if (modal === 'unstake') {
       setOpenUnstakeModal(showOrHide);
-    } else if (modal === 'restake') {
+    } /* else if (modal === 'restake') {
       setOpenRestakeModal(showOrHide);
-    }
+    } */
   };
 
   const handleClaim = async () => {
@@ -299,7 +299,7 @@ const MyStakingBox = () => {
                     }
                     label="Unstake"
                   />
-                  <Button
+                  {/* <Button
                     className="p-button mt-2 justify-content-center mr-3 text-white border-primary"
                     onClick={() => handleModal('restake', true)}
                     disabled={
@@ -308,7 +308,7 @@ const MyStakingBox = () => {
                       isTxPending
                     }
                     label="Restake"
-                  />
+                  /> */}
                   <Button
                     className="p-button-outlined mt-2 justify-content-center text-white border-primary"
                     onClick={() => handleClaim()}
@@ -333,10 +333,10 @@ const MyStakingBox = () => {
         open={openUnstakeModal}
         onHide={() => handleModal('unstake', false)}
       />
-      <RestakeModal
+      {/* <RestakeModal
         open={openRestakeModal}
         onHide={() => handleModal('restake', false)}
-      />
+      /> */}
     </>
   );
 };
