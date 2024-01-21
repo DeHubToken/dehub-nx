@@ -143,7 +143,7 @@ export class AddressFormComponent implements OnInit, OnDestroy {
     if (name.value.concat(line1.value, city.value).length > 0) {
       return `${name.value} | ${line1.value} | ${city.value}...`;
     }
-    return 'Please fill in your shipping address';
+    return 'Shipping Details';
   }
 
   clearAddress() {
