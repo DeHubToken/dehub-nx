@@ -18,7 +18,7 @@ export enum ReceiptStatus {
   'delivered',
 }
 
-export type Currency = 'BNB' | 'DeHub' | 'BUSD';
+export type Currency = 'BNB' | 'DeHub' | 'BUSD' | 'USDT';
 
 /**
  * A set of product values required for Order initialization on Moralis.
