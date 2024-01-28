@@ -1,0 +1,13 @@
+fragment PageSectionDappPosts on PageSectionDappPosts {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  description
+  handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    items {
+      ...DappPost
+    }
+  }
+}

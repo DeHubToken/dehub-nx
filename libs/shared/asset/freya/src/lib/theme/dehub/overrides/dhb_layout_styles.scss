@@ -1,0 +1,173 @@
+@import '../variables/dhb_variables';
+
+$menuBgColor: transparent;
+
+/* ---------------------------------- Main ---------------------------------- */
+
+a {
+  color: $dhb_link_color;
+
+  &:hover {
+    color: $dhb_link_hover_color;
+    text-decoration: underline;
+  }
+}
+
+.layout-wrapper {
+  background: $dhb_gradient1;
+
+  .layout-topbar {
+    position: relative;
+    background: transparent;
+    height: 90px;
+    .layout-topbar-wrapper {
+      .layout-topbar-left {
+        padding-left: 40px;
+        .layout-topbar-logo {
+          height: 25px;
+          > img {
+            height: 25px;
+          }
+        }
+      }
+      .layout-topbar-right {
+        padding-right: 20px;
+      }
+      .menu-wrapper {
+        background-color: transparent;
+        .layout-menu-container {
+          .layout-menu {
+            padding: 5px 0 0 0;
+          }
+        }
+      }
+    }
+  }
+
+  .layout-rightpanel {
+    .rightpanel-wrapper {
+      position: relative;
+      height: 100%;
+
+      .rightpanel-header {
+        text-align: center;
+
+        .profile {
+          padding: 12px;
+        }
+      }
+
+      .rightpanel-actions {
+        padding: 12px 6px 36px;
+
+        .actions {
+          .action-buttons {
+            .p-col-6,
+            .p-md-4 {
+              padding: 0.2em;
+            }
+          }
+        }
+      }
+
+      .rightpanel-chat {
+        .ui-tabs {
+          .ui-tabs-nav {
+            background-color: lighten($contentShade200, 4%);
+
+            li.ui-tabs-header {
+              padding: 1rem;
+
+              a {
+                font-size: 12px;
+                font-weight: 500;
+              }
+              > span {
+                font-size: 10px;
+              }
+              &.ui-state-active {
+                background-color: $contentShade200;
+              }
+            }
+          }
+
+          .ui-tabs-panels {
+            background-color: lighten($contentShade200, 4%);
+            .ui-tabs-panel {
+              padding: 0;
+
+              .chat {
+                .chat-content {
+                  .chat-message {
+                    .message {
+                      width: 80%;
+                    }
+                  }
+                }
+                .chat-input {
+                  input {
+                    width: 105px;
+                    margin-right: 7px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .layout-main {
+    // Fixes an issue with animated items overlaping with other items on safari
+    overflow: hidden;
+    padding-top: 20px;
+  }
+}
+
+/* ------------------------------ Media Queries ----------------------------- */
+@media (max-width: $tabletBreakpoint) {
+  .layout-wrapper {
+    .layout-topbar {
+      .layout-topbar-wrapper {
+        .layout-topbar-left {
+          padding-left: 16px;
+          .menu-button {
+            margin-top: 5px;
+          }
+        }
+        .layout-topbar-right {
+          padding-right: 16px;
+        }
+        .menu-wrapper {
+          background-color: $dhb_gray_1;
+          z-index: 998;
+          padding-top: 95px;
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $mobileBreakpoint) {
+  .layout-wrapper {
+    .layout-topbar {
+      height: 120px;
+    }
+  }
+}
+
+@import 'layout/dhb_typography.scss';
+@import 'widgets/dhb_tabview_layout_styles';
+@import 'widgets/dhb_overview_box_layout_styles';
+@import 'components/button/dhb_splitbutton.scss';
+@import 'components/panel/dhb_card.scss';
+@import 'components/panel/dhb_accordion';
+@import 'components/panel/dhb_fieldset';
+@import 'components/overlay/dhb_dialog';
+@import 'components/overlay/dhb_loader';
+@import 'components/data/dhb_carousel';
+@import 'components/input/dhb_inputtext';
+@import 'components/input/dhb_inputmask';
+@import 'components/misc/dhb_inplace';

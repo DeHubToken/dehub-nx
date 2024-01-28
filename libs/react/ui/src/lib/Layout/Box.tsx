@@ -1,0 +1,16 @@
+import classNames from 'classnames';
+import React from 'react';
+
+interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
+
+const Box = ({ className, children, ...props }: BoxProps) => {
+  return (
+    <div className={classNames(`box ${className ?? ''}`)} {...props}>
+      {children}
+    </div>
+  );
+};
+
+export default Box;

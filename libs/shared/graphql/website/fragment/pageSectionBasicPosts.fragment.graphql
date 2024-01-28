@@ -1,0 +1,23 @@
+fragment PageSectionBasicPosts on PageSectionBasicPosts {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  description
+  handpickedPostsCollection(limit: 5, preview: $isPreview) {
+    items {
+      ...BasicPost
+    }
+  }
+  postsByCategory {
+    linkedFrom {
+      basicPostCollection(limit: 20, preview: $isPreview) {
+        items {
+          ...BasicPost
+        }
+      }
+    }
+  }
+  swiperResponsiveOptions
+}

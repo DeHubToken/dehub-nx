@@ -1,0 +1,25 @@
+{
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "no-console": [
+          "error",
+          { "allow": ["warn", "error", "info", "debug"] }
+        ],
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(warn|error|info|debug)$/]",
+            "message": "Unexpected property on console object was called"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          { "argsIgnorePattern": "^_" }
+        ],
+        "@typescript-eslint/no-empty-function": "off"
+      }
+    }
+  ]
+}

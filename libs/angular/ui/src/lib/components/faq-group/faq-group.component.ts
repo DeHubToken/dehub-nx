@@ -1,0 +1,76 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { FaqGroupFragment, FaqItemFragment } from '@dehub/shared/model';
+import { isNotNil } from '@dehub/shared/utils';
+
+import { NgFor, NgIf } from '@angular/common';
+import { trackByContentfulIdFn } from '@dehub/angular/util';
+import { AccordionModule } from 'primeng/accordion';
+import { ContentfulDraftDirective } from '../../directives/contentful-draft/contentful-draft.directive';
+
+@Component({
+  selector: 'dhb-faq-group',
+  standalone: true,
+  imports: [
+    // Angular
+    NgIf,
+    NgFor,
+    // PrimeNG
+    AccordionModule,
+    // UI
+    ContentfulDraftDirective,
+  ],
+  template: `
+    <div
+      *ngIf="faqGroup"
+      [dhbContentfulDraft]="faqGroup.sys"
+      class="card border-round bg-gradient-2"
+    >
+      <h3>{{ faqGroup.name }}</h3>
+
+      <!-- Faq Items -->
+      <p-accordion>
+        <ng-container
+          *ngFor="let faqItem of faqItems; let i = index; trackBy: trackByFn"
+        >
+          <ng-container *ngIf="faqItem.question">
+            <p-accordionTab [selected]="i === 0">
+              <!-- Header -->
+              <ng-template pTemplate="header">
+                <div [dhbContentfulDraft]="faqItem.sys">
+                  {{ faqItem.question }}
+                </div>
+              </ng-template>
+              <!-- Content -->
+              <ng-template pTemplate="content">
+                <div [dhbContentfulDraft]="faqItem.sys">
+                  {{ faqItem.answer }}
+                </div>
+              </ng-template>
+            </p-accordionTab>
+          </ng-container>
+        </ng-container>
+      </p-accordion>
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class FaqGroupComponent implements OnInit {
+  @Input() faqGroup!: FaqGroupFragment;
+
+  faqItems: FaqItemFragment[] = [];
+
+  trackByFn = trackByContentfulIdFn<FaqItemFragment>();
+
+  constructor() {}
+
+  ngOnInit() {
+    this.faqItems = (this.faqGroup.faqItemCollection?.items ?? []).filter(
+      isNotNil
+    );
+  }
+}

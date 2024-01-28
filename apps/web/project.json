@@ -1,0 +1,211 @@
+{
+  "name": "web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/web/src",
+  "prefix": "dhb",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/web.prod/web",
+        "index": "apps/web/src/index.html",
+        "main": "apps/web/src/main.ts",
+        "polyfills": "apps/web/src/polyfills.ts",
+        "tsConfig": "apps/web/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/web/src/assets",
+          "apps/web/src/dehub.webmanifest",
+          {
+            "input": "libs/shared/asset/dehub/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts"],
+            "output": "assets/dehub"
+          },
+          {
+            "input": "libs/shared/asset/freya/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts", "**/*.scss"],
+            "output": "assets"
+          }
+        ],
+        "styles": ["apps/web/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/asset/dehub/src/lib"]
+        },
+        "scripts": [],
+        "allowedCommonJsDependencies": [
+          "lodash",
+          "bn.js",
+          "contentful-management",
+          "google-libphonenumber",
+          "@contentful/rich-text-html-renderer",
+          "@contentful/rich-text-plain-text-renderer",
+          "@contentful/rich-text-types",
+          "js-sha3",
+          "aes-js",
+          "scrypt-js",
+          "bech32",
+          "is-typedarray",
+          "typedarray-to-buffer",
+          "hash.js",
+          "bignumber.js",
+          "query-string",
+          "@walletconnect/environment",
+          "cross-fetch",
+          "qrcode",
+          "@stablelib/ed25519"
+        ],
+        "budgets": [
+          {
+            "type": "initial",
+            "maximumWarning": "2mb",
+            "maximumError": "5mb"
+          },
+          {
+            "type": "anyComponentStyle",
+            "maximumWarning": "2kb",
+            "maximumError": "20kb"
+          }
+        ],
+        "outputHashing": "all",
+        "deployUrl": "/web/",
+        "baseHref": "/web",
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/web/ngsw-config.json"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "./apps/web/src/environments/environment.ts",
+              "with": "./apps/web/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "preview": {
+          "fileReplacements": [
+            {
+              "replace": "./apps/web/src/environments/environment.ts",
+              "with": "./apps/web/src/environments/environment.preview.ts"
+            }
+          ],
+          "outputPath": "dist/apps/web.preview/web"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "outputHashing": "none",
+          "deployUrl": "",
+          "baseHref": "/"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "options": {
+          "host": "dev.localhost"
+        },
+        "production": {
+          "port": 8302,
+          "servePath": "/web",
+          "buildTarget": "web:build:production"
+        },
+        "development": {
+          "port": 8301,
+          "buildTarget": "web:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "web:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "maxWarnings": 0
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/web"],
+      "options": {
+        "jestConfig": "apps/web/jest.config.ts",
+        "bail": 1
+      }
+    },
+    "deploy-preview-draft": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 --alias=nx -d ../../dist/apps/web.preview -o",
+        "cwd": "netlify/web.preview"
+      }
+    },
+    "deploy-preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web.preview -p -o",
+        "cwd": "netlify/web.preview"
+      }
+    },
+    "deploy-prod-draft": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=a5e07eeb-b383-41df-9bc1-c9dcb4fd93b6 --alias=nx -d ../../dist/apps/web.prod -o",
+        "cwd": "netlify/web.prod"
+      }
+    },
+    "deploy-prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=a5e07eeb-b383-41df-9bc1-c9dcb4fd93b6 -d ../../dist/apps/web.prod -p -o",
+        "cwd": "netlify/web.prod"
+      }
+    },
+    "demo": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9301 -o web",
+        "cwd": "dist/apps/web.prod"
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9301 -o web",
+        "cwd": "dist/apps/web.preview"
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/web/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "web:serve",
+        "port": 8302
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "web:serve:production"
+        }
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:app"],
+  "implicitDependencies": ["shared-asset-dehub", "shared-asset-freya"],
+  "namedInputs": {
+    "projectSpecificFiles": ["{workspaceRoot}/netlify/web*/*.toml"]
+  }
+}

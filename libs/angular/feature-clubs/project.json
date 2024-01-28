@@ -1,0 +1,24 @@
+{
+  "name": "angular-feature-clubs",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/angular/feature-clubs/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-clubs"],
+      "options": {
+        "jestConfig": "libs/angular/feature-clubs/jest.config.ts",
+        "bail": 1
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}

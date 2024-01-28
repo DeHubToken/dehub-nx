@@ -1,0 +1,24 @@
+{
+  "name": "angular-core",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/angular/core/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/core"],
+      "options": {
+        "jestConfig": "libs/angular/core/jest.config.ts",
+        "bail": 1
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}

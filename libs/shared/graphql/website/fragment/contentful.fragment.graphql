@@ -1,0 +1,18 @@
+fragment Sys on Sys {
+  firstPublishedAt
+  publishedAt
+  id
+}
+
+fragment Asset on Asset {
+  sys {
+    ...Sys
+  }
+  title
+  fileName
+  description
+  width
+  height
+  url
+  contentType
+}

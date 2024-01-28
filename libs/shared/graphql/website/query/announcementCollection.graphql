@@ -1,0 +1,21 @@
+query announcementCollection($now: DateTime!, $isPreview: Boolean = false) {
+  announcementCollection(
+    where: { start_lte: $now, end_gte: $now }
+    order: start_ASC
+    preview: $isPreview
+  ) {
+    items {
+      ...Announcement
+    }
+  }
+}
+
+query announcementCollectionCount($now: DateTime, $isPreview: Boolean = false) {
+  announcementCollection(
+    where: { start_lte: $now, end_gte: $now }
+    order: start_ASC
+    preview: $isPreview
+  ) {
+    total
+  }
+}

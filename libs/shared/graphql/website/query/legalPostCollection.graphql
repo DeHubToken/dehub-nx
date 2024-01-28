@@ -1,0 +1,7 @@
+query legalPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+  legalPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+    items {
+      ...LegalPost
+    }
+  }
+}

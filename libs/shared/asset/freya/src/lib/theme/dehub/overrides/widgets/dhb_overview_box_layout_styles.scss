@@ -1,0 +1,13 @@
+.overview-box {
+  position: relative;
+  .overview-info {
+    > *:first-child {
+      padding-right: 32px;
+    }
+  }
+  > i {
+    position: absolute;
+    float: right;
+    right: 20px;
+  }
+}

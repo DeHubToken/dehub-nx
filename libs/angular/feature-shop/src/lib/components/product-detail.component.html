@@ -1,0 +1,103 @@
+<ng-container *rxLet="productDetail$ as productDetail">
+  <div
+    [dhbContentfulDraft]="productDetail.sys"
+    class="card image-card shadow-8 mx-4 bg-gradient-2 pb-5 overflow-hidden"
+  >
+    <!-- Main Picture -->
+    <swiper-container
+      *ngIf="productDetail.picturesCollection?.items ?? [] as pictures"
+      dhbSwiper
+      [swiperOptions]="swiperOptions"
+      init="false"
+      [attr.grab-cursor]="pictures.length > 1"
+      [class.no-padding-bottom]="swiperIsClickable"
+    >
+      <swiper-slide
+        *ngFor="
+          let picture of pictures;
+          let isFirst = first;
+          trackBy: trackByFn
+        "
+        [lazy]="!isFirst"
+      >
+        <img
+          *ngIf="picture.url"
+          [dhbContentfulDraft]="picture.sys"
+          [ngSrc]="picture.url"
+          [width]="picture.width"
+          [height]="picture.height"
+          [priority]="isFirst"
+          [alt]="picture | dhbContentfulImageAlt"
+          sizes="(max-width: 1200px) 50vw, 23vw"
+          class="h-auto w-full"
+        />
+      </swiper-slide>
+    </swiper-container>
+
+    <div class="image-content px-4 xl:px-8">
+      <!-- Title -->
+      <h2 class="border-bottom-2 pb-1 mb-5">{{ productDetail.name || '' }}</h2>
+
+      <!-- Body -->
+      <div
+        class="flex flex-wrap sm:flex-nowrap justify-content-end align-items-start"
+      >
+        <div
+          [innerHtml]="
+            productDetail.fullDescription?.json
+              | dhbContentfulRichMarkup
+              | dhbSafeHtml
+          "
+          class="flex-grow pr-3 mb-4 line-height-3"
+        ></div>
+
+        <div class="min-w-full sm:min-w-max">
+          <!-- Meta Info -->
+          <div
+            *ngIf="productDetail.category as category"
+            class="card overview-box gray shadow-2 pt-1 pb-3 mb-3"
+          >
+            <div class="overview-info text-center w-full">
+              <h6 class="pt-3 pb-2 pr-0 mb-0">
+                <i [class]="category.icon + ' text-xl pr-2'"></i>
+                {{ category.name || '' }}
+              </h6>
+            </div>
+          </div>
+
+          <!-- Info Widget -->
+          <dhb-product-info
+            [productDetail]="productDetail"
+            [increaseFontSize]="true"
+          >
+            <!-- Buy / Coming Soon -->
+            <p-button
+              [routerLink]="
+                productDetail.pause
+                  ? null
+                  : [
+                      '/shop',
+                      {
+                        outlets: {
+                          modal: ['checkout', productDetail.slug]
+                        }
+                      }
+                    ]
+              "
+              [label]="productDetail.pause ? 'Coming Soon' : 'Buy'"
+              [disabled]="productDetail.pause ?? false"
+              icon="fa-solid fa-check"
+              styleClass="p-button-primary p-button-lg mt-3 block w-full"
+            />
+          </dhb-product-info>
+
+          <!-- Sales Widget -->
+          <dhb-product-sales [productSales$]="productSales$" />
+
+          <!-- Orders Widget -->
+          <dhb-product-orders [productOrders$]="productOrders$" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,16 @@
+[[redirects]]
+  from = "/"
+  to = "web/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/web/*"
+  to = "web/index.html"
+  status = 200
+
+# Staking
+[[redirects]]
+  from = "/staking/*"
+  to = "https://staking-dehub.netlify.app/staking/:splat"
+  status = 200
+  force = true

@@ -1,0 +1,19 @@
+fragment SectionPost on SectionPost {
+  sys {
+    ...Sys
+  }
+  title
+  showTitle
+  richDescription: description {
+    json
+  }
+  chartPost {
+    ...ChartPost
+  }
+  embedPost {
+    ...EmbedPost
+  }
+  columnWidth
+  alignCenter
+  titleSize
+}

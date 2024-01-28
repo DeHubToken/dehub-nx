@@ -1,0 +1,1592 @@
+/* eslint-disable */
+import * as models from '@dehub/shared/model';
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
+const defaultOptions = {} as const;
+export const SysFragmentDoc = gql`
+  fragment Sys on Sys {
+    firstPublishedAt
+    publishedAt
+    id
+  }
+`;
+export const AnnouncementFragmentDoc = gql`
+  fragment Announcement on Announcement {
+    sys {
+      ...Sys
+    }
+    header
+    icon
+    start
+    content {
+      json
+    }
+  }
+  ${SysFragmentDoc}
+`;
+export const AssetFragmentDoc = gql`
+  fragment Asset on Asset {
+    sys {
+      ...Sys
+    }
+    title
+    fileName
+    description
+    width
+    height
+    url
+    contentType
+  }
+  ${SysFragmentDoc}
+`;
+export const BasicPostCommonFragmentDoc = gql`
+  fragment BasicPostCommon on BasicPost {
+    sys {
+      ...Sys
+    }
+    title
+    mainPicture(preview: $isPreview) {
+      ...Asset
+    }
+  }
+  ${SysFragmentDoc}
+  ${AssetFragmentDoc}
+`;
+export const BasicPostDetailFragmentDoc = gql`
+  fragment BasicPostDetail on BasicPost {
+    ...BasicPostCommon
+    description {
+      json
+    }
+  }
+  ${BasicPostCommonFragmentDoc}
+`;
+export const CallToActionFragmentDoc = gql`
+  fragment CallToAction on CallToAction {
+    sys {
+      ...Sys
+    }
+    label
+    externalLink
+    routerLink
+    type
+    style
+    size
+    icon
+  }
+  ${SysFragmentDoc}
+`;
+export const AwardPostFragmentDoc = gql`
+  fragment AwardPost on AwardPost {
+    sys {
+      ...Sys
+    }
+    picture(preview: $isPreview) {
+      ...Asset
+    }
+    link
+    isRounded
+  }
+  ${SysFragmentDoc}
+  ${AssetFragmentDoc}
+`;
+export const FooterFragmentDoc = gql`
+  fragment Footer on Footer {
+    sys {
+      ...Sys
+    }
+    copyright
+    address {
+      json
+    }
+    linksCollection(limit: 20, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    socialIconsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    awardsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...AwardPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
+  ${AwardPostFragmentDoc}
+`;
+export const LegalPostFragmentDoc = gql`
+  fragment LegalPost on LegalPost {
+    sys {
+      ...Sys
+    }
+    title
+    description {
+      json
+    }
+    slug
+  }
+  ${SysFragmentDoc}
+`;
+export const FeaturePostFragmentDoc = gql`
+  fragment FeaturePost on FeaturePost {
+    sys {
+      ...Sys
+    }
+    videoUrl
+    picture(preview: $isPreview) {
+      ...Asset
+    }
+    heavyPicture(preview: $isPreview) {
+      ...Asset
+    }
+    showHeavyPictureOnHover
+    title
+    description
+    callToActionUrl
+    callToActionButtonLabel
+  }
+  ${SysFragmentDoc}
+  ${AssetFragmentDoc}
+`;
+export const PageSectionFeaturePostsFragmentDoc = gql`
+  fragment PageSectionFeaturePosts on PageSectionFeaturePosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
+      items {
+        ...FeaturePost
+      }
+    }
+    swiperResponsiveOptions
+  }
+  ${SysFragmentDoc}
+  ${FeaturePostFragmentDoc}
+`;
+export const ThumbnailPostFragmentDoc = gql`
+  fragment ThumbnailPost on ThumbnailPost {
+    sys {
+      ...Sys
+    }
+    picture(preview: $isPreview) {
+      ...Asset
+    }
+    heavyPicture(preview: $isPreview) {
+      ...Asset
+    }
+    showHeavyPictureOnHover
+    title
+    link
+    isVideo
+  }
+  ${SysFragmentDoc}
+  ${AssetFragmentDoc}
+`;
+export const PageSectionThumbnailPostsFragmentDoc = gql`
+  fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
+      items {
+        ...ThumbnailPost
+      }
+    }
+    swiperResponsiveOptions
+  }
+  ${SysFragmentDoc}
+  ${ThumbnailPostFragmentDoc}
+`;
+export const BasicPostFragmentDoc = gql`
+  fragment BasicPost on BasicPost {
+    ...BasicPostCommon
+    summary
+    slug
+  }
+  ${BasicPostCommonFragmentDoc}
+`;
+export const PageSectionBasicPostsFragmentDoc = gql`
+  fragment PageSectionBasicPosts on PageSectionBasicPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...BasicPost
+      }
+    }
+    postsByCategory {
+      linkedFrom {
+        basicPostCollection(limit: 20, preview: $isPreview) {
+          items {
+            ...BasicPost
+          }
+        }
+      }
+    }
+    swiperResponsiveOptions
+  }
+  ${SysFragmentDoc}
+  ${BasicPostFragmentDoc}
+`;
+export const IconTileFragmentDoc = gql`
+  fragment IconTile on IconTile {
+    sys {
+      ...Sys
+    }
+    icon
+    title
+    description
+    callToActionUrl
+    callToActionButtonLabel
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionIconTilesFragmentDoc = gql`
+  fragment PageSectionIconTiles on PageSectionIconTiles {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedIconTilesCollection(limit: 20, preview: $isPreview) {
+      items {
+        ...IconTile
+      }
+    }
+    isSwiper
+    swiperResponsiveOptions
+  }
+  ${SysFragmentDoc}
+  ${IconTileFragmentDoc}
+`;
+export const FaqItemFragmentDoc = gql`
+  fragment FaqItem on FaqItem {
+    sys {
+      ...Sys
+    }
+    question
+    answer
+  }
+  ${SysFragmentDoc}
+`;
+export const FaqGroupFragmentDoc = gql`
+  fragment FaqGroup on FaqGroup {
+    sys {
+      ...Sys
+    }
+    name
+    faqItemCollection(limit: 50, preview: $isPreview) {
+      items {
+        ...FaqItem
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FaqItemFragmentDoc}
+`;
+export const PageSectionFaQsFragmentDoc = gql`
+  fragment PageSectionFaQs on PageSectionFaQs {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...FaqGroup
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${FaqGroupFragmentDoc}
+`;
+export const DappPostFragmentDoc = gql`
+  fragment DappPost on DappPost {
+    sys {
+      ...Sys
+    }
+    icon
+    iconTitle
+    title
+    description
+    urlToDapp
+    urlToLearnMore
+  }
+  ${SysFragmentDoc}
+`;
+export const PageSectionDappPostsFragmentDoc = gql`
+  fragment PageSectionDappPosts on PageSectionDappPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...DappPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${DappPostFragmentDoc}
+`;
+export const GrandPostFragmentDoc = gql`
+  fragment GrandPost on GrandPost {
+    sys {
+      ...Sys
+    }
+    videoUrl
+    picture(preview: $isPreview) {
+      ...Asset
+    }
+    heavyPicture(preview: $isPreview) {
+      ...Asset
+    }
+    showHeavyPictureOnHover
+    title
+    subtitle
+    description
+    callToActionUrl
+    callToActionButtonLabel
+  }
+  ${SysFragmentDoc}
+  ${AssetFragmentDoc}
+`;
+export const PageSectionGrandPostsFragmentDoc = gql`
+  fragment PageSectionGrandPosts on PageSectionGrandPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
+      items {
+        ...GrandPost
+      }
+    }
+    isSwiper
+    swiperResponsiveOptions
+  }
+  ${SysFragmentDoc}
+  ${GrandPostFragmentDoc}
+`;
+export const ChartPostFragmentDoc = gql`
+  fragment ChartPost on ChartPost {
+    sys {
+      ...Sys
+    }
+    title
+    hideTitle
+    chartType
+    chartData
+    chartOptions
+  }
+  ${SysFragmentDoc}
+`;
+export const EmbedPostFragmentDoc = gql`
+  fragment EmbedPost on EmbedPost {
+    sys {
+      ...Sys
+    }
+    title
+    hideTitle
+    embedCode
+    scriptUrl
+    aspectRatio
+  }
+  ${SysFragmentDoc}
+`;
+export const SectionPostFragmentDoc = gql`
+  fragment SectionPost on SectionPost {
+    sys {
+      ...Sys
+    }
+    title
+    showTitle
+    richDescription: description {
+      json
+    }
+    chartPost {
+      ...ChartPost
+    }
+    embedPost {
+      ...EmbedPost
+    }
+    columnWidth
+    alignCenter
+    titleSize
+  }
+  ${SysFragmentDoc}
+  ${ChartPostFragmentDoc}
+  ${EmbedPostFragmentDoc}
+`;
+export const PageSectionSectionPostsFragmentDoc = gql`
+  fragment PageSectionSectionPosts on PageSectionSectionPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...SectionPost
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${SectionPostFragmentDoc}
+`;
+export const PageClubsFragmentDoc = gql`
+  fragment PageClubs on PageClubs {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    headerColumnWidth
+    headerAlignCenter
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+`;
+export const PageGameFragmentDoc = gql`
+  fragment PageGame on PageGame {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    headerColumnWidth
+    headerAlignCenter
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+`;
+export const PersonPostFragmentDoc = gql`
+  fragment PersonPost on PersonPost {
+    sys {
+      ...Sys
+    }
+    avatar(preview: $isPreview) {
+      ...Asset
+    }
+    name
+    title
+    description
+    twitter
+    linkedin
+    instagram
+    github
+  }
+  ${SysFragmentDoc}
+  ${AssetFragmentDoc}
+`;
+export const PageSectionPersonPostsFragmentDoc = gql`
+  fragment PageSectionPersonPosts on PageSectionPersonPosts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedPostsCollection(limit: 20, preview: $isPreview) {
+      items {
+        ...PersonPost
+      }
+    }
+    isSwiper
+    swiperResponsiveOptions
+  }
+  ${SysFragmentDoc}
+  ${PersonPostFragmentDoc}
+`;
+export const PageHomeFragmentDoc = gql`
+  fragment PageHome on PageHome {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    headerColumnWidth
+    headerAlignCenter
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+        ...PageSectionPersonPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+  ${PageSectionPersonPostsFragmentDoc}
+`;
+export const PageLearnFragmentDoc = gql`
+  fragment PageLearn on PageLearn {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    headerColumnWidth
+    headerAlignCenter
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+        ...PageSectionPersonPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+  ${PageSectionPersonPostsFragmentDoc}
+`;
+export const ProductCommonFragmentDoc = gql`
+  fragment ProductCommon on Product {
+    sys {
+      ...Sys
+    }
+    picturesCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...Asset
+      }
+    }
+    name
+    price
+    softCap
+    hardCap
+    currency
+    sku
+    availableQuantity
+    slug
+    category {
+      sys {
+        ...Sys
+      }
+      name
+      icon
+    }
+    soldOutLabel
+    pause
+  }
+  ${SysFragmentDoc}
+  ${AssetFragmentDoc}
+`;
+export const ProductFragmentDoc = gql`
+  fragment Product on Product {
+    ...ProductCommon
+    shortDescription
+  }
+  ${ProductCommonFragmentDoc}
+`;
+export const PageSectionProductsFragmentDoc = gql`
+  fragment PageSectionProducts on PageSectionProducts {
+    __typename
+    sys {
+      ...Sys
+    }
+    title
+    description
+    handpickedProductsCollection(limit: 5, preview: $isPreview) {
+      items {
+        ...Product
+      }
+    }
+    productsByCategory {
+      icon
+      linkedFrom {
+        productCollection(limit: 20, preview: $isPreview) {
+          items {
+            category {
+              icon
+            }
+            ...Product
+          }
+        }
+      }
+    }
+    swiperResponsiveOptions
+  }
+  ${SysFragmentDoc}
+  ${ProductFragmentDoc}
+`;
+export const PageShopFragmentDoc = gql`
+  fragment PageShop on PageShop {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    headerColumnWidth
+    headerAlignCenter
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+        ...PageSectionPersonPosts
+        ...PageSectionProducts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+  ${PageSectionPersonPostsFragmentDoc}
+  ${PageSectionProductsFragmentDoc}
+`;
+export const GroupPostFragmentDoc = gql`
+  fragment GroupPost on GroupPost {
+    sys {
+      ...Sys
+    }
+    icon
+    title
+    description
+    label
+    externalLink
+    highlighted
+    toggleable
+    collapsed
+  }
+  ${SysFragmentDoc}
+`;
+export const PageStreamFragmentDoc = gql`
+  fragment PageStream on PageStream {
+    sys {
+      ...Sys
+    }
+    mainTitle
+    showTitle
+    subtitle
+    showSubtitle
+    ctasCollection(limit: 3, preview: $isPreview) {
+      items {
+        ...CallToAction
+      }
+    }
+    headerColumnWidth
+    headerAlignCenter
+    groupsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...GroupPost
+      }
+    }
+    sectionsCollection(limit: 10, preview: $isPreview) {
+      items {
+        ...PageSectionFeaturePosts
+        ...PageSectionThumbnailPosts
+        ...PageSectionBasicPosts
+        ...PageSectionIconTiles
+        ...PageSectionFaQs
+        ...PageSectionDappPosts
+        ...PageSectionGrandPosts
+        ...PageSectionSectionPosts
+      }
+    }
+  }
+  ${SysFragmentDoc}
+  ${CallToActionFragmentDoc}
+  ${GroupPostFragmentDoc}
+  ${PageSectionFeaturePostsFragmentDoc}
+  ${PageSectionThumbnailPostsFragmentDoc}
+  ${PageSectionBasicPostsFragmentDoc}
+  ${PageSectionIconTilesFragmentDoc}
+  ${PageSectionFaQsFragmentDoc}
+  ${PageSectionDappPostsFragmentDoc}
+  ${PageSectionGrandPostsFragmentDoc}
+  ${PageSectionSectionPostsFragmentDoc}
+`;
+export const ProductAvailableQuantityFragmentDoc = gql`
+  fragment ProductAvailableQuantity on Product {
+    availableQuantity
+  }
+`;
+export const ProductDetailFragmentDoc = gql`
+  fragment ProductDetail on Product {
+    ...ProductCommon
+    fullDescription {
+      json
+    }
+    availableColors
+    availableSizes
+  }
+  ${ProductCommonFragmentDoc}
+`;
+export const AnnouncementCollectionDocument = gql`
+  query announcementCollection($now: DateTime!, $isPreview: Boolean = false) {
+    announcementCollection(
+      where: { start_lte: $now, end_gte: $now }
+      order: start_ASC
+      preview: $isPreview
+    ) {
+      items {
+        ...Announcement
+      }
+    }
+  }
+  ${AnnouncementFragmentDoc}
+`;
+
+/**
+ * __useAnnouncementCollectionQuery__
+ *
+ * To run a query within a React component, call `useAnnouncementCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAnnouncementCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAnnouncementCollectionQuery({
+ *   variables: {
+ *      now: // value for 'now'
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useAnnouncementCollectionQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    models.AnnouncementCollectionQuery,
+    models.AnnouncementCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.AnnouncementCollectionQuery,
+    models.AnnouncementCollectionQueryVariables
+  >(AnnouncementCollectionDocument, options);
+}
+export function useAnnouncementCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.AnnouncementCollectionQuery,
+    models.AnnouncementCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.AnnouncementCollectionQuery,
+    models.AnnouncementCollectionQueryVariables
+  >(AnnouncementCollectionDocument, options);
+}
+export type AnnouncementCollectionQueryHookResult = ReturnType<
+  typeof useAnnouncementCollectionQuery
+>;
+export type AnnouncementCollectionLazyQueryHookResult = ReturnType<
+  typeof useAnnouncementCollectionLazyQuery
+>;
+export type AnnouncementCollectionQueryResult = Apollo.QueryResult<
+  models.AnnouncementCollectionQuery,
+  models.AnnouncementCollectionQueryVariables
+>;
+export const AnnouncementCollectionCountDocument = gql`
+  query announcementCollectionCount(
+    $now: DateTime
+    $isPreview: Boolean = false
+  ) {
+    announcementCollection(
+      where: { start_lte: $now, end_gte: $now }
+      order: start_ASC
+      preview: $isPreview
+    ) {
+      total
+    }
+  }
+`;
+
+/**
+ * __useAnnouncementCollectionCountQuery__
+ *
+ * To run a query within a React component, call `useAnnouncementCollectionCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAnnouncementCollectionCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAnnouncementCollectionCountQuery({
+ *   variables: {
+ *      now: // value for 'now'
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useAnnouncementCollectionCountQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.AnnouncementCollectionCountQuery,
+    models.AnnouncementCollectionCountQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.AnnouncementCollectionCountQuery,
+    models.AnnouncementCollectionCountQueryVariables
+  >(AnnouncementCollectionCountDocument, options);
+}
+export function useAnnouncementCollectionCountLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.AnnouncementCollectionCountQuery,
+    models.AnnouncementCollectionCountQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.AnnouncementCollectionCountQuery,
+    models.AnnouncementCollectionCountQueryVariables
+  >(AnnouncementCollectionCountDocument, options);
+}
+export type AnnouncementCollectionCountQueryHookResult = ReturnType<
+  typeof useAnnouncementCollectionCountQuery
+>;
+export type AnnouncementCollectionCountLazyQueryHookResult = ReturnType<
+  typeof useAnnouncementCollectionCountLazyQuery
+>;
+export type AnnouncementCollectionCountQueryResult = Apollo.QueryResult<
+  models.AnnouncementCollectionCountQuery,
+  models.AnnouncementCollectionCountQueryVariables
+>;
+export const BasicPostCollectionBySlugDocument = gql`
+  query basicPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+    basicPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+      items {
+        ...BasicPostDetail
+      }
+    }
+  }
+  ${BasicPostDetailFragmentDoc}
+`;
+
+/**
+ * __useBasicPostCollectionBySlugQuery__
+ *
+ * To run a query within a React component, call `useBasicPostCollectionBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBasicPostCollectionBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBasicPostCollectionBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useBasicPostCollectionBySlugQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.BasicPostCollectionBySlugQuery,
+    models.BasicPostCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.BasicPostCollectionBySlugQuery,
+    models.BasicPostCollectionBySlugQueryVariables
+  >(BasicPostCollectionBySlugDocument, options);
+}
+export function useBasicPostCollectionBySlugLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.BasicPostCollectionBySlugQuery,
+    models.BasicPostCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.BasicPostCollectionBySlugQuery,
+    models.BasicPostCollectionBySlugQueryVariables
+  >(BasicPostCollectionBySlugDocument, options);
+}
+export type BasicPostCollectionBySlugQueryHookResult = ReturnType<
+  typeof useBasicPostCollectionBySlugQuery
+>;
+export type BasicPostCollectionBySlugLazyQueryHookResult = ReturnType<
+  typeof useBasicPostCollectionBySlugLazyQuery
+>;
+export type BasicPostCollectionBySlugQueryResult = Apollo.QueryResult<
+  models.BasicPostCollectionBySlugQuery,
+  models.BasicPostCollectionBySlugQueryVariables
+>;
+export const FooterCollectionDocument = gql`
+  query footerCollection($isPreview: Boolean = false) {
+    footerCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...Footer
+      }
+    }
+  }
+  ${FooterFragmentDoc}
+`;
+
+/**
+ * __useFooterCollectionQuery__
+ *
+ * To run a query within a React component, call `useFooterCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFooterCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFooterCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useFooterCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.FooterCollectionQuery,
+    models.FooterCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.FooterCollectionQuery,
+    models.FooterCollectionQueryVariables
+  >(FooterCollectionDocument, options);
+}
+export function useFooterCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.FooterCollectionQuery,
+    models.FooterCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.FooterCollectionQuery,
+    models.FooterCollectionQueryVariables
+  >(FooterCollectionDocument, options);
+}
+export type FooterCollectionQueryHookResult = ReturnType<
+  typeof useFooterCollectionQuery
+>;
+export type FooterCollectionLazyQueryHookResult = ReturnType<
+  typeof useFooterCollectionLazyQuery
+>;
+export type FooterCollectionQueryResult = Apollo.QueryResult<
+  models.FooterCollectionQuery,
+  models.FooterCollectionQueryVariables
+>;
+export const LegalPostCollectionBySlugDocument = gql`
+  query legalPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+    legalPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+      items {
+        ...LegalPost
+      }
+    }
+  }
+  ${LegalPostFragmentDoc}
+`;
+
+/**
+ * __useLegalPostCollectionBySlugQuery__
+ *
+ * To run a query within a React component, call `useLegalPostCollectionBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLegalPostCollectionBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLegalPostCollectionBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useLegalPostCollectionBySlugQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.LegalPostCollectionBySlugQuery,
+    models.LegalPostCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.LegalPostCollectionBySlugQuery,
+    models.LegalPostCollectionBySlugQueryVariables
+  >(LegalPostCollectionBySlugDocument, options);
+}
+export function useLegalPostCollectionBySlugLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.LegalPostCollectionBySlugQuery,
+    models.LegalPostCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.LegalPostCollectionBySlugQuery,
+    models.LegalPostCollectionBySlugQueryVariables
+  >(LegalPostCollectionBySlugDocument, options);
+}
+export type LegalPostCollectionBySlugQueryHookResult = ReturnType<
+  typeof useLegalPostCollectionBySlugQuery
+>;
+export type LegalPostCollectionBySlugLazyQueryHookResult = ReturnType<
+  typeof useLegalPostCollectionBySlugLazyQuery
+>;
+export type LegalPostCollectionBySlugQueryResult = Apollo.QueryResult<
+  models.LegalPostCollectionBySlugQuery,
+  models.LegalPostCollectionBySlugQueryVariables
+>;
+export const PageClubsCollectionDocument = gql`
+  query pageClubsCollection($isPreview: Boolean = false) {
+    pageClubsCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageClubs
+      }
+    }
+  }
+  ${PageClubsFragmentDoc}
+`;
+
+/**
+ * __usePageClubsCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageClubsCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageClubsCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageClubsCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageClubsCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageClubsCollectionQuery,
+    models.PageClubsCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageClubsCollectionQuery,
+    models.PageClubsCollectionQueryVariables
+  >(PageClubsCollectionDocument, options);
+}
+export function usePageClubsCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageClubsCollectionQuery,
+    models.PageClubsCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageClubsCollectionQuery,
+    models.PageClubsCollectionQueryVariables
+  >(PageClubsCollectionDocument, options);
+}
+export type PageClubsCollectionQueryHookResult = ReturnType<
+  typeof usePageClubsCollectionQuery
+>;
+export type PageClubsCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageClubsCollectionLazyQuery
+>;
+export type PageClubsCollectionQueryResult = Apollo.QueryResult<
+  models.PageClubsCollectionQuery,
+  models.PageClubsCollectionQueryVariables
+>;
+export const PageGameCollectionDocument = gql`
+  query pageGameCollection($isPreview: Boolean = false) {
+    pageGameCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageGame
+      }
+    }
+  }
+  ${PageGameFragmentDoc}
+`;
+
+/**
+ * __usePageGameCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageGameCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageGameCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageGameCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageGameCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageGameCollectionQuery,
+    models.PageGameCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageGameCollectionQuery,
+    models.PageGameCollectionQueryVariables
+  >(PageGameCollectionDocument, options);
+}
+export function usePageGameCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageGameCollectionQuery,
+    models.PageGameCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageGameCollectionQuery,
+    models.PageGameCollectionQueryVariables
+  >(PageGameCollectionDocument, options);
+}
+export type PageGameCollectionQueryHookResult = ReturnType<
+  typeof usePageGameCollectionQuery
+>;
+export type PageGameCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageGameCollectionLazyQuery
+>;
+export type PageGameCollectionQueryResult = Apollo.QueryResult<
+  models.PageGameCollectionQuery,
+  models.PageGameCollectionQueryVariables
+>;
+export const PageHomeCollectionDocument = gql`
+  query pageHomeCollection($isPreview: Boolean = false) {
+    pageHomeCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageHome
+      }
+    }
+  }
+  ${PageHomeFragmentDoc}
+`;
+
+/**
+ * __usePageHomeCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageHomeCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageHomeCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageHomeCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageHomeCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageHomeCollectionQuery,
+    models.PageHomeCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageHomeCollectionQuery,
+    models.PageHomeCollectionQueryVariables
+  >(PageHomeCollectionDocument, options);
+}
+export function usePageHomeCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageHomeCollectionQuery,
+    models.PageHomeCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageHomeCollectionQuery,
+    models.PageHomeCollectionQueryVariables
+  >(PageHomeCollectionDocument, options);
+}
+export type PageHomeCollectionQueryHookResult = ReturnType<
+  typeof usePageHomeCollectionQuery
+>;
+export type PageHomeCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageHomeCollectionLazyQuery
+>;
+export type PageHomeCollectionQueryResult = Apollo.QueryResult<
+  models.PageHomeCollectionQuery,
+  models.PageHomeCollectionQueryVariables
+>;
+export const PageLearnCollectionDocument = gql`
+  query pageLearnCollection($isPreview: Boolean = false) {
+    pageLearnCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageLearn
+      }
+    }
+  }
+  ${PageLearnFragmentDoc}
+`;
+
+/**
+ * __usePageLearnCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageLearnCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageLearnCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageLearnCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageLearnCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageLearnCollectionQuery,
+    models.PageLearnCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageLearnCollectionQuery,
+    models.PageLearnCollectionQueryVariables
+  >(PageLearnCollectionDocument, options);
+}
+export function usePageLearnCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageLearnCollectionQuery,
+    models.PageLearnCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageLearnCollectionQuery,
+    models.PageLearnCollectionQueryVariables
+  >(PageLearnCollectionDocument, options);
+}
+export type PageLearnCollectionQueryHookResult = ReturnType<
+  typeof usePageLearnCollectionQuery
+>;
+export type PageLearnCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageLearnCollectionLazyQuery
+>;
+export type PageLearnCollectionQueryResult = Apollo.QueryResult<
+  models.PageLearnCollectionQuery,
+  models.PageLearnCollectionQueryVariables
+>;
+export const PageShopCollectionDocument = gql`
+  query pageShopCollection($isPreview: Boolean = false) {
+    pageShopCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageShop
+      }
+    }
+  }
+  ${PageShopFragmentDoc}
+`;
+
+/**
+ * __usePageShopCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageShopCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageShopCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageShopCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageShopCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageShopCollectionQuery,
+    models.PageShopCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageShopCollectionQuery,
+    models.PageShopCollectionQueryVariables
+  >(PageShopCollectionDocument, options);
+}
+export function usePageShopCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageShopCollectionQuery,
+    models.PageShopCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageShopCollectionQuery,
+    models.PageShopCollectionQueryVariables
+  >(PageShopCollectionDocument, options);
+}
+export type PageShopCollectionQueryHookResult = ReturnType<
+  typeof usePageShopCollectionQuery
+>;
+export type PageShopCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageShopCollectionLazyQuery
+>;
+export type PageShopCollectionQueryResult = Apollo.QueryResult<
+  models.PageShopCollectionQuery,
+  models.PageShopCollectionQueryVariables
+>;
+export const PageStreamCollectionDocument = gql`
+  query pageStreamCollection($isPreview: Boolean = false) {
+    pageStreamCollection(limit: 2, preview: $isPreview) {
+      items {
+        ...PageStream
+      }
+    }
+  }
+  ${PageStreamFragmentDoc}
+`;
+
+/**
+ * __usePageStreamCollectionQuery__
+ *
+ * To run a query within a React component, call `usePageStreamCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageStreamCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageStreamCollectionQuery({
+ *   variables: {
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function usePageStreamCollectionQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.PageStreamCollectionQuery,
+    models.PageStreamCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.PageStreamCollectionQuery,
+    models.PageStreamCollectionQueryVariables
+  >(PageStreamCollectionDocument, options);
+}
+export function usePageStreamCollectionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.PageStreamCollectionQuery,
+    models.PageStreamCollectionQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.PageStreamCollectionQuery,
+    models.PageStreamCollectionQueryVariables
+  >(PageStreamCollectionDocument, options);
+}
+export type PageStreamCollectionQueryHookResult = ReturnType<
+  typeof usePageStreamCollectionQuery
+>;
+export type PageStreamCollectionLazyQueryHookResult = ReturnType<
+  typeof usePageStreamCollectionLazyQuery
+>;
+export type PageStreamCollectionQueryResult = Apollo.QueryResult<
+  models.PageStreamCollectionQuery,
+  models.PageStreamCollectionQueryVariables
+>;
+export const ProductCollectionBySlugDocument = gql`
+  query productCollectionBySlug($slug: String, $isPreview: Boolean = false) {
+    productCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {
+      items {
+        ...ProductDetail
+      }
+    }
+  }
+  ${ProductDetailFragmentDoc}
+`;
+
+/**
+ * __useProductCollectionBySlugQuery__
+ *
+ * To run a query within a React component, call `useProductCollectionBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductCollectionBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductCollectionBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *      isPreview: // value for 'isPreview'
+ *   },
+ * });
+ */
+export function useProductCollectionBySlugQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    models.ProductCollectionBySlugQuery,
+    models.ProductCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    models.ProductCollectionBySlugQuery,
+    models.ProductCollectionBySlugQueryVariables
+  >(ProductCollectionBySlugDocument, options);
+}
+export function useProductCollectionBySlugLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    models.ProductCollectionBySlugQuery,
+    models.ProductCollectionBySlugQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    models.ProductCollectionBySlugQuery,
+    models.ProductCollectionBySlugQueryVariables
+  >(ProductCollectionBySlugDocument, options);
+}
+export type ProductCollectionBySlugQueryHookResult = ReturnType<
+  typeof useProductCollectionBySlugQuery
+>;
+export type ProductCollectionBySlugLazyQueryHookResult = ReturnType<
+  typeof useProductCollectionBySlugLazyQuery
+>;
+export type ProductCollectionBySlugQueryResult = Apollo.QueryResult<
+  models.ProductCollectionBySlugQuery,
+  models.ProductCollectionBySlugQueryVariables
+>;

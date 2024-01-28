@@ -1,0 +1,22 @@
+fragment BasicPostCommon on BasicPost {
+  sys {
+    ...Sys
+  }
+  title
+  mainPicture(preview: $isPreview) {
+    ...Asset
+  }
+}
+
+fragment BasicPost on BasicPost {
+  ...BasicPostCommon
+  summary
+  slug
+}
+
+fragment BasicPostDetail on BasicPost {
+  ...BasicPostCommon
+  description {
+    json
+  }
+}

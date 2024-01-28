@@ -1,0 +1,14 @@
+fragment PageSectionThumbnailPosts on PageSectionThumbnailPosts {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  description
+  handpickedPostsCollection(limit: 20, preview: $isPreview) {
+    items {
+      ...ThumbnailPost
+    }
+  }
+  swiperResponsiveOptions
+}

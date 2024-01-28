@@ -1,0 +1,54 @@
+{
+  "extends": ["../../../.eslintrc.json", "../../../.eslintrc-overrides.json"],
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@typescript-eslint/no-this-alias": [
+          "error",
+          {
+            "allowDestructuring": false,
+            "allowedNames": ["that"]
+          }
+        ],
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@dehub/shared/utils"],
+                "message": "Please import only from tree-shakable util, one function in one file, example: 'decimalToHex'"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["!*.spec.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "moralis",
+                "importNames": ["Moralis"],
+                "message": "Moralis Cloud functions cannot reference Moralis Client SDK. It has its own provided version."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    }
+  ]
+}

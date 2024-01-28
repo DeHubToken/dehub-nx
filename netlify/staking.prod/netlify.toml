@@ -1,0 +1,9 @@
+[[redirects]]
+  from = "/"
+  to = "staking/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/staking/*"
+  to = "staking/index.html"
+  status = 200

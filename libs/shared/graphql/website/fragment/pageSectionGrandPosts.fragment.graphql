@@ -1,0 +1,15 @@
+fragment PageSectionGrandPosts on PageSectionGrandPosts {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  description
+  handpickedPostsCollection(limit: 20, preview: $isPreview) {
+    items {
+      ...GrandPost
+    }
+  }
+  isSwiper
+  swiperResponsiveOptions
+}

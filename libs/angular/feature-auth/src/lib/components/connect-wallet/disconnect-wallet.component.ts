@@ -1,0 +1,70 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { IMoralisService, MoralisToken } from '@dehub/angular/model';
+import { ButtonModule } from 'primeng/button';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { first, tap } from 'rxjs';
+import { AbstractConnectWalletComponent } from './abstract-connect-wallet.component';
+
+@Component({
+  selector: 'dhb-disconnect-wallet',
+  standalone: true,
+  imports: [
+    // PrimeNG
+    ButtonModule,
+  ],
+  template: `
+    <div class="text-center">
+      <i class="fa-duotone fa-hand-wave icon-color-duotone-1 text-6xl mt-4"></i>
+      <h6 class="mt-5 mb-6">
+        Hope to see you back soon!
+        <br />
+        You are no longer connected.
+      </h6>
+      <div class="mb-8">
+        <p-button
+          [label]="'Reconnect Wallet'"
+          [icon]="'fas fa-wallet'"
+          (onClick)="onReconnectClick()"
+        />
+      </div>
+    </div>
+  `,
+
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class DisconnectWalletComponent
+  extends AbstractConnectWalletComponent
+  implements OnInit
+{
+  constructor(
+    @Inject(MoralisToken) private moralisService: IMoralisService,
+    protected override router: Router,
+    protected override dialogRef: DynamicDialogRef
+  ) {
+    super(router, dialogRef);
+  }
+
+  ngOnInit() {
+    this.moralisService.user$
+      .pipe(
+        first(),
+        tap(() => this.moralisService.logout())
+      )
+      .subscribe();
+
+    this.closeDialogOnBackNavigation();
+  }
+
+  onReconnectClick() {
+    this.closeDialog(true);
+    this.router.navigate(['/', { outlets: { modal: ['auth', 'connect'] } }], {
+      queryParamsHandling: 'preserve',
+    });
+  }
+}

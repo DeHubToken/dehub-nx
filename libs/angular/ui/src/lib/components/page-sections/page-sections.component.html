@@ -1,0 +1,99 @@
+<ng-container *ngFor="let section of sections; trackBy: trackByFn">
+  <!-- Feature Posts -->
+  <dhb-page-section-feature-posts
+    *ngIf="isPageSectionFeaturePosts(section)"
+    [section]="section"
+    [swiperResponsiveOptions]="featurePostsResponsiveOptions"
+  />
+
+  <!-- Thumbnail Posts -->
+  <dhb-page-section-thumbnail-posts
+    *ngIf="isPageSectionThumbnailPosts(section)"
+    [section]="section"
+    [swiperResponsiveOptions]="thumbnailPostsResponsiveOptions"
+  />
+
+  <!-- Basic Posts -->
+  <dhb-page-section-basic-posts
+    *ngIf="isPageSectionBasicPosts(section)"
+    [section]="section"
+    [swiperResponsiveOptions]="basicPostsResponsiveOptions"
+  />
+
+  <!-- Icon Tiles Swiper -->
+  <dhb-page-section-icon-tiles-swiper
+    *ngIf="isPageSectionIconTiles(section) && section.isSwiper; else iconTiles"
+    [section]="section"
+    [swiperResponsiveOptions]="iconTilesResponsiveOptions"
+  />
+
+  <!-- Icon Tiles -->
+  <ng-template #iconTiles>
+    <dhb-page-section-icon-tiles
+      *ngIf="isPageSectionIconTiles(section)"
+      [section]="section"
+    />
+  </ng-template>
+
+  <!-- FaQs -->
+  <dhb-page-section-faqs
+    *ngIf="isPageSectionFaQs(section)"
+    [section]="section"
+  />
+
+  <!-- Dapp Posts -->
+  <dhb-page-section-dapp-posts
+    *ngIf="isPageSectionDappPosts(section)"
+    [section]="section"
+  />
+
+  <!-- Grand Posts -->
+  <dhb-page-section-grand-posts-swiper
+    *ngIf="
+      isPageSectionGrandPosts(section) && section.isSwiper;
+      else grandPosts
+    "
+    [section]="section"
+    [swiperResponsiveOptions]="grandPostsResponsiveOptions"
+  />
+
+  <ng-template #grandPosts>
+    <dhb-page-section-grand-posts
+      *ngIf="isPageSectionGrandPosts(section)"
+      [section]="section"
+    />
+  </ng-template>
+
+  <!-- Section Posts -->
+  <dhb-page-section-section-posts
+    *ngIf="isPageSectionSectionPosts(section)"
+    [section]="section"
+  />
+
+  <!-- Person Posts Swiper -->
+  <dhb-page-section-person-posts-swiper
+    *ngIf="
+      isPageSectionPersonPosts(section) && section.isSwiper;
+      else personPosts
+    "
+    [section]="section"
+    [path]="path"
+  />
+
+  <ng-template #personPosts>
+    <dhb-page-section-person-posts
+      *ngIf="isPageSectionPersonPosts(section)"
+      [section]="section"
+      [path]="path"
+    />
+  </ng-template>
+
+  <!-- Products -->
+  <dhb-page-section-products
+    *ngIf="isPageSectionProducts(section)"
+    [section]="section"
+    [swiperResponsiveOptions]="productsResponsiveOptions"
+    [menuItems]="productMenuItems"
+    [activeMenuItem]="productActiveMenuItem$ | push"
+  />
+</ng-container>

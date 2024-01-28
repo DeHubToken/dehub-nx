@@ -1,0 +1,161 @@
+<ng-container *rxLet="checkoutState$ as checkoutState; suspense: loading">
+  <!-- Show Status -->
+  <div
+    *ngIf="checkoutState.status; else showProduct"
+    class="text-center py-5 mb-4"
+  >
+    <!-- Status info -->
+    <i [ngClass]="checkoutState.status.icon" class="text-4xl"></i>
+    <br />
+    <div class="mt-3 font-bold">{{ checkoutState.status.text }}</div>
+
+    <!-- Checkout status complete -->
+    <div class="mt-3 text-sm">
+      {{
+        checkoutState.status.isCompleted
+          ? 'Please get in touch via ' +
+            env.emails.shopSupport +
+            ' if you have any questions.'
+          : 'Please do not close this window.'
+      }}
+    </div>
+
+    <!-- Close -->
+    <p-button
+      *ngIf="checkoutState.status.isCompleted"
+      label="Close"
+      styleClass="p-button-secondary p-button-lg mt-4"
+      (click)="ref.close()"
+    />
+  </div>
+
+  <!-- Product Checkout -->
+  <ng-template #showProduct>
+    <ng-container *rxLet="productDetail$ as productDetail">
+      <!-- Product Item -->
+      <dhb-product-mini [product]="productDetail" />
+
+      <!-- Quantity selection -->
+      <form [formGroup]="checkoutForm" class="p-fluid grid mt-5">
+        <div class="field col-5 sm:col-3 col-offset-7 sm:col-offset-9">
+          <span class="p-float-label">
+            <p-inputNumber
+              [formControlName]="'quantity'"
+              [inputId]="'selectedQuantity'"
+              [ariaLabel]="'Quantity'"
+              [ariaRequired]="true"
+              [min]="1"
+              [max]="productDetail.availableQuantity"
+              [allowEmpty]="false"
+              [showButtons]="true"
+            />
+            <label for="selectedQuantity">Quantity</label>
+          </span>
+        </div>
+      </form>
+
+      <ng-container *ngIf="checkoutState.hasAllowance">
+        <!-- Contact -->
+        <h5>Contact Details</h5>
+        <dhb-contacts-form
+          *rxLet="userContacts$ as contacts; suspense: loading"
+          [formControl]="checkoutForm.controls.contacts"
+          [prefillData]="contacts"
+        >
+        </dhb-contacts-form>
+
+        <!-- Shipping Address -->
+        <h5>Shipping Address</h5>
+        <h6 class="text-sm">Optional for digital items</h6>
+        <dhb-address-form
+          *rxLet="userShippingAddress$ as address; suspense: loading"
+          [formControl]="checkoutForm.controls.shippingAddress"
+          [prefillData]="address?.attributes"
+          (clear)="checkoutForm.controls.shippingAddress.reset()"
+        />
+
+        <!-- Referral Address -->
+        <h5>Referral Address</h5>
+        <form [formGroup]="checkoutForm" class="p-fluid grid pt-2">
+          <div class="field col-12 sm:col-5">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">
+                <i class="fa-duotone fa-wallet"></i>
+              </span>
+              <span class="p-float-label">
+                <p-inputMask
+                  [inputId]="'referralAddress'"
+                  [formControlName]="'referralAddress'"
+                  [size]="47"
+                  [maxlength]="42"
+                  mask="******************************************"
+                  characterPattern="[ABCDEFXabcdefx]"
+                  slotChar=""
+                />
+                <label for="referralAddress" class="pr-5"
+                  >Referral Address</label
+                >
+              </span>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+
+      <!-- Total -->
+      <div
+        *ngIf="checkoutForm.controls.quantity.value as quantity"
+        class="grid"
+      >
+        <div class="col-12">
+          <div class="flex flex-column justify-content-end text-right">
+            <h5 class="align-self-end mb-1">Total</h5>
+            <h3 class="align-self-end border-top-1 text-bold mt-0 pl-8 pt-1">
+              {{ calcTotalAmount(productDetail.price, quantity) }}
+              <span class="text-sm">{{ productDetail.currency }}</span>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex justify-content-between gap-2 sm:justify-content-end">
+        <!-- Cancel -->
+        <p-button
+          label="Cancel"
+          (click)="ref.close()"
+          styleClass="p-button-secondary p-button-lg w-full"
+          class="w-6 sm:w-auto"
+        />
+
+        <!-- Confirm -->
+        <ng-container *ngIf="productDetail.availableQuantity > 0">
+          <p-button
+            *ngIf="checkoutState.hasAllowance; else approve"
+            [label]="productDetail.pause ? 'Coming Soon' : 'Confirm'"
+            [disabled]="!checkoutForm.valid || productDetail.pause"
+            (onClick)="onConfirm()"
+            icon="fa-regular fa-check"
+            styleClass="p-button-primary p-button-lg w-full"
+            class="w-6 sm:w-auto"
+          />
+        </ng-container>
+
+        <!-- Approve -->
+        <ng-template #approve>
+          <p-button
+            label="Approve"
+            icon="fa-regular fa-check"
+            (onClick)="onApprove()"
+            styleClass="p-button-primary p-button-lg w-full"
+            class="w-6 sm:w-auto"
+          />
+        </ng-template>
+      </div>
+    </ng-container>
+  </ng-template>
+</ng-container>
+
+<!-- Loading Template -->
+<ng-template #loading>
+  <dhb-loading />
+</ng-template>

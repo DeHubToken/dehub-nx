@@ -1,0 +1,24 @@
+{
+  "name": "angular-feature-mailing",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/angular/feature-mailing/src",
+  "prefix": "dhb",
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/feature-mailing"],
+      "options": {
+        "jestConfig": "libs/angular/feature-mailing/jest.config.ts",
+        "bail": 1
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "maxWarnings": 0
+      }
+    }
+  },
+  "tags": ["scope:angular", "type:feature"]
+}

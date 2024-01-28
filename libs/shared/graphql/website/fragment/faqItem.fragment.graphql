@@ -1,0 +1,7 @@
+fragment FaqItem on FaqItem {
+  sys {
+    ...Sys
+  }
+  question
+  answer
+}

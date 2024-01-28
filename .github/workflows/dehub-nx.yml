@@ -1,0 +1,59 @@
+# Documentation
+# https://nx.app/docs/configuring-ci
+
+# Curtesy for Jo Hanna Pearce for the idea
+# https://github.com/jdpearce/nx-large-repo/actions/runs/2229075101/workflow
+name: DeHUB Nx
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  NX_VERBOSE_LOGGING: true
+
+# Each push should cancel workflows in progress and start a new one
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    if: ${{ github.event_name != 'pull_request' }}
+    name: Main
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.14.0
+    with:
+      node-version: '20.10.0'
+      pnpm-version: '8.9.0'
+      number-of-agents: 4
+      install-commands: pnpm install --frozen-lockfile
+      parallel-commands-on-agents: |
+        pnpm nx affected -t build --configuration=preview --parallel=2
+        pnpm nx affected -t lint,test,build --parallel=2
+      final-commands: |
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false pnpm deploy:preview
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false pnpm deploy:prod
+
+  pr:
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.draft == false }}
+    name: Pull Request
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.14.0
+    with:
+      node-version: '20.10.0'
+      pnpm-version: '8.9.0'
+      number-of-agents: 4
+      install-commands: pnpm install --frozen-lockfile
+      parallel-commands-on-agents: |
+        pnpm nx affected -t lint,test,build --configuration=preview --parallel=2
+      final-commands: |
+        NX_CLOUD_DISTRIBUTED_EXECUTION=false pnpm deploy:preview-draft
+
+  agents:
+    name: Agents
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.14.0
+    with:
+      node-version: '20.10.0'
+      pnpm-version: '8.9.0'
+      number-of-agents: 4
+      install-commands: pnpm install --frozen-lockfile

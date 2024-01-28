@@ -1,0 +1,26 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  white-space: pre-line;
+}
+
+h2 {
+  line-height: $dhb_h2_line_height;
+}
+h3 {
+  line-height: $dhb_h3_line_height;
+}
+h5 {
+  line-height: $dhb_h5_line_height;
+}
+
+p {
+  line-height: $dhb_paragraph_line_height;
+}
+
+hr {
+  border-color: $dhb_neon_1;
+}

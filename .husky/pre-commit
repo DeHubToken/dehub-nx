@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+set +e
+npx pretty-quick --staged
+if [ $? -ne 0 ]; then
+  echo "WARNING: failed to run file formatting (npx pretty-quick --staged)"
+  exit 1;
+fi
+
+exit 0;

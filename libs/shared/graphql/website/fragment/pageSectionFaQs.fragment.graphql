@@ -1,0 +1,13 @@
+fragment PageSectionFaQs on PageSectionFaQs {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  description
+  handpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {
+    items {
+      ...FaqGroup
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "name": "moralis-cloud",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/moralis/cloud/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/moralis/cloud.dev",
+        "main": "apps/moralis/cloud/src/main.ts",
+        "tsConfig": "apps/moralis/cloud/tsconfig.app.json",
+        "assets": [],
+        "sourceMap": false,
+        "extractLicenses": false,
+        "target": "node",
+        "compiler": "tsc",
+        "webpackConfig": "apps/moralis/cloud/webpack.config.js"
+      },
+      "configurations": {
+        "preview": {
+          "optimization": true,
+          "inspect": false,
+          "outputPath": "dist/apps/moralis/cloud.preview"
+        },
+        "development": {
+          "optimization": false
+        },
+        "production": {
+          "optimization": true,
+          "inspect": false,
+          "outputPath": "dist/apps/moralis/cloud.prod",
+          "fileReplacements": [
+            {
+              "replace": "./apps/moralis/cloud/src/environments/environment.ts",
+              "with": "./apps/moralis/cloud/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "moralis-cloud:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/moralis/cloud/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/moralis/cloud"],
+      "options": {
+        "jestConfig": "apps/moralis/cloud/jest.config.ts",
+        "passWithNoTests": true,
+        "bail": 1
+      }
+    },
+    "deploy-preview-draft": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx nx run moralis-cloud:deploy-preview"]
+      }
+    },
+    "deploy-preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "NODE_OPTIONS=--openssl-legacy-provider cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=nm6dir4me3i0.usemoralis.com npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud.preview"
+        ],
+        "readyWhen": "Changes Uploaded Correctly",
+        "parallel": true
+      }
+    },
+    "deploy-prod-draft": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'Prod Draft mode not supported in Moralis Cloud.'"
+      }
+    },
+    "deploy-prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "NODE_OPTIONS=--openssl-legacy-provider cross-env moralisApiKey=rSh7aP5Qba9Lw3o moralisApiSecret=VcMhTuAMDwY5r7u moralisSubdomain=vamoxwojj7ht.moralisweb3.com npx moralis-admin-cli watch-cloud-folder --autoSave 1 --moralisCloudfolder dist/apps/moralis/cloud.prod"
+        ],
+        "readyWhen": "Changes Uploaded Correctly",
+        "parallel": true
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:util"]
+}

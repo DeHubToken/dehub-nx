@@ -1,0 +1,11 @@
+fragment Announcement on Announcement {
+  sys {
+    ...Sys
+  }
+  header
+  icon
+  start
+  content {
+    json
+  }
+}

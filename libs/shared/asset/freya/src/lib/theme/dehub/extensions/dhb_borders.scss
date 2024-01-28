@@ -1,0 +1,27 @@
+.gradient-border {
+  @include gradient-border();
+}
+
+$neon-border-maps: (
+  1: (
+    border: 1px solid #2fadbe7a,
+    box-shadow: 0 0 9px #2fadbe7a,
+  ),
+  2: (
+    border: 1px solid #d7ca347a,
+    box-shadow: 0 0 9px #cda7147a,
+  ),
+  3: (
+    border: 1px solid #8030bd7a,
+    box-shadow: 0 0 9px #8030bd7a,
+  ),
+);
+
+@each $variant, $value in $neon-border-maps {
+  .border-neon-#{$variant} {
+    @include neon-border($value);
+  }
+  .border-neon-#{$variant}-propagate {
+    @include neon-border($value, true);
+  }
+}

@@ -1,0 +1,15 @@
+fragment PageSectionIconTiles on PageSectionIconTiles {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  description
+  handpickedIconTilesCollection(limit: 20, preview: $isPreview) {
+    items {
+      ...IconTile
+    }
+  }
+  isSwiper
+  swiperResponsiveOptions
+}

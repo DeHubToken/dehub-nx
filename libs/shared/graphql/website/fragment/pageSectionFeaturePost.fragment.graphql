@@ -1,0 +1,14 @@
+fragment PageSectionFeaturePosts on PageSectionFeaturePosts {
+  __typename
+  sys {
+    ...Sys
+  }
+  title
+  description
+  handpickedPostsCollection(limit: 20, preview: $isPreview) {
+    items {
+      ...FeaturePost
+    }
+  }
+  swiperResponsiveOptions
+}

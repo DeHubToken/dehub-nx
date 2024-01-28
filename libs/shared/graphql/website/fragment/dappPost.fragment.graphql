@@ -1,0 +1,11 @@
+fragment DappPost on DappPost {
+  sys {
+    ...Sys
+  }
+  icon
+  iconTitle
+  title
+  description
+  urlToDapp
+  urlToLearnMore
+}

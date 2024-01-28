@@ -1,0 +1,29 @@
+fragment PageLearn on PageLearn {
+  sys {
+    ...Sys
+  }
+  mainTitle
+  showTitle
+  subtitle
+  showSubtitle
+  ctasCollection(limit: 3, preview: $isPreview) {
+    items {
+      ...CallToAction
+    }
+  }
+  headerColumnWidth
+  headerAlignCenter
+  sectionsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...PageSectionFeaturePosts
+      ...PageSectionThumbnailPosts
+      ...PageSectionBasicPosts
+      ...PageSectionIconTiles
+      ...PageSectionFaQs
+      ...PageSectionDappPosts
+      ...PageSectionGrandPosts
+      ...PageSectionSectionPosts
+      ...PageSectionPersonPosts
+    }
+  }
+}

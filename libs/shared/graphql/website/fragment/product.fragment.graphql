@@ -1,0 +1,45 @@
+fragment ProductAvailableQuantity on Product {
+  availableQuantity
+}
+
+fragment ProductCommon on Product {
+  sys {
+    ...Sys
+  }
+  picturesCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...Asset
+    }
+  }
+  name
+  price
+  softCap
+  hardCap
+  currency
+  sku
+  availableQuantity
+  slug
+  category {
+    sys {
+      ...Sys
+    }
+    name
+    icon
+  }
+  soldOutLabel
+  pause
+}
+
+fragment Product on Product {
+  ...ProductCommon
+  shortDescription
+}
+
+fragment ProductDetail on Product {
+  ...ProductCommon
+  fullDescription {
+    json
+  }
+  availableColors
+  availableSizes
+}

@@ -1,0 +1,546 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-03-11T10:52:20.327Z",
+  "__export_source": "insomnia.desktop.app:v2022.1.1",
+  "resources": [
+    {
+      "_id": "req_e136827013f4440098f827449be37ac1",
+      "parentId": "fld_a3a62eacb2ac44a58e01fa11d85a85a0",
+      "modified": 1646143096610,
+      "created": 1646142969709,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "LegalPostBySlug",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment LegalPost on LegalPost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\tdescription {\\n\\t\\tjson\\n\\t}\\n\\tslug\\n}\\n\\nquery legalPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {\\n\\tlegalPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...LegalPost\\n\\t\\t}\\n\\t}\\n}\\n\",\"variables\":{\"slug\":\"privacy\",\"isPreview\":true},\"operationName\":\"legalPostCollectionBySlug\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645020466161.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_a3a62eacb2ac44a58e01fa11d85a85a0",
+      "parentId": "fld_0d599923e9ae4294b0d3c3bdcbcaeeb6",
+      "modified": 1646142978325,
+      "created": 1646142978325,
+      "name": "Legal Post",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1646142978325,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_0d599923e9ae4294b0d3c3bdcbcaeeb6",
+      "parentId": "wrk_e3965f9da96b4505afea501f1ae42059",
+      "modified": 1645020474725,
+      "created": 1645020474725,
+      "name": "Website",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1645020474725,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_e3965f9da96b4505afea501f1ae42059",
+      "parentId": null,
+      "modified": 1638896521088,
+      "created": 1638894253777,
+      "name": "Website Contentful",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_c24c7af5aff84497ac4db92166d911a6",
+      "parentId": "fld_0b2e0fa4d325470ba2875a7a99d3abe2",
+      "modified": 1646142951268,
+      "created": 1645115823084,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "BasicPostCollectionBySlug",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment BasicPost on BasicPost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\tmainPicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\tsummary\\n\\tslug\\n}\\n\\nfragment BasicPostDetail on BasicPost {\\n\\t...BasicPost\\n\\tdescription {\\n\\t\\tjson\\n\\t}\\n}\\n\\nquery basicPostCollectionBySlug($slug: String, $isPreview: Boolean = false) {\\n\\tbasicPostCollection(where: { slug: $slug }, limit: 1, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...BasicPostDetail\\n\\t\\t}\\n\\t}\\n}\\n\",\"variables\":{\"slug\":\"test-basic-news-article-post-3\",\"isPreview\":true}}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645020474104,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_0b2e0fa4d325470ba2875a7a99d3abe2",
+      "parentId": "fld_0d599923e9ae4294b0d3c3bdcbcaeeb6",
+      "modified": 1645115823079,
+      "created": 1645115823079,
+      "name": "BasicPost",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1645068906261,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_089193e9aef34c06834c9c5aacd0a2d0",
+      "parentId": "fld_1554157532264422802883df85b58e34",
+      "modified": 1645774009789,
+      "created": 1645022662646,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "PageHomeCollection",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment BasicPost on BasicPost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\tmainPicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\tsummary\\n\\tslug\\n}\\n\\nfragment FeaturePost on FeaturePost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tvideoUrl\\n\\tpicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\ttitle\\n\\tdescription\\n\\tcallToActionUrl\\n\\tcallToActionButtonLabel\\n}\\n\\nfragment IconTile on IconTile {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ticon\\n\\ttitle\\n\\tdescription\\n}\\n\\nfragment FaqGroup on FaqGroup {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tname\\n\\tfaqItemCollection(limit: 50, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqItem\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment FaqItem on FaqItem {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tquestion\\n\\tanswer\\n}\\n\\nfragment PageSectionFeaturePosts on PageSectionFeaturePosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FeaturePost\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionBasicPosts on PageSectionBasicPosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...BasicPost\\n\\t\\t}\\n\\t}\\n\\tpostsByCategory {\\n\\t\\tlinkedFrom {\\n\\t\\t\\tbasicPostCollection(limit: 20, preview: $isPreview) {\\n\\t\\t\\t\\titems {\\n\\t\\t\\t\\t\\t...BasicPost\\n\\t\\t\\t\\t}\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionIconTiles on PageSectionIconTiles {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedIconTilesCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...IconTile\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionFaQs on PageSectionFaQs {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqGroup\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageHome on PageHome {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tmainTitle\\n\\tsubtitle\\n\\tsectionsCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...PageSectionFeaturePosts\\n\\t\\t\\t...PageSectionBasicPosts\\n\\t\\t\\t...PageSectionIconTiles\\n\\t\\t\\t...PageSectionFaQs\\n\\t\\t}\\n\\t}\\n}\\n\\nquery pageHomeCollection($isPreview: Boolean = false) {\\n\\tpageHomeCollection(limit: 2, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...PageHome\\n\\t\\t}\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":false}}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645022137598.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_1554157532264422802883df85b58e34",
+      "parentId": "fld_0d599923e9ae4294b0d3c3bdcbcaeeb6",
+      "modified": 1645023785008,
+      "created": 1645023785008,
+      "name": "Home",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1645023785008,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_08a838d14c4d490fb42a02079a602fc2",
+      "parentId": "fld_1554157532264422802883df85b58e34",
+      "modified": 1645709541463,
+      "created": 1645018936768,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "PageHomeCollectionBySections",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nquery pageHomeCollection($isPreview: Boolean = false) {\\n\\tpageHomeCollection(limit: 2, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\tsys {\\n\\t\\t\\t\\t...Sys\\n\\t\\t\\t}\\n\\t\\t\\tmainTitle\\n\\t\\t\\tsubtitle\\n\\t\\t\\tsectionsCollection {\\n\\t\\t\\t\\titems {\\n\\t\\t\\t\\t\\t__typename\\n\\t\\t\\t\\t\\t... on PageSectionFeaturePosts {\\n\\t\\t\\t\\t\\t\\tsys {\\n\\t\\t\\t\\t\\t\\t\\tid\\n\\t\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t__typename\\n\\t\\t\\t\\t\\t... on PageSectionBasicPosts {\\n\\t\\t\\t\\t\\t\\tsys {\\n\\t\\t\\t\\t\\t\\t\\tid\\n\\t\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t__typename\\n\\t\\t\\t\\t\\t... on PageSectionIconTiles {\\n\\t\\t\\t\\t\\t\\tsys {\\n\\t\\t\\t\\t\\t\\t\\tid\\n\\t\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t__typename\\n\\t\\t\\t\\t\\t... on PageSectionFaQs {\\n\\t\\t\\t\\t\\t\\tsys {\\n\\t\\t\\t\\t\\t\\t\\tid\\n\\t\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t}\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":false},\"operationName\":\"pageHomeCollection\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645022137548.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f653291db1274de2a74d88c9a9eae325",
+      "parentId": "fld_302f511dc5884bcea1bf722c59f6b21b",
+      "modified": 1645708261548,
+      "created": 1645113854691,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "PageLearnCollection",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment BasicPost on BasicPost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\tmainPicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\tsummary\\n\\tslug\\n}\\n\\nfragment FeaturePost on FeaturePost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tvideoUrl\\n\\tpicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\ttitle\\n\\tdescription\\n\\tcallToActionUrl\\n\\tcallToActionButtonLabel\\n}\\n\\nfragment IconTile on IconTile {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ticon\\n\\ttitle\\n\\tdescription\\n}\\n\\nfragment FaqGroup on FaqGroup {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tname\\n\\tfaqItemCollection(limit: 50, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqItem\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment FaqItem on FaqItem {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tquestion\\n\\tanswer\\n}\\n\\nfragment PageSectionFeaturePosts on PageSectionFeaturePosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FeaturePost\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionBasicPosts on PageSectionBasicPosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...BasicPost\\n\\t\\t}\\n\\t}\\n\\tpostsByCategory {\\n\\t\\tlinkedFrom {\\n\\t\\t\\tbasicPostCollection(limit: 20, preview: $isPreview) {\\n\\t\\t\\t\\titems {\\n\\t\\t\\t\\t\\t...BasicPost\\n\\t\\t\\t\\t}\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionIconTiles on PageSectionIconTiles {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedIconTilesCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...IconTile\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageSectionFaQs on PageSectionFaQs {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqGroup\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment PageLearn on PageLearn {\\n\\tsys {\\n\\t\\tid\\n\\t}\\n\\tmainTitle\\n\\tsubtitle\\n\\tsectionsCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...PageSectionFeaturePosts\\n\\t\\t\\t...PageSectionBasicPosts\\n\\t\\t\\t...PageSectionIconTiles\\n\\t\\t\\t...PageSectionFaQs\\n\\t\\t}\\n\\t}\\n}\\n\\nquery pageLearnCollection($isPreview: Boolean = false) {\\n\\tpageLearnCollection(limit: 2, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...PageLearn\\n\\t\\t}\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":false}}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645022137598.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_302f511dc5884bcea1bf722c59f6b21b",
+      "parentId": "fld_0d599923e9ae4294b0d3c3bdcbcaeeb6",
+      "modified": 1645113854622,
+      "created": 1645113854622,
+      "name": "Learn",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1645022137548.5,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_7b57440be5494618b7fd83208f61d6e2",
+      "parentId": "fld_302f511dc5884bcea1bf722c59f6b21b",
+      "modified": 1645696142534,
+      "created": 1645113854630,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "PageLearnCollectionBySections",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nquery pageLearnCollection($isPreview: Boolean = false) {\\n\\tpageLearnCollection(limit: 2, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\tsys {\\n\\t\\t\\t\\t...Sys\\n\\t\\t\\t}\\n\\t\\t\\tmainTitle\\n\\t\\t\\tsubtitle\\n\\t\\t\\tsectionsCollection {\\n\\t\\t\\t\\titems {\\n\\t\\t\\t\\t\\t__typename\\n\\t\\t\\t\\t\\t... on PageSectionBasicPosts {\\n\\t\\t\\t\\t\\t\\tsys {\\n\\t\\t\\t\\t\\t\\t\\tid\\n\\t\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t__typename\\n\\t\\t\\t\\t\\t... on PageSectionIconTiles {\\n\\t\\t\\t\\t\\t\\tsys {\\n\\t\\t\\t\\t\\t\\t\\tid\\n\\t\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t__typename\\n\\t\\t\\t\\t\\t... on PageSectionFaQs {\\n\\t\\t\\t\\t\\t\\tsys {\\n\\t\\t\\t\\t\\t\\t\\tid\\n\\t\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t}\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":true},\"operationName\":\"pageLearnCollection\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645022137548.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_8281a1666e1049078e09b4d907d5f8af",
+      "parentId": "fld_94a22585af034edfabe0fcfe482e2f1d",
+      "modified": 1645709372689,
+      "created": 1645540913922,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "PageSectionFeaturePostsById",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment FeaturePost on FeaturePost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tvideoUrl\\n\\tpicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\ttitle\\n\\tdescription\\n\\tcallToActionUrl\\n\\tcallToActionButtonLabel\\n}\\n\\nfragment PageSectionFeaturePosts on PageSectionFeaturePosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 10, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FeaturePost\\n\\t\\t}\\n\\t}\\n}\\n\\nquery pageSectionFeaturePosts($isPreview: Boolean = false) {\\n\\tpageSectionFeaturePosts(id: \\\"1vulnhgkObwwiaPgGMbglf\\\", preview: $isPreview) {\\n\\t\\t...PageSectionFeaturePosts\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":true},\"operationName\":\"pageSectionFeaturePosts\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645020490039,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_94a22585af034edfabe0fcfe482e2f1d",
+      "parentId": "fld_0d599923e9ae4294b0d3c3bdcbcaeeb6",
+      "modified": 1645023764214,
+      "created": 1645020490089,
+      "name": "PageSection",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1645020490089,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_1f5b184a35934542b815fb0f643eb946",
+      "parentId": "fld_94a22585af034edfabe0fcfe482e2f1d",
+      "modified": 1645708349223,
+      "created": 1645016979511,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "PageSectionBasicPostsById",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment BasicPost on BasicPost {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\tmainPicture(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\ttitle\\n\\t\\turl\\n\\t}\\n\\tsummary\\n\\tslug\\n}\\n\\nfragment PageSectionBasicPosts on PageSectionBasicPosts {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedPostsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...BasicPost\\n\\t\\t}\\n\\t}\\n\\tpostsByCategory {\\n\\t\\tlinkedFrom {\\n\\t\\t\\tbasicPostCollection(limit: 20, preview: $isPreview) {\\n\\t\\t\\t\\titems {\\n\\t\\t\\t\\t\\t...BasicPost\\n\\t\\t\\t\\t}\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\\n\\nquery pageSectionBasicPosts($isPreview: Boolean = false) {\\n\\tpageSectionBasicPosts(id: \\\"7sd5rESR2BYiv4iLex3XtZ\\\", preview: $isPreview) {\\n\\t\\t...PageSectionBasicPosts\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":true},\"operationName\":\"pageSectionBasicPosts\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645020489989,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_1d2eeb7a5d4441a8835c077c76cf9486",
+      "parentId": "fld_94a22585af034edfabe0fcfe482e2f1d",
+      "modified": 1645708350311,
+      "created": 1645021298226,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "PageSectionIconTilesById",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment IconTile on IconTile {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ticon\\n\\ttitle\\n\\tdescription\\n}\\n\\nfragment PageSectionIconTiles on PageSectionIconTiles {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedIconTilesCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...IconTile\\n\\t\\t}\\n\\t}\\n}\\n\\nquery pageSectionIconTiles($isPreview: Boolean = false) {\\n\\tpageSectionIconTiles(id: \\\"4kNgDcj9DQOJ3Z8asCAW7q\\\", preview: $isPreview) {\\n\\t\\t...PageSectionIconTiles\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":true},\"operationName\":\"pageSectionIconTiles\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645020458219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f18c4bb9fc884e648c566daed29f5adf",
+      "parentId": "fld_94a22585af034edfabe0fcfe482e2f1d",
+      "modified": 1645719550870,
+      "created": 1645021502720,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "PageSectionFaQsById",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment FaqGroup on FaqGroup {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tname\\n\\tfaqItemCollection(limit: 50, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqItem\\n\\t\\t}\\n\\t}\\n}\\n\\nfragment FaqItem on FaqItem {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tquestion\\n\\tanswer\\n}\\n\\nfragment PageSectionFaQs on PageSectionFaQs {\\n\\t__typename\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\ttitle\\n\\thandpickedFaqGroupsCollection(limit: 5, preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\t...FaqGroup\\n\\t\\t}\\n\\t}\\n}\\n\\nquery pageSectionFaQs($isPreview: Boolean = false) {\\n\\tpageSectionFaQs(id: \\\"8kXMUxy0oJFXmpACwwTkd\\\", preview: $isPreview) {\\n...PageSectionFaQs\\n\\t}\\n}\\n\",\"variables\":{\"isPreview\":false}}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645020442334,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_814bc68cd0ac42d4b67b1268d1e242f1",
+      "parentId": "fld_9cc934c347c0426a833643acb6dd92ce",
+      "modified": 1645540888736,
+      "created": 1638894778220,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "Tournaments",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nfragment Tournament on Tournament {\\n\\tsys {\\n\\t\\t...Sys\\n\\t}\\n\\tcoverImage(preview: $isPreview) {\\n\\t\\tsys {\\n\\t\\t\\t...Sys\\n\\t\\t}\\n\\t\\turl\\n\\t}\\n\\ttitle\\n\\tdate\\n\\tbadge\\n\\tcallToActionButtonLabel\\n\\tcallToActionButtonLink\\n\\tfeatured\\n\\tdescription {\\n\\t\\tjson\\n\\t}\\n}\\n\\nfragment TournamentCollection on TournamentCollection {\\n\\ttotal\\n\\titems {\\n\\t\\t...Tournament\\n\\t}\\n}\\n\\nquery tournaments(\\n\\t$isFeatured: Boolean\\n\\t$dateGte: DateTime\\n\\t$isPreview: Boolean = false\\n) {\\n\\ttournamentCollection(\\n\\t\\twhere: { featured: $isFeatured, date_gte: $dateGte }\\n\\t\\torder: [date_DESC]\\n\\t\\tpreview: $isPreview\\n\\t) {\\n\\t\\t...TournamentCollection\\n\\t}\\n}\\n\",\"variables\":{\"isFeatured\":false,\"dateGte\":\"2021-11-01\",\"isPreview\":true},\"operationName\":\"tournaments\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1641957411725,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_9cc934c347c0426a833643acb6dd92ce",
+      "parentId": "wrk_e3965f9da96b4505afea501f1ae42059",
+      "modified": 1645020452532,
+      "created": 1645020452532,
+      "name": "Tournaments",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1645020452532,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_ffb23aaa4a314719957a17ee65114cc6",
+      "parentId": "fld_1ca09ee0e2b64017a4b54f0d73c2ae91",
+      "modified": 1645540878618,
+      "created": 1638894397051,
+      "url": "{{ _.graphQLEndpint }}",
+      "name": "TeamMembers",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"fragment Sys on Sys {\\n\\tpublishedAt\\n}\\n\\nquery teamMembers($isPreview: Boolean = false) {\\n\\tteamMemberCollection(preview: $isPreview) {\\n\\t\\titems {\\n\\t\\t\\tsys {\\n\\t\\t\\t\\t...Sys\\n\\t\\t\\t}\\n\\t\\t\\tname\\n\\t\\t\\ttitle\\n\\t\\t\\tavatar(preview: $isPreview) {\\n\\t\\t\\t\\tsys {\\n\\t\\t\\t\\t\\t...Sys\\n\\t\\t\\t\\t}\\n\\t\\t\\t\\turl\\n\\t\\t\\t}\\n\\t\\t\\ttwitter\\n\\t\\t\\tlinkedin\\n\\t\\t\\tinstagram\\n\\t\\t\\tgithub\\n\\t\\t}\\n\\t}\\n}\\n\",\"operationName\":\"teamMembers\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_186f7a8b15e74724a6b474cc3f87bc34"
+        }
+      ],
+      "authentication": { "type": "bearer", "token": "{{ _.cpaToken }}" },
+      "metaSortKey": -1645020426449,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_1ca09ee0e2b64017a4b54f0d73c2ae91",
+      "parentId": "wrk_e3965f9da96b4505afea501f1ae42059",
+      "modified": 1645020437292,
+      "created": 1645020426399,
+      "name": "Demo",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1645020426424,
+      "_type": "request_group"
+    },
+    {
+      "_id": "env_a0ade67c39af78bb11401d72282c84c0b255ee21",
+      "parentId": "wrk_e3965f9da96b4505afea501f1ae42059",
+      "modified": 1645458504239,
+      "created": 1638894253793,
+      "name": "Base Environment",
+      "data": {
+        "graphQLEndpint": "https://graphql.contentful.com/content/v1/spaces/4jicnfvodfm8",
+        "cpaToken": "C__6WRbPa01sIs-K6MAWXGHJkIPTY0aS3_Fg9hGp9xY"
+      },
+      "dataPropertyOrder": { "&": ["graphQLEndpint", "cpaToken"] },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1638894253793,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_a0ade67c39af78bb11401d72282c84c0b255ee21",
+      "parentId": "wrk_e3965f9da96b4505afea501f1ae42059",
+      "modified": 1638894253798,
+      "created": 1638894253798,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_6782395b7d9d440f8ba700f056e2a1a2",
+      "parentId": "wrk_e3965f9da96b4505afea501f1ae42059",
+      "modified": 1638894253779,
+      "created": 1638894253779,
+      "fileName": "Contentful",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "env_3cacfb3c094148a989b877706355f5f4",
+      "parentId": "env_a0ade67c39af78bb11401d72282c84c0b255ee21",
+      "modified": 1645458498367,
+      "created": 1638894356433,
+      "name": "Prod",
+      "data": {},
+      "dataPropertyOrder": {},
+      "color": "#980606",
+      "isPrivate": false,
+      "metaSortKey": 1638894356433,
+      "_type": "environment"
+    }
+  ]
+}

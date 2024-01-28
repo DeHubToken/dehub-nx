@@ -1,0 +1,12 @@
+.bg-none {
+  background: none !important;
+}
+
+@each $variant, $value in $dhb_gradients {
+  .bg-gradient-#{$variant} {
+    @include gradient-background($value);
+  }
+  .bg-gradient-#{$variant}-propagate {
+    @include gradient-background($value, true);
+  }
+}

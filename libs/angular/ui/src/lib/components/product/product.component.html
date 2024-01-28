@@ -1,0 +1,83 @@
+<div [dhbContentfulDraft]="product.sys">
+  <p-card
+    *ngIf="product"
+    [header]="product.name ?? ''"
+    styleClass="product p-card-shadow h-full"
+  >
+    <!-- Header -->
+    <ng-template pTemplate="header">
+      <swiper-container
+        *ngIf="product.picturesCollection?.items ?? [] as pictures"
+        dhbSwiper
+        [swiperOptions]="swiperOptions"
+        init="false"
+        [attr.grab-cursor]="pictures.length > 1"
+        [class.no-padding-bottom]="swiperIsClickable"
+      >
+        <swiper-slide
+          *ngFor="
+            let picture of pictures;
+            let isFirst = first;
+            trackBy: trackByFn
+          "
+          [lazy]="!isFirst || !priorityImage"
+        >
+          <img
+            *ngIf="picture.url"
+            [dhbContentfulDraft]="picture.sys"
+            [ngSrc]="picture.url"
+            [width]="picture.width"
+            [height]="picture.height"
+            [priority]="isFirst && priorityImage"
+            [alt]="picture | dhbContentfulImageAlt"
+            sizes="(max-width: 320px) 70vw, (max-width: 960px) 50vw, (max-width: 1350px) 30vw, (max-width: 1700px) 15vw, 10vw"
+            class="h-auto"
+          />
+        </swiper-slide>
+      </swiper-container>
+    </ng-template>
+
+    <!-- Body -->
+    <div
+      class="flex flex-wrap sm:flex-nowrap justify-content-end align-items-start"
+    >
+      <div class="flex-grow-1 pr-3 mb-4">
+        <p>
+          {{ product.shortDescription }}
+        </p>
+      </div>
+
+      <div class="min-w-full sm:min-w-max">
+        <!-- Info Widget -->
+        <dhb-product-info [productDetail]="product" />
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-end">
+        <!-- Details -->
+        <p-button
+          [routerLink]="['/shop', product.slug]"
+          label="Details"
+          class="w-6 md:w-auto"
+          styleClass="p-button-secondary p-button-lg w-full"
+        />
+
+        <!-- Buy -->
+        <p-button
+          *ngIf="product.availableQuantity ?? 0 > 0"
+          [routerLink]="
+            product.pause
+              ? null
+              : [{ outlets: { modal: ['checkout', product.slug] } }]
+          "
+          [label]="product.pause ? 'Coming Soon' : 'Buy'"
+          [disabled]="product.pause ?? false"
+          styleClass="p-button-primary p-button-lg ml-2"
+          class="w-6 md:w-auto"
+        />
+      </div>
+    </ng-template>
+  </p-card>
+</div>

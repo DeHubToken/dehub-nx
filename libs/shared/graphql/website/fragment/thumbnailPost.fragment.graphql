@@ -1,0 +1,15 @@
+fragment ThumbnailPost on ThumbnailPost {
+  sys {
+    ...Sys
+  }
+  picture(preview: $isPreview) {
+    ...Asset
+  }
+  heavyPicture(preview: $isPreview) {
+    ...Asset
+  }
+  showHeavyPictureOnHover
+  title
+  link
+  isVideo
+}

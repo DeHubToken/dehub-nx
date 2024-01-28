@@ -1,0 +1,189 @@
+// Floating
+.anim-float-1 {
+  @include gpu-acceleration();
+  animation: float1 6s ease-in-out infinite;
+}
+@keyframes float1 {
+  0% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(0px) perspective(500px) rotateY(25deg) rotateZ(-5deg);
+  }
+  50% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(-20px) perspective(3000px) rotateY(5deg) rotateZ(0deg);
+  }
+  100% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(0px) perspective(500px) rotateY(25deg) rotateZ(-5deg);
+  }
+}
+
+.anim-float-2 {
+  @include gpu-acceleration();
+  animation: float2 6s ease-in-out infinite;
+}
+@keyframes float2 {
+  0% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(-20px) perspective(3000px) rotateY(5deg) rotateZ(0deg);
+  }
+  50% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(0px) perspective(500px) rotateY(-25deg) rotateZ(5deg);
+  }
+  100% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(-20px) perspective(3000px) rotateY(5deg) rotateZ(0deg);
+  }
+}
+
+.anim-float-3 {
+  @include gpu-acceleration();
+  animation: float3 6s linear infinite;
+}
+@keyframes float3 {
+  0% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(0px) perspective(500px) rotateY(25deg) rotateZ(-5deg);
+  }
+  25% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(-20px) perspective(3000px) rotateY(5deg) rotateZ(0deg);
+  }
+  50% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(0px) perspective(500px) rotateY(-25deg) rotateZ(5deg);
+  }
+  75% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(-20px) perspective(3000px) rotateY(-5deg)
+      rotateZ(0deg);
+  }
+  100% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(0px) perspective(500px) rotateY(25deg) rotateZ(-5deg);
+  }
+}
+
+.anim-float-4 {
+  @include gpu-acceleration();
+  animation: float4 6s ease-in-out infinite;
+}
+@keyframes float4 {
+  0% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(0px) perspective(500px) rotateY(5deg) rotateZ(0);
+  }
+  50% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.2));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(-10px) perspective(2000px) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    //   -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.6));
+    //   filter: url(#drop-shadow);
+    //   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    //   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    // }
+    transform: translateY(0px) perspective(500px) rotateY(5deg) rotateZ(0);
+  }
+}
+
+// Hover animation
+.anim-hover-1 {
+  transform: perspective(1500px) rotateY(15deg);
+  border-radius: 1rem;
+  transition: transform 1s ease 0s;
+
+  &:hover {
+    transform: perspective(3000px) rotateY(5deg);
+  }
+}
+
+.anim-hover-1-reverse {
+  border-radius: 1rem;
+  transition: transform 1s ease 0s;
+  transform: perspective(3000px) rotateY(0deg) rotateX(0deg);
+  &:hover {
+    transform: perspective(1500px) rotateY(15deg) rotateX(10deg);
+  }
+}
+
+.anim-hover-2 {
+  transform: perspective(800px) rotateY(25deg) scale(0.9) rotateX(10deg);
+  filter: blur(2px);
+  opacity: 0.5;
+  transition: 0.6s ease all;
+
+  &:hover {
+    transform: perspective(800px) rotateY(-15deg) translateY(-50px)
+      rotateX(10deg) scale(1);
+    filter: blur(0);
+    opacity: 1;
+  }
+}

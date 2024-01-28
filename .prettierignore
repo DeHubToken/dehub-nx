@@ -1,0 +1,17 @@
+# Add files here to ignore them from prettier formatting
+
+/dist
+/coverage
+/libs/shared/asset/freya/**/*.scss
+!/libs/shared/asset/freya/**/dhb_*.scss
+.history
+.angular
+.vscode
+.github
+**/*.insomnia.json
+!**/*.json
+!**/*.js
+pnpm-lock.yaml
+
+
+/.nx/cache

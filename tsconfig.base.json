@@ -1,0 +1,58 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom", "esnext.asynciterable"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@dehub/angular/core": ["libs/angular/core/src/index.ts"],
+      "@dehub/angular/feature-auth": ["libs/angular/feature-auth/src/index.ts"],
+      "@dehub/angular/feature-clubs": [
+        "libs/angular/feature-clubs/src/index.ts"
+      ],
+      "@dehub/angular/feature-game": ["libs/angular/feature-game/src/index.ts"],
+      "@dehub/angular/feature-home": ["libs/angular/feature-home/src/index.ts"],
+      "@dehub/angular/feature-learn": [
+        "libs/angular/feature-learn/src/index.ts"
+      ],
+      "@dehub/angular/feature-legal": [
+        "libs/angular/feature-legal/src/index.ts"
+      ],
+      "@dehub/angular/feature-mailing": [
+        "libs/angular/feature-mailing/src/index.ts"
+      ],
+      "@dehub/angular/feature-news": ["libs/angular/feature-news/src/index.ts"],
+      "@dehub/angular/feature-shop": ["libs/angular/feature-shop/src/index.ts"],
+      "@dehub/angular/feature-stream": [
+        "libs/angular/feature-stream/src/index.ts"
+      ],
+      "@dehub/angular/model": ["libs/angular/model/src/index.ts"],
+      "@dehub/angular/ui/*": ["libs/angular/ui/src/lib/*"],
+      "@dehub/angular/util": ["libs/angular/util/src/index.ts"],
+      "@dehub/moralis/cloud": ["libs/moralis/cloud/src/index.ts"],
+      "@dehub/react/core": ["libs/react/core/src/index.ts"],
+      "@dehub/react/ui": ["libs/react/ui/src/index.ts"],
+      "@dehub/shared/asset/dehub/*": ["libs/shared/asset/dehub/src/lib/*"],
+      "@dehub/shared/asset/freya/*": ["libs/shared/asset/freya/src/lib/*"],
+      "@dehub/shared/model": ["libs/shared/model/src/index.ts"],
+      "@dehub/shared/util/*": ["libs/shared/util/src/lib/*"],
+      "@dehub/shared/utils": ["libs/shared/util/src/index.ts"],
+      "crypto": ["./node_modules/crypto-browserify"],
+      "http": ["./node_modules/stream-http"],
+      "https": ["./node_modules/https-browserify"],
+      "os": ["./node_modules/os-browserify"],
+      "stream": ["./node_modules/stream-browserify"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

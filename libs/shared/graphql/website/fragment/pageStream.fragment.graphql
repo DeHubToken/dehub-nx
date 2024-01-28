@@ -1,0 +1,33 @@
+fragment PageStream on PageStream {
+  sys {
+    ...Sys
+  }
+  mainTitle
+  showTitle
+  subtitle
+  showSubtitle
+  ctasCollection(limit: 3, preview: $isPreview) {
+    items {
+      ...CallToAction
+    }
+  }
+  headerColumnWidth
+  headerAlignCenter
+  groupsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...GroupPost
+    }
+  }
+  sectionsCollection(limit: 10, preview: $isPreview) {
+    items {
+      ...PageSectionFeaturePosts
+      ...PageSectionThumbnailPosts
+      ...PageSectionBasicPosts
+      ...PageSectionIconTiles
+      ...PageSectionFaQs
+      ...PageSectionDappPosts
+      ...PageSectionGrandPosts
+      ...PageSectionSectionPosts
+    }
+  }
+}
