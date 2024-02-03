@@ -8317,6 +8317,7 @@ export enum ProductOrder {
 
 export interface Query {
   __typename?: 'Query';
+  _node?: Maybe<_Node>;
   announcement?: Maybe<Announcement>;
   announcementCollection?: Maybe<AnnouncementCollection>;
   asset?: Maybe<Asset>;
@@ -8394,6 +8395,12 @@ export interface Query {
   sectionPostCollection?: Maybe<SectionPostCollection>;
   thumbnailPost?: Maybe<ThumbnailPost>;
   thumbnailPostCollection?: Maybe<ThumbnailPostCollection>;
+}
+
+export interface Query_NodeArgs {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
 }
 
 export interface QueryAnnouncementArgs {
@@ -9383,6 +9390,10 @@ export enum ThumbnailPostOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
+}
+
+export interface _Node {
+  _id: Scalars['ID'];
 }
 
 export interface CfAwardPostNestedFilter {
