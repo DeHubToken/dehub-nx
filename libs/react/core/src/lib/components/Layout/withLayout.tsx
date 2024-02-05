@@ -3,9 +3,9 @@ import {
   Header,
   Loader,
   LoaderProps,
-  LogoTypes,
+  Logo,
   PageMeta,
-  TabMenu,
+  TabMenu
 } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
@@ -53,7 +53,7 @@ const withLayout =
 
     const { footer } = useContentfulContext();
 
-    const logo: LogoTypes = {
+    const logo: Logo.LogoTypes = {
       href: 'https://dehub.net',
       icon: `${baseUrl}/assets/dehub/logo-dehub-white.svg`,
       alt: 'DeHub logo',

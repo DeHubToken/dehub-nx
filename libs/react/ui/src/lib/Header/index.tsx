@@ -1,2 +1,3 @@
-export { default } from './Header';
-export { LogoTypes } from './Logo';
+export { default as Header } from './Header';
+export * as Logo from './Logo';
+
