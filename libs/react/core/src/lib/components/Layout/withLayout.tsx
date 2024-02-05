@@ -5,14 +5,14 @@ import {
   LoaderProps,
   Logo,
   PageMeta,
-  TabMenu
+  TabMenu,
 } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/model';
 import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { iOS } from '@dehub/shared/utils';
 import { Moralis } from 'moralis-v1';
 import React, { useEffect, useState } from 'react';
-import { useWeb3Context } from '../../hooks';
+import { useEnvironmentContext, useWeb3Context } from '../../hooks';
 import { useContentfulContext } from '../../hooks/useContentfulContext';
 import ToastListener from '../Toast/ToastListener';
 import UserMenu from '../UserMenu';
@@ -25,13 +25,11 @@ const initMessage: LoaderProps = {
 const withLayout =
   <P extends object>(
     {
-      baseUrl = '/',
       landing,
       cexUrl,
       downloadMetamaskUrl,
       activeTab,
     }: {
-      baseUrl?: string;
       landing: string;
       cexUrl: string;
       downloadMetamaskUrl: string;
@@ -40,16 +38,12 @@ const withLayout =
     Component: React.ComponentType<P>
   ): React.FC<P> =>
   ({ ...props }) => {
+    const { baseUrl } = useEnvironmentContext();
+
     const [showLoader, setShowLoader] = useState(false);
     const [message, setMessage] = useState<LoaderProps>(initMessage);
 
-    const {
-      walletConnectingState,
-      defaultChainId,
-      // baseUrl,
-      // landingUrl: landing,
-      logout,
-    } = useWeb3Context();
+    const { walletConnectingState, defaultChainId, logout } = useWeb3Context();
 
     const { footer } = useContentfulContext();
 
