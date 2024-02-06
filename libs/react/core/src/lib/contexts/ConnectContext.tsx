@@ -114,6 +114,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
         );
       }
       window.localStorage.removeItem(enableOptionsLocalStorageKey);
+      console.log("HHH - cleanConnectorStorage");
     },
     []
   );
@@ -142,6 +143,8 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
       setAccount(null);
       setChainId(null);
     }
+    // throw new Error("log out");
+    console.log("HHH - logout");
     cleanConnectorStorage(enableOptions.provider as DeHubConnectorNames);
   }, [moralisLogout, web3Logout, cleanConnectorStorage]);
 
@@ -209,7 +212,7 @@ const ConnectProvider: React.FC<ConnectProviderProps> = ({
         // if moralis connector
         moralisLogin({
           ...enableOptions,
-          signingMessage: 'DeHub D’App',
+          signingMessage: 'DeHub DApp',
           onError: (error: Error) => {
             logout();
             setWalletConnectingState(WalletConnectingState.INIT);

@@ -7,6 +7,7 @@ export enum NavigationTabMenu {
   Clubs = 'clubs',
   News = 'news',
   Legal = 'legal',
+  Bridge = 'bridge',
 }
 
 export const animationDuration = 500;

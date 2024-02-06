@@ -18,9 +18,10 @@ export const setupMetamaskNetwork = async (
 ): Promise<boolean> => {
   const currentChainIdHex = Moralis.chainId;
   const requestedChainIdHex = decimalToHex(requestedChainId);
-
+  console.log("HHH - setupMetamaskNetwork", currentChainIdHex, requestedChainIdHex)
   // Switch Network
-  if (currentChainIdHex && currentChainIdHex !== requestedChainIdHex) {
+  if (currentChainIdHex && currentChainIdHex !== requestedChainIdHex) 
+  {
     const currentChainId = hexToDecimal(currentChainIdHex);
     console.warn('Please switch network!');
 

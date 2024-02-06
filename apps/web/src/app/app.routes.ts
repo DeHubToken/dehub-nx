@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { NavigationTabMenu } from '@dehub/shared/model';
+import { environment } from '../environments/environment';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
         path: NavigationTabMenu.Legal,
         loadChildren: () => import('@dehub/angular/feature-legal'),
       },
+      // {
+      //   path: NavigationTabMenu.Bridge,
+      //   loadChildren: () => import('@dehub/angular/feature-clubs'),
+      // },
       {
         path: 'mailing',
         loadChildren: () => import('@dehub/angular/feature-mailing'),

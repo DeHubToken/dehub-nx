@@ -71,13 +71,13 @@ const withLayout =
       });
     }, []);
 
-    useEffect(() => {
-      Moralis.onChainChanged(newChainId => {
-        if (newChainId !== decimalToHex(defaultChainId)) {
-          logout();
-        }
-      });
-    }, [logout, defaultChainId]);
+    // useEffect(() => {
+    //   Moralis.onChainChanged(newChainId => {
+    //     if (newChainId !== decimalToHex(defaultChainId)) {
+    //       logout();
+    //     }
+    //   });
+    // }, [logout, defaultChainId]);
 
     useEffect(() => {
       if (walletConnectingState === WalletConnectingState.WAITING) {

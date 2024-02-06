@@ -2,7 +2,8 @@ import { NavigationTabMenu } from '@dehub/shared/model';
 import { startCase } from 'lodash';
 
 export const getTabMenuItems = (
-  landing: string
+  landing: string,
+  bridgeUrl?: string 
 ): { label: string; icon: string; url: string; routerLink: string[] }[] =>
   [
     {
@@ -29,12 +30,27 @@ export const getTabMenuItems = (
       label: NavigationTabMenu.Clubs,
       icon: 'fad fa-people-group',
     },
-  ].map(menuItem => ({
-    ...menuItem,
-    label: startCase(menuItem.label),
-    url: `${landing}/${menuItem.label}`,
-    routerLink: [menuItem.label],
-  }));
+    {
+      label: NavigationTabMenu.Bridge,
+      icon: 'fad fa-bridge',
+    },
+  ].map(menuItem => {
+    if (menuItem.label === NavigationTabMenu.Bridge) {
+      return {
+        ...menuItem,
+        label: startCase(menuItem.label),
+        url: `${bridgeUrl}`,
+        routerLink: [menuItem.label],
+      }
+    } else {
+      return {
+        ...menuItem,
+        label: startCase(menuItem.label),
+        url: `${landing}/${menuItem.label}`,
+        routerLink: [menuItem.label],
+      };
+    }
+  });
 
 export const getBuyDehubMenuItems = (
   landing: string,

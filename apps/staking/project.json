@@ -92,7 +92,7 @@
         },
         "development": {
           "buildTarget": "staking:build:development",
-          "host": "dev.localhost",
+          "host": "localhost",
           "port": 8601
         }
       },

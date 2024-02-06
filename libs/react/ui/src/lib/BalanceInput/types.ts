@@ -7,12 +7,13 @@ export interface BalanceInputProps {
   placeholder?: string;
   innerRef?: React.RefObject<HTMLInputElement>;
   inputProps?: Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    'value' | 'placeholder' | 'onChange'
+  InputHTMLAttributes<HTMLInputElement>,
+  'value' | 'placeholder' | 'onChange'
   >;
   isWarning?: boolean;
   isDisabled?: boolean;
   decimals?: number;
   unit?: string;
   switchEditingUnits?: () => void;
+  className?: string;
 }

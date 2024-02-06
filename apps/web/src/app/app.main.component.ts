@@ -6,7 +6,7 @@ import { EnvToken } from '@dehub/angular/model';
 import { FooterComponent } from '@dehub/angular/ui/components/footer/footer.component';
 
 import { TabMenuComponent } from '@dehub/angular/ui/components/tab-menu/tab-menu.component';
-import { FooterFragment, SharedEnv } from '@dehub/shared/model';
+import { FooterFragment, NavigationTabMenu, SharedEnv } from '@dehub/shared/model';
 import { getTabMenuItems } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
 import { MenuItem } from 'primeng/api';
@@ -47,7 +47,10 @@ export class AppMainComponent implements OnInit, OnDestroy {
 
   /** Can be undefined if none of the tab menu items is active */
   activeMenuItem?: MenuItem;
-  tabMenuItems = getTabMenuItems(this.env.dehub.landing);
+  tabMenuItems = getTabMenuItems(
+    this.env.dehub.landing,
+    this.env.dehub.dapps.bridge
+  );
   private sub: Subscription;
 
   footer$?: Observable<FooterFragment | undefined>;
@@ -66,15 +69,19 @@ export class AppMainComponent implements OnInit, OnDestroy {
     // Docs: https://www.primefaces.org/primeng/showcase/#/tabmenu
     this.sub = this.router.events
       .pipe(filter(isNavigationEnd))
-      .subscribe(
-        ({ url }) =>
-          (this.activeMenuItem = this.tabMenuItems.find(
+      .subscribe(({ url }) => {
+        if (url.includes(NavigationTabMenu.Bridge)) {
+          window.location.href = this.env.dehub.dapps.bridge;
+        } else {
+          this.activeMenuItem = this.tabMenuItems.find(
             ({ routerLink }) => routerLink && url.includes(routerLink[0])
-          ))
-      );
+          );
+        }
+      });
   }
 
   ngOnInit() {
+    console.log('HHH', this.tabMenuItems);
     this.footer$ = this.footerCollectionService
       .fetch({
         isPreview: this.env.contentful.isPreview,
