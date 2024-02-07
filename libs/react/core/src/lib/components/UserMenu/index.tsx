@@ -1,4 +1,3 @@
-import { LetsExchangeModal } from '@dehub/react/ui';
 import { shortenAddress } from '@dehub/shared/utils';
 import Moralis from 'moralis-v1';
 import { MenuItem } from 'primereact/menuitem';
@@ -56,14 +55,22 @@ const UserMenu = ({
 
   return (
     <ul className="layout-topbar-actions">
-      <li className="topbar-item">
+      {/* <li className="topbar-item">
+        <BuyDeHubButton
+          landing={landing}
+          cexUrl={cexUrl}
+          downloadMetamaskUrl={downloadMetamaskUrl}
+          onSwap={() => {
+            setSwapDeHubModalOpen(true);
+          }}
+        />
         <LetsExchangeModal
           visible={swapDeHubModalOpen}
           onDismiss={() => {
             setSwapDeHubModalOpen(false);
           }}
         />
-      </li>
+      </li> */}
       <li className="topbar-item ml-2 md:ml-4">
         {account ? (
           <SplitButton

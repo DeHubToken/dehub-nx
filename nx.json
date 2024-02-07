@@ -89,10 +89,6 @@
           "codeCoverage": true
         }
       }
-    },
-    "@nx/eslint:lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
-      "cache": true
     }
   },
   "nxCloudAccessToken": "NzIwNDI2YWItYzA1My00MDZjLWJmYjMtNzkyM2UyMTMxM2RmfHJlYWQtd3JpdGU="
