@@ -1,23 +1,16 @@
 import { useRefresh, useWeb3Context } from '@dehub/react/core';
-import { BIG_ZERO, getRandomRpcUrlByChainId } from '@dehub/shared/utils';
+import { BIG_ZERO } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { useEffect, useRef, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';
-import { getDehubBscAddress } from '../utils/addressHelpers';
-import {
-  getBep20Contract,
-  getDehubTokenContract,
-} from '../utils/contractHelpers';
+import { CHAININFO } from '../constants/chains';
 import {
   useDstChain,
   useSourceChain,
   useTokenAmount,
-  useUpdateState,
 } from '../state/application/hooks';
-import { CHAININFO } from '../constants/chains';
+import { getDehubTokenContract } from '../utils/contractHelpers';
 import { useBridgeContract } from './useContract';
-import { Web3Provider } from '@ethersproject/providers';
-import Web3 from 'web3';
 
 type UseTokenBalanceState = {
   userBalance: BigNumber;
@@ -37,7 +30,6 @@ export const useTokenBalance = () => {
   const { fastRefresh } = useRefresh();
   const { chain } = useSourceChain();
   const bridgeContract = useBridgeContract();
-  const updateState = useUpdateState();
   const mountedRef = useRef(true);
 
   useEffect(() => {
@@ -49,7 +41,7 @@ export const useTokenBalance = () => {
   useEffect(() => {
     mountedRef.current = true;
     const fetchBalance = async () => {
-      if (!chain || chain.chainID != chainId)
+      if (!chain || chain.chainID !== chainId)
         return setBalanceState({
           userBalance: BIG_ZERO,
           bridgeBalance: BIG_ZERO,
@@ -86,7 +78,17 @@ export const useTokenBalance = () => {
         fetchStatus: NOT_FETCHED,
       });
     }
-  }, [account, chain, web3, fastRefresh, NOT_FETCHED, SUCCESS, FAILED]);
+  }, [
+    account,
+    chain,
+    web3,
+    fastRefresh,
+    NOT_FETCHED,
+    SUCCESS,
+    FAILED,
+    chainId,
+    bridgeContract?.address,
+  ]);
 
   return balanceState;
 };
@@ -99,12 +101,11 @@ export const useTokenDstBalance = () => {
     fetchStatus: NOT_FETCHED,
   });
 
-  const { account, web3 } = useWeb3Context();
+  const { account } = useWeb3Context();
   const { fastRefresh } = useRefresh();
   const { chain } = useDstChain();
   const chainId = chain?.chainID;
   const bridgeContract = useBridgeContract();
-  const updateState = useUpdateState();
   const mountedRef = useRef(true);
 
   useEffect(() => {
@@ -116,7 +117,7 @@ export const useTokenDstBalance = () => {
   useEffect(() => {
     mountedRef.current = true;
     const fetchBalance = async () => {
-      if (!chain || chain.chainID != chainId)
+      if (!chain || chain.chainID !== chainId)
         return setBalanceState({
           userBalance: BIG_ZERO,
           bridgeBalance: BIG_ZERO,
@@ -154,7 +155,16 @@ export const useTokenDstBalance = () => {
         fetchStatus: NOT_FETCHED,
       });
     }
-  }, [account, chain, fastRefresh, NOT_FETCHED, SUCCESS, FAILED]);
+  }, [
+    account,
+    chain,
+    fastRefresh,
+    NOT_FETCHED,
+    SUCCESS,
+    FAILED,
+    chainId,
+    bridgeContract?.address,
+  ]);
 
   return balanceState;
 };
@@ -168,7 +178,6 @@ export const useApproved = () => {
   const { chain } = useSourceChain();
   const mountedRef = useRef(true);
   const { amount } = useTokenAmount();
-  const updateState = useUpdateState();
 
   useEffect(() => {
     return () => {
@@ -202,7 +211,7 @@ export const useApproved = () => {
     if (account) {
       fetchAllowance();
     }
-  }, [web3, account, amount]);
+  }, [web3, account, amount, chain]);
 
   return { approved, approvedAmount };
 };

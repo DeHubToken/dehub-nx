@@ -1,11 +1,9 @@
 import { useWeb3Context } from '@dehub/react/core';
-import { getContract } from '@dehub/shared/utils';
 import { Contract } from '@ethersproject/contracts';
 import { useMemo } from 'react';
 import { getChainId } from '../config/constants';
 import { getBnbAddress, getDehubBscAddress } from '../utils/addressHelpers';
 import { getBep20Contract, getStakingContract } from '../utils/contractHelpers';
-import { ChainType } from '../constants/chains';
 
 export function useFirstAmount(): number {
   return useMemo(() => {

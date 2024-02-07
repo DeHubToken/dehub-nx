@@ -1,11 +1,9 @@
+import { ContractInterface } from '@ethersproject/contracts';
+import binanceLogo from '../../assets/bnb-bnb-logo.svg';
 import ethereumLogo from '../../assets/ethereum-logo.svg';
 import polygonLogo from '../../assets/polygon.svg';
-import binanceLogo from '../../assets/bnb-bnb-logo.svg';
-import { chain } from 'lodash';
-import { ContractInterface } from '@ethersproject/contracts';
-import DeHubABI from './dehubABI.json';
 import BridgeABI from './bridgeABI.json';
-import BigNumber from 'bignumber.js';
+import DeHubABI from './dehubABI.json';
 
 export enum CHAIN {
   ETHEREUM = 1,
@@ -34,7 +32,7 @@ export interface ChainInfo {
 
 export interface ChainType {
   name: string;
-  logo: any;
+  logo: string;
   chainID: number;
   layerzeroID: number;
 }

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { NavigationTabMenu } from '@dehub/shared/model';
-import { environment } from '../environments/environment';
 
 export const routes: Routes = [
   {

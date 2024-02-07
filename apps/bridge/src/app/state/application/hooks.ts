@@ -3,16 +3,16 @@ import {
   useRefresh,
   useWeb3Context,
 } from '@dehub/react/core';
+import { DEHUB_DECIMALS } from '@dehub/shared/model';
 import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '..';
+import { ChainType, MAX_VALUE, MIN_VALUE } from '../../constants/chains';
+import { useGetDehubBalance } from '../../hooks/useTokenBalance';
 import { AppState } from '../index';
 import { fetchPool, fetchUserInfo, setApplicationStatus } from './';
 import { ApplicationStatus, PoolInfoAndPaused, UserInfo } from './types';
-import { ChainType, MAX_VALUE, MIN_VALUE } from '../../constants/chains';
-import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import { DEHUB_DECIMALS } from '@dehub/shared/model';
 
 export const useApplicationStatus = (): ApplicationStatus => {
   return useSelector((state: AppState) => state.application.applicationStatus);
@@ -149,7 +149,7 @@ export const useSourceChain = (): {
 export const useValidAmount = () => {
   const [valid, setValid] = useState<boolean>(false);
   const { amount } = useTokenAmount();
-  const { userBalance, fetchStatus, bridgeBalance } = useGetDehubBalance();
+  const { userBalance, bridgeBalance } = useGetDehubBalance();
 
   useEffect(() => {
     const _value = Number(amount);

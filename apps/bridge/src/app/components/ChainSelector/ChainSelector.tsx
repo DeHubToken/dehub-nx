@@ -1,50 +1,32 @@
-import { BalanceInput, Heading, Text } from '@dehub/react/ui';
-import { useEffect, useRef, useState } from 'react';
-import getTimePeriods from '../../utils/getTimePeriods';
-import { useFirstAmount, useSecondAmount } from '../../hooks/useChains';
-import {
-  CHAINS,
-  ChainType,
-  MAX_VALUE,
-  MIN_VALUE,
-} from '../../constants/chains';
-import Logo from 'libs/react/ui/src/lib/Header/Logo';
-import { Button } from 'primereact/button';
-import ChainDialog from '../../views/components/ChainDialog';
-import {
-  useDstChain,
-  useSourceChain,
-  useTokenAmount,
-} from '../../state/application/hooks';
 import { useWeb3Context } from '@dehub/react/core';
+import { BalanceInput, Heading, Text } from '@dehub/react/ui';
 import {
-  useGetDehubBalance,
-  useGetDstDehubBalance,
-} from '../../hooks/useTokenBalance';
-import { FetchStatus } from '../../config/constants/types';
+  DEHUB_DECIMALS,
+  enableOptionsLocalStorageKey,
+  Web3EnableOptions,
+} from '@dehub/shared/model';
 import {
   BIG_ZERO,
   getBalanceAmount,
   setupMetamaskNetwork,
 } from '@dehub/shared/utils';
-import {
-  DEHUB_DECIMALS,
-  DEHUB_DISPLAY_DECIMALS,
-  DeHubConnectorNames,
-  Web3EnableOptions,
-  enableOptionsLocalStorageKey,
-} from '@dehub/shared/model';
-import { isNumber } from 'lodash';
-import { useDispatch } from 'react-redux';
-import {
-  setDstChain,
-  setSourceChain,
-  setTokenAmount,
-} from '../../state/application';
-import { useAppDispatch } from '../../state';
-import { isSource } from 'graphql/language/source';
-import BigNumber from 'bignumber.js';
+import { Button } from 'primereact/button';
+import { useEffect, useState } from 'react';
 import arrow from '../../../assets/down-arrow-svgrepo-com.svg';
+import { FetchStatus } from '../../config/constants/types';
+import { MAX_VALUE, MIN_VALUE } from '../../constants/chains';
+import {
+  useGetDehubBalance,
+  useGetDstDehubBalance,
+} from '../../hooks/useTokenBalance';
+import { useAppDispatch } from '../../state';
+import { setTokenAmount } from '../../state/application';
+import {
+  useDstChain,
+  useSourceChain,
+  useTokenAmount,
+} from '../../state/application/hooks';
+import ChainDialog from '../../views/components/ChainDialog';
 
 interface ChainSelectorProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -56,12 +38,11 @@ const ChainSelector = ({
   isSourceChain,
   ...props
 }: ChainSelectorProps) => {
-  const timer: { current: NodeJS.Timeout | null } = useRef(null);
   const [openChainDialog, setOpenChainDialog] = useState<boolean>(false);
   const { chain: dstChain } = useDstChain();
   const { chain: sourceChain } = useSourceChain();
   const chain = isSourceChain ? sourceChain : dstChain;
-  const { account, chainId, login, logout } = useWeb3Context();
+  const { account, chainId } = useWeb3Context();
   const [balance, setBalance] = useState<string>('0.00');
   const [balance2, setBalance2] = useState<string>('0.00');
   const [warning, setWarning] = useState<string>('');
@@ -71,11 +52,8 @@ const ChainSelector = ({
     bridgeBalance,
   } = useGetDehubBalance();
 
-  const {
-    userBalance: dehubBalance2,
-    fetchStatus: fetchBalanceStatus2,
-    bridgeBalance: bridgeBalance2,
-  } = useGetDstDehubBalance();
+  const { userBalance: dehubBalance2, fetchStatus: fetchBalanceStatus2 } =
+    useGetDstDehubBalance();
   const { amount: tokenAmount } = useTokenAmount();
   const [value, setValue] = useState<string>(tokenAmount);
   const dispatch = useAppDispatch();
@@ -99,7 +77,7 @@ const ChainSelector = ({
   }, [account, chainId, dehubBalance, fetchBalanceStatus]);
 
   useEffect(() => {
-    if (isSourceChain && chain && chain.chainID != chainId) {
+    if (isSourceChain && chain && chain.chainID !== chainId) {
       const enableOptions = JSON.parse(
         window.localStorage.getItem(enableOptionsLocalStorageKey) ?? '{}'
       ) as Web3EnableOptions;
@@ -118,10 +96,10 @@ const ChainSelector = ({
         }
       );
     }
-  }, [chain]);
+  }, [chain, isSourceChain, chainId]);
 
   useEffect(() => {
-    if (chain?.chainID != chainId) {
+    if (chain?.chainID !== chainId) {
       setWarning('Please switch network on wallet');
     } else {
       setWarning('');
@@ -158,7 +136,7 @@ const ChainSelector = ({
       setWarning('!!! Invalid input value');
     }
     dispatch(setTokenAmount({ amount: value }));
-  }, [value]);
+  }, [value, bridgeBalance, dehubBalance, dispatch]);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -175,7 +153,12 @@ const ChainSelector = ({
             >
               {chain ? (
                 <>
-                  <img width={50} height={50} src={chain?.logo}></img>
+                  <img
+                    width={50}
+                    height={50}
+                    src={chain?.logo}
+                    alt={chain?.name}
+                  ></img>
                   <div
                     className="text right align-self-center"
                     style={{ fontSize: '20px', paddingLeft: '15px' }}
@@ -195,6 +178,7 @@ const ChainSelector = ({
                 width={30}
                 height={30}
                 src={arrow}
+                alt="arrow"
               ></img>
             </div>
             <div className="col-12 md:col-6 lg:col-6 flex flex-row">

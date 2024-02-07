@@ -14,6 +14,7 @@ import {
 } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
 import DeHubStakingAbi from '../../config/abis/DeHubStaking.json';
+import { CHAINS, ChainType } from '../../constants/chains';
 import { getStakingAddress } from '../../utils/addressHelpers';
 import { Call, multicallV2 } from '../../utils/multicall';
 import {
@@ -22,7 +23,6 @@ import {
   SerializedPoolInfoAndPaused,
   SerializedUserInfo,
 } from './types';
-import { CHAIN, CHAINS, ChainType } from '../../constants/chains';
 
 const initialState: ApplicationState = {
   applicationStatus: ApplicationStatus.INITIAL,

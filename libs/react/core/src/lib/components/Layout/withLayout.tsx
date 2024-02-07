@@ -8,9 +8,7 @@ import {
   TabMenu,
 } from '@dehub/react/ui';
 import { WalletConnectingState } from '@dehub/shared/model';
-import { decimalToHex } from '@dehub/shared/util/network/decimal-to-hex';
 import { iOS } from '@dehub/shared/utils';
-import { Moralis } from 'moralis-v1';
 import React, { useEffect, useState } from 'react';
 import { useWeb3Context } from '../../hooks';
 import { useContentfulContext } from '../../hooks/useContentfulContext';
@@ -45,10 +43,10 @@ const withLayout =
 
     const {
       walletConnectingState,
-      defaultChainId,
+      // defaultChainId,
       // baseUrl,
       // landingUrl: landing,
-      logout,
+      // logout,
     } = useWeb3Context();
 
     const { footer } = useContentfulContext();

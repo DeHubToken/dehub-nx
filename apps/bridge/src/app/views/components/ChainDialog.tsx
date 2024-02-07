@@ -1,13 +1,10 @@
-import Web3 from 'web3';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
-import { BalanceInput, Box, Heading, Text } from '@dehub/react/ui';
 import { useRef } from 'react';
 import { CHAINS, ChainType } from '../../constants/chains';
+import { useAppDispatch } from '../../state';
 import { setDstChain, setSourceChain } from '../../state/application';
 import { useDstChain, useSourceChain } from '../../state/application/hooks';
-import { useAppDispatch } from '../../state';
-import { useWeb3Context } from '@dehub/react/core';
 
 interface ChainDialogProps {
   isSourceChain: boolean;
@@ -23,13 +20,12 @@ const ChainDialog: React.FC<ChainDialogProps> = ({
   const toast = useRef<Toast>(null);
   const { chain: sourceChain } = useSourceChain();
   const { chain: dstChain } = useDstChain();
-  const chain = isSourceChain ? sourceChain : dstChain;
   const dispatch = useAppDispatch();
-  const { account, web3, chainId } = useWeb3Context();
+  // const { account, web3, chainId } = useWeb3Context();
 
   const clickChain = async (chain: ChainType) => {
     if (isSourceChain) {
-      if (sourceChain && chain.chainID == dstChain?.chainID) {
+      if (sourceChain && chain.chainID === dstChain?.chainID) {
         dispatch(setDstChain({ chain: sourceChain }));
       }
       dispatch(setSourceChain({ chain }));
@@ -72,6 +68,7 @@ const ChainDialog: React.FC<ChainDialogProps> = ({
                     height={30}
                     className="align-left"
                     src={chain.logo}
+                    alt={chain?.name}
                   ></img>
                   <div
                     className="text right align-self-center"
