@@ -9,7 +9,11 @@ import {
   getFullDisplayBalance,
 } from '@dehub/shared/utils';
 import { Interface } from '@ethersproject/abi';
-import { ContractReceipt, Event } from '@ethersproject/contracts';
+import {
+  ContractFunction,
+  ContractReceipt,
+  Event,
+} from '@ethersproject/contracts';
 import { id } from '@ethersproject/hash';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -29,7 +33,7 @@ import {
   useValidAmount,
 } from '../state/application/hooks';
 import { useApproved, useGetDehubBalance } from '../hooks/useTokenBalance';
-import { CHAININFO, MAX_VALUE, MIN_VALUE } from '../constants/chains';
+import { CHAININFO, FEE, MAX_VALUE, MIN_VALUE } from '../constants/chains';
 import { chain } from 'lodash';
 import { useAppDispatch } from '../state';
 import { setTokenAmount, setUpdateState } from '../state/application';
@@ -106,10 +110,15 @@ const MyBridgeBox = () => {
         EthersBigNumber.from(
           BigNumber(amount).multipliedBy(Math.pow(10, 18)).toString()
         ),
-        dstChain.layerzeroID
+        dstChain.layerzeroID, 
+        {
+          from: account,
+          value: EthersBigNumber.from(BigNumber(amount).multipliedBy(Math.pow(10, 18)).multipliedBy(FEE[sourceChain.chainID]).toString()),
+        }
       );
+
       await tx.wait().then((receipt: ContractReceipt) => {
-        dispatch(setTokenAmount({ amount : "0" + amount }));
+        dispatch(setTokenAmount({ amount: '0' + amount }));
         setSendTx(receipt.transactionHash);
         toast?.current?.show({
           severity: 'success',
@@ -162,7 +171,7 @@ const MyBridgeBox = () => {
         const events = receipt.events?.filter(
           (event: Event) => event.topics[0] === ClaimedTopic
         );
-        dispatch(setTokenAmount({ amount : "0" + amount }));
+        dispatch(setTokenAmount({ amount: '0' + amount }));
         const lastEvent =
           events && events.length > 0 ? events.slice(-1)[0] : undefined;
         if (!lastEvent) return;
