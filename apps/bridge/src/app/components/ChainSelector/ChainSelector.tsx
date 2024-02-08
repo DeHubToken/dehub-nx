@@ -198,7 +198,7 @@ const ChainSelector = ({
                   className="text-right align-self-center"
                   style={{ fontSize: '18px' }}
                 >
-                  $DeHub Balance: {balance}{' '}
+                  $DHB Balance: {balance}{' '}
                 </div>
                 <Button
                   className="ml-5"
@@ -214,7 +214,7 @@ const ChainSelector = ({
                 className="text-right align-self-center"
                 style={{ fontSize: '18px' }}
               >
-                $DeHub Balance: ...{' '}
+                $DHB Balance: ...{' '}
               </div>
             )
           ) : fetchBalanceStatus2 ? (
@@ -223,7 +223,7 @@ const ChainSelector = ({
                 className="text-right align-self-center"
                 style={{ fontSize: '18px' }}
               >
-                $DeHub Balance: {balance2}{' '}
+                $DHB Balance: {balance2}{' '}
               </div>
             </div>
           ) : (
@@ -231,7 +231,7 @@ const ChainSelector = ({
               className="text-right align-self-center"
               style={{ fontSize: '18px' }}
             >
-              $DeHub Balance: ...{' '}
+              $DHB Balance: ...{' '}
             </div>
           )}
           {isSourceChain && value && warning ? (

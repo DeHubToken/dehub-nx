@@ -126,10 +126,10 @@ export const MAX_VALUE = Number.MAX_VALUE;
 export const FEE: { [chainId: number]: number } =
   //0.001;
   {
-    [CHAIN.ETHEREUM]: 0.0000008,
-    [CHAIN.GOERLI]: 0.0000008,
-    [CHAIN.BSC]: 0.000007,
-    [CHAIN.BSC_TESTNET]: 0.000007,
-    [CHAIN.POLYGON]: 0.0025,
-    [CHAIN.MUMBAI]: 0.0025,
+    [CHAIN.ETHEREUM]: 0.000005,
+    [CHAIN.GOERLI]: 0.000005,
+    [CHAIN.BSC]: 0.00007,
+    [CHAIN.BSC_TESTNET]: 0.0007,
+    [CHAIN.POLYGON]: 0.05,
+    [CHAIN.MUMBAI]: 0.05,
   };

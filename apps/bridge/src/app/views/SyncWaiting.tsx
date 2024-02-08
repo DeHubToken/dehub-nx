@@ -19,7 +19,7 @@ const SyncWaiting = ({ loadingStatus }: { loadingStatus: LoadingStatus }) => {
               <i className="fad fa-circle-notch fa-spin"></i>
             </div>
             <Heading className="text-center">
-              Syncing with $DeHub Contract
+              Syncing with $DHB Contract
             </Heading>
             <Text className="text-center">Please give it a second.</Text>
           </>

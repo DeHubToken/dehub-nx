@@ -152,7 +152,7 @@ const MyBridgeBox = () => {
                   ethersToBigNumber(parsed.args['amount']),
                   DEHUB_DECIMALS,
                   DEHUB_DISPLAY_DECIMALS
-                )} $DeHub has been successfully approved!`}
+                )} $DHB has been successfully approved!`}
               </Text>
             </Box>
           ),
@@ -214,7 +214,7 @@ const MyBridgeBox = () => {
   //                 ethersToBigNumber(parsed.args['amount']),
   //                 DEHUB_DECIMALS,
   //                 DEHUB_DISPLAY_DECIMALS
-  //               )} $DeHub has been successfully claimed!`}
+  //               )} $DHB has been successfully claimed!`}
   //             </Text>
   //           </Box>
   //         ),
@@ -290,7 +290,7 @@ const MyBridgeBox = () => {
                       className="text-right"
                       style={{ marginBottom: '8px' , fontSize:'18px'}}
                     >
-                      {MAX_VALUE.toString()} $DeHub
+                      {MAX_VALUE.toString()} $DHB
                     </Text> */}
                   <Text
                     className="text-left"
