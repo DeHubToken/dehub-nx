@@ -39,6 +39,10 @@ export const routes: Routes = [
         path: NavigationTabMenu.Legal,
         loadChildren: () => import('@dehub/angular/feature-legal'),
       },
+      // {
+      //   path: NavigationTabMenu.Bridge,
+      //   loadChildren: () => import('@dehub/angular/feature-clubs'),
+      // },
       {
         path: 'mailing',
         loadChildren: () => import('@dehub/angular/feature-mailing'),

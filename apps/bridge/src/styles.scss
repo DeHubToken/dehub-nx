@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Issue: https://github.com/primefaces/primeflex/issues/91#issuecomment-1138560974
+@forward 'libs/shared/asset/freya/src/lib/theme/dehub/theme.scss' hide $colors;
+@import 'libs/shared/asset/freya/src/lib/layout/css/layout-dehub.scss';
+
+@import 'primereact/resources/primereact.min.css';
+@import 'primeflex/primeflex.scss';
+@import 'primeicons/primeicons.css';
+
+:root {
+  // Swiper
+  --swiper-theme-color: #fafafa;
+
+  // Font Awesome
+  --fa-animation-duration: 2s;
+  --fa-animation-delay: 4s;
+}
+
+body {
+  // WalletConnect
+  --wcm-z-index: 3200;
+  --wcm-font-family: 'Exo', sans-serif;
+  --wcm-accent-color: #906fb0;
+  --wcm-color-fg-1: #eaebec;
+  --wcm-accent-fill-color: #eaebec;
+  --wcm-background-color: #321338;
+  --wcm-color-bg-1: #0b1113;
+  --wcm-color-bg-2: #321338;
+  --wcm-color-bg-3: #321338;
+  --wcm-color-overlay: #321338;
+}

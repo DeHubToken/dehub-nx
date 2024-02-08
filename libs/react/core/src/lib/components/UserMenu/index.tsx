@@ -1,9 +1,8 @@
-import { LetsExchangeModal } from '@dehub/react/ui';
 import { shortenAddress } from '@dehub/shared/utils';
 import Moralis from 'moralis-v1';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
 import { useWeb3Context } from '../../hooks';
 import ConnectWalletButton from '../ConnectWalletButton';
@@ -17,7 +16,7 @@ const UserMenu = ({
   cexUrl: string;
   downloadMetamaskUrl: string;
 }) => {
-  const [swapDeHubModalOpen, setSwapDeHubModalOpen] = useState(false);
+  // const [swapDeHubModalOpen, setSwapDeHubModalOpen] = useState(false);
   const { account, logout } = useWeb3Context();
 
   const { isAuthenticating } = useMoralis();
@@ -56,14 +55,22 @@ const UserMenu = ({
 
   return (
     <ul className="layout-topbar-actions">
-      <li className="topbar-item">
+      {/* <li className="topbar-item">
+        <BuyDeHubButton
+          landing={landing}
+          cexUrl={cexUrl}
+          downloadMetamaskUrl={downloadMetamaskUrl}
+          onSwap={() => {
+            setSwapDeHubModalOpen(true);
+          }}
+        />
         <LetsExchangeModal
           visible={swapDeHubModalOpen}
           onDismiss={() => {
             setSwapDeHubModalOpen(false);
           }}
         />
-      </li>
+      </li> */}
       <li className="topbar-item ml-2 md:ml-4">
         {account ? (
           <SplitButton
