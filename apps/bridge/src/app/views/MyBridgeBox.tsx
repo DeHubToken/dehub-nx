@@ -281,10 +281,10 @@ const MyBridgeBox = () => {
               <div className="col-6 md:col-6 lg:col-6 flex flex-column">
                 <div className="overview-info text-left w-full">
                   <Text
-                    className="text-right"
+                    className="text-left"
                     style={{ marginBottom: '8px', fontSize: '18px' }}
                   >
-                    {MIN_VALUE.toString()} $DeHub
+                    {MIN_VALUE.toString()} $DHB
                   </Text>
                   {/* <Text
                       className="text-right"
@@ -293,7 +293,7 @@ const MyBridgeBox = () => {
                       {MAX_VALUE.toString()} $DeHub
                     </Text> */}
                   <Text
-                    className="text-right"
+                    className="text-left"
                     style={{ marginBottom: '8px', fontSize: '18px' }}
                   >
                     {getFullDisplayBalance(
@@ -301,7 +301,7 @@ const MyBridgeBox = () => {
                       DEHUB_DECIMALS,
                       DEHUB_DISPLAY_DECIMALS
                     )}{' '}
-                    $DeHub
+                    $DHB
                   </Text>
                 </div>
               </div>

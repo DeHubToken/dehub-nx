@@ -116,28 +116,28 @@
     "deploy-preview-draft": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx netlify deploy --site=6861568a-86ef-4c9f-9673-b2dc8b9df18f --alias=nx -d ../../dist/apps/bridge.preview -o",
+        "command": "npx netlify deploy --site=ea188fa3-f58d-47d7-9fa7-8d0adca6d8ea --alias=nx -d ../../dist/apps/bridge.preview -o",
         "cwd": "netlify/bridge.prod"
       }
     },
     "deploy-preview": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx netlify deploy --site=6861568a-86ef-4c9f-9673-b2dc8b9df18f -d ../../dist/apps/bridge.preview -p -o",
+        "command": "npx netlify deploy --site=ea188fa3-f58d-47d7-9fa7-8d0adca6d8ea -d ../../dist/apps/bridge.preview -p -o",
         "cwd": "netlify/bridge.prod"
       }
     },
     "deploy-prod-draft": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 --alias=nx -d ../../dist/apps/bridge.prod -o",
+        "command": "npx netlify deploy --site=90082b9a-e321-496f-a2dc-cff37bd574cc --alias=nx -d ../../dist/apps/bridge.prod -o",
         "cwd": "netlify/bridge.prod"
       }
     },
     "deploy-prod": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/bridge.prod -p -o",
+        "command": "npx netlify deploy --site=90082b9a-e321-496f-a2dc-cff37bd574cc -d ../../dist/apps/bridge.prod -p -o",
         "cwd": "netlify/bridge.prod"
       }
     },
