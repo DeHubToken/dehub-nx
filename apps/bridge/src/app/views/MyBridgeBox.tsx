@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import { ChainSelector } from '../components/ChainSelector';
 import { CHAININFO, FEE, MIN_VALUE } from '../constants/chains';
 import { useBridgeContract, useDehubTokenContract } from '../hooks/useContract';
-import { useApproved, useGetDehubBalance } from '../hooks/useTokenBalance';
+import { useApproved } from '../hooks/useTokenBalance';
 import { useAppDispatch } from '../state';
 import { setTokenAmount } from '../state/application';
 import {
@@ -38,7 +38,7 @@ const MyBridgeBox = () => {
   const { chain: sourceChain } = useSourceChain();
   const { chain: dstChain } = useDstChain();
   const dehubTokenContract = useDehubTokenContract();
-  const { bridgeBalance } = useGetDehubBalance();
+  // const { bridgeBalance } = useGetDehubBalance();
   const bridgeContract = useBridgeContract();
   const { approved } = useApproved();
   const { amount } = useTokenAmount();
@@ -296,12 +296,12 @@ const MyBridgeBox = () => {
                     className="text-left"
                     style={{ marginBottom: '8px', fontSize: '18px' }}
                   >
-                    {getFullDisplayBalance(
+                    {/* {getFullDisplayBalance(
                       bridgeBalance,
                       DEHUB_DECIMALS,
                       DEHUB_DISPLAY_DECIMALS
-                    )}{' '}
-                    $DHB
+                    )} */}
+                    {'8,000,000,000'} $DHB
                   </Text>
                 </div>
               </div>
@@ -330,7 +330,7 @@ const MyBridgeBox = () => {
           </div>
           {sendTx ? (
             <div className="flex align-self-end">
-              <Link to={`https://testnet.layerzeroscan.com/tx/${sendTx}`}>
+              <Link to={`https://layerzeroscan.com/tx/${sendTx}`}>
                 Transaction Link
               </Link>
             </div>

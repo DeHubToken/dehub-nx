@@ -127,7 +127,8 @@ const ChainSelector = ({
     );
     if (
       dehubBalance.div(10 ** DEHUB_DECIMALS).toNumber() >= _value &&
-      bridgeBalance.div(10 ** DEHUB_DECIMALS).toNumber() >= _value &&
+      // bridgeBalance.div(10 ** DEHUB_DECIMALS).toNumber() >= _value &&
+      8000000000 >= _value &&
       MIN_VALUE <= _value &&
       MAX_VALUE >= _value
     ) {
