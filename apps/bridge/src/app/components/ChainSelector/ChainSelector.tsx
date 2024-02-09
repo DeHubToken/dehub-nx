@@ -49,7 +49,7 @@ const ChainSelector = ({
   const {
     userBalance: dehubBalance,
     fetchStatus: fetchBalanceStatus,
-    bridgeBalance,
+    // bridgeBalance,
   } = useGetDehubBalance();
 
   const { userBalance: dehubBalance2, fetchStatus: fetchBalanceStatus2 } =
@@ -120,11 +120,6 @@ const ChainSelector = ({
 
   useEffect(() => {
     const _value = Number(value);
-    console.log(
-      'HHH - Balance',
-      dehubBalance.div(10 ** 18).toString(),
-      bridgeBalance.div(10 ** 18).toString()
-    );
     if (
       dehubBalance.div(10 ** DEHUB_DECIMALS).toNumber() >= _value &&
       // bridgeBalance.div(10 ** DEHUB_DECIMALS).toNumber() >= _value &&
@@ -137,7 +132,7 @@ const ChainSelector = ({
       setWarning('!!! Invalid input value');
     }
     dispatch(setTokenAmount({ amount: value }));
-  }, [value, bridgeBalance, dehubBalance, dispatch]);
+  }, [value, dehubBalance, dispatch]);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment

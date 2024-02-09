@@ -76,6 +76,7 @@ const MyBridgeBox = () => {
             BigNumber(amount)
               .multipliedBy(Math.pow(10, 18))
               .multipliedBy(FEE[sourceChain.chainID])
+              .toFixed(0)
               .toString()
           ),
         }
@@ -254,56 +255,54 @@ const MyBridgeBox = () => {
             isSourceChain={false}
           ></ChainSelector>
           <div className="mt-5">
-            <div className="grid">
-              <div className="col- md:col-6 lg:col-6 flex flex-column">
-                <div className="overview-info text-left w-full">
-                  <Text
-                    className="text-right"
-                    style={{ marginBottom: '8px', fontSize: '18px' }}
-                  >
-                    Minimum Amount:
-                  </Text>
-                  <Text
-                    className="text-right"
-                    style={{ marginBottom: '8px', fontSize: '18px' }}
-                  >
-                    Maximum Amount:
-                  </Text>
-                  {/* <Text
-                      className="text-right"
-                      style={{ marginBottom: '8px' , fontSize:'18px'}}
-                    >
-                      Available to Bridge:
-                    </Text> */}
-                </div>
+            <div className="w-full flex flex-column align-center text-center">
+              {/* <div
+                className="w-full flex align-center"
+                style={{
+                  marginBottom: '8px',
+                  fontSize: '18px',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ marginRight: '5px', fontSize: '18px' }}>
+                  FEE :
+                </Text>
+                <Text style={{ fontSize: '18px' }}>0.3 BNB</Text>
+              </div> */}
+              <div
+                className="flex align-center"
+                style={{
+                  marginBottom: '8px',
+                  fontSize: '18px',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ marginRight: '5px', fontSize: '18px' }}>
+                  {window?.innerWidth <= 768 ? 'Min' : 'Minimum'}:
+                </Text>
+                <Text style={{ fontSize: '18px' }}>
+                  {MIN_VALUE.toString()} $DHB
+                </Text>
               </div>
-
-              <div className="col-6 md:col-6 lg:col-6 flex flex-column">
-                <div className="overview-info text-left w-full">
-                  <Text
-                    className="text-left"
-                    style={{ marginBottom: '8px', fontSize: '18px' }}
-                  >
-                    {MIN_VALUE.toString()} $DHB
-                  </Text>
-                  {/* <Text
-                      className="text-right"
-                      style={{ marginBottom: '8px' , fontSize:'18px'}}
-                    >
-                      {MAX_VALUE.toString()} $DHB
-                    </Text> */}
-                  <Text
-                    className="text-left"
-                    style={{ marginBottom: '8px', fontSize: '18px' }}
-                  >
-                    {/* {getFullDisplayBalance(
+              <div
+                className="flex align-center"
+                style={{
+                  marginBottom: '8px',
+                  fontSize: '18px',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ marginRight: '5px', fontSize: '18px' }}>
+                  {window?.innerWidth <= 768 ? 'Max' : 'Maximum Amount'}:
+                </Text>
+                <Text style={{ fontSize: '18px' }}>
+                  {/* {getFullDisplayBalance(
                       bridgeBalance,
                       DEHUB_DECIMALS,
                       DEHUB_DISPLAY_DECIMALS
                     )} */}
-                    {'8,000,000,000'} $DHB
-                  </Text>
-                </div>
+                  {'8,000,000,000'} $DHB
+                </Text>
               </div>
             </div>
           </div>
