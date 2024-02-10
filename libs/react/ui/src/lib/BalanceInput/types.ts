@@ -15,5 +15,4 @@ export interface BalanceInputProps {
   decimals?: number;
   unit?: string;
   switchEditingUnits?: () => void;
-  className?: string;
 }
