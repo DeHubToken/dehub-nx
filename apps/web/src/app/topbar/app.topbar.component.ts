@@ -13,7 +13,7 @@ import { ConnectWalletButtonComponent } from '@dehub/angular/ui/components/butto
 import { LetsExchangeComponent } from '@dehub/angular/ui/components/lets-exchange/lets-exchange.component';
 import { shortenAddress } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
-import { Observable, map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Env } from '../../environments/env';
 import { AppComponent } from '../app.component';
 import { AppMainComponent } from '../app.main.component';

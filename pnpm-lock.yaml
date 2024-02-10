@@ -136,7 +136,7 @@ dependencies:
     version: 6.1.9(react@18.2.0)
   '@web3-react/torus-connector':
     specifier: 6.2.9
-    version: 6.2.9(@babel/runtime@7.23.7)
+    version: 6.2.9(@babel/runtime@7.23.6)
   '@web3-react/walletlink-connector':
     specifier: 6.2.14
     version: 6.2.14
@@ -525,7 +525,7 @@ devDependencies:
     version: 9.3.0
   ts-jest:
     specifier: 29.1.0
-    version: 29.1.0(@babel/core@7.14.5)(babel-jest@29.4.3)(esbuild@0.19.11)(jest@29.4.3)(typescript@5.3.3)
+    version: 29.1.0(@babel/core@7.14.5)(babel-jest@29.4.3)(esbuild@0.19.10)(jest@29.4.3)(typescript@5.3.3)
   ts-node:
     specifier: 10.9.1
     version: 10.9.1(@swc/core@1.3.96)(@types/node@18.19.14)(typescript@5.3.3)
@@ -4013,6 +4013,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
+    dev: true
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
@@ -10991,7 +10992,7 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /@toruslabs/http-helpers@3.4.0(@babel/runtime@7.23.7):
+  /@toruslabs/http-helpers@3.4.0(@babel/runtime@7.23.6):
     resolution: {integrity: sha512-CoeJSL32mpp0gmYjxv48odu6pfjHk/rbJHDwCtYPcMHAl+qUQ/DTpVOOn9U0fGkD+fYZrQmZbRkXFgLhiT0ajQ==}
     engines: {node: '>=14.17.0', npm: '>=6.x'}
     peerDependencies:
@@ -11001,19 +11002,19 @@ packages:
       '@sentry/types':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.7
+      '@babel/runtime': 7.23.6
       lodash.merge: 4.6.2
       loglevel: 1.8.1
     dev: false
 
-  /@toruslabs/openlogin-jrpc@3.2.0(@babel/runtime@7.23.7):
+  /@toruslabs/openlogin-jrpc@3.2.0(@babel/runtime@7.23.6):
     resolution: {integrity: sha512-G+K0EHyVUaAEyeD4xGsnAZRpn/ner8lQ2HC2+pGKg6oGmzKI2wGMDcw2KMH6+HKlfBGVJ5/VR9AQfC/tZlLDmQ==}
     deprecated: Not supported. Pls upgrade
     peerDependencies:
       '@babel/runtime': 7.x
     dependencies:
-      '@babel/runtime': 7.23.7
-      '@toruslabs/openlogin-utils': 3.0.0(@babel/runtime@7.23.7)
+      '@babel/runtime': 7.23.6
+      '@toruslabs/openlogin-utils': 3.0.0(@babel/runtime@7.23.6)
       end-of-stream: 1.4.4
       eth-rpc-errors: 4.0.3
       events: 3.3.0
@@ -11023,29 +11024,29 @@ packages:
       readable-stream: 3.6.2
     dev: false
 
-  /@toruslabs/openlogin-utils@3.0.0(@babel/runtime@7.23.7):
+  /@toruslabs/openlogin-utils@3.0.0(@babel/runtime@7.23.6):
     resolution: {integrity: sha512-T5t29/AIFqXc84x4OoAkZWjd0uoP2Lk6iaFndnIIMzCPu+BwwV0spX/jd/3YYNjZ8Po8D+faEnwAhiqemYeK2w==}
     deprecated: Not supported. Pls upgrade
     peerDependencies:
       '@babel/runtime': 7.x
     dependencies:
-      '@babel/runtime': 7.23.7
+      '@babel/runtime': 7.23.6
       base64url: 3.0.1
       keccak: 3.0.4
       randombytes: 2.1.0
     dev: false
 
-  /@toruslabs/torus-embed@1.41.3(@babel/runtime@7.23.7):
+  /@toruslabs/torus-embed@1.41.3(@babel/runtime@7.23.6):
     resolution: {integrity: sha512-RpSNJub99oweFASv3Jinrf4JzA9QgkqGnErnymGuAQop9WGcmV2lJoImg2lXJbWgfM9SOOK6qtakhysf02oTTw==}
     engines: {node: '>=14.17.0', npm: '>=6.x'}
     deprecated: Not supported. Pls upgrade
     peerDependencies:
       '@babel/runtime': 7.x
     dependencies:
-      '@babel/runtime': 7.23.7
+      '@babel/runtime': 7.23.6
       '@metamask/obs-store': 7.0.0
-      '@toruslabs/http-helpers': 3.4.0(@babel/runtime@7.23.7)
-      '@toruslabs/openlogin-jrpc': 3.2.0(@babel/runtime@7.23.7)
+      '@toruslabs/http-helpers': 3.4.0(@babel/runtime@7.23.6)
+      '@toruslabs/openlogin-jrpc': 3.2.0(@babel/runtime@7.23.6)
       create-hash: 1.2.0
       end-of-stream: 1.4.4
       eth-rpc-errors: 4.0.3
@@ -12499,10 +12500,10 @@ packages:
       tiny-warning: 1.0.3
     dev: false
 
-  /@web3-react/torus-connector@6.2.9(@babel/runtime@7.23.7):
+  /@web3-react/torus-connector@6.2.9(@babel/runtime@7.23.6):
     resolution: {integrity: sha512-aq0pDZh00aIBdZZUsDFf3y91ZMVpEZpqKEPe5Q+Mk+aG0dbgOs5gwuT/jtfaCDAkxJqwGJzKQ4kF6+bj/HMaJw==}
     dependencies:
-      '@toruslabs/torus-embed': 1.41.3(@babel/runtime@7.23.7)
+      '@toruslabs/torus-embed': 1.41.3(@babel/runtime@7.23.6)
       '@web3-react/abstract-connector': 6.0.7
       '@web3-react/types': 6.0.7
     transitivePeerDependencies:
@@ -20948,10 +20949,10 @@ packages:
       jest-environment-jsdom: 29.4.3
       jest-util: 29.7.0
       pretty-format: 29.7.0
-      ts-jest: 29.1.0(@babel/core@7.14.5)(babel-jest@29.4.3)(esbuild@0.19.11)(jest@29.4.3)(typescript@5.3.3)
+      ts-jest: 29.1.0(@babel/core@7.14.5)(babel-jest@29.4.3)(esbuild@0.19.10)(jest@29.4.3)(typescript@5.3.3)
       typescript: 5.3.3
     optionalDependencies:
-      esbuild: 0.19.11
+      esbuild: 0.19.10
     transitivePeerDependencies:
       - '@babel/core'
       - '@jest/types'
@@ -27838,7 +27839,7 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /ts-jest@29.1.0(@babel/core@7.14.5)(babel-jest@29.4.3)(esbuild@0.19.11)(jest@29.4.3)(typescript@5.3.3):
+  /ts-jest@29.1.0(@babel/core@7.14.5)(babel-jest@29.4.3)(esbuild@0.19.10)(jest@29.4.3)(typescript@5.3.3):
     resolution: {integrity: sha512-ZhNr7Z4PcYa+JjMl62ir+zPiNJfXJN6E8hSLnaUKhOgqcn8vb3e537cpkd0FuAfRK3sR1LSqM1MOhliXNgOFPA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -27862,7 +27863,7 @@ packages:
       '@babel/core': 7.14.5
       babel-jest: 29.4.3(@babel/core@7.14.5)
       bs-logger: 0.2.6
-      esbuild: 0.19.11
+      esbuild: 0.19.10
       fast-json-stable-stringify: 2.1.0
       jest: 29.4.3(@types/node@18.19.14)(ts-node@10.9.1)
       jest-util: 29.7.0

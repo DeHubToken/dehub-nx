@@ -61,3 +61,31 @@ We use Netlify for hosting and creating sites from the CLI as we use Nx `run-com
    URL:       https://staking-dehub-preview.netlify.app
    Site ID:   6861568a-86ef-4c9f-9673-b2dc8b9df18f
    ```
+
+   **Prod Bridge**
+
+   ```
+   npx netlify sites:create --account-slug=dehub --name=bridge-dehub
+   ```
+
+   Output:
+
+   ```
+   Admin URL: https://app.netlify.com/sites/bridge-dehub
+   URL:       https://bridge-dehub.netlify.app
+   Site ID:   09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3
+   ```
+
+   **Preview Bridge**
+
+   ```
+   npx netlify sites:create --account-slug=dehub --name=bridge-dehub-preview
+   ```
+
+   Output:
+
+   ```
+   Admin URL: https://app.netlify.com/sites/bridge-dehub-preview
+   URL:       https://bridge-dehub-preview.netlify.app
+   Site ID:   6861568a-86ef-4c9f-9673-b2dc8b9df18f
+   ```

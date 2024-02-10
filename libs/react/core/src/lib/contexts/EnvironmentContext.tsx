@@ -1,10 +1,7 @@
-import React, {
-  createContext,
-  PropsWithChildren
-} from 'react';
+import React, { createContext, PropsWithChildren } from 'react';
 
 interface EnvironmentContextValue {
-  baseUrl: string
+  baseUrl: string;
 }
 
 const EnvironmentContext = createContext<undefined | EnvironmentContextValue>(
