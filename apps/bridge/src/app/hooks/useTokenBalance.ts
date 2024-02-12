@@ -3,7 +3,7 @@ import { BIG_ZERO } from '@dehub/shared/utils';
 import BigNumber from 'bignumber.js';
 import { useEffect, useRef, useState } from 'react';
 import { FetchStatus } from '../config/constants/types';
-import { CHAIN_INFO } from '../constants/chains';
+import { CHAININFO } from '../constants/chains';
 import {
   useDstChain,
   useSourceChain,
@@ -193,7 +193,7 @@ export const useApproved = () => {
       try {
         const res = await contract['allowance'](
           account,
-          CHAIN_INFO[chain.chainID].bridgeContract
+          CHAININFO[chain.chainID].bridgeContract
         );
         if (!mountedRef.current) {
           return;

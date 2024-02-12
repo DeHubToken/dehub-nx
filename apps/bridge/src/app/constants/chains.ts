@@ -1,4 +1,7 @@
 import { ContractInterface } from '@ethersproject/contracts';
+import binanceLogo from '../../assets/bnb-bnb-logo.svg';
+import ethereumLogo from '../../assets/ethereum-logo.svg';
+import polygonLogo from '../../assets/polygon.svg';
 import BridgeABI from './bridgeABI.json';
 import DeHubABI from './dehubABI.json';
 
@@ -11,7 +14,7 @@ export enum CHAIN {
   MUMBAI = 80001,
 }
 
-export enum LAYER_ZERO_ID {
+export enum LAYERZEROID {
   ETHEREUM = 101,
   GOERLI = 10121,
   BSC = 102,
@@ -31,10 +34,10 @@ export interface ChainType {
   name: string;
   logo: string;
   chainID: number;
-  layerZeroID: number;
+  layerzeroID: number;
 }
 
-export const CHAIN_INFO: { [chainId: number]: ChainInfo } = {
+export const CHAININFO: { [chainId: number]: ChainInfo } = {
   // Mainnet
   [CHAIN.ETHEREUM]: {
     dehubToken: '0x99BB69Ee1BbFC7706C3ebb79b21C5B698fe58EC0',
@@ -77,56 +80,59 @@ export const CHAIN_INFO: { [chainId: number]: ChainInfo } = {
 };
 
 export const CHAINS: ChainType[] = [
-  // Mainnet
+  // // Mainnets
   {
     name: 'Ethereum',
-    logo: 'ethereum-logo.svg',
+    logo: ethereumLogo,
     chainID: CHAIN.ETHEREUM,
-    layerZeroID: LAYER_ZERO_ID.ETHEREUM,
+    layerzeroID: LAYERZEROID.ETHEREUM,
   },
   {
     name: 'Polygon',
-    logo: 'polygon.svg',
+    logo: polygonLogo,
     chainID: CHAIN.POLYGON,
-    layerZeroID: LAYER_ZERO_ID.POLYGON,
+    layerzeroID: LAYERZEROID.POLYGON,
   },
   {
     name: 'Binance',
-    logo: 'bnb-bnb-logo.svg',
+    logo: binanceLogo,
     chainID: CHAIN.BSC,
-    layerZeroID: LAYER_ZERO_ID.BSC,
+    layerzeroID: LAYERZEROID.BSC,
   },
 
-  // Testnet
-  // {
-  //   name: 'Polygon Mumbai',
-  //   logo: 'polygon.svg',
-  //   chainID: CHAIN.MUMBAI,
-  //   layerZeroID: LAYER_ZERO_ID.MUMBAI,
-  // },
-  // {
-  //   name: 'Goerli',
-  //   logo: 'ethereum-logo.svg',
-  //   chainID: CHAIN.GOERLI,
-  //   layerZeroID: LAYER_ZERO_ID.GOERLI,
-  // },
-  // {
-  //   name: 'Binance Testnet',
-  //   logo: 'bnb-bnb-logo.svg',
-  //   chainID: CHAIN.BSC_TESTNET,
-  //   layerZeroID: LAYER_ZERO_ID.BSC_TESTNET,
-  // },
+  // Testnets
+  //   {
+  //     name: 'Polygon Mumbai',
+  //     logo: polygonLogo,
+  //     chainID: CHAIN.MUMBAI,
+  //     layerzeroID: LAYERZEROID.MUMBAI,
+  //   },
+  //   {
+  //     name: 'Goerli',
+  //     logo: ethereumLogo,
+  //     chainID: CHAIN.GOERLI,
+  //     layerzeroID: LAYERZEROID.GOERLI,
+  //   },
+  //   {
+  //     name: 'Binance Testnet',
+  //     logo: binanceLogo,
+  //     chainID: CHAIN.BSC_TESTNET,
+  //     layerzeroID: LAYERZEROID.BSC_TESTNET,
+  //   },
 ];
 
 export const MIN_VALUE = Number(10);
 export const MAX_VALUE = Number.MAX_VALUE;
 export const FEE: { [chainId: number]: number } =
-  // 0.001;
+  //0.001;
   {
-    [CHAIN.ETHEREUM]: 0.000005,
-    [CHAIN.GOERLI]: 0.000005,
-    [CHAIN.BSC]: 0.00007,
-    [CHAIN.BSC_TESTNET]: 0.0007,
-    [CHAIN.POLYGON]: 0.05,
-    [CHAIN.MUMBAI]: 0.05,
+    // [CHAIN.ETHEREUM]: 0.00000002,
+    [CHAIN.ETHEREUM]: 0.005 / 2700,
+    [CHAIN.GOERLI]: 0.00000002,
+    // [CHAIN.BSC]: 0.0000002,
+    [CHAIN.BSC]: 0.001 / 300,
+    [CHAIN.BSC_TESTNET]: 0.0000002,
+    [CHAIN.POLYGON]: 0.00004375,
+    // [CHAIN.MUMBAI]: 0.00004375,
+    [CHAIN.MUMBAI]: 0.005 / 0.9,
   };

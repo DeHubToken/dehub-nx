@@ -14,7 +14,7 @@ import {
 import { getTabMenuItems } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
 import { MenuItem } from 'primeng/api';
-import { Observable, Subscription, filter, map } from 'rxjs';
+import { filter, map, Observable, Subscription } from 'rxjs';
 import { AppComponent } from './app.component';
 import { AppTopBarComponent } from './topbar/app.topbar.component';
 import { MenuService } from './topbar/menu/app.menu.service';

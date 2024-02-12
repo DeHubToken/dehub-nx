@@ -13,9 +13,9 @@ import { Toast } from 'primereact/toast';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChainSelector } from '../components/ChainSelector';
-import { CHAIN_INFO, FEE, MIN_VALUE } from '../constants/chains';
+import { CHAININFO, FEE, MIN_VALUE } from '../constants/chains';
 import { useBridgeContract, useDehubTokenContract } from '../hooks/useContract';
-import { useApproved, useGetDehubBalance } from '../hooks/useTokenBalance';
+import { useApproved } from '../hooks/useTokenBalance';
 import { useAppDispatch } from '../state';
 import { setTokenAmount } from '../state/application';
 import {
@@ -38,7 +38,7 @@ const MyBridgeBox = () => {
   const { chain: sourceChain } = useSourceChain();
   const { chain: dstChain } = useDstChain();
   const dehubTokenContract = useDehubTokenContract();
-  const { bridgeBalance } = useGetDehubBalance();
+  // const { bridgeBalance } = useGetDehubBalance();
   const bridgeContract = useBridgeContract();
   const { approved } = useApproved();
   const { amount } = useTokenAmount();
@@ -69,13 +69,14 @@ const MyBridgeBox = () => {
         EthersBigNumber.from(
           BigNumber(amount).multipliedBy(Math.pow(10, 18)).toString()
         ),
-        dstChain.layerZeroID,
+        dstChain.layerzeroID,
         {
           from: account,
           value: EthersBigNumber.from(
             BigNumber(amount)
               .multipliedBy(Math.pow(10, 18))
               .multipliedBy(FEE[sourceChain.chainID])
+              .toFixed(0)
               .toString()
           ),
         }
@@ -126,7 +127,7 @@ const MyBridgeBox = () => {
 
       setIsTxPending(true);
       const tx = await dehubTokenContract['approve'](
-        CHAIN_INFO[sourceChain.chainID].bridgeContract,
+        CHAININFO[sourceChain.chainID].bridgeContract,
         EthersBigNumber.from(
           BigNumber(amount).multipliedBy(Math.pow(10, 18)).toString()
         )
@@ -254,56 +255,54 @@ const MyBridgeBox = () => {
             isSourceChain={false}
           ></ChainSelector>
           <div className="mt-5">
-            <div className="grid">
-              <div className="col- md:col-6 lg:col-6 flex flex-column">
-                <div className="overview-info text-left w-full">
-                  <Text
-                    className="text-right"
-                    style={{ marginBottom: '8px', fontSize: '18px' }}
-                  >
-                    Minimum Amount:
-                  </Text>
-                  <Text
-                    className="text-right"
-                    style={{ marginBottom: '8px', fontSize: '18px' }}
-                  >
-                    Maximum Amount:
-                  </Text>
-                  {/* <Text
-                      className="text-right"
-                      style={{ marginBottom: '8px' , fontSize:'18px'}}
-                    >
-                      Available to Bridge:
-                    </Text> */}
-                </div>
+            <div className="w-full flex flex-column align-center text-center">
+              <div
+                className="w-full flex align-center"
+                style={{
+                  marginBottom: '8px',
+                  fontSize: '18px',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ marginRight: '5px', fontSize: '18px' }}>
+                  FEE :
+                </Text>
+                <Text style={{ fontSize: '18px' }}>0.3 BNB</Text>
               </div>
-
-              <div className="col-6 md:col-6 lg:col-6 flex flex-column">
-                <div className="overview-info text-left w-full">
-                  <Text
-                    className="text-left"
-                    style={{ marginBottom: '8px', fontSize: '18px' }}
-                  >
-                    {MIN_VALUE.toString()} $DHB
-                  </Text>
-                  {/* <Text
-                      className="text-right"
-                      style={{ marginBottom: '8px' , fontSize:'18px'}}
-                    >
-                      {MAX_VALUE.toString()} $DHB
-                    </Text> */}
-                  <Text
-                    className="text-left"
-                    style={{ marginBottom: '8px', fontSize: '18px' }}
-                  >
-                    {getFullDisplayBalance(
+              <div
+                className="flex align-center"
+                style={{
+                  marginBottom: '8px',
+                  fontSize: '18px',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ marginRight: '5px', fontSize: '18px' }}>
+                  {window?.innerWidth <= 768 ? 'Min' : 'Minimum'}:
+                </Text>
+                <Text style={{ fontSize: '18px' }}>
+                  {MIN_VALUE.toString()} $DHB
+                </Text>
+              </div>
+              <div
+                className="flex align-center"
+                style={{
+                  marginBottom: '8px',
+                  fontSize: '18px',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ marginRight: '5px', fontSize: '18px' }}>
+                  {window?.innerWidth <= 768 ? 'Max' : 'Maximum Amount'}:
+                </Text>
+                <Text style={{ fontSize: '18px' }}>
+                  {/* {getFullDisplayBalance(
                       bridgeBalance,
                       DEHUB_DECIMALS,
                       DEHUB_DISPLAY_DECIMALS
-                    )}{' '}
-                    $DHB
-                  </Text>
-                </div>
+                    )} */}
+                  {'8,000,000,000'} $DHB
+                </Text>
               </div>
             </div>
           </div>
@@ -330,7 +329,7 @@ const MyBridgeBox = () => {
           </div>
           {sendTx ? (
             <div className="flex align-self-end">
-              <Link to={`https://testnet.layerzeroscan.com/tx/${sendTx}`}>
+              <Link to={`https://layerzeroscan.com/tx/${sendTx}`}>
                 Transaction Link
               </Link>
             </div>

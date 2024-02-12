@@ -1,8 +1,4 @@
-import {
-  useEagerWeb3,
-  useEnvironmentContext,
-  withLayout,
-} from '@dehub/react/core';
+import { useEagerWeb3, withLayout } from '@dehub/react/core';
 import { FullScreenLoader, SuspenseWithChunkError } from '@dehub/react/ui';
 import { NavigationTabMenu } from '@dehub/shared/model';
 import BigNumber from 'bignumber.js';
@@ -21,13 +17,13 @@ BigNumber.config({
 });
 
 const {
+  baseUrl,
   dehub: { landing },
 } = environment;
 const { cexUrl, downloadMetamaskUrl } = environment.dehub;
 const activeTab = NavigationTabMenu.Clubs;
 
 export function App() {
-  const { baseUrl } = useEnvironmentContext();
   useEagerWeb3();
   useFetchPool();
   usePullBusdPrice();
@@ -39,6 +35,7 @@ export function App() {
     () =>
       withLayout(
         {
+          baseUrl,
           landing,
           cexUrl,
           downloadMetamaskUrl,

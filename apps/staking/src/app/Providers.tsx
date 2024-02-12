@@ -1,6 +1,5 @@
 import {
   ContentfulProvider,
-  EnvironmentProvider,
   RefreshContextProvider,
   ToastProvider,
   Web3Providers,
@@ -23,13 +22,11 @@ const Providers: React.FC<PropsWithChildren<unknown>> = ({ children }) => {
     <ToastProvider>
       <Web3Providers web3={web3} legalPage={legalPage}>
         <Provider store={store}>
-          <EnvironmentProvider baseUrl={baseUrl}>
-            <ContentfulProvider contentful={contentful}>
-              <RefreshContextProvider>
-                <HelmetProvider>{children}</HelmetProvider>
-              </RefreshContextProvider>
-            </ContentfulProvider>
-          </EnvironmentProvider>
+          <ContentfulProvider contentful={contentful}>
+            <RefreshContextProvider>
+              <HelmetProvider>{children}</HelmetProvider>
+            </RefreshContextProvider>
+          </ContentfulProvider>
         </Provider>
       </Web3Providers>
     </ToastProvider>

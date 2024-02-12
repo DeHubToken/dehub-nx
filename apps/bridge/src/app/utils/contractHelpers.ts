@@ -5,7 +5,7 @@ import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { JsonRpcProvider, Provider } from '@ethersproject/providers';
 import DeHubStakingAbi from '../config/abis/DeHubStaking.json';
 import MulticallAbi from '../config/abis/Multicall.json';
-import { CHAIN, CHAIN_INFO } from '../constants/chains';
+import { CHAIN, CHAININFO } from '../constants/chains';
 import { getMultiCallAddress, getStakingAddress } from './addressHelpers';
 import { simpleRpcProvider } from './providers';
 
@@ -31,8 +31,8 @@ export const getDehubTokenContract = (
   chainId: number,
   signer?: Signer | Provider | null
 ) => {
-  const tokenAddress = CHAIN_INFO[chainId].dehubToken;
-  const abi = CHAIN_INFO[chainId].dehubTokenABI;
+  const tokenAddress = CHAININFO[chainId].dehubToken;
+  const abi = CHAININFO[chainId].dehubTokenABI;
   return getContract(tokenAddress, abi, signer, chainId);
 };
 
@@ -40,8 +40,8 @@ export const getBridgeContract = (
   chainId: number,
   signer?: Signer | Provider
 ) => {
-  const tokenAddress = CHAIN_INFO[chainId].bridgeContract;
-  const abi = CHAIN_INFO[chainId].bridgeABI;
+  const tokenAddress = CHAININFO[chainId].bridgeContract;
+  const abi = CHAININFO[chainId].bridgeABI;
   return getContract(tokenAddress, abi, signer, chainId);
 };
 

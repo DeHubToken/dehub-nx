@@ -1,9 +1,9 @@
-import { useEnvironmentContext, useWeb3Context } from '@dehub/react/core';
+import { useWeb3Context } from '@dehub/react/core';
 import { BalanceInput, Heading, Text } from '@dehub/react/ui';
 import {
   DEHUB_DECIMALS,
-  Web3EnableOptions,
   enableOptionsLocalStorageKey,
+  Web3EnableOptions,
 } from '@dehub/shared/model';
 import {
   BIG_ZERO,
@@ -12,6 +12,7 @@ import {
 } from '@dehub/shared/utils';
 import { Button } from 'primereact/button';
 import { useEffect, useState } from 'react';
+import arrow from '../../../assets/down-arrow-svgrepo-com.svg';
 import { FetchStatus } from '../../config/constants/types';
 import { MAX_VALUE, MIN_VALUE } from '../../constants/chains';
 import {
@@ -37,7 +38,6 @@ const ChainSelector = ({
   isSourceChain,
   ...props
 }: ChainSelectorProps) => {
-  const { baseUrl } = useEnvironmentContext();
   const [openChainDialog, setOpenChainDialog] = useState<boolean>(false);
   const { chain: dstChain } = useDstChain();
   const { chain: sourceChain } = useSourceChain();
@@ -49,7 +49,7 @@ const ChainSelector = ({
   const {
     userBalance: dehubBalance,
     fetchStatus: fetchBalanceStatus,
-    bridgeBalance,
+    // bridgeBalance,
   } = useGetDehubBalance();
 
   const { userBalance: dehubBalance2, fetchStatus: fetchBalanceStatus2 } =
@@ -120,14 +120,10 @@ const ChainSelector = ({
 
   useEffect(() => {
     const _value = Number(value);
-    console.log(
-      'HHH - Balance',
-      dehubBalance.div(10 ** 18).toString(),
-      bridgeBalance.div(10 ** 18).toString()
-    );
     if (
       dehubBalance.div(10 ** DEHUB_DECIMALS).toNumber() >= _value &&
-      bridgeBalance.div(10 ** DEHUB_DECIMALS).toNumber() >= _value &&
+      // bridgeBalance.div(10 ** DEHUB_DECIMALS).toNumber() >= _value &&
+      8000000000 >= _value &&
       MIN_VALUE <= _value &&
       MAX_VALUE >= _value
     ) {
@@ -136,7 +132,7 @@ const ChainSelector = ({
       setWarning('!!! Invalid input value');
     }
     dispatch(setTokenAmount({ amount: value }));
-  }, [value, bridgeBalance, dehubBalance, dispatch]);
+  }, [value, dispatch, dehubBalance]);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -156,7 +152,7 @@ const ChainSelector = ({
                   <img
                     width={50}
                     height={50}
-                    src={`${baseUrl}/assets/${chain?.logo}`}
+                    src={chain?.logo}
                     alt={chain?.name}
                   ></img>
                   <div
@@ -177,7 +173,7 @@ const ChainSelector = ({
                 className="ml-3 align-self-center"
                 width={30}
                 height={30}
-                src={`${baseUrl}/assets/down-arrow-svgrepo-com.svg`}
+                src={arrow}
                 alt="arrow"
               ></img>
             </div>
@@ -185,7 +181,7 @@ const ChainSelector = ({
               <BalanceInput
                 inputProps={{ width: '100%' }}
                 value={isSourceChain ? value : tokenAmount}
-                onUserInput={isSourceChain ? handleChange : () => ({})}
+                onUserInput={isSourceChain ? handleChange : () => {}}
                 isDisabled={!isSourceChain}
                 className="align-self-center p-dropdown-filter"
               ></BalanceInput>
