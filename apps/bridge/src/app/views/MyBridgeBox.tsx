@@ -256,7 +256,7 @@ const MyBridgeBox = () => {
           ></ChainSelector>
           <div className="mt-5">
             <div className="w-full flex flex-column align-center text-center">
-              {/* <div
+              <div
                 className="w-full flex align-center"
                 style={{
                   marginBottom: '8px',
@@ -268,7 +268,7 @@ const MyBridgeBox = () => {
                   FEE :
                 </Text>
                 <Text style={{ fontSize: '18px' }}>0.3 BNB</Text>
-              </div> */}
+              </div>
               <div
                 className="flex align-center"
                 style={{

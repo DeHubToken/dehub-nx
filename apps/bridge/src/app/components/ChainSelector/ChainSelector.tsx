@@ -132,7 +132,7 @@ const ChainSelector = ({
       setWarning('!!! Invalid input value');
     }
     dispatch(setTokenAmount({ amount: value }));
-  }, [value, dehubBalance, dispatch]);
+  }, [value, dispatch]);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
