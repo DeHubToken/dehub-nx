@@ -92,7 +92,7 @@
         },
         "development": {
           "buildTarget": "staking:build:development",
-          "host": "localhost",
+          "host": "dev.localhost",
           "port": 8601
         }
       },
@@ -100,7 +100,6 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
       "options": {
         "maxWarnings": 0
       }

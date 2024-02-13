@@ -1,7 +1,6 @@
 export { default as BalanceInput } from './lib/BalanceInput';
-export * from './lib/Button';
 export { default as Footer } from './lib/Footer';
-export { default as Header, LogoTypes } from './lib/Header';
+export { Header, Logo } from './lib/Header';
 export * from './lib/Layout';
 export * from './lib/LetsExchangeModal';
 export * from './lib/Loader';
@@ -10,3 +9,4 @@ export * from './lib/MultiStepWizard';
 export { default as SuspenseWithChunkError } from './lib/SuspenseWithChunkError';
 export * from './lib/TabMenu';
 export * from './lib/Text';
+

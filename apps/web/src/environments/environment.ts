@@ -8,13 +8,4 @@
 import 'zone.js/plugins/zone-error'; // Included with Angular CLI.
 import { defaultEnv, Env } from './env';
 
-export const environment: Env = {
-  ...defaultEnv,
-  dehub: {
-    ...defaultEnv.dehub,
-    dapps: {
-      ...defaultEnv.dehub.dapps,
-      bridge: 'http://localhost:8701',
-    },
-  },
-};
+export const environment: Env = { ...defaultEnv };
