@@ -1,0 +1,161 @@
+{
+  "name": "trade",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/trade/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/trade",
+        "index": "apps/trade/src/index.html",
+        "main": "apps/trade/src/main.tsx",
+        "tsConfig": "apps/trade/tsconfig.app.json",
+        "assets": [
+          "apps/trade/src/assets",
+          "apps/trade/src/dehub.webmanifest",
+          {
+            "input": "libs/shared/asset/dehub/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts"],
+            "output": "assets/dehub"
+          },
+          {
+            "input": "libs/shared/asset/freya/src/lib",
+            "glob": "**/*",
+            "ignore": ["**/*.ts", "**/*.scss"],
+            "output": "assets"
+          }
+        ],
+        "styles": ["apps/trade/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "apps/trade/webpack.config.js",
+        "deployUrl": "/trade/",
+        "baseHref": "/trade"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true,
+          "deployUrl": "",
+          "baseHref": "/"
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/trade/src/environments/environment.ts",
+              "with": "apps/trade/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "preview": {
+          "fileReplacements": [
+            {
+              "replace": "./apps/trade/src/environments/environment.ts",
+              "with": "./apps/trade/src/environments/environment.preview.ts"
+            }
+          ],
+          "outputPath": "dist/apps/trade.preview/trade"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "trade:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "trade:build:development",
+          "host": "dev.localhost",
+          "port": 8701
+        },
+        "production": {
+          "buildTarget": "trade:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/trade/jest.config.ts"
+      }
+    },
+    "deploy-preview-draft": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=6861568a-86ef-4c9f-9673-b2dc8b9df18f --alias=nx -d ../../dist/apps/trade.preview -o",
+        "cwd": "netlify/trade.prod"
+      }
+    },
+    "deploy-preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=6861568a-86ef-4c9f-9673-b2dc8b9df18f -d ../../dist/apps/trade.preview -p -o",
+        "cwd": "netlify/trade.prod"
+      }
+    },
+    "deploy-prod-draft": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 --alias=nx -d ../../dist/apps/trade.prod -o",
+        "cwd": "netlify/trade.prod"
+      }
+    },
+    "deploy-prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx netlify deploy --site=09877a39-cdbf-4a0e-a63c-dcee6e4f3fb3 -d ../../dist/apps/trade.prod -p -o",
+        "cwd": "netlify/trade.prod"
+      }
+    },
+    "demo": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9701 -o trade",
+        "cwd": "dist/apps/trade.prod"
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "http-server -a dev.localhost -b -p 9701 -o trade",
+        "cwd": "dist/apps/trade.preview"
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/trade/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "trade:serve",
+        "port": 8702
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "trade:serve:production"
+        }
+      }
+    }
+  },
+  "tags": ["scope:react", "type:app"],
+  "implicitDependencies": ["shared-asset-dehub", "shared-asset-freya"]
+}

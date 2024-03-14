@@ -21,6 +21,7 @@ export const defaultSharedProdEnv: SharedEnv = {
         dehubBnb: '0xE876eE0945CE80Ef821633f2C18950b33Fb85633',
         wbnb: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
         bnbBusd: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
+        weth: '0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA',
         busd: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
         usdt: '0x55d398326f99059fF775485246999027B3197955',
         multiCall: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',

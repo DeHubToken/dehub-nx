@@ -35,6 +35,16 @@ const UserMenu = ({
       unsubscribeFromWeb3Deactivated();
     };
   }, [isAuthenticating, logout]);
+  
+  const handleTrade = ({
+    originalEvent,
+    item,
+  }: {
+    originalEvent: React.SyntheticEvent;
+    item: MenuItem;
+  }) => {
+    location.href = "/trade"; // todo
+  }
 
   const handleLogout = ({
     originalEvent,
@@ -47,6 +57,11 @@ const UserMenu = ({
   };
 
   const items: MenuItem[] = [
+    {
+      label: 'Trade',
+      icon: 'pi pi-sign-out',
+      command: handleTrade,
+    },
     {
       label: 'Logout',
       icon: 'pi pi-sign-out',

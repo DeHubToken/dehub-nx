@@ -33,6 +33,7 @@ export interface ContractsEnv {
   dehubBnb: string;
   wbnb: string;
   bnbBusd: string;
+  weth: string;
   busd: string;
   usdt: string;
   multiCall: string;
@@ -84,7 +85,7 @@ export interface SharedEnv {
     /** Official DeHUB landing page */
     landing: string;
     /** Official DeHUB dapp pages */
-    dapps: { staking: string };
+    dapps: { staking: string; trade: string };
   };
 
   contentful: ContentfulEnv;
@@ -110,6 +111,7 @@ export const defaultSharedEnv: SharedEnv = {
     landing: 'https://dehub.net/web',
     dapps: {
       staking: 'https://dehub.net/staking',
+      trade: 'https://dehub.net/trading',
     },
   },
 
@@ -139,6 +141,7 @@ export const defaultSharedEnv: SharedEnv = {
         dehubPolygon: '0x7B7A0023C59822478caA0c1A26BF83d69F586bb6', // mumbai testnet
         dehubBnb: '0x21B7576349f8F2178C83A8C3fe0ca4492f488d5D',
         wbnb: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
+        weth: '0x9cB928A44B0664Ad8e933C833f8210d772269b68',
         bnbBusd: '0xe0e92035077c39594793e61802a350347c320cf2',
         busd: '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
         usdt: '0x337610d27c682E347C9cD60BD4b3b107C9d34dDd',
