@@ -29,6 +29,7 @@ import {
   usePool,
   useUserInfo,
 } from '../../state/application/hooks';
+import { calculateGasMargin } from '../../utils/tx';
 
 interface UnstakeModalProps {
   open: boolean;
@@ -92,9 +93,12 @@ const UnstakeModal: React.FC<UnstakeModalProps> = ({ open, onHide }) => {
       ]);
 
       setIsTxPending(true);
-      const tx = await stakingContract['unstake'](
-        EthersBigNumber.from(decimalValue.toString())
-      );
+      const amount = EthersBigNumber.from(decimalValue.toString());
+      const estimateGas = await stakingContract.estimateGas['unstake'](amount);
+      const tx = await stakingContract['unstake'](amount, {
+        from: account,
+        gasLimit: calculateGasMargin(estimateGas),
+      });
       await tx
         .wait()
         .then((receipt: ContractReceipt) => {

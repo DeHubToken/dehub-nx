@@ -38,6 +38,7 @@ import {
   useUserInfo,
 } from '../../state/application/hooks';
 import { getStakingAddress } from '../../utils/addressHelpers';
+import { calculateGasMargin } from '../../utils/tx';
 
 interface StakeModalProps {
   open: boolean;
@@ -141,10 +142,16 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
         'event Staked(address indexed user,uint256 period,uint256 amount,uint256 stakeAt,uint256 indexed rewardIndex,uint256 indexed tierIndex)',
       ]);
 
-      const tx = await stakingContract['stake'](
-        period * DAY_IN_SECONDS,
-        EthersBigNumber.from(decimalValue.toString())
+      const periodInSecond = period * DAY_IN_SECONDS;
+      const amount = EthersBigNumber.from(decimalValue.toString());
+      const estimateGas = await stakingContract.estimateGas['stake'](
+        periodInSecond,
+        amount
       );
+      const tx = await stakingContract['stake'](periodInSecond, amount, {
+        from: account,
+        gasLimit: calculateGasMargin(estimateGas),
+      });
       await tx
         .wait()
         .then((receipt: ContractReceipt) => {
