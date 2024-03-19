@@ -34,6 +34,7 @@ import {
   usePool,
   useUserInfo,
 } from '../../state/application/hooks';
+import { calculateGasMargin } from '../../utils/tx';
 
 interface RestakeModalProps {
   open: boolean;
@@ -130,10 +131,20 @@ const RestakeModal: React.FC<RestakeModalProps> = ({ open, onHide }) => {
       ]);
 
       setIsTxPending(true);
-      const tx = await stakingContract['restakePortion'](
-        EthersBigNumber.from(decimalValue.toString()),
-        period * DAY_IN_SECONDS,
+      const amount = EthersBigNumber.from(decimalValue.toString());
+      const periodInSecond = period * DAY_IN_SECONDS;
+      const estimateGas = await stakingContract.estimateGas['restakePortion'](
+        amount,
+        periodInSecond,
         count
+      );
+      const tx = await stakingContract['restakePortion'](
+        amount,
+        periodInSecond,
+        count, {
+          from: account,
+          gasLimit: calculateGasMargin(estimateGas),
+        }
       );
       await tx
         .wait()

@@ -17,6 +17,7 @@ import { Toast } from 'primereact/toast';
 import { useMemo, useRef, useState } from 'react';
 import { usePickStakingContract } from '../hooks/useContract';
 import { useFetchPool, usePool, useUserInfo } from '../state/application/hooks';
+import { calculateGasMargin } from '../utils/tx';
 import { /* RestakeModal, */ StakeModal, UnstakeModal } from './components';
 
 const MyStakingBox = () => {
@@ -60,7 +61,11 @@ const MyStakingBox = () => {
       ]);
 
       setIsTxPending(true);
-      const tx = await stakingContract['claim']();
+      const estimateGas = await stakingContract.estimateGas['claim']();
+      const tx = await stakingContract['claim']({
+        from: account,
+        gasLimit: calculateGasMargin(estimateGas),
+      });
       await tx.wait().then((receipt: ContractReceipt) => {
         updatePool();
         updateUser();
