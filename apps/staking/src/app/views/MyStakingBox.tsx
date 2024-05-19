@@ -173,7 +173,9 @@ const MyStakingBox = () => {
             </div>
 
             <div className="col-12 md:col-4 lg:col-4 flex flex-column">
-              <Heading className="pb-1 text-left ml-4">Current Tier</Heading>
+              <Heading className="pb-1 text-left ml-4">
+                {!userInfo || userInfo.totalAmount > BigNumber(0) ? `Current Tier`: `Last Tier`}
+              </Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full flex flex-column align-items-start">
                   {isReady && userInfo && poolInfo ? (
@@ -201,7 +203,7 @@ const MyStakingBox = () => {
               <Heading className="pb-1 text-left ml-4">Unlock date</Heading>
               <div className="card overview-box gray shadow-2 mt-1">
                 <div className="overview-info text-left w-full flex flex-column align-items-start">
-                  {isReady && userInfo ? (
+                  {isReady && userInfo && userInfo.totalAmount > BigNumber(0) ? (
                     <>
                       <Text fontSize="16px" fontWeight={900}>
                         {userInfo.stakedAt > 0
