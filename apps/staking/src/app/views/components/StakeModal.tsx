@@ -221,6 +221,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
         const nowPeriod = poolInfo.tierPeriods[userInfo.lastTierIndex];
         const nextPeriod =
           userInfo.unlockedAt === 0 ||
+          userInfo.totalAmount === BigNumber(0) ||
           userInfo.lastTierIndex >= poolInfo.tierPeriods.length - 1
             ? undefined
             : poolInfo.tierPeriods[userInfo.lastTierIndex + 1];
