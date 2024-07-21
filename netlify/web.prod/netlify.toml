@@ -14,3 +14,10 @@
   to = "https://staking-dehub.netlify.app/staking/:splat"
   status = 200
   force = true
+
+# Bridge
+[[redirects]]
+  from = "/bridge/*"
+  to = "https://bridge-dehub.netlify.app/bridge/:splat"
+  status = 200
+  force = true

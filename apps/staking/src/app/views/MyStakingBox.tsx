@@ -89,7 +89,7 @@ const MyStakingBox = () => {
                   ethersToBigNumber(parsed.args['amount']),
                   DEHUB_DECIMALS,
                   DEHUB_DISPLAY_DECIMALS
-                )} $DeHub has been successfully claimed!`}
+                )} $DHB has been successfully claimed!`}
               </Text>
             </Box>
           ),

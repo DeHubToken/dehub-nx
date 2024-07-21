@@ -1,3 +1,9 @@
+import { ReactComponent as BscIcon } from '@dehub/shared/asset/dehub/icons/bsc.svg';
+import { ReactComponent as CoinbaseIcon } from '@dehub/shared/asset/dehub/icons/coinbase.svg';
+import { ReactComponent as MagicLinkIcon } from '@dehub/shared/asset/dehub/icons/magic.svg';
+import { ReactComponent as MetaMaskIcon } from '@dehub/shared/asset/dehub/icons/metamask.svg';
+import { ReactComponent as TrustWalletIcon } from '@dehub/shared/asset/dehub/icons/trustwallet.svg';
+import { ReactComponent as WalletConnectIcon } from '@dehub/shared/asset/dehub/icons/walletconnect.svg';
 import {
   DeHubConnectorNames,
   MoralisConnectorNames,
@@ -12,7 +18,7 @@ import { Inplace, InplaceContent, InplaceDisplay } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useEnvironmentContext, useWeb3Context } from '../../hooks';
+import { useWeb3Context } from '../../hooks';
 
 interface WalletModalProps {
   visible: boolean;
@@ -33,7 +39,6 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
   const [invalidMagicLinkEmail, setInvalidMagicLinkEmail] = useState(false);
 
   const { walletConnectingState } = useWeb3Context();
-  const { baseUrl } = useEnvironmentContext();
   const [connectorId, setConnectorId] = useState<DeHubConnectorNames | ''>('');
 
   const initialize = () => {
@@ -64,18 +69,12 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
         >
           <div>Browser Wallet</div>
           <div className="flex flex-row align-items-center">
-            <img
-              src={`${baseUrl}/assets/dehub/icons/metamask.svg`}
-              style={{ width: '32px', height: '20px' }}
-              alt="MetaMask logo"
-            />
-            <img
-              src={`${baseUrl}/assets/dehub/icons/trustwallet.svg`}
+            <MetaMaskIcon style={{ width: '32px', height: '20px' }} />
+            <TrustWalletIcon
               style={{
                 width: '32px',
                 height: '20px',
               }}
-              alt="Trust Wallet logo"
             />
           </div>
         </WalletButton>
@@ -111,11 +110,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
             <WalletButton className="flex justify-content-between text-500">
               <div>MagicLink</div>
               <div className="flex flex-row align-items-center">
-                <img
-                  src={`${baseUrl}/assets/dehub/icons/magic.svg`}
-                  style={{ width: '32px', height: '20px' }}
-                  alt="MagicLink logo"
-                />
+                <MagicLinkIcon style={{ width: '32px', height: '20px' }} />
               </div>
             </WalletButton>
           </div>
@@ -146,14 +141,12 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
                 <Button
                   disabled={invalidMagicLinkEmail}
                   icon={
-                    <img
-                      src={`${baseUrl}/assets/dehub/icons/magic.svg`}
+                    <MagicLinkIcon
                       style={{
                         width: '32px',
                         height: '16px',
                         paddingRight: '10px',
                       }}
-                      alt="MagicLink logo"
                     />
                   }
                   label={'Login'}
@@ -178,11 +171,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
         >
           <div>WalletConnect</div>
           <div className="flex flex-row align-items-center">
-            <img
-              src={`${baseUrl}/assets/dehub/icons/walletconnect.svg`}
-              style={{ width: '32px', height: '20px' }}
-              alt="WalletConnect logo"
-            />
+            <WalletConnectIcon style={{ width: '32px', height: '20px' }} />
           </div>
         </WalletButton>
       </div>
@@ -197,11 +186,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
         >
           <div>Binance</div>
           <div className="flex flex-row align-items-center">
-            <img
-              src={`${baseUrl}/assets/dehub/icons/bsc.svg`}
-              style={{ width: '32px', height: '20px' }}
-              alt="Binance Wallet logo"
-            />
+            <BscIcon style={{ width: '32px', height: '20px' }} />
           </div>
         </WalletButton>
 
@@ -244,11 +229,7 @@ const WalletModal = ({ visible, onDismiss, doConnect }: WalletModalProps) => {
         >
           <div>Coinbase</div>
           <div className="flex flex-row align-items-center">
-            <img
-              src={`${baseUrl}/assets/dehub/icons/coinbase.svg`}
-              style={{ width: '32px', height: '20px' }}
-              alt="Coinbase Wallet logo"
-            />
+            <CoinbaseIcon style={{ width: '32px', height: '20px' }} />
           </div>
         </WalletButton>
       </div>

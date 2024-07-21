@@ -1,0 +1,9 @@
+[[redirects]]
+  from = "/"
+  to = "bridge/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/bridge/*"
+  to = "bridge/index.html"
+  status = 200
