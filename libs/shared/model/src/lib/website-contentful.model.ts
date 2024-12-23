@@ -28,8 +28,9 @@ export interface Scalars {
 }
 
 /** DeHub announcement which will be displayed on the website [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/announcement) */
-export interface Announcement extends Entry {
+export interface Announcement extends Entry, _Node {
   __typename?: 'Announcement';
+  _id: Scalars['ID'];
   content?: Maybe<AnnouncementContent>;
   contentfulMetadata: ContentfulMetadata;
   end?: Maybe<Scalars['DateTime']>;
@@ -106,9 +107,24 @@ export interface AnnouncementContentLinks {
 
 export interface AnnouncementContentResources {
   __typename?: 'AnnouncementContentResources';
-  block: Array<ResourceLink>;
-  hyperlink: Array<ResourceLink>;
-  inline: Array<ResourceLink>;
+  block: Array<AnnouncementContentResourcesBlock>;
+  hyperlink: Array<AnnouncementContentResourcesHyperlink>;
+  inline: Array<AnnouncementContentResourcesInline>;
+}
+
+export interface AnnouncementContentResourcesBlock extends ResourceLink {
+  __typename?: 'AnnouncementContentResourcesBlock';
+  sys: ResourceSys;
+}
+
+export interface AnnouncementContentResourcesHyperlink extends ResourceLink {
+  __typename?: 'AnnouncementContentResourcesHyperlink';
+  sys: ResourceSys;
+}
+
+export interface AnnouncementContentResourcesInline extends ResourceLink {
+  __typename?: 'AnnouncementContentResourcesInline';
+  sys: ResourceSys;
 }
 
 export interface AnnouncementFilter {
@@ -415,8 +431,9 @@ export enum AssetOrder {
 }
 
 /** Single award post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/awardPost) */
-export interface AwardPost extends Entry {
+export interface AwardPost extends Entry, _Node {
   __typename?: 'AwardPost';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   isRounded?: Maybe<Scalars['Boolean']>;
   link?: Maybe<Scalars['String']>;
@@ -524,8 +541,9 @@ export enum AwardPostOrder {
 }
 
 /** Basic post model for simple announcements, news posts, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPost) */
-export interface BasicPost extends Entry {
+export interface BasicPost extends Entry, _Node {
   __typename?: 'BasicPost';
+  _id: Scalars['ID'];
   category?: Maybe<BasicPostCategory>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<BasicPostDescription>;
@@ -576,8 +594,9 @@ export interface BasicPostTitleArgs {
 }
 
 /** A category for the basic post allows filtering basic posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/basicPostCategory) */
-export interface BasicPostCategory extends Entry {
+export interface BasicPostCategory extends Entry, _Node {
   __typename?: 'BasicPostCategory';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   linkedFrom?: Maybe<BasicPostCategoryLinkingCollections>;
   name?: Maybe<Scalars['String']>;
@@ -733,9 +752,24 @@ export interface BasicPostDescriptionLinks {
 
 export interface BasicPostDescriptionResources {
   __typename?: 'BasicPostDescriptionResources';
-  block: Array<ResourceLink>;
-  hyperlink: Array<ResourceLink>;
-  inline: Array<ResourceLink>;
+  block: Array<BasicPostDescriptionResourcesBlock>;
+  hyperlink: Array<BasicPostDescriptionResourcesHyperlink>;
+  inline: Array<BasicPostDescriptionResourcesInline>;
+}
+
+export interface BasicPostDescriptionResourcesBlock extends ResourceLink {
+  __typename?: 'BasicPostDescriptionResourcesBlock';
+  sys: ResourceSys;
+}
+
+export interface BasicPostDescriptionResourcesHyperlink extends ResourceLink {
+  __typename?: 'BasicPostDescriptionResourcesHyperlink';
+  sys: ResourceSys;
+}
+
+export interface BasicPostDescriptionResourcesInline extends ResourceLink {
+  __typename?: 'BasicPostDescriptionResourcesInline';
+  sys: ResourceSys;
 }
 
 export interface BasicPostFilter {
@@ -828,8 +862,9 @@ export enum BasicPostOrder {
 }
 
 /** A call to action reusable element. Link, button, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/callToAction) */
-export interface CallToAction extends Entry {
+export interface CallToAction extends Entry, _Node {
   __typename?: 'CallToAction';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   externalLink?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
@@ -1204,8 +1239,9 @@ export enum CallToActionOrder {
 }
 
 /** A chart graphic post. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/chartPost) */
-export interface ChartPost extends Entry {
+export interface ChartPost extends Entry, _Node {
   __typename?: 'ChartPost';
+  _id: Scalars['ID'];
   chartData?: Maybe<Scalars['JSON']>;
   chartOptions?: Maybe<Scalars['JSON']>;
   chartType?: Maybe<Scalars['String']>;
@@ -1343,10 +1379,26 @@ export enum ChartPostOrder {
 
 export interface ContentfulMetadata {
   __typename?: 'ContentfulMetadata';
+  concepts: Array<Maybe<TaxonomyConcept>>;
   tags: Array<Maybe<ContentfulTag>>;
 }
 
+export interface ContentfulMetadataConceptsDescendantsFilter {
+  id_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  id_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  id_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
+export interface ContentfulMetadataConceptsFilter {
+  descendants?: InputMaybe<ContentfulMetadataConceptsDescendantsFilter>;
+  id_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  id_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  id_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+}
+
 export interface ContentfulMetadataFilter {
+  concepts?: InputMaybe<ContentfulMetadataConceptsFilter>;
+  concepts_exists?: InputMaybe<Scalars['Boolean']>;
   tags?: InputMaybe<ContentfulMetadataTagsFilter>;
   tags_exists?: InputMaybe<Scalars['Boolean']>;
 }
@@ -1359,7 +1411,7 @@ export interface ContentfulMetadataTagsFilter {
 
 /**
  * Represents a tag entity for finding and organizing content easily.
- *     Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-tags
+ *       Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-tags
  */
 export interface ContentfulTag {
   __typename?: 'ContentfulTag';
@@ -1368,8 +1420,9 @@ export interface ContentfulTag {
 }
 
 /** A special post to link to a specific D`App. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/dappPost) */
-export interface DappPost extends Entry {
+export interface DappPost extends Entry, _Node {
   __typename?: 'DappPost';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
@@ -1533,8 +1586,9 @@ export enum DappPostOrder {
 }
 
 /** A post for iframe or other type of embed code. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/embedPost) */
-export interface EmbedPost extends Entry {
+export interface EmbedPost extends Entry, _Node {
   __typename?: 'EmbedPost';
+  _id: Scalars['ID'];
   aspectRatio?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   embedCode?: Maybe<Scalars['String']>;
@@ -1716,8 +1770,9 @@ export enum EntryOrder {
 }
 
 /** A collection of FAQ questions. Use this to create separate groups of FAQ questions for different pages, sections, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqGroup) */
-export interface FaqGroup extends Entry {
+export interface FaqGroup extends Entry, _Node {
   __typename?: 'FaqGroup';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   faqItemCollection?: Maybe<FaqGroupFaqItemCollection>;
   linkedFrom?: Maybe<FaqGroupLinkingCollections>;
@@ -1840,8 +1895,9 @@ export enum FaqGroupOrder {
 }
 
 /** A single FAQ item which can be used in different FAQ collections. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/faqItem) */
-export interface FaqItem extends Entry {
+export interface FaqItem extends Entry, _Node {
   __typename?: 'FaqItem';
+  _id: Scalars['ID'];
   answer?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   linkedFrom?: Maybe<FaqItemLinkingCollections>;
@@ -1943,8 +1999,9 @@ export enum FaqItemOrder {
 }
 
 /** A short, but impactful post with a video or a picture and a call to action button. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/featurePost) */
-export interface FeaturePost extends Entry {
+export interface FeaturePost extends Entry, _Node {
   __typename?: 'FeaturePost';
+  _id: Scalars['ID'];
   callToActionButtonLabel?: Maybe<Scalars['String']>;
   callToActionUrl?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
@@ -2122,8 +2179,9 @@ export enum FeaturePostOrder {
 }
 
 /** Main website footer component. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/footer) */
-export interface Footer extends Entry {
+export interface Footer extends Entry, _Node {
   __typename?: 'Footer';
+  _id: Scalars['ID'];
   address?: Maybe<FooterAddress>;
   awardsCollection?: Maybe<FooterAwardsCollection>;
   contentfulMetadata: ContentfulMetadata;
@@ -2207,9 +2265,24 @@ export interface FooterAddressLinks {
 
 export interface FooterAddressResources {
   __typename?: 'FooterAddressResources';
-  block: Array<ResourceLink>;
-  hyperlink: Array<ResourceLink>;
-  inline: Array<ResourceLink>;
+  block: Array<FooterAddressResourcesBlock>;
+  hyperlink: Array<FooterAddressResourcesHyperlink>;
+  inline: Array<FooterAddressResourcesInline>;
+}
+
+export interface FooterAddressResourcesBlock extends ResourceLink {
+  __typename?: 'FooterAddressResourcesBlock';
+  sys: ResourceSys;
+}
+
+export interface FooterAddressResourcesHyperlink extends ResourceLink {
+  __typename?: 'FooterAddressResourcesHyperlink';
+  sys: ResourceSys;
+}
+
+export interface FooterAddressResourcesInline extends ResourceLink {
+  __typename?: 'FooterAddressResourcesInline';
+  sys: ResourceSys;
 }
 
 export interface FooterAwardsCollection {
@@ -2354,8 +2427,9 @@ export enum FooterSocialIconsCollectionOrder {
 }
 
 /** A post with the biggest surface area on the screen. Best displayed in pairs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/grandPost) */
-export interface GrandPost extends Entry {
+export interface GrandPost extends Entry, _Node {
   __typename?: 'GrandPost';
+  _id: Scalars['ID'];
   callToActionButtonLabel?: Maybe<Scalars['String']>;
   callToActionUrl?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
@@ -2550,8 +2624,9 @@ export enum GrandPostOrder {
 }
 
 /** Grouping component with the optional content toggle feature [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/groupPost) */
-export interface GroupPost extends Entry {
+export interface GroupPost extends Entry, _Node {
   __typename?: 'GroupPost';
+  _id: Scalars['ID'];
   collapsed?: Maybe<Scalars['Boolean']>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
@@ -2743,8 +2818,9 @@ export enum GroupPostOrder {
 }
 
 /** Simple decorative tile element with icon, title, and short description. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/iconTile) */
-export interface IconTile extends Entry {
+export interface IconTile extends Entry, _Node {
   __typename?: 'IconTile';
+  _id: Scalars['ID'];
   callToActionButtonLabel?: Maybe<Scalars['String']>;
   callToActionUrl?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
@@ -2994,8 +3070,9 @@ export interface ImageTransformOptions {
 }
 
 /** Legal post model for Privacy, Terms of Use, etc. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/legalPost) */
-export interface LegalPost extends Entry {
+export interface LegalPost extends Entry, _Node {
   __typename?: 'LegalPost';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<LegalPostDescription>;
   linkedFrom?: Maybe<LegalPostLinkingCollections>;
@@ -3060,9 +3137,24 @@ export interface LegalPostDescriptionLinks {
 
 export interface LegalPostDescriptionResources {
   __typename?: 'LegalPostDescriptionResources';
-  block: Array<ResourceLink>;
-  hyperlink: Array<ResourceLink>;
-  inline: Array<ResourceLink>;
+  block: Array<LegalPostDescriptionResourcesBlock>;
+  hyperlink: Array<LegalPostDescriptionResourcesHyperlink>;
+  inline: Array<LegalPostDescriptionResourcesInline>;
+}
+
+export interface LegalPostDescriptionResourcesBlock extends ResourceLink {
+  __typename?: 'LegalPostDescriptionResourcesBlock';
+  sys: ResourceSys;
+}
+
+export interface LegalPostDescriptionResourcesHyperlink extends ResourceLink {
+  __typename?: 'LegalPostDescriptionResourcesHyperlink';
+  sys: ResourceSys;
+}
+
+export interface LegalPostDescriptionResourcesInline extends ResourceLink {
+  __typename?: 'LegalPostDescriptionResourcesInline';
+  sys: ResourceSys;
 }
 
 export interface LegalPostFilter {
@@ -3117,8 +3209,9 @@ export enum LegalPostOrder {
 }
 
 /** Clubs page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageClubs) */
-export interface PageClubs extends Entry {
+export interface PageClubs extends Entry, _Node {
   __typename?: 'PageClubs';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   ctasCollection?: Maybe<PageClubsCtasCollection>;
   headerAlignCenter?: Maybe<Scalars['Boolean']>;
@@ -3341,8 +3434,9 @@ export type PageClubsSectionsItem =
   | PageSectionThumbnailPosts;
 
 /** Game page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageGame) */
-export interface PageGame extends Entry {
+export interface PageGame extends Entry, _Node {
   __typename?: 'PageGame';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   ctasCollection?: Maybe<PageGameCtasCollection>;
   headerAlignCenter?: Maybe<Scalars['Boolean']>;
@@ -3565,8 +3659,9 @@ export type PageGameSectionsItem =
   | PageSectionThumbnailPosts;
 
 /** Home page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageHome) */
-export interface PageHome extends Entry {
+export interface PageHome extends Entry, _Node {
   __typename?: 'PageHome';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   ctasCollection?: Maybe<PageHomeCtasCollection>;
   headerAlignCenter?: Maybe<Scalars['Boolean']>;
@@ -3790,8 +3885,9 @@ export type PageHomeSectionsItem =
   | PageSectionThumbnailPosts;
 
 /** Learn page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageLearn) */
-export interface PageLearn extends Entry {
+export interface PageLearn extends Entry, _Node {
   __typename?: 'PageLearn';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   ctasCollection?: Maybe<PageLearnCtasCollection>;
   headerAlignCenter?: Maybe<Scalars['Boolean']>;
@@ -4015,8 +4111,9 @@ export type PageLearnSectionsItem =
   | PageSectionThumbnailPosts;
 
 /** Page section with Basic Posts. Can display handpicked posts together with the posts from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionBasicPosts) */
-export interface PageSectionBasicPosts extends Entry {
+export interface PageSectionBasicPosts extends Entry, _Node {
   __typename?: 'PageSectionBasicPosts';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedPostsCollection?: Maybe<PageSectionBasicPostsHandpickedPostsCollection>;
@@ -4367,8 +4464,9 @@ export enum PageSectionBasicPostsOrder {
 }
 
 /** Page section with D`App Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionDappPosts) */
-export interface PageSectionDappPosts extends Entry {
+export interface PageSectionDappPosts extends Entry, _Node {
   __typename?: 'PageSectionDappPosts';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedPostsCollection?: Maybe<PageSectionDappPostsHandpickedPostsCollection>;
@@ -4670,8 +4768,9 @@ export enum PageSectionDappPostsOrder {
 }
 
 /** Page section with FAQs. Displays a limited amount of handpicked FAQ groups. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFaQs) */
-export interface PageSectionFaQs extends Entry {
+export interface PageSectionFaQs extends Entry, _Node {
   __typename?: 'PageSectionFaQs';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedFaqGroupsCollection?: Maybe<PageSectionFaQsHandpickedFaqGroupsCollection>;
@@ -4957,8 +5056,9 @@ export enum PageSectionFaQsOrder {
 }
 
 /** Page section with Feature Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionFeaturePosts) */
-export interface PageSectionFeaturePosts extends Entry {
+export interface PageSectionFeaturePosts extends Entry, _Node {
   __typename?: 'PageSectionFeaturePosts';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedPostsCollection?: Maybe<PageSectionFeaturePostsHandpickedPostsCollection>;
@@ -5303,8 +5403,9 @@ export enum PageSectionFeaturePostsOrder {
 }
 
 /** Page section with Grand Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionGrandPosts) */
-export interface PageSectionGrandPosts extends Entry {
+export interface PageSectionGrandPosts extends Entry, _Node {
   __typename?: 'PageSectionGrandPosts';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedPostsCollection?: Maybe<PageSectionGrandPostsHandpickedPostsCollection>;
@@ -5662,8 +5763,9 @@ export enum PageSectionGrandPostsOrder {
 }
 
 /** Page section with Icon Tiles. Displays a limited amount of handpicked icon tiles. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionIconTiles) */
-export interface PageSectionIconTiles extends Entry {
+export interface PageSectionIconTiles extends Entry, _Node {
   __typename?: 'PageSectionIconTiles';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedIconTilesCollection?: Maybe<PageSectionIconTilesHandpickedIconTilesCollection>;
@@ -6019,8 +6121,9 @@ export enum PageSectionIconTilesOrder {
 }
 
 /** Page section with Persons. Displays a limited amount of handpicked person posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionPersonPosts) */
-export interface PageSectionPersonPosts extends Entry {
+export interface PageSectionPersonPosts extends Entry, _Node {
   __typename?: 'PageSectionPersonPosts';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedPostsCollection?: Maybe<PageSectionPersonPostsHandpickedPostsCollection>;
@@ -6272,8 +6375,9 @@ export enum PageSectionPersonPostsOrder {
 }
 
 /** Page section with Products. Can display handpicked products together with the products from a certain category. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionProducts) */
-export interface PageSectionProducts extends Entry {
+export interface PageSectionProducts extends Entry, _Node {
   __typename?: 'PageSectionProducts';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedProductsCollection?: Maybe<PageSectionProductsHandpickedProductsCollection>;
@@ -6458,8 +6562,9 @@ export enum PageSectionProductsOrder {
 }
 
 /** Page section with Section Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionSectionPosts) */
-export interface PageSectionSectionPosts extends Entry {
+export interface PageSectionSectionPosts extends Entry, _Node {
   __typename?: 'PageSectionSectionPosts';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedPostsCollection?: Maybe<PageSectionSectionPostsHandpickedPostsCollection>;
@@ -6797,8 +6902,9 @@ export enum PageSectionSectionPostsOrder {
 }
 
 /** Page section with Thumbnail Posts. Displays handpicked posts. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageSectionThumbnailPosts) */
-export interface PageSectionThumbnailPosts extends Entry {
+export interface PageSectionThumbnailPosts extends Entry, _Node {
   __typename?: 'PageSectionThumbnailPosts';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   handpickedPostsCollection?: Maybe<PageSectionThumbnailPostsHandpickedPostsCollection>;
@@ -7141,8 +7247,9 @@ export enum PageSectionThumbnailPostsOrder {
 }
 
 /** Shop page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageShop) */
-export interface PageShop extends Entry {
+export interface PageShop extends Entry, _Node {
   __typename?: 'PageShop';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   ctasCollection?: Maybe<PageShopCtasCollection>;
   headerAlignCenter?: Maybe<Scalars['Boolean']>;
@@ -7365,8 +7472,9 @@ export type PageShopSectionsItem =
   | PageSectionThumbnailPosts;
 
 /** Stream page structure and content. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/pageStream) */
-export interface PageStream extends Entry {
+export interface PageStream extends Entry, _Node {
   __typename?: 'PageStream';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   ctasCollection?: Maybe<PageStreamCtasCollection>;
   groupsCollection?: Maybe<PageStreamGroupsCollection>;
@@ -7637,8 +7745,9 @@ export type PageStreamSectionsItem =
   | PageSectionThumbnailPosts;
 
 /** A post representing a person with avatar and social media links [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/personPost) */
-export interface PersonPost extends Entry {
+export interface PersonPost extends Entry, _Node {
   __typename?: 'PersonPost';
+  _id: Scalars['ID'];
   avatar?: Maybe<Asset>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
@@ -7829,8 +7938,9 @@ export enum PersonPostOrder {
 }
 
 /** Online shop product item. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/product) */
-export interface Product extends Entry {
+export interface Product extends Entry, _Node {
   __typename?: 'Product';
+  _id: Scalars['ID'];
   availableColors?: Maybe<Array<Maybe<Scalars['String']>>>;
   availableQuantity?: Maybe<Scalars['Int']>;
   availableSizes?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -7943,8 +8053,9 @@ export interface ProductSoldOutLabelArgs {
 }
 
 /** [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/productCategory) */
-export interface ProductCategory extends Entry {
+export interface ProductCategory extends Entry, _Node {
   __typename?: 'ProductCategory';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   icon?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<ProductCategoryLinkingCollections>;
@@ -8241,9 +8352,24 @@ export interface ProductFullDescriptionLinks {
 
 export interface ProductFullDescriptionResources {
   __typename?: 'ProductFullDescriptionResources';
-  block: Array<ResourceLink>;
-  hyperlink: Array<ResourceLink>;
-  inline: Array<ResourceLink>;
+  block: Array<ProductFullDescriptionResourcesBlock>;
+  hyperlink: Array<ProductFullDescriptionResourcesHyperlink>;
+  inline: Array<ProductFullDescriptionResourcesInline>;
+}
+
+export interface ProductFullDescriptionResourcesBlock extends ResourceLink {
+  __typename?: 'ProductFullDescriptionResourcesBlock';
+  sys: ResourceSys;
+}
+
+export interface ProductFullDescriptionResourcesHyperlink extends ResourceLink {
+  __typename?: 'ProductFullDescriptionResourcesHyperlink';
+  sys: ResourceSys;
+}
+
+export interface ProductFullDescriptionResourcesInline extends ResourceLink {
+  __typename?: 'ProductFullDescriptionResourcesInline';
+  sys: ResourceSys;
 }
 
 export interface ProductLinkingCollections {
@@ -8983,20 +9109,19 @@ export interface QueryThumbnailPostCollectionArgs {
 }
 
 export interface ResourceLink {
-  __typename?: 'ResourceLink';
   sys: ResourceSys;
 }
 
 export interface ResourceSys {
   __typename?: 'ResourceSys';
   linkType: Scalars['String'];
-  type: Scalars['String'];
   urn: Scalars['String'];
 }
 
 /** A short post rendered inside the section. Useful for inline paragraphs. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/sectionPost) */
-export interface SectionPost extends Entry {
+export interface SectionPost extends Entry, _Node {
   __typename?: 'SectionPost';
+  _id: Scalars['ID'];
   alignCenter?: Maybe<Scalars['Boolean']>;
   chartPost?: Maybe<ChartPost>;
   columnWidth?: Maybe<Scalars['String']>;
@@ -9095,9 +9220,24 @@ export interface SectionPostDescriptionLinks {
 
 export interface SectionPostDescriptionResources {
   __typename?: 'SectionPostDescriptionResources';
-  block: Array<ResourceLink>;
-  hyperlink: Array<ResourceLink>;
-  inline: Array<ResourceLink>;
+  block: Array<SectionPostDescriptionResourcesBlock>;
+  hyperlink: Array<SectionPostDescriptionResourcesHyperlink>;
+  inline: Array<SectionPostDescriptionResourcesInline>;
+}
+
+export interface SectionPostDescriptionResourcesBlock extends ResourceLink {
+  __typename?: 'SectionPostDescriptionResourcesBlock';
+  sys: ResourceSys;
+}
+
+export interface SectionPostDescriptionResourcesHyperlink extends ResourceLink {
+  __typename?: 'SectionPostDescriptionResourcesHyperlink';
+  sys: ResourceSys;
+}
+
+export interface SectionPostDescriptionResourcesInline extends ResourceLink {
+  __typename?: 'SectionPostDescriptionResourcesInline';
+  sys: ResourceSys;
 }
 
 export interface SectionPostFilter {
@@ -9205,6 +9345,8 @@ export interface Sys {
   environmentId: Scalars['String'];
   firstPublishedAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
+  /** The locale that was requested. */
+  locale?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   publishedVersion?: Maybe<Scalars['Int']>;
   spaceId: Scalars['String'];
@@ -9247,9 +9389,19 @@ export interface SysFilter {
   publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 }
 
+/**
+ * Represents a tag entity for finding and organizing content easily.
+ *         Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-concepts
+ */
+export interface TaxonomyConcept {
+  __typename?: 'TaxonomyConcept';
+  id?: Maybe<Scalars['String']>;
+}
+
 /** Single thumbnail post with a link. [See type definition](https://app.contentful.com/spaces/4jicnfvodfm8/content_types/thumbnailPost) */
-export interface ThumbnailPost extends Entry {
+export interface ThumbnailPost extends Entry, _Node {
   __typename?: 'ThumbnailPost';
+  _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   heavyPicture?: Maybe<Asset>;
   isVideo?: Maybe<Scalars['Boolean']>;
