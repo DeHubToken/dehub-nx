@@ -124,7 +124,8 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=6861568a-86ef-4c9f-9673-b2dc8b9df18f -d ../../dist/apps/staking.preview -p -o",
-        "cwd": "netlify/staking.prod"
+        "cwd": "netlify/staking.prod",
+        "readyWhen": "Deploy is live!"
       }
     },
     "deploy-prod-draft": {
