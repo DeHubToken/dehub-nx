@@ -32,11 +32,7 @@ import {
   usePickStakingContract,
 } from '../../hooks/useContract';
 import { useGetDehubBalance } from '../../hooks/useTokenBalance';
-import {
-  useFetchPool,
-  usePool,
-  useUserInfo,
-} from '../../state/application/hooks';
+import { useFetchPool, usePool } from '../../state/application/hooks';
 import { getStakingAddress } from '../../utils/addressHelpers';
 import { calculateGasMargin } from '../../utils/tx';
 
@@ -63,11 +59,8 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
   const { balance: dehubBalance, fetchStatus: fetchBalanceStatus } =
     useGetDehubBalance();
   const { poolInfo } = usePool();
-  const { userInfo } = useUserInfo();
 
   const [value, setValue] = useState<string>('0.00');
-  const [minPeriod, setMinPeriod] = useState<number>(1);
-  const [maxPeriod, setMaxPeriod] = useState<number | undefined>(undefined);
   const [isTxPending, setIsTxPending] = useState(false);
   const [disableStake, setDisableStake] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -212,33 +205,6 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
     setDisableStake(true);
   }, [value, maxBalance, setErrorMessage]);
 
-  useEffect(() => {
-    if (poolInfo) {
-      setMinPeriod(Math.floor(poolInfo.minPeriod / DAY_IN_SECONDS));
-      setMaxPeriod(undefined);
-
-      if (userInfo) {
-        const nowPeriod = poolInfo.tierPeriods[userInfo.lastTierIndex];
-        const nextPeriod =
-          userInfo.unlockedAt === 0 ||
-          userInfo.totalAmount === BigNumber(0) ||
-          userInfo.lastTierIndex >= poolInfo.tierPeriods.length - 1
-            ? undefined
-            : poolInfo.tierPeriods[userInfo.lastTierIndex + 1];
-
-        setMinPeriod(
-          Math.max(
-            Math.floor(nowPeriod / DAY_IN_SECONDS),
-            Math.floor(poolInfo.minPeriod / DAY_IN_SECONDS)
-          )
-        );
-        setMaxPeriod(
-          nextPeriod ? Math.floor(nextPeriod / DAY_IN_SECONDS) - 1 : undefined
-        );
-      }
-    }
-  }, [userInfo, poolInfo]);
-
   return (
     <>
       <Toast ref={toast} />
@@ -333,13 +299,14 @@ const StakeModal: React.FC<StakeModalProps> = ({ open, onHide }) => {
               Period:
             </Text>
             <InputNumber
+              min={
+                poolInfo ? Math.floor(poolInfo.minPeriod / DAY_IN_SECONDS) : 1
+              }
               value={period}
               disabled={!account || isTxPending}
               onValueChange={handlePeriodChange}
               showButtons
               className="w-full text-right"
-              min={minPeriod}
-              max={maxPeriod}
             />
             <Text textAlign="right" className="w-2">
               days

@@ -150,14 +150,16 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 --alias=nx -d ../../dist/apps/web.preview -o",
-        "cwd": "netlify/web.preview"
+        "cwd": "netlify/web.preview",
+        "readyWhen": "Deploy is live!"
       }
     },
     "deploy-preview": {
       "executor": "nx:run-commands",
       "options": {
         "command": "npx netlify deploy --site=cd6cae81-a327-47d3-8d95-3efefc0f46e2 -d ../../dist/apps/web.preview -p -o",
-        "cwd": "netlify/web.preview"
+        "cwd": "netlify/web.preview",
+        "readyWhen": "Deploy is live!"
       }
     },
     "deploy-prod-draft": {
