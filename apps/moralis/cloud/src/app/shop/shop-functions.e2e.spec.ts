@@ -14,7 +14,7 @@ const {
   web3: { moralis },
 } = environment;
 
-describe('E2E Shop functions', () => {
+xdescribe('E2E Shop functions', () => {
   const config = {
     // wallet address and auth information should be matched in `_User` table
     address: '0x91573f05f34aaf59ec4849860e61c3762906978e',

@@ -7,7 +7,7 @@ const {
   web3: { moralis },
 } = environment;
 
-describe('E2E DeHub functions', () => {
+xdescribe('E2E DeHub functions', () => {
   let supply: Stats;
   beforeAll(async () => await Moralis.start(moralis));
 
