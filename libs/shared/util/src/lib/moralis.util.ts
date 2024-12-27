@@ -12,6 +12,9 @@ export const resolveMessage = (state: WalletConnectingState) => {
     case WalletConnectingState.ADD_NETWORK:
       msg = WalletConnectingMessage.ADD_NETWORK;
       break;
+    case WalletConnectingState.ERROR:
+      msg = WalletConnectingMessage.UnknownError;
+      break;
     default:
       msg = WalletConnectingMessage.WAITING;
   }

@@ -359,6 +359,7 @@ export class MoralisService implements IMoralisService {
             summary: JSON.stringify(e),
             detail: WalletConnectingMessage.UnknownError,
           });
+          this.setWalletConnectState(WalletConnectingState.ERROR, connectorId);
           throw e;
         }
       });

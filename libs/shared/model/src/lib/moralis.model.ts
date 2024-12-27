@@ -109,6 +109,7 @@ export enum WalletConnectingState {
   SWITCH_NETWORK,
   ADD_NETWORK,
   COMPLETE,
+  ERROR,
 }
 
 export type WalletConnectState = {
