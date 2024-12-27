@@ -353,8 +353,14 @@ export class MoralisService implements IMoralisService {
             WalletConnectingState.NO_PROVIDER,
             connectorId
           );
+        } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: JSON.stringify(e),
+            detail: WalletConnectingMessage.UnknownError,
+          });
+          throw e;
         }
-        throw e;
       });
   }
 

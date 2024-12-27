@@ -124,6 +124,7 @@ export enum WalletConnectingMessage {
   UnsupportedProvider = 'Provider not supported.',
   MetamaskSignatureDenied = 'Metamask signature was denied.',
   BinanceSignatureRejected = 'Binance signature was rejected.',
+  UnknownError = 'An unknown error occurred.',
 }
 
 export enum MoralisMessage {
