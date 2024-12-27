@@ -38,6 +38,7 @@ import {
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { WINDOW } from '@ng-web-apis/common';
 import * as events from 'events';
+import { get } from 'lodash';
 import { Moralis } from 'moralis-v1';
 import {
   ConfirmEventType,
@@ -356,7 +357,7 @@ export class MoralisService implements IMoralisService {
         } else {
           this.messageService.add({
             severity: 'error',
-            summary: JSON.stringify(e),
+            summary: getErrorMessage(e),
             detail: WalletConnectingMessage.UnknownError,
           });
           this.setWalletConnectState(WalletConnectingState.ERROR, connectorId);
@@ -582,3 +583,55 @@ export class MoralisService implements IMoralisService {
     return `${this.env.web3.moralis.serverUrl}/functions/${cloudFunctionName}`;
   }
 }
+
+/**
+ * Extracts error message from various error shapes
+ * @param error The error object
+ * @returns A string representation of the error
+ */
+export const getErrorMessage = (error: unknown): string => {
+  if (!error) {
+    return 'Unknown error occurred';
+  }
+
+  // Handle string errors
+  if (typeof error === 'string') {
+    return error;
+  }
+
+  // Handle Error instances
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  // Handle common error object shapes
+  const message =
+    get(error, 'message') ||
+    get(error, 'error.message') ||
+    get(error, 'data.message') ||
+    get(error, 'response.data.message');
+
+  if (message && typeof message === 'string') {
+    return message;
+  }
+
+  // Handle objects with code and message (common in web3/blockchain errors)
+  const code = get(error, 'code');
+  if (code && typeof code !== 'object') {
+    const codeStr = String(code);
+    const msg = get(error, 'message');
+    if (msg && typeof msg === 'string') {
+      return `${msg} (Code: ${codeStr})`;
+    }
+    return `Error code: ${codeStr}`;
+  }
+
+  // Last resort: try to stringify the error
+  try {
+    return typeof error === 'object'
+      ? JSON.stringify(error)
+      : 'Unknown error occurred';
+  } catch {
+    return 'Unknown error occurred';
+  }
+};
