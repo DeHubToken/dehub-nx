@@ -36,6 +36,11 @@ export const setupMetamaskNetwork = async (
           if (afterAddNetwork) afterAddNetwork(addResult);
           return addResult;
         }
+        // User rejected switching chains
+        // https://developer.trustwallet.com/developer/develop-for-trust/browser-extension/evm#request-chain-id-change
+        if ((<{ code: number }>switchError).code === 4001) {
+          console.warn('User rejected switching chains.');
+        }
         return false;
       });
     if (afterSwitchNetwork) afterSwitchNetwork(switchResult);
