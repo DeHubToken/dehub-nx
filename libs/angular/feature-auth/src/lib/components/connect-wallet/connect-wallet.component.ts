@@ -23,7 +23,6 @@ import {
   WalletConnectState,
   WalletConnectingState,
 } from '@dehub/shared/model';
-import { resolveMessage } from '@dehub/shared/utils';
 import { PushModule } from '@rx-angular/template/push';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, Subscription } from 'rxjs';
@@ -81,7 +80,8 @@ export class ConnectWalletComponent
         WalletConnectingState.SWITCH_NETWORK,
         WalletConnectingState.ADD_NETWORK,
       ].includes(state)
-        ? this.loaderService.show(resolveMessage(state))
+        ? // Temporary always hide loader
+          this.loaderService.hide() // this.loaderService.show(resolveMessage(state))
         : this.loaderService.hide()
     );
   }
