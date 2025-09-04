@@ -131,7 +131,7 @@ export const defaultSharedEnv: SharedEnv = {
       appId: 'UxvDeanBLvO8ym31e6x6dYdQa2Qlzw2jOSrhm3cE',
       serverUrl: 'https://nm6dir4me3i0.usemoralis.com:2053/server',
     },
-    chainId: 97,
+    chainId: 56, // Temporary set to BSC Mainnet (dev and preview envs)
     addresses: {
       contracts: {
         dehubBsc: '0xEad75F6d5E16E86b157937Ba227c13B5fb6864fC', // bsc testnet

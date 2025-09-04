@@ -1,7 +1,7 @@
 require('../shared/mock.include');
 import { MoralisFunctions } from '@dehub/shared/model';
 import { Moralis } from 'moralis-v1';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.prod';
 
 const {
   web3: { moralis, chainId },
