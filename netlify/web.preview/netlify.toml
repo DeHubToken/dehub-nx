@@ -1,3 +1,9 @@
+# Preview mirror must never index as a duplicate of the real site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
 [[redirects]]
   from = "/"
   to = "web/index.html"
