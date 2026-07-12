@@ -1,16 +1,33 @@
-[[redirects]]
-  from = "/"
-  to = "web/index.html"
-  status = 200
+# dehub.net is the LEGACY domain — dehub.io is canonical. Everything 301s
+# there (path-mapped where an equivalent exists) so old links keep working
+# and years of link equity consolidate onto one domain instead of splitting
+# the brand entity across two. First matching rule wins.
 
+# Old Angular dapp lived under /web — its home maps to the app feed.
 [[redirects]]
   from = "/web/*"
-  to = "web/index.html"
-  status = 200
+  to = "https://dehub.io/app"
+  status = 301
+  force = true
 
-# Staking
+# Staking dapp → current staking page.
 [[redirects]]
   from = "/staking/*"
-  to = "https://staking-dehub.netlify.app/staking/:splat"
-  status = 200
+  to = "https://dehub.io/stake"
+  status = 301
+  force = true
+
+# Old careers page → current jobs page.
+[[redirects]]
+  from = "/careers*"
+  to = "https://dehub.io/jobs"
+  status = 301
+  force = true
+
+# Everything else: same path on the canonical domain (/, /tv, /governance
+# etc. all exist there; unknown paths 404 with noindex at the dehub.io edge).
+[[redirects]]
+  from = "/*"
+  to = "https://dehub.io/:splat"
+  status = 301
   force = true
