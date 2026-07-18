@@ -45,3 +45,6 @@ Thumbs.db
 .angular
 
 .nx/cache
+# Never commit secrets — .env was tracked until 7/2026 (leaked keys rotated/revoked)
+.env
+.env.local
